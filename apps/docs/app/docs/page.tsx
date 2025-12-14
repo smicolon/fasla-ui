@@ -2,135 +2,93 @@ import Link from "next/link"
 
 export default function DocsPage() {
   return (
-    <div className="container py-8">
-      <div className="mx-auto max-w-[980px]">
-        <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">Documentation</h1>
-          <p className="text-lg text-muted-foreground">
-            Learn how to install and use SMI-UI components in your project.
-          </p>
+    <div className="space-y-8">
+      <div className="space-y-4">
+        <h1 className="text-4xl font-bold tracking-tight">Introduction</h1>
+        <p className="text-xl text-muted-foreground">
+          SMI-UI is a beautiful, animated component library built with React, Tailwind CSS, and Framer Motion.
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight">What is SMI-UI?</h2>
+        <p className="text-muted-foreground leading-relaxed">
+          SMI-UI provides a collection of reusable components that you can copy and paste into your apps.
+          It&apos;s not a traditional component library - you own the code and can customize it however you want.
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight">Features</h2>
+        <ul className="grid gap-3 text-muted-foreground">
+          <li className="flex items-start gap-3">
+            <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-xs">✓</span>
+            <span><strong className="text-foreground">22+ Components</strong> - UI primitives, app blocks, and stunning effects</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-xs">✓</span>
+            <span><strong className="text-foreground">Accessible</strong> - Built with accessibility in mind, keyboard navigation included</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-xs">✓</span>
+            <span><strong className="text-foreground">Animated</strong> - Smooth animations with Framer Motion, respects reduced motion</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-xs">✓</span>
+            <span><strong className="text-foreground">TypeScript</strong> - 100% TypeScript with full type safety</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-xs">✓</span>
+            <span><strong className="text-foreground">Dark Mode</strong> - Beautiful dark mode support out of the box</span>
+          </li>
+          <li className="flex items-start gap-3">
+            <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-xs">✓</span>
+            <span><strong className="text-foreground">Customizable</strong> - Built with Tailwind CSS, easy to customize</span>
+          </li>
+        </ul>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold tracking-tight">Component Categories</h2>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <Link
+            href="/docs/components/button"
+            className="group rounded-lg border border-border/50 p-4 transition-colors hover:border-primary/50 hover:bg-accent/50"
+          >
+            <h3 className="font-semibold group-hover:text-primary">UI Primitives</h3>
+            <p className="mt-1 text-sm text-muted-foreground">12 components</p>
+          </Link>
+          <Link
+            href="/docs/components/app-shell"
+            className="group rounded-lg border border-border/50 p-4 transition-colors hover:border-primary/50 hover:bg-accent/50"
+          >
+            <h3 className="font-semibold group-hover:text-primary">Blocks</h3>
+            <p className="mt-1 text-sm text-muted-foreground">8 components</p>
+          </Link>
+          <Link
+            href="/docs/components/shimmer-button"
+            className="group rounded-lg border border-border/50 p-4 transition-colors hover:border-primary/50 hover:bg-accent/50"
+          >
+            <h3 className="font-semibold group-hover:text-primary">Effects</h3>
+            <p className="mt-1 text-sm text-muted-foreground">7 components</p>
+          </Link>
         </div>
+      </div>
 
-        <div className="mt-10 space-y-8">
-          <section>
-            <h2 className="text-2xl font-bold tracking-tight">Installation</h2>
-            <div className="mt-4 space-y-4">
-              <p className="text-muted-foreground">
-                Use the CLI to install components into your project.
-              </p>
-              <pre className="overflow-x-auto rounded-lg border bg-muted p-4">
-                <code>npx smi-ui init</code>
-              </pre>
-              <p className="text-muted-foreground">
-                Then add components as needed:
-              </p>
-              <pre className="overflow-x-auto rounded-lg border bg-muted p-4">
-                <code>npx smi-ui add button</code>
-              </pre>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold tracking-tight">Components</h2>
-            <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {/* UI Primitives */}
-              <div className="space-y-3">
-                <h3 className="font-semibold">UI Primitives</h3>
-                <ul className="space-y-2 text-sm">
-                  <li>
-                    <Link href="/docs/components/button" className="text-muted-foreground hover:text-foreground">
-                      Button
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/docs/components/input" className="text-muted-foreground hover:text-foreground">
-                      Input
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/docs/components/card" className="text-muted-foreground hover:text-foreground">
-                      Card
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/docs/components/badge" className="text-muted-foreground hover:text-foreground">
-                      Badge
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/docs/components/skeleton" className="text-muted-foreground hover:text-foreground">
-                      Skeleton
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Blocks */}
-              <div className="space-y-3">
-                <h3 className="font-semibold">Blocks</h3>
-                <ul className="space-y-2 text-sm">
-                  <li>
-                    <Link href="/docs/components/app-shell" className="text-muted-foreground hover:text-foreground">
-                      App Shell
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/docs/components/page-header" className="text-muted-foreground hover:text-foreground">
-                      Page Header
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/docs/components/empty-state" className="text-muted-foreground hover:text-foreground">
-                      Empty State
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/docs/components/form-section" className="text-muted-foreground hover:text-foreground">
-                      Form Section
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/docs/components/data-table" className="text-muted-foreground hover:text-foreground">
-                      Data Table
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-
-              {/* Effects */}
-              <div className="space-y-3">
-                <h3 className="font-semibold">Effects</h3>
-                <ul className="space-y-2 text-sm">
-                  <li>
-                    <Link href="/docs/components/shimmer-button" className="text-muted-foreground hover:text-foreground">
-                      Shimmer Button
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/docs/components/animated-gradient" className="text-muted-foreground hover:text-foreground">
-                      Animated Gradient
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/docs/components/text-reveal" className="text-muted-foreground hover:text-foreground">
-                      Text Reveal
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/docs/components/border-beam" className="text-muted-foreground hover:text-foreground">
-                      Border Beam
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href="/docs/components/spotlight" className="text-muted-foreground hover:text-foreground">
-                      Spotlight
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </section>
-        </div>
+      <div className="rounded-lg border border-primary/20 bg-primary/5 p-6">
+        <h3 className="font-semibold">Quick Start</h3>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Get started by installing the CLI and adding your first component.
+        </p>
+        <Link
+          href="/docs/installation"
+          className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+        >
+          Go to Installation
+          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+          </svg>
+        </Link>
       </div>
     </div>
   )
