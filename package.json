@@ -2,6 +2,9 @@
   "name": "smi-ui-monorepo",
   "private": true,
   "packageManager": "bun@1.2.0",
+  "engines": {
+    "node": ">=22"
+  },
   "workspaces": ["packages/*", "apps/*"],
   "scripts": {
     "build": "turbo run build",
