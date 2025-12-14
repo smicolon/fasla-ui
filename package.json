@@ -5,6 +5,7 @@
   "workspaces": ["packages/*", "apps/*"],
   "scripts": {
     "build": "turbo run build",
+    "build:pages": "turbo run build --filter=smi-ui-docs --filter=smi-ui-storybook && cp -r apps/storybook/storybook-static apps/docs/out/components",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
     "typecheck": "turbo run typecheck",

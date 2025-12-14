@@ -18,8 +18,12 @@ const withMDX = createMDX({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "export",
+  images: { unoptimized: true },
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
   transpilePackages: ["@smicolon/smi-ui"],
+  // Storybook will be copied to /components during build
+  trailingSlash: true,
 }
 
 export default withMDX(nextConfig)
