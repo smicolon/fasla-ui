@@ -72,6 +72,72 @@ function FeatureCard({
   )
 }
 
+// Showcase card with hover effects
+function ShowcaseCard({
+  title,
+  description,
+  gradient,
+  size = "default",
+  delay,
+  children,
+}: {
+  title: string
+  description?: string
+  gradient: string
+  size?: "default" | "tall" | "wide" | "large"
+  delay: number
+  children?: React.ReactNode
+}) {
+  const sizeClasses = {
+    default: "col-span-1 row-span-1 aspect-square md:aspect-auto md:h-64",
+    tall: "col-span-1 row-span-2 h-64 md:h-auto",
+    wide: "col-span-1 md:col-span-2 row-span-1 aspect-video md:aspect-auto md:h-64",
+    large: "col-span-1 md:col-span-2 row-span-1 md:row-span-2 aspect-square md:aspect-auto md:h-auto",
+  }
+
+  return (
+    <div
+      className={`group relative overflow-hidden rounded-2xl ${sizeClasses[size]} animate-fade-in-up cursor-pointer`}
+      style={{ animationDelay: `${delay}ms` }}
+    >
+      {/* Background gradient */}
+      <div className={`absolute inset-0 ${gradient} transition-transform duration-500 group-hover:scale-105`} />
+
+      {/* Overlay on hover */}
+      <div className="absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/20" />
+
+      {/* Content */}
+      <div className="relative h-full p-6 flex flex-col justify-between z-10">
+        <div className="flex items-start justify-between">
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 backdrop-blur-sm px-3 py-1 text-xs font-medium text-white">
+            {title}
+          </div>
+          <div className="opacity-0 translate-y-2 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+            <div className="h-8 w-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
+              <svg className="h-4 w-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        {children}
+
+        {description && (
+          <div className="opacity-0 translate-y-4 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
+            <p className="text-sm text-white/80">{description}</p>
+          </div>
+        )}
+      </div>
+
+      {/* Shine effect on hover */}
+      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+        <div className="absolute inset-0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/10 to-transparent" />
+      </div>
+    </div>
+  )
+}
+
 // Category card
 function CategoryCard({
   title,
@@ -328,6 +394,142 @@ export default function HomePage() {
               count={7}
               delay={400}
             />
+          </div>
+        </div>
+      </section>
+
+      {/* Showcase Section */}
+      <section className="container mx-auto px-4 py-16 md:py-24">
+        <div className="mx-auto max-w-[1200px]">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-bold md:text-4xl animate-fade-in-up">
+              Showcase
+            </h2>
+            <p className="text-muted-foreground md:text-lg animate-fade-in-up" style={{ animationDelay: "100ms" }}>
+              Beautiful interfaces built with SMI-UI components.
+            </p>
+          </div>
+
+          {/* Masonry Grid */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
+            <ShowcaseCard
+              title="Dashboard"
+              description="Analytics dashboard with real-time charts"
+              gradient="bg-gradient-to-br from-violet-600 to-indigo-900"
+              size="tall"
+              delay={100}
+            >
+              <div className="flex-1 flex items-center justify-center">
+                <div className="grid grid-cols-2 gap-2 w-full max-w-[120px]">
+                  <div className="h-12 rounded-lg bg-white/20 animate-pulse" />
+                  <div className="h-12 rounded-lg bg-white/10" />
+                  <div className="h-12 rounded-lg bg-white/10" />
+                  <div className="h-12 rounded-lg bg-white/20 animate-pulse" style={{ animationDelay: "150ms" }} />
+                </div>
+              </div>
+            </ShowcaseCard>
+
+            <ShowcaseCard
+              title="E-commerce"
+              description="Modern shopping experience"
+              gradient="bg-gradient-to-br from-rose-500 to-orange-500"
+              size="default"
+              delay={150}
+            >
+              <div className="flex-1 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-xl bg-white/20 flex items-center justify-center">
+                  <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                  </svg>
+                </div>
+              </div>
+            </ShowcaseCard>
+
+            <ShowcaseCard
+              title="SaaS Platform"
+              description="Team collaboration tools"
+              gradient="bg-gradient-to-br from-cyan-500 to-blue-600"
+              size="wide"
+              delay={200}
+            >
+              <div className="flex-1 flex items-center justify-center gap-3">
+                <div className="flex -space-x-2">
+                  {[...Array(4)].map((_, i) => (
+                    <div key={i} className="w-8 h-8 rounded-full bg-white/30 border-2 border-white/20" />
+                  ))}
+                </div>
+                <div className="h-8 w-20 rounded-full bg-white/20" />
+              </div>
+            </ShowcaseCard>
+
+            <ShowcaseCard
+              title="Fintech"
+              description="Banking & finance apps"
+              gradient="bg-gradient-to-br from-emerald-500 to-teal-700"
+              size="default"
+              delay={250}
+            >
+              <div className="flex-1 flex items-center justify-center">
+                <div className="text-3xl font-bold text-white/90">$</div>
+              </div>
+            </ShowcaseCard>
+
+            <ShowcaseCard
+              title="AI Tools"
+              description="Next-gen AI interfaces"
+              gradient="bg-gradient-to-br from-purple-600 via-pink-500 to-red-500"
+              size="default"
+              delay={300}
+            >
+              <div className="flex-1 flex items-center justify-center">
+                <div className="relative">
+                  <div className="w-12 h-12 rounded-xl bg-white/20 animate-pulse" />
+                  <div className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-white/40 animate-ping" />
+                </div>
+              </div>
+            </ShowcaseCard>
+
+            <ShowcaseCard
+              title="Portfolio"
+              description="Creative showcase sites"
+              gradient="bg-gradient-to-br from-amber-400 to-orange-600"
+              size="tall"
+              delay={350}
+            >
+              <div className="flex-1 flex flex-col items-center justify-center gap-2">
+                <div className="w-20 h-3 rounded-full bg-white/30" />
+                <div className="w-16 h-3 rounded-full bg-white/20" />
+                <div className="w-12 h-3 rounded-full bg-white/10" />
+              </div>
+            </ShowcaseCard>
+
+            <ShowcaseCard
+              title="Healthcare"
+              description="Medical & wellness platforms"
+              gradient="bg-gradient-to-br from-sky-400 to-indigo-600"
+              size="default"
+              delay={400}
+            >
+              <div className="flex-1 flex items-center justify-center">
+                <svg className="h-10 w-10 text-white/80" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                </svg>
+              </div>
+            </ShowcaseCard>
+
+            <ShowcaseCard
+              title="Developer Tools"
+              description="CLI & API interfaces"
+              gradient="bg-gradient-to-br from-slate-800 to-slate-950"
+              size="wide"
+              delay={450}
+            >
+              <div className="flex-1 flex items-center justify-center">
+                <div className="font-mono text-sm text-green-400/80 bg-black/30 rounded-lg px-4 py-2">
+                  <span className="text-gray-500">$</span> npx smi-ui add
+                </div>
+              </div>
+            </ShowcaseCard>
           </div>
         </div>
       </section>
