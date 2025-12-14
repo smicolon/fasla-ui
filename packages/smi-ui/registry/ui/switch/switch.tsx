@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "../../../src/lib/utils"
 
 export interface SwitchProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type" | "size"> {
   /** Label text */
   label?: string
   /** Description text */
