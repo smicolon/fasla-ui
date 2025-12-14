@@ -60,8 +60,8 @@ export function DocsSidebar() {
   const pathname = usePathname()
 
   return (
-    <aside className="fixed top-16 z-30 hidden h-[calc(100vh-4rem)] w-64 shrink-0 border-r border-border/40 md:sticky md:block">
-      <div className="h-full overflow-y-auto py-6 pr-6 pl-4">
+    <aside className="fixed top-20 z-30 hidden h-[calc(100vh-5rem)] w-64 shrink-0 border-r border-border/40 md:sticky md:block">
+      <div className="h-full overflow-y-auto pt-4 pb-6 pr-6 pl-6">
         <nav className="space-y-6">
           {sidebarNav.map((section) => (
             <div key={section.title} className="space-y-2">
@@ -74,7 +74,7 @@ export function DocsSidebar() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "block rounded-md px-3 py-2 text-sm transition-colors",
+                        "block rounded-md px-2 py-1.5 text-sm transition-colors",
                         pathname === item.href || pathname === item.href + "/"
                           ? "bg-primary/10 text-primary font-medium"
                           : "text-muted-foreground hover:bg-accent hover:text-foreground"

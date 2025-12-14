@@ -31,12 +31,23 @@ export function CodeBlock({ children, language = "tsx" }: CodeBlockProps) {
 
   return (
     <div className="relative">
-      <pre className="overflow-x-auto rounded-lg border bg-muted p-4">
-        <code className="text-sm">{children}</code>
-      </pre>
+      <div className="rounded-lg bg-[#0a0a0a] border border-white/10 overflow-hidden">
+        {/* Terminal header */}
+        <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border-b border-white/10">
+          <div className="flex gap-1.5">
+            <div className="h-3 w-3 rounded-full bg-red-500/80" />
+            <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
+            <div className="h-3 w-3 rounded-full bg-green-500/80" />
+          </div>
+          <span className="text-xs text-white/40 ml-2">{language}</span>
+        </div>
+        <pre className="overflow-x-auto p-4">
+          <code className="text-sm text-green-400 font-mono">{children}</code>
+        </pre>
+      </div>
       <button
         onClick={copy}
-        className="absolute right-4 top-4 rounded-md border bg-background px-2 py-1 text-xs hover:bg-accent"
+        className="absolute right-4 top-12 rounded-md bg-white/10 px-2 py-1 text-xs text-white/70 hover:bg-white/20 transition-colors"
       >
         {copied ? "Copied!" : "Copy"}
       </button>
