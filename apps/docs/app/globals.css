@@ -1,0 +1,511 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   SMICOLON BRAND IDENTITY - SMI-UI DOCS
+   ============================================ */
+
+@layer base {
+  :root {
+    /* Smicolon Brand Colors using oklch */
+    --radius: 0.625rem;
+    --background: oklch(1 0 0);
+    --foreground: oklch(0% 0 0);
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.145 0 0);
+    --popover: oklch(1 0 0);
+    --popover-foreground: oklch(0.145 0 0);
+
+    /* Primary: Smicolon Red */
+    --primary: oklch(61.61% 0.257 27.15);
+    --primary-foreground: oklch(0.985 0 0);
+
+    --secondary: oklch(0.97 0 0);
+    --secondary-foreground: oklch(0.205 0 0);
+    --muted: oklch(0.97 0 0);
+    --muted-foreground: oklch(0.556 0 0);
+    --accent: oklch(0.97 0 0);
+    --accent-foreground: oklch(0.205 0 0);
+    --destructive: oklch(61.61% 0.257 27.15);
+    --destructive-foreground: oklch(0.985 0 0);
+    --border: oklch(0.922 0 0);
+    --input: oklch(0.922 0 0);
+    --ring: oklch(0.708 0 0);
+
+    /* Chart colors */
+    --chart-1: 173 58% 39%;
+    --chart-2: 12 76% 61%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+
+    /* Sidebar */
+    --sidebar: oklch(0.985 0 0);
+    --sidebar-foreground: oklch(0.145 0 0);
+    --sidebar-primary: oklch(0.205 0 0);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.97 0 0);
+    --sidebar-accent-foreground: oklch(0.205 0 0);
+    --sidebar-border: oklch(0.922 0 0);
+    --sidebar-ring: oklch(0.708 0 0);
+
+    /* Smicolon Extended Colors */
+    --smi-red-600: #ff0037;
+    --smi-red-800: #e40017;
+    --smi-red-900: #b60012;
+    --smi-red-dark: #6b000b;
+    --smi-neutral-50: #f9fafb;
+    --smi-neutral-300: #d1d5db;
+    --smi-neutral-800: #1f2937;
+    --smi-neutral-850: #141414;
+    --smi-neutral-900: #111827;
+    --smi-neutral-950: #0a0a0a;
+  }
+
+  .dark {
+    --background: oklch(0 0 0);
+    --foreground: oklch(1 0 0);
+    --card: oklch(0.205 0 0);
+    --card-foreground: oklch(0.985 0 0);
+    --popover: oklch(0.205 0 0);
+    --popover-foreground: oklch(0.985 0 0);
+
+    /* Primary: Smicolon Red */
+    --primary: oklch(61.61% 0.257 27.15);
+    --primary-foreground: oklch(1 0 0);
+
+    --secondary: oklch(19.13% 0 0);
+    --secondary-foreground: oklch(0.985 0 0);
+    --muted: oklch(0.269 0 0);
+    --muted-foreground: oklch(0.708 0 0);
+    --accent: oklch(0.269 0 0);
+    --accent-foreground: oklch(0.985 0 0);
+    --destructive: oklch(0.704 0.191 22.216);
+    --destructive-foreground: oklch(0.985 0 0);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.556 0 0);
+
+    /* Chart colors dark mode */
+    --chart-1: 220 70% 50%;
+    --chart-5: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-2: 340 75% 55%;
+
+    /* Sidebar dark */
+    --sidebar: oklch(0.205 0 0);
+    --sidebar-foreground: oklch(0.985 0 0);
+    --sidebar-primary: oklch(0.488 0.243 264.376);
+    --sidebar-primary-foreground: oklch(0.985 0 0);
+    --sidebar-accent: oklch(0.269 0 0);
+    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.556 0 0);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ============================================
+   SMICOLON BRAND ANIMATIONS
+   ============================================ */
+
+@keyframes roll-reveal {
+  from {
+    transform: rotate(12deg) scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0deg) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-left {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-top {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in-from-bottom {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(228, 0, 23, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(228, 0, 23, 0.6);
+  }
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes border-beam {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+/* Animation utilities */
+.animate-roll-reveal {
+  animation: roll-reveal 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.7s ease-out backwards;
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out backwards;
+}
+
+.animate-slide-top {
+  animation: slide-top 0.6s ease-out backwards;
+}
+
+.animate-slide-left {
+  animation: slide-left 0.6s ease-out backwards;
+}
+
+.animate-shimmer {
+  animation: shimmer var(--shimmer-duration, 2s) infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-gradient-shift {
+  background-size: 200% 200%;
+  animation: gradient-shift 3s ease infinite;
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-scale-in {
+  animation: scale-in 0.5s ease-out backwards;
+}
+
+/* Staggered animation delays */
+.animate-delay-100 { animation-delay: 100ms; }
+.animate-delay-200 { animation-delay: 200ms; }
+.animate-delay-300 { animation-delay: 300ms; }
+.animate-delay-400 { animation-delay: 400ms; }
+.animate-delay-500 { animation-delay: 500ms; }
+.animate-delay-600 { animation-delay: 600ms; }
+.animate-delay-700 { animation-delay: 700ms; }
+.animate-delay-800 { animation-delay: 800ms; }
+
+/* ============================================
+   SMICOLON BRAND BACKGROUND EFFECTS
+   ============================================ */
+
+.bg-gradient-radial-red {
+  background-image: radial-gradient(ellipse at center, rgba(228, 0, 23, 0.15) 0%, transparent 70%);
+}
+
+.bg-blurry-dots {
+  background-image:
+    radial-gradient(closest-side, var(--smi-red-600) 7%, transparent 100%),
+    radial-gradient(closest-side, var(--smi-red-600) 7%, transparent 100%);
+  background-position:
+    -100% -10%,
+    200% -10%;
+  background-size:
+    min(1000px, 70vw) min(1000px, 70vw),
+    min(1000px, 70vw) min(1000px, 70vw);
+  background-repeat: repeat-y;
+  filter: blur(10px);
+  opacity: 0.07;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.gradient-t-to-b {
+  @apply absolute inset-0 z-0 bg-gradient-to-b from-[#E40017] to-transparent to-[100%] opacity-10 pointer-events-none;
+}
+
+/* Noise background effect */
+.dark .bg-noisy {
+  position: relative;
+}
+
+.dark .bg-noisy::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ============================================
+   SMICOLON BRAND COMPONENTS
+   ============================================ */
+
+/* Primary button style */
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3;
+  @apply font-medium text-sm;
+  @apply bg-primary text-primary-foreground;
+  @apply rounded-lg;
+  @apply transition-all duration-200;
+  @apply hover:opacity-90;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2;
+}
+
+/* Outline button style */
+.btn-outline {
+  @apply inline-flex items-center justify-center gap-2 px-6 py-3;
+  @apply font-medium text-sm;
+  @apply border border-foreground text-foreground bg-transparent;
+  @apply rounded-lg;
+  @apply transition-all duration-200;
+  @apply hover:bg-foreground hover:text-background;
+  @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2;
+}
+
+/* Card with hover glow effect */
+.card-glow {
+  @apply relative overflow-hidden rounded-xl border bg-card p-6;
+  @apply transition-all duration-300;
+}
+
+.card-glow::before {
+  content: '';
+  @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(228, 0, 23, 0.1), transparent 40%);
+}
+
+.card-glow:hover::before {
+  @apply opacity-100;
+}
+
+/* Text stroke effect */
+.text-stroke {
+  -webkit-text-stroke-width: 0.7px;
+  -webkit-text-stroke-color: color-mix(in srgb, currentColor 20%, transparent);
+}
+
+/* ============================================
+   CODE BLOCKS & PROSE
+   ============================================ */
+
+/* Code blocks */
+[data-rehype-pretty-code-figure] pre {
+  @apply overflow-x-auto rounded-lg border bg-muted px-0 py-4;
+}
+
+[data-rehype-pretty-code-figure] code {
+  @apply text-sm;
+}
+
+[data-rehype-pretty-code-figure] [data-line] {
+  @apply px-4;
+}
+
+[data-rehype-pretty-code-figure] [data-highlighted-line] {
+  background-color: color-mix(in oklch, var(--accent) 50%, transparent);
+}
+
+/* Inline code */
+:not(pre) > code {
+  @apply rounded-md bg-muted px-1.5 py-0.5 text-sm font-medium;
+}
+
+/* MDX styling */
+.prose {
+  @apply max-w-none;
+}
+
+.prose h1 {
+  @apply scroll-m-20 text-4xl font-bold tracking-tight;
+}
+
+.prose h2 {
+  @apply mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+}
+
+.prose h3 {
+  @apply mt-8 scroll-m-20 text-2xl font-semibold tracking-tight;
+}
+
+.prose p {
+  @apply leading-7 [&:not(:first-child)]:mt-6;
+}
+
+.prose ul {
+  @apply my-6 ml-6 list-disc [&>li]:mt-2;
+}
+
+.prose ol {
+  @apply my-6 ml-6 list-decimal [&>li]:mt-2;
+}
+
+.prose blockquote {
+  @apply mt-6 border-l-2 border-primary pl-6 italic;
+}
+
+.prose table {
+  @apply my-6 w-full overflow-y-auto;
+}
+
+.prose th {
+  @apply border px-4 py-2 text-left font-bold;
+}
+
+.prose td {
+  @apply border px-4 py-2;
+}
+
+.prose a {
+  @apply text-primary underline-offset-4 hover:underline;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+
+@layer utilities {
+  .flex-center {
+    @apply flex items-center justify-center;
+  }
+
+  .col-center {
+    @apply flex flex-col items-center justify-center;
+  }
+
+  .abs-center {
+    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
+  }
+
+  /* Gradient text */
+  .text-gradient {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(135deg, #e40017 0%, #ff0037 50%, #e40017 100%);
+  }
+
+  /* Glass effect */
+  .glass {
+    @apply bg-background/80 backdrop-blur-lg;
+  }
+}
+
+/* ============================================
+   RESPONSIVE ADJUSTMENTS
+   ============================================ */
+
+@media (max-width: 640px) {
+  .bg-blurry-dots {
+    background-position:
+      -50% -1%,
+      150% -1%;
+    background-size:
+      min(1000px, 100vw) min(1000px, 100vw),
+      min(1000px, 100vw) min(1000px, 100vw);
+  }
+}
