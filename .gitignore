@@ -43,3 +43,4 @@ coverage/
 
 # Agent artifacts (per the agent instructions file)
 agent-artifacts/
+node_modules

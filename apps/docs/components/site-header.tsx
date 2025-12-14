@@ -1,37 +1,22 @@
-"use client"
-
 import Link from "next/link"
 import Image from "next/image"
-import { useTheme } from "next-themes"
 import { ThemeToggle } from "./theme-toggle"
-import { useEffect, useState } from "react"
 
 export function SiteHeader() {
-  const { resolvedTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center">
         <div className="mr-4 flex">
-          <Link href="/" className="mr-6 flex items-center space-x-3 group">
-            {mounted && (
-              <Image
-                src={resolvedTheme === "dark" ? "/Logo-dark.svg" : "/Logo-light.svg"}
-                alt="Smicolon"
-                width={32}
-                height={32}
-                className="h-8 w-auto transition-transform duration-200 group-hover:scale-105"
-              />
-            )}
-            <div className="flex flex-col">
-              <span className="font-bold text-lg leading-none">SMI-UI</span>
-              <span className="text-xs text-muted-foreground">by Smicolon</span>
-            </div>
+          <Link href="/" className="mr-6 flex items-center space-x-2 group">
+            <Image
+              src="/smicolon-icon.png"
+              alt="Smicolon"
+              width={28}
+              height={28}
+              className="h-7 w-7 transition-transform duration-200 group-hover:scale-110"
+            />
+            <span className="font-bold text-lg">smi-ui</span>
           </Link>
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
             <Link
