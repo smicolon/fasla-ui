@@ -1,45 +1,45 @@
 import { Command } from "commander"
 import chalk from "chalk"
-
-// Registry items (will be fetched from registry.json in production)
-const REGISTRY_ITEMS = [
-  { name: "button", type: "ui", description: "Button component with variants" },
-  { name: "input", type: "ui", description: "Input component with validation states" },
-  { name: "card", type: "ui", description: "Card with header, content, footer" },
-  { name: "badge", type: "ui", description: "Badge for status indicators" },
-  { name: "skeleton", type: "ui", description: "Loading skeleton placeholders" },
-  { name: "app-shell", type: "block", description: "Application shell layout" },
-  { name: "page-header", type: "block", description: "Page header with breadcrumb" },
-  { name: "empty-state", type: "block", description: "Empty state with action" },
-  { name: "form-section", type: "block", description: "Grouped form fields" },
-  { name: "data-table", type: "block", description: "Sortable, filterable table" },
-  { name: "shimmer-button", type: "effect", description: "Button with shimmer effect" },
-  { name: "animated-gradient", type: "effect", description: "Animated gradient background" },
-  { name: "text-reveal", type: "effect", description: "Character-by-character reveal" },
-  { name: "border-beam", type: "effect", description: "Animated border effect" },
-  { name: "spotlight", type: "effect", description: "Cursor-following spotlight" },
-]
+import ora from "ora"
+import { fetchRegistry } from "../registry.js"
 
 export const list = new Command()
   .name("list")
   .description("List available components")
   .option("-t, --type <type>", "Filter by type (ui, block, effect)")
   .action(async (options) => {
+    const spinner = ora("Fetching components...").start()
+
+    let registry
+    try {
+      registry = await fetchRegistry()
+      spinner.stop()
+    } catch (error) {
+      spinner.fail("Failed to fetch registry")
+      console.error(chalk.red((error as Error).message))
+      process.exit(1)
+    }
+
     console.log(chalk.bold("\nAvailable Components\n"))
 
-    let items = REGISTRY_ITEMS
+    let items = registry.items
 
     if (options.type) {
-      items = items.filter((item) => item.type === options.type)
+      const typeFilter = `registry:${options.type}`
+      items = items.filter((item) =>
+        item.type === options.type || item.type === typeFilter
+      )
     }
 
     // Group by type
     const grouped = items.reduce(
       (acc, item) => {
-        if (!acc[item.type]) {
-          acc[item.type] = []
+        // Normalize type (remove registry: prefix if present)
+        const type = item.type.replace("registry:", "")
+        if (!acc[type]) {
+          acc[type] = []
         }
-        acc[item.type].push(item)
+        acc[type].push(item)
         return acc
       },
       {} as Record<string, typeof items>
@@ -54,11 +54,13 @@ export const list = new Command()
     for (const [type, typeItems] of Object.entries(grouped)) {
       console.log(chalk.cyan.bold(`${typeLabels[type] || type}`))
       for (const item of typeItems) {
-        console.log(`  ${chalk.green(item.name.padEnd(20))} ${chalk.gray(item.description)}`)
+        const name = item.name.padEnd(20)
+        const desc = item.description || ""
+        console.log(`  ${chalk.green(name)} ${chalk.gray(desc)}`)
       }
       console.log()
     }
 
     console.log(chalk.gray(`Total: ${items.length} components`))
-    console.log(chalk.gray("\nAdd components with: npx smi-ui add <component>"))
+    console.log(chalk.gray("\nAdd components with: npx @smicolon/cli add <component>"))
   })

@@ -4,20 +4,7 @@ import ora from "ora"
 import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
-
-// Registry items (will be fetched from registry.json in production)
-const REGISTRY_ITEMS = [
-  { name: "button", type: "ui", description: "Button component with variants" },
-  { name: "input", type: "ui", description: "Input component with validation states" },
-  { name: "card", type: "ui", description: "Card with header, content, footer" },
-  { name: "badge", type: "ui", description: "Badge for status indicators" },
-  { name: "skeleton", type: "ui", description: "Loading skeleton placeholders" },
-  { name: "app-shell", type: "block", description: "Application shell layout" },
-  { name: "page-header", type: "block", description: "Page header with breadcrumb" },
-  { name: "empty-state", type: "block", description: "Empty state with action" },
-  { name: "shimmer-button", type: "effect", description: "Button with shimmer effect" },
-  { name: "animated-gradient", type: "effect", description: "Animated gradient background" },
-]
+import { fetchRegistry, fetchComponent, getTargetDirectory } from "../registry.js"
 
 export const add = new Command()
   .name("add")
@@ -36,15 +23,28 @@ export const add = new Command()
 
     if (!hasConfig) {
       console.log(chalk.red("Error: components.json not found."))
-      console.log("Run", chalk.cyan("npx smi-ui init"), "first.")
+      console.log("Run", chalk.cyan("npx @smicolon/cli init"), "first.")
       process.exit(1)
     }
 
     const config = await fs.readJson(configPath)
+    const componentsDir = config.aliases?.components?.replace("@/", "src/") || "src/components"
+
+    // Fetch registry
+    const spinner = ora("Fetching registry...").start()
+    let registry
+    try {
+      registry = await fetchRegistry()
+      spinner.succeed("Registry fetched")
+    } catch (error) {
+      spinner.fail("Failed to fetch registry")
+      console.error(chalk.red((error as Error).message))
+      process.exit(1)
+    }
 
     // If --all flag, add all components
     if (options.all) {
-      components = REGISTRY_ITEMS.map((item) => item.name)
+      components = registry.items.map((item) => item.name)
     }
 
     // If no components specified, prompt for selection
@@ -53,8 +53,8 @@ export const add = new Command()
         type: "multiselect",
         name: "selected",
         message: "Which components would you like to add?",
-        choices: REGISTRY_ITEMS.map((item) => ({
-          title: `${item.name} (${item.type})`,
+        choices: registry.items.map((item) => ({
+          title: `${item.name} ${chalk.gray(`(${item.type.replace("registry:", "")})`)}`,
           value: item.name,
           description: item.description,
         })),
@@ -71,11 +71,11 @@ export const add = new Command()
 
     // Validate components exist
     const validComponents = components.filter((c) =>
-      REGISTRY_ITEMS.some((item) => item.name === c)
+      registry.items.some((item) => item.name === c)
     )
 
     const invalidComponents = components.filter(
-      (c) => !REGISTRY_ITEMS.some((item) => item.name === c)
+      (c) => !registry.items.some((item) => item.name === c)
     )
 
     if (invalidComponents.length > 0) {
@@ -104,52 +104,80 @@ export const add = new Command()
       }
     }
 
-    const spinner = ora("Adding components...").start()
+    const addSpinner = ora("Adding components...").start()
+    const allDependencies: Set<string> = new Set()
 
     for (const componentName of validComponents) {
-      const item = REGISTRY_ITEMS.find((i) => i.name === componentName)
-      if (!item) continue
+      addSpinner.text = `Adding ${componentName}...`
 
-      spinner.text = `Adding ${componentName}...`
+      try {
+        // Fetch component with source code
+        const component = await fetchComponent(componentName)
 
-      // Determine target directory based on component type
-      const targetDir =
-        item.type === "ui"
-          ? path.join(cwd, "src/components/ui")
-          : item.type === "block"
-            ? path.join(cwd, "src/components/blocks")
-            : path.join(cwd, "src/components/effects")
+        if (!component.files || component.files.length === 0) {
+          addSpinner.warn(`${componentName}: No files found`)
+          continue
+        }
 
-      await fs.ensureDir(targetDir)
+        // Track dependencies
+        component.dependencies?.forEach((dep) => allDependencies.add(dep))
 
-      // In production, this would fetch from the registry and copy files
-      // For now, create a placeholder
-      const targetFile = path.join(targetDir, `${componentName}.tsx`)
+        // Write each file
+        for (const file of component.files) {
+          if (!file.content) {
+            addSpinner.warn(`${componentName}: Missing content for ${file.path}`)
+            continue
+          }
 
-      if ((await fs.pathExists(targetFile)) && !options.overwrite) {
-        spinner.warn(`${componentName} already exists, skipping...`)
-        continue
+          // Determine target path
+          const targetDir = getTargetDirectory(file.type || component.type, path.join(cwd, componentsDir))
+          await fs.ensureDir(targetDir)
+
+          // Get filename from target or path
+          const filename = path.basename(file.target || file.path)
+          const targetPath = path.join(targetDir, filename)
+
+          // Check if file exists
+          if ((await fs.pathExists(targetPath)) && !options.overwrite) {
+            addSpinner.warn(`${componentName}: ${filename} already exists, skipping (use -o to overwrite)`)
+            continue
+          }
+
+          // Transform the content - fix imports
+          let content = file.content
+          // Replace relative imports to utils with the configured path
+          const utilsPath = config.aliases?.utils || "@/lib/utils"
+          content = content.replace(
+            /from ["']\.\.\/.*?lib\/utils["']/g,
+            `from "${utilsPath}"`
+          )
+          content = content.replace(
+            /from ["']@\/lib\/utils["']/g,
+            `from "${utilsPath}"`
+          )
+
+          await fs.writeFile(targetPath, content)
+        }
+      } catch (error) {
+        addSpinner.warn(`${componentName}: ${(error as Error).message}`)
       }
-
-      // Placeholder - in production, fetch actual component code
-      await fs.writeFile(
-        targetFile,
-        `// TODO: Fetch from registry\n// Component: ${componentName}\n// Type: ${item.type}\n`
-      )
     }
 
-    spinner.succeed(`Added ${validComponents.length} component(s)`)
+    addSpinner.succeed(`Added ${validComponents.length} component(s)`)
 
+    // Show dependencies to install
+    if (allDependencies.size > 0) {
+      console.log(chalk.cyan("\nDependencies to install:"))
+      console.log(chalk.gray(`  npm install ${[...allDependencies].join(" ")}`))
+    }
+
+    // Show import examples
     console.log(chalk.green("\nComponents added successfully!"))
     console.log("\nImport them in your code:")
     for (const componentName of validComponents) {
-      const item = REGISTRY_ITEMS.find((i) => i.name === componentName)
-      const importPath =
-        item?.type === "ui"
-          ? `@/components/ui/${componentName}`
-          : item?.type === "block"
-            ? `@/components/blocks/${componentName}`
-            : `@/components/effects/${componentName}`
+      const item = registry.items.find((i) => i.name === componentName)
+      const typeDir = item?.type.replace("registry:", "") || "ui"
+      const importPath = `@/components/${typeDir}/${componentName}`
       console.log(chalk.cyan(`  import { ... } from "${importPath}"`))
     }
   })
