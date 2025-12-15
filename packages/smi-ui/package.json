@@ -1,6 +1,6 @@
 {
   "name": "@smicolon/smi-ui",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Professional UI components with animations and app building blocks",
   "license": "MIT",
   "author": "Smicolon",
@@ -24,23 +24,23 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs"
+      "import": "./dist/index.js"
     },
     "./tokens": {
       "types": "./dist/tokens/index.d.ts",
-      "import": "./dist/tokens/index.mjs"
+      "import": "./dist/tokens/index.js"
     },
     "./motion": {
       "types": "./dist/motion/index.d.ts",
-      "import": "./dist/motion/index.mjs"
+      "import": "./dist/motion/index.js"
     },
     "./registry": {
       "types": "./dist/registry/index.d.ts",
-      "import": "./dist/registry/index.mjs"
+      "import": "./dist/registry/index.js"
     },
     "./lib/utils": {
       "types": "./dist/lib/utils.d.ts",
-      "import": "./dist/lib/utils.mjs"
+      "import": "./dist/lib/utils.js"
     }
   },
   "files": [

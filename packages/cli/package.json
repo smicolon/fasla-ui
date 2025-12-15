@@ -1,17 +1,17 @@
 {
   "name": "@smicolon/cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "CLI for installing smi-ui components",
   "license": "MIT",
   "author": "Smicolon",
   "type": "module",
   "bin": {
-    "smi-ui": "./dist/index.mjs"
+    "smi-ui": "./dist/index.js"
   },
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs"
+      "import": "./dist/index.js"
     }
   },
   "files": [
