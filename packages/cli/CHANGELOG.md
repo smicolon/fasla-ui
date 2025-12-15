@@ -1,5 +1,11 @@
 # @smicolon/cli
 
+## 0.2.1
+
+### Patch Changes
+
+- Add package README for npm listing
+
 ## 0.2.0
 
 ### Minor Changes

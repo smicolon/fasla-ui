@@ -82,7 +82,7 @@ export const init = new Command()
         },
         registries: {
           smicolon: {
-            url: "https://smi-ui.smicolon.dev/r",
+            url: "https://ui.smicolon.com/r",
           },
         },
       }
@@ -107,7 +107,7 @@ export const init = new Command()
         },
         registries: {
           smicolon: {
-            url: "https://smi-ui.smicolon.dev/r",
+            url: "https://ui.smicolon.com/r",
           },
         },
       }

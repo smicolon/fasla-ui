@@ -164,7 +164,7 @@ Follow the prompts to describe your changes.
 
 - Open an issue for bugs or feature requests
 - Join discussions in existing issues
-- Check the documentation at [smi-ui.smicolon.dev](https://smi-ui.smicolon.dev)
+- Check the documentation at [ui.smicolon.com](https://ui.smicolon.com)
 
 ## Code of Conduct
 

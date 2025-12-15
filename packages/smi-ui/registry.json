@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "smicolon",
-  "homepage": "https://smi-ui.smicolon.dev",
+  "homepage": "https://ui.smicolon.com",
   "items": [
     {
       "name": "button",

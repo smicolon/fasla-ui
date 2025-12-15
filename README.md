@@ -47,7 +47,7 @@ export function App() {
 
 ## Documentation
 
-Visit [smi-ui.smicolon.dev](https://smi-ui.smicolon.dev) for full documentation.
+Visit [ui.smicolon.com](https://ui.smicolon.com) for full documentation.
 
 ## Components
 

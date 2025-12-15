@@ -1,6 +1,6 @@
 {
   "name": "@smicolon/smi-ui",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Professional UI components with animations and app building blocks",
   "license": "MIT",
   "author": "Smicolon",
@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/smicolon/smi-ui"
   },
-  "homepage": "https://smi-ui.smicolon.dev",
+  "homepage": "https://ui.smicolon.com",
   "keywords": [
     "react",
     "components",
