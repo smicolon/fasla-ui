@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/build-registry.mjs && next build",
+    "build:registry": "node scripts/build-registry.mjs",
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit"

@@ -1,5 +1,15 @@
 # @smicolon/cli
 
+## 0.2.2
+
+### Patch Changes
+
+- 7d70eb2: Update documentation URL and improve package READMEs
+  - Change documentation URL to ui.smicolon.com
+  - Add npm badges (version, downloads, license)
+  - Improve component documentation with organized tables
+  - Add peer dependencies and Tailwind configuration sections
+
 ## 0.2.1
 
 ### Patch Changes
