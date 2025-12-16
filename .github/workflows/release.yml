@@ -38,7 +38,7 @@ jobs:
         id: changesets
         uses: changesets/action@v1
         with:
-          publish: bun run release
+          publish: npx changeset publish
           version: bun run version
           commit: "chore: release packages"
           title: "chore: release packages"
