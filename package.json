@@ -18,7 +18,8 @@
     "clean": "turbo run clean && rm -rf node_modules",
     "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
     "changeset": "changeset",
-    "release": "changeset version && turbo run build && changeset publish"
+    "version": "changeset version",
+    "release": "changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.0",
