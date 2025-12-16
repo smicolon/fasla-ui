@@ -4,6 +4,11 @@
   "description": "CLI for installing smi-ui components",
   "license": "MIT",
   "author": "Smicolon",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smicolon/smi-ui"
+  },
+  "homepage": "https://ui.smicolon.com",
   "type": "module",
   "bin": {
     "smi-ui": "./dist/index.js"
