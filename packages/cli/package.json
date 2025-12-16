@@ -1,6 +1,6 @@
 {
   "name": "@smicolon/cli",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "CLI for installing smi-ui components",
   "license": "MIT",
   "author": "Smicolon",

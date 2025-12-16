@@ -1,5 +1,17 @@
 # @smicolon/cli
 
+## 0.3.0
+
+### Minor Changes
+
+- d7dc69a: Implement full registry integration for CLI
+  - Add registry fetching from ui.smicolon.com/r/
+  - `list` command now fetches available components from live registry
+  - `add` command downloads actual component source code
+  - Automatically transforms imports to match project configuration
+  - Shows required dependencies after adding components
+  - Shows correct import paths for added components
+
 ## 0.2.2
 
 ### Patch Changes
