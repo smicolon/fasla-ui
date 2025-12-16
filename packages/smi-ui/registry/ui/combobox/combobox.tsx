@@ -151,7 +151,7 @@ export function Combobox({
         e.preventDefault()
         if (highlightedIndex < filteredOptions.length) {
           const option = filteredOptions[highlightedIndex]
-          if (!option.disabled) {
+          if (option && !option.disabled) {
             handleSelect(option.value)
           }
         } else if (showCreate) {

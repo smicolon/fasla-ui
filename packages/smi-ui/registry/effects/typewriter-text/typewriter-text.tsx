@@ -151,11 +151,11 @@ export function TypewriterWords({
 
   React.useEffect(() => {
     if (prefersReducedMotion) {
-      setDisplayText(words[0])
+      setDisplayText(words[0] ?? "")
       return
     }
 
-    const currentWord = words[wordIndex]
+    const currentWord = words[wordIndex] ?? ""
     let timeoutId: NodeJS.Timeout
 
     if (!isDeleting) {

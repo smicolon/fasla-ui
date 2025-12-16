@@ -25,6 +25,5 @@
       "@smi-ui/effects/*": ["../../packages/smi-ui/registry/effects/*"]
     }
   },
-  "include": ["src", "stories", ".storybook"],
-  "references": [{ "path": "../../packages/smi-ui" }]
+  "include": ["src", "stories", ".storybook"]
 }

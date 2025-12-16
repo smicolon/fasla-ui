@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { motion, useReducedMotion } from "framer-motion"
+import { useReducedMotion } from "framer-motion"
 import { cn } from "../../../src/lib/utils"
 
 export interface ShimmerButtonProps

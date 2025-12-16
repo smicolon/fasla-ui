@@ -131,16 +131,12 @@ export function GlowContainer({
       }
       {...props}
     >
-      <style jsx>{`
+      <style dangerouslySetInnerHTML={{ __html: `
         @keyframes glow-slide {
-          0% {
-            background-position: 200% 0;
-          }
-          100% {
-            background-position: -200% 0;
-          }
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
         }
-      `}</style>
+      ` }} />
       <div className="relative z-10 rounded-[11px] bg-background">
         {children}
       </div>
