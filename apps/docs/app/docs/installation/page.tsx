@@ -1,3 +1,7 @@
+import { metadataForRoute } from "@/lib/seo-routes"
+
+export const metadata = metadataForRoute("/docs/installation/")
+
 export default function InstallationPage() {
   return (
     <div className="space-y-8">

@@ -1,4 +1,7 @@
 import { DocsSidebar } from "@/components/docs-sidebar"
+import { metadataForRoute } from "@/lib/seo-routes"
+
+export const metadata = metadataForRoute("/docs/")
 
 export default function DocsLayout({
   children,

@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "storybook dev -p 6006",
-    "build": "storybook build",
+    "build": "storybook build && node scripts/brand-built-head.mjs && node scripts/verify-built-head.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

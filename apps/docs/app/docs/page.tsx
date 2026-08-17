@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { componentRouteGroups } from "@/lib/seo-routes"
 
 export default function DocsPage() {
   return (
@@ -50,29 +51,27 @@ export default function DocsPage() {
 
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold tracking-tight">Component Categories</h2>
-        <div className="grid gap-4 sm:grid-cols-3">
-          <Link
-            href="/docs/components/button"
-            className="group rounded-lg border border-border/50 p-4 transition-colors hover:border-primary/50 hover:bg-accent/50"
-          >
-            <h3 className="font-semibold group-hover:text-primary">UI Primitives</h3>
-            <p className="mt-1 text-sm text-muted-foreground">12 components</p>
-          </Link>
-          <Link
-            href="/docs/components/app-shell"
-            className="group rounded-lg border border-border/50 p-4 transition-colors hover:border-primary/50 hover:bg-accent/50"
-          >
-            <h3 className="font-semibold group-hover:text-primary">Blocks</h3>
-            <p className="mt-1 text-sm text-muted-foreground">8 components</p>
-          </Link>
-          <Link
-            href="/docs/components/shimmer-button"
-            className="group rounded-lg border border-border/50 p-4 transition-colors hover:border-primary/50 hover:bg-accent/50"
-          >
-            <h3 className="font-semibold group-hover:text-primary">Effects</h3>
-            <p className="mt-1 text-sm text-muted-foreground">7 components</p>
-          </Link>
-        </div>
+        {componentRouteGroups.map((group) => (
+          <section key={group.category} className="space-y-3">
+            <h3 className="font-semibold">{group.category}</h3>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {group.routes.map((route) => (
+                <Link
+                  key={route.path}
+                  href={route.path}
+                  className="group rounded-lg border border-border/50 p-4 transition-colors hover:border-primary/50 hover:bg-accent/50"
+                >
+                  <span className="font-semibold group-hover:text-primary">
+                    {route.h1}
+                  </span>
+                  <span className="mt-1 block text-sm text-muted-foreground">
+                    {route.description}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ))}
       </div>
 
       <div className="rounded-lg border border-primary/20 bg-primary/5 p-6">
