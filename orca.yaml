@@ -1,0 +1,10 @@
+scripts:
+  setup: bun install
+
+# agent-artifacts/ is symlinked into each new worktree, not copied, so notes an
+# agent writes on a branch land in the main checkout. Orca skips an entry unless
+# the directory exists in the main checkout and is gitignored.
+worktree:
+  sharedDirectories:
+    - agent-artifacts
+    - agents-artifacts
