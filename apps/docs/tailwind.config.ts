@@ -14,6 +14,8 @@ const config: Config = {
         // Brand V2.5 §14 — product tier.
         sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
+        // Brand V2.5 §14 — the Arabic face. Geist has no Arabic coverage.
+        arabic: ["var(--font-cairo)", "system-ui", "sans-serif"],
       },
       colors: {
         border: "var(--border)",
@@ -58,6 +60,16 @@ const config: Config = {
           "accent-foreground": "var(--sidebar-accent-foreground)",
           border: "var(--sidebar-border)",
           ring: "var(--sidebar-ring)",
+        },
+        // A dark code surface in both themes. Tokenised, never hardcoded.
+        terminal: {
+          DEFAULT: "var(--terminal)",
+          foreground: "var(--terminal-foreground)",
+          muted: "var(--terminal-muted)",
+          subtle: "var(--terminal-subtle)",
+          border: "var(--terminal-border)",
+          accent: "var(--terminal-accent)",
+          caret: "var(--terminal-caret)",
         },
         // Brand V2.5 §13 — the canonical three, plus the docs code accent.
         fasla: {

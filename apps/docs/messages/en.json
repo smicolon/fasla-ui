@@ -1,0 +1,113 @@
+{
+  "meta": {
+    "localeName": "English",
+    "switchTo": "العربية"
+  },
+  "nav": {
+    "docs": "Docs",
+    "components": "Components",
+    "aguiEvents": "AG-UI events",
+    "changelog": "Changelog",
+    "github": "GitHub",
+    "getStarted": "Get started",
+    "home": "Fasla — home",
+    "toggleMenu": "Toggle menu",
+    "toggleTheme": "Toggle theme",
+    "switchLanguage": "Switch language"
+  },
+  "home": {
+    "eyebrow": "{count, plural, one {# component} other {# components}} · MIT core",
+    "headlineLead": "Add a component",
+    "headlineTail": "own the source.",
+    "intro": "Fasla is a React component library from Smicolon GmbH, built on shadcn/ui primitives. The CLI copies a component's source into your project — you own it, you edit it, there is no black box to fight.",
+    "readDocs": "Read the docs",
+    "terminal": {
+      "title": "terminal",
+      "cwd": "~/your-app",
+      "resolved": "registry resolved",
+      "written": "button.tsx → components/ui",
+      "wired": "cva + tailwind-merge wired",
+      "ownedFile": "components/ui/button.tsx — yours",
+      "ownership": "edit it · rename it · delete it"
+    },
+    "stats": {
+      "componentsLabel": "components across primitives, blocks and effects",
+      "licenceLabel": "licensed core, no runtime lock-in",
+      "depsLabel": "required runtime deps beyond your own React",
+      "countryValue": "DE",
+      "countryLabel": "Built in Germany by Smicolon GmbH"
+    },
+    "registry": {
+      "title": "What is in the registry",
+      "intro": "Three categories, one install path. Every component ships its loading, empty, error and disabled states.",
+      "browse": "Browse",
+      "primitives": {
+        "title": "UI primitives",
+        "description": "Button, Input, Card, Badge, Skeleton, Avatar, Checkbox, Switch, Select, Combobox, Tabs, Textarea."
+      },
+      "blocks": {
+        "title": "Blocks",
+        "description": "AppShell, PageHeader, EmptyState, Sidebar, Navbar, StatsCard, DataTable, FormSection."
+      },
+      "effects": {
+        "title": "Effects",
+        "description": "ShimmerButton, AnimatedGradient, TextReveal, BorderBeam, Spotlight, GlowCard, TypewriterText."
+      }
+    },
+    "features": {
+      "title": "What you get either way",
+      "accessible": {
+        "title": "Accessible by default",
+        "description": "Keyboard navigation and screen reader support are built in. Icon-only buttons carry an aria-label; focus styles stay visible."
+      },
+      "motion": {
+        "title": "Reduced motion respected",
+        "description": "Every animation reads prefers-reduced-motion from the shared motion presets. No opt-in required."
+      },
+      "typescript": {
+        "title": "TypeScript throughout",
+        "description": "Typed props and variants, so autocomplete works the moment a component lands in your project."
+      },
+      "tokens": {
+        "title": "Semantic tokens",
+        "description": "Colours come from CSS variables and the Tailwind theme. Retheme the set by editing tokens, not components."
+      },
+      "density": {
+        "title": "Three density profiles",
+        "description": "Compact, comfortable and spacious, so the same components suit a dense console and a marketing page."
+      },
+      "ownership": {
+        "title": "Yours after install",
+        "description": "The CLI copies source, not a dependency. Nothing stops you rewriting a component the day after you add it."
+      }
+    }
+  },
+  "docs": {
+    "sections": {
+      "installation": "Installation",
+      "preview": "Preview",
+      "usage": "Usage",
+      "props": "Props",
+      "variants": "Variants",
+      "sizes": "Sizes",
+      "states": "States",
+      "features": "Features",
+      "components": "Components",
+      "accessibility": "Accessibility"
+    },
+    "sidebar": {
+      "gettingStarted": "Getting started",
+      "primitives": "UI primitives",
+      "blocks": "Blocks",
+      "effects": "Effects"
+    },
+    "onThisPage": "On this page",
+    "copyCode": "Copy code",
+    "copied": "Copied"
+  },
+  "footer": {
+    "attribution": "fasla.dev · by Smicolon GmbH",
+    "by": "by Smicolon GmbH",
+    "licence": "MIT · Kirchheim b. München"
+  }
+}

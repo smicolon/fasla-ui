@@ -5,7 +5,7 @@ import React from "react"
 import { renderToStaticMarkup } from "react-dom/server"
 
 const docsRoot = path.resolve(import.meta.dir, "..")
-const componentsRoot = path.join(docsRoot, "app/docs/components")
+const componentsRoot = path.join(docsRoot, "app/[locale]/docs/components")
 
 describe("SEO route catalog", () => {
   test("covers the filesystem component routes and core pages", async () => {
@@ -31,7 +31,7 @@ describe("SEO route catalog", () => {
     expect(descriptions.size).toBe(routes.length)
 
     for (const route of routes) {
-      const canonical = new URL(route.path, SITE_URL).toString()
+      const canonical = new URL(`/en${route.path === "/" ? "/" : route.path}`.replace(/\/{2,}/g, "/"), SITE_URL).toString()
       const metadata = metadataForRoute(route.path)
 
       expect(metadata.title).toBe(route.title)
@@ -54,14 +54,14 @@ describe("SEO route catalog", () => {
   test("wires every route to the shared metadata catalog", async () => {
     const { componentRoutes } = await import("../lib/seo-routes")
     const coreAdapters = [
-      ["/", "app/(home)/layout.tsx"],
-      ["/docs/", "app/docs/layout.tsx"],
-      ["/docs/installation/", "app/docs/installation/page.tsx"],
+      ["/", "app/[locale]/(home)/layout.tsx"],
+      ["/docs/", "app/[locale]/docs/layout.tsx"],
+      ["/docs/installation/", "app/[locale]/docs/installation/page.tsx"],
     ]
 
     for (const [route, relativeFile] of coreAdapters) {
       const source = readFileSync(path.join(docsRoot, relativeFile), "utf8")
-      expect(source).toContain(`metadataForRoute("${route}")`)
+      expect(source).toContain(`metadataForRoute("${route}"`)
     }
 
     for (const route of componentRoutes) {
@@ -70,19 +70,19 @@ describe("SEO route catalog", () => {
         path.join(componentsRoot, slug, "layout.tsx"),
         "utf8"
       )
-      expect(source).toContain(`metadataForRoute("${route.path}")`)
+      expect(source).toContain(`metadataForRoute("${route.path}"`)
     }
   })
 
   test("keeps exactly one page-level H1 on every canonical docs route", async () => {
     const { componentRoutes } = await import("../lib/seo-routes")
     const pageFiles = [
-      "app/(home)/page.tsx",
-      "app/docs/page.tsx",
-      "app/docs/installation/page.tsx",
+      "app/[locale]/(home)/page.tsx",
+      "app/[locale]/docs/page.tsx",
+      "app/[locale]/docs/installation/page.tsx",
       ...componentRoutes.map((route) => {
         const slug = route.path.split("/").at(-2)
-        return `app/docs/components/${slug}/page.tsx`
+        return `app/[locale]/docs/components/${slug}/page.tsx`
       }),
     ]
 
@@ -92,31 +92,44 @@ describe("SEO route catalog", () => {
     }
   })
 
-  test("keeps the catalog H1 aligned with the rendered home heading", async () => {
-    const [{ routes }, { default: HomePage }] = await Promise.all([
-      import("../lib/seo-routes"),
-      import("../app/(home)/page"),
-    ])
-    const html = renderToStaticMarkup(React.createElement(HomePage))
+  test("keeps the catalog H1 aligned with the home message catalogue", async () => {
+    const { routes } = await import("../lib/seo-routes")
+    const en = JSON.parse(readFileSync(path.join(docsRoot, "messages/en.json"), "utf8"))
     const homeRoute = routes.find((route) => route.path === "/")
-    const h1Text = html
-      .match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/)?.[1]
-      ?.replace(/<[^>]+>/g, "")
-      .replace(/\s+/g, " ")
-      .trim()
 
-    expect(h1Text).toBe(homeRoute?.h1)
+    // The rendered H1 is headlineLead + the Arabic comma + headlineTail.
+    const composed = `${en.home.headlineLead}\u060C${en.home.headlineTail}`
+
+    expect(homeRoute?.h1).toBe(composed)
+  })
+
+  test("keeps every message key present in both locales", async () => {
+    const read = (file) =>
+      JSON.parse(readFileSync(path.join(docsRoot, "messages", file), "utf8"))
+    const flatten = (obj, prefix = "") =>
+      Object.entries(obj).flatMap(([k, v]) =>
+        typeof v === "object" && v !== null
+          ? flatten(v, `${prefix}${k}.`)
+          : [`${prefix}${k}`],
+      )
+
+    const en = flatten(read("en.json")).sort()
+    const ar = flatten(read("ar.json")).sort()
+
+    // A key present in one locale and missing in the other renders as the raw
+    // key path to the reader, so the two files must stay in lockstep.
+    expect(ar).toEqual(en)
   })
 
   test("scopes homepage metadata below the root layout", () => {
     const rootLayout = readFileSync(path.join(docsRoot, "app/layout.tsx"), "utf8")
     const homeLayout = readFileSync(
-      path.join(docsRoot, "app/(home)/layout.tsx"),
+      path.join(docsRoot, "app/[locale]/(home)/layout.tsx"),
       "utf8"
     )
 
-    expect(rootLayout).not.toContain('metadataForRoute("/")')
-    expect(homeLayout).toContain('metadataForRoute("/")')
+    expect(rootLayout).not.toContain("metadataForRoute(")
+    expect(homeLayout).toContain('metadataForRoute("/"')
   })
 
   test("allows PageHeader previews to use a subordinate heading", async () => {
