@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { locales, defaultLocale, type Locale } from "@/i18n/routing"
 
 export const SITE_URL = "https://ui.smicolon.com"
 
@@ -307,20 +308,32 @@ export const componentRouteGroups = (
   routes: componentRoutes.filter((route) => route.category === category),
 }))
 
-export function metadataForRoute(path: RoutePath): Metadata {
+/** Every route exists once per locale, so the canonical carries the prefix. */
+export function localisedPath(path: RoutePath, locale: Locale): string {
+  return `/${locale}${path === "/" ? "/" : path}`.replace(/\/{2,}/g, "/")
+}
+
+export function metadataForRoute(path: RoutePath, locale: Locale = defaultLocale): Metadata {
   const route = routes.find((candidate) => candidate.path === path)
 
   if (!route) {
     throw new Error(`Unknown canonical route: ${path}`)
   }
 
-  const canonical = new URL(route.path, SITE_URL).toString()
+  const canonical = new URL(localisedPath(path, locale), SITE_URL).toString()
+
+  // hreflang tells a crawler these are the same page in another language, and
+  // x-default names the one to serve when no language matches.
+  const languages: Record<string, string> = Object.fromEntries(
+    locales.map((l) => [l, new URL(localisedPath(path, l), SITE_URL).toString()]),
+  )
+  languages["x-default"] = new URL(localisedPath(path, defaultLocale), SITE_URL).toString()
   const image = new URL("/smicolon-icon.png", SITE_URL).toString()
 
   return {
     title: route.title,
     description: route.description,
-    alternates: { canonical },
+    alternates: { canonical, languages },
     icons: { icon: "/favicon.ico" },
     openGraph: {
       title: route.title,

@@ -118,6 +118,15 @@ AppShell
           └── Footer actions (sticky save bar when applicable)
 ```
 
+## Localisation
+
+`apps/docs` is bilingual (English, Arabic) via next-intl. Routes live under
+`app/[locale]/`, strings under `apps/docs/messages/{en,ar}.json`.
+
+Adding a string means adding the key to **both** files — a parity test fails
+otherwise. Async server pages must call `setRequestLocale(locale)` or the
+static export breaks. See `docs/LOCALISATION.md`.
+
 ## Workflow
 
 1. Create a **Block Map** for each screen using `docs/BLOCK_MAP_TEMPLATE.md` (2-5 min)

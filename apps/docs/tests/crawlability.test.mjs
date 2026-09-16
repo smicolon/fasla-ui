@@ -6,12 +6,16 @@ const docsRoot = path.resolve(import.meta.dir, "..")
 
 describe("static crawlability", () => {
   test("publishes every canonical route in the sitemap", async () => {
-    const [{ default: sitemap }, { routes, SITE_URL }] = await Promise.all([
+    const [{ default: sitemap }, { routes, SITE_URL, localisedPath }] = await Promise.all([
       import("../app/sitemap"),
       import("../lib/seo-routes"),
     ])
+    // Every canonical route is published once per locale.
+    const localeCodes = ["en", "ar"]
     const expectedUrls = [
-      ...routes.map((route) => new URL(route.path, SITE_URL).toString()),
+      ...localeCodes.flatMap((locale) =>
+        routes.map((route) => new URL(localisedPath(route.path, locale), SITE_URL).toString()),
+      ),
       `${SITE_URL}/components/`,
     ]
 
@@ -32,7 +36,7 @@ describe("static crawlability", () => {
   })
 
   test("uses catalog routes as ordinary links on the landing and sidebar", () => {
-    const landingSource = readFileSync(path.join(docsRoot, "app/docs/page.tsx"), "utf8")
+    const landingSource = readFileSync(path.join(docsRoot, "app/[locale]/docs/page.tsx"), "utf8")
     const sidebarSource = readFileSync(
       path.join(docsRoot, "components/docs-sidebar.tsx"),
       "utf8"

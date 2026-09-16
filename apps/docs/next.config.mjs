@@ -1,4 +1,5 @@
 import createMDX from "@next/mdx"
+import createNextIntlPlugin from "next-intl/plugin"
 import rehypePrettyCode from "rehype-pretty-code"
 import rehypeSlug from "rehype-slug"
 import remarkGfm from "remark-gfm"
@@ -26,4 +27,6 @@ const nextConfig = {
   trailingSlash: true,
 }
 
-export default withMDX(nextConfig)
+const withNextIntl = createNextIntlPlugin("./i18n/request.ts")
+
+export default withNextIntl(withMDX(nextConfig))

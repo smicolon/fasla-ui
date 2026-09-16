@@ -57,6 +57,17 @@
     --fasla-white: #ffffff;
     /* Docs code accent only. Needs the dark ground; capped at 10% of a composition. */
     --fasla-cyan: #009ed4;
+
+    /* Terminal surface — intentionally dark in both themes, tokenised so it
+       is tuned in one place and never hardcoded at the call site. */
+    --terminal: #0a0a0a;
+    --terminal-foreground: oklch(1 0 0 / 88%);
+    --terminal-muted: oklch(1 0 0 / 46%);
+    --terminal-subtle: oklch(1 0 0 / 30%);
+    --terminal-border: oklch(1 0 0 / 12%);
+    --terminal-accent: #009ed4;
+    --terminal-caret: oklch(1 0 0 / 70%);
+
   }
 
   .dark {
@@ -99,6 +110,11 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
+
+    /* The page is pure black here, so the terminal lifts to stay readable
+       as its own surface. */
+    --terminal: oklch(0.17 0 0);
+    --terminal-border: oklch(1 0 0 / 14%);
   }
 }
 
@@ -282,8 +298,10 @@
   background-color: color-mix(in oklch, var(--accent) 50%, transparent);
 }
 
-/* Inline code */
-:not(pre) > code {
+/* Inline code — prose only. A blanket `code` rule also hits UI chrome such as
+   the hero install command, producing a pill inside a button. */
+.prose :not(pre) > code,
+[data-rehype-pretty-code-figure] :not(pre) > code {
   @apply rounded-md bg-muted px-1.5 py-0.5 text-sm font-medium;
 }
 
@@ -380,4 +398,95 @@
 
 .animate-bounce-x {
   animation: bounce-x 1s ease-in-out infinite;
+}
+
+/* ============================================
+   REDUCED MOTION
+   UI_STANDARDS: every animation must honour this. Global so a new animation
+   is covered the moment it is written, rather than opted in one at a time.
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   HERO MOTION
+   One orchestrated reveal, not scattered micro-interactions (§02.02).
+   ============================================ */
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.rise {
+  animation: rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+
+/* The Arabic comma is the brand's own punctuation, and Geist has no Arabic
+   coverage (brand book Q1), so it must name faces that do or it falls back to
+   a random system font and sits off the baseline. */
+.fasla-comma {
+  font-family: "Geeza Pro", "Noto Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+  font-weight: 400;
+}
+
+@keyframes caret {
+  0%, 45%  { opacity: 1; }
+  55%, 100% { opacity: 0; }
+}
+
+.caret {
+  animation: caret 1.1s steps(1) infinite;
+}
+
+/* ============================================
+   ARABIC SETTING (Brand V2.5 §15)
+   Line height 1.7 minimum, 1.8 preferred. Tracking is always 0 — Arabic is
+   never letter-spaced. All-caps does not exist in Arabic; italic is never used.
+   ============================================ */
+
+[dir="rtl"] {
+  font-family: var(--font-cairo), system-ui, sans-serif;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3,
+[dir="rtl"] p,
+[dir="rtl"] li {
+  letter-spacing: 0;
+  line-height: 1.8;
+}
+
+[dir="rtl"] h1,
+[dir="rtl"] h2,
+[dir="rtl"] h3 {
+  line-height: 1.4;
+}
+
+[dir="rtl"] .uppercase {
+  text-transform: none;
+}
+
+[dir="rtl"] .italic {
+  font-style: normal;
+}
+
+/* Numerals, code and anything monospace stay Latin and LTR (§15). */
+[dir="rtl"] code,
+[dir="rtl"] pre,
+[dir="rtl"] kbd,
+[dir="rtl"] .font-mono {
+  direction: ltr;
+  unicode-bidi: embed;
+  text-align: start;
 }

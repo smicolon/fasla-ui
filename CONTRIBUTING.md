@@ -150,6 +150,16 @@ keep the first line under 72 characters. A commit that does not parse as a
 conventional commit is simply ignored for versioning, so it will not appear in
 the changelog.
 
+## Localisation
+
+The docs site ships in English and Arabic, and every page exists in both. A
+string added to one locale and not the other fails the build.
+
+Read **[docs/LOCALISATION.md](docs/LOCALISATION.md)** before adding a page, a
+string or a locale. It covers the message-file structure, `setRequestLocale`
+(which the static export requires), the Arabic writing rules from Brand
+Identity V2.5, ICU plurals, and what does and does not mirror in RTL.
+
 ## Component Guidelines
 
 ### Accessibility
