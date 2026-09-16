@@ -53,7 +53,7 @@ export function TypewriterText({
       return
     }
 
-    let timeoutId: NodeJS.Timeout
+    let timeoutId: ReturnType<typeof setTimeout>
     let charIndex = 0
     setIsTyping(true)
 
@@ -156,7 +156,7 @@ export function TypewriterWords({
     }
 
     const currentWord = words[wordIndex] ?? ""
-    let timeoutId: NodeJS.Timeout
+    let timeoutId: ReturnType<typeof setTimeout>
 
     if (!isDeleting) {
       // Typing

@@ -44,8 +44,32 @@ describe("static crawlability", () => {
 
     for (const source of [landingSource, sidebarSource]) {
       expect(source).toContain("componentRouteGroups")
-      expect(source).toContain("href={route.path}")
       expect(source).toContain("<Link")
+
+      // Catalogue paths are locale-agnostic, so a link must add the prefix.
+      // `href={route.path}` shipped once and 404'd every Arabic docs link.
+      expect(source).toContain("href={p(route.path)}")
+      expect(source).not.toContain("href={route.path}")
+    }
+  })
+
+  test("never links to an internal route without a locale prefix", () => {
+    const files = [
+      "app/[locale]/docs/page.tsx",
+      "components/docs-sidebar.tsx",
+      "components/site-header.tsx",
+      "app/[locale]/(home)/page.tsx",
+    ]
+
+    for (const file of files) {
+      const source = readFileSync(path.join(docsRoot, file), "utf8")
+      const literal = [...source.matchAll(/href="(\/[^"]*)"/g)].map((m) => m[1])
+
+      // /components/ is Storybook, copied in at build time outside the locale
+      // tree, so it is the one internal path that carries no prefix.
+      const unprefixed = literal.filter((href) => href !== "/components")
+
+      expect(unprefixed).toEqual([])
     }
   })
 })

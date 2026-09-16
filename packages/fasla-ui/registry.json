@@ -4,84 +4,25 @@
   "homepage": "https://ui.smicolon.com",
   "items": [
     {
-      "name": "button",
+      "name": "animated-gradient",
       "type": "registry:ui",
-      "title": "Button",
-      "description": "A button component with multiple variants, sizes, and loading state.",
-      "dependencies": ["@radix-ui/react-slot", "class-variance-authority"],
+      "title": "Animated Gradient",
+      "description": "Animated gradient background and text effects.",
+      "dependencies": [
+        "framer-motion"
+      ],
       "registryDependencies": [],
       "files": [
         {
-          "path": "registry/ui/button/button.tsx",
+          "path": "registry/effects/animated-gradient/animated-gradient.tsx",
           "type": "registry:ui",
-          "target": "components/ui/button.tsx"
+          "target": "components/ui/animated-gradient.tsx"
         }
       ],
-      "categories": ["primitives", "forms"]
-    },
-    {
-      "name": "input",
-      "type": "registry:ui",
-      "title": "Input",
-      "description": "An input component with variants for validation states and icon support.",
-      "dependencies": ["class-variance-authority"],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "registry/ui/input/input.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/input.tsx"
-        }
-      ],
-      "categories": ["primitives", "forms"]
-    },
-    {
-      "name": "card",
-      "type": "registry:ui",
-      "title": "Card",
-      "description": "A card component with header, content, and footer sections.",
-      "dependencies": [],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "registry/ui/card/card.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/card.tsx"
-        }
-      ],
-      "categories": ["primitives", "layout"]
-    },
-    {
-      "name": "badge",
-      "type": "registry:ui",
-      "title": "Badge",
-      "description": "A badge component for status indicators with multiple variants.",
-      "dependencies": ["class-variance-authority"],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "registry/ui/badge/badge.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/badge.tsx"
-        }
-      ],
-      "categories": ["primitives", "data-display"]
-    },
-    {
-      "name": "skeleton",
-      "type": "registry:ui",
-      "title": "Skeleton",
-      "description": "Loading skeleton placeholders with pre-built variants for text, avatars, and cards.",
-      "dependencies": [],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "registry/ui/skeleton/skeleton.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/skeleton.tsx"
-        }
-      ],
-      "categories": ["primitives", "feedback"]
+      "categories": [
+        "effects",
+        "backgrounds"
+      ]
     },
     {
       "name": "app-shell",
@@ -97,55 +38,152 @@
           "target": "components/blocks/app-shell.tsx"
         }
       ],
-      "categories": ["layout", "application"]
+      "categories": [
+        "layout",
+        "application"
+      ]
     },
     {
-      "name": "page-header",
-      "type": "registry:block",
-      "title": "Page Header",
-      "description": "Page header with title, breadcrumb, description, and actions.",
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "Represent users with images, fallback content, and grouping.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/avatar/avatar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/avatar.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "data-display"
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "A badge component for status indicators with multiple variants.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/badge/badge.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/badge.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "data-display"
+      ]
+    },
+    {
+      "name": "border-beam",
+      "type": "registry:ui",
+      "title": "Border Beam",
+      "description": "Animated border beam and glowing border effects.",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/effects/border-beam/border-beam.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/border-beam.tsx"
+        }
+      ],
+      "categories": [
+        "effects",
+        "borders"
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "A button component with multiple variants, sizes, and loading state.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/button/button.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/button.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "forms"
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "A card component with header, content, and footer sections.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
         {
-          "path": "registry/blocks/page-header/PageHeader.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/page-header.tsx"
+          "path": "registry/ui/card/card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/card.tsx"
         }
       ],
-      "categories": ["layout", "navigation"]
+      "categories": [
+        "primitives",
+        "layout"
+      ]
     },
     {
-      "name": "empty-state",
-      "type": "registry:block",
-      "title": "Empty State",
-      "description": "Empty state component with icon, title, description, and actions.",
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "An accessible checkbox for binary selections with controlled state.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
         {
-          "path": "registry/blocks/empty-state/EmptyState.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/empty-state.tsx"
+          "path": "registry/ui/checkbox/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/checkbox.tsx"
         }
       ],
-      "categories": ["feedback", "data-display"]
+      "categories": [
+        "primitives",
+        "forms"
+      ]
     },
     {
-      "name": "form-section",
-      "type": "registry:block",
-      "title": "Form Section",
-      "description": "Form section with title, description, fields, and actions.",
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "A searchable combobox with single or multiple selection.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
         {
-          "path": "registry/blocks/form-section/FormSection.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/form-section.tsx"
+          "path": "registry/ui/combobox/combobox.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/combobox.tsx"
         }
       ],
-      "categories": ["forms", "layout"]
+      "categories": [
+        "primitives",
+        "forms"
+      ]
     },
     {
       "name": "data-table",
@@ -161,14 +199,154 @@
           "target": "components/blocks/data-table.tsx"
         }
       ],
-      "categories": ["data-display", "tables"]
+      "categories": [
+        "data-display",
+        "tables"
+      ]
+    },
+    {
+      "name": "empty-state",
+      "type": "registry:block",
+      "title": "Empty State",
+      "description": "Empty state component with icon, title, description, and actions.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/empty-state/EmptyState.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/empty-state.tsx"
+        }
+      ],
+      "categories": [
+        "feedback",
+        "data-display"
+      ]
+    },
+    {
+      "name": "form-section",
+      "type": "registry:block",
+      "title": "Form Section",
+      "description": "Form section with title, description, fields, and actions.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/form-section/FormSection.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/form-section.tsx"
+        }
+      ],
+      "categories": [
+        "forms",
+        "layout"
+      ]
+    },
+    {
+      "name": "glow-card",
+      "type": "registry:ui",
+      "title": "Glow Card",
+      "description": "Card with a cursor-following glow on hover.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/effects/glow-card/glow-card.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/glow-card.tsx"
+        }
+      ],
+      "categories": [
+        "effects",
+        "interactive"
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "An input component with variants for validation states and icon support.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/input/input.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "forms"
+      ]
+    },
+    {
+      "name": "navbar",
+      "type": "registry:block",
+      "title": "Navbar",
+      "description": "Responsive navigation bar with desktop links and mobile menu.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/navbar/Navbar.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar.tsx"
+        }
+      ],
+      "categories": [
+        "navigation",
+        "layout"
+      ]
+    },
+    {
+      "name": "page-header",
+      "type": "registry:block",
+      "title": "Page Header",
+      "description": "Page header with title, breadcrumb, description, and actions.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/page-header/PageHeader.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/page-header.tsx"
+        }
+      ],
+      "categories": [
+        "layout",
+        "navigation"
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "A select control for choosing one option from a list.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/select/select.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/select.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "forms"
+      ]
     },
     {
       "name": "shimmer-button",
       "type": "registry:ui",
       "title": "Shimmer Button",
       "description": "A button with animated shimmer effect.",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "framer-motion"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -177,62 +355,57 @@
           "target": "components/ui/shimmer-button.tsx"
         }
       ],
-      "categories": ["effects", "buttons"]
+      "categories": [
+        "effects",
+        "buttons"
+      ]
     },
     {
-      "name": "animated-gradient",
-      "type": "registry:ui",
-      "title": "Animated Gradient",
-      "description": "Animated gradient background and text effects.",
-      "dependencies": ["framer-motion"],
+      "name": "sidebar",
+      "type": "registry:block",
+      "title": "Sidebar",
+      "description": "Responsive sidebar navigation with collapsible structure.",
+      "dependencies": [],
       "registryDependencies": [],
       "files": [
         {
-          "path": "registry/effects/animated-gradient/animated-gradient.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/animated-gradient.tsx"
+          "path": "registry/blocks/sidebar/Sidebar.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/sidebar.tsx"
         }
       ],
-      "categories": ["effects", "backgrounds"]
+      "categories": [
+        "navigation",
+        "layout"
+      ]
     },
     {
-      "name": "text-reveal",
+      "name": "skeleton",
       "type": "registry:ui",
-      "title": "Text Reveal",
-      "description": "Character and word reveal animations.",
-      "dependencies": ["framer-motion"],
+      "title": "Skeleton",
+      "description": "Loading skeleton placeholders with pre-built variants for text, avatars, and cards.",
+      "dependencies": [],
       "registryDependencies": [],
       "files": [
         {
-          "path": "registry/effects/text-reveal/text-reveal.tsx",
+          "path": "registry/ui/skeleton/skeleton.tsx",
           "type": "registry:ui",
-          "target": "components/ui/text-reveal.tsx"
+          "target": "components/ui/skeleton.tsx"
         }
       ],
-      "categories": ["effects", "text"]
-    },
-    {
-      "name": "border-beam",
-      "type": "registry:ui",
-      "title": "Border Beam",
-      "description": "Animated border beam and glowing border effects.",
-      "dependencies": ["framer-motion"],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "registry/effects/border-beam/border-beam.tsx",
-          "type": "registry:ui",
-          "target": "components/ui/border-beam.tsx"
-        }
-      ],
-      "categories": ["effects", "borders"]
+      "categories": [
+        "primitives",
+        "feedback"
+      ]
     },
     {
       "name": "spotlight",
       "type": "registry:ui",
       "title": "Spotlight",
       "description": "Cursor-following spotlight effect.",
-      "dependencies": ["framer-motion"],
+      "dependencies": [
+        "framer-motion"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -241,7 +414,128 @@
           "target": "components/ui/spotlight.tsx"
         }
       ],
-      "categories": ["effects", "interactive"]
+      "categories": [
+        "effects",
+        "interactive"
+      ]
+    },
+    {
+      "name": "stats-card",
+      "type": "registry:block",
+      "title": "Stats Card",
+      "description": "Display a metric with trend, icon, and supporting label.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/stats-card/StatsCard.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/stats-card.tsx"
+        }
+      ],
+      "categories": [
+        "data-display",
+        "application"
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "An accessible switch for on-off settings.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/switch/switch.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/switch.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "forms"
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Accessible tab lists, triggers, and keyboard-navigable panels.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/tabs/tabs.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tabs.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "navigation"
+      ]
+    },
+    {
+      "name": "text-reveal",
+      "type": "registry:ui",
+      "title": "Text Reveal",
+      "description": "Character and word reveal animations.",
+      "dependencies": [
+        "framer-motion"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/effects/text-reveal/text-reveal.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/text-reveal.tsx"
+        }
+      ],
+      "categories": [
+        "effects",
+        "text"
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "A multi-line text input with character counting and resize options.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/textarea/textarea.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/textarea.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "forms"
+      ]
+    },
+    {
+      "name": "typewriter-text",
+      "type": "registry:ui",
+      "title": "Typewriter Text",
+      "description": "Text that types itself out, one character at a time.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/effects/typewriter-text/typewriter-text.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/typewriter-text.tsx"
+        }
+      ],
+      "categories": [
+        "effects",
+        "text"
+      ]
     }
   ]
 }
