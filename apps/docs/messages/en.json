@@ -99,11 +99,30 @@
       "gettingStarted": "Getting started",
       "primitives": "UI primitives",
       "blocks": "Blocks",
-      "effects": "Effects"
+      "effects": "Effects",
+      "introduction": "Introduction",
+      "installation": "Installation",
+      "playground": "Component Playground"
     },
     "onThisPage": "On this page",
     "copyCode": "Copy code",
-    "copied": "Copied"
+    "copied": "Copied",
+    "landing": {
+      "introTitle": "Introduction",
+      "introBody": "Fasla provides a collection of reusable components that you can copy and paste into your apps. It's not a traditional component library — you own the code and can customize it however you want.",
+      "featuresTitle": "Features",
+      "categoriesTitle": "Component categories",
+      "getStartedTitle": "Get started",
+      "getStartedBody": "Install the CLI and add your first component.",
+      "features": {
+        "components": "<strong>{count}+ components</strong> — UI primitives, app blocks, and effects",
+        "accessible": "<strong>Accessible</strong> — built with accessibility in mind, keyboard navigation included",
+        "animated": "<strong>Animated</strong> — smooth animations with Framer Motion, respects reduced motion",
+        "typescript": "<strong>TypeScript</strong> — 100% TypeScript with full type safety",
+        "darkMode": "<strong>Dark mode</strong> — dark mode support out of the box",
+        "customizable": "<strong>Customizable</strong> — built with Tailwind CSS, easy to customize"
+      }
+    }
   },
   "footer": {
     "attribution": "fasla.dev · by Smicolon GmbH",
