@@ -61,6 +61,16 @@ const config: Config = {
           border: "var(--sidebar-border)",
           ring: "var(--sidebar-ring)",
         },
+        // A dark code surface in both themes. Tokenised, never hardcoded.
+        terminal: {
+          DEFAULT: "var(--terminal)",
+          foreground: "var(--terminal-foreground)",
+          muted: "var(--terminal-muted)",
+          subtle: "var(--terminal-subtle)",
+          border: "var(--terminal-border)",
+          accent: "var(--terminal-accent)",
+          caret: "var(--terminal-caret)",
+        },
         // Brand V2.5 §13 — the canonical three, plus the docs code accent.
         fasla: {
           red: "var(--fasla-red)",

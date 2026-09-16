@@ -57,6 +57,17 @@
     --fasla-white: #ffffff;
     /* Docs code accent only. Needs the dark ground; capped at 10% of a composition. */
     --fasla-cyan: #009ed4;
+
+    /* Terminal surface — intentionally dark in both themes, tokenised so it
+       is tuned in one place and never hardcoded at the call site. */
+    --terminal: #0a0a0a;
+    --terminal-foreground: oklch(1 0 0 / 88%);
+    --terminal-muted: oklch(1 0 0 / 46%);
+    --terminal-subtle: oklch(1 0 0 / 30%);
+    --terminal-border: oklch(1 0 0 / 12%);
+    --terminal-accent: #009ed4;
+    --terminal-caret: oklch(1 0 0 / 70%);
+
   }
 
   .dark {
@@ -99,6 +110,11 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.556 0 0);
+
+    /* The page is pure black here, so the terminal lifts to stay readable
+       as its own surface. */
+    --terminal: oklch(0.17 0 0);
+    --terminal-border: oklch(1 0 0 / 14%);
   }
 }
 

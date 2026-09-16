@@ -139,34 +139,34 @@ export default async function HomePage({
 
           {/* ── the proof ── */}
           <div className="rise" style={{ animationDelay: "240ms" }}>
-            <div className="overflow-hidden rounded-xl border border-border bg-fasla-ink shadow-2xl shadow-black/20">
-              <div className="flex items-center justify-between border-b border-white/10 px-4 py-2.5">
-                <span className="font-mono text-[11px] text-white/40">{t("terminal.title")}</span>
-                <span className="font-mono text-[11px] text-white/25">{t("terminal.cwd")}</span>
+            <div className="overflow-hidden rounded-xl border border-border bg-terminal shadow-2xl shadow-foreground/10">
+              <div className="flex items-center justify-between border-b border-terminal-border px-4 py-2.5">
+                <span className="font-mono text-[11px] text-terminal-muted">{t("terminal.title")}</span>
+                <span className="font-mono text-[11px] text-terminal-subtle">{t("terminal.cwd")}</span>
               </div>
 
-              <div className="space-y-1 px-4 py-4 font-mono text-[12.5px] leading-[1.9] text-white/85">
+              <div className="space-y-1 px-4 py-4 font-mono text-[12.5px] leading-[1.9] text-terminal-foreground">
                 <div className="rise" style={{ animationDelay: "420ms" }}>
-                  <span className="text-fasla-cyan">$</span> npx fasla-ui add button
+                  <span className="text-terminal-accent">$</span> npx fasla-ui add button
                 </div>
-                <div className="rise text-white/45" style={{ animationDelay: "700ms" }}>✓ {t("terminal.resolved")}</div>
-                <div className="rise text-white/45" style={{ animationDelay: "850ms" }}>✓ {t("terminal.written")}</div>
-                <div className="rise text-white/45" style={{ animationDelay: "1000ms" }}>✓ {t("terminal.wired")}</div>
+                <div className="rise text-terminal-muted" style={{ animationDelay: "700ms" }}>✓ {t("terminal.resolved")}</div>
+                <div className="rise text-terminal-muted" style={{ animationDelay: "850ms" }}>✓ {t("terminal.written")}</div>
+                <div className="rise text-terminal-muted" style={{ animationDelay: "1000ms" }}>✓ {t("terminal.wired")}</div>
                 <div className="rise flex items-center gap-1.5 pt-1" style={{ animationDelay: "1150ms" }}>
-                  <span className="text-fasla-cyan">$</span>
-                  <span className="caret inline-block h-[14px] w-[7px] bg-white/70" aria-hidden="true" />
+                  <span className="text-terminal-accent">$</span>
+                  <span className="caret inline-block h-[14px] w-[7px] bg-terminal-caret" aria-hidden="true" />
                 </div>
               </div>
 
               {/* what you own once it lands */}
-              <div className="border-t border-white/10 px-4 py-4">
-                <div className="mb-2.5 font-mono text-[11px] text-white/35">
+              <div className="border-t border-terminal-border px-4 py-4">
+                <div className="mb-2.5 font-mono text-[11px] text-terminal-subtle">
                   {t("terminal.ownedFile")}
                 </div>
-                <div className="font-mono text-[12.5px] leading-[1.9] text-white/75">
-                  <div><span className="text-fasla-cyan">const</span> buttonVariants = cva(</div>
-                  <div className="pl-4 text-white/40">&quot;inline-flex items-center…&quot;,</div>
-                  <div className="pl-4">&#123; <span className="text-fasla-cyan">variants</span>: &#123; variant, size &#125; &#125;</div>
+                <div className="font-mono text-[12.5px] leading-[1.9] text-terminal-foreground">
+                  <div><span className="text-terminal-accent">const</span> buttonVariants = cva(</div>
+                  <div className="pl-4 text-terminal-muted">&quot;inline-flex items-center…&quot;,</div>
+                  <div className="pl-4">&#123; <span className="text-terminal-accent">variants</span>: &#123; variant, size &#125; &#125;</div>
                   <div>)</div>
                 </div>
               </div>
