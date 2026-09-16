@@ -55,9 +55,18 @@ jobs:
           node-version: "22"
           registry-url: "https://registry.npmjs.org"
 
+      # Trusted publishing needs npm 11.5.0 or newer.
       - name: Upgrade npm for trusted publishing
         run: npm install -g npm@latest
 
+      # Published via npm trusted publishing: the job's OIDC token (id-token:
+      # write, above) is exchanged for a short-lived credential, so there is no
+      # NPM_TOKEN here and no long-lived secret to leak or rotate. npm attaches
+      # the provenance attestation itself, so --provenance is not passed.
+      #
+      # Each package needs a trusted publisher configured once on npmjs.com,
+      # pointing at smicolon/fasla-ui and this workflow file (release.yml).
+      #
       # Only the packages release-please actually bumped get published, so a
       # release that touches one package does not try to republish the other at
       # a version npm already has.
@@ -67,10 +76,9 @@ jobs:
             | jq -r '.[]' \
             | while read -r pkg; do
                 echo "::group::publishing $pkg"
-                ( cd "$pkg" && npm publish --access public --provenance )
+                ( cd "$pkg" && npm publish --access public )
                 echo "::endgroup::"
               done
         env:
           # Never inline ${{ }} into the script body — keep it a quoted env var.
           PATHS_RELEASED: ${{ needs.release-please.outputs.paths_released }}
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
