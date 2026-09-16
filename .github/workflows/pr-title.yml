@@ -11,7 +11,11 @@ on:
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
+  # Not cancel-in-progress. Opening a PR fires `opened` and then `edited`
+  # moments later when the body lands, and cancelling the first leaves a
+  # CANCELLED check that GitHub reports as a failure on a PR that is fine.
+  # The job takes three seconds, so there is nothing worth cancelling.
+  cancel-in-progress: false
 
 permissions:
   contents: read
