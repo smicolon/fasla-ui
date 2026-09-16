@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from "node:fs"
 import path from "node:path"
 import { fileURLToPath, pathToFileURL } from "node:url"
 
-const title = "FASLA-UI Component Explorer | Smicolon"
+const title = "Fasla Component Explorer | Smicolon"
 
 export function brandManagerHtml(html) {
   const titles = html.match(/<title>[\s\S]*?<\/title>/gi) ?? []

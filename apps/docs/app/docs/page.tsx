@@ -7,14 +7,14 @@ export default function DocsPage() {
       <div className="space-y-4">
         <h1 className="text-4xl font-bold tracking-tight">Introduction</h1>
         <p className="text-xl text-muted-foreground">
-          FASLA-UI is a beautiful, animated component library built with React, Tailwind CSS, and Framer Motion.
+          Fasla is a beautiful, animated component library built with React, Tailwind CSS, and Framer Motion.
         </p>
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight">What is FASLA-UI?</h2>
+        <h2 className="text-2xl font-semibold tracking-tight">What is Fasla?</h2>
         <p className="text-muted-foreground leading-relaxed">
-          FASLA-UI provides a collection of reusable components that you can copy and paste into your apps.
+          Fasla provides a collection of reusable components that you can copy and paste into your apps.
           It&apos;s not a traditional component library - you own the code and can customize it however you want.
         </p>
       </div>

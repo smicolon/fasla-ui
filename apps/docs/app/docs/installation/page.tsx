@@ -8,7 +8,7 @@ export default function InstallationPage() {
       <div className="space-y-4">
         <h1 className="text-4xl font-bold tracking-tight">Installation</h1>
         <p className="text-xl text-muted-foreground">
-          How to install and set up FASLA-UI in your project.
+          How to install and set up Fasla in your project.
         </p>
       </div>
 
@@ -29,7 +29,7 @@ export default function InstallationPage() {
 
         <div className="space-y-4">
           <div>
-            <p className="text-sm font-medium mb-2">Initialize FASLA-UI in your project:</p>
+            <p className="text-sm font-medium mb-2">Initialize Fasla in your project:</p>
             <pre className="overflow-x-auto rounded-lg bg-smi-neutral-950 p-4">
               <code className="text-green-400">npx @smicolon/fasla-ui init</code>
             </pre>

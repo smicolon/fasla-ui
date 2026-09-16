@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ============================================
-   SMICOLON BRAND IDENTITY - FASLA-UI DOCS
+   FASLA — BRAND IDENTITY V2.5 · DOCS
    ============================================ */
 
 @layer base {
@@ -18,7 +18,7 @@
     --popover-foreground: oklch(0.145 0 0);
 
     /* Primary: Smicolon Red */
-    --primary: oklch(61.61% 0.257 27.15);
+    --primary: #e40017;
     --primary-foreground: oklch(0.985 0 0);
 
     --secondary: oklch(0.97 0 0);
@@ -27,7 +27,7 @@
     --muted-foreground: oklch(0.556 0 0);
     --accent: oklch(0.97 0 0);
     --accent-foreground: oklch(0.205 0 0);
-    --destructive: oklch(61.61% 0.257 27.15);
+    --destructive: #e40017;
     --destructive-foreground: oklch(0.985 0 0);
     --border: oklch(0.922 0 0);
     --input: oklch(0.922 0 0);
@@ -50,17 +50,13 @@
     --sidebar-border: oklch(0.922 0 0);
     --sidebar-ring: oklch(0.708 0 0);
 
-    /* Smicolon Extended Colors */
-    --smi-red-600: #ff0037;
-    --smi-red-800: #e40017;
-    --smi-red-900: #b60012;
-    --smi-red-dark: #6b000b;
-    --smi-neutral-50: #f9fafb;
-    --smi-neutral-300: #d1d5db;
-    --smi-neutral-800: #1f2937;
-    --smi-neutral-850: #141414;
-    --smi-neutral-900: #111827;
-    --smi-neutral-950: #0a0a0a;
+    /* Brand V2.5 §13 — canonical palette. Three values, plus one code accent.
+       Nothing else may be added here; a near miss (#DC0B22) fails a brand check. */
+    --fasla-red: #e40017;
+    --fasla-ink: #0a0a0a;
+    --fasla-white: #ffffff;
+    /* Docs code accent only. Needs the dark ground; capped at 10% of a composition. */
+    --fasla-cyan: #009ed4;
   }
 
   .dark {
@@ -72,7 +68,7 @@
     --popover-foreground: oklch(0.985 0 0);
 
     /* Primary: Smicolon Red */
-    --primary: oklch(61.61% 0.257 27.15);
+    --primary: #e40017;
     --primary-foreground: oklch(1 0 0);
 
     --secondary: oklch(19.13% 0 0);
@@ -81,7 +77,7 @@
     --muted-foreground: oklch(0.708 0 0);
     --accent: oklch(0.269 0 0);
     --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
+    --destructive: #e40017;
     --destructive-foreground: oklch(0.985 0 0);
     --border: oklch(1 0 0 / 10%);
     --input: oklch(1 0 0 / 15%);
@@ -119,19 +115,8 @@
 }
 
 /* ============================================
-   SMICOLON BRAND ANIMATIONS
+   MOTION
    ============================================ */
-
-@keyframes roll-reveal {
-  from {
-    transform: rotate(12deg) scale(0);
-    opacity: 0;
-  }
-  to {
-    transform: rotate(0deg) scale(1);
-    opacity: 1;
-  }
-}
 
 @keyframes fade-in {
   from {
@@ -186,42 +171,12 @@
   }
 }
 
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 20px rgba(228, 0, 23, 0.3);
-  }
-  50% {
-    box-shadow: 0 0 40px rgba(228, 0, 23, 0.6);
-  }
-}
-
-@keyframes gradient-shift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
 @keyframes shimmer {
   0% {
     transform: translateX(-100%);
   }
   100% {
     transform: translateX(100%);
-  }
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-10px);
   }
 }
 
@@ -246,10 +201,6 @@
 }
 
 /* Animation utilities */
-.animate-roll-reveal {
-  animation: roll-reveal 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
-}
-
 .animate-fade-in {
   animation: fade-in 0.7s ease-out backwards;
 }
@@ -270,19 +221,6 @@
   animation: shimmer var(--shimmer-duration, 2s) infinite;
 }
 
-.animate-pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-.animate-gradient-shift {
-  background-size: 200% 200%;
-  animation: gradient-shift 3s ease infinite;
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
 .animate-scale-in {
   animation: scale-in 0.5s ease-out backwards;
 }
@@ -298,53 +236,7 @@
 .animate-delay-800 { animation-delay: 800ms; }
 
 /* ============================================
-   SMICOLON BRAND BACKGROUND EFFECTS
-   ============================================ */
-
-.bg-gradient-radial-red {
-  background-image: radial-gradient(ellipse at center, rgba(228, 0, 23, 0.15) 0%, transparent 70%);
-}
-
-.bg-blurry-dots {
-  background-image:
-    radial-gradient(closest-side, var(--smi-red-600) 7%, transparent 100%),
-    radial-gradient(closest-side, var(--smi-red-600) 7%, transparent 100%);
-  background-position:
-    -100% -10%,
-    200% -10%;
-  background-size:
-    min(1000px, 70vw) min(1000px, 70vw),
-    min(1000px, 70vw) min(1000px, 70vw);
-  background-repeat: repeat-y;
-  filter: blur(10px);
-  opacity: 0.07;
-  pointer-events: none;
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.gradient-t-to-b {
-  @apply absolute inset-0 z-0 bg-gradient-to-b from-[#E40017] to-transparent to-[100%] opacity-10 pointer-events-none;
-}
-
-/* Noise background effect */
-.dark .bg-noisy {
-  position: relative;
-}
-
-.dark .bg-noisy::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ============================================
-   SMICOLON BRAND COMPONENTS
+   COMPONENTS
    ============================================ */
 
 /* Primary button style */
@@ -367,28 +259,6 @@
   @apply transition-all duration-200;
   @apply hover:bg-foreground hover:text-background;
   @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-foreground focus-visible:ring-offset-2;
-}
-
-/* Card with hover glow effect */
-.card-glow {
-  @apply relative overflow-hidden rounded-xl border bg-card p-6;
-  @apply transition-all duration-300;
-}
-
-.card-glow::before {
-  content: '';
-  @apply absolute inset-0 opacity-0 transition-opacity duration-300;
-  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(228, 0, 23, 0.1), transparent 40%);
-}
-
-.card-glow:hover::before {
-  @apply opacity-100;
-}
-
-/* Text stroke effect */
-.text-stroke {
-  -webkit-text-stroke-width: 0.7px;
-  -webkit-text-stroke-color: color-mix(in srgb, currentColor 20%, transparent);
 }
 
 /* ============================================
@@ -483,12 +353,6 @@
     @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
   }
 
-  /* Gradient text */
-  .text-gradient {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, #e40017 0%, #ff0037 50%, #e40017 100%);
-  }
-
   /* Glass effect */
   .glass {
     @apply bg-background/80 backdrop-blur-lg;
@@ -516,19 +380,4 @@
 
 .animate-bounce-x {
   animation: bounce-x 1s ease-in-out infinite;
-}
-
-/* ============================================
-   RESPONSIVE ADJUSTMENTS
-   ============================================ */
-
-@media (max-width: 640px) {
-  .bg-blurry-dots {
-    background-position:
-      -50% -1%,
-      150% -1%;
-    background-size:
-      min(1000px, 100vw) min(1000px, 100vw),
-      min(1000px, 100vw) min(1000px, 100vw);
-  }
 }

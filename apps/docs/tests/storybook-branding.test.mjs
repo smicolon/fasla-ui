@@ -3,7 +3,7 @@ import { existsSync, readFileSync } from "node:fs"
 import path from "node:path"
 
 const storybookRoot = path.resolve(import.meta.dir, "../../storybook")
-const title = "FASLA-UI Component Explorer | Smicolon"
+const title = "Fasla Component Explorer | Smicolon"
 const canonical = "https://ui.smicolon.com/components/"
 
 describe("Storybook product identity", () => {
@@ -25,10 +25,10 @@ describe("Storybook product identity", () => {
     expect(managerHtml).toContain(`<title>${title}</title>`)
     expect(managerHtml).not.toContain("@storybook/core - Storybook")
     expect(managerHtml).toContain(`rel="canonical" href="${canonical}"`)
-    expect(managerHtml).toContain("FASLA-UI component explorer")
+    expect(managerHtml).toContain("Fasla component explorer")
     expect(managerHtml).toContain('property="og:title"')
     expect(managerHtml).toContain('name="twitter:card"')
-    expect(managerSource).toContain('brandTitle: "FASLA-UI Component Explorer"')
+    expect(managerSource).toContain('brandTitle: "Fasla Component Explorer"')
     expect(managerSource).toContain(`brandUrl: "${canonical}"`)
   })
 
@@ -47,7 +47,7 @@ describe("Storybook product identity", () => {
     const managerHtml = `
       <html><head>
         <title>${title}</title>
-        <meta name="description" content="Explore FASLA-UI component explorer previews.">
+        <meta name="description" content="Explore Fasla component explorer previews.">
         <link rel="canonical" href="${canonical}">
         <meta property="og:title" content="${title}">
         <meta name="twitter:card" content="summary_large_image">
