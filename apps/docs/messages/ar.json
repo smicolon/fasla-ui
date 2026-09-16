@@ -1,0 +1,113 @@
+{
+  "meta": {
+    "localeName": "العربية",
+    "switchTo": "English"
+  },
+  "nav": {
+    "docs": "التوثيق",
+    "components": "المكوّنات",
+    "aguiEvents": "أحداث AG-UI",
+    "changelog": "سجل التغييرات",
+    "github": "GitHub",
+    "getStarted": "ابدأ الآن",
+    "home": "فاصلة — الرئيسية",
+    "toggleMenu": "فتح القائمة",
+    "toggleTheme": "تبديل المظهر",
+    "switchLanguage": "تغيير اللغة"
+  },
+  "home": {
+    "eyebrow": "{count, plural, zero {لا مكوّنات} one {مكوّن واحد} two {مكوّنان} few {# مكوّنات} many {# مكوّناً} other {# مكوّن}} · نواة برخصة MIT",
+    "headlineLead": "أضف مكوّناً",
+    "headlineTail": "وامتلك شيفرته.",
+    "intro": "فاصلة مكتبة مكوّنات React من تطوير شركة Smicolon GmbH، مبنيّة على مكوّنات shadcn/ui الأساسية. تنسخ أداة الأوامر شيفرة المكوّن داخل مشروعك. الشيفرة لك، تعدّلها كما تشاء، بلا صندوق مغلق تصارعه.",
+    "readDocs": "اقرأ التوثيق",
+    "terminal": {
+      "title": "الطرفية",
+      "cwd": "~/your-app",
+      "resolved": "تم حلّ المكوّن في السجل",
+      "written": "button.tsx ← components/ui",
+      "wired": "تم ربط cva و tailwind-merge",
+      "ownedFile": "components/ui/button.tsx — لك",
+      "ownership": "عدّله · غيّر اسمه · احذفه"
+    },
+    "stats": {
+      "componentsLabel": "مكوّنات تشمل الأساسيات والكتل والتأثيرات",
+      "licenceLabel": "رخصة النواة، بلا قيود وقت التشغيل",
+      "depsLabel": "اعتماديات وقت تشغيل مطلوبة إلى جانب React الموجود لديك",
+      "countryValue": "DE",
+      "countryLabel": "صُنعت في ألمانيا من Smicolon GmbH"
+    },
+    "registry": {
+      "title": "ما يضمّه السجل",
+      "intro": "ثلاث فئات ومسار تثبيت واحد. كل مكوّن يأتي بحالات التحميل والفراغ والخطأ والتعطيل.",
+      "browse": "تصفّح",
+      "primitives": {
+        "title": "المكوّنات الأساسية",
+        "description": "Button و Input و Card و Badge و Skeleton و Avatar و Checkbox و Switch و Select و Combobox و Tabs و Textarea."
+      },
+      "blocks": {
+        "title": "الكتل",
+        "description": "AppShell و PageHeader و EmptyState و Sidebar و Navbar و StatsCard و DataTable و FormSection."
+      },
+      "effects": {
+        "title": "التأثيرات",
+        "description": "ShimmerButton و AnimatedGradient و TextReveal و BorderBeam و Spotlight و GlowCard و TypewriterText."
+      }
+    },
+    "features": {
+      "title": "ما تحصل عليه في الحالتين",
+      "accessible": {
+        "title": "الوصولية افتراضياً",
+        "description": "التنقّل بلوحة المفاتيح ودعم قارئات الشاشة مبنيّان في المكوّنات. الأزرار الأيقونية تحمل aria-label، وحدود التركيز تبقى ظاهرة."
+      },
+      "motion": {
+        "title": "احترام تقليل الحركة",
+        "description": "كل حركة تقرأ prefers-reduced-motion من إعدادات الحركة المشتركة. لا حاجة إلى تفعيل يدوي."
+      },
+      "typescript": {
+        "title": "TypeScript في كل مكان",
+        "description": "الخصائص والصيغ موصّفة بالأنواع، فيعمل الإكمال التلقائي فور وصول المكوّن إلى مشروعك."
+      },
+      "tokens": {
+        "title": "رموز دلالية",
+        "description": "الألوان تأتي من متغيّرات CSS ومن سمة Tailwind. غيّر السمة بتعديل الرموز، لا المكوّنات."
+      },
+      "density": {
+        "title": "ثلاثة مستويات كثافة",
+        "description": "مضغوط ومريح وواسع، فتناسب المكوّنات نفسها لوحة تحكّم كثيفة وصفحة تسويقية."
+      },
+      "ownership": {
+        "title": "الملك لك بعد التثبيت",
+        "description": "أداة الأوامر تنسخ الشيفرة، لا اعتمادية. لا شيء يمنعك من إعادة كتابة المكوّن في اليوم التالي."
+      }
+    }
+  },
+  "docs": {
+    "sections": {
+      "installation": "التثبيت",
+      "preview": "معاينة",
+      "usage": "الاستخدام",
+      "props": "الخصائص",
+      "variants": "الصيغ",
+      "sizes": "المقاسات",
+      "states": "الحالات",
+      "features": "الميزات",
+      "components": "المكوّنات",
+      "accessibility": "الوصولية"
+    },
+    "sidebar": {
+      "gettingStarted": "البداية",
+      "primitives": "المكوّنات الأساسية",
+      "blocks": "الكتل",
+      "effects": "التأثيرات"
+    },
+    "onThisPage": "في هذه الصفحة",
+    "copyCode": "انسخ الشيفرة",
+    "copied": "تم النسخ"
+  },
+  "footer": {
+    "attribution": "fasla.dev · من Smicolon GmbH",
+    "by": "من Smicolon GmbH",
+    "licence": "MIT · Kirchheim b. München"
+  }
+}

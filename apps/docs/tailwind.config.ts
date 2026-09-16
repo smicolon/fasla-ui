@@ -14,6 +14,8 @@ const config: Config = {
         // Brand V2.5 §14 — product tier.
         sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
         mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
+        // Brand V2.5 §14 — the Arabic face. Geist has no Arabic coverage.
+        arabic: ["var(--font-cairo)", "system-ui", "sans-serif"],
       },
       colors: {
         border: "var(--border)",
