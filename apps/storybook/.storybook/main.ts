@@ -1,9 +1,9 @@
 import type { StorybookConfig } from "@storybook/react-vite"
 import path from "node:path"
 
-const explorerTitle = "FASLA-UI Component Explorer | Smicolon"
+const explorerTitle = "Fasla Component Explorer | Smicolon"
 const explorerDescription =
-  "Explore the FASLA-UI component explorer for accessible React primitives, application blocks, and animated effects by Smicolon."
+  "Explore the Fasla component explorer for accessible React primitives, application blocks, and animated effects by Smicolon."
 const explorerCanonical = "https://ui.smicolon.com/components/"
 
 function appendManagerMetadata(head: string) {

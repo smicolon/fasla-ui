@@ -12,15 +12,29 @@ export function SiteHeader() {
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4">
       <nav className="flex items-center gap-2 rounded-full border border-border/40 bg-background/80 px-3 sm:px-4 py-2 shadow-lg shadow-black/5 backdrop-blur-md">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-2 pr-4 sm:pr-6 border-r border-border/40 mr-1 sm:mr-2">
+        <Link
+          href="/"
+          aria-label="Fasla — home"
+          className="flex items-center pr-4 sm:pr-6 border-r border-border/40 mr-1 sm:mr-2"
+        >
+          {/* Drawn lockup, never re-set type (§11). 30px tall = 93px wide, above the
+              90px minimum (§10). Wordmark is ink on light, white on dark (§08). */}
           <Image
-            src="/smicolon-icon.png"
-            alt="Smicolon"
-            width={28}
-            height={28}
-            className="h-6 w-6 sm:h-7 sm:w-7"
+            src="/brand/fasla-lockup-ltr.svg"
+            alt="Fasla"
+            width={93}
+            height={30}
+            priority
+            className="h-[26px] w-auto sm:h-[30px] dark:hidden"
           />
-          <span className="font-bold text-sm sm:text-base">FASLA-UI</span>
+          <Image
+            src="/brand/fasla-lockup-ltr-onDark.svg"
+            alt="Fasla"
+            width={93}
+            height={30}
+            priority
+            className="hidden h-[26px] w-auto sm:h-[30px] dark:block"
+          />
         </Link>
 
         {/* Desktop Nav Links */}
@@ -41,7 +55,7 @@ export function SiteHeader() {
             href="/docs/components/shimmer-button"
             className="px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground rounded-full hover:bg-accent"
           >
-            Effects
+            AG&#8209;UI events
           </Link>
           <Link
             href="https://github.com/smicolon/fasla-ui"
@@ -58,9 +72,9 @@ export function SiteHeader() {
           <ThemeToggle />
           <Link
             href="/docs"
-            className="hidden sm:inline-flex items-center justify-center rounded-full bg-primary px-4 py-1.5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+            className="hidden sm:inline-flex items-center justify-center rounded-full border border-foreground px-4 py-1.5 text-sm font-medium text-foreground transition-colors hover:bg-foreground hover:text-background"
           >
-            Get Started
+            Get started
           </Link>
 
           {/* Mobile Menu Button */}
@@ -120,9 +134,9 @@ export function SiteHeader() {
               <Link
                 href="/docs"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 rounded-xl bg-primary px-4 py-3 text-sm font-medium text-primary-foreground"
+                className="flex items-center justify-center gap-2 rounded-xl border border-foreground px-4 py-3 text-sm font-medium text-foreground"
               >
-                Get Started
+                Get started
                 <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>

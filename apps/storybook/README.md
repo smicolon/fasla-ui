@@ -1,6 +1,6 @@
-# FASLA-UI Storybook
+# Fasla Storybook
 
-Interactive documentation and testing environment for FASLA-UI components.
+Interactive documentation and testing environment for Fasla components.
 
 ## Getting Started
 

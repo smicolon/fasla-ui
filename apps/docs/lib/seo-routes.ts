@@ -27,32 +27,32 @@ export const routes = [
   {
     kind: "core",
     path: "/",
-    title: "FASLA-UI React Component Library by Smicolon",
+    title: "Fasla — React Component Library by Smicolon GmbH",
     description:
-      "Build polished React interfaces with accessible FASLA-UI components, application blocks, and motion effects for Tailwind CSS.",
-    h1: "The only UI library you need to build beautiful",
+      "27 accessible React components — primitives, application blocks and motion effects for Tailwind CSS. The CLI copies the source into your project. MIT-licensed core.",
+    h1: "Add a component،own the source.",
   },
   {
     kind: "core",
     path: "/docs/",
-    title: "FASLA-UI Documentation: React Components and Blocks",
+    title: "Fasla Documentation: React Components and Blocks",
     description:
-      "Explore FASLA-UI documentation for reusable React primitives, application blocks, animated effects, and copy-paste implementation guidance.",
+      "Explore Fasla documentation for reusable React primitives, application blocks, animated effects, and copy-paste implementation guidance.",
     h1: "Introduction",
   },
   {
     kind: "core",
     path: "/docs/installation/",
-    title: "Install FASLA-UI for React and Tailwind CSS",
+    title: "Install Fasla for React and Tailwind CSS",
     description:
-      "Install FASLA-UI with the CLI or manually, then configure React, TypeScript, Tailwind CSS, and the shared component utilities.",
+      "Install Fasla with the CLI or manually, then configure React, TypeScript, Tailwind CSS, and the shared component utilities.",
     h1: "Installation",
   },
   {
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/button/",
-    title: "Button React Component | FASLA-UI",
+    title: "Button React Component | Fasla",
     description:
       "Add an accessible React button with visual variants, responsive sizes, loading feedback, and composable child rendering.",
     h1: "Button",
@@ -61,7 +61,7 @@ export const routes = [
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/input/",
-    title: "Input React Component | FASLA-UI",
+    title: "Input React Component | Fasla",
     description:
       "Use a typed React text input with validation states, icon support, accessible focus styles, and Tailwind customization.",
     h1: "Input",
@@ -70,7 +70,7 @@ export const routes = [
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/card/",
-    title: "Card React Component | FASLA-UI",
+    title: "Card React Component | Fasla",
     description:
       "Compose React card layouts from accessible header, title, description, content, and footer building blocks.",
     h1: "Card",
@@ -79,7 +79,7 @@ export const routes = [
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/badge/",
-    title: "Badge React Component | FASLA-UI",
+    title: "Badge React Component | Fasla",
     description:
       "Display compact React status indicators and labels with reusable badge variants and semantic Tailwind styling.",
     h1: "Badge",
@@ -88,16 +88,16 @@ export const routes = [
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/skeleton/",
-    title: "Skeleton Loading Components for React | FASLA-UI",
+    title: "Skeleton Loading Components for React | Fasla",
     description:
-      "Create accessible React loading placeholders for text, avatars, cards, and custom content layouts with FASLA-UI skeletons.",
+      "Create accessible React loading placeholders for text, avatars, cards, and custom content layouts with Fasla skeletons.",
     h1: "Skeleton",
   },
   {
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/avatar/",
-    title: "Avatar React Component | FASLA-UI",
+    title: "Avatar React Component | Fasla",
     description:
       "Represent users with a React avatar that supports images, fallback content, grouping, and consistent accessible sizing.",
     h1: "Avatar",
@@ -106,7 +106,7 @@ export const routes = [
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/checkbox/",
-    title: "Checkbox React Component | FASLA-UI",
+    title: "Checkbox React Component | Fasla",
     description:
       "Add an accessible React checkbox for binary selections with controlled state, labels, and keyboard interaction.",
     h1: "Checkbox",
@@ -115,7 +115,7 @@ export const routes = [
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/switch/",
-    title: "Switch React Component | FASLA-UI",
+    title: "Switch React Component | Fasla",
     description:
       "Use an accessible React switch for on-off settings with controlled state, keyboard support, and clear visual feedback.",
     h1: "Switch",
@@ -124,7 +124,7 @@ export const routes = [
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/select/",
-    title: "Select React Component | FASLA-UI",
+    title: "Select React Component | Fasla",
     description:
       "Build a typed React select control for choosing one option with accessible interaction and customizable styling.",
     h1: "Select",
@@ -133,7 +133,7 @@ export const routes = [
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/textarea/",
-    title: "Textarea React Component | FASLA-UI",
+    title: "Textarea React Component | Fasla",
     description:
       "Add a multi-line React text input with character counting, resize options, validation states, and accessible labels.",
     h1: "Textarea",
@@ -142,7 +142,7 @@ export const routes = [
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/tabs/",
-    title: "Tabs React Component | FASLA-UI",
+    title: "Tabs React Component | Fasla",
     description:
       "Organize related React content into accessible tab lists, triggers, and keyboard-navigable panels.",
     h1: "Tabs",
@@ -151,7 +151,7 @@ export const routes = [
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/combobox/",
-    title: "Combobox React Component | FASLA-UI",
+    title: "Combobox React Component | Fasla",
     description:
       "Create a searchable React combobox with single or multiple selection, accessible controls, and typed options.",
     h1: "Combobox",
@@ -160,7 +160,7 @@ export const routes = [
     kind: "component",
     category: "Blocks",
     path: "/docs/components/app-shell/",
-    title: "App Shell React Layout | FASLA-UI",
+    title: "App Shell React Layout | Fasla",
     description:
       "Structure React applications with a responsive app shell that composes navigation, sidebars, headers, and main content.",
     h1: "AppShell",
@@ -169,7 +169,7 @@ export const routes = [
     kind: "component",
     category: "Blocks",
     path: "/docs/components/page-header/",
-    title: "Page Header React Block | FASLA-UI",
+    title: "Page Header React Block | Fasla",
     description:
       "Build consistent React page headers with titles, descriptions, breadcrumbs, and responsive action areas.",
     h1: "PageHeader",
@@ -178,7 +178,7 @@ export const routes = [
     kind: "component",
     category: "Blocks",
     path: "/docs/components/empty-state/",
-    title: "Empty State React Block | FASLA-UI",
+    title: "Empty State React Block | Fasla",
     description:
       "Explain empty React views with contextual icons, helpful descriptions, search variants, and clear next actions.",
     h1: "EmptyState",
@@ -187,7 +187,7 @@ export const routes = [
     kind: "component",
     category: "Blocks",
     path: "/docs/components/form-section/",
-    title: "Form Section React Block | FASLA-UI",
+    title: "Form Section React Block | Fasla",
     description:
       "Group related React form fields with headings, descriptions, validation-ready layout, and aligned action controls.",
     h1: "FormSection",
@@ -196,7 +196,7 @@ export const routes = [
     kind: "component",
     category: "Blocks",
     path: "/docs/components/data-table/",
-    title: "Data Table React Block | FASLA-UI",
+    title: "Data Table React Block | Fasla",
     description:
       "Present structured React data with typed columns, pagination, responsive controls, and reusable table states.",
     h1: "DataTable",
@@ -205,7 +205,7 @@ export const routes = [
     kind: "component",
     category: "Blocks",
     path: "/docs/components/sidebar/",
-    title: "Sidebar React Navigation Block | FASLA-UI",
+    title: "Sidebar React Navigation Block | Fasla",
     description:
       "Add a responsive React sidebar for application navigation with collapsible structure and accessible links.",
     h1: "Sidebar",
@@ -214,7 +214,7 @@ export const routes = [
     kind: "component",
     category: "Blocks",
     path: "/docs/components/navbar/",
-    title: "Navbar React Navigation Block | FASLA-UI",
+    title: "Navbar React Navigation Block | Fasla",
     description:
       "Create a responsive React navigation bar with desktop links, mobile menu behavior, and flexible brand content.",
     h1: "Navbar",
@@ -223,7 +223,7 @@ export const routes = [
     kind: "component",
     category: "Blocks",
     path: "/docs/components/stats-card/",
-    title: "Stats Card React Block | FASLA-UI",
+    title: "Stats Card React Block | Fasla",
     description:
       "Display key React dashboard metrics with trend indicators, supporting context, icons, and consistent card layout.",
     h1: "Stats Card",
@@ -232,7 +232,7 @@ export const routes = [
     kind: "component",
     category: "Effects",
     path: "/docs/components/shimmer-button/",
-    title: "Shimmer Button React Effect | FASLA-UI",
+    title: "Shimmer Button React Effect | Fasla",
     description:
       "Draw attention to React calls to action with a polished shimmer animation that respects reduced-motion preferences.",
     h1: "Shimmer Button",
@@ -241,7 +241,7 @@ export const routes = [
     kind: "component",
     category: "Effects",
     path: "/docs/components/animated-gradient/",
-    title: "Animated Gradient React Effect | FASLA-UI",
+    title: "Animated Gradient React Effect | Fasla",
     description:
       "Add a configurable animated gradient background to React hero sections and cards with smooth motion behavior.",
     h1: "AnimatedGradient",
@@ -250,7 +250,7 @@ export const routes = [
     kind: "component",
     category: "Effects",
     path: "/docs/components/text-reveal/",
-    title: "Text Reveal React Effect | FASLA-UI",
+    title: "Text Reveal React Effect | Fasla",
     description:
       "Reveal React text character by character with reusable animation controls and reduced-motion support.",
     h1: "TextReveal",
@@ -259,7 +259,7 @@ export const routes = [
     kind: "component",
     category: "Effects",
     path: "/docs/components/border-beam/",
-    title: "Border Beam React Effect | FASLA-UI",
+    title: "Border Beam React Effect | Fasla",
     description:
       "Highlight React cards and containers with a configurable animated beam that travels around the border.",
     h1: "BorderBeam",
@@ -268,7 +268,7 @@ export const routes = [
     kind: "component",
     category: "Effects",
     path: "/docs/components/spotlight/",
-    title: "Spotlight React Effect | FASLA-UI",
+    title: "Spotlight React Effect | Fasla",
     description:
       "Create cursor-responsive spotlight backgrounds for React interfaces with controlled glow and positioning.",
     h1: "Spotlight",
@@ -277,7 +277,7 @@ export const routes = [
     kind: "component",
     category: "Effects",
     path: "/docs/components/typewriter-text/",
-    title: "Typewriter Text React Effect | FASLA-UI",
+    title: "Typewriter Text React Effect | Fasla",
     description:
       "Animate React copy with a configurable typewriter sequence for product messages, headings, and demonstrations.",
     h1: "Typewriter Text",
@@ -286,7 +286,7 @@ export const routes = [
     kind: "component",
     category: "Effects",
     path: "/docs/components/glow-card/",
-    title: "Glow Card React Effect | FASLA-UI",
+    title: "Glow Card React Effect | Fasla",
     description:
       "Build interactive React cards with pointer-following glow effects, layered content, and adaptable surface styling.",
     h1: "Glow Card",
@@ -327,8 +327,8 @@ export function metadataForRoute(path: RoutePath): Metadata {
       description: route.description,
       type: "website",
       url: canonical,
-      siteName: "FASLA-UI",
-      images: [{ url: image, alt: "FASLA-UI by Smicolon" }],
+      siteName: "Fasla",
+      images: [{ url: image, alt: "Fasla by Smicolon" }],
     },
     twitter: {
       card: "summary_large_image",
