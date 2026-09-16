@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Combobox } from "../../../../../../packages/smi-ui/registry/ui/combobox"
+import { Combobox } from "../../../../../../packages/fasla-ui/registry/ui/combobox"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 const frameworks = [
@@ -30,7 +30,7 @@ export default function ComboboxPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">Installation</h2>
-        <CodeBlock>npx @smicolon/smi-ui add combobox</CodeBlock>
+        <CodeBlock>npx @smicolon/fasla-ui add combobox</CodeBlock>
       </section>
 
       {/* Preview */}

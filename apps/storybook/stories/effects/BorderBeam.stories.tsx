@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import {
   BorderBeam,
   GlowingBorder,
-} from "../../../../packages/smi-ui/registry/effects/border-beam"
+} from "../../../../packages/fasla-ui/registry/effects/border-beam"
 
 const meta: Meta<typeof BorderBeam> = {
   title: "Effects/BorderBeam",

@@ -386,7 +386,7 @@ export default function HomePage() {
                   </div>
                   {/* Code Content */}
                   <div className="p-2 sm:p-3 font-mono text-[7px] sm:text-[9px] md:text-[10px] space-y-0.5 sm:space-y-1">
-                    <div><span className="text-emerald-400">$</span> <span className="text-white/80">npx smi-ui add</span></div>
+                    <div><span className="text-emerald-400">$</span> <span className="text-white/80">npx fasla-ui add</span></div>
                     <div className="text-white/40 hidden sm:block">Installing...</div>
                     <div className="text-emerald-400">✓ button added</div>
                     <div className="text-emerald-400 hidden sm:block">✓ styles updated</div>
@@ -488,7 +488,7 @@ export default function HomePage() {
         <div className="mx-auto max-w-[1000px]">
           <div className="mb-8 sm:mb-12 text-center">
             <h2 className="mb-3 sm:mb-4 text-2xl sm:text-3xl font-bold md:text-4xl animate-fade-in-up">
-              Why SMI-UI?
+              Why FASLA-UI?
             </h2>
             <p className="text-sm sm:text-base text-muted-foreground md:text-lg animate-fade-in-up" style={{ animationDelay: "100ms" }}>
               Built for developers who care about quality, performance, and user experience.
@@ -622,7 +622,7 @@ export default function HomePage() {
               </div>
               <pre className="text-green-400 overflow-x-auto">
                 <code>
-                  <span className="text-gray-500">$</span> npx @smicolon/smi-ui add button{"\n"}
+                  <span className="text-gray-500">$</span> npx @smicolon/fasla-ui add button{"\n"}
                   <span className="text-gray-500"># or use shadcn CLI</span>{"\n"}
                   <span className="text-gray-500">$</span> npx shadcn add @smicolon/button
                 </code>
@@ -651,7 +651,7 @@ export default function HomePage() {
             Ready to build?
           </h2>
           <p className="mb-6 sm:mb-8 text-sm sm:text-base text-muted-foreground md:text-lg animate-fade-in-up" style={{ animationDelay: "100ms" }}>
-            Start building beautiful interfaces with SMI-UI today.
+            Start building beautiful interfaces with FASLA-UI today.
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 animate-fade-in-up" style={{ animationDelay: "200ms" }}>
             <Link
@@ -669,7 +669,7 @@ export default function HomePage() {
               </svg>
             </Link>
             <Link
-              href="https://github.com/smicolon/smi-ui"
+              href="https://github.com/smicolon/fasla-ui"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center justify-center gap-2 rounded-lg border border-border bg-background px-6 py-3 sm:px-8 sm:py-4 text-sm sm:text-base font-medium transition-all duration-300 hover:bg-accent"
@@ -694,7 +694,7 @@ export default function HomePage() {
               </Link>
             </p>
             <div className="flex items-center gap-4 sm:gap-6">
-              <Link href="https://github.com/smicolon/smi-ui" target="_blank" rel="noreferrer" className="text-xs sm:text-sm text-muted-foreground hover:text-foreground">
+              <Link href="https://github.com/smicolon/fasla-ui" target="_blank" rel="noreferrer" className="text-xs sm:text-sm text-muted-foreground hover:text-foreground">
                 GitHub
               </Link>
               <Link href="https://smicolon.com" target="_blank" rel="noreferrer" className="text-xs sm:text-sm text-muted-foreground hover:text-foreground">

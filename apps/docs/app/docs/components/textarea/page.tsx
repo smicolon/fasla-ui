@@ -1,6 +1,6 @@
 "use client"
 
-import { Textarea } from "../../../../../../packages/smi-ui/registry/ui/textarea"
+import { Textarea } from "../../../../../../packages/fasla-ui/registry/ui/textarea"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 export default function TextareaPage() {
@@ -16,7 +16,7 @@ export default function TextareaPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">Installation</h2>
-        <CodeBlock>npx @smicolon/smi-ui add textarea</CodeBlock>
+        <CodeBlock>npx @smicolon/fasla-ui add textarea</CodeBlock>
       </section>
 
       {/* Preview */}

@@ -1,9 +1,9 @@
 import type { StorybookConfig } from "@storybook/react-vite"
 import path from "node:path"
 
-const explorerTitle = "SMI-UI Component Explorer | Smicolon"
+const explorerTitle = "FASLA-UI Component Explorer | Smicolon"
 const explorerDescription =
-  "Explore the SMI-UI component explorer for accessible React primitives, application blocks, and animated effects by Smicolon."
+  "Explore the FASLA-UI component explorer for accessible React primitives, application blocks, and animated effects by Smicolon."
 const explorerCanonical = "https://ui.smicolon.com/components/"
 
 function appendManagerMetadata(head: string) {
@@ -51,7 +51,7 @@ const config: StorybookConfig = {
         ...config.resolve,
         alias: {
           ...config.resolve?.alias,
-          "@smicolon/smi-ui": path.resolve(__dirname, "../../packages/smi-ui/src"),
+          "@smicolon/fasla-ui": path.resolve(__dirname, "../../packages/fasla-ui/src"),
         },
       },
     }

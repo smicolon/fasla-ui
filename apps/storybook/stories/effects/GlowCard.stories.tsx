@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { GlowCard, GlowContainer } from "../../../../packages/smi-ui/registry/effects/glow-card"
+import { GlowCard, GlowContainer } from "../../../../packages/fasla-ui/registry/effects/glow-card"
 
 const meta: Meta<typeof GlowCard> = {
   title: "Effects/GlowCard",

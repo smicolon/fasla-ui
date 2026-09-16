@@ -4,7 +4,7 @@ import {
   SkeletonText,
   SkeletonAvatar,
   SkeletonCard,
-} from "../../../../packages/smi-ui/registry/ui/skeleton"
+} from "../../../../packages/fasla-ui/registry/ui/skeleton"
 
 const meta: Meta<typeof Skeleton> = {
   title: "UI/Skeleton",

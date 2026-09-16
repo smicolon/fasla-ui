@@ -1,6 +1,6 @@
 "use client"
 
-import { Button } from "../../../../../../packages/smi-ui/registry/ui/button"
+import { Button } from "../../../../../../packages/fasla-ui/registry/ui/button"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 export default function ButtonPage() {
@@ -19,7 +19,7 @@ export default function ButtonPage() {
           <section>
             <h2 className="text-2xl font-bold tracking-tight">Installation</h2>
             <div className="mt-4">
-              <CodeBlock>npx smi-ui add button</CodeBlock>
+              <CodeBlock>npx fasla-ui add button</CodeBlock>
             </div>
           </section>
 

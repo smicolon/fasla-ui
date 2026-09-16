@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Checkbox } from "../../../../../../packages/smi-ui/registry/ui/checkbox"
+import { Checkbox } from "../../../../../../packages/fasla-ui/registry/ui/checkbox"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 export default function CheckboxPage() {
@@ -19,7 +19,7 @@ export default function CheckboxPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">Installation</h2>
-        <CodeBlock>npx @smicolon/smi-ui add checkbox</CodeBlock>
+        <CodeBlock>npx @smicolon/fasla-ui add checkbox</CodeBlock>
       </section>
 
       {/* Preview */}

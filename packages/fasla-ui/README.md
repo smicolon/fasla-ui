@@ -1,8 +1,8 @@
-# @smicolon/smi-ui
+# @smicolon/fasla-ui
 
-[![npm version](https://img.shields.io/npm/v/@smicolon/smi-ui.svg)](https://www.npmjs.com/package/@smicolon/smi-ui)
-[![npm downloads](https://img.shields.io/npm/dm/@smicolon/smi-ui.svg)](https://www.npmjs.com/package/@smicolon/smi-ui)
-[![license](https://img.shields.io/npm/l/@smicolon/smi-ui.svg)](https://github.com/smicolon/smi-ui/blob/main/LICENSE)
+[![npm version](https://img.shields.io/npm/v/@smicolon/fasla-ui.svg)](https://www.npmjs.com/package/@smicolon/fasla-ui)
+[![npm downloads](https://img.shields.io/npm/dm/@smicolon/fasla-ui.svg)](https://www.npmjs.com/package/@smicolon/fasla-ui)
+[![license](https://img.shields.io/npm/l/@smicolon/fasla-ui.svg)](https://github.com/smicolon/fasla-ui/blob/main/LICENSE)
 
 A professional React UI component library built on **shadcn/ui** primitives. Provides animated effects components (like Magic UI), app building blocks, and design tokens - all distributed via a shadcn-compatible registry.
 
@@ -25,11 +25,11 @@ npx @smicolon/cli init
 npx @smicolon/cli add button
 
 # Or install the package directly
-npm install @smicolon/smi-ui
+npm install @smicolon/fasla-ui
 # or
-yarn add @smicolon/smi-ui
+yarn add @smicolon/fasla-ui
 # or
-pnpm add @smicolon/smi-ui
+pnpm add @smicolon/fasla-ui
 ```
 
 ## Components
@@ -82,9 +82,9 @@ Animated components for visual flair (powered by Framer Motion):
 ## Quick Start
 
 ```tsx
-import { Button } from "@smicolon/smi-ui/registry/ui/button"
-import { Card, CardHeader, CardTitle, CardContent } from "@smicolon/smi-ui/registry/ui/card"
-import { ShimmerButton } from "@smicolon/smi-ui/registry/effects/shimmer-button"
+import { Button } from "@smicolon/fasla-ui/registry/ui/button"
+import { Card, CardHeader, CardTitle, CardContent } from "@smicolon/fasla-ui/registry/ui/card"
+import { ShimmerButton } from "@smicolon/fasla-ui/registry/effects/shimmer-button"
 
 export function MyComponent() {
   return (
@@ -114,13 +114,13 @@ export function MyComponent() {
 
 ## Tailwind Configuration
 
-Add smi-ui to your `tailwind.config.js`:
+Add fasla-ui to your `tailwind.config.js`:
 
 ```js
 module.exports = {
   content: [
     // ... your content paths
-    "./node_modules/@smicolon/smi-ui/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@smicolon/fasla-ui/**/*.{js,ts,jsx,tsx}",
   ],
 }
 ```
@@ -138,4 +138,4 @@ Visit [ui.smicolon.com](https://ui.smicolon.com) for full documentation, example
 
 ## License
 
-MIT - See [LICENSE](https://github.com/smicolon/smi-ui/blob/main/LICENSE) for details.
+MIT - See [LICENSE](https://github.com/smicolon/fasla-ui/blob/main/LICENSE) for details.

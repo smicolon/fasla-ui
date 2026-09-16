@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import {
   Spotlight,
   SpotlightCard,
-} from "../../../../packages/smi-ui/registry/effects/spotlight"
+} from "../../../../packages/fasla-ui/registry/effects/spotlight"
 
 const meta: Meta<typeof Spotlight> = {
   title: "Effects/Spotlight",
@@ -143,7 +143,7 @@ export const Hero: Story = {
       className="h-96 w-full max-w-3xl rounded-2xl border bg-card"
     >
       <div className="h-full flex flex-col items-center justify-center p-8 text-center">
-        <h1 className="text-4xl font-bold">Welcome to SMI-UI</h1>
+        <h1 className="text-4xl font-bold">Welcome to FASLA-UI</h1>
         <p className="mt-4 text-lg text-muted-foreground max-w-lg">
           A beautiful collection of animated components for your next project.
           Built with React, Tailwind CSS, and Framer Motion.

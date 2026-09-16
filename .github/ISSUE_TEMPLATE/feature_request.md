@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest an idea for SMI UI
+about: Suggest an idea for FASLA UI
 title: '[Feature] '
 labels: enhancement
 assignees: ''

@@ -64,7 +64,7 @@ jobs:
         with:
           name: build-artifacts
           path: |
-            packages/smi-ui/dist
+            packages/fasla-ui/dist
             packages/cli/dist
           retention-days: 7
 

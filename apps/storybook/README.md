@@ -1,6 +1,6 @@
-# SMI-UI Storybook
+# FASLA-UI Storybook
 
-Interactive documentation and testing environment for SMI-UI components.
+Interactive documentation and testing environment for FASLA-UI components.
 
 ## Getting Started
 
@@ -60,7 +60,7 @@ Create a new file in the appropriate category folder:
 
 ```tsx
 import type { Meta, StoryObj } from "@storybook/react"
-import { MyComponent } from "../../../../packages/smi-ui/registry/ui/my-component"
+import { MyComponent } from "../../../../packages/fasla-ui/registry/ui/my-component"
 
 const meta: Meta<typeof MyComponent> = {
   title: "UI/MyComponent",

@@ -121,7 +121,7 @@ describe("SEO route catalog", () => {
 
   test("allows PageHeader previews to use a subordinate heading", async () => {
     const { PageHeader } = await import(
-      "../../../packages/smi-ui/registry/blocks/page-header/PageHeader"
+      "../../../packages/fasla-ui/registry/blocks/page-header/PageHeader"
     )
     const html = renderToStaticMarkup(
       React.createElement(PageHeader, {

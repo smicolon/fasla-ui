@@ -1,6 +1,6 @@
 "use client"
 
-import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "../../../../../../packages/smi-ui/registry/ui/card"
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "../../../../../../packages/fasla-ui/registry/ui/card"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 export default function CardPage() {
@@ -18,7 +18,7 @@ export default function CardPage() {
           <section>
             <h2 className="text-2xl font-bold tracking-tight">Installation</h2>
             <div className="mt-4">
-              <CodeBlock>npx smi-ui add card</CodeBlock>
+              <CodeBlock>npx fasla-ui add card</CodeBlock>
             </div>
           </section>
 

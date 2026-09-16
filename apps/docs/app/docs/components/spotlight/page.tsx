@@ -1,6 +1,6 @@
 "use client"
 
-import { Spotlight } from "../../../../../../packages/smi-ui/registry/effects/spotlight/spotlight"
+import { Spotlight } from "../../../../../../packages/fasla-ui/registry/effects/spotlight/spotlight"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 export default function SpotlightPage() {
@@ -18,7 +18,7 @@ export default function SpotlightPage() {
           <section>
             <h2 className="text-2xl font-bold tracking-tight">Installation</h2>
             <div className="mt-4">
-              <CodeBlock>npx smi-ui add spotlight</CodeBlock>
+              <CodeBlock>npx fasla-ui add spotlight</CodeBlock>
             </div>
           </section>
 

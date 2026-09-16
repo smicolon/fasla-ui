@@ -1,17 +1,17 @@
 {
   "name": "@smicolon/cli",
   "version": "0.3.1",
-  "description": "CLI for installing smi-ui components",
+  "description": "CLI for installing fasla-ui components",
   "license": "MIT",
   "author": "Smicolon",
   "repository": {
     "type": "git",
-    "url": "https://github.com/smicolon/smi-ui"
+    "url": "https://github.com/smicolon/fasla-ui"
   },
   "homepage": "https://ui.smicolon.com",
   "type": "module",
   "bin": {
-    "smi-ui": "./dist/index.js"
+    "fasla-ui": "./dist/index.js"
   },
   "exports": {
     ".": {

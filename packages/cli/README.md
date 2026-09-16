@@ -2,9 +2,9 @@
 
 [![npm version](https://img.shields.io/npm/v/@smicolon/cli.svg)](https://www.npmjs.com/package/@smicolon/cli)
 [![npm downloads](https://img.shields.io/npm/dm/@smicolon/cli.svg)](https://www.npmjs.com/package/@smicolon/cli)
-[![license](https://img.shields.io/npm/l/@smicolon/cli.svg)](https://github.com/smicolon/smi-ui/blob/main/LICENSE)
+[![license](https://img.shields.io/npm/l/@smicolon/cli.svg)](https://github.com/smicolon/fasla-ui/blob/main/LICENSE)
 
-CLI for installing [@smicolon/smi-ui](https://www.npmjs.com/package/@smicolon/smi-ui) components into your React project. Works like shadcn/ui CLI - components are copied directly into your codebase for full customization.
+CLI for installing [@smicolon/fasla-ui](https://www.npmjs.com/package/@smicolon/fasla-ui) components into your React project. Works like shadcn/ui CLI - components are copied directly into your codebase for full customization.
 
 ## Quick Start
 
@@ -23,7 +23,7 @@ npx @smicolon/cli list
 
 ### `init`
 
-Initialize smi-ui in your project. Creates a `components.json` configuration file.
+Initialize fasla-ui in your project. Creates a `components.json` configuration file.
 
 ```bash
 npx @smicolon/cli init
@@ -96,7 +96,7 @@ Visit [ui.smicolon.com](https://ui.smicolon.com) for:
 
 ## Related
 
-- [@smicolon/smi-ui](https://www.npmjs.com/package/@smicolon/smi-ui) - The component library
+- [@smicolon/fasla-ui](https://www.npmjs.com/package/@smicolon/fasla-ui) - The component library
 - [shadcn/ui](https://ui.shadcn.com) - Inspiration for this approach
 
 ## License

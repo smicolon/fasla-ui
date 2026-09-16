@@ -1,6 +1,6 @@
 "use client"
 
-import { BorderBeam } from "../../../../../../packages/smi-ui/registry/effects/border-beam/border-beam"
+import { BorderBeam } from "../../../../../../packages/fasla-ui/registry/effects/border-beam/border-beam"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 export default function BorderBeamPage() {
@@ -18,7 +18,7 @@ export default function BorderBeamPage() {
           <section>
             <h2 className="text-2xl font-bold tracking-tight">Installation</h2>
             <div className="mt-4">
-              <CodeBlock>npx smi-ui add border-beam</CodeBlock>
+              <CodeBlock>npx fasla-ui add border-beam</CodeBlock>
             </div>
           </section>
 

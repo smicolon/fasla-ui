@@ -1,6 +1,6 @@
-# Contributing to SMI UI
+# Contributing to FASLA UI
 
-Thank you for your interest in contributing to SMI UI! This document provides guidelines and instructions for contributing.
+Thank you for your interest in contributing to FASLA UI! This document provides guidelines and instructions for contributing.
 
 ## Getting Started
 
@@ -15,8 +15,8 @@ Thank you for your interest in contributing to SMI UI! This document provides gu
 1. Fork the repository
 2. Clone your fork:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/smi-ui.git
-   cd smi-ui
+   git clone https://github.com/YOUR_USERNAME/fasla-ui.git
+   cd fasla-ui
    ```
 3. Install dependencies:
    ```bash
@@ -48,9 +48,9 @@ docs(readme): update installation instructions
 
 ### Creating Components
 
-1. Create a new directory in `packages/smi-ui/registry/ui/`:
+1. Create a new directory in `packages/fasla-ui/registry/ui/`:
    ```
-   packages/smi-ui/registry/ui/component-name/
+   packages/fasla-ui/registry/ui/component-name/
    ├── component-name.tsx
    ├── component-name.test.tsx
    ├── component-name.stories.tsx

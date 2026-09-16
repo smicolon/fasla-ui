@@ -6,7 +6,7 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./content/**/*.{js,ts,jsx,tsx,mdx}",
-    "../../packages/smi-ui/registry/**/*.{js,ts,jsx,tsx}",
+    "../../packages/fasla-ui/registry/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {

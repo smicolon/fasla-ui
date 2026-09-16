@@ -1,6 +1,6 @@
 "use client"
 
-import { TextReveal } from "../../../../../../packages/smi-ui/registry/effects/text-reveal/text-reveal"
+import { TextReveal } from "../../../../../../packages/fasla-ui/registry/effects/text-reveal/text-reveal"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 export default function TextRevealPage() {
@@ -18,7 +18,7 @@ export default function TextRevealPage() {
           <section>
             <h2 className="text-2xl font-bold tracking-tight">Installation</h2>
             <div className="mt-4">
-              <CodeBlock>npx smi-ui add text-reveal</CodeBlock>
+              <CodeBlock>npx fasla-ui add text-reveal</CodeBlock>
             </div>
           </section>
 
