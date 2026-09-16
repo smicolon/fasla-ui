@@ -1,6 +1,23 @@
 import { Command } from "commander"
 import chalk from "chalk"
 import ora from "ora"
+
+interface ComponentsConfig {
+  aliases?: { utils?: string; [key: string]: string | undefined }
+  [key: string]: unknown
+}
+
+const UTILS_SOURCE = `import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
+
+/**
+ * Merge Tailwind CSS classes with clsx and tailwind-merge.
+ * This ensures proper class merging and deduplication.
+ */
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
+}
+`
 import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
@@ -117,7 +134,20 @@ export const init = new Command()
 
     try {
       await fs.writeJson(configPath, config, { spaces: 2 })
-      spinner.succeed("Configuration written to components.json")
+
+      // Every component in the registry imports `cn` from the utils alias.
+      // Without this file a fresh install does not compile, so init writes it.
+      const utilsAlias = (config as ComponentsConfig).aliases?.utils ?? "@/lib/utils"
+      const utilsRelative = utilsAlias.replace(/^@\//, "src/")
+      const utilsPath = path.resolve(cwd, `${utilsRelative}.ts`)
+
+      if (!(await fs.pathExists(utilsPath))) {
+        await fs.ensureDir(path.dirname(utilsPath))
+        await fs.writeFile(utilsPath, UTILS_SOURCE, "utf8")
+        spinner.succeed(`Configuration written to components.json, cn helper written to ${utilsRelative}.ts`)
+      } else {
+        spinner.succeed("Configuration written to components.json")
+      }
 
       console.log(chalk.green("\nSuccess! fasla-ui has been initialized."))
       console.log("\nYou can now add components:")

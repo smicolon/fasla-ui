@@ -2,7 +2,16 @@
  * Registry module for fetching components from the fasla-ui registry
  */
 
-const REGISTRY_URL = "https://ui.smicolon.com/r"
+const DEFAULT_REGISTRY_URL = "https://ui.smicolon.com/r"
+
+/**
+ * Point the CLI at another registry — a local build, or a staging deploy —
+ * without editing the source. Trailing slashes are trimmed so the caller can
+ * pass either form.
+ */
+const REGISTRY_URL = (
+  process.env.FASLA_UI_REGISTRY_URL || DEFAULT_REGISTRY_URL
+).replace(/\/+$/, "")
 
 export interface RegistryFile {
   path: string

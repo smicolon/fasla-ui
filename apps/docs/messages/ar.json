@@ -99,11 +99,30 @@
       "gettingStarted": "البداية",
       "primitives": "المكوّنات الأساسية",
       "blocks": "الكتل",
-      "effects": "التأثيرات"
+      "effects": "التأثيرات",
+      "introduction": "مقدّمة",
+      "installation": "التثبيت",
+      "playground": "مختبر المكوّنات"
     },
     "onThisPage": "في هذه الصفحة",
     "copyCode": "انسخ الشيفرة",
-    "copied": "تم النسخ"
+    "copied": "تم النسخ",
+    "landing": {
+      "introTitle": "مقدّمة",
+      "introBody": "تقدّم فاصلة مجموعة مكوّنات قابلة لإعادة الاستخدام، تنسخها وتلصقها في تطبيقك. ليست مكتبة مكوّنات تقليدية — الشيفرة لك، تعدّلها كما تشاء.",
+      "featuresTitle": "الميزات",
+      "categoriesTitle": "فئات المكوّنات",
+      "getStartedTitle": "ابدأ",
+      "getStartedBody": "ثبّت أداة الأوامر وأضف أول مكوّن.",
+      "features": {
+        "components": "<strong>{count}+ مكوّناً</strong> — أساسيات وكتل وتأثيرات",
+        "accessible": "<strong>وصولية</strong> — مبنية بالوصولية في الحسبان، مع التنقّل بلوحة المفاتيح",
+        "animated": "<strong>حركة</strong> — حركات سلسة عبر Framer Motion، تحترم تقليل الحركة",
+        "typescript": "<strong>TypeScript</strong> — أنواع كاملة في كل الشيفرة",
+        "darkMode": "<strong>المظهر الداكن</strong> — مدعوم جاهزاً",
+        "customizable": "<strong>قابلة للتخصيص</strong> — مبنية على Tailwind CSS، سهلة التعديل"
+      }
+    }
   },
   "footer": {
     "attribution": "fasla.dev · من Smicolon GmbH",
