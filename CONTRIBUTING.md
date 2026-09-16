@@ -124,18 +124,31 @@ bun run test --coverage
 3. Add/update tests
 4. Add/update documentation
 5. Run `bun run lint` and `bun run typecheck`
-6. Create a changeset: `bun run changeset`
-7. Push and create a PR
+6. Push and create a PR
 
-### Changeset
+### Versioning — nothing to do by hand
 
-We use [Changesets](https://github.com/changesets/changesets) for versioning:
+Versions and changelogs come from your commit messages. There is no changeset
+file to write and no version to bump yourself.
 
-```bash
-bun run changeset
-```
+[release-please](https://github.com/googleapis/release-please) reads the
+conventional commits that land on `main` and keeps a `chore: release packages`
+pull request open with the next versions and CHANGELOG entries already written.
+Merging that PR tags the release and publishes to npm.
 
-Follow the prompts to describe your changes.
+What your commit type does:
+
+| Commit | Bump |
+| --- | --- |
+| `fix:` | patch — `0.2.2` → `0.2.3` |
+| `feat:` | minor — `0.2.2` → `0.3.0` |
+| `feat!:` or a `BREAKING CHANGE:` footer | major — `0.2.2` → `1.0.0` |
+| `chore:`, `ci:`, `test:`, `style:` | none |
+
+Scope a commit to the package it touches when it matters — `fix(cli): …` — and
+keep the first line under 72 characters. A commit that does not parse as a
+conventional commit is simply ignored for versioning, so it will not appear in
+the changelog.
 
 ## Component Guidelines
 

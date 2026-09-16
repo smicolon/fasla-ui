@@ -5,7 +5,10 @@
   "engines": {
     "node": ">=22"
   },
-  "workspaces": ["packages/*", "apps/*"],
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "scripts": {
     "build": "turbo run build",
     "build:pages": "turbo run build --filter=fasla-ui-docs --filter=fasla-ui-storybook && cp -r apps/storybook/storybook-static apps/docs/out/components",
@@ -16,13 +19,9 @@
     "storybook": "bun run --cwd apps/storybook dev",
     "build-storybook": "bun run --cwd apps/storybook build",
     "clean": "turbo run clean && rm -rf node_modules",
-    "format": "prettier --write \"**/*.{ts,tsx,md,json}\"",
-    "changeset": "changeset",
-    "version": "changeset version",
-    "release": "changeset publish"
+    "format": "prettier --write \"**/*.{ts,tsx,md,json}\""
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.0",
     "turbo": "^2.3.0",
     "typescript": "^5.4.0",
     "prettier": "^3.2.0",

@@ -26,7 +26,7 @@ Closes #
 - [ ] I have added tests that prove my fix/feature works
 - [ ] I have updated the documentation as needed
 - [ ] All new and existing tests pass
-- [ ] I have added a changeset (`bun run changeset`)
+- [ ] My commits follow conventional commits, so release-please can version them
 - [ ] I have checked my code for accessibility issues
 
 ## Testing
