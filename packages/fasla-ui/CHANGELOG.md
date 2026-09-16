@@ -1,5 +1,12 @@
 # @smicolon/fasla-ui
 
+## [0.2.3](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.2.2...fasla-ui-v0.2.3) (2026-09-16)
+
+
+### Refactors
+
+* rename smi-ui to fasla-ui ([#4](https://github.com/smicolon/fasla-ui/issues/4)) ([91ee183](https://github.com/smicolon/fasla-ui/commit/91ee1839cbf6ec01833fee9a630f8246d4da00e5))
+
 ## 0.2.2
 
 ### Patch Changes
