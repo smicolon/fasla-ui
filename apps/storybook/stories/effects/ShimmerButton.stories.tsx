@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { ShimmerButton } from "../../../../packages/smi-ui/registry/effects/shimmer-button"
+import { ShimmerButton } from "../../../../packages/fasla-ui/registry/effects/shimmer-button"
 
 const meta: Meta<typeof ShimmerButton> = {
   title: "Effects/ShimmerButton",

@@ -2,7 +2,7 @@
 
 /**
  * Build script to generate shadcn-compatible registry files
- * Reads components from packages/smi-ui and generates JSON files in public/r/
+ * Reads components from packages/fasla-ui and generates JSON files in public/r/
  */
 
 import fs from "fs/promises"
@@ -11,14 +11,14 @@ import { fileURLToPath } from "url"
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT_DIR = path.resolve(__dirname, "../../..")
-const SMI_UI_DIR = path.join(ROOT_DIR, "packages/smi-ui")
+const FASLA_UI_DIR = path.join(ROOT_DIR, "packages/fasla-ui")
 const OUTPUT_DIR = path.join(__dirname, "../public/r")
 
 async function main() {
   console.log("Building registry...")
 
   // Read the source registry
-  const registryPath = path.join(SMI_UI_DIR, "registry.json")
+  const registryPath = path.join(FASLA_UI_DIR, "registry.json")
   const registry = JSON.parse(await fs.readFile(registryPath, "utf-8"))
 
   // Ensure output directory exists
@@ -34,7 +34,7 @@ async function main() {
     // Read source files and embed content
     const filesWithContent = []
     for (const file of item.files) {
-      const sourcePath = path.join(SMI_UI_DIR, file.path)
+      const sourcePath = path.join(FASLA_UI_DIR, file.path)
       try {
         const content = await fs.readFile(sourcePath, "utf-8")
         filesWithContent.push({

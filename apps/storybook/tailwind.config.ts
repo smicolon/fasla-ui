@@ -5,7 +5,7 @@ const config: Config = {
   content: [
     "./stories/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
-    "../../packages/smi-ui/registry/**/*.{js,ts,jsx,tsx}",
+    "../../packages/fasla-ui/registry/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {

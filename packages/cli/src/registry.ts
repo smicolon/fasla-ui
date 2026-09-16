@@ -1,5 +1,5 @@
 /**
- * Registry module for fetching components from the smi-ui registry
+ * Registry module for fetching components from the fasla-ui registry
  */
 
 const REGISTRY_URL = "https://ui.smicolon.com/r"

@@ -20,7 +20,7 @@ export function SiteHeader() {
             height={28}
             className="h-6 w-6 sm:h-7 sm:w-7"
           />
-          <span className="font-bold text-sm sm:text-base">SMI-UI</span>
+          <span className="font-bold text-sm sm:text-base">FASLA-UI</span>
         </Link>
 
         {/* Desktop Nav Links */}
@@ -44,7 +44,7 @@ export function SiteHeader() {
             Effects
           </Link>
           <Link
-            href="https://github.com/smicolon/smi-ui"
+            href="https://github.com/smicolon/fasla-ui"
             target="_blank"
             rel="noreferrer"
             className="px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground rounded-full hover:bg-accent"
@@ -108,7 +108,7 @@ export function SiteHeader() {
               Effects
             </Link>
             <Link
-              href="https://github.com/smicolon/smi-ui"
+              href="https://github.com/smicolon/fasla-ui"
               target="_blank"
               rel="noreferrer"
               onClick={() => setMobileMenuOpen(false)}

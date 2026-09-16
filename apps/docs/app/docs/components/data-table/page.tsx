@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { DataTable, Pagination, Column } from "../../../../../../packages/smi-ui/registry/blocks/data-table/DataTable"
+import { DataTable, Pagination, Column } from "../../../../../../packages/fasla-ui/registry/blocks/data-table/DataTable"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 interface User {
@@ -38,7 +38,7 @@ export default function DataTablePage() {
           <section>
             <h2 className="text-2xl font-bold tracking-tight">Installation</h2>
             <div className="mt-4">
-              <CodeBlock>npx smi-ui add data-table</CodeBlock>
+              <CodeBlock>npx fasla-ui add data-table</CodeBlock>
             </div>
           </section>
 

@@ -1,5 +1,5 @@
 {
-  "name": "smi-ui-storybook",
+  "name": "fasla-ui-storybook",
   "private": true,
   "type": "module",
   "scripts": {
@@ -12,7 +12,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@smicolon/smi-ui": "workspace:*",
+    "@smicolon/fasla-ui": "workspace:*",
     "@storybook/addon-a11y": "^8.4.0",
     "@storybook/addon-essentials": "^8.4.0",
     "@storybook/addon-interactions": "^8.4.0",

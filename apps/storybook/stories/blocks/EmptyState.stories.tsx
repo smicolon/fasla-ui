@@ -3,8 +3,8 @@ import {
   EmptyState,
   EmptySearchResults,
   EmptyData,
-} from "../../../../packages/smi-ui/registry/blocks/empty-state"
-import { Button } from "../../../../packages/smi-ui/registry/ui/button"
+} from "../../../../packages/fasla-ui/registry/blocks/empty-state"
+import { Button } from "../../../../packages/fasla-ui/registry/ui/button"
 
 const meta: Meta<typeof EmptyState> = {
   title: "Blocks/EmptyState",

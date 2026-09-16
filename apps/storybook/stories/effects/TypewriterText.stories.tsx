@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { TypewriterText, TypewriterWords } from "../../../../packages/smi-ui/registry/effects/typewriter-text"
+import { TypewriterText, TypewriterWords } from "../../../../packages/fasla-ui/registry/effects/typewriter-text"
 
 const meta: Meta<typeof TypewriterText> = {
   title: "Effects/TypewriterText",

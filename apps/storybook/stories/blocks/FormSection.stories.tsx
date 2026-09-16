@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { FormSection, FormField, FormActions } from "../../../../packages/smi-ui/registry/blocks/form-section/FormSection"
-import { Input } from "../../../../packages/smi-ui/registry/ui/input/input"
+import { FormSection, FormField, FormActions } from "../../../../packages/fasla-ui/registry/blocks/form-section/FormSection"
+import { Input } from "../../../../packages/fasla-ui/registry/ui/input/input"
 
 const meta: Meta<typeof FormSection> = {
   title: "Blocks/FormSection",

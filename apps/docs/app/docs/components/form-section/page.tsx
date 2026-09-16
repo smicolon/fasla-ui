@@ -1,7 +1,7 @@
 "use client"
 
-import { FormSection, FormField, FormActions } from "../../../../../../packages/smi-ui/registry/blocks/form-section/FormSection"
-import { Input } from "../../../../../../packages/smi-ui/registry/ui/input"
+import { FormSection, FormField, FormActions } from "../../../../../../packages/fasla-ui/registry/blocks/form-section/FormSection"
+import { Input } from "../../../../../../packages/fasla-ui/registry/ui/input"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 export default function FormSectionPage() {
@@ -19,7 +19,7 @@ export default function FormSectionPage() {
           <section>
             <h2 className="text-2xl font-bold tracking-tight">Installation</h2>
             <div className="mt-4">
-              <CodeBlock>npx smi-ui add form-section</CodeBlock>
+              <CodeBlock>npx fasla-ui add form-section</CodeBlock>
             </div>
           </section>
 

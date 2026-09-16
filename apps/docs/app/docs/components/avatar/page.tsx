@@ -1,6 +1,6 @@
 "use client"
 
-import { Avatar, AvatarGroup } from "../../../../../../packages/smi-ui/registry/ui/avatar"
+import { Avatar, AvatarGroup } from "../../../../../../packages/fasla-ui/registry/ui/avatar"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 export default function AvatarPage() {
@@ -16,7 +16,7 @@ export default function AvatarPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">Installation</h2>
-        <CodeBlock>npx @smicolon/smi-ui add avatar</CodeBlock>
+        <CodeBlock>npx @smicolon/fasla-ui add avatar</CodeBlock>
       </section>
 
       {/* Preview */}

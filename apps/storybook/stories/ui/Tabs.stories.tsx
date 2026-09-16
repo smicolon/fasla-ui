@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../../../packages/smi-ui/registry/ui/tabs"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../../../packages/fasla-ui/registry/ui/tabs"
 
 const meta: Meta<typeof Tabs> = {
   title: "UI/Tabs",

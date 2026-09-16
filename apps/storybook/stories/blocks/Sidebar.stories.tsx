@@ -8,7 +8,7 @@ import {
   SidebarGroup,
   SidebarItem,
   SidebarCollapseButton,
-} from "../../../../packages/smi-ui/registry/blocks/sidebar"
+} from "../../../../packages/fasla-ui/registry/blocks/sidebar"
 
 const meta: Meta<typeof Sidebar> = {
   title: "Blocks/Sidebar",

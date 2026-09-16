@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Input } from "../../../../packages/smi-ui/registry/ui/input"
+import { Input } from "../../../../packages/fasla-ui/registry/ui/input"
 
 const meta: Meta<typeof Input> = {
   title: "UI/Input",

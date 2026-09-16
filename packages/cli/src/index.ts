@@ -6,8 +6,8 @@ import { list } from "./commands/list.js"
 const program = new Command()
 
 program
-  .name("smi-ui")
-  .description("CLI for installing smi-ui components")
+  .name("fasla-ui")
+  .description("CLI for installing fasla-ui components")
   .version("0.1.0")
 
 program.addCommand(init)

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
-import { DataTable, Pagination, Column } from "../../../../packages/smi-ui/registry/blocks/data-table/DataTable"
+import { DataTable, Pagination, Column } from "../../../../packages/fasla-ui/registry/blocks/data-table/DataTable"
 
 const meta: Meta<typeof DataTable> = {
   title: "Blocks/DataTable",

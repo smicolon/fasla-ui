@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import {
   AnimatedGradient,
   AnimatedGradientText,
-} from "../../../../packages/smi-ui/registry/effects/animated-gradient"
+} from "../../../../packages/fasla-ui/registry/effects/animated-gradient"
 
 const meta: Meta<typeof AnimatedGradient> = {
   title: "Effects/AnimatedGradient",

@@ -1,6 +1,6 @@
 "use client"
 
-import { PageHeader } from "../../../../../../packages/smi-ui/registry/blocks/page-header/PageHeader"
+import { PageHeader } from "../../../../../../packages/fasla-ui/registry/blocks/page-header/PageHeader"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 export default function PageHeaderPage() {
@@ -18,7 +18,7 @@ export default function PageHeaderPage() {
           <section>
             <h2 className="text-2xl font-bold tracking-tight">Installation</h2>
             <div className="mt-4">
-              <CodeBlock>npx smi-ui add page-header</CodeBlock>
+              <CodeBlock>npx fasla-ui add page-header</CodeBlock>
             </div>
           </section>
 

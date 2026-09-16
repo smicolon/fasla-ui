@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Switch } from "../../../../../../packages/smi-ui/registry/ui/switch"
+import { Switch } from "../../../../../../packages/fasla-ui/registry/ui/switch"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 export default function SwitchPage() {
@@ -19,7 +19,7 @@ export default function SwitchPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">Installation</h2>
-        <CodeBlock>npx @smicolon/smi-ui add switch</CodeBlock>
+        <CodeBlock>npx @smicolon/fasla-ui add switch</CodeBlock>
       </section>
 
       {/* Preview */}

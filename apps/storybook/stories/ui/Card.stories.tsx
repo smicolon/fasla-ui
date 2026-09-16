@@ -6,8 +6,8 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "../../../../packages/smi-ui/registry/ui/card"
-import { Button } from "../../../../packages/smi-ui/registry/ui/button"
+} from "../../../../packages/fasla-ui/registry/ui/card"
+import { Button } from "../../../../packages/fasla-ui/registry/ui/button"
 
 const meta: Meta<typeof Card> = {
   title: "UI/Card",

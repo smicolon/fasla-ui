@@ -1,6 +1,6 @@
 "use client"
 
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../../../../../packages/smi-ui/registry/ui/tabs"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "../../../../../../packages/fasla-ui/registry/ui/tabs"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 export default function TabsPage() {
@@ -16,7 +16,7 @@ export default function TabsPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">Installation</h2>
-        <CodeBlock>npx @smicolon/smi-ui add tabs</CodeBlock>
+        <CodeBlock>npx @smicolon/fasla-ui add tabs</CodeBlock>
       </section>
 
       {/* Preview */}

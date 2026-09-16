@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Textarea } from "../../../../packages/smi-ui/registry/ui/textarea"
+import { Textarea } from "../../../../packages/fasla-ui/registry/ui/textarea"
 
 const meta: Meta<typeof Textarea> = {
   title: "UI/Textarea",

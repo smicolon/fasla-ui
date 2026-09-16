@@ -1,4 +1,4 @@
-# SMI UI
+# FASLA UI
 
 Professional UI components with animations and app building blocks for React applications.
 
@@ -17,17 +17,17 @@ Built with [Tailwind CSS](https://tailwindcss.com), [Framer Motion](https://www.
 
 ```bash
 # Install the package
-npm install @smicolon/smi-ui
+npm install @smicolon/fasla-ui
 
 # Or use the CLI
-npx smi-ui init
-npx smi-ui add button card
+npx fasla-ui init
+npx fasla-ui add button card
 ```
 
 ## Quick Start
 
 ```tsx
-import { Button, Card, CardHeader, CardTitle, CardContent } from "@smicolon/smi-ui"
+import { Button, Card, CardHeader, CardTitle, CardContent } from "@smicolon/fasla-ui"
 
 export function App() {
   return (
@@ -94,13 +94,13 @@ Visit [ui.smicolon.com](https://ui.smicolon.com) for full documentation.
 
 ## Tailwind Configuration
 
-Add SMI UI to your `tailwind.config.js`:
+Add FASLA UI to your `tailwind.config.js`:
 
 ```js
 module.exports = {
   content: [
     // ... your content
-    "./node_modules/@smicolon/smi-ui/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@smicolon/fasla-ui/**/*.{js,ts,jsx,tsx}",
   ],
   // ...
 }

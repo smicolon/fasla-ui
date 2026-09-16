@@ -8,7 +8,7 @@ import {
   NavbarLink,
   NavbarMenu,
   NavbarToggle,
-} from "../../../../packages/smi-ui/registry/blocks/navbar"
+} from "../../../../packages/fasla-ui/registry/blocks/navbar"
 
 const meta: Meta<typeof Navbar> = {
   title: "Blocks/Navbar",

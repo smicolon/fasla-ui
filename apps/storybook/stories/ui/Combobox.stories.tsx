@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
-import { Combobox, ComboboxOption } from "../../../../packages/smi-ui/registry/ui/combobox"
+import { Combobox, ComboboxOption } from "../../../../packages/fasla-ui/registry/ui/combobox"
 
 const meta: Meta<typeof Combobox> = {
   title: "UI/Combobox",

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is **@smicolon/smi-ui**, a professional UI component library built on shadcn/ui primitives. It provides both animated effects components (like Magic UI) and app building blocks, distributed via a shadcn-compatible registry.
+This is **@smicolon/fasla-ui**, a professional UI component library built on shadcn/ui primitives. It provides both animated effects components (like Magic UI) and app building blocks, distributed via a shadcn-compatible registry.
 
 ## Commands
 
@@ -34,21 +34,21 @@ bun run test
 bun run format
 
 # Build single package
-bun run --cwd packages/smi-ui build
+bun run --cwd packages/fasla-ui build
 
 # CLI commands (after build)
-npx smi-ui init          # Initialize in a project
-npx smi-ui add button    # Add a component
-npx smi-ui list          # List available components
+npx fasla-ui init          # Initialize in a project
+npx fasla-ui add button    # Add a component
+npx fasla-ui list          # List available components
 ```
 
 ## Architecture
 
 ### Monorepo Structure
 ```
-smi-ui/
+fasla-ui/
 ├── packages/
-│   ├── smi-ui/           # Core library
+│   ├── fasla-ui/           # Core library
 │   │   ├── registry/
 │   │   │   ├── ui/       # Primitives (button, input, card)
 │   │   │   ├── blocks/   # Composites (AppShell, PageHeader)
@@ -123,7 +123,7 @@ AppShell
 1. Create a **Block Map** for each screen using `docs/BLOCK_MAP_TEMPLATE.md` (2-5 min)
 2. Implement **structure pass** first: layout, semantics, all states (loading/empty/error/success)
 3. Implement **polish pass**: motion presets, responsive layout, spacing/typography consistency
-4. New blocks go in `packages/smi-ui/registry/blocks/` with Storybook stories
+4. New blocks go in `packages/fasla-ui/registry/blocks/` with Storybook stories
 
 ## Prompt Reference (from docs/CLAUDE_CODE_PROMPTS.md)
 
