@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Select } from "../../../../packages/smi-ui/registry/ui/select"
+import { Select } from "../../../../packages/fasla-ui/registry/ui/select"
 
 const meta: Meta<typeof Select> = {
   title: "UI/Select",

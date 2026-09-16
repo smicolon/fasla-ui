@@ -4,7 +4,7 @@ import { create } from "@storybook/theming/create"
 addons.setConfig({
   theme: create({
     base: "light",
-    brandTitle: "SMI-UI Component Explorer",
+    brandTitle: "FASLA-UI Component Explorer",
     brandUrl: "https://ui.smicolon.com/components/",
     brandImage: "/components/Logo-dark.svg",
     brandTarget: "_self",

@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs"
 import path from "node:path"
 import { fileURLToPath, pathToFileURL } from "node:url"
 
-const title = "SMI-UI Component Explorer | Smicolon"
+const title = "FASLA-UI Component Explorer | Smicolon"
 const canonical = "https://ui.smicolon.com/components/"
 
 function requireMarkup(html, markup, label) {

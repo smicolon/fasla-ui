@@ -1,6 +1,6 @@
 "use client"
 
-import { Skeleton, SkeletonText, SkeletonAvatar, SkeletonCard } from "../../../../../../packages/smi-ui/registry/ui/skeleton"
+import { Skeleton, SkeletonText, SkeletonAvatar, SkeletonCard } from "../../../../../../packages/fasla-ui/registry/ui/skeleton"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 export default function SkeletonPage() {
@@ -18,7 +18,7 @@ export default function SkeletonPage() {
           <section>
             <h2 className="text-2xl font-bold tracking-tight">Installation</h2>
             <div className="mt-4">
-              <CodeBlock>npx smi-ui add skeleton</CodeBlock>
+              <CodeBlock>npx fasla-ui add skeleton</CodeBlock>
             </div>
           </section>
 

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import {
   TextReveal,
   WordReveal,
-} from "../../../../packages/smi-ui/registry/effects/text-reveal"
+} from "../../../../packages/fasla-ui/registry/effects/text-reveal"
 
 const meta: Meta<typeof TextReveal> = {
   title: "Effects/TextReveal",

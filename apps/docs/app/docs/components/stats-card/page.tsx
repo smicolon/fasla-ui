@@ -10,7 +10,7 @@ export default function StatsCardPage() {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">Installation</h2>
         <pre className="overflow-x-auto rounded-lg bg-smi-neutral-950 p-4">
-          <code className="text-green-400">npx @smicolon/smi-ui add stats-card</code>
+          <code className="text-green-400">npx @smicolon/fasla-ui add stats-card</code>
         </pre>
       </div>
       <div className="space-y-4">

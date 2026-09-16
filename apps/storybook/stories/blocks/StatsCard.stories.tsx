@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { StatsCard, StatsGrid } from "../../../../packages/smi-ui/registry/blocks/stats-card"
+import { StatsCard, StatsGrid } from "../../../../packages/fasla-ui/registry/blocks/stats-card"
 
 const meta: Meta<typeof StatsCard> = {
   title: "Blocks/StatsCard",

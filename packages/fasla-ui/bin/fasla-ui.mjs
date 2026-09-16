@@ -3,12 +3,12 @@ import fs from "node:fs";
 import path from "node:path";
 
 function usage() {
-  console.log(`smi-ui (scaffold)
+  console.log(`fasla-ui (scaffold)
 Usage:
-  smi-ui add <registry-path> --to <target-dir>
+  fasla-ui add <registry-path> --to <target-dir>
 
 Example:
-  smi-ui add blocks/app-shell --to ../client/src/components/blocks
+  fasla-ui add blocks/app-shell --to ../client/src/components/blocks
 `);
 }
 
@@ -42,7 +42,7 @@ if (!item || !targetDir) {
   process.exit(1);
 }
 
-const registryRoot = path.resolve(process.cwd(), "packages/smi-ui/registry");
+const registryRoot = path.resolve(process.cwd(), "packages/fasla-ui/registry");
 const srcDir = path.join(registryRoot, item);
 if (!fs.existsSync(srcDir)) {
   console.error(`Registry path not found: ${srcDir}`);

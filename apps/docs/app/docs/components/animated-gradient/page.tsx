@@ -1,6 +1,6 @@
 "use client"
 
-import { AnimatedGradient } from "../../../../../../packages/smi-ui/registry/effects/animated-gradient/animated-gradient"
+import { AnimatedGradient } from "../../../../../../packages/fasla-ui/registry/effects/animated-gradient/animated-gradient"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 export default function AnimatedGradientPage() {
@@ -18,7 +18,7 @@ export default function AnimatedGradientPage() {
           <section>
             <h2 className="text-2xl font-bold tracking-tight">Installation</h2>
             <div className="mt-4">
-              <CodeBlock>npx smi-ui add animated-gradient</CodeBlock>
+              <CodeBlock>npx fasla-ui add animated-gradient</CodeBlock>
             </div>
           </section>
 

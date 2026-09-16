@@ -7,5 +7,5 @@
   "access": "public",
   "baseBranch": "main",
   "updateInternalDependencies": "patch",
-  "ignore": ["smi-ui-storybook", "smi-ui-docs"]
+  "ignore": ["fasla-ui-storybook", "fasla-ui-docs"]
 }

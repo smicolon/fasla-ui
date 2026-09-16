@@ -1,6 +1,6 @@
 "use client"
 
-import { ShimmerButton } from "../../../../../../packages/smi-ui/registry/effects/shimmer-button"
+import { ShimmerButton } from "../../../../../../packages/fasla-ui/registry/effects/shimmer-button"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 export default function ShimmerButtonPage() {
@@ -19,7 +19,7 @@ export default function ShimmerButtonPage() {
           <section>
             <h2 className="text-2xl font-bold tracking-tight">Installation</h2>
             <div className="mt-4">
-              <CodeBlock>npx smi-ui add shimmer-button</CodeBlock>
+              <CodeBlock>npx fasla-ui add shimmer-button</CodeBlock>
             </div>
           </section>
 

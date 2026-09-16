@@ -1,5 +1,5 @@
 {
-  "name": "smi-ui-docs",
+  "name": "fasla-ui-docs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,7 +16,7 @@
     "@mdx-js/react": "^3.0.0",
     "@next/mdx": "^14.2.0",
     "@radix-ui/react-slot": "^1.1.0",
-    "@smicolon/smi-ui": "workspace:*",
+    "@smicolon/fasla-ui": "workspace:*",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.0",

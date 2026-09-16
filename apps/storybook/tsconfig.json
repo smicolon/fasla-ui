@@ -18,11 +18,11 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
-      "@smicolon/smi-ui": ["../../packages/smi-ui/src"],
-      "@smicolon/smi-ui/*": ["../../packages/smi-ui/src/*"],
-      "@smi-ui/ui/*": ["../../packages/smi-ui/registry/ui/*"],
-      "@smi-ui/blocks/*": ["../../packages/smi-ui/registry/blocks/*"],
-      "@smi-ui/effects/*": ["../../packages/smi-ui/registry/effects/*"]
+      "@smicolon/fasla-ui": ["../../packages/fasla-ui/src"],
+      "@smicolon/fasla-ui/*": ["../../packages/fasla-ui/src/*"],
+      "@fasla-ui/ui/*": ["../../packages/fasla-ui/registry/ui/*"],
+      "@fasla-ui/blocks/*": ["../../packages/fasla-ui/registry/blocks/*"],
+      "@fasla-ui/effects/*": ["../../packages/fasla-ui/registry/effects/*"]
     }
   },
   "include": ["src", "stories", ".storybook"]

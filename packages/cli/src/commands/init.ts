@@ -7,13 +7,13 @@ import path from "path"
 
 export const init = new Command()
   .name("init")
-  .description("Initialize smi-ui in your project")
+  .description("Initialize fasla-ui in your project")
   .option("-y, --yes", "Skip confirmation prompts")
   .option("-c, --cwd <path>", "Working directory", process.cwd())
   .action(async (options) => {
     const cwd = path.resolve(options.cwd)
 
-    console.log(chalk.bold("\nInitializing smi-ui...\n"))
+    console.log(chalk.bold("\nInitializing fasla-ui...\n"))
 
     // Check for existing config
     const configPath = path.join(cwd, "components.json")
@@ -119,10 +119,10 @@ export const init = new Command()
       await fs.writeJson(configPath, config, { spaces: 2 })
       spinner.succeed("Configuration written to components.json")
 
-      console.log(chalk.green("\nSuccess! smi-ui has been initialized."))
+      console.log(chalk.green("\nSuccess! fasla-ui has been initialized."))
       console.log("\nYou can now add components:")
-      console.log(chalk.cyan("  npx smi-ui add button"))
-      console.log(chalk.cyan("  npx smi-ui add @smicolon/shimmer-button"))
+      console.log(chalk.cyan("  npx fasla-ui add button"))
+      console.log(chalk.cyan("  npx fasla-ui add @smicolon/shimmer-button"))
     } catch (error) {
       spinner.fail("Failed to write configuration")
       console.error(error)

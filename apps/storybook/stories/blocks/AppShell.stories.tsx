@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { AppShell } from "../../../../packages/smi-ui/registry/blocks/app-shell/AppShell"
+import { AppShell } from "../../../../packages/fasla-ui/registry/blocks/app-shell/AppShell"
 
 const meta: Meta<typeof AppShell> = {
   title: "Blocks/AppShell",

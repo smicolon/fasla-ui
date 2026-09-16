@@ -1,6 +1,6 @@
 "use client"
 
-import { AppShell } from "../../../../../../packages/smi-ui/registry/blocks/app-shell/AppShell"
+import { AppShell } from "../../../../../../packages/fasla-ui/registry/blocks/app-shell/AppShell"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 const SidebarContent = () => (
@@ -39,7 +39,7 @@ export default function AppShellPage() {
           <section>
             <h2 className="text-2xl font-bold tracking-tight">Installation</h2>
             <div className="mt-4">
-              <CodeBlock>npx smi-ui add app-shell</CodeBlock>
+              <CodeBlock>npx fasla-ui add app-shell</CodeBlock>
             </div>
           </section>
 

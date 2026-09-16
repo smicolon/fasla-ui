@@ -25,7 +25,7 @@ If applicable, add screenshots to help explain your problem.
 ## Environment
 - OS: [e.g. macOS, Windows, Linux]
 - Browser: [e.g. Chrome, Safari]
-- SMI UI Version: [e.g. 0.1.0]
+- FASLA UI Version: [e.g. 0.1.0]
 - React Version: [e.g. 18.2.0]
 
 ## Code Example

@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { PageHeader } from "../../../../packages/smi-ui/registry/blocks/page-header/PageHeader"
+import { PageHeader } from "../../../../packages/fasla-ui/registry/blocks/page-header/PageHeader"
 
 const meta: Meta<typeof PageHeader> = {
   title: "Blocks/PageHeader",

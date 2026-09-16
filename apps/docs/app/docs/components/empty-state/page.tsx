@@ -1,6 +1,6 @@
 "use client"
 
-import { EmptyState, EmptySearchResults, EmptyData } from "../../../../../../packages/smi-ui/registry/blocks/empty-state/EmptyState"
+import { EmptyState, EmptySearchResults, EmptyData } from "../../../../../../packages/fasla-ui/registry/blocks/empty-state/EmptyState"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 export default function EmptyStatePage() {
@@ -18,7 +18,7 @@ export default function EmptyStatePage() {
           <section>
             <h2 className="text-2xl font-bold tracking-tight">Installation</h2>
             <div className="mt-4">
-              <CodeBlock>npx smi-ui add empty-state</CodeBlock>
+              <CodeBlock>npx fasla-ui add empty-state</CodeBlock>
             </div>
           </section>
 

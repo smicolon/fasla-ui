@@ -1,6 +1,6 @@
 "use client"
 
-import { Input } from "../../../../../../packages/smi-ui/registry/ui/input"
+import { Input } from "../../../../../../packages/fasla-ui/registry/ui/input"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 export default function InputPage() {
@@ -18,7 +18,7 @@ export default function InputPage() {
           <section>
             <h2 className="text-2xl font-bold tracking-tight">Installation</h2>
             <div className="mt-4">
-              <CodeBlock>npx smi-ui add input</CodeBlock>
+              <CodeBlock>npx fasla-ui add input</CodeBlock>
             </div>
           </section>
 

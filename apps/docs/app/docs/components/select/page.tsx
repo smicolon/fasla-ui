@@ -1,6 +1,6 @@
 "use client"
 
-import { Select } from "../../../../../../packages/smi-ui/registry/ui/select"
+import { Select } from "../../../../../../packages/fasla-ui/registry/ui/select"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 const options = [
@@ -23,7 +23,7 @@ export default function SelectPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">Installation</h2>
-        <CodeBlock>npx @smicolon/smi-ui add select</CodeBlock>
+        <CodeBlock>npx @smicolon/fasla-ui add select</CodeBlock>
       </section>
 
       {/* Preview */}
