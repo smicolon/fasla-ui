@@ -1,0 +1,64 @@
+name: PR title
+
+# PRs are squash-merged, so the PR title becomes the commit message on main —
+# and that commit is the only thing release-please reads to decide the next
+# version. A title it cannot parse means no release, silently. Hence this check.
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, edited, reopened, synchronize]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  conventional:
+    name: Conventional commit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check the title
+        env:
+          # Untrusted input: keep it a quoted env var, never inline ${{ }} here.
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          set -euo pipefail
+
+          types='build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test'
+          pattern="^(${types})(\([a-z0-9._/-]+\))?!?: .+"
+
+          if ! printf '%s' "$PR_TITLE" | grep -qE "$pattern"; then
+            {
+              echo "### PR title is not a conventional commit"
+              echo
+              echo '```'
+              printf '%s\n' "$PR_TITLE"
+              echo '```'
+              echo
+              echo "This repository squash-merges, so the title above becomes the commit"
+              echo "message on \`main\`. release-please reads that message to work out the"
+              echo "next version — a title it cannot parse produces no release at all."
+              echo
+              echo "Use \`<type>(<optional scope>): <description>\`, for example:"
+              echo
+              echo "- \`feat(cli): add a --dry-run flag\`"
+              echo "- \`fix: stop DataTable dropping the last page\`"
+              echo "- \`feat!: drop React 17 support\`  (major)"
+              echo
+              echo "Types: \`${types//|/\`, \`}\`"
+            } >> "$GITHUB_STEP_SUMMARY"
+            echo "::error::PR title is not a conventional commit — see the job summary."
+            exit 1
+          fi
+
+          length=${#PR_TITLE}
+          if [ "$length" -gt 72 ]; then
+            echo "::error::PR title is ${length} characters; keep the first line under 72."
+            exit 1
+          fi
+
+          echo "OK: $PR_TITLE"

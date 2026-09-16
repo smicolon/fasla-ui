@@ -7,13 +7,35 @@ on:
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
-  release:
-    name: Release
+  # Keeps a rolling "chore: release packages" PR up to date from the conventional
+  # commits on main. Merging that PR bumps versions, writes CHANGELOGs, tags and
+  # cuts GitHub releases — which is what triggers the publish job below.
+  release-please:
+    name: Release PR
     runs-on: ubuntu-latest
+    outputs:
+      releases_created: ${{ steps.release.outputs.releases_created }}
+      paths_released: ${{ steps.release.outputs.paths_released }}
+    steps:
+      - uses: googleapis/release-please-action@v4
+        id: release
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    name: Publish to npm
+    runs-on: ubuntu-latest
+    needs: release-please
+    if: needs.release-please.outputs.releases_created == 'true'
     permissions:
-      contents: write
-      pull-requests: write
+      contents: read
       id-token: write
     steps:
       - uses: actions/checkout@v4
@@ -28,25 +50,35 @@ jobs:
       - name: Build packages
         run: bun run build
 
-      - name: Setup Node.js for npm publish
-        uses: actions/setup-node@v4
+      - uses: actions/setup-node@v4
         with:
           node-version: "22"
           registry-url: "https://registry.npmjs.org"
 
+      # Trusted publishing needs npm 11.5.0 or newer.
       - name: Upgrade npm for trusted publishing
         run: npm install -g npm@latest
 
-      - name: Create Release Pull Request or Publish
-        id: changesets
-        uses: changesets/action@v1
-        with:
-          publish: npx changeset publish
-          version: bun run version
-          commit: "chore: release packages"
-          title: "chore: release packages"
-          createGithubReleases: true
+      # Published via npm trusted publishing: the job's OIDC token (id-token:
+      # write, above) is exchanged for a short-lived credential, so there is no
+      # NPM_TOKEN here and no long-lived secret to leak or rotate. npm attaches
+      # the provenance attestation itself, so --provenance is not passed.
+      #
+      # Each package needs a trusted publisher configured once on npmjs.com,
+      # pointing at smicolon/fasla-ui and this workflow file (release.yml).
+      #
+      # Only the packages release-please actually bumped get published, so a
+      # release that touches one package does not try to republish the other at
+      # a version npm already has.
+      - name: Publish released packages
+        run: |
+          printf '%s' "$PATHS_RELEASED" \
+            | jq -r '.[]' \
+            | while read -r pkg; do
+                echo "::group::publishing $pkg"
+                ( cd "$pkg" && npm publish --access public )
+                echo "::endgroup::"
+              done
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          NPM_CONFIG_PROVENANCE: true
+          # Never inline ${{ }} into the script body — keep it a quoted env var.
+          PATHS_RELEASED: ${{ needs.release-please.outputs.paths_released }}
