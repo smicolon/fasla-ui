@@ -45,3 +45,11 @@ coverage/
 # Agent artifacts (per CLAUDE.md instructions)
 agent-artifacts/
 node_modules
+
+# Claude Code worktrees (scratch copies of the repo, created per session)
+.claude/worktrees/
+
+# Figma node-id cache — 498 KB, rewritten most sessions, and carries the
+# live Figma file key plus the internal component index. Kept on disk for the
+# pipeline; deliberately not committed. Live copy: ~/.claude/skills/
+.agents/skills/component-blocks-update/references/file-inventory.md

@@ -6,6 +6,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is **@smicolon/fasla-ui**, a professional UI component library built on shadcn/ui primitives. It provides both animated effects components (like Magic UI) and app building blocks, distributed via a shadcn-compatible registry.
 
+## Design and Figma work
+
+This repo is the code library; the design system itself is maintained in Figma. For anything
+touching Figma, design tokens, RTL or the design system, **read `design/FIGMA.md` first** — then
+`design/INSTRUCTIONS.md` (standing instructions) and `design/DESIGN.md` (the visual system).
+
+The skills, agents and slash-command launchers that drive that work live in `.agents/`, with
+`.claude/` symlinked to it. They are **repo-anchored**: run them with the repo root as the working
+directory, or their relative paths will not resolve.
+
 ## Commands
 
 ```bash
