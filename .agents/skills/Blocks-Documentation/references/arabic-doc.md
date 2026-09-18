@@ -67,7 +67,7 @@ auto-layout, so mirroring means **reversing append order** plus explicit alignme
 | info callout `ℹ` | first child | **last child** — glyph on the right |
 | Do / Don't cards | Do, then Don't | **Don't, then Do** — Do on the right |
 | Anatomy columns | stage, then legend | **legend, then stage** — stage on the right |
-| Anatomy pins | left of each element | **right of each element**, leaders point left |
+| Anatomy pins | left of each element | **reflected across the stage's vertical axis** — each pin follows its own element, so on a two-column block some go right and some go left |
 
 ## Anatomy: use the RTL variant, and its own geometry
 
@@ -211,3 +211,90 @@ own.forEach(t => { const c = t.characters.replace(/[‎‏‪‬]/g,'');
 ```
 
 The remedy is a real word, not a mark: «وأخرى **قيمتها** ‪$50.00‬».
+
+## Audit eleven: a digits-only run with an internal neutral reverses — and no isolation mark fixes it
+
+> **⚠️ PROVISIONAL — not yet house doctrine. Reproduce independently before relying on it.**
+>
+> The evidence here is asymmetric, and the gap matters:
+>
+> - **The remedy was observed to work.** The rewritten copy (`624 في 600`, `1440 و768 و360`) renders
+>   in source order in the shipped `Creative Hero` AR doc, confirmed by screenshot, with 0 unwrapped
+>   runs and 0 fusions in the audit.
+> - **The failing state was never independently observed.** No reviewer outside the build session saw
+>   `111 × 999` render reversed under LRM. "The fix works" is consistent with the diagnosis below, but
+>   it is also consistent with other explanations — a working remedy is weaker evidence than it looks.
+> - **It narrows a previously recorded finding** (the Gift Cards ruling below), so it carries a higher
+>   burden of proof than a fresh observation would.
+>
+> The UUAX#9 N1 reasoning is plausible and consistent with how bidi resolution works, but it is
+> reasoning about a spec, not a second measurement. **Rebuild the probe frame and watch the failure
+> directly** before treating any of this as settled. Until then, prefer the remedy (it is harmless and
+> reads better in Arabic regardless) but do not cite the mechanism as established.
+
+Proved by probe frame on `Creative Hero` AR, 2026-09-17. Source string `قيمة 111 × 999 نهاية`,
+rendered four ways in Cairo at 20/34, `textAlignHorizontal='RIGHT'`:
+
+| Form | Renders |
+|---|---|
+| `{RLM}قيمة {LRM}111 × 999{LRM} نهاية` | **`999 × 111`** — reversed |
+| `{RLM}قيمة {LRE}111 × 999{PDF} نهاية` | **`999 × 111`** — reversed, identically |
+| `{RLM}قيمة {LRM}AAA × ZZZ{LRM} نهاية` | `AAA × ZZZ` — correct |
+| `قيمة 111 × 999 نهاية` (no marks at all) | `111 × 999` — correct |
+
+Same result for `111 / 555 / 999`. So the axis is **not which mark you use** — it is whether the run
+carries a **Latin letter** to anchor it. A run of digit groups joined by `×`, `/` or `–` has no strong
+L of its own; the isolation mark in front of it makes the first digit group resolve L, and UUAX#9 N1
+then resolves the separator **R** (EN and AN count as R for neighbouring neutrals), which flips the
+groups. A leading Latin letter anchors the whole run and it renders in source order.
+
+This **narrows** the Gift Cards ruling above rather than contradicting it. That note is still right
+that widening the helper's `/[#$]/` condition is a null change — LRE is demonstrably no stronger than
+LRM here. It is wrong only if read as "a plain LRM makes any numeric range safe". It does not.
+
+**The remedy is in the copy, not in the marks: give each number its own isolated run and join them
+with an Arabic word.**
+
+| Instead of | Write |
+|---|---|
+| `~624 × 600~` | «مقاسها ~624~ في ~600~» — `في` is the idiomatic Arabic × for dimensions |
+| `~1440 / 768 / 360~` | «~1440~ و~768~ و~360~» — waw + numeral is correct orthography |
+| `~5–6~ كلمات` | «~5~ أو ~6~ كلمات» |
+| `~12–15~` | «من ~12~ إلى ~15~» |
+| `~1–2~` | «واحدة أو اثنتان» |
+
+`Creative Hero` AR shipped 10 nodes rewritten this way and every one verified by screenshot. Runs that
+begin with a Latin letter — `theme/background-inverse`, `Solid/primary`, `Type=Split Canvas,
+Breakpoint=Desktop, Direction=RTL`, `Work card — n` — need no change and were left alone.
+
+**A leading `-` is not an anchor either.** `~-inverse~` rendered as `inverse-`. Write the whole token
+(`~theme/foreground-inverse~`) or an Arabic phrase («برموز السِمة المعاكسة») instead of a suffix
+fragment.
+
+## `~A~ · ~B~` reverses the list; `~A · B~` does not
+
+Two adjacent isolated runs are two LTR blocks inside an RTL paragraph, so they are laid out
+right-to-left and **B reads first in Arabic**. On `Creative Hero` AR this silently swapped
+`Solid/primary · Outline/primary` and `theme/foreground-inverse · theme/muted-foreground-inverse`
+against their English twins.
+
+Wrap the whole list as **one** run — `~Solid/primary · Outline/primary~` — exactly as the isolation
+convention above already implies when it says a `·` inside a wrapped run is part of the run. Six nodes
+on this doc were rebuilt that way.
+
+## `figma.loadAllPagesAsync()` on the Fasla file — occasionally slow, not reliably fatal
+
+One build session on 2026-09-17 saw the Desktop Bridge stop responding for ~3 minutes after this
+call: `figma_get_status` kept reporting the socket connected while every `figma_execute`, including
+`return figma.root.children.map(p => p.name)`, timed out.
+
+**Treat that as a single anecdote, not a rule.** Other sessions against the same 132-page file on the
+same day called `loadAllPagesAsync()` repeatedly — it opens most cross-page audit queries — and every
+call returned in seconds. Whatever caused the stall was not the call on its own; it is more likely
+load- or timing-dependent (a concurrent session, or a page still streaming). The original note here
+said the call "wedges the Bridge", which is stronger than the evidence supports.
+
+So: it is safe to use, and cross-page work needs it. If the Bridge does go unresponsive after one,
+wait rather than retrying in a loop, and do not conclude the call is the cause. If a survey of
+sibling AR docs is only a nice-to-have, decide from this file and report the decision instead of
+paying for the page load.
