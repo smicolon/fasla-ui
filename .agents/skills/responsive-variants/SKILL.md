@@ -134,3 +134,66 @@ Fix everything before reporting.
 
 Full screenshots of each component set (all three variants side by side), audit counts,
 what was adapted per block, and any approved deviations — all previously raised.
+
+---
+
+## Corrections — verified 2026-09-17 on `Creative Hero` ⚠️
+
+This section overrides anything above it that contradicts it.
+
+**1. There is no approval gate in this pass.** Phases 0 and 2 above describe a final-approval gate and
+an adaptation-proposal round. Neither applies in this repo: `design/FIGMA.md` ("Working style") says to
+build directly, and `fasla-blocks-agent` explicitly makes pass 2 *report without gating* because its
+output is re-verified by the Gate 2 audits after RTL. Pick a defensible default, state it in one line,
+keep moving. Keep the read-only Phase 1 — it is still mandatory.
+
+**2. A block family is already one set — do not `combineAsVariants`.** Phase 4 above assumes loose
+desktop components. A family that came through `component-blocks-update` is a single `COMPONENT_SET`
+with a `Type` axis, so the path is: rename each existing variant to `Type=X, Breakpoint=Desktop`
+(which creates the axis), then `variant.clone()` → rename → `SET.appendChild` → pin the mode → place on
+the grid. The desktop variants keep their node ids and every existing instance stays linked.
+
+**3. Bind block padding to `block-horizontal-padding`, not `horizontal-padding`.** The table above
+lists `horizontal-padding` (32 / 24 / 16) — that is the *inner* control padding. Marketing block roots
+use **`block-horizontal-padding`** `VariableID:42351:296148` (**96 / 64 / 32**) with
+`vertical-padding` `VariableID:9118:18911` (96 / 64 / 32) and `block-width`
+`VariableID:10288:173929` (1440 / 768 / 360). Content widths after padding: **1248 / 640 / 296**.
+`block()` already binds all of these, so cloning and pinning the mode re-resolves them for free — a
+correctly built family needs **no** padding or width edits in this pass.
+
+**4. A padding audit must accept `VariableCollectionId:9118:18734`.** Those root paddings are bound
+into `💻 Responsive` by design. An audit that only accepts `💨 Tailwind` reports 4 false failures per
+variant. Audit padding as `if (!boundVariables[k])` — never `if (n[k] > 0 && !boundVariables[k])`, or a
+raw zero is invisible.
+
+**5. Step type with a HUG measurement.** `textAutoResize = 'WIDTH_AND_HEIGHT'` is silently ignored on a
+TEXT that FILLs an auto-layout parent, so a stepper that reads `width` after setting it always returns
+the largest size in the ramp. Set `layoutSizingHorizontal = 'HUG'`, read `width`, then restore FILL
+(or `resize(maxW, h)` for a FIXED text). Hug width respects explicit `\n`, so it measures the longest
+authored line.
+
+**6. Screenshot new variants through the Desktop Bridge.** `figma_capture_screenshot` renders freshly
+appended set children correctly (live runtime `exportAsync`); the official `get_screenshot` returns 1×1
+and inline `node.screenshot()` returns blank until Figma saves. `format` **and** `scale` are both
+required. Resize the set explicitly after appending — a set clips, and anything past its bottom edge
+exports as a blank ~149-byte PNG.
+
+**7. Order the reflow: structure → type step → explicit sizes → stale-height pin → audits.** Explicit
+sizes go **last** — a height set before the reflow is recomputed from the desktop ratio and silently
+reset. After any `layoutMode` flip, re-assert every child's `layoutSizingHorizontal/Vertical`: FILL
+children freeze at a collapsed height and no overflow detector sees it. Never `HUG` a
+`layoutMode: 'NONE'` frame (it collapses to 1px and deletes the photo) — `resize()` it explicitly.
+`resize()` also reverts FILL to FIXED, so re-apply sizing after every resize, then re-assert the height.
+
+**8. Photographs must be re-cropped per breakpoint, not just resized.** `scaleMode: 'FILL'` centres the
+crop, so a near-square hero stacked into a landscape frame loses the subject's head. Use
+`scaleMode: 'CROP'` with a top-anchored `imageTransform` on the clone; read the natural size with
+`figma.getImageByHash(hash).getSizeAsync()`. Nothing in the token or overflow audits catches this —
+only a screenshot does.
+
+**9. A stage that scales cards cannot scale text.** When a `layoutMode: 'NONE'` composition wraps a
+copy column, scaling every coordinate by one factor destroys the column's clearance, because text
+height does not shrink with the stage. Scale card *size* and *x* by `contentW / 1248`, then solve the
+vertical factor `f` from the clearance you need — e.g. `cardBottom·f + 24 ≤ (stageH·f − contentH) / 2`.
+Position rotated children by **bounding box** (`n.x += (parentAbs.x + tx) − n.absoluteBoundingBox.x`),
+never by `x`/`y`, and re-read `absoluteBoundingBox` to verify.

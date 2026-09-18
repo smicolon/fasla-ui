@@ -43,6 +43,10 @@ separate call containing **no `await` at all**.
 
 ## Placement traps
 
+- **`figma.currentPage = page` throws under `documentAccess: dynamic-page`** —
+  `Error: in set_currentPage: Cannot call with documentAccess: dynamic-page.` Use
+  `await figma.setCurrentPageAsync(page)`, after `await page.loadAsync()`.
+
 - **A SECTION child's `x`/`y` are relative to the section origin**, not the canvas. Order matters:
   set `sect.x` → `sect.appendChild(doc)` → `doc.x = 80; doc.y = 80`.
 - **Never move a section after appending** — the child's relative coordinate goes stale and the doc

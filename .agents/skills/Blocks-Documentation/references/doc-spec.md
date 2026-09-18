@@ -94,7 +94,30 @@ dashed bounds.
   **top + ~14–18px**, so the pin heads the group instead of landing on an arbitrary row.
 - Compute every position from `absoluteBoundingBox` relative to the instance, then **verify pin
   centres against the printed slot ranges** (see `references/audits.md`).
-- **AR mirrors the x axis**: pins sit on the right of each element, leaders point left.
+- **AR mirrors the x axis** — literally, as `AR pin x = Frame2.width − (EN pin x + pinSize)`, not as
+  a blanket "pins on the right". On a single-column block every pin does end up on the right; on a
+  two-column block the pins follow their own element, so the one labelling the column that moved to
+  the right goes right and the rest go left. Verified on `Creative Hero` AR `44861:350993`, where
+  pin 1 (the photograph) sits at x 913 and pins 2–6 at x 51. If the mirrored leader lengths do not
+  come out identical to the EN doc's, the mirror is wrong.
+
+> **⚠️ Corrected 2026-09-17 against `Creative Hero` (EN `44861:7596`) — these numbers are FAQ-derived.**
+>
+> **Re-derive the widths for a canon 1440 section.** `Stage wrap` 1420 / `Frame 3` 1353 / `Frame 2` 943
+> are measured off FAQ, whose sections are 1420 because of its 10px stroke. At 1440:
+> `Frame 3` = 1440 − 68 = **1372** and `Frame 2` = 1372 − 39 − `Legend` = **962** for a 371 legend.
+>
+> **The 640 / 511 heights are not safe — derive them from the legend.** A 7-row legend measures **756**.
+> Build the legend first, read `legend.height`, then set `Frame 3` height = `max(stageHeight,
+> legend.height)` and `Stage wrap` = 64 + that + 64. Sizing them up front pushes the last legend rows
+> outside the wrap: nothing throws, and `clipsContent` crops them out of the screenshot.
+>
+> **The 43 × 1 leader assumes a gutter outside the block; a marketing block has none.** Its own 96px
+> padding is **60px after the 0.625 rescale**, so the content edge sits 60px inside the instance and
+> the pins belong in that gutter — a fixed 43 either crosses `Block bounds` or stops short of the
+> element. Derive the length: the leader runs from the **slot's own edge** to 4px clear of the pin.
+> On `Creative Hero` that gave left pin centre x 49 (leader 26 long) and right pin centre x 911
+> (24 long to the panel edge, 64 to the four text slots), with `Block bounds` never crossed.
 
 **Legend row** — HORIZONTAL · gap 12 · badge 22px + `t` (VERTICAL · gap 3):
 - title — Inter Bold 14.5 / lh 21 (AR: Cairo Bold 14.5 / lh 24, and the slot's Latin layer name in

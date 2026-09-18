@@ -411,3 +411,54 @@ which the Group-A correction named for horizontal `Steps / Step item` but which 
   that a hand-off document described as containing them. A missing entry does not error — the
   instance falls through to the glyph branch, matches no mirrored id, and is skipped whole: no
   flip, no restore, no translation, and the free-text pass cannot reach inside it either.
+
+## Corrections verified 2026-09-17 (Creative Hero — marketing blocks with a manual scatter stage)
+
+- **`mirror()` has no branch for a `layoutMode: 'NONE'` parent, and the generic advice
+  (`x = parent.width - x - width`) is wrong for a rotated child.** A scatter stage of rotated,
+  absolutely-placed cards mirrors by **reflecting each child's bounding-box centre** across the
+  parent's vertical axis and **negating its rotation** — never by reversing the child list (there is
+  no flow order to reverse, and reversal is what buries an ABSOLUTE child). Negate `rotation` first,
+  then correct position from `absoluteBoundingBox`, because `x` on a rotated node is not its
+  bounding-box left edge:
+  ```js
+  const sa = stage.absoluteBoundingBox;
+  const recs = stage.children.map(k => { const a = k.absoluteBoundingBox;
+    return {k, cx: a.x + a.width/2 - sa.x, cy: a.y + a.height/2 - sa.y}; });   // read ALL first
+  for (const r of recs){
+    const targetCx = stage.width - r.cx;
+    if (Math.abs(r.k.rotation) > 0.01) r.k.rotation = -r.k.rotation;
+    const b = r.k.absoluteBoundingBox;
+    r.k.x += targetCx - (b.x + b.width/2 - sa.x);
+    r.k.y += r.cy  - (b.y + b.height/2 - sa.y);
+  }
+  ```
+  A mirror preserves which card is in front, so leaving z-order alone **is** the correct mirror.
+  Verified to 0.001px on 15 rotated cards across three breakpoints.
+- **The structural-mirror audit must pair children by layer name PLUS the instance's variant string.**
+  Two sibling ` Button` layers share the layer name; after the row reverses, name+ordinal pairing
+  matches the LTR primary against the RTL secondary and reports a 159px phantom failure on a row that
+  is perfectly mirrored. Key on `name + '|' + mainComponent.name.replace(/Direction=(LTR|RTL), /,'')`.
+- **Report the mirror deviation as the MINIMUM of two metrics, or translation looks like a defect.**
+  Centre-reflection (`|(Acx − leftEdge) − (rightEdge − Bcx)|`) is the right metric for a centred
+  element; leading-edge (`|(A.x − leftEdge) − (rightEdge − B.right)|`) is the right one for a MIN/MAX
+  anchored one. A narrower Arabic label breaks whichever metric does not apply — a centred CTA whose
+  Arabic label is 58px narrower reports a 29px "error" under the leading-edge metric and 0 under the
+  centre one. Neither is a bug; quote the label width delta alongside the residual.
+- **Applying the AR twin to a detached eyebrow re-attaches `textStyleId`**, because the style resets
+  the 8% tracking that detached it. Expect RTL text-style coverage to come out *better* than LTR
+  (21/21 against 15/21 here) and do not treat the asymmetry as a defect. Map a detached node to its
+  rung by `fontSize` + `fontName.style`, not by its missing style id.
+- **`setProperties({Direction:'RTL'})` did NOT discard nested fill overrides on ` Button`** — all 12
+  buttons kept their label `boundVariables.fills`, including a deliberate `theme/foreground-inverse`
+  rebind. Keep the snapshot-and-re-assert step as a detector, but read the result: "repaired 0 of 12"
+  is the honest report, not "the override was restored".
+- **Do not translate structural layer names in a block.** The skill's "rename the layer to its Arabic"
+  rule was written for placeholder-named atoms (`Header` → `العنوان`). In a block, layer names are
+  roles (`Copy panel`, `Work card — 1`) and both the structural-mirror audit and the documentation
+  pass pair LTR↔RTL by layer path. Translate the copy, keep the path.
+- **Re-break Arabic headings by measurement, not by copying the English break.** A three-line English
+  Mobile heading needed only two lines in Cairo at the same rung, which made that RTL variant
+  *shorter* than its LTR twin (356 vs 404). Conversely Cairo's taller line box (144px at 8XL against
+  Geist's 125) grew the Desktop twin 626 → 668, which forces a **row re-pitch**: recompute each row's
+  y from the tallest of its six variants, resize the set, and move the motion chips with their rows.
