@@ -11,7 +11,7 @@ export default function BadgePage() {
     <div className="container py-8">
       <div className="mx-auto max-w-[980px]">
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">Badge</h1>
+          <h1 className="text-4xl font-bold">Badge</h1>
           <p className="text-lg text-muted-foreground">
             A badge component for status indicators and labels.
           </p>
@@ -19,14 +19,14 @@ export default function BadgePage() {
 
         <div className="mt-8 space-y-8">
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("installation")}</h2>
+            <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
               <CodeBlock>npx fasla-ui add badge</CodeBlock>
             </div>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("preview")}</h2>
+            <h2 className="text-2xl font-bold">{t("preview")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <Badge>Badge</Badge>
@@ -35,7 +35,7 @@ export default function BadgePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("variants")}</h2>
+            <h2 className="text-2xl font-bold">{t("variants")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <div className="flex flex-wrap gap-2">
@@ -51,7 +51,7 @@ export default function BadgePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("props")}</h2>
+            <h2 className="text-2xl font-bold">{t("props")}</h2>
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>

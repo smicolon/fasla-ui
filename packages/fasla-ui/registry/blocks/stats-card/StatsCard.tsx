@@ -43,7 +43,7 @@ export function StatsCard({
           {loading ? (
             <div className="h-8 w-24 animate-pulse rounded bg-muted" />
           ) : (
-            <p className="text-2xl font-bold tracking-tight">{value}</p>
+            <p className="text-2xl font-bold">{value}</p>
           )}
         </div>
         {icon && (

@@ -338,29 +338,45 @@ set of tokens — a size-named ramp could only ever serve one language.
 
 | Style | Size | En line-height (rung) | ratio | AR line-height (rung) | ratio | Role |
 |---|---|---|---|---|---|---|
-| `XS` | 12 | 16 (`L-0`) | 1.33 | 18 (`L-0,5`) | 1.50 | eyebrows, captions, badge labels |
-| `SM` | 14 | 20 (`L-1`) | 1.43 | 22 (`L-1,5`) | 1.57 | UI default — buttons, inputs, cells, menu items |
-| `Base` | 16 | 24 (`L-2`) | 1.50 | 24 (`L-2`) | 1.50 | body copy |
-| `LG` | 18 | 28 (`L-3`) | 1.56 | 26 (`L-2,5`) | 1.44 | lead paragraphs |
-| `XL` | 20 | 28 (`L-3`) | 1.40 | 30 (`L-3,5`) | 1.50 | small headings |
-| `2XL` | 24 | 32 (`L-4`) | 1.33 | 36 (`L-5`) | 1.50 | section subheadings |
-| `3XL` | 30 | 40 (`L-6`) | 1.33 | 44 (`L-7`) | 1.47 | section headings |
-| `4XL` | 36 | 44 (`L-7`) | 1.22 | 54 (`L-9,5`) | 1.50 | block headings |
-| `5XL` | 48 | **auto** | — | 72 (`L-13`) | 1.50 | display |
-| `6XL` | 60 | **auto** | — | 90 (`L-13,5`) | 1.50 | display |
-| `7XL` | 72 | **auto** | — | 108 (`L-14`) | 1.50 | display |
-| `8XL` | 96 | **auto** | — | 144 (`L-14,5`) | 1.50 | oversized editorial |
-| `9XL` | 128 | **auto** | — | 192 (`L-15`) | 1.50 | oversized numerals |
+| `XS` | 12 | 16 (`L-0`) | 1.33 | 20 (`L-1`) | 1.67 | eyebrows, captions, badge labels |
+| `SM` | 14 | 20 (`L-1`) | 1.43 | 24 (`L-2`) | 1.71 | UI default — buttons, inputs, cells, menu items |
+| `Base` | 16 | 24 (`L-2`) | 1.50 | 28 (`L-3`) | 1.75 | body copy |
+| `LG` | 18 | 28 (`L-3`) | 1.56 | 32 (`L-4`) | 1.78 | lead paragraphs |
+| `XL` | 20 | 28 (`L-3`) | 1.40 | 36 (`L-5`) | 1.80 | small headings |
+| `2XL` | 24 | 32 (`L-4`) | 1.33 | 40 (`L-6`) | 1.67 | section subheadings |
+| `3XL` | 30 | 40 (`L-6`) | 1.33 | 50 (`L-8,5`) | 1.67 | section headings |
+| `4XL` | 36 | 44 (`L-7`) | 1.22 | 60 (`L-11`) | 1.67 | block headings |
+| `5XL` | 48 | 58 (`L-10,5`) | 1.21 | 72 (`L-13`) | 1.50 | display |
+| `6XL` | 60 | 72 (`L-13`) | 1.20 | 90 (`L-13,5`) | 1.50 | display |
+| `7XL` | 72 | 90 (`L-13,5`) | 1.25 | 108 (`L-14`) | 1.50 | display |
+| `8XL` | 96 | 108 (`L-14`) | 1.13 | 144 (`L-14,5`) | 1.50 | oversized editorial |
+| `9XL` | 128 | 144 (`L-14,5`) | 1.13 | 192 (`L-15`) | 1.50 | oversized numerals |
 
-**Arabic holds a flat 1.5** across the whole ramp, bar two deliberate exceptions (`SM` at 1.57, `LG`
-at 1.44). It is fully bound at every size, display included.
+**Arabic runs in three bands**, not one flat ratio. Reading copy (`XS`–`XL`) climbs monotonically
+from 1.67 to a peak of 1.80 — 1.67, 1.71, 1.75, 1.78, 1.80, with no step out of order; headings
+(`2XL`–`4XL`) then drop to a flat 1.67; display (`5XL`–`9XL`) to a flat 1.50. The ratio falls as the
+type grows, which is the standard typographic move, but Arabic starts far looser than English and
+stays looser at every comparable size — Cairo needs the room for descenders and diacritics, and
+Arabic body copy wraps sooner because it runs longer than English.
 
-**English tightens as it grows** — 1.56 at `LG` down to 1.22 at `4XL` — which is the standard
-typographic curve: long-form text wants air, headlines want none. Above `4XL` it is still on `AUTO`
-and unbound; see [Known Gaps](#known-gaps).
+Every band lands on the `L-*` ladder exactly, with no midpoint rounding anywhere: the reading band
+uses 20 / 24 / 28 / 32 / 36 and the heading band 40 / 50 / 60. Reading copy from `SM` up sits inside
+the 1.7–1.8 range the brand book asks for, which it did not before.
 
-Two extras sit outside the ramp: `Tailwind En/Extra/Link` (16/24) and `Tailwind En/Extra/List Header`
-(14/16).
+Both ramps are now **fully bound at every size**, display included. Nothing in either script is left
+on `AUTO`.
+
+**English loosens, then tightens.** It is a hump, not a curve: 1.33 at `XS` rising to a peak of 1.56
+at `LG`, then falling away through 1.22 at `4XL` to 1.13 at `9XL`. Only the descent is the standard
+typographic move of letting long-form text breathe and pulling headlines in; below `LG` the ramp runs
+the other way. Three irregularities sit inside it — `LG` and `XL` share the same 28px line-height at
+different sizes, which is what makes the 1.56 → 1.40 drop so abrupt; `2XL` and `3XL` are both exactly
+1.33; and `7XL` rises to 1.25 between `6XL` at 1.20 and `8XL` at 1.13, the one place the descent
+reverses.
+
+Two extras sit outside the ramp, identical in both scripts: `Extra/Link` (16/24, Regular, underlined)
+and `Extra/List Header` (14/16, Medium, uppercase). Uppercase is English-only — Arabic has no
+uppercase, and the Arabic style carries `textCase: UPPER` only as a duplication artefact.
 
 ### Font family
 
@@ -393,7 +409,7 @@ Geist and Cairo are both open-source, so no substitution is normally needed. If 
 lacks them: replace Geist with **Inter** (near-identical metrics; reduce letter-spacing by roughly
 0.01em at `4XL` and above, as Inter runs slightly wider in display sizes) and Cairo with **IBM Plex
 Sans Arabic** or **Noto Sans Arabic**, adding about 4% line-height because both sit lower on the
-baseline than Cairo and will crowd a 24px leading at `Base`. The file also contains a legacy
+baseline than Cairo and will crowd the 28px leading at `Base`. The file also contains a legacy
 `Almarai/*` style set that is **not** the Arabic ramp — it predates the current system and must not be
 used.
 
@@ -741,12 +757,6 @@ Honest list of what this document does not cover and what the system does not ye
 - **`Button` Solid/primary is unreadable in Dark mode** — near-white fill with a light-grey label,
   because `theme/primary-foreground` resolves to `#a3a3a3` in Dark rather than a true dark ink. Known
   and reported; it needs a token fix at the source, not per-instance patches.
-- **English display line-heights are still unbound.** `Tailwind En/5XL` through `9XL` — 25 styles,
-  5 sizes × 5 weights — are the only ones in the file left on `AUTO`, so Geist display type takes its
-  natural 1.30× leading and cannot be tuned through the variable layer. Every other style in both
-  ramps is bound. Completing it at the Tailwind ratio of 1.0 would need two new rungs on the ladder:
-  the display run currently offers 48 (`L-8`), 60 (`L-11`) and 72 (`L-13`) for `5XL`–`7XL`, but has
-  no 96 for `8XL` and no 128 for `9XL` — the nearest are 90 / 108 and 144.
 - **`html.to.design`** (53 variables) is a leftover import collection and a cleanup candidate. Nothing
   should bind to it.
 - **Colour and effect *styles* cannot be read through the REST API** in this setup, as

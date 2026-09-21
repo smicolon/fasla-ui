@@ -11,7 +11,7 @@ export default function PageHeaderPage() {
     <div className="container py-8">
       <div className="mx-auto max-w-[980px]">
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">PageHeader</h1>
+          <h1 className="text-4xl font-bold">PageHeader</h1>
           <p className="text-lg text-muted-foreground">
             Page header with title, description, breadcrumbs, and actions.
           </p>
@@ -19,14 +19,14 @@ export default function PageHeaderPage() {
 
         <div className="mt-8 space-y-8">
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("installation")}</h2>
+            <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
               <CodeBlock>npx fasla-ui add page-header</CodeBlock>
             </div>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("preview")}</h2>
+            <h2 className="text-2xl font-bold">{t("preview")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <PageHeader
@@ -39,7 +39,7 @@ export default function PageHeaderPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">With Actions</h2>
+            <h2 className="text-2xl font-bold">With Actions</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <PageHeader
@@ -57,7 +57,7 @@ export default function PageHeaderPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">With Breadcrumb</h2>
+            <h2 className="text-2xl font-bold">With Breadcrumb</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <PageHeader
@@ -76,7 +76,7 @@ export default function PageHeaderPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("props")}</h2>
+            <h2 className="text-2xl font-bold">{t("props")}</h2>
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>

@@ -31,7 +31,7 @@ export default function DataTablePage() {
     <div className="container py-8">
       <div className="mx-auto max-w-[980px]">
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">DataTable</h1>
+          <h1 className="text-4xl font-bold">DataTable</h1>
           <p className="text-lg text-muted-foreground">
             A data table component with sorting, selection, and pagination.
           </p>
@@ -39,14 +39,14 @@ export default function DataTablePage() {
 
         <div className="mt-8 space-y-8">
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("installation")}</h2>
+            <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
               <CodeBlock>npx fasla-ui add data-table</CodeBlock>
             </div>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("preview")}</h2>
+            <h2 className="text-2xl font-bold">{t("preview")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <DataTable
@@ -59,7 +59,7 @@ export default function DataTablePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">Loading State</h2>
+            <h2 className="text-2xl font-bold">Loading State</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <DataTable
@@ -73,7 +73,7 @@ export default function DataTablePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">Empty State</h2>
+            <h2 className="text-2xl font-bold">Empty State</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <DataTable
@@ -87,7 +87,7 @@ export default function DataTablePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("usage")}</h2>
+            <h2 className="text-2xl font-bold">{t("usage")}</h2>
             <div className="mt-4">
               <CodeBlock>{`import { DataTable, Column } from "@/components/blocks/data-table"
 

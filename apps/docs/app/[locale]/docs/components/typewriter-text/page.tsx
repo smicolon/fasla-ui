@@ -12,7 +12,7 @@ export default async function TypewriterTextPage({
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight">Typewriter Text</h1>
+        <h1 className="text-4xl font-bold">Typewriter Text</h1>
         <p className="text-xl text-muted-foreground">
           Animated text that types out character by character.
         </p>

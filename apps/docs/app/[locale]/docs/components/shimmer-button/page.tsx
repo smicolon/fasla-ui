@@ -11,7 +11,7 @@ export default function ShimmerButtonPage() {
     <div className="container py-8">
       <div className="mx-auto max-w-[980px]">
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">Shimmer Button</h1>
+          <h1 className="text-4xl font-bold">Shimmer Button</h1>
           <p className="text-lg text-muted-foreground">
             A button with an animated shimmer effect that respects prefers-reduced-motion.
           </p>
@@ -20,7 +20,7 @@ export default function ShimmerButtonPage() {
         <div className="mt-8 space-y-8">
           {/* Installation */}
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("installation")}</h2>
+            <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
               <CodeBlock>npx fasla-ui add shimmer-button</CodeBlock>
             </div>
@@ -28,7 +28,7 @@ export default function ShimmerButtonPage() {
 
           {/* Preview */}
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("preview")}</h2>
+            <h2 className="text-2xl font-bold">{t("preview")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <ShimmerButton>Get Started</ShimmerButton>
@@ -38,7 +38,7 @@ export default function ShimmerButtonPage() {
 
           {/* Custom Colors */}
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">Custom Colors</h2>
+            <h2 className="text-2xl font-bold">Custom Colors</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <div className="flex flex-col gap-4">
@@ -61,7 +61,7 @@ export default function ShimmerButtonPage() {
 
           {/* Usage */}
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("usage")}</h2>
+            <h2 className="text-2xl font-bold">{t("usage")}</h2>
             <div className="mt-4">
               <CodeBlock>{`import { ShimmerButton } from "@/components/ui/shimmer-button"
 
@@ -80,7 +80,7 @@ export function Example() {
 
           {/* Props */}
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("props")}</h2>
+            <h2 className="text-2xl font-bold">{t("props")}</h2>
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
@@ -123,7 +123,7 @@ export function Example() {
 
           {/* Accessibility */}
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("accessibility")}</h2>
+            <h2 className="text-2xl font-bold">{t("accessibility")}</h2>
             <div className="mt-4">
               <p className="text-muted-foreground">
                 The shimmer animation automatically respects the user&apos;s{" "}

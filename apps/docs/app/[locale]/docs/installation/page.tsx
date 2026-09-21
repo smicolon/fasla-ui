@@ -6,14 +6,14 @@ export default function InstallationPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight">Installation</h1>
+        <h1 className="text-4xl font-bold">Installation</h1>
         <p className="text-xl text-muted-foreground">
           How to install and set up Fasla in your project.
         </p>
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight">Requirements</h2>
+        <h2 className="text-2xl font-semibold">Requirements</h2>
         <ul className="list-disc list-inside space-y-2 text-muted-foreground">
           <li>React 18 or later</li>
           <li>Tailwind CSS 3.4 or later</li>
@@ -22,7 +22,7 @@ export default function InstallationPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight">Using the CLI</h2>
+        <h2 className="text-2xl font-semibold">Using the CLI</h2>
         <p className="text-muted-foreground">
           The easiest way to add components is using our CLI:
         </p>
@@ -52,7 +52,7 @@ export default function InstallationPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight">Manual Installation</h2>
+        <h2 className="text-2xl font-semibold">Manual Installation</h2>
         <p className="text-muted-foreground">
           You can also copy components directly from the source code.
         </p>
@@ -85,7 +85,7 @@ export function cn(...inputs: ClassValue[]) {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight">Tailwind Configuration</h2>
+        <h2 className="text-2xl font-semibold">Tailwind Configuration</h2>
         <p className="text-muted-foreground">
           Make sure your Tailwind config includes the necessary colors and animations:
         </p>

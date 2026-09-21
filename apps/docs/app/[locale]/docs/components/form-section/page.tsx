@@ -12,7 +12,7 @@ export default function FormSectionPage() {
     <div className="container py-8">
       <div className="mx-auto max-w-[980px]">
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">FormSection</h1>
+          <h1 className="text-4xl font-bold">FormSection</h1>
           <p className="text-lg text-muted-foreground">
             Form sections for grouping related fields with labels and descriptions.
           </p>
@@ -20,14 +20,14 @@ export default function FormSectionPage() {
 
         <div className="mt-8 space-y-8">
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("installation")}</h2>
+            <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
               <CodeBlock>npx fasla-ui add form-section</CodeBlock>
             </div>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("preview")}</h2>
+            <h2 className="text-2xl font-bold">{t("preview")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <FormSection
@@ -48,7 +48,7 @@ export default function FormSectionPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">With Error</h2>
+            <h2 className="text-2xl font-bold">With Error</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <FormField
@@ -63,7 +63,7 @@ export default function FormSectionPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">Form Actions</h2>
+            <h2 className="text-2xl font-bold">Form Actions</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <FormActions>
@@ -79,7 +79,7 @@ export default function FormSectionPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("usage")}</h2>
+            <h2 className="text-2xl font-bold">{t("usage")}</h2>
             <div className="mt-4">
               <CodeBlock>{`import { FormSection, FormField, FormActions } from "@/components/blocks/form-section"
 

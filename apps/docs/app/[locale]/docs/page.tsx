@@ -41,12 +41,12 @@ export default async function DocsPage({
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight">{t("introTitle")}</h1>
+        <h1 className="text-4xl font-bold">{t("introTitle")}</h1>
         <p className="text-xl leading-relaxed text-muted-foreground">{t("introBody")}</p>
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight">{t("featuresTitle")}</h2>
+        <h2 className="text-2xl font-semibold">{t("featuresTitle")}</h2>
         <ul className="grid gap-3 text-muted-foreground">
           {featureKeys.map((key) => (
             <li key={key} className="flex items-start gap-3">
@@ -67,7 +67,7 @@ export default async function DocsPage({
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-2xl font-semibold tracking-tight">{t("categoriesTitle")}</h2>
+        <h2 className="text-2xl font-semibold">{t("categoriesTitle")}</h2>
         {componentRouteGroups.map((group) => (
           <section key={group.category} className="space-y-3">
             <h3 className="font-semibold">
