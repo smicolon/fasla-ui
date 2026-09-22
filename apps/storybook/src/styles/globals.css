@@ -24,7 +24,10 @@
     --destructive-foreground: 0 0% 98%;
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
-    --ring: 240 5.9% 10%;
+    /* Figma theme/ring (☾ Mode, Light) = #a3a3a3. Written as an HSL triplet
+       because this app resolves colours through `hsl(var(--ring))` — a literal
+       hex here would produce `hsl(#a3a3a3)` and silently drop the ring. */
+    --ring: 0 0% 63.9%;
     --radius: 0.5rem;
     --success: 142 76% 36%;
     --success-foreground: 0 0% 100%;
@@ -53,7 +56,8 @@
     --destructive-foreground: 0 0% 98%;
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
-    --ring: 240 4.9% 83.9%;
+    /* Figma theme/ring (☾ Mode, Dark) = #737373. HSL triplet, as above. */
+    --ring: 0 0% 45.1%;
     --success: 142 76% 36%;
     --success-foreground: 0 0% 100%;
     --warning: 38 92% 50%;
