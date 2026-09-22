@@ -1,5 +1,12 @@
 # @smicolon/fasla-ui
 
+## [0.2.4](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.2.3...fasla-ui-v0.2.4) (2026-09-18)
+
+
+### Bug Fixes
+
+* complete the registry and repair Arabic docs links ([#10](https://github.com/smicolon/fasla-ui/issues/10)) ([b2f96b7](https://github.com/smicolon/fasla-ui/commit/b2f96b76ff84341a05b065ecc7e40b824d3a71ea))
+
 ## [0.2.3](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.2.2...fasla-ui-v0.2.3) (2026-09-16)
 
 

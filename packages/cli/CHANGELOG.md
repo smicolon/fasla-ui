@@ -1,5 +1,12 @@
 # @smicolon/cli
 
+## [0.3.3](https://github.com/smicolon/fasla-ui/compare/cli-v0.3.2...cli-v0.3.3) (2026-09-18)
+
+
+### Bug Fixes
+
+* complete the registry and repair Arabic docs links ([#10](https://github.com/smicolon/fasla-ui/issues/10)) ([b2f96b7](https://github.com/smicolon/fasla-ui/commit/b2f96b76ff84341a05b065ecc7e40b824d3a71ea))
+
 ## [0.3.2](https://github.com/smicolon/fasla-ui/compare/cli-v0.3.1...cli-v0.3.2) (2026-09-16)
 
 
