@@ -11,7 +11,7 @@ export default function TextRevealPage() {
     <div className="container py-8">
       <div className="mx-auto max-w-[980px]">
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">TextReveal</h1>
+          <h1 className="text-4xl font-bold">TextReveal</h1>
           <p className="text-lg text-muted-foreground">
             Character-by-character text reveal animation effect.
           </p>
@@ -19,14 +19,14 @@ export default function TextRevealPage() {
 
         <div className="mt-8 space-y-8">
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("installation")}</h2>
+            <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
               <CodeBlock>npx fasla-ui add text-reveal</CodeBlock>
             </div>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("preview")}</h2>
+            <h2 className="text-2xl font-bold">{t("preview")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <TextReveal text="Hello, World!" className="text-4xl font-bold" />
@@ -35,7 +35,7 @@ export default function TextRevealPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("props")}</h2>
+            <h2 className="text-2xl font-bold">{t("props")}</h2>
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>

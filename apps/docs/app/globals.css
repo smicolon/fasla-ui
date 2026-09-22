@@ -311,15 +311,15 @@
 }
 
 .prose h1 {
-  @apply scroll-m-20 text-4xl font-bold tracking-tight;
+  @apply scroll-m-20 text-4xl font-bold;
 }
 
 .prose h2 {
-  @apply mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
+  @apply mt-10 scroll-m-20 border-b pb-2 text-3xl font-semibold first:mt-0;
 }
 
 .prose h3 {
-  @apply mt-8 scroll-m-20 text-2xl font-semibold tracking-tight;
+  @apply mt-8 scroll-m-20 text-2xl font-semibold;
 }
 
 .prose p {
@@ -450,6 +450,13 @@
 
 /* ============================================
    ARABIC SETTING (Brand V2.5 §15)
+
+   Line height is not set here. It comes from the shared type ramp in
+   packages/fasla-ui/tailwind-preset.ts, which re-leads every `text-*` utility
+   under [dir="rtl"] from the Figma `Tailwind AR/*` styles. Arabic reading copy
+   runs 1.71–1.80 there, inside the range below. Do not re-add a line-height
+   rule here; fix the rung in Figma and mirror it in the preset.
+
    Line height 1.7 minimum, 1.8 preferred. Tracking is always 0 — Arabic is
    never letter-spaced. All-caps does not exist in Arabic; italic is never used.
    ============================================ */
@@ -464,13 +471,6 @@
 [dir="rtl"] p,
 [dir="rtl"] li {
   letter-spacing: 0;
-  line-height: 1.8;
-}
-
-[dir="rtl"] h1,
-[dir="rtl"] h2,
-[dir="rtl"] h3 {
-  line-height: 1.4;
 }
 
 [dir="rtl"] .uppercase {

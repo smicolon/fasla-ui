@@ -10,7 +10,7 @@ export default function TabsPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight">Tabs</h1>
+        <h1 className="text-4xl font-bold">Tabs</h1>
         <p className="text-xl text-muted-foreground">
           A set of layered sections of content that display one panel at a time.
         </p>

@@ -48,7 +48,7 @@ export function PageHeader({
               {breadcrumb}
             </nav>
           )}
-          <Heading className="truncate text-xl font-semibold tracking-tight md:text-2xl">
+          <Heading className="truncate text-xl font-semibold md:text-2xl">
             {title}
           </Heading>
           {description && (

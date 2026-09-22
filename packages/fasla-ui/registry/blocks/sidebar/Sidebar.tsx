@@ -116,7 +116,7 @@ export function SidebarGroup({
   return (
     <div className={cn("py-2", className)} {...props}>
       {label && (
-        <div className="mb-2 px-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        <div className="mb-2 px-2 text-xs font-semibold uppercase text-muted-foreground">
           {label}
         </div>
       )}

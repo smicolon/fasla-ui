@@ -32,7 +32,7 @@ export default function AppShellPage() {
     <div className="container py-8">
       <div className="mx-auto max-w-[980px]">
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">AppShell</h1>
+          <h1 className="text-4xl font-bold">AppShell</h1>
           <p className="text-lg text-muted-foreground">
             Application layout with sidebar, header, and content areas.
           </p>
@@ -40,14 +40,14 @@ export default function AppShellPage() {
 
         <div className="mt-8 space-y-8">
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("installation")}</h2>
+            <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
               <CodeBlock>npx fasla-ui add app-shell</CodeBlock>
             </div>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("preview")}</h2>
+            <h2 className="text-2xl font-bold">{t("preview")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <div className="h-[400px] overflow-hidden rounded-md border">
@@ -64,7 +64,7 @@ export default function AppShellPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("usage")}</h2>
+            <h2 className="text-2xl font-bold">{t("usage")}</h2>
             <div className="mt-4">
               <CodeBlock>{`import { AppShell } from "@/components/blocks/app-shell"
 
@@ -83,7 +83,7 @@ export function Layout() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("props")}</h2>
+            <h2 className="text-2xl font-bold">{t("props")}</h2>
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>

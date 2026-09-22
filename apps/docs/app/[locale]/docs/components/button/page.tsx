@@ -11,7 +11,7 @@ export default function ButtonPage() {
     <div className="container py-8">
       <div className="mx-auto max-w-[980px]">
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">Button</h1>
+          <h1 className="text-4xl font-bold">Button</h1>
           <p className="text-lg text-muted-foreground">
             A button component with multiple variants, sizes, and loading state.
           </p>
@@ -20,7 +20,7 @@ export default function ButtonPage() {
         <div className="mt-8 space-y-8">
           {/* Installation */}
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("installation")}</h2>
+            <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
               <CodeBlock>npx fasla-ui add button</CodeBlock>
             </div>
@@ -28,7 +28,7 @@ export default function ButtonPage() {
 
           {/* Preview */}
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("preview")}</h2>
+            <h2 className="text-2xl font-bold">{t("preview")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <Button>Click me</Button>
@@ -38,7 +38,7 @@ export default function ButtonPage() {
 
           {/* Variants */}
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("variants")}</h2>
+            <h2 className="text-2xl font-bold">{t("variants")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <div className="flex flex-wrap gap-4">
@@ -55,7 +55,7 @@ export default function ButtonPage() {
 
           {/* Sizes */}
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("sizes")}</h2>
+            <h2 className="text-2xl font-bold">{t("sizes")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <div className="flex items-center gap-4">
@@ -69,7 +69,7 @@ export default function ButtonPage() {
 
           {/* Loading */}
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">Loading</h2>
+            <h2 className="text-2xl font-bold">Loading</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <Button loading>Loading...</Button>
@@ -79,7 +79,7 @@ export default function ButtonPage() {
 
           {/* Usage */}
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("usage")}</h2>
+            <h2 className="text-2xl font-bold">{t("usage")}</h2>
             <div className="mt-4">
               <CodeBlock>{`import { Button } from "@/components/ui/button"
 
@@ -95,7 +95,7 @@ export function Example() {
 
           {/* Props */}
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("props")}</h2>
+            <h2 className="text-2xl font-bold">{t("props")}</h2>
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>

@@ -12,7 +12,7 @@ export default async function NavbarPage({
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight">Navbar</h1>
+        <h1 className="text-4xl font-bold">Navbar</h1>
         <p className="text-xl text-muted-foreground">
           A responsive navigation bar with mobile menu support.
         </p>

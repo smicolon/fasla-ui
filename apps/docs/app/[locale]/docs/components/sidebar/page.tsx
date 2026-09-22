@@ -12,7 +12,7 @@ export default async function SidebarPage({
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight">Sidebar</h1>
+        <h1 className="text-4xl font-bold">Sidebar</h1>
         <p className="text-xl text-muted-foreground">
           A collapsible sidebar navigation component for app layouts.
         </p>

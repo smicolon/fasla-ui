@@ -11,7 +11,7 @@ export default function EmptyStatePage() {
     <div className="container py-8">
       <div className="mx-auto max-w-[980px]">
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">EmptyState</h1>
+          <h1 className="text-4xl font-bold">EmptyState</h1>
           <p className="text-lg text-muted-foreground">
             Display contextual empty states with icons, titles, descriptions, and actions.
           </p>
@@ -19,14 +19,14 @@ export default function EmptyStatePage() {
 
         <div className="mt-8 space-y-8">
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("installation")}</h2>
+            <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
               <CodeBlock>npx fasla-ui add empty-state</CodeBlock>
             </div>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("preview")}</h2>
+            <h2 className="text-2xl font-bold">{t("preview")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <EmptyState
@@ -43,7 +43,7 @@ export default function EmptyStatePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">Search Results</h2>
+            <h2 className="text-2xl font-bold">Search Results</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <EmptySearchResults query="dashboard" />
@@ -52,7 +52,7 @@ export default function EmptyStatePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">Empty Data</h2>
+            <h2 className="text-2xl font-bold">Empty Data</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <EmptyData resourceName="tasks" />
@@ -61,7 +61,7 @@ export default function EmptyStatePage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("sizes")}</h2>
+            <h2 className="text-2xl font-bold">{t("sizes")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <div className="space-y-8">
