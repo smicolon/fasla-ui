@@ -168,14 +168,14 @@ const Radio = React.forwardRef<HTMLInputElement, RadioProps>(
           >
             <span
               className={cn(
-                // `bg-foreground`, not `bg-primary`. Figma's theme/primary for
-                // the dot is the strong neutral (#0a0a0a light, white dark) —
-                // the same meaning `--foreground` carries in code. The docs app
-                // has repurposed `--primary` as the Fasla brand red, so
-                // `bg-primary` would render the dot red there and near-black in
-                // Storybook. `--foreground` is correct in both apps and in both
-                // modes, with no app-level change.
-                "scale-0 rounded-full bg-foreground transition-transform motion-reduce:transition-none group-has-[:checked]:scale-100",
+                // Figma paints the dot with theme/primary — the strong neutral
+                // (#0a0a0a light, #fafafa dark). Both apps now declare exactly
+                // that, so `bg-primary` is the honest token again. This read
+                // `bg-foreground` until the token sync, as a workaround for the
+                // docs app having repurposed `--primary` as the brand red.
+                // Figma gives primary and foreground the same value in both
+                // modes, so this is a rename, not a visual change.
+                "scale-0 rounded-full bg-primary transition-transform motion-reduce:transition-none group-has-[:checked]:scale-100",
                 sizes.dot
               )}
             />

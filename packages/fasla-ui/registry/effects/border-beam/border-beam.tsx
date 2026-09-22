@@ -24,7 +24,7 @@ export interface BorderBeamProps extends React.HTMLAttributes<HTMLDivElement> {
 export function BorderBeam({
   duration = 4,
   borderWidth = 2,
-  colorFrom = "hsl(var(--primary))",
+  colorFrom = "var(--primary)",
   colorTo = "transparent",
   delay = 0,
   className,
@@ -103,7 +103,7 @@ const intensityValues = {
  * Static glowing border effect.
  */
 export function GlowingBorder({
-  glowColor = "hsl(var(--primary) / 0.5)",
+  glowColor = "color-mix(in oklch, var(--primary) 50%, transparent)",
   borderRadius = "0.5rem",
   intensity = "md",
   className,

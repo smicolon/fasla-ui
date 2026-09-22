@@ -29,8 +29,8 @@ const blurValues = {
  */
 export function AnimatedGradient({
   colors = [
-    "hsl(var(--primary))",
-    "hsl(var(--secondary))",
+    "var(--primary)",
+    "var(--secondary)",
     "hsl(280 100% 70%)",
     "hsl(200 100% 70%)",
   ],
@@ -100,7 +100,7 @@ export interface AnimatedGradientTextProps {
 }
 
 export function AnimatedGradientText({
-  colors = ["hsl(var(--primary))", "hsl(280 100% 70%)", "hsl(var(--primary))"],
+  colors = ["var(--primary)", "hsl(280 100% 70%)", "var(--primary)"],
   speed = 3,
   className,
   children,

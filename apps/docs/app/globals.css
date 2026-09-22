@@ -8,50 +8,76 @@
 
 @layer base {
   :root {
-    /* Smicolon Brand Colors using oklch */
-    --radius: 0.625rem;
-    --background: oklch(1 0 0);
-    --foreground: oklch(0% 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
+    /* ── figma:theme:start · ⚪️ Light ──────────────────────────────────────
+       The 41 theme/* variables of the Figma "☾ Mode" collection, generated
+       from design/tokens/mode.json. Figma is the source of truth; do not
+       hand-edit these. `bun run test` fails if they drift from the snapshot.
+       Anything NOT from Figma belongs below the end marker and is
+       never regenerated. */
+    /* Surfaces */
+    --background: #ffffff;
+    --foreground: #0a0a0a;
+    --card: #ffffff;
+    --card-foreground: #0a0a0a;
+    --popover: #ffffff;
+    --popover-foreground: #0a0a0a;
 
-    /* Primary: Smicolon Red */
-    --primary: #e40017;
-    --primary-foreground: oklch(0.985 0 0);
+    /* Actions */
+    --primary: #0a0a0a;
+    --primary-foreground: #fafafa;
+    --secondary: #f5f5f5;
+    --secondary-foreground: #171717;
+    --muted: #f5f5f5;
+    --muted-foreground: #737373;
+    --accent: #f5f5f5;
+    --accent-foreground: #171717;
+    --destructive: #dc2626;
+    --destructive-foreground: #ffffff;
 
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
-    --destructive: #e40017;
-    --destructive-foreground: oklch(0.985 0 0);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
+    /* Lines and focus */
+    --border: #e5e5e5;
+    --input: #e5e5e5;
+    --ring: #a3a3a3;
 
-    /* Chart colors */
-    --chart-1: 173 58% 39%;
-    --chart-2: 12 76% 61%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    /* Status */
+    --success: #16a34a;
+    --success-foreground: #f8fafc;
+    --warning: #d97706;
+    --warning-foreground: #f8fafc;
+    --info: #0284c7;
+    --info-foreground: #f8fafc;
+
+    /* Inverse — a fixed contrast band, not a mode-reactive surface */
+    --background-inverse: #0a0a0a;
+    --foreground-inverse: #ffffff;
+    --muted-foreground-inverse: #d4d4d4;
+
+    /* Charts */
+    --chart-1: #ea580c;
+    --chart-2: #0d9488;
+    --chart-3: #164e63;
+    --chart-4: #d97706;
+    --chart-5: #e11d48;
 
     /* Sidebar */
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --sidebar: #fafafa;
+    --sidebar-foreground: #404040;
+    --sidebar-primary: #e5e5e5;
+    --sidebar-primary-foreground: #171717;
+    --sidebar-accent: #f5f5f5;
+    --sidebar-accent-foreground: #171717;
+    --sidebar-border: #e5e5e5;
+    --sidebar-ring: #262626;
+    /* ── figma:theme:end ─────────────────────────────────────────────── */
+
+    /* ── Docs-only, not in Figma. Preserved across every token sync. ──── */
+
+    --radius: 0.625rem;
 
     /* Brand V2.5 §13 — canonical palette. Three values, plus one code accent.
-       Nothing else may be added here; a near miss (#DC0B22) fails a brand check. */
+       Nothing else may be added here; a near miss (#DC0B22) fails a brand check.
+       `--fasla-red` is what carries the brand red through the site chrome —
+       `--primary` is Figma's strong neutral and must not be used for it. */
     --fasla-red: #e40017;
     --fasla-ink: #0a0a0a;
     --fasla-white: #ffffff;
@@ -67,53 +93,80 @@
     --terminal-border: oklch(1 0 0 / 12%);
     --terminal-accent: #009ed4;
     --terminal-caret: oklch(1 0 0 / 70%);
-
   }
 
   .dark {
-    --background: oklch(0 0 0);
-    --foreground: oklch(1 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
+    /* ── figma:theme:start · 🌑 Dark ──────────────────────────────────────
+       The 41 theme/* variables of the Figma "☾ Mode" collection, generated
+       from design/tokens/mode.json. Figma is the source of truth; do not
+       hand-edit these. `bun run test` fails if they drift from the snapshot.
+       Anything NOT from Figma belongs below the end marker and is
+       never regenerated. */
+    /* Surfaces */
+    --background: #0a0a0a;
+    --foreground: #fafafa;
+    --card: #171717;
+    --card-foreground: #fafafa;
+    --popover: #0a0a0a;
+    --popover-foreground: #fafafa;
 
-    /* Primary: Smicolon Red */
-    --primary: #e40017;
-    --primary-foreground: oklch(1 0 0);
+    /* Actions */
+    --primary: #fafafa;
+    --primary-foreground: #0a0a0a;
+    --secondary: #262626;
+    --secondary-foreground: #fafafa;
+    --muted: #262626;
+    --muted-foreground: #d4d4d4;
+    --accent: #262626;
+    --accent-foreground: #fafafa;
+    --destructive: #dc2626;
+    --destructive-foreground: #000000;
 
-    --secondary: oklch(19.13% 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: #e40017;
-    --destructive-foreground: oklch(0.985 0 0);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
+    /* Lines and focus */
+    --border: #3f3f46;
+    --input: rgb(255 255 255 / 20%);
+    --ring: #737373;
 
-    /* Chart colors dark mode */
-    --chart-1: 220 70% 50%;
-    --chart-5: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-2: 340 75% 55%;
+    /* Status */
+    --success: #4ade80;
+    --success-foreground: #0a0a0a;
+    --warning: #d97706;
+    --warning-foreground: #0a0a0a;
+    --info: #7dd3fc;
+    --info-foreground: #0a0a0a;
 
-    /* Sidebar dark */
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
-    --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+    /* Inverse — a fixed contrast band, not a mode-reactive surface */
+    --background-inverse: #ffffff;
+    --foreground-inverse: #0a0a0a;
+    --muted-foreground-inverse: #737373;
 
-    /* The page is pure black here, so the terminal lifts to stay readable
-       as its own surface. */
-    --terminal: oklch(0.17 0 0);
+    /* Charts */
+    --chart-1: #c2410c;
+    --chart-2: #14b8a6;
+    --chart-3: #06b6d4;
+    --chart-4: #fbbf24;
+    --chart-5: #f43f5e;
+
+    /* Sidebar */
+    --sidebar: #171717;
+    --sidebar-foreground: #fafafa;
+    --sidebar-primary: #3f3f46;
+    --sidebar-primary-foreground: #0a0a0a;
+    --sidebar-accent: #262626;
+    --sidebar-accent-foreground: #fafafa;
+    --sidebar-border: #404040;
+    --sidebar-ring: #525252;
+    /* ── figma:theme:end ─────────────────────────────────────────────── */
+
+    /* ── Docs-only, not in Figma. Preserved across every token sync. ──── */
+
+    /* The page is no longer pure black — it follows Figma's #0a0a0a — so the
+       terminal has to lift further than it used to in order to read as its own
+       surface. The old oklch(0.17 0 0) resolves to ~#0f0f0f, which would sit
+       5/255 off the new page and effectively vanish. #171717 is neutral/900:
+       one ramp step above the page, the same separation Figma gives `card`
+       over `background`. */
+    --terminal: #171717;
     --terminal-border: oklch(1 0 0 / 14%);
   }
 }
@@ -335,7 +388,7 @@
 }
 
 .prose blockquote {
-  @apply mt-6 border-l-2 border-primary pl-6 italic;
+  @apply mt-6 border-l-2 border-fasla-red pl-6 italic;
 }
 
 .prose table {
@@ -351,7 +404,7 @@
 }
 
 .prose a {
-  @apply text-primary underline-offset-4 hover:underline;
+  @apply text-fasla-red underline-offset-4 hover:underline;
 }
 
 /* ============================================

@@ -139,7 +139,7 @@ export const Hero: Story = {
     <Spotlight
       size={500}
       blur={80}
-      color="hsl(var(--primary) / 0.2)"
+      color="color-mix(in oklch, var(--primary) 20%, transparent)"
       className="h-96 w-full max-w-3xl rounded-2xl border bg-card"
     >
       <div className="h-full flex flex-col items-center justify-center p-8 text-center">
