@@ -28,11 +28,11 @@ export const ShimmerButton = React.forwardRef<
 >(
   (
     {
-      shimmerColor = "hsl(var(--primary) / 0.2)",
+      shimmerColor = "color-mix(in oklch, var(--primary) 20%, transparent)",
       shimmerSize = "0.1em",
       shimmerDuration = "2s",
       borderRadius = "0.5rem",
-      background = "hsl(var(--primary))",
+      background = "var(--primary)",
       className,
       children,
       ...props

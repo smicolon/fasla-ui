@@ -6,64 +6,135 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 240 5.9% 10%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 5.9% 90%;
-    --input: 240 5.9% 90%;
-    /* Figma theme/ring (☾ Mode, Light) = #a3a3a3. Written as an HSL triplet
-       because this app resolves colours through `hsl(var(--ring))` — a literal
-       hex here would produce `hsl(#a3a3a3)` and silently drop the ring. */
-    --ring: 0 0% 63.9%;
+    /* ── figma:theme:start · ⚪️ Light ──────────────────────────────────────
+       The 41 theme/* variables of the Figma "☾ Mode" collection, generated
+       from design/tokens/mode.json. Figma is the source of truth; do not
+       hand-edit these. `bun run test` fails if they drift from the snapshot.
+       Anything NOT from Figma belongs below the end marker and is
+       never regenerated. */
+    /* Surfaces */
+    --background: #ffffff;
+    --foreground: #0a0a0a;
+    --card: #ffffff;
+    --card-foreground: #0a0a0a;
+    --popover: #ffffff;
+    --popover-foreground: #0a0a0a;
+
+    /* Actions */
+    --primary: #0a0a0a;
+    --primary-foreground: #fafafa;
+    --secondary: #f5f5f5;
+    --secondary-foreground: #171717;
+    --muted: #f5f5f5;
+    --muted-foreground: #737373;
+    --accent: #f5f5f5;
+    --accent-foreground: #171717;
+    --destructive: #dc2626;
+    --destructive-foreground: #ffffff;
+
+    /* Lines and focus */
+    --border: #e5e5e5;
+    --input: #e5e5e5;
+    --ring: #a3a3a3;
+
+    /* Status */
+    --success: #16a34a;
+    --success-foreground: #f8fafc;
+    --warning: #d97706;
+    --warning-foreground: #f8fafc;
+    --info: #0284c7;
+    --info-foreground: #f8fafc;
+
+    /* Inverse — a fixed contrast band, not a mode-reactive surface */
+    --background-inverse: #0a0a0a;
+    --foreground-inverse: #ffffff;
+    --muted-foreground-inverse: #d4d4d4;
+
+    /* Charts */
+    --chart-1: #ea580c;
+    --chart-2: #0d9488;
+    --chart-3: #164e63;
+    --chart-4: #d97706;
+    --chart-5: #e11d48;
+
+    /* Sidebar */
+    --sidebar: #fafafa;
+    --sidebar-foreground: #404040;
+    --sidebar-primary: #e5e5e5;
+    --sidebar-primary-foreground: #171717;
+    --sidebar-accent: #f5f5f5;
+    --sidebar-accent-foreground: #171717;
+    --sidebar-border: #e5e5e5;
+    --sidebar-ring: #262626;
+    /* ── figma:theme:end ─────────────────────────────────────────────── */
+
+    /* ── Storybook-only, not in Figma. Preserved across every token sync. ── */
+
     --radius: 0.5rem;
-    --success: 142 76% 36%;
-    --success-foreground: 0 0% 100%;
-    --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 100%;
-    --info: 199 89% 48%;
-    --info-foreground: 0 0% 100%;
   }
 
   .dark {
-    --background: 240 10% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 240 10% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 240 10% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 240 5.9% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 15.9%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 240 3.7% 15.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 15.9%;
-    --input: 240 3.7% 15.9%;
-    /* Figma theme/ring (☾ Mode, Dark) = #737373. HSL triplet, as above. */
-    --ring: 0 0% 45.1%;
-    --success: 142 76% 36%;
-    --success-foreground: 0 0% 100%;
-    --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 100%;
-    --info: 199 89% 48%;
-    --info-foreground: 0 0% 100%;
+    /* ── figma:theme:start · 🌑 Dark ──────────────────────────────────────
+       The 41 theme/* variables of the Figma "☾ Mode" collection, generated
+       from design/tokens/mode.json. Figma is the source of truth; do not
+       hand-edit these. `bun run test` fails if they drift from the snapshot.
+       Anything NOT from Figma belongs below the end marker and is
+       never regenerated. */
+    /* Surfaces */
+    --background: #0a0a0a;
+    --foreground: #fafafa;
+    --card: #171717;
+    --card-foreground: #fafafa;
+    --popover: #0a0a0a;
+    --popover-foreground: #fafafa;
+
+    /* Actions */
+    --primary: #fafafa;
+    --primary-foreground: #0a0a0a;
+    --secondary: #262626;
+    --secondary-foreground: #fafafa;
+    --muted: #262626;
+    --muted-foreground: #d4d4d4;
+    --accent: #262626;
+    --accent-foreground: #fafafa;
+    --destructive: #dc2626;
+    --destructive-foreground: #000000;
+
+    /* Lines and focus */
+    --border: #3f3f46;
+    --input: rgb(255 255 255 / 20%);
+    --ring: #737373;
+
+    /* Status */
+    --success: #4ade80;
+    --success-foreground: #0a0a0a;
+    --warning: #d97706;
+    --warning-foreground: #0a0a0a;
+    --info: #7dd3fc;
+    --info-foreground: #0a0a0a;
+
+    /* Inverse — a fixed contrast band, not a mode-reactive surface */
+    --background-inverse: #ffffff;
+    --foreground-inverse: #0a0a0a;
+    --muted-foreground-inverse: #737373;
+
+    /* Charts */
+    --chart-1: #c2410c;
+    --chart-2: #14b8a6;
+    --chart-3: #06b6d4;
+    --chart-4: #fbbf24;
+    --chart-5: #f43f5e;
+
+    /* Sidebar */
+    --sidebar: #171717;
+    --sidebar-foreground: #fafafa;
+    --sidebar-primary: #3f3f46;
+    --sidebar-primary-foreground: #0a0a0a;
+    --sidebar-accent: #262626;
+    --sidebar-accent-foreground: #fafafa;
+    --sidebar-border: #404040;
+    --sidebar-ring: #525252;
+    /* ── figma:theme:end ─────────────────────────────────────────────── */
   }
 }
 

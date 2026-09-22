@@ -40,14 +40,14 @@ function CategoryCard({
   return (
     <Link
       href={href}
-      className="group relative rounded-xl border border-border p-6 transition-colors hover:border-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+      className="group relative rounded-xl border border-border p-6 transition-colors hover:border-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fasla-red focus-visible:ring-offset-2"
     >
       <div className="flex items-baseline justify-between gap-4">
         <h3 className="text-lg font-semibold">{title}</h3>
         <span className="font-mono text-sm text-muted-foreground">{count}</span>
       </div>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p>
-      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-fasla-red">
         {browseLabel}
         <svg className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h13M12 5l7 7-7 7" />
@@ -111,7 +111,7 @@ export default async function HomePage({
               {t("headlineLead")}
               {/* The brand's punctuation, used once (§15). Geist carries no
                   Arabic glyph, so .fasla-comma names faces that do. */}
-              <span className="fasla-comma text-primary" aria-hidden="true">،</span>
+              <span className="fasla-comma text-fasla-red" aria-hidden="true">،</span>
               <br />
               {t("headlineTail")}
             </h1>
@@ -127,7 +127,7 @@ export default async function HomePage({
               <CopyCommand command="npx fasla-ui add button" />
               <Link
                 href={p("/docs")}
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-3 text-[15px] font-medium text-primary-foreground transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+                className="inline-flex items-center gap-2 rounded-lg bg-fasla-red px-5 py-3 text-[15px] font-medium text-fasla-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fasla-red focus-visible:ring-offset-2"
               >
                 {t("readDocs")}
                 <svg className="h-3.5 w-3.5 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
@@ -261,7 +261,7 @@ export default async function HomePage({
               href="https://smicolon.com"
               target="_blank"
               rel="noreferrer"
-              className="font-medium text-foreground hover:text-primary"
+              className="font-medium text-foreground hover:text-fasla-red"
             >
               {tf("by")}
             </Link>

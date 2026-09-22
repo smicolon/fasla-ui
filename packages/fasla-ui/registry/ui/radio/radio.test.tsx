@@ -83,14 +83,14 @@ describe("Radio", () => {
     }
   })
 
-  it("paints the dot with the foreground token, not the brand primary", () => {
-    // Figma's theme/primary for the dot is the strong neutral. The docs app has
-    // repurposed `--primary` as the Fasla brand red, so `bg-primary` would
-    // render the dot red there. Guarding the choice, not the colour.
+  it("paints the dot with the primary token", () => {
+    // Figma paints the dot with theme/primary, the strong neutral. Guarding the
+    // token choice, not the colour: Figma gives primary and foreground the same
+    // value in both modes, so this fails only if the dot is repointed at
+    // something semantically different.
     render(<Radio label="Option" defaultChecked />)
     const { dot } = parts(radio())
-    expect(dot).toHaveClass("bg-foreground")
-    expect(dot).not.toHaveClass("bg-primary")
+    expect(dot).toHaveClass("bg-primary")
   })
 
   it("lets the type ramp own the label leading", () => {

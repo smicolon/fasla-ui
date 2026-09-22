@@ -143,7 +143,7 @@ export const GlowColors: Story = {
 
 export const CardExample: Story = {
   render: () => (
-    <BorderBeam colorFrom="hsl(var(--primary))" className="w-80">
+    <BorderBeam colorFrom="var(--primary)" className="w-80">
       <div className="p-6">
         <h3 className="text-lg font-semibold">Premium Feature</h3>
         <p className="text-sm text-muted-foreground mt-2">

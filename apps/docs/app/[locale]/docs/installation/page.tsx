@@ -87,28 +87,30 @@ export function cn(...inputs: ClassValue[]) {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">Tailwind Configuration</h2>
         <p className="text-muted-foreground">
-          Make sure your Tailwind config includes the necessary colors and animations:
+          Map the semantic tokens into your Tailwind theme. The package exports
+          the whole set, already wrapped so that opacity modifiers keep working:
         </p>
         <pre className="overflow-x-auto rounded-lg bg-smi-neutral-950 p-4 text-sm">
           <code className="text-gray-300">{`// tailwind.config.ts
+import { tailwindSemanticColors } from "@smicolon/fasla-ui/tokens"
+
 module.exports = {
   darkMode: "class",
   theme: {
     extend: {
-      colors: {
-        border: "var(--border)",
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        primary: {
-          DEFAULT: "var(--primary)",
-          foreground: "var(--primary-foreground)",
-        },
-        // ... other colors
-      },
+      colors: tailwindSemanticColors,
     },
   },
 }`}</code>
         </pre>
+        <p className="text-muted-foreground text-sm">
+          Then declare the matching CSS variables as full colours (hex or oklch)
+          on <code>:root</code> and <code>.dark</code>. Mapping a token as a bare{" "}
+          <code>var(--primary)</code> looks correct but silently drops Tailwind&rsquo;s
+          opacity modifiers &mdash; <code>bg-primary/10</code> compiles to no rule at
+          all. That is why the exported map wraps each token in{" "}
+          <code>color-mix()</code>.
+        </p>
       </div>
     </div>
   )

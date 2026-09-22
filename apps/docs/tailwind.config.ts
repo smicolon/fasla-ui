@@ -1,5 +1,9 @@
 import type { Config } from "tailwindcss"
 import faslaTypography from "../../packages/fasla-ui/tailwind-preset"
+import {
+  semanticColor as t,
+  tailwindSemanticColors,
+} from "../../packages/fasla-ui/src/tokens/tailwind"
 
 const config: Config = {
   // Fonts and the direction-aware type ramp live in the shared preset, so the
@@ -15,65 +19,32 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        border: "var(--border)",
-        input: "var(--input)",
-        ring: "var(--ring)",
-        background: "var(--background)",
-        foreground: "var(--foreground)",
-        primary: {
-          DEFAULT: "var(--primary)",
-          foreground: "var(--primary-foreground)",
-        },
-        secondary: {
-          DEFAULT: "var(--secondary)",
-          foreground: "var(--secondary-foreground)",
-        },
-        destructive: {
-          DEFAULT: "var(--destructive)",
-          foreground: "var(--destructive-foreground)",
-        },
-        muted: {
-          DEFAULT: "var(--muted)",
-          foreground: "var(--muted-foreground)",
-        },
-        accent: {
-          DEFAULT: "var(--accent)",
-          foreground: "var(--accent-foreground)",
-        },
-        popover: {
-          DEFAULT: "var(--popover)",
-          foreground: "var(--popover-foreground)",
-        },
-        card: {
-          DEFAULT: "var(--card)",
-          foreground: "var(--card-foreground)",
-        },
-        sidebar: {
-          DEFAULT: "var(--sidebar)",
-          foreground: "var(--sidebar-foreground)",
-          primary: "var(--sidebar-primary)",
-          "primary-foreground": "var(--sidebar-primary-foreground)",
-          accent: "var(--sidebar-accent)",
-          "accent-foreground": "var(--sidebar-accent-foreground)",
-          border: "var(--sidebar-border)",
-          ring: "var(--sidebar-ring)",
-        },
+        // The 41 Figma `theme/*` tokens. One shared definition for both apps
+        // and for library consumers — see packages/fasla-ui/src/tokens/tailwind.ts.
+        // Imported from source, not from the built package, because a Tailwind
+        // config has to resolve before `bun run build` has produced dist/.
+        ...tailwindSemanticColors,
+
+        // ── Not from Figma. Docs-only, and not part of the token contract. ──
+
         // A dark code surface in both themes. Tokenised, never hardcoded.
         terminal: {
-          DEFAULT: "var(--terminal)",
-          foreground: "var(--terminal-foreground)",
-          muted: "var(--terminal-muted)",
-          subtle: "var(--terminal-subtle)",
-          border: "var(--terminal-border)",
-          accent: "var(--terminal-accent)",
-          caret: "var(--terminal-caret)",
+          DEFAULT: t("terminal"),
+          foreground: t("terminal-foreground"),
+          muted: t("terminal-muted"),
+          subtle: t("terminal-subtle"),
+          border: t("terminal-border"),
+          accent: t("terminal-accent"),
+          caret: t("terminal-caret"),
         },
         // Brand V2.5 §13 — the canonical three, plus the docs code accent.
+        // `fasla.red` is the brand red, deliberately separate from `primary`,
+        // which Figma defines as the strong neutral.
         fasla: {
-          red: "var(--fasla-red)",
-          ink: "var(--fasla-ink)",
-          white: "var(--fasla-white)",
-          cyan: "var(--fasla-cyan)",
+          red: t("fasla-red"),
+          ink: t("fasla-ink"),
+          white: t("fasla-white"),
+          cyan: t("fasla-cyan"),
         },
       },
       borderRadius: {

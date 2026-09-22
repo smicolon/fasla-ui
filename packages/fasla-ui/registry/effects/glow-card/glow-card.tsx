@@ -16,7 +16,7 @@ export interface GlowCardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function GlowCard({
-  glowColor = "hsl(var(--primary))",
+  glowColor = "var(--primary)",
   glowIntensity = 60,
   followMouse = false,
   hoverOnly = true,
@@ -106,7 +106,7 @@ export interface GlowContainerProps extends React.HTMLAttributes<HTMLDivElement>
 }
 
 export function GlowContainer({
-  glowColor = "hsl(var(--primary))",
+  glowColor = "var(--primary)",
   duration = 3,
   className,
   children,

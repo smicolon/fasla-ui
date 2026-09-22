@@ -20,7 +20,7 @@ export interface SpotlightProps extends React.HTMLAttributes<HTMLDivElement> {
  * Respects prefers-reduced-motion by disabling the effect.
  */
 export function Spotlight({
-  color = "hsl(var(--primary) / 0.15)",
+  color = "color-mix(in oklch, var(--primary) 15%, transparent)",
   size = 400,
   blur = 80,
   opacity = 1,
@@ -98,7 +98,7 @@ export interface SpotlightCardProps extends React.HTMLAttributes<HTMLDivElement>
  * Card with spotlight effect on hover.
  */
 export function SpotlightCard({
-  spotlightColor = "hsl(var(--primary) / 0.1)",
+  spotlightColor = "color-mix(in oklch, var(--primary) 10%, transparent)",
   spotlightSize = 300,
   className,
   children,

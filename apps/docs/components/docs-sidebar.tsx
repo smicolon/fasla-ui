@@ -31,7 +31,7 @@ export function DocsSidebar() {
     cn(
       "block rounded-md px-2 py-1.5 text-sm transition-colors",
       active
-        ? "bg-primary/10 text-primary font-medium"
+        ? "bg-fasla-red/10 text-fasla-red font-medium"
         : "text-muted-foreground hover:bg-accent hover:text-foreground",
     )
 

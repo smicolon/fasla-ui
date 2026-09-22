@@ -95,7 +95,7 @@ export function Example() {
                   <tr className="border-b">
                     <td className="px-4 py-2 font-mono text-xs">shimmerColor</td>
                     <td className="px-4 py-2 font-mono text-xs">string</td>
-                    <td className="px-4 py-2 font-mono text-xs">hsl(var(--primary) / 0.2)</td>
+                    <td className="px-4 py-2 font-mono text-xs">color-mix(in oklch, var(--primary) 20%, transparent)</td>
                     <td className="px-4 py-2">Color of the shimmer effect</td>
                   </tr>
                   <tr className="border-b">
@@ -107,7 +107,7 @@ export function Example() {
                   <tr className="border-b">
                     <td className="px-4 py-2 font-mono text-xs">background</td>
                     <td className="px-4 py-2 font-mono text-xs">string</td>
-                    <td className="px-4 py-2 font-mono text-xs">hsl(var(--primary))</td>
+                    <td className="px-4 py-2 font-mono text-xs">var(--primary)</td>
                     <td className="px-4 py-2">Background color or gradient</td>
                   </tr>
                   <tr className="border-b">
