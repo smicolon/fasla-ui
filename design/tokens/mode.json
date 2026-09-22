@@ -1,0 +1,230 @@
+{
+  "$meta": {
+    "source": "Figma · Fasla · ☾ Mode",
+    "fileKey": "yGEQmCZOvs7KptsYUdB0Xg",
+    "collectionId": "VariableCollectionId:82:3",
+    "modes": { "light": "⚪️ Light", "dark": "🌑 Dark" },
+    "measured": "2026-09-22",
+    "count": 41,
+    "note": "Snapshot of the 41 theme/* variables in the ☾ Mode collection, aliases resolved to primitives. Figma is the source of truth; this file is the committed record of what it said when the two apps were last synced to it. `light`/`dark` are the exact CSS values both apps must declare — tokens/mode.test.ts asserts that. `via` records the alias chain, so a future drift diff shows whether a value changed or was re-aliased. Pin the collection id when re-reading: 41 of these names also exist in 🌈 Themes with a single mode, and a name-only lookup silently returns that copy."
+  },
+  "tokens": {
+    "background": {
+      "light": "#ffffff",
+      "dark": "#0a0a0a",
+      "via": { "light": "colors/base/white", "dark": "colors/neutral/950" }
+    },
+    "foreground": {
+      "light": "#0a0a0a",
+      "dark": "#fafafa",
+      "via": { "light": "colors/neutral/950", "dark": "colors/neutral/50" }
+    },
+    "card": {
+      "light": "#ffffff",
+      "dark": "#171717",
+      "via": { "light": "colors/base/white", "dark": "colors/neutral/900" }
+    },
+    "card-foreground": {
+      "light": "#0a0a0a",
+      "dark": "#fafafa",
+      "via": { "light": "colors/neutral/950", "dark": "colors/neutral/50" }
+    },
+    "popover": {
+      "light": "#ffffff",
+      "dark": "#0a0a0a",
+      "via": { "light": "colors/base/white", "dark": "colors/neutral/950" }
+    },
+    "popover-foreground": {
+      "light": "#0a0a0a",
+      "dark": "#fafafa",
+      "via": { "light": "colors/neutral/950", "dark": "colors/neutral/50" }
+    },
+    "primary": {
+      "light": "#0a0a0a",
+      "dark": "#fafafa",
+      "via": { "light": "colors/neutral/950", "dark": "colors/neutral/50" }
+    },
+    "primary-foreground": {
+      "light": "#fafafa",
+      "dark": "#0a0a0a",
+      "via": { "light": "colors/neutral/50", "dark": "colors/neutral/950" }
+    },
+    "secondary": {
+      "light": "#f5f5f5",
+      "dark": "#262626",
+      "via": { "light": "colors/neutral/100", "dark": "colors/neutral/800" }
+    },
+    "secondary-foreground": {
+      "light": "#171717",
+      "dark": "#fafafa",
+      "via": { "light": "colors/neutral/900", "dark": "colors/neutral/50" }
+    },
+    "muted": {
+      "light": "#f5f5f5",
+      "dark": "#262626",
+      "via": { "light": "colors/neutral/100", "dark": "colors/neutral/800" }
+    },
+    "muted-foreground": {
+      "light": "#737373",
+      "dark": "#d4d4d4",
+      "via": { "light": "colors/neutral/500", "dark": "colors/neutral/300" }
+    },
+    "accent": {
+      "light": "#f5f5f5",
+      "dark": "#262626",
+      "via": { "light": "colors/neutral/100", "dark": "colors/neutral/800" }
+    },
+    "accent-foreground": {
+      "light": "#171717",
+      "dark": "#fafafa",
+      "via": { "light": "colors/neutral/900", "dark": "colors/neutral/50" }
+    },
+    "destructive": {
+      "light": "#dc2626",
+      "dark": "#dc2626",
+      "via": { "light": "colors/red/600", "dark": "colors/red/600" }
+    },
+    "destructive-foreground": {
+      "light": "#ffffff",
+      "dark": "#000000",
+      "via": {
+        "light": "custom/white → colors/base/white",
+        "dark": "custom/black → colors/base/black"
+      }
+    },
+    "border": {
+      "light": "#e5e5e5",
+      "dark": "#3f3f46",
+      "via": { "light": "colors/neutral/200", "dark": "colors/zinc/700" }
+    },
+    "input": {
+      "light": "#e5e5e5",
+      "dark": "rgb(255 255 255 / 20%)",
+      "via": {
+        "light": "colors/neutral/200",
+        "dark": "raw value, not an alias"
+      }
+    },
+    "ring": {
+      "light": "#a3a3a3",
+      "dark": "#737373",
+      "via": { "light": "colors/neutral/400", "dark": "colors/neutral/500" }
+    },
+    "success": {
+      "light": "#16a34a",
+      "dark": "#4ade80",
+      "via": { "light": "colors/green/600", "dark": "colors/green/400" }
+    },
+    "success-foreground": {
+      "light": "#f8fafc",
+      "dark": "#0a0a0a",
+      "via": { "light": "colors/slate/50", "dark": "colors/neutral/950" }
+    },
+    "warning": {
+      "light": "#d97706",
+      "dark": "#d97706",
+      "via": { "light": "colors/amber/600", "dark": "colors/amber/600" }
+    },
+    "warning-foreground": {
+      "light": "#f8fafc",
+      "dark": "#0a0a0a",
+      "via": { "light": "colors/slate/50", "dark": "colors/neutral/950" }
+    },
+    "info": {
+      "light": "#0284c7",
+      "dark": "#7dd3fc",
+      "via": { "light": "colors/sky/600", "dark": "colors/sky/300" }
+    },
+    "info-foreground": {
+      "light": "#f8fafc",
+      "dark": "#0a0a0a",
+      "via": { "light": "colors/slate/50", "dark": "colors/neutral/950" }
+    },
+    "background-inverse": {
+      "light": "#0a0a0a",
+      "dark": "#ffffff",
+      "via": { "light": "colors/neutral/950", "dark": "colors/base/white" }
+    },
+    "foreground-inverse": {
+      "light": "#ffffff",
+      "dark": "#0a0a0a",
+      "via": { "light": "colors/base/white", "dark": "colors/neutral/950" }
+    },
+    "muted-foreground-inverse": {
+      "light": "#d4d4d4",
+      "dark": "#737373",
+      "via": {
+        "light": "theme/muted-foreground-dark → colors/neutral/300",
+        "dark": "colors/neutral/500"
+      }
+    },
+    "chart-1": {
+      "light": "#ea580c",
+      "dark": "#c2410c",
+      "via": { "light": "colors/orange/600", "dark": "colors/orange/700" }
+    },
+    "chart-2": {
+      "light": "#0d9488",
+      "dark": "#14b8a6",
+      "via": { "light": "colors/teal/600", "dark": "colors/teal/500" }
+    },
+    "chart-3": {
+      "light": "#164e63",
+      "dark": "#06b6d4",
+      "via": { "light": "colors/cyan/900", "dark": "colors/cyan/500" }
+    },
+    "chart-4": {
+      "light": "#d97706",
+      "dark": "#fbbf24",
+      "via": { "light": "colors/amber/600", "dark": "colors/amber/400" }
+    },
+    "chart-5": {
+      "light": "#e11d48",
+      "dark": "#f43f5e",
+      "via": { "light": "colors/rose/600", "dark": "colors/rose/500" }
+    },
+    "sidebar": {
+      "light": "#fafafa",
+      "dark": "#171717",
+      "via": { "light": "colors/neutral/50", "dark": "colors/neutral/900" }
+    },
+    "sidebar-foreground": {
+      "light": "#404040",
+      "dark": "#fafafa",
+      "via": { "light": "colors/neutral/700", "dark": "colors/neutral/50" }
+    },
+    "sidebar-primary": {
+      "light": "#e5e5e5",
+      "dark": "#3f3f46",
+      "via": { "light": "colors/neutral/200", "dark": "colors/zinc/700" }
+    },
+    "sidebar-primary-foreground": {
+      "light": "#171717",
+      "dark": "#0a0a0a",
+      "via": {
+        "light": "colors/neutral/900",
+        "dark": "theme/primary-foreground-dark → colors/neutral/950"
+      }
+    },
+    "sidebar-accent": {
+      "light": "#f5f5f5",
+      "dark": "#262626",
+      "via": { "light": "colors/neutral/100", "dark": "colors/neutral/800" }
+    },
+    "sidebar-accent-foreground": {
+      "light": "#171717",
+      "dark": "#fafafa",
+      "via": { "light": "colors/neutral/900", "dark": "colors/neutral/50" }
+    },
+    "sidebar-border": {
+      "light": "#e5e5e5",
+      "dark": "#404040",
+      "via": { "light": "colors/neutral/200", "dark": "colors/neutral/700" }
+    },
+    "sidebar-ring": {
+      "light": "#262626",
+      "dark": "#525252",
+      "via": { "light": "colors/neutral/800", "dark": "colors/neutral/600" }
+    }
+  }
+}

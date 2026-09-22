@@ -52,7 +52,7 @@ export default async function DocsPage({
             <li key={key} className="flex items-start gap-3">
               <span
                 aria-hidden="true"
-                className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs text-primary"
+                className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-fasla-red/10 text-xs text-fasla-red"
               >
                 ✓
               </span>
@@ -80,10 +80,10 @@ export default async function DocsPage({
                 <Link
                   key={route.path}
                   href={p(route.path)}
-                  className="group rounded-lg border border-border/50 p-4 transition-colors hover:border-primary/50 hover:bg-accent/50"
+                  className="group rounded-lg border border-border/50 p-4 transition-colors hover:border-fasla-red/50 hover:bg-accent/50"
                 >
                   {/* Component names are technical terms and stay Latin (§15). */}
-                  <span className="font-semibold group-hover:text-primary">{route.h1}</span>
+                  <span className="font-semibold group-hover:text-fasla-red">{route.h1}</span>
                   <span className="mt-1 block text-sm text-muted-foreground">
                     {route.description}
                   </span>
@@ -94,12 +94,12 @@ export default async function DocsPage({
         ))}
       </div>
 
-      <div className="rounded-lg border border-primary/20 bg-primary/5 p-6">
+      <div className="rounded-lg border border-fasla-red/20 bg-fasla-red/5 p-6">
         <h3 className="font-semibold">{t("getStartedTitle")}</h3>
         <p className="mt-2 text-sm text-muted-foreground">{t("getStartedBody")}</p>
         <Link
           href={p("/docs/installation/")}
-          className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+          className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-fasla-red hover:underline"
         >
           {tSidebar("installation")}
           {/* Indicates direction of travel, so it mirrors in RTL (§15). */}
