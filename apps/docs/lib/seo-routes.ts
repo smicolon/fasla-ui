@@ -30,7 +30,7 @@ export const routes = [
     path: "/",
     title: "Fasla — React Component Library by Smicolon GmbH",
     description:
-      "27 accessible React components — primitives, application blocks and motion effects for Tailwind CSS. The CLI copies the source into your project. MIT-licensed core.",
+      "28 accessible React components — primitives, application blocks and motion effects for Tailwind CSS. The CLI copies the source into your project. MIT-licensed core.",
     h1: "Add a component،own the source.",
   },
   {
@@ -111,6 +111,15 @@ export const routes = [
     description:
       "Add an accessible React checkbox for binary selections with controlled state, labels, and keyboard interaction.",
     h1: "Checkbox",
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
+    path: "/docs/components/radio/",
+    title: "Radio React Component | Fasla",
+    description:
+      "Add an accessible React radio for choosing one option from a set, with a plain control, a bordered card layout, and full RTL support.",
+    h1: "Radio",
   },
   {
     kind: "component",
