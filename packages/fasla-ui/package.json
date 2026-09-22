@@ -38,6 +38,7 @@
       "types": "./dist/registry/index.d.ts",
       "import": "./dist/registry/index.js"
     },
+    "./tailwind-preset": "./tailwind-preset.ts",
     "./lib/utils": {
       "types": "./dist/lib/utils.d.ts",
       "import": "./dist/lib/utils.js"
@@ -45,6 +46,7 @@
   },
   "files": [
     "dist",
+    "tailwind-preset.ts",
     "registry",
     "registry.json"
   ],

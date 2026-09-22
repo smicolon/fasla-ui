@@ -1,5 +1,17 @@
 import type { StorybookConfig } from "@storybook/react-vite"
 import path from "node:path"
+import { createRequire } from "node:module"
+
+// The docs app gets Geist from the `geist` package via next/font/local, which
+// Vite cannot use. Point at the same binaries instead, so the explorer renders
+// the identical face rather than a lookalike from another registry.
+// `geist/font/sans` is an exported entry resolving to dist/sans.js; the woff2
+// files sit alongside it. Resolving through the package keeps this correct
+// wherever the workspace hoists node_modules to.
+const geistFontsDirectory = path.join(
+  path.dirname(createRequire(import.meta.url).resolve("geist/font/sans")),
+  "fonts"
+)
 
 const explorerTitle = "Fasla Component Explorer | Smicolon"
 const explorerDescription =
@@ -52,6 +64,8 @@ const config: StorybookConfig = {
         alias: {
           ...config.resolve?.alias,
           "@smicolon/fasla-ui": path.resolve(__dirname, "../../packages/fasla-ui/src"),
+          // Consumed by the @font-face rules in src/styles/fonts.css.
+          "@geist-fonts": geistFontsDirectory,
         },
       },
     }

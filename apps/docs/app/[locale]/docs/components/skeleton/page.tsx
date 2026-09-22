@@ -11,7 +11,7 @@ export default function SkeletonPage() {
     <div className="container py-8">
       <div className="mx-auto max-w-[980px]">
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">Skeleton</h1>
+          <h1 className="text-4xl font-bold">Skeleton</h1>
           <p className="text-lg text-muted-foreground">
             Loading placeholder components for content that is loading.
           </p>
@@ -19,14 +19,14 @@ export default function SkeletonPage() {
 
         <div className="mt-8 space-y-8">
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("installation")}</h2>
+            <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
               <CodeBlock>npx fasla-ui add skeleton</CodeBlock>
             </div>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">Basic</h2>
+            <h2 className="text-2xl font-bold">Basic</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <Skeleton className="h-12 w-48" />
@@ -35,7 +35,7 @@ export default function SkeletonPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("variants")}</h2>
+            <h2 className="text-2xl font-bold">{t("variants")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <div className="flex items-center gap-4">
@@ -48,7 +48,7 @@ export default function SkeletonPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">Text Skeleton</h2>
+            <h2 className="text-2xl font-bold">Text Skeleton</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <SkeletonText lines={3} className="max-w-sm" />
@@ -57,7 +57,7 @@ export default function SkeletonPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">Avatar Skeleton</h2>
+            <h2 className="text-2xl font-bold">Avatar Skeleton</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <div className="flex items-center gap-4">
@@ -69,7 +69,7 @@ export default function SkeletonPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">Card Skeleton</h2>
+            <h2 className="text-2xl font-bold">Card Skeleton</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <SkeletonCard className="max-w-sm" />
@@ -78,7 +78,7 @@ export default function SkeletonPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("props")}</h2>
+            <h2 className="text-2xl font-bold">{t("props")}</h2>
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>

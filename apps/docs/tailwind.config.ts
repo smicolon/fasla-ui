@@ -1,6 +1,10 @@
 import type { Config } from "tailwindcss"
+import faslaTypography from "../../packages/fasla-ui/tailwind-preset"
 
 const config: Config = {
+  // Fonts and the direction-aware type ramp live in the shared preset, so the
+  // docs site and Storybook cannot drift apart.
+  presets: [faslaTypography],
   darkMode: "class",
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,13 +14,6 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        // Brand V2.5 §14 — product tier.
-        sans: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
-        mono: ["var(--font-geist-mono)", "ui-monospace", "monospace"],
-        // Brand V2.5 §14 — the Arabic face. Geist has no Arabic coverage.
-        arabic: ["var(--font-cairo)", "system-ui", "sans-serif"],
-      },
       colors: {
         border: "var(--border)",
         input: "var(--input)",

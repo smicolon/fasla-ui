@@ -24,7 +24,7 @@ export default function ComboboxPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight">Combobox</h1>
+        <h1 className="text-4xl font-bold">Combobox</h1>
         <p className="text-xl text-muted-foreground">
           A searchable dropdown with autocomplete, multi-select, and create-new functionality.
         </p>

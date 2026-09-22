@@ -1,0 +1,40 @@
+/* ============================================
+   FONTS (Brand V2.5 §14)
+
+   The docs site gets these from next/font — Geist from the `geist` package via
+   next/font/local, Cairo from next/font/google. Storybook runs on Vite, and the
+   `geist` package is next/font-only (it declares a `next` peer dependency and
+   its entry points are next/font calls), so the mechanism cannot be shared.
+
+   What is shared is what matters: the same Geist binary the docs app ships
+   (`@geist-fonts` is aliased to the package's font directory in
+   .storybook/main.ts) and the same CSS variable names, so the preset's font
+   stack resolves identically in both. Cairo is self-hosted through @fontsource-variable — the Vite
+   equivalent of what next/font/google does at build time, with no runtime
+   request to Google.
+   ============================================ */
+
+@font-face {
+  font-family: "Geist Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("@geist-fonts/geist-sans/Geist-Variable.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "Geist Mono Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("@geist-fonts/geist-mono/GeistMono-Variable.woff2") format("woff2-variations");
+}
+
+/* The names the shared preset's font stacks point at. next/font generates these
+   in the docs app; here they are declared by hand against the faces above. */
+:root {
+  --font-geist-sans: "Geist Variable";
+  --font-geist-mono: "Geist Mono Variable";
+  /* Declared by @fontsource-variable/cairo, imported in .storybook/preview.ts. */
+  --font-cairo: "Cairo Variable";
+}

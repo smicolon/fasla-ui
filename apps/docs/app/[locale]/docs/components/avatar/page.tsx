@@ -10,7 +10,7 @@ export default function AvatarPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight">Avatar</h1>
+        <h1 className="text-4xl font-bold">Avatar</h1>
         <p className="text-xl text-muted-foreground">
           An image element with a fallback for representing users.
         </p>

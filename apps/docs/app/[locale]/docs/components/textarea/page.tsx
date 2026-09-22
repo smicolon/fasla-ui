@@ -10,7 +10,7 @@ export default function TextareaPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight">Textarea</h1>
+        <h1 className="text-4xl font-bold">Textarea</h1>
         <p className="text-xl text-muted-foreground">
           A multi-line text input with character count and resize options.
         </p>

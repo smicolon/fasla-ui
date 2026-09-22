@@ -13,7 +13,7 @@ export default function SwitchPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight">Switch</h1>
+        <h1 className="text-4xl font-bold">Switch</h1>
         <p className="text-xl text-muted-foreground">
           A toggle control for switching between on and off states.
         </p>

@@ -11,7 +11,7 @@ export default function InputPage() {
     <div className="container py-8">
       <div className="mx-auto max-w-[980px]">
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">Input</h1>
+          <h1 className="text-4xl font-bold">Input</h1>
           <p className="text-lg text-muted-foreground">
             A text input component with validation states and icon support.
           </p>
@@ -19,14 +19,14 @@ export default function InputPage() {
 
         <div className="mt-8 space-y-8">
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("installation")}</h2>
+            <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
               <CodeBlock>npx fasla-ui add input</CodeBlock>
             </div>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("preview")}</h2>
+            <h2 className="text-2xl font-bold">{t("preview")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <Input placeholder="Enter text..." className="max-w-sm" />
@@ -35,7 +35,7 @@ export default function InputPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("variants")}</h2>
+            <h2 className="text-2xl font-bold">{t("variants")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <div className="flex flex-col gap-4 max-w-sm">
@@ -48,7 +48,7 @@ export default function InputPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("sizes")}</h2>
+            <h2 className="text-2xl font-bold">{t("sizes")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <div className="flex flex-col gap-4 max-w-sm">
@@ -61,7 +61,7 @@ export default function InputPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">With Icons</h2>
+            <h2 className="text-2xl font-bold">With Icons</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <div className="flex flex-col gap-4 max-w-sm">
@@ -79,7 +79,7 @@ export default function InputPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("props")}</h2>
+            <h2 className="text-2xl font-bold">{t("props")}</h2>
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>

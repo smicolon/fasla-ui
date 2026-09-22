@@ -11,7 +11,7 @@ export default function AnimatedGradientPage() {
     <div className="container py-8">
       <div className="mx-auto max-w-[980px]">
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">AnimatedGradient</h1>
+          <h1 className="text-4xl font-bold">AnimatedGradient</h1>
           <p className="text-lg text-muted-foreground">
             Animated gradient background effect for hero sections and cards.
           </p>
@@ -19,14 +19,14 @@ export default function AnimatedGradientPage() {
 
         <div className="mt-8 space-y-8">
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("installation")}</h2>
+            <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
               <CodeBlock>npx fasla-ui add animated-gradient</CodeBlock>
             </div>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("preview")}</h2>
+            <h2 className="text-2xl font-bold">{t("preview")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <AnimatedGradient className="h-48 rounded-lg" />
@@ -35,7 +35,7 @@ export default function AnimatedGradientPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">With Content</h2>
+            <h2 className="text-2xl font-bold">With Content</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <AnimatedGradient className="relative h-48 rounded-lg">
@@ -48,7 +48,7 @@ export default function AnimatedGradientPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">Custom Colors</h2>
+            <h2 className="text-2xl font-bold">Custom Colors</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <AnimatedGradient
@@ -60,7 +60,7 @@ export default function AnimatedGradientPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("props")}</h2>
+            <h2 className="text-2xl font-bold">{t("props")}</h2>
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>

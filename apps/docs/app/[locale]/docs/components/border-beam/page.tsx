@@ -11,7 +11,7 @@ export default function BorderBeamPage() {
     <div className="container py-8">
       <div className="mx-auto max-w-[980px]">
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">BorderBeam</h1>
+          <h1 className="text-4xl font-bold">BorderBeam</h1>
           <p className="text-lg text-muted-foreground">
             Animated border beam effect for cards and containers.
           </p>
@@ -19,14 +19,14 @@ export default function BorderBeamPage() {
 
         <div className="mt-8 space-y-8">
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("installation")}</h2>
+            <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
               <CodeBlock>npx fasla-ui add border-beam</CodeBlock>
             </div>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("preview")}</h2>
+            <h2 className="text-2xl font-bold">{t("preview")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <div className="relative h-32 w-64 rounded-xl border bg-card">
@@ -40,7 +40,7 @@ export default function BorderBeamPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("props")}</h2>
+            <h2 className="text-2xl font-bold">{t("props")}</h2>
             <div className="mt-4 overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>

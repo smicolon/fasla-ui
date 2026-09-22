@@ -18,7 +18,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 function Stat({ value, label }: { value: string; label: React.ReactNode }) {
   return (
     <div className="border-b border-border px-0 py-6 sm:px-7 lg:border-b-0 lg:border-r lg:last:border-r-0 [&:first-child]:pl-0 [&:nth-child(2)]:border-b lg:[&:nth-child(2)]:border-b-0">
-      <div className="text-[28px] font-semibold tracking-tight">{value}</div>
+      <div className="text-[28px] font-semibold">{value}</div>
       <div className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">{label}</div>
     </div>
   )
@@ -105,7 +105,7 @@ export default async function HomePage({
             </div>
 
             <h1
-              className="rise text-[40px] font-semibold leading-[1.05] tracking-[-0.035em] sm:text-[56px] lg:text-[64px] [text-wrap:balance]"
+              className="rise text-4xl font-semibold sm:text-5xl lg:text-6xl [text-wrap:balance]"
               style={{ animationDelay: "60ms" }}
             >
               {t("headlineLead")}
@@ -189,7 +189,7 @@ export default async function HomePage({
 
       {/* ── Categories ───────────────────────────────────────── */}
       <section className="mx-auto max-w-[1120px] px-6 py-24 md:px-16">
-        <h2 className="text-3xl font-semibold tracking-tight md:text-4xl">{t("registry.title")}</h2>
+        <h2 className="text-3xl font-semibold md:text-4xl">{t("registry.title")}</h2>
         <p className="mt-3 max-w-[560px] text-base leading-relaxed text-muted-foreground">
           {t("registry.intro")}
         </p>
@@ -221,7 +221,7 @@ export default async function HomePage({
 
       {/* ── Why ──────────────────────────────────────────────── */}
       <section className="mx-auto max-w-[1120px] px-6 pb-24 md:px-16">
-        <h2 className="mb-10 text-3xl font-semibold tracking-tight md:text-4xl">
+        <h2 className="mb-10 text-3xl font-semibold md:text-4xl">
           {t("features.title")}
         </h2>
         <div className="grid gap-x-10 gap-y-8 md:grid-cols-3">

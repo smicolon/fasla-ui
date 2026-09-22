@@ -13,7 +13,7 @@ export default function CheckboxPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold tracking-tight">Checkbox</h1>
+        <h1 className="text-4xl font-bold">Checkbox</h1>
         <p className="text-xl text-muted-foreground">
           A control that allows the user to toggle between checked and not checked.
         </p>

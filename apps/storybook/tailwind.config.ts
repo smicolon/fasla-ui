@@ -1,8 +1,14 @@
 import type { Config } from "tailwindcss"
+import faslaTypography from "../../packages/fasla-ui/tailwind-preset"
 
 const config: Config = {
+  // Fonts and the direction-aware type ramp live in the shared preset, so the
+  // explorer renders components exactly as the docs site does.
+  presets: [faslaTypography],
   darkMode: "class",
   content: [
+    // The direction decorator lives here and is the only user of `font-arabic`.
+    "./.storybook/**/*.{js,ts,jsx,tsx}",
     "./stories/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
     "../../packages/fasla-ui/registry/**/*.{js,ts,jsx,tsx}",

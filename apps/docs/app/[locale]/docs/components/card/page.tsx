@@ -11,7 +11,7 @@ export default function CardPage() {
     <div className="container py-8">
       <div className="mx-auto max-w-[980px]">
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold tracking-tight">Card</h1>
+          <h1 className="text-4xl font-bold">Card</h1>
           <p className="text-lg text-muted-foreground">
             A composable card component with header, content, and footer sections.
           </p>
@@ -19,14 +19,14 @@ export default function CardPage() {
 
         <div className="mt-8 space-y-8">
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("installation")}</h2>
+            <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
               <CodeBlock>npx fasla-ui add card</CodeBlock>
             </div>
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("preview")}</h2>
+            <h2 className="text-2xl font-bold">{t("preview")}</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <Card className="w-[350px]">
@@ -48,7 +48,7 @@ export default function CardPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">Simple Card</h2>
+            <h2 className="text-2xl font-bold">Simple Card</h2>
             <div className="mt-4">
               <ComponentPreview>
                 <Card className="w-[350px] p-6">
@@ -59,7 +59,7 @@ export default function CardPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-bold tracking-tight">{t("usage")}</h2>
+            <h2 className="text-2xl font-bold">{t("usage")}</h2>
             <div className="mt-4">
               <CodeBlock>{`import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
 
