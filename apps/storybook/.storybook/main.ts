@@ -44,6 +44,10 @@ const config: StorybookConfig = {
     "@storybook/addon-interactions",
     "@storybook/addon-a11y",
     "@storybook/addon-themes",
+    // Renders :hover / :focus-visible statically, so a states grid shows the
+    // real pseudo-states rather than a hand-written imitation that can drift
+    // from the component.
+    "storybook-addon-pseudo-states",
   ],
   framework: {
     name: "@storybook/react-vite",

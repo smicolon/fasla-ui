@@ -167,6 +167,27 @@
       ]
     },
     {
+      "name": "radio",
+      "type": "registry:ui",
+      "title": "Radio",
+      "description": "An accessible radio for choosing one option from a set, with a plain and a bordered layout variant.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/radio/radio.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/radio.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "forms"
+      ]
+    },
+    {
       "name": "combobox",
       "type": "registry:ui",
       "title": "Combobox",

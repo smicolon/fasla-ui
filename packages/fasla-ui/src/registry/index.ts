@@ -56,6 +56,15 @@ export const registry: RegistryItem[] = [
     sourcePath: "registry/ui/skeleton",
     categories: ["primitives", "feedback"],
   },
+  {
+    name: "radio",
+    type: "ui",
+    title: "Radio",
+    description: "An accessible radio for choosing one option from a set, with a plain and a bordered layout variant.",
+    sourcePath: "registry/ui/radio",
+    dependencies: ["class-variance-authority"],
+    categories: ["primitives", "forms"],
+  },
   // Blocks
   {
     name: "app-shell",
