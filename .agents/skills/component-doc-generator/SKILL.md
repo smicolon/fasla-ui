@@ -148,3 +148,9 @@ const p = figma.currentPage;
 p.findAll(n => n.name.endsWith('— Fasla Component Documentation') && n.id !== keepId).forEach(n => n.remove());
 ```
 Never create a second doc frame for the same component — edit the one in progress.
+
+---
+
+**After this pass, refresh the component index.** It is what other agents read to find
+components, and it goes stale silently. Run the `figma-index` skill — about seven read-only
+Figma calls — and commit the diff. Do not hand-edit `design/index-atoms.*`.

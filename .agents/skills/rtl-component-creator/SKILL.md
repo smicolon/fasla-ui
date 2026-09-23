@@ -462,3 +462,9 @@ which the Group-A correction named for horizontal `Steps / Step item` but which 
   *shorter* than its LTR twin (356 vs 404). Conversely Cairo's taller line box (144px at 8XL against
   Geist's 125) grew the Desktop twin 626 → 668, which forces a **row re-pitch**: recompute each row's
   y from the tallest of its six variants, resize the set, and move the motion chips with their rows.
+
+---
+
+**After this pass, refresh the component index.** It is what other agents read to find
+components, and it goes stale silently. Run the `figma-index` skill — about seven read-only
+Figma calls — and commit the diff. Do not hand-edit `design/index-atoms.*`.
