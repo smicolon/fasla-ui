@@ -32,11 +32,15 @@ export const GREEN_TICK = (name) => name.includes("🟢") && name.trim().endsWit
 export const BLOCK_SHAPED = (name) => /[-–—]\s*\d+\s*Blocks?\b/i.test(name)
 
 /* ── Status legend ─────────────────────────────────────────────────────────────────
- * Inferred from usage across all 133 pages, NOT from a written source. Recorded in the
- * JSON as `confirmed: false` until the designers sign it off. */
+ * Mostly inferred from usage across all 133 pages. `confirmedBy` records the entries a
+ * designer has actually settled; everything else is still a reading, not a fact. */
 export const LEGEND = {
-  confirmed: false,
-  note: "Inferred from usage across the whole file on 2026-09-23; not yet confirmed by Yasmin or Haneen.",
+  confirmed: "partial",
+  note: "Inferred from usage across the whole file on 2026-09-23. Only the entries listed in `confirmedBy` have been settled by a designer; treat the rest as a reading.",
+  confirmedBy: {
+    "✅": "Yasmin, 2026-09-23 — a page without one is not signed off, and its components are not ready to be used.",
+    Y: "Yasmin, 2026-09-23", H: "Yasmin, 2026-09-23", "Y/H": "Yasmin, 2026-09-23",
+  },
   status: {
     "🟢": "work on this page is done",
     "🟡": "in progress",
@@ -45,14 +49,24 @@ export const LEGEND = {
     "❌": "cancelled or removed",
   },
   trailing: {
-    "✅": "signed off — a second gate beyond 🟢; the atom index keys on this",
+    "✅": "signed off, and ready to be used",
     "🔸": "meaning unknown (only on Footer and Card)",
     "🔺🔺": "meaning unknown (only on File Input)",
     "🙋": "meaning unknown (only on Case Study Cards)",
   },
+  // Initials, not architectures or conventions — corrected by Yasmin on 2026-09-23.
   initials: { Y: "Yasmin", H: "Haneen", "Y/H": "both" },
   prefix: { "✦": "marks a component page (not a status)" },
 }
+
+/** Atoms by shape whose page has no trailing ✅, so the selection rule excludes them.
+ *  Settled by Yasmin on 2026-09-23: not signed off means not ready to be used. They join
+ *  the index on their own when they earn a ✅ — do not special-case them, do not re-ask. */
+export const EXCLUDED_UNSIGNED = [
+  { page: "✦  🟢 Y | Footer 🔸", id: "4108:1020" },
+  { page: "✦ 🟢 Y | Card 🔸", id: "3750:734412" },
+  { page: "✦  🟢 Y/H |  File Input 🔺🔺", id: "3884:83880" },
+]
 
 /** Registry item -> the Figma component set it is implemented against.
  *  Hand-maintained and deliberately explicit. Keyed on {set, page} rather than name alone:
@@ -254,6 +268,10 @@ export function build(capture) {
         crossCheck: "page name must NOT match /[-–—]\\s*\\d+\\s*Blocks?/i",
         onDisagreement: "the build throws and names the pages; it never guesses",
         excluded: "test and scratch pages, section dividers, Component Atoms, the Lucide icon page, and every block page",
+        excludedUnsigned: {
+          reason: "Atoms by shape, but their page carries no trailing ✅. Settled by Yasmin on 2026-09-23: not signed off means not ready to be used. They enter the index on their own when they earn a ✅ — do not special-case them.",
+          pages: EXCLUDED_UNSIGNED,
+        },
       },
       coverage: "walked all pages of the file; captured depth ≤5, INSTANCE subtrees skipped",
       derivation: {
@@ -327,14 +345,20 @@ export function renderMarkdown(ix) {
   L.push(`If the two ever disagree, **${m.selectionRule.onDisagreement}**.`)
   L.push("")
   L.push(`Excluded: ${m.selectionRule.excluded}.`, "")
+  const ex = m.selectionRule.excludedUnsigned
+  L.push("Three pages are atoms by shape but have no trailing ✅, so the rule leaves them out:", "")
+  for (const e of ex.pages) L.push(`- \`${e.page}\` — [${e.id}](${link(e.id)})`)
+  L.push("", `${ex.reason}`, "")
 
   L.push("## Status legend", "")
-  L.push(`> ⚠️ **Unconfirmed.** ${m.legend.note}`, "")
-  L.push("| Mark | Where | Reading |", "|---|---|---|")
-  for (const [k, v] of Object.entries(m.legend.status)) L.push(`| ${k} | status slot | ${v} |`)
-  for (const [k, v] of Object.entries(m.legend.trailing)) L.push(`| ${k} | trailing | ${v} |`)
-  for (const [k, v] of Object.entries(m.legend.initials)) L.push(`| \`${k}\` | owner slot | ${v} |`)
-  L.push(`| ✦ | prefix | ${m.legend.prefix["✦"]} |`)
+  L.push(`> ⚠️ **Mostly inferred.** ${m.legend.note}`, "")
+  const conf = m.legend.confirmedBy ?? {}
+  const src = (k) => conf[k] ?? "*inferred — not confirmed*"
+  L.push("| Mark | Where | Reading | Settled by |", "|---|---|---|---|")
+  for (const [k, v] of Object.entries(m.legend.status)) L.push(`| ${k} | status slot | ${v} | ${src(k)} |`)
+  for (const [k, v] of Object.entries(m.legend.trailing)) L.push(`| ${k} | trailing | ${v} | ${src(k)} |`)
+  for (const [k, v] of Object.entries(m.legend.initials)) L.push(`| \`${k}\` | owner slot | ${v} | ${src(k)} |`)
+  L.push(`| ✦ | prefix | ${m.legend.prefix["✦"]} | ${src("✦")} |`)
   L.push("")
 
   L.push("## Components", "")

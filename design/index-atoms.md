@@ -25,25 +25,33 @@ If the two ever disagree, **the build throws and names the pages; it never guess
 
 Excluded: test and scratch pages, section dividers, Component Atoms, the Lucide icon page, and every block page.
 
+Three pages are atoms by shape but have no trailing ✅, so the rule leaves them out:
+
+- `✦  🟢 Y | Footer 🔸` — [4108:1020](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4108-1020)
+- `✦ 🟢 Y | Card 🔸` — [3750:734412](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3750-734412)
+- `✦  🟢 Y/H |  File Input 🔺🔺` — [3884:83880](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3884-83880)
+
+Atoms by shape, but their page carries no trailing ✅. Settled by Yasmin on 2026-09-23: not signed off means not ready to be used. They enter the index on their own when they earn a ✅ — do not special-case them.
+
 ## Status legend
 
-> ⚠️ **Unconfirmed.** Inferred from usage across the whole file on 2026-09-23; not yet confirmed by Yasmin or Haneen.
+> ⚠️ **Mostly inferred.** Inferred from usage across the whole file on 2026-09-23. Only the entries listed in `confirmedBy` have been settled by a designer; treat the rest as a reading.
 
-| Mark | Where | Reading |
-|---|---|---|
-| 🟢 | status slot | work on this page is done |
-| 🟡 | status slot | in progress |
-| 🟠 | status slot | queued / not started — every 🟠 page lacks documentation |
-| 🔴 | status slot | not started |
-| ❌ | status slot | cancelled or removed |
-| ✅ | trailing | signed off — a second gate beyond 🟢; the atom index keys on this |
-| 🔸 | trailing | meaning unknown (only on Footer and Card) |
-| 🔺🔺 | trailing | meaning unknown (only on File Input) |
-| 🙋 | trailing | meaning unknown (only on Case Study Cards) |
-| `Y` | owner slot | Yasmin |
-| `H` | owner slot | Haneen |
-| `Y/H` | owner slot | both |
-| ✦ | prefix | marks a component page (not a status) |
+| Mark | Where | Reading | Settled by |
+|---|---|---|---|
+| 🟢 | status slot | work on this page is done | *inferred — not confirmed* |
+| 🟡 | status slot | in progress | *inferred — not confirmed* |
+| 🟠 | status slot | queued / not started — every 🟠 page lacks documentation | *inferred — not confirmed* |
+| 🔴 | status slot | not started | *inferred — not confirmed* |
+| ❌ | status slot | cancelled or removed | *inferred — not confirmed* |
+| ✅ | trailing | signed off, and ready to be used | Yasmin, 2026-09-23 — a page without one is not signed off, and its components are not ready to be used. |
+| 🔸 | trailing | meaning unknown (only on Footer and Card) | *inferred — not confirmed* |
+| 🔺🔺 | trailing | meaning unknown (only on File Input) | *inferred — not confirmed* |
+| 🙋 | trailing | meaning unknown (only on Case Study Cards) | *inferred — not confirmed* |
+| `Y` | owner slot | Yasmin | Yasmin, 2026-09-23 |
+| `H` | owner slot | Haneen | Yasmin, 2026-09-23 |
+| `Y/H` | owner slot | both | Yasmin, 2026-09-23 |
+| ✦ | prefix | marks a component page (not a status) | *inferred — not confirmed* |
 
 ## Components
 
