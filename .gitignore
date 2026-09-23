@@ -53,3 +53,7 @@ node_modules
 # live Figma file key plus the internal component index. Kept on disk for the
 # pipeline; deliberately not committed. Live copy: ~/.claude/skills/
 .agents/skills/component-blocks-update/references/file-inventory.md
+
+# Per-session dev-server launcher for the Browser pane. Ports and which apps
+# you run are a local choice, and each worktree wants its own.
+.claude/launch.json
