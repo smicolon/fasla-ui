@@ -12,6 +12,14 @@ This repo is the code library; the design system itself is maintained in Figma. 
 touching Figma, design tokens, RTL or the design system, **read `design/FIGMA.md` first** — then
 `design/INSTRUCTIONS.md` (standing instructions) and `design/DESIGN.md` (the visual system).
 
+To find a specific component, start at **`design/index-atoms.md`** — every atom in the Figma file
+with a direct link, its variant axes, whether it has RTL, English and Arabic docs, and whether it
+is implemented in the code registry. `design/index-atoms.json` holds the same data for grepping.
+Both are generated: regenerate with the `figma-index` skill, never edit them by hand. They carry
+the date they were measured — **check it before trusting them**, and re-run the skill if it is old.
+A blocks index will sit beside them as `design/index-blocks.*` once the block pages are
+consolidated; it does not exist yet.
+
 The skills, agents and slash-command launchers that drive that work live in `.agents/`, with
 `.claude/` symlinked to it. They are **repo-anchored**: run them with the repo root as the working
 directory, or their relative paths will not resolve.

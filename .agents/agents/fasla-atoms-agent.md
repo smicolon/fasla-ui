@@ -90,4 +90,8 @@ One message. No surprises — anything notable was raised when it happened, not 
 5. **Corrections written back** — any drifted id fixed in `file-inventory.md`, any skill file updated.
 6. **Left open** — what remains and which skill owns it.
 
+7. **Index refreshed** — confirm the `figma-index` skill was run and both `design/index-atoms.*`
+   files were committed. Other agents read that index to find components; a pass that changes the
+   file and leaves it stale has not finished.
+
 Then offer to record durable learnings to memory: new Arabic terms, a component quirk, a drifted id.

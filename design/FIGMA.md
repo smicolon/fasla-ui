@@ -12,7 +12,11 @@ It has light/dark theming and full LTR/RTL (English/Arabic) support. The project
 **SMI-UI / smicolon**; every new artifact carries the Fasla name.
 
 - Figma fileKey: `yGEQmCZOvs7KptsYUdB0Xg`
-- 922 variables / 5 collections · 140 text styles · ~1,654 components / 129 sets
+- 922 variables / 5 collections · 140 text styles
+- **Component counts here were stale by roughly 4× and have been removed.** The atoms are now
+  indexed and verified in [`index-atoms.md`](index-atoms.md) (44 pages, 158 components, measured
+  2026-09-23). File-wide totals including blocks are not yet verified — do not quote a number for
+  them; walk the file or wait for `index-blocks.*`.
 
 There is no npm project, no build, no test suite. "Running" this project means driving Figma through
 MCP tools and verifying with screenshots. Do not look for package.json — the deliverable is Figma nodes.
@@ -279,3 +283,5 @@ Sample people are fictional and transliterate in RTL rather than being swapped f
 - `~/.claude/agents/fasla-atoms-agent.md` — the atom equivalent: RTL → EN doc → AR doc, two gates
 - `~/Desktop/Creative- Blocks.md` — the hero/block pattern catalogue the `Hero` set was built from
 - `~/.claude/projects/-Users-jasmine-Desktop/memory/` — per-page project memories, richer than this summary
+- [`index-atoms.md`](index-atoms.md) / `index-atoms.json` — every atom in the file, generated and
+  dated; rebuilt by `.agents/skills/figma-index/SKILL.md`, guarded by a staleness test
