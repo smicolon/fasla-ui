@@ -4,9 +4,9 @@
     "fileKey": "yGEQmCZOvs7KptsYUdB0Xg",
     "collectionId": "VariableCollectionId:82:3",
     "modes": { "light": "⚪️ Light", "dark": "🌑 Dark" },
-    "measured": "2026-09-22",
+    "measured": "2026-09-23",
     "count": 41,
-    "note": "Snapshot of the 41 theme/* variables in the ☾ Mode collection, aliases resolved to primitives. Figma is the source of truth; this file is the committed record of what it said when the two apps were last synced to it. `light`/`dark` are the exact CSS values both apps must declare — tokens/mode.test.ts asserts that. `via` records the alias chain, so a future drift diff shows whether a value changed or was re-aliased. Pin the collection id when re-reading: 41 of these names also exist in 🌈 Themes with a single mode, and a name-only lookup silently returns that copy."
+    "note": "Snapshot of the 41 theme/* variables in the ☾ Mode collection, aliases resolved to primitives. Figma is the source of truth; this file is the committed record of what it said when the two apps were last synced to it. `light`/`dark` are the exact CSS values both apps must declare — tokens/mode.test.ts asserts that. `via` records the alias chain, so a future drift diff shows whether a value changed or was re-aliased. Pin the collection id when re-reading: 41 of these names also exist in 🌈 Themes with a single mode, and a name-only lookup silently returns that copy. Resolve every alias hop in the same mode as the token: `custom/black` and `custom/white` are themselves ☾ Mode variables that swap in Dark (`custom/black` is white there), so resolving an intermediate hop in its default mode gives the Light value — that is how `destructive-foreground` dark was once recorded as #000000."
   },
   "tokens": {
     "background": {
@@ -86,10 +86,10 @@
     },
     "destructive-foreground": {
       "light": "#ffffff",
-      "dark": "#000000",
+      "dark": "#ffffff",
       "via": {
         "light": "custom/white → colors/base/white",
-        "dark": "custom/black → colors/base/black"
+        "dark": "custom/black → colors/base/white"
       }
     },
     "border": {
