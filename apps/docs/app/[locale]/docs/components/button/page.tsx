@@ -8,8 +8,8 @@ import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 export default function ButtonPage() {
   const t = useTranslations("docs.sections")
   return (
-    <div className="container py-8">
-      <div className="mx-auto max-w-[980px]">
+    <div>
+      <div>
         <div className="space-y-2">
           <h1 className="text-4xl font-bold">Button</h1>
           <p className="text-lg text-muted-foreground">
