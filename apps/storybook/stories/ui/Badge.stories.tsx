@@ -1,12 +1,64 @@
 import * as React from "react"
 import type { Meta, StoryObj } from "@storybook/react"
-import { Badge } from "../../../../packages/fasla-ui/registry/ui/badge"
+import { fn } from "@storybook/test"
+import { Badge, type BadgeProps } from "../../../../packages/fasla-ui/registry/ui/badge"
 
-const meta: Meta<typeof Badge> = {
+/** The consumer's icons — 24-grid SVGs with no size or colour of their own. */
+const StarIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
+  </svg>
+)
+
+const HeartIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+  </svg>
+)
+
+/**
+ * A plain circular `<img>` — deliberately not the library's Avatar, which is
+ * being rebuilt. The badge owns the 12px size and the clip.
+ */
+const avatar = (alt: string) => <img src="/samples/avatar.svg" alt={alt} />
+
+/**
+ * `closable` is a story-only arg, not a Badge prop: the component shows its close
+ * button when it is given `onClose`, and a boolean is the only way to toggle that
+ * from the Controls panel. `onClose` itself is a spy in `args`, so every press
+ * shows up in the Actions panel.
+ */
+type BadgeStoryArgs = BadgeProps & { closable?: boolean }
+
+const meta: Meta<BadgeStoryArgs> = {
   title: "UI/Badge",
   component: Badge,
   parameters: { layout: "centered" },
   tags: ["autodocs"],
+  args: {
+    variant: "solid",
+    tone: "primary",
+    size: "sm",
+    radius: "rounded",
+    icon: "none" as unknown as React.ReactNode,
+    avatar: "none" as unknown as React.ReactNode,
+    closable: false,
+    onClose: fn(),
+  },
   argTypes: {
     variant: { control: "inline-radio", options: ["solid", "soft", "outline"] },
     tone: {
@@ -15,11 +67,45 @@ const meta: Meta<typeof Badge> = {
     },
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
     radius: { control: "inline-radio", options: ["rounded", "standard"] },
+    children: {
+      name: "label",
+      control: "text",
+      description:
+        "Label text. Leave empty for the sample label in the current direction; type long English or Arabic text to test wrapping-free growth.",
+      table: { type: { summary: "ReactNode" } },
+    },
+    // Controls can't author a ReactNode, so each slot offers named choices and
+    // `mapping` turns the choice into a real element.
+    icon: {
+      control: { type: "select", labels: { none: "None", star: "Star", heart: "Heart" } },
+      options: ["none", "star", "heart"],
+      mapping: { none: undefined, star: <StarIcon />, heart: <HeartIcon /> },
+      table: { type: { summary: "ReactNode" } },
+    },
+    avatar: {
+      control: { type: "select", labels: { none: "None", sample: "Sample image" } },
+      options: ["none", "sample"],
+      mapping: { none: undefined, sample: avatar("") },
+      table: { type: { summary: "ReactNode" } },
+    },
+    closable: {
+      control: "boolean",
+      description:
+        "Story-only. Passes `onClose`, which renders the close button; presses are logged in the Actions panel.",
+      table: { category: "Story" },
+    },
+    onClose: { control: false },
+    closeLabel: {
+      control: "text",
+      description:
+        "Not visible. The close button's accessible name, read by screen readers. Defaults to \"Remove\", or \"إزالة\" when the page's `lang` is Arabic.",
+      if: { arg: "closable" },
+    },
   },
 }
 
 export default meta
-type Story = StoryObj<typeof Badge>
+type Story = StoryObj<BadgeStoryArgs>
 
 /**
  * Sample copy, per script. Prop and axis names stay English — they are code and
@@ -54,33 +140,16 @@ const VARIANTS = ["solid", "soft", "outline"] as const
 const TONES = ["primary", "secondary", "info", "success", "warning", "destructive"] as const
 const SIZES = ["sm", "md", "lg"] as const
 
-/** The consumer's icon — any 24-grid SVG with no size or colour of its own. */
-const StarIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
-  </svg>
-)
-
-/**
- * A plain circular `<img>` — deliberately not the library's Avatar, which is
- * being rebuilt. The badge owns the 12px size and the clip.
- */
-const avatar = (alt: string) => <img src="/samples/avatar.svg" alt={alt} />
-
 export const Default: Story = {
-  render: (args, ctx) => <Badge {...args}>{copy(ctx).badge}</Badge>,
+  render: ({ closable, onClose, children, ...args }, ctx) => (
+    <Badge {...args} onClose={closable ? onClose : undefined}>
+      {children || copy(ctx).badge}
+    </Badge>
+  ),
 }
 
 /** Figma's Type × Tone: three visual weights, six semantic tones. */
 export const Types: Story = {
-  parameters: { layout: "padded" },
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
@@ -214,7 +283,6 @@ const cellId = (v: string, t: string) => `focus-${v}-${t}`
  */
 export const FocusStates: Story = {
   parameters: {
-    layout: "padded",
     pseudo: {
       focusVisible: VARIANTS.flatMap((v) => TONES.map((t) => `#${cellId(v, t)} button`)),
     },
