@@ -2,6 +2,8 @@ import Link from "next/link"
 import Image from "next/image"
 import { CopyCommand } from "@/components/copy-command"
 import { getTranslations, setRequestLocale } from "next-intl/server"
+import { localeDirection, type Locale } from "@/i18n/routing"
+import { registryCounts } from "@/lib/registry"
 
 /**
  * Home page — Fasla Brand Identity V2.5.
@@ -15,9 +17,28 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
  * Nothing decorative: "nothing is added because a surface looks empty" (§02.02).
  */
 
+/**
+ * Translated copy set inside a monospace surface. globals.css keeps every
+ * `.font-mono` element LTR in Arabic, which is right for code but reverses an
+ * Arabic phrase, so the phrase is isolated in its own direction and set in
+ * Cairo, the face that carries its glyphs.
+ */
+function Phrase({ dir, children }: { dir: "ltr" | "rtl"; children: React.ReactNode }) {
+  return (
+    <bdi dir={dir} className="rtl:font-arabic">
+      {children}
+    </bdi>
+  )
+}
+
+// Two columns below lg, four from lg. Every cell keeps 28px on both sides of a
+// divider (12px between the two columns on a phone); the cells on the
+// container's edges sit flush with it. The edge
+// rules are scoped to non-overlapping breakpoints, so no two of them compete
+// for the same cell (they did, and cell 3 lost its padding beside a divider).
 function Stat({ value, label }: { value: string; label: React.ReactNode }) {
   return (
-    <div className="border-b border-border px-0 py-6 sm:px-7 lg:border-b-0 lg:border-r lg:last:border-r-0 [&:first-child]:pl-0 [&:nth-child(2)]:border-b lg:[&:nth-child(2)]:border-b-0">
+    <div className="border-b border-border px-3 py-6 sm:px-7 max-lg:[&:nth-child(odd)]:ps-0 max-lg:[&:nth-child(even)]:pe-0 lg:border-b-0 lg:border-e lg:first:ps-0 lg:last:border-e-0 lg:last:pe-0 [&:nth-child(2)]:border-b lg:[&:nth-child(2)]:border-b-0">
       <div className="text-[28px] font-semibold">{value}</div>
       <div className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">{label}</div>
     </div>
@@ -47,9 +68,11 @@ function CategoryCard({
         <span className="font-mono text-sm text-muted-foreground">{count}</span>
       </div>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p>
-      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-fasla-red">
+      {/* Red text on the dark ground is 4.06:1, under AA, so in Dark the label
+          is foreground and only the arrow (non-text, 3:1) stays red. */}
+      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-fasla-red dark:text-foreground">
         {browseLabel}
-        <svg className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+        <svg className="h-3.5 w-3.5 text-fasla-red transition-transform duration-200 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h13M12 5l7 7-7 7" />
         </svg>
       </span>
@@ -79,6 +102,7 @@ export default async function HomePage({
   const tf = await getTranslations("footer")
   const tn = await getTranslations("nav")
   const p = (path: string) => `/${locale}${path}`
+  const dir = localeDirection[locale as Locale]
 
   return (
     <div>
@@ -91,7 +115,7 @@ export default async function HomePage({
           (§02.02). Everything here is turned off by prefers-reduced-motion,
           handled globally in globals.css.
       ──────────────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-[1220px] px-6 pb-4 pt-20 md:px-12 md:pt-28">
+      <section className="site-container pb-4 pt-20 md:pt-28">
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:gap-16">
 
           {/* ── the claim ── */}
@@ -99,8 +123,14 @@ export default async function HomePage({
             <div className="rise mb-7 flex items-center gap-2.5" style={{ animationDelay: "0ms" }}>
               {/* Comma at 26px tall = 13px wide, above the 12px minimum (§10) */}
               <Image src="/brand/fasla-comma.svg" alt="" width={13} height={26} className="h-[22px] w-auto" aria-hidden="true" />
-              <span className="font-mono text-[13px] tracking-wide text-muted-foreground">
-                {t("eyebrow", { count: 27 })}
+              {/* Not font-mono in Arabic: the mono rule would force it LTR, and
+                  Arabic is never letter-spaced (§15). */}
+              <span
+                className={`text-[13px] text-muted-foreground ${
+                  dir === "rtl" ? "font-arabic" : "font-mono tracking-wide"
+                }`}
+              >
+                {t("eyebrow", { count: registryCounts.total })}
               </span>
             </div>
 
@@ -141,7 +171,7 @@ export default async function HomePage({
           <div className="rise" style={{ animationDelay: "240ms" }}>
             <div className="overflow-hidden rounded-xl border border-border bg-terminal shadow-2xl shadow-foreground/10">
               <div className="flex items-center justify-between border-b border-terminal-border px-4 py-2.5">
-                <span className="font-mono text-[11px] text-terminal-muted">{t("terminal.title")}</span>
+                <span className="font-mono text-[11px] text-terminal-muted"><Phrase dir={dir}>{t("terminal.title")}</Phrase></span>
                 <span className="font-mono text-[11px] text-terminal-subtle">{t("terminal.cwd")}</span>
               </div>
 
@@ -149,9 +179,9 @@ export default async function HomePage({
                 <div className="rise" style={{ animationDelay: "420ms" }}>
                   <span className="text-terminal-accent">$</span> npx fasla-ui add button
                 </div>
-                <div className="rise text-terminal-muted" style={{ animationDelay: "700ms" }}>✓ {t("terminal.resolved")}</div>
-                <div className="rise text-terminal-muted" style={{ animationDelay: "850ms" }}>✓ {t("terminal.written")}</div>
-                <div className="rise text-terminal-muted" style={{ animationDelay: "1000ms" }}>✓ {t("terminal.wired")}</div>
+                <div className="rise text-terminal-muted" style={{ animationDelay: "700ms" }}>✓ <Phrase dir={dir}>{t("terminal.resolved")}</Phrase></div>
+                <div className="rise text-terminal-muted" style={{ animationDelay: "850ms" }}>✓ <Phrase dir={dir}>{t("terminal.written")}</Phrase></div>
+                <div className="rise text-terminal-muted" style={{ animationDelay: "1000ms" }}>✓ <Phrase dir={dir}>{t("terminal.wired")}</Phrase></div>
                 <div className="rise flex items-center gap-1.5 pt-1" style={{ animationDelay: "1150ms" }}>
                   <span className="text-terminal-accent">$</span>
                   <span className="caret inline-block h-[14px] w-[7px] bg-terminal-caret" aria-hidden="true" />
@@ -161,7 +191,7 @@ export default async function HomePage({
               {/* what you own once it lands */}
               <div className="border-t border-terminal-border px-4 py-4">
                 <div className="mb-2.5 font-mono text-[11px] text-terminal-subtle">
-                  {t("terminal.ownedFile")}
+                  <Phrase dir={dir}>{t("terminal.ownedFile")}</Phrase>
                 </div>
                 <div className="font-mono text-[12.5px] leading-[1.9] text-terminal-foreground">
                   <div><span className="text-terminal-accent">const</span> buttonVariants = cva(</div>
@@ -172,7 +202,11 @@ export default async function HomePage({
               </div>
             </div>
 
-            <p className="mt-3 text-center font-mono text-[11px] text-muted-foreground lg:text-right">
+            <p
+              className={`mt-3 text-center text-[11px] text-muted-foreground lg:text-end ${
+                dir === "rtl" ? "font-arabic" : "font-mono"
+              }`}
+            >
               {t("terminal.ownership")}
             </p>
           </div>
@@ -180,7 +214,7 @@ export default async function HomePage({
 
         {/* Proof row — one claim, one proof (§04) */}
         <div className="rise mt-16 grid grid-cols-2 border-t border-border lg:grid-cols-4" style={{ animationDelay: "300ms" }}>
-          <Stat value="27" label={t("stats.componentsLabel")} />
+          <Stat value={String(registryCounts.total)} label={t("stats.componentsLabel")} />
           <Stat value="MIT" label={t("stats.licenceLabel")} />
           <Stat value="0" label={t("stats.depsLabel")} />
           <Stat value={t("stats.countryValue")} label={t("stats.countryLabel")} />
@@ -188,7 +222,7 @@ export default async function HomePage({
       </section>
 
       {/* ── Categories ───────────────────────────────────────── */}
-      <section className="mx-auto max-w-[1120px] px-6 py-24 md:px-16">
+      <section className="site-container py-24">
         <h2 className="text-3xl font-semibold md:text-4xl">{t("registry.title")}</h2>
         <p className="mt-3 max-w-[560px] text-base leading-relaxed text-muted-foreground">
           {t("registry.intro")}
@@ -199,28 +233,28 @@ export default async function HomePage({
             title={t("registry.primitives.title")}
             description={t("registry.primitives.description")}
             href={p("/docs/components/button")}
-            count={12}
+            count={registryCounts.primitives}
             browseLabel={t("registry.browse")}
           />
           <CategoryCard
             title={t("registry.blocks.title")}
             description={t("registry.blocks.description")}
             href={p("/docs/components/app-shell")}
-            count={8}
+            count={registryCounts.blocks}
             browseLabel={t("registry.browse")}
           />
           <CategoryCard
             title={t("registry.effects.title")}
             description={t("registry.effects.description")}
             href={p("/docs/components/shimmer-button")}
-            count={7}
+            count={registryCounts.effects}
             browseLabel={t("registry.browse")}
           />
         </div>
       </section>
 
       {/* ── Why ──────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-[1120px] px-6 pb-24 md:px-16">
+      <section className="site-container pb-24">
         <h2 className="mb-10 text-3xl font-semibold md:text-4xl">
           {t("features.title")}
         </h2>
@@ -254,7 +288,7 @@ export default async function HomePage({
 
       {/* ── Footer ───────────────────────────────────────────── */}
       <footer className="border-t border-border">
-        <div className="mx-auto flex max-w-[1120px] flex-col gap-4 px-6 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between md:px-16">
+        <div className="site-container flex flex-col gap-4 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <span>
             fasla.dev ·{" "}
             <Link

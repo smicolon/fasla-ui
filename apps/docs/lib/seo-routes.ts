@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { locales, defaultLocale, type Locale } from "@/i18n/routing"
+import { registryCounts } from "@/lib/registry"
 
 export const SITE_URL = "https://ui.smicolon.com"
 
@@ -11,6 +12,21 @@ type CoreRoute = {
   title: string
   description: string
   h1: string
+  /** Arabic title and description, for routes whose page body is Arabic on /ar. */
+  ar?: { title: string; description: string }
+}
+
+/** Arabic counted noun, matching the plural forms of home.eyebrow in ar.json. */
+function arabicComponentCount(count: number): string {
+  const forms: Record<Intl.LDMLPluralRule, string> = {
+    zero: "لا مكوّنات",
+    one: "مكوّناً واحداً",
+    two: "مكوّنين",
+    few: `${count} مكوّنات`,
+    many: `${count} مكوّناً`,
+    other: `${count} مكوّن`,
+  }
+  return forms[new Intl.PluralRules("ar").select(count)]
 }
 
 type ComponentRoute = {
@@ -29,9 +45,12 @@ export const routes = [
     kind: "core",
     path: "/",
     title: "Fasla — React Component Library by Smicolon GmbH",
-    description:
-      "28 accessible React components — primitives, application blocks and motion effects for Tailwind CSS. The CLI copies the source into your project. MIT-licensed core.",
+    description: `${registryCounts.total} accessible React components — primitives, application blocks and motion effects for Tailwind CSS. The CLI copies the source into your project. MIT-licensed core.`,
     h1: "Add a component،own the source.",
+    ar: {
+      title: "فاصلة — مكتبة مكوّنات React من Smicolon GmbH",
+      description: `مكتبة React تضمّ ${arabicComponentCount(registryCounts.total)} تراعي الوصولية: مكوّنات أساسية وكتل تطبيقات وتأثيرات حركية مبنيّة على Tailwind CSS. تنسخ أداة الأوامر الشيفرة المصدرية إلى مشروعك. النواة برخصة MIT.`,
+    },
   },
   {
     kind: "core",
@@ -40,6 +59,11 @@ export const routes = [
     description:
       "Explore Fasla documentation for reusable React primitives, application blocks, animated effects, and copy-paste implementation guidance.",
     h1: "Introduction",
+    ar: {
+      title: "توثيق فاصلة: مكوّنات React والكتل",
+      description:
+        "استكشف توثيق فاصلة: مكوّنات React أساسية قابلة لإعادة الاستخدام، وكتل تطبيقات، وتأثيرات حركية، وإرشادات تطبيق جاهزة للنسخ واللصق.",
+    },
   },
   {
     kind: "core",
@@ -330,6 +354,10 @@ export function metadataForRoute(path: RoutePath, locale: Locale = defaultLocale
   }
 
   const canonical = new URL(localisedPath(path, locale), SITE_URL).toString()
+  // Component and installation pages are still English on /ar, so their
+  // metadata stays English there too, matching the page it describes.
+  const { title, description } =
+    locale === "ar" && "ar" in route && route.ar ? route.ar : route
 
   // hreflang tells a crawler these are the same page in another language, and
   // x-default names the one to serve when no language matches.
@@ -337,25 +365,36 @@ export function metadataForRoute(path: RoutePath, locale: Locale = defaultLocale
     locales.map((l) => [l, new URL(localisedPath(path, l), SITE_URL).toString()]),
   )
   languages["x-default"] = new URL(localisedPath(path, defaultLocale), SITE_URL).toString()
-  const image = new URL("/smicolon-icon.png", SITE_URL).toString()
+  // The RTL lockup is its own drawing, not a mirrored copy, so each direction
+  // shares its own card.
+  const image = new URL(
+    locale === "ar" ? "/brand/fasla-og-rtl.png" : "/brand/fasla-og.png",
+    SITE_URL,
+  ).toString()
 
   return {
-    title: route.title,
-    description: route.description,
+    title,
+    description,
     alternates: { canonical, languages },
-    icons: { icon: "/favicon.ico" },
+    icons: {
+      icon: [
+        { url: "/brand/fasla-favicon.svg", type: "image/svg+xml" },
+        { url: "/favicon.ico", sizes: "48x48" },
+      ],
+    },
     openGraph: {
-      title: route.title,
-      description: route.description,
+      title,
+      description,
       type: "website",
+      locale: locale === "ar" ? "ar_AR" : "en_US",
       url: canonical,
       siteName: "Fasla",
-      images: [{ url: image, alt: "Fasla by Smicolon" }],
+      images: [{ url: image, alt: locale === "ar" ? "فاصلة من Smicolon" : "Fasla by Smicolon" }],
     },
     twitter: {
       card: "summary_large_image",
-      title: route.title,
-      description: route.description,
+      title,
+      description,
       images: [image],
     },
   }

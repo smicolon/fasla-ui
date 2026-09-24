@@ -102,7 +102,8 @@
       "effects": "Effects",
       "introduction": "Introduction",
       "installation": "Installation",
-      "playground": "Component Playground"
+      "playground": "Component Playground",
+      "menu": "Docs menu"
     },
     "onThisPage": "On this page",
     "copyCode": "Copy code",
@@ -123,6 +124,11 @@
         "customizable": "<strong>Customizable</strong> — built with Tailwind CSS, easy to customize"
       }
     }
+  },
+  "copyCommand": {
+    "copy": "Copy {command} to clipboard",
+    "copied": "Copied to clipboard",
+    "status": "Copied"
   },
   "footer": {
     "attribution": "fasla.dev · by Smicolon GmbH",

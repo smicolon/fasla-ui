@@ -29,8 +29,8 @@ const HeaderContent = () => (
 export default function AppShellPage() {
   const t = useTranslations("docs.sections")
   return (
-    <div className="container py-8">
-      <div className="mx-auto max-w-[980px]">
+    <div>
+      <div>
         <div className="space-y-2">
           <h1 className="text-4xl font-bold">AppShell</h1>
           <p className="text-lg text-muted-foreground">
@@ -88,9 +88,9 @@ export function Layout() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b">
-                    <th className="px-4 py-2 text-left font-semibold">Prop</th>
-                    <th className="px-4 py-2 text-left font-semibold">Type</th>
-                    <th className="px-4 py-2 text-left font-semibold">Default</th>
+                    <th className="px-4 py-2 text-start font-semibold">Prop</th>
+                    <th className="px-4 py-2 text-start font-semibold">Type</th>
+                    <th className="px-4 py-2 text-start font-semibold">Default</th>
                   </tr>
                 </thead>
                 <tbody>

@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useTranslations } from "next-intl"
 
 interface ComponentPreviewProps {
   children: React.ReactNode
@@ -9,7 +10,9 @@ interface ComponentPreviewProps {
 
 export function ComponentPreview({ children, className }: ComponentPreviewProps) {
   return (
-    <div className={`relative rounded-lg border bg-background p-6 ${className || ""}`}>
+    // A live demo: its headings belong to the component, not the page, so the
+    // table of contents skips them.
+    <div data-toc-ignore className={`relative rounded-lg border bg-background p-6 ${className || ""}`}>
       <div className="flex items-center justify-center">{children}</div>
     </div>
   )
@@ -22,6 +25,7 @@ interface CodeBlockProps {
 
 export function CodeBlock({ children, language = "tsx" }: CodeBlockProps) {
   const [copied, setCopied] = React.useState(false)
+  const t = useTranslations("docs")
 
   const copy = () => {
     navigator.clipboard.writeText(children)
@@ -30,7 +34,9 @@ export function CodeBlock({ children, language = "tsx" }: CodeBlockProps) {
   }
 
   return (
-    <div className="relative">
+    // Code reads left to right in both directions, so the block keeps its own
+    // LTR order in Arabic; otherwise the copy button lands on top of the code.
+    <div dir="ltr" className="relative">
       <div className="rounded-lg bg-terminal border border-terminal-border overflow-hidden">
         {/* Terminal header */}
         <div className="flex items-center gap-2 px-4 py-2 bg-foreground/[0.04] border-b border-terminal-border">
@@ -39,7 +45,7 @@ export function CodeBlock({ children, language = "tsx" }: CodeBlockProps) {
             <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
             <div className="h-3 w-3 rounded-full bg-green-500/80" />
           </div>
-          <span className="text-xs text-terminal-muted ml-2">{language}</span>
+          <span className="text-xs text-terminal-muted ms-2">{language}</span>
         </div>
         <pre className="overflow-x-auto p-4">
           <code className="text-sm text-green-400 font-mono">{children}</code>
@@ -47,9 +53,9 @@ export function CodeBlock({ children, language = "tsx" }: CodeBlockProps) {
       </div>
       <button
         onClick={copy}
-        className="absolute right-4 top-12 rounded-md bg-foreground/10 px-2 py-1 text-xs text-terminal-foreground hover:bg-foreground/20 transition-colors"
+        className="absolute end-4 top-12 rounded-md bg-foreground/10 px-2 py-1 text-xs text-terminal-foreground hover:bg-foreground/20 transition-colors"
       >
-        {copied ? "Copied!" : "Copy"}
+        {copied ? t("copied") : t("copyCode")}
       </button>
     </div>
   )

@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useTranslations } from "next-intl"
 
 /**
  * The hero's install command. A command you cannot copy is a picture of a
@@ -11,6 +12,7 @@ import { useEffect, useState } from "react"
  */
 export function CopyCommand({ command }: { command: string }) {
   const [copied, setCopied] = useState(false)
+  const t = useTranslations("copyCommand")
 
   useEffect(() => {
     if (!copied) return
@@ -29,17 +31,20 @@ export function CopyCommand({ command }: { command: string }) {
   }
 
   return (
+    // A shell command is code: the prompt leads it in both directions, so the
+    // button keeps its own LTR order inside an RTL page.
     <button
       type="button"
+      dir="ltr"
       onClick={copy}
-      aria-label={copied ? "Copied to clipboard" : `Copy ${command} to clipboard`}
-      className="group inline-flex items-center gap-3 rounded-lg border border-border bg-secondary px-4 py-3 text-left transition-colors hover:border-foreground/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fasla-red focus-visible:ring-offset-2"
+      aria-label={copied ? t("copied") : t("copy", { command })}
+      className="group inline-flex items-center gap-3 rounded-lg border border-border bg-secondary px-4 py-3 text-start transition-colors hover:border-foreground/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fasla-red focus-visible:ring-offset-2"
     >
       <span aria-hidden="true" className="select-none font-mono text-[15px] text-muted-foreground">
         $
       </span>
       <span className="font-mono text-[15px] text-foreground">{command}</span>
-      <span aria-hidden="true" className="ml-1 text-muted-foreground transition-colors group-hover:text-foreground">
+      <span aria-hidden="true" className="ms-1 text-muted-foreground transition-colors group-hover:text-foreground">
         {copied ? (
           <svg className="h-4 w-4 text-fasla-red" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
             <path d="M20 6L9 17l-5-5" strokeLinecap="round" strokeLinejoin="round" />
@@ -52,7 +57,7 @@ export function CopyCommand({ command }: { command: string }) {
         )}
       </span>
       <span role="status" aria-live="polite" className="sr-only">
-        {copied ? "Copied" : ""}
+        {copied ? t("status") : ""}
       </span>
     </button>
   )

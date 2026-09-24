@@ -76,6 +76,10 @@ Fasla apart.
   component showcase.
 - **Component status lives in the Figma page names** and is indexed in `design/index-atoms.md`.
   That file is generated and dated, so check its date before trusting it.
+- **Figma and code are out of step for now, on purpose.** The code components are being rebuilt
+  to match Figma, and some components that exist in Figma are not built in code yet. Differences
+  between Figma and code are expected until the rebuild lands. Don't report them as parity
+  defects.
 
 ## Capabilities and Constraints
 
@@ -124,7 +128,8 @@ Fasla apart.
 2. **Serve both audiences with one system.** What Smicolon ships to clients and what external
    teams adopt is the same product. There is no internal fork.
 3. **Figma and code are one source of truth.** A token, variant or state that exists on one side
-   and not the other is a defect, not a backlog item.
+   and not the other is a defect, not a backlog item. The exception is the rebuild now under way
+   (see Operating Context).
 4. **Completeness over novelty.** Every component ships all its states, both themes and both
    directions before it counts as done. Build from existing parts. Add a new pattern only when it
    has been asked for, or when it is reused across projects.
@@ -146,5 +151,7 @@ Fasla apart.
   - `Button` Solid/primary is unreadable in Dark mode.
   - No formal audit has been run yet. Contrast pairs are inherited from shadcn defaults, not
     measured.
-- **Inclusion means Arabic readers get equal quality**: correct mirroring, Arabic line heights of
-  1.7–1.8 for body copy, and proper plural agreement across all six Arabic plural forms.
+- **Inclusion means Arabic readers get equal quality**: correct mirroring, the Arabic line height
+  set by the Cairo type ramp, and proper plural agreement across all six Arabic plural forms.
+  The current Cairo line height has been reviewed and approved. Do not flag it in critiques or
+  audits.
