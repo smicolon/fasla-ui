@@ -92,7 +92,6 @@ const meta: Meta<BadgeStoryArgs> = {
       control: "boolean",
       description:
         "Story-only. Passes `onClose`, which renders the close button; presses are logged in the Actions panel.",
-      table: { category: "Story" },
     },
     onClose: { control: false },
     closeLabel: {
