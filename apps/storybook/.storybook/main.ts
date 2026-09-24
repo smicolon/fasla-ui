@@ -20,6 +20,7 @@ const explorerCanonical = "https://ui.smicolon.com/components/"
 
 function appendManagerMetadata(head: string) {
   return `${head}
+    <link rel="icon" type="image/svg+xml" href="/brand/fasla-favicon.svg">
     <meta name="description" content="${explorerDescription}">
     <link rel="canonical" href="${explorerCanonical}">
     <meta property="og:type" content="website">

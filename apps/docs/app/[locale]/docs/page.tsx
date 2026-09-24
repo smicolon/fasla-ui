@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { componentRouteGroups } from "@/lib/seo-routes"
+import { registryCounts } from "@/lib/registry"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 
 /** Category keys as they appear in seo-routes, mapped to message keys. */
@@ -58,7 +59,7 @@ export default async function DocsPage({
               </span>
               <span>
                 {key === "components"
-                  ? t.rich(`features.${key}`, { ...rich, count: 27 })
+                  ? t.rich(`features.${key}`, { ...rich, count: registryCounts.total })
                   : t.rich(`features.${key}`, rich)}
               </span>
             </li>
@@ -95,7 +96,7 @@ export default async function DocsPage({
       </div>
 
       <div className="rounded-lg border border-fasla-red/20 bg-fasla-red/5 p-6">
-        <h3 className="font-semibold">{t("getStartedTitle")}</h3>
+        <h2 className="text-2xl font-semibold">{t("getStartedTitle")}</h2>
         <p className="mt-2 text-sm text-muted-foreground">{t("getStartedBody")}</p>
         <Link
           href={p("/docs/installation/")}

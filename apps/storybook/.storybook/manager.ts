@@ -6,7 +6,8 @@ addons.setConfig({
     base: "light",
     brandTitle: "Fasla Component Explorer",
     brandUrl: "https://ui.smicolon.com/components/",
-    brandImage: "/components/Logo-dark.svg",
+    // staticDirs serves apps/docs/public at the root.
+    brandImage: "/brand/fasla-lockup-ltr.svg",
     brandTarget: "_self",
   }),
 })
