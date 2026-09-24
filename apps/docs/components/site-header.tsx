@@ -18,13 +18,13 @@ export function SiteHeader() {
   const p = (path: string) => `/${locale}${path}`
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-4">
+    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4">
       <nav className="flex items-center gap-2 rounded-full border border-border/40 bg-background/80 px-3 sm:px-4 py-2 shadow-lg shadow-foreground/5 backdrop-blur-md">
         {/* Logo */}
         <Link
           href={p("")}
           aria-label={t("home")}
-          className="flex items-center pr-4 sm:pr-6 border-r border-border/40 mr-1 sm:mr-2"
+          className="flex items-center pe-4 sm:pe-6 border-e border-border/40 me-1 sm:me-2"
         >
           {/* Drawn lockup, never re-set type (§11). 30px tall = 93px wide, above the
               90px minimum (§10). Wordmark is ink on light, white on dark (§08). */}
@@ -77,7 +77,7 @@ export function SiteHeader() {
         </div>
 
         {/* Right: Theme + Get Started + Mobile Menu */}
-        <div className="flex items-center gap-1 sm:gap-2 pl-1 sm:pl-2 border-l border-border/40">
+        <div className="flex items-center gap-1 sm:gap-2 ps-1 sm:ps-2 border-s border-border/40">
           <LocaleSwitcher />
           <ThemeToggle />
           <Link
@@ -108,7 +108,7 @@ export function SiteHeader() {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-4 right-4 mt-2 rounded-2xl border border-border/40 bg-background/95 backdrop-blur-md shadow-lg p-4 animate-in fade-in slide-in-from-top-2">
+        <div className="md:hidden absolute inset-x-4 top-full mt-2 rounded-2xl border border-border/40 bg-background/95 backdrop-blur-md shadow-lg p-4 animate-in fade-in slide-in-from-top-2">
           <div className="flex flex-col gap-1">
             <Link
               href={p("/docs")}
@@ -147,7 +147,7 @@ export function SiteHeader() {
                 className="flex items-center justify-center gap-2 rounded-xl border border-foreground px-4 py-3 text-sm font-medium text-foreground"
               >
                 {t("getStarted")}
-                <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="h-4 w-4 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </Link>

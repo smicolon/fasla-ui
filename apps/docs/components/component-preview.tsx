@@ -39,7 +39,7 @@ export function CodeBlock({ children, language = "tsx" }: CodeBlockProps) {
             <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
             <div className="h-3 w-3 rounded-full bg-green-500/80" />
           </div>
-          <span className="text-xs text-terminal-muted ml-2">{language}</span>
+          <span className="text-xs text-terminal-muted ms-2">{language}</span>
         </div>
         <pre className="overflow-x-auto p-4">
           <code className="text-sm text-green-400 font-mono">{children}</code>
@@ -47,7 +47,7 @@ export function CodeBlock({ children, language = "tsx" }: CodeBlockProps) {
       </div>
       <button
         onClick={copy}
-        className="absolute right-4 top-12 rounded-md bg-foreground/10 px-2 py-1 text-xs text-terminal-foreground hover:bg-foreground/20 transition-colors"
+        className="absolute end-4 top-12 rounded-md bg-foreground/10 px-2 py-1 text-xs text-terminal-foreground hover:bg-foreground/20 transition-colors"
       >
         {copied ? "Copied!" : "Copy"}
       </button>

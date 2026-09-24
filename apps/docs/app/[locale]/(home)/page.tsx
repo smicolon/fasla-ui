@@ -32,7 +32,7 @@ function Phrase({ dir, children }: { dir: "ltr" | "rtl"; children: React.ReactNo
 
 function Stat({ value, label }: { value: string; label: React.ReactNode }) {
   return (
-    <div className="border-b border-border px-0 py-6 sm:px-7 lg:border-b-0 lg:border-r lg:last:border-r-0 [&:first-child]:pl-0 [&:nth-child(2)]:border-b lg:[&:nth-child(2)]:border-b-0">
+    <div className="border-b border-border px-0 py-6 sm:px-7 lg:border-b-0 lg:border-e lg:last:border-e-0 [&:first-child]:ps-0 [&:nth-child(2)]:border-b lg:[&:nth-child(2)]:border-b-0">
       <div className="text-[28px] font-semibold">{value}</div>
       <div className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">{label}</div>
     </div>

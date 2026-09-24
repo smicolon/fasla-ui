@@ -85,10 +85,10 @@ export function Example() {
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b">
-                    <th className="px-4 py-2 text-left font-semibold">Prop</th>
-                    <th className="px-4 py-2 text-left font-semibold">Type</th>
-                    <th className="px-4 py-2 text-left font-semibold">Default</th>
-                    <th className="px-4 py-2 text-left font-semibold">Description</th>
+                    <th className="px-4 py-2 text-start font-semibold">Prop</th>
+                    <th className="px-4 py-2 text-start font-semibold">Type</th>
+                    <th className="px-4 py-2 text-start font-semibold">Default</th>
+                    <th className="px-4 py-2 text-start font-semibold">Description</th>
                   </tr>
                 </thead>
                 <tbody>
