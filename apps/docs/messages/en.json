@@ -124,6 +124,11 @@
       }
     }
   },
+  "copyCommand": {
+    "copy": "Copy {command} to clipboard",
+    "copied": "Copied to clipboard",
+    "status": "Copied"
+  },
   "footer": {
     "attribution": "fasla.dev · by Smicolon GmbH",
     "by": "by Smicolon GmbH",

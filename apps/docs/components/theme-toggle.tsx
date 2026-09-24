@@ -2,9 +2,11 @@
 
 import * as React from "react"
 import { useTheme } from "next-themes"
+import { useTranslations } from "next-intl"
 
 export function ThemeToggle() {
   const { setTheme, theme } = useTheme()
+  const t = useTranslations("nav")
 
   return (
     <button
@@ -43,7 +45,7 @@ export function ThemeToggle() {
       >
         <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
       </svg>
-      <span className="sr-only">Toggle theme</span>
+      <span className="sr-only">{t("toggleTheme")}</span>
     </button>
   )
 }

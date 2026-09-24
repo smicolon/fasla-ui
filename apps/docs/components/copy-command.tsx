@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useTranslations } from "next-intl"
 
 /**
  * The hero's install command. A command you cannot copy is a picture of a
@@ -11,6 +12,7 @@ import { useEffect, useState } from "react"
  */
 export function CopyCommand({ command }: { command: string }) {
   const [copied, setCopied] = useState(false)
+  const t = useTranslations("copyCommand")
 
   useEffect(() => {
     if (!copied) return
@@ -35,7 +37,7 @@ export function CopyCommand({ command }: { command: string }) {
       type="button"
       dir="ltr"
       onClick={copy}
-      aria-label={copied ? "Copied to clipboard" : `Copy ${command} to clipboard`}
+      aria-label={copied ? t("copied") : t("copy", { command })}
       className="group inline-flex items-center gap-3 rounded-lg border border-border bg-secondary px-4 py-3 text-start transition-colors hover:border-foreground/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fasla-red focus-visible:ring-offset-2"
     >
       <span aria-hidden="true" className="select-none font-mono text-[15px] text-muted-foreground">
@@ -55,7 +57,7 @@ export function CopyCommand({ command }: { command: string }) {
         )}
       </span>
       <span role="status" aria-live="polite" className="sr-only">
-        {copied ? "Copied" : ""}
+        {copied ? t("status") : ""}
       </span>
     </button>
   )

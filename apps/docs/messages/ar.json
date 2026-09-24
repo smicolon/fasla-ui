@@ -124,6 +124,11 @@
       }
     }
   },
+  "copyCommand": {
+    "copy": "انسخ الأمر {command} إلى الحافظة",
+    "copied": "تم النسخ إلى الحافظة",
+    "status": "تم النسخ"
+  },
   "footer": {
     "attribution": "fasla.dev · من Smicolon GmbH",
     "by": "من Smicolon GmbH",

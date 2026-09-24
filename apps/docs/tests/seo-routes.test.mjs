@@ -147,3 +147,20 @@ describe("SEO route catalog", () => {
     expect(html).not.toContain("<h1")
   })
 })
+
+describe("Arabic route metadata", () => {
+  test("serves Arabic metadata on /ar for the pages whose body is Arabic", async () => {
+    const { metadataForRoute } = await import("../lib/seo-routes")
+    const arabic = /[؀-ۿ]/
+
+    for (const route of ["/", "/docs/"]) {
+      const en = metadataForRoute(route, "en")
+      const ar = metadataForRoute(route, "ar")
+      expect(ar.title).toMatch(arabic)
+      expect(ar.description).toMatch(arabic)
+      expect(en.title).not.toMatch(arabic)
+      expect(ar.openGraph).toMatchObject({ title: ar.title, locale: "ar_AR" })
+      expect(ar.twitter).toMatchObject({ title: ar.title })
+    }
+  })
+})

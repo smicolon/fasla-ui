@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useTranslations } from "next-intl"
 
 interface ComponentPreviewProps {
   children: React.ReactNode
@@ -22,6 +23,7 @@ interface CodeBlockProps {
 
 export function CodeBlock({ children, language = "tsx" }: CodeBlockProps) {
   const [copied, setCopied] = React.useState(false)
+  const t = useTranslations("docs")
 
   const copy = () => {
     navigator.clipboard.writeText(children)
@@ -49,7 +51,7 @@ export function CodeBlock({ children, language = "tsx" }: CodeBlockProps) {
         onClick={copy}
         className="absolute end-4 top-12 rounded-md bg-foreground/10 px-2 py-1 text-xs text-terminal-foreground hover:bg-foreground/20 transition-colors"
       >
-        {copied ? "Copied!" : "Copy"}
+        {copied ? t("copied") : t("copyCode")}
       </button>
     </div>
   )
