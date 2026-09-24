@@ -337,13 +337,23 @@ export function metadataForRoute(path: RoutePath, locale: Locale = defaultLocale
     locales.map((l) => [l, new URL(localisedPath(path, l), SITE_URL).toString()]),
   )
   languages["x-default"] = new URL(localisedPath(path, defaultLocale), SITE_URL).toString()
-  const image = new URL("/smicolon-icon.png", SITE_URL).toString()
+  // The RTL lockup is its own drawing, not a mirrored copy, so each direction
+  // shares its own card.
+  const image = new URL(
+    locale === "ar" ? "/brand/fasla-og-rtl.png" : "/brand/fasla-og.png",
+    SITE_URL,
+  ).toString()
 
   return {
     title: route.title,
     description: route.description,
     alternates: { canonical, languages },
-    icons: { icon: "/favicon.ico" },
+    icons: {
+      icon: [
+        { url: "/brand/fasla-favicon.svg", type: "image/svg+xml" },
+        { url: "/favicon.ico", sizes: "48x48" },
+      ],
+    },
     openGraph: {
       title: route.title,
       description: route.description,
