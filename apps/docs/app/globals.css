@@ -89,7 +89,9 @@
     --terminal: #0a0a0a;
     --terminal-foreground: oklch(1 0 0 / 88%);
     --terminal-muted: oklch(1 0 0 / 46%);
-    --terminal-subtle: oklch(1 0 0 / 30%);
+    /* Subtle carries 11px text, so it may not drop below muted: 30% measured
+       2.6:1 on the terminal. 46% is 4.7:1 on both grounds (#0a0a0a, #171717). */
+    --terminal-subtle: var(--terminal-muted);
     --terminal-border: oklch(1 0 0 / 12%);
     --terminal-accent: #009ed4;
     --terminal-caret: oklch(1 0 0 / 70%);

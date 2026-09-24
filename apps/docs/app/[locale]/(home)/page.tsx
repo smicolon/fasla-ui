@@ -62,9 +62,11 @@ function CategoryCard({
         <span className="font-mono text-sm text-muted-foreground">{count}</span>
       </div>
       <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p>
-      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-fasla-red">
+      {/* Red text on the dark ground is 4.06:1, under AA, so in Dark the label
+          is foreground and only the arrow (non-text, 3:1) stays red. */}
+      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-fasla-red dark:text-foreground">
         {browseLabel}
-        <svg className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
+        <svg className="h-3.5 w-3.5 text-fasla-red transition-transform duration-200 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
           <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h13M12 5l7 7-7 7" />
         </svg>
       </span>
