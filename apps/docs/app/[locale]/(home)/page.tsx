@@ -31,9 +31,11 @@ function Phrase({ dir, children }: { dir: "ltr" | "rtl"; children: React.ReactNo
   )
 }
 
+// Two columns below lg, four from lg: the cell that opens each row sits on the
+// container edge, so odd cells drop their start padding until the row is four wide.
 function Stat({ value, label }: { value: string; label: React.ReactNode }) {
   return (
-    <div className="border-b border-border px-0 py-6 sm:px-7 lg:border-b-0 lg:border-e lg:last:border-e-0 [&:first-child]:ps-0 [&:nth-child(2)]:border-b lg:[&:nth-child(2)]:border-b-0">
+    <div className="border-b border-border px-0 py-6 sm:px-7 lg:border-b-0 lg:border-e lg:last:border-e-0 [&:nth-child(odd)]:ps-0 lg:[&:nth-child(3)]:ps-7 [&:nth-child(2)]:border-b lg:[&:nth-child(2)]:border-b-0">
       <div className="text-[28px] font-semibold">{value}</div>
       <div className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">{label}</div>
     </div>
@@ -110,7 +112,7 @@ export default async function HomePage({
           (§02.02). Everything here is turned off by prefers-reduced-motion,
           handled globally in globals.css.
       ──────────────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-[1220px] px-6 pb-4 pt-20 md:px-12 md:pt-28">
+      <section className="site-container pb-4 pt-20 md:pt-28">
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:gap-16">
 
           {/* ── the claim ── */}
@@ -217,7 +219,7 @@ export default async function HomePage({
       </section>
 
       {/* ── Categories ───────────────────────────────────────── */}
-      <section className="mx-auto max-w-[1120px] px-6 py-24 md:px-16">
+      <section className="site-container py-24">
         <h2 className="text-3xl font-semibold md:text-4xl">{t("registry.title")}</h2>
         <p className="mt-3 max-w-[560px] text-base leading-relaxed text-muted-foreground">
           {t("registry.intro")}
@@ -249,7 +251,7 @@ export default async function HomePage({
       </section>
 
       {/* ── Why ──────────────────────────────────────────────── */}
-      <section className="mx-auto max-w-[1120px] px-6 pb-24 md:px-16">
+      <section className="site-container pb-24">
         <h2 className="mb-10 text-3xl font-semibold md:text-4xl">
           {t("features.title")}
         </h2>
@@ -283,7 +285,7 @@ export default async function HomePage({
 
       {/* ── Footer ───────────────────────────────────────────── */}
       <footer className="border-t border-border">
-        <div className="mx-auto flex max-w-[1120px] flex-col gap-4 px-6 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between md:px-16">
+        <div className="site-container flex flex-col gap-4 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
           <span>
             fasla.dev ·{" "}
             <Link

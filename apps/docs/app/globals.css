@@ -413,6 +413,19 @@
    UTILITY CLASSES
    ============================================ */
 
+/* ============================================
+   SITE CONTAINER
+
+   One content width for every homepage band (hero, sections, footer), so
+   their edges line up. 1200px up to the 2xl breakpoint, then 1440px, so a
+   1920px screen is ~70% content instead of half. Padding is inside the width.
+   ============================================ */
+@layer components {
+  .site-container {
+    @apply mx-auto w-full max-w-[1200px] px-6 md:px-12 2xl:max-w-[1440px];
+  }
+}
+
 @layer utilities {
   .flex-center {
     @apply flex items-center justify-center;
