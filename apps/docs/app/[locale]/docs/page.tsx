@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { componentRouteGroups } from "@/lib/seo-routes"
+import { registryCounts } from "@/lib/registry"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 
 /** Category keys as they appear in seo-routes, mapped to message keys. */
@@ -58,7 +59,7 @@ export default async function DocsPage({
               </span>
               <span>
                 {key === "components"
-                  ? t.rich(`features.${key}`, { ...rich, count: 27 })
+                  ? t.rich(`features.${key}`, { ...rich, count: registryCounts.total })
                   : t.rich(`features.${key}`, rich)}
               </span>
             </li>

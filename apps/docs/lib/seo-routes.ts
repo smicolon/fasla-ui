@@ -1,5 +1,6 @@
 import type { Metadata } from "next"
 import { locales, defaultLocale, type Locale } from "@/i18n/routing"
+import { registryCounts } from "@/lib/registry"
 
 export const SITE_URL = "https://ui.smicolon.com"
 
@@ -29,8 +30,7 @@ export const routes = [
     kind: "core",
     path: "/",
     title: "Fasla — React Component Library by Smicolon GmbH",
-    description:
-      "28 accessible React components — primitives, application blocks and motion effects for Tailwind CSS. The CLI copies the source into your project. MIT-licensed core.",
+    description: `${registryCounts.total} accessible React components — primitives, application blocks and motion effects for Tailwind CSS. The CLI copies the source into your project. MIT-licensed core.`,
     h1: "Add a component،own the source.",
   },
   {

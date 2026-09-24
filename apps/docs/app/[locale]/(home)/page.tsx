@@ -3,6 +3,7 @@ import Image from "next/image"
 import { CopyCommand } from "@/components/copy-command"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { localeDirection, type Locale } from "@/i18n/routing"
+import { registryCounts } from "@/lib/registry"
 
 /**
  * Home page — Fasla Brand Identity V2.5.
@@ -124,7 +125,7 @@ export default async function HomePage({
                   dir === "rtl" ? "font-arabic" : "font-mono tracking-wide"
                 }`}
               >
-                {t("eyebrow", { count: 27 })}
+                {t("eyebrow", { count: registryCounts.total })}
               </span>
             </div>
 
@@ -208,7 +209,7 @@ export default async function HomePage({
 
         {/* Proof row — one claim, one proof (§04) */}
         <div className="rise mt-16 grid grid-cols-2 border-t border-border lg:grid-cols-4" style={{ animationDelay: "300ms" }}>
-          <Stat value="27" label={t("stats.componentsLabel")} />
+          <Stat value={String(registryCounts.total)} label={t("stats.componentsLabel")} />
           <Stat value="MIT" label={t("stats.licenceLabel")} />
           <Stat value="0" label={t("stats.depsLabel")} />
           <Stat value={t("stats.countryValue")} label={t("stats.countryLabel")} />
@@ -227,21 +228,21 @@ export default async function HomePage({
             title={t("registry.primitives.title")}
             description={t("registry.primitives.description")}
             href={p("/docs/components/button")}
-            count={12}
+            count={registryCounts.primitives}
             browseLabel={t("registry.browse")}
           />
           <CategoryCard
             title={t("registry.blocks.title")}
             description={t("registry.blocks.description")}
             href={p("/docs/components/app-shell")}
-            count={8}
+            count={registryCounts.blocks}
             browseLabel={t("registry.browse")}
           />
           <CategoryCard
             title={t("registry.effects.title")}
             description={t("registry.effects.description")}
             href={p("/docs/components/shimmer-button")}
-            count={7}
+            count={registryCounts.effects}
             browseLabel={t("registry.browse")}
           />
         </div>
