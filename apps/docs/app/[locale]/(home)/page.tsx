@@ -31,11 +31,14 @@ function Phrase({ dir, children }: { dir: "ltr" | "rtl"; children: React.ReactNo
   )
 }
 
-// Two columns below lg, four from lg: the cell that opens each row sits on the
-// container edge, so odd cells drop their start padding until the row is four wide.
+// Two columns below lg, four from lg. Every cell keeps 28px on both sides of a
+// divider (12px between the two columns on a phone); the cells on the
+// container's edges sit flush with it. The edge
+// rules are scoped to non-overlapping breakpoints, so no two of them compete
+// for the same cell (they did, and cell 3 lost its padding beside a divider).
 function Stat({ value, label }: { value: string; label: React.ReactNode }) {
   return (
-    <div className="border-b border-border px-0 py-6 sm:px-7 lg:border-b-0 lg:border-e lg:last:border-e-0 [&:nth-child(odd)]:ps-0 lg:[&:nth-child(3)]:ps-7 [&:nth-child(2)]:border-b lg:[&:nth-child(2)]:border-b-0">
+    <div className="border-b border-border px-3 py-6 sm:px-7 max-lg:[&:nth-child(odd)]:ps-0 max-lg:[&:nth-child(even)]:pe-0 lg:border-b-0 lg:border-e lg:first:ps-0 lg:last:border-e-0 lg:last:pe-0 [&:nth-child(2)]:border-b lg:[&:nth-child(2)]:border-b-0">
       <div className="text-[28px] font-semibold">{value}</div>
       <div className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">{label}</div>
     </div>
