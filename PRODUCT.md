@@ -17,6 +17,9 @@ Two audiences, served equally. Decisions have to work for both.
   The ones who get the most from it ship in both **Arabic and English**. Most would otherwise have
   to design their product twice or bolt RTL on after launch.
 
+**The primary market is the MENA region.** Fasla is aimed first at product teams in the Middle
+East and North Africa, where Arabic is a launch language, not a later localisation.
+
 Both groups use it in two places: **designers** in the Figma file, and **developers** through the
 shadcn-compatible registry, the `fasla-ui` CLI and the npm package. A third consumer is coming
 into scope: **AI agents** that pick components and fill them with content on a person's behalf.
@@ -43,6 +46,9 @@ afterwards. It is a first-class direction:
 - `Direction = LTR / RTL` is a property of the component itself, not a separate file or port;
 - the Arabic type ramp is a 1:1 twin of the English one;
 - an RTL variant counts as part of the component, not downstream work.
+
+**The goal is to be the Arabic-first counterpart to shadcn/ui** for teams in the Middle East and
+North Africa: the same open, own-the-source model, with Arabic and RTL built in from the start.
 
 Two things support that claim. Neither stands in for it:
 
