@@ -96,7 +96,7 @@ export default async function DocsPage({
       </div>
 
       <div className="rounded-lg border border-fasla-red/20 bg-fasla-red/5 p-6">
-        <h3 className="font-semibold">{t("getStartedTitle")}</h3>
+        <h2 className="text-2xl font-semibold">{t("getStartedTitle")}</h2>
         <p className="mt-2 text-sm text-muted-foreground">{t("getStartedBody")}</p>
         <Link
           href={p("/docs/installation/")}
