@@ -34,7 +34,9 @@ export function CodeBlock({ children, language = "tsx" }: CodeBlockProps) {
   }
 
   return (
-    <div className="relative">
+    // Code reads left to right in both directions, so the block keeps its own
+    // LTR order in Arabic; otherwise the copy button lands on top of the code.
+    <div dir="ltr" className="relative">
       <div className="rounded-lg bg-terminal border border-terminal-border overflow-hidden">
         {/* Terminal header */}
         <div className="flex items-center gap-2 px-4 py-2 bg-foreground/[0.04] border-b border-terminal-border">
