@@ -7,7 +7,8 @@
 @layer base {
   :root {
     /* ── figma:theme:start · ⚪️ Light ──────────────────────────────────────
-       The 41 theme/* variables of the Figma "☾ Mode" collection, generated
+       The Figma "☾ Mode" variables — 41 theme/*, six Soft tints and, in
+       light only, one radius — generated
        from design/tokens/mode.json. Figma is the source of truth; do not
        hand-edit these. `bun run test` fails if they drift from the snapshot.
        Anything NOT from Figma belongs below the end marker and is
@@ -66,6 +67,17 @@
     --sidebar-accent-foreground: #171717;
     --sidebar-border: #e5e5e5;
     --sidebar-ring: #262626;
+
+    /* Soft tints — Figma opacity/*, the Badge Soft fill, laid over --card */
+    --soft-primary: rgb(23 23 23 / 10%);
+    --soft-secondary: rgb(244 244 245 / 60%);
+    --soft-info: rgb(2 132 199 / 10%);
+    --soft-success: rgb(22 163 74 / 10%);
+    --soft-warning: rgb(227 146 25 / 10%);
+    --soft-destructive: rgb(224 52 52 / 10%);
+
+    /* Radius — Figma border radius/sm; mode-independent, so light only */
+    --radius-sm: 6px;
     /* ── figma:theme:end ─────────────────────────────────────────────── */
 
     /* ── Storybook-only, not in Figma. Preserved across every token sync. ── */
@@ -75,7 +87,8 @@
 
   .dark {
     /* ── figma:theme:start · 🌑 Dark ──────────────────────────────────────
-       The 41 theme/* variables of the Figma "☾ Mode" collection, generated
+       The Figma "☾ Mode" variables — 41 theme/*, six Soft tints and, in
+       light only, one radius — generated
        from design/tokens/mode.json. Figma is the source of truth; do not
        hand-edit these. `bun run test` fails if they drift from the snapshot.
        Anything NOT from Figma belongs below the end marker and is
@@ -134,6 +147,14 @@
     --sidebar-accent-foreground: #fafafa;
     --sidebar-border: #404040;
     --sidebar-ring: #525252;
+
+    /* Soft tints — Figma opacity/*, the Badge Soft fill, laid over --card */
+    --soft-primary: rgb(250 250 250 / 10%);
+    --soft-secondary: rgb(244 244 245 / 60%);
+    --soft-info: rgb(2 132 199 / 10%);
+    --soft-success: rgb(22 163 74 / 10%);
+    --soft-warning: rgb(227 146 25 / 10%);
+    --soft-destructive: rgb(224 52 52 / 10%);
     /* ── figma:theme:end ─────────────────────────────────────────────── */
   }
 }

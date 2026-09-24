@@ -4,9 +4,9 @@
     "fileKey": "yGEQmCZOvs7KptsYUdB0Xg",
     "collectionId": "VariableCollectionId:82:3",
     "modes": { "light": "⚪️ Light", "dark": "🌑 Dark" },
-    "measured": "2026-09-23",
-    "count": 41,
-    "note": "Snapshot of the 41 theme/* variables in the ☾ Mode collection, aliases resolved to primitives. Figma is the source of truth; this file is the committed record of what it said when the two apps were last synced to it. `light`/`dark` are the exact CSS values both apps must declare — tokens/mode.test.ts asserts that. `via` records the alias chain, so a future drift diff shows whether a value changed or was re-aliased. Pin the collection id when re-reading: 41 of these names also exist in 🌈 Themes with a single mode, and a name-only lookup silently returns that copy. Resolve every alias hop in the same mode as the token: `custom/black` and `custom/white` are themselves ☾ Mode variables that swap in Dark (`custom/black` is white there), so resolving an intermediate hop in its default mode gives the Light value — that is how `destructive-foreground` dark was once recorded as #000000."
+    "measured": "2026-09-24",
+    "count": 47,
+    "note": "Snapshot of the 41 theme/* variables in the ☾ Mode collection, plus the six opacity/* tints the Badge Soft type is filled with (`soft-*`), aliases resolved to primitives. `radius` holds the one ☾ Mode radius a component binds that no Tailwind class gives in both apps, `border radius/sm`; it is mode-independent, so only the light block declares it. Figma is the source of truth; this file is the committed record of what it said when the two apps were last synced to it. `light`/`dark` are the exact CSS values both apps must declare — tokens/mode.test.ts asserts that. `via` records the alias chain, so a future drift diff shows whether a value changed or was re-aliased. Pin the collection id when re-reading: 41 of these names also exist in 🌈 Themes with a single mode, and a name-only lookup silently returns that copy. Resolve every alias hop in the same mode as the token: `custom/black` and `custom/white` are themselves ☾ Mode variables that swap in Dark (`custom/black` is white there), so resolving an intermediate hop in its default mode gives the Light value — that is how `destructive-foreground` dark was once recorded as #000000."
   },
   "tokens": {
     "background": {
@@ -225,6 +225,60 @@
       "light": "#262626",
       "dark": "#525252",
       "via": { "light": "colors/neutral/800", "dark": "colors/neutral/600" }
+    },
+    "soft-primary": {
+      "light": "rgb(23 23 23 / 10%)",
+      "dark": "rgb(250 250 250 / 10%)",
+      "via": {
+        "light": "opacity/primary/10 → opacity/primary/10 (raw)",
+        "dark": "opacity/primary/10 → opacity/primary-dark/10 (raw)"
+      }
+    },
+    "soft-secondary": {
+      "light": "rgb(244 244 245 / 60%)",
+      "dark": "rgb(244 244 245 / 60%)",
+      "via": {
+        "light": "opacity/secondary/60 → opacity/secondary/60 (raw)",
+        "dark": "opacity/secondary/60 → opacity/secondary/60 (raw)"
+      }
+    },
+    "soft-info": {
+      "light": "rgb(2 132 199 / 10%)",
+      "dark": "rgb(2 132 199 / 10%)",
+      "via": {
+        "light": "opacity/info/10 → opacity/info/10 (raw)",
+        "dark": "opacity/info/10 → opacity/info/10 (raw)"
+      }
+    },
+    "soft-success": {
+      "light": "rgb(22 163 74 / 10%)",
+      "dark": "rgb(22 163 74 / 10%)",
+      "via": {
+        "light": "opacity/success/10 → opacity/success/10 (raw)",
+        "dark": "opacity/success/10 → opacity/success/10 (raw)"
+      }
+    },
+    "soft-warning": {
+      "light": "rgb(227 146 25 / 10%)",
+      "dark": "rgb(227 146 25 / 10%)",
+      "via": {
+        "light": "opacity/warning/10 → opacity/warning/10 (raw)",
+        "dark": "opacity/warning/10 → opacity/warning/10 (raw)"
+      }
+    },
+    "soft-destructive": {
+      "light": "rgb(224 52 52 / 10%)",
+      "dark": "rgb(224 52 52 / 10%)",
+      "via": {
+        "light": "opacity/destructive/10 → opacity/destructive/10 (raw)",
+        "dark": "opacity/destructive/10 → opacity/destructive/10 (raw)"
+      }
+    }
+  },
+  "radius": {
+    "radius-sm": {
+      "value": "6px",
+      "via": "border radius/sm → border radius/sm (raw)"
     }
   }
 }
