@@ -68,7 +68,7 @@
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
-      "description": "A badge component for status indicators with multiple variants.",
+      "description": "A compact inline label for status, category or metadata: solid, soft and outline types in six semantic tones, with an optional icon, avatar and close button.",
       "dependencies": [
         "class-variance-authority"
       ],
