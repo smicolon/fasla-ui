@@ -25,7 +25,7 @@
       "title": "الطرفية",
       "cwd": "~/your-app",
       "resolved": "تم حلّ المكوّن في السجل",
-      "written": "button.tsx ← components/ui",
+      "written": "button.tsx → components/ui",
       "wired": "تم ربط cva و tailwind-merge",
       "ownedFile": "components/ui/button.tsx — لك",
       "ownership": "عدّله · غيّر اسمه · احذفه"

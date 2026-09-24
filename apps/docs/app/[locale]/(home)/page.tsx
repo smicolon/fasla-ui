@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { CopyCommand } from "@/components/copy-command"
 import { getTranslations, setRequestLocale } from "next-intl/server"
+import { localeDirection, type Locale } from "@/i18n/routing"
 
 /**
  * Home page — Fasla Brand Identity V2.5.
@@ -14,6 +15,20 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
  * Type is product tier: Geist and Geist Mono (§14).
  * Nothing decorative: "nothing is added because a surface looks empty" (§02.02).
  */
+
+/**
+ * Translated copy set inside a monospace surface. globals.css keeps every
+ * `.font-mono` element LTR in Arabic, which is right for code but reverses an
+ * Arabic phrase, so the phrase is isolated in its own direction and set in
+ * Cairo, the face that carries its glyphs.
+ */
+function Phrase({ dir, children }: { dir: "ltr" | "rtl"; children: React.ReactNode }) {
+  return (
+    <bdi dir={dir} className="rtl:font-arabic">
+      {children}
+    </bdi>
+  )
+}
 
 function Stat({ value, label }: { value: string; label: React.ReactNode }) {
   return (
@@ -79,6 +94,7 @@ export default async function HomePage({
   const tf = await getTranslations("footer")
   const tn = await getTranslations("nav")
   const p = (path: string) => `/${locale}${path}`
+  const dir = localeDirection[locale as Locale]
 
   return (
     <div>
@@ -99,7 +115,13 @@ export default async function HomePage({
             <div className="rise mb-7 flex items-center gap-2.5" style={{ animationDelay: "0ms" }}>
               {/* Comma at 26px tall = 13px wide, above the 12px minimum (§10) */}
               <Image src="/brand/fasla-comma.svg" alt="" width={13} height={26} className="h-[22px] w-auto" aria-hidden="true" />
-              <span className="font-mono text-[13px] tracking-wide text-muted-foreground">
+              {/* Not font-mono in Arabic: the mono rule would force it LTR, and
+                  Arabic is never letter-spaced (§15). */}
+              <span
+                className={`text-[13px] text-muted-foreground ${
+                  dir === "rtl" ? "font-arabic" : "font-mono tracking-wide"
+                }`}
+              >
                 {t("eyebrow", { count: 27 })}
               </span>
             </div>
@@ -141,7 +163,7 @@ export default async function HomePage({
           <div className="rise" style={{ animationDelay: "240ms" }}>
             <div className="overflow-hidden rounded-xl border border-border bg-terminal shadow-2xl shadow-foreground/10">
               <div className="flex items-center justify-between border-b border-terminal-border px-4 py-2.5">
-                <span className="font-mono text-[11px] text-terminal-muted">{t("terminal.title")}</span>
+                <span className="font-mono text-[11px] text-terminal-muted"><Phrase dir={dir}>{t("terminal.title")}</Phrase></span>
                 <span className="font-mono text-[11px] text-terminal-subtle">{t("terminal.cwd")}</span>
               </div>
 
@@ -149,9 +171,9 @@ export default async function HomePage({
                 <div className="rise" style={{ animationDelay: "420ms" }}>
                   <span className="text-terminal-accent">$</span> npx fasla-ui add button
                 </div>
-                <div className="rise text-terminal-muted" style={{ animationDelay: "700ms" }}>✓ {t("terminal.resolved")}</div>
-                <div className="rise text-terminal-muted" style={{ animationDelay: "850ms" }}>✓ {t("terminal.written")}</div>
-                <div className="rise text-terminal-muted" style={{ animationDelay: "1000ms" }}>✓ {t("terminal.wired")}</div>
+                <div className="rise text-terminal-muted" style={{ animationDelay: "700ms" }}>✓ <Phrase dir={dir}>{t("terminal.resolved")}</Phrase></div>
+                <div className="rise text-terminal-muted" style={{ animationDelay: "850ms" }}>✓ <Phrase dir={dir}>{t("terminal.written")}</Phrase></div>
+                <div className="rise text-terminal-muted" style={{ animationDelay: "1000ms" }}>✓ <Phrase dir={dir}>{t("terminal.wired")}</Phrase></div>
                 <div className="rise flex items-center gap-1.5 pt-1" style={{ animationDelay: "1150ms" }}>
                   <span className="text-terminal-accent">$</span>
                   <span className="caret inline-block h-[14px] w-[7px] bg-terminal-caret" aria-hidden="true" />
@@ -161,7 +183,7 @@ export default async function HomePage({
               {/* what you own once it lands */}
               <div className="border-t border-terminal-border px-4 py-4">
                 <div className="mb-2.5 font-mono text-[11px] text-terminal-subtle">
-                  {t("terminal.ownedFile")}
+                  <Phrase dir={dir}>{t("terminal.ownedFile")}</Phrase>
                 </div>
                 <div className="font-mono text-[12.5px] leading-[1.9] text-terminal-foreground">
                   <div><span className="text-terminal-accent">const</span> buttonVariants = cva(</div>
@@ -172,7 +194,11 @@ export default async function HomePage({
               </div>
             </div>
 
-            <p className="mt-3 text-center font-mono text-[11px] text-muted-foreground lg:text-right">
+            <p
+              className={`mt-3 text-center text-[11px] text-muted-foreground lg:text-end ${
+                dir === "rtl" ? "font-arabic" : "font-mono"
+              }`}
+            >
               {t("terminal.ownership")}
             </p>
           </div>
