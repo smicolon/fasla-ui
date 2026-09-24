@@ -10,7 +10,9 @@ interface ComponentPreviewProps {
 
 export function ComponentPreview({ children, className }: ComponentPreviewProps) {
   return (
-    <div className={`relative rounded-lg border bg-background p-6 ${className || ""}`}>
+    // A live demo: its headings belong to the component, not the page, so the
+    // table of contents skips them.
+    <div data-toc-ignore className={`relative rounded-lg border bg-background p-6 ${className || ""}`}>
       <div className="flex items-center justify-center">{children}</div>
     </div>
   )
