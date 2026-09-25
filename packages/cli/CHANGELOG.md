@@ -1,5 +1,12 @@
 # @smicolon/cli
 
+## [0.3.4](https://github.com/smicolon/fasla-ui/compare/cli-v0.3.3...cli-v0.3.4) (2026-09-25)
+
+
+### Bug Fixes
+
+* **cli:** point every install command at @smicolon/cli ([#24](https://github.com/smicolon/fasla-ui/issues/24)) ([60c1ead](https://github.com/smicolon/fasla-ui/commit/60c1ead43b59c751b45873c3da5964c45d8de60c))
+
 ## [0.3.3](https://github.com/smicolon/fasla-ui/compare/cli-v0.3.2...cli-v0.3.3) (2026-09-18)
 
 
