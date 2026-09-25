@@ -130,6 +130,15 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/status-indicator/",
+    title: "Status Indicator React Component | Fasla",
+    description:
+      "Show online, away, busy or offline presence with a React status dot whose accessible name follows the page language.",
+    h1: "Status Indicator",
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/checkbox/",
     title: "Checkbox React Component | Fasla",
     description:

@@ -460,6 +460,27 @@
       ]
     },
     {
+      "name": "status-indicator",
+      "type": "registry:ui",
+      "title": "Status Indicator",
+      "description": "A presence dot — online, away, busy or offline — with an accessible name in the page's language, so colour never carries the status alone.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/status-indicator/status-indicator.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/status-indicator.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "data-display"
+      ]
+    },
+    {
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",

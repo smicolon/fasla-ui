@@ -49,6 +49,15 @@ export const registry: RegistryItem[] = [
     categories: ["primitives", "data-display"],
   },
   {
+    name: "status-indicator",
+    type: "ui",
+    title: "Status Indicator",
+    description: "A presence dot — online, away, busy or offline — with an accessible name in the page's language, so colour never carries the status alone.",
+    sourcePath: "registry/ui/status-indicator",
+    dependencies: ["class-variance-authority"],
+    categories: ["primitives", "data-display"],
+  },
+  {
     name: "skeleton",
     type: "ui",
     title: "Skeleton",

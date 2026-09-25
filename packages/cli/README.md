@@ -61,7 +61,7 @@ npx @smicolon/cli list
 ## Available Components
 
 ### UI Primitives
-`avatar` `badge` `button` `card` `checkbox` `combobox` `input` `select` `skeleton` `switch` `tabs` `textarea`
+`avatar` `badge` `button` `card` `checkbox` `combobox` `input` `select` `skeleton` `status-indicator` `switch` `tabs` `textarea`
 
 ### App Blocks
 `app-shell` `data-table` `empty-state` `form-section` `navbar` `page-header` `sidebar` `stats-card`
