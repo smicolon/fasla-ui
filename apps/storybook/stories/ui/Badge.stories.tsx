@@ -120,6 +120,8 @@ const COPY = {
     filter: "Design",
     author: "Yasmin",
     reset: "Reset",
+    filters: ["Cairo", "In stock", "2026", "Under $50"],
+    removeFilter: (name: string) => `Remove filter: ${name}`,
   },
   rtl: {
     badge: "شارة",
@@ -129,6 +131,8 @@ const COPY = {
     filter: "تصميم",
     author: "ياسمين",
     reset: "إعادة الضبط",
+    filters: ["القاهرة", "متوفر", "٢٠٢٦", "أقل من ٥٠ دولار"],
+    removeFilter: (name: string) => `إزالة فلتر: ${name}`,
   },
 } as const
 
@@ -239,27 +243,36 @@ export const Slots: Story = {
   },
 }
 
-/** A removable filter: the close button is real and calls `onClose`. */
+/**
+ * Active filters, each removable. One tone throughout, because this story is
+ * about the close button, not colour. Each close button gets its own
+ * `closeLabel` naming its filter, because a screen reader announcing four
+ * identical "Remove" buttons can't tell the user which one removes what.
+ */
 export const Removable: Story = {
   render: (_args, ctx) => {
     const c = copy(ctx)
-    const [items, setItems] = React.useState<string[]>([...c.tones.slice(0, 4)])
+    // Removed filters are tracked by position, not by text, so flipping the
+    // Direction toolbar swaps the language without resetting the story.
+    const [removed, setRemoved] = React.useState<number[]>([])
+    const remaining = c.filters.map((_, i) => i).filter((i) => !removed.includes(i))
     return (
       <div className="flex flex-wrap items-center gap-2">
-        {items.map((item) => (
+        {remaining.map((i) => (
           <Badge
-            key={item}
+            key={i}
             variant="soft"
-            onClose={() => setItems((all) => all.filter((x) => x !== item))}
+            closeLabel={c.removeFilter(c.filters[i]!)}
+            onClose={() => setRemoved((all) => [...all, i])}
           >
-            {item}
+            {c.filters[i]}
           </Badge>
         ))}
-        {items.length === 0 && (
+        {remaining.length === 0 && (
           <button
             type="button"
             className="text-xs text-muted-foreground underline"
-            onClick={() => setItems([...c.tones.slice(0, 4)])}
+            onClick={() => setRemoved([])}
           >
             {c.reset}
           </button>
