@@ -26,12 +26,15 @@ const REPO = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..")
 type Snapshot = {
   $meta: { count: number }
   tokens: Record<string, { light: string; dark: string }>
+  /** Mode-independent, so declared once, in the light block only. */
+  radius: Record<string, { value: string }>
 }
 
 const snap: Snapshot = JSON.parse(
   readFileSync(resolve(REPO, "design/tokens/mode.json"), "utf8")
 )
 const NAMES = Object.keys(snap.tokens)
+const RADII = Object.keys(snap.radius)
 
 /** Snapshot lookup that fails loudly rather than yielding `undefined`. */
 function tok(name: string) {
@@ -102,6 +105,20 @@ describe("Figma ☾ Mode snapshot", () => {
     }
   })
 
+  it("keeps border radius/sm at 6px", () => {
+    // The radius Badge Standard binds. No Tailwind class is 6px in both apps —
+    // `rounded-sm` is calc(var(--radius) - 4px), and --radius differs between
+    // them — which is why it travels as its own variable.
+    expect(snap.radius["radius-sm"]?.value).toBe("6px")
+  })
+
+  it("keeps destructive-foreground white in both modes", () => {
+    // Dark was once recorded #000000: `custom/black` is itself a ☾ Mode variable
+    // that turns white in Dark, and the snapshot resolved it in Light.
+    expect(tok("destructive-foreground").light).toBe("#ffffff")
+    expect(tok("destructive-foreground").dark).toBe("#ffffff")
+  })
+
   it("keeps destructive distinct from primary", () => {
     // Both were #e40017 in docs, so a delete button matched a confirm button.
     expect(tok("destructive").light).toBe("#dc2626")
@@ -121,10 +138,14 @@ describe.each(Object.entries(APPS))("%s globals.css", (app, rel) => {
     expect(dark).toContain("🌑 Dark")
   })
 
-  it.each(["light", "dark"] as const)("declares all 41 tokens in %s", (mode) => {
-    const decls = declarations(mode === "light" ? light : dark)
-    expect(Object.keys(decls).sort()).toEqual([...NAMES].sort())
-  })
+  it.each(["light", "dark"] as const)(
+    `declares all ${NAMES.length} colour tokens in %s, and the radius in light only`,
+    (mode) => {
+      const decls = declarations(mode === "light" ? light : dark)
+      const expected = mode === "light" ? [...NAMES, ...RADII] : NAMES
+      expect(Object.keys(decls).sort()).toEqual([...expected].sort())
+    }
+  )
 
   it.each(["light", "dark"] as const)("matches Figma exactly in %s", (mode) => {
     const decls = declarations(mode === "light" ? light : dark)
@@ -133,6 +154,12 @@ describe.each(Object.entries(APPS))("%s globals.css", (app, rel) => {
     for (const n of NAMES) {
       actual[n] = decls[n]
       expected[n] = tok(n)[mode]
+    }
+    if (mode === "light") {
+      for (const r of RADII) {
+        actual[r] = decls[r]
+        expected[r] = snap.radius[r]!.value
+      }
     }
     // Compared as one object so a failure names every drifted token at once.
     expect(actual).toEqual(expected)

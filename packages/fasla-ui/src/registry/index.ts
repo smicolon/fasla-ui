@@ -43,7 +43,7 @@ export const registry: RegistryItem[] = [
     name: "badge",
     type: "ui",
     title: "Badge",
-    description: "A badge component for status indicators with multiple variants.",
+    description: "A compact inline label for status, category or metadata: solid, soft and outline types in six semantic tones, with an optional icon, avatar and close button.",
     sourcePath: "registry/ui/badge",
     dependencies: ["class-variance-authority"],
     categories: ["primitives", "data-display"],
