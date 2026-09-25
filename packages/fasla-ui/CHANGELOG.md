@@ -1,5 +1,18 @@
 # @smicolon/fasla-ui
 
+## [0.3.0](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.2.4...fasla-ui-v0.3.0) (2026-09-25)
+
+
+### ⚠ BREAKING CHANGES
+
+* **ui:** rebuild Badge against the Figma set ([#23](https://github.com/smicolon/fasla-ui/issues/23))
+
+### Features
+
+* **design:** index every atom in the Figma file, generated and dated ([#19](https://github.com/smicolon/fasla-ui/issues/19)) ([39aed84](https://github.com/smicolon/fasla-ui/commit/39aed84b3fc4ed98017e9eae9f34ddd0ec05bef9))
+* **typography:** mirror the Figma type ramp across both scripts ([#14](https://github.com/smicolon/fasla-ui/issues/14)) ([8f028b4](https://github.com/smicolon/fasla-ui/commit/8f028b47e4838eaa05d5aa3777bc268113320821))
+* **ui:** rebuild Badge against the Figma set ([#23](https://github.com/smicolon/fasla-ui/issues/23)) ([92e5160](https://github.com/smicolon/fasla-ui/commit/92e51603a95a08c73eb601c8df187bc573dfdd81))
+
 ## [0.2.4](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.2.3...fasla-ui-v0.2.4) (2026-09-18)
 
 

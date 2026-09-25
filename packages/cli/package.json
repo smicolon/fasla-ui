@@ -1,6 +1,6 @@
 {
   "name": "@smicolon/cli",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "CLI for installing fasla-ui components",
   "license": "MIT",
   "author": "Smicolon",
