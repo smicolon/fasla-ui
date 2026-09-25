@@ -24,6 +24,7 @@
     "terminal": {
       "title": "terminal",
       "cwd": "~/your-app",
+      "initialized": "components.json written",
       "resolved": "registry resolved",
       "written": "button.tsx → components/ui",
       "wired": "cva + tailwind-merge wired",
@@ -109,6 +110,7 @@
     "copyCode": "Copy code",
     "copied": "Copied",
     "installNote": "Run <code>init</code> once per project before adding components. See <link>Installation</link>.",
+    "addSeveral": "Or add several at once:",
     "landing": {
       "introTitle": "Introduction",
       "introBody": "Fasla provides a collection of reusable components that you can copy and paste into your apps. It's not a traditional component library — you own the code and can customize it however you want.",

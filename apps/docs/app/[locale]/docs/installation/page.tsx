@@ -1,8 +1,18 @@
+import { getTranslations, setRequestLocale } from "next-intl/server"
 import { metadataForRoute } from "@/lib/seo-routes"
 
 export const metadata = metadataForRoute("/docs/installation/")
 
-export default function InstallationPage() {
+export default async function InstallationPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+  // Static export: pin the locale or next-intl reads headers() and the
+  // route drops out of the prerender.
+  setRequestLocale(locale)
+  const t = await getTranslations("docs")
   return (
     <div className="space-y-8">
       <div className="space-y-4">
@@ -40,10 +50,13 @@ export default function InstallationPage() {
           </div>
 
           <div>
-            <p className="text-sm font-medium mb-2">2. Add components, one or several at a time:</p>
+            <p className="text-sm font-medium mb-2">2. Add a component:</p>
             <pre className="overflow-x-auto rounded-lg bg-smi-neutral-950 p-4">
-              <code className="text-green-400">{`npx @smicolon/cli add button
-npx @smicolon/cli add button card input badge`}</code>
+              <code className="text-green-400">npx @smicolon/cli add button</code>
+            </pre>
+            <p className="text-sm font-medium mt-4 mb-2">{t("addSeveral")}</p>
+            <pre className="overflow-x-auto rounded-lg bg-smi-neutral-950 p-4">
+              <code className="text-green-400">npx @smicolon/cli add card input badge</code>
             </pre>
           </div>
 
