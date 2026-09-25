@@ -44,20 +44,23 @@ type StoryCtx = { globals: { direction?: string } }
 const labels = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? STATUS_LABELS.ar : STATUS_LABELS.en)
 
 const COPY = {
-  ltr: { person: "Layla Hassan", role: "Product designer", surfaces: ["Background", "Card", "Muted"] },
-  rtl: { person: "ليلى حسن", role: "مصمّمة منتجات", surfaces: ["الخلفية", "البطاقة", "خافت"] },
+  ltr: { person: "Layla Hassan", role: "Product designer" },
+  rtl: { person: "ليلى حسن", role: "مصمّمة منتجات" },
 } as const
 const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
 
 export const Default: Story = {}
 
-/** Every Figma variant: Type × Size. */
+/**
+ * Every Figma variant: Type × Size. Each dot is centred under its heading;
+ * the grid mirrors itself under `dir="rtl"`.
+ */
 export const Statuses: Story = {
   render: (_, ctx) => (
     <div className="grid grid-cols-[auto_repeat(4,minmax(4.5rem,auto))] items-center gap-x-6 gap-y-4">
       <span />
       {STATUSES.map((s) => (
-        <span key={s} className="text-xs text-muted-foreground">
+        <span key={s} className="justify-self-center text-xs text-muted-foreground">
           {labels(ctx)[s]}
         </span>
       ))}
@@ -67,34 +70,9 @@ export const Statuses: Story = {
             {size}px
           </span>
           {STATUSES.map((s) => (
-            <StatusIndicator key={s} status={s} size={size} />
+            <StatusIndicator key={s} status={s} size={size} className="justify-self-center" />
           ))}
         </React.Fragment>
-      ))}
-    </div>
-  ),
-}
-
-/**
- * The ring is `background`, so it cuts the dot out of whatever it overlaps.
- * On `card` and `muted` it shows as a halo — the reason the dot is meant to sit
- * on an avatar rather than on a panel.
- */
-export const Surfaces: Story = {
-  render: (_, ctx) => (
-    <div className="flex gap-4">
-      {(["bg-background", "bg-card", "bg-muted"] as const).map((bg, i) => (
-        <div
-          key={bg}
-          className={`flex flex-col items-center gap-3 rounded-lg border p-4 ${bg}`}
-        >
-          <div className="flex gap-3">
-            {STATUSES.map((s) => (
-              <StatusIndicator key={s} status={s} />
-            ))}
-          </div>
-          <span className="text-xs text-muted-foreground">{copy(ctx).surfaces[i]}</span>
-        </div>
       ))}
     </div>
   ),

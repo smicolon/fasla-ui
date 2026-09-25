@@ -84,6 +84,9 @@
     }
   },
   "docs": {
+    "statusIndicator": {
+      "onAvatar": "صُمّمت النقطة لتوضع على صورة رمزية، لا منفردةً فوق سطح ملوّن."
+    },
     "sections": {
       "installation": "التثبيت",
       "preview": "معاينة",

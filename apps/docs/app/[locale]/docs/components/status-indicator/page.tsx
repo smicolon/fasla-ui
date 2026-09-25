@@ -15,6 +15,7 @@ const PROPS = [
 
 export default function StatusIndicatorPage() {
   const t = useTranslations("docs.sections")
+  const tStatus = useTranslations("docs.statusIndicator")
 
   return (
     <div className="space-y-8">
@@ -143,6 +144,8 @@ npx @smicolon/cli add status-indicator`}</CodeBlock>
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
+        {/* Translated, unlike the page prose, so it takes the locale's direction. */}
+        <p className="text-muted-foreground">{tStatus("onAvatar")}</p>
         <CodeBlock>{`import { StatusIndicator } from "@/components/ui/status-indicator"
 
 <StatusIndicator status="online" />

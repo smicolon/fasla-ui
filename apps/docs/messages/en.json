@@ -84,6 +84,9 @@
     }
   },
   "docs": {
+    "statusIndicator": {
+      "onAvatar": "The dot is meant to sit on an avatar, not on its own over a coloured surface."
+    },
     "sections": {
       "installation": "Installation",
       "preview": "Preview",
