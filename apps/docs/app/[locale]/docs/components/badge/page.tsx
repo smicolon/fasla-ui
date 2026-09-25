@@ -69,7 +69,13 @@ export default function BadgePage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
-        <CodeBlock>npx @smicolon/fasla-ui add badge</CodeBlock>
+        {/*
+         * `@smicolon/cli` is the installer. `@smicolon/fasla-ui` also ships a
+         * `fasla-ui` binary, but it is a repo-only scaffold, and `fasla-ui` is
+         * not a package on npm. `init` writes components.json, which `add` needs.
+         */}
+        <CodeBlock language="bash">{`npx @smicolon/cli init
+npx @smicolon/cli add badge`}</CodeBlock>
       </section>
 
       {/* Preview */}
