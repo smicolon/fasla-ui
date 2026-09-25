@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@fasla-ui/ui/card"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { InstallCommand } from "@/components/install-command"
 
 export default function CardPage() {
   const t = useTranslations("docs.sections")
@@ -21,7 +22,7 @@ export default function CardPage() {
           <section>
             <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
-              <CodeBlock>npx fasla-ui add card</CodeBlock>
+              <InstallCommand name="card" />
             </div>
           </section>
 

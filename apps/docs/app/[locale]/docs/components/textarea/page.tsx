@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 
 import { Textarea } from "@fasla-ui/ui/textarea"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { InstallCommand } from "@/components/install-command"
 
 export default function TextareaPage() {
   const t = useTranslations("docs.sections")
@@ -19,7 +20,7 @@ export default function TextareaPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
-        <CodeBlock>npx @smicolon/fasla-ui add textarea</CodeBlock>
+        <InstallCommand name="textarea" />
       </section>
 
       {/* Preview */}

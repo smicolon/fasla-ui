@@ -3,7 +3,8 @@
 import { useTranslations } from "next-intl"
 
 import { BorderBeam } from "@fasla-ui/effects/border-beam/border-beam"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview } from "@/components/component-preview"
+import { InstallCommand } from "@/components/install-command"
 
 export default function BorderBeamPage() {
   const t = useTranslations("docs.sections")
@@ -21,7 +22,7 @@ export default function BorderBeamPage() {
           <section>
             <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
-              <CodeBlock>npx fasla-ui add border-beam</CodeBlock>
+              <InstallCommand name="border-beam" />
             </div>
           </section>
 

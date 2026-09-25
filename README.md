@@ -19,9 +19,9 @@ Built with [Tailwind CSS](https://tailwindcss.com), [Framer Motion](https://www.
 # Install the package
 npm install @smicolon/fasla-ui
 
-# Or use the CLI
-npx fasla-ui init
-npx fasla-ui add button card
+# Or copy components into your project with the CLI
+npx @smicolon/cli init              # once per project, writes components.json
+npx @smicolon/cli add button card   # per component
 ```
 
 ## Quick Start

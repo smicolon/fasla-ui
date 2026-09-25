@@ -3,7 +3,8 @@
 import { useTranslations } from "next-intl"
 
 import { AnimatedGradient } from "@fasla-ui/effects/animated-gradient/animated-gradient"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview } from "@/components/component-preview"
+import { InstallCommand } from "@/components/install-command"
 
 export default function AnimatedGradientPage() {
   const t = useTranslations("docs.sections")
@@ -21,7 +22,7 @@ export default function AnimatedGradientPage() {
           <section>
             <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
-              <CodeBlock>npx fasla-ui add animated-gradient</CodeBlock>
+              <InstallCommand name="animated-gradient" />
             </div>
           </section>
 

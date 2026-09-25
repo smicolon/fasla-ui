@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 
 import { ShimmerButton } from "@fasla-ui/effects/shimmer-button"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { InstallCommand } from "@/components/install-command"
 
 export default function ShimmerButtonPage() {
   const t = useTranslations("docs.sections")
@@ -22,7 +23,7 @@ export default function ShimmerButtonPage() {
           <section>
             <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
-              <CodeBlock>npx fasla-ui add shimmer-button</CodeBlock>
+              <InstallCommand name="shimmer-button" />
             </div>
           </section>
 

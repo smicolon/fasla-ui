@@ -62,5 +62,5 @@ export const list = new Command()
     }
 
     console.log(chalk.gray(`Total: ${items.length} components`))
-    console.log(chalk.gray("\nAdd components with: npx fasla-ui add <component>"))
+    console.log(chalk.gray("\nAdd components with: npx @smicolon/cli add <component>"))
   })
