@@ -31,10 +31,22 @@ const HeartIcon = () => (
 )
 
 /**
- * A plain circular `<img>` — deliberately not the library's Avatar, which is
- * being rebuilt. The badge owns the 12px size and the clip.
+ * A placeholder portrait — deliberately not the library's Avatar, which is being
+ * rebuilt. Inline rather than an image file so it takes theme tokens and follows
+ * the mode. The badge owns the 12px size and the circular clip; an empty `alt`
+ * marks it decorative, for when the label already names the person.
  */
-const avatar = (alt: string) => <img src="/samples/avatar.svg" alt={alt} />
+const avatar = (alt: string) => (
+  <svg
+    viewBox="0 0 48 48"
+    className="size-full"
+    {...(alt ? { role: "img", "aria-label": alt } : { "aria-hidden": true })}
+  >
+    <rect width="48" height="48" className="fill-muted" />
+    <circle cx="24" cy="19" r="9" className="fill-muted-foreground" />
+    <path d="M6 48c1.5-10 9-16 18-16s16.5 6 18 16Z" className="fill-muted-foreground" />
+  </svg>
+)
 
 /**
  * `closable` is a story-only arg, not a Badge prop: the component shows its close
