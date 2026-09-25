@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@fasla-ui/ui/tabs"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { InstallCommand } from "@/components/install-command"
 
 export default function TabsPage() {
   const t = useTranslations("docs.sections")
@@ -19,7 +20,7 @@ export default function TabsPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
-        <CodeBlock>npx @smicolon/fasla-ui add tabs</CodeBlock>
+        <InstallCommand name="tabs" />
       </section>
 
       {/* Preview */}

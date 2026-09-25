@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 
 import { Button } from "@fasla-ui/ui/button"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { InstallCommand } from "@/components/install-command"
 
 export default function ButtonPage() {
   const t = useTranslations("docs.sections")
@@ -22,7 +23,7 @@ export default function ButtonPage() {
           <section>
             <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
-              <CodeBlock>npx fasla-ui add button</CodeBlock>
+              <InstallCommand name="button" />
             </div>
           </section>
 

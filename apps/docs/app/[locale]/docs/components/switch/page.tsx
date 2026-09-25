@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { Switch } from "@fasla-ui/ui/switch"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { InstallCommand } from "@/components/install-command"
 
 export default function SwitchPage() {
   const t = useTranslations("docs.sections")
@@ -22,7 +23,7 @@ export default function SwitchPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
-        <CodeBlock>npx @smicolon/fasla-ui add switch</CodeBlock>
+        <InstallCommand name="switch" />
       </section>
 
       {/* Preview */}

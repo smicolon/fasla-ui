@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { Combobox } from "@fasla-ui/ui/combobox"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { InstallCommand } from "@/components/install-command"
 
 const frameworks = [
   { value: "react", label: "React" },
@@ -33,7 +34,7 @@ export default function ComboboxPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
-        <CodeBlock>npx @smicolon/fasla-ui add combobox</CodeBlock>
+        <InstallCommand name="combobox" />
       </section>
 
       {/* Preview */}

@@ -1,8 +1,18 @@
+import { getTranslations, setRequestLocale } from "next-intl/server"
 import { metadataForRoute } from "@/lib/seo-routes"
 
 export const metadata = metadataForRoute("/docs/installation/")
 
-export default function InstallationPage() {
+export default async function InstallationPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}) {
+  const { locale } = await params
+  // Static export: pin the locale or next-intl reads headers() and the
+  // route drops out of the prerender.
+  setRequestLocale(locale)
+  const t = await getTranslations("docs")
   return (
     <div className="space-y-8">
       <div className="space-y-4">
@@ -24,28 +34,36 @@ export default function InstallationPage() {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">Using the CLI</h2>
         <p className="text-muted-foreground">
-          The easiest way to add components is using our CLI:
+          The easiest way to add components is the <code>@smicolon/cli</code>{" "}
+          package. It takes two steps.
         </p>
 
         <div className="space-y-4">
           <div>
-            <p className="text-sm font-medium mb-2">Initialize Fasla in your project:</p>
+            <p className="text-sm font-medium mb-2">
+              1. Initialize Fasla, once per project. This writes{" "}
+              <code>components.json</code>, which every <code>add</code> reads:
+            </p>
             <pre className="overflow-x-auto rounded-lg bg-smi-neutral-950 p-4">
-              <code className="text-green-400">npx @smicolon/fasla-ui init</code>
+              <code className="text-green-400">npx @smicolon/cli init</code>
             </pre>
           </div>
 
           <div>
-            <p className="text-sm font-medium mb-2">Add components:</p>
+            <p className="text-sm font-medium mb-2">2. Add a component:</p>
             <pre className="overflow-x-auto rounded-lg bg-smi-neutral-950 p-4">
-              <code className="text-green-400">npx @smicolon/fasla-ui add button</code>
+              <code className="text-green-400">npx @smicolon/cli add button</code>
+            </pre>
+            <p className="text-sm font-medium mt-4 mb-2">{t("addSeveral")}</p>
+            <pre className="overflow-x-auto rounded-lg bg-smi-neutral-950 p-4">
+              <code className="text-green-400">npx @smicolon/cli add card input badge</code>
             </pre>
           </div>
 
           <div>
-            <p className="text-sm font-medium mb-2">Add multiple components:</p>
+            <p className="text-sm font-medium mb-2">List everything the registry offers:</p>
             <pre className="overflow-x-auto rounded-lg bg-smi-neutral-950 p-4">
-              <code className="text-green-400">npx @smicolon/fasla-ui add button card input badge</code>
+              <code className="text-green-400">npx @smicolon/cli list</code>
             </pre>
           </div>
         </div>

@@ -3,7 +3,8 @@
 import { useTranslations } from "next-intl"
 
 import { TextReveal } from "@fasla-ui/effects/text-reveal/text-reveal"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview } from "@/components/component-preview"
+import { InstallCommand } from "@/components/install-command"
 
 export default function TextRevealPage() {
   const t = useTranslations("docs.sections")
@@ -21,7 +22,7 @@ export default function TextRevealPage() {
           <section>
             <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
-              <CodeBlock>npx fasla-ui add text-reveal</CodeBlock>
+              <InstallCommand name="text-reveal" />
             </div>
           </section>
 

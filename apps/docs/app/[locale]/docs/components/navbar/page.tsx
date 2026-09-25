@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server"
+import { InstallCommand } from "@/components/install-command"
 export default async function NavbarPage({
   params,
 }: {
@@ -19,9 +20,7 @@ export default async function NavbarPage({
       </div>
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
-        <pre className="overflow-x-auto rounded-lg bg-smi-neutral-950 p-4">
-          <code className="text-green-400">npx @smicolon/fasla-ui add navbar</code>
-        </pre>
+        <InstallCommand name="navbar" />
       </div>
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("components")}</h2>

@@ -24,6 +24,7 @@
     "terminal": {
       "title": "الطرفية",
       "cwd": "~/your-app",
+      "initialized": "تم إنشاء components.json",
       "resolved": "تم حلّ المكوّن في السجل",
       "written": "button.tsx → components/ui",
       "wired": "تم ربط cva و tailwind-merge",
@@ -108,6 +109,8 @@
     "onThisPage": "في هذه الصفحة",
     "copyCode": "انسخ الشيفرة",
     "copied": "تم النسخ",
+    "installNote": "قبل إضافة أي مكوّن، شغّل الأمر <code>init</code> مرة واحدة في مشروعك. التفاصيل في صفحة <link>التثبيت</link>.",
+    "addSeveral": "أو أضف عدة مكوّنات دفعة واحدة:",
     "landing": {
       "introTitle": "مقدّمة",
       "introBody": "تقدّم فاصلة مجموعة مكوّنات قابلة لإعادة الاستخدام، تنسخها وتلصقها في تطبيقك. ليست مكتبة مكوّنات تقليدية — الشيفرة لك، تعدّلها كما تشاء.",

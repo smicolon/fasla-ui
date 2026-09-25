@@ -154,7 +154,7 @@ export default async function HomePage({
             </p>
 
             <div className="rise mt-9 flex flex-wrap items-center gap-3" style={{ animationDelay: "180ms" }}>
-              <CopyCommand command="npx fasla-ui add button" />
+              <CopyCommand command="npx @smicolon/cli init" />
               <Link
                 href={p("/docs")}
                 className="inline-flex items-center gap-2 rounded-lg bg-fasla-red px-5 py-3 text-[15px] font-medium text-fasla-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fasla-red focus-visible:ring-offset-2"
@@ -176,13 +176,18 @@ export default async function HomePage({
               </div>
 
               <div className="space-y-1 px-4 py-4 font-mono text-[12.5px] leading-[1.9] text-terminal-foreground">
+                {/* init first: `add` exits without the components.json it writes. */}
                 <div className="rise" style={{ animationDelay: "420ms" }}>
-                  <span className="text-terminal-accent">$</span> npx fasla-ui add button
+                  <span className="text-terminal-accent">$</span> npx @smicolon/cli init
                 </div>
-                <div className="rise text-terminal-muted" style={{ animationDelay: "700ms" }}>✓ <Phrase dir={dir}>{t("terminal.resolved")}</Phrase></div>
-                <div className="rise text-terminal-muted" style={{ animationDelay: "850ms" }}>✓ <Phrase dir={dir}>{t("terminal.written")}</Phrase></div>
-                <div className="rise text-terminal-muted" style={{ animationDelay: "1000ms" }}>✓ <Phrase dir={dir}>{t("terminal.wired")}</Phrase></div>
-                <div className="rise flex items-center gap-1.5 pt-1" style={{ animationDelay: "1150ms" }}>
+                <div className="rise text-terminal-muted" style={{ animationDelay: "650ms" }}>✓ <Phrase dir={dir}>{t("terminal.initialized")}</Phrase></div>
+                <div className="rise pt-1" style={{ animationDelay: "900ms" }}>
+                  <span className="text-terminal-accent">$</span> npx @smicolon/cli add button
+                </div>
+                <div className="rise text-terminal-muted" style={{ animationDelay: "1150ms" }}>✓ <Phrase dir={dir}>{t("terminal.resolved")}</Phrase></div>
+                <div className="rise text-terminal-muted" style={{ animationDelay: "1300ms" }}>✓ <Phrase dir={dir}>{t("terminal.written")}</Phrase></div>
+                <div className="rise text-terminal-muted" style={{ animationDelay: "1450ms" }}>✓ <Phrase dir={dir}>{t("terminal.wired")}</Phrase></div>
+                <div className="rise flex items-center gap-1.5 pt-1" style={{ animationDelay: "1600ms" }}>
                   <span className="text-terminal-accent">$</span>
                   <span className="caret inline-block h-[14px] w-[7px] bg-terminal-caret" aria-hidden="true" />
                 </div>

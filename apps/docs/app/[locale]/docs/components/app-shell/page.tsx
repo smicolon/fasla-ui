@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 
 import { AppShell } from "@fasla-ui/blocks/app-shell/AppShell"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { InstallCommand } from "@/components/install-command"
 
 const SidebarContent = () => (
   <div className="flex h-full flex-col">
@@ -42,7 +43,7 @@ export default function AppShellPage() {
           <section>
             <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
-              <CodeBlock>npx fasla-ui add app-shell</CodeBlock>
+              <InstallCommand name="app-shell" />
             </div>
           </section>
 
