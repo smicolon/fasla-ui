@@ -2,7 +2,7 @@ import * as React from "react"
 import { readFileSync } from "node:fs"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
-import { describe, it, expect, vi } from "vitest"
+import { beforeAll, describe, it, expect, vi } from "vitest"
 import { render, screen, fireEvent } from "@testing-library/react"
 import { Badge, type BadgeProps } from "./badge"
 
@@ -111,33 +111,49 @@ describe("Badge", () => {
     })
 
     it("clips the avatar to a 12px circle and keeps it accessible", () => {
-      badge({ avatar: <img src="/a.png" alt="Yasmin" /> })
-      const img = screen.getByAltText("Yasmin")
+      badge({ avatar: <img src="/a.png" alt="Layla" /> })
+      const img = screen.getByAltText("Layla")
       expect(img.parentElement).toHaveClass("size-3", "rounded-full", "overflow-hidden")
       expect(img.parentElement).not.toHaveAttribute("aria-hidden")
     })
 
     it("allows both at once, as Figma's two independent booleans do", () => {
-      badge({ icon: <Star />, avatar: <img src="/a.png" alt="Yasmin" /> })
+      badge({ icon: <Star />, avatar: <img src="/a.png" alt="Layla" /> })
       expect(screen.getByTestId("icon")).toBeInTheDocument()
-      expect(screen.getByAltText("Yasmin")).toBeInTheDocument()
+      expect(screen.getByAltText("Layla")).toBeInTheDocument()
     })
 
     it("renders icon, avatar, label, close in DOM order, which dir mirrors", () => {
       const el = badge({
         icon: <Star />,
-        avatar: <img src="/a.png" alt="Yasmin" />,
+        avatar: <img src="/a.png" alt="Layla" />,
         onClose: () => {},
       })
       const kids = Array.from(el.children)
       expect(kids[0]).toContainElement(screen.getByTestId("icon"))
-      expect(kids[1]).toContainElement(screen.getByAltText("Yasmin"))
+      expect(kids[1]).toContainElement(screen.getByAltText("Layla"))
       expect(kids[2]).toHaveTextContent("Badge")
       expect(kids[3]?.tagName).toBe("BUTTON")
     })
   })
 
   describe("close", () => {
+    /*
+     * The default name is two hidden runs, and CSS keeps the one matching the
+     * nearest `lang`. jsdom loads no Tailwind, so inject exactly the compiled
+     * rules the name depends on; the accessible-name computation then drops
+     * the `display: none` run, as a browser does.
+     */
+    beforeAll(() => {
+      const style = document.createElement("style")
+      style.textContent = [
+        ".hidden { display: none }",
+        ".\\[\\&\\:lang\\(ar\\)\\]\\:hidden:lang(ar) { display: none }",
+        ".\\[\\&\\:lang\\(ar\\)\\]\\:inline:lang(ar) { display: inline }",
+      ].join("\n")
+      document.head.append(style)
+    })
+
     it("renders no button without onClose", () => {
       badge()
       expect(screen.queryByRole("button")).not.toBeInTheDocument()
@@ -145,31 +161,75 @@ describe("Badge", () => {
 
     it("is a real button that calls onClose", () => {
       const onClose = vi.fn()
-      badge({ onClose })
-      const button = screen.getByRole("button", { name: "Remove" })
+      badge({ onClose, children: "Cairo" })
+      const button = screen.getByRole("button", { name: "Remove Cairo" })
       expect(button).toHaveAttribute("type", "button")
       fireEvent.click(button)
       expect(onClose).toHaveBeenCalledTimes(1)
     })
 
+    it("falls back to a bare verb when the label is not plain text", () => {
+      render(
+        <Badge onClose={() => {}}>
+          <strong>Cairo</strong>
+        </Badge>
+      )
+      expect(screen.getByRole("button", { name: "Remove" })).toBeInTheDocument()
+    })
+
     it("names itself in Arabic when the page is Arabic", () => {
       render(
         <div lang="ar" dir="rtl">
-          <Badge onClose={() => {}}>شارة</Badge>
+          <Badge onClose={() => {}}>القاهرة</Badge>
         </div>
       )
-      expect(screen.getByRole("button", { name: "إزالة" })).toBeInTheDocument()
+      expect(screen.getByRole("button", { name: "إزالة القاهرة" })).toBeInTheDocument()
+    })
+
+    it("follows the nearest lang, so an English island on an Arabic page stays English", () => {
+      render(
+        <div lang="ar">
+          <div lang="en">
+            <Badge onClose={() => {}}>Cairo</Badge>
+          </div>
+        </div>
+      )
+      expect(screen.getByRole("button", { name: "Remove Cairo" })).toBeInTheDocument()
+    })
+
+    it("follows a live language change without remounting", () => {
+      const { container } = render(
+        <div lang="en">
+          <Badge onClose={() => {}}>القاهرة</Badge>
+        </div>
+      )
+      expect(screen.getByRole("button", { name: "Remove القاهرة" })).toBeInTheDocument()
+      container.firstElementChild!.setAttribute("lang", "ar")
+      expect(screen.getByRole("button", { name: "إزالة القاهرة" })).toBeInTheDocument()
+    })
+
+    it("carries both names in the markup, so server HTML needs no script", () => {
+      badge({ onClose: () => {}, children: "Cairo" })
+      const runs = Array.from(screen.getByRole("button").querySelectorAll(".sr-only"))
+      expect(runs.map((r) => r.textContent)).toEqual(["Remove Cairo", "إزالة Cairo"])
+      expect(SOURCE).not.toMatch(/useEffect|useState|useLayoutEffect/)
     })
 
     it("takes an explicit label over the page language", () => {
       render(
         <div lang="ar">
-          <Badge onClose={() => {}} closeLabel="Remove filter">
-            Filter
+          <Badge onClose={() => {}} closeLabel="Remove filter: Cairo">
+            Cairo
           </Badge>
         </div>
       )
-      expect(screen.getByRole("button", { name: "Remove filter" })).toBeInTheDocument()
+      const button = screen.getByRole("button", { name: "Remove filter: Cairo" })
+      expect(button.querySelector(".sr-only")).toBeNull()
+    })
+
+    it("widens the hit area to 24px without changing the 12px glyph", () => {
+      badge({ onClose: () => {} })
+      expect(screen.getByRole("button")).toHaveClass("size-3", "after:absolute", "after:-inset-1.5")
     })
   })
 
@@ -205,6 +265,10 @@ describe("Badge", () => {
       badge({ tone, onClose: () => {} })
       expect(screen.getByRole("button").nextElementSibling).toHaveClass(cls)
     })
+  })
+
+  it("is a client component, so a server component can render it", () => {
+    expect(SOURCE.startsWith('"use client"')).toBe(true)
   })
 
   it("forwards its ref, merges className and passes props through", () => {

@@ -36,6 +36,7 @@ function sampleAvatar(alt: string) {
 }
 
 const PROPS = [
+  ["children", "ReactNode — the label", "—"],
   ["variant", "solid | soft | outline", "solid"],
   ["tone", "primary | secondary | info | success | warning | destructive", "primary"],
   ["size", "sm | md | lg", "sm"],
@@ -43,7 +44,7 @@ const PROPS = [
   ["icon", "ReactNode", "—"],
   ["avatar", "ReactNode", "—"],
   ["onClose", "(event) => void", "—"],
-  ["closeLabel", "string", "\"Remove\" / \"إزالة\""],
+  ["closeLabel", "string", "\"Remove {label}\" / \"إزالة {label}\""],
 ] as const
 
 export default function BadgePage() {
@@ -183,12 +184,12 @@ export default function BadgePage() {
           <div className="flex flex-wrap items-center gap-2">
             <Badge icon={<StarIcon />}>Featured</Badge>
             <Badge variant="soft" avatar={sampleAvatar("")}>
-              Yasmin
+              Layla
             </Badge>
             <Badge
               variant="outline"
               icon={<StarIcon />}
-              avatar={sampleAvatar("Yasmin")}
+              avatar={sampleAvatar("Layla")}
               onClose={() => {}}
             >
               Reviewer
@@ -207,9 +208,11 @@ export default function BadgePage() {
             <code className="text-sm">&lt;button&gt;</code>.
           </li>
           <li>
-            The close button is named &quot;Remove&quot;, or &quot;إزالة&quot; when the
-            page&apos;s <code className="text-sm">lang</code> is Arabic. Pass{" "}
-            <code className="text-sm">closeLabel</code> to say what is removed.
+            The close button is named after the label, &quot;Remove Cairo&quot;, or
+            &quot;إزالة القاهرة&quot; when the nearest <code className="text-sm">lang</code>{" "}
+            is Arabic. It follows a language change without a reload. Pass{" "}
+            <code className="text-sm">closeLabel</code> for more context, such as
+            &quot;Remove filter: Cairo&quot;.
           </li>
           <li>
             The icon is decorative and hidden from assistive technology. The avatar is
@@ -266,7 +269,7 @@ export default function BadgePage() {
 <Badge avatar={<img src={user.photo} alt="" />}>{user.name}</Badge>
 
 // Removable
-<Badge variant="soft" onClose={() => remove(tag)} closeLabel={\`Remove \${tag}\`}>
+<Badge variant="soft" onClose={() => remove(tag)} closeLabel={\`Remove filter: \${tag}\`}>
   {tag}
 </Badge>`}</CodeBlock>
       </section>

@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 import { cva } from "class-variance-authority"
 import { cn } from "../../../src/lib/utils"
@@ -107,21 +109,10 @@ const focusRingTone = {
   destructive: "ring-destructive/20",
 }
 
-/** The close button's accessible name, by the language of the page. */
-const CLOSE_LABELS = { en: "Remove", ar: "إزالة" } as const
-
-/**
- * Reads `lang` from the nearest ancestor that sets it, the same way direction
- * is read from `dir`: the badge follows the page rather than taking a prop.
- * Runs after mount, so the server render and first client render agree.
- */
-function usePageLanguage(ref: React.RefObject<HTMLElement | null>) {
-  const [lang, setLang] = React.useState<keyof typeof CLOSE_LABELS>("en")
-  React.useEffect(() => {
-    const value = ref.current?.closest("[lang]")?.getAttribute("lang") ?? ""
-    setLang(value.toLowerCase().startsWith("ar") ? "ar" : "en")
-  }, [ref])
-  return lang
+/** The close button's accessible name, per script, with the badge's label when it is plain text. */
+const CLOSE_LABELS = {
+  en: (label?: string) => (label ? `Remove ${label}` : "Remove"),
+  ar: (label?: string) => (label ? `إزالة ${label}` : "إزالة"),
 }
 
 type Variant = "solid" | "soft" | "outline"
@@ -155,8 +146,9 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
   /** Renders a close button at the trailing edge, and is called when it is pressed. */
   onClose?: (event: React.MouseEvent<HTMLButtonElement>) => void
   /**
-   * Accessible name for the close button. Defaults to "Remove", or "إزالة" when
-   * the page's `lang` is Arabic.
+   * Accessible name for the close button — read by screen readers, never shown.
+   * Defaults to "Remove {label}" when the label is plain text, or "إزالة {label}"
+   * when the page's `lang` is Arabic; "Remove" / "إزالة" otherwise.
    */
   closeLabel?: string
 }
@@ -176,18 +168,12 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
       children,
       ...props
     },
-    forwardedRef
+    ref
   ) => {
-    const ownRef = React.useRef<HTMLSpanElement | null>(null)
-    const ref = React.useCallback(
-      (node: HTMLSpanElement | null) => {
-        ownRef.current = node
-        if (typeof forwardedRef === "function") forwardedRef(node)
-        else if (forwardedRef) forwardedRef.current = node
-      },
-      [forwardedRef]
-    )
-    const lang = usePageLanguage(ownRef)
+    const label =
+      typeof children === "string" || typeof children === "number"
+        ? String(children).trim() || undefined
+        : undefined
 
     return (
       <span
@@ -213,13 +199,30 @@ const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
           <>
             <button
               type="button"
-              aria-label={closeLabel ?? CLOSE_LABELS[lang]}
+              aria-label={closeLabel}
               onClick={onClose}
               // The ring below is the badge's focus indicator, so the button
-              // draws none of its own. `after:` widens the hit area to 20px
-              // without moving anything: the glyph is Figma's 12px.
-              className="peer relative inline-flex size-3 shrink-0 cursor-pointer items-center justify-center rounded-full outline-none after:absolute after:-inset-1 after:content-['']"
+              // draws none of its own. `after:` widens the hit area to 24×24px
+              // (WCAG 2.5.8) without moving anything: the glyph stays Figma's
+              // 12px, and an absolute pseudo-element can't change the badge's
+              // height even where it reaches past sm's 20px.
+              className="peer relative inline-flex size-3 shrink-0 cursor-pointer items-center justify-center rounded-full outline-none after:absolute after:-inset-1.5 after:content-['']"
             >
+              {/*
+               * Without `closeLabel`, the name comes from these two hidden
+               * runs, and CSS keeps the one that matches the nearest `lang` —
+               * the same way `dir` is inherited. That is right in the server
+               * HTML before any script runs, and it follows a live language
+               * change; `display: none` takes the other out of the name.
+               */}
+              {!closeLabel && (
+                <>
+                  <span className="sr-only [&:lang(ar)]:hidden">{CLOSE_LABELS.en(label)}</span>
+                  <span className="sr-only hidden [&:lang(ar)]:inline">
+                    {CLOSE_LABELS.ar(label)}
+                  </span>
+                </>
+              )}
               <svg
                 aria-hidden="true"
                 width="12"

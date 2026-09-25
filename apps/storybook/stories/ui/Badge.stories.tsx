@@ -97,7 +97,7 @@ const meta: Meta<BadgeStoryArgs> = {
     closeLabel: {
       control: "text",
       description:
-        "Not visible. The close button's accessible name, read by screen readers. Defaults to \"Remove\", or \"إزالة\" when the page's `lang` is Arabic.",
+        "Not visible. The close button's accessible name, read by screen readers. Defaults to \"Remove {label}\", or \"إزالة {label}\" when the page's `lang` is Arabic.",
       if: { arg: "closable" },
     },
   },
@@ -118,9 +118,9 @@ const COPY = {
     sizes: ["Small", "Medium", "Large"],
     featured: "Featured",
     filter: "Design",
-    author: "Yasmin",
+    author: "Layla",
     reset: "Reset",
-    filters: ["Cairo", "In stock", "2026", "Under $50"],
+    filters: ["Cairo", "In stock", "Free shipping", "On sale"],
     removeFilter: (name: string) => `Remove filter: ${name}`,
   },
   rtl: {
@@ -129,9 +129,9 @@ const COPY = {
     sizes: ["صغير", "متوسط", "كبير"],
     featured: "مميز",
     filter: "تصميم",
-    author: "ياسمين",
+    author: "ليلى",
     reset: "إعادة الضبط",
-    filters: ["القاهرة", "متوفر", "٢٠٢٦", "أقل من ٥٠ دولار"],
+    filters: ["القاهرة", "متوفر", "شحن مجاني", "تخفيضات"],
     removeFilter: (name: string) => `إزالة فلتر: ${name}`,
   },
 } as const
@@ -246,8 +246,8 @@ export const Slots: Story = {
 /**
  * Active filters, each removable. One tone throughout, because this story is
  * about the close button, not colour. Each close button gets its own
- * `closeLabel` naming its filter, because a screen reader announcing four
- * identical "Remove" buttons can't tell the user which one removes what.
+ * `closeLabel`, "Remove filter: Cairo", because the default "Remove Cairo" names
+ * the item but not what kind of thing removing it changes.
  */
 export const Removable: Story = {
   render: (_args, ctx) => {
