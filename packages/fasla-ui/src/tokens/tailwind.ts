@@ -1,7 +1,8 @@
 /**
  * Tailwind mapping for the Fasla semantic colour tokens.
  *
- * These are the 41 `theme/*` variables of the Figma "☾ Mode" collection. Figma
+ * These are the 41 `theme/*` variables of the Figma "☾ Mode" collection, plus
+ * the six `opacity/*` Soft tints. Figma
  * is the source of truth; `design/tokens/mode.json` holds the committed
  * snapshot, and both apps declare the same values in their own `globals.css`.
  *
@@ -53,6 +54,18 @@ export const tailwindSemanticColors = {
   success: { DEFAULT: c("success"), foreground: c("success-foreground") },
   warning: { DEFAULT: c("warning"), foreground: c("warning-foreground") },
   info: { DEFAULT: c("info"), foreground: c("info-foreground") },
+
+  // Soft tints — Figma's `opacity/*` variables, already translucent. The Badge
+  // Soft type lays one over `card`, exactly as Figma stacks the two fills, so
+  // the chip reads the same on any surface. Only `primary` changes in Dark.
+  soft: {
+    primary: c("soft-primary"),
+    secondary: c("soft-secondary"),
+    info: c("soft-info"),
+    success: c("soft-success"),
+    warning: c("soft-warning"),
+    destructive: c("soft-destructive"),
+  },
 
   // Inverse — a fixed contrast band, not a mode-reactive surface.
   "background-inverse": c("background-inverse"),

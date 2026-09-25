@@ -73,6 +73,11 @@ typography:
     fontWeight: 500
     lineHeight: 16px
     letterSpacing: 0.08em
+  label:
+    fontFamily: Geist
+    fontSize: 12px
+    fontWeight: 500
+    lineHeight: 16px
   body-ar:
     fontFamily: Cairo
     fontSize: 16px
@@ -153,15 +158,26 @@ components:
     rounded: "{rounded.lg}"
     padding: "{spacing.6}"
   badge:
-    backgroundColor: "{colors.secondary}"
-    textColor: "{colors.secondary-foreground}"
-    typography: "{typography.eyebrow}"
-    rounded: "{rounded.sm}"
-    padding: "{spacing.0.5} {spacing.2}"
-  badge-pill:
-    backgroundColor: "{colors.secondary}"
-    textColor: "{colors.secondary-foreground}"
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.primary-foreground}"
+    typography: "{typography.label}"
     rounded: "{rounded.pill}"
+    height: 20px
+    padding: "{spacing.0.5} {spacing.1.5}"
+  badge-soft:
+    backgroundColor: "{colors.card}"
+    textColor: "{colors.primary}"
+    typography: "{typography.label}"
+    rounded: "{rounded.pill}"
+  badge-outline:
+    backgroundColor: transparent
+    textColor: "{colors.primary}"
+    typography: "{typography.label}"
+    rounded: "{rounded.pill}"
+  badge-standard:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.primary-foreground}"
+    rounded: "{rounded.sm}"
   alert:
     backgroundColor: "{colors.background}"
     textColor: "{colors.foreground}"
@@ -539,7 +555,7 @@ defaults to true.
 
 | Component | Variants | Properties |
 |---|---|---|
-| `Badge` `326:2134` | 432 | `Type` Solid/Soft/Outline · `Style` Primary/Secondary/Info/Success/Warning/Destructive · `Size` sm/md/lg · `Radius` · `Stats` Default/Focus · Icon / Closable / Avatar |
+| `Badge` `326:2134` | 432 | `Type` Solid/Soft/Outline · `Tone` Primary/Secondary/Info/Success/Warning/Destructive · `Size` sm/md/lg · `Radius` Rounded (default)/Standard · `Stats` Default/Focus · Icon / Closable / Avatar. Built in code: `variant` · `tone` · `size` · `radius`, with `icon` / `avatar` slots at 12px and `onClose`. sm / md / lg are 20 / 22 / 26px with 6 / 8 / 12px inline padding and 2 / 4 / 6px gaps; Arabic grows them to 24 / 24 / 28px. Label is `XS/Medium` with no tracking. Soft lays an `opacity/*` tint over `{colors.card}`; Outline is a 1px inside stroke in the tone. Focus is a 1px ring 2px outside the whole badge, shown when its close button has keyboard focus. |
 | `Alert` `15226:58727` | 30 | `Variants` Default/Info/Success/Warning/Destructive · `Type` Outline/Solid/Soft · actions, close, title, subtitle, avatar |
 | `Tooltip` `15139:15897` | 120 | `Style` ×6 · `Position` Top/Bottom/Left/Right/None · `Radius` · LTR + RTL content and sub-text props |
 | `Progress` `3831:2727` | 126 | `sizes` sm/md/lg · `Percentage` 0–100% in 5% steps (21 values) · `Show Percentage` |
