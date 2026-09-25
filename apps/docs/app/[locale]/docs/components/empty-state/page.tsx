@@ -3,7 +3,8 @@
 import { useTranslations } from "next-intl"
 
 import { EmptyState, EmptySearchResults, EmptyData } from "@fasla-ui/blocks/empty-state/EmptyState"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview } from "@/components/component-preview"
+import { InstallCommand } from "@/components/install-command"
 
 export default function EmptyStatePage() {
   const t = useTranslations("docs.sections")
@@ -21,7 +22,7 @@ export default function EmptyStatePage() {
           <section>
             <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
-              <CodeBlock>npx fasla-ui add empty-state</CodeBlock>
+              <InstallCommand name="empty-state" />
             </div>
           </section>
 

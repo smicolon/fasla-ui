@@ -108,6 +108,7 @@
     "onThisPage": "On this page",
     "copyCode": "Copy code",
     "copied": "Copied",
+    "installNote": "Run <code>init</code> once per project before adding components. See <link>Installation</link>.",
     "landing": {
       "introTitle": "Introduction",
       "introBody": "Fasla provides a collection of reusable components that you can copy and paste into your apps. It's not a traditional component library — you own the code and can customize it however you want.",

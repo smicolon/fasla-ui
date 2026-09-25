@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 
 import { Select } from "@fasla-ui/ui/select"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { InstallCommand } from "@/components/install-command"
 
 const options = [
   { value: "react", label: "React" },
@@ -26,7 +27,7 @@ export default function SelectPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
-        <CodeBlock>npx @smicolon/fasla-ui add select</CodeBlock>
+        <InstallCommand name="select" />
       </section>
 
       {/* Preview */}

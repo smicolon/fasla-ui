@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { DataTable, Pagination, Column } from "@fasla-ui/blocks/data-table/DataTable"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { InstallCommand } from "@/components/install-command"
 
 interface User {
   id: number
@@ -41,7 +42,7 @@ export default function DataTablePage() {
           <section>
             <h2 className="text-2xl font-bold">{t("installation")}</h2>
             <div className="mt-4">
-              <CodeBlock>npx fasla-ui add data-table</CodeBlock>
+              <InstallCommand name="data-table" />
             </div>
           </section>
 

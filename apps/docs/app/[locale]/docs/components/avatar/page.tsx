@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 
 import { Avatar, AvatarGroup } from "@fasla-ui/ui/avatar"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { InstallCommand } from "@/components/install-command"
 
 export default function AvatarPage() {
   const t = useTranslations("docs.sections")
@@ -19,7 +20,7 @@ export default function AvatarPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
-        <CodeBlock>npx @smicolon/fasla-ui add avatar</CodeBlock>
+        <InstallCommand name="avatar" />
       </section>
 
       {/* Preview */}

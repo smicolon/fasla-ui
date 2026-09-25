@@ -151,8 +151,8 @@ export const init = new Command()
 
       console.log(chalk.green("\nSuccess! fasla-ui has been initialized."))
       console.log("\nYou can now add components:")
-      console.log(chalk.cyan("  npx fasla-ui add button"))
-      console.log(chalk.cyan("  npx fasla-ui add @smicolon/shimmer-button"))
+      console.log(chalk.cyan("  npx @smicolon/cli add button"))
+      console.log(chalk.cyan("  npx @smicolon/cli add shimmer-button"))
     } catch (error) {
       spinner.fail("Failed to write configuration")
       console.error(error)
