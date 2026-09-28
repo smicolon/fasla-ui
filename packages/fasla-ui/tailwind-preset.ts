@@ -28,12 +28,15 @@ import type { Config } from "tailwindcss"
  * rounding a source-of-truth value. calc() avoids that entirely.
  *
  * `null` means Figma has the rung on AUTO — the font's own metrics, which CSS
- * spells `normal`. No rung is currently on AUTO: all 134 styles are bound, in
+ * spells `normal`. No rung is currently on AUTO: all 144 styles are bound, in
  * both scripts, at every size. The mechanism stays because AUTO is a legitimate
  * choice Figma can express, and a rung may return to it.
  */
 const LEADING = {
   //           size          En            AR
+  // XXS is the one rung below Tailwind's stock scale. Figma binds En to
+  // `typography/line-height/L-neg-0,5` (14) and AR to `L-0` (16).
+  xxs: /*       10 */ [/*    14 */ 14, /*    16 */ 16],
   xs: /*        12 */ [/*    16 */ 16, /*    20 */ 20],
   sm: /*        14 */ [/*    20 */ 20, /*    24 */ 24],
   base: /*      16 */ [/*    24 */ 24, /*    28 */ 28],
@@ -47,7 +50,7 @@ const LEADING = {
   "7xl": /*     72 */ [/*    90 */ 90, /*   108 */ 108],
   "8xl": /*     96 */ [/*   108 */ 108, /*  144 */ 144],
   "9xl": /*    128 */ [/*   144 */ 144, /*  192 */ 192],
-  // `Extra/*` — two styles that sit outside the XS–9XL ramp but are part of it.
+  // `Extra/*` — two styles that sit outside the XXS–9XL ramp but are part of it.
   // Weight, underline and case are left to the ordinary utilities: `Extra/Link`
   // is 400 + underline, `Extra/List Header` is 500 + uppercase. Uppercase is
   // English-only; Arabic has no uppercase and must never be given one.
@@ -55,8 +58,12 @@ const LEADING = {
   "list-header": /* 14 */ [/*  16 */ 16, /*    16 */ 16],
 } as const satisfies Record<string, readonly [number | null, number | null]>
 
-/** Figma's size scale, which Tailwind's own scale already matches 1:1. */
+/**
+ * Figma's size scale. From XS up it matches Tailwind's own scale 1:1; XXS
+ * (10px, `typography/font-size/xxs`) is Fasla's addition below it.
+ */
 const SIZE_PX = {
+  xxs: 10,
   xs: 12,
   sm: 14,
   base: 16,
@@ -98,7 +105,7 @@ const leadingFor = (index: 0 | 1) =>
   )
 
 /**
- * Figma sets `letterSpacing` to 0% on all 134 text styles, both scripts, every
+ * Figma sets `letterSpacing` to 0% on all 144 text styles, both scripts, every
  * weight — so the ramp declares no tracking and components should set none.
  * Tailwind's stock `tracking-*` scale is left in place for the one sanctioned
  * exception, the letter-spaced eyebrow that design/DESIGN.md documents as
@@ -132,4 +139,5 @@ const preset = {
   ],
 } satisfies Config
 
+export { LEADING, SIZE_PX }
 export default preset

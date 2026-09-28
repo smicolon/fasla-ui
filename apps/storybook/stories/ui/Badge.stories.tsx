@@ -2,6 +2,7 @@ import * as React from "react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { fn } from "@storybook/test"
 import { Badge, type BadgeProps } from "../../../../packages/fasla-ui/registry/ui/badge"
+import { Avatar } from "../../../../packages/fasla-ui/registry/ui/avatar"
 
 /** The consumer's icons — 24-grid SVGs with no size or colour of their own. */
 const StarIcon = () => (
@@ -31,21 +32,12 @@ const HeartIcon = () => (
 )
 
 /**
- * A placeholder portrait — deliberately not the library's Avatar, which is being
- * rebuilt. Inline rather than an image file so it takes theme tokens and follows
- * the mode. The badge owns the 12px size and the circular clip; an empty `alt`
- * marks it decorative, for when the label already names the person.
+ * The library's Avatar, as the Figma Badge uses it: Size 12, Rounded, Image, no
+ * border, no dot. The photo is the Avatar set's own illustration. An empty
+ * `name` makes it silent, for when the label already names the person.
  */
-const avatar = (alt: string) => (
-  <svg
-    viewBox="0 0 48 48"
-    className="size-full"
-    {...(alt ? { role: "img", "aria-label": alt } : { "aria-hidden": true })}
-  >
-    <rect width="48" height="48" className="fill-muted" />
-    <circle cx="24" cy="19" r="9" className="fill-muted-foreground" />
-    <path d="M6 48c1.5-10 9-16 18-16s16.5 6 18 16Z" className="fill-muted-foreground" />
-  </svg>
+const avatar = (name: string) => (
+  <Avatar size="12" radius="rounded" src="/samples/avatar-portrait.png" name={name} />
 )
 
 /**
@@ -171,7 +163,7 @@ export const Types: Story = {
       <div className="grid grid-cols-[4.5rem_repeat(6,max-content)] items-center gap-x-3 gap-y-3">
         {VARIANTS.map((variant) => (
           <React.Fragment key={variant}>
-            <span dir="ltr" className="text-xs text-muted-foreground">
+            <span className="text-xs text-muted-foreground">
               {variant}
             </span>
             {TONES.map((tone, i) => (
@@ -317,7 +309,7 @@ export const FocusStates: Story = {
       <div className="grid grid-cols-[4.5rem_repeat(6,max-content)] items-center gap-x-4 gap-y-4">
         {VARIANTS.map((variant) => (
           <React.Fragment key={variant}>
-            <span dir="ltr" className="text-xs text-muted-foreground">
+            <span className="text-xs text-muted-foreground">
               {variant}
             </span>
             {TONES.map((tone, i) => (

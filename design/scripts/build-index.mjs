@@ -84,6 +84,7 @@ export const CODE_MAP = {
   radio: { set: "Radio", page: "3830:60584" },
   select: { set: "Select Input", page: "3884:9073" },
   skeleton: { set: "Skeleton", page: "14860:69258" },
+  "status-indicator": { set: "Status Indicator", page: "38830:41585" },
   switch: { set: "Switch", page: "3862:3097" },
   tabs: { set: "Tabs Component", page: "3808:12668" },
   textarea: { set: "Textarea", page: "3975:63617" },

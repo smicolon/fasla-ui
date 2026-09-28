@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 
 import { useState } from "react"
 import { Badge } from "@fasla-ui/ui/badge"
+import { Avatar } from "@fasla-ui/ui/avatar"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 
 const VARIANTS = ["solid", "soft", "outline"] as const
@@ -27,23 +28,12 @@ function StarIcon() {
 }
 
 /**
- * A placeholder portrait, not the library's Avatar, which is being rebuilt.
- * Inline rather than an image file so it takes theme tokens and follows the
- * mode. The badge owns the 12px size and the circular clip; an empty `alt`
- * marks it decorative, for when the label already names the person.
+ * The library's Avatar, as the Figma Badge uses it: Size 12, Rounded, Image, no
+ * border, no dot. The photo is the Avatar set's own illustration. An empty
+ * `name` makes it silent, for when the label already names the person.
  */
-function sampleAvatar(alt: string) {
-  return (
-    <svg
-      viewBox="0 0 48 48"
-      className="size-full"
-      {...(alt ? { role: "img", "aria-label": alt } : { "aria-hidden": true })}
-    >
-      <rect width="48" height="48" className="fill-muted" />
-      <circle cx="24" cy="19" r="9" className="fill-muted-foreground" />
-      <path d="M6 48c1.5-10 9-16 18-16s16.5 6 18 16Z" className="fill-muted-foreground" />
-    </svg>
-  )
+function sampleAvatar(name: string) {
+  return <Avatar size="12" radius="rounded" src="/samples/avatar-portrait.png" name={name} />
 }
 
 const PROPS = [
@@ -233,8 +223,8 @@ npx @smicolon/cli add badge`}</CodeBlock>
           </li>
           <li>
             The icon is decorative and hidden from assistive technology. The avatar is
-            not: give its image an <code className="text-sm">alt</code>, or{" "}
-            <code className="text-sm">alt=&quot;&quot;</code> when the label already
+            not: give the Avatar a <code className="text-sm">name</code>, or{" "}
+            <code className="text-sm">name=&quot;&quot;</code> when the label already
             names the person.
           </li>
           <li>
@@ -276,6 +266,7 @@ npx @smicolon/cli add badge`}</CodeBlock>
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
         <CodeBlock>{`import { Badge } from "@/components/ui/badge"
+import { Avatar } from "@/components/ui/avatar"
 
 <Badge>New</Badge>
 <Badge variant="soft" tone="success">Paid</Badge>
@@ -283,7 +274,9 @@ npx @smicolon/cli add badge`}</CodeBlock>
 
 // Icon and avatar — the badge sizes and colours them
 <Badge icon={<Star />}>Featured</Badge>
-<Badge avatar={<img src={user.photo} alt="" />}>{user.name}</Badge>
+<Badge avatar={<Avatar size="12" radius="rounded" src={user.photo} name="" />}>
+  {user.name}
+</Badge>
 
 // Removable
 <Badge variant="soft" onClose={() => remove(tag)} closeLabel={\`Remove filter: \${tag}\`}>

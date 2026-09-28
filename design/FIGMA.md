@@ -105,7 +105,7 @@ re-query every id before relying on it, and write corrections back into that fil
 `FIGMA_ACCESS_TOKEN`, which is not configured — read them through variables or the Desktop Bridge.
 
 Fonts: **Geist** (`Regular`/`Medium`/`SemiBold`, no space) for `Tailwind En/*`; **Cairo** for
-`Tailwind AR/*` (XS–9XL × Light/Regular/Medium/SemiBold/Bold, 1:1 with the English ramp). The legacy
+`Tailwind AR/*` (XXS–9XL × Light/Regular/Medium/SemiBold/Bold, 1:1 with the English ramp). The legacy
 `Almarai/*` set is not the Arabic ramp — a past note saying Almarai was wrong.
 
 ## Layout conventions
