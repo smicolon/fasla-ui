@@ -576,12 +576,27 @@
   font-style: normal;
 }
 
-/* Numerals, code and anything monospace stay Latin and LTR (§15). */
+/* Numerals, code and anything monospace stay Latin and LTR (§15).
+
+   `isolate`, not `embed`: an embedded run still lets its edge brackets take the
+   Arabic paragraph's direction, so `<input>` was drawn `>input<`. Isolated, the
+   run is one LTR unit and every bracket and symbol keeps its order.
+
+   Arabic letters never go inside a code span (tests/arabic-code-spans.test.mjs
+   enforces it for the message files), so a و next to code is always set in
+   Cairo. Flush against a monospace word it reads as a Latin "g" glued to it,
+   hence the inline padding: the و stays joined, with no space character, but
+   visibly apart from the code. */
 [dir="rtl"] code,
 [dir="rtl"] pre,
 [dir="rtl"] kbd,
 [dir="rtl"] .font-mono {
   direction: ltr;
-  unicode-bidi: embed;
+  unicode-bidi: isolate;
   text-align: start;
+}
+
+[dir="rtl"] :not(pre) > code,
+[dir="rtl"] kbd {
+  padding-inline: 0.2em;
 }

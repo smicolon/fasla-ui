@@ -28,27 +28,19 @@ export default function RadioPage() {
   )
   const rich = { code, input: INPUT }
 
-  // `prose` marks a prop cell that is a sentence rather than an identifier, so
-  // it is set as text instead of code.
-  const props: {
-    prop: React.ReactNode
-    prose?: boolean
-    type: string
-    fallback: string
-    description: React.ReactNode
-  }[] = [
+  // The component's own props, then the native <input> props it passes through
+  // that a radio group needs.
+  const props: { prop: string; type: string; fallback: string; description: React.ReactNode }[] = [
     { prop: "variant", type: '"default" | "layout"', fallback: '"default"', description: r.rich("props.variant", rich) },
     { prop: "size", type: '"sm" | "md" | "lg"', fallback: '"md"', description: r.rich("props.size", rich) },
     { prop: "label", type: "string", fallback: "", description: r.rich("props.label", rich) },
     { prop: "description", type: "string", fallback: "", description: r.rich("props.descriptionProp", rich) },
     { prop: "className", type: "string", fallback: "", description: r.rich("props.className", rich) },
-    {
-      prop: r.rich("props.restProp", { ...rich, input: "<input>" }),
-      prose: true,
-      type: "",
-      fallback: "",
-      description: r.rich("props.rest", rich),
-    },
+    { prop: "name", type: "string", fallback: "", description: r.rich("props.nameProp", rich) },
+    { prop: "value", type: "string", fallback: "", description: r.rich("props.valueProp", rich) },
+    { prop: "checked", type: "boolean", fallback: "", description: r.rich("props.checkedProp", rich) },
+    { prop: "disabled", type: "boolean", fallback: "false", description: r.rich("props.disabledProp", rich) },
+    { prop: "onChange", type: "(event) => void", fallback: "", description: r.rich("props.onChangeProp", rich) },
   ]
 
   return (
@@ -169,20 +161,16 @@ export default function RadioPage() {
               {props.map((row, i) => (
                 <tr key={i} className="border-b align-top">
                   <td className="px-4 py-2 text-start">
-                    {row.prose ? (
-                      <span className="text-muted-foreground">{row.prop}</span>
-                    ) : (
-                      <code className="whitespace-nowrap text-xs">{row.prop}</code>
-                    )}
+                    <code className="whitespace-nowrap text-xs">{row.prop}</code>
                   </td>
                   <td className="px-4 py-2 text-start">
-                    {row.type && <code className="whitespace-nowrap text-xs">{row.type}</code>}
+                    <code className="whitespace-nowrap text-xs">{row.type}</code>
                   </td>
                   <td className="px-4 py-2 text-start text-muted-foreground">
                     {row.fallback ? (
                       <code className="whitespace-nowrap text-xs text-foreground">{row.fallback}</code>
                     ) : (
-                      row.type && r("props.none")
+                      r("props.none")
                     )}
                   </td>
                   <td className="px-4 py-2 text-start text-muted-foreground">{row.description}</td>

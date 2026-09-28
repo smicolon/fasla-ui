@@ -195,8 +195,11 @@
         "label": "Label text. Without it, pass an <code>aria-label</code>.",
         "descriptionProp": "Secondary line below the label, linked with <code>aria-describedby</code>.",
         "className": "Extra classes, merged with the component's own.",
-        "restProp": "Other <code>{input}</code> props",
-        "rest": "Passed to the native <code>{input}</code>, such as <code>name</code>, <code>value</code>, <code>checked</code>, <code>disabled</code> and <code>onChange</code>."
+        "nameProp": "Groups options. Radios with the same <code>name</code> form one group, and only one of them can be selected.",
+        "valueProp": "The value submitted with the form when this option is selected.",
+        "checkedProp": "Selects the option from your state. Use it with <code>onChange</code>.",
+        "disabledProp": "Disables the option and dims it.",
+        "onChangeProp": "Called when the option is selected. Read the new value from <code>event.target.value</code>."
       }
     }
   },
