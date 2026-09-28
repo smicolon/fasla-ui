@@ -66,7 +66,7 @@ export const Statuses: Story = {
       ))}
       {SIZES.map((size) => (
         <React.Fragment key={size}>
-          <span dir="ltr" className="text-xs text-muted-foreground">
+          <span className="text-xs text-muted-foreground">
             {size}px
           </span>
           {STATUSES.map((s) => (

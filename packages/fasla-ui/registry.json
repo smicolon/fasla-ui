@@ -47,11 +47,13 @@
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
-      "description": "Represent users with images, fallback content, and grouping.",
+      "description": "A user's photo, initials or icon, in three sizes and two radii, with an optional border and presence dot. Falls back from photo to initials to icon on its own.",
       "dependencies": [
         "class-variance-authority"
       ],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "status-indicator"
+      ],
       "files": [
         {
           "path": "registry/ui/avatar/avatar.tsx",

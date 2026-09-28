@@ -84,6 +84,9 @@
     }
   },
   "docs": {
+    "avatar": {
+      "fallback": "If the photo is missing or fails to load, the avatar shows the initials, or the icon if there's no name."
+    },
     "statusIndicator": {
       "onAvatar": "The dot is meant to sit on an avatar, not on its own over a coloured surface."
     },

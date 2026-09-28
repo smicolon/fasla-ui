@@ -1,6 +1,6 @@
 "use client"
 
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 import { StatusIndicator, STATUS_LABELS } from "@fasla-ui/ui/status-indicator"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
@@ -16,6 +16,8 @@ const PROPS = [
 export default function StatusIndicatorPage() {
   const t = useTranslations("docs.sections")
   const tStatus = useTranslations("docs.statusIndicator")
+  // The label beside each dot is the site's language only, as the dot's own name is.
+  const labels = useLocale() === "ar" ? STATUS_LABELS.ar : STATUS_LABELS.en
 
   return (
     <div className="space-y-8">
@@ -63,12 +65,7 @@ npx @smicolon/cli add status-indicator`}</CodeBlock>
             {STATUSES.map((status) => (
               <div key={status} className="flex items-center gap-2">
                 <StatusIndicator status={status} aria-hidden />
-                <span dir="ltr" className="text-sm">
-                  {STATUS_LABELS.en[status]}
-                </span>
-                <span dir="rtl" lang="ar" className="text-sm text-muted-foreground">
-                  {STATUS_LABELS.ar[status]}
-                </span>
+                <span className="text-sm">{labels[status]}</span>
               </div>
             ))}
           </div>

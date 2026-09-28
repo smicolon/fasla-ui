@@ -124,7 +124,7 @@ export const routes = [
     path: "/docs/components/avatar/",
     title: "Avatar React Component | Fasla",
     description:
-      "Represent users with a React avatar that supports images, fallback content, grouping, and consistent accessible sizing.",
+      "Represent people with a React avatar: photo, initials or icon fallback, three sizes, an optional border and a presence dot.",
     h1: "Avatar",
   },
   {
