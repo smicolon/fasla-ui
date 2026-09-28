@@ -15,13 +15,23 @@ import "../src/styles/globals.css"
  *
  * Mirrors apps/docs/app/[locale]/layout.tsx: `dir` and `lang` on a wrapper, and
  * `font-arabic` to reach Cairo, which is what the docs site renders.
+ *
+ * The iframe's own <html> is hardcoded to lang="en" with no dir, so the
+ * document element follows the toolbar too: that is what the a11y addon,
+ * screen readers and the scrollbar read, and anything portalled into <body>
+ * would render outside the wrapper. The wrapper keeps its attributes for
+ * autodocs pages, which render several stories.
  */
 const withDirection: Decorator = (Story, context) => {
   const direction = context.globals.direction === "rtl" ? "rtl" : "ltr"
   const isRtl = direction === "rtl"
+  const lang = isRtl ? "ar" : "en"
+
+  document.documentElement.dir = direction
+  document.documentElement.lang = lang
 
   return (
-    <div dir={direction} lang={isRtl ? "ar" : "en"} className={isRtl ? "font-arabic" : undefined}>
+    <div dir={direction} lang={lang} className={isRtl ? "font-arabic" : undefined}>
       <Story />
     </div>
   )
