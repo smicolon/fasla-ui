@@ -72,31 +72,40 @@ describe("Avatar", () => {
       expect(frame.querySelector(".sr-only")).toBeNull()
     })
 
-    it("keeps the current photo on screen while a new src loads, then swaps", () => {
+    it("never shows the previous photo under a new src: the fallback shows until it loads", () => {
       const { container, rerender } = render(<Avatar src="/a.png" name="Layla Hassan" />)
       fireEvent.load(container.querySelector("img")!)
-      rerender(<Avatar src="/b.png" name="Layla Hassan" />)
-      const [current, next] = Array.from(container.querySelectorAll("img"))
-      expect(current).toHaveAttribute("src", "/a.png")
-      expect(current).not.toHaveClass("opacity-0") // no flash of the initials
-      expect(container.textContent).not.toContain("LH")
-      expect(next).toHaveAttribute("src", "/b.png")
-      expect(next).toHaveClass("opacity-0")
-      expect(screen.getAllByRole("img")).toHaveLength(1) // only the visible photo is named
-      fireEvent.load(next!)
+      rerender(<Avatar src="/b.png" name="Vera Brandt" />)
       const imgs = container.querySelectorAll("img")
       expect(imgs).toHaveLength(1)
-      expect(imgs[0]).toBe(next)
-      expect(imgs[0]).not.toHaveClass("opacity-0")
+      expect(imgs[0]).toHaveAttribute("src", "/b.png") // the old photo is gone at once
+      expect(imgs[0]).toHaveClass("opacity-0")
+      expect(screen.queryAllByRole("img")).toHaveLength(0) // nothing named by the old photo
+      expect(container.textContent).toContain("VB")
+      expect(container.querySelector(".sr-only")!.textContent).toBe("Vera Brandt")
+      fireEvent.load(imgs[0]!)
+      expect(screen.getByRole("img", { name: "Vera Brandt" })).toHaveAttribute("src", "/b.png")
     })
 
-    it("drops the old photo for the fallback if the new src fails", () => {
-      const { container, rerender } = render(<Avatar src="/a.png" name="Layla Hassan" />)
+    it("resets on a new srcSet too", () => {
+      const { container, rerender } = render(<Avatar src="/a.png" srcSet="/a.png 1x" name="Layla Hassan" />)
       fireEvent.load(container.querySelector("img")!)
-      rerender(<Avatar src="/missing.png" name="Layla Hassan" />)
-      fireEvent.error(container.querySelectorAll("img")[1]!)
-      expect(container.querySelector("img")).toBeNull()
+      rerender(<Avatar src="/a.png" srcSet="/a@2x.png 2x" name="Layla Hassan" />)
+      expect(container.querySelector("img")).toHaveClass("opacity-0")
       expect(container.textContent).toContain("LH")
+    })
+
+    it("tries a source that failed before afresh when it comes back", () => {
+      const { container, rerender } = render(<Avatar src="/flaky.png" name="Layla Hassan" />)
+      fireEvent.error(container.querySelector("img")!)
+      expect(container.querySelector("img")).toBeNull()
+      rerender(<Avatar src="/other.png" name="Layla Hassan" />)
+      rerender(<Avatar src="/flaky.png" name="Layla Hassan" />)
+      const retry = container.querySelector("img")!
+      expect(retry).toHaveAttribute("src", "/flaky.png") // requested again, not remembered as failed
+      fireEvent.load(retry)
+      expect(screen.getByRole("img", { name: "Layla Hassan" })).toBe(retry)
+      expect(container.textContent).not.toContain("LH")
     })
 
     it("falls back to initials when the photo fails", () => {
