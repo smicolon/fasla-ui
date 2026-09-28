@@ -12,6 +12,8 @@ const COPY = {
 type StoryCtx = { globals: { direction?: string } }
 const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
 
+const IMAGE_ATTRS = ["srcSet", "sizes", "loading", "decoding", "crossOrigin", "referrerPolicy"] as const
+
 const meta: Meta<typeof Avatar> = {
   title: "UI/Avatar",
   component: Avatar,
@@ -49,6 +51,8 @@ const meta: Meta<typeof Avatar> = {
       description: "Shows the status dot. Off unless set.",
     },
     statusLabel: { control: "text", description: "Not visible. Overrides the dot's accessible name." },
+    // Pass-throughs to the `<img>`: props of the component, not of the design.
+    ...Object.fromEntries(IMAGE_ATTRS.map((attr) => [attr, { table: { disable: true } }])),
   },
 }
 
