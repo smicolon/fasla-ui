@@ -44,10 +44,10 @@ export default function AvatarPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
         <CodeBlock language="bash">{`npx @smicolon/cli init
-npx @smicolon/cli add avatar`}</CodeBlock>
+npx @smicolon/cli add avatar status-indicator`}</CodeBlock>
         <p dir="ltr" className="text-muted-foreground">
-          This also adds <code className="text-sm">status-indicator</code>, which the
-          avatar uses for its dot.
+          The avatar uses <code className="text-sm">status-indicator</code> for its dot, so
+          add both.
         </p>
       </section>
 

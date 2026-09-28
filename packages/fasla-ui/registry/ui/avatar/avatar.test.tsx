@@ -58,18 +58,50 @@ describe("Avatar", () => {
   describe("variant=image (the default) falls back through the content", () => {
     it("shows the photo, named by `name`, once it loads", () => {
       const { frame } = avatar({ src: "/layla.png", name: "Layla Hassan" })
-      const img = screen.getByRole("img", { name: "Layla Hassan" })
-      expect(img).toHaveClass("opacity-0") // still loading: the fallback shows
+      const img = frame.querySelector("img")!
+      // Still loading: hidden and unnamed, while the named fallback shows.
+      expect(img).toHaveClass("opacity-0")
+      expect(img).toHaveAttribute("aria-hidden", "true")
       expect(frame).toHaveClass("bg-muted")
+      expect(frame.querySelector(".sr-only")!.textContent).toBe("Layla Hassan")
       fireEvent.load(img)
+      expect(screen.getByRole("img", { name: "Layla Hassan" })).toBe(img) // same element, no re-decode
       expect(img).not.toHaveClass("opacity-0")
       expect(frame).not.toHaveClass("bg-muted") // Figma's Image variant has no fill
       expect(frame.textContent).not.toContain("LH")
+      expect(frame.querySelector(".sr-only")).toBeNull()
+    })
+
+    it("keeps the current photo on screen while a new src loads, then swaps", () => {
+      const { container, rerender } = render(<Avatar src="/a.png" name="Layla Hassan" />)
+      fireEvent.load(container.querySelector("img")!)
+      rerender(<Avatar src="/b.png" name="Layla Hassan" />)
+      const [current, next] = Array.from(container.querySelectorAll("img"))
+      expect(current).toHaveAttribute("src", "/a.png")
+      expect(current).not.toHaveClass("opacity-0") // no flash of the initials
+      expect(container.textContent).not.toContain("LH")
+      expect(next).toHaveAttribute("src", "/b.png")
+      expect(next).toHaveClass("opacity-0")
+      expect(screen.getAllByRole("img")).toHaveLength(1) // only the visible photo is named
+      fireEvent.load(next!)
+      const imgs = container.querySelectorAll("img")
+      expect(imgs).toHaveLength(1)
+      expect(imgs[0]).toBe(next)
+      expect(imgs[0]).not.toHaveClass("opacity-0")
+    })
+
+    it("drops the old photo for the fallback if the new src fails", () => {
+      const { container, rerender } = render(<Avatar src="/a.png" name="Layla Hassan" />)
+      fireEvent.load(container.querySelector("img")!)
+      rerender(<Avatar src="/missing.png" name="Layla Hassan" />)
+      fireEvent.error(container.querySelectorAll("img")[1]!)
+      expect(container.querySelector("img")).toBeNull()
+      expect(container.textContent).toContain("LH")
     })
 
     it("falls back to initials when the photo fails", () => {
       const { frame } = avatar({ src: "/missing.png", name: "Layla Hassan" })
-      fireEvent.error(screen.getByRole("img"))
+      fireEvent.error(frame.querySelector("img")!)
       expect(screen.queryByRole("img")).toBeNull()
       expect(frame).toHaveClass("bg-muted")
       expect(frame.textContent).toContain("LH")
@@ -85,7 +117,7 @@ describe("Avatar", () => {
 
     it("falls back to the icon when the photo fails and there is no name", () => {
       const { frame } = avatar({ src: "/missing.png" })
-      fireEvent.error(screen.getByRole("img"))
+      fireEvent.error(frame.querySelector("img")!)
       expect(frame.querySelector("svg")).not.toBeNull()
     })
   })
@@ -131,7 +163,7 @@ describe("Avatar", () => {
       crossOrigin: "anonymous",
       referrerPolicy: "no-referrer",
     })
-    const img = screen.getByRole("img", { name: "Layla Hassan" })
+    const img = document.querySelector<HTMLImageElement>("img[src='/layla.png']")!
     expect(img).toHaveAttribute("srcset", "/layla.png 1x, /layla@2x.png 2x")
     expect(img).toHaveAttribute("sizes", "32px")
     expect(img).toHaveAttribute("loading", "lazy")

@@ -266,6 +266,7 @@ npx @smicolon/cli add badge`}</CodeBlock>
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
         <CodeBlock>{`import { Badge } from "@/components/ui/badge"
+import { Avatar } from "@/components/ui/avatar"
 
 <Badge>New</Badge>
 <Badge variant="soft" tone="success">Paid</Badge>

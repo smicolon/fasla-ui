@@ -81,7 +81,7 @@ export const Variants: Story = {
             <span className="text-xs text-muted-foreground">
               {size}px
             </span>
-            <div className="flex gap-8">
+            <div className="flex flex-wrap gap-x-8 gap-y-6">
               {styles.map(([label, props]) => (
                 <div key={label} className="flex flex-col gap-3">
                   <span className="text-xs text-muted-foreground">

@@ -57,7 +57,7 @@ export const Default: Story = {}
  */
 export const Statuses: Story = {
   render: (_, ctx) => (
-    <div className="grid grid-cols-[auto_repeat(4,minmax(4.5rem,auto))] items-center gap-x-6 gap-y-4">
+    <div className="grid grid-cols-[auto_repeat(4,minmax(3.5rem,auto))] items-center gap-x-3 gap-y-4 sm:grid-cols-[auto_repeat(4,minmax(4.5rem,auto))] sm:gap-x-6">
       <span />
       {STATUSES.map((s) => (
         <span key={s} className="justify-self-center text-xs text-muted-foreground">

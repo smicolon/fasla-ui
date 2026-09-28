@@ -158,7 +158,9 @@ export interface AvatarProps extends Omit<React.HTMLAttributes<HTMLSpanElement>,
   statusLabel?: string
 }
 
-type ImageState = "loading" | "loaded" | "error"
+type Photo = { src: string; srcSet?: string }
+/** Identifies a photo by its sources; "" when there is none. */
+const photoKey = (photo?: Photo | null) => (photo ? `${photo.src}\n${photo.srcSet ?? ""}` : "")
 
 const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
   (
@@ -182,18 +184,35 @@ const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
     },
     ref
   ) => {
-    const imgRef = React.useRef<HTMLImageElement>(null)
-    const [image, setImage] = React.useState<ImageState>("loading")
+    const requested = variant === "image" && src ? { src, srcSet } : undefined
+    const requestedKey = photoKey(requested)
+    // The last photo that finished loading, and the last source that failed.
+    const [shown, setShown] = React.useState<Photo | null>(null)
+    const [failed, setFailed] = React.useState<string | null>(null)
+    const pendingRef = React.useRef<HTMLImageElement>(null)
+
+    // While a new photo loads, the previous one stays on screen, so a change
+    // of `src` never flashes the fallback. It goes only when the new photo
+    // fails, or when there is no photo to show.
+    const display = requested && failed !== requestedKey ? shown : null
+    const pending = requested && failed !== requestedKey && photoKey(shown) !== requestedKey
+    const loaded = display !== null
 
     React.useEffect(() => {
       // A cached photo can finish before hydration attaches `onLoad`.
-      const img = imgRef.current
-      setImage(img?.complete && img.naturalWidth > 0 ? "loaded" : "loading")
-    }, [src, srcSet])
+      const img = pendingRef.current
+      if (requested && img?.complete && img.naturalWidth > 0) setShown(requested)
+      // `requested` is rebuilt every render; its key is what identifies it.
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [requestedKey])
+
+    // One element per source, keyed by it, so the photo that finishes loading
+    // is the same element that becomes visible — nothing re-decodes on the swap.
+    const layers: Photo[] = []
+    if (display) layers.push(display)
+    if (pending && requested) layers.push(requested)
 
     const letters = variant !== "icon" && name ? initialsFrom(name, size === "12" ? 1 : 2) : ""
-    const showImage = variant === "image" && Boolean(src) && image !== "error"
-    const loaded = showImage && image === "loaded"
 
     return (
       <span
@@ -217,23 +236,30 @@ const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
               <UserRoundIcon />
             ))}
           {/* The fallback's name, when there is no photo to carry it. */}
-          {!showImage && name && <span className="sr-only">{name}</span>}
-          {showImage && (
-            <img
-              ref={imgRef}
-              src={src}
-              srcSet={srcSet}
-              sizes={sizes}
-              loading={loading}
-              decoding={decoding}
-              crossOrigin={crossOrigin}
-              referrerPolicy={referrerPolicy}
-              alt={name ?? ""}
-              onLoad={() => setImage("loaded")}
-              onError={() => setImage("error")}
-              className={cn("absolute inset-0 size-full object-cover", !loaded && "opacity-0")}
-            />
-          )}
+          {!loaded && name && <span className="sr-only">{name}</span>}
+          {layers.map((photo) => {
+            const key = photoKey(photo)
+            const visible = photoKey(display) === key
+            return (
+              <img
+                key={key}
+                ref={visible ? undefined : pendingRef}
+                src={photo.src}
+                srcSet={photo.srcSet}
+                sizes={sizes}
+                loading={loading}
+                decoding={decoding}
+                crossOrigin={crossOrigin}
+                referrerPolicy={referrerPolicy}
+                // Only the photo on screen is named; one still loading is hidden.
+                alt={visible ? (name ?? "") : ""}
+                aria-hidden={visible ? undefined : true}
+                onLoad={visible ? undefined : () => setShown(photo)}
+                onError={visible ? undefined : () => setFailed(key)}
+                className={cn("absolute inset-0 size-full object-cover", !visible && "opacity-0")}
+              />
+            )
+          })}
         </span>
         {status && (
           <StatusIndicator
