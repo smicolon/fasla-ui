@@ -1,0 +1,236 @@
+{
+  "$meta": {
+    "source": "Figma · Fasla · 💨 Tailwind + Tailwind En/* and Tailwind AR/* text styles",
+    "fileKey": "yGEQmCZOvs7KptsYUdB0Xg",
+    "measured": "2026-09-28",
+    "textStyles": 144,
+    "note": "Snapshot of the type ramp: the shared typography/line-height/* ladder, and each rung's size and line-height in both scripts with the ladder variable it binds. Values are identical across the five weights of every rung. Figma is the source of truth; packages/fasla-ui/tailwind-preset.ts mirrors this file and tokens/typography.test.ts asserts they agree. The ladder steps by 2px per half step from `L-0` (16), so the 14px rung below it is `L-neg-0,5`. Every style binds its line-height to a ladder variable and its family to `typography/font-family/{LTR,RTL}/font-family-default`. The one binding outside `typography/font-size/*` is deliberate: 4XL binds size to the 💻 Responsive `font-size` variable — 36 on Web, 30 on Tablet, 24 on Mobile — and this file records the Web value, which is what the preset declares."
+  },
+  "lineHeights": {
+    "L-neg-0,5": 14,
+    "L-0": 16,
+    "L-0,5": 18,
+    "L-1": 20,
+    "L-1,5": 22,
+    "L-2": 24,
+    "L-2,5": 26,
+    "L-3": 28,
+    "L-3,5": 30,
+    "L-4": 32,
+    "L-4,5": 34,
+    "L-5": 36,
+    "L-5,5": 38,
+    "L-6": 40,
+    "L-6,5": 42,
+    "L-7": 44,
+    "L-7,5": 46,
+    "L-8": 48,
+    "L-8,5": 50,
+    "L-9": 52,
+    "L-9,5": 54,
+    "L-10": 56,
+    "L-10,5": 58,
+    "L-11": 60,
+    "L-11,5": 62,
+    "L-12": 64,
+    "L-13": 72,
+    "L-13,5": 90,
+    "L-14": 108,
+    "L-14,5": 144,
+    "L-15": 192
+  },
+  "ramp": {
+    "xxs": {
+      "figma": "XXS",
+      "size": 10,
+      "en": {
+        "lineHeight": 14,
+        "rung": "L-neg-0,5"
+      },
+      "ar": {
+        "lineHeight": 16,
+        "rung": "L-0"
+      }
+    },
+    "xs": {
+      "figma": "XS",
+      "size": 12,
+      "en": {
+        "lineHeight": 16,
+        "rung": "L-0"
+      },
+      "ar": {
+        "lineHeight": 20,
+        "rung": "L-1"
+      }
+    },
+    "sm": {
+      "figma": "SM",
+      "size": 14,
+      "en": {
+        "lineHeight": 20,
+        "rung": "L-1"
+      },
+      "ar": {
+        "lineHeight": 24,
+        "rung": "L-2"
+      }
+    },
+    "base": {
+      "figma": "Base",
+      "size": 16,
+      "en": {
+        "lineHeight": 24,
+        "rung": "L-2"
+      },
+      "ar": {
+        "lineHeight": 28,
+        "rung": "L-3"
+      }
+    },
+    "lg": {
+      "figma": "LG",
+      "size": 18,
+      "en": {
+        "lineHeight": 28,
+        "rung": "L-3"
+      },
+      "ar": {
+        "lineHeight": 32,
+        "rung": "L-4"
+      }
+    },
+    "xl": {
+      "figma": "XL",
+      "size": 20,
+      "en": {
+        "lineHeight": 28,
+        "rung": "L-3"
+      },
+      "ar": {
+        "lineHeight": 36,
+        "rung": "L-5"
+      }
+    },
+    "2xl": {
+      "figma": "2XL",
+      "size": 24,
+      "en": {
+        "lineHeight": 32,
+        "rung": "L-4"
+      },
+      "ar": {
+        "lineHeight": 40,
+        "rung": "L-6"
+      }
+    },
+    "3xl": {
+      "figma": "3XL",
+      "size": 30,
+      "en": {
+        "lineHeight": 40,
+        "rung": "L-6"
+      },
+      "ar": {
+        "lineHeight": 50,
+        "rung": "L-8,5"
+      }
+    },
+    "4xl": {
+      "figma": "4XL",
+      "size": 36,
+      "en": {
+        "lineHeight": 44,
+        "rung": "L-7"
+      },
+      "ar": {
+        "lineHeight": 60,
+        "rung": "L-11"
+      }
+    },
+    "5xl": {
+      "figma": "5XL",
+      "size": 48,
+      "en": {
+        "lineHeight": 58,
+        "rung": "L-10,5"
+      },
+      "ar": {
+        "lineHeight": 72,
+        "rung": "L-13"
+      }
+    },
+    "6xl": {
+      "figma": "6XL",
+      "size": 60,
+      "en": {
+        "lineHeight": 72,
+        "rung": "L-13"
+      },
+      "ar": {
+        "lineHeight": 90,
+        "rung": "L-13,5"
+      }
+    },
+    "7xl": {
+      "figma": "7XL",
+      "size": 72,
+      "en": {
+        "lineHeight": 90,
+        "rung": "L-13,5"
+      },
+      "ar": {
+        "lineHeight": 108,
+        "rung": "L-14"
+      }
+    },
+    "8xl": {
+      "figma": "8XL",
+      "size": 96,
+      "en": {
+        "lineHeight": 108,
+        "rung": "L-14"
+      },
+      "ar": {
+        "lineHeight": 144,
+        "rung": "L-14,5"
+      }
+    },
+    "9xl": {
+      "figma": "9XL",
+      "size": 128,
+      "en": {
+        "lineHeight": 144,
+        "rung": "L-14,5"
+      },
+      "ar": {
+        "lineHeight": 192,
+        "rung": "L-15"
+      }
+    },
+    "link": {
+      "figma": "Extra/Link",
+      "size": 16,
+      "en": {
+        "lineHeight": 24,
+        "rung": "L-2"
+      },
+      "ar": {
+        "lineHeight": 24,
+        "rung": "L-2"
+      }
+    },
+    "list-header": {
+      "figma": "Extra/List Header",
+      "size": 14,
+      "en": {
+        "lineHeight": 16,
+        "rung": "L-0"
+      },
+      "ar": {
+        "lineHeight": 16,
+        "rung": "L-0"
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@
     "modes": { "light": "⚪️ Light", "dark": "🌑 Dark" },
     "measured": "2026-09-24",
     "count": 47,
-    "note": "Snapshot of the 41 theme/* variables in the ☾ Mode collection, plus the six opacity/* tints the Badge Soft type is filled with (`soft-*`), aliases resolved to primitives. `radius` holds the one ☾ Mode radius a component binds that no Tailwind class gives in both apps, `border radius/sm`; it is mode-independent, so only the light block declares it. Figma is the source of truth; this file is the committed record of what it said when the two apps were last synced to it. `light`/`dark` are the exact CSS values both apps must declare — tokens/mode.test.ts asserts that. `via` records the alias chain, so a future drift diff shows whether a value changed or was re-aliased. Pin the collection id when re-reading: 41 of these names also exist in 🌈 Themes with a single mode, and a name-only lookup silently returns that copy. Resolve every alias hop in the same mode as the token: `custom/black` and `custom/white` are themselves ☾ Mode variables that swap in Dark (`custom/black` is white there), so resolving an intermediate hop in its default mode gives the Light value — that is how `destructive-foreground` dark was once recorded as #000000."
+    "note": "Snapshot of the 41 theme/* variables in the ☾ Mode collection, plus the six opacity/* tints the Badge Soft type is filled with (`soft-*`), aliases resolved to primitives. `radius` holds the ☾ Mode radii components bind that no Tailwind class gives in both apps — `border radius/xs` and `border radius/md` (Avatar Standard), `border radius/sm` (Badge Standard); they are mode-independent, so only the light block declares them. Figma is the source of truth; this file is the committed record of what it said when the two apps were last synced to it. `light`/`dark` are the exact CSS values both apps must declare — tokens/mode.test.ts asserts that. `via` records the alias chain, so a future drift diff shows whether a value changed or was re-aliased. Pin the collection id when re-reading: 41 of these names also exist in 🌈 Themes with a single mode, and a name-only lookup silently returns that copy. Resolve every alias hop in the same mode as the token: `custom/black` and `custom/white` are themselves ☾ Mode variables that swap in Dark (`custom/black` is white there), so resolving an intermediate hop in its default mode gives the Light value — that is how `destructive-foreground` dark was once recorded as #000000."
   },
   "tokens": {
     "background": {
@@ -276,9 +276,17 @@
     }
   },
   "radius": {
+    "radius-xs": {
+      "value": "2px",
+      "via": "border radius/xs → border radius/xs (raw)"
+    },
     "radius-sm": {
       "value": "6px",
       "via": "border radius/sm → border radius/sm (raw)"
+    },
+    "radius-md": {
+      "value": "8px",
+      "via": "border radius/md → border radius/md (raw)"
     }
   }
 }

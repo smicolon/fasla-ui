@@ -225,14 +225,14 @@ resolve to the same neutral. The system does not have a brand hue doing hierarch
 comes from weight, spacing, and inversion to `{colors.background-inverse}`. Designers arriving from a
 more colourful system consistently mis-read this — see [Known Gaps](#known-gaps).
 
-**Scale.** 5 variable collections / 923 variables · 134 text styles · 81 effect styles · 158 component
+**Scale.** 5 variable collections / 983 variables · 144 text styles · 80 effect styles · 158 component
 sets across the 44 atom pages (71 product atoms plus an 87-set low-fidelity wireframe library).
 
 ---
 
 ## Colors
 
-Colour is defined in two layers. The `💨 Tailwind` collection (456 variables, single `Default` mode)
+Colour is defined in two layers. The `💨 Tailwind` collection (475 variables, single `Default` mode)
 holds the primitives: the full 23-family Tailwind ramp at 11 steps each, 244 colours in total, which
 nothing in a design should reference directly. The `☾  Mode` collection (137 variables, Light + Dark)
 holds the semantic layer, and that is the only layer components bind to. A third collection,
@@ -324,7 +324,7 @@ modal scrims, `custom/shadow` `#000000 a0.10 → a0.30`, `custom/black` and `cus
 
 ## Typography
 
-Two ramps of 67 styles each, XS → 9XL crossed with Light / Regular / Medium / Semi Bold / Bold.
+Two ramps of 72 styles each, XXS → 9XL crossed with Light / Regular / Medium / Semi Bold / Bold.
 **Geist** carries LTR through `Tailwind En/*`; **Cairo** carries RTL through `Tailwind AR/*`. The two
 are 1:1 by *size*, so swapping a style across the language boundary is a name substitution and never a
 redesign — that symmetry is what makes the `Direction` property viable at all.
@@ -335,10 +335,11 @@ descenders and diacritics, so each ramp is leaded for its own font.
 ### The line-height ladder
 
 Line-height is not named after the type size. It is a shared numeric ladder,
-`typography/line-height/L-0` … `L-15` in the `💨 Tailwind` collection, which both ramps draw from:
+`typography/line-height/L-neg-0,5`, `L-0` … `L-15` in the `💨 Tailwind` collection, which both ramps draw from:
 
 | | | | | |
 |---|---|---|---|---|
+| `L-neg-0,5` 14 | | | | |
 | `L-0` 16 | `L-0,5` 18 | `L-1` 20 | `L-1,5` 22 | `L-2` 24 |
 | `L-2,5` 26 | `L-3` 28 | `L-3,5` 30 | `L-4` 32 | `L-4,5` 34 |
 | `L-5` 36 | `L-5,5` 38 | `L-6` 40 | `L-6,5` 42 | `L-7` 44 |
@@ -346,7 +347,8 @@ Line-height is not named after the type size. It is a shared numeric ladder,
 | `L-10` 56 | `L-10,5` 58 | `L-11` 60 | `L-11,5` 62 | `L-12` 64 |
 | `L-13` 72 | `L-13,5` 90 | `L-14` 108 | `L-14,5` 144 | `L-15` 192 |
 
-Two-pixel steps from 16 to 64, then a display run of 72 / 90 / 108 / 144 / 192. Decoupling the rung
+`L-neg-0,5` (14) sits one half step below `L-0`, added for English `XXS`. Then two-pixel steps from
+16 to 64, and a display run of 72 / 90 / 108 / 144 / 192. Decoupling the rung
 from the size name is what lets English and Arabic sit at different leading while still binding to one
 set of tokens — a size-named ramp could only ever serve one language.
 
@@ -354,6 +356,7 @@ set of tokens — a size-named ramp could only ever serve one language.
 
 | Style | Size | En line-height (rung) | ratio | AR line-height (rung) | ratio | Role |
 |---|---|---|---|---|---|---|
+| `XXS` | 10 | 14 (`L-neg-0,5`) | 1.40 | 16 (`L-0`) | 1.60 | 12px avatar initials |
 | `XS` | 12 | 16 (`L-0`) | 1.33 | 20 (`L-1`) | 1.67 | eyebrows, captions, badge labels |
 | `SM` | 14 | 20 (`L-1`) | 1.43 | 24 (`L-2`) | 1.71 | UI default — buttons, inputs, cells, menu items |
 | `Base` | 16 | 24 (`L-2`) | 1.50 | 28 (`L-3`) | 1.75 | body copy |
@@ -368,8 +371,8 @@ set of tokens — a size-named ramp could only ever serve one language.
 | `8XL` | 96 | 108 (`L-14`) | 1.13 | 144 (`L-14,5`) | 1.50 | oversized editorial |
 | `9XL` | 128 | 144 (`L-14,5`) | 1.13 | 192 (`L-15`) | 1.50 | oversized numerals |
 
-**Arabic runs in three bands**, not one flat ratio. Reading copy (`XS`–`XL`) climbs monotonically
-from 1.67 to a peak of 1.80 — 1.67, 1.71, 1.75, 1.78, 1.80, with no step out of order; headings
+**Arabic runs in three bands**, not one flat ratio. Reading copy (`XXS`–`XL`) climbs monotonically
+from 1.60 to a peak of 1.80 — 1.60, 1.67, 1.71, 1.75, 1.78, 1.80, with no step out of order; headings
 (`2XL`–`4XL`) then drop to a flat 1.67; display (`5XL`–`9XL`) to a flat 1.50. The ratio falls as the
 type grows, which is the standard typographic move, but Arabic starts far looser than English and
 stays looser at every comparable size — Cairo needs the room for descenders and diacritics, and
@@ -383,7 +386,7 @@ Both ramps are now **fully bound at every size**, display included. Nothing in e
 on `AUTO`.
 
 **English loosens, then tightens.** It is a hump, not a curve: 1.33 at `XS` rising to a peak of 1.56
-at `LG`, then falling away through 1.22 at `4XL` to 1.13 at `9XL`. Only the descent is the standard
+at `LG` (`XXS` sits apart at 1.40, looser than `XS`, because its 14px line is the ladder's floor), then falling away through 1.22 at `4XL` to 1.13 at `9XL`. Only the descent is the standard
 typographic move of letting long-form text breathe and pulling headlines in; below `LG` the ramp runs
 the other way. Three irregularities sit inside it — `LG` and `XL` share the same 28px line-height at
 different sizes, which is what makes the 1.56 → 1.40 drop so abrupt; `2XL` and `3XL` are both exactly
@@ -459,7 +462,7 @@ wraps to its container. `HUG` is reserved for inline labels inside hug rows — 
 
 ## Elevation & Depth
 
-81 effect styles, organised as three families.
+80 effect styles, organised as three families.
 
 **Drop shadows** run a 7-step ramp — `2xs, xs, sm, md, lg, xl, 2xl` — repeated for each shadow colour
 (`default`, `primary`, `secondary`, `accent`, `Info`, `success`, `warning`, `error`). The geometry is
