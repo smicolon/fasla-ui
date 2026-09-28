@@ -108,6 +108,60 @@ describe("Avatar", () => {
       expect(container.textContent).not.toContain("LH")
     })
 
+    describe("a photo that finished before its listeners were attached", () => {
+      // As after hydration, or on a reload served from cache: the browser has
+      // already loaded the image, so no load or error event will ever arrive.
+      const stub = (complete: boolean, naturalWidth: number) => {
+        const proto = HTMLImageElement.prototype
+        const was = {
+          complete: Object.getOwnPropertyDescriptor(proto, "complete")!,
+          naturalWidth: Object.getOwnPropertyDescriptor(proto, "naturalWidth")!,
+        }
+        Object.defineProperty(proto, "complete", { configurable: true, get: () => complete })
+        Object.defineProperty(proto, "naturalWidth", { configurable: true, get: () => naturalWidth })
+        return () => {
+          Object.defineProperty(proto, "complete", was.complete)
+          Object.defineProperty(proto, "naturalWidth", was.naturalWidth)
+        }
+      }
+
+      it("shows it at once when it is complete with a real size", () => {
+        const restore = stub(true, 64)
+        try {
+          const { frame } = avatar({ src: "/cached.png", name: "Layla Hassan" })
+          const img = screen.getByRole("img", { name: "Layla Hassan" }) // no load event fired
+          expect(img).not.toHaveClass("opacity-0")
+          expect(frame).not.toHaveClass("bg-muted")
+          expect(frame.textContent).not.toContain("LH")
+        } finally {
+          restore()
+        }
+      })
+
+      it("falls back when it is complete but empty — it failed before we listened", () => {
+        const restore = stub(true, 0)
+        try {
+          const { frame } = avatar({ src: "/broken.png", name: "Layla Hassan" })
+          expect(frame.querySelector("img")).toBeNull()
+          expect(frame.textContent).toContain("LH")
+        } finally {
+          restore()
+        }
+      })
+
+      it("checks again when the source changes to a photo that is already cached", () => {
+        const { container, rerender } = render(<Avatar src="/a.png" name="Layla Hassan" />)
+        fireEvent.load(container.querySelector("img")!)
+        const restore = stub(true, 64)
+        try {
+          rerender(<Avatar src="/cached.png" name="Vera Brandt" />)
+          expect(screen.getByRole("img", { name: "Vera Brandt" })).toHaveAttribute("src", "/cached.png")
+        } finally {
+          restore()
+        }
+      })
+    })
+
     it("falls back to initials when the photo fails", () => {
       const { frame } = avatar({ src: "/missing.png", name: "Layla Hassan" })
       fireEvent.error(frame.querySelector("img")!)

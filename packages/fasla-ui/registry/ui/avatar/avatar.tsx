@@ -199,16 +199,18 @@ const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
     const imgRef = React.useRef<HTMLImageElement>(null)
 
     React.useEffect(() => {
-      // Claim the state for this source, so an earlier result — above all an
-      // earlier failure of the same source — never carries over. A cached
-      // photo can finish before hydration attaches `onLoad`, so check it here.
-      // If this source's own load or error event already landed, keep it.
+      // On mount and on every source change, read the <img> itself. A photo
+      // served from cache can finish before hydration attaches `onLoad` and
+      // `onError`, so its events never reach us: complete with a real size is
+      // loaded, complete but empty is a failure. Otherwise this source starts
+      // from "loading", so no earlier result — above all an earlier failure of
+      // the same source — carries over; if its own event already landed, keep it.
       const img = imgRef.current
-      setState((prev) =>
-        prev.key === requestedKey
-          ? prev
-          : { key: requestedKey, image: img?.complete && img.naturalWidth > 0 ? "loaded" : "loading" }
-      )
+      if (img?.complete) {
+        setState({ key: requestedKey, image: img.naturalWidth > 0 ? "loaded" : "error" })
+        return
+      }
+      setState((prev) => (prev.key === requestedKey ? prev : { key: requestedKey, image: "loading" }))
     }, [requestedKey])
 
     const showImage = requested !== undefined && image !== "error"
