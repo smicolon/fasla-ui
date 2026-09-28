@@ -143,5 +143,11 @@
     "attribution": "fasla.dev · by Smicolon GmbH",
     "by": "by Smicolon GmbH",
     "licence": "MIT · Kirchheim b. München"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "This page may have moved, or it never existed.",
+    "home": "Back to the home page",
+    "docs": "Browse the docs"
   }
 }
