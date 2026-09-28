@@ -18,13 +18,13 @@ const meta: Meta<typeof Avatar> = {
   parameters: { layout: "centered" },
   tags: ["autodocs"],
   args: {
-    style: "image",
+    variant: "image",
     size: "32",
     radius: "standard",
     border: false,
   },
   argTypes: {
-    style: {
+    variant: {
       control: "inline-radio",
       options: ["image", "initials", "icon"],
       description:
@@ -37,11 +37,11 @@ const meta: Meta<typeof Avatar> = {
       description: "Figma `Radius`. Standard is `border radius/md`, or `xs` at 12.",
     },
     border: { control: "boolean", description: "Figma `Border`: a `ring` stroke inside the edge." },
-    // The story always passes the sample photo; `style` decides whether it shows.
+    // The story always passes the sample photo; `variant` decides whether it shows.
     src: { table: { disable: true } },
     name: {
       control: "text",
-      description: "The person's name: the photo's alt, the source of the initials, and the accessible name of every style. Leave empty for the sample name in the current direction.",
+      description: "The person's name: the photo's alt, the source of the initials, and the accessible name of every variant. Leave empty for the sample name in the current direction.",
     },
     status: {
       control: "select",
@@ -64,15 +64,15 @@ export const Default: Story = {
 
 /**
  * Figma's grid: Style × Radius × Border, at every size. Every avatar gets the
- * same photo and name; `style` alone picks what shows. Initials are Base 16px
+ * same photo and name; `variant` alone picks what shows. Initials are Base 16px
  * at 32, XS 12px at 24 and XXS 10px at 12.
  */
 export const Variants: Story = {
   render: (_, ctx) => {
     const styles: Array<[string, Partial<AvatarProps>]> = [
-      ["Image", { style: "image", src: PHOTO, name: copy(ctx).name }],
-      ["Initials", { style: "initials", src: PHOTO, name: copy(ctx).name }],
-      ["Icon", { style: "icon", src: PHOTO, name: copy(ctx).name }],
+      ["Image", { variant: "image", src: PHOTO, name: copy(ctx).name }],
+      ["Initials", { variant: "initials", src: PHOTO, name: copy(ctx).name }],
+      ["Icon", { variant: "icon", src: PHOTO, name: copy(ctx).name }],
     ]
     return (
       <div className="flex flex-col gap-8">
@@ -114,11 +114,12 @@ export const Variants: Story = {
 /**
  * The dot takes its size from the avatar: 8px at 32 and 24, 4px at 12. One
  * grid, so every column — radius × status — stays centred across the three
- * sizes; `dir="rtl"` mirrors it.
+ * sizes; `dir="rtl"` mirrors it. Below `sm` each row wraps to 4 columns, one
+ * radius per line.
  */
 export const Status: Story = {
   render: (_, ctx) => (
-    <div className="grid grid-cols-8 place-items-center gap-x-6 gap-y-6">
+    <div className="grid grid-cols-4 place-items-center gap-x-6 gap-y-6 sm:grid-cols-8">
       {SIZES.flatMap((size) =>
         RADII.flatMap((radius) =>
           (["online", "away", "busy", "offline"] as const).map((status) => (

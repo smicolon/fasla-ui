@@ -55,7 +55,7 @@ describe("Avatar", () => {
     })
   })
 
-  describe("style=image (the default) falls back through the content", () => {
+  describe("variant=image (the default) falls back through the content", () => {
     it("shows the photo, named by `name`, once it loads", () => {
       const { frame } = avatar({ src: "/layla.png", name: "Layla Hassan" })
       const img = screen.getByRole("img", { name: "Layla Hassan" })
@@ -90,9 +90,9 @@ describe("Avatar", () => {
     })
   })
 
-  describe("style=initials", () => {
+  describe("variant=initials", () => {
     it("shows the initials even when there is a photo", () => {
-      const { frame } = avatar({ style: "initials", src: "/layla.png", name: "Layla Hassan" })
+      const { frame } = avatar({ variant: "initials", src: "/layla.png", name: "Layla Hassan" })
       expect(screen.queryByRole("img")).toBeNull()
       expect(frame).toHaveClass("bg-muted")
       expect(frame.querySelector("[aria-hidden='true']")!.textContent).toBe("LH")
@@ -100,14 +100,14 @@ describe("Avatar", () => {
     })
 
     it("shows the icon when there is no name to take initials from", () => {
-      const { frame } = avatar({ style: "initials" })
+      const { frame } = avatar({ variant: "initials" })
       expect(frame.querySelector("svg")).not.toBeNull()
     })
   })
 
-  describe("style=icon", () => {
+  describe("variant=icon", () => {
     it("shows the icon even with a photo and a name, and is still named by `name`", () => {
-      const { frame } = avatar({ style: "icon", src: "/layla.png", name: "Layla Hassan" })
+      const { frame } = avatar({ variant: "icon", src: "/layla.png", name: "Layla Hassan" })
       expect(screen.queryByRole("img")).toBeNull()
       expect(frame.querySelector("svg")).not.toBeNull()
       expect(frame.textContent).not.toContain("LH")
@@ -115,8 +115,29 @@ describe("Avatar", () => {
     })
   })
 
-  it("takes Figma's Style in place of inline CSS, so there is no `style` attribute", () => {
-    expect(avatar({ style: "icon" }).root).not.toHaveAttribute("style")
+  it("names Figma's Style `variant`, so React's inline `style` still reaches the root", () => {
+    const { root } = avatar({ variant: "icon", style: { marginInlineStart: "1rem" } })
+    expect(root.style.marginInlineStart).toBe("1rem")
+  })
+
+  it("passes the image attributes through to the <img>", () => {
+    avatar({
+      src: "/layla.png",
+      name: "Layla Hassan",
+      srcSet: "/layla.png 1x, /layla@2x.png 2x",
+      sizes: "32px",
+      loading: "lazy",
+      decoding: "async",
+      crossOrigin: "anonymous",
+      referrerPolicy: "no-referrer",
+    })
+    const img = screen.getByRole("img", { name: "Layla Hassan" })
+    expect(img).toHaveAttribute("srcset", "/layla.png 1x, /layla@2x.png 2x")
+    expect(img).toHaveAttribute("sizes", "32px")
+    expect(img).toHaveAttribute("loading", "lazy")
+    expect(img).toHaveAttribute("decoding", "async")
+    expect(img).toHaveAttribute("crossorigin", "anonymous")
+    expect(img).toHaveAttribute("referrerpolicy", "no-referrer")
   })
 
   describe("initials", () => {
@@ -179,6 +200,10 @@ describe("Avatar", () => {
     it.each(["online", "away", "busy", "offline"] as const)("passes %s through", (status) => {
       const fills = { online: "bg-success", away: "bg-warning", busy: "bg-destructive", offline: "bg-muted" }
       expect(dot({ status })).toHaveClass(fills[status])
+    })
+
+    it("silences the dot with statusLabel=\"\", as name=\"\" silences the avatar", () => {
+      expect(dot({ statusLabel: "" }).textContent).toBe("")
     })
 
     it("takes a statusLabel for the dot's name", () => {

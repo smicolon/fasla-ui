@@ -11,7 +11,7 @@ const SIZES = ["32", "24", "12"] as const
 const STATUSES = ["online", "away", "busy", "offline"] as const
 
 const PROPS = [
-  ["style", "\"image\" | \"initials\" | \"icon\"", "\"image\""],
+  ["variant", "\"image\" | \"initials\" | \"icon\"", "\"image\""],
   ["size", "\"32\" | \"24\" | \"12\"", "\"32\""],
   ["radius", "\"standard\" | \"rounded\"", "\"standard\""],
   ["border", "boolean", "false"],
@@ -68,7 +68,7 @@ npx @smicolon/cli add avatar`}</CodeBlock>
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("variants")}</h2>
         <p dir="ltr" className="text-muted-foreground">
-          <code className="text-sm">style</code> picks the content, as Figma&apos;s Style
+          <code className="text-sm">variant</code> picks the content, as Figma&apos;s Style
           does. <code className="text-sm">image</code>, the default, shows the photo, and
           while it loads or if it fails falls back to initials from{" "}
           <code className="text-sm">name</code>, then to the user icon when there is no name.{" "}
@@ -83,9 +83,9 @@ npx @smicolon/cli add avatar`}</CodeBlock>
           <div className="grid grid-cols-4 items-center gap-4">
             {(["standard", "rounded"] as const).flatMap((radius) =>
               [false, true].flatMap((border) => [
-                <Avatar key={`${radius}-${border}-i`} style="image" radius={radius} border={border} src={PHOTO} name="Vera Brandt" />,
-                <Avatar key={`${radius}-${border}-n`} style="initials" radius={radius} border={border} src={PHOTO} name="Vera Brandt" />,
-                <Avatar key={`${radius}-${border}-u`} style="icon" radius={radius} border={border} src={PHOTO} name="Vera Brandt" />,
+                <Avatar key={`${radius}-${border}-i`} variant="image" radius={radius} border={border} src={PHOTO} name="Vera Brandt" />,
+                <Avatar key={`${radius}-${border}-n`} variant="initials" radius={radius} border={border} src={PHOTO} name="Vera Brandt" />,
+                <Avatar key={`${radius}-${border}-u`} variant="icon" radius={radius} border={border} src={PHOTO} name="Vera Brandt" />,
                 <span key={`${radius}-${border}-l`} className="text-xs text-muted-foreground">
                   {radius}
                   {border ? " · border" : ""}
@@ -139,7 +139,7 @@ npx @smicolon/cli add avatar`}</CodeBlock>
         <h2 className="text-2xl font-semibold">{t("accessibility")}</h2>
         <ul dir="ltr" className="list-disc space-y-2 ps-6 text-muted-foreground">
           <li>
-            <code className="text-sm">name</code> names the avatar in every style: it is
+            <code className="text-sm">name</code> names the avatar in every variant: it is
             the photo&apos;s <code className="text-sm">alt</code>, and hidden text behind the
             initials or icon, whose visible letters are not read out.
           </li>
@@ -192,10 +192,12 @@ npx @smicolon/cli add avatar`}</CodeBlock>
 // Photo, falling back to initials, then the user icon
 <Avatar src={user.photo} name={user.name} />
 
-// Initials or the icon, whatever else is passed. \`style\` is Figma's Style,
-// not inline CSS — use className for that.
-<Avatar style="initials" name={user.name} />
-<Avatar style="icon" name={user.name} />
+// Initials or the icon, whatever else is passed
+<Avatar variant="initials" name={user.name} />
+<Avatar variant="icon" name={user.name} />
+
+// Long lists: defer photos below the fold, and give dense screens a sharper source
+<Avatar src={user.photo} srcSet={\`\${user.photo} 1x, \${user.photo2x} 2x\`} loading="lazy" name={user.name} />
 
 // Circle with a border and a presence dot
 <Avatar src={user.photo} name={user.name} radius="rounded" border status="online" />

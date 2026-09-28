@@ -10,7 +10,7 @@ import { StatusIndicator, type StatusIndicatorProps } from "../status-indicator/
  * Border × Size, 72 variants, plus the `Status Indicator` boolean. Every colour
  * and radius below is the token the set binds.
  *
- * `style` is Figma's Style. `image`, the default, shows the photo when `src`
+ * `variant` is Figma's Style. `image`, the default, shows the photo when `src`
  * loads, and while it loads or if it fails falls back to initials from `name`,
  * then to the user icon when there is no name either — so the avatar is never
  * empty. `initials` and `icon` show that content whatever else is passed.
@@ -110,32 +110,41 @@ function initialsFrom(name: string, count: 1 | 2) {
 type Size = "32" | "24" | "12"
 type Radius = "standard" | "rounded"
 type Status = NonNullable<StatusIndicatorProps["status"]>
-type Style = "image" | "initials" | "icon"
+type Variant = "image" | "initials" | "icon"
+type ImgAttributes = React.ImgHTMLAttributes<HTMLImageElement>
 
-/**
- * `style` is Figma's Style, so it replaces React's inline-CSS `style` prop on
- * this component. Style the root with `className`.
- */
-export interface AvatarProps
-  extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children" | "style"> {
+export interface AvatarProps extends Omit<React.HTMLAttributes<HTMLSpanElement>, "children"> {
   /**
-   * Figma `Style`. `image` shows the photo, falling back to initials, then the
-   * icon. `initials` always shows the initials (the icon if there is no name);
-   * `icon` always shows the icon.
+   * Figma `Style` — named `variant`, as Badge names Figma's Type, so React's
+   * inline `style` stays available. `image` shows the photo, falling back to
+   * initials, then the icon. `initials` always shows the initials (the icon if
+   * there is no name); `icon` always shows the icon.
    */
-  style?: Style
+  variant?: Variant
   /** Figma `Size`, in px. */
   size?: Size
   /** Figma `Radius`: `standard` is `border radius/md` (`xs` at 12), `rounded` a circle. */
   radius?: Radius
   /** Figma `Border`: a `ring` stroke inside the edge. */
   border?: boolean
-  /** The photo, for `style="image"`. While it loads, or if it fails, the avatar shows its fallback. */
+  /** The photo, for `variant="image"`. While it loads, or if it fails, the avatar shows its fallback. */
   src?: string
+  /** Passed to the `<img>`: responsive sources for sharper photos on dense screens. */
+  srcSet?: ImgAttributes["srcSet"]
+  /** Passed to the `<img>`, alongside `srcSet`. */
+  sizes?: ImgAttributes["sizes"]
+  /** Passed to the `<img>`. `"lazy"` defers photos below the fold, as in a long list. */
+  loading?: ImgAttributes["loading"]
+  /** Passed to the `<img>`. */
+  decoding?: ImgAttributes["decoding"]
+  /** Passed to the `<img>`, for photos served from another origin. */
+  crossOrigin?: ImgAttributes["crossOrigin"]
+  /** Passed to the `<img>`. */
+  referrerPolicy?: ImgAttributes["referrerPolicy"]
   /**
    * The person's name. It is the photo's `alt`, the source of the initials —
    * the first letters of the first and last words, one letter at size 12 — and
-   * the accessible name of every style. Pass `""` when a label beside the
+   * the accessible name of every variant. Pass `""` when a label beside the
    * avatar already names the person.
    */
   name?: string
@@ -145,7 +154,7 @@ export interface AvatarProps
    * the page language.
    */
   status?: Status
-  /** Overrides the dot's accessible name. */
+  /** Overrides the dot's accessible name. Pass `""` to silence it, as `name=""` silences the avatar. */
   statusLabel?: string
 }
 
@@ -155,11 +164,17 @@ const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
   (
     {
       className,
-      style = "image",
+      variant = "image",
       size = "32",
       radius = "standard",
       border = false,
       src,
+      srcSet,
+      sizes,
+      loading,
+      decoding,
+      crossOrigin,
+      referrerPolicy,
       name,
       status,
       statusLabel,
@@ -174,10 +189,10 @@ const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
       // A cached photo can finish before hydration attaches `onLoad`.
       const img = imgRef.current
       setImage(img?.complete && img.naturalWidth > 0 ? "loaded" : "loading")
-    }, [src])
+    }, [src, srcSet])
 
-    const letters = style !== "icon" && name ? initialsFrom(name, size === "12" ? 1 : 2) : ""
-    const showImage = style === "image" && Boolean(src) && image !== "error"
+    const letters = variant !== "icon" && name ? initialsFrom(name, size === "12" ? 1 : 2) : ""
+    const showImage = variant === "image" && Boolean(src) && image !== "error"
     const loaded = showImage && image === "loaded"
 
     return (
@@ -207,6 +222,12 @@ const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
             <img
               ref={imgRef}
               src={src}
+              srcSet={srcSet}
+              sizes={sizes}
+              loading={loading}
+              decoding={decoding}
+              crossOrigin={crossOrigin}
+              referrerPolicy={referrerPolicy}
               alt={name ?? ""}
               onLoad={() => setImage("loaded")}
               onError={() => setImage("error")}

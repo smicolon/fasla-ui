@@ -52,7 +52,8 @@ export interface StatusIndicatorProps extends React.HTMLAttributes<HTMLSpanEleme
   /**
    * Accessible name — read by screen readers, never shown. Defaults to the
    * status in the page's language: "Online" / "متصل", "Away" / "بعيد",
-   * "Busy" / "مشغول", "Offline" / "غير متصل".
+   * "Busy" / "مشغول", "Offline" / "غير متصل". Pass `""` to silence the dot,
+   * for when text beside it already says the status.
    */
   label?: string
 }
@@ -70,7 +71,7 @@ const StatusIndicator = React.forwardRef<HTMLSpanElement, StatusIndicatorProps>(
        * close button names itself. It is right in the server HTML before any
        * script runs, and follows a live language change.
        */}
-      {label ? (
+      {label === "" ? null : label ? (
         <span className="sr-only">{label}</span>
       ) : (
         <>

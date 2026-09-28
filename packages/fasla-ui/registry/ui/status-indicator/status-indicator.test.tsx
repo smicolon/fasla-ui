@@ -128,6 +128,17 @@ describe("StatusIndicator", () => {
       expect(el.querySelectorAll(".sr-only")).toHaveLength(1)
     })
 
+    it("is silent with label=\"\", for when text beside it already says the status", () => {
+      render(
+        <div lang="ar">
+          <StatusIndicator data-testid="dot" status="busy" label="" />
+        </div>
+      )
+      const el = screen.getByTestId("dot")
+      expect(el.querySelectorAll(".sr-only")).toHaveLength(0)
+      expect(el.textContent).toBe("")
+    })
+
     it("puts the name in text, not in colour alone", () => {
       const el = dot({ status: "offline" })
       expect(el.textContent).toContain("Offline")
