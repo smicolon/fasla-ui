@@ -112,6 +112,13 @@ describe("Figma ☾ Mode snapshot", () => {
     expect(snap.radius["radius-sm"]?.value).toBe("6px")
   })
 
+  it("keeps border radius/md at 8px and border radius/xs at 2px", () => {
+    // Avatar Standard: md at 32 and 24, xs at 12. `rounded-md` is
+    // calc(var(--radius) - 2px), 6px in Storybook and 8px in docs.
+    expect(snap.radius["radius-md"]?.value).toBe("8px")
+    expect(snap.radius["radius-xs"]?.value).toBe("2px")
+  })
+
   it("keeps destructive-foreground white in both modes", () => {
     // Dark was once recorded #000000: `custom/black` is itself a ☾ Mode variable
     // that turns white in Dark, and the snapshot resolved it in Light.

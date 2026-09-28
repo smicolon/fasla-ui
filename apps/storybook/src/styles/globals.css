@@ -76,8 +76,10 @@
     --soft-warning: rgb(227 146 25 / 10%);
     --soft-destructive: rgb(224 52 52 / 10%);
 
-    /* Radius — Figma border radius/sm; mode-independent, so light only */
+    /* Radius — Figma border radius/xs, sm, md; mode-independent, so light only */
+    --radius-xs: 2px;
     --radius-sm: 6px;
+    --radius-md: 8px;
     /* ── figma:theme:end ─────────────────────────────────────────────── */
 
     /* ── Storybook-only, not in Figma. Preserved across every token sync. ── */

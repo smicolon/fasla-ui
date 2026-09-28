@@ -48,6 +48,7 @@ Core building blocks with CVA variants for consistent styling:
 | **Tabs** | Tabbed navigation with animations |
 | **Badge** | Status indicators and labels |
 | **Avatar** | User avatars with fallback initials |
+| **Status Indicator** | Presence dot with a language-aware accessible name |
 | **Card** | Flexible content containers |
 | **Skeleton** | Loading placeholders |
 | **Combobox** | Searchable select with autocomplete |

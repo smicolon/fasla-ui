@@ -14,6 +14,27 @@ const ROOT_DIR = path.resolve(__dirname, "../../..")
 const Fasla_UI_DIR = path.join(ROOT_DIR, "packages/fasla-ui")
 const OUTPUT_DIR = path.join(__dirname, "../public/r")
 
+/**
+ * Registry files import each other the way the source tree lays them out —
+ * `../status-indicator/status-indicator` from `registry/ui/avatar/`. Every CLI
+ * writes each file to its `target`, so point the import at where that
+ * component lands instead: `./status-indicator` beside `avatar.tsx`. Doing it
+ * here, in the published JSON, is what lets a CLI that doesn't rewrite these
+ * imports — @smicolon/cli 0.3.3, or shadcn — install a component that uses
+ * another. Imports of anything that isn't a registry component are left alone.
+ */
+export function rewriteComponentImports(content, fromTarget, targetOf) {
+  return content.replace(
+    /from (["'])\.\.\/([a-z0-9-]+)\/([a-z0-9-]+)\1/g,
+    (match, quote, folder, file) => {
+      const toTarget = folder === file ? targetOf(file) : undefined
+      if (!toTarget) return match
+      const rel = path.posix.relative(path.posix.dirname(fromTarget), toTarget.replace(/\.tsx?$/, ""))
+      return `from ${quote}${rel.startsWith(".") ? rel : `./${rel}`}${quote}`
+    }
+  )
+}
+
 async function main() {
   console.log("Building registry...")
 
@@ -24,6 +45,10 @@ async function main() {
   // Ensure output directory exists
   await fs.mkdir(OUTPUT_DIR, { recursive: true })
   await fs.mkdir(path.join(OUTPUT_DIR, "styles/default"), { recursive: true })
+
+  // Where each component's main file lands in a consumer's project.
+  const targets = new Map(registry.items.map((item) => [item.name, item.files[0]?.target]))
+  const targetOf = (name) => targets.get(name)
 
   // Process each component
   const processedItems = []
@@ -39,7 +64,7 @@ async function main() {
         const content = await fs.readFile(sourcePath, "utf-8")
         filesWithContent.push({
           ...file,
-          content,
+          content: rewriteComponentImports(content, file.target, targetOf),
         })
       } catch (err) {
         console.warn(`    Warning: Could not read ${file.path}`)
@@ -102,4 +127,7 @@ async function main() {
   console.log(`  - Output: ${OUTPUT_DIR}`)
 }
 
-main().catch(console.error)
+// Run only when invoked as a script, so tests can import the rewrite.
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  main().catch(console.error)
+}

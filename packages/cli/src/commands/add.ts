@@ -5,6 +5,7 @@ import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
 import { fetchRegistry, fetchComponent, getTargetDirectory } from "../registry.js"
+import { resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
 
 export const add = new Command()
   .name("add")
@@ -104,16 +105,42 @@ export const add = new Command()
       }
     }
 
-    const addSpinner = ora("Adding components...").start()
+    const addSpinner = ora("Resolving dependencies...").start()
     const allDependencies: Set<string> = new Set()
+    const baseDir = path.join(cwd, componentsDir)
 
-    for (const componentName of validComponents) {
-      addSpinner.text = `Adding ${componentName}...`
+    // Pull in every registry component the requested ones import, so `add
+    // avatar` also writes status-indicator.tsx, which avatar.tsx imports.
+    let resolved
+    try {
+      resolved = await resolveWithDependencies(
+        validComponents,
+        new Set(registry.items.map((item) => item.name)),
+        fetchComponent
+      )
+    } catch (error) {
+      addSpinner.fail("Failed to resolve components")
+      console.error(chalk.red((error as Error).message))
+      process.exit(1)
+    }
+    if (resolved.added.length > 0) {
+      addSpinner.info(`Also adding ${resolved.added.join(", ")}, which ${validComponents.join(", ")} need(s)`)
+    }
+    if (resolved.skipped.length > 0) {
+      addSpinner.warn(`Not resolvable from this registry, install separately: ${resolved.skipped.join(", ")}`)
+    }
+
+    // Where each registry component lands, for rewriting imports between them.
+    const targetDirOf = (name: string) => {
+      const item = registry.items.find((i) => i.name === name)
+      return item ? getTargetDirectory(item.type, baseDir) : undefined
+    }
+
+    for (const component of resolved.items) {
+      const componentName = component.name
+      addSpinner.start(`Adding ${componentName}...`)
 
       try {
-        // Fetch component with source code
-        const component = await fetchComponent(componentName)
-
         if (!component.files || component.files.length === 0) {
           addSpinner.warn(`${componentName}: No files found`)
           continue
@@ -130,7 +157,7 @@ export const add = new Command()
           }
 
           // Determine target path
-          const targetDir = getTargetDirectory(file.type || component.type, path.join(cwd, componentsDir))
+          const targetDir = getTargetDirectory(file.type || component.type, baseDir)
           await fs.ensureDir(targetDir)
 
           // Get filename from target or path
@@ -155,6 +182,7 @@ export const add = new Command()
             /from ["']@\/lib\/utils["']/g,
             `from "${utilsPath}"`
           )
+          content = rewriteComponentImports(content, targetDir, targetDirOf)
 
           await fs.writeFile(targetPath, content)
         }
@@ -163,7 +191,7 @@ export const add = new Command()
       }
     }
 
-    addSpinner.succeed(`Added ${validComponents.length} component(s)`)
+    addSpinner.succeed(`Added ${resolved.items.length} component(s)`)
 
     // Show dependencies to install
     if (allDependencies.size > 0) {
