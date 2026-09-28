@@ -94,13 +94,13 @@
       "installation": "التثبيت",
       "preview": "معاينة",
       "usage": "الاستخدام",
-      "props": "الخصائص",
-      "variants": "الصيغ",
-      "sizes": "المقاسات",
+      "props": "الخصائص (props)",
+      "variants": "الأنماط (variant)",
+      "sizes": "الأحجام",
       "states": "الحالات",
       "features": "الميزات",
       "components": "المكوّنات",
-      "accessibility": "الوصولية"
+      "accessibility": "إتاحة الوصول (accessibility)"
     },
     "sidebar": {
       "gettingStarted": "البداية",
@@ -109,7 +109,7 @@
       "effects": "التأثيرات",
       "introduction": "مقدّمة",
       "installation": "التثبيت",
-      "playground": "مختبر المكوّنات",
+      "playground": "مختبر المكوّنات (بالإنجليزية)",
       "menu": "قائمة التوثيق"
     },
     "onThisPage": "في هذه الصفحة",
@@ -132,6 +132,72 @@
         "darkMode": "<strong>المظهر الداكن</strong> — مدعوم جاهزاً",
         "customizable": "<strong>قابلة للتخصيص</strong> — مبنية على Tailwind CSS، سهلة التعديل"
       }
+    },
+    "radio": {
+      "lead": "يتيح لك زر الاختيار (Radio) تحديد خيار واحد فقط من مجموعة خيارات.",
+      "variantsBody": "يضع النمط (variant) <code>layout</code> زر الاختيار ونصّه داخل بطاقة بإطار، فتصبح البطاقة كلها قابلة للنقر. استخدمه عندما تحمل الخيارات وصفًا، واستخدم <code>default</code> للخيارات القصيرة في قائمة متقاربة.",
+      "statesBody": "تأتي حالتا التمرير (hover) والتركيز (focus) من CSS مباشرة. مرّر المؤشر فوق خيار، أو انتقل إليه بمفتاح Tab، لتراهما. تظهر حالة الاختيار في النقطة وحدها، ويبقى شكل البطاقة ثابتًا.",
+      "a11y": {
+        "nativeInput": "يعمل زر الاختيار مع لوحة المفاتيح تلقائيًا: تنتقل بين الخيارات بمفاتيح الأسهم، ويُرسَل الخيار المحدد مع النموذج دون شيفرة إضافية، لأنه مبني على عنصر <code>{input}</code> الأصلي.",
+        "group": "لتجميع عدة أزرار اختيار في مجموعة واحدة، أعطها قيمة <code>name</code> نفسها. عندها يمكنك تحديد خيار واحد فقط منها في كل مرة.",
+        "describedBy": "يقرأ قارئ الشاشة نص <code>description</code> بعد التسمية مباشرة، لأنه مرتبط بزر الاختيار عبر <code>aria-describedby</code>. أما الدائرة المرسومة فمخفية عن قارئ الشاشة، فيُعلن الخيار مرة واحدة فقط.",
+        "ariaLabel": "أضف <code>aria-label</code> لزر الاختيار الذي يظهر بلا <code>label</code> أو <code>description</code>، ليعرف قارئ الشاشة ما يمثله الخيار.",
+        "direction": "يتبع زر الاختيار اتجاه الصفحة المحدد في السمة (attribute) <code>dir</code>، فتظهر الدائرة دائمًا في بداية السطر."
+      },
+      "preview": {
+        "standard": "شحن عادي",
+        "express": "شحن سريع",
+        "courier": "توصيل في اليوم نفسه",
+        "long": "توصيل بالبريد السريع في اليوم نفسه إلى عنوان سكني"
+      },
+      "variants": {
+        "defaultA": "شحن عادي",
+        "defaultB": "شحن سريع",
+        "layoutA": "شحن عادي",
+        "layoutADescription": "من ثلاثة إلى خمسة أيام عمل",
+        "layoutB": "شحن سريع",
+        "layoutBDescription": "يصل غدًا قبل السادسة مساءً"
+      },
+      "sizes": {
+        "sm": "شحن عادي",
+        "md": "شحن عادي",
+        "lg": "شحن عادي"
+      },
+      "states": {
+        "unselected": "شحن عادي",
+        "selected": "شحن سريع",
+        "disabled": "توصيل في اليوم نفسه",
+        "disabledSelected": "استلام من المتجر"
+      },
+      "usage": {
+        "commentGroup": "مجموعة خيارات تشترك في قيمة name",
+        "commentDescription": "مع وصف",
+        "commentLayout": "بطاقة بإطار",
+        "commentControlled": "التحكّم بالقيمة",
+        "codeStandard": "شحن عادي",
+        "codeExpress": "شحن سريع",
+        "codeCourier": "توصيل في اليوم نفسه",
+        "codeCourierDescription": "يصل قبل السادسة مساءً",
+        "standard": "شحن عادي",
+        "standardDescription": "من ثلاثة إلى خمسة أيام عمل",
+        "express": "شحن سريع",
+        "expressDescription": "يصل غدًا",
+        "selected": "الخيار المحدد:"
+      },
+      "props": {
+        "prop": "الخاصية",
+        "type": "النوع",
+        "default": "الافتراضي",
+        "description": "الوصف",
+        "none": "لا يوجد",
+        "variant": "يحدد النمط (variant) شكل زر الاختيار. يضع <code>layout</code> زر الاختيار ونصّه داخل بطاقة بإطار.",
+        "size": "حجم زر الاختيار.",
+        "label": "نص التسمية. أضف <code>aria-label</code> إذا تركته فارغًا.",
+        "descriptionProp": "سطر ثانوي يظهر تحت التسمية، ويرتبط بزر الاختيار عبر <code>aria-describedby</code>.",
+        "className": "أصناف (class) إضافية، تُضاف إلى ما يحدده المكوّن.",
+        "restProp": "خصائص (props) <code>{input}</code> الأخرى",
+        "rest": "تُمرَّر إلى عنصر <code>{input}</code> الأصلي، مثل <code>name</code> و<code>value</code> و<code>checked</code> و<code>disabled</code> و<code>onChange</code>."
+      }
     }
   },
   "copyCommand": {
@@ -146,7 +212,7 @@
   },
   "notFound": {
     "title": "الصفحة غير موجودة",
-    "description": "ربما نُقلت هذه الصفحة، أو أنها لم تكن موجودة أصلاً.",
+    "description": "ربما نُقلت هذه الصفحة، أو أنها لم تكن موجودة أصلًا.",
     "home": "العودة إلى الصفحة الرئيسية",
     "docs": "تصفّح التوثيق"
   }

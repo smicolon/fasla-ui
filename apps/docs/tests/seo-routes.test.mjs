@@ -153,7 +153,7 @@ describe("Arabic route metadata", () => {
     const { metadataForRoute } = await import("../lib/seo-routes")
     const arabic = /[؀-ۿ]/
 
-    for (const route of ["/", "/docs/"]) {
+    for (const route of ["/", "/docs/", "/docs/components/radio/"]) {
       const en = metadataForRoute(route, "en")
       const ar = metadataForRoute(route, "ar")
       expect(ar.title).toMatch(arabic)

@@ -36,6 +36,11 @@ type ComponentRoute = {
   description: string
   h1: string
   category: ComponentCategory
+  /**
+   * Arabic name, title and description, for component pages whose body is
+   * Arabic on /ar. The name follows design/content/arabic-glossary.md.
+   */
+  ar?: { title: string; description: string; h1: string }
 }
 
 export type SeoRoute = CoreRoute | ComponentRoute
@@ -153,6 +158,12 @@ export const routes = [
     description:
       "Add an accessible React radio for choosing one option from a set, with a plain control, a bordered card layout, and full RTL support.",
     h1: "Radio",
+    ar: {
+      title: "زر الاختيار (Radio) لتطبيقات React | فاصلة",
+      description:
+        "أضف زر الاختيار (Radio) إلى تطبيق React ليحدّد المستخدم خيارًا واحدًا من مجموعة خيارات. يأتي بنمط بسيط ونمط بطاقة بإطار، ويدعم الكتابة العربية واتجاهها بالكامل.",
+      h1: "زر الاختيار (Radio)",
+    },
   },
   {
     kind: "component",
@@ -350,6 +361,17 @@ export const componentRouteGroups = (
   routes: componentRoutes.filter((route) => route.category === category),
 }))
 
+/**
+ * The name and description a component route shows in the sidebar and on the
+ * /docs/ landing: Arabic on /ar when the route has an `ar` block, else English.
+ */
+export function routeText(
+  route: { h1: string; description: string; ar?: { h1: string; description: string } },
+  locale: Locale
+): { h1: string; description: string } {
+  return locale === "ar" && route.ar ? route.ar : route
+}
+
 /** Every route exists once per locale, so the canonical carries the prefix. */
 export function localisedPath(path: RoutePath, locale: Locale): string {
   return `/${locale}${path === "/" ? "/" : path}`.replace(/\/{2,}/g, "/")
@@ -363,8 +385,8 @@ export function metadataForRoute(path: RoutePath, locale: Locale = defaultLocale
   }
 
   const canonical = new URL(localisedPath(path, locale), SITE_URL).toString()
-  // Component and installation pages are still English on /ar, so their
-  // metadata stays English there too, matching the page it describes.
+  // A page without an `ar` block is still English on /ar, so its metadata
+  // stays English there too, matching the page it describes.
   const { title, description } =
     locale === "ar" && "ar" in route && route.ar ? route.ar : route
 

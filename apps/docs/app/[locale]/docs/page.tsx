@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { componentRouteGroups } from "@/lib/seo-routes"
+import { componentRouteGroups, routeText } from "@/lib/seo-routes"
+import type { Locale } from "@/i18n/routing"
 import { registryCounts } from "@/lib/registry"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 
@@ -83,10 +84,13 @@ export default async function DocsPage({
                   href={p(route.path)}
                   className="group rounded-lg border border-border/50 p-4 transition-colors hover:border-fasla-red/50 hover:bg-accent/50"
                 >
-                  {/* Component names are technical terms and stay Latin (§15). */}
-                  <span className="font-semibold group-hover:text-fasla-red">{route.h1}</span>
+                  {/* Component names follow design/content/arabic-glossary.md:
+                      Arabic with the English in parentheses on /ar/. */}
+                  <span className="font-semibold group-hover:text-fasla-red">
+                    {routeText(route, locale as Locale).h1}
+                  </span>
                   <span className="mt-1 block text-sm text-muted-foreground">
-                    {route.description}
+                    {routeText(route, locale as Locale).description}
                   </span>
                 </Link>
               ))}

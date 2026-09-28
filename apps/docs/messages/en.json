@@ -132,6 +132,72 @@
         "darkMode": "<strong>Dark mode</strong> — dark mode support out of the box",
         "customizable": "<strong>Customizable</strong> — built with Tailwind CSS, easy to customize"
       }
+    },
+    "radio": {
+      "lead": "A control for choosing exactly one option from a set.",
+      "variantsBody": "The <code>layout</code> variant wraps the control and its text in a bordered card, so the whole card becomes the target. Use it when the options carry a description; use the default when they are single words in a tight list.",
+      "statesBody": "Hover and focus are real CSS states rather than props — hover an option, or tab to it, to see them. Selection is carried by the dot alone; the card chrome does not change.",
+      "a11y": {
+        "nativeInput": "Renders a native <code>{input}</code>, so arrow-key navigation and form submission work without extra code.",
+        "group": "Options sharing a <code>name</code> form one group, and only one can be selected.",
+        "describedBy": "<code>description</code> is linked with <code>aria-describedby</code>; the control graphic is hidden from assistive technology.",
+        "ariaLabel": "Without a <code>label</code> or <code>description</code>, pass an <code>aria-label</code>.",
+        "direction": "Direction is inherited from <code>dir</code>, never a prop, so the control can never disagree with the page."
+      },
+      "preview": {
+        "standard": "Standard delivery",
+        "express": "Express delivery",
+        "courier": "Same-day courier",
+        "long": "Same-day courier delivery to a residential address"
+      },
+      "variants": {
+        "defaultA": "Default",
+        "defaultB": "Default",
+        "layoutA": "Layout",
+        "layoutADescription": "The card is the target",
+        "layoutB": "Layout",
+        "layoutBDescription": "Hover fills the card"
+      },
+      "sizes": {
+        "sm": "Small",
+        "md": "Medium",
+        "lg": "Large"
+      },
+      "states": {
+        "unselected": "Unselected",
+        "selected": "Selected",
+        "disabled": "Disabled",
+        "disabledSelected": "Disabled, selected"
+      },
+      "usage": {
+        "commentGroup": "A group — options share a name",
+        "commentDescription": "With a description",
+        "commentLayout": "Bordered card layout",
+        "commentControlled": "Controlled",
+        "codeStandard": "Standard",
+        "codeExpress": "Express",
+        "codeCourier": "Same-day courier",
+        "codeCourierDescription": "Arrives before 6pm",
+        "standard": "Standard",
+        "standardDescription": "3–5 business days",
+        "express": "Express",
+        "expressDescription": "Arrives tomorrow",
+        "selected": "Selected:"
+      },
+      "props": {
+        "prop": "Prop",
+        "type": "Type",
+        "default": "Default",
+        "description": "Description",
+        "none": "—",
+        "variant": "Visual treatment. <code>layout</code> wraps the control and its text in a bordered card.",
+        "size": "Control size.",
+        "label": "Label text. Without it, pass an <code>aria-label</code>.",
+        "descriptionProp": "Secondary line below the label, linked with <code>aria-describedby</code>.",
+        "className": "Extra classes, merged with the component's own.",
+        "restProp": "Other <code>{input}</code> props",
+        "rest": "Passed to the native <code>{input}</code>, such as <code>name</code>, <code>value</code>, <code>checked</code>, <code>disabled</code> and <code>onChange</code>."
+      }
     }
   },
   "copyCommand": {
