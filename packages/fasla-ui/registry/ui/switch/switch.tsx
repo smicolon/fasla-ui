@@ -11,18 +11,23 @@ export interface SwitchProps
   size?: "sm" | "default" | "lg"
 }
 
+/**
+ * The thumb follows the input's own checked state (peer-checked), so it moves
+ * for a controlled `checked` and an uncontrolled `defaultChecked` alike. It
+ * travels towards the end of the reading direction, so RTL flips the offset.
+ */
 const sizeClasses = {
   sm: {
     track: "h-4 w-7",
-    thumb: "h-3 w-3 data-[state=checked]:translate-x-3",
+    thumb: "h-3 w-3 peer-checked:translate-x-3 rtl:peer-checked:-translate-x-3",
   },
   default: {
     track: "h-5 w-9",
-    thumb: "h-4 w-4 data-[state=checked]:translate-x-4",
+    thumb: "h-4 w-4 peer-checked:translate-x-4 rtl:peer-checked:-translate-x-4",
   },
   lg: {
     track: "h-6 w-11",
-    thumb: "h-5 w-5 data-[state=checked]:translate-x-5",
+    thumb: "h-5 w-5 peer-checked:translate-x-5 rtl:peer-checked:-translate-x-5",
   },
 }
 
@@ -47,7 +52,7 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
           type="checkbox"
           ref={ref}
           id={inputId}
-          className="sr-only"
+          className="peer sr-only"
           {...props}
         />
         <span
