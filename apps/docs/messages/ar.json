@@ -27,7 +27,7 @@
       "initialized": "تم إنشاء components.json",
       "resolved": "تم حلّ المكوّن في السجل",
       "written": "button.tsx → components/ui",
-      "wired": "تم ربط cva و tailwind-merge",
+      "wired": "تم ربط cva مع tailwind-merge",
       "ownedFile": "أصبح الملف components/ui/button.tsx ملكك",
       "ownership": "عدّله، أو غيّر اسمه، أو احذفه"
     },
@@ -44,15 +44,15 @@
       "browse": "تصفّح",
       "primitives": {
         "title": "المكوّنات الأساسية",
-        "description": "Button و Input و Card و Badge و Skeleton و Avatar و Checkbox و Switch و Select و Combobox و Tabs و Textarea."
+        "description": "Button، Input، Card، Badge، Skeleton، Avatar، Checkbox، Switch، Select، Combobox، Tabs، Textarea."
       },
       "blocks": {
         "title": "الكتل",
-        "description": "AppShell و PageHeader و EmptyState و Sidebar و Navbar و StatsCard و DataTable و FormSection."
+        "description": "AppShell، PageHeader، EmptyState، Sidebar، Navbar، StatsCard، DataTable، FormSection."
       },
       "effects": {
         "title": "التأثيرات",
-        "description": "ShimmerButton و AnimatedGradient و TextReveal و BorderBeam و Spotlight و GlowCard و TypewriterText."
+        "description": "ShimmerButton، AnimatedGradient، TextReveal، BorderBeam، Spotlight، GlowCard، TypewriterText."
       }
     },
     "features": {

@@ -36,4 +36,18 @@ describe("Arabic and inline code", () => {
 
     expect(offenders).toEqual([])
   })
+
+  // Between two Latin words or code values, Cairo's standalone و reads as a
+  // Latin "g" even with spaces ("cva و tailwind-merge" reads "cva g
+  // tailwind-merge"), so the sentence is reworded: "cva مع tailwind-merge",
+  // or a list after مثل with Arabic commas.
+  test("never puts و between two Latin words or code values in ar.json", () => {
+    const ar = JSON.parse(readFileSync(path.join(docsRoot, "messages/ar.json"), "utf8"))
+    const latinBefore = /(?:[A-Za-z0-9)\]'"`]|<\/code>)\s*و\s*(?=<code>|[A-Za-z`])/
+    const offenders = strings(ar)
+      .filter(([, message]) => latinBefore.test(message))
+      .map(([key, message]) => `${key}: ${message}`)
+
+    expect(offenders).toEqual([])
+  })
 })
