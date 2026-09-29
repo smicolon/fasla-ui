@@ -89,7 +89,12 @@ export default async function DocsPage({
                   <span className="font-semibold group-hover:text-fasla-red">
                     {routeText(route, locale as Locale).h1}
                   </span>
-                  <span className="mt-1 block text-sm text-muted-foreground">
+                  {/* Until a component's page is written in Arabic its description
+                      is English; set it LTR so its full stop stays at the end. */}
+                  <span
+                    className="mt-1 block text-sm text-muted-foreground"
+                    {...(locale === "ar" && !("ar" in route) ? { dir: "ltr", lang: "en" } : {})}
+                  >
                     {routeText(route, locale as Locale).description}
                   </span>
                 </Link>

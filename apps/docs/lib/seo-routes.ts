@@ -77,6 +77,11 @@ export const routes = [
     description:
       "Install Fasla with the CLI or manually, then configure React, TypeScript, Tailwind CSS, and the shared component utilities.",
     h1: "Installation",
+    ar: {
+      title: "ثبّت فاصلة في مشروع React مع Tailwind CSS",
+      description:
+        "ثبّت فاصلة بأداة الأوامر (CLI) أو يدويًا، ثم اضبط إعدادات Tailwind CSS والدالة المساعدة cn في مشروع React.",
+    },
   },
   {
     kind: "component",

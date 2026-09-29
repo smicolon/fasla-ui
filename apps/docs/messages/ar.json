@@ -123,14 +123,14 @@
       "featuresTitle": "الميزات",
       "categoriesTitle": "فئات المكوّنات",
       "getStartedTitle": "ابدأ",
-      "getStartedBody": "ثبّت أداة الأوامر وأضف أول مكوّن.",
+      "getStartedBody": "ثبّت أداة الأوامر (CLI) وأضف أول مكوّن.",
       "features": {
-        "components": "<strong>{count}+ مكوّنًا</strong> بين أساسيات وكتل وتأثيرات",
-        "accessible": "<strong>وصولية</strong> مدروسة من البداية، مع التنقّل بلوحة المفاتيح",
-        "animated": "<strong>حركة</strong> سلسة عبر Framer Motion، تحترم تقليل الحركة",
-        "typescript": "<strong>TypeScript</strong> بأنواع كاملة في كل الشيفرة",
-        "darkMode": "<strong>المظهر الداكن</strong> مدعوم دون أي إعداد",
-        "customizable": "<strong>قابلة للتخصيص</strong> لأنها مبنية على Tailwind CSS"
+        "components": "<strong>{count}+ مكوّنًا</strong> بين مكوّنات أساسية وكتل تطبيقات وتأثيرات",
+        "accessible": "<strong>إتاحة الوصول (accessibility)</strong> مدروسة من البداية، ومنها التنقّل بلوحة المفاتيح",
+        "animated": "<strong>حركة</strong> سلسة بمكتبة Framer Motion، تحترم إعداد تقليل الحركة",
+        "typescript": "<strong>TypeScript</strong> في الشيفرة كلها، مع أنواع كاملة",
+        "darkMode": "<strong>الوضع الداكن</strong> مدعوم دون أي إعداد",
+        "customizable": "<strong>قابلة للتخصيص</strong> بسهولة، لأنها مبنية على Tailwind CSS"
       }
     },
     "radio": {
@@ -201,6 +201,29 @@
         "disabledProp": "يعطّل الخيار ويُظهره باهتًا.",
         "onChangeProp": "تُستدعى عند تحديد الخيار."
       }
+    },
+    "installation": {
+      "title": "التثبيت",
+      "lead": "ثبّت فاصلة في مشروعك واضبطها في خطوات قليلة.",
+      "requirementsTitle": "المتطلبات",
+      "requirements": {
+        "react": "مكتبة React بالإصدار 18 أو أحدث",
+        "tailwind": "إطار Tailwind CSS بالإصدار 3.4 أو أحدث",
+        "typescript": "لغة TypeScript، وهي موصى بها"
+      },
+      "cliTitle": "ثبّت بأداة الأوامر (CLI)",
+      "cliBody": "أسهل طريقة لإضافة المكوّنات هي الحزمة <code>@smicolon/cli</code>، وتحتاج إلى خطوتين.",
+      "cliInit": "1. هيّئ فاصلة مرة واحدة في كل مشروع. يكتب هذا الأمر الملف <code>components.json</code>، الذي يقرؤه كل أمر <code>add</code>:",
+      "cliAdd": "2. أضف مكوّنًا:",
+      "cliList": "اعرض كل ما يقدّمه السجل (registry):",
+      "manualTitle": "ثبّت يدويًا",
+      "manualBody": "يمكنك أيضًا نسخ المكوّنات مباشرة من الشيفرة المصدرية.",
+      "manualDeps": "1. ثبّت الاعتماديات (dependency):",
+      "manualCn": "2. أضف الدالة المساعدة <code>cn</code> إلى مشروعك:",
+      "manualCopy": "3. انسخ الشيفرة المصدرية لكل مكوّن من صفحته.",
+      "tailwindTitle": "اضبط Tailwind",
+      "tailwindBody": "اربط الـ tokens الدلالية بقسم <code>theme</code> في إعدادات Tailwind. والـ token قيمة تصميم محفوظة باسم، مثل <code>primary</code> للون الأساسي. تصدّر الحزمة المجموعة كاملة، مغلّفة مسبقًا لتبقى معدِّلات الشفافية (opacity modifier) تعمل:",
+      "tailwindNote": "بعد ذلك، عرّف متغيرات CSS المقابلة بألوان كاملة بصيغة hex أو oklch، على <code>:root</code> للوضع الفاتح، وعلى <code>.dark</code> للوضع الداكن. ربط الـ token بقيمة <code>var(--primary)</code> وحدها يبدو صحيحًا، لكنه يُسقط معدِّلات الشفافية (opacity modifier) في Tailwind دون تنبيه، فلا ينتج <code>bg-primary/10</code> أي قاعدة. لذلك تغلّف الخريطة المُصدَّرة كل token بالدالة <code>color-mix()</code>."
     }
   },
   "copyCommand": {
