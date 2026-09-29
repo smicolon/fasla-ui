@@ -161,6 +161,7 @@ describe("Arabic route metadata", () => {
       expect(en.title).not.toMatch(arabic)
       expect(ar.openGraph).toMatchObject({ title: ar.title, locale: "ar_AR" })
       expect(ar.twitter).toMatchObject({ title: ar.title })
+      expect(ar.description).not.toMatch(/React/)
     }
   })
 
@@ -175,6 +176,8 @@ describe("Arabic route metadata", () => {
       expect(route.ar.h1).toMatch(arabic)
       expect(route.ar.h1.endsWith(` (${route.h1})`)).toBe(true)
       expect(route.ar.description).toMatch(arabic)
+      // Readers know Fasla is a React library; only the <title> says so.
+      expect(route.ar.description).not.toMatch(/React/)
       expect(route.ar.title.startsWith(route.ar.h1)).toBe(true)
 
       // The page's H1 takes its name from the catalogue, never a literal.
