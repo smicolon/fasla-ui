@@ -185,11 +185,6 @@
         "selected": "Selected:"
       },
       "props": {
-        "prop": "Prop",
-        "type": "Type",
-        "default": "Default",
-        "description": "Description",
-        "none": "—",
         "variant": "A plain control or a bordered card.",
         "size": "Control size.",
         "label": "Label text.",
@@ -224,6 +219,268 @@
       "tailwindTitle": "Tailwind Configuration",
       "tailwindBody": "Map the semantic tokens into your Tailwind theme. The package exports the whole set, already wrapped so that opacity modifiers keep working:",
       "tailwindNote": "Then declare the matching CSS variables as full colours (hex or oklch) on <code>:root</code> and <code>.dark</code>. Mapping a token as a bare <code>var(--primary)</code> looks correct but silently drops Tailwind’s opacity modifiers — <code>bg-primary/10</code> compiles to no rule at all. That is why the exported map wraps each token in <code>color-mix()</code>."
+    },
+    "propsTable": {
+      "prop": "Prop",
+      "type": "Type",
+      "default": "Default",
+      "description": "Description",
+      "none": "—"
+    },
+    "checkbox": {
+      "lead": "A control that allows the user to toggle between checked and not checked.",
+      "preview": {
+        "terms": "Accept terms",
+        "long": "Email me a weekly summary of new components and release notes"
+      },
+      "withLabelTitle": "With Label & Description",
+      "withLabel": {
+        "email": "Email notifications",
+        "marketing": "Marketing emails",
+        "marketingDescription": "Receive emails about new products and features",
+        "security": "Security alerts",
+        "securityDescription": "Get notified about security updates"
+      },
+      "states": {
+        "default": "Default",
+        "checked": "Checked",
+        "indeterminate": "Indeterminate",
+        "disabled": "Disabled",
+        "error": "Error state"
+      },
+      "usage": {
+        "basic": "Basic checkbox",
+        "withLabel": "With label",
+        "withDescription": "With description",
+        "indeterminate": "Indeterminate state",
+        "error": "Error state",
+        "terms": "Accept terms and conditions",
+        "marketing": "Marketing emails",
+        "marketingDescription": "Receive emails about new products",
+        "required": "Required field"
+      },
+      "props": {
+        "checked": "Checked state. Use it with <code>onChange</code>.",
+        "indeterminate": "Shows a dash for a partly selected group.",
+        "disabled": "Disables the checkbox and dims it.",
+        "error": "Marks the checkbox as invalid.",
+        "label": "Label text.",
+        "description": "Secondary line below the label.",
+        "name": "Name submitted with the form.",
+        "value": "Value submitted when checked.",
+        "onChange": "Called when the checkbox changes.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "switch": {
+      "lead": "A toggle control for switching between on and off states.",
+      "preview": {
+        "long": "Download updates over mobile data when Wi-Fi is unavailable"
+      },
+      "withLabelTitle": "With Label & Description",
+      "withLabel": {
+        "airplane": "Airplane mode",
+        "dark": "Dark mode",
+        "darkDescription": "Toggle dark mode on or off",
+        "notifications": "Notifications",
+        "notificationsDescription": "Receive push notifications"
+      },
+      "usage": {
+        "basic": "Basic switch",
+        "withLabel": "With label",
+        "withDescription": "With description",
+        "sizes": "Different sizes",
+        "controlled": "Controlled"
+      },
+      "props": {
+        "size": "Switch size.",
+        "checked": "On state. Use it with <code>onChange</code>.",
+        "disabled": "Disables the switch and dims it.",
+        "label": "Label text.",
+        "description": "Secondary line below the label.",
+        "name": "Name submitted with the form.",
+        "onChange": "Called when the switch changes.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "select": {
+      "lead": "A native select input with custom styling.",
+      "options": {
+        "a": "React",
+        "b": "Vue",
+        "c": "Angular",
+        "d": "Svelte"
+      },
+      "placeholder": "Select a framework",
+      "sizes": {
+        "sm": "Small",
+        "default": "Default",
+        "lg": "Large"
+      },
+      "states": {
+        "default": "Default",
+        "error": "Error state",
+        "disabled": "Disabled"
+      },
+      "usage": {
+        "basic": "Basic select",
+        "sizes": "Different sizes",
+        "error": "Error state"
+      },
+      "props": {
+        "options": "Options to choose from.",
+        "placeholder": "Text shown before a choice.",
+        "selectSize": "Select size.",
+        "error": "Marks the select as invalid.",
+        "disabled": "Disables the select and dims it.",
+        "value": "Selected value. Use it with <code>onChange</code>.",
+        "name": "Name submitted with the form.",
+        "onChange": "Called when the choice changes.",
+        "className": "Extra classes for the component."
+      },
+      "optionValues": {
+        "a": "react",
+        "b": "vue",
+        "c": "angular",
+        "d": "svelte"
+      }
+    },
+    "textarea": {
+      "lead": "A multi-line text input with character count and resize options.",
+      "placeholder": "Type your message here...",
+      "countTitle": "With Character Count",
+      "countPlaceholder": "Type your message...",
+      "resizeTitle": "Resize Options",
+      "resize": {
+        "none": "No resize",
+        "vertical": "Vertical resize (default)",
+        "both": "Both directions"
+      },
+      "states": {
+        "default": "Default",
+        "error": "Error state",
+        "disabled": "Disabled"
+      },
+      "usage": {
+        "basic": "Basic textarea",
+        "count": "With character count",
+        "resize": "Different resize options",
+        "error": "Error state",
+        "codePlaceholder": "Type your message...",
+        "codeCount": "Type here..."
+      },
+      "props": {
+        "variant": "Visual style: default or error.",
+        "resize": "Directions it can be resized in.",
+        "showCount": "Shows a character counter.",
+        "maxLength": "Maximum number of characters.",
+        "placeholder": "Text shown while empty.",
+        "disabled": "Disables the field and dims it.",
+        "value": "Text value. Use it with <code>onChange</code>.",
+        "onChange": "Called when the text changes.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "input": {
+      "lead": "A text input component with validation states and icon support.",
+      "placeholder": "Enter text...",
+      "variants": {
+        "default": "Default",
+        "error": "Error state",
+        "success": "Success state"
+      },
+      "sizes": {
+        "sm": "Small",
+        "default": "Default",
+        "lg": "Large"
+      },
+      "iconsTitle": "With Icons",
+      "icons": {
+        "search": "Search...",
+        "end": "With end icon"
+      },
+      "props": {
+        "variant": "Visual style for validation.",
+        "inputSize": "Field size.",
+        "startIcon": "Icon at the start of the field.",
+        "endIcon": "Icon at the end of the field.",
+        "placeholder": "Text shown while empty.",
+        "type": "Input type, such as <code>email</code>.",
+        "disabled": "Disables the field and dims it.",
+        "value": "Field value. Use it with <code>onChange</code>.",
+        "onChange": "Called when the text changes.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "combobox": {
+      "lead": "A searchable dropdown with autocomplete, multi-select, and create-new functionality.",
+      "options": {
+        "a": "React",
+        "b": "Vue",
+        "c": "Angular",
+        "d": "Svelte",
+        "e": "Next.js",
+        "f": "Nuxt"
+      },
+      "placeholder": "Select a framework...",
+      "searchableTitle": "Searchable",
+      "searchable": {
+        "placeholder": "Search frameworks...",
+        "search": "Type to search..."
+      },
+      "multiTitle": "Multi-select",
+      "multi": "Select frameworks...",
+      "creatableTitle": "Creatable",
+      "creatable": "Select or create...",
+      "states": {
+        "default": "Default",
+        "disabled": "Disabled",
+        "loading": "Loading..."
+      },
+      "text": {
+        "search": "Search...",
+        "empty": "No options found.",
+        "create": "Create",
+        "loading": "Loading...",
+        "open": "Open",
+        "close": "Close",
+        "remove": "Remove {label}"
+      },
+      "usage": {
+        "basic": "Basic combobox",
+        "controlled": "Controlled with search",
+        "multi": "Multi-select",
+        "creatable": "Creatable",
+        "addNew": "Add new option to your list",
+        "codePlaceholder": "Select option..."
+      },
+      "props": {
+        "options": "Options to choose from.",
+        "value": "Selected value, or values when <code>multiple</code>.",
+        "onChange": "Called when the selection changes.",
+        "placeholder": "Text shown before a choice.",
+        "searchPlaceholder": "Placeholder of the search field.",
+        "multiple": "Allows several selections.",
+        "creatable": "Lets the user add a new option.",
+        "onCreate": "Called with the new option’s text.",
+        "emptyText": "Text when nothing matches.",
+        "createText": "Label of the create option.",
+        "loading": "Shows the loading state.",
+        "loadingText": "Text shown while loading.",
+        "openLabel": "Toggle’s accessible name when closed.",
+        "closeLabel": "Toggle’s accessible name when open.",
+        "removeLabel": "Accessible name of a chip’s remove button.",
+        "disabled": "Disables the combobox and dims it.",
+        "className": "Extra classes for the component."
+      },
+      "optionValues": {
+        "a": "react",
+        "b": "vue",
+        "c": "angular",
+        "d": "svelte",
+        "e": "nextjs",
+        "f": "nuxt"
+      }
     }
   },
   "copyCommand": {

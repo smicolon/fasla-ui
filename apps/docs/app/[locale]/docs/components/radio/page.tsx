@@ -2,10 +2,11 @@
 
 import { useLocale, useTranslations } from "next-intl"
 
-import { Fragment, useState } from "react"
+import { useState } from "react"
 import { Radio } from "@fasla-ui/ui/radio"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { PropsTable, type PropRow } from "@/components/props-table"
 import { componentRoutes, routeText } from "@/lib/seo-routes"
 import type { Locale } from "@/i18n/routing"
 
@@ -13,79 +14,6 @@ const route = componentRoutes.find((candidate) => candidate.path === "/docs/comp
 
 /** The literal element name, passed as a value so ICU does not parse it as a tag. */
 const INPUT = '<input type="radio">'
-
-type PropRow = {
-  prop: string
-  type: string
-  fallback: string
-  description: React.ReactNode
-}
-
-/**
- * A type that may break before each `|`, never inside a value, so
- * `"sm" | "md" | "lg"` keeps the type column narrow enough for the
- * description.
- */
-function UnionType({ value }: { value: string }) {
-  const parts = value.split(" | ")
-  return (
-    <code className="text-xs">
-      {parts.map((part, index) => (
-        <Fragment key={part}>
-          {index > 0 && " "}
-          <span className="whitespace-nowrap">
-            {index > 0 && "| "}
-            {part}
-          </span>
-        </Fragment>
-      ))}
-    </code>
-  )
-}
-
-/**
- * The props table: one table, four columns, one short line per description
- * (design/content/arabic-writing-guide.md). Cells keep the page's direction, so
- * on /ar every column aligns to the start (right); a code value sits in an
- * inline <code>, which globals.css isolates left to right inside the RTL cell.
- */
-function PropsTable({ rows }: { rows: PropRow[] }) {
-  const r = useTranslations("docs.radio")
-  return (
-    <div className="overflow-x-auto">
-      <table className="w-full text-sm">
-        <thead>
-          <tr className="border-b">
-            <th className="px-3 py-2 text-start font-semibold">{r("props.prop")}</th>
-            <th className="px-3 py-2 text-start font-semibold">{r("props.type")}</th>
-            <th className="px-3 py-2 text-start font-semibold">{r("props.default")}</th>
-            <th className="min-w-[15rem] px-3 py-2 text-start font-semibold">{r("props.description")}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row) => (
-            <tr key={row.prop} className="border-b align-top">
-              <td className="px-3 py-2 text-start">
-                <code className="whitespace-nowrap text-xs">{row.prop}</code>
-              </td>
-              <td className="px-3 py-2 text-start">
-                <UnionType value={row.type} />
-              </td>
-              <td className="px-3 py-2 text-start text-muted-foreground">
-                {row.fallback ? (
-                  <code className="whitespace-nowrap text-xs text-foreground">{row.fallback}</code>
-                ) : (
-                  r("props.none")
-                )}
-              </td>
-              <td className="px-3 py-2 text-start text-muted-foreground">{row.description}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  )
-}
 
 export default function RadioPage() {
   const locale = useLocale() as Locale

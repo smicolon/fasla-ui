@@ -11,6 +11,30 @@ const meta: Meta<typeof Switch> = {
 export default meta
 type Story = StoryObj<typeof Switch>
 
+/**
+ * Sample copy, per script. Only the rendered values change; prop names stay
+ * English. The Arabic follows design/content/.
+ */
+const COPY = {
+  ltr: {
+    airplane: "Airplane mode",
+    notifications: "Notifications",
+    notificationsDesc: "Receive push notifications",
+    disabled: "Disabled",
+    long: "Download updates over mobile data when Wi-Fi is unavailable",
+  },
+  rtl: {
+    airplane: "وضع الطيران",
+    notifications: "الإشعارات",
+    notificationsDesc: "تصلك الإشعارات الفورية",
+    disabled: "المزامنة عبر بيانات الجوّال",
+    long: "تنزيل التحديثات تلقائيًا عبر بيانات الجوّال عند غياب شبكة Wi-Fi",
+  },
+} as const
+
+type StoryCtx = { globals: { direction?: string } }
+const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
+
 export const Default: Story = {
   args: {},
 }
@@ -30,21 +54,24 @@ export const Sizes: Story = {
 }
 
 export const WithLabel: Story = {
-  args: {
-    label: "Airplane mode",
-  },
+  render: (args, ctx) => <Switch label={copy(ctx).airplane} {...args} />,
 }
 
 export const WithDescription: Story = {
-  args: {
-    label: "Notifications",
-    description: "Receive push notifications",
-  },
+  render: (args, ctx) => (
+    <Switch label={copy(ctx).notifications} description={copy(ctx).notificationsDesc} {...args} />
+  ),
 }
 
 export const Disabled: Story = {
-  args: {
-    label: "Disabled",
-    disabled: true,
-  },
+  render: (args, ctx) => <Switch label={copy(ctx).disabled} disabled {...args} />,
+}
+
+/** A label long enough to wrap: the track must stay on the first line. */
+export const WrappedLabel: Story = {
+  render: (args, ctx) => (
+    <div className="w-64">
+      <Switch label={copy(ctx).long} defaultChecked {...args} />
+    </div>
+  ),
 }

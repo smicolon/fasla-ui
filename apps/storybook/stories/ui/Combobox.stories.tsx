@@ -14,28 +14,88 @@ const meta: Meta<typeof Combobox> = {
 export default meta
 type Story = StoryObj<typeof Combobox>
 
-const frameworks: ComboboxOption[] = [
-  { value: "react", label: "React" },
-  { value: "vue", label: "Vue" },
-  { value: "angular", label: "Angular" },
-  { value: "svelte", label: "Svelte" },
-  { value: "solid", label: "Solid" },
-  { value: "qwik", label: "Qwik" },
-  { value: "next", label: "Next.js" },
-  { value: "nuxt", label: "Nuxt" },
-  { value: "astro", label: "Astro" },
-]
+/**
+ * Sample copy, per script. Option values stay Latin identifiers; labels,
+ * placeholders and the component's own text change. The Arabic follows
+ * design/content/.
+ */
+const COPY = {
+  ltr: {
+    options: [
+      { value: "react", label: "React" },
+      { value: "vue", label: "Vue" },
+      { value: "angular", label: "Angular" },
+      { value: "svelte", label: "Svelte" },
+      { value: "solid", label: "Solid" },
+      { value: "qwik", label: "Qwik" },
+      { value: "next", label: "Next.js" },
+      { value: "nuxt", label: "Nuxt" },
+      { value: "astro", label: "Astro" },
+    ] as ComboboxOption[],
+    first: "react",
+    second: "next",
+    select: "Select framework...",
+    searchFrameworks: "Search frameworks...",
+    selectMany: "Select frameworks...",
+    create: "Select or create...",
+    createTags: "Select or create tags...",
+    disabled: "Disabled...",
+    loading: "Loading...",
+    someDisabled: "Some options disabled...",
+    disabledOption: "Disabled Option",
+    anotherDisabled: "Another Disabled",
+    text: {},
+  },
+  rtl: {
+    options: [
+      { value: "sa", label: "السعودية" },
+      { value: "ae", label: "الإمارات" },
+      { value: "eg", label: "مصر" },
+      { value: "jo", label: "الأردن" },
+      { value: "ma", label: "المغرب" },
+      { value: "kw", label: "الكويت" },
+      { value: "qa", label: "قطر" },
+      { value: "om", label: "عُمان" },
+      { value: "bh", label: "البحرين" },
+    ] as ComboboxOption[],
+    first: "sa",
+    second: "qa",
+    select: "اختر دولة…",
+    searchFrameworks: "ابحث عن دولة…",
+    selectMany: "اختر دول الشحن…",
+    create: "اختر دولة أو أضف واحدة…",
+    createTags: "اختر وسومًا أو أضف واحدًا…",
+    disabled: "الدولة محددة من حسابك",
+    loading: "جارٍ تحميل الدول…",
+    someDisabled: "بعض الدول غير متاحة للشحن…",
+    disabledOption: "لبنان، قريبًا",
+    anotherDisabled: "العراق، قريبًا",
+    text: {
+      searchPlaceholder: "ابحث…",
+      emptyText: "لا توجد دولة مطابقة.",
+      createText: "إضافة",
+      loadingText: "جارٍ التحميل…",
+      openLabel: "فتح القائمة",
+      closeLabel: "إغلاق القائمة",
+      removeLabel: (label: string) => `إزالة ${label}`,
+    },
+  },
+}
+
+type StoryCtx = { globals: { direction?: string } }
+const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
 
 export const Default: Story = {
-  render: () => {
+  render: (_args, ctx) => {
+    const c = copy(ctx)
     const [value, setValue] = useState<string>("")
     return (
       <div className="w-[300px]">
         <Combobox
-          options={frameworks}
+          options={c.options} {...c.text}
           value={value}
           onChange={(v) => setValue(v as string)}
-          placeholder="Select framework..."
+          placeholder={c.select}
         />
       </div>
     )
@@ -43,16 +103,17 @@ export const Default: Story = {
 }
 
 export const WithSearch: Story = {
-  render: () => {
-    const [value, setValue] = useState<string>("react")
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    const [value, setValue] = useState<string>(c.first)
     return (
       <div className="w-[300px]">
         <Combobox
-          options={frameworks}
+          options={c.options} {...c.text}
           value={value}
           onChange={(v) => setValue(v as string)}
-          placeholder="Select framework..."
-          searchPlaceholder="Search frameworks..."
+          placeholder={c.select}
+          searchPlaceholder={c.searchFrameworks}
         />
       </div>
     )
@@ -60,15 +121,16 @@ export const WithSearch: Story = {
 }
 
 export const Multiple: Story = {
-  render: () => {
-    const [value, setValue] = useState<string[]>(["react", "next"])
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    const [value, setValue] = useState<string[]>([c.first, c.second])
     return (
       <div className="w-[300px]">
         <Combobox
-          options={frameworks}
+          options={c.options} {...c.text}
           value={value}
           onChange={(v) => setValue(v as string[])}
-          placeholder="Select frameworks..."
+          placeholder={c.selectMany}
           multiple
         />
       </div>
@@ -77,17 +139,18 @@ export const Multiple: Story = {
 }
 
 export const Creatable: Story = {
-  render: () => {
-    const [options, setOptions] = useState<ComboboxOption[]>(frameworks)
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    const [options, setOptions] = useState<ComboboxOption[]>(c.options)
     const [value, setValue] = useState<string>("")
 
     return (
       <div className="w-[300px]">
         <Combobox
-          options={options}
+          options={options} {...c.text}
           value={value}
           onChange={(v) => setValue(v as string)}
-          placeholder="Select or create..."
+          placeholder={c.create}
           creatable
           onCreate={(newValue) => {
             const newOption = { value: newValue.toLowerCase(), label: newValue }
@@ -101,17 +164,18 @@ export const Creatable: Story = {
 }
 
 export const CreatableMultiple: Story = {
-  render: () => {
-    const [options, setOptions] = useState<ComboboxOption[]>(frameworks)
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    const [options, setOptions] = useState<ComboboxOption[]>(c.options)
     const [value, setValue] = useState<string[]>([])
 
     return (
       <div className="w-[300px]">
         <Combobox
-          options={options}
+          options={options} {...c.text}
           value={value}
           onChange={(v) => setValue(v as string[])}
-          placeholder="Select or create tags..."
+          placeholder={c.createTags}
           multiple
           creatable
           onCreate={(newValue) => {
@@ -126,48 +190,46 @@ export const CreatableMultiple: Story = {
 }
 
 export const Disabled: Story = {
-  render: () => (
-    <div className="w-[300px]">
-      <Combobox
-        options={frameworks}
-        value="react"
-        placeholder="Disabled..."
-        disabled
-      />
-    </div>
-  ),
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <div className="w-[300px]">
+        <Combobox options={c.options} {...c.text} value={c.first} placeholder={c.disabled} disabled />
+      </div>
+    )
+  },
 }
 
 export const Loading: Story = {
-  render: () => (
-    <div className="w-[300px]">
-      <Combobox
-        options={[]}
-        placeholder="Loading..."
-        loading
-      />
-    </div>
-  ),
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <div className="w-[300px]">
+        <Combobox options={[]} {...c.text} placeholder={c.loading} loading />
+      </div>
+    )
+  },
 }
 
 export const WithDisabledOptions: Story = {
-  render: () => {
+  render: (_args, ctx) => {
+    const c = copy(ctx)
     const [value, setValue] = useState<string>("")
     const optionsWithDisabled: ComboboxOption[] = [
-      ...frameworks.slice(0, 3),
-      { value: "disabled1", label: "Disabled Option", disabled: true },
-      ...frameworks.slice(3, 6),
-      { value: "disabled2", label: "Another Disabled", disabled: true },
-      ...frameworks.slice(6),
+      ...c.options.slice(0, 3),
+      { value: "disabled1", label: c.disabledOption, disabled: true },
+      ...c.options.slice(3, 6),
+      { value: "disabled2", label: c.anotherDisabled, disabled: true },
+      ...c.options.slice(6),
     ]
 
     return (
       <div className="w-[300px]">
         <Combobox
-          options={optionsWithDisabled}
+          options={optionsWithDisabled} {...c.text}
           value={value}
           onChange={(v) => setValue(v as string)}
-          placeholder="Some options disabled..."
+          placeholder={c.someDisabled}
         />
       </div>
     )

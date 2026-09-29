@@ -11,53 +11,74 @@ const meta: Meta<typeof Select> = {
 export default meta
 type Story = StoryObj<typeof Select>
 
-const options = [
-  { value: "react", label: "React" },
-  { value: "vue", label: "Vue" },
-  { value: "angular", label: "Angular" },
-  { value: "svelte", label: "Svelte" },
-]
-
-export const Default: Story = {
-  args: {
-    options,
+/**
+ * Sample copy, per script. Option values stay Latin identifiers; only the
+ * labels and placeholders change. The Arabic follows design/content/.
+ */
+const COPY = {
+  ltr: {
+    options: [
+      { value: "react", label: "React" },
+      { value: "vue", label: "Vue" },
+      { value: "angular", label: "Angular" },
+      { value: "svelte", label: "Svelte" },
+    ],
     placeholder: "Select a framework",
-    className: "w-[200px]",
+    sizes: ["Small", "Default", "Large"],
+    disabledOption: "Disabled Option",
+  },
+  rtl: {
+    options: [
+      { value: "riyadh", label: "الرياض" },
+      { value: "jeddah", label: "جدة" },
+      { value: "dammam", label: "الدمام" },
+      { value: "makkah", label: "مكة المكرمة" },
+    ],
+    placeholder: "اختر مدينة",
+    sizes: ["اختر مدينة", "اختر مدينة", "اختر مدينة"],
+    disabledOption: "أبها، قريبًا",
   },
 }
 
-export const Sizes: Story = {
-  render: () => (
-    <div className="flex flex-col gap-4">
-      <Select options={options} selectSize="sm" placeholder="Small" className="w-[200px]" />
-      <Select options={options} selectSize="default" placeholder="Default" className="w-[200px]" />
-      <Select options={options} selectSize="lg" placeholder="Large" className="w-[200px]" />
-    </div>
+type StoryCtx = { globals: { direction?: string } }
+const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
+
+export const Default: Story = {
+  render: (args, ctx) => (
+    <Select {...args} options={copy(ctx).options} placeholder={args.placeholder ?? copy(ctx).placeholder} className="w-[200px]" />
   ),
 }
 
-export const Error: Story = {
-  args: {
-    options,
-    error: true,
-    className: "w-[200px]",
+export const Sizes: Story = {
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <div className="flex flex-col gap-4">
+        <Select options={c.options} selectSize="sm" placeholder={c.sizes[0]} className="w-[200px]" />
+        <Select options={c.options} selectSize="default" placeholder={c.sizes[1]} className="w-[200px]" />
+        <Select options={c.options} selectSize="lg" placeholder={c.sizes[2]} className="w-[200px]" />
+      </div>
+    )
   },
+}
+
+export const Error: Story = {
+  render: (args, ctx) => <Select {...args} options={copy(ctx).options} error className="w-[200px]" />,
 }
 
 export const Disabled: Story = {
-  args: {
-    options,
-    disabled: true,
-    className: "w-[200px]",
-  },
+  render: (args, ctx) => <Select {...args} options={copy(ctx).options} disabled className="w-[200px]" />,
 }
 
 export const WithDisabledOption: Story = {
-  args: {
-    options: [
-      ...options,
-      { value: "disabled", label: "Disabled Option", disabled: true },
-    ],
-    className: "w-[200px]",
+  render: (args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <Select
+        {...args}
+        options={[...c.options, { value: "disabled", label: c.disabledOption, disabled: true }]}
+        className="w-[200px]"
+      />
+    )
   },
 }
