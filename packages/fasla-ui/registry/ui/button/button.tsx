@@ -53,7 +53,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {loading ? (
           <>
-            <LoaderCircleIcon aria-hidden="true" className="animate-spin" strokeWidth={1.5} />
+            <LoaderCircleIcon aria-hidden="true" className="animate-spin motion-reduce:animate-none" strokeWidth={1.5} />
             <span className="sr-only">Loading</span>
             {children}
           </>

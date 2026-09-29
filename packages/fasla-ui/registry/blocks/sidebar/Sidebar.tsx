@@ -188,7 +188,7 @@ export function SidebarCollapseButton({
       <ChevronsLeftIcon
         size={16}
         strokeWidth={1.5}
-        className={cn("transition-transform rtl:-scale-x-100", collapsed && "rotate-180")}
+        className={cn("transition-transform motion-reduce:transition-none rtl:-scale-x-100", collapsed && "rotate-180")}
       />
     </button>
   )

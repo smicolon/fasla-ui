@@ -231,7 +231,7 @@ export function Combobox({
           <ChevronDownIcon
             size={16}
             strokeWidth={1.5}
-            className={cn("transition-transform", open && "rotate-180")}
+            className={cn("transition-transform motion-reduce:transition-none", open && "rotate-180")}
           />
         </button>
       </div>
