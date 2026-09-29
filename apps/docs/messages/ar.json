@@ -10,14 +10,14 @@
     "changelog": "سجل التغييرات",
     "github": "GitHub",
     "getStarted": "ابدأ الآن",
-    "home": "فاصلة — الرئيسية",
+    "home": "الصفحة الرئيسية لفاصلة",
     "toggleMenu": "فتح القائمة",
     "toggleTheme": "تبديل المظهر",
     "switchLanguage": "تغيير اللغة"
   },
   "home": {
-    "eyebrow": "{count, plural, zero {لا مكوّنات} one {مكوّن واحد} two {مكوّنان} few {# مكوّنات} many {# مكوّناً} other {# مكوّن}} · نواة برخصة MIT",
-    "headlineLead": "أضف مكوّناً",
+    "eyebrow": "{count, plural, zero {لا مكوّنات} one {مكوّن واحد} two {مكوّنان} few {# مكوّنات} many {# مكوّنًا} other {# مكوّن}}، والنواة برخصة MIT",
+    "headlineLead": "أضف مكوّنًا",
     "headlineTail": "وامتلك شيفرته.",
     "intro": "فاصلة مكتبة مكوّنات React من تطوير شركة Smicolon GmbH، مبنيّة على مكوّنات shadcn/ui الأساسية. تنسخ أداة الأوامر شيفرة المكوّن داخل مشروعك. الشيفرة لك، تعدّلها كما تشاء، بلا صندوق مغلق تصارعه.",
     "readDocs": "اقرأ التوثيق",
@@ -28,8 +28,8 @@
       "resolved": "تم حلّ المكوّن في السجل",
       "written": "button.tsx → components/ui",
       "wired": "تم ربط cva و tailwind-merge",
-      "ownedFile": "components/ui/button.tsx — لك",
-      "ownership": "عدّله · غيّر اسمه · احذفه"
+      "ownedFile": "أصبح الملف components/ui/button.tsx ملكك",
+      "ownership": "عدّله، أو غيّر اسمه، أو احذفه"
     },
     "stats": {
       "componentsLabel": "مكوّنات تشمل الأساسيات والكتل والتأثيرات",
@@ -58,7 +58,7 @@
     "features": {
       "title": "ما تحصل عليه في الحالتين",
       "accessible": {
-        "title": "الوصولية افتراضياً",
+        "title": "الوصولية افتراضيًا",
         "description": "التنقّل بلوحة المفاتيح ودعم قارئات الشاشة مبنيّان في المكوّنات. الأزرار الأيقونية تحمل aria-label، وحدود التركيز تبقى ظاهرة."
       },
       "motion": {
@@ -119,18 +119,18 @@
     "addSeveral": "أو أضف عدة مكوّنات دفعة واحدة:",
     "landing": {
       "introTitle": "مقدّمة",
-      "introBody": "تقدّم فاصلة مجموعة مكوّنات قابلة لإعادة الاستخدام، تنسخها وتلصقها في تطبيقك. ليست مكتبة مكوّنات تقليدية — الشيفرة لك، تعدّلها كما تشاء.",
+      "introBody": "تقدّم فاصلة مجموعة مكوّنات قابلة لإعادة الاستخدام، تنسخها وتلصقها في تطبيقك. وهي ليست مكتبة مكوّنات تقليدية، فالشيفرة لك وتعدّلها كما تشاء.",
       "featuresTitle": "الميزات",
       "categoriesTitle": "فئات المكوّنات",
       "getStartedTitle": "ابدأ",
       "getStartedBody": "ثبّت أداة الأوامر وأضف أول مكوّن.",
       "features": {
-        "components": "<strong>{count}+ مكوّناً</strong> — أساسيات وكتل وتأثيرات",
-        "accessible": "<strong>وصولية</strong> — مبنية بالوصولية في الحسبان، مع التنقّل بلوحة المفاتيح",
-        "animated": "<strong>حركة</strong> — حركات سلسة عبر Framer Motion، تحترم تقليل الحركة",
-        "typescript": "<strong>TypeScript</strong> — أنواع كاملة في كل الشيفرة",
-        "darkMode": "<strong>المظهر الداكن</strong> — مدعوم جاهزاً",
-        "customizable": "<strong>قابلة للتخصيص</strong> — مبنية على Tailwind CSS، سهلة التعديل"
+        "components": "<strong>{count}+ مكوّنًا</strong> بين أساسيات وكتل وتأثيرات",
+        "accessible": "<strong>وصولية</strong> مدروسة من البداية، مع التنقّل بلوحة المفاتيح",
+        "animated": "<strong>حركة</strong> سلسة عبر Framer Motion، تحترم تقليل الحركة",
+        "typescript": "<strong>TypeScript</strong> بأنواع كاملة في كل الشيفرة",
+        "darkMode": "<strong>المظهر الداكن</strong> مدعوم دون أي إعداد",
+        "customizable": "<strong>قابلة للتخصيص</strong> لأنها مبنية على Tailwind CSS"
       }
     },
     "radio": {
@@ -209,7 +209,7 @@
     "status": "تم النسخ"
   },
   "footer": {
-    "attribution": "fasla.dev · من Smicolon GmbH",
+    "attribution": "موقع fasla.dev من Smicolon GmbH",
     "by": "من Smicolon GmbH",
     "licence": "MIT · Kirchheim b. München"
   },

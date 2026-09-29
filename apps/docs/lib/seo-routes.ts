@@ -20,10 +20,10 @@ type CoreRoute = {
 function arabicComponentCount(count: number): string {
   const forms: Record<Intl.LDMLPluralRule, string> = {
     zero: "لا مكوّنات",
-    one: "مكوّناً واحداً",
+    one: "مكوّنًا واحدًا",
     two: "مكوّنين",
     few: `${count} مكوّنات`,
-    many: `${count} مكوّناً`,
+    many: `${count} مكوّنًا`,
     other: `${count} مكوّن`,
   }
   return forms[new Intl.PluralRules("ar").select(count)]
@@ -53,7 +53,7 @@ export const routes = [
     description: `${registryCounts.total} accessible React components — primitives, application blocks and motion effects for Tailwind CSS. The CLI copies the source into your project. MIT-licensed core.`,
     h1: "Add a component،own the source.",
     ar: {
-      title: "فاصلة — مكتبة مكوّنات React من Smicolon GmbH",
+      title: "مكتبة فاصلة لمكوّنات React من Smicolon GmbH",
       description: `مكتبة React تضمّ ${arabicComponentCount(registryCounts.total)} تراعي الوصولية: مكوّنات أساسية وكتل تطبيقات وتأثيرات حركية مبنيّة على Tailwind CSS. تنسخ أداة الأوامر الشيفرة المصدرية إلى مشروعك. النواة برخصة MIT.`,
     },
   },
