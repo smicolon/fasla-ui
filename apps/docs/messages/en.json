@@ -858,7 +858,7 @@
       },
       "props": {
         "data": "Rows to display.",
-        "columns": "Column definitions.",
+        "columns": "Column definitions; each <code>align</code> is <code>start</code>, <code>center</code> or <code>end</code> of the reading direction.",
         "getRowKey": "Unique key for each row.",
         "loading": "Shows the loading state.",
         "emptyState": "Shown when there are no rows.",

@@ -101,8 +101,8 @@ const columnsFor = (c: Copy): Column<User>[] => [
       </Badge>
     ),
   },
-  // `right` is the end of the reading direction, so it mirrors in RTL.
-  { id: "createdAt", header: c.headers.created, cell: (row) => row.createdAt, align: "right" },
+  // `end` follows the reading direction, so the dates sit on the left in RTL.
+  { id: "createdAt", header: c.headers.created, cell: (row) => row.createdAt, align: "end" },
 ]
 
 export const Default: Story = {
