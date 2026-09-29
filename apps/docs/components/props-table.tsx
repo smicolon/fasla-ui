@@ -12,9 +12,30 @@ export type PropRow = {
 }
 
 /**
+ * A piece of a type that may break after each `, ` and nowhere else, so an
+ * object type such as `{ words, speed, cursor }` wraps inside its column.
+ */
+function CommaBreaks({ value }: { value: string }) {
+  const parts = value.split(", ")
+  return (
+    <>
+      {parts.map((part, index) => (
+        <Fragment key={index}>
+          {index > 0 && " "}
+          <span className="whitespace-nowrap">
+            {part}
+            {index < parts.length - 1 && ","}
+          </span>
+        </Fragment>
+      ))}
+    </>
+  )
+}
+
+/**
  * A type that may break before each `|`, never inside a value, so
  * `"sm" | "md" | "lg"` keeps the type column narrow enough for the
- * description.
+ * description. A long part may also break after a comma.
  */
 function UnionType({ value }: { value: string }) {
   const parts = value.split(" | ")
@@ -23,10 +44,7 @@ function UnionType({ value }: { value: string }) {
       {parts.map((part, index) => (
         <Fragment key={part}>
           {index > 0 && " "}
-          <span className="whitespace-nowrap">
-            {index > 0 && "| "}
-            {part}
-          </span>
+          <CommaBreaks value={index > 0 ? `| ${part}` : part} />
         </Fragment>
       ))}
     </code>
@@ -64,7 +82,8 @@ export function PropsTable({ rows }: { rows: PropRow[] }) {
               </td>
               <td className="px-3 py-2 text-start text-muted-foreground">
                 {row.fallback ? (
-                  <code className="whitespace-nowrap text-xs text-foreground">{row.fallback}</code>
+                  // A default wraps at its spaces, like the CSS or text it is.
+                  <code className="text-xs text-foreground">{row.fallback}</code>
                 ) : (
                   t("none")
                 )}
