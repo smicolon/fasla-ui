@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from "next-intl"
 
-import { useState } from "react"
+import { Fragment, useState } from "react"
 import { Radio } from "@fasla-ui/ui/radio"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
@@ -151,7 +151,7 @@ export default function RadioPage() {
                 <th className="px-4 py-2 text-start font-semibold">{r("props.prop")}</th>
                 <th className="px-4 py-2 text-start font-semibold">{r("props.type")}</th>
                 <th className="px-4 py-2 text-start font-semibold">{r("props.default")}</th>
-                <th className="px-4 py-2 text-start font-semibold">{r("props.description")}</th>
+                <th className="min-w-[15rem] px-4 py-2 text-start font-semibold">{r("props.description")}</th>
               </tr>
             </thead>
             {/* Cells keep the page's direction, so on /ar every column aligns to
@@ -164,7 +164,19 @@ export default function RadioPage() {
                     <code className="whitespace-nowrap text-xs">{row.prop}</code>
                   </td>
                   <td className="px-4 py-2 text-start">
-                    <code className="whitespace-nowrap text-xs">{row.type}</code>
+                    {/* A union may break after each `|`, never inside a value, so
+                        the column stays narrow enough for the description. */}
+                    <code className="text-xs">
+                      {row.type.split(" | ").map((part, index) => (
+                        <Fragment key={part}>
+                          {index > 0 && " "}
+                          <span className="whitespace-nowrap">
+                            {index > 0 && "| "}
+                            {part}
+                          </span>
+                        </Fragment>
+                      ))}
+                    </code>
                   </td>
                   <td className="px-4 py-2 text-start text-muted-foreground">
                     {row.fallback ? (
