@@ -21,7 +21,7 @@ export function cn(...inputs: ClassValue[]) {
 import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
-import { aliasToPath, pathToAlias, readAliasRoot } from "../paths.js"
+import { aliasToPath, OutsideProjectError, pathToAlias, readAliasRoot, resolveInsideProject } from "../paths.js"
 
 export const init = new Command()
   .name("init")
@@ -116,15 +116,27 @@ export const init = new Command()
       },
     }
 
+    // Every component in the registry imports `cn` from the utils alias.
+    // Without this file a fresh install does not compile, so init writes it.
+    const utilsRelative = aliasToPath(utilsAlias, aliasRoot)
+
+    // Refuse before writing anything if a path would land outside the project.
+    let utilsPath: string
+    try {
+      await resolveInsideProject(cwd, "components.json")
+      await resolveInsideProject(cwd, aliasToPath(componentsAlias, aliasRoot))
+      utilsPath = await resolveInsideProject(cwd, `${utilsRelative}.ts`)
+    } catch (error) {
+      if (!(error instanceof OutsideProjectError)) throw error
+      console.log(chalk.red(`Error: ${error.message}`))
+      console.log("Nothing was written.")
+      process.exit(1)
+    }
+
     const spinner = ora("Writing configuration...").start()
 
     try {
       await fs.writeJson(configPath, config, { spaces: 2 })
-
-      // Every component in the registry imports `cn` from the utils alias.
-      // Without this file a fresh install does not compile, so init writes it.
-      const utilsRelative = aliasToPath(utilsAlias, aliasRoot)
-      const utilsPath = path.resolve(cwd, `${utilsRelative}.ts`)
 
       if (!(await fs.pathExists(utilsPath))) {
         await fs.ensureDir(path.dirname(utilsPath))
