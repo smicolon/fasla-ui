@@ -6,16 +6,28 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from "@fasla-ui/ui/tabs"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
+import { PropsTable, richCode, type PropRow } from "@/components/props-table"
+
+const TABS = ["account", "password", "settings"] as const
 
 export default function TabsPage() {
   const t = useTranslations("docs.sections")
+  const a = useTranslations("docs.tabs")
+
+  const props: PropRow[] = [
+    { prop: "value", type: "string", fallback: "", description: a.rich("props.value", richCode) },
+    { prop: "defaultValue", type: "string", fallback: "", description: a.rich("props.defaultValue", richCode) },
+    { prop: "onValueChange", type: "(value) => void", fallback: "", description: a.rich("props.onValueChange", richCode) },
+    { prop: "TabsTrigger", type: "{ value, disabled }", fallback: "", description: a.rich("props.trigger", richCode) },
+    { prop: "TabsContent", type: "{ value }", fallback: "", description: a.rich("props.content", richCode) },
+    { prop: "className", type: "string", fallback: "", description: a.rich("props.className", richCode) },
+  ]
+
   return (
     <div className="space-y-8">
       <div className="space-y-4">
         <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/tabs/" /></h1>
-        <p className="text-xl text-muted-foreground">
-          A set of layered sections of content that display one panel at a time.
-        </p>
+        <p className="text-xl text-muted-foreground">{a("lead")}</p>
       </div>
 
       {/* Installation */}
@@ -30,60 +42,50 @@ export default function TabsPage() {
         <ComponentPreview>
           <Tabs defaultValue="account" className="w-full max-w-md">
             <TabsList>
-              <TabsTrigger value="account">Account</TabsTrigger>
-              <TabsTrigger value="password">Password</TabsTrigger>
-              <TabsTrigger value="settings">Settings</TabsTrigger>
+              {TABS.map((tab) => (
+                <TabsTrigger key={tab} value={tab}>
+                  {a(`tabs.${tab}`)}
+                </TabsTrigger>
+              ))}
             </TabsList>
-            <TabsContent value="account">
-              <div className="p-4 border rounded-lg mt-2">
-                <h3 className="font-semibold">Account</h3>
-                <p className="text-sm text-muted-foreground">
-                  Make changes to your account here.
-                </p>
-              </div>
-            </TabsContent>
-            <TabsContent value="password">
-              <div className="p-4 border rounded-lg mt-2">
-                <h3 className="font-semibold">Password</h3>
-                <p className="text-sm text-muted-foreground">
-                  Change your password here.
-                </p>
-              </div>
-            </TabsContent>
-            <TabsContent value="settings">
-              <div className="p-4 border rounded-lg mt-2">
-                <h3 className="font-semibold">Settings</h3>
-                <p className="text-sm text-muted-foreground">
-                  Manage your settings here.
-                </p>
-              </div>
-            </TabsContent>
+            {TABS.map((tab) => (
+              <TabsContent key={tab} value={tab}>
+                <div className="mt-2 rounded-lg border p-4">
+                  <h3 className="font-semibold">{a(`tabs.${tab}`)}</h3>
+                  <p className="text-sm text-muted-foreground">{a(`panels.${tab}`)}</p>
+                </div>
+              </TabsContent>
+            ))}
           </Tabs>
         </ComponentPreview>
       </section>
 
       {/* With Disabled Tab */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">With Disabled Tab</h2>
+        <h2 className="text-2xl font-semibold">{a("disabledTitle")}</h2>
         <ComponentPreview>
-          <Tabs defaultValue="tab1" className="w-full max-w-md">
+          <Tabs defaultValue="current" className="w-full max-w-md">
             <TabsList>
-              <TabsTrigger value="tab1">Active</TabsTrigger>
-              <TabsTrigger value="tab2" disabled>Disabled</TabsTrigger>
-              <TabsTrigger value="tab3">Another</TabsTrigger>
+              <TabsTrigger value="current">{a("disabled.current")}</TabsTrigger>
+              <TabsTrigger value="invoices" disabled>
+                {a("disabled.invoices")}
+              </TabsTrigger>
+              <TabsTrigger value="past">{a("disabled.past")}</TabsTrigger>
             </TabsList>
-            <TabsContent value="tab1">
-              <div className="p-4 border rounded-lg mt-2">
-                Content for the first tab.
-              </div>
+            <TabsContent value="current">
+              <div className="mt-2 rounded-lg border p-4">{a("disabled.currentText")}</div>
             </TabsContent>
-            <TabsContent value="tab3">
-              <div className="p-4 border rounded-lg mt-2">
-                Content for the third tab.
-              </div>
+            <TabsContent value="past">
+              <div className="mt-2 rounded-lg border p-4">{a("disabled.pastText")}</div>
             </TabsContent>
           </Tabs>
         </ComponentPreview>
+      </section>
+
+      {/* Props */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("props")}</h2>
+        <PropsTable rows={props} />
       </section>
 
       {/* Usage */}
@@ -91,22 +93,23 @@ export default function TabsPage() {
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
         <CodeBlock>{`import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
-// Basic tabs
+// ${a("usage.basic")}
 <Tabs defaultValue="account">
   <TabsList>
-    <TabsTrigger value="account">Account</TabsTrigger>
-    <TabsTrigger value="password">Password</TabsTrigger>
+    <TabsTrigger value="account">${a("tabs.account")}</TabsTrigger>
+    <TabsTrigger value="password">${a("tabs.password")}</TabsTrigger>
   </TabsList>
   <TabsContent value="account">
-    Account content here.
+    ${a("usage.accountContent")}
   </TabsContent>
   <TabsContent value="password">
-    Password content here.
+    ${a("usage.passwordContent")}
   </TabsContent>
 </Tabs>
 
-// Controlled tabs
+// ${a("usage.controlled")}
 const [value, setValue] = useState("account")
+
 <Tabs value={value} onValueChange={setValue}>
   ...
 </Tabs>`}</CodeBlock>

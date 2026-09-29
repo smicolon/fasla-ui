@@ -85,10 +85,60 @@
   },
   "docs": {
     "avatar": {
-      "fallback": "If the photo is missing or fails to load, the avatar shows the initials, or the icon if there's no name."
+      "fallback": "If the photo is missing or fails to load, the avatar shows the initials, or the icon if there's no name.",
+      "lead": "A person’s photo, initials or icon, with an optional border and presence dot.",
+      "installNote": "The avatar uses <code>status-indicator</code> for its dot, so add both.",
+      "person": "Layla Haddad",
+      "variantsBody": "<code>variant</code> picks the content. <code>image</code>, the default, shows the photo, and while it loads or if it fails falls back to initials from <code>name</code>, then to the user icon when there is no name. <code>initials</code> and <code>icon</code> show theirs even when a photo is passed. <code>radius</code> picks a rounded square or a circle, and <code>border</code> adds a ring inside the edge.",
+      "sizesBody": "32 for headers, cards and comments; 24 for dense tables and lists; 12 for inline mentions, where initials shrink to one letter at the 10px XXS size.",
+      "statusTitle": "Status",
+      "statusBody": "<code>status</code> adds a Status Indicator at the end corner — bottom-right, or bottom-left in a right-to-left page. There is no dot unless you set one: it claims the person’s presence, so show it only when you know it.",
+      "a11y": {
+        "name": "<code>name</code> names the avatar in every variant: it is the photo’s <code>alt</code>, and hidden text behind the initials or icon, whose visible letters are not read out.",
+        "empty": "Pass <code>{emptyName}</code> when a label beside the avatar already names the person, so it isn’t announced twice.",
+        "dot": "The dot is read after the name — \"Layla Haddad\", then \"Online\", or \"متصل\" when the nearest <code>lang</code> is Arabic. Pass <code>statusLabel</code> to say more.",
+        "dir": "Direction is inherited from <code>dir</code>, never a prop, so the dot always sits on the right corner for the page."
+      },
+      "usage": {
+        "photo": "Photo, falling back to initials, then the user icon",
+        "initials": "Initials or the icon, whatever else is passed",
+        "lazy": "Long lists: defer photos below the fold, and give dense screens a sharper source",
+        "circle": "Circle with a border and a presence dot",
+        "inline": "Inline, beside a name that already says who it is"
+      },
+      "props": {
+        "variant": "What it shows: photo, initials or icon.",
+        "size": "Avatar size in pixels.",
+        "radius": "Rounded square or circle.",
+        "border": "Adds a ring inside the edge.",
+        "src": "Photo URL.",
+        "name": "Person’s name: the alt text and initials.",
+        "status": "Adds a presence dot.",
+        "statusLabel": "Dot’s accessible name, in the page language by default.",
+        "className": "Extra classes for the component."
+      }
     },
     "statusIndicator": {
-      "onAvatar": "The dot is meant to sit on an avatar, not on its own over a coloured surface."
+      "onAvatar": "The dot is meant to sit on an avatar, not on its own over a coloured surface.",
+      "lead": "A presence dot — online, away, busy or offline — with an accessible name, so colour never carries the status alone.",
+      "variantsBody": "<code>status</code> sets the colour: success for online, warning for away, destructive for busy and muted for offline.",
+      "sizesBody": "8px with a 2px ring, or 4px with a 1px ring for the smallest avatar. The ring is the page background, drawn outside the dot, so it never changes its size.",
+      "a11y": {
+        "colour": "Colour alone can’t carry the status. Each dot carries hidden text: \"Online\", \"Away\", \"Busy\" or \"Offline\", or \"متصل\", \"بعيد\", \"مشغول\" or \"غير متصل\" when the nearest <code>lang</code> is Arabic. It follows a language change without a reload.",
+        "label": "Pass <code>label</code> for more context, such as \"Layla is online\".",
+        "hidden": "When the status is already written next to the dot, hide the dot with <code>aria-hidden</code> so it isn’t announced twice.",
+        "dir": "The dot is a circle, so it has no direction. The parent decides where it sits; Avatar pins it to the end corner."
+      },
+      "usage": {
+        "context": "More context for screen readers",
+        "awayLabel": "is away"
+      },
+      "props": {
+        "status": "Presence to show.",
+        "size": "Dot size in pixels.",
+        "label": "Accessible name, in the page language by default.",
+        "className": "Extra classes for the component."
+      }
     },
     "sections": {
       "installation": "Installation",
@@ -465,6 +515,168 @@
         "closeLabel": "Toggle’s accessible name when open.",
         "removeLabel": "Accessible name of a chip’s remove button.",
         "disabled": "Disables the combobox and dims it.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "button": {
+      "lead": "A button component with multiple variants, sizes, and loading state.",
+      "preview": "Save changes",
+      "variants": {
+        "default": "Save changes",
+        "secondary": "Preview",
+        "destructive": "Delete account",
+        "outline": "Cancel",
+        "ghost": "Skip",
+        "link": "View details"
+      },
+      "sizes": {
+        "sm": "Save changes",
+        "default": "Save changes",
+        "lg": "Save changes"
+      },
+      "loadingTitle": "Loading",
+      "loading": "Saving…",
+      "loadingLabel": "Saving",
+      "props": {
+        "variant": "The visual style of the button.",
+        "size": "The size of the button.",
+        "loading": "Shows a loading spinner.",
+        "loadingLabel": "Screen-reader text while loading.",
+        "disabled": "Disables the button.",
+        "asChild": "Renders its child element instead.",
+        "onClick": "Called when the button is pressed.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "card": {
+      "lead": "A composable card component with header, content, and footer sections.",
+      "preview": {
+        "title": "Your order is on its way",
+        "description": "Arrives tomorrow before 6 pm.",
+        "content": "Order 4821 contains three items.",
+        "action": "Track order"
+      },
+      "simpleTitle": "Simple Card",
+      "simple": "We’ll message you when your order status changes.",
+      "partsNote": "Every part takes these props, and any <code>div</code> prop: <code>Card</code>, <code>CardHeader</code>, <code>CardTitle</code>, <code>CardDescription</code>, <code>CardContent</code>, <code>CardFooter</code>.",
+      "usage": {
+        "title": "Your order is on its way",
+        "description": "Arrives tomorrow",
+        "content": "Order details",
+        "footer": "Track order"
+      },
+      "props": {
+        "children": "The part’s content.",
+        "className": "Extra classes for the part."
+      }
+    },
+    "skeleton": {
+      "lead": "Loading placeholder components for content that is loading.",
+      "basicTitle": "Basic",
+      "textTitle": "Text Skeleton",
+      "avatarTitle": "Avatar Skeleton",
+      "cardTitle": "Card Skeleton",
+      "props": {
+        "variant": "The shape of the skeleton.",
+        "animate": "Whether to animate the skeleton.",
+        "lines": "Number of lines in <code>SkeletonText</code>.",
+        "className": "Sets the size, such as <code>h-12 w-48</code>."
+      }
+    },
+    "tabs": {
+      "lead": "A set of layered sections of content that display one panel at a time.",
+      "tabs": {
+        "account": "Account",
+        "password": "Password",
+        "settings": "Settings"
+      },
+      "panels": {
+        "account": "Make changes to your account here.",
+        "password": "Change your password here.",
+        "settings": "Manage your settings here."
+      },
+      "disabledTitle": "With Disabled Tab",
+      "disabled": {
+        "current": "Current orders",
+        "invoices": "Invoices",
+        "past": "Past orders",
+        "currentText": "You have two orders out for delivery.",
+        "pastText": "Your last order was two weeks ago."
+      },
+      "usage": {
+        "basic": "Basic tabs",
+        "controlled": "Controlled tabs",
+        "accountContent": "Account content here.",
+        "passwordContent": "Password content here."
+      },
+      "props": {
+        "value": "Active tab, when controlled.",
+        "defaultValue": "Tab active at first.",
+        "onValueChange": "Called when the active tab changes.",
+        "trigger": "A tab button; its <code>value</code> names its panel.",
+        "content": "The panel shown for its <code>value</code>.",
+        "className": "Extra classes for the part."
+      }
+    },
+    "badge": {
+      "lead": "A compact inline label for status, category or metadata, with an optional icon, avatar and close button.",
+      "preview": {
+        "new": "New",
+        "paid": "Paid",
+        "featured": "Featured"
+      },
+      "variantsBody": "<code>variant</code> sets the visual weight and <code>tone</code> the meaning. Solid is the loudest; Soft lays a tint over the card surface, so it reads the same wherever it sits; Outline is the quietest.",
+      "tones": {
+        "primary": "New",
+        "secondary": "Draft",
+        "info": "In review",
+        "success": "Paid",
+        "warning": "Awaiting payment",
+        "destructive": "Overdue"
+      },
+      "radiusBody": "<code>{radiusStandard}</code> swaps the pill for the design system’s small radius.",
+      "radius": "New",
+      "sizesBody": "Heights are minimums: 20, 22 and 26px in English. Arabic’s taller line grows them to 24, 24 and 28px rather than squeezing the text.",
+      "sizes": "Featured",
+      "statesBody": "Pass <code>onClose</code> and the badge gets a real close button. Tab to one to see the focus ring, which wraps the whole badge 2px out.",
+      "filters": {
+        "a": "Design",
+        "b": "Engineering",
+        "c": "Research",
+        "d": "Marketing"
+      },
+      "reset": "Reset filters",
+      "examples": {
+        "featured": "Featured",
+        "person": "Layla",
+        "reviewer": "Reviewer"
+      },
+      "a11y": {
+        "span": "The badge is a plain <code>{span}</code>. Only the close button is interactive, and it is a native <code>{button}</code>.",
+        "closeName": "The close button is named after the label, \"Remove Cairo\", or \"إزالة القاهرة\" when the nearest <code>lang</code> is Arabic. It follows a language change without a reload. Pass <code>closeLabel</code> for more context, such as \"Remove filter: Cairo\".",
+        "icon": "The icon is decorative and hidden from assistive technology. The avatar is not: give the Avatar a <code>name</code>, or <code>{emptyName}</code> when the label already names the person.",
+        "tone": "Don’t rely on tone alone to carry meaning — the label should say it.",
+        "dir": "Direction is inherited from <code>dir</code>, never a prop, so the badge can never disagree with the page."
+      },
+      "usage": {
+        "new": "New",
+        "paid": "Paid",
+        "overdue": "Overdue",
+        "featured": "Featured",
+        "iconAvatar": "Icon and avatar — the badge sizes and colours them",
+        "removable": "Removable",
+        "removeFilter": "Remove filter"
+      },
+      "props": {
+        "children": "The label.",
+        "variant": "Visual weight.",
+        "tone": "Meaning, shown as colour.",
+        "size": "Badge size.",
+        "radius": "Pill or small radius.",
+        "icon": "Icon before the label.",
+        "avatar": "Avatar before the label.",
+        "onClose": "Adds a close button; called when pressed.",
+        "closeLabel": "Close button’s accessible name, in the page language by default.",
         "className": "Extra classes for the component."
       }
     }
