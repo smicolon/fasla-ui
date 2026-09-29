@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { ShimmerButton } from "@fasla-ui/effects/shimmer-button"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
 
 export default function ShimmerButtonPage() {
   const t = useTranslations("docs.sections")
@@ -12,7 +13,7 @@ export default function ShimmerButtonPage() {
     <div>
       <div>
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold">Shimmer Button</h1>
+          <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/shimmer-button/" /></h1>
           <p className="text-lg text-muted-foreground">
             A button with an animated shimmer effect that respects prefers-reduced-motion.
           </p>

@@ -4,6 +4,7 @@ import { useLocale, useTranslations } from "next-intl"
 
 import { StatusIndicator, STATUS_LABELS } from "@fasla-ui/ui/status-indicator"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentName } from "@/components/component-name"
 
 const STATUSES = ["online", "away", "busy", "offline"] as const
 
@@ -22,7 +23,7 @@ export default function StatusIndicatorPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold">Status Indicator</h1>
+        <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/status-indicator/" /></h1>
         {/*
          * `dir="ltr"` on every English run: the page prose is untranslated, and
          * in the Arabic locale a trailing full stop is bidi-neutral and would

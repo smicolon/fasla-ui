@@ -5,13 +5,14 @@ import { useTranslations } from "next-intl"
 import { Textarea } from "@fasla-ui/ui/textarea"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
 
 export default function TextareaPage() {
   const t = useTranslations("docs.sections")
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold">Textarea</h1>
+        <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/textarea/" /></h1>
         <p className="text-xl text-muted-foreground">
           A multi-line text input with character count and resize options.
         </p>

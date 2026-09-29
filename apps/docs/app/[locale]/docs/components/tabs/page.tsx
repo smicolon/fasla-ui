@@ -5,13 +5,14 @@ import { useTranslations } from "next-intl"
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@fasla-ui/ui/tabs"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
 
 export default function TabsPage() {
   const t = useTranslations("docs.sections")
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold">Tabs</h1>
+        <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/tabs/" /></h1>
         <p className="text-xl text-muted-foreground">
           A set of layered sections of content that display one panel at a time.
         </p>

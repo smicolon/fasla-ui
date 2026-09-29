@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
 export default async function GlowCardPage({
   params,
 }: {
@@ -13,7 +14,7 @@ export default async function GlowCardPage({
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold">Glow Card</h1>
+        <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/glow-card/" /></h1>
         <p className="text-xl text-muted-foreground">
           Cards with interactive glow effects that follow the mouse cursor.
         </p>

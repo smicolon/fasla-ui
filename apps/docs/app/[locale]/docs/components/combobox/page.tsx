@@ -6,6 +6,7 @@ import { useState } from "react"
 import { Combobox } from "@fasla-ui/ui/combobox"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
 
 const frameworks = [
   { value: "react", label: "React" },
@@ -25,7 +26,7 @@ export default function ComboboxPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold">Combobox</h1>
+        <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/combobox/" /></h1>
         <p className="text-xl text-muted-foreground">
           A searchable dropdown with autocomplete, multi-select, and create-new functionality.
         </p>

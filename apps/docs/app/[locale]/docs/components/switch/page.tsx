@@ -6,6 +6,7 @@ import { useState } from "react"
 import { Switch } from "@fasla-ui/ui/switch"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
 
 export default function SwitchPage() {
   const t = useTranslations("docs.sections")
@@ -14,7 +15,7 @@ export default function SwitchPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold">Switch</h1>
+        <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/switch/" /></h1>
         <p className="text-xl text-muted-foreground">
           A toggle control for switching between on and off states.
         </p>

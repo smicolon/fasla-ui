@@ -6,6 +6,7 @@ import { useState } from "react"
 import { Checkbox } from "@fasla-ui/ui/checkbox"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
 
 export default function CheckboxPage() {
   const t = useTranslations("docs.sections")
@@ -14,7 +15,7 @@ export default function CheckboxPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold">Checkbox</h1>
+        <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/checkbox/" /></h1>
         <p className="text-xl text-muted-foreground">
           A control that allows the user to toggle between checked and not checked.
         </p>

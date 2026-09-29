@@ -6,6 +6,7 @@ import { useState } from "react"
 import { DataTable, Pagination, Column } from "@fasla-ui/blocks/data-table/DataTable"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
 
 interface User {
   id: number
@@ -32,7 +33,7 @@ export default function DataTablePage() {
     <div>
       <div>
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold">DataTable</h1>
+          <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/data-table/" /></h1>
           <p className="text-lg text-muted-foreground">
             A data table component with sorting, selection, and pagination.
           </p>

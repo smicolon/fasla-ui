@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { Select } from "@fasla-ui/ui/select"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
 
 const options = [
   { value: "react", label: "React" },
@@ -18,7 +19,7 @@ export default function SelectPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold">Select</h1>
+        <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/select/" /></h1>
         <p className="text-xl text-muted-foreground">
           A native select input with custom styling.
         </p>

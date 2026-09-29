@@ -91,6 +91,12 @@ export const routes = [
     description:
       "Add an accessible React button with visual variants, responsive sizes, loading feedback, and composable child rendering.",
     h1: "Button",
+    ar: {
+      title: "زر (Button) لتطبيقات React | فاصلة",
+      description:
+        "أضف مكوّن زر (Button) إلى تطبيق React، مع أنماط (variant) مرئية وأحجام متجاوبة وحالة تحميل، ويمكنك وضع عناصر أخرى داخله.",
+      h1: "زر (Button)",
+    },
   },
   {
     kind: "component",
@@ -100,6 +106,12 @@ export const routes = [
     description:
       "Use a typed React text input with validation states, icon support, accessible focus styles, and Tailwind customization.",
     h1: "Input",
+    ar: {
+      title: "حقل الإدخال (Input) لتطبيقات React | فاصلة",
+      description:
+        "استخدم حقل الإدخال (Input) لإدخال نص في React، مع حالات التحقق والأيقونات وحلقة تركيز واضحة، وتخصيص سهل عبر Tailwind.",
+      h1: "حقل الإدخال (Input)",
+    },
   },
   {
     kind: "component",
@@ -109,6 +121,12 @@ export const routes = [
     description:
       "Compose React card layouts from accessible header, title, description, content, and footer building blocks.",
     h1: "Card",
+    ar: {
+      title: "بطاقة (Card) لتطبيقات React | فاصلة",
+      description:
+        "ركّب بطاقات (Card) في React من أجزاء جاهزة تراعي إتاحة الوصول (accessibility): الرأس والعنوان والوصف والمحتوى والتذييل.",
+      h1: "بطاقة (Card)",
+    },
   },
   {
     kind: "component",
@@ -118,6 +136,12 @@ export const routes = [
     description:
       "Display compact React status indicators and labels with reusable badge variants and semantic Tailwind styling.",
     h1: "Badge",
+    ar: {
+      title: "شارة (Badge) لتطبيقات React | فاصلة",
+      description:
+        "اعرض حالات وتسميات قصيرة في React بمكوّن شارة (Badge)، بأنماط (variant) قابلة لإعادة الاستخدام وألوان دلالية من Tailwind.",
+      h1: "شارة (Badge)",
+    },
   },
   {
     kind: "component",
@@ -127,6 +151,12 @@ export const routes = [
     description:
       "Create accessible React loading placeholders for text, avatars, cards, and custom content layouts with Fasla skeletons.",
     h1: "Skeleton",
+    ar: {
+      title: "هيكل التحميل (Skeleton) لتطبيقات React | فاصلة",
+      description:
+        "اعرض عناصر نائبة أثناء التحميل في React بمكوّن هيكل التحميل (Skeleton)، للنصوص والصور الرمزية والبطاقات وأي تخطيط آخر.",
+      h1: "هيكل التحميل (Skeleton)",
+    },
   },
   {
     kind: "component",
@@ -136,6 +166,12 @@ export const routes = [
     description:
       "Represent people with a React avatar: photo, initials or icon fallback, three sizes, an optional border and a presence dot.",
     h1: "Avatar",
+    ar: {
+      title: "صورة رمزية (Avatar) لتطبيقات React | فاصلة",
+      description:
+        "مثّل الأشخاص في React بمكوّن صورة رمزية (Avatar): صورة شخصية أو أحرف أولى أو أيقونة بديلة، بثلاثة أحجام، مع إطار ونقطة حالة اختياريين.",
+      h1: "صورة رمزية (Avatar)",
+    },
   },
   {
     kind: "component",
@@ -145,6 +181,12 @@ export const routes = [
     description:
       "Show online, away, busy or offline presence with a React status dot whose accessible name follows the page language.",
     h1: "Status Indicator",
+    ar: {
+      title: "مؤشر الحالة (Status Indicator) لتطبيقات React | فاصلة",
+      description:
+        "اعرض حالة الاتصال في React بمكوّن مؤشر الحالة (Status Indicator): متصل أو غائب أو مشغول أو غير متصل، باسم يتبع لغة الصفحة.",
+      h1: "مؤشر الحالة (Status Indicator)",
+    },
   },
   {
     kind: "component",
@@ -154,6 +196,12 @@ export const routes = [
     description:
       "Add an accessible React checkbox for binary selections with controlled state, labels, and keyboard interaction.",
     h1: "Checkbox",
+    ar: {
+      title: "خانة الاختيار (Checkbox) لتطبيقات React | فاصلة",
+      description:
+        "أضف مكوّن خانة الاختيار (Checkbox) إلى تطبيق React للاختيارات الثنائية، مع التحكم بالحالة وتسمية واضحة ودعم لوحة المفاتيح.",
+      h1: "خانة الاختيار (Checkbox)",
+    },
   },
   {
     kind: "component",
@@ -178,6 +226,12 @@ export const routes = [
     description:
       "Use an accessible React switch for on-off settings with controlled state, keyboard support, and clear visual feedback.",
     h1: "Switch",
+    ar: {
+      title: "مفتاح التبديل (Switch) لتطبيقات React | فاصلة",
+      description:
+        "استخدم مكوّن مفتاح التبديل (Switch) في React لإعدادات التشغيل والإيقاف، مع التحكم بالحالة ودعم لوحة المفاتيح ومؤشر مرئي واضح.",
+      h1: "مفتاح التبديل (Switch)",
+    },
   },
   {
     kind: "component",
@@ -187,6 +241,12 @@ export const routes = [
     description:
       "Build a typed React select control for choosing one option with accessible interaction and customizable styling.",
     h1: "Select",
+    ar: {
+      title: "قائمة منسدلة (Select) لتطبيقات React | فاصلة",
+      description:
+        "أنشئ قائمة منسدلة (Select) في React لاختيار خيار واحد، مع تفاعل يراعي إتاحة الوصول (accessibility) وتنسيق قابل للتخصيص.",
+      h1: "قائمة منسدلة (Select)",
+    },
   },
   {
     kind: "component",
@@ -196,6 +256,12 @@ export const routes = [
     description:
       "Add a multi-line React text input with character counting, resize options, validation states, and accessible labels.",
     h1: "Textarea",
+    ar: {
+      title: "منطقة النص (Textarea) لتطبيقات React | فاصلة",
+      description:
+        "أضف مكوّن منطقة النص (Textarea) لإدخال نص متعدد الأسطر في React، مع عدّاد للأحرف وخيارات لتغيير الحجم وحالات التحقق.",
+      h1: "منطقة النص (Textarea)",
+    },
   },
   {
     kind: "component",
@@ -205,6 +271,12 @@ export const routes = [
     description:
       "Organize related React content into accessible tab lists, triggers, and keyboard-navigable panels.",
     h1: "Tabs",
+    ar: {
+      title: "علامات التبويب (Tabs) لتطبيقات React | فاصلة",
+      description:
+        "نظّم المحتوى المترابط في React بمكوّن علامات التبويب (Tabs)، مع قوائم وأزرار ولوحات تتنقّل بينها بلوحة المفاتيح.",
+      h1: "علامات التبويب (Tabs)",
+    },
   },
   {
     kind: "component",
@@ -214,6 +286,12 @@ export const routes = [
     description:
       "Create a searchable React combobox with single or multiple selection, accessible controls, and typed options.",
     h1: "Combobox",
+    ar: {
+      title: "قائمة منسدلة بالبحث (Combobox) لتطبيقات React | فاصلة",
+      description:
+        "أنشئ قائمة منسدلة بالبحث (Combobox) في React لاختيار خيار واحد أو عدة خيارات، مع عناصر تحكم تراعي إتاحة الوصول (accessibility).",
+      h1: "قائمة منسدلة بالبحث (Combobox)",
+    },
   },
   {
     kind: "component",
@@ -223,6 +301,12 @@ export const routes = [
     description:
       "Structure React applications with a responsive app shell that composes navigation, sidebars, headers, and main content.",
     h1: "AppShell",
+    ar: {
+      title: "إطار التطبيق (AppShell) لتطبيقات React | فاصلة",
+      description:
+        "نظّم تطبيق React بكتلة إطار التطبيق (AppShell)، وهي تخطيط متجاوب يجمع التنقّل والشريط الجانبي والرأس والمحتوى الرئيسي.",
+      h1: "إطار التطبيق (AppShell)",
+    },
   },
   {
     kind: "component",
@@ -232,6 +316,12 @@ export const routes = [
     description:
       "Build consistent React page headers with titles, descriptions, breadcrumbs, and responsive action areas.",
     h1: "PageHeader",
+    ar: {
+      title: "رأس الصفحة (PageHeader) لتطبيقات React | فاصلة",
+      description:
+        "ابنِ رؤوس صفحات متّسقة في React بكتلة رأس الصفحة (PageHeader)، مع العنوان والوصف ومسار التنقّل ومنطقة للإجراءات.",
+      h1: "رأس الصفحة (PageHeader)",
+    },
   },
   {
     kind: "component",
@@ -241,6 +331,12 @@ export const routes = [
     description:
       "Explain empty React views with contextual icons, helpful descriptions, search variants, and clear next actions.",
     h1: "EmptyState",
+    ar: {
+      title: "حالة فارغة (EmptyState) لتطبيقات React | فاصلة",
+      description:
+        "اشرح الشاشات الفارغة في React بكتلة حالة فارغة (EmptyState)، مع أيقونة ووصف مفيد وخطوة تالية واضحة.",
+      h1: "حالة فارغة (EmptyState)",
+    },
   },
   {
     kind: "component",
@@ -250,6 +346,12 @@ export const routes = [
     description:
       "Group related React form fields with headings, descriptions, validation-ready layout, and aligned action controls.",
     h1: "FormSection",
+    ar: {
+      title: "قسم النموذج (FormSection) لتطبيقات React | فاصلة",
+      description:
+        "اجمع حقول النموذج المترابطة في React بكتلة قسم النموذج (FormSection)، مع عنوان ووصف وتخطيط جاهز للتحقق وأزرار إجراءات مصطفّة.",
+      h1: "قسم النموذج (FormSection)",
+    },
   },
   {
     kind: "component",
@@ -259,6 +361,12 @@ export const routes = [
     description:
       "Present structured React data with typed columns, pagination, responsive controls, and reusable table states.",
     h1: "DataTable",
+    ar: {
+      title: "جدول البيانات (DataTable) لتطبيقات React | فاصلة",
+      description:
+        "اعرض بيانات منظّمة في React بكتلة جدول البيانات (DataTable)، مع أعمدة محددة الأنواع وترقيم للصفحات وحالات جاهزة للجدول.",
+      h1: "جدول البيانات (DataTable)",
+    },
   },
   {
     kind: "component",
@@ -268,6 +376,12 @@ export const routes = [
     description:
       "Add a responsive React sidebar for application navigation with collapsible structure and accessible links.",
     h1: "Sidebar",
+    ar: {
+      title: "شريط جانبي (Sidebar) لتطبيقات React | فاصلة",
+      description:
+        "أضف كتلة شريط جانبي (Sidebar) متجاوبة لتنقّل تطبيق React، مع بنية قابلة للطي وروابط تراعي إتاحة الوصول (accessibility).",
+      h1: "شريط جانبي (Sidebar)",
+    },
   },
   {
     kind: "component",
@@ -277,6 +391,12 @@ export const routes = [
     description:
       "Create a responsive React navigation bar with desktop links, mobile menu behavior, and flexible brand content.",
     h1: "Navbar",
+    ar: {
+      title: "شريط التنقّل (Navbar) لتطبيقات React | فاصلة",
+      description:
+        "أنشئ كتلة شريط التنقّل (Navbar) متجاوبة في React، مع روابط لسطح المكتب وقائمة للهاتف ومساحة مرنة لهوية المنتج.",
+      h1: "شريط التنقّل (Navbar)",
+    },
   },
   {
     kind: "component",
@@ -286,6 +406,12 @@ export const routes = [
     description:
       "Display key React dashboard metrics with trend indicators, supporting context, icons, and consistent card layout.",
     h1: "Stats Card",
+    ar: {
+      title: "بطاقة الإحصاءات (Stats Card) لتطبيقات React | فاصلة",
+      description:
+        "اعرض المقاييس الأساسية للوحة التحكم في React بكتلة بطاقة الإحصاءات (Stats Card)، مع مؤشرات الاتجاه والسياق والأيقونات.",
+      h1: "بطاقة الإحصاءات (Stats Card)",
+    },
   },
   {
     kind: "component",
@@ -295,6 +421,12 @@ export const routes = [
     description:
       "Draw attention to React calls to action with a polished shimmer animation that respects reduced-motion preferences.",
     h1: "Shimmer Button",
+    ar: {
+      title: "زر اللمعان (Shimmer Button) لتطبيقات React | فاصلة",
+      description:
+        "اجذب الانتباه إلى أزرار الإجراء الرئيسية في React بتأثير زر اللمعان (Shimmer Button)، بحركة لمعان تحترم إعداد تقليل الحركة.",
+      h1: "زر اللمعان (Shimmer Button)",
+    },
   },
   {
     kind: "component",
@@ -304,6 +436,12 @@ export const routes = [
     description:
       "Add a configurable animated gradient background to React hero sections and cards with smooth motion behavior.",
     h1: "AnimatedGradient",
+    ar: {
+      title: "تدرّج متحرك (AnimatedGradient) لتطبيقات React | فاصلة",
+      description:
+        "أضف خلفية بتأثير تدرّج متحرك (AnimatedGradient) إلى الأقسام الرئيسية والبطاقات في React، بحركة سلسة قابلة للضبط.",
+      h1: "تدرّج متحرك (AnimatedGradient)",
+    },
   },
   {
     kind: "component",
@@ -313,6 +451,12 @@ export const routes = [
     description:
       "Reveal React text character by character with reusable animation controls and reduced-motion support.",
     h1: "TextReveal",
+    ar: {
+      title: "ظهور النص (TextReveal) لتطبيقات React | فاصلة",
+      description:
+        "أظهر النص في React حرفًا حرفًا بتأثير ظهور النص (TextReveal)، مع عناصر تحكم بالحركة ودعم تقليل الحركة.",
+      h1: "ظهور النص (TextReveal)",
+    },
   },
   {
     kind: "component",
@@ -322,6 +466,12 @@ export const routes = [
     description:
       "Highlight React cards and containers with a configurable animated beam that travels around the border.",
     h1: "BorderBeam",
+    ar: {
+      title: "شعاع الإطار (BorderBeam) لتطبيقات React | فاصلة",
+      description:
+        "أبرز البطاقات والحاويات في React بتأثير شعاع الإطار (BorderBeam)، وهو شعاع متحرك قابل للضبط يدور حول الإطار.",
+      h1: "شعاع الإطار (BorderBeam)",
+    },
   },
   {
     kind: "component",
@@ -331,6 +481,12 @@ export const routes = [
     description:
       "Create cursor-responsive spotlight backgrounds for React interfaces with controlled glow and positioning.",
     h1: "Spotlight",
+    ar: {
+      title: "بقعة الضوء (Spotlight) لتطبيقات React | فاصلة",
+      description:
+        "أنشئ خلفيات تتبع المؤشر في واجهات React بتأثير بقعة الضوء (Spotlight)، مع التحكم بالتوهج وموضعه.",
+      h1: "بقعة الضوء (Spotlight)",
+    },
   },
   {
     kind: "component",
@@ -340,6 +496,12 @@ export const routes = [
     description:
       "Animate React copy with a configurable typewriter sequence for product messages, headings, and demonstrations.",
     h1: "Typewriter Text",
+    ar: {
+      title: "نص الآلة الكاتبة (Typewriter Text) لتطبيقات React | فاصلة",
+      description:
+        "حرّك النصوص في React بتأثير نص الآلة الكاتبة (Typewriter Text)، لرسائل المنتج والعناوين والعروض التوضيحية.",
+      h1: "نص الآلة الكاتبة (Typewriter Text)",
+    },
   },
   {
     kind: "component",
@@ -349,6 +511,12 @@ export const routes = [
     description:
       "Build interactive React cards with pointer-following glow effects, layered content, and adaptable surface styling.",
     h1: "Glow Card",
+    ar: {
+      title: "بطاقة متوهجة (Glow Card) لتطبيقات React | فاصلة",
+      description:
+        "ابنِ بطاقات تفاعلية في React بتأثير بطاقة متوهجة (Glow Card)، مع توهج يتبع المؤشر ومحتوى متعدد الطبقات.",
+      h1: "بطاقة متوهجة (Glow Card)",
+    },
   },
 ] as const satisfies readonly SeoRoute[]
 

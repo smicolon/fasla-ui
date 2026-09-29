@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 
 import { Avatar } from "@fasla-ui/ui/avatar"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentName } from "@/components/component-name"
 
 /** The Avatar set's own illustration, exported from Figma. */
 const PHOTO = "/samples/avatar-portrait.png"
@@ -28,7 +29,7 @@ export default function AvatarPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold">Avatar</h1>
+        <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/avatar/" /></h1>
         {/*
          * `dir="ltr"` on every English run: the page prose is untranslated, and
          * in the Arabic locale a trailing full stop is bidi-neutral and would

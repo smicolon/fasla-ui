@@ -6,6 +6,7 @@ import { FormSection, FormField, FormActions } from "@fasla-ui/blocks/form-secti
 import { Input } from "@fasla-ui/ui/input"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
 
 export default function FormSectionPage() {
   const t = useTranslations("docs.sections")
@@ -13,7 +14,7 @@ export default function FormSectionPage() {
     <div>
       <div>
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold">FormSection</h1>
+          <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/form-section/" /></h1>
           <p className="text-lg text-muted-foreground">
             Form sections for grouping related fields with labels and descriptions.
           </p>

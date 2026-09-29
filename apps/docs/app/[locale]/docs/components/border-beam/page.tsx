@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { BorderBeam } from "@fasla-ui/effects/border-beam/border-beam"
 import { ComponentPreview } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
 
 export default function BorderBeamPage() {
   const t = useTranslations("docs.sections")
@@ -12,7 +13,7 @@ export default function BorderBeamPage() {
     <div>
       <div>
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold">BorderBeam</h1>
+          <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/border-beam/" /></h1>
           <p className="text-lg text-muted-foreground">
             Animated border beam effect for cards and containers.
           </p>

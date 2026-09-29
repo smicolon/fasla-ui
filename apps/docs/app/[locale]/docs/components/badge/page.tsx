@@ -6,6 +6,7 @@ import { useState } from "react"
 import { Badge } from "@fasla-ui/ui/badge"
 import { Avatar } from "@fasla-ui/ui/avatar"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentName } from "@/components/component-name"
 
 const VARIANTS = ["solid", "soft", "outline"] as const
 const TONES = ["primary", "secondary", "info", "success", "warning", "destructive"] as const
@@ -55,7 +56,7 @@ export default function BadgePage() {
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold">Badge</h1>
+        <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/badge/" /></h1>
         {/*
          * `dir="ltr"` on every English run: the page prose is untranslated, and
          * in the Arabic locale a trailing full stop is bidi-neutral and would

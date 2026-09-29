@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { EmptyState, EmptySearchResults, EmptyData } from "@fasla-ui/blocks/empty-state/EmptyState"
 import { ComponentPreview } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
 
 export default function EmptyStatePage() {
   const t = useTranslations("docs.sections")
@@ -12,7 +13,7 @@ export default function EmptyStatePage() {
     <div>
       <div>
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold">EmptyState</h1>
+          <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/empty-state/" /></h1>
           <p className="text-lg text-muted-foreground">
             Display contextual empty states with icons, titles, descriptions, and actions.
           </p>

@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { TextReveal } from "@fasla-ui/effects/text-reveal/text-reveal"
 import { ComponentPreview } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
 
 export default function TextRevealPage() {
   const t = useTranslations("docs.sections")
@@ -12,7 +13,7 @@ export default function TextRevealPage() {
     <div>
       <div>
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold">TextReveal</h1>
+          <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/text-reveal/" /></h1>
           <p className="text-lg text-muted-foreground">
             Character-by-character text reveal animation effect.
           </p>

@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@fasla-ui/ui/card"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
 
 export default function CardPage() {
   const t = useTranslations("docs.sections")
@@ -12,7 +13,7 @@ export default function CardPage() {
     <div>
       <div>
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold">Card</h1>
+          <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/card/" /></h1>
           <p className="text-lg text-muted-foreground">
             A composable card component with header, content, and footer sections.
           </p>

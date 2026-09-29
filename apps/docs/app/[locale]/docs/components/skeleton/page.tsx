@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { Skeleton, SkeletonText, SkeletonAvatar, SkeletonCard } from "@fasla-ui/ui/skeleton"
 import { ComponentPreview } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
 
 export default function SkeletonPage() {
   const t = useTranslations("docs.sections")
@@ -12,7 +13,7 @@ export default function SkeletonPage() {
     <div>
       <div>
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold">Skeleton</h1>
+          <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/skeleton/" /></h1>
           <p className="text-lg text-muted-foreground">
             Loading placeholder components for content that is loading.
           </p>

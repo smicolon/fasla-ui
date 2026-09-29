@@ -1,5 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
 export default async function TypewriterTextPage({
   params,
 }: {
@@ -13,7 +14,7 @@ export default async function TypewriterTextPage({
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold">Typewriter Text</h1>
+        <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/typewriter-text/" /></h1>
         <p className="text-xl text-muted-foreground">
           Animated text that types out character by character.
         </p>

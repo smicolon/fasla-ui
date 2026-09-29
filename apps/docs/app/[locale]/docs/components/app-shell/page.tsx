@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl"
 import { AppShell } from "@fasla-ui/blocks/app-shell/AppShell"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
 
 const SidebarContent = () => (
   <div className="flex h-full flex-col">
@@ -33,7 +34,7 @@ export default function AppShellPage() {
     <div>
       <div>
         <div className="space-y-2">
-          <h1 className="text-4xl font-bold">AppShell</h1>
+          <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/app-shell/" /></h1>
           <p className="text-lg text-muted-foreground">
             Application layout with sidebar, header, and content areas.
           </p>
