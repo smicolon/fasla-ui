@@ -6,6 +6,7 @@ import fs from "fs-extra"
 import path from "path"
 import { fetchRegistry, fetchComponent, getTargetDirectory } from "../registry.js"
 import { resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
+import { aliasToPath, readAliasRoot } from "../paths.js"
 
 export const add = new Command()
   .name("add")
@@ -29,7 +30,8 @@ export const add = new Command()
     }
 
     const config = await fs.readJson(configPath)
-    const componentsDir = config.aliases?.components?.replace("@/", "src/") || "src/components"
+    const componentsAlias: string = config.aliases?.components || "@/components"
+    const componentsDir = aliasToPath(componentsAlias, await readAliasRoot(cwd))
 
     // Fetch registry
     const spinner = ora("Fetching registry...").start()
@@ -204,8 +206,7 @@ export const add = new Command()
     console.log("\nImport them in your code:")
     for (const componentName of validComponents) {
       const item = registry.items.find((i) => i.name === componentName)
-      const typeDir = item?.type.replace("registry:", "") || "ui"
-      const importPath = `@/components/${typeDir}/${componentName}`
+      const importPath = `${getTargetDirectory(item?.type ?? "registry:ui", componentsAlias)}/${componentName}`
       console.log(chalk.cyan(`  import { ... } from "${importPath}"`))
     }
   })

@@ -21,6 +21,7 @@ export function cn(...inputs: ClassValue[]) {
 import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
+import { aliasToPath, pathToAlias, readAliasRoot } from "../paths.js"
 
 export const init = new Command()
   .name("init")
@@ -50,8 +51,14 @@ export const init = new Command()
       }
     }
 
-    // Gather configuration
-    let config: Record<string, unknown> = {}
+    // Gather configuration. `@/` is wherever the project's tsconfig points it,
+    // so the defaults, the stored aliases and the files written all follow it.
+    const aliasRoot = await readAliasRoot(cwd)
+    const under = (p: string) => (aliasRoot ? `${aliasRoot}/${p}` : p)
+
+    let componentsAlias = "@/components"
+    let utilsAlias = "@/lib/utils"
+    let style = "default"
 
     if (!options.yes) {
       const response = await prompts([
@@ -59,13 +66,13 @@ export const init = new Command()
           type: "text",
           name: "componentsDir",
           message: "Where should components be installed?",
-          initial: "src/components",
+          initial: under("components"),
         },
         {
           type: "text",
           name: "utilsPath",
           message: "Where is your utils file (cn)?",
-          initial: "src/lib/utils",
+          initial: under("lib/utils"),
         },
         {
           type: "select",
@@ -79,55 +86,34 @@ export const init = new Command()
         },
       ])
 
-      config = {
-        $schema: "https://ui.shadcn.com/schema.json",
-        style: response.style,
-        rsc: true,
-        tsx: true,
-        tailwind: {
-          config: "tailwind.config.ts",
-          css: "src/app/globals.css",
-          baseColor: "slate",
-          cssVariables: true,
+      componentsAlias = pathToAlias(response.componentsDir, aliasRoot)
+      utilsAlias = pathToAlias(response.utilsPath, aliasRoot)
+      style = response.style
+    }
+
+    const config: ComponentsConfig = {
+      $schema: "https://ui.shadcn.com/schema.json",
+      style,
+      rsc: true,
+      tsx: true,
+      tailwind: {
+        config: "tailwind.config.ts",
+        css: under("app/globals.css"),
+        baseColor: "slate",
+        cssVariables: true,
+      },
+      aliases: {
+        components: componentsAlias,
+        utils: utilsAlias,
+        ui: `${componentsAlias}/ui`,
+        lib: "@/lib",
+        hooks: "@/hooks",
+      },
+      registries: {
+        smicolon: {
+          url: "https://ui.smicolon.com/r",
         },
-        aliases: {
-          components: `@/${response.componentsDir}`,
-          utils: `@/${response.utilsPath}`,
-          ui: `@/${response.componentsDir}/ui`,
-          lib: "@/lib",
-          hooks: "@/hooks",
-        },
-        registries: {
-          smicolon: {
-            url: "https://ui.smicolon.com/r",
-          },
-        },
-      }
-    } else {
-      config = {
-        $schema: "https://ui.shadcn.com/schema.json",
-        style: "default",
-        rsc: true,
-        tsx: true,
-        tailwind: {
-          config: "tailwind.config.ts",
-          css: "src/app/globals.css",
-          baseColor: "slate",
-          cssVariables: true,
-        },
-        aliases: {
-          components: "@/components",
-          utils: "@/lib/utils",
-          ui: "@/components/ui",
-          lib: "@/lib",
-          hooks: "@/hooks",
-        },
-        registries: {
-          smicolon: {
-            url: "https://ui.smicolon.com/r",
-          },
-        },
-      }
+      },
     }
 
     const spinner = ora("Writing configuration...").start()
@@ -137,8 +123,7 @@ export const init = new Command()
 
       // Every component in the registry imports `cn` from the utils alias.
       // Without this file a fresh install does not compile, so init writes it.
-      const utilsAlias = (config as ComponentsConfig).aliases?.utils ?? "@/lib/utils"
-      const utilsRelative = utilsAlias.replace(/^@\//, "src/")
+      const utilsRelative = aliasToPath(utilsAlias, aliasRoot)
       const utilsPath = path.resolve(cwd, `${utilsRelative}.ts`)
 
       if (!(await fs.pathExists(utilsPath))) {
