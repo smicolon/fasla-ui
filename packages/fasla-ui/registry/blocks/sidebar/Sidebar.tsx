@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { ChevronsLeftIcon } from "lucide-react"
 import { cn } from "../../../src/lib/utils"
 
 export interface SidebarProps extends React.HTMLAttributes<HTMLElement> {
@@ -183,20 +184,12 @@ export function SidebarCollapseButton({
       aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
       {...props}
     >
-      <svg
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className={cn("transition-transform", collapsed && "rotate-180")}
-      >
-        <polyline points="11 17 6 12 11 7" />
-        <polyline points="18 17 13 12 18 7" />
-      </svg>
+      {/* Points at the edge the sidebar collapses toward, so it mirrors in RTL. */}
+      <ChevronsLeftIcon
+        size={16}
+        strokeWidth={1.5}
+        className={cn("transition-transform rtl:-scale-x-100", collapsed && "rotate-180")}
+      />
     </button>
   )
 }

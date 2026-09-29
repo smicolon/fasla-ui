@@ -1,4 +1,5 @@
 import * as React from "react"
+import { MenuIcon, XIcon } from "lucide-react"
 import { cn } from "../../../src/lib/utils"
 
 export interface NavbarProps extends React.HTMLAttributes<HTMLElement> {
@@ -162,29 +163,11 @@ export function NavbarToggle({
       aria-label={open ? "Close menu" : "Open menu"}
       {...props}
     >
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        {open ? (
-          <>
-            <line x1="18" y1="6" x2="6" y2="18" />
-            <line x1="6" y1="6" x2="18" y2="18" />
-          </>
-        ) : (
-          <>
-            <line x1="4" y1="12" x2="20" y2="12" />
-            <line x1="4" y1="6" x2="20" y2="6" />
-            <line x1="4" y1="18" x2="20" y2="18" />
-          </>
-        )}
-      </svg>
+      {open ? (
+        <XIcon size={20} strokeWidth={1.5} />
+      ) : (
+        <MenuIcon size={20} strokeWidth={1.5} />
+      )}
     </button>
   )
 }

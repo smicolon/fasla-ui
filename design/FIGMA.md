@@ -193,6 +193,13 @@ children set `x = parent.width - x - width` and flip `constraints.horizontal`.
 - Do **not** flip `Direction` on Avatar, Dot Badge or decorative instances; leave `Social Icons` alone.
 - Never mirror: photographs, QR codes, pictograms (telescope, compass, signpost), code/terminal windows
   (mirror the subtree a second time — it's an identity — so it returns to LTR inside a mirrored block).
+- **In code, a directional icon mirrors with `rtl:-scale-x-100`, never `rtl:rotate-180`** (shadcn's
+  choice). A rotation also turns the glyph upside down, which only looks right on shapes that are
+  symmetric top-to-bottom; `arrow-up-right`, `undo`, `send` or a speech-bubble tail come out wrong.
+  Mirror what points along the reading direction (`chevron-left`/`-right`, `chevrons-left`, left/right
+  arrows, `panel-left`, submenu chevrons); leave vertical chevrons, `x`, `check`, `minus`, `plus`,
+  `search`, `menu` and spinners alone. The mirror composes with a state rotation (Sidebar's collapse
+  chevron carries both).
 - Set the AR text style **before** writing `.characters`, then re-apply `fontSize`/`lineHeight` bindings.
   Load Cairo and Geist first.
 - Latin stays Latin inside MSA copy: brand/product/technology names (Figma, Tailwind, shadcn/ui, API,
