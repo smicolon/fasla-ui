@@ -37,6 +37,14 @@ export interface ComboboxProps {
   className?: string
   /** Loading state */
   loading?: boolean
+  /** Text shown while loading */
+  loadingText?: string
+  /** Accessible name of the toggle button while the list is closed */
+  openLabel?: string
+  /** Accessible name of the toggle button while the list is open */
+  closeLabel?: string
+  /** Accessible name of a selected chip’s remove button, given the option label */
+  removeLabel?: (label: string) => string
 }
 
 export function Combobox({
@@ -53,6 +61,10 @@ export function Combobox({
   disabled = false,
   className,
   loading = false,
+  loadingText = "Loading...",
+  openLabel = "Open",
+  closeLabel = "Close",
+  removeLabel = (label) => `Remove ${label}`,
 }: ComboboxProps) {
   const [open, setOpen] = React.useState(false)
   const [search, setSearch] = React.useState("")
@@ -225,8 +237,8 @@ export function Combobox({
           type="button"
           onClick={() => !disabled && setOpen(!open)}
           disabled={disabled}
-          className="ml-2 shrink-0 text-muted-foreground hover:text-foreground"
-          aria-label={open ? "Close" : "Open"}
+          className="ms-2 shrink-0 text-muted-foreground hover:text-foreground"
+          aria-label={open ? closeLabel : openLabel}
         >
           <ChevronDownIcon
             size={16}
@@ -261,7 +273,7 @@ export function Combobox({
           >
             {loading ? (
               <li className="px-2 py-4 text-center text-sm text-muted-foreground">
-                Loading...
+                {loadingText}
               </li>
             ) : filteredOptions.length === 0 && !showCreate ? (
               <li className="px-2 py-4 text-center text-sm text-muted-foreground">
@@ -290,7 +302,7 @@ export function Combobox({
                       {multiple && (
                         <span
                           className={cn(
-                            "mr-2 flex h-4 w-4 items-center justify-center rounded-sm border",
+                            "me-2 flex h-4 w-4 items-center justify-center rounded-sm border",
                             isSelected
                               ? "border-primary bg-primary text-primary-foreground"
                               : "border-input"
@@ -303,7 +315,17 @@ export function Combobox({
                       )}
                       <span className="flex-1">{option.label}</span>
                       {!multiple && isSelected && (
-                        <CheckIcon size={16} strokeWidth={1.5} className="ml-2 text-primary" />
+                        <svg
+                          width="16"
+                          height="16"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          className="ms-2 text-primary"
+                        >
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
                       )}
                     </li>
                   )
@@ -321,7 +343,18 @@ export function Combobox({
                         "bg-accent text-accent-foreground"
                     )}
                   >
-                    <PlusIcon size={16} strokeWidth={1.5} className="mr-2" />
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      className="me-2"
+                    >
+                      <line x1="12" y1="5" x2="12" y2="19" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
                     {createText} "{search}"
                   </li>
                 )}
@@ -356,7 +389,7 @@ export function Combobox({
                     handleSelect(val)
                   }}
                   className="hover:text-destructive"
-                  aria-label={`Remove ${option?.label || val}`}
+                  aria-label={removeLabel(option?.label || val)}
                 >
                   <XIcon size={12} strokeWidth={1.5} />
                 </button>
