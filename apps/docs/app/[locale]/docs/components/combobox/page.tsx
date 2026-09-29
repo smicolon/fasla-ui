@@ -9,17 +9,21 @@ import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
 
-/** Option values stay Latin identifiers in both locales; each locale picks its own. */
-const OPTION_KEYS = ["a", "b", "c", "d", "e", "f"] as const
+/** The same countries in both locales: the value is a Latin identifier, the label is the locale's. */
+const OPTIONS = [
+  ["a", "sa"],
+  ["b", "ae"],
+  ["c", "eg"],
+  ["d", "jo"],
+  ["e", "ma"],
+  ["f", "kw"],
+] as const
 
 export default function ComboboxPage() {
   const t = useTranslations("docs.sections")
   const c = useTranslations("docs.combobox")
 
-  const initialOptions = OPTION_KEYS.map((key) => ({
-    value: c(`optionValues.${key}`),
-    label: c(`options.${key}`),
-  }))
+  const initialOptions = OPTIONS.map(([key, value]) => ({ value: value as string, label: c(`options.${key}`) }))
 
   const [value, setValue] = useState<string>("")
   const [multiValue, setMultiValue] = useState<string[]>([])

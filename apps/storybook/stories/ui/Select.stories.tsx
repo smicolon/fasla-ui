@@ -12,20 +12,21 @@ export default meta
 type Story = StoryObj<typeof Select>
 
 /**
- * Sample copy, per script. Option values stay Latin identifiers; only the
- * labels and placeholders change. The Arabic follows design/content/.
+ * Sample copy, per script: the same cities in both, as Radio uses the same
+ * shipping options. Option values are the same Latin identifiers in both;
+ * only the labels and placeholders change. The Arabic follows design/content/.
  */
 const COPY = {
   ltr: {
     options: [
-      { value: "react", label: "React" },
-      { value: "vue", label: "Vue" },
-      { value: "angular", label: "Angular" },
-      { value: "svelte", label: "Svelte" },
+      { value: "riyadh", label: "Riyadh" },
+      { value: "jeddah", label: "Jeddah" },
+      { value: "dammam", label: "Dammam" },
+      { value: "makkah", label: "Makkah" },
     ],
-    placeholder: "Select a framework",
-    sizes: ["Small", "Default", "Large"],
-    disabledOption: "Disabled Option",
+    placeholder: "Select a city",
+    sizes: ["Select a city", "Select a city", "Select a city"],
+    disabledOption: "Abha, coming soon",
   },
   rtl: {
     options: [

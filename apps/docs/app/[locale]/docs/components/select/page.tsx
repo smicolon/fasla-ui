@@ -8,14 +8,19 @@ import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
 
-/** Option values stay Latin identifiers in both locales; each locale picks its own. */
-const OPTION_KEYS = ["a", "b", "c", "d"] as const
+/** The same cities in both locales: the value is a Latin identifier, the label is the locale's. */
+const OPTIONS = [
+  ["a", "riyadh"],
+  ["b", "jeddah"],
+  ["c", "dammam"],
+  ["d", "makkah"],
+] as const
 
 export default function SelectPage() {
   const t = useTranslations("docs.sections")
   const s = useTranslations("docs.select")
 
-  const options = OPTION_KEYS.map((key) => ({ value: s(`optionValues.${key}`), label: s(`options.${key}`) }))
+  const options = OPTIONS.map(([key, value]) => ({ value, label: s(`options.${key}`) }))
 
   const props: PropRow[] = [
     { prop: "options", type: "SelectOption[]", fallback: "", description: s.rich("props.options", richCode) },

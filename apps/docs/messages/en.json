@@ -306,21 +306,21 @@
     "select": {
       "lead": "A native select input with custom styling.",
       "options": {
-        "a": "React",
-        "b": "Vue",
-        "c": "Angular",
-        "d": "Svelte"
+        "a": "Riyadh",
+        "b": "Jeddah",
+        "c": "Dammam",
+        "d": "Makkah"
       },
-      "placeholder": "Select a framework",
+      "placeholder": "Select a city",
       "sizes": {
-        "sm": "Small",
-        "default": "Default",
-        "lg": "Large"
+        "sm": "Select a city",
+        "default": "Select a city",
+        "lg": "Select a city"
       },
       "states": {
-        "default": "Default",
-        "error": "Error state",
-        "disabled": "Disabled"
+        "default": "Select a city",
+        "error": "Select a delivery city",
+        "disabled": "Select a branch"
       },
       "usage": {
         "basic": "Basic select",
@@ -337,12 +337,6 @@
         "name": "Name submitted with the form.",
         "onChange": "Called when the choice changes.",
         "className": "Extra classes for the component."
-      },
-      "optionValues": {
-        "a": "react",
-        "b": "vue",
-        "c": "angular",
-        "d": "svelte"
       }
     },
     "textarea": {
@@ -415,32 +409,32 @@
     "combobox": {
       "lead": "A searchable dropdown with autocomplete, multi-select, and create-new functionality.",
       "options": {
-        "a": "React",
-        "b": "Vue",
-        "c": "Angular",
-        "d": "Svelte",
-        "e": "Next.js",
-        "f": "Nuxt"
+        "a": "Saudi Arabia",
+        "b": "United Arab Emirates",
+        "c": "Egypt",
+        "d": "Jordan",
+        "e": "Morocco",
+        "f": "Kuwait"
       },
-      "placeholder": "Select a framework...",
+      "placeholder": "Select a country…",
       "searchableTitle": "Searchable",
       "searchable": {
-        "placeholder": "Search frameworks...",
-        "search": "Type to search..."
+        "placeholder": "Search for a country…",
+        "search": "Type a country name…"
       },
       "multiTitle": "Multi-select",
-      "multi": "Select frameworks...",
+      "multi": "Select shipping countries…",
       "creatableTitle": "Creatable",
-      "creatable": "Select or create...",
+      "creatable": "Select a country or add one…",
       "states": {
-        "default": "Default",
-        "disabled": "Disabled",
-        "loading": "Loading..."
+        "default": "Select a country…",
+        "disabled": "Country set by your account",
+        "loading": "Loading countries…"
       },
       "text": {
         "search": "Search...",
-        "empty": "No options found.",
-        "create": "Create",
+        "empty": "No matching country.",
+        "create": "Add",
         "loading": "Loading...",
         "open": "Open",
         "close": "Close",
@@ -452,7 +446,7 @@
         "multi": "Multi-select",
         "creatable": "Creatable",
         "addNew": "Add new option to your list",
-        "codePlaceholder": "Select option..."
+        "codePlaceholder": "Select an option…"
       },
       "props": {
         "options": "Options to choose from.",
@@ -472,14 +466,6 @@
         "removeLabel": "Accessible name of a chip’s remove button.",
         "disabled": "Disables the combobox and dims it.",
         "className": "Extra classes for the component."
-      },
-      "optionValues": {
-        "a": "react",
-        "b": "vue",
-        "c": "angular",
-        "d": "svelte",
-        "e": "nextjs",
-        "f": "nuxt"
       }
     }
   },

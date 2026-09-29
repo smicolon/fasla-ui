@@ -15,35 +15,35 @@ export default meta
 type Story = StoryObj<typeof Combobox>
 
 /**
- * Sample copy, per script. Option values stay Latin identifiers; labels,
- * placeholders and the component's own text change. The Arabic follows
- * design/content/.
+ * Sample copy, per script: the same countries in both. Option values are the
+ * same Latin identifiers in both; labels, placeholders and the component's own
+ * text change. The Arabic follows design/content/.
  */
 const COPY = {
   ltr: {
     options: [
-      { value: "react", label: "React" },
-      { value: "vue", label: "Vue" },
-      { value: "angular", label: "Angular" },
-      { value: "svelte", label: "Svelte" },
-      { value: "solid", label: "Solid" },
-      { value: "qwik", label: "Qwik" },
-      { value: "next", label: "Next.js" },
-      { value: "nuxt", label: "Nuxt" },
-      { value: "astro", label: "Astro" },
+      { value: "sa", label: "Saudi Arabia" },
+      { value: "ae", label: "United Arab Emirates" },
+      { value: "eg", label: "Egypt" },
+      { value: "jo", label: "Jordan" },
+      { value: "ma", label: "Morocco" },
+      { value: "kw", label: "Kuwait" },
+      { value: "qa", label: "Qatar" },
+      { value: "om", label: "Oman" },
+      { value: "bh", label: "Bahrain" },
     ] as ComboboxOption[],
-    first: "react",
-    second: "next",
-    select: "Select framework...",
-    searchFrameworks: "Search frameworks...",
-    selectMany: "Select frameworks...",
-    create: "Select or create...",
-    createTags: "Select or create tags...",
-    disabled: "Disabled...",
-    loading: "Loading...",
-    someDisabled: "Some options disabled...",
-    disabledOption: "Disabled Option",
-    anotherDisabled: "Another Disabled",
+    first: "sa",
+    second: "qa",
+    select: "Select a country…",
+    searchCountries: "Search for a country…",
+    selectMany: "Select shipping countries…",
+    create: "Select a country or add one…",
+    createTags: "Select tags or add one…",
+    disabled: "Country set by your account",
+    loading: "Loading countries…",
+    someDisabled: "Some countries don’t ship yet…",
+    disabledOption: "Lebanon, coming soon",
+    anotherDisabled: "Iraq, coming soon",
     text: {},
   },
   rtl: {
@@ -61,7 +61,7 @@ const COPY = {
     first: "sa",
     second: "qa",
     select: "اختر دولة…",
-    searchFrameworks: "ابحث عن دولة…",
+    searchCountries: "ابحث عن دولة…",
     selectMany: "اختر دول الشحن…",
     create: "اختر دولة أو أضف واحدة…",
     createTags: "اختر وسومًا أو أضف واحدًا…",
@@ -113,7 +113,7 @@ export const WithSearch: Story = {
           value={value}
           onChange={(v) => setValue(v as string)}
           placeholder={c.select}
-          searchPlaceholder={c.searchFrameworks}
+          searchPlaceholder={c.searchCountries}
         />
       </div>
     )

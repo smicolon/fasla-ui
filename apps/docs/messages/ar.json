@@ -337,12 +337,6 @@
         "name": "الاسم الذي يُرسَل مع النموذج.",
         "onChange": "تُستدعى عند تغيير الاختيار.",
         "className": "أصناف (class) إضافية للمكوّن."
-      },
-      "optionValues": {
-        "a": "riyadh",
-        "b": "jeddah",
-        "c": "dammam",
-        "d": "makkah"
       }
     },
     "textarea": {
@@ -472,14 +466,6 @@
         "removeLabel": "اسم زر إزالة الخيار المحدد.",
         "disabled": "يعطّل القائمة ويُظهرها باهتة.",
         "className": "أصناف (class) إضافية للمكوّن."
-      },
-      "optionValues": {
-        "a": "sa",
-        "b": "ae",
-        "c": "eg",
-        "d": "jo",
-        "e": "ma",
-        "f": "kw"
       }
     }
   },
