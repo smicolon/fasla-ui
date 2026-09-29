@@ -3,6 +3,23 @@
 import * as React from "react"
 import { cn } from "../../../src/lib/utils"
 
+/**
+ * Whether the user asks for reduced motion. It starts false, so the server and
+ * the first client render agree, then follows the setting as it changes.
+ */
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = React.useState(false)
+  React.useEffect(() => {
+    if (typeof window.matchMedia !== "function") return
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)")
+    setReduced(query.matches)
+    const onChange = () => setReduced(query.matches)
+    query.addEventListener("change", onChange)
+    return () => query.removeEventListener("change", onChange)
+  }, [])
+  return reduced
+}
+
 export interface TypewriterTextProps extends React.HTMLAttributes<HTMLSpanElement> {
   /** Text to type out */
   text: string
@@ -36,25 +53,25 @@ export function TypewriterText({
 }: TypewriterTextProps) {
   const [displayText, setDisplayText] = React.useState("")
   const [isTyping, setIsTyping] = React.useState(false)
-  const [showCursor, setShowCursor] = React.useState(cursor)
+  const prefersReducedMotion = usePrefersReducedMotion()
+  const showCursor = cursor && !prefersReducedMotion
 
-  // Check for reduced motion preference
-  const prefersReducedMotion = React.useMemo(() => {
-    if (typeof window === "undefined") return false
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  }, [])
+  // Held in a ref: an inline callback is a new function every render, and as
+  // an effect dependency it restarted the typing each time the parent rendered.
+  const onCompleteRef = React.useRef(onComplete)
+  onCompleteRef.current = onComplete
 
   React.useEffect(() => {
     // If user prefers reduced motion, show full text immediately
     if (prefersReducedMotion) {
       setDisplayText(text)
-      setShowCursor(false)
-      onComplete?.()
+      onCompleteRef.current?.()
       return
     }
 
     let timeoutId: ReturnType<typeof setTimeout>
     let charIndex = 0
+    setDisplayText("")
     setIsTyping(true)
 
     const startTyping = () => {
@@ -65,7 +82,7 @@ export function TypewriterText({
           timeoutId = setTimeout(typeChar, speed)
         } else {
           setIsTyping(false)
-          onComplete?.()
+          onCompleteRef.current?.()
 
           if (loop) {
             timeoutId = setTimeout(() => {
@@ -84,20 +101,20 @@ export function TypewriterText({
     timeoutId = setTimeout(startTyping, delay)
 
     return () => clearTimeout(timeoutId)
-  }, [text, speed, delay, loop, loopDelay, onComplete, prefersReducedMotion])
+  }, [text, speed, delay, loop, loopDelay, prefersReducedMotion])
 
   // Cursor blink effect
   const [cursorVisible, setCursorVisible] = React.useState(true)
 
   React.useEffect(() => {
-    if (!showCursor || prefersReducedMotion) return
+    if (!showCursor) return
 
     const blinkInterval = setInterval(() => {
       setCursorVisible((prev) => !prev)
     }, 530)
 
     return () => clearInterval(blinkInterval)
-  }, [showCursor, prefersReducedMotion])
+  }, [showCursor])
 
   return (
     <span className={cn("inline", className)} {...props}>
@@ -144,10 +161,7 @@ export function TypewriterWords({
   const [displayText, setDisplayText] = React.useState("")
   const [isDeleting, setIsDeleting] = React.useState(false)
 
-  const prefersReducedMotion = React.useMemo(() => {
-    if (typeof window === "undefined") return false
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  }, [])
+  const prefersReducedMotion = usePrefersReducedMotion()
 
   React.useEffect(() => {
     if (prefersReducedMotion) {
@@ -204,7 +218,7 @@ export function TypewriterWords({
   return (
     <span className={cn("inline", className)} {...props}>
       {displayText}
-      {cursor && (
+      {cursor && !prefersReducedMotion && (
         <span
           className={cn(
             "ms-0.5 inline-block",

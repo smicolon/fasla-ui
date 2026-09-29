@@ -1,8 +1,11 @@
 "use client"
 
 import * as React from "react"
-import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion"
+import { AnimatePresence, motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion"
 import { cn } from "../../../src/lib/utils"
+
+/** A layout effect in the browser, a plain effect on the server (where neither runs). */
+const useIsomorphicLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect
 
 export interface SpotlightProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Spotlight color */
@@ -38,6 +41,16 @@ export function Spotlight({
   const springX = useSpring(mouseX, springConfig)
   const springY = useSpring(mouseY, springConfig)
 
+  // Rest at the centre, not the top-left corner, until the pointer moves.
+  useIsomorphicLayoutEffect(() => {
+    const el = containerRef.current
+    if (!el) return
+    mouseX.jump(el.offsetWidth / 2 - size / 2)
+    mouseY.jump(el.offsetHeight / 2 - size / 2)
+    springX.jump(el.offsetWidth / 2 - size / 2)
+    springY.jump(el.offsetHeight / 2 - size / 2)
+  }, [mouseX, mouseY, springX, springY, size, prefersReducedMotion])
+
   const handleMouseMove = React.useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (!containerRef.current || prefersReducedMotion) return
@@ -67,9 +80,10 @@ export function Spotlight({
       className={cn("relative isolate overflow-hidden", className)}
       {...props}
     >
-      {/* Spotlight */}
+      {/* Spotlight. Pinned to the top-left corner: without it, a flex parent that
+          centres its content would move the origin the pointer offsets start from. */}
       <motion.div
-        className="pointer-events-none absolute -z-10 rounded-full"
+        className="pointer-events-none absolute left-0 top-0 -z-10 rounded-full"
         style={{
           x: springX,
           y: springY,
@@ -137,23 +151,29 @@ export function SpotlightCard({
       )}
       {...props}
     >
-      {/* Spotlight */}
-      {!prefersReducedMotion && isHovered && (
-        <motion.div
-          className="pointer-events-none absolute -z-10 rounded-full"
-          style={{
-            x: mouseX,
-            y: mouseY,
-            width: spotlightSize,
-            height: spotlightSize,
-            background: `radial-gradient(circle, ${spotlightColor} 0%, transparent 70%)`,
-            transform: "translate(-50%, -50%)",
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        />
-      )}
+      {/*
+        Spotlight. Centred on the pointer by offsetting half its size: a CSS
+        translate(-50%, -50%) is overwritten by the x and y motion values.
+      */}
+      <AnimatePresence>
+        {!prefersReducedMotion && isHovered && (
+          <motion.div
+            className="pointer-events-none absolute -z-10 rounded-full"
+            style={{
+              x: mouseX,
+              y: mouseY,
+              left: -spotlightSize / 2,
+              top: -spotlightSize / 2,
+              width: spotlightSize,
+              height: spotlightSize,
+              background: `radial-gradient(circle, ${spotlightColor} 0%, transparent 70%)`,
+            }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          />
+        )}
+      </AnimatePresence>
 
       {/* Content */}
       {children}

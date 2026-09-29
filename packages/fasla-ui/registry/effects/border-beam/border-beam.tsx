@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { motion, useReducedMotion } from "framer-motion"
+import { animate, motion, useMotionValue, useReducedMotion, useTransform } from "framer-motion"
 import { cn } from "../../../src/lib/utils"
 
 export interface BorderBeamProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -33,53 +33,57 @@ export function BorderBeam({
 }: BorderBeamProps) {
   const prefersReducedMotion = useReducedMotion()
 
+  // The beam is a conic gradient whose start angle turns, so it runs round
+  // the border of any shape; rotating a layer only works for a square.
+  const angle = useMotionValue(0)
+  React.useEffect(() => {
+    if (prefersReducedMotion) return
+    const controls = animate(angle, 360, {
+      duration,
+      delay,
+      ease: "linear",
+      repeat: Infinity,
+    })
+    return () => controls.stop()
+  }, [angle, duration, delay, prefersReducedMotion])
+  const background = useTransform(
+    angle,
+    (a) => `conic-gradient(from ${a}deg, transparent 0deg 270deg, ${colorTo} 270deg, ${colorFrom} 360deg)`
+  )
+
+  /** Paints only a borderWidth ring: the content box is masked out. */
+  const ring: React.CSSProperties = {
+    padding: borderWidth,
+    mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+    maskComposite: "exclude",
+    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+    WebkitMaskComposite: "xor",
+  }
+
   return (
     <div
-      className={cn("relative overflow-hidden rounded-lg", className)}
+      className={cn("relative isolate overflow-hidden rounded-lg", className)}
       {...props}
     >
-      {/* Border beam */}
-      {!prefersReducedMotion && (
-        <motion.div
-          className="pointer-events-none absolute inset-0 rounded-[inherit]"
-          style={{
-            padding: borderWidth,
-            background: `linear-gradient(90deg, ${colorFrom}, ${colorTo})`,
-            mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-            maskComposite: "exclude",
-            WebkitMaskComposite: "xor",
-          }}
-          animate={{
-            rotate: [0, 360],
-          }}
-          transition={{
-            duration,
-            delay,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-      )}
-
-      {/* Static border fallback for reduced motion */}
-      {prefersReducedMotion && (
-        <div
-          className="pointer-events-none absolute inset-0 rounded-[inherit]"
-          style={{
-            padding: borderWidth,
-            background: colorFrom,
-            mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-            maskComposite: "exclude",
-            WebkitMaskComposite: "xor",
-            opacity: 0.5,
-          }}
-        />
-      )}
-
       {/* Content */}
-      <div className="relative z-10 rounded-[inherit] bg-background">
+      <div className="relative rounded-[inherit] bg-background">
         {children}
       </div>
+
+      {/* The ring sits above the content, over its outer edge, so the content cannot cover it */}
+      {prefersReducedMotion ? (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-10 rounded-[inherit]"
+          style={{ ...ring, background: colorFrom, opacity: 0.5 }}
+        />
+      ) : (
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-10 rounded-[inherit]"
+          style={{ ...ring, background }}
+        />
+      )}
     </div>
   )
 }
