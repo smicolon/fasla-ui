@@ -64,7 +64,7 @@ export function Spotlight({
     <div
       ref={containerRef}
       onMouseMove={handleMouseMove}
-      className={cn("relative overflow-hidden", className)}
+      className={cn("relative isolate overflow-hidden", className)}
       {...props}
     >
       {/* Spotlight */}
@@ -132,7 +132,7 @@ export function SpotlightCard({
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className={cn(
-        "relative overflow-hidden rounded-xl border bg-card p-6 shadow",
+        "relative isolate overflow-hidden rounded-xl border bg-card p-6 shadow",
         className
       )}
       {...props}

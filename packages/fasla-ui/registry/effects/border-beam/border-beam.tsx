@@ -112,7 +112,7 @@ export function GlowingBorder({
 }: GlowingBorderProps) {
   return (
     <div
-      className={cn("relative", className)}
+      className={cn("relative isolate", className)}
       style={{
         borderRadius,
       }}

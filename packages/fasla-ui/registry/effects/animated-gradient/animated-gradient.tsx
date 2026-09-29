@@ -44,7 +44,7 @@ export function AnimatedGradient({
 
   return (
     <div
-      className={cn("relative overflow-hidden", className)}
+      className={cn("relative isolate overflow-hidden", className)}
       {...props}
     >
       {/* Gradient blobs */}
