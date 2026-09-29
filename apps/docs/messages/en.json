@@ -160,7 +160,34 @@
       "introduction": "Introduction",
       "installation": "Installation",
       "playground": "Component Playground",
-      "menu": "Docs menu"
+      "menu": "Docs menu",
+      "lead": "A collapsible sidebar navigation component for app layouts.",
+      "brand": "My store",
+      "group": "Store",
+      "items": {
+        "dashboard": "Dashboard",
+        "orders": "Orders",
+        "products": "Products",
+        "settings": "Settings"
+      },
+      "collapse": "Collapse sidebar",
+      "expand": "Expand sidebar",
+      "parts": {
+        "sidebar": "Main container",
+        "header": "Header section",
+        "content": "Scrollable content area",
+        "footer": "Footer section",
+        "group": "Grouped items with label",
+        "item": "Navigation item with icon",
+        "collapseButton": "Toggle collapse state"
+      },
+      "props": {
+        "collapsed": "Collapses it to icons only.",
+        "onCollapsedChange": "Called when it collapses or expands.",
+        "width": "Width when expanded.",
+        "children": "The sidebar’s parts.",
+        "className": "Extra classes for the component."
+      }
     },
     "onThisPage": "On this page",
     "copyCode": "Copy code",
@@ -677,6 +704,223 @@
         "avatar": "Avatar before the label.",
         "onClose": "Adds a close button; called when pressed.",
         "closeLabel": "Close button’s accessible name, in the page language by default.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "appShell": {
+      "lead": "Application layout with sidebar, header, and content areas.",
+      "brand": "My store",
+      "nav": {
+        "dashboard": "Dashboard",
+        "orders": "Orders",
+        "settings": "Settings"
+      },
+      "welcome": "Welcome back, Layla",
+      "content": {
+        "title": "Dashboard",
+        "body": "You have 12 new orders today."
+      },
+      "props": {
+        "sidebar": "Sidebar content, hidden on mobile.",
+        "header": "Header content.",
+        "children": "Main content.",
+        "sidebarWidth": "Width of the sidebar.",
+        "sidebarMobile": "Shows the sidebar on mobile.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "pageHeader": {
+      "lead": "Page header with title, description, breadcrumbs, and actions.",
+      "preview": {
+        "title": "Orders",
+        "description": "Track and manage your store’s orders"
+      },
+      "actionsTitle": "With Actions",
+      "actions": {
+        "title": "Products",
+        "description": "Add, edit and price your products",
+        "action": "Add product"
+      },
+      "breadcrumbTitle": "With Breadcrumb",
+      "breadcrumb": {
+        "home": "Home",
+        "current": "Settings",
+        "label": "Breadcrumb"
+      },
+      "props": {
+        "title": "Page title.",
+        "description": "Text below the title.",
+        "actions": "Controls at the end of the header.",
+        "breadcrumb": "Breadcrumb above the title.",
+        "breadcrumbLabel": "Breadcrumb landmark’s accessible name.",
+        "bordered": "Shows the bottom border.",
+        "headingLevel": "Heading level of the title.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "emptyState": {
+      "lead": "Display contextual empty states with icons, titles, descriptions, and actions.",
+      "preview": {
+        "title": "No products yet",
+        "description": "Get started by adding your first product.",
+        "action": "Add product"
+      },
+      "searchTitle": "Search Results",
+      "search": {
+        "query": "linen shirt",
+        "title": "No results found",
+        "description": "No results for \"{query}\". Try a different search term."
+      },
+      "dataTitle": "Empty Data",
+      "data": {
+        "title": "No orders yet",
+        "description": "Get started by creating your first order."
+      },
+      "sizes": "No products yet",
+      "props": {
+        "icon": "Icon above the title.",
+        "title": "Main title.",
+        "description": "Text below the title.",
+        "action": "Primary action.",
+        "secondaryAction": "Secondary action.",
+        "size": "Size of the empty state.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "formSection": {
+      "lead": "Form sections for grouping related fields with labels and descriptions.",
+      "preview": {
+        "title": "Personal Information",
+        "description": "Update your personal details.",
+        "first": "First Name",
+        "firstPlaceholder": "Layla",
+        "last": "Last Name",
+        "lastPlaceholder": "Haddad"
+      },
+      "errorTitle": "With Error",
+      "error": {
+        "label": "Email",
+        "message": "This email is already taken"
+      },
+      "actionsTitle": "Form Actions",
+      "actions": {
+        "cancel": "Cancel",
+        "save": "Save"
+      },
+      "usage": {
+        "title": "Account",
+        "description": "Update your account settings.",
+        "email": "Email"
+      },
+      "partsNote": "The table covers the props of <code>FormSection</code>, <code>FormField</code> and <code>FormActions</code>.",
+      "props": {
+        "title": "Section title.",
+        "description": "Text below the title or label.",
+        "divider": "Shows a divider at the bottom.",
+        "label": "Field label.",
+        "error": "Error message below the field.",
+        "required": "Marks the field as required.",
+        "htmlFor": "Connects the label to its input.",
+        "align": "Alignment of the actions.",
+        "sticky": "Sticks the actions to the bottom.",
+        "className": "Extra classes for the part."
+      }
+    },
+    "dataTable": {
+      "lead": "A data table component with sorting, selection, and pagination.",
+      "columns": {
+        "name": "Name",
+        "email": "Email",
+        "role": "Role"
+      },
+      "people": {
+        "a": "Layla Haddad",
+        "b": "Omar Khalil",
+        "c": "Sara Nasser"
+      },
+      "roles": {
+        "admin": "Admin",
+        "editor": "Editor",
+        "viewer": "Viewer"
+      },
+      "loadingTitle": "Loading State",
+      "emptyTitle": "Empty State",
+      "empty": "No users found",
+      "paginationTitle": "Pagination",
+      "pagination": {
+        "label": "Pagination",
+        "status": "Page {page} of {total}",
+        "previous": "Previous",
+        "next": "Next",
+        "goToPrevious": "Go to previous page",
+        "goToNext": "Go to next page",
+        "goToPage": "Go to page {page}"
+      },
+      "props": {
+        "data": "Rows to display.",
+        "columns": "Column definitions.",
+        "getRowKey": "Unique key for each row.",
+        "loading": "Shows the loading state.",
+        "emptyState": "Shown when there are no rows.",
+        "onRowClick": "Called when a row is clicked.",
+        "selectedKey": "Key of the selected row.",
+        "stickyHeader": "Keeps the header visible on scroll.",
+        "pagination": "Pages through rows; <code>labels</code> translates its text.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "navbar": {
+      "lead": "A responsive navigation bar with mobile menu support.",
+      "brand": "My store",
+      "links": {
+        "home": "Home",
+        "products": "Products",
+        "orders": "Orders"
+      },
+      "open": "Open menu",
+      "close": "Close menu",
+      "parts": {
+        "navbar": "Main container",
+        "brand": "Logo/brand area",
+        "content": "Content sections",
+        "menu": "Navigation menu",
+        "link": "Navigation links",
+        "item": "Generic navbar items",
+        "toggle": "Mobile menu toggle"
+      },
+      "props": {
+        "sticky": "Sticks to the top on scroll.",
+        "bordered": "Shows the bottom border.",
+        "children": "The navbar’s parts.",
+        "content": "A section aligned to the start, centre or end.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "statsCard": {
+      "lead": "Display key metrics with trends and icons.",
+      "cards": {
+        "revenue": "Revenue",
+        "revenueValue": "SAR 48,200",
+        "orders": "Orders",
+        "returns": "Returns",
+        "vsLastMonth": "vs last month"
+      },
+      "features": {
+        "value": "Title and value display",
+        "trend": "Trend indicator (up/down with percentage)",
+        "icon": "Optional icon",
+        "description": "Description text",
+        "loading": "Loading state",
+        "grid": "StatsGrid for layout"
+      },
+      "props": {
+        "title": "Label above the value.",
+        "value": "The main value.",
+        "description": "Text below the value.",
+        "icon": "Icon in the corner.",
+        "trend": "Change, with an up or down arrow.",
+        "loading": "Shows a skeleton while loading.",
+        "grid": "Lays the cards out in 2, 3 or 4 columns.",
         "className": "Extra classes for the component."
       }
     }

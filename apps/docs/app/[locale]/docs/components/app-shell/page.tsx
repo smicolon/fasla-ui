@@ -6,69 +6,79 @@ import { AppShell } from "@fasla-ui/blocks/app-shell/AppShell"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
+import { PropsTable, richCode, type PropRow } from "@/components/props-table"
 
-const SidebarContent = () => (
-  <div className="flex h-full flex-col">
-    <div className="flex h-14 items-center border-b px-4">
-      <span className="font-semibold">App</span>
-    </div>
-    <nav className="flex-1 space-y-1 p-2">
-      {["Dashboard", "Projects", "Settings"].map((item) => (
-        <a key={item} href="#" className="flex items-center rounded-md px-3 py-2 text-sm hover:bg-accent">
-          {item}
-        </a>
-      ))}
-    </nav>
-  </div>
-)
-
-const HeaderContent = () => (
-  <div className="flex h-14 items-center px-4">
-    <span className="text-sm text-muted-foreground">Welcome!</span>
-  </div>
-)
+const NAV = ["dashboard", "orders", "settings"] as const
 
 export default function AppShellPage() {
   const t = useTranslations("docs.sections")
+  const a = useTranslations("docs.appShell")
+
+  const props: PropRow[] = [
+    { prop: "sidebar", type: "ReactNode", fallback: "", description: a.rich("props.sidebar", richCode) },
+    { prop: "header", type: "ReactNode", fallback: "", description: a.rich("props.header", richCode) },
+    { prop: "children", type: "ReactNode", fallback: "", description: a.rich("props.children", richCode) },
+    { prop: "sidebarWidth", type: '"sm" | "md" | "lg"', fallback: '"md"', description: a.rich("props.sidebarWidth", richCode) },
+    { prop: "sidebarMobile", type: "boolean", fallback: "false", description: a.rich("props.sidebarMobile", richCode) },
+    { prop: "className", type: "string", fallback: "", description: a.rich("props.className", richCode) },
+  ]
+
   return (
-    <div>
-      <div>
-        <div className="space-y-2">
-          <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/app-shell/" /></h1>
-          <p className="text-lg text-muted-foreground">
-            Application layout with sidebar, header, and content areas.
-          </p>
-        </div>
+    <div className="space-y-8">
+      <div className="space-y-4">
+        <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/app-shell/" /></h1>
+        <p className="text-xl text-muted-foreground">{a("lead")}</p>
+      </div>
 
-        <div className="mt-8 space-y-8">
-          <section>
-            <h2 className="text-2xl font-bold">{t("installation")}</h2>
-            <div className="mt-4">
-              <InstallCommand name="app-shell" />
-            </div>
-          </section>
+      {/* Installation */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("installation")}</h2>
+        <InstallCommand name="app-shell" />
+      </section>
 
-          <section>
-            <h2 className="text-2xl font-bold">{t("preview")}</h2>
-            <div className="mt-4">
-              <ComponentPreview>
-                <div className="h-[400px] overflow-hidden rounded-md border">
-                  <AppShell
-                    sidebar={<SidebarContent />}
-                    header={<HeaderContent />}
-                  >
-                    <h2 className="text-xl font-bold">Dashboard</h2>
-                    <p className="mt-2 text-muted-foreground">Main content area</p>
-                  </AppShell>
+      {/* Preview */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("preview")}</h2>
+        <ComponentPreview>
+          <div className="h-[400px] w-full overflow-hidden rounded-md border">
+            <AppShell
+              sidebar={
+                <div className="flex h-full flex-col">
+                  <div className="flex h-14 items-center border-b px-4">
+                    <span className="font-semibold">{a("brand")}</span>
+                  </div>
+                  <nav className="flex-1 space-y-1 p-2">
+                    {NAV.map((item) => (
+                      <a key={item} href="#" className="flex items-center rounded-md px-3 py-2 text-sm hover:bg-accent">
+                        {a(`nav.${item}`)}
+                      </a>
+                    ))}
+                  </nav>
                 </div>
-              </ComponentPreview>
-            </div>
-          </section>
+              }
+              header={
+                <div className="flex h-14 items-center px-4">
+                  <span className="text-sm text-muted-foreground">{a("welcome")}</span>
+                </div>
+              }
+            >
+              <h2 className="text-xl font-bold">{a("content.title")}</h2>
+              <p className="mt-2 text-muted-foreground">{a("content.body")}</p>
+            </AppShell>
+          </div>
+        </ComponentPreview>
+      </section>
 
-          <section>
-            <h2 className="text-2xl font-bold">{t("usage")}</h2>
-            <div className="mt-4">
-              <CodeBlock>{`import { AppShell } from "@/components/blocks/app-shell"
+      {/* Props */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("props")}</h2>
+        <PropsTable rows={props} />
+      </section>
+
+      {/* Usage */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("usage")}</h2>
+        <CodeBlock>{`import { AppShell } from "@/components/blocks/app-shell"
 
 export function Layout() {
   return (
@@ -81,42 +91,7 @@ export function Layout() {
     </AppShell>
   )
 }`}</CodeBlock>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold">{t("props")}</h2>
-            <div className="mt-4 overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b">
-                    <th className="px-4 py-2 text-start font-semibold">Prop</th>
-                    <th className="px-4 py-2 text-start font-semibold">Type</th>
-                    <th className="px-4 py-2 text-start font-semibold">Default</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b">
-                    <td className="px-4 py-2 font-mono text-xs">sidebar</td>
-                    <td className="px-4 py-2 font-mono text-xs">ReactNode</td>
-                    <td className="px-4 py-2 font-mono text-xs">-</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="px-4 py-2 font-mono text-xs">header</td>
-                    <td className="px-4 py-2 font-mono text-xs">ReactNode</td>
-                    <td className="px-4 py-2 font-mono text-xs">-</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="px-4 py-2 font-mono text-xs">sidebarWidth</td>
-                    <td className="px-4 py-2 font-mono text-xs">sm | md | lg</td>
-                    <td className="px-4 py-2 font-mono text-xs">md</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-        </div>
-      </div>
+      </section>
     </div>
   )
 }
