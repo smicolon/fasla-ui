@@ -25,6 +25,38 @@ const meta: Meta<typeof AnimatedGradient> = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+/**
+ * Sample copy, per script: the same store as the docs page. The Arabic follows
+ * design/content/. Colours are theme variables, so every story follows light
+ * and dark mode.
+ */
+const COPY = {
+  ltr: {
+    title: "The autumn edit is here",
+    body: "New pieces in linen, wool and leather, in store now.",
+    gradientText: "The autumn edit",
+    customColours: "New season colours",
+    slow: "A slower gradient",
+    welcome: "Welcome to My store",
+    heroBody: "Free delivery on every order in Riyadh this week.",
+  },
+  rtl: {
+    title: "تشكيلة الخريف وصلت",
+    body: "قطع جديدة من الكتان والصوف والجلد، في المتجر الآن.",
+    gradientText: "تشكيلة الخريف",
+    customColours: "ألوان الموسم الجديد",
+    slow: "تدرّج أبطأ",
+    welcome: "مرحبًا بك في متجري",
+    heroBody: "توصيل مجاني لكل الطلبات داخل الرياض هذا الأسبوع.",
+  },
+}
+
+type StoryCtx = { globals: { direction?: string } }
+const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
+
+const WARM = ["var(--chart-1)", "var(--chart-5)", "var(--chart-4)", "var(--chart-1)"]
+const COOL = ["var(--chart-2)", "var(--chart-3)", "var(--chart-2)", "var(--chart-3)"]
+
 export const Default: Story = {
   args: {
     className: "h-64 w-96 rounded-xl",
@@ -32,37 +64,24 @@ export const Default: Story = {
 }
 
 export const WithContent: Story = {
-  render: () => (
-    <AnimatedGradient className="h-64 w-96 rounded-xl flex items-center justify-center">
-      <div className="text-center text-white">
-        <h2 className="text-2xl font-bold">Hello World</h2>
-        <p className="mt-2 text-white/80">Content over animated gradient</p>
-      </div>
-    </AnimatedGradient>
-  ),
+  render: (args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <AnimatedGradient {...args} className="flex h-64 w-96 items-center justify-center rounded-xl border">
+        <div className="space-y-2 px-6 text-center">
+          <h2 className="text-2xl font-bold">{c.title}</h2>
+          <p className="text-muted-foreground">{c.body}</p>
+        </div>
+      </AnimatedGradient>
+    )
+  },
 }
 
 export const CustomColors: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <AnimatedGradient
-        className="h-32 w-64 rounded-xl"
-        colors={[
-          "hsl(340 100% 70%)",
-          "hsl(280 100% 70%)",
-          "hsl(220 100% 70%)",
-          "hsl(180 100% 70%)",
-        ]}
-      />
-      <AnimatedGradient
-        className="h-32 w-64 rounded-xl"
-        colors={[
-          "hsl(140 70% 50%)",
-          "hsl(180 70% 50%)",
-          "hsl(220 70% 50%)",
-          "hsl(260 70% 50%)",
-        ]}
-      />
+      <AnimatedGradient className="h-32 w-64 rounded-xl" colors={WARM} />
+      <AnimatedGradient className="h-32 w-64 rounded-xl" colors={COOL} />
     </div>
   ),
 }
@@ -74,9 +93,10 @@ export const BlurVariants: Story = {
         <AnimatedGradient
           key={blur}
           blur={blur}
-          className="h-24 w-32 rounded-lg flex items-center justify-center"
+          colors={WARM}
+          className="flex h-24 w-32 items-center justify-center rounded-lg border"
         >
-          <span className="text-white text-sm font-medium">{blur}</span>
+          <code className="text-sm font-medium">{blur}</code>
         </AnimatedGradient>
       ))}
     </div>
@@ -84,39 +104,36 @@ export const BlurVariants: Story = {
 }
 
 export const GradientText: Story = {
-  render: () => (
-    <div className="space-y-4">
-      <AnimatedGradientText className="text-4xl font-bold">
-        Animated Gradient Text
-      </AnimatedGradientText>
-      <AnimatedGradientText
-        className="text-2xl font-semibold"
-        colors={["hsl(340 100% 60%)", "hsl(280 100% 60%)", "hsl(340 100% 60%)"]}
-      >
-        Custom Colors
-      </AnimatedGradientText>
-      <AnimatedGradientText
-        className="text-xl"
-        speed={6}
-        colors={["hsl(140 70% 50%)", "hsl(200 70% 50%)", "hsl(140 70% 50%)"]}
-      >
-        Slow Animation
-      </AnimatedGradientText>
-    </div>
-  ),
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <div className="space-y-4">
+        <AnimatedGradientText className="text-4xl font-bold">{c.gradientText}</AnimatedGradientText>
+        <br />
+        <AnimatedGradientText className="text-2xl font-semibold" colors={["var(--chart-1)", "var(--chart-5)", "var(--chart-1)"]}>
+          {c.customColours}
+        </AnimatedGradientText>
+        <br />
+        <AnimatedGradientText className="text-xl" speed={6} colors={["var(--chart-2)", "var(--chart-3)", "var(--chart-2)"]}>
+          {c.slow}
+        </AnimatedGradientText>
+      </div>
+    )
+  },
 }
 
 export const Hero: Story = {
-  render: () => (
-    <AnimatedGradient className="h-80 w-full max-w-2xl rounded-2xl flex items-center justify-center p-8">
-      <div className="text-center">
-        <AnimatedGradientText className="text-5xl font-bold text-white">
-          Welcome
-        </AnimatedGradientText>
-        <p className="mt-4 text-lg text-white/80 max-w-md mx-auto">
-          Create beautiful, animated backgrounds with just a few lines of code.
-        </p>
-      </div>
-    </AnimatedGradient>
-  ),
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <AnimatedGradient colors={WARM} className="flex h-80 w-full max-w-2xl items-center justify-center rounded-2xl border p-8">
+        <div className="text-center">
+          <AnimatedGradientText className="text-5xl font-bold" colors={["var(--primary)", "var(--chart-1)", "var(--primary)"]}>
+            {c.welcome}
+          </AnimatedGradientText>
+          <p className="mx-auto mt-4 max-w-md text-lg text-muted-foreground">{c.heroBody}</p>
+        </div>
+      </AnimatedGradient>
+    )
+  },
 }

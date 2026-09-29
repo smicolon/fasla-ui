@@ -923,6 +923,186 @@
         "grid": "Lays the cards out in 2, 3 or 4 columns.",
         "className": "Extra classes for the component."
       }
+    },
+    "shimmerButton": {
+      "lead": "A button with a sheen that sweeps across it, for the one call to action that matters most on the page.",
+      "preview": "Shop the collection",
+      "coloursTitle": "Custom colours",
+      "coloursBody": "<code>background</code> takes any CSS colour or gradient, and <code>shimmerColor</code> sets the sheen. CSS variables such as <code>var(--chart-2)</code> follow light and dark mode.",
+      "colours": {
+        "a": "Shop the collection",
+        "b": "Join the waitlist"
+      },
+      "a11y": {
+        "button": "It is a native <code>{button}</code>, so it takes its usual attributes, such as <code>onClick</code>, <code>disabled</code> and <code>type</code>, and shows a focus ring on Tab.",
+        "motion": "With <code>prefers-reduced-motion</code> set, the sheen is not drawn, and the button looks the same without it.",
+        "dir": "The sheen sweeps in the reading direction: left to right in English, right to left in Arabic.",
+        "contrast": "The label uses <code>--primary-foreground</code>. With a custom <code>background</code>, check that the label still has enough contrast."
+      },
+      "props": {
+        "children": "The button label.",
+        "shimmerColor": "Colour of the sheen.",
+        "shimmerDuration": "How long one sweep takes.",
+        "background": "Background colour or gradient.",
+        "borderRadius": "Corner radius.",
+        "native": "Native button attributes, such as <code>onClick</code> and <code>disabled</code>.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "animatedGradient": {
+      "lead": "A background of slow-moving colour blobs, for hero sections and cards.",
+      "contentTitle": "With content",
+      "content": {
+        "title": "The autumn edit is here",
+        "body": "New pieces in linen, wool and leather, in store now."
+      },
+      "coloursTitle": "Custom colours",
+      "coloursBody": "<code>colors</code> takes up to four colours, one per blob. CSS variables such as <code>var(--chart-1)</code> follow light and dark mode.",
+      "a11y": {
+        "decorative": "The gradient is decoration: it has no role, and nothing in it for assistive tech to read.",
+        "motion": "With <code>prefers-reduced-motion</code> set, the blobs stay still.",
+        "contrast": "Text on the gradient must keep enough contrast wherever the blobs move."
+      },
+      "props": {
+        "children": "Content on top of the gradient.",
+        "colors": "Colours of the blobs, one each.",
+        "speed": "Seconds for one cycle; higher is slower.",
+        "blur": "How soft the blobs are.",
+        "gradientText": "Text filled with a moving gradient.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "textReveal": {
+      "lead": "Reveals text a character at a time as it scrolls into view. Arabic reveals a word at a time, so its letters stay joined.",
+      "preview": "Welcome to My store",
+      "wordTitle": "Word by word",
+      "wordBody": "<code>WordReveal</code> reveals a word at a time, with a soft blur. It suits longer lines, in any language.",
+      "word": "Free delivery on every order in Riyadh this week.",
+      "joinedTitle": "Joined scripts",
+      "joinedBody": "Arabic letters join to their neighbours, and a separate element for each letter would break those joins. So when the text contains Arabic, the effect reveals it a word at a time. Latin text keeps the character reveal.",
+      "a11y": {
+        "whole": "Assistive tech reads the whole text once; the animated pieces are hidden from it.",
+        "motion": "With <code>prefers-reduced-motion</code> set, the text appears at once.",
+        "view": "With <code>triggerOnView</code>, the effect waits until half the text is on screen, then plays once."
+      },
+      "props": {
+        "text": "The text to reveal.",
+        "delay": "Seconds between one piece and the next.",
+        "duration": "Seconds each piece takes to appear.",
+        "triggerOnView": "Waits until the text is on screen.",
+        "wordReveal": "The same, a word at a time; <code>delay</code> defaults to 0.1 and <code>duration</code> to 0.4.",
+        "className": "Extra classes for the component."
+      },
+      "replay": "Replay"
+    },
+    "borderBeam": {
+      "lead": "A beam of light that travels round the border of a card or container.",
+      "card": {
+        "title": "Autumn sale ends tonight",
+        "body": "Up to 30% off linen and wool."
+      },
+      "glowTitle": "Glowing border",
+      "glowBody": "<code>GlowingBorder</code> is the still version: a soft glow round the edge, with no motion.",
+      "a11y": {
+        "decorative": "The beam is decoration and ignores the pointer; the content inside works as usual.",
+        "motion": "With <code>prefers-reduced-motion</code> set, the beam is replaced by a still border at half strength."
+      },
+      "props": {
+        "children": "Content inside the border.",
+        "duration": "Seconds for one lap.",
+        "borderWidth": "Width of the beam in pixels.",
+        "colorFrom": "Colour at the head of the beam.",
+        "colorTo": "Colour the beam fades to.",
+        "delay": "Seconds before it starts.",
+        "glowingBorder": "A still glow round the edge.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "spotlight": {
+      "lead": "A soft light that follows the pointer across a section.",
+      "panel": {
+        "title": "Meet the autumn edit",
+        "body": "Move your pointer across this panel."
+      },
+      "cardTitle": "Spotlight card",
+      "cardBody": "<code>SpotlightCard</code> is a card that lights up under the pointer while you hover over it.",
+      "card": {
+        "title": "Free delivery",
+        "body": "On every order in Riyadh this week."
+      },
+      "a11y": {
+        "pointer": "The light follows a mouse or trackpad only. Keyboard and touch users never see it, so put nothing in it that they need.",
+        "motion": "With <code>prefers-reduced-motion</code> set, there is no light at all."
+      },
+      "props": {
+        "children": "Content on top of the light.",
+        "color": "Colour of the light.",
+        "size": "Diameter of the light in pixels.",
+        "blur": "Softness of the edge in pixels.",
+        "opacity": "Strength, from 0 to 1.",
+        "spotlightCard": "A card that lights up under the pointer.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "typewriterText": {
+      "lead": "Types text out a character at a time, with a blinking cursor.",
+      "preview": "Your order is on its way.",
+      "wordsTitle": "Cycling words",
+      "wordsBody": "<code>TypewriterWords</code> types a word, deletes it and moves on to the next.",
+      "wordsPrefix": "New in:",
+      "words": {
+        "a": "linen shirts",
+        "b": "leather bags",
+        "c": "wool scarves"
+      },
+      "a11y": {
+        "cursor": "The cursor is hidden from assistive tech.",
+        "motion": "With <code>prefers-reduced-motion</code> set, the full text appears at once, with no cursor.",
+        "reading": "A screen reader reads the text as it stands when it gets there, which may be half typed. Give the same message elsewhere on the page."
+      },
+      "props": {
+        "text": "The text to type.",
+        "speed": "Milliseconds per character.",
+        "delay": "Milliseconds before typing starts.",
+        "cursor": "Shows the cursor.",
+        "cursorChar": "The cursor character.",
+        "loop": "Types the text again after a pause.",
+        "loopDelay": "Milliseconds before it types again.",
+        "onComplete": "Called when the text is fully typed.",
+        "typewriterWords": "Types, deletes and cycles through a list of words.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "glowCard": {
+      "lead": "A card with a soft glow that lights up on hover and can follow the pointer.",
+      "cards": {
+        "delivery": {
+          "title": "Free delivery",
+          "body": "On every order in Riyadh this week."
+        },
+        "returns": {
+          "title": "Easy returns",
+          "body": "Return any item within 30 days."
+        }
+      },
+      "followHint": "The second card's glow follows the pointer.",
+      "containerTitle": "Glow container",
+      "containerBody": "<code>GlowContainer</code> draws a glow that slides round the border, in the reading direction.",
+      "container": "Members get early access to the autumn edit.",
+      "a11y": {
+        "decorative": "The glow is decoration; the card's content works as usual.",
+        "hover": "With <code>hoverOnly</code>, keyboard and touch users never see the glow, so put nothing in it that they need.",
+        "motion": "With <code>prefers-reduced-motion</code> set, <code>GlowCard</code> shows no glow and the border of <code>GlowContainer</code> stays still."
+      },
+      "props": {
+        "children": "Content of the card.",
+        "glowColor": "Colour of the glow.",
+        "glowIntensity": "Blur of the glow in pixels.",
+        "followMouse": "Moves the glow with the pointer.",
+        "hoverOnly": "Shows the glow only on hover.",
+        "glowContainer": "A container with a glow that slides round its border.",
+        "className": "Extra classes for the component."
+      }
     }
   },
   "copyCommand": {

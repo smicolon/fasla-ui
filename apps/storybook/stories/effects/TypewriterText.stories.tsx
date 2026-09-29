@@ -11,71 +11,86 @@ const meta: Meta<typeof TypewriterText> = {
 export default meta
 type Story = StoryObj<typeof TypewriterText>
 
-export const Default: Story = {
-  args: {
-    text: "Hello, I'm a typewriter effect!",
-    className: "text-2xl font-bold",
+/**
+ * Sample copy, per script: the same store as the docs page. The Arabic follows
+ * design/content/. The cursor sits at the end of the line, so on the left in RTL.
+ */
+const COPY = {
+  ltr: {
+    default: "Your order is on its way.",
+    slow: "Typing slowly…",
+    delayed: "This started after a pause.",
+    noCursor: "No cursor here.",
+    looping: "Free delivery in Riyadh this week.",
+    prefix: "New in:",
+    words: ["linen shirts", "leather bags", "wool scarves", "desert boots"],
+    heroTitle: "Welcome to My store",
+    heroBody: "New pieces in linen, wool and leather, in store now.",
   },
+  rtl: {
+    default: "طلبك في الطريق إليك.",
+    slow: "كتابة بطيئة…",
+    delayed: "بدأت الكتابة بعد توقف قصير.",
+    noCursor: "لا مؤشر كتابة هنا.",
+    looping: "توصيل مجاني داخل الرياض هذا الأسبوع.",
+    prefix: "وصل حديثًا:",
+    words: ["قمصان الكتان", "حقائب الجلد", "أوشحة الصوف", "أحذية الصحراء"],
+    heroTitle: "مرحبًا بك في متجري",
+    heroBody: "قطع جديدة من الكتان والصوف والجلد، في المتجر الآن.",
+  },
+}
+
+type StoryCtx = { globals: { direction?: string } }
+const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
+
+export const Default: Story = {
+  args: { className: "text-2xl font-bold" },
+  render: (args, ctx) => <TypewriterText {...args} text={copy(ctx).default} />,
 }
 
 export const SlowSpeed: Story = {
-  args: {
-    text: "This is typing slowly...",
-    speed: 150,
-    className: "text-xl",
-  },
+  args: { speed: 150, className: "text-xl" },
+  render: (args, ctx) => <TypewriterText {...args} text={copy(ctx).slow} />,
 }
 
 export const WithDelay: Story = {
-  args: {
-    text: "I started after a delay",
-    delay: 1000,
-    className: "text-xl",
-  },
+  args: { delay: 1000, className: "text-xl" },
+  render: (args, ctx) => <TypewriterText {...args} text={copy(ctx).delayed} />,
 }
 
 export const NoCursor: Story = {
-  args: {
-    text: "No cursor here",
-    cursor: false,
-    className: "text-xl",
-  },
+  args: { cursor: false, className: "text-xl" },
+  render: (args, ctx) => <TypewriterText {...args} text={copy(ctx).noCursor} />,
 }
 
 export const Looping: Story = {
-  args: {
-    text: "This will loop forever",
-    loop: true,
-    loopDelay: 1500,
-    className: "text-xl",
-  },
+  args: { loop: true, loopDelay: 1500, className: "text-xl" },
+  render: (args, ctx) => <TypewriterText {...args} text={copy(ctx).looping} />,
 }
 
 export const WordsCycle: Story = {
-  render: () => (
-    <div className="text-2xl font-bold">
-      We build{" "}
-      <TypewriterWords
-        words={["websites", "apps", "software", "experiences"]}
-        className="text-primary"
-      />
-    </div>
-  ),
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <div className="text-2xl font-bold">
+        {c.prefix} <TypewriterWords words={c.words} className="text-primary" />
+      </div>
+    )
+  },
 }
 
 export const HeroExample: Story = {
-  render: () => (
-    <div className="text-center">
-      <h1 className="text-4xl font-bold">
-        <TypewriterText text="Welcome to the Future" speed={80} />
-      </h1>
-      <p className="mt-4 text-xl text-muted-foreground">
-        <TypewriterText
-          text="Building amazing experiences, one character at a time."
-          delay={2500}
-          speed={30}
-        />
-      </p>
-    </div>
-  ),
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <div className="text-center">
+        <h1 className="text-4xl font-bold">
+          <TypewriterText text={c.heroTitle} speed={80} />
+        </h1>
+        <p className="mt-4 text-xl text-muted-foreground">
+          <TypewriterText text={c.heroBody} delay={2500} speed={30} />
+        </p>
+      </div>
+    )
+  },
 }

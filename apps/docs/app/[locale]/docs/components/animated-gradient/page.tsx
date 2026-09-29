@@ -3,92 +3,98 @@
 import { useTranslations } from "next-intl"
 
 import { AnimatedGradient } from "@fasla-ui/effects/animated-gradient/animated-gradient"
-import { ComponentPreview } from "@/components/component-preview"
+import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
+import { PropsTable, richCode, type PropRow } from "@/components/props-table"
+
+const A11Y = ["decorative", "motion", "contrast"] as const
+const CHART_COLORS = ["var(--chart-1)", "var(--chart-2)", "var(--chart-4)", "var(--chart-5)"]
 
 export default function AnimatedGradientPage() {
   const t = useTranslations("docs.sections")
+  const g = useTranslations("docs.animatedGradient")
+
+  const props: PropRow[] = [
+    { prop: "children", type: "ReactNode", fallback: "", description: g.rich("props.children", richCode) },
+    { prop: "colors", type: "string[]", fallback: '["var(--primary)", "var(--secondary)", …]', description: g.rich("props.colors", richCode) },
+    { prop: "speed", type: "number", fallback: "10", description: g.rich("props.speed", richCode) },
+    { prop: "blur", type: '"sm" | "md" | "lg" | "xl" | "2xl" | "3xl"', fallback: '"3xl"', description: g.rich("props.blur", richCode) },
+    { prop: "AnimatedGradientText", type: "{ colors, speed }", fallback: "", description: g.rich("props.gradientText", richCode) },
+    { prop: "className", type: "string", fallback: "", description: g.rich("props.className", richCode) },
+  ]
+
   return (
-    <div>
-      <div>
-        <div className="space-y-2">
-          <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/animated-gradient/" /></h1>
-          <p className="text-lg text-muted-foreground">
-            Animated gradient background effect for hero sections and cards.
-          </p>
-        </div>
-
-        <div className="mt-8 space-y-8">
-          <section>
-            <h2 className="text-2xl font-bold">{t("installation")}</h2>
-            <div className="mt-4">
-              <InstallCommand name="animated-gradient" />
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold">{t("preview")}</h2>
-            <div className="mt-4">
-              <ComponentPreview>
-                <AnimatedGradient className="h-48 rounded-lg" />
-              </ComponentPreview>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold">With Content</h2>
-            <div className="mt-4">
-              <ComponentPreview>
-                <AnimatedGradient className="relative h-48 rounded-lg">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <h2 className="text-2xl font-bold text-white">Hero Title</h2>
-                  </div>
-                </AnimatedGradient>
-              </ComponentPreview>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold">Custom Colors</h2>
-            <div className="mt-4">
-              <ComponentPreview>
-                <AnimatedGradient
-                  className="h-48 rounded-lg"
-                  colors={["#ff0080", "#7928ca", "#0070f3"]}
-                />
-              </ComponentPreview>
-            </div>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold">{t("props")}</h2>
-            <div className="mt-4 overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b">
-                    <th className="px-4 py-2 text-start font-semibold">Prop</th>
-                    <th className="px-4 py-2 text-start font-semibold">Type</th>
-                    <th className="px-4 py-2 text-start font-semibold">Default</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b">
-                    <td className="px-4 py-2 font-mono text-xs">colors</td>
-                    <td className="px-4 py-2 font-mono text-xs">string[]</td>
-                    <td className="px-4 py-2 font-mono text-xs">default gradient</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="px-4 py-2 font-mono text-xs">speed</td>
-                    <td className="px-4 py-2 font-mono text-xs">slow | normal | fast</td>
-                    <td className="px-4 py-2 font-mono text-xs">normal</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-        </div>
+    <div className="space-y-8">
+      <div className="space-y-4">
+        <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/animated-gradient/" /></h1>
+        <p className="text-xl text-muted-foreground">{g("lead")}</p>
       </div>
+
+      {/* Installation */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("installation")}</h2>
+        <InstallCommand name="animated-gradient" />
+      </section>
+
+      {/* Preview */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("preview")}</h2>
+        <ComponentPreview>
+          <AnimatedGradient className="h-48 w-full rounded-lg" />
+        </ComponentPreview>
+      </section>
+
+      {/* With content */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{g("contentTitle")}</h2>
+        <ComponentPreview>
+          <AnimatedGradient className="flex h-56 w-full items-center justify-center rounded-lg border">
+            <div className="space-y-2 px-6 text-center">
+              <h3 className="text-2xl font-bold">{g("content.title")}</h3>
+              <p className="text-muted-foreground">{g("content.body")}</p>
+            </div>
+          </AnimatedGradient>
+        </ComponentPreview>
+      </section>
+
+      {/* Custom colours */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{g("coloursTitle")}</h2>
+        <p className="text-muted-foreground">{g.rich("coloursBody", richCode)}</p>
+        <ComponentPreview>
+          <AnimatedGradient className="h-48 w-full rounded-lg" colors={CHART_COLORS} />
+        </ComponentPreview>
+      </section>
+
+      {/* Accessibility */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("accessibility")}</h2>
+        <ul className="list-disc space-y-2 ps-6 text-muted-foreground">
+          {A11Y.map((key) => (
+            <li key={key}>{g.rich(`a11y.${key}`, richCode)}</li>
+          ))}
+        </ul>
+      </section>
+
+      {/* Props */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("props")}</h2>
+        <PropsTable rows={props} />
+      </section>
+
+      {/* Usage */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("usage")}</h2>
+        <CodeBlock>{`import { AnimatedGradient } from "@/components/ui/animated-gradient"
+
+<AnimatedGradient
+  className="flex h-56 items-center justify-center rounded-lg"
+  colors={["var(--chart-1)", "var(--chart-2)", "var(--chart-4)", "var(--chart-5)"]}
+>
+  <h3 className="text-2xl font-bold">${g("content.title")}</h3>
+</AnimatedGradient>`}</CodeBlock>
+      </section>
     </div>
   )
 }
