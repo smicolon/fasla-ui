@@ -192,14 +192,21 @@
         "none": "لا يوجد",
         "variant": "يحدد النمط (variant) شكل زر الاختيار. يضع <code>layout</code> زر الاختيار ونصّه داخل بطاقة بإطار.",
         "size": "حجم زر الاختيار.",
-        "label": "نص التسمية. أضف <code>aria-label</code> إذا تركته فارغًا.",
-        "descriptionProp": "سطر ثانوي يظهر تحت التسمية، ويرتبط بزر الاختيار عبر <code>aria-describedby</code>.",
+        "label": "نص التسمية. أضف <code>aria-label</code> إذا تركته فارغًا. في Figma، تُظهر <code>Label</code> التسمية أو تخفيها.",
+        "descriptionProp": "سطر ثانوي يظهر تحت التسمية، ويرتبط بزر الاختيار عبر <code>aria-describedby</code>. في Figma، تُظهر <code>sub label</code> السطر الثانوي أو تخفيه.",
         "className": "أصناف (class) إضافية، تُضاف إلى ما يحدده المكوّن.",
         "nameProp": "يجمع الخيارات في مجموعة واحدة. أزرار الاختيار التي تحمل قيمة <code>name</code> نفسها تكوّن مجموعة، ويمكنك تحديد خيار واحد منها فقط.",
         "valueProp": "القيمة التي تُرسَل مع النموذج عند تحديد هذا الخيار.",
         "checkedProp": "يحدد الخيار من الحالة التي تديرها بنفسك. استخدمه مع <code>onChange</code>.",
         "disabledProp": "يعطّل الخيار ويُظهره باهتًا.",
-        "onChangeProp": "تُستدعى عند تحديد الخيار. اقرأ القيمة الجديدة من <code>event.target.value</code>."
+        "onChangeProp": "تُستدعى عند تحديد الخيار. اقرأ القيمة الجديدة من <code>event.target.value</code>.",
+        "figmaTitle": "في Figma والكود",
+        "figmaIntro": "تطابق الخصائص (props) في هذا الجدول خصائص مكوّن زر الاختيار (Radio) في Figma.",
+        "figma": "في Figma",
+        "figmaNote": "تأتي القيمتان <code>Hover</code> و<code>Focus</code> في <code>Interaction</code> من CSS مباشرة، لذلك لا يقابلهما شيء في الكود.",
+        "directionNote": "ولا يقابل <code>Direction</code> في Figma شيء في الكود أيضًا، لأن زر الاختيار يتبع اتجاه الصفحة المحدد في السمة (attribute) <code>dir</code>.",
+        "codeTitle": "في الكود فقط",
+        "codeIntro": "هذه الخصائص (props) موجودة في الكود فقط، وتجعل المكوّن يعمل، مثل تجميع الخيارات وقراءة الخيار المحدد."
       }
     }
   },
