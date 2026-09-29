@@ -13,8 +13,8 @@ export interface Column<T> {
   sortable?: boolean
   /** Column width class */
   width?: string
-  /** Alignment. `left` and `right` are the start and end of the reading direction, so they mirror in RTL. */
-  align?: "left" | "center" | "right"
+  /** Alignment. `start` and `end` follow the reading direction; `left` and `right` are physical sides. Defaults to `start`. */
+  align?: "start" | "center" | "end" | "left" | "right"
 }
 
 export interface DataTableProps<T> extends React.HTMLAttributes<HTMLDivElement> {
@@ -37,9 +37,11 @@ export interface DataTableProps<T> extends React.HTMLAttributes<HTMLDivElement> 
 }
 
 const alignClasses = {
-  left: "text-start",
+  start: "text-start",
   center: "text-center",
-  right: "text-end",
+  end: "text-end",
+  left: "text-left",
+  right: "text-right",
 }
 
 /**
@@ -70,7 +72,7 @@ export function DataTable<T>({
                     key={column.id}
                     className={cn(
                       "h-10 px-4 font-medium text-muted-foreground",
-                      alignClasses[column.align || "left"],
+                      alignClasses[column.align || "start"],
                       column.width
                     )}
                   >
@@ -108,7 +110,7 @@ export function DataTable<T>({
                     key={column.id}
                     className={cn(
                       "h-10 px-4 font-medium text-muted-foreground",
-                      alignClasses[column.align || "left"],
+                      alignClasses[column.align || "start"],
                       column.width
                     )}
                   >
@@ -141,7 +143,7 @@ export function DataTable<T>({
                   key={column.id}
                   className={cn(
                     "h-10 px-4 font-medium text-muted-foreground",
-                    alignClasses[column.align || "left"],
+                    alignClasses[column.align || "start"],
                     column.width
                   )}
                 >
@@ -170,7 +172,7 @@ export function DataTable<T>({
                       key={column.id}
                       className={cn(
                         "p-4",
-                        alignClasses[column.align || "left"],
+                        alignClasses[column.align || "start"],
                         column.width
                       )}
                     >
