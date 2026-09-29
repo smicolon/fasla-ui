@@ -70,7 +70,7 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
           {label && (
             <label
               htmlFor={inputId}
-              className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+              className="text-sm font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
             >
               {label}
             </label>
