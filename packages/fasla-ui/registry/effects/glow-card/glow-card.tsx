@@ -120,15 +120,6 @@ export function GlowContainer({
   return (
     <div
       className={cn("relative overflow-hidden rounded-xl p-px", className)}
-      style={
-        !prefersReducedMotion
-          ? {
-              background: `linear-gradient(90deg, ${glowColor}, transparent, ${glowColor})`,
-              backgroundSize: "200% 100%",
-              animation: `glow-slide ${duration}s linear infinite`,
-            }
-          : { background: glowColor }
-      }
       {...props}
     >
       <style dangerouslySetInnerHTML={{ __html: `
@@ -137,6 +128,20 @@ export function GlowContainer({
           100% { background-position: -200% 0; }
         }
       ` }} />
+      {/* The glow is its own layer so it can mirror in RTL and slide in the reading direction */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 rtl:-scale-x-100"
+        style={
+          !prefersReducedMotion
+            ? {
+                background: `linear-gradient(90deg, ${glowColor}, transparent, ${glowColor})`,
+                backgroundSize: "200% 100%",
+                animation: `glow-slide ${duration}s linear infinite`,
+              }
+            : { background: glowColor }
+        }
+      />
       <div className="relative z-10 rounded-[11px] bg-background">
         {children}
       </div>

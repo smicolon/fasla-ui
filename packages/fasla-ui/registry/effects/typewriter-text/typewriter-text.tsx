@@ -105,7 +105,7 @@ export function TypewriterText({
       {showCursor && (
         <span
           className={cn(
-            "ml-0.5 inline-block",
+            "ms-0.5 inline-block",
             cursorVisible ? "opacity-100" : "opacity-0",
             isTyping ? "" : "animate-pulse"
           )}
@@ -207,7 +207,7 @@ export function TypewriterWords({
       {cursor && (
         <span
           className={cn(
-            "ml-0.5 inline-block",
+            "ms-0.5 inline-block",
             cursorVisible ? "opacity-100" : "opacity-0"
           )}
           aria-hidden="true"

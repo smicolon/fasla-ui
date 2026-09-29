@@ -61,10 +61,10 @@ export const ShimmerButton = React.forwardRef<
         }
         {...props}
       >
-        {/* Shimmer effect */}
+        {/* Shimmer effect: mirrored in RTL so it sweeps in the reading direction */}
         {!prefersReducedMotion && (
           <div
-            className="absolute inset-0 overflow-hidden"
+            className="absolute inset-0 overflow-hidden rtl:-scale-x-100"
             style={{ borderRadius: "var(--border-radius)" }}
           >
             <div
