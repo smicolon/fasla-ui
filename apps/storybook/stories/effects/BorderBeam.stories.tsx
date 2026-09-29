@@ -69,7 +69,7 @@ export const Default: Story = {
   render: (args, ctx) => {
     const c = copy(ctx)
     return (
-      <BorderBeam {...args} className="w-64">
+      <BorderBeam duration={3} {...args} className="w-64">
         <div className="p-6">
           <h3 className="font-semibold">{c.title}</h3>
           <p className="mt-2 text-sm text-muted-foreground">{c.body}</p>
@@ -83,7 +83,7 @@ export const CustomColors: Story = {
   render: (_args, ctx) => (
     <div className="flex flex-col gap-6">
       {CHART.map((color, i) => (
-        <BorderBeam key={color} colorFrom={color} className="w-64">
+        <BorderBeam key={color} colorFrom={color} duration={3} className="w-64">
           <div className="p-6">
             <h3 className="font-semibold">{copy(ctx).colours[i]}</h3>
           </div>
@@ -153,7 +153,7 @@ export const CardExample: Story = {
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <BorderBeam colorFrom="var(--primary)" className="w-80">
+      <BorderBeam colorFrom="var(--primary)" duration={3} className="w-80">
         <div className="p-6">
           <h3 className="text-lg font-semibold">{c.member}</h3>
           <p className="mt-2 text-sm text-muted-foreground">{c.memberBody}</p>

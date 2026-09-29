@@ -169,17 +169,3 @@
     @apply bg-background text-foreground;
   }
 }
-
-/* Shimmer animation for ShimmerButton */
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-.animate-shimmer {
-  animation: shimmer var(--shimmer-duration, 2s) infinite;
-}

@@ -34,6 +34,7 @@ const COPY = {
     icon: "Start shopping",
     disabled: "Sold out",
     speeds: ["Fast: 1 second", "Default: 2 seconds", "Slow: 4 seconds"],
+    widths: ["Narrow sheen: 20%", "Half width: 50%", "Default: 100%"],
     sizes: ["Small", "Default", "Large"],
   },
   rtl: {
@@ -42,6 +43,7 @@ const COPY = {
     icon: "ابدأ التسوّق",
     disabled: "نفدت الكمية",
     speeds: ["سريع: ثانية واحدة", "افتراضي: ثانيتان", "بطيء: 4 ثوانٍ"],
+    widths: ["بريق ضيّق: 20%", "نصف العرض: 50%", "افتراضي: 100%"],
     sizes: ["صغير", "افتراضي", "كبير"],
   },
 }
@@ -111,6 +113,19 @@ export const CustomDuration: Story = {
       {(["1s", "2s", "4s"] as const).map((duration, i) => (
         <ShimmerButton key={duration} shimmerDuration={duration}>
           {copy(ctx).speeds[i]}
+        </ShimmerButton>
+      ))}
+    </div>
+  ),
+}
+
+/** `shimmerSize` sets the width of the sheen; the default is the full button. */
+export const ShimmerSize: Story = {
+  render: (_args, ctx) => (
+    <div className="flex flex-col gap-4">
+      {(["20%", "50%", "100%"] as const).map((size, i) => (
+        <ShimmerButton key={size} shimmerSize={size}>
+          {copy(ctx).widths[i]}
         </ShimmerButton>
       ))}
     </div>

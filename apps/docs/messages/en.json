@@ -943,6 +943,7 @@
         "children": "The button label.",
         "shimmerColor": "Colour of the sheen.",
         "shimmerDuration": "How long one sweep takes.",
+        "shimmerSize": "Width of the sheen, as a length or a percentage of the button.",
         "background": "Background colour or gradient.",
         "borderRadius": "Corner radius.",
         "native": "Native button attributes, such as <code>onClick</code> and <code>disabled</code>.",

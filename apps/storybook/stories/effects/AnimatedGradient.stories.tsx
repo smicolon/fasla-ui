@@ -57,9 +57,12 @@ const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : CO
 const WARM = ["var(--chart-1)", "var(--chart-5)", "var(--chart-4)", "var(--chart-1)"]
 const COOL = ["var(--chart-2)", "var(--chart-3)", "var(--chart-2)", "var(--chart-3)"]
 
+// The default speed, 10 seconds a cycle, is calm by design; the stories use 3 so
+// the motion is easy to see at a glance.
 export const Default: Story = {
   args: {
     className: "h-64 w-96 rounded-xl",
+    speed: 3,
   },
 }
 
@@ -67,7 +70,7 @@ export const WithContent: Story = {
   render: (args, ctx) => {
     const c = copy(ctx)
     return (
-      <AnimatedGradient {...args} className="flex h-64 w-96 items-center justify-center rounded-xl border">
+      <AnimatedGradient speed={3} {...args} className="flex h-64 w-96 items-center justify-center rounded-xl border">
         <div className="space-y-2 px-6 text-center">
           <h2 className="text-2xl font-bold">{c.title}</h2>
           <p className="text-muted-foreground">{c.body}</p>
@@ -80,8 +83,8 @@ export const WithContent: Story = {
 export const CustomColors: Story = {
   render: () => (
     <div className="flex flex-col gap-4">
-      <AnimatedGradient className="h-32 w-64 rounded-xl" colors={WARM} />
-      <AnimatedGradient className="h-32 w-64 rounded-xl" colors={COOL} />
+      <AnimatedGradient speed={3} className="h-32 w-64 rounded-xl" colors={WARM} />
+      <AnimatedGradient speed={3} className="h-32 w-64 rounded-xl" colors={COOL} />
     </div>
   ),
 }
@@ -93,6 +96,7 @@ export const BlurVariants: Story = {
         <AnimatedGradient
           key={blur}
           blur={blur}
+          speed={3}
           colors={WARM}
           className="flex h-24 w-32 items-center justify-center rounded-lg border"
         >
@@ -126,7 +130,7 @@ export const Hero: Story = {
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <AnimatedGradient colors={WARM} className="flex h-80 w-full max-w-2xl items-center justify-center rounded-2xl border p-8">
+      <AnimatedGradient speed={3} colors={WARM} className="flex h-80 w-full max-w-2xl items-center justify-center rounded-2xl border p-8">
         <div className="text-center">
           <AnimatedGradientText className="text-5xl font-bold" colors={["var(--primary)", "var(--chart-1)", "var(--primary)"]}>
             {c.welcome}

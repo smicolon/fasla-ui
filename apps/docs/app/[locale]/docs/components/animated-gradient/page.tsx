@@ -41,7 +41,7 @@ export default function AnimatedGradientPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("preview")}</h2>
         <ComponentPreview>
-          <AnimatedGradient className="h-48 w-full rounded-lg" />
+          <AnimatedGradient className="h-48 w-full rounded-lg" speed={3} />
         </ComponentPreview>
       </section>
 
@@ -49,7 +49,7 @@ export default function AnimatedGradientPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{g("contentTitle")}</h2>
         <ComponentPreview>
-          <AnimatedGradient className="flex h-56 w-full items-center justify-center rounded-lg border">
+          <AnimatedGradient speed={3} className="flex h-56 w-full items-center justify-center rounded-lg border">
             <div className="space-y-2 px-6 text-center">
               <h3 className="text-2xl font-bold">{g("content.title")}</h3>
               <p className="text-muted-foreground">{g("content.body")}</p>
@@ -63,7 +63,7 @@ export default function AnimatedGradientPage() {
         <h2 className="text-2xl font-semibold">{g("coloursTitle")}</h2>
         <p className="text-muted-foreground">{g.rich("coloursBody", richCode)}</p>
         <ComponentPreview>
-          <AnimatedGradient className="h-48 w-full rounded-lg" colors={CHART_COLORS} />
+          <AnimatedGradient className="h-48 w-full rounded-lg" colors={CHART_COLORS} speed={3} />
         </ComponentPreview>
       </section>
 
@@ -90,6 +90,7 @@ export default function AnimatedGradientPage() {
 
 <AnimatedGradient
   className="flex h-56 items-center justify-center rounded-lg"
+  speed={3}
   colors={["var(--chart-1)", "var(--chart-2)", "var(--chart-4)", "var(--chart-5)"]}
 >
   <h3 className="text-2xl font-bold">${g("content.title")}</h3>

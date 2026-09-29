@@ -58,7 +58,6 @@ const config: Config = {
         "fade-in-up": "fade-in-up 0.6s ease-out backwards",
         "slide-top": "slide-top 0.6s ease-out backwards",
         "slide-left": "slide-left 0.6s ease-out backwards",
-        shimmer: "shimmer var(--shimmer-duration, 2s) infinite",
         "scale-in": "scale-in 0.5s ease-out backwards",
       },
       keyframes: {
@@ -77,10 +76,6 @@ const config: Config = {
         "slide-left": {
           from: { transform: "translateX(20px)", opacity: "0" },
           to: { transform: "translateX(0px)", opacity: "1" },
-        },
-        shimmer: {
-          "0%": { transform: "translateX(-100%)" },
-          "100%": { transform: "translateX(100%)" },
         },
         "scale-in": {
           from: { transform: "scale(0.9)", opacity: "0" },

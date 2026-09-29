@@ -19,8 +19,9 @@ export default function ShimmerButtonPage() {
 
   const props: PropRow[] = [
     { prop: "children", type: "ReactNode", fallback: "", description: s.rich("props.children", rich) },
-    { prop: "shimmerColor", type: "string", fallback: '"color-mix(in oklch, var(--primary) 20%, transparent)"', description: s.rich("props.shimmerColor", rich) },
+    { prop: "shimmerColor", type: "string", fallback: '"color-mix(in oklch, var(--primary-foreground) 35%, transparent)"', description: s.rich("props.shimmerColor", rich) },
     { prop: "shimmerDuration", type: "string", fallback: '"2s"', description: s.rich("props.shimmerDuration", rich) },
+    { prop: "shimmerSize", type: "string", fallback: '"100%"', description: s.rich("props.shimmerSize", rich) },
     { prop: "background", type: "string", fallback: '"var(--primary)"', description: s.rich("props.background", rich) },
     { prop: "borderRadius", type: "string", fallback: '"0.5rem"', description: s.rich("props.borderRadius", rich) },
     { prop: "...props", type: "ButtonHTMLAttributes", fallback: "", description: s.rich("props.native", rich) },
@@ -57,12 +58,15 @@ export default function ShimmerButtonPage() {
             <ShimmerButton
               background="linear-gradient(135deg, var(--chart-2), var(--chart-3))"
               shimmerColor="color-mix(in oklch, var(--primary-foreground) 35%, transparent)"
+              shimmerSize="40%"
+              shimmerDuration="1.5s"
             >
               {s("colours.a")}
             </ShimmerButton>
             <ShimmerButton
               background="linear-gradient(135deg, var(--chart-1), var(--chart-5))"
               shimmerColor="color-mix(in oklch, var(--primary-foreground) 35%, transparent)"
+              shimmerDuration="1.5s"
             >
               {s("colours.b")}
             </ShimmerButton>
@@ -96,6 +100,7 @@ export default function ShimmerButtonPage() {
 <ShimmerButton
   background="linear-gradient(135deg, var(--chart-2), var(--chart-3))"
   shimmerColor="color-mix(in oklch, var(--primary-foreground) 35%, transparent)"
+  shimmerSize="40%"
 >
   ${s("colours.a")}
 </ShimmerButton>`}</CodeBlock>

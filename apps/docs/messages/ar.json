@@ -943,6 +943,7 @@
         "children": "نص الزر.",
         "shimmerColor": "لون البريق.",
         "shimmerDuration": "مدة مرور البريق مرة واحدة.",
+        "shimmerSize": "عرض البريق، بطول أو بنسبة مئوية من عرض الزر.",
         "background": "لون الخلفية أو التدرّج اللوني.",
         "borderRadius": "نصف قطر الزوايا.",
         "native": "سمات الزر الأصلية، مثل <code>onClick</code>، <code>disabled</code>.",

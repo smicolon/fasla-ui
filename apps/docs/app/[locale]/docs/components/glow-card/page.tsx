@@ -64,7 +64,7 @@ export default function GlowCardPage() {
         <h2 className="text-2xl font-semibold">{g("containerTitle")}</h2>
         <p className="text-muted-foreground">{g.rich("containerBody", richCode)}</p>
         <ComponentPreview>
-          <GlowContainer className="w-full max-w-sm">
+          <GlowContainer className="w-full max-w-sm" duration={2}>
             <p className="p-6 text-center font-medium">{g("container")}</p>
           </GlowContainer>
         </ComponentPreview>
@@ -95,7 +95,7 @@ export default function GlowCardPage() {
   <div className="p-6">${g("cards.returns.title")}</div>
 </GlowCard>
 
-<GlowContainer duration={4}>
+<GlowContainer duration={2}>
   <p className="p-6">${g("container")}</p>
 </GlowContainer>`}</CodeBlock>
       </section>

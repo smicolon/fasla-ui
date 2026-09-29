@@ -49,7 +49,7 @@ export default function BorderBeamPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("preview")}</h2>
         <ComponentPreview>
-          <BorderBeam className="w-72 rounded-xl">{card}</BorderBeam>
+          <BorderBeam className="w-72 rounded-xl" duration={3}>{card}</BorderBeam>
         </ComponentPreview>
       </section>
 
@@ -85,7 +85,7 @@ export default function BorderBeamPage() {
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
         <CodeBlock>{`import { BorderBeam, GlowingBorder } from "@/components/ui/border-beam"
 
-<BorderBeam className="rounded-xl" duration={6}>
+<BorderBeam className="rounded-xl" duration={3}>
   <div className="p-6">${b("card.title")}</div>
 </BorderBeam>
 

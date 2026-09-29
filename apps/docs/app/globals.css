@@ -269,15 +269,6 @@
   }
 }
 
-@keyframes shimmer {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
 @keyframes scale-in {
   from {
     transform: scale(0.9);
@@ -313,10 +304,6 @@
 
 .animate-slide-left {
   animation: slide-left 0.6s ease-out backwards;
-}
-
-.animate-shimmer {
-  animation: shimmer var(--shimmer-duration, 2s) infinite;
 }
 
 .animate-scale-in {
