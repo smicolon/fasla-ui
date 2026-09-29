@@ -102,6 +102,10 @@ export function EmptySearchResults({
   onClear,
   ...props
 }: Omit<EmptyStateProps, "title" | "description"> & {
+  /** Replaces the English title */
+  title?: string
+  /** Replaces the English description */
+  description?: string
   query?: string
   onClear?: () => void
 }) {
@@ -126,6 +130,10 @@ export function EmptyData({
   resourceName = "items",
   ...props
 }: Omit<EmptyStateProps, "title" | "description"> & {
+  /** Replaces the English title */
+  title?: string
+  /** Replaces the English description */
+  description?: string
   resourceName?: string
 }) {
   return (

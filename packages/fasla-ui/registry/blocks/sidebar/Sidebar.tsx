@@ -184,12 +184,20 @@ export function SidebarCollapseButton({
       aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
       {...props}
     >
-      {/* Points at the edge the sidebar collapses toward, so it mirrors in RTL. */}
-      <ChevronsLeftIcon
-        size={16}
-        strokeWidth={1.5}
-        className={cn("transition-transform motion-reduce:transition-none rtl:-scale-x-100", collapsed && "rotate-180")}
-      />
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        className={cn("transition-transform rtl:-scale-x-100", collapsed && "rotate-180")}
+      >
+        <polyline points="11 17 6 12 11 7" />
+        <polyline points="18 17 13 12 18 7" />
+      </svg>
     </button>
   )
 }

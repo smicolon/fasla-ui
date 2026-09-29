@@ -82,7 +82,7 @@ export function FormField({
         )}
       >
         {label}
-        {required && <span className="ml-1 text-destructive">*</span>}
+        {required && <span className="ms-1 text-destructive">*</span>}
       </label>
       {children}
       {description && !error && (
