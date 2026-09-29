@@ -71,8 +71,11 @@ export function StatsCard({
               {trend.direction === "down" && (
                 <ChevronDownIcon size={16} strokeWidth={1.5} />
               )}
-              {trend.value > 0 ? "+" : ""}
-              {trend.value}%
+              {/* One LTR unit: in RTL the sign would otherwise jump to the far end, "12.5%+". */}
+              <bdi dir="ltr">
+                {trend.value > 0 ? "+" : ""}
+                {trend.value}%
+              </bdi>
             </span>
           )}
           {description && (
