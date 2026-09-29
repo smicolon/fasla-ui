@@ -51,6 +51,12 @@ describe("Button", () => {
     expect(screen.getByText("Loading")).toBeInTheDocument()
   })
 
+  it("announces the loading text it is given", () => {
+    render(<Button loading loadingLabel="جارٍ الحفظ">حفظ</Button>)
+    expect(screen.getByText("جارٍ الحفظ")).toBeInTheDocument()
+    expect(screen.queryByText("Loading")).not.toBeInTheDocument()
+  })
+
   it("is disabled when disabled prop is true", () => {
     render(<Button disabled>Disabled</Button>)
     expect(screen.getByRole("button")).toBeDisabled()
