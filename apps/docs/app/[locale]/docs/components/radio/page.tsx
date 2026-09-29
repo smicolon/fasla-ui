@@ -16,27 +16,25 @@ const INPUT = '<input type="radio">'
 
 type PropRow = {
   prop: string
-  /** The Figma property (and value, where one value maps), for props that have one. */
-  figma?: string
   type: string
   fallback: string
   description: React.ReactNode
 }
 
 /**
- * A code value that may break before each separator, never inside a value:
- * `"default" | "layout"` before the `|`, `Interaction = Disabled` before the
- * `=`. It keeps the narrow columns narrow enough for the description.
+ * A type that may break before each `|`, never inside a value, so
+ * `"sm" | "md" | "lg"` keeps the type column narrow enough for the
+ * description.
  */
-function BreakableCode({ value, separator }: { value: string; separator: string }) {
-  const parts = value.split(` ${separator} `)
+function UnionType({ value }: { value: string }) {
+  const parts = value.split(" | ")
   return (
     <code className="text-xs">
       {parts.map((part, index) => (
         <Fragment key={part}>
           {index > 0 && " "}
           <span className="whitespace-nowrap">
-            {index > 0 && `${separator} `}
+            {index > 0 && "| "}
             {part}
           </span>
         </Fragment>
@@ -46,24 +44,22 @@ function BreakableCode({ value, separator }: { value: string; separator: string 
 }
 
 /**
- * One props table. Cells keep the page's direction, so on /ar every column
- * aligns to the start (right); a code value sits in an inline <code>, which
- * globals.css isolates left to right inside the RTL cell.
+ * The props table: one table, four columns, one short line per description
+ * (design/content/arabic-writing-guide.md). Cells keep the page's direction, so
+ * on /ar every column aligns to the start (right); a code value sits in an
+ * inline <code>, which globals.css isolates left to right inside the RTL cell.
  */
-function PropsTable({ rows, withFigma = false }: { rows: PropRow[]; withFigma?: boolean }) {
+function PropsTable({ rows }: { rows: PropRow[] }) {
   const r = useTranslations("docs.radio")
-  // Five columns need a narrower description minimum to fit the content column.
-  const descriptionMin = withFigma ? "min-w-[12rem]" : "min-w-[15rem]"
   return (
     <div className="overflow-x-auto">
       <table className="w-full text-sm">
         <thead>
           <tr className="border-b">
             <th className="px-3 py-2 text-start font-semibold">{r("props.prop")}</th>
-            {withFigma && <th className="px-3 py-2 text-start font-semibold">{r("props.figma")}</th>}
             <th className="px-3 py-2 text-start font-semibold">{r("props.type")}</th>
             <th className="px-3 py-2 text-start font-semibold">{r("props.default")}</th>
-            <th className={`${descriptionMin} px-3 py-2 text-start font-semibold`}>{r("props.description")}</th>
+            <th className="min-w-[15rem] px-3 py-2 text-start font-semibold">{r("props.description")}</th>
           </tr>
         </thead>
         <tbody>
@@ -72,13 +68,8 @@ function PropsTable({ rows, withFigma = false }: { rows: PropRow[]; withFigma?: 
               <td className="px-3 py-2 text-start">
                 <code className="whitespace-nowrap text-xs">{row.prop}</code>
               </td>
-              {withFigma && (
-                <td className="px-3 py-2 text-start">
-                  {row.figma && <BreakableCode value={row.figma} separator="=" />}
-                </td>
-              )}
               <td className="px-3 py-2 text-start">
-                <BreakableCode value={row.type} separator="|" />
+                <UnionType value={row.type} />
               </td>
               <td className="px-3 py-2 text-start text-muted-foreground">
                 {row.fallback ? (
@@ -110,20 +101,15 @@ export default function RadioPage() {
   )
   const rich = { code, input: INPUT }
 
-  // The props section is two tables, split on one question: does the prop have
-  // an equivalent in Figma? (design/content/arabic-writing-guide.md). The Figma
-  // names come from the Radio component set itself (3830:58457 in
-  // yGEQmCZOvs7KptsYUdB0Xg), read with get_metadata and the set's property
-  // definitions, never from the Storybook comments.
-  const figmaProps: PropRow[] = [
-    { prop: "variant", figma: "Type", type: '"default" | "layout"', fallback: '"default"', description: r.rich("props.variant", rich) },
-    { prop: "size", figma: "Size", type: '"sm" | "md" | "lg"', fallback: '"md"', description: r.rich("props.size", rich) },
-    { prop: "checked", figma: "State", type: "boolean", fallback: "", description: r.rich("props.checkedProp", rich) },
-    { prop: "disabled", figma: "Interaction = Disabled", type: "boolean", fallback: "false", description: r.rich("props.disabledProp", rich) },
-    { prop: "label", figma: "Label", type: "string", fallback: "", description: r.rich("props.label", rich) },
-    { prop: "description", figma: "sub label", type: "string", fallback: "", description: r.rich("props.descriptionProp", rich) },
-  ]
-  const codeProps: PropRow[] = [
+  // One table, in a fixed order: appearance and state first, then text, then
+  // the native <input> props a radio group needs, then styling.
+  const props: PropRow[] = [
+    { prop: "variant", type: '"default" | "layout"', fallback: '"default"', description: r.rich("props.variant", rich) },
+    { prop: "size", type: '"sm" | "md" | "lg"', fallback: '"md"', description: r.rich("props.size", rich) },
+    { prop: "checked", type: "boolean", fallback: "", description: r.rich("props.checkedProp", rich) },
+    { prop: "disabled", type: "boolean", fallback: "false", description: r.rich("props.disabledProp", rich) },
+    { prop: "label", type: "string", fallback: "", description: r.rich("props.label", rich) },
+    { prop: "description", type: "string", fallback: "", description: r.rich("props.descriptionProp", rich) },
     { prop: "name", type: "string", fallback: "", description: r.rich("props.nameProp", rich) },
     { prop: "value", type: "string", fallback: "", description: r.rich("props.valueProp", rich) },
     { prop: "onChange", type: "(event) => void", fallback: "", description: r.rich("props.onChangeProp", rich) },
@@ -231,21 +217,7 @@ export default function RadioPage() {
       {/* Props */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("props")}</h2>
-
-        <div className="space-y-3">
-          <h3 className="text-lg font-semibold">{r("props.figmaTitle")}</h3>
-          <p className="text-muted-foreground">{r("props.figmaIntro")}</p>
-          <PropsTable rows={figmaProps} withFigma />
-          <p className="text-sm text-muted-foreground">
-            {r.rich("props.figmaNote", rich)} {r.rich("props.directionNote", rich)}
-          </p>
-        </div>
-
-        <div className="space-y-3">
-          <h3 className="text-lg font-semibold">{r("props.codeTitle")}</h3>
-          <p className="text-muted-foreground">{r("props.codeIntro")}</p>
-          <PropsTable rows={codeProps} />
-        </div>
+        <PropsTable rows={props} />
       </section>
 
       {/* Usage */}

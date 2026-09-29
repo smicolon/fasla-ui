@@ -25,6 +25,20 @@ function slugify(text: string): string {
     .replace(/\s+/g, "-")
 }
 
+const ARABIC = /[؀-ۿݐ-ݿࢠ-ࣿﭐ-﷿ﹰ-﻿]/
+const LATIN_PARENTHETICAL = /\s*\([^()؀-ۿ]*[A-Za-z][^()؀-ۿ]*\)/g
+
+/**
+ * The menu label for a heading. An Arabic heading carries its term's English
+ * in parentheses, "الأنماط (variant)", per design/content/; the page keeps it,
+ * but the menu is a list of short Arabic labels, so it drops the Latin-only
+ * parenthetical. English headings are left as they are.
+ */
+export function tocLabel(text: string): string {
+  if (!ARABIC.test(text)) return text
+  return text.replace(LATIN_PARENTHETICAL, "").trim()
+}
+
 /**
  * Reads the page's own h2 and h3 headings, so every docs page gets a table of
  * contents without writing one. Headings inside a live component preview
@@ -46,7 +60,7 @@ function collectHeadings(root: Element): TocItem[] {
       heading.id = id
     }
     used.add(heading.id)
-    items.push({ id: heading.id, text, level: heading.tagName === "H3" ? 3 : 2 })
+    items.push({ id: heading.id, text: tocLabel(text), level: heading.tagName === "H3" ? 3 : 2 })
   })
 
   return items

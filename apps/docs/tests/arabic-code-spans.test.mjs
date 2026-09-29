@@ -24,4 +24,16 @@ describe("Arabic and inline code", () => {
 
     expect(offenders).toEqual([])
   })
+
+  // A و written flush against a Latin word or a code span renders as a Latin
+  // "g" glued to it ("وFocus" reads "gFocus"), so it takes a space:
+  // `<code>name</code> و <code>value</code>`, "Figma و Tailwind".
+  test("puts a space after every و that precedes Latin or code in ar.json", () => {
+    const ar = JSON.parse(readFileSync(path.join(docsRoot, "messages/ar.json"), "utf8"))
+    const offenders = strings(ar)
+      .filter(([, message]) => /(^|[\s،(>])و(?=<code>|[A-Za-z])/.test(message))
+      .map(([key, message]) => `${key}: ${message}`)
+
+    expect(offenders).toEqual([])
+  })
 })
