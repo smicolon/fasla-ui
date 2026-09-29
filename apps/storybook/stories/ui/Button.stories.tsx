@@ -55,7 +55,7 @@ export const Sizes: Story = {
       <Button size="sm">Small</Button>
       <Button size="default">Default</Button>
       <Button size="lg">Large</Button>
-      <Button size="icon">
+      <Button size="icon" aria-label="Add">
         <PlusIcon size={16} strokeWidth={1.5} />
       </Button>
     </div>
