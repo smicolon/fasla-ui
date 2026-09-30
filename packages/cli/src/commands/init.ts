@@ -21,7 +21,8 @@ export function cn(...inputs: ClassValue[]) {
 import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
-import { aliasToPath, OutsideProjectError, pathToAlias, readAliasRoot, resolveInsideProject } from "../paths.js"
+import { aliasToPath, pathToAlias, resolveInsideProject, resolveWritableFile, writeFileNoFollow } from "../paths.js"
+import { aliasRootOrExit, safeOrExit } from "./shared.js"
 
 export const init = new Command()
   .name("init")
@@ -53,7 +54,7 @@ export const init = new Command()
 
     // Gather configuration. `@/` is wherever the project's tsconfig points it,
     // so the defaults, the stored aliases and the files written all follow it.
-    const aliasRoot = await readAliasRoot(cwd)
+    const aliasRoot = await aliasRootOrExit(cwd, Boolean(options.yes))
     const under = (p: string) => (aliasRoot ? `${aliasRoot}/${p}` : p)
 
     let componentsAlias = "@/components"
@@ -120,27 +121,23 @@ export const init = new Command()
     // Without this file a fresh install does not compile, so init writes it.
     const utilsRelative = aliasToPath(utilsAlias, aliasRoot)
 
-    // Refuse before writing anything if a path would land outside the project.
-    let utilsPath: string
-    try {
-      await resolveInsideProject(cwd, "components.json")
+    // Refuse before writing anything if a path would land outside the project
+    // or write through a symlink. The cn helper is only written when absent,
+    // so an existing one — symlinked or not — is left alone.
+    const utilsPath = await safeOrExit(async () => {
+      await resolveWritableFile(cwd, "components.json")
       await resolveInsideProject(cwd, aliasToPath(componentsAlias, aliasRoot))
-      utilsPath = await resolveInsideProject(cwd, `${utilsRelative}.ts`)
-    } catch (error) {
-      if (!(error instanceof OutsideProjectError)) throw error
-      console.log(chalk.red(`Error: ${error.message}`))
-      console.log("Nothing was written.")
-      process.exit(1)
-    }
+      return resolveInsideProject(cwd, `${utilsRelative}.ts`)
+    })
 
     const spinner = ora("Writing configuration...").start()
 
     try {
-      await fs.writeJson(configPath, config, { spaces: 2 })
+      await writeFileNoFollow(configPath, `${JSON.stringify(config, null, 2)}\n`)
 
       if (!(await fs.pathExists(utilsPath))) {
         await fs.ensureDir(path.dirname(utilsPath))
-        await fs.writeFile(utilsPath, UTILS_SOURCE, "utf8")
+        await writeFileNoFollow(utilsPath, UTILS_SOURCE)
         spinner.succeed(`Configuration written to components.json, cn helper written to ${utilsRelative}.ts`)
       } else {
         spinner.succeed("Configuration written to components.json")

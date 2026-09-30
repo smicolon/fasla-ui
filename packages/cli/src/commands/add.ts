@@ -6,7 +6,8 @@ import fs from "fs-extra"
 import path from "path"
 import { fetchRegistry, fetchComponent, getTargetDirectory, type RegistryFile, type RegistryItem } from "../registry.js"
 import { resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
-import { aliasToPath, OutsideProjectError, readAliasRoot, resolveInsideProject } from "../paths.js"
+import { aliasToPath, resolveInsideProject, resolveWritableFile, writeFileNoFollow } from "../paths.js"
+import { aliasRootOrExit, safeOrExit } from "./shared.js"
 
 export const add = new Command()
   .name("add")
@@ -31,8 +32,8 @@ export const add = new Command()
 
     const config = await fs.readJson(configPath)
     const componentsAlias: string = config.aliases?.components || "@/components"
-    const componentsDir = aliasToPath(componentsAlias, await readAliasRoot(cwd))
-    await insideProjectOrExit(cwd, componentsDir)
+    const componentsDir = aliasToPath(componentsAlias, await aliasRootOrExit(cwd, Boolean(options.yes)))
+    await safeOrExit(() => resolveInsideProject(cwd, componentsDir))
 
     // Fetch registry
     const spinner = ora("Fetching registry...").start()
@@ -143,11 +144,13 @@ export const add = new Command()
       path.join(getTargetDirectory(file.type || component.type, baseDir), path.basename(file.target || file.path))
 
     // Check every destination before writing any, so a path that leads out of
-    // the project — even through a symlink, even with --overwrite — stops the
-    // whole install rather than half of it.
+    // the project, or a destination that is itself a symlink, stops the whole
+    // install rather than half of it — with or without --overwrite.
     addSpinner.stop()
     for (const component of resolved.items) {
-      for (const file of component.files ?? []) await insideProjectOrExit(cwd, targetPathOf(file, component))
+      for (const file of component.files ?? []) {
+        await safeOrExit(() => resolveWritableFile(cwd, targetPathOf(file, component)))
+      }
     }
 
     for (const component of resolved.items) {
@@ -195,7 +198,7 @@ export const add = new Command()
           )
           content = rewriteComponentImports(content, targetDir, targetDirOf)
 
-          await fs.writeFile(targetPath, content)
+          await writeFileNoFollow(targetPath, content)
         }
       } catch (error) {
         addSpinner.warn(`${componentName}: ${(error as Error).message}`)
@@ -219,14 +222,3 @@ export const add = new Command()
       console.log(chalk.cyan(`  import { ... } from "${importPath}"`))
     }
   })
-
-async function insideProjectOrExit(cwd: string, target: string) {
-  try {
-    await resolveInsideProject(cwd, target)
-  } catch (error) {
-    if (!(error instanceof OutsideProjectError)) throw error
-    console.log(chalk.red(`Error: ${error.message}`))
-    console.log("Nothing was written.")
-    process.exit(1)
-  }
-}

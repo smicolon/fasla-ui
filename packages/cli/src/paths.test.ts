@@ -1,14 +1,20 @@
-import { afterEach, describe, it, expect } from "vitest"
+import { afterEach, describe, it, expect, vi } from "vitest"
 import fs from "fs-extra"
 import os from "os"
 import path from "path"
 import {
   aliasToPath,
-  OutsideProjectError,
+  chooseAliasRoot,
+  findAliasRoot,
   pathToAlias,
-  readAliasRoot,
   resolveInsideProject,
+  resolveWritableFile,
+  UnknownAliasRootError,
+  UnsafePathError,
+  writeFileNoFollow,
 } from "./paths"
+
+const readAliasRoot = async (dir: string) => (await findAliasRoot(dir)).root
 
 // Every temp folder a test makes, removed after each test.
 const tempDirs: string[] = []
@@ -73,7 +79,11 @@ describe("readAliasRoot: reading tsconfig", () => {
 
   it("falls back when there is no @/* path or the file doesn't parse", async () => {
     expect(await rootFor({ "tsconfig.json": tsconfig({ "~/*": ["./*"] }) }, ["src"])).toBe("src")
-    expect(await rootFor({ "tsconfig.json": "{ not json" })).toBe("")
+  })
+
+  it("reports a config it can't parse instead of guessing silently", async () => {
+    const found = await findAliasRoot(await project({ "tsconfig.json": "{ not json" }))
+    expect(found).toEqual({ root: "", problem: "tsconfig.json could not be read as JSON." })
   })
 })
 
@@ -229,19 +239,19 @@ describe("resolveInsideProject", () => {
     const dir = await project({ "tsconfig.json": tsconfig({ "@/*": ["../../other-project/*"] }) })
     const root = await readAliasRoot(dir)
     expect(root).toBe("../../other-project")
-    await expect(resolveInsideProject(dir, aliasToPath("@/components", root))).rejects.toThrow(OutsideProjectError)
+    await expect(resolveInsideProject(dir, aliasToPath("@/components", root))).rejects.toThrow(UnsafePathError)
   })
 
   it("refuses an alias in components.json that climbs out", async () => {
     const dir = await project({}, ["src"])
-    await expect(resolveInsideProject(dir, aliasToPath("@/../../etc", "src"))).rejects.toThrow(OutsideProjectError)
+    await expect(resolveInsideProject(dir, aliasToPath("@/../../etc", "src"))).rejects.toThrow(UnsafePathError)
   })
 
   it("refuses a folder inside the project that is a symlink to outside it", async () => {
     const dir = await project({}, ["src"])
     const outside = await tempDir()
     await fs.symlink(outside, path.join(dir, "src/components"))
-    await expect(resolveInsideProject(dir, "src/components/ui/badge.tsx")).rejects.toThrow(OutsideProjectError)
+    await expect(resolveInsideProject(dir, "src/components/ui/badge.tsx")).rejects.toThrow(UnsafePathError)
   })
 
   it("refuses to overwrite a file that is a symlink to outside the project", async () => {
@@ -251,7 +261,7 @@ describe("resolveInsideProject", () => {
     const outside = await tempDir()
     await fs.writeFile(path.join(outside, "victim.tsx"), "keep me")
     await fs.symlink(path.join(outside, "victim.tsx"), path.join(dir, "components/ui/badge.tsx"))
-    await expect(resolveInsideProject(dir, "components/ui/badge.tsx")).rejects.toThrow(OutsideProjectError)
+    await expect(resolveInsideProject(dir, "components/ui/badge.tsx")).rejects.toThrow(UnsafePathError)
   })
 })
 
@@ -264,5 +274,174 @@ describe("temp folder cleanup", () => {
 
   it("has removed it before the next test runs", async () => {
     expect(await fs.pathExists(made)).toBe(false)
+  })
+})
+
+describe("findAliasRoot: package extends", () => {
+  const pkg = (name: string, manifest: object, files: Record<string, string>) =>
+    Object.fromEntries([
+      [`node_modules/${name}/package.json`, JSON.stringify({ name, ...manifest })],
+      ...Object.entries(files).map(([f, text]) => [`node_modules/${name}/${f}`, text]),
+    ])
+  // Each shared config maps @/* to <project>/app/src, via baseUrl.
+  const shared = tsconfig({ "@/*": ["./app/src/*"] }, "../../..")
+
+  it("reads a bare package's tsconfig field", async () => {
+    const found = await findAliasRoot(
+      await project({
+        ...pkg("@repo/tsconfig", { main: "index.js", tsconfig: "base.json" }, { "index.js": "", "base.json": shared }),
+        "tsconfig.json": JSON.stringify({ extends: "@repo/tsconfig" }),
+      })
+    )
+    expect(found).toEqual({ root: "app/src" })
+  })
+
+  it("reads a bare package's tsconfig.json when it has no tsconfig field", async () => {
+    const found = await findAliasRoot(
+      await project({
+        ...pkg("shared-config", {}, { "tsconfig.json": tsconfig({ "@/*": ["./app/src/*"] }, "../..") }),
+        "tsconfig.json": JSON.stringify({ extends: "shared-config" }),
+      })
+    )
+    expect(found).toEqual({ root: "app/src" })
+  })
+
+  it("adds .json to a subpath, and never picks a .js file of the same name", async () => {
+    const found = await findAliasRoot(
+      await project({
+        ...pkg("@repo/tsconfig", {}, { "nextjs.js": "module.exports = {}", "nextjs.json": shared }),
+        "tsconfig.json": JSON.stringify({ extends: "@repo/tsconfig/nextjs" }),
+      })
+    )
+    expect(found).toEqual({ root: "app/src" })
+  })
+
+  it("follows a JSON file the package's exports map", async () => {
+    const found = await findAliasRoot(
+      await project({
+        ...pkg("@repo/tsconfig", { exports: { "./nextjs": "./configs/next.json" } }, { "configs/next.json": tsconfig({ "@/*": ["./app/src/*"] }, "../../../..") }),
+        "tsconfig.json": JSON.stringify({ extends: "@repo/tsconfig/nextjs" }),
+      })
+    )
+    expect(found).toEqual({ root: "app/src" })
+  })
+
+  it("reports a JSON file the package's exports leave out, as tsc does", async () => {
+    // tsc 5.9: error TS6053: File '@repo/tsconfig/nextjs.json' not found.
+    const found = await findAliasRoot(
+      await project(
+        {
+          ...pkg("@repo/tsconfig", { exports: { ".": "./index.js" } }, { "index.js": "", "nextjs.json": shared }),
+          "tsconfig.json": JSON.stringify({ extends: "@repo/tsconfig/nextjs.json" }),
+        },
+        ["src"]
+      )
+    )
+    expect(found).toEqual({
+      root: "src",
+      problem: 'tsconfig.json extends "@repo/tsconfig/nextjs.json", which could not be found.',
+    })
+  })
+
+  it("reports a package that isn't installed, naming the config that extends it", async () => {
+    const found = await findAliasRoot(
+      await project({
+        "configs/base.json": JSON.stringify({ extends: "@repo/missing/base.json" }),
+        "tsconfig.json": JSON.stringify({ extends: "./configs/base.json" }),
+      })
+    )
+    expect(found.problem).toBe('configs/base.json extends "@repo/missing/base.json", which could not be found.')
+  })
+
+  it("needs nothing from an unreadable parent when the project sets paths and baseUrl itself", async () => {
+    const found = await findAliasRoot(
+      await project({
+        "tsconfig.json": JSON.stringify({
+          extends: "@repo/missing",
+          compilerOptions: { baseUrl: ".", paths: { "@/*": ["./src/*"] } },
+        }),
+      })
+    )
+    expect(found).toEqual({ root: "src" })
+  })
+
+  it("reports an unreadable parent that could still set baseUrl", async () => {
+    const found = await findAliasRoot(
+      await project({
+        "tsconfig.json": JSON.stringify({ extends: "@repo/missing", compilerOptions: { paths: { "@/*": ["./src/*"] } } }),
+      })
+    )
+    expect(found.problem).toMatch(/extends "@repo\/missing"/)
+  })
+})
+
+describe("chooseAliasRoot", () => {
+  const unreadable = () => project({ "tsconfig.json": JSON.stringify({ extends: "@repo/missing" }) }, ["src"])
+
+  it("uses a readable config without asking", async () => {
+    const dir = await project({ "tsconfig.json": tsconfig({ "@/*": ["./*"] }) })
+    const ask = vi.fn()
+    expect(await chooseAliasRoot(dir, { yes: false, ask })).toBe("")
+    expect(ask).not.toHaveBeenCalled()
+  })
+
+  it("stops a --yes run instead of guessing", async () => {
+    const ask = vi.fn()
+    await expect(chooseAliasRoot(await unreadable(), { yes: true, ask })).rejects.toThrow(UnknownAliasRootError)
+    await expect(chooseAliasRoot(await unreadable(), { yes: true, ask })).rejects.toThrow(/without --yes/)
+    expect(ask).not.toHaveBeenCalled()
+  })
+
+  it("asks an interactive run, offering the guess, and uses the answer", async () => {
+    const ask = vi.fn(async () => "./app/src/")
+    expect(await chooseAliasRoot(await unreadable(), { yes: false, ask })).toBe("app/src")
+    expect(ask).toHaveBeenCalledWith('tsconfig.json extends "@repo/missing", which could not be found.', "src")
+  })
+
+  it("reads an answer of . as the project root", async () => {
+    expect(await chooseAliasRoot(await unreadable(), { yes: false, ask: async () => "." })).toBe("")
+  })
+
+  it("stops when the question is cancelled", async () => {
+    await expect(chooseAliasRoot(await unreadable(), { yes: false, ask: async () => undefined })).rejects.toThrow("Cancelled.")
+  })
+})
+
+describe("never writing through a symlink", () => {
+  it("refuses a destination that is a symlink to a missing file outside the project", async () => {
+    // Greptile's case: pathExists says the link is absent, the write follows it.
+    const dir = await project({}, ["components/ui"])
+    const outside = await tempDir()
+    await fs.symlink(path.join(outside, "planted.tsx"), path.join(dir, "components/ui/badge.tsx"))
+    await expect(resolveWritableFile(dir, "components/ui/badge.tsx")).rejects.toThrow(UnsafePathError)
+    await expect(resolveInsideProject(dir, "components/ui/badge.tsx")).rejects.toThrow(UnsafePathError)
+    expect(await fs.pathExists(path.join(outside, "planted.tsx"))).toBe(false)
+  })
+
+  it("refuses a destination that is a symlink even when it points inside the project", async () => {
+    const dir = await project({ "shared/badge.tsx": "mine" }, ["components/ui"])
+    await fs.symlink(path.join(dir, "shared/badge.tsx"), path.join(dir, "components/ui/badge.tsx"))
+    await expect(resolveWritableFile(dir, "components/ui/badge.tsx")).rejects.toThrow(/is a symlink/)
+  })
+
+  it("refuses a folder on the way that is a dangling symlink", async () => {
+    const dir = await project({}, ["components"])
+    const outside = await tempDir()
+    await fs.symlink(path.join(outside, "gone"), path.join(dir, "components/ui"))
+    await expect(resolveWritableFile(dir, "components/ui/badge.tsx")).rejects.toThrow(/does not exist/)
+  })
+
+  it("accepts a plain file or a new one", async () => {
+    const dir = await project({ "components/ui/badge.tsx": "old" })
+    expect(await resolveWritableFile(dir, "components/ui/badge.tsx")).toBe(path.join(dir, "components/ui/badge.tsx"))
+    expect(await resolveWritableFile(dir, "components/ui/new.tsx")).toBe(path.join(dir, "components/ui/new.tsx"))
+  })
+
+  it.skipIf(process.platform === "win32")("fails the write itself if a symlink appears after the check", async () => {
+    const dir = await project({}, ["components"])
+    const outside = await tempDir()
+    await fs.symlink(path.join(outside, "planted.tsx"), path.join(dir, "components/badge.tsx"))
+    await expect(writeFileNoFollow(path.join(dir, "components/badge.tsx"), "x")).rejects.toMatchObject({ code: "ELOOP" })
+    expect(await fs.pathExists(path.join(outside, "planted.tsx"))).toBe(false)
   })
 })
