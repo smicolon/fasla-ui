@@ -4,6 +4,24 @@ import * as React from "react"
 import { motion, useReducedMotion } from "framer-motion"
 import { cn } from "../../../src/lib/utils"
 
+/**
+ * The colours, without blank entries (a cleared control, say); the fallback
+ * when none are left, since an empty list would draw nothing.
+ */
+const filledList = (colors: string[] | undefined, fallback: string[]) => {
+  const usable = (colors ?? []).filter((color) => typeof color === "string" && color.trim())
+  return usable.length ? usable : fallback
+}
+
+const GRADIENT_COLORS = [
+  "var(--primary)",
+  "var(--secondary)",
+  "hsl(280 100% 70%)",
+  "hsl(200 100% 70%)",
+]
+
+const TEXT_COLORS = ["var(--primary)", "hsl(280 100% 70%)", "var(--primary)"]
+
 export interface AnimatedGradientProps
   extends React.HTMLAttributes<HTMLDivElement> {
   /** Gradient colors */
@@ -28,12 +46,7 @@ const blurValues = {
  * Respects prefers-reduced-motion by stopping animation.
  */
 export function AnimatedGradient({
-  colors = [
-    "var(--primary)",
-    "var(--secondary)",
-    "hsl(280 100% 70%)",
-    "hsl(200 100% 70%)",
-  ],
+  colors: colorsProp,
   speed = 10,
   blur = "3xl",
   className,
@@ -41,6 +54,7 @@ export function AnimatedGradient({
   ...props
 }: AnimatedGradientProps) {
   const prefersReducedMotion = useReducedMotion()
+  const colors = filledList(colorsProp, GRADIENT_COLORS)
 
   return (
     <div
@@ -100,12 +114,13 @@ export interface AnimatedGradientTextProps {
 }
 
 export function AnimatedGradientText({
-  colors = ["var(--primary)", "hsl(280 100% 70%)", "var(--primary)"],
+  colors: colorsProp,
   speed = 3,
   className,
   children,
 }: AnimatedGradientTextProps) {
   const prefersReducedMotion = useReducedMotion()
+  const colors = filledList(colorsProp, TEXT_COLORS)
 
   return (
     <motion.span

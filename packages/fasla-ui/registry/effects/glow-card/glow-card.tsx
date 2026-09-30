@@ -20,6 +20,10 @@ function usePrefersReducedMotion() {
   return reduced
 }
 
+/** The value, or the fallback when it is missing or blank (a cleared control, say). */
+const filled = (value: string | undefined, fallback: string) =>
+  value && value.trim() ? value : fallback
+
 export interface GlowCardProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Glow color (any CSS color) */
   glowColor?: string
@@ -33,7 +37,7 @@ export interface GlowCardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function GlowCard({
-  glowColor = "var(--primary)",
+  glowColor: glowColorProp,
   glowIntensity = 60,
   followMouse = false,
   hoverOnly = true,
@@ -41,6 +45,7 @@ export function GlowCard({
   children,
   ...props
 }: GlowCardProps) {
+  const glowColor = filled(glowColorProp, "var(--primary)")
   const cardRef = React.useRef<HTMLDivElement>(null)
   // Pointer position in px from the card's top-left; null keeps the glow centred.
   const [mousePosition, setMousePosition] = React.useState<{ x: number; y: number } | null>(null)
@@ -123,12 +128,13 @@ export interface GlowContainerProps extends React.HTMLAttributes<HTMLDivElement>
 }
 
 export function GlowContainer({
-  glowColor = "var(--primary)",
+  glowColor: glowColorProp,
   duration = 3,
   className,
   children,
   ...props
 }: GlowContainerProps) {
+  const glowColor = filled(glowColorProp, "var(--primary)")
   const prefersReducedMotion = usePrefersReducedMotion()
 
   return (

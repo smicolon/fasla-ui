@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, afterEach } from "vitest"
 import { act, fireEvent, render, waitFor } from "@testing-library/react"
 import { ShimmerButton } from "./shimmer-button/shimmer-button"
+import { AnimatedGradient } from "./animated-gradient/animated-gradient"
 import { TypewriterText } from "./typewriter-text/typewriter-text"
 import { Spotlight, SpotlightCard } from "./spotlight/spotlight"
 import { GlowCard } from "./glow-card/glow-card"
@@ -148,5 +149,75 @@ describe("Spotlight", () => {
       heightSpy.mockRestore()
       globalThis.ResizeObserver = saved
     }
+  })
+})
+
+/**
+ * A blank string prop (what a cleared Storybook control or an empty form field
+ * passes) falls back to the default instead of emptying the style it feeds.
+ */
+describe("blank string props fall back to their defaults", () => {
+  it("ShimmerButton: every string prop", () => {
+    const { getByRole } = render(
+      <ShimmerButton shimmerColor="" shimmerSize=" " shimmerDuration="" borderRadius="" background="">
+        Shop
+      </ShimmerButton>
+    )
+    const style = getByRole("button").style
+    expect(style.getPropertyValue("--shimmer-color")).toContain("--primary-foreground")
+    expect(style.getPropertyValue("--shimmer-size")).toBe("100%")
+    expect(style.getPropertyValue("--shimmer-duration")).toBe("2s")
+    expect(style.getPropertyValue("--border-radius")).toBe("0.5rem")
+    expect(style.getPropertyValue("--background")).toBe("var(--primary)")
+  })
+
+  it("ShimmerButton: no stacked motion-safe hover variant, anywhere in the source", async () => {
+    const { getByRole } = render(<ShimmerButton>Shop</ShimmerButton>)
+    expect(getByRole("button").className).toContain("hover:scale-105")
+    // Tailwind generates classes it finds in comments, so check the file itself.
+    const { readFileSync } = await import("node:fs")
+    const { resolve } = await import("node:path")
+    const source = readFileSync(resolve(__dirname, "shimmer-button/shimmer-button.tsx"), "utf8")
+    expect(source).not.toMatch(/motion-(safe|reduce):(hover|focus)/)
+  })
+
+  it("BorderBeam and GlowingBorder", async () => {
+    const beam = render(<BorderBeam colorFrom="" colorTo="">Card</BorderBeam>)
+    const ring = beam.container.firstElementChild!.lastElementChild as HTMLElement
+    await waitFor(() => expect(ring.style.background).toContain("var(--primary) 360deg"))
+    expect(ring.style.background).toContain("transparent 270deg")
+
+    const glow = render(<GlowingBorder glowColor="" borderRadius="">Card</GlowingBorder>)
+    const root = glow.container.firstElementChild as HTMLElement
+    expect(root.style.borderRadius).toBe("0.5rem")
+    expect((root.lastElementChild as HTMLElement).style.boxShadow).toContain("var(--primary)")
+  })
+
+  it("GlowCard and GlowContainer", () => {
+    const card = render(<GlowCard glowColor="" hoverOnly={false}>Card</GlowCard>)
+    const layer = card.container.firstElementChild!.firstElementChild as HTMLElement
+    expect(layer.style.background).toContain("var(--primary)")
+  })
+
+  it("Spotlight and SpotlightCard", () => {
+    const spot = render(<Spotlight color="">Panel</Spotlight>)
+    expect(spot.container.querySelector<HTMLElement>(".rounded-full")!.style.background).toContain("var(--primary)")
+    const card = render(<SpotlightCard spotlightColor="">Card</SpotlightCard>)
+    fireEvent.mouseEnter(card.container.firstElementChild!)
+    expect(card.container.querySelector<HTMLElement>(".rounded-full")!.style.background).toContain("var(--primary)")
+  })
+
+  it("AnimatedGradient: blank colours are dropped, an empty list uses the default", () => {
+    const empty = render(<AnimatedGradient colors={[]} />)
+    expect(empty.container.querySelectorAll(".rounded-full")).toHaveLength(4)
+    const some = render(<AnimatedGradient colors={["", "red", " "]} />)
+    const blobs = some.container.querySelectorAll<HTMLElement>(".rounded-full")
+    expect(blobs).toHaveLength(1)
+    expect(blobs[0]!.style.background).toBe("red")
+  })
+
+  it("TypewriterText: a blank cursorChar keeps the default cursor", () => {
+    const { container } = render(<TypewriterText text="Hi" cursorChar="" />)
+    expect(container.querySelector("[aria-hidden]")?.textContent).toBe("|")
   })
 })

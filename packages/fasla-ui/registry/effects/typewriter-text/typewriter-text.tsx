@@ -20,6 +20,10 @@ function usePrefersReducedMotion() {
   return reduced
 }
 
+/** The value, or the fallback when it is missing or blank (a cleared control, say). */
+const filled = (value: string | undefined, fallback: string) =>
+  value && value.trim() ? value : fallback
+
 export interface TypewriterTextProps extends React.HTMLAttributes<HTMLSpanElement> {
   /** Text to type out */
   text: string
@@ -44,13 +48,14 @@ export function TypewriterText({
   speed = 50,
   delay = 0,
   cursor = true,
-  cursorChar = "|",
+  cursorChar: cursorCharProp,
   loop = false,
   loopDelay = 2000,
   onComplete,
   className,
   ...props
 }: TypewriterTextProps) {
+  const cursorChar = filled(cursorCharProp, "|")
   const [displayText, setDisplayText] = React.useState("")
   const [isTyping, setIsTyping] = React.useState(false)
   const prefersReducedMotion = usePrefersReducedMotion()

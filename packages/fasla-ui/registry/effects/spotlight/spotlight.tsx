@@ -7,6 +7,10 @@ import { cn } from "../../../src/lib/utils"
 /** A layout effect in the browser, a plain effect on the server (where neither runs). */
 const useIsomorphicLayoutEffect = typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect
 
+/** The value, or the fallback when it is missing or blank (a cleared control, say). */
+const filled = (value: string | undefined, fallback: string) =>
+  value && value.trim() ? value : fallback
+
 export interface SpotlightProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Spotlight color */
   color?: string
@@ -23,7 +27,7 @@ export interface SpotlightProps extends React.HTMLAttributes<HTMLDivElement> {
  * Respects prefers-reduced-motion by disabling the effect.
  */
 export function Spotlight({
-  color = "color-mix(in oklch, var(--primary) 15%, transparent)",
+  color: colorProp,
   size = 400,
   blur = 80,
   opacity = 1,
@@ -31,6 +35,7 @@ export function Spotlight({
   children,
   ...props
 }: SpotlightProps) {
+  const color = filled(colorProp, "color-mix(in oklch, var(--primary) 15%, transparent)")
   const prefersReducedMotion = useReducedMotion()
   const containerRef = React.useRef<HTMLDivElement>(null)
 
@@ -125,12 +130,13 @@ export interface SpotlightCardProps extends React.HTMLAttributes<HTMLDivElement>
  * Card with spotlight effect on hover.
  */
 export function SpotlightCard({
-  spotlightColor = "color-mix(in oklch, var(--primary) 10%, transparent)",
+  spotlightColor: spotlightColorProp,
   spotlightSize = 300,
   className,
   children,
   ...props
 }: SpotlightCardProps) {
+  const spotlightColor = filled(spotlightColorProp, "color-mix(in oklch, var(--primary) 10%, transparent)")
   const prefersReducedMotion = useReducedMotion()
   const containerRef = React.useRef<HTMLDivElement>(null)
   const [isHovered, setIsHovered] = React.useState(false)

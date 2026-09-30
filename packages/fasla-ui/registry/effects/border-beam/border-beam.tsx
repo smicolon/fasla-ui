@@ -4,6 +4,10 @@ import * as React from "react"
 import { animate, motion, useMotionValue, useReducedMotion, useTransform } from "framer-motion"
 import { cn } from "../../../src/lib/utils"
 
+/** The value, or the fallback when it is missing or blank (a cleared control, say). */
+const filled = (value: string | undefined, fallback: string) =>
+  value && value.trim() ? value : fallback
+
 export interface BorderBeamProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Duration of the animation in seconds */
   duration?: number
@@ -24,13 +28,15 @@ export interface BorderBeamProps extends React.HTMLAttributes<HTMLDivElement> {
 export function BorderBeam({
   duration = 4,
   borderWidth = 2,
-  colorFrom = "var(--primary)",
-  colorTo = "transparent",
+  colorFrom: colorFromProp,
+  colorTo: colorToProp,
   delay = 0,
   className,
   children,
   ...props
 }: BorderBeamProps) {
+  const colorFrom = filled(colorFromProp, "var(--primary)")
+  const colorTo = filled(colorToProp, "transparent")
   const prefersReducedMotion = useReducedMotion()
 
   // The beam is a conic gradient whose start angle turns, so it runs round
@@ -112,13 +118,15 @@ const intensityValues = {
  * tight glow around it. The ring is the border, so the content needs none.
  */
 export function GlowingBorder({
-  glowColor = "color-mix(in oklch, var(--primary) 50%, transparent)",
-  borderRadius = "0.5rem",
+  glowColor: glowColorProp,
+  borderRadius: borderRadiusProp,
   intensity = "md",
   className,
   children,
   ...props
 }: GlowingBorderProps) {
+  const glowColor = filled(glowColorProp, "color-mix(in oklch, var(--primary) 50%, transparent)")
+  const borderRadius = filled(borderRadiusProp, "0.5rem")
   const { ring, glow } = intensityValues[intensity]
   return (
     <div
