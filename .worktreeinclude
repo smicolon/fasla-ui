@@ -1,0 +1,10 @@
+# Explicit paths relative to the repository root; Orca does not support globs.
+# Only existing, gitignored files are copied into new worktrees.
+# https://www.onorca.dev/docs/model/worktrees
+
+.env
+.env.local
+apps/docs/.env
+apps/docs/.env.local
+apps/storybook/.env
+apps/storybook/.env.local
