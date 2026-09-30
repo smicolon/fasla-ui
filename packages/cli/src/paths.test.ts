@@ -1,4 +1,5 @@
 import { afterEach, describe, it, expect, vi } from "vitest"
+import { execFileSync } from "child_process"
 import fs from "fs-extra"
 import os from "os"
 import path from "path"
@@ -443,5 +444,42 @@ describe("never writing through a symlink", () => {
     await fs.symlink(path.join(outside, "planted.tsx"), path.join(dir, "components/badge.tsx"))
     await expect(writeFileNoFollow(path.join(dir, "components/badge.tsx"), "x")).rejects.toMatchObject({ code: "ELOOP" })
     expect(await fs.pathExists(path.join(outside, "planted.tsx"))).toBe(false)
+  })
+})
+
+describe("writeFileNoFollow file modes", () => {
+  // The umask can't be changed inside a vitest worker, and at the usual 022
+  // 0o644 and 0o666 give the same file, so write from a child process under a
+  // shared-project umask, where they differ.
+  const hasBun = (() => {
+    try {
+      execFileSync("bun", ["--version"], { stdio: "ignore" })
+      return true
+    } catch {
+      return false
+    }
+  })()
+
+  it.skipIf(process.platform === "win32" || !hasBun)("gives a new file the mode fs.writeFile would, under the umask", async () => {
+    const dir = await tempDir()
+    const paths = path.resolve(__dirname, "paths.ts")
+    const script = `
+      import fs from "fs"
+      import { writeFileNoFollow } from ${JSON.stringify(paths)}
+      await writeFileNoFollow(${JSON.stringify(path.join(dir, "ours.tsx"))}, "x")
+      fs.writeFileSync(${JSON.stringify(path.join(dir, "plain.tsx"))}, "x")
+    `
+    execFileSync("sh", ["-c", 'umask 002 && exec bun -e "$0"', script])
+    const mode = async (f: string) => (await fs.stat(path.join(dir, f))).mode & 0o777
+    expect(await mode("plain.tsx")).toBe(0o664)
+    expect(await mode("ours.tsx")).toBe(0o664)
+  })
+
+  it.skipIf(process.platform === "win32")("keeps the mode of a file it overwrites", async () => {
+    const dir = await project({ "badge.tsx": "old" })
+    await fs.chmod(path.join(dir, "badge.tsx"), 0o600)
+    await writeFileNoFollow(path.join(dir, "badge.tsx"), "new")
+    expect((await fs.stat(path.join(dir, "badge.tsx"))).mode & 0o777).toBe(0o600)
+    expect(await fs.readFile(path.join(dir, "badge.tsx"), "utf8")).toBe("new")
   })
 })

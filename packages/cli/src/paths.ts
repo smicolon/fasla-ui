@@ -275,11 +275,13 @@ export async function resolveWritableFile(cwd: string, rel: string): Promise<str
 /**
  * Writes a file without following a symlink at its path, on systems that
  * support it: a link that appears after `resolveWritableFile` checked the
- * path makes the write fail instead of landing somewhere else.
+ * path makes the write fail instead of landing somewhere else. A new file
+ * gets 0o666 less the umask, as `fs.writeFile` gives it, so a shared
+ * project's group-write umask still applies; an existing file keeps its mode.
  */
 export async function writeFileNoFollow(file: string, content: string): Promise<void> {
   const { O_WRONLY, O_CREAT, O_TRUNC, O_NOFOLLOW } = fs.constants
-  const handle = await open(file, O_WRONLY | O_CREAT | O_TRUNC | (O_NOFOLLOW ?? 0), 0o644)
+  const handle = await open(file, O_WRONLY | O_CREAT | O_TRUNC | (O_NOFOLLOW ?? 0), 0o666)
   try {
     await handle.writeFile(content, "utf8")
   } finally {
