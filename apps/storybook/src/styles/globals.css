@@ -169,3 +169,15 @@
     @apply bg-background text-foreground;
   }
 }
+
+/*
+ * Docs view keeps Storybook's own light page for the English prose, but the
+ * theme toolbar puts `dark` on <html>, so the components inside each story
+ * canvas switch to dark tokens on that light page: white text on white. Each
+ * canvas takes the theme's surface and text colour instead; the prose around
+ * it is left as it is. Single-story view already gets them from `body`.
+ */
+.dark .docs-story {
+  background-color: var(--background);
+  color: var(--foreground);
+}
