@@ -4,7 +4,7 @@ import { ShimmerButton } from "./shimmer-button/shimmer-button"
 import { TypewriterText } from "./typewriter-text/typewriter-text"
 import { SpotlightCard } from "./spotlight/spotlight"
 import { GlowCard } from "./glow-card/glow-card"
-import { BorderBeam } from "./border-beam/border-beam"
+import { BorderBeam, GlowingBorder } from "./border-beam/border-beam"
 
 afterEach(() => {
   vi.useRealTimers()
@@ -91,5 +91,25 @@ describe("BorderBeam", () => {
     expect(root.firstElementChild).toBe(getByText("Card"))
     expect(beam.className).toContain("z-10")
     expect(beam.getAttribute("aria-hidden")).toBe("true")
+  })
+})
+
+describe("GlowingBorder", () => {
+  it("draws a coloured ring above the content with a tight glow and no spread", () => {
+    const { container, getByText } = render(
+      <GlowingBorder glowColor="red" intensity="lg">
+        Card
+      </GlowingBorder>
+    )
+    const root = container.firstElementChild as HTMLElement
+    const ring = root.lastElementChild as HTMLElement
+    expect(root.firstChild?.textContent).toBe(getByText("Card").textContent)
+    expect(ring.className).toContain("z-10")
+    const shadow = ring.style.boxShadow
+    expect(shadow).toContain("inset 0 0 0 2px red")
+    // Every outer layer is a blur with zero spread: "0 0 <blur>px 0".
+    for (const layer of shadow.split(/,(?![^(]*\))/).slice(1)) {
+      expect(layer.trim()).toMatch(/^0 0 \d+px 0 red$/)
+    }
   })
 })

@@ -97,14 +97,19 @@ export interface GlowingBorderProps extends React.HTMLAttributes<HTMLDivElement>
   intensity?: "sm" | "md" | "lg"
 }
 
+/**
+ * The ring's width and the blur of the glow that hugs it, in px. The glow has
+ * no spread, so it stays close to the edge instead of casting a shadow.
+ */
 const intensityValues = {
-  sm: "0 0 10px 2px",
-  md: "0 0 20px 4px",
-  lg: "0 0 30px 6px",
+  sm: { ring: 1, glow: 4 },
+  md: { ring: 1, glow: 8 },
+  lg: { ring: 2, glow: 12 },
 }
 
 /**
- * Static glowing border effect.
+ * Static glowing border: a coloured ring on the element's edge with a soft,
+ * tight glow around it. The ring is the border, so the content needs none.
  */
 export function GlowingBorder({
   glowColor = "color-mix(in oklch, var(--primary) 50%, transparent)",
@@ -114,6 +119,7 @@ export function GlowingBorder({
   children,
   ...props
 }: GlowingBorderProps) {
+  const { ring, glow } = intensityValues[intensity]
   return (
     <div
       className={cn("relative isolate", className)}
@@ -122,15 +128,21 @@ export function GlowingBorder({
       }}
       {...props}
     >
-      {/* Glow */}
+      {children}
+      {/*
+        Above the content, so a card's own background cannot cover it. The inset
+        shadow draws the ring just inside the edge, over any neutral border the
+        content has; the outer ones are the glow.
+      */}
       <div
-        className="absolute inset-0 -z-10"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-10"
         style={{
           borderRadius,
-          boxShadow: `${intensityValues[intensity]} ${glowColor}`,
+          // Two stacked blurs, no spread: a denser glow at the edge that fades fast.
+          boxShadow: `inset 0 0 0 ${ring}px ${glowColor}, 0 0 ${glow / 2}px 0 ${glowColor}, 0 0 ${glow}px 0 ${glowColor}`,
         }}
       />
-      {children}
     </div>
   )
 }
