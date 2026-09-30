@@ -46,16 +46,21 @@ export function Spotlight({
   const springX = useSpring(mouseX, springConfig)
   const springY = useSpring(mouseY, springConfig)
 
-  // Rest at the centre, not the top-left corner, until the pointer moves, and
-  // follow the centre while the container resizes (a sidebar opening, say).
+  // The motion values hold the light's centre, and the light is offset by half
+  // its size through left and top, so a change of size keeps it centred on the
+  // same point instead of drifting away from the pointer.
+  //
+  // Rest at the container's centre, not its top-left corner, until the pointer
+  // moves, and follow that centre while the container resizes (a sidebar
+  // opening, say).
   const pointerMoved = React.useRef(false)
   useIsomorphicLayoutEffect(() => {
     const el = containerRef.current
     if (!el) return
     const centre = () => {
       if (pointerMoved.current) return
-      const x = el.offsetWidth / 2 - size / 2
-      const y = el.offsetHeight / 2 - size / 2
+      const x = el.offsetWidth / 2
+      const y = el.offsetHeight / 2
       mouseX.jump(x)
       mouseY.jump(y)
       springX.jump(x)
@@ -66,7 +71,7 @@ export function Spotlight({
     const observer = new ResizeObserver(centre)
     observer.observe(el)
     return () => observer.disconnect()
-  }, [mouseX, mouseY, springX, springY, size, prefersReducedMotion])
+  }, [mouseX, mouseY, springX, springY, prefersReducedMotion])
 
   const handleMouseMove = React.useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
@@ -74,13 +79,10 @@ export function Spotlight({
 
       pointerMoved.current = true
       const rect = containerRef.current.getBoundingClientRect()
-      const x = e.clientX - rect.left - size / 2
-      const y = e.clientY - rect.top - size / 2
-
-      mouseX.set(x)
-      mouseY.set(y)
+      mouseX.set(e.clientX - rect.left)
+      mouseY.set(e.clientY - rect.top)
     },
-    [mouseX, mouseY, size, prefersReducedMotion]
+    [mouseX, mouseY, prefersReducedMotion]
   )
 
   if (prefersReducedMotion) {
@@ -98,13 +100,16 @@ export function Spotlight({
       className={cn("relative isolate overflow-hidden", className)}
       {...props}
     >
-      {/* Spotlight. Pinned to the top-left corner: without it, a flex parent that
-          centres its content would move the origin the pointer offsets start from. */}
+      {/* Spotlight. Placed from the top-left corner (a flex parent that centres
+          its content would otherwise move the origin), then pulled back by half
+          its size so x and y are its centre. */}
       <motion.div
-        className="pointer-events-none absolute left-0 top-0 -z-10 rounded-full"
+        className="pointer-events-none absolute -z-10 rounded-full"
         style={{
           x: springX,
           y: springY,
+          left: -size / 2,
+          top: -size / 2,
           width: size,
           height: size,
           background: `radial-gradient(circle, ${color} 0%, transparent 70%)`,

@@ -135,15 +135,15 @@ describe("Spotlight", () => {
       // framer writes translateX(<n>px); jsdom has no DOMMatrix to parse it.
       const x = () => Number(/translateX\((-?[\d.]+)px\)/.exec(light.style.transform)?.[1] ?? 0)
       // framer writes the transform on its next frame, hence waitFor.
-      await waitFor(() => expect(x()).toBe(150)) // (400 - 100) / 2
+      await waitFor(() => expect(x()).toBe(200)) // centre of 400
       width = 800
       act(() => resize())
-      await waitFor(() => expect(x()).toBe(350)) // (800 - 100) / 2
+      await waitFor(() => expect(x()).toBe(400)) // centre of 800
       fireEvent.mouseMove(container.firstElementChild!, { clientX: 10, clientY: 10 })
       width = 1000
       act(() => resize())
       await new Promise((resolve) => setTimeout(resolve, 100))
-      expect(x()).not.toBe(450) // the pointer has taken over from the centre
+      expect(x()).not.toBe(500) // the pointer has taken over from the centre
     } finally {
       widthSpy.mockRestore()
       heightSpy.mockRestore()
@@ -219,5 +219,48 @@ describe("blank string props fall back to their defaults", () => {
   it("TypewriterText: a blank cursorChar keeps the default cursor", () => {
     const { container } = render(<TypewriterText text="Hi" cursorChar="" />)
     expect(container.querySelector("[aria-hidden]")?.textContent).toBe("|")
+  })
+})
+
+describe("Spotlight size", () => {
+  // The light's centre is its translate plus its left offset plus half its size.
+  const centreOf = (light: HTMLElement) => {
+    const translate = Number(/translateX\((-?[\d.]+)px\)/.exec(light.style.transform)?.[1] ?? 0)
+    return translate + parseFloat(light.style.left) + light.offsetWidth / 2
+  }
+
+  it("keeps the light centred on the pointer when size changes after the pointer moved", async () => {
+    const widthSpy = vi.spyOn(HTMLElement.prototype, "offsetWidth", "get").mockImplementation(function (this: HTMLElement) {
+      return this.classList.contains("rounded-full") ? parseFloat(this.style.width) : 400
+    })
+    try {
+      const { container, rerender } = render(<Spotlight size={100}>Panel</Spotlight>)
+      const root = container.firstElementChild!
+      fireEvent.mouseMove(root, { clientX: 120, clientY: 60 })
+      const light = () => container.querySelector<HTMLElement>(".rounded-full")!
+      await waitFor(() => expect(Math.round(centreOf(light()))).toBe(120))
+      rerender(<Spotlight size={300}>Panel</Spotlight>)
+      await waitFor(() => expect(light().style.width).toBe("300px"))
+      expect(Math.round(centreOf(light()))).toBe(120)
+      expect(light().style.left).toBe("-150px")
+    } finally {
+      widthSpy.mockRestore()
+    }
+  })
+
+  it("keeps the resting light at the container's centre when size changes", async () => {
+    const widthSpy = vi.spyOn(HTMLElement.prototype, "offsetWidth", "get").mockImplementation(function (this: HTMLElement) {
+      return this.classList.contains("rounded-full") ? parseFloat(this.style.width) : 400
+    })
+    try {
+      const { container, rerender } = render(<Spotlight size={100}>Panel</Spotlight>)
+      const light = () => container.querySelector<HTMLElement>(".rounded-full")!
+      await waitFor(() => expect(Math.round(centreOf(light()))).toBe(200))
+      rerender(<Spotlight size={300}>Panel</Spotlight>)
+      await waitFor(() => expect(light().style.width).toBe("300px"))
+      expect(Math.round(centreOf(light()))).toBe(200)
+    } finally {
+      widthSpy.mockRestore()
+    }
   })
 })
