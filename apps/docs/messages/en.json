@@ -1002,8 +1002,8 @@
         "title": "Autumn sale ends tonight",
         "body": "Up to 30% off linen and wool."
       },
-      "glowTitle": "Glowing border",
-      "glowBody": "<code>GlowingBorder</code> is the still version: a soft glow round the edge, with no motion.",
+      "glowTitle": "Static glowing border",
+      "glowBody": "To highlight a card without motion, use <code>GlowingBorder</code> instead of the beam. It draws a still coloured border with a soft glow close to it.",
       "a11y": {
         "decorative": "The beam is decoration and ignores the pointer; the content inside works as usual.",
         "motion": "With <code>prefers-reduced-motion</code> set, the beam is replaced by a still border at half strength."
@@ -1015,7 +1015,7 @@
         "colorFrom": "Colour at the head of the beam.",
         "colorTo": "Colour the beam fades to.",
         "delay": "Seconds before it starts.",
-        "glowingBorder": "A still glow round the edge.",
+        "glowingBorder": "A still coloured border with a tight glow.",
         "className": "Extra classes for the component."
       }
     },
@@ -1086,9 +1086,9 @@
           "body": "Return any item within 30 days."
         }
       },
-      "followHint": "The second card's glow follows the pointer.",
+      "cardMotion": "The card’s glow reacts to the pointer: it lights up on hover, and on the second card, which sets <code>followMouse</code>, it follows the pointer.",
       "containerTitle": "Glow container",
-      "containerBody": "<code>GlowContainer</code> draws a glow that slides round the border, in the reading direction.",
+      "containerBody": "<code>GlowContainer</code> draws a glow that slides round the border, in the reading direction. It moves on its own and doesn’t react to the pointer.",
       "container": "Members get early access to the autumn edit.",
       "a11y": {
         "decorative": "The glow is decoration; the card's content works as usual.",

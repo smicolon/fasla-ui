@@ -63,7 +63,6 @@ type StoryCtx = { globals: { direction?: string } }
 const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
 
 const CHART = ["var(--chart-1)", "var(--chart-2)", "var(--chart-5)"]
-const glowOf = (color: string) => `color-mix(in oklch, ${color} 50%, transparent)`
 
 export const Default: Story = {
   render: (args, ctx) => {
@@ -107,12 +106,17 @@ export const DifferentSpeeds: Story = {
   ),
 }
 
+/**
+ * Static glowing border. To highlight a card without motion, use `GlowingBorder`
+ * instead of the beam: a still coloured border with a soft glow close to it.
+ * This story shows the default colour, `--primary` at 50%.
+ */
 export const GlowingBorderDefault: Story = {
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
       <GlowingBorder className="w-64">
-        <div className="rounded-lg border bg-card p-6">
+        <div className="rounded-lg bg-card p-6">
           <h3 className="font-semibold">{c.glowTitle}</h3>
           <p className="mt-2 text-sm text-muted-foreground">{c.glowBody}</p>
         </div>
@@ -121,12 +125,13 @@ export const GlowingBorderDefault: Story = {
   },
 }
 
+/** Static glowing border: `intensity` sets the ring's width and how far the tight glow reaches. */
 export const GlowIntensities: Story = {
   render: (_args, ctx) => (
     <div className="flex flex-col gap-8">
       {(["sm", "md", "lg"] as const).map((intensity, i) => (
-        <GlowingBorder key={intensity} intensity={intensity}>
-          <div className="w-64 rounded-lg border bg-card p-6">
+        <GlowingBorder key={intensity} intensity={intensity} glowColor="var(--chart-2)">
+          <div className="w-64 rounded-lg bg-card p-6">
             <h3 className="font-semibold">{copy(ctx).intensities[i]}</h3>
           </div>
         </GlowingBorder>
@@ -135,12 +140,13 @@ export const GlowIntensities: Story = {
   ),
 }
 
+/** Static glowing border: `glowColor` colours both the ring and its glow. */
 export const GlowColors: Story = {
   render: (_args, ctx) => (
     <div className="flex gap-6">
       {CHART.map((color, i) => (
-        <GlowingBorder key={color} glowColor={glowOf(color)}>
-          <div className="rounded-lg border bg-card p-6">
+        <GlowingBorder key={color} glowColor={color}>
+          <div className="rounded-lg bg-card p-6">
             <p className="text-sm font-medium">{copy(ctx).colours[i]}</p>
           </div>
         </GlowingBorder>

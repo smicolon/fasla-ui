@@ -58,7 +58,7 @@ export default function BorderBeamPage() {
         <h2 className="text-2xl font-semibold">{b("glowTitle")}</h2>
         <p className="text-muted-foreground">{b.rich("glowBody", richCode)}</p>
         <ComponentPreview>
-          <GlowingBorder className="w-72 border bg-card" borderRadius="0.75rem">
+          <GlowingBorder className="w-72 bg-card" borderRadius="0.75rem" glowColor="var(--chart-2)">
             {card}
           </GlowingBorder>
         </ComponentPreview>
@@ -89,7 +89,7 @@ export default function BorderBeamPage() {
   <div className="p-6">${b("card.title")}</div>
 </BorderBeam>
 
-<GlowingBorder intensity="lg">
+<GlowingBorder glowColor="var(--chart-2)" intensity="lg">
   <div className="p-6">${b("card.title")}</div>
 </GlowingBorder>`}</CodeBlock>
       </section>

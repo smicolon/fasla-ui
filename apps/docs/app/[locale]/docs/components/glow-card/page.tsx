@@ -40,7 +40,7 @@ export default function GlowCardPage() {
       {/* Preview */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("preview")}</h2>
-        <p className="text-muted-foreground">{g("followHint")}</p>
+        <p className="text-muted-foreground">{g.rich("cardMotion", richCode)}</p>
         <ComponentPreview>
           <div className="grid w-full gap-4 sm:grid-cols-2">
             <GlowCard glowColor="var(--chart-2)">

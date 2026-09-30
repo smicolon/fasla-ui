@@ -85,10 +85,10 @@ export function CodeBlock({ children, language = "tsx" }: CodeBlockProps) {
 
   return (
     // Code reads left to right in both directions, so the block keeps its own
-    // LTR order in Arabic; otherwise the copy button lands on top of the code.
-    <div dir="ltr" className="relative">
+    // LTR order in Arabic.
+    <div dir="ltr">
       <div className="rounded-lg bg-terminal border border-terminal-border overflow-hidden">
-        {/* Terminal header */}
+        {/* Terminal header. The copy button lives here, not over the code, so a long first line never runs under it. */}
         <div className="flex items-center gap-2 px-4 py-2 bg-foreground/[0.04] border-b border-terminal-border">
           <div className="flex gap-1.5">
             <div className="h-3 w-3 rounded-full bg-red-500/80" />
@@ -96,17 +96,18 @@ export function CodeBlock({ children, language = "tsx" }: CodeBlockProps) {
             <div className="h-3 w-3 rounded-full bg-green-500/80" />
           </div>
           <span className="text-xs text-terminal-muted ms-2">{language}</span>
+          <button
+            type="button"
+            onClick={copy}
+            className="ms-auto rounded-md bg-foreground/10 px-2 py-0.5 text-xs text-terminal-foreground hover:bg-foreground/20 transition-colors"
+          >
+            {copied ? t("copied") : t("copyCode")}
+          </button>
         </div>
         <pre className="overflow-x-auto p-4">
           <code className="text-sm text-green-400 font-mono">{renderCode(children)}</code>
         </pre>
       </div>
-      <button
-        onClick={copy}
-        className="absolute end-4 top-12 rounded-md bg-foreground/10 px-2 py-1 text-xs text-terminal-foreground hover:bg-foreground/20 transition-colors"
-      >
-        {copied ? t("copied") : t("copyCode")}
-      </button>
     </div>
   )
 }

@@ -32,6 +32,21 @@ function CommaBreaks({ value }: { value: string }) {
   )
 }
 
+/** Code that may break at its spaces and nowhere else. */
+function SpaceBreaks({ value }: { value: string }) {
+  const words = value.split(" ")
+  return (
+    <>
+      {words.map((word, index) => (
+        <Fragment key={index}>
+          {index > 0 && " "}
+          <span className="whitespace-nowrap">{word}</span>
+        </Fragment>
+      ))}
+    </>
+  )
+}
+
 /**
  * A type that may break before each `|`, never inside a value, so
  * `"sm" | "md" | "lg"` keeps the type column narrow enough for the
@@ -82,8 +97,11 @@ export function PropsTable({ rows }: { rows: PropRow[] }) {
               </td>
               <td className="px-3 py-2 text-start text-muted-foreground">
                 {row.fallback ? (
-                  // A default wraps at its spaces, like the CSS or text it is.
-                  <code className="text-xs text-foreground">{row.fallback}</code>
+                  // A default wraps at its spaces, never inside a token: a plain
+                  // wrap would also break after the hyphens of "var(--primary)".
+                  <code className="text-xs text-foreground">
+                    <SpaceBreaks value={row.fallback} />
+                  </code>
                 ) : (
                   t("none")
                 )}
