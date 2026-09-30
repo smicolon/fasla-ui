@@ -74,9 +74,20 @@ export default function NavbarPage() {
                   open={open}
                   onClick={() => setOpen(!open)}
                   aria-label={open ? n("close") : n("open")}
+                  aria-controls="navbar-preview-menu"
                 />
               </NavbarContent>
             </Navbar>
+            {/* NavbarMenu hides below md, so a narrow screen shows the links here instead */}
+            {open && (
+              <div id="navbar-preview-menu" className="flex flex-col gap-3 border-t bg-background p-4 md:hidden">
+                {LINKS.map((link, i) => (
+                  <NavbarLink key={link} href="#" active={i === 0}>
+                    {n(`links.${link}`)}
+                  </NavbarLink>
+                ))}
+              </div>
+            )}
           </div>
         </ComponentPreview>
       </section>

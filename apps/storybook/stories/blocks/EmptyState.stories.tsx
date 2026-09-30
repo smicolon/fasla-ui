@@ -86,8 +86,8 @@ export const WithActions: Story = {
     return (
       <EmptyState
         {...args}
-        title={c.title}
-        description={c.description}
+        title={args.title ?? c.title}
+        description={args.description ?? c.description}
         icon={<FolderIcon />}
         action={<Button>{c.action}</Button>}
         secondaryAction={<Button variant="outline">{c.secondary}</Button>}

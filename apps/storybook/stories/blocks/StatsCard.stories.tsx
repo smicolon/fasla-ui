@@ -68,9 +68,9 @@ export const Default: Story = {
     return (
       <StatsCard
         {...args}
-        title={c.revenue}
-        value={c.revenueValue}
-        description={c.fromLastMonth}
+        title={args.title ?? c.revenue}
+        value={args.value ?? c.revenueValue}
+        description={args.description ?? c.fromLastMonth}
         icon={<DollarIcon />}
         trend={{ value: 20.1, direction: "up" }}
       />
@@ -82,13 +82,13 @@ export const TrendDown: Story = {
   render: (args, ctx) => {
     const c = copy(ctx)
     return (
-      <StatsCard {...args} title={c.returns} value="4.2%" description={c.vsLastWeek} trend={{ value: -5.2, direction: "down" }} />
+      <StatsCard {...args} title={args.title ?? c.returns} value={args.value ?? "4.2%"} description={args.description ?? c.vsLastWeek} trend={{ value: -5.2, direction: "down" }} />
     )
   },
 }
 
 export const Loading: Story = {
-  render: (args, ctx) => <StatsCard {...args} title={copy(ctx).customers} value="0" loading icon={<UsersIcon />} />,
+  render: (args, ctx) => <StatsCard {...args} title={args.title ?? copy(ctx).customers} value={args.value ?? "0"} loading icon={<UsersIcon />} />,
 }
 
 export const Grid: Story = {

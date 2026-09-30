@@ -98,7 +98,7 @@ export const Default: Story = {
   render: (args, ctx) => {
     const c = copy(ctx)
     return (
-      <FormSection {...args} title={c.personal.title} description={c.personal.description}>
+      <FormSection {...args} title={args.title ?? c.personal.title} description={args.description ?? c.personal.description}>
         <PersonalFields c={c} />
       </FormSection>
     )
@@ -109,7 +109,7 @@ export const WithError: Story = {
   render: (args, ctx) => {
     const c = copy(ctx)
     return (
-      <FormSection {...args} title={c.account.title} description={c.account.description}>
+      <FormSection {...args} title={args.title ?? c.account.title} description={args.description ?? c.account.description}>
         <div className="grid gap-4">
           <FormField label={c.username} htmlFor="username" required error={c.usernameTaken}>
             <Input id="username" variant="error" defaultValue="layla" />
@@ -127,7 +127,7 @@ export const NoDivider: Story = {
   render: (args, ctx) => {
     const c = copy(ctx)
     return (
-      <FormSection {...args} title={c.notifications.title} description={c.notifications.description} divider={false}>
+      <FormSection {...args} title={args.title ?? c.notifications.title} description={args.description ?? c.notifications.description} divider={false}>
         <div className="space-y-4">
           {c.channels.map((channel) => (
             <Checkbox key={channel} label={channel} />

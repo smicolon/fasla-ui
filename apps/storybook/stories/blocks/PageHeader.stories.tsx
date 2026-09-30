@@ -74,7 +74,7 @@ const Breadcrumb = ({ c }: { c: Copy }) => (
 
 export const Default: Story = {
   render: (args, ctx) => (
-    <PageHeader {...args} title={copy(ctx).orders.title} description={copy(ctx).orders.description} />
+    <PageHeader {...args} title={args.title ?? copy(ctx).orders.title} description={args.description ?? copy(ctx).orders.description} />
   ),
 }
 
@@ -84,8 +84,8 @@ export const WithActions: Story = {
     return (
       <PageHeader
         {...args}
-        title={c.products.title}
-        description={c.products.description}
+        title={args.title ?? c.products.title}
+        description={args.description ?? c.products.description}
         actions={
           <>
             <Button variant="outline">{c.export}</Button>
@@ -103,10 +103,10 @@ export const WithBreadcrumb: Story = {
     return (
       <PageHeader
         {...args}
-        title={c.settings.title}
-        description={c.settings.description}
+        title={args.title ?? c.settings.title}
+        description={args.description ?? c.settings.description}
         breadcrumb={<Breadcrumb c={c} />}
-        breadcrumbLabel={c.breadcrumbLabel}
+        breadcrumbLabel={args.breadcrumbLabel ?? c.breadcrumbLabel}
         actions={<Button>{c.saveChanges}</Button>}
       />
     )
@@ -114,7 +114,7 @@ export const WithBreadcrumb: Story = {
 }
 
 export const TitleOnly: Story = {
-  render: (args, ctx) => <PageHeader {...args} title={copy(ctx).dashboard} />,
+  render: (args, ctx) => <PageHeader {...args} title={args.title ?? copy(ctx).dashboard} />,
 }
 
 export const NoBorder: Story = {
@@ -123,8 +123,8 @@ export const NoBorder: Story = {
     return (
       <PageHeader
         {...args}
-        title={c.account.title}
-        description={c.account.description}
+        title={args.title ?? c.account.title}
+        description={args.description ?? c.account.description}
         bordered={false}
         actions={<Button variant="outline">{c.cancel}</Button>}
       />
@@ -137,7 +137,7 @@ export const LongTitle: Story = {
   render: (args, ctx) => {
     const c = copy(ctx)
     return (
-      <PageHeader {...args} title={c.long.title} description={c.long.description} actions={<Button>{c.action}</Button>} />
+      <PageHeader {...args} title={args.title ?? c.long.title} description={args.description ?? c.long.description} actions={<Button>{c.action}</Button>} />
     )
   },
 }

@@ -46,7 +46,7 @@ const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : CO
 
 export const Default: Story = {
   render: (args, ctx) => (
-    <Select {...args} options={copy(ctx).options} placeholder={args.placeholder ?? copy(ctx).placeholder} className="w-[200px]" />
+    <Select {...args} options={args.options ?? copy(ctx).options} placeholder={args.placeholder ?? copy(ctx).placeholder} className="w-[200px]" />
   ),
 }
 
@@ -64,11 +64,11 @@ export const Sizes: Story = {
 }
 
 export const Error: Story = {
-  render: (args, ctx) => <Select {...args} options={copy(ctx).options} error className="w-[200px]" />,
+  render: (args, ctx) => <Select {...args} options={args.options ?? copy(ctx).options} error className="w-[200px]" />,
 }
 
 export const Disabled: Story = {
-  render: (args, ctx) => <Select {...args} options={copy(ctx).options} disabled className="w-[200px]" />,
+  render: (args, ctx) => <Select {...args} options={args.options ?? copy(ctx).options} disabled className="w-[200px]" />,
 }
 
 export const WithDisabledOption: Story = {
@@ -77,7 +77,7 @@ export const WithDisabledOption: Story = {
     return (
       <Select
         {...args}
-        options={[...c.options, { value: "disabled", label: c.disabledOption, disabled: true }]}
+        options={args.options ?? [...c.options, { value: "disabled", label: c.disabledOption, disabled: true }]}
         className="w-[200px]"
       />
     )

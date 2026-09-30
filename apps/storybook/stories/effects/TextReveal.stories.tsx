@@ -70,7 +70,7 @@ export const Default: Story = {
   args: {
     className: "text-2xl font-semibold",
   },
-  render: (args, ctx) => <TextReveal {...args} text={copy(ctx).welcome} />,
+  render: (args, ctx) => <TextReveal {...args} text={args.text ?? copy(ctx).welcome} />,
 }
 
 export const CharacterReveal: Story = {

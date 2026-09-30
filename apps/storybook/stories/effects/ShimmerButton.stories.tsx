@@ -59,7 +59,7 @@ const GRADIENTS = [
 ]
 
 export const Default: Story = {
-  render: (args, ctx) => <ShimmerButton {...args}>{copy(ctx).label}</ShimmerButton>,
+  render: (args, ctx) => <ShimmerButton {...args}>{args.children ?? copy(ctx).label}</ShimmerButton>,
 }
 
 export const CustomColors: Story = {
@@ -94,7 +94,7 @@ export const WithIcon: Story = {
         <path d="M3 6h18" />
         <path d="M16 10a4 4 0 0 1-8 0" />
       </svg>
-      {copy(ctx).icon}
+      {args.children ?? copy(ctx).icon}
     </ShimmerButton>
   ),
 }
@@ -102,7 +102,7 @@ export const WithIcon: Story = {
 export const Disabled: Story = {
   render: (args, ctx) => (
     <ShimmerButton {...args} disabled>
-      {copy(ctx).disabled}
+      {args.children ?? copy(ctx).disabled}
     </ShimmerButton>
   ),
 }

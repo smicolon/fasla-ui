@@ -45,27 +45,27 @@ const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : CO
 
 export const Default: Story = {
   args: { className: "text-2xl font-bold" },
-  render: (args, ctx) => <TypewriterText {...args} text={copy(ctx).default} />,
+  render: (args, ctx) => <TypewriterText {...args} text={args.text ?? copy(ctx).default} />,
 }
 
 export const SlowSpeed: Story = {
   args: { speed: 150, className: "text-xl" },
-  render: (args, ctx) => <TypewriterText {...args} text={copy(ctx).slow} />,
+  render: (args, ctx) => <TypewriterText {...args} text={args.text ?? copy(ctx).slow} />,
 }
 
 export const WithDelay: Story = {
   args: { delay: 1000, className: "text-xl" },
-  render: (args, ctx) => <TypewriterText {...args} text={copy(ctx).delayed} />,
+  render: (args, ctx) => <TypewriterText {...args} text={args.text ?? copy(ctx).delayed} />,
 }
 
 export const NoCursor: Story = {
   args: { cursor: false, className: "text-xl" },
-  render: (args, ctx) => <TypewriterText {...args} text={copy(ctx).noCursor} />,
+  render: (args, ctx) => <TypewriterText {...args} text={args.text ?? copy(ctx).noCursor} />,
 }
 
 export const Looping: Story = {
   args: { loop: true, loopDelay: 1500, className: "text-xl" },
-  render: (args, ctx) => <TypewriterText {...args} text={copy(ctx).looping} />,
+  render: (args, ctx) => <TypewriterText {...args} text={args.text ?? copy(ctx).looping} />,
 }
 
 export const WordsCycle: Story = {

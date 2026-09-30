@@ -96,11 +96,16 @@ export const WithMobileMenu: Story = {
             </NavbarMenu>
           </NavbarContent>
           <NavbarContent align="end">
-            <NavbarToggle open={open} onClick={() => setOpen(!open)} aria-label={open ? c.close : c.open} />
+            <NavbarToggle
+              open={open}
+              onClick={() => setOpen(!open)}
+              aria-label={open ? c.close : c.open}
+              aria-controls="navbar-story-menu"
+            />
           </NavbarContent>
         </Navbar>
         {open && (
-          <div className="border-b bg-background p-4 md:hidden">
+          <div id="navbar-story-menu" className="border-b bg-background p-4 md:hidden">
             <nav className="flex flex-col gap-2">
               {links.map((link, i) => (
                 <a key={link} href="#" className={i === 0 ? "py-2 font-medium" : "py-2 text-muted-foreground"}>
