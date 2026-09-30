@@ -161,6 +161,8 @@ export function NavbarToggle({
         className
       )}
       aria-label={open ? "Close menu" : "Open menu"}
+      // Screen readers announce whether the menu it controls is showing.
+      aria-expanded={open ?? false}
       {...props}
     >
       {open ? (

@@ -1,8 +1,8 @@
 import { describe, it, expect, vi, afterEach } from "vitest"
-import { act, fireEvent, render } from "@testing-library/react"
+import { act, fireEvent, render, waitFor } from "@testing-library/react"
 import { ShimmerButton } from "./shimmer-button/shimmer-button"
 import { TypewriterText } from "./typewriter-text/typewriter-text"
-import { SpotlightCard } from "./spotlight/spotlight"
+import { Spotlight, SpotlightCard } from "./spotlight/spotlight"
 import { GlowCard } from "./glow-card/glow-card"
 import { BorderBeam, GlowingBorder } from "./border-beam/border-beam"
 
@@ -110,6 +110,43 @@ describe("GlowingBorder", () => {
     // Every outer layer is a blur with zero spread: "0 0 <blur>px 0".
     for (const layer of shadow.split(/,(?![^(]*\))/).slice(1)) {
       expect(layer.trim()).toMatch(/^0 0 \d+px 0 red$/)
+    }
+  })
+})
+
+describe("Spotlight", () => {
+  it("keeps the resting light centred when the container resizes, until the pointer moves", async () => {
+    let resize: () => void = () => {}
+    const saved = globalThis.ResizeObserver
+    globalThis.ResizeObserver = class {
+      constructor(callback: () => void) {
+        resize = callback
+      }
+      observe() {}
+      disconnect() {}
+    } as unknown as typeof ResizeObserver
+    let width = 400
+    const widthSpy = vi.spyOn(HTMLElement.prototype, "offsetWidth", "get").mockImplementation(() => width)
+    const heightSpy = vi.spyOn(HTMLElement.prototype, "offsetHeight", "get").mockImplementation(() => 200)
+    try {
+      const { container } = render(<Spotlight size={100}>Panel</Spotlight>)
+      const light = container.querySelector<HTMLElement>(".rounded-full")!
+      // framer writes translateX(<n>px); jsdom has no DOMMatrix to parse it.
+      const x = () => Number(/translateX\((-?[\d.]+)px\)/.exec(light.style.transform)?.[1] ?? 0)
+      // framer writes the transform on its next frame, hence waitFor.
+      await waitFor(() => expect(x()).toBe(150)) // (400 - 100) / 2
+      width = 800
+      act(() => resize())
+      await waitFor(() => expect(x()).toBe(350)) // (800 - 100) / 2
+      fireEvent.mouseMove(container.firstElementChild!, { clientX: 10, clientY: 10 })
+      width = 1000
+      act(() => resize())
+      await new Promise((resolve) => setTimeout(resolve, 100))
+      expect(x()).not.toBe(450) // the pointer has taken over from the centre
+    } finally {
+      widthSpy.mockRestore()
+      heightSpy.mockRestore()
+      globalThis.ResizeObserver = saved
     }
   })
 })

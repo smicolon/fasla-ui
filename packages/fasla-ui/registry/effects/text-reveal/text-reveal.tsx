@@ -36,7 +36,9 @@ function splitGraphemes(text: string): string[] {
     const segmenter = new Segmenter(undefined, { granularity: "grapheme" })
     return Array.from(segmenter.segment(text), (part) => part.segment)
   }
-  return Array.from(text)
+  // Without Segmenter (Firefox before 125, for one), keep each combining mark
+  // with the character before it, so a letter and its accent animate together.
+  return text.match(/\P{M}\p{M}*|\p{M}+/gu) ?? []
 }
 
 /**
@@ -83,26 +85,33 @@ export function TextReveal({
     >
       {/* Read once, whole; the animated pieces are hidden from assistive tech */}
       <span className="sr-only">{text}</span>
-      {units.map((unit, i) => (
-        <motion.span
-          aria-hidden="true"
-          key={`${unit}-${i}`}
-          className="inline-block"
-          initial={{ opacity: 0, y: 10 }}
-          animate={
-            shouldAnimate
-              ? { opacity: 1, y: 0 }
-              : { opacity: 0, y: 10 }
-          }
-          transition={{
-            duration,
-            delay: i * delay,
-            ease: [0.2, 0.65, 0.3, 0.9],
-          }}
-        >
-          {/^\s+$/.test(unit) ? "\u00A0" : unit}
-        </motion.span>
-      ))}
+      {units.map((unit, i) =>
+        /^\s+$/.test(unit) ? (
+          // Whitespace stays plain text, so it follows the element's
+          // white-space like the unanimated text: collapsed normally, kept
+          // (with its line breaks) under whitespace-pre-wrap.
+          <React.Fragment key={`space-${i}`}>{unit}</React.Fragment>
+        ) : (
+          <motion.span
+            aria-hidden="true"
+            key={`${unit}-${i}`}
+            className="inline-block"
+            initial={{ opacity: 0, y: 10 }}
+            animate={
+              shouldAnimate
+                ? { opacity: 1, y: 0 }
+                : { opacity: 0, y: 10 }
+            }
+            transition={{
+              duration,
+              delay: i * delay,
+              ease: [0.2, 0.65, 0.3, 0.9],
+            }}
+          >
+            {unit}
+          </motion.span>
+        )
+      )}
     </div>
   )
 }

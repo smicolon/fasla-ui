@@ -41,20 +41,33 @@ export function Spotlight({
   const springX = useSpring(mouseX, springConfig)
   const springY = useSpring(mouseY, springConfig)
 
-  // Rest at the centre, not the top-left corner, until the pointer moves.
+  // Rest at the centre, not the top-left corner, until the pointer moves, and
+  // follow the centre while the container resizes (a sidebar opening, say).
+  const pointerMoved = React.useRef(false)
   useIsomorphicLayoutEffect(() => {
     const el = containerRef.current
     if (!el) return
-    mouseX.jump(el.offsetWidth / 2 - size / 2)
-    mouseY.jump(el.offsetHeight / 2 - size / 2)
-    springX.jump(el.offsetWidth / 2 - size / 2)
-    springY.jump(el.offsetHeight / 2 - size / 2)
+    const centre = () => {
+      if (pointerMoved.current) return
+      const x = el.offsetWidth / 2 - size / 2
+      const y = el.offsetHeight / 2 - size / 2
+      mouseX.jump(x)
+      mouseY.jump(y)
+      springX.jump(x)
+      springY.jump(y)
+    }
+    centre()
+    if (typeof ResizeObserver === "undefined") return
+    const observer = new ResizeObserver(centre)
+    observer.observe(el)
+    return () => observer.disconnect()
   }, [mouseX, mouseY, springX, springY, size, prefersReducedMotion])
 
   const handleMouseMove = React.useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (!containerRef.current || prefersReducedMotion) return
 
+      pointerMoved.current = true
       const rect = containerRef.current.getBoundingClientRect()
       const x = e.clientX - rect.left - size / 2
       const y = e.clientY - rect.top - size / 2

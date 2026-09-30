@@ -73,7 +73,8 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     // Radio's control does, so it stays centred on the first line.
     return (
       <div className="flex items-start gap-3">
-        <div className="flex h-[calc(var(--leading-sm)*0.875rem)] shrink-0 items-center">{checkbox}</div>
+        {/* One label line tall, as Radio's control; falls back to English's 20 / 14 without the Fasla preset */}
+        <div className="flex h-[calc(var(--leading-sm,calc(20/14))*0.875rem)] shrink-0 items-center">{checkbox}</div>
         <div className="grid gap-1">
           {label && (
             <label

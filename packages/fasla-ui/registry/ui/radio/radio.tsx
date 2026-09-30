@@ -9,14 +9,15 @@ import { cn } from "../../../src/lib/utils"
  * not a length, so the line box is ratio × font-size. Writing it this way makes
  * the control direction-aware for free: under `[dir="rtl"]` the ramp re-points
  * `--leading-sm` at Cairo's 24px leading and the control re-centres itself with
- * no RTL-specific class.
+ * no RTL-specific class. The fallback, English's 20 / 14, is for a project that
+ * does not load the Fasla preset, where `--leading-sm` does not exist.
  *
  * The label deliberately has no fixed height. Figma pins its label boxes to
  * 16/20/24px, which is a defect there — at `sm` a 16px box holds 20px English
  * and 24px Arabic text — and it must not be mirrored here. The ramp sets the
  * leading; nothing else does.
  */
-const LINE_BOX = "h-[calc(var(--leading-sm)*0.875rem)]"
+const LINE_BOX = "h-[calc(var(--leading-sm,calc(20/14))*0.875rem)]"
 
 const radioVariants = cva(
   "group relative inline-flex cursor-pointer items-start gap-3 has-[:disabled]:pointer-events-none has-[:disabled]:opacity-50",

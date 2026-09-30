@@ -215,6 +215,14 @@ export interface PaginationLabels {
   goToPage: (page: number) => string
 }
 
+/** The entries of a partial object whose values are not undefined. */
+function definedOnly<T extends object>(value: Partial<T> | undefined): Partial<T> {
+  if (!value) return {}
+  return Object.fromEntries(
+    Object.entries(value).filter(([, entry]) => entry !== undefined)
+  ) as Partial<T>
+}
+
 const DEFAULT_PAGINATION_LABELS: PaginationLabels = {
   pagination: "Pagination",
   status: (page, totalPages) => `Page ${page} of ${totalPages}`,
@@ -236,7 +244,10 @@ export function Pagination({
   className,
   labels,
 }: PaginationProps) {
-  const text = { ...DEFAULT_PAGINATION_LABELS, ...labels }
+  // A label passed as undefined (a missed translation key, say) keeps its
+  // English default instead of replacing it: a plain spread would leave
+  // status or goToPage undefined, and calling them would crash the render.
+  const text = { ...DEFAULT_PAGINATION_LABELS, ...definedOnly(labels) }
   const canGoPrevious = page > 1
   const canGoNext = page < totalPages
 
