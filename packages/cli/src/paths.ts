@@ -303,15 +303,50 @@ export async function resolveWritableFile(cwd: string, rel: string): Promise<str
  * path makes the write fail instead of landing somewhere else. A new file
  * gets 0o666 less the umask, as `fs.writeFile` gives it, so a shared
  * project's group-write umask still applies; an existing file keeps its mode.
+ *
+ * With `createOnly`, the file must not exist yet: anything at the path — a
+ * file another process made after a check, one written earlier in the same
+ * run, a symlink — fails the write with `EEXIST` and is left as it was. The
+ * check and the create are one step, so nothing can slip in between them.
  */
-export async function writeFileNoFollow(file: string, content: string): Promise<void> {
-  const { O_WRONLY, O_CREAT, O_TRUNC, O_NOFOLLOW } = fs.constants
-  const handle = await open(file, O_WRONLY | O_CREAT | O_TRUNC | (O_NOFOLLOW ?? 0), 0o666)
+export async function writeFileNoFollow(
+  file: string,
+  content: string,
+  { createOnly = false }: { createOnly?: boolean } = {}
+): Promise<void> {
+  const { O_WRONLY, O_CREAT, O_TRUNC, O_EXCL, O_NOFOLLOW } = fs.constants
+  const flags = createOnly ? O_WRONLY | O_CREAT | O_EXCL : O_WRONLY | O_CREAT | O_TRUNC | (O_NOFOLLOW ?? 0)
+  const handle = await open(file, flags, 0o666)
   try {
     await handle.writeFile(content, "utf8")
   } finally {
     await handle.close()
   }
+}
+
+/**
+ * Writes one file for `add`, deciding whether it may at the moment of the
+ * write. A destination another component wrote earlier in the same run is
+ * never replaced, with or without `overwrite` — two registry files would
+ * otherwise overwrite each other. Without `overwrite`, a file already there,
+ * even one created after `checkDestination` ran, is left as it is.
+ */
+export async function installFile(
+  file: string,
+  content: string,
+  owner: string,
+  { overwrite, writtenBy }: { overwrite: boolean; writtenBy: Map<string, string> }
+): Promise<{ result: "written" } | { result: "exists" } | { result: "duplicate"; by: string }> {
+  const by = writtenBy.get(file)
+  if (by !== undefined) return { result: "duplicate", by }
+  try {
+    await writeFileNoFollow(file, content, { createOnly: !overwrite })
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "EEXIST") return { result: "exists" }
+    throw error
+  }
+  writtenBy.set(file, owner)
+  return { result: "written" }
 }
 
 async function lexists(p: string): Promise<boolean> {

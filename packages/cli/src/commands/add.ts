@@ -6,7 +6,7 @@ import fs from "fs-extra"
 import path from "path"
 import { fetchRegistry, fetchComponent, getTargetDirectory, type RegistryFile, type RegistryItem } from "../registry.js"
 import { resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
-import { aliasToPath, checkDestination, resolveInsideProject, writeFileNoFollow } from "../paths.js"
+import { aliasToPath, checkDestination, installFile, resolveInsideProject } from "../paths.js"
 import { aliasRootOrExit, safeOrExit } from "./shared.js"
 
 export const add = new Command()
@@ -146,18 +146,18 @@ export const add = new Command()
     // Check every destination before writing any, so a path that leads out of
     // the project, or a destination that is itself a symlink, stops the whole
     // install rather than half of it. Without --overwrite, a file already
-    // there is skipped instead — it won't be written, so a symlink there is
-    // no reason to stop.
+    // there will be skipped — it won't be written, so a symlink there is no
+    // reason to stop. Whether it exists is decided again when it is written.
     addSpinner.stop()
-    const skipped = new Set<string>()
     for (const component of resolved.items) {
       for (const file of component.files ?? []) {
-        const targetPath = targetPathOf(file, component)
-        if ((await safeOrExit(() => checkDestination(cwd, targetPath, Boolean(options.overwrite)))) === "skip") {
-          skipped.add(targetPath)
-        }
+        await safeOrExit(() => checkDestination(cwd, targetPathOf(file, component), Boolean(options.overwrite)))
       }
     }
+
+    // Which component wrote each file in this run, so two registry files with
+    // the same destination can't replace each other, with or without -o.
+    const writtenBy = new Map<string, string>()
 
     for (const component of resolved.items) {
       const componentName = component.name
@@ -184,11 +184,6 @@ export const add = new Command()
           const filename = path.basename(targetPath)
           await fs.ensureDir(targetDir)
 
-          if (skipped.has(targetPath)) {
-            addSpinner.warn(`${componentName}: ${filename} already exists, skipping (use -o to overwrite)`)
-            continue
-          }
-
           // Transform the content - fix imports
           let content = file.content
           // Replace relative imports to utils with the configured path
@@ -203,7 +198,17 @@ export const add = new Command()
           )
           content = rewriteComponentImports(content, targetDir, targetDirOf)
 
-          await writeFileNoFollow(targetPath, content)
+          // Whether the file may be written is decided as it is written, so
+          // one created after the check above is skipped, not truncated.
+          const outcome = await installFile(targetPath, content, componentName, {
+            overwrite: Boolean(options.overwrite),
+            writtenBy,
+          })
+          if (outcome.result === "exists") {
+            addSpinner.warn(`${componentName}: ${filename} already exists, skipping (use -o to overwrite)`)
+          } else if (outcome.result === "duplicate") {
+            addSpinner.warn(`${componentName}: ${filename} was already written by ${outcome.by} in this run, skipping`)
+          }
         }
       } catch (error) {
         addSpinner.warn(`${componentName}: ${(error as Error).message}`)

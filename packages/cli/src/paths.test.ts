@@ -8,6 +8,7 @@ import {
   checkDestination,
   chooseAliasRoot,
   findAliasRoot,
+  installFile,
   outsideAliasMessage,
   pathToAlias,
   resolveInsideProject,
@@ -503,6 +504,54 @@ describe("checkDestination", () => {
     await fs.outputFile(path.join(outside, "ui/badge.tsx"), "theirs")
     await fs.symlink(path.join(outside, "ui"), path.join(dir, "components/ui"))
     await expect(checkDestination(dir, "components/ui/badge.tsx", false)).rejects.toThrow(UnsafePathError)
+  })
+})
+
+describe("installFile: never replacing a file without --overwrite", () => {
+  it("skips a file another process creates after checkDestination said to write it", async () => {
+    // Greptile's P1 on #31: the skip was decided once, before any write, so a
+    // file that appeared in between was truncated.
+    const dir = await project({}, ["components/ui"])
+    const file = path.join(dir, "components/ui/badge.tsx")
+    expect(await checkDestination(dir, file, false)).toBe("write")
+    await fs.writeFile(file, "someone else's work")
+    const outcome = await installFile(file, "// registry badge", "badge", { overwrite: false, writtenBy: new Map() })
+    expect(outcome).toEqual({ result: "exists" })
+    expect(await fs.readFile(file, "utf8")).toBe("someone else's work")
+  })
+
+  it("skips a symlink that appears after the check, without following it", async () => {
+    const dir = await project({}, ["components/ui"])
+    const outside = await tempDir()
+    const file = path.join(dir, "components/ui/badge.tsx")
+    expect(await checkDestination(dir, file, false)).toBe("write")
+    await fs.symlink(path.join(outside, "planted.tsx"), file)
+    const outcome = await installFile(file, "x", "badge", { overwrite: false, writtenBy: new Map() })
+    expect(outcome).toEqual({ result: "exists" })
+    expect(await fs.pathExists(path.join(outside, "planted.tsx"))).toBe(false)
+  })
+
+  it("keeps the first of two registry files with the same destination", async () => {
+    // Greptile's second case: alpha and beta both ship ui/shared.tsx, and
+    // beta's silently replaced alpha's.
+    for (const overwrite of [false, true]) {
+      const dir = await project({}, ["components/ui"])
+      const file = path.join(dir, "components/ui/shared.tsx")
+      const writtenBy = new Map<string, string>()
+      expect(await installFile(file, "// from alpha", "alpha", { overwrite, writtenBy })).toEqual({ result: "written" })
+      expect(await installFile(file, "// from beta", "beta", { overwrite, writtenBy })).toEqual({
+        result: "duplicate",
+        by: "alpha",
+      })
+      expect(await fs.readFile(file, "utf8")).toBe("// from alpha")
+    }
+  })
+
+  it("still replaces an existing file with --overwrite", async () => {
+    const dir = await project({ "components/ui/badge.tsx": "old" })
+    const file = path.join(dir, "components/ui/badge.tsx")
+    expect(await installFile(file, "new", "badge", { overwrite: true, writtenBy: new Map() })).toEqual({ result: "written" })
+    expect(await fs.readFile(file, "utf8")).toBe("new")
   })
 })
 
