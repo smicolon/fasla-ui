@@ -5,13 +5,17 @@ import os from "os"
 import path from "path"
 import {
   aliasToPath,
+  checkDestination,
   chooseAliasRoot,
   findAliasRoot,
+  installFile,
+  outsideAliasMessage,
   pathToAlias,
   resolveInsideProject,
   resolveWritableFile,
   UnknownAliasRootError,
   UnsafePathError,
+  writeFileIfAbsent,
   writeFileNoFollow,
 } from "./paths"
 
@@ -207,8 +211,23 @@ describe("pathToAlias", () => {
       ["components", ""],
       ["app/ui", ""],
     ]) {
-      expect(aliasToPath(pathToAlias(answer, root), root)).toBe(answer)
+      expect(aliasToPath(pathToAlias(answer, root)!, root)).toBe(answer)
     }
+  })
+
+  it("gives no alias for a folder outside @/'s folder, rather than moving it inside", () => {
+    // The #28 case: @/ is src/, the answer is "components". It used to become
+    // @/components, so add wrote to src/components/ui without a word.
+    expect(pathToAlias("components", "src")).toBeUndefined()
+    expect(pathToAlias("./lib/utils", "src")).toBeUndefined()
+    expect(pathToAlias("srcfoo/components", "src")).toBeUndefined()
+    expect(pathToAlias("src", "src")).toBeUndefined()
+  })
+
+  it("says why, and what to enter instead", () => {
+    const message = outsideAliasMessage("components", "src")
+    expect(message).toContain('components is not inside src/, the folder "@/" points to')
+    expect(message).toContain("src/components")
   })
 })
 
@@ -444,6 +463,116 @@ describe("never writing through a symlink", () => {
     await fs.symlink(path.join(outside, "planted.tsx"), path.join(dir, "components/badge.tsx"))
     await expect(writeFileNoFollow(path.join(dir, "components/badge.tsx"), "x")).rejects.toMatchObject({ code: "ELOOP" })
     expect(await fs.pathExists(path.join(outside, "planted.tsx"))).toBe(false)
+  })
+})
+
+describe("checkDestination", () => {
+  it("skips an existing symlinked file without --overwrite, instead of stopping the install", async () => {
+    // The #28 case: badge.tsx is a symlink, `add badge button` without -o.
+    // badge.tsx would never be written, so it must not block button.tsx.
+    const dir = await project({ "shared/badge.tsx": "mine" }, ["components/ui"])
+    await fs.symlink(path.join(dir, "shared/badge.tsx"), path.join(dir, "components/ui/badge.tsx"))
+    expect(await checkDestination(dir, "components/ui/badge.tsx", false)).toBe("skip")
+    expect(await checkDestination(dir, "components/ui/button.tsx", false)).toBe("write")
+    expect(await fs.readFile(path.join(dir, "shared/badge.tsx"), "utf8")).toBe("mine")
+  })
+
+  it("skips a dangling or outward symlink without --overwrite too, since nothing is written", async () => {
+    const dir = await project({}, ["components/ui"])
+    const outside = await tempDir()
+    await fs.symlink(path.join(outside, "planted.tsx"), path.join(dir, "components/ui/badge.tsx"))
+    await fs.writeFile(path.join(outside, "victim.tsx"), "theirs")
+    await fs.symlink(path.join(outside, "victim.tsx"), path.join(dir, "components/ui/card.tsx"))
+    expect(await checkDestination(dir, "components/ui/badge.tsx", false)).toBe("skip")
+    expect(await checkDestination(dir, "components/ui/card.tsx", false)).toBe("skip")
+  })
+
+  it("still refuses a symlink that --overwrite would write through", async () => {
+    const dir = await project({ "shared/badge.tsx": "mine" }, ["components/ui"])
+    await fs.symlink(path.join(dir, "shared/badge.tsx"), path.join(dir, "components/ui/badge.tsx"))
+    await expect(checkDestination(dir, "components/ui/badge.tsx", true)).rejects.toThrow(/is a symlink/)
+  })
+
+  it("skips a plain existing file without --overwrite and writes it with", async () => {
+    const dir = await project({ "components/ui/badge.tsx": "old" })
+    expect(await checkDestination(dir, "components/ui/badge.tsx", false)).toBe("skip")
+    expect(await checkDestination(dir, "components/ui/badge.tsx", true)).toBe("write")
+  })
+
+  it("still refuses a skipped file whose folder leads out of the project", async () => {
+    const dir = await project({}, ["components"])
+    const outside = await tempDir()
+    await fs.outputFile(path.join(outside, "ui/badge.tsx"), "theirs")
+    await fs.symlink(path.join(outside, "ui"), path.join(dir, "components/ui"))
+    await expect(checkDestination(dir, "components/ui/badge.tsx", false)).rejects.toThrow(UnsafePathError)
+  })
+})
+
+describe("installFile: never replacing a file without --overwrite", () => {
+  it("skips a file another process creates after checkDestination said to write it", async () => {
+    // Greptile's P1 on #31: the skip was decided once, before any write, so a
+    // file that appeared in between was truncated.
+    const dir = await project({}, ["components/ui"])
+    const file = path.join(dir, "components/ui/badge.tsx")
+    expect(await checkDestination(dir, file, false)).toBe("write")
+    await fs.writeFile(file, "someone else's work")
+    const outcome = await installFile(file, "// registry badge", "badge", { overwrite: false, writtenBy: new Map() })
+    expect(outcome).toEqual({ result: "exists" })
+    expect(await fs.readFile(file, "utf8")).toBe("someone else's work")
+  })
+
+  it("skips a symlink that appears after the check, without following it", async () => {
+    const dir = await project({}, ["components/ui"])
+    const outside = await tempDir()
+    const file = path.join(dir, "components/ui/badge.tsx")
+    expect(await checkDestination(dir, file, false)).toBe("write")
+    await fs.symlink(path.join(outside, "planted.tsx"), file)
+    const outcome = await installFile(file, "x", "badge", { overwrite: false, writtenBy: new Map() })
+    expect(outcome).toEqual({ result: "exists" })
+    expect(await fs.pathExists(path.join(outside, "planted.tsx"))).toBe(false)
+  })
+
+  it("keeps the first of two registry files with the same destination", async () => {
+    // Greptile's second case: alpha and beta both ship ui/shared.tsx, and
+    // beta's silently replaced alpha's.
+    for (const overwrite of [false, true]) {
+      const dir = await project({}, ["components/ui"])
+      const file = path.join(dir, "components/ui/shared.tsx")
+      const writtenBy = new Map<string, string>()
+      expect(await installFile(file, "// from alpha", "alpha", { overwrite, writtenBy })).toEqual({ result: "written" })
+      expect(await installFile(file, "// from beta", "beta", { overwrite, writtenBy })).toEqual({
+        result: "duplicate",
+        by: "alpha",
+      })
+      expect(await fs.readFile(file, "utf8")).toBe("// from alpha")
+    }
+  })
+
+  it("still replaces an existing file with --overwrite", async () => {
+    const dir = await project({ "components/ui/badge.tsx": "old" })
+    const file = path.join(dir, "components/ui/badge.tsx")
+    expect(await installFile(file, "new", "badge", { overwrite: true, writtenBy: new Map() })).toEqual({ result: "written" })
+    expect(await fs.readFile(file, "utf8")).toBe("new")
+  })
+})
+
+describe("writeFileIfAbsent: init's cn helper", () => {
+  it("keeps a cn helper another process creates after init's checks", async () => {
+    // init checked that lib/utils.ts was absent, then wrote it; one created in
+    // between was truncated to the default helper.
+    const dir = await project({}, ["src/lib"])
+    const file = await resolveInsideProject(dir, "src/lib/utils.ts")
+    expect(await fs.pathExists(file)).toBe(false)
+    await fs.writeFile(file, "// my own cn")
+    expect(await writeFileIfAbsent(file, "// default cn")).toBe(false)
+    expect(await fs.readFile(file, "utf8")).toBe("// my own cn")
+  })
+
+  it("writes the helper when nothing is there", async () => {
+    const dir = await project({}, ["src/lib"])
+    const file = path.join(dir, "src/lib/utils.ts")
+    expect(await writeFileIfAbsent(file, "// default cn")).toBe(true)
+    expect(await fs.readFile(file, "utf8")).toBe("// default cn")
   })
 })
 
