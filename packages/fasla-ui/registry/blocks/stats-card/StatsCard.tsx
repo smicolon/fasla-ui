@@ -1,4 +1,5 @@
 import * as React from "react"
+import { ChevronDownIcon, ChevronUpIcon } from "lucide-react"
 import { cn } from "../../../src/lib/utils"
 
 export interface StatsCardProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -65,32 +66,10 @@ export function StatsCard({
               )}
             >
               {trend.direction === "up" && (
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="18 15 12 9 6 15" />
-                </svg>
+                <ChevronUpIcon size={16} strokeWidth={1.5} />
               )}
               {trend.direction === "down" && (
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <polyline points="6 9 12 15 18 9" />
-                </svg>
+                <ChevronDownIcon size={16} strokeWidth={1.5} />
               )}
               {trend.value > 0 ? "+" : ""}
               {trend.value}%

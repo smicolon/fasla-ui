@@ -49,7 +49,8 @@
       "title": "Avatar",
       "description": "A user's photo, initials or icon, in three sizes and two radii, with an optional border and presence dot. Falls back from photo to initials to icon on its own.",
       "dependencies": [
-        "class-variance-authority"
+        "class-variance-authority",
+        "lucide-react"
       ],
       "registryDependencies": [
         "status-indicator"
@@ -72,7 +73,8 @@
       "title": "Badge",
       "description": "A compact inline label for status, category or metadata: solid, soft and outline types in six semantic tones, with an optional icon, avatar and close button.",
       "dependencies": [
-        "class-variance-authority"
+        "class-variance-authority",
+        "lucide-react"
       ],
       "registryDependencies": [],
       "files": [
@@ -115,7 +117,8 @@
       "description": "A button component with multiple variants, sizes, and loading state.",
       "dependencies": [
         "@radix-ui/react-slot",
-        "class-variance-authority"
+        "class-variance-authority",
+        "lucide-react"
       ],
       "registryDependencies": [],
       "files": [
@@ -154,7 +157,9 @@
       "type": "registry:ui",
       "title": "Checkbox",
       "description": "An accessible checkbox for binary selections with controlled state.",
-      "dependencies": [],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -194,7 +199,9 @@
       "type": "registry:ui",
       "title": "Combobox",
       "description": "A searchable combobox with single or multiple selection.",
-      "dependencies": [],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -232,7 +239,9 @@
       "type": "registry:block",
       "title": "Empty State",
       "description": "Empty state component with icon, title, description, and actions.",
-      "dependencies": [],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -310,7 +319,9 @@
       "type": "registry:block",
       "title": "Navbar",
       "description": "Responsive navigation bar with desktop links and mobile menu.",
-      "dependencies": [],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -348,7 +359,9 @@
       "type": "registry:ui",
       "title": "Select",
       "description": "A select control for choosing one option from a list.",
-      "dependencies": [],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -388,7 +401,9 @@
       "type": "registry:block",
       "title": "Sidebar",
       "description": "Responsive sidebar navigation with collapsible structure.",
-      "dependencies": [],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [],
       "files": [
         {
@@ -447,7 +462,9 @@
       "type": "registry:block",
       "title": "Stats Card",
       "description": "Display a metric with trend, icon, and supporting label.",
-      "dependencies": [],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [],
       "files": [
         {

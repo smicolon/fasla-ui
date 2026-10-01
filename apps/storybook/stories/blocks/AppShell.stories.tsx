@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
+import { MenuIcon } from "lucide-react"
 import { AppShell } from "../../../../packages/fasla-ui/registry/blocks/app-shell/AppShell"
 
 const meta: Meta<typeof AppShell> = {
@@ -35,10 +36,8 @@ const SidebarContent = () => (
 const HeaderContent = () => (
   <div className="flex h-14 items-center justify-between px-4">
     <div className="flex items-center gap-4">
-      <button className="md:hidden rounded-md p-2 hover:bg-accent">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-          <path d="M3 12h18M3 6h18M3 18h18" />
-        </svg>
+      <button className="md:hidden rounded-md p-2 hover:bg-accent" aria-label="Open menu">
+        <MenuIcon size={20} strokeWidth={1.5} />
       </button>
       <span className="text-sm text-muted-foreground">Welcome back!</span>
     </div>
