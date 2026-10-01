@@ -1,5 +1,23 @@
 # @smicolon/cli
 
+## [0.4.0](https://github.com/smicolon/fasla-ui/compare/cli-v0.3.3...cli-v0.4.0) (2026-10-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* **ui:** rebuild Avatar and add Status Indicator ([#25](https://github.com/smicolon/fasla-ui/issues/25))
+
+### Features
+
+* **ui:** rebuild Avatar and add Status Indicator ([#25](https://github.com/smicolon/fasla-ui/issues/25)) ([93e0f45](https://github.com/smicolon/fasla-ui/commit/93e0f450a00ed8c29090cc606da8a94ff376488a))
+
+
+### Bug Fixes
+
+* **cli:** ask again for folders outside @/, skip existing files in add ([#31](https://github.com/smicolon/fasla-ui/issues/31)) ([91b067f](https://github.com/smicolon/fasla-ui/commit/91b067f465daef23682bbaad345527ce77720a35))
+* **cli:** point every install command at @smicolon/cli ([#24](https://github.com/smicolon/fasla-ui/issues/24)) ([60c1ead](https://github.com/smicolon/fasla-ui/commit/60c1ead43b59c751b45873c3da5964c45d8de60c))
+* **cli:** resolve component paths from tsconfig, not a hard-coded src/ ([#28](https://github.com/smicolon/fasla-ui/issues/28)) ([850ae1e](https://github.com/smicolon/fasla-ui/commit/850ae1e899d7fbef021e3e910379c020112d7294))
+
 ## [0.3.3](https://github.com/smicolon/fasla-ui/compare/cli-v0.3.2...cli-v0.3.3) (2026-09-18)
 
 

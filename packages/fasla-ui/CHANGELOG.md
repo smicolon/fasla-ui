@@ -1,5 +1,21 @@
 # @smicolon/fasla-ui
 
+## [0.3.0](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.2.4...fasla-ui-v0.3.0) (2026-10-01)
+
+
+### ⚠ BREAKING CHANGES
+
+* **ui:** rebuild Avatar and add Status Indicator ([#25](https://github.com/smicolon/fasla-ui/issues/25))
+* **ui:** rebuild Badge against the Figma set ([#23](https://github.com/smicolon/fasla-ui/issues/23))
+
+### Features
+
+* **design:** index every atom in the Figma file, generated and dated ([#19](https://github.com/smicolon/fasla-ui/issues/19)) ([39aed84](https://github.com/smicolon/fasla-ui/commit/39aed84b3fc4ed98017e9eae9f34ddd0ec05bef9))
+* **typography:** mirror the Figma type ramp across both scripts ([#14](https://github.com/smicolon/fasla-ui/issues/14)) ([8f028b4](https://github.com/smicolon/fasla-ui/commit/8f028b47e4838eaa05d5aa3777bc268113320821))
+* **ui:** rebuild Avatar and add Status Indicator ([#25](https://github.com/smicolon/fasla-ui/issues/25)) ([93e0f45](https://github.com/smicolon/fasla-ui/commit/93e0f450a00ed8c29090cc606da8a94ff376488a))
+* **ui:** rebuild Badge against the Figma set ([#23](https://github.com/smicolon/fasla-ui/issues/23)) ([92e5160](https://github.com/smicolon/fasla-ui/commit/92e51603a95a08c73eb601c8df187bc573dfdd81))
+* **ui:** replace hand-written SVG icons with lucide-react ([#27](https://github.com/smicolon/fasla-ui/issues/27)) ([eadac23](https://github.com/smicolon/fasla-ui/commit/eadac234bbd8457bad2b973b92d4ed8b8a9225fc))
+
 ## [0.2.4](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.2.3...fasla-ui-v0.2.4) (2026-09-18)
 
 
