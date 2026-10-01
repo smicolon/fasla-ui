@@ -6,7 +6,7 @@ import fs from "fs-extra"
 import path from "path"
 import { fetchRegistry, fetchComponent, getTargetDirectory, type RegistryFile, type RegistryItem } from "../registry.js"
 import { resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
-import { aliasToPath, resolveInsideProject, resolveWritableFile, writeFileNoFollow } from "../paths.js"
+import { aliasToPath, checkDestination, resolveInsideProject, writeFileNoFollow } from "../paths.js"
 import { aliasRootOrExit, safeOrExit } from "./shared.js"
 
 export const add = new Command()
@@ -145,11 +145,17 @@ export const add = new Command()
 
     // Check every destination before writing any, so a path that leads out of
     // the project, or a destination that is itself a symlink, stops the whole
-    // install rather than half of it — with or without --overwrite.
+    // install rather than half of it. Without --overwrite, a file already
+    // there is skipped instead — it won't be written, so a symlink there is
+    // no reason to stop.
     addSpinner.stop()
+    const skipped = new Set<string>()
     for (const component of resolved.items) {
       for (const file of component.files ?? []) {
-        await safeOrExit(() => resolveWritableFile(cwd, targetPathOf(file, component)))
+        const targetPath = targetPathOf(file, component)
+        if ((await safeOrExit(() => checkDestination(cwd, targetPath, Boolean(options.overwrite)))) === "skip") {
+          skipped.add(targetPath)
+        }
       }
     }
 
@@ -178,8 +184,7 @@ export const add = new Command()
           const filename = path.basename(targetPath)
           await fs.ensureDir(targetDir)
 
-          // Check if file exists
-          if ((await fs.pathExists(targetPath)) && !options.overwrite) {
+          if (skipped.has(targetPath)) {
             addSpinner.warn(`${componentName}: ${filename} already exists, skipping (use -o to overwrite)`)
             continue
           }

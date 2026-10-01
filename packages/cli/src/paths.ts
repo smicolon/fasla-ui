@@ -211,14 +211,39 @@ export function aliasToPath(alias: string, root: string): string {
 /**
  * What someone typed at the init prompt → the alias to store. `src/components`
  * becomes `@/components` when `@/` is `src/`; an answer that is already an
- * alias is kept as it is.
+ * alias is kept as it is. A folder outside `@/`'s folder has no alias, so it
+ * gives `undefined` — never an alias for some other folder inside it.
  */
-export function pathToAlias(input: string, root: string): string {
+export function pathToAlias(input: string, root: string): string | undefined {
   const trimmed = input.trim()
   if (trimmed.startsWith("@/")) return `@/${normalise(trimmed.slice(2))}`
   const rel = normalise(trimmed)
-  if (root && rel.startsWith(`${root}/`)) return `@/${rel.slice(root.length + 1)}`
-  return `@/${rel}`
+  if (!root) return `@/${rel}`
+  if (rel.startsWith(`${root}/`)) return `@/${rel.slice(root.length + 1)}`
+  return undefined
+}
+
+/** Why `pathToAlias` gave no alias for `input`, to show before asking again. */
+export function outsideAliasMessage(input: string, root: string): string {
+  return (
+    `${normalise(input.trim()) || "."} is not inside ${root}/, the folder "@/" points to, ` +
+    `so files there can't be imported through "@/". Enter a folder inside ${root}/, such as ${root}/components.`
+  )
+}
+
+/**
+ * How `add` treats one destination. Without `--overwrite`, a file already
+ * there — a symlink included, even a dangling one — is skipped and never
+ * written, so only its folder has to be inside the project. Anything that
+ * will be written must pass `resolveWritableFile`.
+ */
+export async function checkDestination(cwd: string, rel: string, overwrite: boolean): Promise<"write" | "skip"> {
+  if (!overwrite && (await lexists(path.resolve(cwd, rel)))) {
+    await resolveInsideProject(cwd, path.dirname(rel))
+    return "skip"
+  }
+  await resolveWritableFile(cwd, rel)
+  return "write"
 }
 
 /** A destination the CLI refuses to write: outside the project, or a symlink. */
