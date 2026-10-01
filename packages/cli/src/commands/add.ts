@@ -4,8 +4,10 @@ import ora from "ora"
 import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
-import { fetchRegistry, fetchComponent, getTargetDirectory } from "../registry.js"
+import { fetchRegistry, fetchComponent, getTargetDirectory, type RegistryFile, type RegistryItem } from "../registry.js"
 import { resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
+import { aliasToPath, resolveInsideProject, resolveWritableFile, writeFileNoFollow } from "../paths.js"
+import { aliasRootOrExit, safeOrExit } from "./shared.js"
 
 export const add = new Command()
   .name("add")
@@ -29,7 +31,9 @@ export const add = new Command()
     }
 
     const config = await fs.readJson(configPath)
-    const componentsDir = config.aliases?.components?.replace("@/", "src/") || "src/components"
+    const componentsAlias: string = config.aliases?.components || "@/components"
+    const componentsDir = aliasToPath(componentsAlias, await aliasRootOrExit(cwd, Boolean(options.yes)))
+    await safeOrExit(() => resolveInsideProject(cwd, componentsDir))
 
     // Fetch registry
     const spinner = ora("Fetching registry...").start()
@@ -136,6 +140,19 @@ export const add = new Command()
       return item ? getTargetDirectory(item.type, baseDir) : undefined
     }
 
+    const targetPathOf = (file: RegistryFile, component: RegistryItem) =>
+      path.join(getTargetDirectory(file.type || component.type, baseDir), path.basename(file.target || file.path))
+
+    // Check every destination before writing any, so a path that leads out of
+    // the project, or a destination that is itself a symlink, stops the whole
+    // install rather than half of it — with or without --overwrite.
+    addSpinner.stop()
+    for (const component of resolved.items) {
+      for (const file of component.files ?? []) {
+        await safeOrExit(() => resolveWritableFile(cwd, targetPathOf(file, component)))
+      }
+    }
+
     for (const component of resolved.items) {
       const componentName = component.name
       addSpinner.start(`Adding ${componentName}...`)
@@ -156,13 +173,10 @@ export const add = new Command()
             continue
           }
 
-          // Determine target path
-          const targetDir = getTargetDirectory(file.type || component.type, baseDir)
+          const targetPath = targetPathOf(file, component)
+          const targetDir = path.dirname(targetPath)
+          const filename = path.basename(targetPath)
           await fs.ensureDir(targetDir)
-
-          // Get filename from target or path
-          const filename = path.basename(file.target || file.path)
-          const targetPath = path.join(targetDir, filename)
 
           // Check if file exists
           if ((await fs.pathExists(targetPath)) && !options.overwrite) {
@@ -184,7 +198,7 @@ export const add = new Command()
           )
           content = rewriteComponentImports(content, targetDir, targetDirOf)
 
-          await fs.writeFile(targetPath, content)
+          await writeFileNoFollow(targetPath, content)
         }
       } catch (error) {
         addSpinner.warn(`${componentName}: ${(error as Error).message}`)
@@ -204,8 +218,7 @@ export const add = new Command()
     console.log("\nImport them in your code:")
     for (const componentName of validComponents) {
       const item = registry.items.find((i) => i.name === componentName)
-      const typeDir = item?.type.replace("registry:", "") || "ui"
-      const importPath = `@/components/${typeDir}/${componentName}`
+      const importPath = `${getTargetDirectory(item?.type ?? "registry:ui", componentsAlias)}/${componentName}`
       console.log(chalk.cyan(`  import { ... } from "${importPath}"`))
     }
   })
