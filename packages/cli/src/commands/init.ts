@@ -21,7 +21,7 @@ export function cn(...inputs: ClassValue[]) {
 import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
-import { aliasToPath, pathToAlias, resolveInsideProject, resolveWritableFile, writeFileNoFollow } from "../paths.js"
+import { aliasToPath, outsideAliasMessage, pathToAlias, resolveInsideProject, resolveWritableFile, writeFileIfAbsent, writeFileNoFollow } from "../paths.js"
 import { aliasRootOrExit, safeOrExit } from "./shared.js"
 
 export const init = new Command()
@@ -62,18 +62,24 @@ export const init = new Command()
     let style = "default"
 
     if (!options.yes) {
+      // An answer outside `@/`'s folder can't be imported through `@/`, so it
+      // is explained and asked again rather than moved inside it.
+      const insideAlias = (answer: string) =>
+        pathToAlias(answer, aliasRoot) === undefined ? outsideAliasMessage(answer, aliasRoot) : true
       const response = await prompts([
         {
           type: "text",
           name: "componentsDir",
           message: "Where should components be installed?",
           initial: under("components"),
+          validate: insideAlias,
         },
         {
           type: "text",
           name: "utilsPath",
           message: "Where is your utils file (cn)?",
           initial: under("lib/utils"),
+          validate: insideAlias,
         },
         {
           type: "select",
@@ -87,8 +93,15 @@ export const init = new Command()
         },
       ])
 
-      componentsAlias = pathToAlias(response.componentsDir, aliasRoot)
-      utilsAlias = pathToAlias(response.utilsPath, aliasRoot)
+      const components = pathToAlias(response.componentsDir ?? "", aliasRoot)
+      const utils = pathToAlias(response.utilsPath ?? "", aliasRoot)
+      // Only a cancelled prompt gets here without an alias; validate saw the rest.
+      if (components === undefined || utils === undefined || response.style === undefined) {
+        console.log(chalk.yellow("Cancelled."))
+        process.exit(0)
+      }
+      componentsAlias = components
+      utilsAlias = utils
       style = response.style
     }
 
@@ -135,9 +148,10 @@ export const init = new Command()
     try {
       await writeFileNoFollow(configPath, `${JSON.stringify(config, null, 2)}\n`)
 
-      if (!(await fs.pathExists(utilsPath))) {
-        await fs.ensureDir(path.dirname(utilsPath))
-        await writeFileNoFollow(utilsPath, UTILS_SOURCE)
+      // Only when absent, decided as it is written: a cn helper that appears
+      // after the checks above is kept, not truncated.
+      await fs.ensureDir(path.dirname(utilsPath))
+      if (await writeFileIfAbsent(utilsPath, UTILS_SOURCE)) {
         spinner.succeed(`Configuration written to components.json, cn helper written to ${utilsRelative}.ts`)
       } else {
         spinner.succeed("Configuration written to components.json")
