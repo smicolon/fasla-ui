@@ -21,6 +21,8 @@ export function cn(...inputs: ClassValue[]) {
 import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
+import { aliasToPath, pathToAlias, resolveInsideProject, resolveWritableFile, writeFileNoFollow } from "../paths.js"
+import { aliasRootOrExit, safeOrExit } from "./shared.js"
 
 export const init = new Command()
   .name("init")
@@ -50,8 +52,14 @@ export const init = new Command()
       }
     }
 
-    // Gather configuration
-    let config: Record<string, unknown> = {}
+    // Gather configuration. `@/` is wherever the project's tsconfig points it,
+    // so the defaults, the stored aliases and the files written all follow it.
+    const aliasRoot = await aliasRootOrExit(cwd, Boolean(options.yes))
+    const under = (p: string) => (aliasRoot ? `${aliasRoot}/${p}` : p)
+
+    let componentsAlias = "@/components"
+    let utilsAlias = "@/lib/utils"
+    let style = "default"
 
     if (!options.yes) {
       const response = await prompts([
@@ -59,13 +67,13 @@ export const init = new Command()
           type: "text",
           name: "componentsDir",
           message: "Where should components be installed?",
-          initial: "src/components",
+          initial: under("components"),
         },
         {
           type: "text",
           name: "utilsPath",
           message: "Where is your utils file (cn)?",
-          initial: "src/lib/utils",
+          initial: under("lib/utils"),
         },
         {
           type: "select",
@@ -79,71 +87,57 @@ export const init = new Command()
         },
       ])
 
-      config = {
-        $schema: "https://ui.shadcn.com/schema.json",
-        style: response.style,
-        rsc: true,
-        tsx: true,
-        tailwind: {
-          config: "tailwind.config.ts",
-          css: "src/app/globals.css",
-          baseColor: "slate",
-          cssVariables: true,
-        },
-        aliases: {
-          components: `@/${response.componentsDir}`,
-          utils: `@/${response.utilsPath}`,
-          ui: `@/${response.componentsDir}/ui`,
-          lib: "@/lib",
-          hooks: "@/hooks",
-        },
-        registries: {
-          smicolon: {
-            url: "https://ui.smicolon.com/r",
-          },
-        },
-      }
-    } else {
-      config = {
-        $schema: "https://ui.shadcn.com/schema.json",
-        style: "default",
-        rsc: true,
-        tsx: true,
-        tailwind: {
-          config: "tailwind.config.ts",
-          css: "src/app/globals.css",
-          baseColor: "slate",
-          cssVariables: true,
-        },
-        aliases: {
-          components: "@/components",
-          utils: "@/lib/utils",
-          ui: "@/components/ui",
-          lib: "@/lib",
-          hooks: "@/hooks",
-        },
-        registries: {
-          smicolon: {
-            url: "https://ui.smicolon.com/r",
-          },
-        },
-      }
+      componentsAlias = pathToAlias(response.componentsDir, aliasRoot)
+      utilsAlias = pathToAlias(response.utilsPath, aliasRoot)
+      style = response.style
     }
+
+    const config: ComponentsConfig = {
+      $schema: "https://ui.shadcn.com/schema.json",
+      style,
+      rsc: true,
+      tsx: true,
+      tailwind: {
+        config: "tailwind.config.ts",
+        css: under("app/globals.css"),
+        baseColor: "slate",
+        cssVariables: true,
+      },
+      aliases: {
+        components: componentsAlias,
+        utils: utilsAlias,
+        ui: `${componentsAlias}/ui`,
+        lib: "@/lib",
+        hooks: "@/hooks",
+      },
+      registries: {
+        smicolon: {
+          url: "https://ui.smicolon.com/r",
+        },
+      },
+    }
+
+    // Every component in the registry imports `cn` from the utils alias.
+    // Without this file a fresh install does not compile, so init writes it.
+    const utilsRelative = aliasToPath(utilsAlias, aliasRoot)
+
+    // Refuse before writing anything if a path would land outside the project
+    // or write through a symlink. The cn helper is only written when absent,
+    // so an existing one — symlinked or not — is left alone.
+    const utilsPath = await safeOrExit(async () => {
+      await resolveWritableFile(cwd, "components.json")
+      await resolveInsideProject(cwd, aliasToPath(componentsAlias, aliasRoot))
+      return resolveInsideProject(cwd, `${utilsRelative}.ts`)
+    })
 
     const spinner = ora("Writing configuration...").start()
 
     try {
-      await fs.writeJson(configPath, config, { spaces: 2 })
-
-      // Every component in the registry imports `cn` from the utils alias.
-      // Without this file a fresh install does not compile, so init writes it.
-      const utilsAlias = (config as ComponentsConfig).aliases?.utils ?? "@/lib/utils"
-      const utilsRelative = utilsAlias.replace(/^@\//, "src/")
-      const utilsPath = path.resolve(cwd, `${utilsRelative}.ts`)
+      await writeFileNoFollow(configPath, `${JSON.stringify(config, null, 2)}\n`)
 
       if (!(await fs.pathExists(utilsPath))) {
         await fs.ensureDir(path.dirname(utilsPath))
-        await fs.writeFile(utilsPath, UTILS_SOURCE, "utf8")
+        await writeFileNoFollow(utilsPath, UTILS_SOURCE)
         spinner.succeed(`Configuration written to components.json, cn helper written to ${utilsRelative}.ts`)
       } else {
         spinner.succeed("Configuration written to components.json")
