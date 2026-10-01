@@ -21,7 +21,7 @@ export function cn(...inputs: ClassValue[]) {
 import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
-import { aliasToPath, outsideAliasMessage, pathToAlias, resolveInsideProject, resolveWritableFile, writeFileNoFollow } from "../paths.js"
+import { aliasToPath, outsideAliasMessage, pathToAlias, resolveInsideProject, resolveWritableFile, writeFileIfAbsent, writeFileNoFollow } from "../paths.js"
 import { aliasRootOrExit, safeOrExit } from "./shared.js"
 
 export const init = new Command()
@@ -148,9 +148,10 @@ export const init = new Command()
     try {
       await writeFileNoFollow(configPath, `${JSON.stringify(config, null, 2)}\n`)
 
-      if (!(await fs.pathExists(utilsPath))) {
-        await fs.ensureDir(path.dirname(utilsPath))
-        await writeFileNoFollow(utilsPath, UTILS_SOURCE)
+      // Only when absent, decided as it is written: a cn helper that appears
+      // after the checks above is kept, not truncated.
+      await fs.ensureDir(path.dirname(utilsPath))
+      if (await writeFileIfAbsent(utilsPath, UTILS_SOURCE)) {
         spinner.succeed(`Configuration written to components.json, cn helper written to ${utilsRelative}.ts`)
       } else {
         spinner.succeed("Configuration written to components.json")

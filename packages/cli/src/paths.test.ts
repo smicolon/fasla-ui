@@ -15,6 +15,7 @@ import {
   resolveWritableFile,
   UnknownAliasRootError,
   UnsafePathError,
+  writeFileIfAbsent,
   writeFileNoFollow,
 } from "./paths"
 
@@ -552,6 +553,26 @@ describe("installFile: never replacing a file without --overwrite", () => {
     const file = path.join(dir, "components/ui/badge.tsx")
     expect(await installFile(file, "new", "badge", { overwrite: true, writtenBy: new Map() })).toEqual({ result: "written" })
     expect(await fs.readFile(file, "utf8")).toBe("new")
+  })
+})
+
+describe("writeFileIfAbsent: init's cn helper", () => {
+  it("keeps a cn helper another process creates after init's checks", async () => {
+    // init checked that lib/utils.ts was absent, then wrote it; one created in
+    // between was truncated to the default helper.
+    const dir = await project({}, ["src/lib"])
+    const file = await resolveInsideProject(dir, "src/lib/utils.ts")
+    expect(await fs.pathExists(file)).toBe(false)
+    await fs.writeFile(file, "// my own cn")
+    expect(await writeFileIfAbsent(file, "// default cn")).toBe(false)
+    expect(await fs.readFile(file, "utf8")).toBe("// my own cn")
+  })
+
+  it("writes the helper when nothing is there", async () => {
+    const dir = await project({}, ["src/lib"])
+    const file = path.join(dir, "src/lib/utils.ts")
+    expect(await writeFileIfAbsent(file, "// default cn")).toBe(true)
+    expect(await fs.readFile(file, "utf8")).toBe("// default cn")
   })
 })
 

@@ -339,14 +339,25 @@ export async function installFile(
 ): Promise<{ result: "written" } | { result: "exists" } | { result: "duplicate"; by: string }> {
   const by = writtenBy.get(file)
   if (by !== undefined) return { result: "duplicate", by }
-  try {
-    await writeFileNoFollow(file, content, { createOnly: !overwrite })
-  } catch (error) {
-    if ((error as NodeJS.ErrnoException).code === "EEXIST") return { result: "exists" }
-    throw error
-  }
+  if (overwrite) await writeFileNoFollow(file, content)
+  else if (!(await writeFileIfAbsent(file, content))) return { result: "exists" }
   writtenBy.set(file, owner)
   return { result: "written" }
+}
+
+/**
+ * Writes a file only if nothing is at its path, a symlink included, and says
+ * whether it did. Unlike checking first and writing after, a file that
+ * appears in between is left as it is.
+ */
+export async function writeFileIfAbsent(file: string, content: string): Promise<boolean> {
+  try {
+    await writeFileNoFollow(file, content, { createOnly: true })
+    return true
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code === "EEXIST") return false
+    throw error
+  }
 }
 
 async function lexists(p: string): Promise<boolean> {
