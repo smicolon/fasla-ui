@@ -19,7 +19,7 @@ export const registry: RegistryItem[] = [
     title: "Button",
     description: "A button component with multiple variants, sizes, and loading state.",
     sourcePath: "registry/ui/button",
-    dependencies: ["@radix-ui/react-slot", "class-variance-authority"],
+    dependencies: ["@radix-ui/react-slot", "class-variance-authority", "lucide-react"],
     categories: ["primitives", "forms"],
   },
   {
@@ -45,7 +45,7 @@ export const registry: RegistryItem[] = [
     title: "Badge",
     description: "A compact inline label for status, category or metadata: solid, soft and outline types in six semantic tones, with an optional icon, avatar and close button.",
     sourcePath: "registry/ui/badge",
-    dependencies: ["class-variance-authority"],
+    dependencies: ["class-variance-authority", "lucide-react"],
     categories: ["primitives", "data-display"],
   },
   {
@@ -54,7 +54,7 @@ export const registry: RegistryItem[] = [
     title: "Avatar",
     description: "A user's photo, initials or icon, in three sizes and two radii, with an optional border and presence dot. Falls back from photo to initials to icon on its own.",
     sourcePath: "registry/ui/avatar",
-    dependencies: ["class-variance-authority"],
+    dependencies: ["class-variance-authority", "lucide-react"],
     registryDependencies: ["status-indicator"],
     categories: ["primitives", "data-display"],
   },
@@ -107,6 +107,7 @@ export const registry: RegistryItem[] = [
     title: "Empty State",
     description: "Empty state component with icon, title, description, and actions.",
     sourcePath: "registry/blocks/empty-state",
+    dependencies: ["lucide-react"],
     categories: ["feedback", "data-display"],
   },
   {

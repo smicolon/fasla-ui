@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { CheckIcon, ChevronDownIcon, PlusIcon, XIcon } from "lucide-react"
 import { cn } from "../../../src/lib/utils"
 
 export interface ComboboxOption {
@@ -227,19 +228,11 @@ export function Combobox({
           className="ml-2 shrink-0 text-muted-foreground hover:text-foreground"
           aria-label={open ? "Close" : "Open"}
         >
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className={cn("transition-transform", open && "rotate-180")}
-          >
-            <polyline points="6 9 12 15 18 9" />
-          </svg>
+          <ChevronDownIcon
+            size={16}
+            strokeWidth={1.5}
+            className={cn("transition-transform motion-reduce:transition-none", open && "rotate-180")}
+          />
         </button>
       </div>
 
@@ -304,32 +297,13 @@ export function Combobox({
                           )}
                         >
                           {isSelected && (
-                            <svg
-                              width="12"
-                              height="12"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="3"
-                            >
-                              <polyline points="20 6 9 17 4 12" />
-                            </svg>
+                            <CheckIcon size={12} strokeWidth={1.5} />
                           )}
                         </span>
                       )}
                       <span className="flex-1">{option.label}</span>
                       {!multiple && isSelected && (
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          className="ml-2 text-primary"
-                        >
-                          <polyline points="20 6 9 17 4 12" />
-                        </svg>
+                        <CheckIcon size={16} strokeWidth={1.5} className="ml-2 text-primary" />
                       )}
                     </li>
                   )
@@ -347,18 +321,7 @@ export function Combobox({
                         "bg-accent text-accent-foreground"
                     )}
                   >
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      className="mr-2"
-                    >
-                      <line x1="12" y1="5" x2="12" y2="19" />
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                    </svg>
+                    <PlusIcon size={16} strokeWidth={1.5} className="mr-2" />
                     {createText} "{search}"
                   </li>
                 )}
@@ -395,10 +358,7 @@ export function Combobox({
                   className="hover:text-destructive"
                   aria-label={`Remove ${option?.label || val}`}
                 >
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
+                  <XIcon size={12} strokeWidth={1.5} />
                 </button>
               </span>
             )

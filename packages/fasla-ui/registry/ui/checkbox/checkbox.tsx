@@ -1,4 +1,5 @@
 import * as React from "react"
+import { CheckIcon, MinusIcon } from "lucide-react"
 import { cn } from "../../../src/lib/utils"
 
 export interface CheckboxProps
@@ -48,34 +49,16 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             className
           )}
         >
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+          <CheckIcon
+            size={12}
+            strokeWidth={1.5}
             className={cn(
               "opacity-0 peer-checked:opacity-100",
               indeterminate ? "hidden" : "block"
             )}
-          >
-            <polyline points="20 6 9 17 4 12" />
-          </svg>
+          />
           {indeterminate && (
-            <svg
-              width="12"
-              height="12"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="3"
-              strokeLinecap="round"
-            >
-              <line x1="5" y1="12" x2="19" y2="12" />
-            </svg>
+            <MinusIcon size={12} strokeWidth={1.5} />
           )}
         </div>
       </div>

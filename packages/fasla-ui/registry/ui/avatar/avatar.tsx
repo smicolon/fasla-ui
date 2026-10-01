@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { cva } from "class-variance-authority"
+import { UserRoundIcon } from "lucide-react"
 import { cn } from "../../../src/lib/utils"
 import { StatusIndicator, type StatusIndicatorProps } from "../status-indicator/status-indicator"
 
@@ -68,25 +69,6 @@ const ROOT_SIZE = { "32": "size-8", "24": "size-6", "12": "size-3" } as const
  */
 function dotPosition(size: Size, radius: Radius) {
   return radius === "standard" && size !== "12" ? "-bottom-0.5 -end-0.5" : "bottom-0 end-0"
-}
-
-/** Lucide `user-round` at Figma's 1.5 stroke, 75% of the avatar. */
-function UserRoundIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      className="size-3/4"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <circle cx="12" cy="8" r="5" />
-      <path d="M20 21a8 8 0 0 0-16 0" />
-    </svg>
-  )
 }
 
 const ARABIC = /[؀-ۿ]/
@@ -237,7 +219,8 @@ const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
                 {letters}
               </span>
             ) : (
-              <UserRoundIcon />
+              // Lucide `user-round` at Figma's 1.5 stroke, 75% of the avatar.
+              <UserRoundIcon aria-hidden="true" className="size-3/4" strokeWidth={1.5} />
             ))}
           {/* The fallback's name, when there is no photo to carry it. */}
           {!loaded && name && <span className="sr-only">{name}</span>}

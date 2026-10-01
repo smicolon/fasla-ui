@@ -30,6 +30,7 @@
     "autoprefixer": "^10.4.0",
     "eslint": "^8.57.0",
     "framer-motion": "^11.0.0",
+    "lucide-react": "^1.48.0",
     "postcss": "^8.4.0",
     "storybook": "^8.4.0",
     "storybook-addon-pseudo-states": "4.0.4",

@@ -1,35 +1,9 @@
 import * as React from "react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { fn } from "@storybook/test"
+import { HeartIcon, StarIcon } from "lucide-react"
 import { Badge, type BadgeProps } from "../../../../packages/fasla-ui/registry/ui/badge"
 import { Avatar } from "../../../../packages/fasla-ui/registry/ui/avatar"
-
-/** The consumer's icons — 24-grid SVGs with no size or colour of their own. */
-const StarIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z" />
-  </svg>
-)
-
-const HeartIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
-  </svg>
-)
 
 /**
  * The library's Avatar, as the Figma Badge uses it: Size 12, Rounded, Image, no
@@ -83,7 +57,7 @@ const meta: Meta<BadgeStoryArgs> = {
     icon: {
       control: { type: "select", labels: { none: "None", star: "Star", heart: "Heart" } },
       options: ["none", "star", "heart"],
-      mapping: { none: undefined, star: <StarIcon />, heart: <HeartIcon /> },
+      mapping: { none: undefined, star: <StarIcon strokeWidth={1.5} />, heart: <HeartIcon strokeWidth={1.5} /> },
       table: { type: { summary: "ReactNode" } },
     },
     avatar: {
@@ -189,7 +163,7 @@ export const Sizes: Story = {
     return (
       <div className="flex items-center gap-3">
         {SIZES.map((size, i) => (
-          <Badge key={size} size={size} icon={<StarIcon />} onClose={() => {}}>
+          <Badge key={size} size={size} icon={<StarIcon strokeWidth={1.5} />} onClose={() => {}}>
             {c.sizes[i]}
           </Badge>
         ))}
@@ -222,7 +196,7 @@ export const Slots: Story = {
       <div className="flex flex-col items-start gap-3">
         {VARIANTS.map((variant) => (
           <div key={variant} className="flex items-center gap-3">
-            <Badge variant={variant} icon={<StarIcon />}>
+            <Badge variant={variant} icon={<StarIcon strokeWidth={1.5} />}>
               {c.featured}
             </Badge>
             {/* The label already names the person, so the picture is decorative. */}
@@ -234,7 +208,7 @@ export const Slots: Story = {
             </Badge>
             <Badge
               variant={variant}
-              icon={<StarIcon />}
+              icon={<StarIcon strokeWidth={1.5} />}
               avatar={avatar(c.author)}
               onClose={() => {}}
             >
