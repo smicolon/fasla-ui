@@ -44,8 +44,8 @@ type StoryCtx = { globals: { direction?: string } }
 const labels = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? STATUS_LABELS.ar : STATUS_LABELS.en)
 
 const COPY = {
-  ltr: { person: "Layla Hassan", role: "Product designer" },
-  rtl: { person: "ليلى حسن", role: "مصمّمة منتجات" },
+  ltr: { person: "Layla Haddad", role: "Product designer" },
+  rtl: { person: "ليلى حداد", role: "مصمّمة منتجات" },
 } as const
 const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
 

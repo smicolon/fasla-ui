@@ -1,8 +1,12 @@
 "use client"
 
 import * as React from "react"
-import { motion, useReducedMotion } from "framer-motion"
+import { animate, motion, useMotionValue, useReducedMotion, useTransform } from "framer-motion"
 import { cn } from "../../../src/lib/utils"
+
+/** The value, or the fallback when it is missing or blank (a cleared control, say). */
+const filled = (value: string | undefined, fallback: string) =>
+  value && value.trim() ? value : fallback
 
 export interface BorderBeamProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Duration of the animation in seconds */
@@ -24,62 +28,68 @@ export interface BorderBeamProps extends React.HTMLAttributes<HTMLDivElement> {
 export function BorderBeam({
   duration = 4,
   borderWidth = 2,
-  colorFrom = "var(--primary)",
-  colorTo = "transparent",
+  colorFrom: colorFromProp,
+  colorTo: colorToProp,
   delay = 0,
   className,
   children,
   ...props
 }: BorderBeamProps) {
+  const colorFrom = filled(colorFromProp, "var(--primary)")
+  const colorTo = filled(colorToProp, "transparent")
   const prefersReducedMotion = useReducedMotion()
+
+  // The beam is a conic gradient whose start angle turns, so it runs round
+  // the border of any shape; rotating a layer only works for a square.
+  const angle = useMotionValue(0)
+  React.useEffect(() => {
+    if (prefersReducedMotion) return
+    const controls = animate(angle, 360, {
+      duration,
+      delay,
+      ease: "linear",
+      repeat: Infinity,
+    })
+    return () => controls.stop()
+  }, [angle, duration, delay, prefersReducedMotion])
+  const background = useTransform(
+    angle,
+    (a) => `conic-gradient(from ${a}deg, transparent 0deg 270deg, ${colorTo} 270deg, ${colorFrom} 360deg)`
+  )
+
+  /** Paints only a borderWidth ring: the content box is masked out. */
+  const ring: React.CSSProperties = {
+    padding: borderWidth,
+    mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+    maskComposite: "exclude",
+    WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+    WebkitMaskComposite: "xor",
+  }
 
   return (
     <div
-      className={cn("relative overflow-hidden rounded-lg", className)}
+      className={cn("relative isolate overflow-hidden rounded-lg", className)}
       {...props}
     >
-      {/* Border beam */}
-      {!prefersReducedMotion && (
-        <motion.div
-          className="pointer-events-none absolute inset-0 rounded-[inherit]"
-          style={{
-            padding: borderWidth,
-            background: `linear-gradient(90deg, ${colorFrom}, ${colorTo})`,
-            mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-            maskComposite: "exclude",
-            WebkitMaskComposite: "xor",
-          }}
-          animate={{
-            rotate: [0, 360],
-          }}
-          transition={{
-            duration,
-            delay,
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        />
-      )}
-
-      {/* Static border fallback for reduced motion */}
-      {prefersReducedMotion && (
-        <div
-          className="pointer-events-none absolute inset-0 rounded-[inherit]"
-          style={{
-            padding: borderWidth,
-            background: colorFrom,
-            mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
-            maskComposite: "exclude",
-            WebkitMaskComposite: "xor",
-            opacity: 0.5,
-          }}
-        />
-      )}
-
       {/* Content */}
-      <div className="relative z-10 rounded-[inherit] bg-background">
+      <div className="relative rounded-[inherit] bg-background">
         {children}
       </div>
+
+      {/* The ring sits above the content, over its outer edge, so the content cannot cover it */}
+      {prefersReducedMotion ? (
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-10 rounded-[inherit]"
+          style={{ ...ring, background: colorFrom, opacity: 0.5 }}
+        />
+      ) : (
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-10 rounded-[inherit]"
+          style={{ ...ring, background }}
+        />
+      )}
     </div>
   )
 }
@@ -93,40 +103,54 @@ export interface GlowingBorderProps extends React.HTMLAttributes<HTMLDivElement>
   intensity?: "sm" | "md" | "lg"
 }
 
+/**
+ * The ring's width and the blur of the glow that hugs it, in px. The glow has
+ * no spread, so it stays close to the edge instead of casting a shadow.
+ */
 const intensityValues = {
-  sm: "0 0 10px 2px",
-  md: "0 0 20px 4px",
-  lg: "0 0 30px 6px",
+  sm: { ring: 1, glow: 4 },
+  md: { ring: 1, glow: 8 },
+  lg: { ring: 2, glow: 12 },
 }
 
 /**
- * Static glowing border effect.
+ * Static glowing border: a coloured ring on the element's edge with a soft,
+ * tight glow around it. The ring is the border, so the content needs none.
  */
 export function GlowingBorder({
-  glowColor = "color-mix(in oklch, var(--primary) 50%, transparent)",
-  borderRadius = "0.5rem",
+  glowColor: glowColorProp,
+  borderRadius: borderRadiusProp,
   intensity = "md",
   className,
   children,
   ...props
 }: GlowingBorderProps) {
+  const glowColor = filled(glowColorProp, "color-mix(in oklch, var(--primary) 50%, transparent)")
+  const borderRadius = filled(borderRadiusProp, "0.5rem")
+  const { ring, glow } = intensityValues[intensity]
   return (
     <div
-      className={cn("relative", className)}
+      className={cn("relative isolate", className)}
       style={{
         borderRadius,
       }}
       {...props}
     >
-      {/* Glow */}
+      {children}
+      {/*
+        Above the content, so a card's own background cannot cover it. The inset
+        shadow draws the ring just inside the edge, over any neutral border the
+        content has; the outer ones are the glow.
+      */}
       <div
-        className="absolute inset-0 -z-10"
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 z-10"
         style={{
           borderRadius,
-          boxShadow: `${intensityValues[intensity]} ${glowColor}`,
+          // Two stacked blurs, no spread: a denser glow at the edge that fades fast.
+          boxShadow: `inset 0 0 0 ${ring}px ${glowColor}, 0 0 ${glow / 2}px 0 ${glowColor}, 0 0 ${glow}px 0 ${glowColor}`,
         }}
       />
-      {children}
     </div>
   )
 }

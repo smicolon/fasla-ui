@@ -38,15 +38,15 @@ export const Variants: Story = {
     <div className="flex flex-col gap-4">
       <div className="flex items-center gap-4">
         <Skeleton variant="default" className="w-32 h-4" />
-        <span className="text-sm text-muted-foreground">Default (rounded)</span>
+        <code className="text-sm text-muted-foreground">default</code>
       </div>
       <div className="flex items-center gap-4">
         <Skeleton variant="circular" className="w-10 h-10" />
-        <span className="text-sm text-muted-foreground">Circular</span>
+        <code className="text-sm text-muted-foreground">circular</code>
       </div>
       <div className="flex items-center gap-4">
         <Skeleton variant="rectangular" className="w-32 h-20" />
-        <span className="text-sm text-muted-foreground">Rectangular</span>
+        <code className="text-sm text-muted-foreground">rectangular</code>
       </div>
     </div>
   ),
@@ -87,7 +87,7 @@ export const Card: Story = {
 
 export const ProfileLoading: Story = {
   render: () => (
-    <div className="flex items-center space-x-4">
+    <div className="flex items-center gap-4">
       <SkeletonAvatar className="h-12 w-12" />
       <div className="space-y-2">
         <Skeleton className="h-4 w-[200px]" />
@@ -120,7 +120,7 @@ export const ListLoading: Story = {
   render: () => (
     <div className="w-[300px] space-y-4">
       {Array.from({ length: 4 }).map((_, i) => (
-        <div key={i} className="flex items-center space-x-4">
+        <div key={i} className="flex items-center gap-4">
           <SkeletonAvatar />
           <div className="space-y-2 flex-1">
             <Skeleton className="h-4 w-full" />

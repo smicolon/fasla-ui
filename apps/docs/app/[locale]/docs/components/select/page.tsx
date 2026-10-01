@@ -5,23 +5,45 @@ import { useTranslations } from "next-intl"
 import { Select } from "@fasla-ui/ui/select"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
+import { PropsTable, richCode, type PropRow } from "@/components/props-table"
 
-const options = [
-  { value: "react", label: "React" },
-  { value: "vue", label: "Vue" },
-  { value: "angular", label: "Angular" },
-  { value: "svelte", label: "Svelte" },
-]
+/** The same cities in both locales: the value is a Latin identifier, the label is the locale's. */
+const OPTIONS = [
+  ["a", "riyadh"],
+  ["b", "jeddah"],
+  ["c", "dammam"],
+  ["d", "makkah"],
+] as const
 
 export default function SelectPage() {
   const t = useTranslations("docs.sections")
+  const s = useTranslations("docs.select")
+
+  const options = OPTIONS.map(([key, value]) => ({ value, label: s(`options.${key}`) }))
+
+  const props: PropRow[] = [
+    { prop: "options", type: "SelectOption[]", fallback: "", description: s.rich("props.options", richCode) },
+    { prop: "placeholder", type: "string", fallback: "", description: s.rich("props.placeholder", richCode) },
+    { prop: "selectSize", type: '"sm" | "default" | "lg"', fallback: '"default"', description: s.rich("props.selectSize", richCode) },
+    { prop: "error", type: "boolean", fallback: "false", description: s.rich("props.error", richCode) },
+    { prop: "disabled", type: "boolean", fallback: "false", description: s.rich("props.disabled", richCode) },
+    { prop: "value", type: "string", fallback: "", description: s.rich("props.value", richCode) },
+    { prop: "name", type: "string", fallback: "", description: s.rich("props.name", richCode) },
+    { prop: "onChange", type: "(event) => void", fallback: "", description: s.rich("props.onChange", richCode) },
+    { prop: "className", type: "string", fallback: "", description: s.rich("props.className", richCode) },
+  ]
+
+  const codeOptions = options
+    .slice(0, 3)
+    .map((option) => `  { value: "${option.value}", label: "${option.label}" },`)
+    .join("\n")
+
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold">Select</h1>
-        <p className="text-xl text-muted-foreground">
-          A native select input with custom styling.
-        </p>
+        <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/select/" /></h1>
+        <p className="text-xl text-muted-foreground">{s.rich("lead", richCode)}</p>
       </div>
 
       {/* Installation */}
@@ -34,11 +56,7 @@ export default function SelectPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("preview")}</h2>
         <ComponentPreview>
-          <Select
-            options={options}
-            placeholder="Select a framework"
-            className="w-[200px]"
-          />
+          <Select options={options} placeholder={s("placeholder")} className="w-[200px]" />
         </ComponentPreview>
       </section>
 
@@ -46,10 +64,10 @@ export default function SelectPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("sizes")}</h2>
         <ComponentPreview>
-          <div className="flex flex-col gap-4 w-[200px]">
-            <Select options={options} selectSize="sm" placeholder="Small" />
-            <Select options={options} selectSize="default" placeholder="Default" />
-            <Select options={options} selectSize="lg" placeholder="Large" />
+          <div className="flex w-[200px] flex-col gap-4">
+            <Select options={options} selectSize="sm" placeholder={s("sizes.sm")} />
+            <Select options={options} selectSize="default" placeholder={s("sizes.default")} />
+            <Select options={options} selectSize="lg" placeholder={s("sizes.lg")} />
           </div>
         </ComponentPreview>
       </section>
@@ -58,12 +76,18 @@ export default function SelectPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("states")}</h2>
         <ComponentPreview>
-          <div className="flex flex-col gap-4 w-[200px]">
-            <Select options={options} placeholder="Default" />
-            <Select options={options} placeholder="Error state" error />
-            <Select options={options} placeholder="Disabled" disabled />
+          <div className="flex w-[200px] flex-col gap-4">
+            <Select options={options} placeholder={s("states.default")} />
+            <Select options={options} placeholder={s("states.error")} error />
+            <Select options={options} placeholder={s("states.disabled")} disabled />
           </div>
         </ComponentPreview>
+      </section>
+
+      {/* Props */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("props")}</h2>
+        <PropsTable rows={props} />
       </section>
 
       {/* Usage */}
@@ -72,23 +96,21 @@ export default function SelectPage() {
         <CodeBlock>{`import { Select } from "@/components/ui/select"
 
 const options = [
-  { value: "react", label: "React" },
-  { value: "vue", label: "Vue" },
-  { value: "angular", label: "Angular" },
+${codeOptions}
 ]
 
-// Basic select
+// ${s("usage.basic")}
 <Select
   options={options}
-  placeholder="Select a framework"
+  placeholder="${s("placeholder")}"
 />
 
-// Different sizes
+// ${s("usage.sizes")}
 <Select options={options} selectSize="sm" />
 <Select options={options} selectSize="default" />
 <Select options={options} selectSize="lg" />
 
-// Error state
+// ${s("usage.error")}
 <Select options={options} error />`}</CodeBlock>
       </section>
     </div>

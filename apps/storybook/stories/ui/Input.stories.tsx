@@ -27,49 +27,76 @@ const meta: Meta<typeof Input> = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {
-    placeholder: "Enter text...",
+/** Sample copy, per script. Only placeholders and values change; the Arabic follows design/content/. */
+const COPY = {
+  ltr: {
+    enter: "Enter text...",
+    variants: ["Default", "Error state", "Success state"],
+    sizes: ["Small", "Default", "Large"],
+    search: "Search...",
+    email: "Enter email",
+    both: "Both icons",
+    disabled: "Disabled input",
+    value: "Hello World",
+    types: ["Text", "Email", "Password", "Number", "Search"],
+  },
+  rtl: {
+    enter: "أدخل اسمك الكامل",
+    variants: ["أدخل بريدك الإلكتروني", "رقم الجوّال", "اسم المستخدم"],
+    sizes: ["أدخل اسمك", "أدخل اسمك", "أدخل اسمك"],
+    search: "ابحث عن منتج…",
+    email: "أدخل بريدك الإلكتروني",
+    both: "اسم المستخدم",
+    disabled: "رقم الحساب",
+    value: "مرحبًا بك في فاصلة",
+    types: ["الاسم الكامل", "البريد الإلكتروني", "كلمة المرور", "الكمية", "ابحث في الطلبات"],
   },
 }
 
+type StoryCtx = { globals: { direction?: string } }
+const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
+
+export const Default: Story = {
+  render: (args, ctx) => <Input placeholder={copy(ctx).enter} {...args} />,
+}
+
 export const Variants: Story = {
-  render: () => (
+  render: (_args, ctx) => (
     <div className="flex flex-col gap-4 w-64">
-      <Input placeholder="Default" variant="default" />
-      <Input placeholder="Error state" variant="error" />
-      <Input placeholder="Success state" variant="success" />
+      <Input placeholder={copy(ctx).variants[0]} variant="default" />
+      <Input placeholder={copy(ctx).variants[1]} variant="error" />
+      <Input placeholder={copy(ctx).variants[2]} variant="success" />
     </div>
   ),
 }
 
 export const Sizes: Story = {
-  render: () => (
+  render: (_args, ctx) => (
     <div className="flex flex-col gap-4 w-64">
-      <Input placeholder="Small" inputSize="sm" />
-      <Input placeholder="Default" inputSize="default" />
-      <Input placeholder="Large" inputSize="lg" />
+      <Input placeholder={copy(ctx).sizes[0]} inputSize="sm" />
+      <Input placeholder={copy(ctx).sizes[1]} inputSize="default" />
+      <Input placeholder={copy(ctx).sizes[2]} inputSize="lg" />
     </div>
   ),
 }
 
 export const WithIcons: Story = {
-  render: () => (
+  render: (_args, ctx) => (
     <div className="flex flex-col gap-4 w-64">
       <Input
-        placeholder="Search..."
+        placeholder={copy(ctx).search}
         startIcon={
           <SearchIcon size={16} strokeWidth={1.5} />
         }
       />
       <Input
-        placeholder="Enter email"
+        placeholder={copy(ctx).email}
         endIcon={
           <MailIcon size={16} strokeWidth={1.5} />
         }
       />
       <Input
-        placeholder="Both icons"
+        placeholder={copy(ctx).both}
         startIcon={
           <UserIcon size={16} strokeWidth={1.5} />
         }
@@ -82,26 +109,21 @@ export const WithIcons: Story = {
 }
 
 export const Disabled: Story = {
-  args: {
-    placeholder: "Disabled input",
-    disabled: true,
-  },
+  render: (args, ctx) => <Input placeholder={copy(ctx).disabled} disabled {...args} />,
 }
 
 export const WithValue: Story = {
-  args: {
-    defaultValue: "Hello World",
-  },
+  render: (args, ctx) => <Input defaultValue={copy(ctx).value} {...args} />,
 }
 
 export const Types: Story = {
-  render: () => (
+  render: (_args, ctx) => (
     <div className="flex flex-col gap-4 w-64">
-      <Input type="text" placeholder="Text" />
-      <Input type="email" placeholder="Email" />
-      <Input type="password" placeholder="Password" />
-      <Input type="number" placeholder="Number" />
-      <Input type="search" placeholder="Search" />
+      <Input type="text" placeholder={copy(ctx).types[0]} />
+      <Input type="email" placeholder={copy(ctx).types[1]} />
+      <Input type="password" placeholder={copy(ctx).types[2]} />
+      <Input type="number" placeholder={copy(ctx).types[3]} />
+      <Input type="search" placeholder={copy(ctx).types[4]} />
     </div>
   ),
 }

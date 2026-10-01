@@ -68,15 +68,19 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       return checkbox
     }
 
+    // The label takes the type ramp's leading (24px Arabic, 20px English), so a
+    // wrapped label never overlaps. The box sits in a box one line tall, as
+    // Radio's control does, so it stays centred on the first line.
     return (
       <div className="flex items-start gap-3">
-        {checkbox}
-        <div className="grid gap-1 leading-none">
+        {/* One label line tall, as Radio's control; falls back to English's 20 / 14 without the Fasla preset */}
+        <div className="flex h-[calc(var(--leading-sm,calc(20/14))*0.875rem)] shrink-0 items-center">{checkbox}</div>
+        <div className="grid gap-1">
           {label && (
             <label
               htmlFor={inputId}
               className={cn(
-                "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
+                "text-sm font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
                 error && "text-destructive"
               )}
             >

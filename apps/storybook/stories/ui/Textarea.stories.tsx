@@ -11,42 +11,45 @@ const meta: Meta<typeof Textarea> = {
 export default meta
 type Story = StoryObj<typeof Textarea>
 
-export const Default: Story = {
-  args: {
-    placeholder: "Type your message here...",
-    className: "w-[300px]",
+/** Sample copy, per script. The Arabic follows design/content/. */
+const COPY = {
+  ltr: {
+    message: "Type your message here...",
+    count: "Write something...",
+    error: "Error state",
+    noResize: "Cannot resize",
+    disabled: "Disabled",
   },
+  rtl: {
+    message: "اكتب رسالتك هنا…",
+    count: "اكتب ملاحظاتك عن الطلب…",
+    error: "صف المشكلة بالتفصيل",
+    noResize: "عنوان الشحن",
+    disabled: "الردود مغلقة على هذه التذكرة",
+  },
+} as const
+
+type StoryCtx = { globals: { direction?: string } }
+const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
+
+export const Default: Story = {
+  render: (args, ctx) => <Textarea placeholder={copy(ctx).message} className="w-[300px]" {...args} />,
 }
 
 export const WithCharacterCount: Story = {
-  args: {
-    placeholder: "Write something...",
-    showCount: true,
-    maxLength: 200,
-    className: "w-[300px]",
-  },
+  render: (args, ctx) => (
+    <Textarea placeholder={copy(ctx).count} showCount maxLength={200} className="w-[300px]" {...args} />
+  ),
 }
 
 export const Error: Story = {
-  args: {
-    placeholder: "Error state",
-    variant: "error",
-    className: "w-[300px]",
-  },
+  render: (args, ctx) => <Textarea placeholder={copy(ctx).error} variant="error" className="w-[300px]" {...args} />,
 }
 
 export const NoResize: Story = {
-  args: {
-    placeholder: "Cannot resize",
-    resize: "none",
-    className: "w-[300px]",
-  },
+  render: (args, ctx) => <Textarea placeholder={copy(ctx).noResize} resize="none" className="w-[300px]" {...args} />,
 }
 
 export const Disabled: Story = {
-  args: {
-    placeholder: "Disabled",
-    disabled: true,
-    className: "w-[300px]",
-  },
+  render: (args, ctx) => <Textarea placeholder={copy(ctx).disabled} disabled className="w-[300px]" {...args} />,
 }

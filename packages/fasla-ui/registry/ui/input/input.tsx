@@ -37,7 +37,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       return (
         <div className="relative">
           {startIcon && (
-            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3 text-muted-foreground">
+            <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3 text-muted-foreground">
               {startIcon}
             </div>
           )}
@@ -45,15 +45,15 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             type={type}
             className={cn(
               inputVariants({ variant, inputSize }),
-              startIcon && "pl-10",
-              endIcon && "pr-10",
+              startIcon && "ps-10",
+              endIcon && "pe-10",
               className
             )}
             ref={ref}
             {...props}
           />
           {endIcon && (
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-muted-foreground">
+            <div className="pointer-events-none absolute inset-y-0 end-0 flex items-center pe-3 text-muted-foreground">
               {endIcon}
             </div>
           )}

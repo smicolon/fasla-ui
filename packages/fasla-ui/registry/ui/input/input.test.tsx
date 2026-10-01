@@ -38,7 +38,7 @@ describe("Input", () => {
       />
     )
     expect(screen.getByTestId("start-icon")).toBeInTheDocument()
-    expect(screen.getByTestId("input")).toHaveClass("pl-10")
+    expect(screen.getByTestId("input")).toHaveClass("ps-10")
   })
 
   it("renders with end icon", () => {
@@ -49,7 +49,7 @@ describe("Input", () => {
       />
     )
     expect(screen.getByTestId("end-icon")).toBeInTheDocument()
-    expect(screen.getByTestId("input")).toHaveClass("pr-10")
+    expect(screen.getByTestId("input")).toHaveClass("pe-10")
   })
 
   it("handles onChange", () => {

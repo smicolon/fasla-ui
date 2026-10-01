@@ -87,13 +87,14 @@ type Story = StoryObj<BadgeStoryArgs>
 /**
  * Sample copy, per script. Prop and axis names stay English — they are code and
  * Figma identifiers — and only the rendered label switches with the Direction
- * toolbar. `badge` is Figma's own RTL sample text.
+ * toolbar. The labels are real situations, never the tone or size name, and
+ * match the docs page (design/content/).
  */
 const COPY = {
   ltr: {
-    badge: "Badge",
-    tones: ["Primary", "Secondary", "Info", "Success", "Warning", "Destructive"],
-    sizes: ["Small", "Medium", "Large"],
+    badge: "New",
+    tones: ["New", "Draft", "In review", "Paid", "Awaiting payment", "Overdue"],
+    sizes: ["Featured", "Featured", "Featured"],
     featured: "Featured",
     filter: "Design",
     author: "Layla",
@@ -102,15 +103,15 @@ const COPY = {
     removeFilter: (name: string) => `Remove filter: ${name}`,
   },
   rtl: {
-    badge: "شارة",
-    tones: ["أساسي", "ثانوي", "معلومة", "نجاح", "تحذير", "خطر"],
-    sizes: ["صغير", "متوسط", "كبير"],
-    featured: "مميز",
+    badge: "جديد",
+    tones: ["جديد", "مسودة", "قيد المراجعة", "مدفوع", "بانتظار الدفع", "متأخر"],
+    sizes: ["مميّز", "مميّز", "مميّز"],
+    featured: "مميّز",
     filter: "تصميم",
     author: "ليلى",
     reset: "إعادة الضبط",
     filters: ["القاهرة", "متوفر", "شحن مجاني", "تخفيضات"],
-    removeFilter: (name: string) => `إزالة فلتر: ${name}`,
+    removeFilter: (name: string) => `إزالة عامل التصفية: ${name}`,
   },
 } as const
 

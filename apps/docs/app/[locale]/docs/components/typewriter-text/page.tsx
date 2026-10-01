@@ -1,44 +1,95 @@
-import { getTranslations, setRequestLocale } from "next-intl/server"
+"use client"
+
+import { useTranslations } from "next-intl"
+
+import { TypewriterText, TypewriterWords } from "@fasla-ui/effects/typewriter-text/typewriter-text"
+import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
-export default async function TypewriterTextPage({
-  params,
-}: {
-  params: Promise<{ locale: string }>
-}) {
-  const { locale } = await params
-  // Static export: pin the locale or next-intl reads headers() and the
-  // route drops out of the prerender.
-  setRequestLocale(locale)
-  const t = await getTranslations("docs.sections")
+import { ComponentName } from "@/components/component-name"
+import { PropsTable, richCode, type PropRow } from "@/components/props-table"
+
+const A11Y = ["cursor", "motion", "reading"] as const
+const WORDS = ["a", "b", "c"] as const
+
+export default function TypewriterTextPage() {
+  const t = useTranslations("docs.sections")
+  const w = useTranslations("docs.typewriterText")
+  const words = WORDS.map((key) => w(`words.${key}`))
+
+  const props: PropRow[] = [
+    { prop: "text", type: "string", fallback: "", description: w.rich("props.text", richCode) },
+    { prop: "speed", type: "number", fallback: "50", description: w.rich("props.speed", richCode) },
+    { prop: "delay", type: "number", fallback: "0", description: w.rich("props.delay", richCode) },
+    { prop: "cursor", type: "boolean", fallback: "true", description: w.rich("props.cursor", richCode) },
+    { prop: "cursorChar", type: "string", fallback: '"|"', description: w.rich("props.cursorChar", richCode) },
+    { prop: "loop", type: "boolean", fallback: "false", description: w.rich("props.loop", richCode) },
+    { prop: "loopDelay", type: "number", fallback: "2000", description: w.rich("props.loopDelay", richCode) },
+    { prop: "onComplete", type: "() => void", fallback: "", description: w.rich("props.onComplete", richCode) },
+    { prop: "TypewriterWords", type: "{ words, speed, deleteDelay, wordDelay, cursor }", fallback: "", description: w.rich("props.typewriterWords", richCode) },
+    { prop: "className", type: "string", fallback: "", description: w.rich("props.className", richCode) },
+  ]
+
   return (
     <div className="space-y-8">
       <div className="space-y-4">
-        <h1 className="text-4xl font-bold">Typewriter Text</h1>
-        <p className="text-xl text-muted-foreground">
-          Animated text that types out character by character.
-        </p>
+        <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/typewriter-text/" /></h1>
+        <p className="text-xl text-muted-foreground">{w("lead")}</p>
       </div>
-      <div className="space-y-4">
+
+      {/* Installation */}
+      <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
         <InstallCommand name="typewriter-text" />
-      </div>
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">{t("components")}</h2>
-        <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-          <li>TypewriterText - Single text animation</li>
-          <li>TypewriterWords - Cycle through multiple words</li>
+      </section>
+
+      {/* Preview */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("preview")}</h2>
+        <ComponentPreview>
+          <p className="text-2xl font-semibold">
+            <TypewriterText text={w("preview")} loop />
+          </p>
+        </ComponentPreview>
+      </section>
+
+      {/* Cycling words */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{w("wordsTitle")}</h2>
+        <p className="text-muted-foreground">{w.rich("wordsBody", richCode)}</p>
+        <ComponentPreview>
+          <p className="text-2xl font-semibold">
+            {w("wordsPrefix")} <TypewriterWords words={words} className="text-primary" />
+          </p>
+        </ComponentPreview>
+      </section>
+
+      {/* Accessibility */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("accessibility")}</h2>
+        <ul className="list-disc space-y-2 ps-6 text-muted-foreground">
+          {A11Y.map((key) => (
+            <li key={key}>{w.rich(`a11y.${key}`, richCode)}</li>
+          ))}
         </ul>
-      </div>
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">{t("features")}</h2>
-        <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-          <li>Customizable typing speed</li>
-          <li>Start delay</li>
-          <li>Optional cursor</li>
-          <li>Loop support</li>
-          <li>Callback on completion</li>
-        </ul>
-      </div>
+      </section>
+
+      {/* Props */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("props")}</h2>
+        <PropsTable rows={props} />
+      </section>
+
+      {/* Usage */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("usage")}</h2>
+        <CodeBlock>{`import { TypewriterText, TypewriterWords } from "@/components/ui/typewriter-text"
+
+<TypewriterText text="${w("preview")}" speed={60} loop />
+
+<p>
+  ${w("wordsPrefix")} <TypewriterWords words={[${words.map((word) => `"${word}"`).join(", ")}]} />
+</p>`}</CodeBlock>
+      </section>
     </div>
   )
 }

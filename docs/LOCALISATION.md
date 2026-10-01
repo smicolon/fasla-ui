@@ -146,41 +146,30 @@ read from `locales`.
 
 ## Writing Arabic
 
-These come from Brand Identity V2.5, sections 04 and 15. They are not style
-preferences — a review will reject copy that breaks them.
+How the Arabic is written is not in this file. `design/content/` is canonical:
 
-**Write it, do not translate it.** Machine output reads as machine output.
-Modern Standard Arabic, short sentences.
+| File | What it covers |
+| --- | --- |
+| `design/content/arabic-writing-guide.md` | Voice, headings, sentences, links, Latin names and direction, punctuation, spelling, and what is Arabic on the site versus Storybook. |
+| `design/content/arabic-glossary.md` | The one list of terms, component names included: on `/ar/` a component is named in Arabic with the English in parentheses, `زر الاختيار (Radio)`. |
 
-**Technical terms stay in Latin script**, inside the Arabic sentence:
+Read both before adding or changing an Arabic string. This file keeps only the
+mechanics: keys, message files, plurals and typesetting.
 
-```
-✅  مبنيّة على مكوّنات shadcn/ui الأساسية
-❌  مبنية على مكونات شادسي إن يو الأساسية
-```
+### Typesetting
 
-That covers `React`, `npm`, `MIT`, `TypeScript`, `CSS`, `Tailwind`, `AG-UI`,
-`cva`, and every component name (`Button`, `Input`, `Card`…).
-
-**Numerals are always Western.** `0 1 2 3 4 5 6 7 8 9`, never `٠١٢٣`. Versions,
-counts, prices and dates included.
-
-**The product name in Arabic is فاصلة.** Never `Fasla` in Latin letters inside
-an Arabic sentence, and never transliterate it as a foreign word.
-
-**Never letter-space Arabic.** Tracking is `0`. There is no all-caps in Arabic —
-use weight. Italic is never used. `globals.css` enforces all three under
-`[dir="rtl"]`, but do not fight it in a component.
-
-**Line height is 1.7 minimum, 1.8 preferred** for body copy.
+`globals.css` enforces these under `[dir="rtl"]`; do not fight them in a
+component. Arabic is never letter-spaced (tracking `0`), never set in all-caps
+(use weight) and never italic. Body copy has a line height of 1.7 minimum, 1.8
+preferred.
 
 ### Plurals
 
-Arabic has six plural categories. A bare `{count} مكوّناً` only agrees for 11–99
+Arabic has six plural categories. A bare `{count} مكوّنًا` only agrees for 11–99
 and silently reads wrong everywhere else. Use ICU:
 
 ```jsonc
-"eyebrow": "{count, plural, zero {لا مكوّنات} one {مكوّن واحد} two {مكوّنان} few {# مكوّنات} many {# مكوّناً} other {# مكوّن}} · نواة برخصة MIT"
+"eyebrow": "{count, plural, zero {لا مكوّنات} one {مكوّن واحد} two {مكوّنان} few {# مكوّنات} many {# مكوّنًا} other {# مكوّن}}"
 ```
 
 English needs `one` and `other` only, but write the full set for Arabic.

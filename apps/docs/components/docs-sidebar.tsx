@@ -5,7 +5,8 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useLocale, useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
-import { componentRouteGroups } from "@/lib/seo-routes"
+import { componentRouteGroups, routeText } from "@/lib/seo-routes"
+import type { Locale } from "@/i18n/routing"
 
 /** Category keys as they appear in seo-routes, mapped to message keys. */
 const categoryKeys: Record<string, string> = {
@@ -16,7 +17,7 @@ const categoryKeys: Record<string, string> = {
 
 function DocsNav() {
   const pathname = usePathname()
-  const locale = useLocale()
+  const locale = useLocale() as Locale
   const t = useTranslations("docs.sidebar")
 
   // Every route in the catalogue is locale-agnostic, so the prefix is added
@@ -69,13 +70,14 @@ function DocsNav() {
             <ul className="space-y-1">
               {group.routes.map((route) => (
                 <li key={route.path}>
-                  {/* Component names are technical terms and stay Latin (§15). */}
+                  {/* Component names follow design/content/arabic-glossary.md:
+                      Arabic with the English in parentheses on /ar/. */}
                   <Link
                     href={p(route.path)}
                     aria-current={isActive(route.path) ? "page" : undefined}
                     className={linkClass(isActive(route.path))}
                   >
-                    {route.h1}
+                    {routeText(route, locale).h1}
                   </Link>
                 </li>
               ))}

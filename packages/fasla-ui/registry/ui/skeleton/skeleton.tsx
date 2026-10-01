@@ -71,7 +71,7 @@ function SkeletonCard({ className, ...props }: SkeletonProps) {
       )}
       {...props}
     >
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center gap-4">
         <SkeletonAvatar />
         <div className="space-y-2 flex-1">
           <Skeleton className="h-4 w-1/2" />

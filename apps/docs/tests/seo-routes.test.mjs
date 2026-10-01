@@ -153,7 +153,7 @@ describe("Arabic route metadata", () => {
     const { metadataForRoute } = await import("../lib/seo-routes")
     const arabic = /[؀-ۿ]/
 
-    for (const route of ["/", "/docs/"]) {
+    for (const route of ["/", "/docs/", "/docs/installation/", "/docs/components/radio/"]) {
       const en = metadataForRoute(route, "en")
       const ar = metadataForRoute(route, "ar")
       expect(ar.title).toMatch(arabic)
@@ -161,6 +161,29 @@ describe("Arabic route metadata", () => {
       expect(en.title).not.toMatch(arabic)
       expect(ar.openGraph).toMatchObject({ title: ar.title, locale: "ar_AR" })
       expect(ar.twitter).toMatchObject({ title: ar.title })
+      expect(ar.description).not.toMatch(/React/)
+    }
+  })
+
+  // design/content/arabic-glossary.md: on /ar a component is named in Arabic
+  // with the English in parentheses, in the H1, the sidebar and its card.
+  test("names every component in Arabic with the English in parentheses", async () => {
+    const { componentRoutes } = await import("../lib/seo-routes")
+    const arabic = /[؀-ۿ]/
+
+    for (const route of componentRoutes) {
+      expect(route.ar, route.path).toBeDefined()
+      expect(route.ar.h1).toMatch(arabic)
+      expect(route.ar.h1.endsWith(` (${route.h1})`)).toBe(true)
+      expect(route.ar.description).toMatch(arabic)
+      // Readers know Fasla is a React library; only the <title> says so.
+      expect(route.ar.description).not.toMatch(/React/)
+      expect(route.ar.title.startsWith(route.ar.h1)).toBe(true)
+
+      // The page's H1 takes its name from the catalogue, never a literal.
+      const slug = route.path.split("/").at(-2)
+      const source = readFileSync(path.join(componentsRoot, slug, "page.tsx"), "utf8")
+      expect(/<h1\b[^>]*>\s*(<ComponentName path="[^"]+" \/>|\{routeText\(route, locale\)\.h1\})\s*<\/h1>/.test(source)).toBe(true)
     }
   })
 })

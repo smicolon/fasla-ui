@@ -5,139 +5,102 @@ import { useTranslations } from "next-intl"
 import { Button } from "@fasla-ui/ui/button"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
+import { PropsTable, richCode, type PropRow } from "@/components/props-table"
+
+const VARIANTS = ["default", "secondary", "destructive", "outline", "ghost", "link"] as const
 
 export default function ButtonPage() {
   const t = useTranslations("docs.sections")
+  const b = useTranslations("docs.button")
+
+  const props: PropRow[] = [
+    { prop: "variant", type: '"default" | "destructive" | "outline" | "secondary" | "ghost" | "link"', fallback: '"default"', description: b.rich("props.variant", richCode) },
+    { prop: "size", type: '"default" | "sm" | "lg" | "icon"', fallback: '"default"', description: b.rich("props.size", richCode) },
+    { prop: "loading", type: "boolean", fallback: "false", description: b.rich("props.loading", richCode) },
+    { prop: "loadingLabel", type: "string", fallback: '"Loading"', description: b.rich("props.loadingLabel", richCode) },
+    { prop: "disabled", type: "boolean", fallback: "false", description: b.rich("props.disabled", richCode) },
+    { prop: "asChild", type: "boolean", fallback: "false", description: b.rich("props.asChild", richCode) },
+    { prop: "onClick", type: "(event) => void", fallback: "", description: b.rich("props.onClick", richCode) },
+    { prop: "className", type: "string", fallback: "", description: b.rich("props.className", richCode) },
+  ]
+
   return (
-    <div>
-      <div>
-        <div className="space-y-2">
-          <h1 className="text-4xl font-bold">Button</h1>
-          <p className="text-lg text-muted-foreground">
-            A button component with multiple variants, sizes, and loading state.
-          </p>
-        </div>
+    <div className="space-y-8">
+      <div className="space-y-4">
+        <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/button/" /></h1>
+        <p className="text-xl text-muted-foreground">{b("lead")}</p>
+      </div>
 
-        <div className="mt-8 space-y-8">
-          {/* Installation */}
-          <section>
-            <h2 className="text-2xl font-bold">{t("installation")}</h2>
-            <div className="mt-4">
-              <InstallCommand name="button" />
-            </div>
-          </section>
+      {/* Installation */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("installation")}</h2>
+        <InstallCommand name="button" />
+      </section>
 
-          {/* Preview */}
-          <section>
-            <h2 className="text-2xl font-bold">{t("preview")}</h2>
-            <div className="mt-4">
-              <ComponentPreview>
-                <Button>Click me</Button>
-              </ComponentPreview>
-            </div>
-          </section>
+      {/* Preview */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("preview")}</h2>
+        <ComponentPreview>
+          <Button>{b("preview")}</Button>
+        </ComponentPreview>
+      </section>
 
-          {/* Variants */}
-          <section>
-            <h2 className="text-2xl font-bold">{t("variants")}</h2>
-            <div className="mt-4">
-              <ComponentPreview>
-                <div className="flex flex-wrap gap-4">
-                  <Button variant="default">Default</Button>
-                  <Button variant="secondary">Secondary</Button>
-                  <Button variant="destructive">Destructive</Button>
-                  <Button variant="outline">Outline</Button>
-                  <Button variant="ghost">Ghost</Button>
-                  <Button variant="link">Link</Button>
-                </div>
-              </ComponentPreview>
-            </div>
-          </section>
+      {/* Variants */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("variants")}</h2>
+        <ComponentPreview>
+          <div className="flex flex-wrap gap-4">
+            {VARIANTS.map((variant) => (
+              <Button key={variant} variant={variant}>
+                {b(`variants.${variant}`)}
+              </Button>
+            ))}
+          </div>
+        </ComponentPreview>
+      </section>
 
-          {/* Sizes */}
-          <section>
-            <h2 className="text-2xl font-bold">{t("sizes")}</h2>
-            <div className="mt-4">
-              <ComponentPreview>
-                <div className="flex items-center gap-4">
-                  <Button size="sm">Small</Button>
-                  <Button size="default">Default</Button>
-                  <Button size="lg">Large</Button>
-                </div>
-              </ComponentPreview>
-            </div>
-          </section>
+      {/* Sizes */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("sizes")}</h2>
+        <ComponentPreview>
+          <div className="flex items-center gap-4">
+            <Button size="sm">{b("sizes.sm")}</Button>
+            <Button size="default">{b("sizes.default")}</Button>
+            <Button size="lg">{b("sizes.lg")}</Button>
+          </div>
+        </ComponentPreview>
+      </section>
 
-          {/* Loading */}
-          <section>
-            <h2 className="text-2xl font-bold">Loading</h2>
-            <div className="mt-4">
-              <ComponentPreview>
-                <Button loading>Loading...</Button>
-              </ComponentPreview>
-            </div>
-          </section>
+      {/* Loading */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{b("loadingTitle")}</h2>
+        <ComponentPreview>
+          <Button loading loadingLabel={b("loadingLabel")}>
+            {b("loading")}
+          </Button>
+        </ComponentPreview>
+      </section>
 
-          {/* Usage */}
-          <section>
-            <h2 className="text-2xl font-bold">{t("usage")}</h2>
-            <div className="mt-4">
-              <CodeBlock>{`import { Button } from "@/components/ui/button"
+      {/* Props */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("props")}</h2>
+        <PropsTable rows={props} />
+      </section>
+
+      {/* Usage */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("usage")}</h2>
+        <CodeBlock>{`import { Button } from "@/components/ui/button"
 
 export function Example() {
   return (
     <Button variant="default" size="default">
-      Click me
+      ${b("preview")}
     </Button>
   )
 }`}</CodeBlock>
-            </div>
-          </section>
-
-          {/* Props */}
-          <section>
-            <h2 className="text-2xl font-bold">{t("props")}</h2>
-            <div className="mt-4 overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b">
-                    <th className="px-4 py-2 text-start font-semibold">Prop</th>
-                    <th className="px-4 py-2 text-start font-semibold">Type</th>
-                    <th className="px-4 py-2 text-start font-semibold">Default</th>
-                    <th className="px-4 py-2 text-start font-semibold">Description</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr className="border-b">
-                    <td className="px-4 py-2 font-mono text-xs">variant</td>
-                    <td className="px-4 py-2 font-mono text-xs">default | destructive | outline | secondary | ghost | link</td>
-                    <td className="px-4 py-2 font-mono text-xs">default</td>
-                    <td className="px-4 py-2">The visual style of the button</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="px-4 py-2 font-mono text-xs">size</td>
-                    <td className="px-4 py-2 font-mono text-xs">default | sm | lg | icon</td>
-                    <td className="px-4 py-2 font-mono text-xs">default</td>
-                    <td className="px-4 py-2">The size of the button</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="px-4 py-2 font-mono text-xs">loading</td>
-                    <td className="px-4 py-2 font-mono text-xs">boolean</td>
-                    <td className="px-4 py-2 font-mono text-xs">false</td>
-                    <td className="px-4 py-2">Shows a loading spinner</td>
-                  </tr>
-                  <tr className="border-b">
-                    <td className="px-4 py-2 font-mono text-xs">asChild</td>
-                    <td className="px-4 py-2 font-mono text-xs">boolean</td>
-                    <td className="px-4 py-2 font-mono text-xs">false</td>
-                    <td className="px-4 py-2">Render as child component</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
-        </div>
-      </div>
+      </section>
     </div>
   )
 }

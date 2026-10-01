@@ -5,8 +5,8 @@ import { Avatar, type AvatarProps } from "../../../../packages/fasla-ui/registry
 const PHOTO = "/samples/avatar-portrait.png"
 
 const COPY = {
-  ltr: { name: "Vera Brandt" },
-  rtl: { name: "دانة أحمد" },
+  ltr: { name: "Layla Haddad" },
+  rtl: { name: "ليلى حداد" },
 } as const
 
 type StoryCtx = { globals: { direction?: string } }
