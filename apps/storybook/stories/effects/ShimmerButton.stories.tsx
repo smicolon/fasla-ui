@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { ArrowUpIcon } from "lucide-react"
+import { ShoppingBagIcon } from "lucide-react"
 import { ShimmerButton } from "../../../../packages/fasla-ui/registry/effects/shimmer-button"
 
 const meta: Meta<typeof ShimmerButton> = {
@@ -78,22 +78,7 @@ export const WithIcon: Story = {
   render: (args, ctx) => (
     <ShimmerButton {...args}>
       {/* A bag, not an arrow: it needs no mirroring in RTL */}
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
-        <path d="M3 6h18" />
-        <path d="M16 10a4 4 0 0 1-8 0" />
-      </svg>
+      <ShoppingBagIcon size={16} strokeWidth={1.5} />
       {args.children ?? copy(ctx).icon}
     </ShimmerButton>
   ),

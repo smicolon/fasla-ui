@@ -12,22 +12,6 @@ const meta: Meta<typeof StatsCard> = {
 export default meta
 type Story = StoryObj<typeof StatsCard>
 
-const DollarIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <line x1="12" y1="1" x2="12" y2="23" />
-    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
-  </svg>
-)
-
-const UsersIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-    <circle cx="9" cy="7" r="4" />
-    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-  </svg>
-)
-
 /**
  * Sample copy, per script: the same store as the docs page. Numbers stay in
  * Western digits in both; the Arabic follows design/content/.
@@ -71,7 +55,7 @@ export const Default: Story = {
         title={args.title ?? c.revenue}
         value={args.value ?? c.revenueValue}
         description={args.description ?? c.fromLastMonth}
-        icon={<DollarIcon />}
+        icon={<DollarSignIcon size={24} strokeWidth={1.5} />}
         trend={{ value: 20.1, direction: "up" }}
       />
     )
@@ -88,7 +72,7 @@ export const TrendDown: Story = {
 }
 
 export const Loading: Story = {
-  render: (args, ctx) => <StatsCard {...args} title={args.title ?? copy(ctx).customers} value={args.value ?? "0"} loading icon={<UsersIcon />} />,
+  render: (args, ctx) => <StatsCard {...args} title={args.title ?? copy(ctx).customers} value={args.value ?? "0"} loading icon={<UsersIcon size={24} strokeWidth={1.5} />} />,
 }
 
 export const Grid: Story = {
@@ -96,10 +80,10 @@ export const Grid: Story = {
     const c = copy(ctx)
     return (
       <StatsGrid columns={4}>
-        <StatsCard title={c.revenue} value={c.revenueValue} icon={<DollarIcon />} trend={{ value: 20.1, direction: "up" }} description={c.fromLastMonth} />
+        <StatsCard title={c.revenue} value={c.revenueValue} icon={<DollarSignIcon size={24} strokeWidth={1.5} />} trend={{ value: 20.1, direction: "up" }} description={c.fromLastMonth} />
         <StatsCard title={c.orders} value="2,350" trend={{ value: 18.1, direction: "up" }} description={c.fromLastMonth} />
         <StatsCard title={c.sales} value="12,234" trend={{ value: 19, direction: "up" }} description={c.fromLastMonth} />
-        <StatsCard title={c.active} value="573" icon={<UsersIcon />} trend={{ value: -2.5, direction: "down" }} description={c.fromLastHour} />
+        <StatsCard title={c.active} value="573" icon={<UsersIcon size={24} strokeWidth={1.5} />} trend={{ value: -2.5, direction: "down" }} description={c.fromLastHour} />
       </StatsGrid>
     )
   },

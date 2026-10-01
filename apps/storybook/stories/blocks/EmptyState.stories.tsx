@@ -25,30 +25,6 @@ const meta: Meta<typeof EmptyState> = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-function InboxIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 0 0-2.15-1.588H6.911a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661Z"
-      />
-    </svg>
-  )
-}
-
-function FolderIcon() {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M2.25 12.75V12A2.25 2.25 0 0 1 4.5 9.75h15A2.25 2.25 0 0 1 21.75 12v.75m-8.69-6.44-2.12-2.12a1.5 1.5 0 0 0-1.061-.44H4.5A2.25 2.25 0 0 0 2.25 6v12a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9a2.25 2.25 0 0 0-2.25-2.25h-5.379a1.5 1.5 0 0 1-1.06-.44Z"
-      />
-    </svg>
-  )
-}
-
 /**
  * Sample copy, per script: the same store as the docs page. The presets' own
  * English is replaced through their title and description props. The Arabic
@@ -76,7 +52,7 @@ const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : CO
 
 export const Default: Story = {
   render: (args, ctx) => (
-    <EmptyState title={copy(ctx).empty.title} description={copy(ctx).empty.description} icon={<InboxIcon />} {...args} />
+    <EmptyState title={copy(ctx).empty.title} description={copy(ctx).empty.description} icon={<InboxIcon strokeWidth={1.5} />} {...args} />
   ),
 }
 
@@ -88,7 +64,7 @@ export const WithActions: Story = {
         {...args}
         title={args.title ?? c.title}
         description={args.description ?? c.description}
-        icon={<FolderIcon />}
+        icon={<FolderOpenIcon strokeWidth={1.5} />}
         action={<Button>{c.action}</Button>}
         secondaryAction={<Button variant="outline">{c.secondary}</Button>}
       />
@@ -103,7 +79,7 @@ export const Sizes: Story = {
       <div className="flex flex-col gap-8">
         {(["sm", "default", "lg"] as const).map((size) => (
           <div key={size} className="rounded-lg border">
-            <EmptyState size={size} title={c.title} description={c.description} icon={<InboxIcon />} />
+            <EmptyState size={size} title={c.title} description={c.description} icon={<InboxIcon strokeWidth={1.5} />} />
           </div>
         ))}
       </div>

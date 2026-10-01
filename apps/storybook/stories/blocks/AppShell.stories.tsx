@@ -93,9 +93,7 @@ const HeaderContent = ({ c }: { c: Copy }) => (
   <div className="flex h-14 items-center justify-between px-4">
     <div className="flex items-center gap-4">
       <Button variant="ghost" size="icon" className="md:hidden" aria-label={c.menu}>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-          <path d="M3 12h18M3 6h18M3 18h18" />
-        </svg>
+        <MenuIcon size={20} strokeWidth={1.5} />
       </Button>
       <span className="text-sm text-muted-foreground">{c.welcome}</span>
     </div>
