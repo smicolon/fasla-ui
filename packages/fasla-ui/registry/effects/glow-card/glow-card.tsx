@@ -3,6 +3,27 @@
 import * as React from "react"
 import { cn } from "../../../src/lib/utils"
 
+/**
+ * Whether the user asks for reduced motion. It starts false, so the server and
+ * the first client render agree, then follows the setting as it changes.
+ */
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = React.useState(false)
+  React.useEffect(() => {
+    if (typeof window.matchMedia !== "function") return
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)")
+    setReduced(query.matches)
+    const onChange = () => setReduced(query.matches)
+    query.addEventListener("change", onChange)
+    return () => query.removeEventListener("change", onChange)
+  }, [])
+  return reduced
+}
+
+/** The value, or the fallback when it is missing or blank (a cleared control, say). */
+const filled = (value: string | undefined, fallback: string) =>
+  value && value.trim() ? value : fallback
+
 export interface GlowCardProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Glow color (any CSS color) */
   glowColor?: string
@@ -16,7 +37,7 @@ export interface GlowCardProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function GlowCard({
-  glowColor = "var(--primary)",
+  glowColor: glowColorProp,
   glowIntensity = 60,
   followMouse = false,
   hoverOnly = true,
@@ -24,29 +45,30 @@ export function GlowCard({
   children,
   ...props
 }: GlowCardProps) {
+  const glowColor = filled(glowColorProp, "var(--primary)")
   const cardRef = React.useRef<HTMLDivElement>(null)
-  const [mousePosition, setMousePosition] = React.useState({ x: 50, y: 50 })
+  // Pointer position in px from the card's top-left; null keeps the glow centred.
+  const [mousePosition, setMousePosition] = React.useState<{ x: number; y: number } | null>(null)
   const [isHovering, setIsHovering] = React.useState(false)
 
-  // Check for reduced motion preference
-  const prefersReducedMotion = React.useMemo(() => {
-    if (typeof window === "undefined") return false
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  }, [])
+  const prefersReducedMotion = usePrefersReducedMotion()
 
   const handleMouseMove = React.useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (!followMouse || !cardRef.current || prefersReducedMotion) return
 
       const rect = cardRef.current.getBoundingClientRect()
-      const x = ((e.clientX - rect.left) / rect.width) * 100
-      const y = ((e.clientY - rect.top) / rect.height) * 100
-      setMousePosition({ x, y })
+      setMousePosition({ x: e.clientX - rect.left, y: e.clientY - rect.top })
     },
     [followMouse, prefersReducedMotion]
   )
 
   const showGlow = prefersReducedMotion ? false : hoverOnly ? isHovering : true
+  // The glow layer overhangs the card by the blur radius on every side, so the
+  // blur has colour to spread instead of fading into the card's clipped edge.
+  const overhang = glowIntensity
+  const glowAt = mousePosition ? `${mousePosition.x + overhang}px ${mousePosition.y + overhang}px` : "50% 50%"
+  const edgeAt = mousePosition ? `${mousePosition.x}px ${mousePosition.y}px` : "50% 50%"
 
   return (
     <div
@@ -54,45 +76,45 @@ export function GlowCard({
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
-      className={cn("relative overflow-hidden rounded-xl", className)}
+      className={cn("relative isolate overflow-hidden rounded-xl border bg-card", className)}
       {...props}
     >
-      {/* Glow effect */}
+      {/*
+        Glow: above the card surface and below the content, so it shows through
+        it. The colour is softened so text on top keeps its contrast.
+      */}
       <div
+        aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute -inset-px rounded-xl opacity-0 transition-opacity duration-300",
+          "pointer-events-none absolute opacity-0 transition-opacity duration-300",
           showGlow && "opacity-100"
         )}
         style={{
-          background: followMouse
-            ? `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, ${glowColor}, transparent 70%)`
-            : `radial-gradient(circle at 50% 50%, ${glowColor}, transparent 70%)`,
+          inset: -overhang,
+          background: `radial-gradient(circle at ${glowAt}, color-mix(in oklch, ${glowColor} 60%, transparent), transparent 40%)`,
           filter: `blur(${glowIntensity}px)`,
         }}
       />
 
-      {/* Border glow */}
+      {/* Card content */}
+      <div className="relative">{children}</div>
+
+      {/* Edge glow: a 1px ring above the content, just inside the border */}
       <div
+        aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300",
-          showGlow && "opacity-50"
+          "pointer-events-none absolute inset-0 rounded-[inherit] opacity-0 transition-opacity duration-300",
+          showGlow && "opacity-100"
         )}
         style={{
-          background: followMouse
-            ? `radial-gradient(circle at ${mousePosition.x}% ${mousePosition.y}%, ${glowColor}, transparent 50%)`
-            : undefined,
+          background: `radial-gradient(circle at ${edgeAt}, ${glowColor}, transparent 50%)`,
           padding: "1px",
-          WebkitMask:
-            "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
+          WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
           WebkitMaskComposite: "xor",
+          mask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
           maskComposite: "exclude",
         }}
       />
-
-      {/* Card content */}
-      <div className="relative z-10 rounded-xl border bg-card">
-        {children}
-      </div>
     </div>
   )
 }
@@ -106,29 +128,18 @@ export interface GlowContainerProps extends React.HTMLAttributes<HTMLDivElement>
 }
 
 export function GlowContainer({
-  glowColor = "var(--primary)",
+  glowColor: glowColorProp,
   duration = 3,
   className,
   children,
   ...props
 }: GlowContainerProps) {
-  const prefersReducedMotion = React.useMemo(() => {
-    if (typeof window === "undefined") return false
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches
-  }, [])
+  const glowColor = filled(glowColorProp, "var(--primary)")
+  const prefersReducedMotion = usePrefersReducedMotion()
 
   return (
     <div
       className={cn("relative overflow-hidden rounded-xl p-px", className)}
-      style={
-        !prefersReducedMotion
-          ? {
-              background: `linear-gradient(90deg, ${glowColor}, transparent, ${glowColor})`,
-              backgroundSize: "200% 100%",
-              animation: `glow-slide ${duration}s linear infinite`,
-            }
-          : { background: glowColor }
-      }
       {...props}
     >
       <style dangerouslySetInnerHTML={{ __html: `
@@ -137,6 +148,20 @@ export function GlowContainer({
           100% { background-position: -200% 0; }
         }
       ` }} />
+      {/* The glow is its own layer so it can mirror in RTL and slide in the reading direction */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 rtl:-scale-x-100"
+        style={
+          !prefersReducedMotion
+            ? {
+                background: `linear-gradient(90deg, ${glowColor}, transparent, ${glowColor})`,
+                backgroundSize: "200% 100%",
+                animation: `glow-slide ${duration}s linear infinite`,
+              }
+            : { background: glowColor }
+        }
+      />
       <div className="relative z-10 rounded-[11px] bg-background">
         {children}
       </div>

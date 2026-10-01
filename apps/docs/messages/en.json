@@ -85,10 +85,60 @@
   },
   "docs": {
     "avatar": {
-      "fallback": "If the photo is missing or fails to load, the avatar shows the initials, or the icon if there's no name."
+      "fallback": "If the photo is missing or fails to load, the avatar shows the initials, or the icon if there's no name.",
+      "lead": "A person’s photo, initials or icon, with an optional border and presence dot.",
+      "installNote": "The avatar uses <code>status-indicator</code> for its dot, so add both.",
+      "person": "Layla Haddad",
+      "variantsBody": "<code>variant</code> picks the content. <code>image</code>, the default, shows the photo, and while it loads or if it fails falls back to initials from <code>name</code>, then to the user icon when there is no name. <code>initials</code> and <code>icon</code> show theirs even when a photo is passed. <code>radius</code> picks a rounded square or a circle, and <code>border</code> adds a ring inside the edge.",
+      "sizesBody": "32 for headers, cards and comments; 24 for dense tables and lists; 12 for inline mentions, where initials shrink to one letter at the 10px XXS size.",
+      "statusTitle": "Status",
+      "statusBody": "<code>status</code> adds a Status Indicator at the end corner — bottom-right, or bottom-left in a right-to-left page. There is no dot unless you set one: it claims the person’s presence, so show it only when you know it.",
+      "a11y": {
+        "name": "<code>name</code> names the avatar in every variant: it is the photo’s <code>alt</code>, and hidden text behind the initials or icon, whose visible letters are not read out.",
+        "empty": "Pass <code>{emptyName}</code> when a label beside the avatar already names the person, so it isn’t announced twice.",
+        "dot": "The dot is read after the name — \"Layla Haddad\", then \"Online\", or \"متصل\" when the nearest <code>lang</code> is Arabic. Pass <code>statusLabel</code> to say more.",
+        "dir": "Direction is inherited from <code>dir</code>, never a prop, so the dot always sits on the right corner for the page."
+      },
+      "usage": {
+        "photo": "Photo, falling back to initials, then the user icon",
+        "initials": "Initials or the icon, whatever else is passed",
+        "lazy": "Long lists: defer photos below the fold, and give dense screens a sharper source",
+        "circle": "Circle with a border and a presence dot",
+        "inline": "Inline, beside a name that already says who it is"
+      },
+      "props": {
+        "variant": "What it shows: photo, initials or icon.",
+        "size": "Avatar size in pixels.",
+        "radius": "Rounded square or circle.",
+        "border": "Adds a ring inside the edge.",
+        "src": "Photo URL.",
+        "name": "Person’s name: the alt text and initials.",
+        "status": "Adds a presence dot.",
+        "statusLabel": "Dot’s accessible name, in the page language by default.",
+        "className": "Extra classes for the component."
+      }
     },
     "statusIndicator": {
-      "onAvatar": "The dot is meant to sit on an avatar, not on its own over a coloured surface."
+      "onAvatar": "The dot is meant to sit on an avatar, not on its own over a coloured surface.",
+      "lead": "A presence dot — online, away, busy or offline — with an accessible name, so colour never carries the status alone.",
+      "variantsBody": "<code>status</code> sets the colour: success for online, warning for away, destructive for busy and muted for offline.",
+      "sizesBody": "8px with a 2px ring, or 4px with a 1px ring for the smallest avatar. The ring is the page background, drawn outside the dot, so it never changes its size.",
+      "a11y": {
+        "colour": "Colour alone can’t carry the status. Each dot carries hidden text: \"Online\", \"Away\", \"Busy\" or \"Offline\", or \"متصل\", \"بعيد\", \"مشغول\" or \"غير متصل\" when the nearest <code>lang</code> is Arabic. It follows a language change without a reload.",
+        "label": "Pass <code>label</code> for more context, such as \"Layla is online\".",
+        "hidden": "When the status is already written next to the dot, hide the dot with <code>aria-hidden</code> so it isn’t announced twice.",
+        "dir": "The dot is a circle, so it has no direction. The parent decides where it sits; Avatar pins it to the end corner."
+      },
+      "usage": {
+        "context": "More context for screen readers",
+        "awayLabel": "is away"
+      },
+      "props": {
+        "status": "Presence to show.",
+        "size": "Dot size in pixels.",
+        "label": "Accessible name, in the page language by default.",
+        "className": "Extra classes for the component."
+      }
     },
     "sections": {
       "installation": "Installation",
@@ -110,7 +160,34 @@
       "introduction": "Introduction",
       "installation": "Installation",
       "playground": "Component Playground",
-      "menu": "Docs menu"
+      "menu": "Docs menu",
+      "lead": "A collapsible sidebar navigation component for app layouts.",
+      "brand": "My store",
+      "group": "Store",
+      "items": {
+        "dashboard": "Dashboard",
+        "orders": "Orders",
+        "products": "Products",
+        "settings": "Settings"
+      },
+      "collapse": "Collapse sidebar",
+      "expand": "Expand sidebar",
+      "parts": {
+        "sidebar": "Main container",
+        "header": "Header section",
+        "content": "Scrollable content area",
+        "footer": "Footer section",
+        "group": "Grouped items with label",
+        "item": "Navigation item with icon",
+        "collapseButton": "Toggle collapse state"
+      },
+      "props": {
+        "collapsed": "Collapses it to icons only.",
+        "onCollapsedChange": "Called when it collapses or expands.",
+        "width": "Width when expanded.",
+        "children": "The sidebar’s parts.",
+        "className": "Extra classes for the component."
+      }
     },
     "onThisPage": "On this page",
     "copyCode": "Copy code",
@@ -132,6 +209,901 @@
         "darkMode": "<strong>Dark mode</strong> — dark mode support out of the box",
         "customizable": "<strong>Customizable</strong> — built with Tailwind CSS, easy to customize"
       }
+    },
+    "radio": {
+      "lead": "A control for choosing exactly one option from a set.",
+      "variantsBody": "The <code>layout</code> variant wraps the control and its text in a bordered card, so the whole card becomes the target. Use it when the options carry a description; use the default when they are single words in a tight list.",
+      "statesBody": "Hover and focus are real CSS states rather than props — hover an option, or tab to it, to see them. Selection is carried by the dot alone; the card chrome does not change.",
+      "a11y": {
+        "nativeInput": "Renders a native <code>{input}</code>, so arrow-key navigation and form submission work without extra code.",
+        "group": "Options sharing a <code>name</code> form one group, and only one can be selected.",
+        "describedBy": "<code>description</code> is linked with <code>aria-describedby</code>; the control graphic is hidden from assistive technology.",
+        "ariaLabel": "Without a <code>label</code> or <code>description</code>, pass an <code>aria-label</code>.",
+        "direction": "Direction is inherited from <code>dir</code>, never a prop, so the control can never disagree with the page."
+      },
+      "preview": {
+        "standard": "Standard delivery",
+        "express": "Express delivery",
+        "courier": "Same-day courier",
+        "long": "Same-day courier delivery to a residential address"
+      },
+      "variants": {
+        "defaultA": "Default",
+        "defaultB": "Default",
+        "layoutA": "Layout",
+        "layoutADescription": "The card is the target",
+        "layoutB": "Layout",
+        "layoutBDescription": "Hover fills the card"
+      },
+      "sizes": {
+        "sm": "Small",
+        "md": "Medium",
+        "lg": "Large"
+      },
+      "states": {
+        "unselected": "Unselected",
+        "selected": "Selected",
+        "disabled": "Disabled",
+        "disabledSelected": "Disabled, selected"
+      },
+      "usage": {
+        "commentGroup": "A group — options share a name",
+        "commentDescription": "With a description",
+        "commentLayout": "Bordered card layout",
+        "commentControlled": "Controlled",
+        "codeStandard": "Standard",
+        "codeExpress": "Express",
+        "codeCourier": "Same-day courier",
+        "codeCourierDescription": "Arrives before 6pm",
+        "standard": "Standard",
+        "standardDescription": "3–5 business days",
+        "express": "Express",
+        "expressDescription": "Arrives tomorrow",
+        "selected": "Selected:"
+      },
+      "props": {
+        "variant": "A plain control or a bordered card.",
+        "size": "Control size.",
+        "label": "Label text.",
+        "descriptionProp": "Secondary line below the label.",
+        "className": "Extra classes for the component.",
+        "nameProp": "Groups radios into one set.",
+        "valueProp": "Value submitted with the form.",
+        "checkedProp": "Selected state, with <code>onChange</code>.",
+        "disabledProp": "Disables the option and dims it.",
+        "onChangeProp": "Called when the option is picked."
+      }
+    },
+    "installation": {
+      "title": "Installation",
+      "lead": "How to install and set up Fasla in your project.",
+      "requirementsTitle": "Requirements",
+      "requirements": {
+        "react": "React 18 or later",
+        "tailwind": "Tailwind CSS 3.4 or later",
+        "typescript": "TypeScript (recommended)"
+      },
+      "cliTitle": "Using the CLI",
+      "cliBody": "The easiest way to add components is the <code>@smicolon/cli</code> package. It takes two steps.",
+      "cliInit": "1. Initialize Fasla, once per project. This writes <code>components.json</code>, which every <code>add</code> reads:",
+      "cliAdd": "2. Add a component:",
+      "cliList": "List everything the registry offers:",
+      "manualTitle": "Manual Installation",
+      "manualBody": "You can also copy components directly from the source code.",
+      "manualDeps": "1. Install dependencies:",
+      "manualCn": "2. Add the cn utility to your project:",
+      "manualCopy": "3. Copy the component source code from each component page.",
+      "tailwindTitle": "Tailwind Configuration",
+      "tailwindBody": "Map the semantic tokens into your Tailwind theme. The package exports the whole set, already wrapped so that opacity modifiers keep working:",
+      "tailwindNote": "Then declare the matching CSS variables as full colours (hex or oklch) on <code>:root</code> and <code>.dark</code>. Mapping a token as a bare <code>var(--primary)</code> looks correct but silently drops Tailwind’s opacity modifiers — <code>bg-primary/10</code> compiles to no rule at all. That is why the exported map wraps each token in <code>color-mix()</code>."
+    },
+    "propsTable": {
+      "prop": "Prop",
+      "type": "Type",
+      "default": "Default",
+      "description": "Description",
+      "none": "—"
+    },
+    "checkbox": {
+      "lead": "A control that allows the user to toggle between checked and not checked.",
+      "preview": {
+        "terms": "Accept terms",
+        "long": "Email me a weekly summary of new components and release notes"
+      },
+      "withLabelTitle": "With Label & Description",
+      "withLabel": {
+        "email": "Email notifications",
+        "marketing": "Marketing emails",
+        "marketingDescription": "Receive emails about new products and features",
+        "security": "Security alerts",
+        "securityDescription": "Get notified about security updates"
+      },
+      "states": {
+        "default": "Default",
+        "checked": "Checked",
+        "indeterminate": "Indeterminate",
+        "disabled": "Disabled",
+        "error": "Error state"
+      },
+      "usage": {
+        "basic": "Basic checkbox",
+        "withLabel": "With label",
+        "withDescription": "With description",
+        "indeterminate": "Indeterminate state",
+        "error": "Error state",
+        "terms": "Accept terms and conditions",
+        "marketing": "Marketing emails",
+        "marketingDescription": "Receive emails about new products",
+        "required": "Required field"
+      },
+      "props": {
+        "checked": "Checked state. Use it with <code>onChange</code>.",
+        "indeterminate": "Shows a dash for a partly selected group.",
+        "disabled": "Disables the checkbox and dims it.",
+        "error": "Marks the checkbox as invalid.",
+        "label": "Label text.",
+        "description": "Secondary line below the label.",
+        "name": "Name submitted with the form.",
+        "value": "Value submitted when checked.",
+        "onChange": "Called when the checkbox changes.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "switch": {
+      "lead": "A toggle control for switching between on and off states.",
+      "preview": {
+        "long": "Download updates over mobile data when Wi-Fi is unavailable"
+      },
+      "withLabelTitle": "With Label & Description",
+      "withLabel": {
+        "airplane": "Airplane mode",
+        "dark": "Dark mode",
+        "darkDescription": "Toggle dark mode on or off",
+        "notifications": "Notifications",
+        "notificationsDescription": "Receive push notifications"
+      },
+      "usage": {
+        "basic": "Basic switch",
+        "withLabel": "With label",
+        "withDescription": "With description",
+        "sizes": "Different sizes",
+        "controlled": "Controlled"
+      },
+      "props": {
+        "size": "Switch size.",
+        "checked": "On state. Use it with <code>onChange</code>.",
+        "disabled": "Disables the switch and dims it.",
+        "label": "Label text.",
+        "description": "Secondary line below the label.",
+        "name": "Name submitted with the form.",
+        "onChange": "Called when the switch changes.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "select": {
+      "lead": "A native select input with custom styling.",
+      "options": {
+        "a": "Riyadh",
+        "b": "Jeddah",
+        "c": "Dammam",
+        "d": "Makkah"
+      },
+      "placeholder": "Select a city",
+      "sizes": {
+        "sm": "Select a city",
+        "default": "Select a city",
+        "lg": "Select a city"
+      },
+      "states": {
+        "default": "Select a city",
+        "error": "Select a delivery city",
+        "disabled": "Select a branch"
+      },
+      "usage": {
+        "basic": "Basic select",
+        "sizes": "Different sizes",
+        "error": "Error state"
+      },
+      "props": {
+        "options": "Options to choose from.",
+        "placeholder": "Text shown before a choice.",
+        "selectSize": "Select size.",
+        "error": "Marks the select as invalid.",
+        "disabled": "Disables the select and dims it.",
+        "value": "Selected value. Use it with <code>onChange</code>.",
+        "name": "Name submitted with the form.",
+        "onChange": "Called when the choice changes.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "textarea": {
+      "lead": "A multi-line text input with character count and resize options.",
+      "placeholder": "Type your message here...",
+      "countTitle": "With Character Count",
+      "countPlaceholder": "Type your message...",
+      "resizeTitle": "Resize Options",
+      "resize": {
+        "none": "No resize",
+        "vertical": "Vertical resize (default)",
+        "both": "Both directions"
+      },
+      "states": {
+        "default": "Default",
+        "error": "Error state",
+        "disabled": "Disabled"
+      },
+      "usage": {
+        "basic": "Basic textarea",
+        "count": "With character count",
+        "resize": "Different resize options",
+        "error": "Error state",
+        "codePlaceholder": "Type your message...",
+        "codeCount": "Type here..."
+      },
+      "props": {
+        "variant": "Visual style: default or error.",
+        "resize": "Directions it can be resized in.",
+        "showCount": "Shows a character counter.",
+        "maxLength": "Maximum number of characters.",
+        "placeholder": "Text shown while empty.",
+        "disabled": "Disables the field and dims it.",
+        "value": "Text value. Use it with <code>onChange</code>.",
+        "onChange": "Called when the text changes.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "input": {
+      "lead": "A text input component with validation states and icon support.",
+      "placeholder": "Enter text...",
+      "variants": {
+        "default": "Default",
+        "error": "Error state",
+        "success": "Success state"
+      },
+      "sizes": {
+        "sm": "Small",
+        "default": "Default",
+        "lg": "Large"
+      },
+      "iconsTitle": "With Icons",
+      "icons": {
+        "search": "Search...",
+        "end": "With end icon"
+      },
+      "props": {
+        "variant": "Visual style for validation.",
+        "inputSize": "Field size.",
+        "startIcon": "Icon at the start of the field.",
+        "endIcon": "Icon at the end of the field.",
+        "placeholder": "Text shown while empty.",
+        "type": "Input type, such as <code>email</code>.",
+        "disabled": "Disables the field and dims it.",
+        "value": "Field value. Use it with <code>onChange</code>.",
+        "onChange": "Called when the text changes.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "combobox": {
+      "lead": "A searchable dropdown with autocomplete, multi-select, and create-new functionality.",
+      "options": {
+        "a": "Saudi Arabia",
+        "b": "United Arab Emirates",
+        "c": "Egypt",
+        "d": "Jordan",
+        "e": "Morocco",
+        "f": "Kuwait"
+      },
+      "placeholder": "Select a country…",
+      "searchableTitle": "Searchable",
+      "searchable": {
+        "placeholder": "Search for a country…",
+        "search": "Type a country name…"
+      },
+      "multiTitle": "Multi-select",
+      "multi": "Select shipping countries…",
+      "creatableTitle": "Creatable",
+      "creatable": "Select a country or add one…",
+      "states": {
+        "default": "Select a country…",
+        "disabled": "Country set by your account",
+        "loading": "Loading countries…"
+      },
+      "text": {
+        "search": "Search...",
+        "empty": "No matching country.",
+        "create": "Add",
+        "loading": "Loading...",
+        "open": "Open",
+        "close": "Close",
+        "remove": "Remove {label}"
+      },
+      "usage": {
+        "basic": "Basic combobox",
+        "controlled": "Controlled with search",
+        "multi": "Multi-select",
+        "creatable": "Creatable",
+        "addNew": "Add new option to your list",
+        "codePlaceholder": "Select an option…"
+      },
+      "props": {
+        "options": "Options to choose from.",
+        "value": "Selected value, or values when <code>multiple</code>.",
+        "onChange": "Called when the selection changes.",
+        "placeholder": "Text shown before a choice.",
+        "searchPlaceholder": "Placeholder of the search field.",
+        "multiple": "Allows several selections.",
+        "creatable": "Lets the user add a new option.",
+        "onCreate": "Called with the new option’s text.",
+        "emptyText": "Text when nothing matches.",
+        "createText": "Label of the create option.",
+        "loading": "Shows the loading state.",
+        "loadingText": "Text shown while loading.",
+        "openLabel": "Toggle’s accessible name when closed.",
+        "closeLabel": "Toggle’s accessible name when open.",
+        "removeLabel": "Accessible name of a chip’s remove button.",
+        "disabled": "Disables the combobox and dims it.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "button": {
+      "lead": "A button component with multiple variants, sizes, and loading state.",
+      "preview": "Save changes",
+      "variants": {
+        "default": "Save changes",
+        "secondary": "Preview",
+        "destructive": "Delete account",
+        "outline": "Cancel",
+        "ghost": "Skip",
+        "link": "View details"
+      },
+      "sizes": {
+        "sm": "Save changes",
+        "default": "Save changes",
+        "lg": "Save changes"
+      },
+      "loadingTitle": "Loading",
+      "loading": "Saving…",
+      "loadingLabel": "Saving",
+      "props": {
+        "variant": "The visual style of the button.",
+        "size": "The size of the button.",
+        "loading": "Shows a loading spinner.",
+        "loadingLabel": "Screen-reader text while loading.",
+        "disabled": "Disables the button.",
+        "asChild": "Renders its child element instead.",
+        "onClick": "Called when the button is pressed.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "card": {
+      "lead": "A composable card component with header, content, and footer sections.",
+      "preview": {
+        "title": "Your order is on its way",
+        "description": "Arrives tomorrow before 6 pm.",
+        "content": "Order 4821 contains three items.",
+        "action": "Track order"
+      },
+      "simpleTitle": "Simple Card",
+      "simple": "We’ll message you when your order status changes.",
+      "partsNote": "Every part takes these props, and any <code>div</code> prop: <code>Card</code>, <code>CardHeader</code>, <code>CardTitle</code>, <code>CardDescription</code>, <code>CardContent</code>, <code>CardFooter</code>.",
+      "usage": {
+        "title": "Your order is on its way",
+        "description": "Arrives tomorrow",
+        "content": "Order details",
+        "footer": "Track order"
+      },
+      "props": {
+        "children": "The part’s content.",
+        "className": "Extra classes for the part."
+      }
+    },
+    "skeleton": {
+      "lead": "Loading placeholder components for content that is loading.",
+      "basicTitle": "Basic",
+      "textTitle": "Text Skeleton",
+      "avatarTitle": "Avatar Skeleton",
+      "cardTitle": "Card Skeleton",
+      "props": {
+        "variant": "The shape of the skeleton.",
+        "animate": "Whether to animate the skeleton.",
+        "lines": "Number of lines in <code>SkeletonText</code>.",
+        "className": "Sets the size, such as <code>h-12 w-48</code>."
+      }
+    },
+    "tabs": {
+      "lead": "A set of layered sections of content that display one panel at a time.",
+      "tabs": {
+        "account": "Account",
+        "password": "Password",
+        "settings": "Settings"
+      },
+      "panels": {
+        "account": "Make changes to your account here.",
+        "password": "Change your password here.",
+        "settings": "Manage your settings here."
+      },
+      "disabledTitle": "With Disabled Tab",
+      "disabled": {
+        "current": "Current orders",
+        "invoices": "Invoices",
+        "past": "Past orders",
+        "currentText": "You have two orders out for delivery.",
+        "pastText": "Your last order was two weeks ago."
+      },
+      "usage": {
+        "basic": "Basic tabs",
+        "controlled": "Controlled tabs",
+        "accountContent": "Account content here.",
+        "passwordContent": "Password content here."
+      },
+      "props": {
+        "value": "Active tab, when controlled.",
+        "defaultValue": "Tab active at first.",
+        "onValueChange": "Called when the active tab changes.",
+        "trigger": "A tab button; its <code>value</code> names its panel.",
+        "content": "The panel shown for its <code>value</code>.",
+        "className": "Extra classes for the part."
+      }
+    },
+    "badge": {
+      "lead": "A compact inline label for status, category or metadata, with an optional icon, avatar and close button.",
+      "preview": {
+        "new": "New",
+        "paid": "Paid",
+        "featured": "Featured"
+      },
+      "variantsBody": "<code>variant</code> sets the visual weight and <code>tone</code> the meaning. Solid is the loudest; Soft lays a tint over the card surface, so it reads the same wherever it sits; Outline is the quietest.",
+      "tones": {
+        "primary": "New",
+        "secondary": "Draft",
+        "info": "In review",
+        "success": "Paid",
+        "warning": "Awaiting payment",
+        "destructive": "Overdue"
+      },
+      "radiusBody": "<code>{radiusStandard}</code> swaps the pill for the design system’s small radius.",
+      "radius": "New",
+      "sizesBody": "Heights are minimums: 20, 22 and 26px in English. Arabic’s taller line grows them to 24, 24 and 28px rather than squeezing the text.",
+      "sizes": "Featured",
+      "statesBody": "Pass <code>onClose</code> and the badge gets a real close button. Tab to one to see the focus ring, which wraps the whole badge 2px out.",
+      "filters": {
+        "a": "Design",
+        "b": "Engineering",
+        "c": "Research",
+        "d": "Marketing"
+      },
+      "reset": "Reset filters",
+      "examples": {
+        "featured": "Featured",
+        "person": "Layla",
+        "reviewer": "Reviewer"
+      },
+      "a11y": {
+        "span": "The badge is a plain <code>{span}</code>. Only the close button is interactive, and it is a native <code>{button}</code>.",
+        "closeName": "The close button is named after the label, \"Remove Cairo\", or \"إزالة القاهرة\" when the nearest <code>lang</code> is Arabic. It follows a language change without a reload. Pass <code>closeLabel</code> for more context, such as \"Remove filter: Cairo\".",
+        "icon": "The icon is decorative and hidden from assistive technology. The avatar is not: give the Avatar a <code>name</code>, or <code>{emptyName}</code> when the label already names the person.",
+        "tone": "Don’t rely on tone alone to carry meaning — the label should say it.",
+        "dir": "Direction is inherited from <code>dir</code>, never a prop, so the badge can never disagree with the page."
+      },
+      "usage": {
+        "new": "New",
+        "paid": "Paid",
+        "overdue": "Overdue",
+        "featured": "Featured",
+        "iconAvatar": "Icon and avatar — the badge sizes and colours them",
+        "removable": "Removable",
+        "removeFilter": "Remove filter"
+      },
+      "props": {
+        "children": "The label.",
+        "variant": "Visual weight.",
+        "tone": "Meaning, shown as colour.",
+        "size": "Badge size.",
+        "radius": "Pill or small radius.",
+        "icon": "Icon before the label.",
+        "avatar": "Avatar before the label.",
+        "onClose": "Adds a close button; called when pressed.",
+        "closeLabel": "Close button’s accessible name, in the page language by default.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "appShell": {
+      "lead": "Application layout with sidebar, header, and content areas.",
+      "brand": "My store",
+      "nav": {
+        "dashboard": "Dashboard",
+        "orders": "Orders",
+        "settings": "Settings"
+      },
+      "welcome": "Welcome back, Layla",
+      "content": {
+        "title": "Dashboard",
+        "body": "You have 12 new orders today."
+      },
+      "props": {
+        "sidebar": "Sidebar content, hidden on mobile.",
+        "header": "Header content.",
+        "children": "Main content.",
+        "sidebarWidth": "Width of the sidebar.",
+        "sidebarMobile": "Shows the sidebar on mobile.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "pageHeader": {
+      "lead": "Page header with title, description, breadcrumbs, and actions.",
+      "preview": {
+        "title": "Orders",
+        "description": "Track and manage your store’s orders"
+      },
+      "actionsTitle": "With Actions",
+      "actions": {
+        "title": "Products",
+        "description": "Add, edit and price your products",
+        "action": "Add product"
+      },
+      "breadcrumbTitle": "With Breadcrumb",
+      "breadcrumb": {
+        "home": "Home",
+        "current": "Settings",
+        "label": "Breadcrumb"
+      },
+      "props": {
+        "title": "Page title.",
+        "description": "Text below the title.",
+        "actions": "Controls at the end of the header.",
+        "breadcrumb": "Breadcrumb above the title.",
+        "breadcrumbLabel": "Breadcrumb landmark’s accessible name.",
+        "bordered": "Shows the bottom border.",
+        "headingLevel": "Heading level of the title.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "emptyState": {
+      "lead": "Display contextual empty states with icons, titles, descriptions, and actions.",
+      "preview": {
+        "title": "No products yet",
+        "description": "Get started by adding your first product.",
+        "action": "Add product"
+      },
+      "searchTitle": "Search Results",
+      "search": {
+        "query": "linen shirt",
+        "title": "No results found",
+        "description": "No results for \"{query}\". Try a different search term."
+      },
+      "dataTitle": "Empty Data",
+      "data": {
+        "title": "No orders yet",
+        "description": "Get started by creating your first order."
+      },
+      "sizes": "No products yet",
+      "props": {
+        "icon": "Icon above the title.",
+        "title": "Main title.",
+        "description": "Text below the title.",
+        "action": "Primary action.",
+        "secondaryAction": "Secondary action.",
+        "size": "Size of the empty state.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "formSection": {
+      "lead": "Form sections for grouping related fields with labels and descriptions.",
+      "preview": {
+        "title": "Personal Information",
+        "description": "Update your personal details.",
+        "first": "First Name",
+        "firstPlaceholder": "Layla",
+        "last": "Last Name",
+        "lastPlaceholder": "Haddad"
+      },
+      "errorTitle": "With Error",
+      "error": {
+        "label": "Email",
+        "message": "This email is already taken"
+      },
+      "actionsTitle": "Form Actions",
+      "actions": {
+        "cancel": "Cancel",
+        "save": "Save"
+      },
+      "usage": {
+        "title": "Account",
+        "description": "Update your account settings.",
+        "email": "Email"
+      },
+      "partsNote": "The table covers the props of <code>FormSection</code>, <code>FormField</code> and <code>FormActions</code>.",
+      "props": {
+        "title": "Section title.",
+        "description": "Text below the title or label.",
+        "divider": "Shows a divider at the bottom.",
+        "label": "Field label.",
+        "error": "Error message below the field.",
+        "required": "Marks the field as required.",
+        "htmlFor": "Connects the label to its input.",
+        "align": "Alignment of the actions.",
+        "sticky": "Sticks the actions to the bottom.",
+        "className": "Extra classes for the part."
+      }
+    },
+    "dataTable": {
+      "lead": "A data table component with sorting, selection, and pagination.",
+      "columns": {
+        "name": "Name",
+        "email": "Email",
+        "role": "Role"
+      },
+      "people": {
+        "a": "Layla Haddad",
+        "b": "Omar Khalil",
+        "c": "Sara Nasser"
+      },
+      "roles": {
+        "admin": "Admin",
+        "editor": "Editor",
+        "viewer": "Viewer"
+      },
+      "loadingTitle": "Loading State",
+      "emptyTitle": "Empty State",
+      "empty": "No users found",
+      "paginationTitle": "Pagination",
+      "pagination": {
+        "label": "Pagination",
+        "status": "Page {page} of {total}",
+        "previous": "Previous",
+        "next": "Next",
+        "goToPrevious": "Go to previous page",
+        "goToNext": "Go to next page",
+        "goToPage": "Go to page {page}"
+      },
+      "props": {
+        "data": "Rows to display.",
+        "columns": "Column definitions; each <code>align</code> is <code>start</code>, <code>center</code> or <code>end</code> of the reading direction.",
+        "getRowKey": "Unique key for each row.",
+        "loading": "Shows the loading state.",
+        "emptyState": "Shown when there are no rows.",
+        "onRowClick": "Called when a row is clicked.",
+        "selectedKey": "Key of the selected row.",
+        "stickyHeader": "Keeps the header visible on scroll.",
+        "pagination": "Pages through rows; <code>labels</code> translates its text.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "navbar": {
+      "lead": "A responsive navigation bar with mobile menu support.",
+      "brand": "My store",
+      "links": {
+        "home": "Home",
+        "products": "Products",
+        "orders": "Orders"
+      },
+      "open": "Open menu",
+      "close": "Close menu",
+      "parts": {
+        "navbar": "Main container",
+        "brand": "Logo/brand area",
+        "content": "Content sections",
+        "menu": "Navigation menu",
+        "link": "Navigation links",
+        "item": "Generic navbar items",
+        "toggle": "Mobile menu toggle"
+      },
+      "props": {
+        "sticky": "Sticks to the top on scroll.",
+        "bordered": "Shows the bottom border.",
+        "children": "The navbar’s parts.",
+        "content": "A section aligned to the start, centre or end.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "statsCard": {
+      "lead": "Display key metrics with trends and icons.",
+      "cards": {
+        "revenue": "Revenue",
+        "revenueValue": "SAR 48,200",
+        "orders": "Orders",
+        "returns": "Returns",
+        "vsLastMonth": "vs last month"
+      },
+      "features": {
+        "value": "Title and value display",
+        "trend": "Trend indicator (up/down with percentage)",
+        "icon": "Optional icon",
+        "description": "Description text",
+        "loading": "Loading state",
+        "grid": "StatsGrid for layout"
+      },
+      "props": {
+        "title": "Label above the value.",
+        "value": "The main value.",
+        "description": "Text below the value.",
+        "icon": "Icon in the corner.",
+        "trend": "Change, with an up or down arrow.",
+        "loading": "Shows a skeleton while loading.",
+        "grid": "Lays the cards out in 2, 3 or 4 columns.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "shimmerButton": {
+      "lead": "A button with a sheen that sweeps across it, for the one call to action that matters most on the page.",
+      "preview": "Shop the collection",
+      "coloursTitle": "Custom colours",
+      "coloursBody": "<code>background</code> takes any CSS colour or gradient, and <code>shimmerColor</code> sets the sheen. CSS variables such as <code>var(--chart-2)</code> follow light and dark mode.",
+      "colours": {
+        "a": "Shop the collection",
+        "b": "Join the waitlist"
+      },
+      "a11y": {
+        "button": "It is a native <code>{button}</code>, so it takes its usual attributes, such as <code>onClick</code>, <code>disabled</code> and <code>type</code>, and shows a focus ring on Tab.",
+        "motion": "With <code>prefers-reduced-motion</code> set, the sheen is not drawn, and the button looks the same without it.",
+        "dir": "The sheen sweeps in the reading direction: left to right in English, right to left in Arabic.",
+        "contrast": "The label uses <code>--primary-foreground</code>. With a custom <code>background</code>, check that the label still has enough contrast."
+      },
+      "props": {
+        "children": "The button label.",
+        "shimmerColor": "Colour of the sheen.",
+        "shimmerDuration": "How long one sweep takes.",
+        "shimmerSize": "Width of the sheen, as a length or a percentage of the button.",
+        "background": "Background colour or gradient.",
+        "borderRadius": "Corner radius.",
+        "native": "Native button attributes, such as <code>onClick</code> and <code>disabled</code>.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "animatedGradient": {
+      "lead": "A background of slow-moving colour blobs, for hero sections and cards.",
+      "contentTitle": "With content",
+      "content": {
+        "title": "The autumn edit is here",
+        "body": "New pieces in linen, wool and leather, in store now."
+      },
+      "coloursTitle": "Custom colours",
+      "coloursBody": "<code>colors</code> takes up to four colours, one per blob. CSS variables such as <code>var(--chart-1)</code> follow light and dark mode.",
+      "a11y": {
+        "decorative": "The gradient is decoration: it has no role, and nothing in it for assistive tech to read.",
+        "motion": "With <code>prefers-reduced-motion</code> set, the blobs stay still.",
+        "contrast": "Text on the gradient must keep enough contrast wherever the blobs move."
+      },
+      "props": {
+        "children": "Content on top of the gradient.",
+        "colors": "Colours of the blobs, one each.",
+        "speed": "Seconds for one cycle; higher is slower.",
+        "blur": "How soft the blobs are.",
+        "gradientText": "Text filled with a moving gradient.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "textReveal": {
+      "lead": "Reveals text a character at a time as it scrolls into view. Arabic reveals a word at a time, so its letters stay joined.",
+      "preview": "Welcome to My store",
+      "wordTitle": "Word by word",
+      "wordBody": "<code>WordReveal</code> reveals a word at a time, with a soft blur. It suits longer lines, in any language.",
+      "word": "Free delivery on every order in Riyadh this week.",
+      "joinedTitle": "Joined scripts",
+      "joinedBody": "Arabic letters join to their neighbours, and a separate element for each letter would break those joins. So when the text contains Arabic, the effect reveals it a word at a time. Latin text keeps the character reveal.",
+      "a11y": {
+        "whole": "Assistive tech reads the whole text once; the animated pieces are hidden from it.",
+        "motion": "With <code>prefers-reduced-motion</code> set, the text appears at once.",
+        "view": "With <code>triggerOnView</code>, the effect waits until half the text is on screen, then plays once."
+      },
+      "props": {
+        "text": "The text to reveal.",
+        "delay": "Seconds between one piece and the next.",
+        "duration": "Seconds each piece takes to appear.",
+        "triggerOnView": "Waits until the text is on screen.",
+        "wordReveal": "The same, a word at a time; <code>delay</code> defaults to 0.1 and <code>duration</code> to 0.4.",
+        "className": "Extra classes for the component."
+      },
+      "replay": "Replay"
+    },
+    "borderBeam": {
+      "lead": "A beam of light that travels round the border of a card or container.",
+      "card": {
+        "title": "Autumn sale ends tonight",
+        "body": "Up to 30% off linen and wool."
+      },
+      "glowTitle": "Static glowing border",
+      "glowBody": "To highlight a card without motion, use <code>GlowingBorder</code> instead of the beam. It draws a still coloured border with a soft glow close to it.",
+      "a11y": {
+        "decorative": "The beam is decoration and ignores the pointer; the content inside works as usual.",
+        "motion": "With <code>prefers-reduced-motion</code> set, the beam is replaced by a still border at half strength."
+      },
+      "props": {
+        "children": "Content inside the border.",
+        "duration": "Seconds for one lap.",
+        "borderWidth": "Width of the beam in pixels.",
+        "colorFrom": "Colour at the head of the beam.",
+        "colorTo": "Colour the beam fades to.",
+        "delay": "Seconds before it starts.",
+        "glowingBorder": "A still coloured border with a tight glow.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "spotlight": {
+      "lead": "A soft light that follows the pointer across a section.",
+      "panel": {
+        "title": "Meet the autumn edit",
+        "body": "Move your pointer across this panel."
+      },
+      "cardTitle": "Spotlight card",
+      "cardBody": "<code>SpotlightCard</code> is a card that lights up under the pointer while you hover over it.",
+      "card": {
+        "title": "Free delivery",
+        "body": "On every order in Riyadh this week."
+      },
+      "a11y": {
+        "pointer": "The light follows a mouse or trackpad only. Keyboard and touch users never see it, so put nothing in it that they need.",
+        "motion": "With <code>prefers-reduced-motion</code> set, there is no light at all."
+      },
+      "props": {
+        "children": "Content on top of the light.",
+        "color": "Colour of the light.",
+        "size": "Diameter of the light in pixels.",
+        "blur": "Softness of the edge in pixels.",
+        "opacity": "Strength, from 0 to 1.",
+        "spotlightCard": "A card that lights up under the pointer.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "typewriterText": {
+      "lead": "Types text out a character at a time, with a blinking cursor.",
+      "preview": "Your order is on its way.",
+      "wordsTitle": "Cycling words",
+      "wordsBody": "<code>TypewriterWords</code> types a word, deletes it and moves on to the next.",
+      "wordsPrefix": "New in:",
+      "words": {
+        "a": "linen shirts",
+        "b": "leather bags",
+        "c": "wool scarves"
+      },
+      "a11y": {
+        "cursor": "The cursor is hidden from assistive tech.",
+        "motion": "With <code>prefers-reduced-motion</code> set, the full text appears at once, with no cursor.",
+        "reading": "A screen reader reads the text as it stands when it gets there, which may be half typed. Give the same message elsewhere on the page."
+      },
+      "props": {
+        "text": "The text to type.",
+        "speed": "Milliseconds per character.",
+        "delay": "Milliseconds before typing starts.",
+        "cursor": "Shows the cursor.",
+        "cursorChar": "The cursor character.",
+        "loop": "Types the text again after a pause.",
+        "loopDelay": "Milliseconds before it types again.",
+        "onComplete": "Called when the text is fully typed.",
+        "typewriterWords": "Types, deletes and cycles through a list of words.",
+        "className": "Extra classes for the component."
+      }
+    },
+    "glowCard": {
+      "lead": "A card with a soft glow that lights up on hover and can follow the pointer.",
+      "cards": {
+        "delivery": {
+          "title": "Free delivery",
+          "body": "On every order in Riyadh this week."
+        },
+        "returns": {
+          "title": "Easy returns",
+          "body": "Return any item within 30 days."
+        }
+      },
+      "cardMotion": "The card’s glow reacts to the pointer: it lights up on hover, and on the second card, which sets <code>followMouse</code>, it follows the pointer.",
+      "containerTitle": "Glow container",
+      "containerBody": "<code>GlowContainer</code> draws a glow that slides round the border, in the reading direction. It moves on its own and doesn’t react to the pointer.",
+      "container": "Members get early access to the autumn edit.",
+      "a11y": {
+        "decorative": "The glow is decoration; the card's content works as usual.",
+        "hover": "With <code>hoverOnly</code>, keyboard and touch users never see the glow, so put nothing in it that they need.",
+        "motion": "With <code>prefers-reduced-motion</code> set, <code>GlowCard</code> shows no glow and the border of <code>GlowContainer</code> stays still."
+      },
+      "props": {
+        "children": "Content of the card.",
+        "glowColor": "Colour of the glow.",
+        "glowIntensity": "Blur of the glow in pixels.",
+        "followMouse": "Moves the glow with the pointer.",
+        "hoverOnly": "Shows the glow only on hover.",
+        "glowContainer": "A container with a glow that slides round its border.",
+        "className": "Extra classes for the component."
+      }
     }
   },
   "copyCommand": {
@@ -143,5 +1115,11 @@
     "attribution": "fasla.dev · by Smicolon GmbH",
     "by": "by Smicolon GmbH",
     "licence": "MIT · Kirchheim b. München"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "This page may have moved, or it never existed.",
+    "home": "Back to the home page",
+    "docs": "Browse the docs"
   }
 }

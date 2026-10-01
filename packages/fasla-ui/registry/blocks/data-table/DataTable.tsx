@@ -13,8 +13,8 @@ export interface Column<T> {
   sortable?: boolean
   /** Column width class */
   width?: string
-  /** Alignment */
-  align?: "left" | "center" | "right"
+  /** Alignment. `start` and `end` follow the reading direction; `left` and `right` are physical sides. Defaults to `start`. */
+  align?: "start" | "center" | "end" | "left" | "right"
 }
 
 export interface DataTableProps<T> extends React.HTMLAttributes<HTMLDivElement> {
@@ -37,8 +37,10 @@ export interface DataTableProps<T> extends React.HTMLAttributes<HTMLDivElement> 
 }
 
 const alignClasses = {
-  left: "text-left",
+  start: "text-start",
   center: "text-center",
+  end: "text-end",
+  left: "text-left",
   right: "text-right",
 }
 
@@ -70,7 +72,7 @@ export function DataTable<T>({
                     key={column.id}
                     className={cn(
                       "h-10 px-4 font-medium text-muted-foreground",
-                      alignClasses[column.align || "left"],
+                      alignClasses[column.align || "start"],
                       column.width
                     )}
                   >
@@ -108,7 +110,7 @@ export function DataTable<T>({
                     key={column.id}
                     className={cn(
                       "h-10 px-4 font-medium text-muted-foreground",
-                      alignClasses[column.align || "left"],
+                      alignClasses[column.align || "start"],
                       column.width
                     )}
                   >
@@ -141,7 +143,7 @@ export function DataTable<T>({
                   key={column.id}
                   className={cn(
                     "h-10 px-4 font-medium text-muted-foreground",
-                    alignClasses[column.align || "left"],
+                    alignClasses[column.align || "start"],
                     column.width
                   )}
                 >
@@ -170,7 +172,7 @@ export function DataTable<T>({
                       key={column.id}
                       className={cn(
                         "p-4",
-                        alignClasses[column.align || "left"],
+                        alignClasses[column.align || "start"],
                         column.width
                       )}
                     >
@@ -197,6 +199,38 @@ export interface PaginationProps {
   /** Show page numbers */
   showPageNumbers?: boolean
   className?: string
+  /** Text and accessible names; each defaults to English */
+  labels?: Partial<PaginationLabels>
+}
+
+export interface PaginationLabels {
+  /** Accessible name of the pagination landmark */
+  pagination: string
+  /** Visible status, given the page and the total */
+  status: (page: number, totalPages: number) => string
+  previous: string
+  next: string
+  goToPrevious: string
+  goToNext: string
+  goToPage: (page: number) => string
+}
+
+/** The entries of a partial object whose values are not undefined. */
+function definedOnly<T extends object>(value: Partial<T> | undefined): Partial<T> {
+  if (!value) return {}
+  return Object.fromEntries(
+    Object.entries(value).filter(([, entry]) => entry !== undefined)
+  ) as Partial<T>
+}
+
+const DEFAULT_PAGINATION_LABELS: PaginationLabels = {
+  pagination: "Pagination",
+  status: (page, totalPages) => `Page ${page} of ${totalPages}`,
+  previous: "Previous",
+  next: "Next",
+  goToPrevious: "Go to previous page",
+  goToNext: "Go to next page",
+  goToPage: (page) => `Go to page ${page}`,
 }
 
 /**
@@ -208,7 +242,12 @@ export function Pagination({
   onPageChange,
   showPageNumbers = true,
   className,
+  labels,
 }: PaginationProps) {
+  // A label passed as undefined (a missed translation key, say) keeps its
+  // English default instead of replacing it: a plain spread would leave
+  // status or goToPage undefined, and calling them would crash the render.
+  const text = { ...DEFAULT_PAGINATION_LABELS, ...definedOnly(labels) }
   const canGoPrevious = page > 1
   const canGoNext = page < totalPages
 
@@ -241,19 +280,17 @@ export function Pagination({
   return (
     <nav
       className={cn("flex items-center justify-between px-2 py-3", className)}
-      aria-label="Pagination"
+      aria-label={text.pagination}
     >
-      <p className="text-sm text-muted-foreground">
-        Page {page} of {totalPages}
-      </p>
+      <p className="text-sm text-muted-foreground">{text.status(page, totalPages)}</p>
       <div className="flex items-center gap-1">
         <button
           onClick={() => onPageChange(page - 1)}
           disabled={!canGoPrevious}
           className="inline-flex h-8 items-center justify-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground disabled:pointer-events-none disabled:opacity-50"
-          aria-label="Go to previous page"
+          aria-label={text.goToPrevious}
         >
-          Previous
+          {text.previous}
         </button>
         {showPageNumbers &&
           getPageNumbers().map((pageNum, i) =>
@@ -271,7 +308,7 @@ export function Pagination({
                     ? "bg-primary text-primary-foreground"
                     : "hover:bg-accent hover:text-accent-foreground"
                 )}
-                aria-label={`Go to page ${pageNum}`}
+                aria-label={text.goToPage(pageNum)}
                 aria-current={pageNum === page ? "page" : undefined}
               >
                 {pageNum}
@@ -282,9 +319,9 @@ export function Pagination({
           onClick={() => onPageChange(page + 1)}
           disabled={!canGoNext}
           className="inline-flex h-8 items-center justify-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground disabled:pointer-events-none disabled:opacity-50"
-          aria-label="Go to next page"
+          aria-label={text.goToNext}
         >
-          Next
+          {text.next}
         </button>
       </div>
     </nav>

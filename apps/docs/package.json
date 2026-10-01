@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/build-registry.mjs && next build",
+    "build": "node scripts/build-registry.mjs && next build && node scripts/export-404.mjs",
+    "verify:html-lang": "node scripts/verify-html-lang.mjs",
     "build:registry": "node scripts/build-registry.mjs",
     "start": "next start",
     "lint": "next lint",

@@ -4,100 +4,103 @@ import { useTranslations } from "next-intl"
 
 import { FormSection, FormField, FormActions } from "@fasla-ui/blocks/form-section/FormSection"
 import { Input } from "@fasla-ui/ui/input"
+import { Button } from "@fasla-ui/ui/button"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
+import { ComponentName } from "@/components/component-name"
+import { PropsTable, richCode, type PropRow } from "@/components/props-table"
 
 export default function FormSectionPage() {
   const t = useTranslations("docs.sections")
+  const f = useTranslations("docs.formSection")
+
+  const props: PropRow[] = [
+    { prop: "title", type: "string", fallback: "", description: f.rich("props.title", richCode) },
+    { prop: "description", type: "string", fallback: "", description: f.rich("props.description", richCode) },
+    { prop: "divider", type: "boolean", fallback: "true", description: f.rich("props.divider", richCode) },
+    { prop: "label", type: "string", fallback: "", description: f.rich("props.label", richCode) },
+    { prop: "error", type: "string", fallback: "", description: f.rich("props.error", richCode) },
+    { prop: "required", type: "boolean", fallback: "false", description: f.rich("props.required", richCode) },
+    { prop: "htmlFor", type: "string", fallback: "", description: f.rich("props.htmlFor", richCode) },
+    { prop: "align", type: '"left" | "right" | "center" | "between"', fallback: '"right"', description: f.rich("props.align", richCode) },
+    { prop: "sticky", type: "boolean", fallback: "false", description: f.rich("props.sticky", richCode) },
+    { prop: "className", type: "string", fallback: "", description: f.rich("props.className", richCode) },
+  ]
+
   return (
-    <div>
-      <div>
-        <div className="space-y-2">
-          <h1 className="text-4xl font-bold">FormSection</h1>
-          <p className="text-lg text-muted-foreground">
-            Form sections for grouping related fields with labels and descriptions.
-          </p>
-        </div>
+    <div className="space-y-8">
+      <div className="space-y-4">
+        <h1 className="text-4xl font-bold"><ComponentName path="/docs/components/form-section/" /></h1>
+        <p className="text-xl text-muted-foreground">{f("lead")}</p>
+      </div>
 
-        <div className="mt-8 space-y-8">
-          <section>
-            <h2 className="text-2xl font-bold">{t("installation")}</h2>
-            <div className="mt-4">
-              <InstallCommand name="form-section" />
+      {/* Installation */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("installation")}</h2>
+        <InstallCommand name="form-section" />
+      </section>
+
+      {/* Preview */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("preview")}</h2>
+        <ComponentPreview>
+          <FormSection title={f("preview.title")} description={f("preview.description")}>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <FormField label={f("preview.first")} required>
+                <Input placeholder={f("preview.firstPlaceholder")} />
+              </FormField>
+              <FormField label={f("preview.last")} required>
+                <Input placeholder={f("preview.lastPlaceholder")} />
+              </FormField>
             </div>
-          </section>
+          </FormSection>
+        </ComponentPreview>
+      </section>
 
-          <section>
-            <h2 className="text-2xl font-bold">{t("preview")}</h2>
-            <div className="mt-4">
-              <ComponentPreview>
-                <FormSection
-                  title="Personal Information"
-                  description="Update your personal details."
-                >
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <FormField label="First Name" required>
-                      <Input placeholder="John" />
-                    </FormField>
-                    <FormField label="Last Name" required>
-                      <Input placeholder="Doe" />
-                    </FormField>
-                  </div>
-                </FormSection>
-              </ComponentPreview>
-            </div>
-          </section>
+      {/* With Error */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{f("errorTitle")}</h2>
+        <ComponentPreview>
+          <FormField label={f("error.label")} error={f("error.message")} required>
+            <Input variant="error" type="email" defaultValue="layla@example.com" />
+          </FormField>
+        </ComponentPreview>
+      </section>
 
-          <section>
-            <h2 className="text-2xl font-bold">With Error</h2>
-            <div className="mt-4">
-              <ComponentPreview>
-                <FormField
-                  label="Email"
-                  error="This email is already taken"
-                  required
-                >
-                  <Input variant="error" defaultValue="taken@example.com" />
-                </FormField>
-              </ComponentPreview>
-            </div>
-          </section>
+      {/* Form Actions */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{f("actionsTitle")}</h2>
+        <ComponentPreview>
+          <FormActions>
+            <Button variant="outline">{f("actions.cancel")}</Button>
+            <Button>{f("actions.save")}</Button>
+          </FormActions>
+        </ComponentPreview>
+      </section>
 
-          <section>
-            <h2 className="text-2xl font-bold">Form Actions</h2>
-            <div className="mt-4">
-              <ComponentPreview>
-                <FormActions>
-                  <button className="rounded-md border px-4 py-2 text-sm">
-                    Cancel
-                  </button>
-                  <button className="rounded-md bg-primary px-4 py-2 text-sm text-primary-foreground">
-                    Save
-                  </button>
-                </FormActions>
-              </ComponentPreview>
-            </div>
-          </section>
+      {/* Props */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("props")}</h2>
+        <p className="text-muted-foreground">{f.rich("partsNote", richCode)}</p>
+        <PropsTable rows={props} />
+      </section>
 
-          <section>
-            <h2 className="text-2xl font-bold">{t("usage")}</h2>
-            <div className="mt-4">
-              <CodeBlock>{`import { FormSection, FormField, FormActions } from "@/components/blocks/form-section"
+      {/* Usage */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("usage")}</h2>
+        <CodeBlock>{`import { FormSection, FormField, FormActions } from "@/components/blocks/form-section"
 
-<FormSection title="Account" description="Update your account settings.">
-  <FormField label="Email" required>
+<FormSection title="${f("usage.title")}" description="${f("usage.description")}">
+  <FormField label="${f("usage.email")}" required>
     <Input type="email" />
   </FormField>
 </FormSection>
 
 <FormActions>
-  <Button variant="outline">Cancel</Button>
-  <Button>Save</Button>
+  <Button variant="outline">${f("actions.cancel")}</Button>
+  <Button>${f("actions.save")}</Button>
 </FormActions>`}</CodeBlock>
-            </div>
-          </section>
-        </div>
-      </div>
+      </section>
     </div>
   )
 }

@@ -39,10 +39,12 @@ export interface ButtonProps
     VariantProps<typeof buttonVariants> {
   asChild?: boolean
   loading?: boolean
+  /** Screen-reader text announced while loading */
+  loadingLabel?: string
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, loading, children, disabled, ...props }, ref) => {
+  ({ className, variant, size, asChild = false, loading, loadingLabel = "Loading", children, disabled, ...props }, ref) => {
     const Comp = asChild ? Slot : "button"
     return (
       <Comp
@@ -54,7 +56,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {loading ? (
           <>
             <LoaderCircleIcon aria-hidden="true" className="animate-spin motion-reduce:animate-none" strokeWidth={1.5} />
-            <span className="sr-only">Loading</span>
+            <span className="sr-only">{loadingLabel}</span>
             {children}
           </>
         ) : (

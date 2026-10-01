@@ -61,7 +61,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div className="relative">
         {textarea}
-        <div className="absolute bottom-2 right-3 text-xs text-muted-foreground">
+        <div className="absolute bottom-2 end-3 text-xs text-muted-foreground">
           {maxLength ? `${count}/${maxLength}` : count}
         </div>
       </div>

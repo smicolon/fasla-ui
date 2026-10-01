@@ -118,3 +118,15 @@ describe("EmptyData", () => {
     expect(svg).toBeInTheDocument()
   })
 })
+
+describe("EmptyState presets", () => {
+  it("take a title and description in place of their English", () => {
+    render(<EmptySearchResults title="لا توجد نتائج" description="جرّب كلمة بحث أخرى." />)
+    expect(screen.getByText("لا توجد نتائج")).toBeInTheDocument()
+    expect(screen.getByText("جرّب كلمة بحث أخرى.")).toBeInTheDocument()
+    expect(screen.queryByText("No results found")).not.toBeInTheDocument()
+
+    render(<EmptyData title="لا توجد طلبات بعد" description="أنشئ طلبك الأول للبدء." />)
+    expect(screen.getByText("لا توجد طلبات بعد")).toBeInTheDocument()
+  })
+})

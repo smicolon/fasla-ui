@@ -52,7 +52,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
               ? "border-destructive focus-visible:ring-destructive"
               : "border-input",
             sizeClasses[selectSize],
-            "pr-10",
+            "pe-10",
             className
           )}
           {...props}
@@ -72,7 +72,7 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             </option>
           ))}
         </select>
-        <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3 text-muted-foreground">
+        <div className="pointer-events-none absolute inset-y-0 end-0 flex items-center pe-3 text-muted-foreground">
           <ChevronDownIcon size={16} strokeWidth={1.5} />
         </div>
       </div>

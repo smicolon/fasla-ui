@@ -14,6 +14,8 @@ export interface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   bordered?: boolean
   /** Semantic heading level for the title */
   headingLevel?: 1 | 2 | 3
+  /** Accessible name of the breadcrumb landmark */
+  breadcrumbLabel?: string
 }
 
 /**
@@ -27,6 +29,7 @@ export function PageHeader({
   breadcrumb,
   bordered = true,
   headingLevel = 1,
+  breadcrumbLabel = "Breadcrumb",
   className,
   ...props
 }: PageHeaderProps) {
@@ -44,7 +47,7 @@ export function PageHeader({
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
           {breadcrumb && (
-            <nav className="mb-2 text-sm text-muted-foreground" aria-label="Breadcrumb">
+            <nav className="mb-2 text-sm text-muted-foreground" aria-label={breadcrumbLabel}>
               {breadcrumb}
             </nav>
           )}

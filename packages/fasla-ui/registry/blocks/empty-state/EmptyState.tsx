@@ -100,18 +100,26 @@ export function EmptyState({
 export function EmptySearchResults({
   query,
   onClear,
+  title,
+  description,
   ...props
 }: Omit<EmptyStateProps, "title" | "description"> & {
+  /** Replaces the English title */
+  title?: string
+  /** Replaces the English description */
+  description?: string
   query?: string
   onClear?: () => void
 }) {
   return (
     <EmptyState
-      title="No results found"
+      // ?? rather than a later spread, so an undefined title keeps the English one
+      title={title ?? "No results found"}
       description={
-        query
+        description ??
+        (query
           ? `No results for "${query}". Try a different search term.`
-          : "Try adjusting your search or filters."
+          : "Try adjusting your search or filters.")
       }
       icon={
         <SearchIcon strokeWidth={1.5} />
@@ -124,14 +132,20 @@ export function EmptySearchResults({
 /** Pre-built empty state for no data */
 export function EmptyData({
   resourceName = "items",
+  title,
+  description,
   ...props
 }: Omit<EmptyStateProps, "title" | "description"> & {
+  /** Replaces the English title */
+  title?: string
+  /** Replaces the English description */
+  description?: string
   resourceName?: string
 }) {
   return (
     <EmptyState
-      title={`No ${resourceName} yet`}
-      description={`Get started by creating your first ${resourceName.replace(/s$/, "")}.`}
+      title={title ?? `No ${resourceName} yet`}
+      description={description ?? `Get started by creating your first ${resourceName.replace(/s$/, "")}.`}
       icon={
         <FilePlusIcon strokeWidth={1.5} />
       }

@@ -3,6 +3,7 @@ import {
   Spotlight,
   SpotlightCard,
 } from "../../../../packages/fasla-ui/registry/effects/spotlight"
+import { Button } from "../../../../packages/fasla-ui/registry/ui/button"
 
 const meta: Meta<typeof Spotlight> = {
   title: "Effects/Spotlight",
@@ -27,65 +28,109 @@ const meta: Meta<typeof Spotlight> = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+/**
+ * Sample copy, per script: the same store as the docs page. The Arabic follows
+ * design/content/. Buttons are the library's own, never hand-styled controls.
+ */
+const COPY = {
+  ltr: {
+    move: "Move your pointer around",
+    moveHint: "to see the spotlight",
+    colours: ["Linen", "Wool", "Leather"],
+    card: { title: "Free delivery", body: "Hover over this card and the light follows your pointer." },
+    grid: [
+      { title: "Orders", body: "Track every order" },
+      { title: "Products", body: "Manage your catalogue" },
+      { title: "Customers", body: "See who buys what" },
+      { title: "Settings", body: "Set up your store" },
+    ],
+    large: { title: "Meet the autumn edit", body: "A larger, softer light for a calmer, more ambient effect." },
+    sizes: ["Small: 200px", "Default: 400px", "Large: 600px"],
+    hero: {
+      title: "Welcome to My store",
+      body: "New pieces in linen, wool and leather, with free delivery in Riyadh this week.",
+      primary: "Shop the collection",
+      secondary: "Our story",
+    },
+  },
+  rtl: {
+    move: "حرّك مؤشر الفأرة هنا",
+    moveHint: "لترى بقعة الضوء",
+    colours: ["الكتان", "الصوف", "الجلد"],
+    card: { title: "توصيل مجاني", body: "مرّر مؤشر الفأرة فوق البطاقة وسيتبعه الضوء." },
+    grid: [
+      { title: "الطلبات", body: "تابع كل طلب" },
+      { title: "المنتجات", body: "أدِر منتجات متجرك" },
+      { title: "العملاء", body: "اعرف من يشتري ماذا" },
+      { title: "الإعدادات", body: "اضبط متجرك" },
+    ],
+    large: { title: "تعرّف إلى تشكيلة الخريف", body: "ضوء أكبر وأنعم لتأثير أهدأ يملأ المساحة." },
+    sizes: ["صغير: 200px", "افتراضي: 400px", "كبير: 600px"],
+    hero: {
+      title: "مرحبًا بك في متجري",
+      body: "قطع جديدة من الكتان والصوف والجلد، مع توصيل مجاني داخل الرياض هذا الأسبوع.",
+      primary: "تسوّق التشكيلة",
+      secondary: "قصتنا",
+    },
+  },
+}
+
+type StoryCtx = { globals: { direction?: string } }
+const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
+
+const lightOf = (color: string) => `color-mix(in oklch, ${color} 30%, transparent)`
+const CHART = ["var(--chart-1)", "var(--chart-2)", "var(--chart-5)"]
+
 export const Default: Story = {
-  render: () => (
-    <Spotlight className="h-64 w-96 rounded-xl border bg-card flex items-center justify-center">
-      <p className="text-center">
-        Move your cursor around<br />
-        <span className="text-sm text-muted-foreground">to see the spotlight effect</span>
-      </p>
-    </Spotlight>
-  ),
+  render: (args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <Spotlight {...args} className="flex h-64 w-96 items-center justify-center rounded-xl border bg-card">
+        <p className="text-center">
+          {c.move}
+          <br />
+          <span className="text-sm text-muted-foreground">{c.moveHint}</span>
+        </p>
+      </Spotlight>
+    )
+  },
 }
 
 export const CustomColors: Story = {
-  render: () => (
+  render: (_args, ctx) => (
     <div className="flex flex-col gap-6">
-      <Spotlight
-        color="hsl(340 100% 60% / 0.2)"
-        className="h-40 w-64 rounded-xl border bg-card flex items-center justify-center"
-      >
-        <p className="text-sm">Pink Spotlight</p>
-      </Spotlight>
-      <Spotlight
-        color="hsl(180 100% 50% / 0.2)"
-        className="h-40 w-64 rounded-xl border bg-card flex items-center justify-center"
-      >
-        <p className="text-sm">Cyan Spotlight</p>
-      </Spotlight>
-      <Spotlight
-        color="hsl(280 100% 60% / 0.2)"
-        className="h-40 w-64 rounded-xl border bg-card flex items-center justify-center"
-      >
-        <p className="text-sm">Purple Spotlight</p>
-      </Spotlight>
+      {CHART.map((color, i) => (
+        <Spotlight
+          key={color}
+          color={lightOf(color)}
+          className="flex h-40 w-64 items-center justify-center rounded-xl border bg-card"
+        >
+          <p className="text-sm">{copy(ctx).colours[i]}</p>
+        </Spotlight>
+      ))}
     </div>
   ),
 }
 
 export const SpotlightCardDefault: Story = {
-  render: () => (
-    <SpotlightCard className="w-72">
-      <h3 className="font-semibold">Spotlight Card</h3>
-      <p className="text-sm text-muted-foreground mt-2">
-        Hover over this card to see the spotlight effect follow your cursor.
-      </p>
-    </SpotlightCard>
-  ),
+  render: (_args, ctx) => {
+    const c = copy(ctx).card
+    return (
+      <SpotlightCard className="w-72">
+        <h3 className="font-semibold">{c.title}</h3>
+        <p className="mt-2 text-sm text-muted-foreground">{c.body}</p>
+      </SpotlightCard>
+    )
+  },
 }
 
 export const CardGrid: Story = {
-  render: () => (
+  render: (_args, ctx) => (
     <div className="grid grid-cols-2 gap-4">
-      {[
-        { title: "Analytics", desc: "Track your performance" },
-        { title: "Insights", desc: "Get actionable data" },
-        { title: "Reports", desc: "Generate custom reports" },
-        { title: "Settings", desc: "Configure your dashboard" },
-      ].map((item, i) => (
-        <SpotlightCard key={i} className="w-48">
+      {copy(ctx).grid.map((item) => (
+        <SpotlightCard key={item.title} className="w-48">
           <h3 className="font-semibold">{item.title}</h3>
-          <p className="text-sm text-muted-foreground mt-1">{item.desc}</p>
+          <p className="mt-1 text-sm text-muted-foreground">{item.body}</p>
         </SpotlightCard>
       ))}
     </div>
@@ -93,70 +138,58 @@ export const CardGrid: Story = {
 }
 
 export const LargeSpotlight: Story = {
-  render: () => (
-    <Spotlight
-      size={600}
-      blur={100}
-      className="h-80 w-full max-w-2xl rounded-2xl border bg-card flex items-center justify-center p-8"
-    >
-      <div className="text-center">
-        <h2 className="text-3xl font-bold">Large Spotlight</h2>
-        <p className="mt-4 text-muted-foreground max-w-md">
-          A larger spotlight with increased blur for a softer, more ambient effect.
-        </p>
-      </div>
-    </Spotlight>
-  ),
+  render: (_args, ctx) => {
+    const c = copy(ctx).large
+    return (
+      <Spotlight
+        size={600}
+        blur={100}
+        className="flex h-80 w-full max-w-2xl items-center justify-center rounded-2xl border bg-card p-8"
+      >
+        <div className="text-center">
+          <h2 className="text-3xl font-bold">{c.title}</h2>
+          <p className="mt-4 max-w-md text-muted-foreground">{c.body}</p>
+        </div>
+      </Spotlight>
+    )
+  },
 }
 
 export const DifferentSizes: Story = {
-  render: () => (
+  render: (_args, ctx) => (
     <div className="flex gap-6">
-      <Spotlight
-        size={200}
-        className="h-40 w-48 rounded-xl border bg-card flex items-center justify-center"
-      >
-        <p className="text-sm">Small (200px)</p>
-      </Spotlight>
-      <Spotlight
-        size={400}
-        className="h-40 w-48 rounded-xl border bg-card flex items-center justify-center"
-      >
-        <p className="text-sm">Default (400px)</p>
-      </Spotlight>
-      <Spotlight
-        size={600}
-        className="h-40 w-48 rounded-xl border bg-card flex items-center justify-center"
-      >
-        <p className="text-sm">Large (600px)</p>
-      </Spotlight>
+      {[200, 400, 600].map((size, i) => (
+        <Spotlight
+          key={size}
+          size={size}
+          className="flex h-40 w-48 items-center justify-center rounded-xl border bg-card"
+        >
+          <p className="text-sm">{copy(ctx).sizes[i]}</p>
+        </Spotlight>
+      ))}
     </div>
   ),
 }
 
 export const Hero: Story = {
-  render: () => (
-    <Spotlight
-      size={500}
-      blur={80}
-      color="color-mix(in oklch, var(--primary) 20%, transparent)"
-      className="h-96 w-full max-w-3xl rounded-2xl border bg-card"
-    >
-      <div className="h-full flex flex-col items-center justify-center p-8 text-center">
-        <h1 className="text-4xl font-bold">Welcome to Fasla</h1>
-        <p className="mt-4 text-lg text-muted-foreground max-w-lg">
-          A beautiful collection of animated components for your next project.
-          Built with React, Tailwind CSS, and Framer Motion.
-        </p>
-        <div className="mt-8 flex gap-4">
-          <button className="bg-primary text-primary-foreground px-6 py-2 rounded-md font-medium hover:bg-primary/90">
-            Get Started
-          </button>
-          <button className="border px-6 py-2 rounded-md font-medium hover:bg-accent">
-            Learn More
-          </button>
+  render: (_args, ctx) => {
+    const c = copy(ctx).hero
+    return (
+      <Spotlight
+        size={500}
+        blur={80}
+        color={lightOf("var(--chart-1)")}
+        className="h-96 w-full max-w-3xl rounded-2xl border bg-card"
+      >
+        <div className="flex h-full flex-col items-center justify-center p-8 text-center">
+          <h1 className="text-4xl font-bold">{c.title}</h1>
+          <p className="mt-4 max-w-lg text-lg text-muted-foreground">{c.body}</p>
+          <div className="mt-8 flex gap-4">
+            <Button>{c.primary}</Button>
+            <Button variant="outline">{c.secondary}</Button>
+          </div>
         </div>
-      </div>
-    </Spotlight>
-  ),
+      </Spotlight>
+    )
+  },
 }

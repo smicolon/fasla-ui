@@ -42,7 +42,7 @@ export function AppShell({
         {sidebar && (
           <aside
             className={cn(
-              "shrink-0 border-r bg-muted/30",
+              "shrink-0 border-e bg-muted/30",
               sidebarWidths[sidebarWidth],
               sidebarMobile ? "block" : "hidden md:block"
             )}
