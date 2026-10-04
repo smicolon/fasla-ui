@@ -1,26 +1,47 @@
 "use client"
 
+import { useState } from "react"
 import { useTranslations } from "next-intl"
 
 import { Switch } from "@fasla-ui/ui/switch"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
-import { PropsTable, richCode, type PropRow } from "@/components/props-table"
+import { PropsTable, type PropRow } from "@/components/props-table"
+
+/** The literal element name, passed as a value so ICU does not parse it as a tag. */
+const INPUT = '<input type="checkbox" role="switch">'
+
+const VARIANTS = ["solid", "outline"] as const
+const SIZES = ["sm", "md", "lg"] as const
 
 export default function SwitchPage() {
   const t = useTranslations("docs.sections")
   const s = useTranslations("docs.switch")
+  const [enabled, setEnabled] = useState(true)
 
+  // Prop and value names are code identifiers, so they stay Latin in both
+  // locales; the sentence around them is the locale's. `nowrap` keeps each one
+  // a single unit: `aria-describedby` must not break at its hyphen.
+  const code = (chunks: React.ReactNode) => (
+    <code className="whitespace-nowrap text-sm">{chunks}</code>
+  )
+  const rich = { code, input: INPUT }
+
+  // One table, in a fixed order: appearance first, then state, then text,
+  // then the native <input> props a form needs, then styling.
   const props: PropRow[] = [
-    { prop: "size", type: '"sm" | "default" | "lg"', fallback: '"default"', description: s.rich("props.size", richCode) },
-    { prop: "checked", type: "boolean", fallback: "", description: s.rich("props.checked", richCode) },
-    { prop: "disabled", type: "boolean", fallback: "false", description: s.rich("props.disabled", richCode) },
-    { prop: "label", type: "string", fallback: "", description: s.rich("props.label", richCode) },
-    { prop: "description", type: "string", fallback: "", description: s.rich("props.description", richCode) },
-    { prop: "name", type: "string", fallback: "", description: s.rich("props.name", richCode) },
-    { prop: "onChange", type: "(event) => void", fallback: "", description: s.rich("props.onChange", richCode) },
-    { prop: "className", type: "string", fallback: "", description: s.rich("props.className", richCode) },
+    { prop: "variant", type: '"solid" | "outline"', fallback: '"solid"', description: s.rich("props.variant", rich) },
+    { prop: "layout", type: '"control-first" | "label-first"', fallback: '"control-first"', description: s.rich("props.layout", rich) },
+    { prop: "size", type: '"sm" | "md" | "lg"', fallback: '"md"', description: s.rich("props.size", rich) },
+    { prop: "checked", type: "boolean", fallback: "", description: s.rich("props.checked", rich) },
+    { prop: "defaultChecked", type: "boolean", fallback: "false", description: s.rich("props.defaultChecked", rich) },
+    { prop: "disabled", type: "boolean", fallback: "false", description: s.rich("props.disabled", rich) },
+    { prop: "label", type: "string", fallback: "", description: s.rich("props.label", rich) },
+    { prop: "description", type: "string", fallback: "", description: s.rich("props.description", rich) },
+    { prop: "name", type: "string", fallback: "", description: s.rich("props.name", rich) },
+    { prop: "onChange", type: "(event) => void", fallback: "", description: s.rich("props.onChange", rich) },
+    { prop: "className", type: "string", fallback: "", description: s.rich("props.className", rich) },
   ]
 
   return (
@@ -41,12 +62,27 @@ export default function SwitchPage() {
         <h2 className="text-2xl font-semibold">{t("preview")}</h2>
         <ComponentPreview>
           <div className="flex max-w-xs flex-col gap-4">
-            <div className="flex items-center gap-6">
-              <Switch />
-              <Switch defaultChecked />
-            </div>
+            <Switch label={s("examples.airplane")} />
+            <Switch label={s("examples.notifications")} description={s("examples.notificationsDescription")} defaultChecked />
             {/* Long enough to wrap: the track must stay on the first line. */}
-            <Switch label={s("preview.long")} defaultChecked />
+            <Switch label={s("examples.long")} defaultChecked />
+          </div>
+        </ComponentPreview>
+      </section>
+
+      {/* Variants */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("variants")}</h2>
+        <p className="text-muted-foreground">{s.rich("variantsBody", rich)}</p>
+        <ComponentPreview>
+          <div className="grid w-full max-w-md gap-8 sm:grid-cols-2">
+            {VARIANTS.map((variant) => (
+              <div key={variant} className="flex flex-col gap-4">
+                <code className="text-sm text-muted-foreground">{variant}</code>
+                <Switch variant={variant} label={s("examples.sync")} />
+                <Switch variant={variant} label={s("examples.location")} defaultChecked />
+              </div>
+            ))}
           </div>
         </ComponentPreview>
       </section>
@@ -54,27 +90,62 @@ export default function SwitchPage() {
       {/* Sizes */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("sizes")}</h2>
+        <p className="text-muted-foreground">{s.rich("sizesBody", rich)}</p>
         <ComponentPreview>
-          <div className="flex items-center gap-6">
-            <Switch size="sm" />
-            <Switch size="default" />
-            <Switch size="lg" />
+          <div className="grid w-full max-w-md gap-8 sm:grid-cols-2">
+            {VARIANTS.map((variant) => (
+              <div key={variant} className="flex flex-col gap-4">
+                <code className="text-sm text-muted-foreground">{variant}</code>
+                {SIZES.map((size) => (
+                  <Switch
+                    key={size}
+                    variant={variant}
+                    size={size}
+                    label={s(`sizes.${size}`)}
+                    defaultChecked
+                  />
+                ))}
+              </div>
+            ))}
           </div>
         </ComponentPreview>
       </section>
 
-      {/* With Label */}
+      {/* Layout */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">{s("withLabelTitle")}</h2>
+        <h2 className="text-2xl font-semibold">{s("layoutTitle")}</h2>
+        <p className="text-muted-foreground">{s.rich("layoutBody", rich)}</p>
         <ComponentPreview>
-          <div className="flex w-full max-w-sm flex-col gap-6">
-            <Switch label={s("withLabel.airplane")} />
-            <Switch label={s("withLabel.dark")} description={s("withLabel.darkDescription")} />
-            <Switch
-              label={s("withLabel.notifications")}
-              description={s("withLabel.notificationsDescription")}
-              defaultChecked
-            />
+          <div className="grid w-full gap-8 md:grid-cols-2">
+            <div className="flex flex-col gap-4">
+              <code className="text-sm text-muted-foreground">control-first</code>
+              <Switch label={s("examples.dark")} description={s("examples.darkDescription")} />
+              <Switch
+                label={s("examples.notifications")}
+                description={s("examples.notificationsDescription")}
+                defaultChecked
+              />
+            </div>
+            <div className="flex flex-col gap-4">
+              <code className="text-sm text-muted-foreground">label-first</code>
+              {/* A settings list: each row fills the card, track at the end. */}
+              <div className="divide-y rounded-lg border">
+                <Switch
+                  layout="label-first"
+                  label={s("examples.dark")}
+                  description={s("examples.darkDescription")}
+                  className="p-4"
+                />
+                <Switch
+                  layout="label-first"
+                  label={s("examples.notifications")}
+                  description={s("examples.notificationsDescription")}
+                  className="p-4"
+                  defaultChecked
+                />
+                <Switch layout="label-first" label={s("examples.airplane")} className="p-4" />
+              </div>
+            </div>
           </div>
         </ComponentPreview>
       </section>
@@ -82,14 +153,31 @@ export default function SwitchPage() {
       {/* States */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("states")}</h2>
+        <p className="text-muted-foreground">{s("statesBody")}</p>
         <ComponentPreview>
-          <div className="flex items-center gap-6">
-            <Switch />
-            <Switch defaultChecked />
-            <Switch disabled />
-            <Switch disabled defaultChecked />
+          <div className="grid w-full max-w-md gap-8 sm:grid-cols-2">
+            {VARIANTS.map((variant) => (
+              <div key={variant} className="flex flex-col gap-4">
+                <code className="text-sm text-muted-foreground">{variant}</code>
+                <Switch variant={variant} label={s("states.off")} />
+                <Switch variant={variant} label={s("states.on")} defaultChecked />
+                <Switch variant={variant} label={s("states.disabledOff")} disabled />
+                <Switch variant={variant} label={s("states.disabledOn")} disabled defaultChecked />
+              </div>
+            ))}
           </div>
         </ComponentPreview>
+      </section>
+
+      {/* Accessibility */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("accessibility")}</h2>
+        <ul className="list-disc space-y-2 ps-6 text-muted-foreground">
+          <li>{s.rich("a11y.nativeInput", rich)}</li>
+          <li>{s.rich("a11y.describedBy", rich)}</li>
+          <li>{s.rich("a11y.ariaLabel", rich)}</li>
+          <li>{s.rich("a11y.direction", rich)}</li>
+        </ul>
       </section>
 
       {/* Props */}
@@ -104,29 +192,48 @@ export default function SwitchPage() {
         <CodeBlock>{`import { Switch } from "@/components/ui/switch"
 
 // ${s("usage.basic")}
-<Switch />
+<Switch aria-label="${s("examples.airplane")}" />
 
 // ${s("usage.withLabel")}
-<Switch label="${s("withLabel.airplane")}" />
+<Switch label="${s("examples.airplane")}" defaultChecked />
 
 // ${s("usage.withDescription")}
 <Switch
-  label="${s("withLabel.dark")}"
-  description="${s("withLabel.darkDescription")}"
+  label="${s("examples.dark")}"
+  description="${s("examples.darkDescription")}"
 />
 
+// ${s("usage.outline")}
+<Switch variant="outline" label="${s("examples.sync")}" />
+
+// ${s("usage.labelFirst")}
+<Switch layout="label-first" label="${s("examples.notifications")}" />
+
 // ${s("usage.sizes")}
-<Switch size="sm" />
-<Switch size="default" />
-<Switch size="lg" />
+<Switch size="sm" label="${s("sizes.sm")}" />
+<Switch size="md" label="${s("sizes.md")}" />
+<Switch size="lg" label="${s("sizes.lg")}" />
 
 // ${s("usage.controlled")}
-const [enabled, setEnabled] = useState(false)
+const [enabled, setEnabled] = useState(true)
 
 <Switch
+  label="${s("examples.notifications")}"
   checked={enabled}
   onChange={(e) => setEnabled(e.target.checked)}
 />`}</CodeBlock>
+        <ComponentPreview>
+          <div className="flex flex-col gap-3">
+            <Switch
+              label={s("examples.notifications")}
+              checked={enabled}
+              onChange={(e) => setEnabled(e.target.checked)}
+            />
+            <p className="text-sm text-muted-foreground">
+              {s("usage.state")} <code className="text-sm">{String(enabled)}</code>
+            </p>
+          </div>
+        </ComponentPreview>
       </section>
     </div>
   )

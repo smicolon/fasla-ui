@@ -351,27 +351,54 @@
     },
     "switch": {
       "lead": "A toggle control for switching between on and off states.",
-      "preview": {
-        "long": "Download updates over mobile data when Wi-Fi is unavailable"
-      },
-      "withLabelTitle": "With Label & Description",
-      "withLabel": {
+      "variantsBody": "Two styles, as in Figma. <code>solid</code>, the default, fills the track, with the primary colour when on. <code>outline</code> keeps the track on the page background, draws it with a 1px line, and fills the thumb instead.",
+      "sizesBody": "Three sizes. <code>md</code> is the default. The track is 32, 40 or 48px wide, and the label stays the same size.",
+      "layoutTitle": "Layout",
+      "layoutBody": "<code>control-first</code>, the default, puts the track before the label and lines the description up under the label. <code>label-first</code> puts the label at the start and the track at the end of a full-width row, for settings lists.",
+      "statesBody": "Focus is a real CSS state rather than a prop. Tab to a switch to see the ring. Disabled dims the whole switch, label and description included.",
+      "examples": {
         "airplane": "Airplane mode",
         "dark": "Dark mode",
         "darkDescription": "Toggle dark mode on or off",
         "notifications": "Notifications",
-        "notificationsDescription": "Receive push notifications"
+        "notificationsDescription": "Receive push notifications",
+        "sync": "Auto-sync",
+        "location": "Location services",
+        "long": "Download updates over mobile data when Wi-Fi is unavailable"
+      },
+      "sizes": {
+        "sm": "Small",
+        "md": "Medium",
+        "lg": "Large"
+      },
+      "states": {
+        "off": "Off",
+        "on": "On",
+        "disabledOff": "Disabled, off",
+        "disabledOn": "Disabled, on"
+      },
+      "a11y": {
+        "nativeInput": "Renders a native <code>{input}</code>, so Space toggles it and it submits with a form without extra code.",
+        "describedBy": "<code>description</code> is linked with <code>aria-describedby</code>; the track is hidden from assistive technology.",
+        "ariaLabel": "Without a <code>label</code>, pass an <code>aria-label</code>.",
+        "direction": "Direction is inherited from <code>dir</code>, never a prop. The thumb always moves towards the end of the line when the switch turns on."
       },
       "usage": {
         "basic": "Basic switch",
         "withLabel": "With label",
         "withDescription": "With description",
+        "outline": "Outline style",
+        "labelFirst": "Label first, track at the end",
         "sizes": "Different sizes",
-        "controlled": "Controlled"
+        "controlled": "Controlled",
+        "state": "checked:"
       },
       "props": {
+        "variant": "A filled track or an outlined one.",
+        "layout": "Track before the label, or after it.",
         "size": "Switch size.",
         "checked": "On state. Use it with <code>onChange</code>.",
+        "defaultChecked": "Starting state when you do not control it.",
         "disabled": "Disables the switch and dims it.",
         "label": "Label text.",
         "description": "Secondary line below the label.",
