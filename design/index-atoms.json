@@ -3,7 +3,7 @@
     "source": "Figma · Fasla · yGEQmCZOvs7KptsYUdB0Xg",
     "fileKey": "yGEQmCZOvs7KptsYUdB0Xg",
     "target": "atoms",
-    "measured": "2026-09-28",
+    "measured": "2026-10-04",
     "generatedBy": ".agents/skills/figma-index (read-only use_figma page walk) → design/scripts/build-index.mjs",
     "selectionRule": {
       "inScope": "page name contains 🟢 AND page name ends with ✅",
@@ -128,6 +128,20 @@
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3830-60584",
       "entryIds": [
         "3830:58457"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "3862:3097",
+      "name": "✦  🟢 Y | Switch ✅",
+      "display": "Switch",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3862-3097",
+      "entryIds": [
+        "3853:15460"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -334,20 +348,6 @@
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3830-5150",
       "entryIds": [
         "3830:2149"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "3862:3097",
-      "name": "✦  🟢 Y | Switch ✅",
-      "display": "Switch",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3862-3097",
-      "entryIds": [
-        "3853:15460"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -1140,6 +1140,77 @@
         "duplicates": []
       },
       "code": "radio",
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "3853:15460": {
+      "name": "Switch",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3862:3097",
+        "name": "✦  🟢 Y | Switch ✅",
+        "display": "Switch",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3853-15460",
+      "variants": 144,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Type": [
+          "Control First",
+          "Label First"
+        ],
+        "Interaction": [
+          "Default",
+          "Disabled",
+          "Focus"
+        ],
+        "Sizes": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "State": [
+          "On",
+          "Off"
+        ],
+        "Style": [
+          "Outline",
+          "Solid"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Type",
+        "Interaction",
+        "Sizes",
+        "State",
+        "Style"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "39939:22618",
+          "name": "Switch — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39939-22618"
+        },
+        "ar": {
+          "id": "39939:23011",
+          "name": "Switch — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39939-23011"
+        },
+        "duplicates": []
+      },
+      "code": "switch",
       "hasDescription": false,
       "flags": [
         "no-description"
@@ -2082,78 +2153,6 @@
       "hasDescription": false,
       "flags": [
         "no-ar-doc",
-        "no-description"
-      ]
-    },
-    "3853:15460": {
-      "name": "Switch",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3862:3097",
-        "name": "✦  🟢 Y | Switch ✅",
-        "display": "Switch",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3853-15460",
-      "variants": 144,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Type": [
-          "Control First",
-          "Label First"
-        ],
-        "State": [
-          "Unchecked",
-          "Checked",
-          "Disbaled",
-          "Focus"
-        ],
-        "Sizes": [
-          "sm",
-          "md",
-          "lg"
-        ],
-        "ON": [
-          "False",
-          "True"
-        ],
-        "Style": [
-          "Outline",
-          "Solid"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Type",
-        "State",
-        "Sizes",
-        "ON",
-        "Style"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "39939:22618",
-          "name": "Switch — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39939-22618"
-        },
-        "ar": {
-          "id": "39939:23011",
-          "name": "Switch — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39939-23011"
-        },
-        "duplicates": []
-      },
-      "code": "switch",
-      "hasDescription": false,
-      "flags": [
         "no-description"
       ]
     },

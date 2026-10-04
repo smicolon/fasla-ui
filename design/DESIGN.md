@@ -543,7 +543,7 @@ mirror by toggling the booleans and setting the mirrored glyph. And `Solid`/`pri
 | `Input Number` `39043:1432` | 100 | `Variant` Default / Vertically Stacked / Horizontally Stacked / Horizontal Stretched / Mini · `State` ×5 |
 | `Check Box` `3830:2149` | 60 | `Type` Default/Layout · `State` Unchecked/Checked/Indeterminate/Disabled Uncheck/Disabled Checked · `Size Default` sm/md/lg |
 | `Radio` `3830:58457` | 48 | `Type` Default/Layout · `State` Unchecked/Checked · `Size Default` · `Disabled` |
-| `Switch` `3853:15460` | 144 | `Type` Control First/Label First · `State` ×4 · `Sizes` · `ON` · `Style` Outline/Solid |
+| `Switch` `3853:15460` | 144 | `Type` Control First/Label First · `Interaction` Default/Focus/Disabled · `State` Off/On · `Sizes` · `Style` Outline/Solid |
 | `Slider` `40500:60632` | 42 | `Style` Half-Full/Empty/Full/Double slider · `size` · `state` Default/focus · `Direction` LTR/RTL/**Both** |
 | `OTP Input` `40465:54984` | 8 | `Type` Digits only / Simple / With Separator / With Spacing (+ `Otp Input Item` `15097:22526`) |
 | `Date Picker` `15113:5466` | 48 | `State` Default/Hover/Focus · `Size` xs–lg · `Variants` Inactive/Active |
