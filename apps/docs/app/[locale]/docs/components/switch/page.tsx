@@ -78,7 +78,7 @@ export default function SwitchPage() {
           <div className="grid w-full max-w-md gap-8 sm:grid-cols-2">
             {VARIANTS.map((variant) => (
               <div key={variant} className="flex flex-col gap-4">
-                <code className="text-sm text-muted-foreground">{variant}</code>
+                <code className="w-fit text-sm text-muted-foreground">{variant}</code>
                 <Switch variant={variant} label={s("examples.sync")} />
                 <Switch variant={variant} label={s("examples.location")} defaultChecked />
               </div>
@@ -95,7 +95,7 @@ export default function SwitchPage() {
           <div className="grid w-full max-w-md gap-8 sm:grid-cols-2">
             {VARIANTS.map((variant) => (
               <div key={variant} className="flex flex-col gap-4">
-                <code className="text-sm text-muted-foreground">{variant}</code>
+                <code className="w-fit text-sm text-muted-foreground">{variant}</code>
                 {SIZES.map((size) => (
                   <Switch
                     key={size}
@@ -118,7 +118,7 @@ export default function SwitchPage() {
         <ComponentPreview>
           <div className="grid w-full gap-8 md:grid-cols-2">
             <div className="flex flex-col gap-4">
-              <code className="text-sm text-muted-foreground">control-first</code>
+              <code className="w-fit text-sm text-muted-foreground">control-first</code>
               <Switch label={s("examples.dark")} description={s("examples.darkDescription")} />
               <Switch
                 label={s("examples.notifications")}
@@ -127,7 +127,7 @@ export default function SwitchPage() {
               />
             </div>
             <div className="flex flex-col gap-4">
-              <code className="text-sm text-muted-foreground">label-first</code>
+              <code className="w-fit text-sm text-muted-foreground">label-first</code>
               {/* A settings list: each row fills the card, track at the end. */}
               <div className="divide-y rounded-lg border">
                 <Switch
@@ -158,7 +158,7 @@ export default function SwitchPage() {
           <div className="grid w-full max-w-md gap-8 sm:grid-cols-2">
             {VARIANTS.map((variant) => (
               <div key={variant} className="flex flex-col gap-4">
-                <code className="text-sm text-muted-foreground">{variant}</code>
+                <code className="w-fit text-sm text-muted-foreground">{variant}</code>
                 <Switch variant={variant} label={s("states.off")} />
                 <Switch variant={variant} label={s("states.on")} defaultChecked />
                 <Switch variant={variant} label={s("states.disabledOff")} disabled />
@@ -230,7 +230,7 @@ const [enabled, setEnabled] = useState(true)
               onChange={(e) => setEnabled(e.target.checked)}
             />
             <p className="text-sm text-muted-foreground">
-              {s("usage.state")} <code className="text-sm">{String(enabled)}</code>
+              {s("usage.state")} <code className="text-sm">{enabled ? "On" : "Off"}</code>
             </p>
           </div>
         </ComponentPreview>

@@ -391,7 +391,7 @@
         "labelFirst": "Label first, track at the end",
         "sizes": "Different sizes",
         "controlled": "Controlled",
-        "state": "checked:"
+        "state": "State:"
       },
       "props": {
         "variant": "A filled track or an outlined one.",

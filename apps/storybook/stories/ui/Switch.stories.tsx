@@ -41,7 +41,7 @@ const COPY = {
     notificationsDesc: "Receive push notifications",
     disabledOff: "Disabled, off",
     disabledOn: "Disabled, on",
-    checked: "checked",
+    state: "State",
     longLabel: "Download updates over mobile data when Wi-Fi is unavailable",
     longDesc: "Large updates may use a lot of data on a limited plan",
   },
@@ -56,7 +56,7 @@ const COPY = {
     notificationsDesc: "تصلك الإشعارات الفورية",
     disabledOff: "معطّل ومتوقف",
     disabledOn: "معطّل وقيد التشغيل",
-    checked: "الحالة الحالية",
+    state: "الحالة الحالية",
     longLabel: "تنزيل التحديثات تلقائيًا عبر بيانات الجوّال عند غياب شبكة Wi-Fi",
     longDesc: "قد تستهلك التحديثات الكبيرة جزءًا كبيرًا من باقة البيانات",
   },
@@ -72,7 +72,7 @@ const LAYOUTS = ["control-first", "label-first"] as const
 const SIZES = ["sm", "md", "lg"] as const
 
 const Head = ({ children }: { children: React.ReactNode }) => (
-  <span dir="ltr" className="font-sans text-xs text-muted-foreground">
+  <span dir="ltr" className="w-fit font-sans text-xs text-muted-foreground">
     {children}
   </span>
 )
@@ -83,7 +83,7 @@ export const Default: Story = {
 }
 
 /** `defaultChecked` — uncontrolled, starting on. Click it: it still toggles. */
-export const Checked: Story = {
+export const On: Story = {
   render: (args, ctx) => <Switch label={copy(ctx).label} defaultChecked {...args} />,
 }
 
@@ -193,7 +193,7 @@ const ControlledDemo = ({ c }: { c: Copy }) => {
         onChange={(e) => setEnabled(e.target.checked)}
       />
       <p className="text-sm text-muted-foreground">
-        {c.checked}: <code dir="ltr">{String(enabled)}</code>
+        {c.state}: <code dir="ltr">{enabled ? "On" : "Off"}</code>
       </p>
     </div>
   )
