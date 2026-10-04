@@ -63,7 +63,7 @@ const sizeClasses = {
  *
  *  - solid: track `input` → `primary`, thumb `primary-foreground`, and Figma's
  *    `shadow/default/xs` on the *track* (Tailwind's `shadow-sm` is the same
- *    0 1 2 0 black/5%). Disabled swaps the thumb to `background`, as Figma does.
+ *    0 1 2 0 black/5%). Disabled keeps the same thumb; only the opacity changes.
  *  - outline: track `background` with a 1px stroke *outside* it, `input` →
  *    `primary`; the thumb takes the stroke colour. A CSS outline is the exact
  *    model of a Figma OUTSIDE stroke: painted, but not part of the box, so the
@@ -78,7 +78,7 @@ const sizeClasses = {
 const variantClasses = {
   solid: {
     track: "bg-input shadow-sm group-has-[:checked]/switch:bg-primary",
-    thumb: "bg-primary-foreground group-has-[:disabled]/switch:bg-background",
+    thumb: "bg-primary-foreground",
     focus: "border border-ring",
   },
   outline: {

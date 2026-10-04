@@ -120,10 +120,9 @@ describe("Switch", () => {
       "group-has-[:checked]/switch:bg-primary",
       "shadow-sm"
     )
-    expect(thumb).toHaveClass(
-      "bg-primary-foreground",
-      "group-has-[:disabled]/switch:bg-background"
-    )
+    // Disabled keeps this thumb too: only the root's opacity changes.
+    expect(thumb).toHaveClass("bg-primary-foreground")
+    expect(thumb.className).not.toMatch(/:disabled/)
     // Focus: a 1px ring stroke inside the track.
     expect(focusRing).toHaveClass("border", "border-ring")
   })
