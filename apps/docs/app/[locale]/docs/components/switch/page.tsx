@@ -1,13 +1,14 @@
 "use client"
 
 import { useState } from "react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 import { Switch } from "@fasla-ui/ui/switch"
 import { ComponentPreview, CodeBlock } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, type PropRow } from "@/components/props-table"
+import { localeDirection, type Locale } from "@/i18n/routing"
 
 /** The literal element name, passed as a value so ICU does not parse it as a tag. */
 const INPUT = '<input type="checkbox" role="switch">'
@@ -18,6 +19,7 @@ const SIZES = ["sm", "md", "lg"] as const
 export default function SwitchPage() {
   const t = useTranslations("docs.sections")
   const s = useTranslations("docs.switch")
+  const isRtl = localeDirection[useLocale() as Locale] === "rtl"
   const [enabled, setEnabled] = useState(true)
 
   // Prop and value names are code identifiers, so they stay Latin in both
@@ -230,7 +232,13 @@ const [enabled, setEnabled] = useState(true)
               onChange={(e) => setEnabled(e.target.checked)}
             />
             <p className="text-sm text-muted-foreground">
-              {s("usage.state")} <code className="text-sm">{enabled ? "On" : "Off"}</code>
+              {s("usage.state")}{" "}
+              {/* Arabic never goes in a code span: its mono face has no Arabic glyphs. */}
+              {isRtl ? (
+                <span className="font-medium text-foreground">{s(enabled ? "usage.on" : "usage.off")}</span>
+              ) : (
+                <code className="text-sm">{s(enabled ? "usage.on" : "usage.off")}</code>
+              )}
             </p>
           </div>
         </ComponentPreview>

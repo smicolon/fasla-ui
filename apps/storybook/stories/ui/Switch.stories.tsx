@@ -42,6 +42,8 @@ const COPY = {
     disabledOff: "Disabled, off",
     disabledOn: "Disabled, on",
     state: "State",
+    on: "On",
+    off: "Off",
     longLabel: "Download updates over mobile data when Wi-Fi is unavailable",
     longDesc: "Large updates may use a lot of data on a limited plan",
   },
@@ -57,6 +59,8 @@ const COPY = {
     disabledOff: "معطّل ومتوقف",
     disabledOn: "معطّل وقيد التشغيل",
     state: "الحالة الحالية",
+    on: "قيد التشغيل",
+    off: "متوقف",
     longLabel: "تنزيل التحديثات تلقائيًا عبر بيانات الجوّال عند غياب شبكة Wi-Fi",
     longDesc: "قد تستهلك التحديثات الكبيرة جزءًا كبيرًا من باقة البيانات",
   },
@@ -193,7 +197,13 @@ const ControlledDemo = ({ c }: { c: Copy }) => {
         onChange={(e) => setEnabled(e.target.checked)}
       />
       <p className="text-sm text-muted-foreground">
-        {c.state}: <code dir="ltr">{enabled ? "On" : "Off"}</code>
+        {c.state}:{" "}
+        {/* Arabic never goes in a code span: its mono face has no Arabic glyphs. */}
+        {c === COPY.rtl ? (
+          <span className="font-medium text-foreground">{enabled ? c.on : c.off}</span>
+        ) : (
+          <code dir="ltr">{enabled ? c.on : c.off}</code>
+        )}
       </p>
     </div>
   )
