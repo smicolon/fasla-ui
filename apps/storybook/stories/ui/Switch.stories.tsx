@@ -313,14 +313,13 @@ const panelId = (theme: string, variant: string) => `panel-${theme}-${variant}-f
  * direction follow the Direction toolbar, like every other story: English and
  * LTR, or Arabic and RTL.
  *
- * The Dark panel carries the `dark` class, which re-points every token for that
- * subtree. The page itself is pinned to Light, or the Light panel inside a dark
- * page would inherit the dark tokens.
+ * Each panel sets its own theme: the `light` or `dark` class re-points every
+ * token for that subtree. That holds on the Docs page too, where every story
+ * shares one document and the theme toolbar's `dark` sits on its <html>.
  */
 export const LightAndDark: Story = {
   parameters: {
     layout: "padded",
-    themes: { themeOverride: "light" },
     pseudo: {
       focusVisible: THEMES.flatMap((theme) =>
         VARIANTS.map((v) => `#${panelId(theme, v)} input`)
@@ -336,7 +335,7 @@ export const LightAndDark: Story = {
             key={theme}
             className={[
               "space-y-4 rounded-lg border bg-background p-6 text-foreground",
-              theme === "dark" ? "dark" : "",
+              theme,
             ].join(" ")}
           >
             <Head>{theme === "dark" ? "Dark" : "Light"}</Head>
