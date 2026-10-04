@@ -204,7 +204,7 @@ export const Controlled: Story = {
   render: (_args, ctx) => <ControlledDemo c={copy(ctx)} />,
 }
 
-const INTERACTIONS = ["enabled", "focus", "disabled"] as const
+const INTERACTIONS = ["default", "focus", "disabled"] as const
 const CHECKED = [false, true] as const
 
 const cellId = (
@@ -225,11 +225,10 @@ const focusTargets = VARIANTS.flatMap((v) =>
 /**
  * Every variant in the Figma set, for the direction on the toolbar.
  *
- * Figma's axes are Direction × Type × State/ON × Sizes × Style: 144 variants.
- * Each section here is one Style × Type, with Sizes × ON down the side and the
- * three interaction states — Enabled, Focus, Disabled — across the top. That is
- * 72 cells, every LTR variant; flip the Direction toolbar for the other 72.
- * (Figma's `State=Checked` / `Unchecked` are the Enabled column, on and off.)
+ * Figma's axes are Direction × Type × Interaction × State × Sizes × Style: 144
+ * variants. Each section here is one Style × Type, with Sizes × State (Off, On)
+ * down the side and Interaction (Default, Focus, Disabled) across the top. That
+ * is 72 cells, every LTR variant; flip the Direction toolbar for the other 72.
  *
  * Focus renders statically: `storybook-addon-pseudo-states` applies the real
  * `:focus-visible` to each Focus cell's input, so the grid cannot drift from
