@@ -304,77 +304,60 @@ export const AllStates: Story = {
   },
 }
 
-const PANELS = [
-  { theme: "light", dir: "ltr" },
-  { theme: "light", dir: "rtl" },
-  { theme: "dark", dir: "ltr" },
-  { theme: "dark", dir: "rtl" },
-] as const
+const THEMES = ["light", "dark"] as const
 
-const panelId = (theme: string, dir: string, variant: string) =>
-  `panel-${theme}-${dir}-${variant}-focus`
+const panelId = (theme: string, variant: string) => `panel-${theme}-${variant}-focus`
 
 /**
- * Light and Dark, LTR and RTL, side by side — whatever the toolbars say.
+ * Light and Dark side by side, whatever the theme toolbar says. Language and
+ * direction follow the Direction toolbar, like every other story: English and
+ * LTR, or Arabic and RTL.
  *
- * Each panel sets its own `dir`, `lang` and font exactly as the direction
- * decorator does, so the Arabic panels get Cairo and the Arabic leading. The
- * Dark panels carry the `dark` class, which re-points every token for that
- * subtree. The page itself is pinned to Light, or a Light panel inside a dark
+ * The Dark panel carries the `dark` class, which re-points every token for that
+ * subtree. The page itself is pinned to Light, or the Light panel inside a dark
  * page would inherit the dark tokens.
  */
-export const ThemesAndDirections: Story = {
+export const LightAndDark: Story = {
   parameters: {
     layout: "padded",
     themes: { themeOverride: "light" },
     pseudo: {
-      focusVisible: PANELS.flatMap((p) =>
-        VARIANTS.map((v) => `#${panelId(p.theme, p.dir, v)} input`)
+      focusVisible: THEMES.flatMap((theme) =>
+        VARIANTS.map((v) => `#${panelId(theme, v)} input`)
       ),
     },
   },
-  render: () => (
-    <div className="grid gap-4 lg:grid-cols-2">
-      {PANELS.map(({ theme, dir }) => {
-        const c = dir === "rtl" ? COPY.rtl : COPY.ltr
-        return (
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <div className="grid gap-4 lg:grid-cols-2">
+        {THEMES.map((theme) => (
           <div
-            key={`${theme}-${dir}`}
-            dir={dir}
-            lang={dir === "rtl" ? "ar" : "en"}
+            key={theme}
             className={[
               "space-y-4 rounded-lg border bg-background p-6 text-foreground",
-              dir === "rtl" ? "font-arabic" : "font-sans",
               theme === "dark" ? "dark" : "",
             ].join(" ")}
           >
-            <Head>
-              {theme === "dark" ? "Dark" : "Light"} · {dir.toUpperCase()}
-            </Head>
+            <Head>{theme === "dark" ? "Dark" : "Light"}</Head>
             <div className="grid grid-cols-2 gap-x-6 gap-y-4">
               {VARIANTS.map((variant) => (
                 <div key={variant} className="flex flex-col gap-4">
                   <Head>{variant}</Head>
                   <Switch variant={variant} label={c.sync} />
                   <Switch variant={variant} label={c.location} defaultChecked />
-                  <div id={panelId(theme, dir, variant)}>
+                  <div id={panelId(theme, variant)}>
                     <Switch variant={variant} label={c.notifications} defaultChecked />
                   </div>
                   <Switch variant={variant} label={c.disabledOn} disabled defaultChecked />
-                  <Switch
-                    variant={variant}
-                    layout="label-first"
-                    label={c.dark}
-                    description={c.darkDesc}
-                  />
                 </div>
               ))}
             </div>
           </div>
-        )
-      })}
-    </div>
-  ),
+        ))}
+      </div>
+    )
+  },
 }
 
 /**
