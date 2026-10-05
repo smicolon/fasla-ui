@@ -5,7 +5,12 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
+  /* `.light` re-declares the light tokens for a subtree, the way `.dark` does
+     for dark: a story can pin a panel to light even while the theme toolbar
+     has put `dark` on <html> — which a story parameter cannot undo on the
+     Docs page, where every story shares one document. */
+  :root,
+  .light {
     /* ── figma:theme:start · ⚪️ Light ──────────────────────────────────────
        The Figma "☾ Mode" variables — 41 theme/*, six Soft tints and, in
        light only, one radius — generated

@@ -503,8 +503,10 @@
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",
-      "description": "An accessible switch for on-off settings.",
-      "dependencies": [],
+      "description": "An accessible switch for on-off settings: solid and outline styles in three sizes, with the track before or after its label.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
       "registryDependencies": [],
       "files": [
         {
