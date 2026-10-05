@@ -15,7 +15,7 @@ import { Switch } from "./switch"
  * Treat a green run here as "the contract is wired", not "it looks right".
  */
 
-/** label ▸ input ▸ [band ▸ track ▸ thumb, text] ▸ focusRing */
+/** label ▸ input ▸ [band ▸ track ▸ (thumb, focusRing), text] */
 const parts = (input: HTMLElement) => {
   const root = input.closest("label") as HTMLElement
   const track = root.querySelector("[data-slot=track]") as HTMLElement
@@ -88,8 +88,9 @@ describe("Switch", () => {
       expect(p.track).toHaveClass(...track)
       expect(p.thumb).toHaveClass(thumb, "start-px", "top-px")
       expect(p.thumb).toHaveClass(`group-has-[:checked]/switch:${on}`)
-      // The focus ring is laid over the track, so it is the track's size.
-      expect(p.focusRing).toHaveClass(...track)
+      // The focus ring lives inside the track and covers it exactly.
+      expect(p.focusRing.parentElement).toBe(p.track)
+      expect(p.focusRing).toHaveClass("absolute", "inset-0")
       unmount()
     }
   })
@@ -143,26 +144,36 @@ describe("Switch", () => {
     // Focus replaces the stroke with `ring`, except an on switch keeps primary.
     expect(focusRing).toHaveClass(
       "outline-ring",
-      "peer-checked:outline-primary"
+      "group-has-[:checked]/switch:outline-primary"
     )
   })
 
-  it("draws focus as a ring-coloured halo on a sibling of the input", () => {
+  it("draws focus as a ring-coloured halo, relayed from the input by its sibling band", () => {
+    // The band is the input's direct sibling, so a plain peer-focus-visible
+    // (the form the Storybook pseudo-states addon can force) sets a variable
+    // on it; the ring inside the track reads that variable as its opacity.
     for (const variant of ["solid", "outline"] as const) {
       const { unmount } = render(<Switch variant={variant} aria-label="Wi-Fi" />)
-      const { focusRing } = parts(control())
-      expect(focusRing.previousElementSibling).not.toBeNull()
-      expect(control().parentElement).toBe(focusRing.parentElement)
+      const { band, focusRing } = parts(control())
+      expect(control().nextElementSibling).toBe(band)
+      expect(band).toHaveClass("peer-focus-visible:[--sw-focus:1]")
       expect(focusRing).toHaveClass(
         "ring-[3px]",
         "ring-ring/50",
-        "opacity-0",
-        "peer-focus-visible:opacity-100",
+        "opacity-[var(--sw-focus,0)]",
         "rounded-full"
       )
-      expect(focusRing).toHaveAttribute("aria-hidden", "true")
       unmount()
     }
+  })
+
+  it("keeps the focus ring on the track when the root is padded", () => {
+    // Padding passed through className used to push the track away from a ring
+    // positioned on the root. Inside the track, it moves with the track.
+    render(<Switch layout="label-first" label="Wi-Fi" className="p-4" />)
+    const { track, focusRing } = parts(control())
+    expect(track.contains(focusRing)).toBe(true)
+    expect(focusRing.className).not.toMatch(/\b(start|end|top)-/)
   })
 
   it("drives focus without a has-[] utility", () => {
@@ -177,17 +188,15 @@ describe("Switch", () => {
 
   it("puts the track first by default, and last for label-first", () => {
     const { rerender } = render(<Switch label="Wi-Fi" description="Detail" />)
-    let { root, band, focusRing } = parts(control())
-    // input, band, text, focus ring
+    let { root, band } = parts(control())
+    // input, band, text
     expect(root.children[1]).toBe(band)
     expect(root).toHaveClass("inline-flex")
-    expect(focusRing).toHaveClass("start-0")
 
     rerender(<Switch layout="label-first" label="Wi-Fi" description="Detail" />)
-    ;({ root, band, focusRing } = parts(control()))
+    ;({ root, band } = parts(control()))
     expect(root.children[2]).toBe(band)
     expect(root).toHaveClass("flex", "justify-between")
-    expect(focusRing).toHaveClass("end-0")
   })
 
   it("sets the label and description in Figma's text styles", () => {
@@ -226,6 +235,39 @@ describe("Switch", () => {
     expect(control()).toHaveAccessibleDescription("Receive push notifications")
   })
 
+  it("names the switch with the label alone, not the description", () => {
+    // The description sits inside the wrapping <label>; without
+    // aria-labelledby it would be read as part of the name and again as the
+    // description.
+    render(<Switch label="Notifications" description="Receive push notifications" />)
+    expect(control()).toHaveAccessibleName("Notifications")
+    expect(control()).toHaveAccessibleDescription("Receive push notifications")
+  })
+
+  it("keeps a caller's aria-label as the name", () => {
+    render(<Switch label="Wi-Fi" aria-label="Wireless networking" />)
+    expect(control()).toHaveAccessibleName("Wireless networking")
+    expect(control()).not.toHaveAttribute("aria-labelledby")
+  })
+
+  it("does not read a description twice when it is the only text", () => {
+    render(<Switch description="Receive push notifications" />)
+    expect(control()).not.toHaveAttribute("aria-describedby")
+  })
+
+  it("joins aria-describedby ids without merging them as classes", () => {
+    // `cn` would drop "text-sm" as a conflicting Tailwind class.
+    render(
+      <>
+        <span id="text-sm">Small print</span>
+        <span id="text-lg">Large print</span>
+        <Switch label="Wi-Fi" description="Detail" aria-describedby="text-sm text-lg" />
+      </>
+    )
+    expect(control().getAttribute("aria-describedby")).toMatch(/-description text-sm text-lg$/)
+    expect(control()).toHaveAccessibleDescription("Detail Small print Large print")
+  })
+
   it("keeps a caller's aria-describedby alongside the description", () => {
     render(
       <>
@@ -240,13 +282,13 @@ describe("Switch", () => {
     render(<Switch label="Wi-Fi" />)
     const { band, focusRing } = parts(control())
     expect(band).toHaveAttribute("aria-hidden", "true")
-    expect(focusRing).toHaveAttribute("aria-hidden", "true")
+    expect(band.contains(focusRing)).toBe(true)
   })
 
   it("renders no text column when label and description are omitted", () => {
     render(<Switch aria-label="Wi-Fi" />)
-    // input, band, focus ring — and no text column.
-    expect(control().parentElement?.childElementCount).toBe(3)
+    // input and band — no text column.
+    expect(control().parentElement?.childElementCount).toBe(2)
     expect(screen.queryByText(/./)).toBeNull()
   })
 

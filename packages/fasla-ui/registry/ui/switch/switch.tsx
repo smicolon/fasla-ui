@@ -17,7 +17,7 @@ import { cn } from "../../../src/lib/utils"
  * puts 50% opacity on the variant root, not on the track.
  */
 const switchVariants = cva(
-  "group/switch relative cursor-pointer items-start gap-2 has-[:disabled]:pointer-events-none has-[:disabled]:opacity-50",
+  "group/switch cursor-pointer items-start gap-2 has-[:disabled]:pointer-events-none has-[:disabled]:opacity-50",
   {
     variants: {
       layout: {
@@ -85,7 +85,7 @@ const variantClasses = {
     track:
       "bg-background outline outline-1 outline-input group-has-[:checked]/switch:outline-primary",
     thumb: "bg-input group-has-[:checked]/switch:bg-primary",
-    focus: "outline outline-1 outline-ring peer-checked:outline-primary",
+    focus: "outline outline-1 outline-ring group-has-[:checked]/switch:outline-primary",
   },
 }
 
@@ -128,6 +128,8 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
       label,
       description,
       id,
+      "aria-label": ariaLabel,
+      "aria-labelledby": ariaLabelledBy,
       "aria-describedby": ariaDescribedBy,
       ...props
     },
@@ -135,7 +137,22 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
   ) => {
     const generatedId = React.useId()
     const inputId = id || generatedId
+    const labelId = `${inputId}-label`
     const descriptionId = `${inputId}-description`
+    /*
+     * The wrapping <label> would name the switch with *all* its text, label
+     * and description together, while `aria-describedby` reads the description
+     * again. So the name points at the label alone, unless the caller named
+     * the switch themselves; and the description is linked only when the name
+     * comes from somewhere else, or it would be the name and the description.
+     */
+    const labelledBy = ariaLabelledBy ?? (label && !ariaLabel ? labelId : undefined)
+    const isNamedElsewhere = Boolean(label || ariaLabel || ariaLabelledBy)
+    // Plain join: these are ids, and `cn` would merge "text-sm text-lg" as classes.
+    const describedBy =
+      [description && isNamedElsewhere ? descriptionId : undefined, ariaDescribedBy]
+        .filter(Boolean)
+        .join(" ") || undefined
     // Fall back to the defaults for an untyped caller passing null or a typo.
     const sizes = sizeClasses[size] ?? sizeClasses.md
     const colors = variantClasses[variant] ?? variantClasses.solid
@@ -145,11 +162,21 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
      * The track sits in a band one label line tall — or the track's height, if
      * that is taller — and centres itself in it. So it aligns with the *first*
      * line of a wrapped label instead of drifting to the middle of the block.
+     *
+     * The band is a *direct sibling of the input*, so a plain
+     * `peer-focus-visible` sets `--sw-focus` on it, and the focus ring inside
+     * the track reads that variable as its opacity. That is the one selector
+     * form `storybook-addon-pseudo-states` can force — it cannot force
+     * `:has(:focus-visible)` — and keeping the ring inside the track means it
+     * follows the track wherever padding on the root moves it.
      */
     const band = (
       <span
         aria-hidden="true"
-        className={cn("flex shrink-0 items-center", BAND_HEIGHT)}
+        className={cn(
+          "flex shrink-0 items-center peer-focus-visible:[--sw-focus:1]",
+          BAND_HEIGHT
+        )}
       >
         <span
           data-slot="track"
@@ -172,6 +199,19 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
               colors.thumb
             )}
           />
+          {/*
+           * Laid exactly over the track. Figma draws focus as a 1px `ring`
+           * stroke (inside for solid, replacing the outside stroke for
+           * outline) plus a 3px halo; painted after the thumb, it never
+           * overlaps it, because the thumb is inset by that same 1px.
+           */}
+          <span
+            data-slot="focus-ring"
+            className={cn(
+              "pointer-events-none absolute inset-0 rounded-full opacity-[var(--sw-focus,0)] ring-[3px] ring-ring/50",
+              colors.focus
+            )}
+          />
         </span>
       </span>
     )
@@ -187,7 +227,10 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
           // Padded so a single line centres on a track taller than the line
           // (lg in English: 24px track, 20px line). The padding is zero
           // whenever the line is the taller of the two.
-          <span className="py-[max(0px,calc((var(--sw-h)-var(--sw-line))/2))] text-sm font-medium text-foreground">
+          <span
+            id={labelId}
+            className="py-[max(0px,calc((var(--sw-h)-var(--sw-line))/2))] text-sm font-medium text-foreground"
+          >
             {label}
           </span>
         )}
@@ -218,9 +261,9 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
           ref={ref}
           id={inputId}
           className="peer sr-only"
-          aria-describedby={
-            description ? cn(descriptionId, ariaDescribedBy) : ariaDescribedBy
-          }
+          aria-label={ariaLabel}
+          aria-labelledby={labelledBy}
+          aria-describedby={describedBy}
           {...props}
         />
         {layout === "label-first" ? (
@@ -234,26 +277,6 @@ const Switch = React.forwardRef<HTMLInputElement, SwitchProps>(
             {text}
           </>
         )}
-        {/*
-         * The focus ring is a real element laid exactly over the track, and a
-         * *direct sibling of the input*, so plain `peer-focus-visible` and
-         * `peer-checked` drive it. `storybook-addon-pseudo-states` can force
-         * that selector form; it cannot force `:has()` or arbitrary variants,
-         * so the states grid would silently stop matching the component.
-         *
-         * Its top is the track's offset inside the band: half of whatever the
-         * band has over the track.
-         */}
-        <span
-          aria-hidden="true"
-          data-slot="focus-ring"
-          className={cn(
-            "pointer-events-none absolute top-[calc((max(var(--sw-line),var(--sw-h))-var(--sw-h))/2)] rounded-full opacity-0 ring-[3px] ring-ring/50 peer-focus-visible:opacity-100",
-            layout === "label-first" ? "end-0" : "start-0",
-            sizes.track,
-            colors.focus
-          )}
-        />
       </label>
     )
   }
