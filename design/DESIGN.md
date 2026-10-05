@@ -541,7 +541,7 @@ mirror by toggling the booleans and setting the mirrored glyph. And `Solid`/`pri
 | `Select Input` `3884:6936` | 192 | as Input plus `Multi Select`, `Show Badges`, `Show Text` |
 | `Textarea` `3928:2374` | 20 | `State` ×5 · `Filled` · LTR/RTL text + placeholder props |
 | `Input Number` `39043:1432` | 100 | `Variant` Default / Vertically Stacked / Horizontally Stacked / Horizontal Stretched / Mini · `State` ×5 |
-| `Check Box` `3830:2149` | 60 | `Type` Default/Layout · `State` Unchecked/Checked/Indeterminate/Disabled Uncheck/Disabled Checked · `Size Default` sm/md/lg |
+| `Check Box` `3830:2149` | 60 | `Type` Default/Layout · `State` Unchecked/Checked/Indeterminate · `Interaction` Default/Disabled · `Size` sm/md/lg |
 | `Radio` `3830:58457` | 48 | `Type` Default/Layout · `State` Unchecked/Checked · `Size Default` · `Disabled` |
 | `Switch` `3853:15460` | 144 | `Type` Control First/Label First · `Interaction` Default/Focus/Disabled · `State` Off/On · `Sizes` · `Style` Outline/Solid |
 | `Slider` `40500:60632` | 42 | `Style` Half-Full/Empty/Full/Double slider · `size` · `state` Default/focus · `Direction` LTR/RTL/**Both** |

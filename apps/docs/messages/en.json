@@ -306,41 +306,59 @@
     },
     "checkbox": {
       "lead": "A control that allows the user to toggle between checked and not checked.",
-      "preview": {
-        "terms": "Accept terms",
-        "long": "Email me a weekly summary of new components and release notes"
-      },
-      "withLabelTitle": "With Label & Description",
-      "withLabel": {
-        "email": "Email notifications",
+      "variantsBody": "Two types, as in Figma. <code>default</code> is the box and its label on their own. <code>layout</code> wraps them in a bordered card that is all one click target, and fills on hover.",
+      "sizesBody": "Three sizes. <code>md</code> is the default. The box is 16, 20 or 24px, and the label stays the same size.",
+      "statesBody": "Checked shows a tick, indeterminate shows a dash, and neither flips in right-to-left. Focus is a real CSS state rather than a prop. Tab to a checkbox to see the ring. Disabled dims the whole checkbox, label and description included.",
+      "examples": {
+        "terms": "Accept terms and conditions",
         "marketing": "Marketing emails",
         "marketingDescription": "Receive emails about new products and features",
         "security": "Security alerts",
-        "securityDescription": "Get notified about security updates"
+        "securityDescription": "Get notified about security updates",
+        "backup": "Automatic backups",
+        "selectAll": "Select all files",
+        "long": "Email me a weekly summary of new components and release notes",
+        "files": {
+          "a": "Annual report.pdf",
+          "b": "Invoices.xlsx",
+          "c": "Contract.docx"
+        }
+      },
+      "sizes": {
+        "sm": "Small",
+        "md": "Medium",
+        "lg": "Large"
       },
       "states": {
-        "default": "Default",
+        "unchecked": "Unchecked",
         "checked": "Checked",
         "indeterminate": "Indeterminate",
-        "disabled": "Disabled",
-        "error": "Error state"
+        "disabledUnchecked": "Disabled, unchecked",
+        "disabledChecked": "Disabled, checked"
+      },
+      "a11y": {
+        "nativeInput": "Renders a native <code>{input}</code>, so Space toggles it and it submits with a form without extra code.",
+        "indeterminate": "<code>indeterminate</code> sets the input's own property, so a screen reader announces the checkbox as mixed. A click clears it, as in the browser; keep the prop in step from your state.",
+        "describedBy": "The checkbox is named by <code>label</code> alone, and <code>description</code> is linked with <code>aria-describedby</code>. The box is hidden from assistive technology.",
+        "ariaLabel": "Without a <code>label</code>, pass an <code>aria-label</code>.",
+        "direction": "Direction is inherited from <code>dir</code>, never a prop. The box sits at the start of the line in both directions."
       },
       "usage": {
         "basic": "Basic checkbox",
         "withLabel": "With label",
         "withDescription": "With description",
-        "indeterminate": "Indeterminate state",
-        "error": "Error state",
-        "terms": "Accept terms and conditions",
-        "marketing": "Marketing emails",
-        "marketingDescription": "Receive emails about new products",
-        "required": "Required field"
+        "layout": "Layout card",
+        "sizes": "Different sizes",
+        "indeterminate": "Select all, with an indeterminate parent",
+        "selected": "Files selected:"
       },
       "props": {
+        "variant": "The box on its own, or inside a bordered card.",
+        "size": "Checkbox size.",
         "checked": "Checked state. Use it with <code>onChange</code>.",
+        "defaultChecked": "Starting state when you do not control it.",
         "indeterminate": "Shows a dash for a partly selected group.",
         "disabled": "Disables the checkbox and dims it.",
-        "error": "Marks the checkbox as invalid.",
         "label": "Label text.",
         "description": "Secondary line below the label.",
         "name": "Name submitted with the form.",
