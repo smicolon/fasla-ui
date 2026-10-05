@@ -640,36 +640,56 @@
       }
     },
     "tabs": {
-      "lead": "A set of layered sections of content that display one panel at a time.",
+      "lead": "Tabs switch between related views in the same place and show one panel at a time. The same component is sometimes called Pills.",
+      "variantsBody": "Three styles, set on <code>TabsList</code> so a group never mixes them. <code>boxed</code>, the default, raises the active tab into a pill and suits toolbars and inline view switches. <code>bordered</code> underlines the active tab, for content navigation and dense layouts. <code>lifted</code> raises the active tab out of a baseline like a file folder, for page-level sections.",
+      "sizesBody": "Three sizes, also set on <code>TabsList</code> so every tab in a group matches. <code>md</code> is the default. Tabs are 28, 30 or 32px tall, and <code>lg</code> uses 16px text with 20px icons.",
+      "statesBody": "The active tab follows <code>value</code>. Hover and focus are real CSS states rather than props, so tab into a group to see the focus ring. A disabled tab is greyed out, and you cannot select it.",
       "tabs": {
         "account": "Account",
         "password": "Password",
+        "billing": "Billing",
         "settings": "Settings"
       },
       "panels": {
         "account": "Make changes to your account here.",
         "password": "Change your password here.",
+        "billing": "Review your plan and invoices here.",
         "settings": "Manage your settings here."
       },
-      "disabledTitle": "With Disabled Tab",
+      "examples": {
+        "label": "Account settings"
+      },
       "disabled": {
+        "label": "Orders",
         "current": "Current orders",
         "invoices": "Invoices",
         "past": "Past orders",
         "currentText": "You have two orders out for delivery.",
         "pastText": "Your last order was two weeks ago."
       },
+      "a11y": {
+        "roles": "Renders the <code>tablist</code>, <code>tab</code> and <code>tabpanel</code> roles, and links each tab to its panel with <code>aria-controls</code> and <code>aria-labelledby</code>.",
+        "keyboard": "Tab enters the group on the active tab. The arrow keys move to the previous or next tab and select it, wrapping at the ends. Home and End jump to the first and last tab. Disabled tabs are skipped.",
+        "label": "Give <code>TabsList</code> an <code>aria-label</code> that names the group.",
+        "icons": "An icon before the label is decorative, so mark it <code>aria-hidden</code> and let the label name the tab.",
+        "direction": "Direction is inherited from <code>dir</code>, never a prop. In right-to-left pages the arrow keys follow the reading order, so the left arrow moves to the next tab."
+      },
       "usage": {
         "basic": "Basic tabs",
+        "variant": "Another style and size",
+        "icons": "With an icon",
         "controlled": "Controlled tabs",
         "accountContent": "Account content here.",
-        "passwordContent": "Password content here."
+        "passwordContent": "Password content here.",
+        "active": "Active tab:"
       },
       "props": {
         "value": "Active tab, when controlled.",
-        "defaultValue": "Tab active at first.",
+        "defaultValue": "Tab active at first. Without it, the first enabled tab is active.",
         "onValueChange": "Called when the active tab changes.",
-        "trigger": "A tab button; its <code>value</code> names its panel.",
+        "variant": "How the active tab is shown. Set on <code>TabsList</code>.",
+        "size": "Size of every tab in the group. Set on <code>TabsList</code>.",
+        "trigger": "A tab button; its <code>value</code> names its panel, and <code>disabled</code> turns it off.",
         "content": "The panel shown for its <code>value</code>.",
         "className": "Extra classes for the part."
       }
