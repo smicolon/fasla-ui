@@ -512,6 +512,90 @@
         "className": "Extra classes for the component."
       }
     },
+    "carousel": {
+      "lead": "A scroll-snap carousel with a dot stepper: one dot per slide, the active one stretched into a pill.",
+      "previewBody": "The track is a native scroller with CSS scroll snapping, so swipe, trackpad and the dots all move it. The active dot follows whichever way you scroll.",
+      "variantsBody": "Figma's <code>No. of items</code> axis is simply how many slides you render: the dot row follows the slide count, and the pill is its <code>Active Item</code>.",
+      "statesBody": "The active dot is a 24px <code>primary</code> pill, the rest are 8px <code>muted</code> circles, and the stretch between them animates unless motion is reduced. <code>defaultActiveIndex</code> starts on a later slide, jumping there instantly rather than scrolling.",
+      "examples": {
+        "gallery": "City guide",
+        "slide": "Slide",
+        "slide1": "The old town at dawn",
+        "slide2": "The harbour market",
+        "slide3": "The corniche at sunset"
+      },
+      "a11y": {
+        "region": "The root is a <code>region</code> with <code>aria-roledescription</code> set to <code>carousel</code>. Always pass an <code>aria-label</code> to name it.",
+        "slides": "Each slide is a <code>group</code> named with digits, “2 / 3”, so the name needs no locale; pass <code>aria-label</code> on a slide to name it by its content instead.",
+        "dots": "The dots are real buttons: Tab reaches them, the active one carries <code>aria-current</code>, and <code>label</code> renames them for your locale.",
+        "motion": "Smooth scrolling comes from CSS alone, so <code>prefers-reduced-motion</code> makes every move instant without any JavaScript.",
+        "direction": "Direction is inherited from <code>dir</code>, never a prop. The track, the snapping and the dots all follow the line's direction."
+      },
+      "usage": {
+        "basic": "Slides with a dot stepper",
+        "startingSlide": "Start on a later slide",
+        "controlled": "Controlled",
+        "state": "Slide:"
+      },
+      "props": {
+        "activeIndex": "Active slide, when controlled.",
+        "defaultActiveIndex": "Slide shown at first.",
+        "onActiveIndexChange": "Called when the active slide changes, dots and manual scrolling alike.",
+        "content": "The scroll-snap track that holds the slides.",
+        "item": "One slide. Override <code>basis-full</code> to show more than one per view.",
+        "dots": "The dot stepper; <code>label</code> names each dot for your locale.",
+        "className": "Extra classes for the part."
+      }
+    },
+    "contentCarousel": {
+      "lead": "A horizontal card browser: previous and next arrows around one, two or three content slots per view.",
+      "previewBody": "Each card is a slot that takes any child. It rides the same scroll-snap engine as the Carousel, so the cards also move by swipe and trackpad.",
+      "variantsBody": "Figma's <code>Type</code> axis is <code>itemsPerView</code>: the cards split the row evenly, each ceding its share of the 16px gaps, and the arrows always advance one card.",
+      "statesBody": "The arrows disable at the ends, dimmed to half opacity: the backward arrow on the first card, the forward arrow on the last page. When everything is already in view, both are off.",
+      "states": {
+        "first": "First card",
+        "last": "Last page",
+        "all": "Everything in view"
+      },
+      "examples": {
+        "label": "Customer stories",
+        "previous": "Previous",
+        "next": "Next",
+        "quote1": "The components dropped into our codebase without a fight, and the defaults already looked designed.",
+        "name1": "Salma, frontend lead",
+        "quote2": "We shipped the Arabic version of our dashboard in a week. The direction handling simply worked.",
+        "name2": "Omar, product engineer",
+        "quote3": "The empty and error states were already thought through, which is usually where libraries leave you alone.",
+        "name3": "Lina, design engineer",
+        "quote4": "Storybook, docs and tokens all agree with each other. That is rarer than it should be.",
+        "name4": "Karim, staff engineer"
+      },
+      "a11y": {
+        "region": "The root is a <code>region</code> with <code>aria-roledescription</code> set to <code>carousel</code>; always pass an <code>aria-label</code> to name it.",
+        "arrows": "The arrows are buttons named by <code>previousLabel</code> and <code>nextLabel</code>, so the keyboard reaches them and a screen reader hears your locale. At the ends they disable.",
+        "slides": "Each card is a <code>group</code> named with digits, “2 / 4”; pass <code>aria-label</code> on a card to name it by its content instead.",
+        "motion": "Smooth scrolling comes from CSS alone, and <code>prefers-reduced-motion</code> makes every move instant without any JavaScript.",
+        "direction": "Direction is inherited from <code>dir</code>, never a prop. The arrows swap sides with the row and their icons mirror themselves."
+      },
+      "usage": {
+        "basic": "Cards with arrows",
+        "itemsPerView": "Three cards per view",
+        "media": "Edge-to-edge media: the slot adds no padding of its own",
+        "labels": "Arrow names for the locale",
+        "controlled": "Controlled",
+        "state": "First visible card:"
+      },
+      "props": {
+        "itemsPerView": "How many cards share the view: Figma's <code>Type</code> axis.",
+        "activeIndex": "First visible card, when controlled.",
+        "defaultActiveIndex": "Card shown first at the start.",
+        "onActiveIndexChange": "Called when the first visible card changes.",
+        "previousLabel": "Accessible name for the backward arrow.",
+        "nextLabel": "Accessible name for the forward arrow.",
+        "item": "One card slot: <code>card</code> on a 1px border, with no padding of its own.",
+        "className": "Extra classes for the part."
+      }
+    },
     "combobox": {
       "lead": "A searchable dropdown with autocomplete, multi-select, and create-new functionality.",
       "options": {
