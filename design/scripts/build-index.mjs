@@ -104,6 +104,9 @@ export const CODE_MAP = {
   ],
   // The date-picker calendar. Calendar View, the scheduler, has its own page and is not built.
   calendar: { set: "Calendar", page: "4108:1012" },
+  // Keyed on set+page, so the skeleton page's "carousel" placeholder is not claimed.
+  carousel: { set: "Carousel", page: "3762:15186" },
+  "content-carousel": { set: "Content Carousel", page: "3762:15186" },
   checkbox: { set: "Check Box", page: "3830:5150" },
   combobox: { set: "Combobox", page: "14852:8647" },
   "date-picker": { set: "Date Picker", page: "14831:275398" },
