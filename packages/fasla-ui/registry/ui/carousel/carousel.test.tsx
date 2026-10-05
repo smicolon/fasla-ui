@@ -171,10 +171,12 @@ describe("Carousel", () => {
     }
   })
 
-  it("pads each dot into a 16px hit target without widening the 4px gap", () => {
+  it("pads each dot into a 12×20 hit box that keeps the 4px gap and never overlaps", () => {
+    // Padding grows the hit box, the matching negative margins give it back,
+    // so the flex gap-1 stays the visible 4px and neighbouring boxes touch.
     renderCarousel()
-    expect(dots()[0]).toHaveClass("p-1", "-m-1", "rounded-full")
-    expect(dots()[0]!.parentElement).toHaveClass("flex", "items-center", "gap-3")
+    expect(dots()[0]).toHaveClass("px-0.5", "py-1.5", "-mx-0.5", "-my-1.5", "rounded-full")
+    expect(dots()[0]!.parentElement).toHaveClass("flex", "items-center", "gap-1")
     expect(dots()[0]!.parentElement).toHaveAttribute("data-slot", "carousel-dots")
   })
 
@@ -201,6 +203,84 @@ describe("Carousel", () => {
         "focus-visible:ring-offset-2"
       )
     }
+  })
+
+  it("makes the track a tab stop with a visible focus ring", () => {
+    // A scrollable region a keyboard cannot reach fails WCAG 2.1.1, and the
+    // tab stop is what makes a dotless composition keyboard-operable.
+    renderCarousel()
+    const track = screen.getByTestId("slide-0").parentElement as HTMLElement
+    expect(track).toHaveAttribute("tabindex", "0")
+    expect(track).toHaveClass(
+      "focus-visible:outline-none",
+      "focus-visible:ring-2",
+      "focus-visible:ring-ring",
+      "focus-visible:ring-offset-2"
+    )
+  })
+
+  it("moves one slide per arrow key, and jumps with Home and End", () => {
+    renderCarousel()
+    const track = screen.getByTestId("slide-0").parentElement as HTMLElement
+
+    fireEvent.keyDown(track, { key: "ArrowRight" })
+    expect(scrollCalls.at(-1)!.el).toBe(screen.getByTestId("slide-1"))
+    expect(dots()[1]).toHaveAttribute("aria-current", "true")
+
+    fireEvent.keyDown(track, { key: "ArrowLeft" })
+    expect(scrollCalls.at(-1)!.el).toBe(screen.getByTestId("slide-0"))
+    expect(dots()[0]).toHaveAttribute("aria-current", "true")
+
+    fireEvent.keyDown(track, { key: "End" })
+    expect(dots()[2]).toHaveAttribute("aria-current", "true")
+    fireEvent.keyDown(track, { key: "Home" })
+    expect(dots()[0]).toHaveAttribute("aria-current", "true")
+
+    // The ends clamp instead of wrapping.
+    fireEvent.keyDown(track, { key: "ArrowLeft" })
+    expect(dots()[0]).toHaveAttribute("aria-current", "true")
+  })
+
+  it("follows the computed direction: in RTL the arrows swap meaning", () => {
+    const spy = vi
+      .spyOn(window, "getComputedStyle")
+      .mockReturnValue({ direction: "rtl" } as CSSStyleDeclaration)
+    renderCarousel({ defaultActiveIndex: 1 })
+    const track = screen.getByTestId("slide-0").parentElement as HTMLElement
+
+    // On an RTL screen the left arrow points forward.
+    fireEvent.keyDown(track, { key: "ArrowLeft" })
+    expect(dots()[2]).toHaveAttribute("aria-current", "true")
+    fireEvent.keyDown(track, { key: "ArrowRight" })
+    expect(dots()[1]).toHaveAttribute("aria-current", "true")
+    spy.mockRestore()
+  })
+
+  it("keeps its hands off arrow keys inside editable content", () => {
+    render(
+      <Carousel aria-label="Gallery">
+        <CarouselContent>
+          <CarouselItem>
+            <input aria-label="Name" />
+          </CarouselItem>
+          <CarouselItem>B</CarouselItem>
+        </CarouselContent>
+        <CarouselDots />
+      </Carousel>
+    )
+    fireEvent.keyDown(screen.getByRole("textbox"), { key: "ArrowRight" })
+    expect(scrollCalls).toHaveLength(0)
+    expect(dots()[0]).toHaveAttribute("aria-current", "true")
+  })
+
+  it("lets a caller's onKeyDown cancel the navigation", () => {
+    const onKeyDown = vi.fn((event: React.KeyboardEvent) => event.preventDefault())
+    renderCarousel({ onKeyDown })
+    const track = screen.getByTestId("slide-0").parentElement as HTMLElement
+    fireEvent.keyDown(track, { key: "ArrowRight" })
+    expect(onKeyDown).toHaveBeenCalled()
+    expect(scrollCalls).toHaveLength(0)
+    expect(dots()[0]).toHaveAttribute("aria-current", "true")
   })
 
   it("navigates on a dot click: scrolls the slide into view and moves the pill", () => {

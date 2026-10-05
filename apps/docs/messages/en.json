@@ -528,6 +528,7 @@
         "region": "The root is a <code>region</code> with <code>aria-roledescription</code> set to <code>carousel</code>. Always pass an <code>aria-label</code> to name it.",
         "slides": "Each slide is a <code>group</code> named with digits, “2 / 3”, so the name needs no locale; pass <code>aria-label</code> on a slide to name it by its content instead.",
         "dots": "The dots are real buttons: Tab reaches them, the active one carries <code>aria-current</code>, and <code>label</code> renames them for your locale.",
+        "keyboard": "The track is a tab stop, and the arrow keys move one slide from anywhere inside — following the text direction, so the key that points forward on screen always goes forward. Home jumps to the first slide, End to the last.",
         "motion": "Smooth scrolling comes from CSS alone, so <code>prefers-reduced-motion</code> makes every move instant without any JavaScript.",
         "direction": "Direction is inherited from <code>dir</code>, never a prop. The track, the snapping and the dots all follow the line's direction."
       },
@@ -573,6 +574,7 @@
       "a11y": {
         "region": "The root is a <code>region</code> with <code>aria-roledescription</code> set to <code>carousel</code>; always pass an <code>aria-label</code> to name it.",
         "arrows": "The arrows are buttons named by <code>previousLabel</code> and <code>nextLabel</code>, so the keyboard reaches them and a screen reader hears your locale. At the ends they disable.",
+        "keyboard": "The arrow keys move one card from anywhere inside — arrows, cards or track — following the text direction. Home jumps to the first card, End to the last.",
         "slides": "Each card is a <code>group</code> named with digits, “2 / 4”; pass <code>aria-label</code> on a card to name it by its content instead.",
         "motion": "Smooth scrolling comes from CSS alone, and <code>prefers-reduced-motion</code> makes every move instant without any JavaScript.",
         "direction": "Direction is inherited from <code>dir</code>, never a prop. The arrows swap sides with the row and their icons mirror themselves."

@@ -134,6 +134,7 @@ export default function ContentCarouselPage() {
         <ul className="list-disc space-y-2 ps-6 text-muted-foreground">
           <li>{s.rich("a11y.region", rich)}</li>
           <li>{s.rich("a11y.arrows", rich)}</li>
+          <li>{s.rich("a11y.keyboard", rich)}</li>
           <li>{s.rich("a11y.slides", rich)}</li>
           <li>{s.rich("a11y.motion", rich)}</li>
           <li>{s.rich("a11y.direction", rich)}</li>

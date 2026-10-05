@@ -528,6 +528,7 @@
         "region": "الجذر منطقة <code>region</code> مع <code>aria-roledescription</code> بقيمة <code>carousel</code>. مرّر دائمًا <code>aria-label</code> لتسميته.",
         "slides": "كل شريحة (slide) مجموعة <code>group</code> تُسمّى بالأرقام \"2 / 3\"، فلا يحتاج الاسم إلى ترجمة؛ مرّر <code>aria-label</code> على الشريحة لتسميتها بمحتواها.",
         "dots": "النقاط أزرار حقيقية: يصل إليها مفتاح Tab، وتحمل النقطة النشطة <code>aria-current</code>، وتعيد <code>label</code> تسميتها بلغتك.",
+        "keyboard": "المسار محطة تركيز، ومفاتيح الأسهم تنقل شريحة واحدة من أي موضع في المكوّن وفق اتجاه النص، فالمفتاح الذي يشير إلى الأمام على الشاشة يتقدم دائمًا. وينتقل بمفتاح Home إلى أول شريحة وبمفتاح End إلى آخرها.",
         "motion": "التمرير السلس يأتي من CSS وحدها، لذا تجعل <code>prefers-reduced-motion</code> كل حركة فورية دون أي JavaScript.",
         "direction": "الاتجاه يُورَث من السمة (attribute) <code>dir</code> وليس خاصية. المسار والتثبيت والنقاط كلها تتبع اتجاه السطر."
       },
@@ -573,6 +574,7 @@
       "a11y": {
         "region": "الجذر منطقة <code>region</code> مع <code>aria-roledescription</code> بقيمة <code>carousel</code>؛ مرّر دائمًا <code>aria-label</code> لتسميته.",
         "arrows": "السهمان زرّان حقيقيان: يُسمّى سهم الرجوع عبر <code>previousLabel</code> وسهم التقدّم عبر <code>nextLabel</code>، فتصل إليهما لوحة المفاتيح ويسمع قارئ الشاشة لغتك، ويتعطّلان عند الطرفين.",
+        "keyboard": "مفاتيح الأسهم تنقل بطاقة واحدة من أي موضع في المكوّن، من السهمين أو البطاقات أو المسار، وفق اتجاه النص. وينتقل بمفتاح Home إلى أول بطاقة وبمفتاح End إلى آخرها.",
         "slides": "كل بطاقة مجموعة <code>group</code> تُسمّى بالأرقام \"2 / 4\"؛ مرّر <code>aria-label</code> على البطاقة لتسميتها بمحتواها.",
         "motion": "التمرير السلس يأتي من CSS وحدها، وتجعل <code>prefers-reduced-motion</code> كل حركة فورية دون أي JavaScript.",
         "direction": "الاتجاه يُورَث من السمة (attribute) <code>dir</code> وليس خاصية. يتبادل السهمان موضعيهما مع الصف وتنعكس أيقونتاهما من تلقاء نفسها."
