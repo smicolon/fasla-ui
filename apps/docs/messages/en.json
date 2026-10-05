@@ -516,7 +516,7 @@
       "lead": "A scroll-snap carousel with a dot stepper: one dot per slide, the active one stretched into a pill.",
       "previewBody": "The track is a native scroller with CSS scroll snapping, so swipe, trackpad and the dots all move it. The active dot follows whichever way you scroll.",
       "variantsBody": "Figma's <code>No. of items</code> axis is simply how many slides you render: the dot row follows the slide count, and the pill is its <code>Active Item</code>.",
-      "statesBody": "The active dot is a 24px <code>primary</code> pill, the rest are 8px <code>muted</code> circles, and the stretch between them animates unless motion is reduced. <code>defaultActiveIndex</code> starts on a later slide, jumping there instantly rather than scrolling.",
+      "statesBody": "The active dot is a 24px <code>primary</code> pill, the rest are 8px <code>muted-foreground</code> circles, and the stretch between them animates unless motion is reduced. <code>defaultActiveIndex</code> starts on a later slide, jumping there instantly rather than scrolling.",
       "examples": {
         "gallery": "City guide",
         "slide": "Slide",
