@@ -71,6 +71,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       activeIndex: controlledIndex,
       defaultActiveIndex = 0,
       onActiveIndexChange,
+      onKeyDown,
       className,
       children,
       ...props
@@ -185,6 +186,30 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       [activeIndex, items.length, scrollTo, registerItem, indexOf]
     )
 
+    /*
+     * Keyboard navigation, from anywhere inside the carousel: the arrow keys
+     * move one slide — read against the carousel's *computed* direction, so
+     * the key that points forward on screen always goes forward — and Home
+     * and End jump to the ends. Keys inside an editable control are left
+     * alone: a text field in a slide keeps its own caret movement.
+     */
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+      onKeyDown?.(event)
+      if (event.defaultPrevented) return
+      const { key } = event
+      if (key !== "ArrowLeft" && key !== "ArrowRight" && key !== "Home" && key !== "End") {
+        return
+      }
+      const target = event.target as HTMLElement
+      if (target.closest('input, textarea, select, [contenteditable="true"]')) return
+      event.preventDefault()
+      if (key === "Home") return scrollTo(0)
+      if (key === "End") return scrollTo(itemsRef.current.length - 1)
+      const isRtl = getComputedStyle(event.currentTarget).direction === "rtl"
+      const forward = (key === "ArrowRight") !== isRtl
+      scrollTo(stateRef.current.activeIndex + (forward ? 1 : -1))
+    }
+
     return (
       <CarouselContext.Provider value={context}>
         <div
@@ -193,6 +218,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
           aria-roledescription="carousel"
           className={cn("relative", className)}
           {...props}
+          onKeyDown={handleKeyDown}
         >
           {children}
         </div>
@@ -211,6 +237,11 @@ export interface CarouselContentProps extends React.HTMLAttributes<HTMLDivElemen
  * The track: a flex scroller with mandatory inline snapping, slides 16px
  * apart. The scrollbar is hidden in both engines — the dots or arrows are the
  * visible affordance — but the area still scrolls by touch and trackpad.
+ *
+ * It is a tab stop with a visible ring: a scrollable region a keyboard cannot
+ * reach fails WCAG 2.1.1, and once it has focus the root's key handling moves
+ * one slide per arrow press — so a carousel composed without dots or arrows
+ * is still fully keyboard-operable.
  */
 const CarouselContent = React.forwardRef<HTMLDivElement, CarouselContentProps>(
   ({ className, ...props }, ref) => {
@@ -220,9 +251,11 @@ const CarouselContent = React.forwardRef<HTMLDivElement, CarouselContentProps>(
       <div
         ref={composedRef}
         data-slot="carousel-content"
+        tabIndex={0}
         className={cn(
           "flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth motion-reduce:scroll-auto",
           "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
           className
         )}
         {...props}
@@ -276,9 +309,12 @@ export interface CarouselDotsProps extends React.HTMLAttributes<HTMLDivElement> 
  * a `primary` 24px pill, everything `9999px`-rounded. The width animates, so
  * activation reads as the dot stretching — unless motion is reduced.
  *
- * Each dot is a real button. The visual is a child span: the button adds 4px
- * padding all round for a 16px hit target, and pulls it back out with a -4px
- * margin so the 4px visual gap holds (12px of `gap-3` − 2 × 4px bleed).
+ * Each dot is a real button. The visual is a child span: the button pads it
+ * by 2px sideways and 6px vertically into a 12×20 hit box, and negative
+ * margins give the padding back, so the flex `gap-1` stays the visible 4px
+ * gap and neighbouring hit boxes touch without overlapping. 12px of pitch
+ * cannot hold WCAG 2.5.8's 24px targets — the focusable, swipeable track and
+ * the arrow keys are the equivalent controls.
  */
 const CarouselDots = React.forwardRef<HTMLDivElement, CarouselDotsProps>(
   ({ className, label, ...props }, ref) => {
@@ -288,7 +324,7 @@ const CarouselDots = React.forwardRef<HTMLDivElement, CarouselDotsProps>(
       <div
         ref={ref}
         data-slot="carousel-dots"
-        className={cn("flex items-center justify-center gap-3", className)}
+        className={cn("flex items-center justify-center gap-1", className)}
         {...props}
       >
         {Array.from({ length: count }, (_, index) => {
@@ -301,7 +337,7 @@ const CarouselDots = React.forwardRef<HTMLDivElement, CarouselDotsProps>(
               aria-label={label ? label(index, count) : `${index + 1} / ${count}`}
               aria-current={isActive ? "true" : undefined}
               onClick={() => scrollTo(index)}
-              className="-m-1 rounded-full p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="-mx-0.5 -my-1.5 rounded-full px-0.5 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               <span
                 className={cn(

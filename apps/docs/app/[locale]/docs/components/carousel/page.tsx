@@ -116,6 +116,7 @@ export default function CarouselPage() {
           <li>{s.rich("a11y.region", rich)}</li>
           <li>{s.rich("a11y.slides", rich)}</li>
           <li>{s.rich("a11y.dots", rich)}</li>
+          <li>{s.rich("a11y.keyboard", rich)}</li>
           <li>{s.rich("a11y.motion", rich)}</li>
           <li>{s.rich("a11y.direction", rich)}</li>
         </ul>

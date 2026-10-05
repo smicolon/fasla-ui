@@ -205,6 +205,18 @@ describe("ContentCarousel", () => {
     expect(scrollCalls.at(-1)!.el).toBe(screen.getByTestId("card-2"))
   })
 
+  it("rides the engine's keyboard navigation from anywhere inside", () => {
+    const onChange = vi.fn()
+    renderCarousel({ onActiveIndexChange: onChange })
+    // The arrows have focus most often; an arrow key from one still navigates.
+    fireEvent.keyDown(next(), { key: "ArrowRight" })
+    expect(onChange).toHaveBeenLastCalledWith(1)
+    expect(scrollCalls.at(-1)!.el).toBe(screen.getByTestId("card-1"))
+    fireEvent.keyDown(screen.getByTestId("card-1"), { key: "End" })
+    expect(onChange).toHaveBeenLastCalledWith(2)
+    expect(next()).toBeDisabled()
+  })
+
   it("renames the arrows for the locale", () => {
     renderCarousel({ previousLabel: "السابق", nextLabel: "التالي" })
     expect(screen.getByRole("button", { name: "السابق" })).toBeInTheDocument()
