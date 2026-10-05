@@ -3,7 +3,7 @@
     "source": "Figma · Fasla · yGEQmCZOvs7KptsYUdB0Xg",
     "fileKey": "yGEQmCZOvs7KptsYUdB0Xg",
     "target": "atoms",
-    "measured": "2026-10-04",
+    "measured": "2026-10-05",
     "generatedBy": ".agents/skills/figma-index (read-only use_figma page walk) → design/scripts/build-index.mjs",
     "selectionRule": {
       "inScope": "page name contains 🟢 AND page name ends with ✅",
@@ -36,20 +36,20 @@
       "codeMap": "hand-maintained in design/scripts/build-index.mjs, keyed on {set, page} because the family page reuses atom names"
     },
     "counts": {
-      "pagesInScope": 44,
-      "entries": 158,
-      "primary": 43,
-      "componentSets": 157,
+      "pagesInScope": 43,
+      "entries": 155,
+      "primary": 41,
+      "componentSets": 154,
       "looseComponents": 1,
-      "variants": 4226,
-      "primaryWithEnDoc": 41,
-      "primaryWithArDoc": 37,
-      "withEnDoc": 41,
-      "withArDoc": 37,
-      "withRtl": 148,
+      "variants": 4200,
+      "primaryWithEnDoc": 39,
+      "primaryWithArDoc": 36,
+      "withEnDoc": 39,
+      "withArDoc": 36,
+      "withRtl": 146,
       "withDescription": 1,
       "mappedToCode": 16,
-      "docFrames": 97
+      "docFrames": 94
     },
     "legend": {
       "confirmed": "partial",
@@ -120,7 +120,7 @@
     },
     {
       "id": "3830:60584",
-      "name": "✦  🟢 Y | Radio  ✅",
+      "name": "✦  🟢 Y | Radio  ✅ ✅",
       "display": "Radio",
       "status": "🟢",
       "tail": "✅",
@@ -134,7 +134,7 @@
     },
     {
       "id": "3862:3097",
-      "name": "✦  🟢 Y | Switch ✅",
+      "name": "✦  🟢 Y | Switch ✅ ✅",
       "display": "Switch",
       "status": "🟢",
       "tail": "✅",
@@ -145,6 +145,63 @@
       ],
       "legacyDocSections": [],
       "orphanDocs": []
+    },
+    {
+      "id": "3724:120666",
+      "name": "✦  🟢 Y | Badge ✅ ✅",
+      "display": "Badge",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3724-120666",
+      "entryIds": [
+        "326:2134"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "3710:7318",
+      "name": "✦  🟢 Y | Avatar ✅ ✅",
+      "display": "Avatar",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3710-7318",
+      "entryIds": [
+        "38597:15156",
+        "38597:15242",
+        "38597:15251",
+        "38597:15288",
+        "323:321"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "38830:41585",
+      "name": "✦  🟢 Y | Status Indicator ✅ ✅",
+      "display": "Status Indicator",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38830-41585",
+      "entryIds": [
+        "323:390"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": [
+        {
+          "id": "39921:18345",
+          "name": "Modifier / Indicator — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39921-18345"
+        },
+        {
+          "id": "39926:18559",
+          "name": "Modifier / Indicator — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39926-18559"
+        }
+      ]
     },
     {
       "id": "3822:55767",
@@ -210,63 +267,6 @@
           "id": "39668:1336",
           "name": "Pagination — Fasla Component Documentation (AR)",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39668-1336"
-        }
-      ]
-    },
-    {
-      "id": "3724:120666",
-      "name": "✦  🟢 Y | Badge ✅",
-      "display": "Badge",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3724-120666",
-      "entryIds": [
-        "326:2134"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "3710:7318",
-      "name": "✦  🟢 Y | Avatar ✅",
-      "display": "Avatar",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3710-7318",
-      "entryIds": [
-        "38597:15156",
-        "38597:15242",
-        "38597:15251",
-        "38597:15288",
-        "323:321"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "38830:41585",
-      "name": "✦  🟢 Y | Status Indicator ✅",
-      "display": "Status Indicator",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38830-41585",
-      "entryIds": [
-        "323:390"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": [
-        {
-          "id": "39921:18345",
-          "name": "Modifier / Indicator — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39921-18345"
-        },
-        {
-          "id": "39926:18559",
-          "name": "Modifier / Indicator — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39926-18559"
         }
       ]
     },
@@ -362,22 +362,6 @@
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4108-1605",
       "entryIds": [
         "4103:4910"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "3762:15186",
-      "name": "✦  🟢 Y | Carousel ✅",
-      "display": "Carousel",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3762-15186",
-      "entryIds": [
-        "15769:74332",
-        "40600:96137",
-        "40600:96155"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -1085,7 +1069,7 @@
       "role": "primary",
       "page": {
         "id": "3830:60584",
-        "name": "✦  🟢 Y | Radio  ✅",
+        "name": "✦  🟢 Y | Radio  ✅ ✅",
         "display": "Radio",
         "status": "🟢",
         "tail": "✅",
@@ -1152,7 +1136,7 @@
       "role": "primary",
       "page": {
         "id": "3862:3097",
-        "name": "✦  🟢 Y | Switch ✅",
+        "name": "✦  🟢 Y | Switch ✅ ✅",
         "display": "Switch",
         "status": "🟢",
         "tail": "✅",
@@ -1213,6 +1197,376 @@
       "code": "switch",
       "hasDescription": false,
       "flags": [
+        "no-description"
+      ]
+    },
+    "326:2134": {
+      "name": "Badge",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3724:120666",
+        "name": "✦  🟢 Y | Badge ✅ ✅",
+        "display": "Badge",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=326-2134",
+      "variants": 432,
+      "axes": {
+        "Type": [
+          "Solid",
+          "Soft",
+          "Outline"
+        ],
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Tone": [
+          "Primary",
+          "Secondary",
+          "Info",
+          "Success",
+          "Warning",
+          "Destructive"
+        ],
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Radius": [
+          "Standard",
+          "Rounded"
+        ],
+        "Stats": [
+          "Default",
+          "Focus"
+        ]
+      },
+      "axisNames": [
+        "Type",
+        "Direction",
+        "Tone",
+        "Size",
+        "Radius",
+        "Stats"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "38832:4920",
+          "name": "Badge — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38832-4920"
+        },
+        "ar": {
+          "id": "39796:3428",
+          "name": "Badge — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39796-3428"
+        },
+        "duplicates": []
+      },
+      "code": "badge",
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "38597:15156": {
+      "name": "Clothes",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "3710:7318",
+        "name": "✦  🟢 Y | Avatar ✅ ✅",
+        "display": "Avatar",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38597-15156",
+      "variants": 16,
+      "axes": {
+        "Type": [
+          "Flower Cardigan",
+          "Big collar with buttons",
+          "Overall 1",
+          "Thin striped t shirt",
+          "Wavy collar sweater",
+          "Simple basic T-shirt",
+          "T-shirt with pocket",
+          "Round Collar blouse",
+          "Thick striped t shirt",
+          "T shirt",
+          "T shirt with buttons",
+          "Sweater vest",
+          "Small collar blouse",
+          "High collar blouse",
+          "Overall 2",
+          "Simple Cardigan"
+        ]
+      },
+      "axisNames": [
+        "Type"
+      ],
+      "rtl": false,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-direction-axis",
+        "no-description"
+      ]
+    },
+    "38597:15242": {
+      "name": "Female hair bangs",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "3710:7318",
+        "name": "✦  🟢 Y | Avatar ✅ ✅",
+        "display": "Avatar",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38597-15242",
+      "variants": 4,
+      "axes": {
+        "Type": [
+          "hair bangs 2",
+          "hair bangs 3",
+          "Hair bangs 4",
+          "Hair bangs 1"
+        ]
+      },
+      "axisNames": [
+        "Type"
+      ],
+      "rtl": false,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-direction-axis",
+        "no-description"
+      ]
+    },
+    "38597:15251": {
+      "name": "Accessories",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "3710:7318",
+        "name": "✦  🟢 Y | Avatar ✅ ✅",
+        "display": "Avatar",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38597-15251",
+      "variants": 6,
+      "axes": {
+        "Type": [
+          "Hair bow tie clip",
+          "glass",
+          "cap",
+          "hat",
+          "Beanie",
+          "Earnings"
+        ]
+      },
+      "axisNames": [
+        "Type"
+      ],
+      "rtl": false,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-direction-axis",
+        "no-description"
+      ]
+    },
+    "38597:15288": {
+      "name": "Head and hair style",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "3710:7318",
+        "name": "✦  🟢 Y | Avatar ✅ ✅",
+        "display": "Avatar",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38597-15288",
+      "variants": 18,
+      "axes": {
+        "Type": [
+          "2 braids",
+          "Beanie and beard",
+          "Female Hijab",
+          "Hair bun",
+          "Long hair",
+          "Long straight hair",
+          "Male hijab 1",
+          "Male hijab 2",
+          "Male puff hair",
+          "Female puff hair with bow tie hair clip",
+          "Short hair and beard",
+          "Short hair and cap",
+          "Short hair and glasses",
+          "Short hair and hat",
+          "Short hair with bangs",
+          "Short straignt hair",
+          "Short under cut",
+          "Shoulder length"
+        ]
+      },
+      "axisNames": [
+        "Type"
+      ],
+      "rtl": false,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-direction-axis",
+        "no-description"
+      ]
+    },
+    "323:321": {
+      "name": "Avatar",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3710:7318",
+        "name": "✦  🟢 Y | Avatar ✅ ✅",
+        "display": "Avatar",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=323-321",
+      "variants": 72,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Radius": [
+          "Standard",
+          "Rounded"
+        ],
+        "Style": [
+          "Image",
+          "Initials",
+          "Icon"
+        ],
+        "Border": [
+          "False",
+          "True"
+        ],
+        "Size": [
+          "32",
+          "24",
+          "12"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Radius",
+        "Style",
+        "Border",
+        "Size"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "39655:8492",
+          "name": "Avatar — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39655-8492"
+        },
+        "ar": {
+          "id": "39695:3102",
+          "name": "Avatar — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39695-3102"
+        },
+        "duplicates": []
+      },
+      "code": "avatar",
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "323:390": {
+      "name": "Status Indicator",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "38830:41585",
+        "name": "✦  🟢 Y | Status Indicator ✅ ✅",
+        "display": "Status Indicator",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=323-390",
+      "variants": 8,
+      "axes": {
+        "Type": [
+          "Online",
+          "Away",
+          "Busy",
+          "Offline"
+        ],
+        "Size": [
+          "8px",
+          "4px"
+        ]
+      },
+      "axisNames": [
+        "Type",
+        "Size"
+      ],
+      "rtl": false,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": "status-indicator",
+      "hasDescription": false,
+      "flags": [
+        "doc-name-mismatch",
+        "no-direction-axis",
         "no-description"
       ]
     },
@@ -1447,376 +1801,6 @@
       "hasDescription": false,
       "flags": [
         "doc-name-mismatch",
-        "no-description"
-      ]
-    },
-    "326:2134": {
-      "name": "Badge",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3724:120666",
-        "name": "✦  🟢 Y | Badge ✅",
-        "display": "Badge",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=326-2134",
-      "variants": 432,
-      "axes": {
-        "Type": [
-          "Solid",
-          "Soft",
-          "Outline"
-        ],
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Tone": [
-          "Primary",
-          "Secondary",
-          "Info",
-          "Success",
-          "Warning",
-          "Destructive"
-        ],
-        "Size": [
-          "sm",
-          "md",
-          "lg"
-        ],
-        "Radius": [
-          "Standard",
-          "Rounded"
-        ],
-        "Stats": [
-          "Default",
-          "Focus"
-        ]
-      },
-      "axisNames": [
-        "Type",
-        "Direction",
-        "Tone",
-        "Size",
-        "Radius",
-        "Stats"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "38832:4920",
-          "name": "Badge — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38832-4920"
-        },
-        "ar": {
-          "id": "39796:3428",
-          "name": "Badge — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39796-3428"
-        },
-        "duplicates": []
-      },
-      "code": "badge",
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "38597:15156": {
-      "name": "Clothes",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "3710:7318",
-        "name": "✦  🟢 Y | Avatar ✅",
-        "display": "Avatar",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38597-15156",
-      "variants": 16,
-      "axes": {
-        "Type": [
-          "Flower Cardigan",
-          "Big collar with buttons",
-          "Overall 1",
-          "Thin striped t shirt",
-          "Wavy collar sweater",
-          "Simple basic T-shirt",
-          "T-shirt with pocket",
-          "Round Collar blouse",
-          "Thick striped t shirt",
-          "T shirt",
-          "T shirt with buttons",
-          "Sweater vest",
-          "Small collar blouse",
-          "High collar blouse",
-          "Overall 2",
-          "Simple Cardigan"
-        ]
-      },
-      "axisNames": [
-        "Type"
-      ],
-      "rtl": false,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-direction-axis",
-        "no-description"
-      ]
-    },
-    "38597:15242": {
-      "name": "Female hair bangs",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "3710:7318",
-        "name": "✦  🟢 Y | Avatar ✅",
-        "display": "Avatar",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38597-15242",
-      "variants": 4,
-      "axes": {
-        "Type": [
-          "hair bangs 2",
-          "hair bangs 3",
-          "Hair bangs 4",
-          "Hair bangs 1"
-        ]
-      },
-      "axisNames": [
-        "Type"
-      ],
-      "rtl": false,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-direction-axis",
-        "no-description"
-      ]
-    },
-    "38597:15251": {
-      "name": "Accessories",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "3710:7318",
-        "name": "✦  🟢 Y | Avatar ✅",
-        "display": "Avatar",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38597-15251",
-      "variants": 6,
-      "axes": {
-        "Type": [
-          "Hair bow tie clip",
-          "glass",
-          "cap",
-          "hat",
-          "Beanie",
-          "Earnings"
-        ]
-      },
-      "axisNames": [
-        "Type"
-      ],
-      "rtl": false,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-direction-axis",
-        "no-description"
-      ]
-    },
-    "38597:15288": {
-      "name": "Head and hair style",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "3710:7318",
-        "name": "✦  🟢 Y | Avatar ✅",
-        "display": "Avatar",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38597-15288",
-      "variants": 18,
-      "axes": {
-        "Type": [
-          "2 braids",
-          "Beanie and beard",
-          "Female Hijab",
-          "Hair bun",
-          "Long hair",
-          "Long straight hair",
-          "Male hijab 1",
-          "Male hijab 2",
-          "Male puff hair",
-          "Female puff hair with bow tie hair clip",
-          "Short hair and beard",
-          "Short hair and cap",
-          "Short hair and glasses",
-          "Short hair and hat",
-          "Short hair with bangs",
-          "Short straignt hair",
-          "Short under cut",
-          "Shoulder length"
-        ]
-      },
-      "axisNames": [
-        "Type"
-      ],
-      "rtl": false,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-direction-axis",
-        "no-description"
-      ]
-    },
-    "323:321": {
-      "name": "Avatar",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3710:7318",
-        "name": "✦  🟢 Y | Avatar ✅",
-        "display": "Avatar",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=323-321",
-      "variants": 72,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Radius": [
-          "Standard",
-          "Rounded"
-        ],
-        "Style": [
-          "Image",
-          "Initials",
-          "Icon"
-        ],
-        "Border": [
-          "False",
-          "True"
-        ],
-        "Size": [
-          "32",
-          "24",
-          "12"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Radius",
-        "Style",
-        "Border",
-        "Size"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "39655:8492",
-          "name": "Avatar — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39655-8492"
-        },
-        "ar": {
-          "id": "39695:3102",
-          "name": "Avatar — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39695-3102"
-        },
-        "duplicates": []
-      },
-      "code": "avatar",
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "323:390": {
-      "name": "Status Indicator",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "38830:41585",
-        "name": "✦  🟢 Y | Status Indicator ✅",
-        "display": "Status Indicator",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=323-390",
-      "variants": 8,
-      "axes": {
-        "Type": [
-          "Online",
-          "Away",
-          "Busy",
-          "Offline"
-        ],
-        "Size": [
-          "8px",
-          "4px"
-        ]
-      },
-      "axisNames": [
-        "Type",
-        "Size"
-      ],
-      "rtl": false,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": "status-indicator",
-      "hasDescription": false,
-      "flags": [
-        "doc-name-mismatch",
-        "no-direction-axis",
         "no-description"
       ]
     },
@@ -2123,11 +2107,13 @@
         "State": [
           "Unchecked",
           "Checked",
-          "Indeterminate",
-          "Disabled Uncheck",
-          "Disabled Checked"
+          "Indeterminate"
         ],
-        "Size Default": [
+        "Interaction": [
+          "Default",
+          "Disabled"
+        ],
+        "Size": [
           "sm",
           "md",
           "lg"
@@ -2137,7 +2123,8 @@
         "Direction",
         "Type",
         "State",
-        "Size Default"
+        "Interaction",
+        "Size"
       ],
       "rtl": true,
       "docs": {
@@ -2146,13 +2133,16 @@
           "name": "Check Box — Fasla Component Documentation",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39777-114"
         },
-        "ar": null,
+        "ar": {
+          "id": "39915:273",
+          "name": "Check Box — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39915-273"
+        },
         "duplicates": []
       },
       "code": "checkbox",
       "hasDescription": false,
       "flags": [
-        "no-ar-doc",
         "no-description"
       ]
     },
@@ -2215,150 +2205,6 @@
         "duplicates": []
       },
       "code": "navbar",
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "15769:74332": {
-      "name": "Content Carousel",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3762:15186",
-        "name": "✦  🟢 Y | Carousel ✅",
-        "display": "Carousel",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15769-74332",
-      "variants": 6,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Type": [
-          "Single box",
-          "Two boxes",
-          "Three boxes"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Type"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "38948:6088",
-          "name": "Content Carousel — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38948-6088"
-        },
-        "ar": {
-          "id": "39802:6765",
-          "name": "Content Carousel — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39802-6765"
-        },
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "40600:96137": {
-      "name": "Carousel Item",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "3762:15186",
-        "name": "✦  🟢 Y | Carousel ✅",
-        "display": "Carousel",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40600-96137",
-      "variants": 2,
-      "axes": {
-        "Active": [
-          "False",
-          "True"
-        ]
-      },
-      "axisNames": [
-        "Active"
-      ],
-      "rtl": false,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-direction-axis",
-        "no-description"
-      ]
-    },
-    "40600:96155": {
-      "name": "Carousel",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3762:15186",
-        "name": "✦  🟢 Y | Carousel ✅",
-        "display": "Carousel",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40600-96155",
-      "variants": 18,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "No. of items": [
-          "2",
-          "3",
-          "4"
-        ],
-        "Active Item": [
-          "1",
-          "2",
-          "3",
-          "4"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "No. of items",
-        "Active Item"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "40602:350",
-          "name": "Carousel — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40602-350"
-        },
-        "ar": {
-          "id": "40605:483",
-          "name": "Carousel — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40605-483"
-        },
-        "duplicates": []
-      },
-      "code": null,
       "hasDescription": false,
       "flags": [
         "no-description"
