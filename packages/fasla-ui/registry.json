@@ -158,6 +158,7 @@
       "title": "Checkbox",
       "description": "An accessible checkbox for binary selections with controlled state.",
       "dependencies": [
+        "class-variance-authority",
         "lucide-react"
       ],
       "registryDependencies": [],
