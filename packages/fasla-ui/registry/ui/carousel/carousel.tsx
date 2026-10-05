@@ -305,9 +305,11 @@ export interface CarouselDotsProps extends React.HTMLAttributes<HTMLDivElement> 
 
 /**
  * Figma's dot stepper, one dot per slide. The geometry is the set's exactly:
- * dots 8px tall and 4px apart, the inactive a `muted` 8px circle, the active
- * a `primary` 24px pill, everything `9999px`-rounded. The width animates, so
- * activation reads as the dot stretching — unless motion is reduced.
+ * dots 8px tall and 4px apart, the inactive a `muted-foreground` 8px circle
+ * (rebound from `muted` on 2026-10-06 — `muted` on `background` was ~1.07:1,
+ * far under WCAG 1.4.11's 3:1), the active a `primary` 24px pill, everything
+ * `9999px`-rounded. The width animates, so activation reads as the dot
+ * stretching — unless motion is reduced.
  *
  * Each dot is a real button. The visual is a child span: the button pads it
  * by 2px sideways and 6px vertically into a 12×20 hit box, and negative
@@ -342,7 +344,7 @@ const CarouselDots = React.forwardRef<HTMLDivElement, CarouselDotsProps>(
               <span
                 className={cn(
                   "block h-2 rounded-full transition-[width,background-color] motion-reduce:transition-none",
-                  isActive ? "w-6 bg-primary" : "w-2 bg-muted"
+                  isActive ? "w-6 bg-primary" : "w-2 bg-muted-foreground"
                 )}
               />
             </button>

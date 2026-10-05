@@ -159,10 +159,11 @@ describe("Carousel", () => {
   it("draws one dot per slide, to the Figma geometry", () => {
     renderCarousel()
     expect(dots()).toHaveLength(3)
-    // Active: a 24×8 primary pill. Inactive: an 8×8 muted circle. The width
-    // transitions, so activation reads as the dot stretching.
+    // Active: a 24×8 primary pill. Inactive: an 8×8 muted-foreground circle —
+    // muted itself sat at ~1.07:1 on the page, under WCAG 1.4.11's 3:1. The
+    // width transitions, so activation reads as the dot stretching.
     expect(dotVisual(0)).toHaveClass("h-2", "w-6", "rounded-full", "bg-primary")
-    expect(dotVisual(1)).toHaveClass("h-2", "w-2", "rounded-full", "bg-muted")
+    expect(dotVisual(1)).toHaveClass("h-2", "w-2", "rounded-full", "bg-muted-foreground")
     for (const i of [0, 1, 2]) {
       expect(dotVisual(i)).toHaveClass(
         "transition-[width,background-color]",

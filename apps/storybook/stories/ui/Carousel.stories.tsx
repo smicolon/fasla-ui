@@ -151,7 +151,7 @@ const THEMES = ["light", "dark"] as const
 
 /**
  * Light and Dark side by side, whatever the theme toolbar says. The dots are
- * `primary` on `muted`, so each panel's class re-points them on its own.
+ * `primary` and `muted-foreground`, so each panel's class re-points them on its own.
  */
 export const LightAndDark: Story = {
   parameters: { layout: "padded" },
