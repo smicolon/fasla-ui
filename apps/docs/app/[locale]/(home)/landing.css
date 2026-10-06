@@ -1,0 +1,192 @@
+/* ============================================
+   LANDING PAGE ONLY
+
+   What Tailwind utilities cannot say on their own: the content width the
+   reference is laid out on, the x-ray tags (a pseudo-element reading its
+   label from an attribute), and the timing of the language flip, which lives
+   on view-transition pseudo-elements. Everything else is utilities in the
+   components. Colours are the semantic and brand tokens from globals.css.
+   ============================================ */
+
+.l-page {
+  /* 1248px of content inside a gutter that grows with the screen. */
+  --l-gutter: clamp(16px, 4vw, 96px);
+  --l-section: clamp(64px, 9vw, 128px);
+  --l-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.l-wrap {
+  width: 100%;
+  max-width: calc(1248px + 2 * var(--l-gutter));
+  margin-inline: auto;
+  padding-inline: var(--l-gutter);
+}
+
+/* ── "Show components" x-ray ────────────────────────────────────────────
+   Every part marked data-c gets a dashed outline and a tag above its start
+   corner naming the Fasla component. Parts that fill their column (the
+   sidebar) carry .l-tag-in and take the tag inside instead. */
+
+.l-stage.is-xray [data-c] {
+  position: relative;
+  outline: 1px dashed var(--fasla-red);
+  outline-offset: 2px;
+}
+
+.l-stage.is-xray [data-c]::after {
+  content: attr(data-c);
+  position: absolute;
+  top: -3px;
+  inset-inline-start: -3px;
+  translate: 0 -100%;
+  z-index: 6;
+  padding: 3px 5px;
+  border-radius: 3px;
+  background: var(--fasla-red);
+  color: var(--fasla-white);
+  font: 500 10px/1 var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  unicode-bidi: isolate;
+  animation: l-tag-in 0.32s var(--l-ease) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+.l-stage.is-xray [data-c].l-tag-in {
+  outline-offset: -2px;
+}
+
+.l-stage.is-xray [data-c].l-tag-in::after {
+  top: 6px;
+  inset-inline-start: 6px;
+  translate: 0 0;
+  animation-name: l-tag-in-inside;
+}
+
+@keyframes l-tag-in {
+  from {
+    opacity: 0;
+    translate: 0 calc(-100% + 4px);
+  }
+}
+
+@keyframes l-tag-in-inside {
+  from {
+    opacity: 0;
+    translate: 0 4px;
+  }
+}
+
+/* ── The language flip ──────────────────────────────────────────────────
+   locale-flip.tsx wraps the move between /en/ and /ar/ in a view transition.
+   The named parts slide from their LTR places to their RTL ones while the
+   rest cross-fades, headline first, then the product window and its parts.
+   The direction switch is shown live, not as a snapshot, so its red thumb
+   keeps sliding through the flip. Everything settles inside half a second. */
+
+@keyframes l-fx-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes l-fx-in {
+  from {
+    opacity: 0;
+  }
+}
+
+::view-transition-group(*) {
+  animation-duration: 260ms;
+  animation-timing-function: var(--l-ease, ease-out);
+}
+
+::view-transition-old(*) {
+  animation: l-fx-out 140ms ease-out both;
+}
+
+::view-transition-new(*) {
+  animation: l-fx-in 200ms ease-out both;
+}
+
+::view-transition-old(root) {
+  animation: l-fx-out 160ms ease-out both;
+}
+
+::view-transition-new(root) {
+  animation: l-fx-in 200ms ease-out both;
+}
+
+::view-transition-old(dir-switch) {
+  display: none;
+}
+
+::view-transition-new(dir-switch),
+::view-transition-group(dir-switch) {
+  animation: none;
+}
+
+::view-transition-group(hinge) {
+  animation-duration: 0s;
+}
+
+::view-transition-group(hero-title),
+::view-transition-old(hero-title),
+::view-transition-new(hero-title) {
+  animation-delay: 15ms;
+}
+
+::view-transition-group(hero-cta),
+::view-transition-old(hero-cta),
+::view-transition-new(hero-cta) {
+  animation-delay: 30ms;
+}
+
+::view-transition-group(product),
+::view-transition-old(product),
+::view-transition-new(product) {
+  animation-delay: 40ms;
+}
+
+::view-transition-group(p-side),
+::view-transition-old(p-side),
+::view-transition-new(p-side) {
+  animation-delay: 45ms;
+}
+
+::view-transition-group(p-head),
+::view-transition-old(p-head),
+::view-transition-new(p-head) {
+  animation-delay: 50ms;
+}
+
+::view-transition-group(p-stats),
+::view-transition-old(p-stats),
+::view-transition-new(p-stats) {
+  animation-delay: 55ms;
+}
+
+::view-transition-group(p-chart),
+::view-transition-old(p-chart),
+::view-transition-new(p-chart) {
+  animation-delay: 58ms;
+}
+
+::view-transition-group(p-table),
+::view-transition-old(p-table),
+::view-transition-new(p-table) {
+  animation-delay: 60ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
+  .l-stage.is-xray [data-c]::after {
+    animation: none;
+  }
+}

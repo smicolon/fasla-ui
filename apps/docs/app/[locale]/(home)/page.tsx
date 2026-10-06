@@ -1,94 +1,29 @@
 import Link from "next/link"
-import Image from "next/image"
-import { CopyCommand } from "@/components/copy-command"
 import { getTranslations, setRequestLocale } from "next-intl/server"
-import { localeDirection, type Locale } from "@/i18n/routing"
-import { registryCounts } from "@/lib/registry"
+import { Button } from "@fasla-ui/ui/button/button"
+import { CopyCommand } from "@/components/copy-command"
+import { DirectionSwitch } from "./_components/direction-switch"
+import { FaslaComma } from "./_components/fasla-mark"
+import { FilmPlayer } from "./_components/film-player"
+import { ArrowEndIcon } from "./_components/icons"
+import { LandingFooter } from "./_components/landing-footer"
+import { LandingNav } from "./_components/landing-nav"
+import { installCommand, landingLinks } from "./_components/links"
+import { FlipSettled } from "./_components/locale-flip"
+import { SanadWindow } from "./_components/sanad-window"
+import { XrayStage } from "./_components/xray-stage"
 
 /**
- * Home page — Fasla Brand Identity V2.5.
+ * The ui.smicolon.com home page: the Fasla landing page, in English and Arabic.
  *
- * Palette is the canonical three (§13): red #E40017, ink #0A0A0A, white #FFFFFF,
- * plus cyan #009ED4 for code accent on a dark ground only. Red is reserved for
- * the comma, one CTA per composition, and interactive states.
+ * Built from the approved reference (fasla-landing-final, 6 Oct 2026) and its
+ * handoff. The page is the demo: the hero's direction switch flips the whole
+ * page between /en/ and /ar/, and the product window under it is assembled
+ * from real Fasla components. Landing-only pieces live in ./_components and
+ * have no Storybook stories.
  *
- * The Arabic comma ، replaces one Latin comma in the headline, once (§15).
- * Type is product tier: Geist and Geist Mono (§14).
- * Nothing decorative: "nothing is added because a surface looks empty" (§02.02).
+ * Brand red marks the comma, the active direction and the x-ray tags only.
  */
-
-/**
- * Translated copy set inside a monospace surface. globals.css keeps every
- * `.font-mono` element LTR in Arabic, which is right for code but reverses an
- * Arabic phrase, so the phrase is isolated in its own direction and set in
- * Cairo, the face that carries its glyphs.
- */
-function Phrase({ dir, children }: { dir: "ltr" | "rtl"; children: React.ReactNode }) {
-  return (
-    <bdi dir={dir} className="rtl:font-arabic">
-      {children}
-    </bdi>
-  )
-}
-
-// Two columns below lg, four from lg. Every cell keeps 28px on both sides of a
-// divider (12px between the two columns on a phone); the cells on the
-// container's edges sit flush with it. The edge
-// rules are scoped to non-overlapping breakpoints, so no two of them compete
-// for the same cell (they did, and cell 3 lost its padding beside a divider).
-function Stat({ value, label }: { value: string; label: React.ReactNode }) {
-  return (
-    <div className="border-b border-border px-3 py-6 sm:px-7 max-lg:[&:nth-child(odd)]:ps-0 max-lg:[&:nth-child(even)]:pe-0 lg:border-b-0 lg:border-e lg:first:ps-0 lg:last:border-e-0 lg:last:pe-0 [&:nth-child(2)]:border-b lg:[&:nth-child(2)]:border-b-0">
-      <div className="text-[28px] font-semibold">{value}</div>
-      <div className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">{label}</div>
-    </div>
-  )
-}
-
-function CategoryCard({
-  title,
-  description,
-  href,
-  count,
-  browseLabel,
-}: {
-  title: string
-  description: string
-  href: string
-  count: number
-  browseLabel: string
-}) {
-  return (
-    <Link
-      href={href}
-      className="group relative rounded-xl border border-border p-6 transition-colors hover:border-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fasla-red focus-visible:ring-offset-2"
-    >
-      <div className="flex items-baseline justify-between gap-4">
-        <h3 className="text-lg font-semibold">{title}</h3>
-        <span className="font-mono text-sm text-muted-foreground">{count}</span>
-      </div>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p>
-      {/* Red text on the dark ground is 4.06:1, under AA, so in Dark the label
-          is foreground and only the arrow (non-text, 3:1) stays red. */}
-      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-fasla-red dark:text-foreground">
-        {browseLabel}
-        <svg className="h-3.5 w-3.5 text-fasla-red transition-transform duration-200 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h13M12 5l7 7-7 7" />
-        </svg>
-      </span>
-    </Link>
-  )
-}
-
-function Feature({ title, description }: { title: string; description: string }) {
-  return (
-    <div className="border-t border-border pt-5">
-      <h3 className="text-base font-semibold">{title}</h3>
-      <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{description}</p>
-    </div>
-  )
-}
-
 export default async function HomePage({
   params,
 }: {
@@ -98,226 +33,97 @@ export default async function HomePage({
   // Static export: pin the locale or next-intl reads headers() and the
   // route drops out of the prerender.
   setRequestLocale(locale)
-  const t = await getTranslations("home")
-  const tf = await getTranslations("footer")
-  const tn = await getTranslations("nav")
-  const p = (path: string) => `/${locale}${path}`
-  const dir = localeDirection[locale as Locale]
+  const t = await getTranslations("landing")
 
   return (
-    <div>
-      {/* ── Hero ─────────────────────────────────────────────────
-          Split: the claim on the left, the product proving it on the right.
-          Dev-tool heroes that work (Frontify, Antimetal, Anchor, Cursor) all
-          put the real surface above the fold rather than below it.
+    <div className="l-page">
+      <FlipSettled />
+      <LandingNav />
 
-          Motion is one orchestrated reveal, not scattered micro-interactions
-          (§02.02). Everything here is turned off by prefers-reduced-motion,
-          handled globally in globals.css.
-      ──────────────────────────────────────────────────────── */}
-      <section className="site-container pb-4 pt-20 md:pt-28">
-        <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)] lg:gap-16">
+      <main id="top">
+        {/* ── Hero ─────────────────────────────────────────────────
+            A seam runs down the centre, the hinge between the two
+            directions. The title, the line under it and the switch label
+            sit on the page ground, which breaks the seam around them. */}
+        <section aria-labelledby="hero-h" className="relative isolate pt-[clamp(36px,4.5vw,56px)] text-center">
+          <div aria-hidden="true" className="absolute inset-y-0 left-1/2 -z-10 w-px -translate-x-1/2 bg-foreground/15 max-[560px]:hidden" />
 
-          {/* ── the claim ── */}
-          <div>
-            <div className="rise mb-7 flex items-center gap-2.5" style={{ animationDelay: "0ms" }}>
-              {/* Comma at 26px tall = 13px wide, above the 12px minimum (§10) */}
-              <Image src="/brand/fasla-comma.svg" alt="" width={13} height={26} className="h-[22px] w-auto" aria-hidden="true" />
-              {/* Not font-mono in Arabic: the mono rule would force it LTR, and
-                  Arabic is never letter-spaced (§15). */}
-              <span
-                className={`text-[13px] text-muted-foreground ${
-                  dir === "rtl" ? "font-arabic" : "font-mono tracking-wide"
-                }`}
-              >
-                {t("eyebrow", { count: registryCounts.total })}
+          <div className="l-wrap">
+            <span
+              aria-hidden="true"
+              className="relative mx-auto mb-[18px] block h-9 w-[18px] [view-transition-name:hinge] before:absolute before:-inset-x-3.5 before:-inset-y-2.5 before:bg-background before:content-['']"
+            >
+              <FaslaComma className="relative size-full" />
+            </span>
+
+            <h1
+              id="hero-h"
+              className="inline-block max-w-full bg-background px-3 py-2 text-[length:clamp(36px,5vw,72px)] font-bold leading-[1.04] tracking-[-0.04em] [text-wrap:balance] [view-transition-name:hero-title] rtl:text-[length:clamp(34px,4.8vw,68px)] rtl:font-extrabold rtl:leading-[1.34]"
+            >
+              {t.rich("hero.title", {
+                nb: (chunks) => <span className="whitespace-nowrap">{chunks}</span>,
+                // "components & templates" stays on one line until phones.
+                nb3: (chunks) => <span className="min-[761px]:whitespace-nowrap">{chunks}</span>,
+                // The red marker behind the first key word, tilted against the reading direction.
+                mark: (chunks) => (
+                  <mark className="relative z-0 -mx-[.02em] inline-block bg-transparent px-[.16em] pb-[.02em] text-fasla-white before:absolute before:inset-x-0 before:bottom-[.02em] before:top-[.1em] before:-z-10 before:-rotate-[1.6deg] before:rounded-[.14em] before:bg-fasla-red before:content-[''] rtl:before:bottom-[.06em] rtl:before:top-[.2em] rtl:before:rotate-[1.6deg]">
+                    {chunks}
+                  </mark>
+                ),
+                // The brand's comma, in red and in Cairo in both languages.
+                comma: (chunks) => <span className="font-arabic text-fasla-red">{chunks}</span>,
+                br: () => <br />,
+              })}
+            </h1>
+
+            <p className="mx-auto mt-4 max-w-[54ch] bg-background px-2 py-1 text-[length:clamp(16px,1.4vw,19px)] leading-normal text-muted-foreground rtl:max-w-[60ch] rtl:leading-[1.75]">
+              {t("hero.sub")}
+            </p>
+
+            {/* Both languages at once, whichever page this is. */}
+            <div
+              aria-hidden="true"
+              className="mb-3 mt-7 grid grid-cols-[1fr_56px_1fr] items-center text-sm text-muted-foreground max-[560px]:grid-cols-[1fr_32px_1fr] max-[560px]:text-[13px]"
+            >
+              <span lang="en" className="justify-self-end font-sans">
+                {t("hero.flipEn")}
+              </span>
+              <i className="size-[7px] justify-self-center rounded-full bg-foreground" />
+              <span lang="ar" dir="rtl" className="justify-self-start font-arabic font-medium">
+                {t("hero.flipAr")}
               </span>
             </div>
 
-            <h1
-              className="rise text-4xl font-semibold sm:text-5xl lg:text-6xl [text-wrap:balance]"
-              style={{ animationDelay: "60ms" }}
-            >
-              {t("headlineLead")}
-              {/* The brand's punctuation, used once (§15). Geist carries no
-                  Arabic glyph, so .fasla-comma names faces that do. */}
-              <span className="fasla-comma text-fasla-red" aria-hidden="true">،</span>
-              <br />
-              {t("headlineTail")}
-            </h1>
+            <DirectionSwitch label={t("hero.swLabel")} />
 
-            <p
-              className="rise mt-6 max-w-[520px] text-[17px] leading-relaxed text-muted-foreground md:text-lg"
-              style={{ animationDelay: "120ms" }}
-            >
-              {t("intro")}
-            </p>
-
-            <div className="rise mt-9 flex flex-wrap items-center gap-3" style={{ animationDelay: "180ms" }}>
-              <CopyCommand command="npx @smicolon/cli init" />
-              <Link
-                href={p("/docs")}
-                className="inline-flex items-center gap-2 rounded-lg bg-fasla-red px-5 py-3 text-[15px] font-medium text-fasla-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fasla-red focus-visible:ring-offset-2"
-              >
-                {t("readDocs")}
-                <svg className="h-3.5 w-3.5 rtl:-scale-x-100" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2} aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h13M12 5l7 7-7 7" />
-                </svg>
-              </Link>
+            <div className="mt-7 flex flex-wrap justify-center gap-3 [view-transition-name:hero-cta]">
+              <CopyCommand
+                command={installCommand}
+                className="h-12 rounded-[10px] border-foreground/15 bg-background py-0 max-[560px]:w-full max-[560px]:justify-between"
+              />
+              <Button asChild size="lg" className="h-12 rounded-[10px] px-[22px] text-[15px] max-[560px]:w-full">
+                <Link href={landingLinks.docs(locale)}>
+                  {t("cta.start")}
+                  <ArrowEndIcon />
+                </Link>
+              </Button>
             </div>
           </div>
 
-          {/* ── the proof ── */}
-          <div className="rise" style={{ animationDelay: "240ms" }}>
-            <div className="overflow-hidden rounded-xl border border-border bg-terminal shadow-2xl shadow-foreground/10">
-              <div className="flex items-center justify-between border-b border-terminal-border px-4 py-2.5">
-                <span className="font-mono text-[11px] text-terminal-muted"><Phrase dir={dir}>{t("terminal.title")}</Phrase></span>
-                <span className="font-mono text-[11px] text-terminal-subtle">{t("terminal.cwd")}</span>
-              </div>
+          <XrayStage label={t("hero.xray")} windowLabel={t("sanad.label")}>
+            <SanadWindow />
+          </XrayStage>
+        </section>
 
-              <div className="space-y-1 px-4 py-4 font-mono text-[12.5px] leading-[1.9] text-terminal-foreground">
-                {/* init first: `add` exits without the components.json it writes. */}
-                <div className="rise" style={{ animationDelay: "420ms" }}>
-                  <span className="text-terminal-accent">$</span> npx @smicolon/cli init
-                </div>
-                <div className="rise text-terminal-muted" style={{ animationDelay: "650ms" }}>✓ <Phrase dir={dir}>{t("terminal.initialized")}</Phrase></div>
-                <div className="rise pt-1" style={{ animationDelay: "900ms" }}>
-                  <span className="text-terminal-accent">$</span> npx @smicolon/cli add button
-                </div>
-                <div className="rise text-terminal-muted" style={{ animationDelay: "1150ms" }}>✓ <Phrase dir={dir}>{t("terminal.resolved")}</Phrase></div>
-                <div className="rise text-terminal-muted" style={{ animationDelay: "1300ms" }}>✓ <Phrase dir={dir}>{t("terminal.written")}</Phrase></div>
-                <div className="rise text-terminal-muted" style={{ animationDelay: "1450ms" }}>✓ <Phrase dir={dir}>{t("terminal.wired")}</Phrase></div>
-                <div className="rise flex items-center gap-1.5 pt-1" style={{ animationDelay: "1600ms" }}>
-                  <span className="text-terminal-accent">$</span>
-                  <span className="caret inline-block h-[14px] w-[7px] bg-terminal-caret" aria-hidden="true" />
-                </div>
-              </div>
-
-              {/* what you own once it lands */}
-              <div className="border-t border-terminal-border px-4 py-4">
-                <div className="mb-2.5 font-mono text-[11px] text-terminal-subtle">
-                  <Phrase dir={dir}>{t("terminal.ownedFile")}</Phrase>
-                </div>
-                <div className="font-mono text-[12.5px] leading-[1.9] text-terminal-foreground">
-                  <div><span className="text-terminal-accent">const</span> buttonVariants = cva(</div>
-                  <div className="pl-4 text-terminal-muted">&quot;inline-flex items-center…&quot;,</div>
-                  <div className="pl-4">&#123; <span className="text-terminal-accent">variants</span>: &#123; variant, size &#125; &#125;</div>
-                  <div>)</div>
-                </div>
-              </div>
-            </div>
-
-            <p
-              className={`mt-3 text-center text-[11px] text-muted-foreground lg:text-end ${
-                dir === "rtl" ? "font-arabic" : "font-mono"
-              }`}
-            >
-              {t("terminal.ownership")}
-            </p>
+        {/* ── Film ─────────────────────────────────────────────── */}
+        <section aria-label={t("film.label")} className="pb-[var(--l-section)] pt-[clamp(24px,4vw,56px)]">
+          <div className="l-wrap">
+            <FilmPlayer />
           </div>
-        </div>
+        </section>
+      </main>
 
-        {/* Proof row — one claim, one proof (§04) */}
-        <div className="rise mt-16 grid grid-cols-2 border-t border-border lg:grid-cols-4" style={{ animationDelay: "300ms" }}>
-          <Stat value={String(registryCounts.total)} label={t("stats.componentsLabel")} />
-          <Stat value="MIT" label={t("stats.licenceLabel")} />
-          <Stat value="0" label={t("stats.depsLabel")} />
-          <Stat value={t("stats.countryValue")} label={t("stats.countryLabel")} />
-        </div>
-      </section>
-
-      {/* ── Categories ───────────────────────────────────────── */}
-      <section className="site-container py-24">
-        <h2 className="text-3xl font-semibold md:text-4xl">{t("registry.title")}</h2>
-        <p className="mt-3 max-w-[560px] text-base leading-relaxed text-muted-foreground">
-          {t("registry.intro")}
-        </p>
-
-        <div className="mt-10 grid gap-5 md:grid-cols-3">
-          <CategoryCard
-            title={t("registry.primitives.title")}
-            description={t("registry.primitives.description")}
-            href={p("/docs/components/button")}
-            count={registryCounts.primitives}
-            browseLabel={t("registry.browse")}
-          />
-          <CategoryCard
-            title={t("registry.blocks.title")}
-            description={t("registry.blocks.description")}
-            href={p("/docs/components/app-shell")}
-            count={registryCounts.blocks}
-            browseLabel={t("registry.browse")}
-          />
-          <CategoryCard
-            title={t("registry.effects.title")}
-            description={t("registry.effects.description")}
-            href={p("/docs/components/shimmer-button")}
-            count={registryCounts.effects}
-            browseLabel={t("registry.browse")}
-          />
-        </div>
-      </section>
-
-      {/* ── Why ──────────────────────────────────────────────── */}
-      <section className="site-container pb-24">
-        <h2 className="mb-10 text-3xl font-semibold md:text-4xl">
-          {t("features.title")}
-        </h2>
-        <div className="grid gap-x-10 gap-y-8 md:grid-cols-3">
-          <Feature
-            title={t("features.accessible.title")}
-            description={t("features.accessible.description")}
-          />
-          <Feature
-            title={t("features.motion.title")}
-            description={t("features.motion.description")}
-          />
-          <Feature
-            title={t("features.typescript.title")}
-            description={t("features.typescript.description")}
-          />
-          <Feature
-            title={t("features.tokens.title")}
-            description={t("features.tokens.description")}
-          />
-          <Feature
-            title={t("features.density.title")}
-            description={t("features.density.description")}
-          />
-          <Feature
-            title={t("features.ownership.title")}
-            description={t("features.ownership.description")}
-          />
-        </div>
-      </section>
-
-      {/* ── Footer ───────────────────────────────────────────── */}
-      <footer className="border-t border-border">
-        <div className="site-container flex flex-col gap-4 py-8 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-          <span>
-            fasla.dev ·{" "}
-            <Link
-              href="https://smicolon.com"
-              target="_blank"
-              rel="noreferrer"
-              className="font-medium text-foreground hover:text-fasla-red"
-            >
-              {tf("by")}
-            </Link>
-          </span>
-          <span className="flex items-center gap-5">
-            <Link
-              href="https://github.com/smicolon/fasla-ui"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:text-foreground"
-            >
-              {tn("github")}
-            </Link>
-            <span className="font-mono text-[13px]">{tf("licence")}</span>
-          </span>
-        </div>
-      </footer>
+      <LandingFooter />
     </div>
   )
 }

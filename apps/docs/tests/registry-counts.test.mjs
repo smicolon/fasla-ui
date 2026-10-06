@@ -20,7 +20,9 @@ describe("Registry-derived component counts", () => {
   })
 
   test("are never hard-coded on the pages that state them", () => {
-    for (const file of ["app/[locale]/(home)/page.tsx", "app/[locale]/docs/page.tsx"]) {
+    // The landing page states no count yet; the sections that do ("all 29
+    // components") arrive in later PRs and put it back on this list.
+    for (const file of ["app/[locale]/docs/page.tsx"]) {
       const source = readFileSync(path.join(docsRoot, file), "utf8")
       expect(source).toContain("registryCounts")
       expect(source).not.toMatch(/count(?:=\{|: )\d+/)

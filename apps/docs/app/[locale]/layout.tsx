@@ -7,7 +7,6 @@ import { Cairo } from "next/font/google"
 import { GeistSans } from "geist/font/sans"
 import { GeistMono } from "geist/font/mono"
 import { ThemeProvider } from "@/components/theme-provider"
-import { SiteHeader } from "@/components/site-header"
 import { locales, localeDirection, type Locale } from "@/i18n/routing"
 
 // Brand V2.5 §14 — the Arabic face. Geist carries no Arabic glyphs, so Arabic
@@ -47,8 +46,9 @@ export default async function LocaleLayout({
           {/* body sets font-sans, so Arabic re-sets its face here (§14). */}
           <div className={`relative flex min-h-screen flex-col ${dir === "rtl" ? "font-arabic" : ""}`}>
             <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-              <SiteHeader />
-              <main className="flex-1">{children}</main>
+              {/* Each page tree brings its own header and <main>: the docs and the
+                  404 use SiteHeader, the home page its own LandingNav. */}
+              {children}
             </ThemeProvider>
           </div>
         </NextIntlClientProvider>

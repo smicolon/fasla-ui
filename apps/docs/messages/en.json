@@ -15,74 +15,6 @@
     "toggleTheme": "Toggle theme",
     "switchLanguage": "Switch language"
   },
-  "home": {
-    "eyebrow": "{count, plural, one {# component} other {# components}} · MIT core",
-    "headlineLead": "Add a component",
-    "headlineTail": "own the source.",
-    "intro": "Fasla is a React component library from Smicolon GmbH, built on shadcn/ui primitives. The CLI copies a component's source into your project — you own it, you edit it, there is no black box to fight.",
-    "readDocs": "Read the docs",
-    "terminal": {
-      "title": "terminal",
-      "cwd": "~/your-app",
-      "initialized": "components.json written",
-      "resolved": "registry resolved",
-      "written": "button.tsx → components/ui",
-      "wired": "cva + tailwind-merge wired",
-      "ownedFile": "components/ui/button.tsx — yours",
-      "ownership": "edit it · rename it · delete it"
-    },
-    "stats": {
-      "componentsLabel": "components across primitives, blocks and effects",
-      "licenceLabel": "licensed core, no runtime lock-in",
-      "depsLabel": "required runtime deps beyond your own React",
-      "countryValue": "DE",
-      "countryLabel": "Built in Germany by Smicolon GmbH"
-    },
-    "registry": {
-      "title": "What is in the registry",
-      "intro": "Three categories, one install path. Every component ships its loading, empty, error and disabled states.",
-      "browse": "Browse",
-      "primitives": {
-        "title": "UI primitives",
-        "description": "Button, Input, Card, Badge, Skeleton, Avatar, Checkbox, Switch, Select, Combobox, Tabs, Textarea."
-      },
-      "blocks": {
-        "title": "Blocks",
-        "description": "AppShell, PageHeader, EmptyState, Sidebar, Navbar, StatsCard, DataTable, FormSection."
-      },
-      "effects": {
-        "title": "Effects",
-        "description": "ShimmerButton, AnimatedGradient, TextReveal, BorderBeam, Spotlight, GlowCard, TypewriterText."
-      }
-    },
-    "features": {
-      "title": "What you get either way",
-      "accessible": {
-        "title": "Accessible by default",
-        "description": "Keyboard navigation and screen reader support are built in. Icon-only buttons carry an aria-label; focus styles stay visible."
-      },
-      "motion": {
-        "title": "Reduced motion respected",
-        "description": "Every animation reads prefers-reduced-motion from the shared motion presets. No opt-in required."
-      },
-      "typescript": {
-        "title": "TypeScript throughout",
-        "description": "Typed props and variants, so autocomplete works the moment a component lands in your project."
-      },
-      "tokens": {
-        "title": "Semantic tokens",
-        "description": "Colours come from CSS variables and the Tailwind theme. Retheme the set by editing tokens, not components."
-      },
-      "density": {
-        "title": "Three density profiles",
-        "description": "Compact, comfortable and spacious, so the same components suit a dense console and a marketing page."
-      },
-      "ownership": {
-        "title": "Yours after install",
-        "description": "The CLI copies source, not a dependency. Nothing stops you rewriting a component the day after you add it."
-      }
-    }
-  },
   "docs": {
     "avatar": {
       "fallback": "If the photo is missing or fails to load, the avatar shows the initials, or the icon if there's no name.",
@@ -1140,15 +1072,110 @@
     "copied": "Copied to clipboard",
     "status": "Copied"
   },
-  "footer": {
-    "attribution": "fasla.dev · by Smicolon GmbH",
-    "by": "by Smicolon GmbH",
-    "licence": "MIT · Kirchheim b. München"
-  },
   "notFound": {
     "title": "Page not found",
     "description": "This page may have moved, or it never existed.",
     "home": "Back to the home page",
     "docs": "Browse the docs"
+  },
+  "landing": {
+    "nav": {
+      "home": "Fasla home",
+      "label": "Main",
+      "docs": "Docs",
+      "components": "Components",
+      "github": "GitHub",
+      "lang": "العربية",
+      "langLabel": "Switch to Arabic",
+      "theme": "Toggle dark theme"
+    },
+    "cta": {
+      "start": "Get started"
+    },
+    "hero": {
+      "title": "Arabic‑first <nb><mark>blocks</mark><comma>,</comma></nb> <nb3>components & templates</nb3>",
+      "sub": "Direction is a property of every Fasla component. One React codebase, one Figma file, English and Arabic on launch day.",
+      "flipEn": "Flip the page",
+      "flipAr": "اقلب الصفحة",
+      "swLabel": "Page direction",
+      "xray": "Show components"
+    },
+    "sanad": {
+      "label": "The Sanad finance dashboard",
+      "url": "app.sanad.example/overview",
+      "mono": "S",
+      "brand": "Sanad",
+      "nav1": "Overview",
+      "nav2": "Transactions",
+      "nav3": "Cards",
+      "nav4": "Transfers",
+      "nav5": "Savings",
+      "secAcc": "Account",
+      "nav6": "Settings",
+      "user": "Personal account",
+      "card": "•••• 4821",
+      "title": "Overview",
+      "greet": "Good morning. Here is where your money went in 2025.",
+      "range": "1 Jan – 31 Dec 2025",
+      "rangeLabel": "Date range",
+      "export": "Export",
+      "s1": "Balance",
+      "s1v": "SAR 184,320.50",
+      "s2": "Monthly spend",
+      "s2v": "SAR 12,940",
+      "s3": "Savings goal",
+      "s3v": "68%",
+      "vsNov": "from November",
+      "goal": "SAR 34,000 of 50,000 · Hajj fund",
+      "chartT": "Balance, 2025",
+      "legend": "Month-end balance, SAR",
+      "months": "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec",
+      "k": "k",
+      "tip": "SAR 184.3k",
+      "tblT": "Recent transactions",
+      "all": "View all",
+      "th1": "Counterparty",
+      "th2": "Date",
+      "th3": "Amount",
+      "th4": "Status",
+      "cur": "SAR",
+      "r1n": "Noura Al-Saud",
+      "r1t": "Transfer received",
+      "r1d": "28 Dec 2025",
+      "r2n": "Khalid Al-Harbi",
+      "r2t": "Transfer sent",
+      "r2d": "27 Dec 2025",
+      "r3n": "Faisal Al-Qahtani",
+      "r3t": "Split bill, Qahwa House",
+      "r3d": "24 Dec 2025",
+      "r4n": "Dar Properties",
+      "r4t": "Rent, January",
+      "r4d": "1 Jan 2026",
+      "done": "Completed",
+      "pend": "Pending",
+      "sched": "Scheduled"
+    },
+    "film": {
+      "label": "Fasla in action",
+      "desc": "A Fasla product assembles from components, flips to Arabic with one property, switches to dark, adapts to desktop, tablet and mobile, then shows the blocks library and the CLI.",
+      "c1": "Build",
+      "c2": "Direction",
+      "c3": "Theme",
+      "c4": "Responsive",
+      "c5": "Blocks",
+      "c6": "Own the source",
+      "chapters": "Chapters",
+      "unmute": "Turn sound on",
+      "mute": "Turn sound off",
+      "pause": "Pause the film",
+      "play": "Play the film"
+    },
+    "footer": {
+      "line": "Built in Germany by Smicolon GmbH · MIT core",
+      "place": "Kirchheim b. München",
+      "nav": "Footer",
+      "word": "fasla",
+      "credits": "Fasla is an Arabic-first React component library. Its components, blocks and templates are designed right-to-left from the start, not mirrored as an afterthought, and come with paired Cairo and Geist type, shared Tailwind tokens and a matching Figma library. You own the source, and you ship Arabic and English from one codebase."
+    }
   }
 }

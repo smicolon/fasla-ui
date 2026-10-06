@@ -1,5 +1,6 @@
 import { metadataForRoute } from "@/lib/seo-routes"
 import type { Locale } from "@/i18n/routing"
+import "./landing.css"
 
 export async function generateMetadata({
   params,
