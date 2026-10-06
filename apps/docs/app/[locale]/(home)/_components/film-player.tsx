@@ -197,7 +197,8 @@ export function FilmPlayer() {
               aria-label={t(key)}
               className="group flex min-w-0 flex-col gap-2.5 rounded-md py-1 text-start focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-foreground"
             >
-              <span className="h-[3px] overflow-hidden rounded-full bg-border">
+              {/* 12px above and 8px below the bar, as the reference spaces it. */}
+              <span className="mb-2 mt-3 h-[3px] overflow-hidden rounded-full bg-border">
                 <i className="block h-full rounded-full bg-foreground" style={{ width: `${progress * 100}%` }} />
               </span>
               <span

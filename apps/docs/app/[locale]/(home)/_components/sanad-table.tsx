@@ -1,10 +1,12 @@
 "use client"
 
+import type { ComponentProps } from "react"
 import { useTranslations } from "next-intl"
 import { Avatar } from "@fasla-ui/ui/avatar/avatar"
 import { Badge } from "@fasla-ui/ui/badge/badge"
 import { DataTable, type Column } from "@fasla-ui/blocks/data-table/DataTable"
 import { DotIcon } from "./icons"
+import { Initials } from "./initials"
 import { xrayTag } from "./xray-tag"
 
 type Row = {
@@ -24,6 +26,18 @@ const ROWS: Row[] = [
 
 const tone = { done: "success", pend: "warning", sched: "info" } as const
 
+function StatusBadge({
+  status,
+  label,
+  ...props
+}: { status: Row["status"]; label: string } & Omit<ComponentProps<typeof Badge>, "children">) {
+  return (
+    <Badge variant="soft" tone={tone[status]} size="md" icon={<DotIcon />} {...props}>
+      {label}
+    </Badge>
+  )
+}
+
 /**
  * Sanad's recent transactions. A client component because DataTable wires a
  * click handler on every row, which a server component cannot pass down.
@@ -37,13 +51,16 @@ export function SanadTable() {
       header: t("th1"),
       cell: (row) => (
         <div className="flex items-center gap-3">
-          <Avatar
-            {...(row.id === 1 ? xrayTag("Avatar", 10) : {})}
-            variant={row.photo ? "image" : "initials"}
-            src={row.photo ? `/landing/img/${row.photo}.webp` : undefined}
-            name={t(`${row.key}n`)}
-            radius="rounded"
-          />
+          {row.photo ? (
+            <Avatar
+              {...(row.id === 1 ? xrayTag("Avatar", 10, { space: "tight" }) : {})}
+              src={`/landing/img/${row.photo}.webp`}
+              name={t(`${row.key}n`)}
+              radius="rounded"
+            />
+          ) : (
+            <Initials>{t(`${row.key}i`)}</Initials>
+          )}
           <div className="min-w-0">
             <span className="block whitespace-nowrap">{t(`${row.key}n`)}</span>
             <small className="block whitespace-nowrap text-xs text-muted-foreground">{t(`${row.key}t`)}</small>
@@ -61,28 +78,31 @@ export function SanadTable() {
       id: "amount",
       header: t("th3"),
       align: "end",
+      // On phones the Status column is hidden and its badge sits under the
+      // amount: the picture is inert, so a table wider than the screen could
+      // never be scrolled to it.
       cell: (row) => (
-        <span className="whitespace-nowrap font-medium">
-          <bdi dir="ltr" className="tabular-nums">
-            {row.amount}
-          </bdi>{" "}
-          <span className="text-xs font-normal text-muted-foreground">{t("cur")}</span>
-        </span>
+        <div className="flex flex-col items-end gap-1">
+          <span className="whitespace-nowrap font-medium">
+            <bdi dir="ltr" className="tabular-nums">
+              {row.amount}
+            </bdi>{" "}
+            <span className="text-xs font-normal text-muted-foreground">{t("cur")}</span>
+          </span>
+          <StatusBadge status={row.status} label={t(row.status)} className="min-[561px]:hidden" />
+        </div>
       ),
     },
     {
       id: "status",
       header: t("th4"),
+      width: "max-[560px]:hidden",
       cell: (row) => (
-        <Badge
-          {...(row.id === 1 ? xrayTag("Badge", 11) : {})}
-          variant="soft"
-          tone={tone[row.status]}
-          size="md"
-          icon={<DotIcon />}
-        >
-          {t(row.status)}
-        </Badge>
+        <StatusBadge
+          {...(row.id === 1 ? xrayTag("Badge", 11, { space: "tight" }) : {})}
+          status={row.status}
+          label={t(row.status)}
+        />
       ),
     },
   ]
@@ -93,7 +113,9 @@ export function SanadTable() {
       data={ROWS}
       columns={columns}
       getRowKey={(row) => row.id}
-      className="rounded-none border-0 [&_thead]:bg-muted/50 [&_tr:last-child]:border-b-0"
+      // The reference's denser table: a 12px header and 12px row padding,
+      // 14px at the sides on phones.
+      className="l-tag-in-end rounded-none border-0 [&_td]:px-5 [&_td]:py-3 [&_th]:h-auto [&_th]:px-5 [&_th]:py-2.5 [&_th]:text-xs [&_thead]:bg-muted/50 [&_tr:last-child]:border-b-0 max-[560px]:[&_td]:px-3.5 max-[560px]:[&_th]:px-3.5"
     />
   )
 }

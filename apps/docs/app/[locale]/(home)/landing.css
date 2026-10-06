@@ -23,21 +23,34 @@
 }
 
 /* ── "Show components" x-ray ────────────────────────────────────────────
-   Every part marked data-c gets a dashed outline and a tag above its start
-   corner naming the Fasla component. Parts that fill their column (the
-   sidebar) carry .l-tag-in and take the tag inside instead. */
+   Every part marked data-c gets a dashed outline held clear of its content,
+   and a tag above its start corner naming the Fasla component. The window's
+   parts sit 8 to 20px apart, so the outline stays close (3px) to leave room
+   for a neighbour's tag; data-c-roomy (the page header, whose title meets its
+   own edge) and data-c-tight (8px-apart controls) adjust it. Parts that fill
+   their frame carry .l-tag-in (the sidebar) or .l-tag-in-end (the table under
+   its card's title): outline and tag sit inside, so they stay within it. */
 
 .l-stage.is-xray [data-c] {
+  --l-off: 3px;
   position: relative;
   outline: 1px dashed var(--fasla-red);
-  outline-offset: 2px;
+  outline-offset: var(--l-off);
+}
+
+.l-stage.is-xray [data-c-roomy] {
+  --l-off: 6px;
+}
+
+.l-stage.is-xray [data-c-tight] {
+  --l-off: 2px;
 }
 
 .l-stage.is-xray [data-c]::after {
   content: attr(data-c);
   position: absolute;
-  top: -3px;
-  inset-inline-start: -3px;
+  top: calc(-1 * var(--l-off) - 1px);
+  inset-inline-start: calc(-1 * var(--l-off) - 1px);
   translate: 0 -100%;
   z-index: 6;
   padding: 3px 5px;
@@ -53,15 +66,20 @@
   animation-delay: calc(var(--i, 0) * 60ms);
 }
 
-.l-stage.is-xray [data-c].l-tag-in {
-  outline-offset: -2px;
+.l-stage.is-xray [data-c]:is(.l-tag-in, .l-tag-in-end) {
+  outline-offset: -6px;
 }
 
-.l-stage.is-xray [data-c].l-tag-in::after {
-  top: 6px;
-  inset-inline-start: 6px;
+.l-stage.is-xray [data-c]:is(.l-tag-in, .l-tag-in-end)::after {
+  top: 10px;
+  inset-inline-start: 10px;
   translate: 0 0;
   animation-name: l-tag-in-inside;
+}
+
+.l-stage.is-xray [data-c].l-tag-in-end::after {
+  inset-inline-start: auto;
+  inset-inline-end: 10px;
 }
 
 @keyframes l-tag-in {
@@ -76,6 +94,19 @@
     opacity: 0;
     translate: 0 4px;
   }
+}
+
+/* ── Currency before a StatsCard value ────────────────────────────────
+   StatsCard takes its value as text, so the small "SAR" / "ر.س" the
+   reference sets before the number is drawn here, from --l-cur on the card.
+   Inside the inert product window, so nothing reads it aloud. */
+
+.l-cur p + p::before {
+  content: var(--l-cur);
+  margin-inline-end: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
 }
 
 /* ── The language flip ──────────────────────────────────────────────────

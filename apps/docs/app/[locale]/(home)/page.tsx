@@ -76,7 +76,7 @@ export default async function HomePage({
               })}
             </h1>
 
-            <p className="mx-auto mt-4 max-w-[54ch] bg-background px-2 py-1 text-[length:clamp(16px,1.4vw,19px)] leading-normal text-muted-foreground rtl:max-w-[60ch] rtl:leading-[1.75]">
+            <p className="mx-auto mt-4 max-w-[54ch] bg-background px-2 py-1 text-[length:clamp(16px,1.4vw,19px)] leading-normal text-foreground/70 dark:text-foreground/[.78] rtl:max-w-[60ch] rtl:leading-[1.75]">
               {t("hero.sub")}
             </p>
 
