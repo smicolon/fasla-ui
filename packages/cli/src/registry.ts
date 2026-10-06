@@ -2,16 +2,27 @@
  * Registry module for fetching components from the fasla-ui registry
  */
 
-const DEFAULT_REGISTRY_URL = "https://ui.smicolon.com/r"
+export const DEFAULT_REGISTRY_URL = "https://ui.smicolon.com/r"
 
 /**
  * Point the CLI at another registry — a local build, or a staging deploy —
  * without editing the source. Trailing slashes are trimmed so the caller can
  * pass either form.
  */
-const REGISTRY_URL = (
+export const REGISTRY_URL = (
   process.env.FASLA_UI_REGISTRY_URL || DEFAULT_REGISTRY_URL
 ).replace(/\/+$/, "")
+
+/**
+ * The `components.json` entry `init` writes, so the shadcn CLI can install
+ * from this registry as `@fasla/<name>`. The shadcn CLI requires the key to
+ * start with "@" and the URL to contain "{name}".
+ */
+export const NAMESPACE = "@fasla"
+
+export function namespaceUrl(base: string = REGISTRY_URL): string {
+  return `${base}/{name}.json`
+}
 
 export interface RegistryFile {
   path: string
