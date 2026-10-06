@@ -24,6 +24,7 @@ let settle: (() => void) | null = null
 /** Longest the page may stay frozen waiting for the other locale to render. */
 const SETTLE_TIMEOUT = 1500
 
+/** The same path in the `target` locale, adding the prefix if it is missing. */
 function swapLocale(pathname: string, target: Locale) {
   const segments = pathname.split("/")
   if (locales.includes(segments[1] as Locale)) segments[1] = target
@@ -31,10 +32,12 @@ function swapLocale(pathname: string, target: Locale) {
   return segments.join("/") || `/${target}/`
 }
 
+/** True when the visitor asked for reduced motion; the flip and the cycles then skip their animation. */
 export function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches
 }
 
+/** The other locale's URL and a `flip` that goes there inside a view transition, with no reload. */
 export function useLocaleFlip() {
   const router = useRouter()
   const pathname = usePathname()
@@ -50,6 +53,7 @@ export function useLocaleFlip() {
   /** Flip to the other locale, after `delay` ms (to let a control animate first). */
   const flip = useCallback(
     (delay = 0) => {
+      /** A client navigation that keeps the scroll position. */
       const navigate = () => router.push(href, { scroll: false })
 
       if (prefersReducedMotion() || !("startViewTransition" in document)) {
@@ -57,6 +61,7 @@ export function useLocaleFlip() {
         return
       }
 
+      /** Starts the view transition; it resolves when the new page reports it has settled, or after a timeout. */
       const run = () =>
         document.startViewTransition(
           () =>

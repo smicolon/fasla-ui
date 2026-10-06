@@ -81,6 +81,7 @@ export function ParityPlayground({ pageDir }: { pageDir: "ltr" | "rtl" }) {
   const rtl = p.dir === "rtl"
   const label = rtl ? t("labelAr") : t("labelEn")
   const size = SIZE[p.size]
+  /** The properties panel: one row per prop, each with its control. */
   const rows = (
     [
       ["dir", t("dir"), <Segmented key="d" label={t("dir")} value={p.dir} options={["ltr", "rtl"]} onChange={(v) => set("dir", v)} />],
@@ -109,6 +110,7 @@ export function ParityPlayground({ pageDir }: { pageDir: "ltr" | "rtl" }) {
     </div>
   ))
 
+  /** One JSX attribute in the code line, lit briefly when it has just changed. */
   const attr = (key: keyof Props, value?: string) => (
     <span className={cn("rounded-[3px] transition-colors duration-700", changed === key && "bg-terminal-foreground/15")}>
       {" "}

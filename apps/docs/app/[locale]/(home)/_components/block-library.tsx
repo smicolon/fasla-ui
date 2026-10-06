@@ -30,10 +30,12 @@ import type { BlockKey } from "./blocks-data"
 /** Block copy is structured data from the messages, read with t.raw. */
 type Copy = any
 
+/** One block's copy from `landing.blk`, as the raw message object. */
 function useCopy(k: BlockKey): Copy {
   return useTranslations("landing.blk").raw(k)
 }
 
+/** The public path of a block photo. */
 const IMG = (name: string) => `/landing/img/blocks/${name}.webp`
 
 /** A photo as a cover background: previews are pictures, so no alt text to carry. */
@@ -54,8 +56,10 @@ const GLASS = "bg-fasla-white/15 shadow-[inset_0_0_0_1px_color-mix(in_oklch,var(
 /** A Button on a photo or dark ground, in white. */
 const WHITE_BTN = "bg-fasla-white text-fasla-ink hover:bg-fasla-white"
 
+/** Keeps numbers, prices and codes left to right inside Arabic copy. */
 const ltr = (x: React.ReactNode) => <bdi dir="ltr">{x}</bdi>
 
+/** A row of small pill labels. */
 function Chips({ items, className }: { items: string[]; className?: string }) {
   return (
     <div className={cn("flex gap-1.5", className)}>
@@ -120,6 +124,7 @@ function Hero({ k, photo, mark }: { k: "hero" | "dhero"; photo: string; mark: [s
 
 /* ── Features ────────────────────────────────────────────────────────── */
 
+/** Feature grid: a heading and tiles of short benefits. */
 function Features() {
   const c = useCopy("feat")
   const tile = "flex flex-col gap-1 rounded-2xl bg-muted p-4"
@@ -172,6 +177,7 @@ function Features() {
 
 /* ── Gallery ─────────────────────────────────────────────────────────── */
 
+/** Destination gallery: four photos in a bento grid with a caption. */
 function Gallery() {
   const c = useCopy("gallery")
   const photos = ["f-dunes", "f-oasis", "f-oldtown", "f-coffee"]
@@ -203,6 +209,7 @@ function Gallery() {
 
 /* ── Banner ──────────────────────────────────────────────────────────── */
 
+/** Campaign banner: a full-bleed photo with a headline and a call to action. */
 function Banner() {
   const c = useCopy("ban")
   return (
@@ -231,6 +238,7 @@ function Banner() {
 
 /* ── Authentication ──────────────────────────────────────────────────── */
 
+/** Sign-in: the form beside a photo panel. */
 function Auth() {
   const c = useCopy("auth")
   return (
@@ -268,6 +276,7 @@ function Auth() {
 
 /* ── Pricing ─────────────────────────────────────────────────────────── */
 
+/** Pricing table: three plans with the middle one featured. */
 function Pricing() {
   const c = useCopy("price")
   const ar = useLocale() === "ar"
@@ -335,6 +344,7 @@ function Pricing() {
 
 /* ── Checkout ────────────────────────────────────────────────────────── */
 
+/** Checkout: contact, address and card fields beside the order total. */
 function Checkout() {
   const c = useCopy("checkout")
   const label = "mb-[5px] mt-2.5 text-xs font-medium text-muted-foreground"
@@ -421,6 +431,7 @@ function Checkout() {
 
 /* ── Order summary ───────────────────────────────────────────────────── */
 
+/** Order summary: the items, the totals and the delivery estimate. */
 function Order() {
   const c = useCopy("order")
   const ar = useLocale() === "ar"
@@ -471,6 +482,7 @@ function Order() {
 
 /* ── Dashboard (dark) ────────────────────────────────────────────────── */
 
+/** Dashboard, dark in both themes: sidebar, stat tiles and a monthly bar chart. */
 function Dashboard() {
   const c = useCopy("dash")
   const ar = useLocale() === "ar"
@@ -562,6 +574,7 @@ function Dashboard() {
 
 /* ── Product grid ────────────────────────────────────────────────────── */
 
+/** Product grid: Qahwa House items with prices and ratings. */
 function Products() {
   const c = useCopy("prod")
   const photo: Record<string, string> = { "q-main": "f-cupset", "q-pour": "f-pitcher", "q-sugar2": "q-sugar2" }
@@ -595,6 +608,7 @@ function Products() {
 
 /* ── Messages ────────────────────────────────────────────────────────── */
 
+/** Messages: one conversation with bubbles on both sides and a composer. */
 function Messages() {
   const c = useCopy("chat")
   const bubble = "max-w-[78%] rounded-[14px] px-3 py-[9px]"
@@ -634,6 +648,7 @@ function Messages() {
 
 /* ── AI assistant (dark) ─────────────────────────────────────────────── */
 
+/** AI assistant, dark in both themes: a prompt, an answer and its sources. */
 function Assistant() {
   const c = useCopy("ai")
   const control = "inline-flex h-[30px] items-center gap-1.5 rounded-[9px] px-[9px] text-xs text-foreground/85 ring-1 ring-inset ring-foreground/10"
@@ -687,6 +702,7 @@ function Assistant() {
 
 /* ── FAQ ─────────────────────────────────────────────────────────────── */
 
+/** FAQ: a short accordion with the first answer open. */
 function Faq() {
   const c = useCopy("faq")
   return (
@@ -709,6 +725,7 @@ function Faq() {
 
 /* ── Error state ─────────────────────────────────────────────────────── */
 
+/** Error state: an illustration, a message and a retry action. */
 function ErrorState() {
   const c = useCopy("err")
   return (
@@ -737,6 +754,7 @@ function ErrorState() {
 
 /* ── Date picker ─────────────────────────────────────────────────────── */
 
+/** Date picker: October 2026 with a five-night stay selected. */
 function DatePicker() {
   const c = useCopy("cal")
   // October 2026 starts on a Thursday; the stay is the 12th to the 16th.
@@ -793,6 +811,7 @@ function DatePicker() {
 
 /* ── Notifications ───────────────────────────────────────────────────── */
 
+/** Notifications: three toasts stacked in their tones. */
 function Notifications() {
   const c = useCopy("toast")
   const tones = ["bg-soft-success text-success", "bg-soft-primary text-foreground", "bg-soft-warning text-warning"]
@@ -818,6 +837,7 @@ function Notifications() {
 
 /* ── Revenue card ────────────────────────────────────────────────────── */
 
+/** Revenue card: the total, its change and a sparkline. */
 function Stats() {
   const c = useCopy("stats")
   const v = [12, 14, 13, 16, 15, 18, 17, 20, 19, 23, 22, 26, 25, 29, 31]
@@ -861,6 +881,7 @@ function Stats() {
 
 /* ── App download ────────────────────────────────────────────────────── */
 
+/** App download: store badges beside a phone mock-up. */
 function AppDownload() {
   const c = useCopy("app")
   return (
@@ -908,6 +929,7 @@ function AppDownload() {
 
 /* ── Majalla: three blocks that exist only in this showcase ──────────── */
 
+/** Majalla front page: the lead story with its photo and kicker. */
 function MagFront() {
   const c = useCopy("mag")
   const ar = useLocale() === "ar"
@@ -949,6 +971,7 @@ function MagFront() {
   )
 }
 
+/** Majalla most-read list, numbered. */
 function MostRead() {
   const c = useCopy("read")
   return (
@@ -971,6 +994,7 @@ function MostRead() {
   )
 }
 
+/** Majalla newsletter sign-up on the inverse surface. */
 function Newsletter() {
   const c = useCopy("news")
   return (

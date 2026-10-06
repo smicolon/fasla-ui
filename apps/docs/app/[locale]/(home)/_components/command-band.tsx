@@ -25,6 +25,7 @@ export function CommandBand() {
     return () => window.clearTimeout(timer)
   }, [copied])
 
+  /** Copies the install command and shows the copied state; a refused clipboard leaves the text to select. */
   async function copy() {
     try {
       await navigator.clipboard.writeText(installCommand)

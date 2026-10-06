@@ -22,8 +22,10 @@ type Lang = "en" | "ar"
 
 const messages = { en, ar }
 
+/** The hero's strings in `lang`, whichever page is rendering. */
 const hero = (lang: Lang) => createTranslator({ locale: lang, messages: messages[lang], namespace: "landing.hero" })
 
+/** The page's language and the other one. */
 export const heroLangs = (locale: string) =>
   (locale === "ar" ? { lang: "ar", other: "en" } : { lang: "en", other: "ar" }) as { lang: Lang; other: Lang }
 
@@ -41,6 +43,7 @@ export function Reserve({ ghost, className, children }: { ghost: React.ReactNode
 const ghostProps = (lang: Lang) =>
   ({ "aria-hidden": true, "data-nosnippet": "", dir: lang === "ar" ? "rtl" : "ltr", lang }) as const
 
+/** The title's classes in `lang`; the ghost copy is invisible and takes no view-transition name. */
 export const titleClass = (lang: Lang, ghost = false) =>
   cn(
     "inline-block max-w-full bg-background px-3 py-2 tracking-[-0.04em] [text-wrap:balance]",
@@ -50,6 +53,7 @@ export const titleClass = (lang: Lang, ghost = false) =>
     ghost ? "invisible" : "[view-transition-name:hero-title]"
   )
 
+/** The title's words in `lang`, with the red marker and the brand comma. */
 export function TitleText({ lang }: { lang: Lang }) {
   return hero(lang).rich("title", {
     nb: (chunks) => <span className="whitespace-nowrap">{chunks}</span>,
@@ -74,6 +78,7 @@ export function TitleText({ lang }: { lang: Lang }) {
   })
 }
 
+/** The invisible title in the other language that holds the title's height. */
 export function TitleGhost({ lang }: { lang: Lang }) {
   return (
     <div {...ghostProps(lang)} className={titleClass(lang, true)}>
@@ -82,6 +87,7 @@ export function TitleGhost({ lang }: { lang: Lang }) {
   )
 }
 
+/** The line under the title in `lang`; `ghost` makes it the invisible copy that holds its height. */
 export function Sub({ lang, ghost = false }: { lang: Lang; ghost?: boolean }) {
   return (
     <p

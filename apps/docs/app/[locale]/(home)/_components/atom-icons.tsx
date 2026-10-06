@@ -223,6 +223,7 @@ const GLYPHS: Record<string, React.ReactNode> = {
 
 const FALLBACK = <rect x="4" y="4" width="16" height="16" rx="3" />
 
+/** The glyph for one Figma atom, by its display name; unknown names get a plain square. */
 export function AtomIcon({ name, className }: { name: string; className?: string }) {
   return (
     <svg

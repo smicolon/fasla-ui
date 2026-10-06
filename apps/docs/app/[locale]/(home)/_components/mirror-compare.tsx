@@ -30,6 +30,7 @@ const SWEEP: [number, number][] = [[0, 100], [400, 100], [1700, 0], [2500, 0], [
 /** After someone drags the line or uses the keys, the sequence picks up again this much later. */
 const RESUME = 6000
 
+/** Cubic ease-in-out for the handle's sweep. */
 const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2)
 
 type Call = { x: number; y: number; below: boolean } | null
@@ -75,6 +76,7 @@ export function MirrorCompare() {
   }, [])
 
   const show = useCallback((i: number) => {
+    /** Wraps the index so the list loops. */
     const next = (i + RULES.length) % RULES.length
     curRef.current = next
     setCur(next)
@@ -124,6 +126,7 @@ export function MirrorCompare() {
     }
     const t0 = performance.now()
     const end = SWEEP[SWEEP.length - 1][0]
+    /** One frame of the sweep: eases the handle between the keyframes in SWEEP. */
     const step = (now: number) => {
       const t = now - t0
       let i = 0
@@ -161,6 +164,7 @@ export function MirrorCompare() {
 
   // Pin each half's callout above or below the specimen, in line with its key part.
   const placeCalls = useCallback(() => {
+    /** Where one half's callout goes: above or below the specimen, in line with its key part. */
     const place = (layer: HTMLDivElement | null): Call => {
       if (!layer) return null
       const key = layer.querySelector("[data-key] [data-slot=track]") ?? layer.querySelector("[data-key]")
@@ -185,6 +189,7 @@ export function MirrorCompare() {
     return () => window.removeEventListener("resize", placeCalls)
   }, [placeCalls])
 
+  /** A pointer's x as a percentage of the stage width. */
   const posFrom = (x: number) => {
     const box = stage.current!.getBoundingClientRect()
     return ((x - box.left) / box.width) * 100
@@ -209,6 +214,7 @@ export function MirrorCompare() {
               if (!(event.key in keys)) return
               event.preventDefault()
               hold()
+              /** Arrow keys and Home/End move between rules, looping at the ends. */
               const next = (keys[event.key] + RULES.length) % RULES.length
               show(next)
               tabs.current[next]?.focus()
@@ -392,6 +398,7 @@ function Specimen({ k, lang }: { k: RuleKey; lang: "en" | "ar" }) {
   const t = useTranslations(`landing.rules.spec.${lang}`)
   const rtl = lang === "ar"
   const flip = rtl ? "-scale-x-100" : undefined
+  /** Keeps numbers left to right inside Arabic copy. */
   const num = (chunks: React.ReactNode) => <bdi dir="ltr">{chunks}</bdi>
   const card = "grid w-[min(430px,88%)] gap-4 rounded-2xl border bg-card p-6 text-[15px] text-card-foreground shadow-sm max-[560px]:p-4"
   const caption = "text-xs text-muted-foreground"

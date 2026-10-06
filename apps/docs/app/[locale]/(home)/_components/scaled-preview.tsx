@@ -47,6 +47,7 @@ export function ScaledPreview({
   useEffect(() => {
     const el = box.current
     if (!el) return
+    /** Fits the block to the box: full width for `fill`, centred within 86% by 80% for `fit`. */
     const measure = () => {
       const w = el.clientWidth
       const h = el.clientHeight

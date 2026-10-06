@@ -40,6 +40,7 @@ const COLUMNS = [
 
 type Review = { name: string; who: string; t: string }
 
+/** One review: avatar, name, role, platform mark and the quote. */
 function ReviewCard({ review, i }: { review: Review; i: number }) {
   const source = SOURCE[i]
   return (

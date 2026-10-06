@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils"
  */
 type IconProps = { className?: string; strokeWidth?: number }
 
+/** The shared 24-grid frame: stroke, round caps, decorative. */
 function Icon({
   className,
   strokeWidth = 1.75,
@@ -38,16 +39,19 @@ export const ArrowRightIcon = (props: IconProps) => (
   </Icon>
 )
 
+/** Points right whatever the page direction. */
 export const ChevronRightIcon = (props: IconProps) => (
   <Icon strokeWidth={2} {...props}>
     <path d="m9 18 6-6-6-6" />
   </Icon>
 )
 
+/** Points toward the end of the line: right in English, left in Arabic. */
 export const ArrowEndIcon = ({ className, ...props }: IconProps) => (
   <ArrowRightIcon className={cn("rtl:-scale-x-100", className)} {...props} />
 )
 
+/** A chevron toward the end of the line: right in English, left in Arabic. */
 export const ChevronEndIcon = ({ className, ...props }: IconProps) => (
   <ChevronRightIcon className={cn("rtl:-scale-x-100", className)} {...props} />
 )
@@ -67,6 +71,7 @@ export const LockIcon = (props: IconProps) => (
   </Icon>
 )
 
+/** A page with a folded corner. */
 export const FileIcon = (props: IconProps) => (
   <Icon {...props}>
     <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
@@ -74,12 +79,14 @@ export const FileIcon = (props: IconProps) => (
   </Icon>
 )
 
+/** Dark theme. */
 export const MoonIcon = (props: IconProps) => (
   <Icon {...props}>
     <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
   </Icon>
 )
 
+/** Light theme. */
 export const SunIcon = (props: IconProps) => (
   <Icon {...props}>
     <circle cx="12" cy="12" r="4" />
@@ -87,6 +94,7 @@ export const SunIcon = (props: IconProps) => (
   </Icon>
 )
 
+/** Sanad sidebar: Overview. */
 export const OverviewIcon = (props: IconProps) => (
   <Icon {...props}>
     <rect x="3" y="3" width="7" height="9" rx="1.5" />
@@ -96,12 +104,14 @@ export const OverviewIcon = (props: IconProps) => (
   </Icon>
 )
 
+/** Sanad sidebar: Transactions. */
 export const TransactionsIcon = (props: IconProps) => (
   <Icon {...props}>
     <path d="M7 4v16M3 8l4-4 4 4M17 20V4M21 16l-4 4-4-4" />
   </Icon>
 )
 
+/** Sanad sidebar: Cards. */
 export const CardIcon = (props: IconProps) => (
   <Icon {...props}>
     <rect x="2" y="5" width="20" height="14" rx="2" />
@@ -109,6 +119,7 @@ export const CardIcon = (props: IconProps) => (
   </Icon>
 )
 
+/** Sanad sidebar: Savings. */
 export const TargetIcon = (props: IconProps) => (
   <Icon {...props}>
     <circle cx="12" cy="12" r="9" />
@@ -117,6 +128,7 @@ export const TargetIcon = (props: IconProps) => (
   </Icon>
 )
 
+/** Sanad sidebar: Settings. */
 export const SettingsIcon = (props: IconProps) => (
   <Icon {...props}>
     <path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0" />
@@ -126,30 +138,35 @@ export const SettingsIcon = (props: IconProps) => (
   </Icon>
 )
 
+/** Export. */
 export const DownloadIcon = (props: IconProps) => (
   <Icon {...props}>
     <path d="M12 3v12M7 10l5 5 5-5M5 21h14" />
   </Icon>
 )
 
+/** Sanad stat card: Balance. */
 export const WalletIcon = (props: IconProps) => (
   <Icon {...props}>
     <path d="M19 7V5a2 2 0 0 0-2-2H5a2 2 0 0 0 0 4h14a2 2 0 0 1 2 2v4h-4a2 2 0 0 0 0 4h4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5" />
   </Icon>
 )
 
+/** Sanad stat card: Monthly spend. */
 export const BagIcon = (props: IconProps) => (
   <Icon {...props}>
     <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4zM3 6h18M16 10a4 4 0 0 1-8 0" />
   </Icon>
 )
 
+/** Film control: play (filled). */
 export const PlayIcon = ({ className }: IconProps) => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={cn("size-4 shrink-0", className)}>
     <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z" />
   </svg>
 )
 
+/** Film control: pause (filled). */
 export const PauseIcon = ({ className }: IconProps) => (
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={cn("size-4 shrink-0", className)}>
     <rect x="6" y="5" width="4" height="14" rx="1" />
@@ -157,6 +174,7 @@ export const PauseIcon = ({ className }: IconProps) => (
   </svg>
 )
 
+/** Film control: muted. */
 export const SoundOffIcon = (props: IconProps) => (
   <Icon strokeWidth={2} {...props}>
     <path d="M11 5 6 9H3v6h3l5 4z" />
@@ -164,6 +182,7 @@ export const SoundOffIcon = (props: IconProps) => (
   </Icon>
 )
 
+/** Film control: sound on. */
 export const SoundOnIcon = (props: IconProps) => (
   <Icon strokeWidth={2} {...props}>
     <path d="M11 5 6 9H3v6h3l5 4z" />
@@ -176,6 +195,7 @@ export const DotIcon = () => (
   <span aria-hidden="true" className="block size-1.5 rounded-full bg-current" />
 )
 
+/** Storybook link. */
 export const BookIcon = (props: IconProps) => (
   <Icon {...props}>
     <path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2" />

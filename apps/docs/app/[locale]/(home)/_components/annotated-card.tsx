@@ -95,9 +95,11 @@ export function AnnotatedCard({ components }: { components: number }) {
   const compact = active === 3
   const c = (key: string) => t(`card.${lang}.${key}`)
 
+  /** One property card. `side` says which way its leader line runs to the stage. */
   const callout = (i: number, side: "start" | "end") => {
     const n = i + 1
     const on = active === i
+    /** Hover, focus or click makes this callout active and holds the cycle on it. */
     const pick = () => {
       setHeld(true)
       setActive(i)
@@ -156,10 +158,10 @@ export function AnnotatedCard({ components }: { components: number }) {
         <div
           ref={section}
           onMouseLeave={() => setHeld(false)}
-          className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.12fr)_minmax(0,1fr)] items-center gap-11 max-[1080px]:grid-cols-2 max-[1080px]:gap-5 max-[620px]:grid-cols-1"
-        >
           // Focus holds a callout like hover does; leaving the group lets the cycle resume.
           onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && setHeld(false)}
+          className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.12fr)_minmax(0,1fr)] items-center gap-11 max-[1080px]:grid-cols-2 max-[1080px]:gap-5 max-[620px]:grid-cols-1"
+        >
           <div className="grid gap-3.5">{[0, 1, 2].map((i) => callout(i, "start"))}</div>
 
           <div

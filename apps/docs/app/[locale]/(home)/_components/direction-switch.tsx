@@ -22,6 +22,7 @@ let slide: { from: Dir; to: Dir; startedAt: number } | null = null
 
 const useIsomorphicLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect
 
+/** Slides the red thumb from one side to the other, starting `elapsed` ms in so a slide that began before the page flipped carries on. */
 function animate(thumb: HTMLElement, from: Dir, to: Dir, elapsed: number) {
   const run = thumb.animate([{ transform: OFFSET[from] }, { transform: OFFSET[to] }], SLIDE)
   run.currentTime = elapsed
@@ -47,6 +48,7 @@ export function DirectionSwitch({ label }: { label: string }) {
     slide = null
   }, [dir])
 
+  /** Moves the thumb to `next`, then flips the page to that direction's language. */
   function choose(next: Dir) {
     if (next === shown) return
     setShown(next)

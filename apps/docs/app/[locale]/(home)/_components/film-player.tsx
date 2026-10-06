@@ -46,6 +46,7 @@ export function FilmPlayer() {
     resume = null
     v.muted = quiet
     setMuted(quiet)
+    /** Jumps to the carried-over time once the new film can seek, and resumes it if it was playing. */
     const seek = () => {
       v.currentTime = at
       if (was) v.play().catch(() => {})
@@ -87,6 +88,7 @@ export function FilmPlayer() {
   useEffect(() => {
     if (!playing) return
     let frame = 0
+    /** Reads the playhead every frame while the film plays, for the chapter bars. */
     const tick = () => {
       setTime(video.current?.currentTime ?? 0)
       frame = requestAnimationFrame(tick)
@@ -95,6 +97,7 @@ export function FilmPlayer() {
     return () => cancelAnimationFrame(frame)
   }, [playing])
 
+  /** Plays or pauses the film. */
   function togglePlay() {
     const v = video.current
     if (!v) return
@@ -107,6 +110,7 @@ export function FilmPlayer() {
     }
   }
 
+  /** Mutes or unmutes the film. */
   function toggleSound() {
     const v = video.current
     if (!v) return
@@ -118,6 +122,7 @@ export function FilmPlayer() {
     }
   }
 
+  /** Jumps to chapter `i` and plays from there. */
   function seek(i: number) {
     const v = video.current
     if (!v) return

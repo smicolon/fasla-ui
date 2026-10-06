@@ -38,6 +38,7 @@ const FAMILIES: [BlockKey, "W" | "N", number, number, number][] = [
 ]
 
 const WIDTH = { W: 880, N: 560 }
+/** Keeps a count left to right inside Arabic copy. */
 const num = (chunks: React.ReactNode) => <bdi dir="ltr">{chunks}</bdi>
 
 /**

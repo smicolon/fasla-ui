@@ -47,6 +47,7 @@ function TemplateCard({ id, stack }: (typeof TEMPLATES)[number]) {
   useEffect(() => {
     const el = box.current
     if (!el) return
+    /** Scales the page to the card's width and works out how far, and how long, the hover scroll runs. */
     const measure = () => {
       const scale = el.clientWidth / WIDTH
       const by = Math.max(0, total * scale - el.clientHeight)
@@ -132,6 +133,7 @@ export function TemplatesRail() {
     return () => window.removeEventListener("resize", update)
   }, [update])
 
+  /** Scrolls the rail one card forward or back, in the page's reading direction. */
   const go = (direction: 1 | -1) => {
     const el = rail.current
     const card = el?.querySelector("a")

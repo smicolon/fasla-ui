@@ -20,6 +20,7 @@ const ROWS = [
 
 const WEIGHT = { 400: "font-normal", 500: "font-medium", 600: "font-semibold" } as const
 
+/** A rung's token and its size, weight and line height, in English or Arabic. */
 function Token({ rung, weight, rtl, className }: { rung: (typeof ROWS)[number]["rung"]; weight: number; rtl: boolean; className?: string }) {
   const [en, ar] = LEADING[rung]
   return (

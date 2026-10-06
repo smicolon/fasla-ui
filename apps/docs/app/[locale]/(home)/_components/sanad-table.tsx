@@ -26,6 +26,7 @@ const ROWS: Row[] = [
 
 const tone = { done: "success", pend: "warning", sched: "info" } as const
 
+/** A transaction's status as a soft Badge in its tone. */
 function StatusBadge({
   status,
   label,
