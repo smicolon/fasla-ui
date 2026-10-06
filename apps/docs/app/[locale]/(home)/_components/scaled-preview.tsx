@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
+import { useNearView } from "./use-near-view"
 
 /**
  * Shows a block drawn at its design width, scaled to its box.
@@ -13,7 +14,8 @@ import { cn } from "@/lib/utils"
  *   (a form, a list) that would look lost at full width.
  *
  * The scale is measured, so the block stays hidden until the first
- * measurement rather than flashing at full size.
+ * measurement rather than flashing at full size. The block itself mounts
+ * only when the preview nears the viewport (useNearView).
  */
 export function ScaledPreview({
   width,
@@ -35,6 +37,7 @@ export function ScaledPreview({
 }) {
   const box = useRef<HTMLDivElement>(null)
   const [frame, setFrame] = useState<{ z: number; x: number; y: number; h: number } | null>(null)
+  const near = useNearView(box)
 
   useEffect(() => {
     const el = box.current
@@ -72,7 +75,7 @@ export function ScaledPreview({
           transform: frame ? `translate(${frame.x}px, ${frame.y}px) scale(${frame.z})` : undefined,
         }}
       >
-        {children}
+        {near && children}
       </div>
     </div>
   )

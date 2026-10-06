@@ -10,6 +10,7 @@ import { DARK_BLOCKS, type BlockKey } from "./blocks-data"
 import { ArrowEndIcon } from "./icons"
 import { landingLinks } from "./links"
 import { prefersReducedMotion } from "./locale-flip"
+import { useNearView } from "./use-near-view"
 
 /** Each template is a page stacked from blocks: [block, height at 880px wide]. Brands are fictional. */
 const TEMPLATES: { id: string; stack: [BlockKey, number][] }[] = [
@@ -35,6 +36,7 @@ function TemplateCard({ id, stack }: (typeof TEMPLATES)[number]) {
   const box = useRef<HTMLDivElement>(null)
   const [z, setZ] = useState<number | null>(null)
   const [scroll, setScroll] = useState({ by: 0, dur: 2.8 })
+  const near = useNearView(box)
   const total = stack.reduce((sum, [, h]) => sum + h, 0)
 
   useEffect(() => {
@@ -70,7 +72,7 @@ function TemplateCard({ id, stack }: (typeof TEMPLATES)[number]) {
           style={{ ["--scroll" as string]: `${-scroll.by}px`, transitionDuration: `${scroll.dur}s` }}
         >
           <div className="absolute left-0 top-0 origin-top-left" style={{ width: WIDTH, transform: z ? `scale(${z})` : undefined }}>
-            {stack.map(([k, h], i) => (
+            {near && stack.map(([k, h], i) => (
               <div key={`${k}-${i}`} className={cn("relative", DARK_BLOCKS.includes(k) && "dark")} style={{ height: h }}>
                 <Block k={k} />
               </div>

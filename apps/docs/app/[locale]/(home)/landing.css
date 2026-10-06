@@ -463,24 +463,24 @@
 }
 
 ::view-transition-group(*) {
-  animation-duration: 260ms;
+  animation-duration: 240ms;
   animation-timing-function: var(--l-ease, ease-out);
 }
 
 ::view-transition-old(*) {
-  animation: l-fx-out 140ms ease-out both;
+  animation: l-fx-out 120ms ease-out both;
 }
 
 ::view-transition-new(*) {
-  animation: l-fx-in 200ms ease-out both;
+  animation: l-fx-in 180ms ease-out both;
 }
 
 ::view-transition-old(root) {
-  animation: l-fx-out 160ms ease-out both;
+  animation: l-fx-out 140ms ease-out both;
 }
 
 ::view-transition-new(root) {
-  animation: l-fx-in 200ms ease-out both;
+  animation: l-fx-in 180ms ease-out both;
 }
 
 ::view-transition-old(dir-switch) {
@@ -499,49 +499,49 @@
 ::view-transition-group(hero-title),
 ::view-transition-old(hero-title),
 ::view-transition-new(hero-title) {
-  animation-delay: 15ms;
+  animation-delay: 10ms;
 }
 
 ::view-transition-group(hero-cta),
 ::view-transition-old(hero-cta),
 ::view-transition-new(hero-cta) {
-  animation-delay: 30ms;
+  animation-delay: 20ms;
 }
 
 ::view-transition-group(product),
 ::view-transition-old(product),
 ::view-transition-new(product) {
-  animation-delay: 40ms;
+  animation-delay: 30ms;
 }
 
 ::view-transition-group(p-side),
 ::view-transition-old(p-side),
 ::view-transition-new(p-side) {
-  animation-delay: 45ms;
+  animation-delay: 35ms;
 }
 
 ::view-transition-group(p-head),
 ::view-transition-old(p-head),
 ::view-transition-new(p-head) {
-  animation-delay: 50ms;
+  animation-delay: 40ms;
 }
 
 ::view-transition-group(p-stats),
 ::view-transition-old(p-stats),
 ::view-transition-new(p-stats) {
-  animation-delay: 55ms;
+  animation-delay: 45ms;
 }
 
 ::view-transition-group(p-chart),
 ::view-transition-old(p-chart),
 ::view-transition-new(p-chart) {
-  animation-delay: 58ms;
+  animation-delay: 48ms;
 }
 
 ::view-transition-group(p-table),
 ::view-transition-old(p-table),
 ::view-transition-new(p-table) {
-  animation-delay: 60ms;
+  animation-delay: 50ms;
 }
 
 @media (prefers-reduced-motion: reduce) {

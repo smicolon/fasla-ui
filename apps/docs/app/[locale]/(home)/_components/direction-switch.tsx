@@ -9,7 +9,7 @@ import { prefersReducedMotion, useLocaleFlip } from "./locale-flip"
 type Dir = "ltr" | "rtl"
 
 /** The thumb slides first; the page starts flipping this many ms into the slide. */
-const FLIP_DELAY = 60
+const FLIP_DELAY = 50
 const SLIDE = { duration: 450, easing: "cubic-bezier(.34, 1.36, .64, 1)" }
 const OFFSET: Record<Dir, string> = { ltr: "translateX(0)", rtl: "translateX(100%)" }
 
