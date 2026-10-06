@@ -17,6 +17,10 @@ export type WallItem = {
   href?: string
   /** The badge's accessible name, e.g. "Melvin Raaj's review on clutch.co". */
   label?: string
+  /** Stars out of 5, from the CMS; no row when it has none. */
+  rating?: number
+  /** The rating row's accessible name, e.g. "Rated 5.0 out of 5". */
+  ratingLabel?: string
 }
 
 /**
@@ -54,6 +58,12 @@ const PLATFORMS: Record<Platform, { site: string; disc: string; mark: React.Reac
   },
 }
 
+/**
+ * The star smicolon.com draws, at its size (14px, 2px apart) and in its
+ * yellow (#F5A524). Stars past the rating are faded to 30%.
+ */
+const STAR_PATH = "M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4l-5.9 3.1 1.2-6.5L2.5 9.4l6.6-.9z"
+
 /** Columns for the viewport: 3, then 2 at 1000px and below, then 1 at 640px and below. */
 const QUERIES = ["(max-width: 640px)", "(max-width: 1000px)"] as const
 
@@ -83,7 +93,7 @@ function drift(quotes: string[]) {
 
 /**
  * One testimonial: picture, name, role, the badge of the site it was posted
- * on, and the quote in full. `copy` marks the loop's repeat, whose badge
+ * on, the quote in full, and its star rating when it has one. `copy` marks the loop's repeat, whose badge
  * leaves the Tab order.
  */
 function ReviewCard({ item, copy = false }: { item: WallItem; copy?: boolean }) {
@@ -126,6 +136,18 @@ function ReviewCard({ item, copy = false }: { item: WallItem; copy?: boolean }) 
       <blockquote className="text-[15px] leading-[1.6] text-[color:var(--l-fg-2)] rtl:leading-[1.8]">
         <p>{item.t}</p>
       </blockquote>
+      {item.rating !== undefined && (
+        <div role="img" aria-label={item.ratingLabel} className="mt-3.5 flex items-center gap-2 text-[13px] font-medium text-[color:var(--l-fg-2)]">
+          <span className="inline-flex gap-0.5 text-[#F5A524]">
+            {Array.from({ length: 5 }, (_, i) => (
+              <svg key={i} viewBox="0 0 24 24" aria-hidden="true" className={cn("size-3.5", i >= Math.round(item.rating ?? 0) && "opacity-30")}>
+                <path fill="currentColor" d={STAR_PATH} />
+              </svg>
+            ))}
+          </span>
+          <span dir="ltr">{item.rating.toFixed(1)}</span>
+        </div>
+      )}
     </article>
   )
 }

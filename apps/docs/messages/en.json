@@ -1993,7 +1993,7 @@
         },
         {
           "who": "Founder, Klubaro",
-          "t": "Wowed by the team's work on our SaaS front-end review! Their expertise & communication were top-notch, and the impact on our platform will be massive. Quick wins & long-term improvement propositions - all actionable & delivered fast! ⚡️ The quality was outstanding for the time invested. Can't recommend them enough! ⭐️⭐️⭐️⭐️⭐️"
+          "t": "Wowed by the team's work on our SaaS front-end review! Their expertise & communication were top-notch, and the impact on our platform will be massive. Quick wins & long-term improvement propositions - all actionable & delivered fast! ⚡️ The quality was outstanding for the time invested. Can't recommend them enough!"
         },
         {
           "who": "Founder & CEO, Pafinda",
@@ -2027,7 +2027,8 @@
           "who": "CEO, Web Help Agency",
           "t": "They showed strong dedication to ensuring the app was secure and met all data regulations"
         }
-      ]
+      ],
+      "rated": "Rated {rating} out of 5"
     },
     "faq": {
       "kicker": "Questions",
