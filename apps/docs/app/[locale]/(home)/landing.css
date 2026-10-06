@@ -222,14 +222,48 @@
   }
 }
 
-/* The open rule's countdown to the next one. */
-.l-tm {
-  animation: l-tm linear forwards;
+/* The rules list, timed as the reference's #cmpx: the open rule's ground and
+   text fade in over .25s, its description opens over .35s, and the red line
+   under it fills, linearly, over the dwell before the next rule opens.
+   The line animates scaleX(0) to scaleX(1) on its own: a Tailwind scale
+   utility writes the whole transform chain, which cannot interpolate to a
+   bare scaleX and makes the line jump at the halfway mark. */
+.l-cmp-tab {
+  transition: background-color 0.25s, color 0.25s;
 }
 
-@keyframes l-tm {
+.l-cmp-desc {
+  transition: max-height 0.35s var(--l-ease), opacity 0.25s;
+}
+
+.l-cmp-tm {
+  position: absolute;
+  inset-inline: 16px;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--fasla-red);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+[dir="rtl"] .l-cmp-tm {
+  transform-origin: right center;
+}
+
+.l-cmp-auto [aria-selected="true"] > .l-cmp-tm {
+  animation: l-tm-fill var(--dwell, 4400ms) linear forwards;
+}
+
+@keyframes l-tm-fill {
   to {
     transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .l-cmp-desc {
+    transition: none;
   }
 }
 

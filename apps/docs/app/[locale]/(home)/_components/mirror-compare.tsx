@@ -202,7 +202,8 @@ export function MirrorCompare() {
             role="tablist"
             aria-orientation="vertical"
             aria-label={t("title")}
-            className="flex flex-col gap-1"
+            className={cn("flex flex-col gap-1", auto && inView && "l-cmp-auto")}
+            style={{ ["--dwell" as string]: `${DWELL}ms` }}
             onKeyDown={(event) => {
               const keys: Record<string, number> = { ArrowDown: cur + 1, ArrowUp: cur - 1, Home: 0, End: RULES.length - 1 }
               if (!(event.key in keys)) return
@@ -244,7 +245,7 @@ export function MirrorCompare() {
                       show(i)
                     }}
                     className={cn(
-                      "relative grid w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1 overflow-hidden rounded-xl px-4 py-3.5 text-start transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-foreground",
+                      "l-cmp-tab relative grid w-full grid-cols-[minmax(0,1fr)_auto] items-center gap-x-4 gap-y-1 overflow-hidden rounded-xl px-4 py-3.5 text-start focus-visible:outline focus-visible:outline-2 focus-visible:outline-foreground",
                       selected
                         ? "bg-[color:var(--l-bg-2)] text-foreground shadow-[inset_0_0_0_1px_var(--border)]"
                         : "text-[color:var(--l-fg-2)] hover:bg-[color:var(--l-bg-2)] hover:text-foreground"
@@ -262,22 +263,15 @@ export function MirrorCompare() {
                     </Badge>
                     <span
                       className={cn(
-                        "col-span-2 overflow-hidden text-sm text-[color:var(--l-fg-2)] transition-[max-height,opacity] duration-300 motion-reduce:transition-none rtl:leading-[1.75]",
+                        "l-cmp-desc col-span-2 overflow-hidden text-sm text-[color:var(--l-fg-2)] rtl:leading-[1.75]",
                         selected ? "max-h-[4em] opacity-100" : "max-h-0 opacity-0"
                       )}
                     >
                       {t(`${r.k}.p`)}
                     </span>
-                    {/* How long until the next rule opens. */}
-                    <span
-                      key={selected ? `on-${epoch}` : "off"}
-                      aria-hidden="true"
-                      className={cn(
-                        "absolute inset-x-4 bottom-0 h-0.5 origin-left scale-x-0 rounded-sm bg-fasla-red rtl:origin-right",
-                        selected && auto && inView && "l-tm"
-                      )}
-                      style={{ animationDuration: `${DWELL}ms` }}
-                    />
+                    {/* How long until the next rule opens. Remounted per rule, so it
+                        starts from empty each time; landing.css fills it. */}
+                    <span key={selected ? `on-${epoch}` : "off"} aria-hidden="true" className="l-cmp-tm" />
                   </button>
                 </div>
               )
