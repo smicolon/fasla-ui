@@ -193,7 +193,7 @@ export function MirrorCompare() {
   const rule = RULES[cur]
 
   return (
-    <section aria-labelledby="rules-h" className="l-sec pt-0">
+    <section aria-labelledby="rules-h" className="pb-[var(--l-section)]">
       <div className="l-wrap">
         <SectionHead id="rules-h" title={<Stroked text={t("title")} />} lede={t("lede")} />
 

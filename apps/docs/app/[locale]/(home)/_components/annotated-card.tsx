@@ -133,7 +133,7 @@ export function AnnotatedCard({ components }: { components: number }) {
   )
 
   return (
-    <section aria-labelledby="props-h" className="l-sec pt-0">
+    <section aria-labelledby="props-h" className="pb-[var(--l-section)]">
       <div className="l-wrap">
         <SectionHead id="props-h" title={<Stroked text={t("title")} />} lede={t("lede")} />
 

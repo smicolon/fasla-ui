@@ -66,7 +66,7 @@ export async function ReviewWall() {
   const reviews = t.raw("reviews") as Review[]
 
   return (
-    <section aria-labelledby="wall-h" className="l-sec pt-0">
+    <section aria-labelledby="wall-h" className="pb-[var(--l-section)]">
       <div className="l-wrap">
         <SectionHead
           id="wall-h"

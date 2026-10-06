@@ -21,7 +21,7 @@ export async function AtomsTable() {
   const n = fmt.format(atomCounts.atoms)
 
   return (
-    <section aria-labelledby="reg-h" className="l-sec pt-0">
+    <section aria-labelledby="reg-h" className="pb-[var(--l-section)]">
       <div className="l-wrap">
         <SectionHead
           id="reg-h"

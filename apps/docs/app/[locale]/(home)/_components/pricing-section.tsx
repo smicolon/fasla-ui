@@ -32,7 +32,7 @@ export async function PricingSection({ components }: { components: number }) {
   ]
 
   return (
-    <section id="pricing" aria-labelledby="price-h" className="l-sec">
+    <section id="pricing" aria-labelledby="price-h" className="py-[var(--l-section)]">
       <div className="l-wrap">
         <SectionHead id="price-h" title={<Stroked text={t("title")} />} lede={t("lede")} />
 

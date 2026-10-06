@@ -129,7 +129,7 @@ export function ParityPlayground({ pageDir }: { pageDir: "ltr" | "rtl" }) {
   ]
 
   return (
-    <section aria-labelledby="parity-h" className="l-sec">
+    <section aria-labelledby="parity-h" className="py-[var(--l-section)]">
       <div className="l-wrap">
         <SectionHead
           id="parity-h"

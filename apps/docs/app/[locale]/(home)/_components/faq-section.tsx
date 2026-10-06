@@ -46,7 +46,7 @@ export function FaqSection() {
   const [first, last] = (t.raw("title") as string).split("<br></br>")
 
   return (
-    <section aria-labelledby="faq-h" className="l-sec border-y bg-[color:var(--l-bg-2)]">
+    <section aria-labelledby="faq-h" className="border-y py-[var(--l-section)] bg-[color:var(--l-bg-2)]">
       <div className="l-wrap">
         <div className="grid grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-start gap-[clamp(32px,7vw,120px)] max-[960px]:grid-cols-1">
           <div className="sticky top-[104px] flex flex-col gap-7 max-[960px]:static max-[960px]:flex-row max-[960px]:flex-wrap max-[960px]:items-end max-[960px]:justify-between">

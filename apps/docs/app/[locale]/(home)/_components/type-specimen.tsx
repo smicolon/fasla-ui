@@ -44,7 +44,7 @@ export async function TypeSpecimen() {
   const t = await getTranslations("landing.type")
 
   return (
-    <section aria-labelledby="type-h" className="l-sec pt-0">
+    <section aria-labelledby="type-h" className="pb-[var(--l-section)]">
       <div className="l-wrap">
         <SectionHead id="type-h" title={<Stroked text={t("title")} />} lede={t("lede")} />
 

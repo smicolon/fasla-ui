@@ -10,7 +10,7 @@ export async function TemplatesSection() {
   const t = await getTranslations("landing.templates")
 
   return (
-    <section id="templates" aria-labelledby="tp-h" className="l-sec pt-0">
+    <section id="templates" aria-labelledby="tp-h" className="pb-[var(--l-section)]">
       <div className="l-wrap">
         <SectionHead id="tp-h" center title={<Stroked text={t("title")} />} lede={t("lede")} />
       </div>

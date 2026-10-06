@@ -51,7 +51,7 @@ export async function BlocksGrid() {
   const t = await getTranslations("landing.blocks")
 
   return (
-    <section id="blocks" aria-labelledby="bl-h" className="l-sec">
+    <section id="blocks" aria-labelledby="bl-h" className="py-[var(--l-section)]">
       <div className="l-wrap">
         <SectionHead id="bl-h" center title={<Stroked text={t("title")} />} lede={t("lede")} />
 
