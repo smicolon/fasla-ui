@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react"
+import type { CSSProperties, ReactNode } from "react"
 import { getTranslations } from "next-intl/server"
 import { Button } from "@fasla-ui/ui/button/button"
 import { Card } from "@fasla-ui/ui/card/card"
@@ -27,6 +27,39 @@ import { xrayTag as tag } from "./xray-tag"
 /** Sidebar rows as the reference draws them: muted until active, the active one a raised pill. */
 const navItem = "h-9 gap-2.5 px-2.5 py-0 font-normal text-foreground/70 hover:bg-muted hover:text-foreground"
 const navActive = "border bg-card font-medium text-foreground shadow-sm hover:bg-card"
+
+/** A Card laid out as StatsCard lays itself out, for the stats it cannot show. */
+function ComposedStat({
+  tagProps,
+  title,
+  value,
+  currency,
+  icon,
+  children,
+}: {
+  tagProps: ReturnType<typeof tag>
+  title: string
+  value: string
+  currency?: string
+  icon: ReactNode
+  children: ReactNode
+}) {
+  return (
+    <Card {...tagProps} className="p-5 shadow-sm">
+      <div className="flex items-start justify-between">
+        <div className="space-y-1">
+          <p className="text-sm font-medium text-muted-foreground">{title}</p>
+          <p className="text-2xl font-bold">
+            {currency && <span className="me-1.5 text-sm font-medium text-muted-foreground">{currency}</span>}
+            {value}
+          </p>
+        </div>
+        <div className="rounded-md bg-primary/10 p-2 text-primary">{icon}</div>
+      </div>
+      {children}
+    </Card>
+  )
+}
 
 /**
  * Sanad, a fictional finance product, assembled from Fasla components. It is a
@@ -125,9 +158,10 @@ export async function SanadWindow() {
             }
           />
 
-          {/* StatsCard's value is text only, so landing.css draws the small
-              currency before it from --l-cur (.l-cur). */}
           <StatsGrid columns={3} className="[view-transition-name:p-stats]">
+            {/* StatsCard's value is text only, so landing.css draws the small
+                currency before it from --l-cur (.l-cur), and hides the chevron
+                StatsCard draws beside every trend (.l-no-chevron). */}
             <StatsCard
               {...tag("StatsCard", 4, { style: currency })}
               title={t("s1")}
@@ -135,35 +169,28 @@ export async function SanadWindow() {
               icon={<WalletIcon />}
               trend={{ value: 4.2, direction: "up" }}
               description={t("vsNov")}
-              className="l-cur p-5"
+              className="l-cur l-no-chevron p-5"
             />
-            {/* Spending less is good news, so the change reads neutral, not red. */}
-            <StatsCard
-              {...tag("StatsCard", 5, { style: currency })}
-              title={t("s2")}
-              value="12,940"
-              icon={<BagIcon />}
-              trend={{ value: -3.1, direction: "neutral" }}
-              description={t("vsNov")}
-              className="l-cur p-5"
-            />
-            {/* StatsCard has no place for a bar, so this one is composed from Card
-                in the same layout. Fasla has no Progress component yet. */}
-            <Card {...tag("Card", 6)} className="p-5 shadow-sm">
-              <div className="flex items-start justify-between">
-                <div className="space-y-1">
-                  <p className="text-sm font-medium text-muted-foreground">{t("s3")}</p>
-                  <p className="text-2xl font-bold">68%</p>
-                </div>
-                <div className="rounded-md bg-primary/10 p-2 text-primary">
-                  <TargetIcon />
-                </div>
+            {/* StatsCard prints a negative change with a hyphen and colours a
+                fall red, so this card is composed from Card in StatsCard's
+                layout: a true minus, and neutral, because spending less is
+                good news. */}
+            <ComposedStat tagProps={tag("Card", 5)} title={t("s2")} currency={t("cur")} value="12,940" icon={<BagIcon />}>
+              <div className="mt-4 flex items-center gap-2 text-sm">
+                <bdi dir="ltr" className="font-medium tabular-nums">
+                  −3.1%
+                </bdi>
+                <span className="text-muted-foreground">{t("vsNov")}</span>
               </div>
+            </ComposedStat>
+            {/* StatsCard has no place for a bar either. Fasla has no Progress
+                component yet, so the bar is landing-only. */}
+            <ComposedStat tagProps={tag("Card", 6)} title={t("s3")} value="68%" icon={<TargetIcon />}>
               <div className="mb-2 mt-3 h-1.5 overflow-hidden rounded-full bg-muted">
                 <div className="h-full w-[68%] rounded-full bg-foreground" />
               </div>
               <p className="text-sm text-muted-foreground">{t("goal")}</p>
-            </Card>
+            </ComposedStat>
           </StatsGrid>
 
           <Card {...tag("Card", 7)} className="px-5 pb-3 pt-[18px] [view-transition-name:p-chart]">

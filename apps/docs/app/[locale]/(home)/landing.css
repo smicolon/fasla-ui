@@ -109,6 +109,11 @@
   color: var(--muted-foreground);
 }
 
+/* StatsCard draws a chevron beside every trend; the reference has none. */
+.l-no-chevron span > svg {
+  display: none;
+}
+
 /* ── The language flip ──────────────────────────────────────────────────
    locale-flip.tsx wraps the move between /en/ and /ar/ in a view transition.
    The named parts slide from their LTR places to their RTL ones while the
