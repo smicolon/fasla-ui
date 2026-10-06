@@ -1,0 +1,598 @@
+/* ============================================
+   LANDING PAGE ONLY
+
+   What Tailwind utilities cannot say on their own: the content width the
+   reference is laid out on, the x-ray tags (a pseudo-element reading its
+   label from an attribute), and the timing of the language flip, which lives
+   on view-transition pseudo-elements. Everything else is utilities in the
+   components. Colours are the semantic and brand tokens from globals.css.
+   ============================================ */
+
+.l-page {
+  /* 1248px of content inside a gutter that grows with the screen. */
+  --l-gutter: clamp(16px, 4vw, 96px);
+  --l-section: clamp(64px, 9vw, 128px);
+  --l-ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Secondary text: the reference's #525252 on white, #c4c4c4 on the dark ground.
+   --l-bg-2 is its second ground, #fafafa on white: an opaque mix of muted into
+   the page, so a layer painted with it fully covers what sits beneath. */
+.l-page {
+  --l-fg-2: color-mix(in oklch, var(--foreground) 70%, transparent);
+  --l-bg-2: color-mix(in oklch, var(--muted) 50%, var(--background));
+}
+
+.dark .l-page {
+  --l-fg-2: color-mix(in oklch, var(--foreground) 78%, transparent);
+}
+
+.l-h2 {
+  font-size: clamp(34px, 4.4vw, 60px);
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  text-wrap: balance;
+}
+
+[dir="rtl"] .l-h2 {
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: 0;
+}
+
+.l-lede {
+  margin-block-start: 20px;
+  max-width: 60ch;
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.5;
+  color: var(--l-fg-2);
+  text-wrap: pretty;
+}
+
+[dir="rtl"] .l-lede {
+  line-height: 1.75;
+}
+
+.l-wrap {
+  width: 100%;
+  max-width: calc(1248px + 2 * var(--l-gutter));
+  margin-inline: auto;
+  padding-inline: var(--l-gutter);
+}
+
+/* ── "Show components" x-ray ────────────────────────────────────────────
+   Every part marked data-c gets a dashed outline held clear of its content,
+   and a tag above its start corner naming the Fasla component. The window's
+   parts sit 8 to 20px apart, so the outline stays close (3px) to leave room
+   for a neighbour's tag; data-c-roomy (the page header, whose title meets its
+   own edge) and data-c-tight (8px-apart controls) adjust it. Parts that fill
+   their frame carry .l-tag-in (the sidebar) or .l-tag-in-end (the table under
+   its card's title): outline and tag sit inside, so they stay within it. */
+
+.l-stage.is-xray [data-c] {
+  --l-off: 3px;
+  position: relative;
+  outline: 1px dashed var(--fasla-red);
+  outline-offset: var(--l-off);
+}
+
+.l-stage.is-xray [data-c-roomy] {
+  --l-off: 6px;
+}
+
+.l-stage.is-xray [data-c-tight] {
+  --l-off: 2px;
+}
+
+.l-stage.is-xray [data-c]::after {
+  content: attr(data-c);
+  position: absolute;
+  top: calc(-1 * var(--l-off) - 1px);
+  inset-inline-start: calc(-1 * var(--l-off) - 1px);
+  translate: 0 -100%;
+  z-index: 6;
+  padding: 3px 5px;
+  border-radius: 3px;
+  background: var(--fasla-red);
+  color: var(--fasla-white);
+  font: 500 10px/1 var(--font-geist-mono), ui-monospace, monospace;
+  letter-spacing: 0;
+  white-space: nowrap;
+  pointer-events: none;
+  unicode-bidi: isolate;
+  animation: l-tag-in 0.32s var(--l-ease) both;
+  animation-delay: calc(var(--i, 0) * 60ms);
+}
+
+.l-stage.is-xray [data-c]:is(.l-tag-in, .l-tag-in-end) {
+  outline-offset: -6px;
+}
+
+.l-stage.is-xray [data-c]:is(.l-tag-in, .l-tag-in-end)::after {
+  top: 10px;
+  inset-inline-start: 10px;
+  translate: 0 0;
+  animation-name: l-tag-in-inside;
+}
+
+.l-stage.is-xray [data-c].l-tag-in-end::after {
+  inset-inline-start: auto;
+  inset-inline-end: 10px;
+}
+
+@keyframes l-tag-in {
+  from {
+    opacity: 0;
+    translate: 0 calc(-100% + 4px);
+  }
+}
+
+@keyframes l-tag-in-inside {
+  from {
+    opacity: 0;
+    translate: 0 4px;
+  }
+}
+
+/* ── What mirrors, what doesn't ───────────────────────────────────────
+   One stage, always laid out left to right: English on the left, Arabic on
+   the right. The English layer sits on top and is clipped at --pos, the red
+   line, which mirror-compare.tsx sweeps or the reader drags. */
+
+.l-cmp {
+  --pos: 50%;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  max-width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--l-bg-2);
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.l-cmp-layer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  isolation: isolate;
+}
+
+.l-cmp-ar {
+  background-color: var(--l-bg-2);
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1.2px);
+  background-size: 18px 18px;
+}
+
+.l-cmp-en {
+  background: var(--l-bg-2);
+  clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+}
+
+.l-cmp-line {
+  position: absolute;
+  inset-block: 0;
+  left: var(--pos);
+  width: 2px;
+  margin-left: -1px;
+  background: var(--fasla-red);
+  pointer-events: none;
+}
+
+.l-cmp-handle {
+  position: absolute;
+  top: 50%;
+  left: clamp(26px, var(--pos), calc(100% - 26px));
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  border: 2px solid var(--fasla-red);
+  border-radius: 12px;
+  background: var(--background);
+  box-shadow: 0 6px 18px -8px color-mix(in oklch, var(--foreground) 35%, transparent);
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.l-cmp-handle:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+}
+
+/* Three grip lines. */
+.l-cmp-handle span {
+  width: 12px;
+  height: 14px;
+  background: linear-gradient(90deg, var(--muted-foreground) 0 1.5px, transparent 1.5px 5.25px, var(--muted-foreground) 5.25px 6.75px, transparent 6.75px 10.5px, var(--muted-foreground) 10.5px 12px);
+}
+
+@media (max-width: 560px) {
+  .l-cmp {
+    aspect-ratio: 4 / 5;
+  }
+
+  .l-cmp-layer {
+    padding: 16px;
+  }
+}
+
+/* The rules list, timed as the reference's #cmpx: the open rule's ground and
+   text fade in over .25s, its description opens over .35s, and the red line
+   under it fills, linearly, over the dwell before the next rule opens.
+   The line animates scaleX(0) to scaleX(1) on its own: a Tailwind scale
+   utility writes the whole transform chain, which cannot interpolate to a
+   bare scaleX and makes the line jump at the halfway mark. */
+.l-cmp-tab {
+  transition: background-color 0.25s, color 0.25s;
+}
+
+.l-cmp-desc {
+  transition: max-height 0.35s var(--l-ease), opacity 0.25s;
+}
+
+.l-cmp-tm {
+  position: absolute;
+  inset-inline: 16px;
+  bottom: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--fasla-red);
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+[dir="rtl"] .l-cmp-tm {
+  transform-origin: right center;
+}
+
+.l-cmp-auto [aria-selected="true"] > .l-cmp-tm {
+  animation: l-tm-fill var(--dwell, 4400ms) linear forwards;
+}
+
+@keyframes l-tm-fill {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .l-cmp-desc {
+    transition: none;
+  }
+}
+
+/* ── Blocks and templates ─────────────────────────────────────────────
+   The block previews are drawn in block-library.tsx; these are the grounds
+   Tailwind cannot write as tokens: photo scrims from the ink token, the AI
+   assistant's glow and dot grid, and the soft radial grounds. */
+
+.l-page {
+  --l-ink: var(--fasla-ink);
+}
+
+.l-scrim-hero {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--l-ink) 50%, transparent) 0%,
+    transparent 32%,
+    color-mix(in oklch, var(--l-ink) 10%, transparent) 55%,
+    color-mix(in oklch, var(--l-ink) 62%, transparent) 100%
+  );
+}
+
+.l-scrim-bottom {
+  background: linear-gradient(180deg, transparent 50%, color-mix(in oklch, var(--l-ink) 55%, transparent));
+}
+
+/* Dark behind the copy, which starts on the reading side. */
+.l-scrim-side {
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--l-ink) 92%, transparent) 0%,
+    color-mix(in oklch, var(--l-ink) 55%, transparent) 55%,
+    color-mix(in oklch, var(--l-ink) 15%, transparent) 100%
+  );
+}
+
+[dir="rtl"] .l-scrim-side {
+  background: linear-gradient(
+    270deg,
+    color-mix(in oklch, var(--l-ink) 92%, transparent) 0%,
+    color-mix(in oklch, var(--l-ink) 55%, transparent) 55%,
+    color-mix(in oklch, var(--l-ink) 15%, transparent) 100%
+  );
+}
+
+.l-ai-glow {
+  background: radial-gradient(50% 60% at 50% 50%, color-mix(in oklch, var(--fasla-red) 38%, transparent), transparent 70%);
+}
+
+.l-ai-dots {
+  background-image: radial-gradient(color-mix(in oklch, var(--foreground) 9%, transparent) 1px, transparent 1px);
+  background-size: 18px 18px;
+  mask-image: radial-gradient(70% 70% at 50% 40%, black, transparent);
+}
+
+.l-err {
+  background: radial-gradient(400px 220px at 50% 40%, var(--muted), var(--card));
+}
+
+.l-toast {
+  background: radial-gradient(500px 260px at 50% 0%, var(--muted), var(--card));
+}
+
+/* The grid's last row fades into the page under "Browse all blocks". */
+.l-fam-grid::after {
+  content: "";
+  position: absolute;
+  inset: auto -2px -2px;
+  height: 18%;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--background) 78%);
+}
+
+@media (max-width: 1180px) {
+  .l-fam-grid > :nth-child(n + 13) {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .l-fam-grid > :nth-child(n + 9) {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .l-fam-grid > :nth-child(n + 5) {
+    display: none;
+  }
+
+  .l-fam-grid::after {
+    height: 16%;
+  }
+}
+
+/* The templates rail starts on the content edge and runs to the page edge. */
+.l-tp-rail {
+  --tp-pad: max(var(--l-gutter), calc((100vw - 1248px) / 2));
+  padding-inline: var(--tp-pad);
+  scroll-padding-inline: var(--tp-pad);
+}
+
+/* ── Wall of Love ──────────────────────────────────────────────────────
+   Each column holds its cards twice and climbs by half its height, so the
+   loop has no seam; the middle column runs the other way. */
+
+.l-wall {
+  height: 640px;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent 0, black 14%, black 86%, transparent 100%);
+}
+
+.l-wall-col {
+  animation: l-wall-up var(--dur, 30s) linear infinite;
+}
+
+.l-wall-col:nth-child(2) {
+  --dur: 36s;
+  animation-direction: reverse;
+}
+
+.l-wall-col:nth-child(3) {
+  --dur: 33s;
+}
+
+.l-wall:hover .l-wall-col,
+.l-wall:focus-within .l-wall-col {
+  animation-play-state: paused;
+}
+
+@keyframes l-wall-up {
+  to {
+    transform: translateY(calc(-50% - 10px));
+  }
+}
+
+@media (max-width: 640px) {
+  .l-wall {
+    height: 560px;
+  }
+}
+
+.l-heart {
+  transform-origin: center;
+  animation: l-beat 2.4s var(--l-ease) infinite;
+}
+
+@keyframes l-beat {
+  0%,
+  70%,
+  100% {
+    transform: scale(1);
+  }
+  78% {
+    transform: scale(1.14);
+  }
+  86% {
+    transform: scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .l-wall-col,
+  .l-heart {
+    animation: none;
+  }
+
+  /* Still: a box that scrolls, without the loop's repeat. */
+  .l-wall {
+    height: auto;
+    max-height: 720px;
+    overflow-y: auto;
+  }
+
+  .l-wall-dup {
+    display: none;
+  }
+}
+
+/* The FAQ's two speech bubbles, nodding at each other. */
+.l-bob {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: l-bob 5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes l-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-2deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .l-bob {
+    animation: none;
+  }
+}
+
+/* ── Currency before a StatsCard value ────────────────────────────────
+   StatsCard takes its value as text, so the small "SAR" / "ر.س" the
+   reference sets before the number is drawn here, from --l-cur on the card.
+   Inside the inert product window, so nothing reads it aloud. */
+
+.l-cur p + p::before {
+  content: var(--l-cur);
+  margin-inline-end: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--muted-foreground);
+}
+
+/* StatsCard draws a chevron beside every trend; the reference has none. */
+.l-no-chevron span > svg {
+  display: none;
+}
+
+/* ── The language flip ──────────────────────────────────────────────────
+   locale-flip.tsx wraps the move between /en/ and /ar/ in a view transition.
+   The named parts slide from their LTR places to their RTL ones while the
+   rest cross-fades, headline first, then the product window and its parts.
+   The direction switch is shown live, not as a snapshot, so its red thumb
+   keeps sliding through the flip. Everything settles inside half a second. */
+
+@keyframes l-fx-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes l-fx-in {
+  from {
+    opacity: 0;
+  }
+}
+
+::view-transition-group(*) {
+  animation-duration: 240ms;
+  animation-timing-function: var(--l-ease, ease-out);
+}
+
+::view-transition-old(*) {
+  animation: l-fx-out 120ms ease-out both;
+}
+
+::view-transition-new(*) {
+  animation: l-fx-in 180ms ease-out both;
+}
+
+::view-transition-old(root) {
+  animation: l-fx-out 140ms ease-out both;
+}
+
+::view-transition-new(root) {
+  animation: l-fx-in 180ms ease-out both;
+}
+
+::view-transition-old(dir-switch) {
+  display: none;
+}
+
+::view-transition-new(dir-switch),
+::view-transition-group(dir-switch) {
+  animation: none;
+}
+
+::view-transition-group(hinge) {
+  animation-duration: 0s;
+}
+
+::view-transition-group(hero-title),
+::view-transition-old(hero-title),
+::view-transition-new(hero-title) {
+  animation-delay: 10ms;
+}
+
+::view-transition-group(hero-cta),
+::view-transition-old(hero-cta),
+::view-transition-new(hero-cta) {
+  animation-delay: 20ms;
+}
+
+::view-transition-group(product),
+::view-transition-old(product),
+::view-transition-new(product) {
+  animation-delay: 30ms;
+}
+
+::view-transition-group(p-side),
+::view-transition-old(p-side),
+::view-transition-new(p-side) {
+  animation-delay: 35ms;
+}
+
+::view-transition-group(p-head),
+::view-transition-old(p-head),
+::view-transition-new(p-head) {
+  animation-delay: 40ms;
+}
+
+::view-transition-group(p-stats),
+::view-transition-old(p-stats),
+::view-transition-new(p-stats) {
+  animation-delay: 45ms;
+}
+
+::view-transition-group(p-chart),
+::view-transition-old(p-chart),
+::view-transition-new(p-chart) {
+  animation-delay: 48ms;
+}
+
+::view-transition-group(p-table),
+::view-transition-old(p-table),
+::view-transition-new(p-table) {
+  animation-delay: 50ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+
+  .l-stage.is-xray [data-c]::after {
+    animation: none;
+  }
+}

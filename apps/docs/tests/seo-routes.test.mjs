@@ -97,10 +97,10 @@ describe("SEO route catalog", () => {
     const en = JSON.parse(readFileSync(path.join(docsRoot, "messages/en.json"), "utf8"))
     const homeRoute = routes.find((route) => route.path === "/")
 
-    // The rendered H1 is headlineLead + the Arabic comma + headlineTail.
-    const composed = `${en.home.headlineLead}\u060C${en.home.headlineTail}`
+    // The rendered H1 is the hero title with its rich-text tags removed.
+    const rendered = en.landing.hero.title.replace(/<\/?[a-z0-9]+>/g, "")
 
-    expect(homeRoute?.h1).toBe(composed)
+    expect(homeRoute?.h1).toBe(rendered)
   })
 
   test("keeps every message key present in both locales", async () => {

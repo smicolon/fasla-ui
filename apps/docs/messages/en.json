@@ -15,74 +15,6 @@
     "toggleTheme": "Toggle theme",
     "switchLanguage": "Switch language"
   },
-  "home": {
-    "eyebrow": "{count, plural, one {# component} other {# components}} · MIT core",
-    "headlineLead": "Add a component",
-    "headlineTail": "own the source.",
-    "intro": "Fasla is a React component library from Smicolon GmbH, built on shadcn/ui primitives. The CLI copies a component's source into your project — you own it, you edit it, there is no black box to fight.",
-    "readDocs": "Read the docs",
-    "terminal": {
-      "title": "terminal",
-      "cwd": "~/your-app",
-      "initialized": "components.json written",
-      "resolved": "registry resolved",
-      "written": "button.tsx → components/ui",
-      "wired": "cva + tailwind-merge wired",
-      "ownedFile": "components/ui/button.tsx — yours",
-      "ownership": "edit it · rename it · delete it"
-    },
-    "stats": {
-      "componentsLabel": "components across primitives, blocks and effects",
-      "licenceLabel": "licensed core, no runtime lock-in",
-      "depsLabel": "required runtime deps beyond your own React",
-      "countryValue": "DE",
-      "countryLabel": "Built in Germany by Smicolon GmbH"
-    },
-    "registry": {
-      "title": "What is in the registry",
-      "intro": "Three categories, one install path. Every component ships its loading, empty, error and disabled states.",
-      "browse": "Browse",
-      "primitives": {
-        "title": "UI primitives",
-        "description": "Button, Input, Card, Badge, Skeleton, Avatar, Checkbox, Switch, Select, Combobox, Tabs, Textarea."
-      },
-      "blocks": {
-        "title": "Blocks",
-        "description": "AppShell, PageHeader, EmptyState, Sidebar, Navbar, StatsCard, DataTable, FormSection."
-      },
-      "effects": {
-        "title": "Effects",
-        "description": "ShimmerButton, AnimatedGradient, TextReveal, BorderBeam, Spotlight, GlowCard, TypewriterText."
-      }
-    },
-    "features": {
-      "title": "What you get either way",
-      "accessible": {
-        "title": "Accessible by default",
-        "description": "Keyboard navigation and screen reader support are built in. Icon-only buttons carry an aria-label; focus styles stay visible."
-      },
-      "motion": {
-        "title": "Reduced motion respected",
-        "description": "Every animation reads prefers-reduced-motion from the shared motion presets. No opt-in required."
-      },
-      "typescript": {
-        "title": "TypeScript throughout",
-        "description": "Typed props and variants, so autocomplete works the moment a component lands in your project."
-      },
-      "tokens": {
-        "title": "Semantic tokens",
-        "description": "Colours come from CSS variables and the Tailwind theme. Retheme the set by editing tokens, not components."
-      },
-      "density": {
-        "title": "Three density profiles",
-        "description": "Compact, comfortable and spacious, so the same components suit a dense console and a marketing page."
-      },
-      "ownership": {
-        "title": "Yours after install",
-        "description": "The CLI copies source, not a dependency. Nothing stops you rewriting a component the day after you add it."
-      }
-    }
-  },
   "docs": {
     "avatar": {
       "fallback": "If the photo is missing or fails to load, the avatar shows the initials, or the icon if there's no name.",
@@ -1140,15 +1072,1064 @@
     "copied": "Copied to clipboard",
     "status": "Copied"
   },
-  "footer": {
-    "attribution": "fasla.dev · by Smicolon GmbH",
-    "by": "by Smicolon GmbH",
-    "licence": "MIT · Kirchheim b. München"
-  },
   "notFound": {
     "title": "Page not found",
     "description": "This page may have moved, or it never existed.",
     "home": "Back to the home page",
     "docs": "Browse the docs"
+  },
+  "landing": {
+    "nav": {
+      "home": "Fasla home",
+      "label": "Main",
+      "docs": "Docs",
+      "components": "Components",
+      "github": "GitHub",
+      "lang": "العربية",
+      "langLabel": "Switch to Arabic",
+      "theme": "Toggle dark theme"
+    },
+    "cta": {
+      "start": "Get started"
+    },
+    "hero": {
+      "title": "Arabic‑first <nb><mark>blocks</mark><comma>,</comma></nb> <nb3>components & templates</nb3>",
+      "sub": "Direction is a property of every Fasla component. One React codebase, one Figma file, English and Arabic on launch day.",
+      "flipEn": "Flip the page",
+      "flipAr": "اقلب الصفحة",
+      "swLabel": "Page direction",
+      "xray": "Show components"
+    },
+    "sanad": {
+      "label": "The Sanad finance dashboard",
+      "url": "app.sanad.example/overview",
+      "mono": "S",
+      "brand": "Sanad",
+      "nav1": "Overview",
+      "nav2": "Transactions",
+      "nav3": "Cards",
+      "nav4": "Transfers",
+      "nav5": "Savings",
+      "secAcc": "Account",
+      "nav6": "Settings",
+      "user": "Personal account",
+      "userIni": "PA",
+      "card": "•••• 4821",
+      "title": "Overview",
+      "greet": "Good morning. Here is where your money went in 2025.",
+      "range": "1 Jan – 31 Dec 2025",
+      "rangeLabel": "Date range",
+      "export": "Export",
+      "s1": "Balance",
+      "s2": "Monthly spend",
+      "s3": "Savings goal",
+      "vsNov": "from November",
+      "goal": "SAR 34,000 of 50,000 · Hajj fund",
+      "chartT": "Balance, 2025",
+      "legend": "Month-end balance, SAR",
+      "months": "Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec",
+      "k": "k",
+      "tip": "SAR 184.3k",
+      "tblT": "Recent transactions",
+      "all": "View all",
+      "th1": "Counterparty",
+      "th2": "Date",
+      "th3": "Amount",
+      "th4": "Status",
+      "cur": "SAR",
+      "r1n": "Noura Al-Saud",
+      "r1t": "Transfer received",
+      "r1d": "28 Dec 2025",
+      "r2n": "Khalid Al-Harbi",
+      "r2t": "Transfer sent",
+      "r2d": "27 Dec 2025",
+      "r3n": "Faisal Al-Qahtani",
+      "r3t": "Split bill, Qahwa House",
+      "r3d": "24 Dec 2025",
+      "r4n": "Dar Properties",
+      "r4i": "DP",
+      "r4t": "Rent, January",
+      "r4d": "1 Jan 2026",
+      "done": "Completed",
+      "pend": "Pending",
+      "sched": "Scheduled"
+    },
+    "film": {
+      "label": "Fasla in action",
+      "desc": "A Fasla product assembles from components, flips to Arabic with one property, switches to dark, adapts to desktop, tablet and mobile, then shows the blocks library and the CLI.",
+      "c1": "Build",
+      "c2": "Direction",
+      "c3": "Theme",
+      "c4": "Responsive",
+      "c5": "Blocks",
+      "c6": "Own the source",
+      "chapters": "Chapters",
+      "unmute": "Turn sound on",
+      "mute": "Turn sound off",
+      "pause": "Pause the film",
+      "play": "Play the film"
+    },
+    "footer": {
+      "line": "Built in Germany by Smicolon GmbH · MIT core",
+      "place": "Kirchheim b. München",
+      "nav": "Footer",
+      "word": "fasla",
+      "credits": "Fasla is an Arabic-first React component library. Its components, blocks and templates are designed right-to-left from the start, not mirrored as an afterthought, and come with paired Cairo and Geist type, shared Tailwind tokens and a matching Figma library. You own the source, and you ship Arabic and English from one codebase."
+    },
+    "type": {
+      "title": "Cairo is a 1:1 twin of Geist.",
+      "lede": "Every step of the English ramp has an Arabic twin at the same size and weight. Only the line-height grows, so Arabic dots and ascenders have room to breathe.",
+      "en": "English",
+      "ar": "Arabic",
+      "note": "Each row shares one baseline. Flip the page and the columns trade places; the type does not change.",
+      "sampleEn": "Ship the Arabic release on launch day",
+      "sampleAr": "أطلق النسخة العربية في يوم الإطلاق"
+    },
+    "rules": {
+      "title": "What mirrors, what doesn't.",
+      "lede": "Fasla follows the rules Arabic readers expect. Pick a rule, or drag the line to compare English and Arabic.",
+      "drag": "Drag to compare English and Arabic",
+      "mirrors": "Mirrors",
+      "stays": "Stays",
+      "r1": {
+        "h": "Arrows and chevrons mirror",
+        "p": "They point the way the reader moves."
+      },
+      "r2": {
+        "h": "Progress fills from the start edge",
+        "p": "From the left in English, from the right in Arabic."
+      },
+      "r3": {
+        "h": "Toggles travel toward the end edge",
+        "p": "The thumb follows the reading direction."
+      },
+      "r6": {
+        "h": "Media controls don't mirror",
+        "p": "Play follows time, not text."
+      },
+      "r8": {
+        "h": "Phone numbers and code stay LTR",
+        "p": "Isolated, so digits and symbols never reorder."
+      },
+      "r4": {
+        "h": "The Fasla mark and comma never mirror",
+        "p": "Brand artwork is drawn once and placed as is."
+      },
+      "arcEn": "LTR · ENGLISH",
+      "arcAr": "RTL · ARABIC",
+      "spec": {
+        "en": {
+          "accounts": "Accounts",
+          "cards": "Cards",
+          "platinum": "Platinum",
+          "back": "Back",
+          "next": "Next",
+          "uploading": "Uploading statement",
+          "size": "4.1 of 6.6 MB",
+          "settings": "Settings",
+          "notifications": "Notifications",
+          "weekly": "Weekly summary",
+          "tour": "Fasla in 60 seconds",
+          "tourK": "Product tour",
+          "phone": "Phone",
+          "install": "Install the button",
+          "word": "fasla",
+          "builtWith": "Built with Fasla",
+          "call1": "Points right",
+          "call2": "Fills from the left",
+          "call3": "On sits right",
+          "call6": "Play points right",
+          "call8": "Reads left to right",
+          "call4": "Drawn once"
+        },
+        "ar": {
+          "accounts": "الحسابات",
+          "cards": "البطاقات",
+          "platinum": "البلاتينية",
+          "back": "رجوع",
+          "next": "التالي",
+          "uploading": "جارٍ رفع كشف الحساب",
+          "size": "<n>4.1</n> من <n>6.6</n> ميغابايت",
+          "settings": "الإعدادات",
+          "notifications": "الإشعارات",
+          "weekly": "الملخّص الأسبوعي",
+          "tour": "فاصلة في <n>60</n> ثانية",
+          "tourK": "جولة في المنتج",
+          "phone": "رقم الهاتف",
+          "install": "ثبّت مكوّن الزر",
+          "word": "فاصلة",
+          "builtWith": "مبني بفاصلة",
+          "call1": "يشير لليسار",
+          "call2": "يمتلئ من اليمين",
+          "call3": "التفعيل يسارًا",
+          "call6": "ما زال لليمين",
+          "call8": "ما زال كذلك",
+          "call4": "العلامة نفسها"
+        }
+      }
+    },
+    "atoms": {
+      "title": "{variants} atom variants, ready in Figma.",
+      "lede": "{n} atoms, each a Figma component set with its sizes, states, light and dark themes, and both directions.",
+      "count": "{n} variants, LTR and RTL",
+      "countLtr": "{n} variants, LTR only",
+      "foot": "TypeScript. MIT core. Built on shadcn/ui primitives.",
+      "names": {
+        "Button": "Button",
+        "Icon Button": "Icon Button",
+        "Radio": "Radio",
+        "Tooltip": "Tooltip",
+        "Alert": "Alert",
+        "Breadcrumb": "Breadcrumb",
+        "Pagination": "Pagination",
+        "Badge": "Badge",
+        "Avatar": "Avatar",
+        "Status Indicator": "Status Indicator",
+        "Rating": "Rating",
+        "Skeleton": "Skeleton",
+        "Separator": "Separator",
+        "Checkbox": "Checkbox",
+        "Switch": "Switch",
+        "Navbar": "Navbar",
+        "Carousel": "Carousel",
+        "Content Carousel": "Content Carousel",
+        "Modal": "Modal",
+        "Input": "Input",
+        "Alert Dialog": "Alert Dialog",
+        "Command Menu": "Command Menu",
+        "Table": "Table",
+        "Drawer": "Drawer",
+        "Textarea": "Textarea",
+        "Progress": "Progress",
+        "Sidebar Item": "Sidebar Item",
+        "Slider": "Slider",
+        "OTP Input": "OTP Input",
+        "Calendar": "Calendar",
+        "Date Picker": "Date Picker",
+        "Select": "Select",
+        "Input Number": "Input Number",
+        "Sonner": "Sonner",
+        "Accordion": "Accordion",
+        "Popover": "Popover",
+        "Timeline": "Timeline",
+        "Dropdown Menu": "Dropdown Menu",
+        "Context Menu": "Context Menu",
+        "Toggle": "Toggle",
+        "Toggle Group": "Toggle Group",
+        "Menubar": "Menubar",
+        "Combobox": "Combobox"
+      }
+    },
+    "blocks": {
+      "title": "Blocks for every page, in both directions.",
+      "lede": "Copy a full-width section into your app. Every block ships in English and Arabic and mirrors to right-to-left on its own.",
+      "all": "Browse all blocks",
+      "count": "{count, plural, one {{num} block} other {{num} blocks}}",
+      "new": "+{num} New",
+      "families": {
+        "hero": "Hero",
+        "feat": "Features",
+        "gallery": "Gallery",
+        "ban": "Banners",
+        "auth": "Authentication",
+        "price": "Billing & payments",
+        "checkout": "Checkout",
+        "order": "Order summary",
+        "dash": "Dashboard",
+        "prod": "Product lists",
+        "chat": "Messages",
+        "ai": "AI assistant",
+        "faq": "FAQ",
+        "err": "Error states",
+        "cal": "Date pickers",
+        "toast": "Notifications"
+      }
+    },
+    "templates": {
+      "title": "Templates, ready for launch day.",
+      "lede": "Complete bilingual sites built from Fasla blocks. Pick one, swap the content, and ship English and Arabic together.",
+      "all": "See all templates",
+      "prev": "Previous templates",
+      "next": "Next templates",
+      "items": {
+        "rihla": {
+          "name": "Rihla",
+          "kind": "Travel & stays"
+        },
+        "qahwahouse": {
+          "name": "Qahwa House",
+          "kind": "Café & shop"
+        },
+        "sanad": {
+          "name": "Sanad",
+          "kind": "Finance dashboard"
+        },
+        "dar": {
+          "name": "Dar",
+          "kind": "Real estate"
+        },
+        "mahaam": {
+          "name": "Mahaam",
+          "kind": "AI workspace"
+        },
+        "majalla": {
+          "name": "Majalla",
+          "kind": "Magazine"
+        }
+      }
+    },
+    "blk": {
+      "hero": {
+        "lg": "Rihla",
+        "ln": [
+          "Stays",
+          "Experiences",
+          "Journal"
+        ],
+        "sg": "Sign in",
+        "k": "Winter season · AlUla",
+        "h": "Wake up\nin the desert.",
+        "f": [
+          [
+            "Where",
+            "AlUla, Saudi Arabia"
+          ],
+          [
+            "When",
+            "12 – 16 Oct"
+          ],
+          [
+            "Guests",
+            "2 adults"
+          ]
+        ],
+        "go": "Search"
+      },
+      "price": {
+        "h": "Plans that grow with you",
+        "seg": [
+          "Monthly",
+          "Yearly"
+        ],
+        "save": "−20%",
+        "cur": "SAR",
+        "per": "/ mo",
+        "pop": "Popular",
+        "t": [
+          [
+            "Starter",
+            "0",
+            [
+              "1 storefront",
+              "Basic analytics",
+              "Email support"
+            ],
+            "Start free"
+          ],
+          [
+            "Pro",
+            "49",
+            [
+              "5 storefronts",
+              "Live inventory",
+              "Arabic and English"
+            ],
+            "Upgrade"
+          ],
+          [
+            "Team",
+            "129",
+            [
+              "Unlimited stores",
+              "Roles and SSO",
+              "Priority support"
+            ],
+            "Talk to sales"
+          ]
+        ]
+      },
+      "stats": {
+        "t": "Revenue",
+        "r": "Last 30 days",
+        "v": "SAR 184,320",
+        "up": "+12.4%",
+        "k": [
+          [
+            "1,284",
+            "Orders"
+          ],
+          [
+            "3.8%",
+            "Conversion"
+          ]
+        ]
+      },
+      "prod": {
+        "h": "New in the studio",
+        "ch": [
+          "All",
+          "Cups",
+          "Pitchers",
+          "Sets"
+        ],
+        "p": [
+          [
+            "q-main",
+            "Chalk cup set",
+            "SAR 460",
+            "New"
+          ],
+          [
+            "q-pour",
+            "Milk pitcher",
+            "SAR 120",
+            ""
+          ],
+          [
+            "q-sugar2",
+            "Sugar pot",
+            "SAR 85",
+            "Bestseller"
+          ]
+        ]
+      },
+      "cal": {
+        "m": "October 2026",
+        "wd": [
+          "Su",
+          "Mo",
+          "Tu",
+          "We",
+          "Th",
+          "Fr",
+          "Sa"
+        ],
+        "n": "4 nights",
+        "p": "SAR 5,000 total",
+        "b": "Reserve"
+      },
+      "chat": {
+        "who": "Noura · Host",
+        "st": "Online",
+        "m": [
+          "Hi Khalid, your villa is ready for Thursday.",
+          "Perfect. Can we check in early?",
+          "Yes, from 1 pm. Here is your stay:"
+        ],
+        "card": [
+          "Oasis House",
+          "12 – 16 Oct · 2 guests"
+        ],
+        "ph": "Write a message…"
+      },
+      "auth": {
+        "loc": "Canyon Lodge, AlUla",
+        "h": "Welcome back",
+        "p": "Sign in to manage your trips.",
+        "l1": "Email",
+        "v1": "khalid@rihla.travel",
+        "l2": "Password",
+        "rm": "Remember me",
+        "fg": "Forgot?",
+        "b": "Sign in",
+        "or": "or",
+        "b2": "Email me a sign-in link"
+      },
+      "ban": {
+        "k": "Riyadh Season",
+        "h": "The city lights up in",
+        "cd": [
+          [
+            "03",
+            "days"
+          ],
+          [
+            "14",
+            "hrs"
+          ],
+          [
+            "22",
+            "min"
+          ],
+          [
+            "09",
+            "sec"
+          ]
+        ],
+        "b": "Get tickets"
+      },
+      "faq": {
+        "h": "Questions, answered",
+        "q": [
+          [
+            "Can I change my dates?",
+            "Yes. Free changes up to 48 hours before check-in."
+          ],
+          [
+            "Is breakfast included?",
+            ""
+          ],
+          [
+            "Do you offer airport pickup?",
+            ""
+          ],
+          [
+            "How do I pay?",
+            ""
+          ]
+        ]
+      },
+      "err": {
+        "h": "Lost in the dunes.",
+        "p": "The page you are looking for moved or never existed.",
+        "b": "Back home",
+        "b2": "Contact us"
+      },
+      "feat": {
+        "h": "Built for real stays",
+        "p": "Every component works in Arabic and English.",
+        "t": [
+          [
+            "Instant booking",
+            "Confirm in one tap"
+          ],
+          [
+            "85 verified hosts",
+            "Checked in person"
+          ],
+          [
+            "92% occupancy",
+            "This winter season"
+          ]
+        ]
+      },
+      "toast": {
+        "t": [
+          [
+            "Payment received",
+            "SAR 3,750 from Khalid",
+            "now"
+          ],
+          [
+            "Booking confirmed",
+            "Oasis House · 12 Oct",
+            "2m"
+          ],
+          [
+            "Check-in tomorrow",
+            "Door code sent by SMS",
+            "1h"
+          ]
+        ]
+      },
+      "gallery": {
+        "h": "Moments from AlUla",
+        "ch": [
+          "All",
+          "Stays",
+          "Dining",
+          "Desert"
+        ],
+        "more": "View all",
+        "cap": [
+          [
+            "Dunes at dawn",
+            "Desert"
+          ],
+          [
+            "Oasis House",
+            "Stays"
+          ],
+          [
+            "Old town",
+            "Explore"
+          ],
+          [
+            "Morning coffee",
+            "Dining"
+          ]
+        ]
+      },
+      "checkout": {
+        "lg": "Qahwa House",
+        "h": "Checkout",
+        "st": [
+          "Bag",
+          "Delivery",
+          "Payment"
+        ],
+        "c": "Contact",
+        "em": "sara@qahwa.house",
+        "d": "Delivery",
+        "ad": "Al Olaya, Riyadh 12211",
+        "p": "Payment",
+        "cn": "•••• •••• •••• 4821",
+        "ex": "08 / 28",
+        "cv": "•••",
+        "b": "Pay SAR 805",
+        "it": [
+          [
+            "q-main",
+            "Chalk cup set",
+            "SAR 460"
+          ],
+          [
+            "q-pour",
+            "Milk pitcher × 2",
+            "SAR 240"
+          ]
+        ],
+        "tot": [
+          [
+            "Subtotal",
+            "SAR 700"
+          ],
+          [
+            "VAT 15%",
+            "SAR 105"
+          ],
+          [
+            "Total",
+            "SAR 805"
+          ]
+        ]
+      },
+      "dhero": {
+        "lg": "Dar",
+        "ln": [
+          "Buy",
+          "Rent",
+          "Off-plan"
+        ],
+        "sg": "List a home",
+        "k": "New this week · Dubai Marina",
+        "h": "Homes with\na view.",
+        "f": [
+          [
+            "Location",
+            "Dubai Marina"
+          ],
+          [
+            "Type",
+            "Apartment"
+          ],
+          [
+            "Budget",
+            "AED 2–3M"
+          ]
+        ],
+        "go": "Search"
+      },
+      "ai": {
+        "lg": "Mahaam",
+        "tag": "Assistant",
+        "h": "What should we plan today?",
+        "ph": "Ask Mahaam to plan, write or summarise…",
+        "ch": [
+          "Plan my week",
+          "Summarise the meeting",
+          "Draft a reply"
+        ],
+        "m": "Fast mode"
+      },
+      "dash": {
+        "lg": "Sanad",
+        "nav": [
+          "Overview",
+          "Payments",
+          "Cards",
+          "Savings"
+        ],
+        "t": "Overview",
+        "s": "Good morning, Khalid",
+        "range": "Jan – Dec 2025",
+        "k": [
+          [
+            "Balance",
+            "SAR 184,320",
+            "+4.2%"
+          ],
+          [
+            "Monthly spend",
+            "SAR 12,940",
+            "−3.1%"
+          ],
+          [
+            "Savings goal",
+            "68%",
+            ""
+          ]
+        ],
+        "ch": "Balance by month",
+        "mo": "J,F,M,A,M,J,J,A,S,O,N,D",
+        "tx": [
+          [
+            "p-noura",
+            "Noura Al-Saud",
+            "+4,500"
+          ],
+          [
+            "p-khalid",
+            "Khalid Al-Harbi",
+            "−1,250"
+          ],
+          [
+            "p-faisal",
+            "Faisal Al-Qahtani",
+            "+186"
+          ]
+        ]
+      },
+      "order": {
+        "h": "Your order",
+        "n": "3 items",
+        "it": [
+          [
+            "q-main",
+            "Chalk cup set",
+            "Sand · 4 cups",
+            "460"
+          ],
+          [
+            "q-pour",
+            "Milk pitcher",
+            "Qty 2",
+            "240"
+          ]
+        ],
+        "promo": "Promo code",
+        "ap": "Apply",
+        "r": [
+          [
+            "Subtotal",
+            "SAR 700"
+          ],
+          [
+            "Delivery",
+            "Free"
+          ],
+          [
+            "VAT 15%",
+            "SAR 105"
+          ]
+        ],
+        "tot": "Total",
+        "tv": "SAR 805",
+        "b": "Checkout",
+        "sec": "Secure payment"
+      },
+      "app": {
+        "lg": "Qahwa House",
+        "k": "Now on mobile",
+        "h": "Your morning cup,\none tap away.",
+        "p": "Order ahead, skip the queue and collect in two minutes.",
+        "b1": [
+          "Download for",
+          "iOS"
+        ],
+        "b2": [
+          "Get it on",
+          "Android"
+        ],
+        "card": [
+          "Spanish latte",
+          "Ready in 2 min"
+        ],
+        "pr": "SAR 18"
+      },
+      "mag": {
+        "lg": "Majalla",
+        "ln": [
+          "Culture",
+          "Travel",
+          "Food",
+          "Design"
+        ],
+        "sb": "Subscribe",
+        "k": "Cover story",
+        "h": "The old town\nwakes up again.",
+        "p": "Inside AlUla’s mud-brick lanes, a new generation of makers is moving back in.",
+        "by": "Words by Noura Al-Saud · 8 min read",
+        "a": [
+          [
+            "f-coffee",
+            "Food",
+            "A cup of gahwa, done right"
+          ],
+          [
+            "f-riyadh",
+            "City",
+            "Riyadh after dark"
+          ],
+          [
+            "f-oasis",
+            "Design",
+            "Courtyards that keep cool"
+          ]
+        ]
+      },
+      "read": {
+        "h": "Most read this week",
+        "it": [
+          [
+            "f-hero",
+            "Travel",
+            "Sunrise over Hegra, minute by minute",
+            "6 min"
+          ],
+          [
+            "f-lodge",
+            "Stay",
+            "A night in a canyon lodge",
+            "5 min"
+          ],
+          [
+            "f-dunes",
+            "Desert",
+            "How the dunes move",
+            "4 min"
+          ],
+          [
+            "f-cupset",
+            "Design",
+            "The potters of the new Riyadh",
+            "7 min"
+          ]
+        ]
+      },
+      "news": {
+        "h": "The Sunday letter",
+        "p": "One email a week. Places, food and design from the region, in Arabic and English.",
+        "ph": "Your email",
+        "b": "Subscribe"
+      }
+    },
+    "parity": {
+      "eyebrow": "Storybook",
+      "title": "Same tokens on both sides.",
+      "lede": "The Figma component and the React component expose the same properties, bound to the same tokens. Change a property in the panel and the button and its JSX follow. Every component works this way in our Storybook.",
+      "storybook": "Explore in Storybook",
+      "newTab": "opens in a new tab",
+      "dir": "Direction",
+      "variant": "Variant",
+      "size": "Size",
+      "icon": "Trailing icon",
+      "loading": "Loading",
+      "disabled": "Disabled",
+      "live": "Live component",
+      "labelEn": "Continue",
+      "labelAr": "متابعة",
+      "loadingEn": "Loading",
+      "loadingAr": "جارٍ التحميل"
+    },
+    "props": {
+      "title": "What you get",
+      "lede": "Everything a bilingual product needs on day one, in code you can read.",
+      "p1": {
+        "t": "Direction is a prop",
+        "d": "LTR or RTL is set on the component, not patched in a stylesheet."
+      },
+      "p2": {
+        "t": "Twin type ramps",
+        "d": "Cairo for Arabic matches Geist for English, size for size."
+      },
+      "p3": {
+        "t": "Every state ships",
+        "d": "Loading, empty, error and disabled, for all {count} components."
+      },
+      "p4": {
+        "t": "Themes and density",
+        "d": "Light and dark, plus compact, comfortable and spacious profiles."
+      },
+      "p5": {
+        "t": "Figma ↔ code parity",
+        "d": "The same tokens in the Figma file and in your codebase."
+      },
+      "p6": {
+        "t": "Agent-ready docs",
+        "d": "Content rules that let AI agents fill components correctly."
+      },
+      "card": {
+        "en": {
+          "name": "Noura Al-Saud",
+          "role": "Product designer · Sanad",
+          "active": "Active",
+          "label": "Work email",
+          "button": "Send invite"
+        },
+        "ar": {
+          "name": "نورة آل سعود",
+          "role": "مصممة منتجات، سند",
+          "active": "نشطة",
+          "label": "البريد الإلكتروني للعمل",
+          "button": "أرسل الدعوة"
+        }
+      }
+    },
+    "wall": {
+      "title": "The Wall of <love>Love</love>",
+      "lede": "What people say about working with the team behind Fasla.",
+      "reviewLabel": "{name}'s review on {site}",
+      "reviews": [
+        {
+          "who": "Founder, BrandBuddy",
+          "t": "Having the team by my side has been invaluable. From technical guidance to working through ideas, their expertise and feedback have made a real difference."
+        },
+        {
+          "who": "Sales & Marketing Consultant, Nexpay",
+          "t": "Fabulous team of people. The team listened to what we wanted, communicated well, and responded positively when we changed the design halfway through! I can thoroughly recommend Anders and his agency. We are very pleased with the work they have done for us."
+        },
+        {
+          "who": "Founder, Design Make Send",
+          "t": "Anders and the team have been amazing to work with over the last year. They have integrity, commitment to the job, fantastic communication and they have delivered a great product at the end of the day. There were of course some challenges in our design and planning, but all projects have those. Many things I did not consider and some things that bit us along the way. Throughout that Anders was great at managing the project, he was clear about what was included and what was a new requirement that we were adding on. It was easy to understand what I was commiting to and what the budget was changing to. I could not fault them and for sure I will be working with them on an ongoing basis to continuiously develop the system we built."
+        },
+        {
+          "who": "CEO, Ace Studios",
+          "t": "This project took many detours for me with how complex it was, and I'm grateful to them for helping me find a path forward to getting a framework in place! The team was easy to communicate with, and went out of their way to help me during the weekend when I was struggling. I would definitely recommend them to anyone else in the future. Thanks again!"
+        },
+        {
+          "who": "Founder, FarsideDev",
+          "t": "I have used several different developers on Upwork, and I can genuinely say that Mohamed and his team have been the best! I highly recommend them, and I will absolutely use them again!"
+        },
+        {
+          "who": "Founder, Klubaro",
+          "t": "Wowed by the team's work on our SaaS front-end review! Their expertise & communication were top-notch, and the impact on our platform will be massive. Quick wins & long-term improvement propositions - all actionable & delivered fast! ⚡️ The quality was outstanding for the time invested. Can't recommend them enough!"
+        },
+        {
+          "who": "Founder & CEO, Pafinda",
+          "t": "The team was crucial in shaping our MVP at Pafinda. Their expertise and strategic guidance balanced our ambitions, budget, and timeline, enhancing our overall understanding. I highly recommend the team for IT consultancy services."
+        },
+        {
+          "who": "Co-Founder, Piamotech",
+          "t": "I'm thrilled with the transformative journey with the team. They crafted our online identity, delivering a stunning website and functional admin dashboard. Their expertise and creativity were key, creating a digital solution that truly reflects who we are. We couldn't be happier and look forward to future collaborations."
+        },
+        {
+          "who": "Founder, Deliverability Ninja",
+          "t": "The team is a great example of a top-tier Dev agency. Excellent communication, and the SDD provided was crystal clear from day 1. Anders and Mohamed were available immediately for any questions, and the dev quality was enterprise level. My build was very complicated, and they completed the project easily. I would strongly recommend everyone to work with them."
+        },
+        {
+          "who": "Founder, Rentrant",
+          "t": "Cons: They cost a lot. Pros: They do a good job. You get what you pay for. I don’t think Mohamed is capable of doing a bad job. After spending time with different developers on this site, it’s quite relieving to work with someone who outputs quality work up to industry standards. My only real gripe was that the team was somewhat lacking in knowledge on the implementation of the maps, but they didn’t charge for the learning curve. Overall, I’m happy with the site. It is what I envisioned and a bit more. I will be working with Mohamed in the future."
+        },
+        {
+          "who": "Advisor, 1Uni",
+          "t": "Partnering with the team transformed our approach to higher education. They created an AI-powered platform that streamlined university selection and applications. Their Student Digital Body Language (SDBL) system revolutionized our understanding of student behavior. I highly recommend the team for their top-notch software solutions."
+        },
+        {
+          "who": "CEO, AccSellerate",
+          "t": "They were determined to get the project right the first time."
+        },
+        {
+          "who": "Senior Consultant, allea consult GmbH",
+          "t": "I want to highlight their team's exceptional spontaneity, flexibility, and rapid responsiveness"
+        },
+        {
+          "who": "CEO, Web Help Agency",
+          "t": "They showed strong dedication to ensuring the app was secure and met all data regulations"
+        }
+      ],
+      "rated": "Rated {rating} out of 5"
+    },
+    "faq": {
+      "kicker": "Questions",
+      "title": "Honest<br></br>questions.",
+      "ask": "Still have a question?",
+      "askLink": "Ask on GitHub",
+      "items": [
+        {
+          "q": "What is Fasla?",
+          "a": "Fasla (فاصلة) is a bilingual design system and React component library by Smicolon. Every component ships in English and Arabic, left-to-right and right-to-left, light and dark."
+        },
+        {
+          "q": "How is it different from shadcn/ui?",
+          "a": "Fasla is built on shadcn/ui primitives and keeps its copy-the-source model. The difference is direction: RTL and the Arabic type ramp are part of every component from the first commit."
+        },
+        {
+          "q": "Do I design my Arabic screens separately?",
+          "a": "No. An Arabic screen uses the same components as the English one with one property changed, Direction = RTL. Layout, icons and spacing mirror on their own."
+        },
+        {
+          "q": "Is it free?",
+          "a": "Yes. The core is MIT licensed and free forever, for personal and commercial work. Pro is $149 and Team is $399, both one-time payments with lifetime access to the premium blocks, templates and the Figma file. <link>See the plans</link>."
+        },
+        {
+          "q": "How do I add it to my project?",
+          "a": "Run init once, then add components one by one. The CLI copies each component's source into your repo, so you edit it like any file you wrote."
+        },
+        {
+          "q": "Is there a Figma file?",
+          "a": "Yes. The Figma file is the source of truth and uses the same tokens as the code, so a designer's choice and a developer's build stay one decision."
+        },
+        {
+          "q": "Which fonts and numerals does it use?",
+          "a": "Geist for English and Cairo for Arabic, on twin type ramps. Arabic copy uses Western numerals, and brand and technical terms stay in Latin script."
+        },
+        {
+          "q": "Can AI agents use the components?",
+          "a": "That's where it's heading. Each component is documented with clear content rules, so an agent can pick the right one and fill it without breaking the layout."
+        }
+      ]
+    },
+    "pricing": {
+      "title": "Free to start. Pay once for more.",
+      "lede": "The core is MIT for any project. Pro and Team add a commercial licence for premium blocks, templates and the Figma file.",
+      "best": "Best value",
+      "free": "free forever",
+      "once": "one-time",
+      "note": "One-time payment. Lifetime access. Unlimited projects.",
+      "start": "Get started",
+      "choosePro": "Choose Pro",
+      "chooseTeam": "Choose Team",
+      "os": {
+        "name": "Open source",
+        "desc": "For anyone starting with Fasla.",
+        "features": [
+          "Unlimited users and projects",
+          "Commercial use under MIT",
+          "All {count} components, LTR and RTL",
+          "CLI that copies the source into your project",
+          "Community support on GitHub",
+          "Premium blocks and templates",
+          "The Fasla Figma file"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "desc": "For individual designers and developers.",
+        "features": [
+          "Single user access",
+          "Unlimited commercial projects",
+          "Everything in Open source",
+          "All premium blocks and templates",
+          "The Fasla Figma file, {variants} variants",
+          "Lifetime access and free updates",
+          "Support within 48 business hours"
+        ]
+      },
+      "team": {
+        "name": "Team",
+        "desc": "For growing product teams.",
+        "features": [
+          "Up to 10 seats",
+          "Unlimited commercial projects",
+          "Everything in Pro",
+          "The Figma file for every seat",
+          "Lifetime access and free updates",
+          "Priority support within 24 business hours"
+        ]
+      },
+      "notIncluded": "Not included"
+    },
+    "final": {
+      "lede": "One command sets up your project. Add components as you need them, and keep every line."
+    },
+    "soon": {
+      "meta": "Coming soon | Fasla",
+      "badge": "On the way",
+      "title": "Coming soon",
+      "lede": "The block library, the templates and the Pro and Team plans are on their way. The open-source components and the docs are ready to use today.",
+      "docs": "Read the docs",
+      "home": "Back to home"
+    }
   }
 }
