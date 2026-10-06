@@ -2,14 +2,15 @@
 
 import { useRef, useSyncExternalStore } from "react"
 import { cn } from "@/lib/utils"
-import { Initials } from "./initials"
 import { useNearView } from "./use-near-view"
 import type { Platform } from "./wall-platforms"
 
 /** One testimonial, ready to draw: who, where it was posted, and the quote. */
 export type WallItem = {
   name: string
-  initials: string
+  /** The picture smicolon.com shows: a portrait (`photo`) or the company's logo (`logo`). */
+  image: string
+  kind: "photo" | "logo"
   who: string
   t: string
   platform?: Platform
@@ -81,7 +82,7 @@ function drift(quotes: string[]) {
 }
 
 /**
- * One testimonial: initials, name, role, the badge of the site it was posted
+ * One testimonial: picture, name, role, the badge of the site it was posted
  * on, and the quote in full. `copy` marks the loop's repeat, whose badge
  * leaves the Tab order.
  */
@@ -90,7 +91,19 @@ function ReviewCard({ item, copy = false }: { item: WallItem; copy?: boolean }) 
   return (
     <article className="rounded-[14px] border bg-card px-[22px] py-5 shadow-sm">
       <div className="mb-3 flex items-center gap-3">
-        <Initials className="size-11 text-sm">{item.initials}</Initials>
+        {/* As smicolon.com draws them: a photo fills the circle; a logo, often
+            white, sits padded on a dark disc in both themes. Both keep a 1px
+            ring so they hold their edge against the card. Decorative: the name
+            is next to it. */}
+        <img
+          src={item.image}
+          alt=""
+          width={44}
+          height={44}
+          loading="lazy"
+          decoding="async"
+          className={cn("size-11 shrink-0 rounded-full border", item.kind === "logo" ? "bg-fasla-ink object-contain p-2" : "bg-muted object-cover")}
+        />
         <span className="flex min-w-0 flex-1 flex-col items-start">
           <b className="w-full truncate text-[15px] font-semibold leading-[1.3]">{item.name}</b>
           <span className="text-[13px] leading-[1.3] text-muted-foreground">{item.who}</span>
