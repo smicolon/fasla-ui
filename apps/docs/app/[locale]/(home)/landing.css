@@ -329,6 +329,13 @@
   }
 }
 
+/* The templates rail starts on the content edge and runs to the page edge. */
+.l-tp-rail {
+  --tp-pad: max(var(--l-gutter), calc((100vw - 1248px) / 2));
+  padding-inline: var(--tp-pad);
+  scroll-padding-inline: var(--tp-pad);
+}
+
 /* ── Currency before a StatsCard value ────────────────────────────────
    StatsCard takes its value as text, so the small "SAR" / "ر.س" the
    reference sets before the number is drawn here, from --l-cur on the card.

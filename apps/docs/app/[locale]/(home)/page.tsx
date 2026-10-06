@@ -14,6 +14,7 @@ import { MirrorCompare } from "./_components/mirror-compare"
 import { installCommand, landingLinks } from "./_components/links"
 import { FlipSettled } from "./_components/locale-flip"
 import { SanadWindow } from "./_components/sanad-window"
+import { TemplatesSection } from "./_components/templates-section"
 import { TypeSpecimen } from "./_components/type-specimen"
 import { XrayStage } from "./_components/xray-stage"
 
@@ -130,6 +131,7 @@ export default async function HomePage({
         <MirrorCompare />
         <AtomsTable />
         <BlocksGrid />
+        <TemplatesSection />
       </main>
 
       <LandingFooter />
