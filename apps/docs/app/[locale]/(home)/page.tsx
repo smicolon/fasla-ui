@@ -11,6 +11,7 @@ import { LandingNav } from "./_components/landing-nav"
 import { installCommand, landingLinks } from "./_components/links"
 import { FlipSettled } from "./_components/locale-flip"
 import { SanadWindow } from "./_components/sanad-window"
+import { TypeSpecimen } from "./_components/type-specimen"
 import { XrayStage } from "./_components/xray-stage"
 
 /**
@@ -121,6 +122,8 @@ export default async function HomePage({
             <FilmPlayer />
           </div>
         </section>
+
+        <TypeSpecimen />
       </main>
 
       <LandingFooter />

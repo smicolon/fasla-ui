@@ -1175,6 +1175,15 @@
       "nav": "Footer",
       "word": "fasla",
       "credits": "Fasla is an Arabic-first React component library. Its components, blocks and templates are designed right-to-left from the start, not mirrored as an afterthought, and come with paired Cairo and Geist type, shared Tailwind tokens and a matching Figma library. You own the source, and you ship Arabic and English from one codebase."
+    },
+    "type": {
+      "title": "Cairo is a 1:1 twin of Geist.",
+      "lede": "Every step of the English ramp has an Arabic twin at the same size and weight. Only the line-height grows, so Arabic dots and ascenders have room to breathe.",
+      "en": "English",
+      "ar": "Arabic",
+      "note": "Each row shares one baseline. Flip the page and the columns trade places; the type does not change.",
+      "sampleEn": "Ship the Arabic release on launch day",
+      "sampleAr": "أطلق النسخة العربية في يوم الإطلاق"
     }
   }
 }
