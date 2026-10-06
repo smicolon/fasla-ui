@@ -32,9 +32,9 @@ const PEOPLE: { name: string; image: string; kind: "photo" | "logo"; platform?: 
 ]
 
 /**
- * "Smicolon clients on the Wall of Love." Smicolon's real testimonials in
- * columns that drift slowly, the middle one the other way, pausing while
- * pointed at or focused (WallColumns).
+ * "The Wall of Love." Smicolon's real testimonials in columns that drift
+ * slowly, the middle one the other way, pausing while pointed at or focused
+ * (WallColumns).
  */
 export async function ReviewWall() {
   const t = await getTranslations("landing.wall")

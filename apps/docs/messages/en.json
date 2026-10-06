@@ -1967,8 +1967,8 @@
       }
     },
     "wall": {
-      "title": "Smicolon clients on the Wall of <love>Love</love>",
-      "lede": "Fasla is made by Smicolon. Here is what Smicolon's clients say about working with the team, in their own words, as published on smicolon.com.",
+      "title": "The Wall of <love>Love</love>",
+      "lede": "What people say about working with the team behind Fasla.",
       "reviewLabel": "{name}'s review on {site}",
       "reviews": [
         {
