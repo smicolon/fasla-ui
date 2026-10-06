@@ -7,6 +7,8 @@ import { platformSite, type Platform } from "./wall-platforms"
  * Smicolon's published testimonials, newest first, as smicolon.com shows them
  * (its CMS, read 6 Oct 2026). The quotes and roles are in the message files:
  * the English word for word, the Arabic translated. Names stay as written.
+ * For the three Clutch reviews the quote is the reviewer's own heading there:
+ * the body smicolon.com shows for them is Clutch's third-person summary.
  * The pictures are the ones smicolon.com shows: Rasmus Aaberg's photo, and
  * each company's logo for the rest.
  * A badge links to the review where it was posted; testimonials sent to
