@@ -39,6 +39,11 @@ function TemplateCard({ id, stack }: (typeof TEMPLATES)[number]) {
   const near = useNearView(box)
   const total = stack.reduce((sum, [, h]) => sum + h, 0)
 
+  // A picture, not a form: its buttons and fields are never focusable.
+  useEffect(() => {
+    if (box.current) box.current.inert = true
+  }, [])
+
   useEffect(() => {
     const el = box.current
     if (!el) return

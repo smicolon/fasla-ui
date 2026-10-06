@@ -158,6 +158,8 @@ export function AnnotatedCard({ components }: { components: number }) {
           onMouseLeave={() => setHeld(false)}
           className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.12fr)_minmax(0,1fr)] items-center gap-11 max-[1080px]:grid-cols-2 max-[1080px]:gap-5 max-[620px]:grid-cols-1"
         >
+          // Focus holds a callout like hover does; leaving the group lets the cycle resume.
+          onBlur={(e) => !e.currentTarget.contains(e.relatedTarget) && setHeld(false)}
           <div className="grid gap-3.5">{[0, 1, 2].map((i) => callout(i, "start"))}</div>
 
           <div

@@ -41,7 +41,7 @@ export function SanadChart({
   useEffect(() => {
     const el = box.current
     if (!el) return
-    const observer = new ResizeObserver(([entry]) => setWidth(Math.max(280, Math.round(entry.contentRect.width))))
+    const observer = new ResizeObserver(([entry]) => setWidth(Math.round(entry.contentRect.width)))
     observer.observe(el)
     return () => observer.disconnect()
   }, [])
@@ -58,9 +58,9 @@ export function SanadChart({
   const y = (v: number) => padTop + (1 - (v - MIN) / (MAX - MIN)) * (h - padTop - padBottom)
 
   const names = months.split(",")
-  // Every other month when the labels would collide, counted back from
+  // As many months apart as the labels need not to collide, counted back from
   // December so the last label always shows and never crowds the one before.
-  const every = step < (rtl ? 50 : 34) ? 2 : 1
+  const every = Math.max(1, Math.ceil((rtl ? 50 : 34) / step))
   const line = DATA.map((v, i) => `${i ? "L" : "M"}${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join("")
   const last = DATA.length - 1
   const lx = x(last)

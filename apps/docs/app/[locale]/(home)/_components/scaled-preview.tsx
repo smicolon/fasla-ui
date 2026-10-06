@@ -39,6 +39,11 @@ export function ScaledPreview({
   const [frame, setFrame] = useState<{ z: number; x: number; y: number; h: number } | null>(null)
   const near = useNearView(box)
 
+  // A picture, not a form: its buttons and fields are never focusable.
+  useEffect(() => {
+    if (box.current) box.current.inert = true
+  }, [])
+
   useEffect(() => {
     const el = box.current
     if (!el) return
