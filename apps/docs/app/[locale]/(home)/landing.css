@@ -389,7 +389,8 @@
   --dur: 33s;
 }
 
-.l-wall:hover .l-wall-col {
+.l-wall:hover .l-wall-col,
+.l-wall:focus-within .l-wall-col {
   animation-play-state: paused;
 }
 
@@ -430,9 +431,15 @@
     animation: none;
   }
 
+  /* Still: a box that scrolls, without the loop's repeat. */
   .l-wall {
     height: auto;
     max-height: 720px;
+    overflow-y: auto;
+  }
+
+  .l-wall-dup {
+    display: none;
   }
 }
 

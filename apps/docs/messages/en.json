@@ -1967,70 +1967,65 @@
       }
     },
     "wall": {
-      "title": "The Wall of",
-      "love": "Love",
-      "lede": "What product teams say after shipping Arabic and English from one set of components.",
-      "note": "Illustrative reviews for this demo.",
+      "title": "Smicolon clients on the Wall of <love>Love</love>",
+      "lede": "Fasla is made by Smicolon. Here is what Smicolon's clients say about working with the team, in their own words, as published on smicolon.com.",
+      "reviewLabel": "{name}'s review on {site}",
       "reviews": [
         {
-          "name": "Noura Al-Qahtani",
-          "who": "Product designer",
-          "t": "We used to design every screen twice. With Fasla the Arabic version is the same frame with Direction set to RTL."
+          "who": "Founder, BrandBuddy",
+          "t": "Having Smicolon by my side has been invaluable. From technical guidance to working through ideas, their expertise and feedback have made a real difference."
         },
         {
-          "name": "Omar Haddad",
-          "who": "Frontend lead",
-          "t": "The CLI copies the source into our repo, so we own every line. No black box, no fighting overrides."
+          "who": "Sales & Marketing Consultant, Nexpay",
+          "t": "Fabulous team of people. The team listened to what we wanted, communicated well, and responded positively when we changed the design halfway through! I can thoroughly recommend Anders and his agency. We are very pleased with the work they have done for us."
         },
         {
-          "name": "Layla Mansour",
-          "who": "Design engineer",
-          "t": "Cairo and Geist on the same type ramp means the Arabic headings finally look like they belong."
+          "who": "Founder, Design Make Send",
+          "t": "Anders and SmiColon have been amazing to work with over the last year. They have integrity, commitment to the job, fantastic communication and they have delivered a great product at the end of the day. There were of course some challenges in our design and planning, but all projects have those. Many things I did not consider and some things that bit us along the way. Throughout that Anders was great at managing the project, he was clear about what was included and what was a new requirement that we were adding on. It was easy to understand what I was commiting to and what the budget was changing to. I could not fault them and for sure I will be working with them on an ongoing basis to continuiously develop the system we built."
         },
         {
-          "name": "Khalid Al-Otaibi",
-          "who": "CTO",
-          "t": "We launched in Arabic on day one instead of promising it for version two. That alone was worth it."
+          "who": "CEO, Ace Studios",
+          "t": "This project took many detours for me with how complex it was, and I'm grateful to them for helping me find a path forward to getting a framework in place! The team was easy to communicate with, and went out of their way to help me during the weekend when I was struggling. I would definitely recommend them to anyone else in the future. Thanks again!"
         },
         {
-          "name": "Sara Nasser",
-          "who": "UX writer",
-          "t": "Every component ships its empty and error states, so the Arabic copy has a home before launch."
+          "who": "Founder, FarsideDev",
+          "t": "I have used several different developers on Upwork, and I can genuinely say that Mohamed and his team have been the best! I highly recommend them, and I will absolutely use them again!"
         },
         {
-          "name": "Youssef Karim",
-          "who": "Mobile developer",
-          "t": "Icons that should flip, flip. The ones that shouldn't, don't. We stopped writing RTL hacks."
+          "who": "Founder, Klubaro",
+          "t": "Wowed by Smicolon Teams' work on our SaaS front-end review! Their expertise & communication were top-notch, and the impact on our platform will be massive. Quick wins & long-term improvement propositions - all actionable & delivered fast! ⚡️ The quality was outstanding for the time invested. Can't recommend them enough! ⭐️⭐️⭐️⭐️⭐️"
         },
         {
-          "name": "Reem Al-Shamsi",
-          "who": "Design lead",
-          "t": "Figma and code use the same tokens, so design review is about the product, not about mismatched greys."
+          "who": "Founder & CEO, Pafinda",
+          "t": "Smicolon was crucial in shaping our MVP at Pafinda. Their expertise and strategic guidance balanced our ambitions, budget, and timeline, enhancing our overall understanding. I highly recommend Smicolon for IT consultancy services."
         },
         {
-          "name": "Faris Al-Rashid",
-          "who": "Founder",
-          "t": "Light and dark, LTR and RTL, from one component set. Our small team ships like a big one."
+          "who": "Co-Founder, Piamotech",
+          "t": "I'm thrilled with the transformative journey with Smicolon. They crafted our online identity, delivering a stunning website and functional admin dashboard. Their expertise and creativity were key, creating a digital solution that truly reflects who we are. We couldn't be happier and look forward to future collaborations."
         },
         {
-          "name": "Ahmed Salem",
-          "who": "Full-stack developer",
-          "t": "It feels like shadcn/ui, but Arabic was there from the first commit, not bolted on later."
+          "who": "Founder, Deliverability Ninja",
+          "t": "Smicolon is a great example of a top-tier Dev agency. Excellent communication, and the SDD provided was crystal clear from day 1. Anders and Mohamed were available immediately for any questions, and the dev quality was enterprise level. My build was very complicated, and they completed the project easily. I would strongly recommend everyone to work with them."
         },
         {
-          "name": "Hana Benali",
-          "who": "Product manager",
-          "t": "Our Arabic and English releases now go out the same week. The backlog item called RTL is gone."
+          "who": "Founder, Rentrant",
+          "t": "Cons: They cost a lot. Pros: They do a good job. You get what you pay for. I don’t think Mohamed is capable of doing a bad job. After spending time with different developers on this site, it’s quite relieving to work with someone who outputs quality work up to industry standards. My only real gripe was that the team was somewhat lacking in knowledge on the implementation of the maps, but they didn’t charge for the learning curve. Overall, I’m happy with the site. It is what I envisioned and a bit more. I will be working with Mohamed in the future."
         },
         {
-          "name": "Rami Khoury",
-          "who": "Design system lead",
-          "t": "Clear content rules per component mean our AI agents fill layouts without breaking them."
+          "who": "Advisor, 1Uni",
+          "t": "Partnering with Smicolon transformed our approach to higher education. They created an AI-powered platform that streamlined university selection and applications. Their Student Digital Body Language (SDBL) system revolutionized our understanding of student behavior. I highly recommend Smicolon for their top-notch software solutions."
         },
         {
-          "name": "Mariam Al-Kuwari",
-          "who": "Frontend developer",
-          "t": "Three density profiles let the same table work in a dense dashboard and on a marketing page."
+          "who": "CEO, AccSellerate",
+          "t": "Smicolon UG successfully accomplished their tasks and completed the project, much to the client's delight. The team was highly organized, and internal stakeholders were particularly impressed with the vendor's dedication to achieving ideal results."
+        },
+        {
+          "who": "Senior Consultant, allea consult GmbH",
+          "t": "Smicolon GmbH helped the client increase the successful approvals for online orders and payments and receive positive user feedback. Their team adapted to significant changes and additions to the project scope, ensuring they addressed and met all the client's requirements. They were also responsive."
+        },
+        {
+          "who": "CEO, Web Help Agency",
+          "t": "Smicolon GmbH helped the end client increase their user engagement by 40% and improve the satisfaction of both users and therapists. They also streamlined the end client's operations through the app's secure communication and booking functionalities. Moreover, the team was adaptable and timely."
         }
       ]
     },
