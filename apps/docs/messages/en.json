@@ -1921,6 +1921,50 @@
       "labelAr": "متابعة",
       "loadingEn": "Loading",
       "loadingAr": "جارٍ التحميل"
+    },
+    "props": {
+      "title": "What you get",
+      "lede": "Everything a bilingual product needs on day one, in code you can read.",
+      "p1": {
+        "t": "Direction is a prop",
+        "d": "LTR or RTL is set on the component, not patched in a stylesheet."
+      },
+      "p2": {
+        "t": "Twin type ramps",
+        "d": "Cairo for Arabic matches Geist for English, size for size."
+      },
+      "p3": {
+        "t": "Every state ships",
+        "d": "Loading, empty, error and disabled, for all {count} components."
+      },
+      "p4": {
+        "t": "Themes and density",
+        "d": "Light and dark, plus compact, comfortable and spacious profiles."
+      },
+      "p5": {
+        "t": "Figma ↔ code parity",
+        "d": "The same tokens in the Figma file and in your codebase."
+      },
+      "p6": {
+        "t": "Agent-ready docs",
+        "d": "Content rules that let AI agents fill components correctly."
+      },
+      "card": {
+        "en": {
+          "name": "Noura Al-Saud",
+          "role": "Product designer · Sanad",
+          "active": "Active",
+          "label": "Work email",
+          "button": "Send invite"
+        },
+        "ar": {
+          "name": "نورة آل سعود",
+          "role": "مصممة منتجات، سند",
+          "active": "نشطة",
+          "label": "البريد الإلكتروني للعمل",
+          "button": "أرسل الدعوة"
+        }
+      }
     }
   }
 }

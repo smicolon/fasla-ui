@@ -3,6 +3,8 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 import { localeDirection, type Locale } from "@/i18n/routing"
 import { Button } from "@fasla-ui/ui/button/button"
 import { CopyCommand } from "@/components/copy-command"
+import { registryCounts } from "@/lib/registry"
+import { AnnotatedCard } from "./_components/annotated-card"
 import { AtomsTable } from "./_components/atoms-table"
 import { BlocksGrid } from "./_components/blocks-grid"
 import { DirectionSwitch } from "./_components/direction-switch"
@@ -135,6 +137,7 @@ export default async function HomePage({
         <BlocksGrid />
         <TemplatesSection />
         <ParityPlayground pageDir={localeDirection[locale as Locale]} />
+        <AnnotatedCard components={registryCounts.total} />
       </main>
 
       <LandingFooter />
