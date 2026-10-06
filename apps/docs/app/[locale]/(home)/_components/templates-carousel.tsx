@@ -65,7 +65,7 @@ function TemplateCard({ id, stack }: (typeof TEMPLATES)[number]) {
 
   return (
     <Link
-      href={landingLinks.docs(locale)}
+      href={landingLinks.templates(locale)}
       aria-label={locale === "ar" ? `${name}، ${kind}` : `${name}, ${kind}`}
       className="group flex w-[clamp(260px,22vw,320px)] shrink-0 snap-start flex-col gap-3.5 rounded-2xl border bg-[color:var(--l-bg-2)] px-3 pb-[18px] pt-3 transition-[border-color,box-shadow] duration-300 hover:border-foreground/15 hover:shadow-lg focus-visible:outline focus-visible:outline-2 focus-visible:outline-foreground"
     >
@@ -171,7 +171,7 @@ export function TemplatesRail() {
         </div>
         <div className="mt-7 flex justify-center">
           <Button asChild>
-            <Link href={landingLinks.docs(locale)}>{t("all")}</Link>
+            <Link href={landingLinks.templates(locale)}>{t("all")}</Link>
           </Button>
         </div>
       </div>

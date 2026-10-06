@@ -60,7 +60,7 @@ export async function BlocksGrid() {
           {FAMILIES.map(([k, w, natural, count, fresh]) => (
             <li key={k}>
               <Link
-                href={landingLinks.docs(locale)}
+                href={landingLinks.blocks(locale)}
                 className="block overflow-hidden rounded-xl border border-transparent bg-muted transition-colors duration-300 hover:border-border hover:bg-[color-mix(in_oklch,var(--muted)_70%,var(--border))] focus-visible:outline focus-visible:outline-2 focus-visible:outline-foreground dark:bg-card"
               >
                 <div className="p-3">
@@ -94,7 +94,7 @@ export async function BlocksGrid() {
 
         <div className={cn("relative z-[1] -mt-16 flex justify-center")}>
           <Button asChild size="lg" className="h-12 rounded-[10px] px-[22px] text-[15px]">
-            <Link href={landingLinks.docs(locale)}>
+            <Link href={landingLinks.blocks(locale)}>
               {t("all")}
               <ArrowEndIcon />
             </Link>

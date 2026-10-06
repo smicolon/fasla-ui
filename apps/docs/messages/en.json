@@ -2126,6 +2126,14 @@
     },
     "final": {
       "lede": "One command sets up your project. Add components as you need them, and keep every line."
+    },
+    "soon": {
+      "meta": "Coming soon | Fasla",
+      "badge": "On the way",
+      "title": "Coming soon",
+      "lede": "The block library, the templates and the Pro and Team plans are on their way. The open-source components and the docs are ready to use today.",
+      "docs": "Read the docs",
+      "home": "Back to home"
     }
   }
 }
