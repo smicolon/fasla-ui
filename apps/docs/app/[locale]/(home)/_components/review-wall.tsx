@@ -3,7 +3,7 @@ import { Avatar } from "@fasla-ui/ui/avatar/avatar"
 import { cn } from "@/lib/utils"
 import { SectionHead, StrokedWord } from "./section-head"
 
-/** Where each review was posted, and the platform marks, drawn in one colour. */
+/** Where each review was posted, and the platform marks. */
 const SOURCE = ["x.com", "linkedin.com", "producthunt.com", "x.com", "linkedin.com", "github.com", "reddit.com", "producthunt.com", "github.com", "linkedin.com", "x.com", "reddit.com"] as const
 
 const MARK: Record<(typeof SOURCE)[number], React.ReactNode> = {
@@ -18,6 +18,17 @@ const MARK: Record<(typeof SOURCE)[number], React.ReactNode> = {
   "producthunt.com": (
     <path transform="translate(2.4 2.4) scale(.8)" d="M13.6 8.4H10v3.6h3.6a1.8 1.8 0 0 0 0-3.6zM12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm1.6 14.4H10V18H7.6V6h6a4.2 4.2 0 0 1 0 8.4z" />
   ),
+}
+
+/**
+ * Third-party brand marks keep their owners' colours, as in the reference:
+ * LinkedIn, Reddit and Product Hunt on their brand colour with a white glyph.
+ * X and GitHub are black marks, so they take the page's ink and ground.
+ */
+const BRAND: Partial<Record<(typeof SOURCE)[number], string>> = {
+  "linkedin.com": "#0A66C2",
+  "reddit.com": "#FF4500",
+  "producthunt.com": "#DA552F",
 }
 
 /** Three columns, each read top to bottom. */
@@ -40,7 +51,10 @@ function ReviewCard({ review, i }: { review: Review; i: number }) {
           <span className="text-[13px] leading-[1.3] text-muted-foreground">{review.who}</span>
         </span>
         <span dir="ltr" className="inline-flex shrink-0 items-center gap-[7px] self-start font-sans text-[13px] text-[color:var(--l-fg-2)]">
-          <span className="grid size-[22px] place-items-center rounded-full bg-foreground text-background">
+          <span
+            className={cn("grid size-[22px] place-items-center rounded-full", BRAND[source] ? "text-fasla-white" : "bg-foreground text-background")}
+            style={BRAND[source] ? { backgroundColor: BRAND[source] } : undefined}
+          >
             <svg viewBox="0 0 24 24" aria-hidden="true" className="size-3 fill-current">
               {MARK[source]}
             </svg>
