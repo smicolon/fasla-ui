@@ -15,8 +15,9 @@ export async function LandingFooter() {
   const t = await getTranslations("landing.footer")
   const tn = await getTranslations("landing.nav")
 
+  // The rule sits on <footer>, outside .l-wrap, so it runs edge to edge.
   return (
-    <footer className="overflow-hidden pt-14 text-sm text-muted-foreground">
+    <footer className="overflow-hidden border-t border-border pt-14 text-sm text-muted-foreground">
       <div className="l-wrap">
         <div className="flex flex-wrap items-start justify-between gap-x-12 gap-y-6">
           <div>
