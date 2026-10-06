@@ -2033,6 +2033,46 @@
           "t": "Three density profiles let the same table work in a dense dashboard and on a marketing page."
         }
       ]
+    },
+    "faq": {
+      "kicker": "Questions",
+      "title": "Honest<br></br>questions.",
+      "ask": "Still have a question?",
+      "askLink": "Ask on GitHub",
+      "items": [
+        {
+          "q": "What is Fasla?",
+          "a": "Fasla (فاصلة) is a bilingual design system and React component library by Smicolon. Every component ships in English and Arabic, left-to-right and right-to-left, light and dark."
+        },
+        {
+          "q": "How is it different from shadcn/ui?",
+          "a": "Fasla is built on shadcn/ui primitives and keeps its copy-the-source model. The difference is direction: RTL and the Arabic type ramp are part of every component from the first commit."
+        },
+        {
+          "q": "Do I design my Arabic screens separately?",
+          "a": "No. An Arabic screen uses the same components as the English one with one property changed, Direction = RTL. Layout, icons and spacing mirror on their own."
+        },
+        {
+          "q": "Is it free?",
+          "a": "Yes. The core is MIT licensed and free forever, for personal and commercial work. Pro is $149 and Team is $399, both one-time payments with lifetime access to the premium blocks, templates and the Figma file. <link>See the plans</link>."
+        },
+        {
+          "q": "How do I add it to my project?",
+          "a": "Run init once, then add components one by one. The CLI copies each component's source into your repo, so you edit it like any file you wrote."
+        },
+        {
+          "q": "Is there a Figma file?",
+          "a": "Yes. The Figma file is the source of truth and uses the same tokens as the code, so a designer's choice and a developer's build stay one decision."
+        },
+        {
+          "q": "Which fonts and numerals does it use?",
+          "a": "Geist for English and Cairo for Arabic, on twin type ramps. Arabic copy uses Western numerals, and brand and technical terms stay in Latin script."
+        },
+        {
+          "q": "Can AI agents use the components?",
+          "a": "That's where it's heading. Each component is documented with clear content rules, so an agent can pick the right one and fill it without breaking the layout."
+        }
+      ]
     }
   }
 }

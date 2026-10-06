@@ -7,6 +7,7 @@ import { registryCounts } from "@/lib/registry"
 import { AnnotatedCard } from "./_components/annotated-card"
 import { AtomsTable } from "./_components/atoms-table"
 import { BlocksGrid } from "./_components/blocks-grid"
+import { FaqSection } from "./_components/faq-section"
 import { DirectionSwitch } from "./_components/direction-switch"
 import { FaslaComma } from "./_components/fasla-mark"
 import { FilmPlayer } from "./_components/film-player"
@@ -140,6 +141,7 @@ export default async function HomePage({
         <ParityPlayground pageDir={localeDirection[locale as Locale]} />
         <AnnotatedCard components={registryCounts.total} />
         <ReviewWall />
+        <FaqSection />
       </main>
 
       <LandingFooter />

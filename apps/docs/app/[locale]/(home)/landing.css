@@ -406,6 +406,29 @@
   }
 }
 
+/* The FAQ's two speech bubbles, nodding at each other. */
+.l-bob {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: l-bob 5s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+
+@keyframes l-bob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-2deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .l-bob {
+    animation: none;
+  }
+}
+
 /* ── Currency before a StatsCard value ────────────────────────────────
    StatsCard takes its value as text, so the small "SAR" / "ر.س" the
    reference sets before the number is drawn here, from --l-cur on the card.
