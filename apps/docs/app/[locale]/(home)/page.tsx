@@ -7,6 +7,7 @@ import { registryCounts } from "@/lib/registry"
 import { AnnotatedCard } from "./_components/annotated-card"
 import { AtomsTable } from "./_components/atoms-table"
 import { BlocksGrid } from "./_components/blocks-grid"
+import { CommandBand } from "./_components/command-band"
 import { FaqSection } from "./_components/faq-section"
 import { DirectionSwitch } from "./_components/direction-switch"
 import { FaslaComma } from "./_components/fasla-mark"
@@ -144,6 +145,7 @@ export default async function HomePage({
         <ReviewWall />
         <FaqSection />
         <PricingSection components={registryCounts.total} />
+        <CommandBand />
       </main>
 
       <LandingFooter />

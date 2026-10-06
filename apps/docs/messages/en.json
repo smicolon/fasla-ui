@@ -2123,6 +2123,9 @@
         ]
       },
       "notIncluded": "Not included"
+    },
+    "final": {
+      "lede": "One command sets up your project. Add components as you need them, and keep every line."
     }
   }
 }
