@@ -8,6 +8,7 @@ import { FilmPlayer } from "./_components/film-player"
 import { ArrowEndIcon } from "./_components/icons"
 import { LandingFooter } from "./_components/landing-footer"
 import { LandingNav } from "./_components/landing-nav"
+import { MirrorCompare } from "./_components/mirror-compare"
 import { installCommand, landingLinks } from "./_components/links"
 import { FlipSettled } from "./_components/locale-flip"
 import { SanadWindow } from "./_components/sanad-window"
@@ -124,6 +125,7 @@ export default async function HomePage({
         </section>
 
         <TypeSpecimen />
+        <MirrorCompare />
       </main>
 
       <LandingFooter />

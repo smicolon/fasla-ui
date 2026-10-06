@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Switch } from "@fasla-ui/ui/switch/switch"
 import { cn } from "@/lib/utils"
+import { visibleOffSwitch } from "./switch-style"
 
 /**
  * The hero's product window with its "Show components" switch. Turned on, every
@@ -34,15 +35,11 @@ export function XrayStage({
       <div className="mb-4 flex justify-center">
         {/* The ground behind the label breaks the hero's centre seam around it. */}
         <span className="relative z-10 bg-background px-4 py-2 text-sm font-medium text-muted-foreground">
-          {/* The library's solid Switch paints its off thumb in primary-foreground,
-              which is black on the dark track in Dark and barely shows in Light.
-              Here, as in the reference, the off thumb is white on a visible track;
-              on keeps the library's colours. */}
           <Switch
             label={label}
             checked={on}
             onChange={(event) => setOn(event.target.checked)}
-            className="[&:has(:checked)_[data-slot=thumb]]:bg-primary-foreground [&_[data-slot=thumb]]:bg-fasla-white [&_[data-slot=thumb]]:shadow-sm [&_[data-slot=track]]:bg-foreground/20"
+            className={visibleOffSwitch}
           />
         </span>
       </div>

@@ -15,9 +15,12 @@
   --l-ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Secondary text: the reference's #525252 on white, #c4c4c4 on the dark ground. */
+/* Secondary text: the reference's #525252 on white, #c4c4c4 on the dark ground.
+   --l-bg-2 is its second ground, #fafafa on white: an opaque mix of muted into
+   the page, so a layer painted with it fully covers what sits beneath. */
 .l-page {
   --l-fg-2: color-mix(in oklch, var(--foreground) 70%, transparent);
+  --l-bg-2: color-mix(in oklch, var(--muted) 50%, var(--background));
 }
 
 .dark .l-page {
@@ -133,6 +136,104 @@
   from {
     opacity: 0;
     translate: 0 4px;
+  }
+}
+
+/* ── What mirrors, what doesn't ───────────────────────────────────────
+   One stage, always laid out left to right: English on the left, Arabic on
+   the right. The English layer sits on top and is clipped at --pos, the red
+   line, which mirror-compare.tsx sweeps or the reader drags. */
+
+.l-cmp {
+  --pos: 50%;
+  position: relative;
+  aspect-ratio: 4 / 3;
+  max-width: 100%;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--l-bg-2);
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.l-cmp-layer {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 28px;
+  isolation: isolate;
+}
+
+.l-cmp-ar {
+  background-color: var(--l-bg-2);
+  background-image: radial-gradient(circle, var(--border) 1px, transparent 1.2px);
+  background-size: 18px 18px;
+}
+
+.l-cmp-en {
+  background: var(--l-bg-2);
+  clip-path: inset(0 calc(100% - var(--pos)) 0 0);
+}
+
+.l-cmp-line {
+  position: absolute;
+  inset-block: 0;
+  left: var(--pos);
+  width: 2px;
+  margin-left: -1px;
+  background: var(--fasla-red);
+  pointer-events: none;
+}
+
+.l-cmp-handle {
+  position: absolute;
+  top: 50%;
+  left: clamp(26px, var(--pos), calc(100% - 26px));
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin: -22px 0 0 -22px;
+  border: 2px solid var(--fasla-red);
+  border-radius: 12px;
+  background: var(--background);
+  box-shadow: 0 6px 18px -8px color-mix(in oklch, var(--foreground) 35%, transparent);
+  cursor: ew-resize;
+  touch-action: none;
+}
+
+.l-cmp-handle:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+}
+
+/* Three grip lines. */
+.l-cmp-handle span {
+  width: 12px;
+  height: 14px;
+  background: linear-gradient(90deg, var(--muted-foreground) 0 1.5px, transparent 1.5px 5.25px, var(--muted-foreground) 5.25px 6.75px, transparent 6.75px 10.5px, var(--muted-foreground) 10.5px 12px);
+}
+
+@media (max-width: 560px) {
+  .l-cmp {
+    aspect-ratio: 4 / 5;
+  }
+
+  .l-cmp-layer {
+    padding: 16px;
+  }
+}
+
+/* The open rule's countdown to the next one. */
+.l-tm {
+  animation: l-tm linear forwards;
+}
+
+@keyframes l-tm {
+  to {
+    transform: scaleX(1);
   }
 }
 

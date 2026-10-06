@@ -1184,6 +1184,89 @@
       "note": "Each row shares one baseline. Flip the page and the columns trade places; the type does not change.",
       "sampleEn": "Ship the Arabic release on launch day",
       "sampleAr": "أطلق النسخة العربية في يوم الإطلاق"
+    },
+    "rules": {
+      "title": "What mirrors, what doesn't.",
+      "lede": "Fasla follows the rules Arabic readers expect. Pick a rule, or drag the line to compare English and Arabic.",
+      "drag": "Drag to compare English and Arabic",
+      "mirrors": "Mirrors",
+      "stays": "Stays",
+      "r1": {
+        "h": "Arrows and chevrons mirror",
+        "p": "They point the way the reader moves."
+      },
+      "r2": {
+        "h": "Progress fills from the start edge",
+        "p": "From the left in English, from the right in Arabic."
+      },
+      "r3": {
+        "h": "Toggles travel toward the end edge",
+        "p": "The thumb follows the reading direction."
+      },
+      "r6": {
+        "h": "Media controls don't mirror",
+        "p": "Play follows time, not text."
+      },
+      "r8": {
+        "h": "Phone numbers and code stay LTR",
+        "p": "Isolated, so digits and symbols never reorder."
+      },
+      "r4": {
+        "h": "The Fasla mark and comma never mirror",
+        "p": "Brand artwork is drawn once and placed as is."
+      },
+      "arcEn": "LTR · ENGLISH",
+      "arcAr": "RTL · ARABIC",
+      "spec": {
+        "en": {
+          "accounts": "Accounts",
+          "cards": "Cards",
+          "platinum": "Platinum",
+          "back": "Back",
+          "next": "Next",
+          "uploading": "Uploading statement",
+          "size": "4.1 of 6.6 MB",
+          "settings": "Settings",
+          "notifications": "Notifications",
+          "weekly": "Weekly summary",
+          "tour": "Fasla in 60 seconds",
+          "tourK": "Product tour",
+          "phone": "Phone",
+          "install": "Install the button",
+          "word": "fasla",
+          "builtWith": "Built with Fasla",
+          "call1": "Points right",
+          "call2": "Fills from the left",
+          "call3": "On sits right",
+          "call6": "Play points right",
+          "call8": "Reads left to right",
+          "call4": "Drawn once"
+        },
+        "ar": {
+          "accounts": "الحسابات",
+          "cards": "البطاقات",
+          "platinum": "البلاتينية",
+          "back": "رجوع",
+          "next": "التالي",
+          "uploading": "جارٍ رفع كشف الحساب",
+          "size": "<n>4.1</n> من <n>6.6</n> ميغابايت",
+          "settings": "الإعدادات",
+          "notifications": "الإشعارات",
+          "weekly": "الملخّص الأسبوعي",
+          "tour": "فاصلة في <n>60</n> ثانية",
+          "tourK": "جولة في المنتج",
+          "phone": "رقم الهاتف",
+          "install": "ثبّت مكوّن الزر",
+          "word": "فاصلة",
+          "builtWith": "مبني بفاصلة",
+          "call1": "يشير لليسار",
+          "call2": "يمتلئ من اليمين",
+          "call3": "التفعيل يسارًا",
+          "call6": "ما زال لليمين",
+          "call8": "ما زال كذلك",
+          "call4": "العلامة نفسها"
+        }
+      }
     }
   }
 }

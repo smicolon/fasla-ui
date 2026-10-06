@@ -1184,6 +1184,89 @@
       "note": "يشترك كل صف في خط أساس واحد. اقلب الصفحة فيتبادل العمودان مكانيهما، ويبقى الخط كما هو.",
       "sampleEn": "Ship the Arabic release on launch day",
       "sampleAr": "أطلق النسخة العربية في يوم الإطلاق"
+    },
+    "rules": {
+      "title": "ما ينعكس، وما لا ينعكس.",
+      "lede": "تتبع فاصلة القواعد التي يتوقعها القارئ العربي. اختر قاعدة، أو اسحب الخط لتقارن بين الإنجليزية والعربية.",
+      "drag": "اسحب للمقارنة بين الإنجليزية والعربية",
+      "mirrors": "ينعكس",
+      "stays": "ثابت",
+      "r1": {
+        "h": "الأسهم وعلامات التوجيه تنعكس",
+        "p": "تشير إلى الجهة التي يتقدّم نحوها القارئ."
+      },
+      "r2": {
+        "h": "شريط التقدّم يمتلئ من جهة البداية",
+        "p": "من اليسار في الإنجليزية، ومن اليمين في العربية."
+      },
+      "r3": {
+        "h": "المفاتيح تتحرك نحو جهة النهاية",
+        "p": "يتبع المقبض اتجاه القراءة."
+      },
+      "r6": {
+        "h": "أزرار الوسائط لا تنعكس",
+        "p": "زر التشغيل يتبع اتجاه الزمن، لا اتجاه النص."
+      },
+      "r8": {
+        "h": "أرقام الهواتف والشيفرة تبقى من اليسار إلى اليمين",
+        "p": "معزولة عن النص، فلا تتبدّل مواضع الأرقام والرموز."
+      },
+      "r4": {
+        "h": "شعار فاصلة والفاصلة لا ينعكسان",
+        "p": "الهوية تُرسم مرة واحدة وتوضع كما هي."
+      },
+      "arcEn": "LTR · ENGLISH",
+      "arcAr": "RTL · ARABIC",
+      "spec": {
+        "en": {
+          "accounts": "Accounts",
+          "cards": "Cards",
+          "platinum": "Platinum",
+          "back": "Back",
+          "next": "Next",
+          "uploading": "Uploading statement",
+          "size": "4.1 of 6.6 MB",
+          "settings": "Settings",
+          "notifications": "Notifications",
+          "weekly": "Weekly summary",
+          "tour": "Fasla in 60 seconds",
+          "tourK": "Product tour",
+          "phone": "Phone",
+          "install": "Install the button",
+          "word": "fasla",
+          "builtWith": "Built with Fasla",
+          "call1": "Points right",
+          "call2": "Fills from the left",
+          "call3": "On sits right",
+          "call6": "Play points right",
+          "call8": "Reads left to right",
+          "call4": "Drawn once"
+        },
+        "ar": {
+          "accounts": "الحسابات",
+          "cards": "البطاقات",
+          "platinum": "البلاتينية",
+          "back": "رجوع",
+          "next": "التالي",
+          "uploading": "جارٍ رفع كشف الحساب",
+          "size": "<n>4.1</n> من <n>6.6</n> ميغابايت",
+          "settings": "الإعدادات",
+          "notifications": "الإشعارات",
+          "weekly": "الملخّص الأسبوعي",
+          "tour": "فاصلة في <n>60</n> ثانية",
+          "tourK": "جولة في المنتج",
+          "phone": "رقم الهاتف",
+          "install": "ثبّت مكوّن الزر",
+          "word": "فاصلة",
+          "builtWith": "مبني بفاصلة",
+          "call1": "يشير لليسار",
+          "call2": "يمتلئ من اليمين",
+          "call3": "التفعيل يسارًا",
+          "call6": "ما زال لليمين",
+          "call8": "ما زال كذلك",
+          "call4": "العلامة نفسها"
+        }
+      }
     }
   }
 }

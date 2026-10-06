@@ -31,15 +31,46 @@ function Icon({
   )
 }
 
-export const ArrowEndIcon = ({ className, ...props }: IconProps) => (
-  <Icon className={cn("rtl:-scale-x-100", className)} strokeWidth={2} {...props}>
+/** Points right whatever the page direction; for specimens that set their own. */
+export const ArrowRightIcon = (props: IconProps) => (
+  <Icon strokeWidth={2} {...props}>
     <path d="M5 12h14M13 6l6 6-6 6" />
   </Icon>
 )
 
-export const ChevronEndIcon = ({ className, ...props }: IconProps) => (
-  <Icon className={cn("rtl:-scale-x-100", className)} strokeWidth={2} {...props}>
+export const ChevronRightIcon = (props: IconProps) => (
+  <Icon strokeWidth={2} {...props}>
     <path d="m9 18 6-6-6-6" />
+  </Icon>
+)
+
+export const ArrowEndIcon = ({ className, ...props }: IconProps) => (
+  <ArrowRightIcon className={cn("rtl:-scale-x-100", className)} {...props} />
+)
+
+export const ChevronEndIcon = ({ className, ...props }: IconProps) => (
+  <ChevronRightIcon className={cn("rtl:-scale-x-100", className)} {...props} />
+)
+
+/** Two opposing arrows: the "mirrors" tag. */
+export const MirrorIcon = (props: IconProps) => (
+  <Icon strokeWidth={2} {...props}>
+    <path d="M8 3 4 7l4 4M4 7h16M16 21l4-4-4-4M20 17H4" />
+  </Icon>
+)
+
+/** A padlock: the "stays" tag. */
+export const LockIcon = (props: IconProps) => (
+  <Icon strokeWidth={2} {...props}>
+    <rect x="5" y="11" width="14" height="10" rx="2" />
+    <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+  </Icon>
+)
+
+export const FileIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
+    <path d="M14 3v5h5" />
   </Icon>
 )
 
