@@ -1267,6 +1267,58 @@
           "call4": "العلامة نفسها"
         }
       }
+    },
+    "atoms": {
+      "title": "{variants} صيغة من المكوّنات الأساسية، جاهزة في Figma.",
+      "lede": "{atoms, plural, one {مكوّن أساسي واحد} two {مكوّنان أساسيان} few {{n} مكوّنات أساسية} many {{n} مكوّنًا أساسيًا} other {{n} مكوّن أساسي}}، لكل منها مجموعة مكوّنات في Figma بمقاساتها وحالاتها ومظهريها الفاتح والداكن، وباتجاهي الكتابة.",
+      "count": "{count, plural, few {{n} صيغ} other {{n} صيغة}}، بالاتجاهين",
+      "countLtr": "{count, plural, few {{n} صيغ} other {{n} صيغة}}، LTR فقط",
+      "foot": "TypeScript. نواة بترخيص MIT. مبنية على مكوّنات shadcn/ui الأساسية.",
+      "names": {
+        "Button": "زر",
+        "Icon Button": "زر أيقونة",
+        "Radio": "زر الاختيار",
+        "Tooltip": "تلميح",
+        "Alert": "تنبيه",
+        "Breadcrumb": "مسار التنقل",
+        "Pagination": "ترقيم الصفحات",
+        "Badge": "شارة",
+        "Avatar": "صورة رمزية",
+        "Status Indicator": "مؤشر الحالة",
+        "Rating": "التقييم",
+        "Skeleton": "هيكل التحميل",
+        "Separator": "خط فاصل",
+        "Checkbox": "مربع اختيار",
+        "Switch": "مفتاح تبديل",
+        "Navbar": "شريط التنقل",
+        "Carousel": "عارض الشرائح",
+        "Content Carousel": "عارض المحتوى",
+        "Modal": "نافذة حوار",
+        "Input": "حقل إدخال",
+        "Alert Dialog": "حوار تأكيد",
+        "Command Menu": "قائمة الأوامر",
+        "Table": "جدول",
+        "Drawer": "درج جانبي",
+        "Textarea": "حقل نص طويل",
+        "Progress": "شريط التقدّم",
+        "Sidebar Item": "عنصر الشريط الجانبي",
+        "Slider": "منزلق",
+        "OTP Input": "حقل رمز التحقق",
+        "Calendar": "تقويم",
+        "Date Picker": "منتقي التاريخ",
+        "Select": "حقل اختيار",
+        "Input Number": "حقل رقمي",
+        "Sonner": "إشعار عابر",
+        "Accordion": "أكورديون",
+        "Popover": "نافذة منبثقة",
+        "Timeline": "خط زمني",
+        "Dropdown Menu": "قائمة منسدلة",
+        "Context Menu": "قائمة السياق",
+        "Toggle": "زر تبديل",
+        "Toggle Group": "مجموعة أزرار تبديل",
+        "Menubar": "شريط القوائم",
+        "Combobox": "حقل اختيار بالبحث"
+      }
     }
   }
 }

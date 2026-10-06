@@ -1267,6 +1267,58 @@
           "call4": "العلامة نفسها"
         }
       }
+    },
+    "atoms": {
+      "title": "{variants} atom variants, ready in Figma.",
+      "lede": "{n} atoms, each a Figma component set with its sizes, states, light and dark themes, and both directions.",
+      "count": "{n} variants, LTR and RTL",
+      "countLtr": "{n} variants, LTR only",
+      "foot": "TypeScript. MIT core. Built on shadcn/ui primitives.",
+      "names": {
+        "Button": "Button",
+        "Icon Button": "Icon Button",
+        "Radio": "Radio",
+        "Tooltip": "Tooltip",
+        "Alert": "Alert",
+        "Breadcrumb": "Breadcrumb",
+        "Pagination": "Pagination",
+        "Badge": "Badge",
+        "Avatar": "Avatar",
+        "Status Indicator": "Status Indicator",
+        "Rating": "Rating",
+        "Skeleton": "Skeleton",
+        "Separator": "Separator",
+        "Checkbox": "Checkbox",
+        "Switch": "Switch",
+        "Navbar": "Navbar",
+        "Carousel": "Carousel",
+        "Content Carousel": "Content Carousel",
+        "Modal": "Modal",
+        "Input": "Input",
+        "Alert Dialog": "Alert Dialog",
+        "Command Menu": "Command Menu",
+        "Table": "Table",
+        "Drawer": "Drawer",
+        "Textarea": "Textarea",
+        "Progress": "Progress",
+        "Sidebar Item": "Sidebar Item",
+        "Slider": "Slider",
+        "OTP Input": "OTP Input",
+        "Calendar": "Calendar",
+        "Date Picker": "Date Picker",
+        "Select": "Select",
+        "Input Number": "Input Number",
+        "Sonner": "Sonner",
+        "Accordion": "Accordion",
+        "Popover": "Popover",
+        "Timeline": "Timeline",
+        "Dropdown Menu": "Dropdown Menu",
+        "Context Menu": "Context Menu",
+        "Toggle": "Toggle",
+        "Toggle Group": "Toggle Group",
+        "Menubar": "Menubar",
+        "Combobox": "Combobox"
+      }
     }
   }
 }

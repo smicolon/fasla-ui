@@ -2,6 +2,7 @@ import Link from "next/link"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Button } from "@fasla-ui/ui/button/button"
 import { CopyCommand } from "@/components/copy-command"
+import { AtomsTable } from "./_components/atoms-table"
 import { DirectionSwitch } from "./_components/direction-switch"
 import { FaslaComma } from "./_components/fasla-mark"
 import { FilmPlayer } from "./_components/film-player"
@@ -126,6 +127,7 @@ export default async function HomePage({
 
         <TypeSpecimen />
         <MirrorCompare />
+        <AtomsTable />
       </main>
 
       <LandingFooter />
