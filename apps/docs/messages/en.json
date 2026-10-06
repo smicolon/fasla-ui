@@ -1319,6 +1319,590 @@
         "Menubar": "Menubar",
         "Combobox": "Combobox"
       }
+    },
+    "blocks": {
+      "title": "Blocks for every page, in both directions.",
+      "lede": "Copy a full-width section into your app. Every block ships in English and Arabic and mirrors to right-to-left on its own.",
+      "all": "Browse all blocks",
+      "count": "{count, plural, one {{num} block} other {{num} blocks}}",
+      "new": "+{num} New",
+      "families": {
+        "hero": "Hero",
+        "feat": "Features",
+        "gallery": "Gallery",
+        "ban": "Banners",
+        "auth": "Authentication",
+        "price": "Billing & payments",
+        "checkout": "Checkout",
+        "order": "Order summary",
+        "dash": "Dashboard",
+        "prod": "Product lists",
+        "chat": "Messages",
+        "ai": "AI assistant",
+        "faq": "FAQ",
+        "err": "Error states",
+        "cal": "Date pickers",
+        "toast": "Notifications"
+      }
+    },
+    "templates": {
+      "title": "Templates, ready for launch day.",
+      "lede": "Complete bilingual sites built from Fasla blocks. Pick one, swap the content, and ship English and Arabic together.",
+      "all": "See all templates",
+      "prev": "Previous templates",
+      "next": "Next templates",
+      "items": {
+        "rihla": {
+          "name": "Rihla",
+          "kind": "Travel & stays"
+        },
+        "qahwahouse": {
+          "name": "Qahwa House",
+          "kind": "Café & shop"
+        },
+        "sanad": {
+          "name": "Sanad",
+          "kind": "Finance dashboard"
+        },
+        "dar": {
+          "name": "Dar",
+          "kind": "Real estate"
+        },
+        "mahaam": {
+          "name": "Mahaam",
+          "kind": "AI workspace"
+        },
+        "majalla": {
+          "name": "Majalla",
+          "kind": "Magazine"
+        }
+      }
+    },
+    "blk": {
+      "hero": {
+        "lg": "Rihla",
+        "ln": [
+          "Stays",
+          "Experiences",
+          "Journal"
+        ],
+        "sg": "Sign in",
+        "k": "Winter season · AlUla",
+        "h": "Wake up\nin the desert.",
+        "f": [
+          [
+            "Where",
+            "AlUla, Saudi Arabia"
+          ],
+          [
+            "When",
+            "12 – 16 Oct"
+          ],
+          [
+            "Guests",
+            "2 adults"
+          ]
+        ],
+        "go": "Search"
+      },
+      "price": {
+        "h": "Plans that grow with you",
+        "seg": [
+          "Monthly",
+          "Yearly"
+        ],
+        "save": "−20%",
+        "cur": "SAR",
+        "per": "/ mo",
+        "pop": "Popular",
+        "t": [
+          [
+            "Starter",
+            "0",
+            [
+              "1 storefront",
+              "Basic analytics",
+              "Email support"
+            ],
+            "Start free"
+          ],
+          [
+            "Pro",
+            "49",
+            [
+              "5 storefronts",
+              "Live inventory",
+              "Arabic and English"
+            ],
+            "Upgrade"
+          ],
+          [
+            "Team",
+            "129",
+            [
+              "Unlimited stores",
+              "Roles and SSO",
+              "Priority support"
+            ],
+            "Talk to sales"
+          ]
+        ]
+      },
+      "stats": {
+        "t": "Revenue",
+        "r": "Last 30 days",
+        "v": "SAR 184,320",
+        "up": "+12.4%",
+        "k": [
+          [
+            "1,284",
+            "Orders"
+          ],
+          [
+            "3.8%",
+            "Conversion"
+          ]
+        ]
+      },
+      "prod": {
+        "h": "New in the studio",
+        "ch": [
+          "All",
+          "Cups",
+          "Pitchers",
+          "Sets"
+        ],
+        "p": [
+          [
+            "q-main",
+            "Chalk cup set",
+            "SAR 460",
+            "New"
+          ],
+          [
+            "q-pour",
+            "Milk pitcher",
+            "SAR 120",
+            ""
+          ],
+          [
+            "q-sugar2",
+            "Sugar pot",
+            "SAR 85",
+            "Bestseller"
+          ]
+        ]
+      },
+      "cal": {
+        "m": "October 2026",
+        "wd": [
+          "Su",
+          "Mo",
+          "Tu",
+          "We",
+          "Th",
+          "Fr",
+          "Sa"
+        ],
+        "n": "4 nights",
+        "p": "SAR 5,000 total",
+        "b": "Reserve"
+      },
+      "chat": {
+        "who": "Noura · Host",
+        "st": "Online",
+        "m": [
+          "Hi Khalid, your villa is ready for Thursday.",
+          "Perfect. Can we check in early?",
+          "Yes, from 1 pm. Here is your stay:"
+        ],
+        "card": [
+          "Oasis House",
+          "12 – 16 Oct · 2 guests"
+        ],
+        "ph": "Write a message…"
+      },
+      "auth": {
+        "loc": "Canyon Lodge, AlUla",
+        "h": "Welcome back",
+        "p": "Sign in to manage your trips.",
+        "l1": "Email",
+        "v1": "khalid@rihla.travel",
+        "l2": "Password",
+        "rm": "Remember me",
+        "fg": "Forgot?",
+        "b": "Sign in",
+        "or": "or",
+        "b2": "Email me a sign-in link"
+      },
+      "ban": {
+        "k": "Riyadh Season",
+        "h": "The city lights up in",
+        "cd": [
+          [
+            "03",
+            "days"
+          ],
+          [
+            "14",
+            "hrs"
+          ],
+          [
+            "22",
+            "min"
+          ],
+          [
+            "09",
+            "sec"
+          ]
+        ],
+        "b": "Get tickets"
+      },
+      "faq": {
+        "h": "Questions, answered",
+        "q": [
+          [
+            "Can I change my dates?",
+            "Yes. Free changes up to 48 hours before check-in."
+          ],
+          [
+            "Is breakfast included?",
+            ""
+          ],
+          [
+            "Do you offer airport pickup?",
+            ""
+          ],
+          [
+            "How do I pay?",
+            ""
+          ]
+        ]
+      },
+      "err": {
+        "h": "Lost in the dunes.",
+        "p": "The page you are looking for moved or never existed.",
+        "b": "Back home",
+        "b2": "Contact us"
+      },
+      "feat": {
+        "h": "Built for real stays",
+        "p": "Every component works in Arabic and English.",
+        "t": [
+          [
+            "Instant booking",
+            "Confirm in one tap"
+          ],
+          [
+            "85 verified hosts",
+            "Checked in person"
+          ],
+          [
+            "92% occupancy",
+            "This winter season"
+          ]
+        ]
+      },
+      "toast": {
+        "t": [
+          [
+            "Payment received",
+            "SAR 3,750 from Khalid",
+            "now"
+          ],
+          [
+            "Booking confirmed",
+            "Oasis House · 12 Oct",
+            "2m"
+          ],
+          [
+            "Check-in tomorrow",
+            "Door code sent by SMS",
+            "1h"
+          ]
+        ]
+      },
+      "gallery": {
+        "h": "Moments from AlUla",
+        "ch": [
+          "All",
+          "Stays",
+          "Dining",
+          "Desert"
+        ],
+        "more": "View all",
+        "cap": [
+          [
+            "Dunes at dawn",
+            "Desert"
+          ],
+          [
+            "Oasis House",
+            "Stays"
+          ],
+          [
+            "Old town",
+            "Explore"
+          ],
+          [
+            "Morning coffee",
+            "Dining"
+          ]
+        ]
+      },
+      "checkout": {
+        "lg": "Qahwa House",
+        "h": "Checkout",
+        "st": [
+          "Bag",
+          "Delivery",
+          "Payment"
+        ],
+        "c": "Contact",
+        "em": "sara@qahwa.house",
+        "d": "Delivery",
+        "ad": "Al Olaya, Riyadh 12211",
+        "p": "Payment",
+        "cn": "•••• •••• •••• 4821",
+        "ex": "08 / 28",
+        "cv": "•••",
+        "b": "Pay SAR 805",
+        "it": [
+          [
+            "q-main",
+            "Chalk cup set",
+            "SAR 460"
+          ],
+          [
+            "q-pour",
+            "Milk pitcher × 2",
+            "SAR 240"
+          ]
+        ],
+        "tot": [
+          [
+            "Subtotal",
+            "SAR 700"
+          ],
+          [
+            "VAT 15%",
+            "SAR 105"
+          ],
+          [
+            "Total",
+            "SAR 805"
+          ]
+        ]
+      },
+      "dhero": {
+        "lg": "Dar",
+        "ln": [
+          "Buy",
+          "Rent",
+          "Off-plan"
+        ],
+        "sg": "List a home",
+        "k": "New this week · Dubai Marina",
+        "h": "Homes with\na view.",
+        "f": [
+          [
+            "Location",
+            "Dubai Marina"
+          ],
+          [
+            "Type",
+            "Apartment"
+          ],
+          [
+            "Budget",
+            "AED 2–3M"
+          ]
+        ],
+        "go": "Search"
+      },
+      "ai": {
+        "lg": "Mahaam",
+        "tag": "Assistant",
+        "h": "What should we plan today?",
+        "ph": "Ask Mahaam to plan, write or summarise…",
+        "ch": [
+          "Plan my week",
+          "Summarise the meeting",
+          "Draft a reply"
+        ],
+        "m": "Fast mode"
+      },
+      "dash": {
+        "lg": "Sanad",
+        "nav": [
+          "Overview",
+          "Payments",
+          "Cards",
+          "Savings"
+        ],
+        "t": "Overview",
+        "s": "Good morning, Khalid",
+        "range": "Jan – Dec 2025",
+        "k": [
+          [
+            "Balance",
+            "SAR 184,320",
+            "+4.2%"
+          ],
+          [
+            "Monthly spend",
+            "SAR 12,940",
+            "−3.1%"
+          ],
+          [
+            "Savings goal",
+            "68%",
+            ""
+          ]
+        ],
+        "ch": "Balance by month",
+        "mo": "J,F,M,A,M,J,J,A,S,O,N,D",
+        "tx": [
+          [
+            "p-noura",
+            "Noura Al-Saud",
+            "+4,500"
+          ],
+          [
+            "p-khalid",
+            "Khalid Al-Harbi",
+            "−1,250"
+          ],
+          [
+            "p-faisal",
+            "Faisal Al-Qahtani",
+            "+186"
+          ]
+        ]
+      },
+      "order": {
+        "h": "Your order",
+        "n": "3 items",
+        "it": [
+          [
+            "q-main",
+            "Chalk cup set",
+            "Sand · 4 cups",
+            "460"
+          ],
+          [
+            "q-pour",
+            "Milk pitcher",
+            "Qty 2",
+            "240"
+          ]
+        ],
+        "promo": "Promo code",
+        "ap": "Apply",
+        "r": [
+          [
+            "Subtotal",
+            "SAR 700"
+          ],
+          [
+            "Delivery",
+            "Free"
+          ],
+          [
+            "VAT 15%",
+            "SAR 105"
+          ]
+        ],
+        "tot": "Total",
+        "tv": "SAR 805",
+        "b": "Checkout",
+        "sec": "Secure payment"
+      },
+      "app": {
+        "lg": "Qahwa House",
+        "k": "Now on mobile",
+        "h": "Your morning cup,\none tap away.",
+        "p": "Order ahead, skip the queue and collect in two minutes.",
+        "b1": [
+          "Download for",
+          "iOS"
+        ],
+        "b2": [
+          "Get it on",
+          "Android"
+        ],
+        "card": [
+          "Spanish latte",
+          "Ready in 2 min"
+        ],
+        "pr": "SAR 18"
+      },
+      "mag": {
+        "lg": "Majalla",
+        "ln": [
+          "Culture",
+          "Travel",
+          "Food",
+          "Design"
+        ],
+        "sb": "Subscribe",
+        "k": "Cover story",
+        "h": "The old town\nwakes up again.",
+        "p": "Inside AlUla’s mud-brick lanes, a new generation of makers is moving back in.",
+        "by": "Words by Noura Al-Saud · 8 min read",
+        "a": [
+          [
+            "f-coffee",
+            "Food",
+            "A cup of gahwa, done right"
+          ],
+          [
+            "f-riyadh",
+            "City",
+            "Riyadh after dark"
+          ],
+          [
+            "f-oasis",
+            "Design",
+            "Courtyards that keep cool"
+          ]
+        ]
+      },
+      "read": {
+        "h": "Most read this week",
+        "it": [
+          [
+            "f-hero",
+            "Travel",
+            "Sunrise over Hegra, minute by minute",
+            "6 min"
+          ],
+          [
+            "f-lodge",
+            "Stay",
+            "A night in a canyon lodge",
+            "5 min"
+          ],
+          [
+            "f-dunes",
+            "Desert",
+            "How the dunes move",
+            "4 min"
+          ],
+          [
+            "f-cupset",
+            "Design",
+            "The potters of the new Riyadh",
+            "7 min"
+          ]
+        ]
+      },
+      "news": {
+        "h": "The Sunday letter",
+        "p": "One email a week. Places, food and design from the region, in Arabic and English.",
+        "ph": "Your email",
+        "b": "Subscribe"
+      }
     }
   }
 }

@@ -237,6 +237,98 @@
   }
 }
 
+/* ── Blocks and templates ─────────────────────────────────────────────
+   The block previews are drawn in block-library.tsx; these are the grounds
+   Tailwind cannot write as tokens: photo scrims from the ink token, the AI
+   assistant's glow and dot grid, and the soft radial grounds. */
+
+.l-page {
+  --l-ink: var(--fasla-ink);
+}
+
+.l-scrim-hero {
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklch, var(--l-ink) 50%, transparent) 0%,
+    transparent 32%,
+    color-mix(in oklch, var(--l-ink) 10%, transparent) 55%,
+    color-mix(in oklch, var(--l-ink) 62%, transparent) 100%
+  );
+}
+
+.l-scrim-bottom {
+  background: linear-gradient(180deg, transparent 50%, color-mix(in oklch, var(--l-ink) 55%, transparent));
+}
+
+/* Dark behind the copy, which starts on the reading side. */
+.l-scrim-side {
+  background: linear-gradient(
+    90deg,
+    color-mix(in oklch, var(--l-ink) 92%, transparent) 0%,
+    color-mix(in oklch, var(--l-ink) 55%, transparent) 55%,
+    color-mix(in oklch, var(--l-ink) 15%, transparent) 100%
+  );
+}
+
+[dir="rtl"] .l-scrim-side {
+  background: linear-gradient(
+    270deg,
+    color-mix(in oklch, var(--l-ink) 92%, transparent) 0%,
+    color-mix(in oklch, var(--l-ink) 55%, transparent) 55%,
+    color-mix(in oklch, var(--l-ink) 15%, transparent) 100%
+  );
+}
+
+.l-ai-glow {
+  background: radial-gradient(50% 60% at 50% 50%, color-mix(in oklch, var(--fasla-red) 38%, transparent), transparent 70%);
+}
+
+.l-ai-dots {
+  background-image: radial-gradient(color-mix(in oklch, var(--foreground) 9%, transparent) 1px, transparent 1px);
+  background-size: 18px 18px;
+  mask-image: radial-gradient(70% 70% at 50% 40%, black, transparent);
+}
+
+.l-err {
+  background: radial-gradient(400px 220px at 50% 40%, var(--muted), var(--card));
+}
+
+.l-toast {
+  background: radial-gradient(500px 260px at 50% 0%, var(--muted), var(--card));
+}
+
+/* The grid's last row fades into the page under "Browse all blocks". */
+.l-fam-grid::after {
+  content: "";
+  position: absolute;
+  inset: auto -2px -2px;
+  height: 18%;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, var(--background) 78%);
+}
+
+@media (max-width: 1180px) {
+  .l-fam-grid > :nth-child(n + 13) {
+    display: none;
+  }
+}
+
+@media (max-width: 860px) {
+  .l-fam-grid > :nth-child(n + 9) {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .l-fam-grid > :nth-child(n + 5) {
+    display: none;
+  }
+
+  .l-fam-grid::after {
+    height: 16%;
+  }
+}
+
 /* ── Currency before a StatsCard value ────────────────────────────────
    StatsCard takes its value as text, so the small "SAR" / "ر.س" the
    reference sets before the number is drawn here, from --l-cur on the card.
