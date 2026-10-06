@@ -16,6 +16,7 @@ import { LandingFooter } from "./_components/landing-footer"
 import { LandingNav } from "./_components/landing-nav"
 import { MirrorCompare } from "./_components/mirror-compare"
 import { ParityPlayground } from "./_components/parity-playground"
+import { PricingSection } from "./_components/pricing-section"
 import { ReviewWall } from "./_components/review-wall"
 import { installCommand, landingLinks } from "./_components/links"
 import { FlipSettled } from "./_components/locale-flip"
@@ -142,6 +143,7 @@ export default async function HomePage({
         <AnnotatedCard components={registryCounts.total} />
         <ReviewWall />
         <FaqSection />
+        <PricingSection components={registryCounts.total} />
       </main>
 
       <LandingFooter />

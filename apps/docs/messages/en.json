@@ -2073,6 +2073,56 @@
           "a": "That's where it's heading. Each component is documented with clear content rules, so an agent can pick the right one and fill it without breaking the layout."
         }
       ]
+    },
+    "pricing": {
+      "title": "Free to start. Pay once for more.",
+      "lede": "The core is MIT for any project. Pro and Team add a commercial licence for premium blocks, templates and the Figma file.",
+      "best": "Best value",
+      "free": "free forever",
+      "once": "one-time",
+      "note": "One-time payment. Lifetime access. Unlimited projects.",
+      "start": "Get started",
+      "choosePro": "Choose Pro",
+      "chooseTeam": "Choose Team",
+      "os": {
+        "name": "Open source",
+        "desc": "For anyone starting with Fasla.",
+        "features": [
+          "Unlimited users and projects",
+          "Commercial use under MIT",
+          "All {count} components, LTR and RTL",
+          "CLI that copies the source into your project",
+          "Community support on GitHub",
+          "Premium blocks and templates",
+          "The Fasla Figma file"
+        ]
+      },
+      "pro": {
+        "name": "Pro",
+        "desc": "For individual designers and developers.",
+        "features": [
+          "Single user access",
+          "Unlimited commercial projects",
+          "Everything in Open source",
+          "All premium blocks and templates",
+          "The Fasla Figma file, {variants} variants",
+          "Lifetime access and free updates",
+          "Support within 48 business hours"
+        ]
+      },
+      "team": {
+        "name": "Team",
+        "desc": "For growing product teams.",
+        "features": [
+          "Up to 10 seats",
+          "Unlimited commercial projects",
+          "Everything in Pro",
+          "The Figma file for every seat",
+          "Lifetime access and free updates",
+          "Priority support within 24 business hours"
+        ]
+      },
+      "notIncluded": "Not included"
     }
   }
 }
