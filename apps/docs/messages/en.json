@@ -1903,6 +1903,24 @@
         "ph": "Your email",
         "b": "Subscribe"
       }
+    },
+    "parity": {
+      "eyebrow": "Storybook",
+      "title": "Same tokens on both sides.",
+      "lede": "The Figma component and the React component expose the same properties, bound to the same tokens. Change a property in the panel and the button and its JSX follow. Every component works this way in our Storybook.",
+      "storybook": "Explore in Storybook",
+      "newTab": "opens in a new tab",
+      "dir": "Direction",
+      "variant": "Variant",
+      "size": "Size",
+      "icon": "Trailing icon",
+      "loading": "Loading",
+      "disabled": "Disabled",
+      "live": "Live component",
+      "labelEn": "Continue",
+      "labelAr": "متابعة",
+      "loadingEn": "Loading",
+      "loadingAr": "جارٍ التحميل"
     }
   }
 }

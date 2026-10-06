@@ -175,3 +175,24 @@ export const SoundOnIcon = (props: IconProps) => (
 export const DotIcon = () => (
   <span aria-hidden="true" className="block size-1.5 rounded-full bg-current" />
 )
+
+export const BookIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M4 19.5V5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2" />
+    <path d="M8 7h7M8 11h5" />
+  </Icon>
+)
+
+/** Leaves the site: up and away, the same in both directions. */
+export const ExternalIcon = (props: IconProps) => (
+  <Icon strokeWidth={2} {...props}>
+    <path d="M7 17 17 7M8 7h9v9" />
+  </Icon>
+)
+
+/** Four diamonds: a Figma component set. */
+export const ComponentIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="M12 2.5 15 5.5 12 8.5 9 5.5ZM12 15.5l3 3-3 3-3-3ZM5.5 9l3 3-3 3-3-3ZM18.5 9l3 3-3 3-3-3Z" />
+  </Icon>
+)

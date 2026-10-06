@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { getTranslations, setRequestLocale } from "next-intl/server"
+import { localeDirection, type Locale } from "@/i18n/routing"
 import { Button } from "@fasla-ui/ui/button/button"
 import { CopyCommand } from "@/components/copy-command"
 import { AtomsTable } from "./_components/atoms-table"
@@ -11,6 +12,7 @@ import { ArrowEndIcon } from "./_components/icons"
 import { LandingFooter } from "./_components/landing-footer"
 import { LandingNav } from "./_components/landing-nav"
 import { MirrorCompare } from "./_components/mirror-compare"
+import { ParityPlayground } from "./_components/parity-playground"
 import { installCommand, landingLinks } from "./_components/links"
 import { FlipSettled } from "./_components/locale-flip"
 import { SanadWindow } from "./_components/sanad-window"
@@ -132,6 +134,7 @@ export default async function HomePage({
         <AtomsTable />
         <BlocksGrid />
         <TemplatesSection />
+        <ParityPlayground pageDir={localeDirection[locale as Locale]} />
       </main>
 
       <LandingFooter />
