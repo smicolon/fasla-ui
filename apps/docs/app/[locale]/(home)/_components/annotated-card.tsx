@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import { useLocale, useTranslations } from "next-intl"
+import { useTheme } from "next-themes"
 import { Avatar } from "@fasla-ui/ui/avatar/avatar"
 import { Badge } from "@fasla-ui/ui/badge/badge"
 import { Button } from "@fasla-ui/ui/button/button"
@@ -26,19 +27,25 @@ const STATES = ["default", "loading", "disabled", "error"] as const
  * They cycle while the section is on screen; hovering, focusing or clicking
  * one holds it until the pointer leaves. Reduced motion never cycles.
  *
- * In the reference the card is always white; here it is built on tokens, so
- * it follows the page theme. On a light page 04 turns it dark; on a dark page
- * there is no light scope to turn it light, so 04 shows the density alone.
+ * The card is built on tokens and follows the page theme; 04 scopes the
+ * other theme to the card alone (a `.light` or `.dark` class on its wrapper),
+ * so it turns dark on a light page and light on a dark one.
  */
 export function AnnotatedCard({ components }: { components: number }) {
   const t = useTranslations("landing.props")
   const page = useLocale() === "ar" ? "ar" : "en"
   const section = useRef<HTMLDivElement>(null)
+  const stage = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState(0)
   const [held, setHeld] = useState(false)
   const [state, setState] = useState<(typeof STATES)[number]>("default")
   const heldRef = useRef(false)
   heldRef.current = held
+
+  // The demo card is a picture: its button and field are never focusable.
+  useEffect(() => {
+    if (stage.current) stage.current.inert = true
+  }, [])
 
   // Cycle while visible and not held.
   useEffect(() => {
@@ -76,7 +83,15 @@ export function AnnotatedCard({ components }: { components: number }) {
 
   const lang = active === 0 ? (page === "ar" ? "en" : "ar") : page
   const dir = lang === "ar" ? "rtl" : "ltr"
-  const dark = active === 3
+  const { resolvedTheme } = useTheme()
+  // The server cannot know the theme, so it is read only after mount; reading
+  // it during the first render would not match the server's HTML.
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  const pageDark = mounted && resolvedTheme === "dark"
+  // 04 shows the theme the page is not in.
+  const flipTheme = active === 3
+  const dark = flipTheme ? !pageDark : pageDark
   const compact = active === 3
   const c = (key: string) => t(`card.${lang}.${key}`)
 
@@ -145,10 +160,11 @@ export function AnnotatedCard({ components }: { components: number }) {
           <div className="grid gap-3.5">{[0, 1, 2].map((i) => callout(i, "start"))}</div>
 
           <div
+            ref={stage}
             aria-hidden="true"
             className="relative rounded-[22px] border bg-[color:var(--l-bg-2)] p-[clamp(22px,3vw,40px)] [background-image:radial-gradient(color-mix(in_oklch,var(--foreground)_18%,transparent)_1px,transparent_1.2px)] [background-size:16px_16px] max-[1080px]:order-first max-[1080px]:col-span-2 max-[620px]:col-span-1"
           >
-            <div className={cn(dark && "dark")}>
+            <div className={cn(flipTheme && (pageDark ? "light" : "dark"))}>
               <div
                 dir={dir}
                 lang={lang}
