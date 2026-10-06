@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useTranslations } from "next-intl"
+import { cn } from "@/lib/utils"
 
 /**
  * The hero's install command. A command you cannot copy is a picture of a
@@ -10,7 +11,7 @@ import { useTranslations } from "next-intl"
  * Deliberately not a <code> element: the prose rule styles inline code as a
  * pill, which renders a second box inside this one.
  */
-export function CopyCommand({ command }: { command: string }) {
+export function CopyCommand({ command, className }: { command: string; className?: string }) {
   const [copied, setCopied] = useState(false)
   const t = useTranslations("copyCommand")
 
@@ -38,7 +39,10 @@ export function CopyCommand({ command }: { command: string }) {
       dir="ltr"
       onClick={copy}
       aria-label={copied ? t("copied") : t("copy", { command })}
-      className="group inline-flex items-center gap-3 rounded-lg border border-border bg-secondary px-4 py-3 text-start transition-colors hover:border-foreground/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fasla-red focus-visible:ring-offset-2"
+      className={cn(
+        "group inline-flex items-center gap-3 rounded-lg border border-border bg-secondary px-4 py-3 text-start transition-colors hover:border-foreground/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fasla-red focus-visible:ring-offset-2",
+        className
+      )}
     >
       <span aria-hidden="true" className="select-none font-mono text-[15px] text-muted-foreground">
         $

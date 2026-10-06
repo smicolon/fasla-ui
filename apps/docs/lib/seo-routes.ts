@@ -49,11 +49,11 @@ export const routes = [
   {
     kind: "core",
     path: "/",
-    title: "Fasla — React Component Library by Smicolon GmbH",
+    title: "Fasla — Arabic‑first blocks, components & templates",
     description: `${registryCounts.total} accessible React components — primitives, application blocks and motion effects for Tailwind CSS. The CLI copies the source into your project. MIT-licensed core.`,
-    h1: "Add a component،own the source.",
+    h1: "Arabic‑first blocks, components & templates",
     ar: {
-      title: "مكتبة فاصلة لمكوّنات React من Smicolon GmbH",
+      title: "كتل ومكوّنات وقوالب، بالعربية أولًا | فاصلة",
       description: `مكتبة تضمّ ${arabicComponentCount(registryCounts.total)} تراعي الوصولية: مكوّنات أساسية وكتل تطبيقات وتأثيرات حركية مبنيّة على Tailwind CSS. تنسخ أداة الأوامر الشيفرة المصدرية إلى مشروعك. النواة برخصة MIT.`,
     },
   },

@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { SiteHeader } from "@/components/site-header"
 import type { Metadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import type { Locale } from "@/i18n/routing"
@@ -32,18 +33,21 @@ export default async function LocaleNotFoundPage({
   const t = await getTranslations("notFound")
 
   return (
-    <div className="mx-auto flex min-h-[60vh] max-w-2xl flex-col items-center justify-center gap-6 px-6 py-16 text-center">
-      <p className="font-mono text-sm text-muted-foreground">404</p>
-      <h1 className="text-4xl font-bold">{t("title")}</h1>
-      <p className="text-muted-foreground">{t("description")}</p>
-      <div className="flex flex-wrap justify-center gap-6">
-        <Link href={`/${locale}/`} className="underline underline-offset-4">
-          {t("home")}
-        </Link>
-        <Link href={`/${locale}/docs/`} className="underline underline-offset-4">
-          {t("docs")}
-        </Link>
-      </div>
-    </div>
+    <>
+      <SiteHeader />
+      <main className="mx-auto flex min-h-[60vh] max-w-2xl flex-col items-center justify-center gap-6 px-6 py-16 text-center">
+        <p className="font-mono text-sm text-muted-foreground">404</p>
+        <h1 className="text-4xl font-bold">{t("title")}</h1>
+        <p className="text-muted-foreground">{t("description")}</p>
+        <div className="flex flex-wrap justify-center gap-6">
+          <Link href={`/${locale}/`} className="underline underline-offset-4">
+            {t("home")}
+          </Link>
+          <Link href={`/${locale}/docs/`} className="underline underline-offset-4">
+            {t("docs")}
+          </Link>
+        </div>
+      </main>
+    </>
   )
 }
