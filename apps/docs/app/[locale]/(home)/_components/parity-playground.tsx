@@ -40,7 +40,8 @@ function Segmented<V extends string>({ label, value, options, onChange }: { labe
           aria-pressed={value === option}
           onClick={() => onChange(option)}
           className={cn(
-            "h-7 rounded-[7px] px-1.5 font-mono text-xs font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-foreground",
+            // Flex centres the label; text-align can't, as .font-mono starts it on the left in Arabic.
+            "flex h-7 items-center justify-center rounded-[7px] px-1.5 font-mono text-xs font-medium transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-foreground",
             value === option ? "bg-background text-foreground shadow-sm" : "text-[color:var(--l-fg-2)] hover:text-foreground"
           )}
         >

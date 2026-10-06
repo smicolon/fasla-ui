@@ -118,7 +118,8 @@ export function AnnotatedCard({ components }: { components: number }) {
           on && "border-foreground shadow-lg after:bg-fasla-red before:bg-fasla-red"
         )}
       >
-        <span className={cn("font-mono text-[11.5px] font-medium", on ? "text-fasla-red" : "text-muted-foreground")}>0{n}</span>
+        {/* justify-self, not text-align: globals.css makes .font-mono LTR in Arabic, so its "start" is the left. */}
+        <span className={cn("justify-self-start font-mono text-[11.5px] font-medium", on ? "text-fasla-red" : "text-muted-foreground")}>0{n}</span>
         <b className="text-base font-semibold rtl:font-bold">{t(`p${n}.t`)}</b>
         <span className="text-sm leading-[1.55] text-[color:var(--l-fg-2)] rtl:leading-[1.8]">{t(`p${n}.d`, { count: String(components) })}</span>
       </button>

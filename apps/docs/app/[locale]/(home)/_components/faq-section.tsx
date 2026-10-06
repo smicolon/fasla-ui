@@ -85,7 +85,7 @@ export function FaqSection() {
                       onClick={() => setOpen(isOpen ? -1 : i)}
                       className="group grid w-full grid-cols-[36px_minmax(0,1fr)_24px] items-center gap-3.5 py-6 text-start focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground max-[560px]:grid-cols-[28px_minmax(0,1fr)_20px] max-[560px]:gap-2.5"
                     >
-                      <span dir="ltr" className="font-mono text-xs text-muted-foreground">
+                      <span dir="ltr" className="justify-self-start font-mono text-xs text-muted-foreground">
                         {n}
                       </span>
                       <span className="text-[length:clamp(18px,1.6vw,23px)] font-medium leading-[1.3] tracking-[-0.015em] rtl:font-semibold rtl:tracking-normal">
