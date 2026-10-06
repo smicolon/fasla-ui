@@ -1965,6 +1965,74 @@
           "button": "أرسل الدعوة"
         }
       }
+    },
+    "wall": {
+      "title": "The Wall of",
+      "love": "Love",
+      "lede": "What product teams say after shipping Arabic and English from one set of components.",
+      "note": "Illustrative reviews for this demo.",
+      "reviews": [
+        {
+          "name": "Noura Al-Qahtani",
+          "who": "Product designer",
+          "t": "We used to design every screen twice. With Fasla the Arabic version is the same frame with Direction set to RTL."
+        },
+        {
+          "name": "Omar Haddad",
+          "who": "Frontend lead",
+          "t": "The CLI copies the source into our repo, so we own every line. No black box, no fighting overrides."
+        },
+        {
+          "name": "Layla Mansour",
+          "who": "Design engineer",
+          "t": "Cairo and Geist on the same type ramp means the Arabic headings finally look like they belong."
+        },
+        {
+          "name": "Khalid Al-Otaibi",
+          "who": "CTO",
+          "t": "We launched in Arabic on day one instead of promising it for version two. That alone was worth it."
+        },
+        {
+          "name": "Sara Nasser",
+          "who": "UX writer",
+          "t": "Every component ships its empty and error states, so the Arabic copy has a home before launch."
+        },
+        {
+          "name": "Youssef Karim",
+          "who": "Mobile developer",
+          "t": "Icons that should flip, flip. The ones that shouldn't, don't. We stopped writing RTL hacks."
+        },
+        {
+          "name": "Reem Al-Shamsi",
+          "who": "Design lead",
+          "t": "Figma and code use the same tokens, so design review is about the product, not about mismatched greys."
+        },
+        {
+          "name": "Faris Al-Rashid",
+          "who": "Founder",
+          "t": "Light and dark, LTR and RTL, from one component set. Our small team ships like a big one."
+        },
+        {
+          "name": "Ahmed Salem",
+          "who": "Full-stack developer",
+          "t": "It feels like shadcn/ui, but Arabic was there from the first commit, not bolted on later."
+        },
+        {
+          "name": "Hana Benali",
+          "who": "Product manager",
+          "t": "Our Arabic and English releases now go out the same week. The backlog item called RTL is gone."
+        },
+        {
+          "name": "Rami Khoury",
+          "who": "Design system lead",
+          "t": "Clear content rules per component mean our AI agents fill layouts without breaking them."
+        },
+        {
+          "name": "Mariam Al-Kuwari",
+          "who": "Frontend developer",
+          "t": "Three density profiles let the same table work in a dense dashboard and on a marketing page."
+        }
+      ]
     }
   }
 }

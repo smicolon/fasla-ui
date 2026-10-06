@@ -15,6 +15,7 @@ import { LandingFooter } from "./_components/landing-footer"
 import { LandingNav } from "./_components/landing-nav"
 import { MirrorCompare } from "./_components/mirror-compare"
 import { ParityPlayground } from "./_components/parity-playground"
+import { ReviewWall } from "./_components/review-wall"
 import { installCommand, landingLinks } from "./_components/links"
 import { FlipSettled } from "./_components/locale-flip"
 import { SanadWindow } from "./_components/sanad-window"
@@ -138,6 +139,7 @@ export default async function HomePage({
         <TemplatesSection />
         <ParityPlayground pageDir={localeDirection[locale as Locale]} />
         <AnnotatedCard components={registryCounts.total} />
+        <ReviewWall />
       </main>
 
       <LandingFooter />

@@ -336,6 +336,76 @@
   scroll-padding-inline: var(--tp-pad);
 }
 
+/* ── Wall of Love ──────────────────────────────────────────────────────
+   Each column holds its cards twice and climbs by half its height, so the
+   loop has no seam; the middle column runs the other way. */
+
+.l-wall {
+  height: 640px;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent 0, black 14%, black 86%, transparent 100%);
+}
+
+.l-wall-col {
+  animation: l-wall-up var(--dur, 30s) linear infinite;
+}
+
+.l-wall-col:nth-child(2) {
+  --dur: 36s;
+  animation-direction: reverse;
+}
+
+.l-wall-col:nth-child(3) {
+  --dur: 33s;
+}
+
+.l-wall:hover .l-wall-col {
+  animation-play-state: paused;
+}
+
+@keyframes l-wall-up {
+  to {
+    transform: translateY(calc(-50% - 10px));
+  }
+}
+
+@media (max-width: 640px) {
+  .l-wall {
+    height: 560px;
+  }
+}
+
+.l-heart {
+  transform-origin: center;
+  animation: l-beat 2.4s var(--l-ease) infinite;
+}
+
+@keyframes l-beat {
+  0%,
+  70%,
+  100% {
+    transform: scale(1);
+  }
+  78% {
+    transform: scale(1.14);
+  }
+  86% {
+    transform: scale(0.97);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .l-wall-col,
+  .l-heart {
+    animation: none;
+  }
+
+  .l-wall {
+    height: auto;
+    max-height: 720px;
+  }
+}
+
 /* ── Currency before a StatsCard value ────────────────────────────────
    StatsCard takes its value as text, so the small "SAR" / "ر.س" the
    reference sets before the number is drawn here, from --l-cur on the card.
