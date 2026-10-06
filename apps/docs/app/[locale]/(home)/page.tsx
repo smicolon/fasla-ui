@@ -12,6 +12,7 @@ import { FaqSection } from "./_components/faq-section"
 import { DirectionSwitch } from "./_components/direction-switch"
 import { FaslaComma } from "./_components/fasla-mark"
 import { FilmPlayer } from "./_components/film-player"
+import { Reserve, Sub, TitleGhost, TitleText, heroLangs, titleClass } from "./_components/hero-copy"
 import { ArrowEndIcon } from "./_components/icons"
 import { LandingFooter } from "./_components/landing-footer"
 import { LandingNav } from "./_components/landing-nav"
@@ -47,6 +48,7 @@ export default async function HomePage({
   // route drops out of the prerender.
   setRequestLocale(locale)
   const t = await getTranslations("landing")
+  const { lang, other } = heroLangs(locale)
 
   return (
     <div className="l-page">
@@ -69,34 +71,22 @@ export default async function HomePage({
               <FaslaComma className="relative size-full" />
             </span>
 
-            <h1
-              id="hero-h"
-              className="inline-block max-w-full bg-background px-3 py-2 text-[length:clamp(36px,5vw,72px)] font-bold leading-[1.04] tracking-[-0.04em] [text-wrap:balance] [view-transition-name:hero-title] rtl:text-[length:clamp(34px,4.8vw,68px)] rtl:font-extrabold rtl:leading-[1.34]"
-            >
-              {t.rich("hero.title", {
-                nb: (chunks) => <span className="whitespace-nowrap">{chunks}</span>,
-                // "components & templates" stays on one line until phones.
-                nb3: (chunks) => <span className="min-[761px]:whitespace-nowrap">{chunks}</span>,
-                // The red marker behind the first key word, tilted against the reading direction.
-                mark: (chunks) => (
-                  <mark className="relative z-0 -mx-[.02em] inline-block bg-transparent px-[.16em] pb-[.02em] text-fasla-white before:absolute before:inset-x-0 before:bottom-[.02em] before:top-[.1em] before:-z-10 before:-rotate-[1.6deg] before:rounded-[.14em] before:bg-fasla-red before:content-[''] rtl:before:bottom-[.06em] rtl:before:top-[.2em] rtl:before:rotate-[1.6deg]">
-                    {chunks}
-                  </mark>
-                ),
-                // The brand's comma, in red and in Cairo in both languages.
-                comma: (chunks) => <span className="font-arabic text-fasla-red">{chunks}</span>,
-                br: () => <br />,
-              })}
-            </h1>
+            {/* Title and line keep one height in both languages, so nothing under them moves on a flip. */}
+            <Reserve ghost={<TitleGhost lang={other} />}>
+              <h1 id="hero-h" className={titleClass(lang)}>
+                <TitleText lang={lang} />
+              </h1>
+            </Reserve>
+            <Reserve className="mt-4" ghost={<Sub lang={other} ghost />}>
+              <Sub lang={lang} />
+            </Reserve>
 
-            <p className="mx-auto mt-4 max-w-[54ch] bg-background px-2 py-1 text-[length:clamp(16px,1.4vw,19px)] leading-normal text-foreground/70 dark:text-foreground/[.78] rtl:max-w-[60ch] rtl:leading-[1.75]">
-              {t("hero.sub")}
-            </p>
-
-            {/* Both languages at once, whichever page this is. */}
+            {/* Both languages at once, whichever page this is. The line height is
+                pinned: text-sm's own is taller under [dir=rtl], which moved the
+                switch 4px between the two pages. */}
             <div
               aria-hidden="true"
-              className="mb-3 mt-7 grid grid-cols-[1fr_56px_1fr] items-center text-sm text-muted-foreground max-[560px]:grid-cols-[1fr_32px_1fr] max-[560px]:text-[13px]"
+              className="mb-3 mt-7 grid grid-cols-[1fr_56px_1fr] items-center text-sm leading-6 text-muted-foreground max-[560px]:grid-cols-[1fr_32px_1fr] max-[560px]:text-[13px]"
             >
               <span lang="en" className="justify-self-end font-sans">
                 {t("hero.flipEn")}
