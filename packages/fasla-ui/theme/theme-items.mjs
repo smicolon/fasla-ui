@@ -126,11 +126,22 @@ function leadingVars(typography, script) {
  */
 const ARABIC_FONT = ['var(--font-arabic, "Cairo Variable", "Cairo")', "system-ui", "sans-serif"]
 
+/**
+ * Greyscale antialiasing, as the Next.js templates set it on the root. Without
+ * it macOS draws text with subpixel smoothing, about a tenth more ink: Geist
+ * and Cairo at the same weight look a step heavier in a Vite app than in a
+ * Next.js one. Measured identical once it is set.
+ */
+const SMOOTHING = { "-webkit-font-smoothing": "antialiased", "-moz-osx-font-smoothing": "grayscale" }
+
 /** The Arabic setting (Brand V2.5 §15), as the docs app's globals.css states it. */
 const ARABIC_RULES = {
   '[dir="rtl"]': {
     // One variable to swap the Arabic font: point --font-arabic at another.
     "font-family": ARABIC_FONT.join(", "),
+    // Cairo renders the same in every app. Arabic only: a brand's Latin text
+    // keeps whatever smoothing it has.
+    ...SMOOTHING,
   },
   // Arabic is never letter-spaced, set in capitals or in italic.
   '[dir="rtl"], [dir="rtl"] *': { "letter-spacing": "0" },
@@ -232,7 +243,7 @@ export function buildThemeItems({ registryUrl, sources = loadSources() }) {
     title: "Fasla theme: colours",
     description: "Fasla's full light and dark palette and radius, on top of the base theme. Replaces your project's colours.",
     registryDependencies: [itemUrl(registryUrl, "theme-base")],
-    css: { body: { "font-family": LATIN_FONT } },
+    css: { body: { "font-family": LATIN_FONT, ...SMOOTHING } },
     cssVars: {
       theme: radius,
       light: Object.fromEntries(all.map((name) => [name, value(name, "light")])),

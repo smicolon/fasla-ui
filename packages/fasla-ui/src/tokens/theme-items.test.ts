@@ -49,7 +49,9 @@ describe("theme (Fasla's colours)", () => {
   })
 
   it("sets the page in Geist, outweighing a template's own body font, with fallbacks for Next.js and fontsource", () => {
-    expect(theme.css).toEqual({ body: { "font-family": LATIN_FONT } })
+    expect(theme.css).toEqual({
+      body: { "font-family": LATIN_FONT, "-webkit-font-smoothing": "antialiased", "-moz-osx-font-smoothing": "grayscale" },
+    })
     expect(LATIN_FONT).toMatch(/^var\(--font-sans, var\(--font-geist-sans, "Geist Variable", "Geist"\)\)/)
     expect(theme.tailwind!.config.theme.extend.fontFamily).toEqual({
       sans: ['var(--font-sans, var(--font-geist-sans, "Geist Variable", "Geist"))', "ui-sans-serif", "system-ui", "sans-serif"],
@@ -119,7 +121,13 @@ describe("theme-base", () => {
 
   it("sets Arabic in Cairo through one variable, with no capitals, italic or tracking, and code left to right", () => {
     const css = base.css!
-    expect(css['[dir="rtl"]']).toEqual({ "font-family": 'var(--font-arabic, "Cairo Variable", "Cairo"), system-ui, sans-serif' })
+    expect(css['[dir="rtl"]']).toEqual({
+      "font-family": 'var(--font-arabic, "Cairo Variable", "Cairo"), system-ui, sans-serif',
+      // The same greyscale antialiasing the Next.js templates set, so Cairo
+      // looks the same weight in a Vite app.
+      "-webkit-font-smoothing": "antialiased",
+      "-moz-osx-font-smoothing": "grayscale",
+    })
     expect(css['[dir="rtl"], [dir="rtl"] *']).toEqual({ "letter-spacing": "0" })
     expect(css['[dir="rtl"] .uppercase']).toEqual({ "text-transform": "none" })
     expect(css['[dir="rtl"] .italic, [dir="rtl"] em, [dir="rtl"] i']).toEqual({ "font-style": "normal" })
