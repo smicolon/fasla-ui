@@ -284,7 +284,7 @@ export function MirrorCompare() {
             })}
           </div>
 
-          <div className="relative min-w-0 pt-[34px] max-[900px]:pt-0">
+          <div className="l-cmp-room relative min-w-0 pt-[34px] max-[900px]:pt-0">
             <Arc className="-left-[54px] -top-6" path="M18 96 A 70 70 0 0 1 96 18" id="arc-en" label={t("arcEn")} />
             <Arc className="-bottom-[58px] -right-[54px]" path="M24 102 A 70 70 0 0 0 102 24" id="arc-ar" label={t("arcAr")} />
             <div
