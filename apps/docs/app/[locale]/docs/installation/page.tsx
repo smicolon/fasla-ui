@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 import { metadataForRoute } from "@/lib/seo-routes"
 import type { Locale } from "@/i18n/routing"
 import { PackageManagerTabs } from "@/components/package-manager-tabs"
+import { shadcnAdd } from "@/lib/package-managers"
 
 export async function generateMetadata({
   params,
@@ -51,7 +52,7 @@ export default async function InstallationPage({
         <div className="space-y-4">
           <div>
             <p className="text-sm font-medium mb-2">{i.rich("cliInit", rich)}</p>
-            <pre className="overflow-x-auto rounded-lg bg-terminal p-4">
+            <pre className="whitespace-pre-wrap break-words rounded-lg bg-terminal p-4">
               <code className="text-green-400">npx @smicolon/cli init</code>
             </pre>
           </div>
@@ -64,22 +65,48 @@ export default async function InstallationPage({
 
           <div>
             <p className="text-sm font-medium mb-2">{i("cliAdd")}</p>
-            <pre className="overflow-x-auto rounded-lg bg-terminal p-4">
+            <pre className="whitespace-pre-wrap break-words rounded-lg bg-terminal p-4">
               <code className="text-green-400">npx @smicolon/cli add button</code>
             </pre>
             <p className="text-sm font-medium mt-4 mb-2">{t("addSeveral")}</p>
-            <pre className="overflow-x-auto rounded-lg bg-terminal p-4">
+            <pre className="whitespace-pre-wrap break-words rounded-lg bg-terminal p-4">
               <code className="text-green-400">npx @smicolon/cli add card input badge</code>
             </pre>
           </div>
 
           <div>
             <p className="text-sm font-medium mb-2">{i("cliList")}</p>
-            <pre className="overflow-x-auto rounded-lg bg-terminal p-4">
+            <pre className="whitespace-pre-wrap break-words rounded-lg bg-terminal p-4">
               <code className="text-green-400">npx @smicolon/cli list</code>
             </pre>
           </div>
         </div>
+      </div>
+
+      <div className="space-y-4">
+        <h2 className="text-2xl font-semibold">{i("themeTitle")}</h2>
+        <p className="text-muted-foreground">{i.rich("themeBody", rich)}</p>
+
+        <div className="space-y-4">
+          <div>
+            <p className="text-sm font-medium mb-2">{i.rich("themeFasla", rich)}</p>
+            <PackageManagerTabs run={shadcnAdd("theme", "font-geist")} />
+            <p className="text-sm text-muted-foreground mt-2">{i.rich("themeNext14", rich)}</p>
+          </div>
+
+          <div>
+            <p className="text-sm font-medium mb-2">{i.rich("themeBrand", rich)}</p>
+            <PackageManagerTabs run={shadcnAdd("theme-base")} />
+          </div>
+
+          {/* shadcn's own question, which defaults to No and stops the install. */}
+          <p className="text-sm text-muted-foreground">{i.rich("themeConfirm", rich)}</p>
+
+          <p className="text-sm text-muted-foreground">{i.rich("themeArabicFont", rich)}</p>
+        </div>
+
+        {/* Said plainly, before anyone adds a component to a shadcn project. */}
+        <p className="rounded-lg border border-border p-4 text-sm">{i.rich("themeReplaces", rich)}</p>
       </div>
 
       <div className="space-y-4">
@@ -109,35 +136,6 @@ export function cn(...inputs: ClassValue[]) {
             <p className="text-sm font-medium mb-2">{i("manualCopy")}</p>
           </div>
         </div>
-      </div>
-
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">{i("tailwindTitle")}</h2>
-        <p className="text-muted-foreground">{i.rich("tailwindBody", rich)}</p>
-        <PackageManagerTabs packages="@smicolon/fasla-ui" />
-        <p className="text-muted-foreground">{i.rich("tailwindConfig", rich)}</p>
-        <pre className="overflow-x-auto rounded-lg bg-terminal p-4 text-sm">
-          <code className="text-gray-300">{`// tailwind.config.ts
-import type { Config } from "tailwindcss"
-import { tailwindSemanticColors } from "@smicolon/fasla-ui/tokens"
-
-const config: Config = {
-  darkMode: "class",
-  content: [
-    "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-  ],
-  theme: {
-    extend: {
-      colors: tailwindSemanticColors,
-    },
-  },
-}
-
-export default config`}</code>
-        </pre>
-        <p className="text-muted-foreground text-sm">{i.rich("tailwindNote", rich)}</p>
       </div>
     </div>
   )

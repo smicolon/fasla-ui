@@ -60,8 +60,9 @@ export function StatsCard({
             <span
               className={cn(
                 "inline-flex items-center gap-1 font-medium",
-                trend.direction === "up" && "text-green-600 dark:text-green-400",
-                trend.direction === "down" && "text-red-600 dark:text-red-400",
+                // The tokens already change with the mode, so no dark: variants.
+                trend.direction === "up" && "text-success",
+                trend.direction === "down" && "text-destructive",
                 trend.direction === "neutral" && "text-muted-foreground"
               )}
             >

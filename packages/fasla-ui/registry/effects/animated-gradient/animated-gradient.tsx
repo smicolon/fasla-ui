@@ -13,14 +13,10 @@ const filledList = (colors: string[] | undefined, fallback: string[]) => {
   return usable.length ? usable : fallback
 }
 
-const GRADIENT_COLORS = [
-  "var(--primary)",
-  "var(--secondary)",
-  "hsl(280 100% 70%)",
-  "hsl(200 100% 70%)",
-]
+// Theme tokens only, so the gradient follows the project's palette and mode.
+const GRADIENT_COLORS = ["var(--primary)", "var(--secondary)", "var(--chart-5)", "var(--info)"]
 
-const TEXT_COLORS = ["var(--primary)", "hsl(280 100% 70%)", "var(--primary)"]
+const TEXT_COLORS = ["var(--primary)", "var(--chart-5)", "var(--primary)"]
 
 export interface AnimatedGradientProps
   extends React.HTMLAttributes<HTMLDivElement> {

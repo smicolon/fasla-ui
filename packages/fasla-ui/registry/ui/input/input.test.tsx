@@ -16,7 +16,7 @@ describe("Input", () => {
     expect(screen.getByTestId("input")).toHaveClass("border-destructive")
 
     rerender(<Input variant="success" data-testid="input" />)
-    expect(screen.getByTestId("input")).toHaveClass("border-green-500")
+    expect(screen.getByTestId("input")).toHaveClass("border-success")
   })
 
   it("renders with different sizes", () => {

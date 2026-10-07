@@ -4,7 +4,7 @@ import * as React from "react"
 import { useTranslations } from "next-intl"
 
 import { cn } from "@/lib/utils"
-import { installCommand, nextTabIndex, PACKAGE_MANAGERS, type PackageManager } from "@/lib/package-managers"
+import { installCommand, nextTabIndex, PACKAGE_MANAGERS, runCommand, wrapPieces, type PackageManager } from "@/lib/package-managers"
 
 const STORAGE_KEY = "fasla-package-manager"
 const CHANGE_EVENT = "fasla-package-manager-change"
@@ -29,7 +29,7 @@ function readChoice(): PackageManager | undefined {
  * the right and the arrow keys moving the way the tabs are laid out. The
  * command itself is code and stays left to right in both.
  */
-export function PackageManagerTabs({ packages }: { packages: string }) {
+export function PackageManagerTabs(props: { packages: string } | { run: string }) {
   const t = useTranslations("docs")
   const id = React.useId()
   const [pm, setPm] = React.useState<PackageManager>("npm")
@@ -78,7 +78,8 @@ export function PackageManagerTabs({ packages }: { packages: string }) {
     tabs.current[next]?.focus()
   }
 
-  const command = installCommand(pm, packages)
+  // `packages` installs them; `run` runs a package's CLI without installing it.
+  const command = "run" in props ? runCommand(pm, props.run) : installCommand(pm, props.packages)
 
   const copy = async () => {
     try {
@@ -137,8 +138,22 @@ export function PackageManagerTabs({ packages }: { packages: string }) {
         tabIndex={0}
         className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-fasla-red"
       >
-        <pre dir="ltr" className="overflow-x-auto p-4">
-          <code className="font-mono text-sm text-green-400">{command}</code>
+        {/* A long command wraps at its spaces instead of running past the edge,
+            so every URL stays whole unless it can't fit on a line of its own.
+            The wrap is only visual: Copy copies the one-line command. */}
+        <pre dir="ltr" className="whitespace-pre-wrap break-words p-4">
+          <code className="font-mono text-sm text-green-400">
+            {wrapPieces(command).map(({ text, keep }, i) =>
+              keep ? (
+                <React.Fragment key={i}>
+                  <wbr />
+                  <span className="whitespace-nowrap">{text}</span>
+                </React.Fragment>
+              ) : (
+                <React.Fragment key={i}>{text}</React.Fragment>
+              )
+            )}
+          </code>
         </pre>
       </div>
     </div>
