@@ -227,6 +227,7 @@
       "themeFasla": "Starting from scratch: use Fasla’s colours. Fasla’s light and dark palette, its radius and the Geist font, on top of the base layer:",
       "themeNext14": "On Next.js 14, leave out the <code>font-geist.json</code> URL: <code>next/font</code> there has no Geist, and the Next.js 14 template already loads it. <code>init</code> does this for you.",
       "themeBrand": "I have a brand: keep my colours. The base layer only: the tokens shadcn doesn’t have (success, warning, info and the soft tints), the type scale with Arabic line heights, the Arabic setting and the Cairo font. It changes no colour you already have:",
+      "themeConfirm": "The shadcn CLI asks <code>Existing CSS variables and components will be overwritten. Continue?</code> with No as the default, so type <code>y</code>. The base layer, <code>theme-base</code>, doesn’t change any colour your project already has.",
       "themeArabicFont": "Arabic text is set in Cairo through the <code>--font-arabic</code> variable. To use another Arabic font, point <code>--font-arabic</code> at it.",
       "themeReplaces": "Fasla’s base components replace shadcn’s components of the same name, such as <code>button</code> and <code>badge</code>, in <code>components/ui</code>. <code>add</code> asks before it replaces a file that isn’t Fasla’s. Blocks install to their own folder, <code>components/blocks</code>.",
       "manualTitle": "Manual Installation",

@@ -99,6 +99,9 @@ export default async function InstallationPage({
             <PackageManagerTabs run={shadcnAdd("theme-base")} />
           </div>
 
+          {/* shadcn's own question, which defaults to No and stops the install. */}
+          <p className="text-sm text-muted-foreground">{i.rich("themeConfirm", rich)}</p>
+
           <p className="text-sm text-muted-foreground">{i.rich("themeArabicFont", rich)}</p>
         </div>
 

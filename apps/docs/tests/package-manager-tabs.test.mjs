@@ -131,10 +131,18 @@ describe("Theme section of the Installation page", () => {
     const ar = JSON.parse(read("messages/ar.json")).docs.installation
     expect(en.themeReplaces).toContain("replace shadcn’s components of the same name")
     expect(ar.themeReplaces).toContain("تحل المكوّنات الأساسية في فاصلة محل مكوّنات shadcn/ui")
-    for (const key of ["themeTitle", "themeBody", "themeFasla", "themeNext14", "themeBrand", "themeArabicFont", "themeReplaces"]) {
+    for (const key of ["themeTitle", "themeBody", "themeFasla", "themeNext14", "themeBrand", "themeConfirm", "themeArabicFont", "themeReplaces"]) {
       expect(typeof en[key]).toBe("string")
       expect(typeof ar[key]).toBe("string")
     }
+    // shadcn's own question defaults to No: both languages say to type y, and
+    // that the base layer changes no colour the project has.
+    for (const t of [en.themeConfirm, ar.themeConfirm]) {
+      expect(t).toContain("<code>Existing CSS variables and components will be overwritten. Continue?</code>")
+      expect(t).toContain("<code>y</code>")
+      expect(t).toContain("<code>theme-base</code>")
+    }
+    expect(page.indexOf('i.rich("themeConfirm", rich)')).toBeGreaterThan(page.indexOf('shadcnAdd("theme-base")'))
     expect(en.themeArabicFont).toContain("<code>--font-arabic</code>")
     expect(ar.themeArabicFont).toContain("<code>--font-arabic</code>")
   })
