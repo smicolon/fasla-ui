@@ -15,19 +15,33 @@ Built with [Tailwind CSS](https://tailwindcss.com), [Framer Motion](https://www.
 
 ## Installation
 
-```bash
-# Install the package
-npm install @smicolon/fasla-ui
+Components are copied into your project with the CLI, as with shadcn/ui:
 
-# Or copy components into your project with the CLI
-npx @smicolon/cli init              # once per project, writes components.json
+```bash
+npx @smicolon/cli init              # once per project: writes components.json and lib/utils.ts
+npm install clsx tailwind-merge     # the two packages lib/utils.ts imports
 npx @smicolon/cli add button card   # per component
+```
+
+`add` ends by printing an `npm install` line for the packages the components
+need. For `button card` it is:
+
+```bash
+npm install @radix-ui/react-slot class-variance-authority lucide-react
+```
+
+The `@smicolon/fasla-ui` package holds the design tokens, the Tailwind preset
+and the motion presets, not the components. Install it when you want those:
+
+```bash
+npm install @smicolon/fasla-ui
 ```
 
 ## Quick Start
 
 ```tsx
-import { Button, Card, CardHeader, CardTitle, CardContent } from "@smicolon/fasla-ui"
+import { Button } from "@/components/ui/button"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
 
 export function App() {
   return (
@@ -85,10 +99,10 @@ Visit [ui.smicolon.com](https://ui.smicolon.com) for full documentation.
 
 ```json
 {
-  "react": "^18.0.0",
-  "react-dom": "^18.0.0",
-  "tailwindcss": "^3.4.0",
-  "framer-motion": "^11.0.0" // optional, for animations
+  "react": "^18.0.0 || ^19.0.0",
+  "react-dom": "^18.0.0 || ^19.0.0",
+  "tailwindcss": "^3.4.0 || ^4.1.4",
+  "framer-motion": "^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0" // optional, for animations
 }
 ```
 

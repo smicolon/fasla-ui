@@ -27,6 +27,15 @@ export default async function InstallationPage({
   // around them is the locale's.
   const rich = { code: (chunks: React.ReactNode) => <code>{chunks}</code> }
 
+  // `init` writes lib/utils.ts, which imports these two, but installs
+  // nothing; without them a fresh project fails tsc and the build.
+  const cnDeps = [
+    "npm install clsx tailwind-merge",
+    "pnpm add clsx tailwind-merge",
+    "yarn add clsx tailwind-merge",
+    "bun add clsx tailwind-merge",
+  ]
+
   return (
     <div className="space-y-8">
       <div className="space-y-4">
@@ -53,6 +62,17 @@ export default async function InstallationPage({
             <pre className="overflow-x-auto rounded-lg bg-terminal p-4">
               <code className="text-green-400">npx @smicolon/cli init</code>
             </pre>
+          </div>
+
+          <div>
+            <p className="text-sm font-medium mb-2">{i.rich("cliDeps", rich)}</p>
+            <div className="space-y-2">
+              {cnDeps.map((command) => (
+                <pre key={command} className="overflow-x-auto rounded-lg bg-terminal p-4">
+                  <code className="text-green-400">{command}</code>
+                </pre>
+              ))}
+            </div>
           </div>
 
           <div>
@@ -109,18 +129,30 @@ export function cn(...inputs: ClassValue[]) {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">{i("tailwindTitle")}</h2>
         <p className="text-muted-foreground">{i.rich("tailwindBody", rich)}</p>
+        <pre className="overflow-x-auto rounded-lg bg-terminal p-4">
+          <code className="text-green-400">npm install @smicolon/fasla-ui</code>
+        </pre>
+        <p className="text-muted-foreground">{i.rich("tailwindConfig", rich)}</p>
         <pre className="overflow-x-auto rounded-lg bg-terminal p-4 text-sm">
           <code className="text-gray-300">{`// tailwind.config.ts
+import type { Config } from "tailwindcss"
 import { tailwindSemanticColors } from "@smicolon/fasla-ui/tokens"
 
-module.exports = {
+const config: Config = {
   darkMode: "class",
+  content: [
+    "./app/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+  ],
   theme: {
     extend: {
       colors: tailwindSemanticColors,
     },
   },
-}`}</code>
+}
+
+export default config`}</code>
         </pre>
         <p className="text-muted-foreground text-sm">{i.rich("tailwindNote", rich)}</p>
       </div>

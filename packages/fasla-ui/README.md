@@ -19,12 +19,25 @@ A professional React UI component library built on **shadcn/ui** primitives. Pro
 
 ## Installation
 
-```bash
-# Using the CLI (recommended)
-npx @smicolon/cli init
-npx @smicolon/cli add button
+Components are copied into your project with the CLI, as with shadcn/ui:
 
-# Or install the package directly
+```bash
+npx @smicolon/cli init              # once per project: writes components.json and lib/utils.ts
+npm install clsx tailwind-merge     # the two packages lib/utils.ts imports
+npx @smicolon/cli add button card shimmer-button
+```
+
+`add` ends by printing an `npm install` line for the packages the components
+need. For `button card shimmer-button` it is:
+
+```bash
+npm install @radix-ui/react-slot class-variance-authority lucide-react framer-motion
+```
+
+This package holds the design tokens, the Tailwind preset and the motion
+presets, not the components. Install it when you want those:
+
+```bash
 npm install @smicolon/fasla-ui
 # or
 yarn add @smicolon/fasla-ui
@@ -83,9 +96,9 @@ Animated components for visual flair (powered by Framer Motion):
 ## Quick Start
 
 ```tsx
-import { Button } from "@smicolon/fasla-ui/registry/ui/button"
-import { Card, CardHeader, CardTitle, CardContent } from "@smicolon/fasla-ui/registry/ui/card"
-import { ShimmerButton } from "@smicolon/fasla-ui/registry/effects/shimmer-button"
+import { Button } from "@/components/ui/button"
+import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card"
+import { ShimmerButton } from "@/components/ui/shimmer-button"
 
 export function MyComponent() {
   return (
@@ -106,10 +119,10 @@ export function MyComponent() {
 
 ```json
 {
-  "react": "^18.0.0",
-  "react-dom": "^18.0.0",
-  "tailwindcss": "^3.4.0",
-  "framer-motion": "^11.0.0"  // optional, required for effects
+  "react": "^18.0.0 || ^19.0.0",
+  "react-dom": "^18.0.0 || ^19.0.0",
+  "tailwindcss": "^3.4.0 || ^4.1.4",
+  "framer-motion": "^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0"  // optional, required for effects
 }
 ```
 

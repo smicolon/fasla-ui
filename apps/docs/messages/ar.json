@@ -216,9 +216,10 @@
         "typescript": "لغة TypeScript، وهي موصى بها"
       },
       "cliTitle": "ثبّت بأداة الأوامر (CLI)",
-      "cliBody": "أسهل طريقة لإضافة المكوّنات هي الحزمة <code>@smicolon/cli</code>، وتحتاج إلى خطوتين.",
+      "cliBody": "أسهل طريقة لإضافة المكوّنات هي الحزمة <code>@smicolon/cli</code>، وتحتاج إلى ثلاث خطوات.",
       "cliInit": "1. هيّئ فاصلة مرة واحدة في كل مشروع. يكتب هذا الأمر الملف <code>components.json</code>، الذي يقرؤه كل أمر <code>add</code>:",
-      "cliAdd": "2. أضف مكوّنًا:",
+      "cliDeps": "2. ثبّت الحزمتين اللتين تستوردهما الدالة المساعدة <code>cn</code>. يكتب الأمر <code>init</code> هذه الدالة، وتثبّت أنت الحزمتين بأحد الأوامر التالية:",
+      "cliAdd": "3. أضف مكوّنًا:",
       "cliList": "اعرض كل ما يقدّمه السجل (registry):",
       "manualTitle": "ثبّت يدويًا",
       "manualBody": "يمكنك أيضًا نسخ المكوّنات مباشرة من الشيفرة المصدرية.",
@@ -226,7 +227,8 @@
       "manualCn": "2. أضف الدالة المساعدة <code>cn</code> إلى مشروعك:",
       "manualCopy": "3. انسخ الشيفرة المصدرية لكل مكوّن من صفحته.",
       "tailwindTitle": "اضبط Tailwind",
-      "tailwindBody": "اربط الـ tokens الدلالية بقسم <code>theme</code> في إعدادات Tailwind. والـ token قيمة تصميم محفوظة باسم، مثل <code>primary</code> للون الأساسي. تصدّر الحزمة المجموعة كاملة، مغلّفة مسبقًا لتبقى معدِّلات الشفافية (opacity modifier) تعمل:",
+      "tailwindBody": "في Tailwind 3، اربط الـ tokens الدلالية بقسم <code>theme</code> في إعدادات Tailwind. والـ token قيمة تصميم محفوظة باسم، مثل <code>primary</code> للون الأساسي. تصدّر الحزمة <code>@smicolon/fasla-ui</code> المجموعة كاملة، مغلّفة مسبقًا لتبقى معدِّلات الشفافية (opacity modifier) تعمل. ثبّتها:",
+      "tailwindConfig": "أضف الـ tokens إلى الملف <code>tailwind.config.ts</code>:",
       "tailwindNote": "بعد ذلك، عرّف متغيرات CSS المقابلة بألوان كاملة بصيغة hex أو oklch، على <code>:root</code> للوضع الفاتح، وعلى <code>.dark</code> للوضع الداكن. ربط الـ token بقيمة <code>var(--primary)</code> وحدها يبدو صحيحًا، لكنه يُسقط معدِّلات الشفافية (opacity modifier) في Tailwind دون تنبيه، فلا ينتج <code>bg-primary/10</code> أي قاعدة. لذلك تغلّف الخريطة المُصدَّرة كل token بالدالة <code>color-mix()</code>."
     },
     "propsTable": {

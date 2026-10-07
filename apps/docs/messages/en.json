@@ -216,9 +216,10 @@
         "typescript": "TypeScript (recommended)"
       },
       "cliTitle": "Using the CLI",
-      "cliBody": "The easiest way to add components is the <code>@smicolon/cli</code> package. It takes two steps.",
+      "cliBody": "The easiest way to add components is the <code>@smicolon/cli</code> package. It takes three steps.",
       "cliInit": "1. Initialize Fasla, once per project. This writes <code>components.json</code>, which every <code>add</code> reads:",
-      "cliAdd": "2. Add a component:",
+      "cliDeps": "2. Install the two packages the <code>cn</code> helper imports. <code>init</code> writes the helper, but not the packages:",
+      "cliAdd": "3. Add a component:",
       "cliList": "List everything the registry offers:",
       "manualTitle": "Manual Installation",
       "manualBody": "You can also copy components directly from the source code.",
@@ -226,7 +227,8 @@
       "manualCn": "2. Add the cn utility to your project:",
       "manualCopy": "3. Copy the component source code from each component page.",
       "tailwindTitle": "Tailwind Configuration",
-      "tailwindBody": "Map the semantic tokens into your Tailwind theme. The package exports the whole set, already wrapped so that opacity modifiers keep working:",
+      "tailwindBody": "On Tailwind 3, map the semantic tokens into your theme. The <code>@smicolon/fasla-ui</code> package exports the whole set, already wrapped so that opacity modifiers keep working. Install it:",
+      "tailwindConfig": "Spread the tokens into <code>tailwind.config.ts</code>:",
       "tailwindNote": "Then declare the matching CSS variables as full colours (hex or oklch) on <code>:root</code> and <code>.dark</code>. Mapping a token as a bare <code>var(--primary)</code> looks correct but silently drops Tailwind’s opacity modifiers — <code>bg-primary/10</code> compiles to no rule at all. That is why the exported map wraps each token in <code>color-mix()</code>."
     },
     "propsTable": {
