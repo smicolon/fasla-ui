@@ -1,5 +1,13 @@
 # @smicolon/cli
 
+## [0.5.0](https://github.com/smicolon/fasla-ui/compare/cli-v0.4.0...cli-v0.5.0) (2026-10-07)
+
+
+### Features
+
+* **cli:** use the project's package manager, repair 0.3 setups ([#41](https://github.com/smicolon/fasla-ui/issues/41)) ([61ec6b0](https://github.com/smicolon/fasla-ui/commit/61ec6b06b04873f392619ffce5bfa4aa1a7cb8ff))
+* ship the Fasla theme as base and colours registry items ([#43](https://github.com/smicolon/fasla-ui/issues/43)) ([7327c0c](https://github.com/smicolon/fasla-ui/commit/7327c0cc3537e857199bcd1d8cc85424e73f231a))
+
 ## [0.4.0](https://github.com/smicolon/fasla-ui/compare/cli-v0.3.3...cli-v0.4.0) (2026-10-07)
 
 
