@@ -2,7 +2,20 @@ import { afterEach, describe, expect, it } from "vitest"
 import fs from "fs-extra"
 import os from "os"
 import path from "path"
-import { applyLegacyRepair, isLegacyConfig, planLegacyRepair, rewriteSpecifiers, type ComponentsConfig } from "./legacy"
+import {
+  applyLegacyRepair,
+  beginLegacyRepair,
+  executeJournal,
+  isLegacyConfig,
+  planLegacyRepair,
+  readJournal,
+  REPAIR_FILE,
+  RepairRolledBackError,
+  resumeLegacyRepair,
+  rewriteSpecifiers,
+  type ComponentsConfig,
+} from "./legacy"
+import { UnsafePathError } from "./paths"
 
 const tempDirs: string[] = []
 afterEach(async () => {
@@ -57,11 +70,11 @@ describe("isLegacyConfig", () => {
   })
 })
 
-describe("repairing a 0.3 project whose @/ is the root (the broken case)", () => {
-  // 0.3.3's interactive init, then 0.3.3's add (src/src), then 0.4's add with
-  // the old config (src/, where "@/src/" does point). Nothing here compiled.
-  const setup = () =>
+// 0.3.3's interactive init, then 0.3.3's add (src/src), then 0.4's add with
+// the old config (src/, where "@/src/" does point). Nothing here compiled.
+const brokenProject = () =>
     project({
+      "components.json": `${JSON.stringify(config033(true), null, 2)}\n`,
       "tsconfig.json": JSON.stringify({ compilerOptions: { paths: { "@/*": ["./*"] } } }),
       "app/globals.css": "",
       "src/src/lib/utils.ts": UTILS,
@@ -78,6 +91,9 @@ describe("repairing a 0.3 project whose @/ is the root (the broken case)", () =>
         `import { cn } from '@/src/lib/utils'`,
       ].join("\n"),
     })
+
+describe("repairing a 0.3 project whose @/ is the root (the broken case)", () => {
+  const setup = brokenProject
 
   it("plans the new aliases, the shadcn-readable registry and the real globals.css", async () => {
     const dir = await setup()
@@ -190,5 +206,102 @@ describe("rewriteSpecifiers", () => {
     expect(rewriteSpecifiers(`from '@/src/components/ui/button'`, pairs)).toBe(`from '@/components/ui/button'`)
     expect(rewriteSpecifiers(`from "@/src/components/ui/button-group"`, pairs)).toBe(`from "@/src/components/ui/button-group"`)
     expect(rewriteSpecifiers(`// see @/src/components/ui/button`, pairs)).toBe(`// see @/src/components/ui/button`)
+  })
+})
+
+/** Every file under `dir` with its text, every folder, and every symlink's target. */
+async function tree(dir: string, rel = ""): Promise<Record<string, string>> {
+  const out: Record<string, string> = {}
+  for (const entry of await fs.readdir(path.join(dir, rel), { withFileTypes: true })) {
+    const child = rel ? `${rel}/${entry.name}` : entry.name
+    if (entry.isSymbolicLink()) out[child] = `-> ${await fs.readlink(path.join(dir, child))}`
+    else if (entry.isDirectory()) Object.assign(out, { [`${child}/`]: "" }, await tree(dir, child))
+    else out[child] = await fs.readFile(path.join(dir, child), "utf8")
+  }
+  return out
+}
+
+describe("a repair that stops part way", () => {
+  it("writes the whole plan to the repair file before changing anything", async () => {
+    const dir = await brokenProject()
+    const before = await tree(dir)
+    const plan = await planLegacyRepair(dir, config033(true), "")
+    await beginLegacyRepair(dir, plan)
+
+    const saved = JSON.parse(await read(dir, REPAIR_FILE))
+    expect(saved).toMatchObject({ version: 1, done: 0, steps: plan.steps })
+    const { [REPAIR_FILE]: journal, ...rest } = await tree(dir)
+    expect(journal).toBeDefined()
+    expect(rest).toEqual(before)
+    // components.json is written last, so a half-done repair still reads as one.
+    expect(plan.steps.at(-1)).toMatchObject({ op: "write", file: "components.json" })
+  })
+
+  it("is finished by the next run after stopping at any step, and ends where an unbroken repair does", async () => {
+    const control = await brokenProject()
+    await applyLegacyRepair(control, await planLegacyRepair(control, config033(true), ""))
+    const expected = await tree(control)
+    expect(expected[REPAIR_FILE]).toBeUndefined()
+
+    const count = (await planLegacyRepair(await brokenProject(), config033(true), "")).steps.length
+    expect(count).toBeGreaterThan(10)
+    for (let stop = 0; stop < count; stop++) {
+      // `recorded` false: the run died inside the step, after the change but
+      // before the journal said so — the next run must see it is already made.
+      for (const recorded of [true, false]) {
+        const dir = await brokenProject()
+        const journal = await beginLegacyRepair(dir, await planLegacyRepair(dir, config033(true), ""))
+        const crash = executeJournal(dir, journal, {
+          afterStep: (i) => {
+            if (i === stop) throw new Error("killed")
+          },
+        })
+        await expect(crash).rejects.toThrow("killed")
+        if (!recorded) {
+          const saved = JSON.parse(await read(dir, REPAIR_FILE))
+          await fs.writeFile(path.join(dir, REPAIR_FILE), JSON.stringify({ ...saved, done: stop }))
+        }
+
+        const left = await readJournal(dir)
+        expect(left?.done).toBe(recorded ? stop + 1 : stop)
+        await resumeLegacyRepair(dir, left!)
+        expect(await tree(dir), `stopped after step ${stop}, ${recorded ? "recorded" : "not recorded"}`).toEqual(expected)
+      }
+    }
+  })
+
+  it("puts everything back and removes the repair file when a step fails", async () => {
+    const dir = await brokenProject()
+    const plan = await planLegacyRepair(dir, config033(true), "")
+    // Edited after the plan was made: its import update refuses to overwrite it,
+    // after every move has already happened.
+    await fs.writeFile(path.join(dir, "app/page.tsx"), "// edited meanwhile\n")
+    const before = await tree(dir)
+
+    await expect(applyLegacyRepair(dir, plan)).rejects.toThrow(RepairRolledBackError)
+    await expect(applyLegacyRepair(dir, plan)).rejects.toThrow("app/page.tsx changed after the repair was planned")
+    expect(await tree(dir)).toEqual(before)
+  })
+
+  it("checks every path before writing the plan, so an unsafe one changes nothing", async () => {
+    const dir = await brokenProject()
+    const outside = await fs.mkdtemp(path.join(os.tmpdir(), "fasla-outside-"))
+    tempDirs.push(outside)
+    await fs.ensureDir(path.join(dir, "components"))
+    await fs.symlink(outside, path.join(dir, "components/ui"))
+    const before = await tree(dir)
+
+    await expect(applyLegacyRepair(dir, await planLegacyRepair(dir, config033(true), ""))).rejects.toThrow(UnsafePathError)
+    expect(await tree(dir)).toEqual(before)
+    expect(await fs.readdir(outside)).toEqual([])
+  })
+
+  it("only deletes a duplicate that is still the same file when its turn comes", async () => {
+    const dir = await brokenProject()
+    const plan = await planLegacyRepair(dir, config033(true), "")
+    const duplicate = plan.moves.find((m) => m.action === "duplicate")!
+    await fs.writeFile(path.join(dir, duplicate.from), "// someone's edit\n")
+    await expect(applyLegacyRepair(dir, plan)).rejects.toThrow(RepairRolledBackError)
+    expect(await read(dir, duplicate.from)).toBe("// someone's edit\n")
   })
 })

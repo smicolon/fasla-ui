@@ -9,6 +9,7 @@ import { installCommand, nextTabIndex, PACKAGE_MANAGERS, type PackageManager } f
 const STORAGE_KEY = "fasla-package-manager"
 const CHANGE_EVENT = "fasla-package-manager-change"
 
+/** The package manager picked earlier on this site, if storage allows reading it. */
 function readChoice(): PackageManager | undefined {
   try {
     const saved = window.localStorage.getItem(STORAGE_KEY)

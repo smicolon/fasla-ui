@@ -8,7 +8,7 @@ import { aliasToPath, outsideAliasMessage, pathToAlias, resolveInsideProject, re
 import { NAMESPACE, namespaceUrl } from "../registry.js"
 import { detectPackageManager, install, installCommand, missingPackages, type PackageManager, type Runner } from "../pm.js"
 import { isLegacyConfig, type ComponentsConfig } from "../legacy.js"
-import { aliasRootOrExit, repairLegacyOrExit, safeOrExit, warnViteAlias } from "./shared.js"
+import { aliasRootOrExit, repairLegacyOrExit, resumeRepairOrExit, safeOrExit } from "./shared.js"
 
 const UTILS_SOURCE = `import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
@@ -73,6 +73,10 @@ export async function installCnPackages(
   return false
 }
 
+/**
+ * `init`: writes components.json and the cn helper, installs what the helper
+ * imports, and repairs a project set up with 0.3.
+ */
 export function initCommand() {
   return new Command()
     .name("init")
@@ -89,11 +93,13 @@ export function initCommand() {
       const configPath = path.join(cwd, "components.json")
       const pm = await detectPackageManager(cwd)
       // `@/` is wherever the project's tsconfig points it, so the defaults,
-      // the stored aliases and the files written all follow it.
-      const aliasRoot = await aliasRootOrExit(cwd, yes)
+      // the stored aliases and the files written all follow it. A --yes run
+      // stops here, before anything is written, when "@/" is only a guess.
+      const aliasRoot = await aliasRootOrExit(cwd, yes, pm)
 
-      let config: ComponentsConfig | undefined
-      if (await fs.pathExists(configPath)) {
+      // A repair an earlier run left unfinished is finished first.
+      let config: ComponentsConfig | undefined = await resumeRepairOrExit(cwd)
+      if (!config && (await fs.pathExists(configPath))) {
         const existing: ComponentsConfig = await fs.readJson(configPath).catch(() => ({}))
         if (await isLegacyConfig(cwd, existing)) {
           // A 0.3 config is broken, not a choice to keep: repair is the default.
@@ -111,8 +117,6 @@ export function initCommand() {
           }
         }
       }
-
-      await warnViteAlias(cwd, aliasRoot, pm)
 
       if (!config) config = await askForConfig(cwd, aliasRoot.root, yes)
       const aliases = config.aliases ?? {}

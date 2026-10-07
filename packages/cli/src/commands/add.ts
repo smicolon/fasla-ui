@@ -6,12 +6,13 @@ import fs from "fs-extra"
 import path from "path"
 import { DEFAULT_REGISTRY_URL, REGISTRY_URL, fetchRegistry, fetchComponent, getTargetDirectory, type RegistryFile, type RegistryItem } from "../registry.js"
 import { registryItemName, resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
-import { aliasToPath, checkDestination, installFile, resolveInsideProject, writeFileNoFollow } from "../paths.js"
+import { aliasToPath, checkDestination, installFile, resolveInsideProject } from "../paths.js"
 import { detectPackageManager, installCommand, missingPackages } from "../pm.js"
 import { isLegacyConfig } from "../legacy.js"
 import { writeCnHelper } from "./init.js"
-import { aliasRootOrExit, repairLegacyOrExit, safeOrExit, warnViteAlias } from "./shared.js"
+import { aliasRootOrExit, repairLegacyOrExit, resumeRepairOrExit, safeOrExit } from "./shared.js"
 
+/** `add`: copies registry components, and what they import, into the project. */
 export function addCommand() {
   return new Command()
     .name("add")
@@ -35,22 +36,10 @@ export function addCommand() {
       }
 
       let config = await fs.readJson(configPath)
+      const yes = Boolean(options.yes)
       const pm = await detectPackageManager(cwd)
-      const aliasRoot = await aliasRootOrExit(cwd, Boolean(options.yes))
-      // A 0.3 config sends files where "@/" can't reach them, so repair it
-      // before adding anything: ask, yes by default, or just do it with --yes.
-      if (await isLegacyConfig(cwd, config)) {
-        config = await repairLegacyOrExit(cwd, config, aliasRoot.root, Boolean(options.yes))
-        await safeOrExit(async () => {
-          await writeFileNoFollow(configPath, `${JSON.stringify(config, null, 2)}\n`)
-          await writeCnHelper(cwd, config.aliases?.utils ?? "@/lib/utils", aliasRoot.root)
-        })
-        console.log(chalk.green("Repaired components.json.\n"))
-      }
-      await warnViteAlias(cwd, aliasRoot, pm)
-      const componentsAlias: string = config.aliases?.components || "@/components"
-      const componentsDir = aliasToPath(componentsAlias, aliasRoot.root)
-      await safeOrExit(() => resolveInsideProject(cwd, componentsDir))
+      // A --yes run stops here, before anything is written, when "@/" is a guess.
+      const aliasRoot = await aliasRootOrExit(cwd, yes, pm)
 
       // Fetch registry
       const spinner = ora("Fetching registry...").start()
@@ -125,6 +114,22 @@ export function addCommand() {
           process.exit(0)
         }
       }
+
+      // Only now, with the names checked and the add confirmed, is a 0.3
+      // project repaired, so a typo or a failed fetch changes nothing. A
+      // repair an earlier run left unfinished is finished first.
+      let repaired = await resumeRepairOrExit(cwd)
+      if (!repaired && (await isLegacyConfig(cwd, config))) {
+        repaired = await repairLegacyOrExit(cwd, config, aliasRoot.root, yes)
+        console.log(chalk.green("Repaired components.json.\n"))
+      }
+      if (repaired) {
+        config = repaired
+        await safeOrExit(() => writeCnHelper(cwd, config.aliases?.utils ?? "@/lib/utils", aliasRoot.root))
+      }
+      const componentsAlias: string = config.aliases?.components || "@/components"
+      const componentsDir = aliasToPath(componentsAlias, aliasRoot.root)
+      await safeOrExit(() => resolveInsideProject(cwd, componentsDir))
 
       const addSpinner = ora("Resolving dependencies...").start()
       const allDependencies: Set<string> = new Set()

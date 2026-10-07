@@ -2,7 +2,7 @@ import { afterEach, describe, expect, it } from "vitest"
 import fs from "fs-extra"
 import os from "os"
 import path from "path"
-import { viteAliasAdvice, viteConfigHasAlias } from "./vite"
+import { aliasAdvice, viteConfigHasAlias } from "./vite"
 
 const tempDirs: string[] = []
 afterEach(async () => {
@@ -47,9 +47,9 @@ describe("viteConfigHasAlias", () => {
   })
 })
 
-describe("viteAliasAdvice", () => {
+describe("aliasAdvice", () => {
   it("prints both halves for a fresh Vite app, naming the files it has", async () => {
-    const advice = (await viteAliasAdvice(await viteTemplate(), { root: "src", mapped: false, pm: "bun" }))!.join("\n")
+    const advice = (await aliasAdvice(await viteTemplate(), { root: "src", mapped: false, pm: "bun" }))!.join("\n")
     expect(advice).toContain('"@/" is not set up in this Vite app')
     expect(advice).toContain('In tsconfig.json and tsconfig.app.json, inside "compilerOptions"')
     expect(advice).toContain('"paths": { "@/*": ["./src/*"] }')
@@ -62,12 +62,12 @@ describe("viteAliasAdvice", () => {
 
   it("leaves out @types/node when package.json already has it", async () => {
     const dir = await viteTemplate({ "package.json": JSON.stringify({ devDependencies: { "@types/node": "^24" } }) })
-    const advice = (await viteAliasAdvice(dir, { root: "src", mapped: false, pm: "npm" }))!.join("\n")
+    const advice = (await aliasAdvice(dir, { root: "src", mapped: false, pm: "npm" }))!.join("\n")
     expect(advice).not.toContain("@types/node")
   })
 
   it("asks only for the vite.config half when the tsconfig maps @/ already", async () => {
-    const advice = (await viteAliasAdvice(await viteTemplate(), { root: "src", mapped: true, pm: "pnpm" }))!.join("\n")
+    const advice = (await aliasAdvice(await viteTemplate(), { root: "src", mapped: true, pm: "pnpm" }))!.join("\n")
     expect(advice).toContain("mapped in the tsconfig but not in vite.config.ts")
     expect(advice).not.toContain('"paths"')
     expect(advice).toContain("1. In vite.config.ts")
@@ -76,7 +76,7 @@ describe("viteAliasAdvice", () => {
 
   it("asks only for the tsconfig half when vite.config has the alias", async () => {
     const dir = await viteTemplate({ "vite.config.ts": `export default defineConfig({ resolve: { alias: { "@": "/src" } } })` })
-    const advice = (await viteAliasAdvice(dir, { root: "src", mapped: false, pm: "npm" }))!.join("\n")
+    const advice = (await aliasAdvice(dir, { root: "src", mapped: false, pm: "npm" }))!.join("\n")
     expect(advice).toContain('"paths": { "@/*": ["./src/*"] }')
     expect(advice).not.toContain("resolve.alias")
   })
@@ -84,17 +84,30 @@ describe("viteAliasAdvice", () => {
   it("says nothing once both halves are there", async () => {
     const dir = await viteTemplate({ "vite.config.mjs": `export default { resolve: { alias: { "@": "/src" } } }` })
     await fs.remove(path.join(dir, "vite.config.ts"))
-    expect(await viteAliasAdvice(dir, { root: "src", mapped: true, pm: "npm" })).toBeUndefined()
+    expect(await aliasAdvice(dir, { root: "src", mapped: true, pm: "npm" })).toBeUndefined()
   })
 
-  it("says nothing outside a Vite app", async () => {
+  it("asks only for the tsconfig outside Vite, where the bundler reads it from there", async () => {
     const dir = await project({ "tsconfig.json": "{}", "next.config.ts": "" })
-    expect(await viteAliasAdvice(dir, { root: "", mapped: false, pm: "npm" })).toBeUndefined()
+    const advice = (await aliasAdvice(dir, { root: "", mapped: false, pm: "npm" }))!.join("\n")
+    expect(advice).toContain(`"@/" is not mapped in this project's tsconfig`)
+    expect(advice).toContain('In tsconfig.json, inside "compilerOptions"')
+    expect(advice).not.toContain("vite.config")
+  })
+
+  it("says nothing outside Vite once the tsconfig maps @/", async () => {
+    const dir = await project({ "tsconfig.json": "{}", "next.config.ts": "" })
+    expect(await aliasAdvice(dir, { root: "", mapped: true, pm: "npm" })).toBeUndefined()
+  })
+
+  it("names jsconfig.json in a JavaScript project without a tsconfig", async () => {
+    const dir = await project({ "jsconfig.json": "{}" })
+    expect((await aliasAdvice(dir, { root: "", mapped: false, pm: "npm" }))!.join("\n")).toContain("In jsconfig.json, inside")
   })
 
   it("points the alias at the project root when there is no src/ folder", async () => {
     const dir = await project({ "vite.config.js": "export default {}", "tsconfig.json": "{}" })
-    const advice = (await viteAliasAdvice(dir, { root: "", mapped: false, pm: "npm" }))!.join("\n")
+    const advice = (await aliasAdvice(dir, { root: "", mapped: false, pm: "npm" }))!.join("\n")
     expect(advice).toContain('"paths": { "@/*": ["./*"] }')
     expect(advice).toContain('path.resolve(__dirname, ".")')
     expect(advice).toContain("In tsconfig.json, inside")

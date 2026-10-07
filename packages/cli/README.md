@@ -40,15 +40,22 @@ npx @smicolon/cli init --no-install
 
 `init` also handles two setups that need more than a config file:
 
-- **Vite.** A Vite app has no `"@/"` alias until you add one, and every component
-  imports `"@/lib/utils"`. When it's missing, `init` and `add` warn and print the
-  exact lines to add to your tsconfig files and `vite.config`.
+- **Vite, and any project without `"@/"`.** Every component imports
+  `"@/lib/utils"`, and a Vite app has no `"@/"` alias until you add one. When no
+  config maps it, `init` and `add` print the exact lines to add to your tsconfig
+  files and `vite.config`. Run interactively, they warn and carry on; with
+  `--yes` they stop and write nothing, since every folder would be a guess.
 - **Projects set up with 0.3.x.** Their `components.json` has a `"smicolon"`
   registry entry the shadcn CLI rejects, and paths that put files in `src/src`.
   Running `init` again repairs it by default: it fixes the config, moves the
   files to where `"@/"` reaches, and updates the imports that pointed at the old
   places. It never overwrites a file; an older copy that differs is kept as
-  `.bak` for you to check.
+  `.bak` for you to check. `add` offers the same repair, after it has checked
+  the component names.
+
+  The whole plan is written to `.fasla-repair.json` before anything changes. If
+  a step fails, everything is put back. If the run is killed part way, the next
+  `init` or `add` finishes it from that file.
 
 ### Package managers
 

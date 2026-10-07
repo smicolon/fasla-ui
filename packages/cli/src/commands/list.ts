@@ -13,6 +13,7 @@ export function addExample(items: Pick<RegistryItem, "name">[]): string | undefi
   return name ? `npx @smicolon/cli add ${name}` : undefined
 }
 
+/** `list`: prints the registry's components by type. */
 export function listCommand() {
   return new Command()
     .name("list")

@@ -201,6 +201,7 @@ async function resolvePackageConfig(spec: string, fromDir: string): Promise<stri
   }
 }
 
+/** Whether `p` is a file, following symlinks. */
 async function isFile(p: string): Promise<boolean> {
   try {
     return (await fs.stat(p)).isFile()
@@ -368,6 +369,7 @@ export async function writeFileIfAbsent(file: string, content: string): Promise<
   }
 }
 
+/** Whether anything, a symlink included, is at `p`. */
 async function lexists(p: string): Promise<boolean> {
   try {
     await fs.lstat(p)

@@ -1,9 +1,9 @@
 /**
- * Vite apps don't map `@/` until someone sets it up, in two places: the
- * tsconfig for the type checker and vite.config for the bundler. Every Fasla
- * component imports `@/lib/utils`, so without both the app neither type-checks
- * nor builds. This says exactly what to add, instead of quietly writing files
- * under src/ as though `@/` already pointed there.
+ * Every Fasla component imports `@/lib/utils`, so `@/` has to resolve. Next.js
+ * reads it from the tsconfig; a Vite app needs it in two places, the tsconfig
+ * for the type checker and vite.config for the bundler, and has neither until
+ * someone adds them. This says exactly what to add, instead of quietly writing
+ * files under src/ as though `@/` already pointed there.
  */
 import fs from "fs-extra"
 import path from "path"
@@ -29,40 +29,42 @@ export function viteConfigHasAlias(source: string): boolean {
 }
 
 /**
- * The tsconfig files to put `paths` in. The Vite templates split the config:
+ * The config files to put `paths` in. The Vite templates split the tsconfig:
  * tsconfig.json only lists references, and tsconfig.app.json is what `tsc -b`
  * checks the app with, so both need it — the first for editors, the second
- * for the build.
+ * for the build. A JavaScript project without a tsconfig uses jsconfig.json.
  */
 async function tsconfigFiles(cwd: string): Promise<string[]> {
   const files = []
   for (const name of ["tsconfig.json", "tsconfig.app.json"]) {
     if (await fs.pathExists(path.join(cwd, name))) files.push(name)
   }
-  return files.length > 0 ? files : ["tsconfig.json"]
+  if (files.length > 0) return files
+  return (await fs.pathExists(path.join(cwd, "jsconfig.json"))) ? ["jsconfig.json"] : ["tsconfig.json"]
 }
 
 /**
- * The changes a Vite app needs before `@/` resolves, as lines to print, or
- * undefined when it isn't a Vite app or has both halves already. `root` is
- * the folder `@/` should point to; `mapped` says whether a tsconfig already
- * maps it.
+ * The changes a project needs before `@/` resolves, as lines to print — the
+ * first line says what is wrong — or undefined when nothing is missing.
+ * `root` is the folder `@/` should point to; `mapped` says whether a tsconfig
+ * already maps it. Outside Vite, only the tsconfig can be missing.
  */
-export async function viteAliasAdvice(
+export async function aliasAdvice(
   cwd: string,
   { root, mapped, pm }: { root: string; mapped: boolean; pm: PackageManager }
 ): Promise<string[] | undefined> {
   const viteConfig = await findViteConfig(cwd)
-  if (!viteConfig) return undefined
-  const source = await fs.readFile(path.join(cwd, viteConfig), "utf8").catch(() => "")
-  const aliased = viteConfigHasAlias(source)
+  const source = viteConfig ? await fs.readFile(path.join(cwd, viteConfig), "utf8").catch(() => "") : ""
+  const aliased = !viteConfig || viteConfigHasAlias(source)
   if (mapped && aliased) return undefined
 
   const target = root ? `./${root}` : "."
   const lines = [
-    mapped
-      ? `"@/" is mapped in the tsconfig but not in ${viteConfig}. Fasla components import "@/lib/utils", so the app won't build until it is.`
-      : `"@/" is not set up in this Vite app. Fasla components import "@/lib/utils", so the app won't type-check or build until it is.`,
+    !viteConfig
+      ? `"@/" is not mapped in this project's tsconfig. Fasla components import "@/lib/utils", so the project won't type-check or build until it is.`
+      : mapped
+        ? `"@/" is mapped in the tsconfig but not in ${viteConfig}. Fasla components import "@/lib/utils", so the app won't build until it is.`
+        : `"@/" is not set up in this Vite app. Fasla components import "@/lib/utils", so the app won't type-check or build until it is.`,
     `Make these changes:`,
   ]
   let step = 1
