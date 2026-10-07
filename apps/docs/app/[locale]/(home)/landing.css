@@ -140,6 +140,18 @@
    the right. The English layer sits on top and is clipped at --pos, the red
    line, which mirror-compare.tsx sweeps or the reader drags. */
 
+/* The curved labels hang 54px outside the stage's corners, one on the page's
+   outer edge. Between 901px (where they appear) and about 1365px the page
+   margin there is narrower than that, so the stage gives up the difference,
+   plus 4px, on that side: the labels keep their place at the corners and stay
+   on screen. The margin is the gutter, or the centring margin once the
+   content reaches its 1248px maximum. */
+@media (min-width: 901px) {
+  .l-cmp-room {
+    margin-inline-end: max(0px, 58px - max(var(--l-gutter), (100vw - 1248px) / 2));
+  }
+}
+
 .l-cmp {
   --pos: 50%;
   position: relative;
