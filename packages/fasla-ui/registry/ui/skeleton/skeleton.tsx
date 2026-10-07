@@ -58,12 +58,19 @@ type SkeletonGroupProps = SkeletonProps & {
   lines?: number
 }
 
+/**
+ * A group has no shape of its own, so `variant` is taken out of its props and
+ * never reaches the DOM. The parameter's rest pattern makes the copy.
+ */
+function withoutVariant({ ...props }: SkeletonProps): React.HTMLAttributes<HTMLDivElement> {
+  delete props.variant
+  return props
+}
+
 /** Pre-built skeleton for text lines. Every line is full width, as in Figma. */
 function SkeletonText({
   className,
   lines = 2,
-  // A group has no shape of its own; taken out so it never reaches the DOM.
-  variant: _variant,
   animate = true,
   ...props
 }: SkeletonGroupProps) {
@@ -72,7 +79,7 @@ function SkeletonText({
       data-slot="skeleton-text"
       aria-hidden="true"
       className={cn("flex flex-col gap-2", className)}
-      {...props}
+      {...withoutVariant(props)}
     >
       {Array.from({ length: lines }).map((_, i) => (
         <Skeleton key={i} animate={animate} className="h-4 w-full" />
@@ -99,7 +106,6 @@ function SkeletonAvatar({ className, ...props }: SkeletonProps) {
 function SkeletonListItem({
   className,
   lines = 2,
-  variant: _variant,
   animate = true,
   ...props
 }: SkeletonGroupProps) {
@@ -108,7 +114,7 @@ function SkeletonListItem({
       data-slot="skeleton-list-item"
       aria-hidden="true"
       className={cn("flex items-center gap-4", className)}
-      {...props}
+      {...withoutVariant(props)}
     >
       <SkeletonAvatar animate={animate} />
       <SkeletonText lines={lines} animate={animate} className="min-w-0 flex-1" />
@@ -123,7 +129,6 @@ function SkeletonListItem({
 function SkeletonCard({
   className,
   lines = 2,
-  variant: _variant,
   animate = true,
   ...props
 }: SkeletonGroupProps) {
@@ -132,7 +137,7 @@ function SkeletonCard({
       data-slot="skeleton-card"
       aria-hidden="true"
       className={cn("flex flex-col gap-4", className)}
-      {...props}
+      {...withoutVariant(props)}
     >
       <Skeleton animate={animate} className="h-[122px] w-full" />
       <SkeletonText lines={lines} animate={animate} />

@@ -38,7 +38,9 @@ function splitGraphemes(text: string): string[] {
   }
   // Without Segmenter (Firefox before 125, for one), keep each combining mark
   // with the character before it, so a letter and its accent animate together.
-  return text.match(/\P{M}\p{M}*|\p{M}+/gu) ?? []
+  // Built from a string: TypeScript rejects the u flag in a regex literal when
+  // the target is below ES2015, as it is in a Next.js 14 tsconfig.
+  return text.match(new RegExp("\\P{M}\\p{M}*|\\p{M}+", "gu")) ?? []
 }
 
 /**

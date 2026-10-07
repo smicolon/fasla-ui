@@ -26,7 +26,9 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       }
     }, [indeterminate])
 
-    const inputId = id || React.useId()
+    // Called on every render, so the hook order holds when id comes and goes
+    const generatedId = React.useId()
+    const inputId = id || generatedId
 
     const checkbox = (
       <div className="relative flex items-center">
