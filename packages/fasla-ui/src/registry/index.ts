@@ -71,7 +71,7 @@ export const registry: RegistryItem[] = [
     name: "skeleton",
     type: "ui",
     title: "Skeleton",
-    description: "Loading skeleton placeholders with pre-built variants for text, avatars, and cards.",
+    description: "Loading placeholders that replace shadcn's Skeleton: a plain block plus text, avatar, list item and card shapes that stay still under reduced motion.",
     sourcePath: "registry/ui/skeleton",
     categories: ["primitives", "feedback"],
   },
