@@ -595,6 +595,22 @@ describe("add: files of the same name from another library", () => {
     expect(asked.map((q) => q.name)).not.toContain("replaceIt")
   })
 
+  it("reads nothing through a folder that is a symlink out of the project", async () => {
+    const dir = await nextApp({
+      "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }),
+    })
+    const outside = await project({ "button.tsx": "SECRET outside the project\n" })
+    await fs.ensureDir(path.join(dir, "components"))
+    await fs.symlink(outside, path.join(dir, "components/ui"))
+    const reads = vi.spyOn(fs, "readFile")
+
+    await expect(run("add", "button", "--yes", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(output()).toContain("Nothing was written.")
+    const touched = reads.mock.calls.map((call) => String(call[0])).filter((file) => file.startsWith(outside) || file.includes("components/ui/button.tsx"))
+    expect(touched).toEqual([])
+    expect(await fs.readFile(path.join(outside, "button.tsx"), "utf8")).toBe("SECRET outside the project\n")
+  })
+
   it("replaces it with -o, without asking", async () => {
     const dir = await withShadcnButton()
     await run("add", "button", "-o", "--yes", "--cwd", dir)

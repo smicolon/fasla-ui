@@ -179,6 +179,9 @@ export function addCommand() {
         for (const component of resolved.items) {
           for (const file of component.files ?? []) {
             const target = targetPathOf(file, component)
+            // Inside the project before anything is read: a symlinked folder
+            // could otherwise lead this read to a file outside it.
+            await safeOrExit(() => resolveInsideProject(cwd, path.dirname(target)))
             const stat = await fs.lstat(target).catch(() => undefined)
             if (!stat?.isFile()) continue
             const existing = await fs.readFile(target, "utf8")
