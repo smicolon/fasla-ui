@@ -5,6 +5,7 @@ import { Button } from "@fasla-ui/ui/button/button"
 import { CopyCommand } from "@/components/copy-command"
 import { registryCounts } from "@/lib/registry"
 import { AnnotatedCard } from "./_components/annotated-card"
+import { ArabicWord } from "./_components/arabic-word"
 import { AtomsTable } from "./_components/atoms-table"
 import { BlocksGrid } from "./_components/blocks-grid"
 import { CommandBand } from "./_components/command-band"
@@ -130,6 +131,7 @@ export default async function HomePage({
         <AtomsTable />
         <BlocksGrid />
         <TemplatesSection />
+        <ArabicWord />
         <ParityPlayground pageDir={localeDirection[locale as Locale]} />
         <AnnotatedCard components={registryCounts.total} />
         <ReviewWall />

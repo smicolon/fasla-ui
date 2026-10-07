@@ -145,7 +145,14 @@ export function ParityPlayground({ pageDir }: { pageDir: "ltr" | "rtl" }) {
             </span>
           }
           action={
-            <Button asChild variant="outline" size="lg" className="h-12 rounded-[10px] px-[22px] text-[15px]">
+            // At least 48px tall, never wider than the column: the Arabic label is
+            // wider than a 320px screen allows on one line, so it wraps there.
+            <Button
+              asChild
+              variant="outline"
+              size="lg"
+              className="h-auto min-h-12 max-w-full whitespace-normal rounded-[10px] px-[22px] py-2 text-center text-[15px]"
+            >
               <a href={landingLinks.storybook} target="_blank" rel="noopener noreferrer">
                 <BookIcon className="size-[17px]" />
                 {t("storybook")}

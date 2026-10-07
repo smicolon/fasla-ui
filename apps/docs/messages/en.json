@@ -1904,6 +1904,11 @@
         "b": "Subscribe"
       }
     },
+    "launch": {
+      "caption": "Arabic, from the first commit.",
+      "title": "Arabic is a launch language.",
+      "lede": "MENA teams ship both languages on day one, from the same components. No second design file, no mirrored rebuild after launch."
+    },
     "parity": {
       "eyebrow": "Storybook",
       "title": "Same tokens on both sides.",
