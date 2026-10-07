@@ -380,7 +380,14 @@ export async function validateJournal(cwd: string, journal: RepairJournal, root:
   const left = Array.isArray(journal.steps) && Number.isInteger(journal.done) ? journal.steps.slice(journal.done) : []
   const finished = left.every((step) => step?.op === "write" && step.file === "components.json" && step.after === configText)
   if (config && finished && !(await isLegacyConfig(cwd, config))) return config
-  if (!config || !(await isLegacyConfig(cwd, config))) {
+  // A config that is 0.3 only by its `@/src/` aliases stops looking like one
+  // once the repair's rmdir steps remove src/src. It still is the config this
+  // plan started from when the plan's own components.json write is still to
+  // come from exactly this text — and the aliases must still go through
+  // `@/src/`, so a plan can't vouch for a config that was never 0.3.
+  const throughSrc = [config?.aliases?.components, config?.aliases?.utils].some((a) => typeof a === "string" && a.startsWith("@/src/"))
+  const plannedFromThis = left.some((step) => step?.op === "write" && step.file === "components.json" && step.before === configText)
+  if (!config || (!(throughSrc && plannedFromThis) && !(await isLegacyConfig(cwd, config)))) {
     throw new RepairJournalError(
       `${REPAIR_FILE} is here, but components.json isn't one from 0.3, so there is nothing to repair and nothing was changed. ` +
         `If a repair has finished, or you didn't start one, delete ${REPAIR_FILE}.`

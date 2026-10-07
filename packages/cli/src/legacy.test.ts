@@ -352,6 +352,43 @@ describe("a plan found on disk", () => {
     }
   })
 
+  it("is resumed after its rmdir steps removed src/src, when the config was 0.3 only by its @/src aliases", async () => {
+    // The registry entry was fixed by hand, so only the aliases and src/src mark it.
+    const config = { ...config033(true), registries: { "@fasla": "https://ui.smicolon.com/r/{name}.json" } }
+    const dir = await project({
+      "components.json": `${JSON.stringify(config, null, 2)}\n`,
+      "src/src/lib/utils.ts": UTILS,
+      "src/src/components/ui/button.tsx": component("Button", "@/src/lib/utils"),
+    })
+    expect(await isLegacyConfig(dir, config)).toBe(true)
+    const journal = await beginLegacyRepair(dir, await planLegacyRepair(dir, config, ""))
+    const lastRmdir = journal.steps.map((s) => s.op).lastIndexOf("rmdir")
+    await expect(
+      executeJournal(dir, journal, {
+        afterStep: (i) => {
+          if (i === lastRmdir) throw new Error("killed")
+        },
+      })
+    ).rejects.toThrow("killed")
+    expect(await exists(dir, "src/src")).toBe(false)
+    expect(await isLegacyConfig(dir, config)).toBe(false)
+
+    const left = (await readJournal(dir))!
+    await resumeLegacyRepair(dir, left, await validateJournal(dir, left, ""))
+    expect((await fs.readJson(path.join(dir, "components.json"))).aliases.components).toBe("@/components")
+    expect(await read(dir, "components/ui/button.tsx")).toContain(`"@/lib/utils"`)
+  })
+
+  it("can't vouch for a config that was never 0.3 by naming it as its starting point", async () => {
+    const dir = await brokenProject()
+    const journal = await beginLegacyRepair(dir, await planLegacyRepair(dir, config033(true), ""))
+    const normal = `${JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }, null, 2)}\n`
+    await fs.writeFile(path.join(dir, "components.json"), normal)
+    const write = journal.steps.find((s) => s.op === "write" && s.file === "components.json") as { before: string | null }
+    write.before = normal
+    await expect(validateJournal(dir, journal, "")).rejects.toThrow("isn't one from 0.3")
+  })
+
   it("is refused when components.json isn't from 0.3, rather than trusted", async () => {
     const dir = await brokenProject()
     const journal = await beginLegacyRepair(dir, await planLegacyRepair(dir, config033(true), ""))
