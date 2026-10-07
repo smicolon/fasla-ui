@@ -7,6 +7,8 @@ import path from "path"
 // Every prompt takes the answer it offers by default, as pressing Enter does,
 // and records what it asked.
 const asked: { name: string; initial: unknown }[] = []
+// The questions as asked, with their choices and wording.
+const prompted: { name: string; message?: string; choices?: { title: string; value: string }[] }[] = []
 // Answers that differ from the default, by question name, for one test.
 const overrides: Record<string, unknown> = {}
 const answers = overrides
@@ -15,8 +17,12 @@ vi.mock("prompts", () => ({
     const answers: Record<string, unknown> = {}
     for (const q of Array.isArray(questions) ? questions : [questions]) {
       asked.push({ name: q.name, initial: q.initial })
+      prompted.push(q as (typeof prompted)[number])
       // An override may be a promise: the question then waits, as a person would.
-      answers[q.name] = q.name in overrides ? await overrides[q.name] : q.initial
+      // A select answers with the chosen choice's value, as prompts does.
+      const choices = (q as { choices?: { value: unknown }[] }).choices
+      const byDefault = choices && typeof q.initial === "number" ? choices[q.initial]?.value : q.initial
+      answers[q.name] = q.name in overrides ? await overrides[q.name] : byDefault
     }
     return answers
   },
@@ -28,8 +34,8 @@ let registryDown = false
 vi.mock("./registry", async (importOriginal) => {
   const actual = await importOriginal<typeof import("./registry")>()
   const items = [
-    { name: "button", type: "registry:ui", dependencies: ["lucide-react"], files: [{ path: "registry/ui/button/button.tsx", type: "registry:ui", target: "", content: `import { cn } from "@/lib/utils"\nexport const Button = () => cn("b")\n` }] },
-    { name: "badge", type: "registry:ui", files: [{ path: "registry/ui/badge/badge.tsx", type: "registry:ui", target: "", content: `import { cn } from "@/lib/utils"\nexport const Badge = () => cn("x")\n` }] },
+    { name: "button", type: "registry:ui", dependencies: ["lucide-react"], files: [{ path: "registry/ui/button/button.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/button): https://ui.smicolon.com\nimport { cn } from "@/lib/utils"\nexport const Button = () => cn("b")\n` }] },
+    { name: "badge", type: "registry:ui", files: [{ path: "registry/ui/badge/badge.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/badge): https://ui.smicolon.com\nimport { cn } from "@/lib/utils"\nexport const Badge = () => cn("x")\n` }] },
   ]
   return {
     ...actual,
@@ -38,6 +44,20 @@ vi.mock("./registry", async (importOriginal) => {
       return { name: "fasla", homepage: "", items: items.map(({ files, ...item }) => item) }
     },
     fetchComponent: async (name: string) => items.find((item) => item.name === name)!,
+  }
+})
+
+// The theme installs with the shadcn CLI, over the network: recorded here instead.
+const themesApplied: { cwd: string; choice: string }[] = []
+let themeFails = false
+vi.mock("./theme", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("./theme")>()
+  return {
+    ...actual,
+    applyTheme: async (cwd: string, choice: string, _project?: unknown) => {
+      themesApplied.push({ cwd, choice })
+      return themeFails ? { ok: false, output: "ERR_SOME_SHADCN_FAILURE" } : { ok: true }
+    },
   }
 })
 
@@ -51,7 +71,10 @@ let logs: string[] = []
 
 beforeEach(() => {
   asked.length = 0
+  prompted.length = 0
   registryDown = false
+  themesApplied.length = 0
+  themeFails = false
   for (const key of Object.keys(overrides)) delete overrides[key]
   logs = []
   vi.spyOn(console, "log").mockImplementation((...args) => void logs.push(args.join(" ")))
@@ -147,7 +170,10 @@ describe("init", () => {
     await run("init", "--no-install", "--cwd", dir)
 
     // The only question was the repair, offered with yes as its default.
-    expect(asked).toEqual([{ name: "repair", initial: true }])
+    expect(asked).toEqual([
+      { name: "repair", initial: true },
+      { name: "theme", initial: 0 },
+    ])
     const config = await fs.readJson(path.join(dir, "components.json"))
     expect(config.registries).toEqual({ "@fasla": "https://ui.smicolon.com/r/{name}.json" })
     expect(config.aliases.components).toBe("@/components")
@@ -228,7 +254,7 @@ describe("init", () => {
     // Run interactively, it shows what is left and asks first.
     logs = []
     await run("init", "--no-install", "--cwd", dir)
-    expect(asked.map((q) => q.name)).toEqual(["resume"])
+    expect(asked.map((q) => q.name)).toEqual(["resume", "theme"])
     expect(asked[0].initial).toBe(true)
     expect(output()).toContain(`stopped after ${journal.done} of ${journal.steps.length} steps`)
     expect(output()).toContain("- write the repaired components.json")
@@ -428,5 +454,175 @@ describe("list", () => {
     expect(addExample([{ name: "avatar" }, { name: "button" }])).toBe("npx @smicolon/cli add button")
     expect(addExample([{ name: "app-shell" }, { name: "navbar" }])).toBe("npx @smicolon/cli add app-shell")
     expect(addExample([])).toBeUndefined()
+  })
+})
+
+describe("init: the theme", () => {
+  const withColours = (extra: Record<string, string> = {}) =>
+    nextApp({ "app/globals.css": `@import "tailwindcss";\n:root {\n  --primary: #ff0066;\n}\n`, ...extra })
+
+  it("asks which theme, Fasla's colours first, and installs what was picked", async () => {
+    const dir = await withColours({ "package.json": JSON.stringify({ dependencies: { next: "16", clsx: "^2", "tailwind-merge": "^3" } }) })
+    await run("init", "--cwd", dir)
+    const theme = prompted.find((q) => q.name === "theme")!
+    expect(theme.message).toBe("How should your components look?")
+    expect(theme.choices!.map((c) => [c.value, c.title])).toEqual([
+      ["fasla", "Starting from scratch: use Fasla's colours"],
+      ["brand", "I have a brand: keep my colours"],
+    ])
+    expect(asked.find((q) => q.name === "theme")!.initial).toBe(0)
+    expect(themesApplied).toEqual([{ cwd: dir, choice: "fasla" }])
+  })
+
+  it("says when there are no colours to keep", async () => {
+    const dir = await nextApp({ "app/globals.css": `@import "tailwindcss";\n` })
+    await run("init", "--no-install", "--cwd", dir)
+    const brand = prompted.find((q) => q.name === "theme")!.choices!.find((c) => c.value === "brand")!
+    expect(brand.title).toBe("I have a brand: keep my colours (app/globals.css has no colours yet, so the components would have none)")
+  })
+
+  it("keeps the project's colours under --yes: base theme only, and says how to switch", async () => {
+    const dir = await withColours()
+    await run("init", "--yes", "--cwd", dir, "--no-install")
+    expect(output()).toContain("app/globals.css has its own colours, so they are kept: installing the base theme only.")
+    expect(output()).toContain("npx @smicolon/cli init --theme fasla")
+    expect(output()).toContain("npx shadcn@latest add @fasla/theme-base")
+    expect(asked.map((q) => q.name)).not.toContain("theme")
+  })
+
+  it("installs Fasla's colours under --yes only when the project has none", async () => {
+    const dir = await nextApp({ "app/globals.css": `@import "tailwindcss";\n`, "package.json": JSON.stringify({ dependencies: { next: "16", clsx: "^2", "tailwind-merge": "^3" } }) })
+    await run("init", "--yes", "--cwd", dir)
+    expect(output()).toContain("app/globals.css has no colours yet, so it gets Fasla's.")
+    expect(themesApplied).toEqual([{ cwd: dir, choice: "fasla" }])
+  })
+
+  it("replaces the project's colours only when --theme fasla says so", async () => {
+    const dir = await withColours({ "package.json": JSON.stringify({ dependencies: { next: "16", clsx: "^2", "tailwind-merge": "^3" } }) })
+    await run("init", "--yes", "--theme", "fasla", "--cwd", dir)
+    expect(themesApplied).toEqual([{ cwd: dir, choice: "fasla" }])
+    expect(output()).not.toContain("so they are kept")
+  })
+
+  it("leaves Geist out of the command on Next.js 14, whose next/font has none", async () => {
+    const dir = await nextApp({ "package.json": JSON.stringify({ dependencies: { next: "14.2.35" } }), "app/globals.css": "@tailwind base;\n" })
+    await run("init", "--yes", "--no-install", "--cwd", dir)
+    expect(output()).toContain("Install the theme:\n  npx shadcn@latest add @fasla/theme\n")
+  })
+
+  it("takes --theme brand without asking", async () => {
+    const dir = await nextApp({ "package.json": JSON.stringify({ dependencies: { next: "16", clsx: "^2", "tailwind-merge": "^3" } }) })
+    await run("init", "--theme", "brand", "--cwd", dir)
+    expect(asked.map((q) => q.name)).not.toContain("theme")
+    expect(themesApplied).toEqual([{ cwd: dir, choice: "brand" }])
+  })
+
+  it("refuses an unknown --theme before writing anything", async () => {
+    const dir = await nextApp()
+    const before = await tree(dir)
+    await expect(run("init", "--yes", "--theme", "blue", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(output()).toContain('--theme is "fasla" or "brand", not "blue"')
+    expect(await tree(dir)).toEqual(before)
+  })
+
+  it("prints the shadcn command and stops when installing the theme fails", async () => {
+    themeFails = true
+    const dir = await withColours({ "package.json": JSON.stringify({ dependencies: { next: "16", clsx: "^2", "tailwind-merge": "^3" } }) })
+    await expect(run("init", "--yes", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(output()).toContain("ERR_SOME_SHADCN_FAILURE")
+    expect(output()).toContain("Run this to finish:\n  npx shadcn@latest add @fasla/theme-base")
+  })
+})
+
+describe("init: where the stylesheet and Tailwind are", () => {
+  it("finds a Vite app's src/index.css, with no Tailwind config and no server components", async () => {
+    const dir = await project({
+      "package.json": JSON.stringify({ devDependencies: { vite: "^8", tailwindcss: "^4.3.3" } }),
+      "tsconfig.json": JSON.stringify({ compilerOptions: { paths: { "@/*": ["./src/*"] } } }),
+      "src/index.css": `@import "tailwindcss";\n`,
+      "src/App.css": ".app {}\n",
+    })
+    await run("init", "--yes", "--no-install", "--cwd", dir)
+    const config = await fs.readJson(path.join(dir, "components.json"))
+    expect(config.tailwind).toMatchObject({ css: "src/index.css", config: "" })
+    expect(config.rsc).toBe(false)
+  })
+
+  it("names the Tailwind 3 config file a Next.js app has", async () => {
+    const dir = await nextApp({
+      "package.json": JSON.stringify({ dependencies: { next: "14" }, devDependencies: { tailwindcss: "^3.4.1" } }),
+      "tailwind.config.js": "module.exports = {}\n",
+      "app/globals.css": "@tailwind base;\n@tailwind components;\n@tailwind utilities;\n",
+    })
+    await run("init", "--yes", "--no-install", "--cwd", dir)
+    const config = await fs.readJson(path.join(dir, "components.json"))
+    expect(config.tailwind).toMatchObject({ css: "app/globals.css", config: "tailwind.config.js" })
+    expect(config.rsc).toBe(true)
+  })
+})
+
+describe("add: files of the same name from another library", () => {
+  const shadcnButton = `import { Slot } from "@radix-ui/react-slot"\nexport function Button() { return null }\n`
+  const withShadcnButton = () =>
+    nextApp({
+      "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }),
+      "components/ui/button.tsx": shadcnButton,
+    })
+
+  it("asks before replacing one, yes by default, and replaces it", async () => {
+    const dir = await withShadcnButton()
+    await run("add", "button", "--cwd", dir)
+    const replace = prompted.find((q) => q.name === "replaceIt")!
+    expect(replace.message).toBe("button.tsx exists and isn't Fasla's. Replace it?")
+    expect(asked.find((q) => q.name === "replaceIt")!.initial).toBe(true)
+    expect(await fs.readFile(path.join(dir, "components/ui/button.tsx"), "utf8")).toContain("From Fasla UI (@fasla/button)")
+  })
+
+  it("keeps it when the answer is no", async () => {
+    const dir = await withShadcnButton()
+    overrides.replaceIt = false
+    await run("add", "button", "--cwd", dir)
+    expect(await fs.readFile(path.join(dir, "components/ui/button.tsx"), "utf8")).toBe(shadcnButton)
+    expect(output()).toContain("Kept components/ui/button.tsx: not Fasla's, so not replaced.")
+  })
+
+  it("never replaces one under --yes, and prints the -o command that would", async () => {
+    const dir = await withShadcnButton()
+    await run("add", "button", "badge", "--yes", "--cwd", dir)
+    expect(await fs.readFile(path.join(dir, "components/ui/button.tsx"), "utf8")).toBe(shadcnButton)
+    expect(await fs.pathExists(path.join(dir, "components/ui/badge.tsx"))).toBe(true)
+    expect(output()).toContain("To replace it with Fasla's: npx @smicolon/cli add button -o")
+    expect(asked.map((q) => q.name)).not.toContain("replaceIt")
+  })
+
+  it("reads nothing through a folder that is a symlink out of the project", async () => {
+    const dir = await nextApp({
+      "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }),
+    })
+    const outside = await project({ "button.tsx": "SECRET outside the project\n" })
+    await fs.ensureDir(path.join(dir, "components"))
+    await fs.symlink(outside, path.join(dir, "components/ui"))
+    const reads = vi.spyOn(fs, "readFile")
+
+    await expect(run("add", "button", "--yes", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(output()).toContain("Nothing was written.")
+    const touched = reads.mock.calls.map((call) => String(call[0])).filter((file) => file.startsWith(outside) || file.includes("components/ui/button.tsx"))
+    expect(touched).toEqual([])
+    expect(await fs.readFile(path.join(outside, "button.tsx"), "utf8")).toBe("SECRET outside the project\n")
+  })
+
+  it("replaces it with -o, without asking", async () => {
+    const dir = await withShadcnButton()
+    await run("add", "button", "-o", "--yes", "--cwd", dir)
+    expect(await fs.readFile(path.join(dir, "components/ui/button.tsx"), "utf8")).toContain("From Fasla UI (@fasla/button)")
+  })
+
+  it("doesn't ask about a Fasla file, edited or not, which keeps the -o rule", async () => {
+    const dir = await withShadcnButton()
+    const edited = `// From Fasla UI (@fasla/button): https://ui.smicolon.com\n// my edit\n`
+    await fs.writeFile(path.join(dir, "components/ui/button.tsx"), edited)
+    await run("add", "button", "--cwd", dir)
+    expect(asked.map((q) => q.name)).not.toContain("replaceIt")
+    expect(await fs.readFile(path.join(dir, "components/ui/button.tsx"), "utf8")).toBe(edited)
   })
 })

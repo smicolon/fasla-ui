@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test"
 import { readdirSync, readFileSync, statSync } from "node:fs"
 import path from "node:path"
-import { installCommand, nextTabIndex, PACKAGE_MANAGERS } from "../lib/package-managers.ts"
+import { installCommand, nextTabIndex, PACKAGE_MANAGERS, runCommand, shadcnAdd, wrapPieces } from "../lib/package-managers.ts"
 
 const docsRoot = path.resolve(import.meta.dir, "..")
 const read = (file) => readFileSync(path.join(docsRoot, file), "utf8")
@@ -22,6 +22,17 @@ describe("Package manager commands", () => {
       "pnpm add clsx tailwind-merge",
       "yarn add clsx tailwind-merge",
       "bun add clsx tailwind-merge",
+    ])
+  })
+})
+
+describe("Package manager run commands", () => {
+  test("run a package without installing it, the way each package manager does", () => {
+    expect(PACKAGE_MANAGERS.map((pm) => runCommand(pm, "shadcn@latest add @fasla/theme"))).toEqual([
+      "npx shadcn@latest add @fasla/theme",
+      "pnpm dlx shadcn@latest add @fasla/theme",
+      "yarn dlx shadcn@latest add @fasla/theme",
+      "bunx --bun shadcn@latest add @fasla/theme",
     ])
   })
 })
@@ -87,6 +98,91 @@ describe("Install commands on the docs pages", () => {
   test("show no npm-only install either; every install goes through the tabs", () => {
     const npmOnly = pages.filter((file) => /npm install /.test(read(file)))
     expect(npmOnly).toEqual([])
-    expect(read("app/[locale]/docs/installation/page.tsx").match(/<PackageManagerTabs /g)).toHaveLength(3)
+    expect(read("app/[locale]/docs/installation/page.tsx").match(/<PackageManagerTabs /g)).toHaveLength(4)
+  })
+})
+
+describe("Theme section of the Installation page", () => {
+  const page = read("app/[locale]/docs/installation/page.tsx")
+
+  test("installs each layer through the tabs, Fasla's colours first", () => {
+    const fasla = page.indexOf('<PackageManagerTabs run={shadcnAdd("theme", "font-geist")} />')
+    const base = page.indexOf('<PackageManagerTabs run={shadcnAdd("theme-base")} />')
+    expect(fasla).toBeGreaterThan(-1)
+    expect(base).toBeGreaterThan(fasla)
+    // The old manual Tailwind setup is gone.
+    expect(page).not.toContain("tailwindSemanticColors")
+  })
+
+  test("writes shadcn commands with full registry URLs, which work without our init", () => {
+    expect(shadcnAdd("theme", "font-geist")).toBe(
+      "shadcn@latest add https://ui.smicolon.com/r/theme.json https://ui.smicolon.com/r/font-geist.json"
+    )
+    expect(runCommand("npm", shadcnAdd("theme-base"))).toBe("npx shadcn@latest add https://ui.smicolon.com/r/theme-base.json")
+    // The @fasla namespace needs a components.json entry only our init writes.
+    const offenders = [...sourceFiles("app"), ...sourceFiles("components"), ...sourceFiles("lib"), "messages/en.json", "messages/ar.json"].filter(
+      (file) => read(file).includes("@fasla/")
+    )
+    expect(offenders).toEqual([])
+  })
+
+  test("says, in both languages, that Fasla's components replace shadcn's of the same name", () => {
+    const en = JSON.parse(read("messages/en.json")).docs.installation
+    const ar = JSON.parse(read("messages/ar.json")).docs.installation
+    expect(en.themeReplaces).toContain("replace shadcn’s components of the same name")
+    expect(ar.themeReplaces).toContain("تحل المكوّنات الأساسية في فاصلة محل مكوّنات shadcn/ui")
+    for (const key of ["themeTitle", "themeBody", "themeFasla", "themeNext14", "themeBrand", "themeConfirm", "themeArabicFont", "themeReplaces"]) {
+      expect(typeof en[key]).toBe("string")
+      expect(typeof ar[key]).toBe("string")
+    }
+    // shadcn's own question defaults to No: both languages say to type y, and
+    // that the base layer changes no colour the project has.
+    for (const t of [en.themeConfirm, ar.themeConfirm]) {
+      expect(t).toContain("<code>Existing CSS variables and components will be overwritten. Continue?</code>")
+      expect(t).toContain("<code>y</code>")
+      expect(t).toContain("<code>theme-base</code>")
+    }
+    expect(page.indexOf('i.rich("themeConfirm", rich)')).toBeGreaterThan(page.indexOf('shadcnAdd("theme-base")'))
+    expect(en.themeArabicFont).toContain("<code>--font-arabic</code>")
+    expect(ar.themeArabicFont).toContain("<code>--font-arabic</code>")
+  })
+})
+
+describe("Command blocks", () => {
+  // A long command — theme.json plus font-geist.json — ran past the block's
+  // edge. Commands wrap at their spaces; overflow-wrap breaks a URL only when
+  // it can't fit on a line of its own.
+  const WRAP = "whitespace-pre-wrap break-words"
+
+  test("wrap in the tabs, on the Installation page, and in bash code blocks", () => {
+    expect(read("components/package-manager-tabs.tsx")).toContain(`<pre dir="ltr" className="${WRAP} p-4">`)
+    const page = read("app/[locale]/docs/installation/page.tsx")
+    expect(page.match(new RegExp(`<pre className="${WRAP} rounded-lg bg-terminal p-4">`, "g"))).toHaveLength(4)
+    expect(read("components/component-preview.tsx")).toContain(`language === "bash" ? "${WRAP} p-4" : "overflow-x-auto p-4"`)
+  })
+
+  test("leave code samples on their own lines, scrolling", () => {
+    const page = read("app/[locale]/docs/installation/page.tsx")
+    expect(page).toContain('<pre className="overflow-x-auto rounded-lg bg-terminal p-4 text-sm">')
+  })
+
+  test("keep each URL's file name whole, so a URL breaks only before it, and join back unchanged", () => {
+    const command = runCommand("npm", shadcnAdd("theme", "font-geist"))
+    expect(wrapPieces(command)).toEqual([
+      { text: "npx shadcn@latest add ", keep: false },
+      { text: "https://ui.smicolon.com/r/", keep: false },
+      { text: "theme.json", keep: true },
+      { text: " ", keep: false },
+      { text: "https://ui.smicolon.com/r/", keep: false },
+      { text: "font-geist.json", keep: true },
+    ])
+    expect(wrapPieces(command).map((p) => p.text).join("")).toBe(command)
+    expect(wrapPieces("npm install clsx tailwind-merge")).toEqual([{ text: "npm install clsx tailwind-merge", keep: false }])
+    expect(read("components/package-manager-tabs.tsx")).toContain('<span className="whitespace-nowrap">{text}</span>')
+  })
+
+  test("still copy the command as one line", () => {
+    const tabs = read("components/package-manager-tabs.tsx")
+    expect(tabs).toContain("navigator.clipboard.writeText(command)")
   })
 })

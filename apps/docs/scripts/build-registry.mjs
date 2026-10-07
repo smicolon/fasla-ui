@@ -9,6 +9,8 @@ import fs from "fs/promises"
 import path from "path"
 import { fileURLToPath } from "url"
 
+import { buildThemeItems } from "../../../packages/fasla-ui/theme/theme-items.mjs"
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT_DIR = path.resolve(__dirname, "../../..")
 const Fasla_UI_DIR = path.join(ROOT_DIR, "packages/fasla-ui")
@@ -21,6 +23,13 @@ const OUTPUT_DIR = path.join(__dirname, "../public/r")
  * already deployed.
  */
 export const REGISTRY_URL = (process.env.FASLA_REGISTRY_URL || "https://ui.smicolon.com/r").replace(/\/+$/, "")
+
+/**
+ * The first line of every component file. @smicolon/cli's `add` reads it to
+ * tell a Fasla file from another library's file of the same name, which it
+ * asks before replacing. A comment may come before "use client".
+ */
+export const fileMarker = (name) => `// From Fasla UI (@fasla/${name}): https://ui.smicolon.com`
 
 /**
  * A dependency on another Fasla item, as a full URL. The shadcn CLI resolves a
@@ -94,7 +103,7 @@ async function main() {
         const content = await fs.readFile(sourcePath, "utf-8")
         filesWithContent.push({
           ...file,
-          content: rewriteComponentImports(rewriteUtilsImport(content), file.target, targetOf),
+          content: `${fileMarker(item.name)}\n${rewriteComponentImports(rewriteUtilsImport(content), file.target, targetOf)}`,
         })
       } catch (err) {
         console.warn(`    Warning: Could not read ${file.path}`)
@@ -131,6 +140,15 @@ async function main() {
       registryDependencies: dependencyUrls(item.registryDependencies || [], ownNames),
       categories: item.categories || [],
     })
+  }
+
+  // The theme: base, colours and the two fonts, generated from the Figma
+  // snapshots. Published beside the components, so `@fasla/theme` resolves,
+  // but kept out of the index: they install with `shadcn add` or our `init`,
+  // not as components.
+  for (const item of buildThemeItems({ registryUrl: REGISTRY_URL })) {
+    console.log(`  Processing ${item.name}...`)
+    await fs.writeFile(path.join(OUTPUT_DIR, `${item.name}.json`), JSON.stringify(item, null, 2))
   }
 
   // Write main registry index
