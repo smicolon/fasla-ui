@@ -52,7 +52,7 @@ export default async function InstallationPage({
         <div className="space-y-4">
           <div>
             <p className="text-sm font-medium mb-2">{i.rich("cliInit", rich)}</p>
-            <pre className="overflow-x-auto rounded-lg bg-terminal p-4">
+            <pre className="whitespace-pre-wrap break-words rounded-lg bg-terminal p-4">
               <code className="text-green-400">npx @smicolon/cli init</code>
             </pre>
           </div>
@@ -65,18 +65,18 @@ export default async function InstallationPage({
 
           <div>
             <p className="text-sm font-medium mb-2">{i("cliAdd")}</p>
-            <pre className="overflow-x-auto rounded-lg bg-terminal p-4">
+            <pre className="whitespace-pre-wrap break-words rounded-lg bg-terminal p-4">
               <code className="text-green-400">npx @smicolon/cli add button</code>
             </pre>
             <p className="text-sm font-medium mt-4 mb-2">{t("addSeveral")}</p>
-            <pre className="overflow-x-auto rounded-lg bg-terminal p-4">
+            <pre className="whitespace-pre-wrap break-words rounded-lg bg-terminal p-4">
               <code className="text-green-400">npx @smicolon/cli add card input badge</code>
             </pre>
           </div>
 
           <div>
             <p className="text-sm font-medium mb-2">{i("cliList")}</p>
-            <pre className="overflow-x-auto rounded-lg bg-terminal p-4">
+            <pre className="whitespace-pre-wrap break-words rounded-lg bg-terminal p-4">
               <code className="text-green-400">npx @smicolon/cli list</code>
             </pre>
           </div>

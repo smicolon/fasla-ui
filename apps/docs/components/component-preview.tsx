@@ -104,7 +104,9 @@ export function CodeBlock({ children, language = "tsx" }: CodeBlockProps) {
             {copied ? t("copied") : t("copyCode")}
           </button>
         </div>
-        <pre className="overflow-x-auto p-4">
+        {/* Commands wrap at their spaces, so a long one stays visible; code
+            keeps its lines and scrolls, since wrapping would misstate it. */}
+        <pre className={language === "bash" ? "whitespace-pre-wrap break-words p-4" : "overflow-x-auto p-4"}>
           <code className="text-sm text-green-400 font-mono">{renderCode(children)}</code>
         </pre>
       </div>

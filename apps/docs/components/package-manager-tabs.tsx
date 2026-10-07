@@ -4,7 +4,7 @@ import * as React from "react"
 import { useTranslations } from "next-intl"
 
 import { cn } from "@/lib/utils"
-import { installCommand, nextTabIndex, PACKAGE_MANAGERS, runCommand, type PackageManager } from "@/lib/package-managers"
+import { installCommand, nextTabIndex, PACKAGE_MANAGERS, runCommand, wrapPieces, type PackageManager } from "@/lib/package-managers"
 
 const STORAGE_KEY = "fasla-package-manager"
 const CHANGE_EVENT = "fasla-package-manager-change"
@@ -138,8 +138,22 @@ export function PackageManagerTabs(props: { packages: string } | { run: string }
         tabIndex={0}
         className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-fasla-red"
       >
-        <pre dir="ltr" className="overflow-x-auto p-4">
-          <code className="font-mono text-sm text-green-400">{command}</code>
+        {/* A long command wraps at its spaces instead of running past the edge,
+            so every URL stays whole unless it can't fit on a line of its own.
+            The wrap is only visual: Copy copies the one-line command. */}
+        <pre dir="ltr" className="whitespace-pre-wrap break-words p-4">
+          <code className="font-mono text-sm text-green-400">
+            {wrapPieces(command).map(({ text, keep }, i) =>
+              keep ? (
+                <React.Fragment key={i}>
+                  <wbr />
+                  <span className="whitespace-nowrap">{text}</span>
+                </React.Fragment>
+              ) : (
+                <React.Fragment key={i}>{text}</React.Fragment>
+              )
+            )}
+          </code>
         </pre>
       </div>
     </div>

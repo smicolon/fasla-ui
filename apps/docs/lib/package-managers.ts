@@ -34,6 +34,20 @@ export function runCommand(pm: PackageManager, command: string): string {
 }
 
 /**
+ * A command in pieces for display. The file name at the end of each URL is
+ * its own piece, kept whole (`keep`) with a break allowed just before it, so a
+ * URL too long for a narrow screen breaks as `https://ui.smicolon.com/r/` +
+ * `font-geist.json`: never after the hyphen in "font-". The pieces join back
+ * into the command unchanged.
+ */
+export function wrapPieces(command: string): { text: string; keep: boolean }[] {
+  return command
+    .split(/(https?:\/\/\S*\/)([^\s/]+)/)
+    .filter((text) => text !== "")
+    .map((text, i, all) => ({ text, keep: i > 0 && /^https?:\/\/\S*\/$/.test(all[i - 1]) && !/\s/.test(text) }))
+}
+
+/**
  * The tab an arrow, Home or End key moves to, wrapping at both ends, or
  * undefined for any other key. Arrows follow what is on screen: in a
  * right-to-left page the first tab is on the right, so ArrowLeft moves

@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test"
 import { readdirSync, readFileSync, statSync } from "node:fs"
 import path from "node:path"
-import { installCommand, nextTabIndex, PACKAGE_MANAGERS, runCommand, shadcnAdd } from "../lib/package-managers.ts"
+import { installCommand, nextTabIndex, PACKAGE_MANAGERS, runCommand, shadcnAdd, wrapPieces } from "../lib/package-managers.ts"
 
 const docsRoot = path.resolve(import.meta.dir, "..")
 const read = (file) => readFileSync(path.join(docsRoot, file), "utf8")
@@ -145,5 +145,44 @@ describe("Theme section of the Installation page", () => {
     expect(page.indexOf('i.rich("themeConfirm", rich)')).toBeGreaterThan(page.indexOf('shadcnAdd("theme-base")'))
     expect(en.themeArabicFont).toContain("<code>--font-arabic</code>")
     expect(ar.themeArabicFont).toContain("<code>--font-arabic</code>")
+  })
+})
+
+describe("Command blocks", () => {
+  // A long command — theme.json plus font-geist.json — ran past the block's
+  // edge. Commands wrap at their spaces; overflow-wrap breaks a URL only when
+  // it can't fit on a line of its own.
+  const WRAP = "whitespace-pre-wrap break-words"
+
+  test("wrap in the tabs, on the Installation page, and in bash code blocks", () => {
+    expect(read("components/package-manager-tabs.tsx")).toContain(`<pre dir="ltr" className="${WRAP} p-4">`)
+    const page = read("app/[locale]/docs/installation/page.tsx")
+    expect(page.match(new RegExp(`<pre className="${WRAP} rounded-lg bg-terminal p-4">`, "g"))).toHaveLength(4)
+    expect(read("components/component-preview.tsx")).toContain(`language === "bash" ? "${WRAP} p-4" : "overflow-x-auto p-4"`)
+  })
+
+  test("leave code samples on their own lines, scrolling", () => {
+    const page = read("app/[locale]/docs/installation/page.tsx")
+    expect(page).toContain('<pre className="overflow-x-auto rounded-lg bg-terminal p-4 text-sm">')
+  })
+
+  test("keep each URL's file name whole, so a URL breaks only before it, and join back unchanged", () => {
+    const command = runCommand("npm", shadcnAdd("theme", "font-geist"))
+    expect(wrapPieces(command)).toEqual([
+      { text: "npx shadcn@latest add ", keep: false },
+      { text: "https://ui.smicolon.com/r/", keep: false },
+      { text: "theme.json", keep: true },
+      { text: " ", keep: false },
+      { text: "https://ui.smicolon.com/r/", keep: false },
+      { text: "font-geist.json", keep: true },
+    ])
+    expect(wrapPieces(command).map((p) => p.text).join("")).toBe(command)
+    expect(wrapPieces("npm install clsx tailwind-merge")).toEqual([{ text: "npm install clsx tailwind-merge", keep: false }])
+    expect(read("components/package-manager-tabs.tsx")).toContain('<span className="whitespace-nowrap">{text}</span>')
+  })
+
+  test("still copy the command as one line", () => {
+    const tabs = read("components/package-manager-tabs.tsx")
+    expect(tabs).toContain("navigator.clipboard.writeText(command)")
   })
 })
