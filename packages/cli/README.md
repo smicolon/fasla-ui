@@ -23,14 +23,52 @@ npx @smicolon/cli list
 
 ### `init`
 
-Initialize fasla-ui in your project. Creates a `components.json` configuration file.
+Initialize fasla-ui in your project. Writes `components.json` and the `cn` helper
+(`lib/utils.ts`), then installs `clsx` and `tailwind-merge`, the two packages the
+helper imports, with your project's package manager. If that install fails, it
+prints the exact command to run.
 
 ```bash
 npx @smicolon/cli init
 
 # Skip prompts with defaults
 npx @smicolon/cli init -y
+
+# Write the files but don't install; print the install command instead
+npx @smicolon/cli init --no-install
 ```
+
+`init` also handles two setups that need more than a config file:
+
+- **Vite, and any project without `"@/"`.** Every component imports
+  `"@/lib/utils"`, and a Vite app has no `"@/"` alias until you add one. When no
+  config maps it, `init` and `add` print the exact lines to add to your tsconfig
+  files and `vite.config`. Run interactively, they warn and carry on; with
+  `--yes` they stop and write nothing, since every folder would be a guess.
+- **Projects set up with 0.3.x.** Their `components.json` has a `"smicolon"`
+  registry entry the shadcn CLI rejects, and paths that put files in `src/src`.
+  Running `init` again repairs it by default: it fixes the config, moves the
+  files to where `"@/"` reaches, and updates the imports that pointed at the old
+  places. It never overwrites a file; an older copy that differs is kept as
+  `.bak` for you to check. `add` offers the same repair, after it has checked
+  the component names.
+
+  The whole plan is written to `.fasla-repair.json` before anything changes. If
+  a step fails, everything is put back. If the run is killed part way, the next
+  `init` or `add` shows what is left and asks "Resume the repair?"; with `--yes`
+  it doesn't resume, and says how to resume or abandon instead. Since that file
+  sits in your project, it is checked first: any step a 0.3 repair of your
+  `components.json` wouldn't make — moving a file other than a component from
+  its 0.3 path to its repaired one, writing anything but updated imports — is
+  refused, and nothing changes. Only one run repairs at a time; a second one
+  exits and says so (`.fasla-repair.lock`).
+
+### Package managers
+
+The CLI reads your lockfile to pick the package manager (`package-lock.json`,
+`pnpm-lock.yaml`, `yarn.lock` or `bun.lock`; npm when there is none, and the
+nearest one in a monorepo). Every install it runs or prints uses that package
+manager's syntax, so a pnpm project gets `pnpm add`, never `npm install`.
 
 ### `add <component...>`
 

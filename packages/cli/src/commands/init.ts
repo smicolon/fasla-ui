@@ -1,11 +1,14 @@
 import { Command } from "commander"
 import chalk from "chalk"
 import ora from "ora"
-
-interface ComponentsConfig {
-  aliases?: { utils?: string; [key: string]: string | undefined }
-  [key: string]: unknown
-}
+import prompts from "prompts"
+import fs from "fs-extra"
+import path from "path"
+import { aliasToPath, outsideAliasMessage, pathToAlias, resolveInsideProject, resolveWritableFile, writeFileIfAbsent, writeFileNoFollow } from "../paths.js"
+import { NAMESPACE, namespaceUrl } from "../registry.js"
+import { detectPackageManager, install, installCommand, missingPackages, type PackageManager, type Runner } from "../pm.js"
+import type { ComponentsConfig } from "../legacy.js"
+import { aliasRootOrExit, repairIfNeededOrExit, safeOrExit } from "./shared.js"
 
 const UTILS_SOURCE = `import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
@@ -18,154 +21,214 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 `
-import prompts from "prompts"
-import fs from "fs-extra"
-import path from "path"
-import { aliasToPath, outsideAliasMessage, pathToAlias, resolveInsideProject, resolveWritableFile, writeFileIfAbsent, writeFileNoFollow } from "../paths.js"
-import { NAMESPACE, namespaceUrl } from "../registry.js"
-import { aliasRootOrExit, safeOrExit } from "./shared.js"
 
-export const init = new Command()
-  .name("init")
-  .description("Initialize fasla-ui in your project")
-  .option("-y, --yes", "Skip confirmation prompts")
-  .option("-c, --cwd <path>", "Working directory", process.cwd())
-  .action(async (options) => {
-    const cwd = path.resolve(options.cwd)
+/** What the cn helper imports. A fresh project has neither. */
+export const CN_PACKAGES = ["clsx", "tailwind-merge"]
 
-    console.log(chalk.bold("\nInitializing fasla-ui...\n"))
+/**
+ * Writes the cn helper at the utils alias when nothing is there yet, and says
+ * whether it did. Every registry component imports it.
+ */
+export async function writeCnHelper(cwd: string, utilsAlias: string, aliasRoot: string): Promise<string | undefined> {
+  const utilsRelative = aliasToPath(utilsAlias, aliasRoot)
+  const utilsPath = await resolveInsideProject(cwd, `${utilsRelative}.ts`)
+  await fs.ensureDir(path.dirname(utilsPath))
+  return (await writeFileIfAbsent(utilsPath, UTILS_SOURCE)) ? `${utilsRelative}.ts` : undefined
+}
 
-    // Check for existing config
-    const configPath = path.join(cwd, "components.json")
-    const hasConfig = await fs.pathExists(configPath)
+/**
+ * Installs clsx and tailwind-merge with the project's package manager, unless
+ * package.json already lists them. On failure, or when installing is off or
+ * there is no package.json, prints the exact command to run instead. Returns
+ * false only when an install was tried and failed.
+ */
+export async function installCnPackages(
+  cwd: string,
+  pm: PackageManager,
+  { enabled = true, run }: { enabled?: boolean; run?: Runner } = {}
+): Promise<boolean> {
+  const missing = await missingPackages(cwd, CN_PACKAGES)
+  if (missing.length === 0) return true
+  const command = installCommand(pm, missing)
+  if (!enabled) {
+    console.log(`\nInstall the packages the cn helper imports:\n  ${chalk.cyan(command)}`)
+    return true
+  }
+  if (!(await fs.pathExists(path.join(cwd, "package.json")))) {
+    console.log(chalk.yellow(`\nNo package.json here, so nothing was installed. In your project, run:`))
+    console.log(`  ${chalk.cyan(command)}`)
+    return true
+  }
+  const spinner = ora(`Installing ${missing.join(" and ")} with ${pm}...`).start()
+  const result = await install(pm, missing, cwd, run)
+  if (result.ok) {
+    spinner.succeed(`Installed ${missing.join(" and ")} with ${pm}`)
+    return true
+  }
+  spinner.fail(`Could not install ${missing.join(" and ")} with ${pm}`)
+  const tail = result.output.trim().split("\n").slice(-15).join("\n")
+  if (tail) console.log(chalk.gray(tail))
+  console.log(`\nThe cn helper imports them, so the project won't compile without them. Run this to finish:`)
+  console.log(`  ${chalk.cyan(command)}`)
+  return false
+}
 
-    if (hasConfig && !options.yes) {
-      const { overwrite } = await prompts({
-        type: "confirm",
-        name: "overwrite",
-        message: "components.json already exists. Overwrite?",
-        initial: false,
+/**
+ * `init`: writes components.json and the cn helper, installs what the helper
+ * imports, and repairs a project set up with 0.3.
+ */
+export function initCommand() {
+  return new Command()
+    .name("init")
+    .description("Initialize fasla-ui in your project")
+    .option("-y, --yes", "Skip confirmation prompts")
+    .option("--no-install", "Don't install clsx and tailwind-merge; print the command instead")
+    .option("-c, --cwd <path>", "Working directory", process.cwd())
+    .action(async (options) => {
+      const cwd = path.resolve(options.cwd)
+      const yes = Boolean(options.yes)
+
+      console.log(chalk.bold("\nInitializing fasla-ui...\n"))
+
+      const configPath = path.join(cwd, "components.json")
+      const pm = await detectPackageManager(cwd)
+      // `@/` is wherever the project's tsconfig points it, so the defaults,
+      // the stored aliases and the files written all follow it. A --yes run
+      // stops here, before anything is written, when "@/" is only a guess.
+      const aliasRoot = await aliasRootOrExit(cwd, yes, pm)
+
+      // A 0.3 config is broken, not a choice to keep: repairing it is the
+      // default, as is finishing a repair an earlier run left unfinished.
+      let config: ComponentsConfig | undefined = await repairIfNeededOrExit(cwd, aliasRoot.root, yes)
+      if (!config && (await fs.pathExists(configPath))) {
+        if (!yes) {
+          const { overwrite } = await prompts({
+            type: "confirm",
+            name: "overwrite",
+            message: "components.json already exists. Overwrite?",
+            initial: false,
+          })
+          if (!overwrite) {
+            console.log(chalk.yellow("Cancelled."))
+            process.exit(0)
+          }
+        }
+      }
+
+      if (!config) config = await askForConfig(cwd, aliasRoot.root, yes)
+      const aliases = config.aliases ?? {}
+      const utilsAlias = aliases.utils ?? "@/lib/utils"
+
+      // Refuse before writing anything if a path would land outside the
+      // project or write through a symlink. The cn helper is only written
+      // when absent, so an existing one — symlinked or not — is left alone.
+      await safeOrExit(async () => {
+        await resolveWritableFile(cwd, "components.json")
+        await resolveInsideProject(cwd, aliasToPath(aliases.components ?? "@/components", aliasRoot.root))
+        await resolveInsideProject(cwd, `${aliasToPath(utilsAlias, aliasRoot.root)}.ts`)
       })
 
-      if (!overwrite) {
-        console.log(chalk.yellow("Cancelled."))
-        process.exit(0)
+      const spinner = ora("Writing configuration...").start()
+      try {
+        await writeFileNoFollow(configPath, `${JSON.stringify(config, null, 2)}\n`)
+        // Only when absent, decided as it is written: a cn helper that appears
+        // after the checks above is kept, not truncated.
+        const written = await writeCnHelper(cwd, utilsAlias, aliasRoot.root)
+        spinner.succeed(
+          written
+            ? `Configuration written to components.json, cn helper written to ${written}`
+            : "Configuration written to components.json"
+        )
+      } catch (error) {
+        spinner.fail("Failed to write configuration")
+        console.error(error)
+        process.exit(1)
       }
-    }
 
-    // Gather configuration. `@/` is wherever the project's tsconfig points it,
-    // so the defaults, the stored aliases and the files written all follow it.
-    const aliasRoot = await aliasRootOrExit(cwd, Boolean(options.yes))
-    const under = (p: string) => (aliasRoot ? `${aliasRoot}/${p}` : p)
-
-    let componentsAlias = "@/components"
-    let utilsAlias = "@/lib/utils"
-    let style = "default"
-
-    if (!options.yes) {
-      // An answer outside `@/`'s folder can't be imported through `@/`, so it
-      // is explained and asked again rather than moved inside it.
-      const insideAlias = (answer: string) =>
-        pathToAlias(answer, aliasRoot) === undefined ? outsideAliasMessage(answer, aliasRoot) : true
-      const response = await prompts([
-        {
-          type: "text",
-          name: "componentsDir",
-          message: "Where should components be installed?",
-          initial: under("components"),
-          validate: insideAlias,
-        },
-        {
-          type: "text",
-          name: "utilsPath",
-          message: "Where is your utils file (cn)?",
-          initial: under("lib/utils"),
-          validate: insideAlias,
-        },
-        {
-          type: "select",
-          name: "style",
-          message: "Which style would you like to use?",
-          choices: [
-            { title: "Default", value: "default" },
-            { title: "New York", value: "new-york" },
-          ],
-          initial: 0,
-        },
-      ])
-
-      const components = pathToAlias(response.componentsDir ?? "", aliasRoot)
-      const utils = pathToAlias(response.utilsPath ?? "", aliasRoot)
-      // Only a cancelled prompt gets here without an alias; validate saw the rest.
-      if (components === undefined || utils === undefined || response.style === undefined) {
-        console.log(chalk.yellow("Cancelled."))
-        process.exit(0)
-      }
-      componentsAlias = components
-      utilsAlias = utils
-      style = response.style
-    }
-
-    const config: ComponentsConfig = {
-      $schema: "https://ui.shadcn.com/schema.json",
-      style,
-      rsc: true,
-      tsx: true,
-      tailwind: {
-        config: "tailwind.config.ts",
-        css: under("app/globals.css"),
-        baseColor: "slate",
-        cssVariables: true,
-      },
-      aliases: {
-        components: componentsAlias,
-        utils: utilsAlias,
-        ui: `${componentsAlias}/ui`,
-        lib: "@/lib",
-        hooks: "@/hooks",
-      },
-      // The shadcn CLI only accepts a namespace that starts with "@" and a URL
-      // with {name} in it; the old `smicolon: { url }` entry made every shadcn
-      // command in the project fail with "Invalid configuration".
-      registries: {
-        [NAMESPACE]: namespaceUrl(),
-      },
-    }
-
-    // Every component in the registry imports `cn` from the utils alias.
-    // Without this file a fresh install does not compile, so init writes it.
-    const utilsRelative = aliasToPath(utilsAlias, aliasRoot)
-
-    // Refuse before writing anything if a path would land outside the project
-    // or write through a symlink. The cn helper is only written when absent,
-    // so an existing one — symlinked or not — is left alone.
-    const utilsPath = await safeOrExit(async () => {
-      await resolveWritableFile(cwd, "components.json")
-      await resolveInsideProject(cwd, aliasToPath(componentsAlias, aliasRoot))
-      return resolveInsideProject(cwd, `${utilsRelative}.ts`)
-    })
-
-    const spinner = ora("Writing configuration...").start()
-
-    try {
-      await writeFileNoFollow(configPath, `${JSON.stringify(config, null, 2)}\n`)
-
-      // Only when absent, decided as it is written: a cn helper that appears
-      // after the checks above is kept, not truncated.
-      await fs.ensureDir(path.dirname(utilsPath))
-      if (await writeFileIfAbsent(utilsPath, UTILS_SOURCE)) {
-        spinner.succeed(`Configuration written to components.json, cn helper written to ${utilsRelative}.ts`)
-      } else {
-        spinner.succeed("Configuration written to components.json")
-      }
+      if (!(await installCnPackages(cwd, pm, { enabled: options.install !== false }))) process.exit(1)
 
       console.log(chalk.green("\nSuccess! fasla-ui has been initialized."))
       console.log("\nYou can now add components:")
       console.log(chalk.cyan("  npx @smicolon/cli add button"))
       console.log(chalk.cyan("  npx @smicolon/cli add shimmer-button"))
-    } catch (error) {
-      spinner.fail("Failed to write configuration")
-      console.error(error)
-      process.exit(1)
+    })
+}
+
+/** The config for a new project, from the prompts or, with `--yes`, the defaults. */
+async function askForConfig(cwd: string, aliasRoot: string, yes: boolean): Promise<ComponentsConfig> {
+  const under = (p: string) => (aliasRoot ? `${aliasRoot}/${p}` : p)
+
+  let componentsAlias = "@/components"
+  let utilsAlias = "@/lib/utils"
+  let style = "default"
+
+  if (!yes) {
+    // An answer outside `@/`'s folder can't be imported through `@/`, so it
+    // is explained and asked again rather than moved inside it.
+    const insideAlias = (answer: string) =>
+      pathToAlias(answer, aliasRoot) === undefined ? outsideAliasMessage(answer, aliasRoot) : true
+    const response = await prompts([
+      {
+        type: "text",
+        name: "componentsDir",
+        message: "Where should components be installed?",
+        initial: under("components"),
+        validate: insideAlias,
+      },
+      {
+        type: "text",
+        name: "utilsPath",
+        message: "Where is your utils file (cn)?",
+        initial: under("lib/utils"),
+        validate: insideAlias,
+      },
+      {
+        type: "select",
+        name: "style",
+        message: "Which style would you like to use?",
+        choices: [
+          { title: "Default", value: "default" },
+          { title: "New York", value: "new-york" },
+        ],
+        initial: 0,
+      },
+    ])
+
+    const components = pathToAlias(response.componentsDir ?? "", aliasRoot)
+    const utils = pathToAlias(response.utilsPath ?? "", aliasRoot)
+    // Only a cancelled prompt gets here without an alias; validate saw the rest.
+    if (components === undefined || utils === undefined || response.style === undefined) {
+      console.log(chalk.yellow("Cancelled."))
+      process.exit(0)
     }
-  })
+    componentsAlias = components
+    utilsAlias = utils
+    style = response.style
+  }
+
+  return {
+    $schema: "https://ui.shadcn.com/schema.json",
+    style,
+    rsc: true,
+    tsx: true,
+    tailwind: {
+      config: "tailwind.config.ts",
+      css: under("app/globals.css"),
+      baseColor: "slate",
+      cssVariables: true,
+    },
+    aliases: {
+      components: componentsAlias,
+      utils: utilsAlias,
+      ui: `${componentsAlias}/ui`,
+      lib: "@/lib",
+      hooks: "@/hooks",
+    },
+    // The shadcn CLI only accepts a namespace that starts with "@" and a URL
+    // with {name} in it; the old `smicolon: { url }` entry made every shadcn
+    // command in the project fail with "Invalid configuration".
+    registries: {
+      [NAMESPACE]: namespaceUrl(),
+    },
+  }
+}
