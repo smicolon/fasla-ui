@@ -55,7 +55,13 @@ npx @smicolon/cli init --no-install
 
   The whole plan is written to `.fasla-repair.json` before anything changes. If
   a step fails, everything is put back. If the run is killed part way, the next
-  `init` or `add` finishes it from that file.
+  `init` or `add` shows what is left and asks "Resume the repair?"; with `--yes`
+  it doesn't resume, and says how to resume or abandon instead. Since that file
+  sits in your project, it is checked first: any step a 0.3 repair of your
+  `components.json` wouldn't make — moving a file other than a component from
+  its 0.3 path to its repaired one, writing anything but updated imports — is
+  refused, and nothing changes. Only one run repairs at a time; a second one
+  exits and says so (`.fasla-repair.lock`).
 
 ### Package managers
 

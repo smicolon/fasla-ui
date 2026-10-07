@@ -8,9 +8,8 @@ import { DEFAULT_REGISTRY_URL, REGISTRY_URL, fetchRegistry, fetchComponent, getT
 import { registryItemName, resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
 import { aliasToPath, checkDestination, installFile, resolveInsideProject } from "../paths.js"
 import { detectPackageManager, installCommand, missingPackages } from "../pm.js"
-import { isLegacyConfig } from "../legacy.js"
 import { writeCnHelper } from "./init.js"
-import { aliasRootOrExit, repairLegacyOrExit, resumeRepairOrExit, safeOrExit } from "./shared.js"
+import { aliasRootOrExit, repairIfNeededOrExit, safeOrExit } from "./shared.js"
 
 /** `add`: copies registry components, and what they import, into the project. */
 export function addCommand() {
@@ -118,11 +117,7 @@ export function addCommand() {
       // Only now, with the names checked and the add confirmed, is a 0.3
       // project repaired, so a typo or a failed fetch changes nothing. A
       // repair an earlier run left unfinished is finished first.
-      let repaired = await resumeRepairOrExit(cwd)
-      if (!repaired && (await isLegacyConfig(cwd, config))) {
-        repaired = await repairLegacyOrExit(cwd, config, aliasRoot.root, yes)
-        console.log(chalk.green("Repaired components.json.\n"))
-      }
+      const repaired = await repairIfNeededOrExit(cwd, aliasRoot.root, yes)
       if (repaired) {
         config = repaired
         await safeOrExit(() => writeCnHelper(cwd, config.aliases?.utils ?? "@/lib/utils", aliasRoot.root))

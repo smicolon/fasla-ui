@@ -1,17 +1,25 @@
 import chalk from "chalk"
 import prompts from "prompts"
 import { chooseAliasRoot, UnknownAliasRootError, UnsafePathError } from "../paths.js"
+import fs from "fs-extra"
+import path from "path"
 import {
   applyLegacyRepair,
   describeRepair,
+  describeSteps,
+  isLegacyConfig,
   planLegacyRepair,
   readJournal,
   RepairJournalError,
+  RepairLockedError,
   RepairRolledBackError,
   RepairStoppedError,
   REPAIR_FILE,
   resumeLegacyRepair,
+  validateJournal,
+  withRepairLock,
   type ComponentsConfig,
+  type RepairJournal,
 } from "../legacy.js"
 import type { PackageManager } from "../pm.js"
 import { aliasAdvice } from "../vite.js"
@@ -85,15 +93,54 @@ export async function safeOrExit<T>(check: () => Promise<T>): Promise<T> {
 }
 
 /**
- * Finishes a 0.3 repair that a previous run started and didn't finish, if
- * `.fasla-repair.json` is there. Returns the config it wrote, or undefined
- * when there was nothing to finish.
+ * Repairs a 0.3 project, or finishes a repair an earlier run left in
+ * `.fasla-repair.json`, holding the repair lock throughout so no other run
+ * works on the same plan. Returns the config it wrote, or undefined when
+ * there was nothing to repair.
  */
-export async function resumeRepairOrExit(cwd: string): Promise<ComponentsConfig | undefined> {
-  const journal = await repairOrExit(() => readJournal(cwd))
-  if (!journal) return undefined
-  console.log(chalk.yellow(`Finishing the repair a previous run started (${journal.done} of ${journal.steps.length} steps done).`))
-  const { config, rewritten, backups } = await repairOrExit(() => resumeLegacyRepair(cwd, journal))
+export async function repairIfNeededOrExit(cwd: string, aliasRoot: string, yes: boolean): Promise<ComponentsConfig | undefined> {
+  const configPath = path.join(cwd, "components.json")
+  const readConfig = (): Promise<ComponentsConfig | undefined> => fs.readJson(configPath).catch(() => undefined)
+  const pending = async () => {
+    const config = await readConfig()
+    return (await fs.pathExists(path.join(cwd, REPAIR_FILE))) || (config !== undefined && (await isLegacyConfig(cwd, config)))
+  }
+  if (!(await pending())) return undefined
+
+  return repairOrExit(() =>
+    withRepairLock(cwd, async () => {
+      // Looked at again under the lock: another run may have finished it.
+      const journal = await readJournal(cwd)
+      if (journal) return resumeOrExit(cwd, journal, aliasRoot, yes)
+      const config = await readConfig()
+      if (config && (await isLegacyConfig(cwd, config))) return repairLegacyOrExit(cwd, config, aliasRoot, yes)
+      return undefined
+    })
+  )
+}
+
+/**
+ * Finishes a repair an earlier run started, once the plan has been checked,
+ * shown and agreed to. The plan is a file in the project, so it is never
+ * acted on unseen: with `--yes` this stops and says how to resume or abandon.
+ */
+async function resumeOrExit(cwd: string, journal: RepairJournal, aliasRoot: string, yes: boolean): Promise<ComponentsConfig> {
+  const config = await validateJournal(cwd, journal, aliasRoot)
+  console.log(chalk.yellow(`An earlier run started repairing this project and stopped after ${journal.done} of ${journal.steps.length} steps.`))
+  console.log(chalk.yellow(`${REPAIR_FILE} holds the rest of its plan:`))
+  for (const line of describeSteps(journal)) console.log(`  - ${line}`)
+  console.log()
+  if (yes) {
+    console.log(`With --yes the CLI won't resume a repair it hasn't shown you. Run the command without --yes to review and resume it,`)
+    console.log(`or delete ${REPAIR_FILE} to abandon it. Nothing was changed.`)
+    process.exit(1)
+  }
+  const { resume } = await prompts({ type: "confirm", name: "resume", message: "Resume the repair?", initial: true })
+  if (!resume) {
+    console.log(chalk.yellow(`Left as it is. Run the command again to resume, or delete ${REPAIR_FILE} to abandon the repair.`))
+    process.exit(0)
+  }
+  const { rewritten, backups } = await resumeLegacyRepair(cwd, journal, config)
   report([], rewritten, backups)
   console.log(chalk.green("Repaired components.json.\n"))
   return config
@@ -105,7 +152,7 @@ export async function resumeRepairOrExit(cwd: string): Promise<ComponentsConfig 
  * components.json, and returns the new config. On no, exits: the old config
  * is what broke the project, so carrying on with it would too.
  */
-export async function repairLegacyOrExit(
+async function repairLegacyOrExit(
   cwd: string,
   config: ComponentsConfig,
   aliasRoot: string,
@@ -127,8 +174,9 @@ export async function repairLegacyOrExit(
     }
   }
 
-  const { rewritten, backups } = await repairOrExit(() => applyLegacyRepair(cwd, plan))
+  const { rewritten, backups } = await applyLegacyRepair(cwd, plan)
   report(plan.moves.filter((m) => m.action === "move").map((m) => `${m.from} → ${m.to}`), rewritten, backups)
+  console.log(chalk.green("Repaired components.json.\n"))
   return plan.config
 }
 
@@ -151,7 +199,7 @@ async function repairOrExit<T>(run: () => Promise<T>): Promise<T> {
     if (error instanceof RepairRolledBackError) {
       console.log(chalk.red(`Error: the repair stopped: ${error.message}`))
       console.log("Everything it had changed was put back, so the project is as it was. Fix the cause and run the command again.")
-    } else if (error instanceof RepairJournalError) {
+    } else if (error instanceof RepairJournalError || error instanceof RepairLockedError) {
       console.log(chalk.red(`Error: ${error.message}`))
     } else if (error instanceof RepairStoppedError) {
       console.log(chalk.red(`Error: the repair stopped: ${error.message}`))

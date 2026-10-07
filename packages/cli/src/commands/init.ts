@@ -7,8 +7,8 @@ import path from "path"
 import { aliasToPath, outsideAliasMessage, pathToAlias, resolveInsideProject, resolveWritableFile, writeFileIfAbsent, writeFileNoFollow } from "../paths.js"
 import { NAMESPACE, namespaceUrl } from "../registry.js"
 import { detectPackageManager, install, installCommand, missingPackages, type PackageManager, type Runner } from "../pm.js"
-import { isLegacyConfig, type ComponentsConfig } from "../legacy.js"
-import { aliasRootOrExit, repairLegacyOrExit, resumeRepairOrExit, safeOrExit } from "./shared.js"
+import type { ComponentsConfig } from "../legacy.js"
+import { aliasRootOrExit, repairIfNeededOrExit, safeOrExit } from "./shared.js"
 
 const UTILS_SOURCE = `import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
@@ -97,14 +97,11 @@ export function initCommand() {
       // stops here, before anything is written, when "@/" is only a guess.
       const aliasRoot = await aliasRootOrExit(cwd, yes, pm)
 
-      // A repair an earlier run left unfinished is finished first.
-      let config: ComponentsConfig | undefined = await resumeRepairOrExit(cwd)
+      // A 0.3 config is broken, not a choice to keep: repairing it is the
+      // default, as is finishing a repair an earlier run left unfinished.
+      let config: ComponentsConfig | undefined = await repairIfNeededOrExit(cwd, aliasRoot.root, yes)
       if (!config && (await fs.pathExists(configPath))) {
-        const existing: ComponentsConfig = await fs.readJson(configPath).catch(() => ({}))
-        if (await isLegacyConfig(cwd, existing)) {
-          // A 0.3 config is broken, not a choice to keep: repair is the default.
-          config = await repairLegacyOrExit(cwd, existing, aliasRoot.root, yes)
-        } else if (!yes) {
+        if (!yes) {
           const { overwrite } = await prompts({
             type: "confirm",
             name: "overwrite",

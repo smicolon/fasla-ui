@@ -22,7 +22,7 @@
 import fs from "fs-extra"
 import { rename } from "fs/promises"
 import path from "path"
-import { aliasToPath, resolveInsideProject, resolveWritableFile, writeFileNoFollow } from "./paths.js"
+import { aliasToPath, resolveInsideProject, resolveWritableFile, writeFileIfAbsent, writeFileNoFollow } from "./paths.js"
 import { NAMESPACE, namespaceUrl } from "./registry.js"
 
 export interface ComponentsConfig {
@@ -37,6 +37,12 @@ export const LEGACY_REGISTRY_KEY = "smicolon"
 
 /** The repair's plan and progress, at the project root while it runs. */
 export const REPAIR_FILE = ".fasla-repair.json"
+
+/** Held by the one run repairing the project, so two never work on one plan. */
+export const LOCK_FILE = ".fasla-repair.lock"
+
+/** The file names `add` writes: kebab-case, .ts or .tsx. */
+const COMPONENT_FILE = /^[a-z0-9][a-z0-9-]*\.tsx?$/
 
 /** The folders `add` writes registry files into, under the components alias. */
 const TYPE_DIRS = ["ui", "blocks", "effects"]
@@ -110,15 +116,34 @@ export interface RepairJournal {
 }
 
 /**
- * What the repair will do, without doing any of it, so it can be shown before
- * anyone agrees to it. `root` is the folder `@/` points to now.
+ * Where a 0.3 project's files are and where the repair puts them, from its
+ * components.json and the folder `@/` points to. The planner builds its steps
+ * from these, and a resumed plan is checked against them.
  */
-export async function planLegacyRepair(cwd: string, config: ComponentsConfig, root: string): Promise<RepairPlan> {
+function repairPaths(config: ComponentsConfig, root: string) {
   const aliases = config.aliases ?? {}
   const oldComponents = aliases.components ?? "@/components"
   const oldUtils = aliases.utils ?? "@/lib/utils"
   const newComponents = withoutSrc(oldComponents)
   const newUtils = withoutSrc(oldUtils)
+  return {
+    oldComponents,
+    oldUtils,
+    newComponents,
+    newUtils,
+    newDir: aliasToPath(newComponents, root),
+    // Where files may be, newest first: where 0.4 wrote with the old aliases,
+    // then where 0.3 did.
+    sourceDirs: unique([aliasToPath(oldComponents, root), legacyPath(oldComponents)]),
+    utilsSources: unique([`${aliasToPath(oldUtils, root)}.ts`, `${legacyPath(oldUtils)}.ts`]),
+    newUtilsFile: `${aliasToPath(newUtils, root)}.ts`,
+  }
+}
+
+/** The components.json the repair writes for a 0.3 one. */
+async function repairedConfig(cwd: string, config: ComponentsConfig, root: string): Promise<ComponentsConfig> {
+  const aliases = config.aliases ?? {}
+  const { oldComponents, newComponents, newUtils } = repairPaths(config, root)
 
   const registries = { ...(config.registries ?? {}) }
   delete registries[LEGACY_REGISTRY_KEY]
@@ -132,7 +157,7 @@ export async function planLegacyRepair(cwd: string, config: ComponentsConfig, ro
     tailwind.css = usualCss
   }
 
-  const newConfig: ComponentsConfig = {
+  return {
     ...config,
     tailwind,
     aliases: {
@@ -143,13 +168,20 @@ export async function planLegacyRepair(cwd: string, config: ComponentsConfig, ro
     },
     registries,
   }
+}
+
+/**
+ * What the repair will do, without doing any of it, so it can be shown before
+ * anyone agrees to it. `root` is the folder `@/` points to now.
+ */
+export async function planLegacyRepair(cwd: string, config: ComponentsConfig, root: string): Promise<RepairPlan> {
+  const { oldComponents, oldUtils, newComponents, newUtils, newDir, sourceDirs, utilsSources, newUtilsFile } = repairPaths(config, root)
+  const newConfig = await repairedConfig(cwd, config, root)
 
   const specifiers = new Map<string, string>()
   if (oldUtils !== newUtils) specifiers.set(oldUtils, newUtils)
 
-  // Where files may be, newest first: where 0.4 wrote with the old aliases,
-  // then where 0.3 did. The first copy of a file to reach its destination
-  // keeps it.
+  // The first copy of a file to reach its destination keeps it.
   const claimed = new Map<string, string>()
   const moves: Move[] = []
   const rewrite = (text: string) => rewriteSpecifiers(text, [...specifiers])
@@ -181,8 +213,6 @@ export async function planLegacyRepair(cwd: string, config: ComponentsConfig, ro
     }
   }
 
-  const newDir = aliasToPath(newComponents, root)
-  const sourceDirs = unique([aliasToPath(oldComponents, root), legacyPath(oldComponents)])
   // Specifiers first, so files compare equal once their imports are updated.
   for (const dir of sourceDirs) {
     for (const type of TYPE_DIRS) {
@@ -201,8 +231,7 @@ export async function planLegacyRepair(cwd: string, config: ComponentsConfig, ro
       }
     }
   }
-  const newUtilsFile = `${aliasToPath(newUtils, root)}.ts`
-  for (const from of unique([`${aliasToPath(oldUtils, root)}.ts`, `${legacyPath(oldUtils)}.ts`])) {
+  for (const from of utilsSources) {
     await consider(from, newUtilsFile)
   }
 
@@ -313,12 +342,210 @@ export async function readJournal(cwd: string): Promise<RepairJournal | undefine
 
 /**
  * Finishes a repair a previous run left in `.fasla-repair.json`, from the
- * step it reached, with the same undo on error. Returns the config it writes.
+ * step it reached, with the same undo on error. Only for a journal that
+ * `validateJournal` accepted; `config` is what it returned.
  */
-export async function resumeLegacyRepair(cwd: string, journal: RepairJournal): Promise<{ config: ComponentsConfig; rewritten: string[]; backups: string[] }> {
+export async function resumeLegacyRepair(
+  cwd: string,
+  journal: RepairJournal,
+  config: ComponentsConfig
+): Promise<{ config: ComponentsConfig; rewritten: string[]; backups: string[] }> {
   await preflight(cwd, journal.steps)
   await runJournal(cwd, journal)
-  return { config: journal.config, ...summarise(journal.steps) }
+  return { config, ...summarise(journal.steps) }
+}
+
+/**
+ * Checks a journal found on disk before anything resumes it. It is a file in
+ * the project, so anyone who can commit to the repository can write one: it is
+ * a request, not a record. Every step must be one the 0.3 repair of this
+ * project's own components.json could make — a component file moved from the
+ * exact 0.3 path to its repaired path or a `.bak` beside it, a duplicate of
+ * one deleted, a folder on those paths, an import of a moved component
+ * updated, or components.json rewritten to exactly the repaired config.
+ * Returns that config; throws a `RepairJournalError` naming the first step
+ * that isn't, before anything changes.
+ */
+export async function validateJournal(cwd: string, journal: RepairJournal, root: string): Promise<ComponentsConfig> {
+  const configText = await readPlainFile(cwd, "components.json")
+  const config: ComponentsConfig | undefined = configText === undefined ? undefined : (() => {
+    try {
+      return JSON.parse(configText)
+    } catch {
+      return undefined
+    }
+  })()
+  // Stopped after writing components.json, its last step, but before the
+  // journal went: nothing is left to change, so there is nothing to trust.
+  const left = Array.isArray(journal.steps) && Number.isInteger(journal.done) ? journal.steps.slice(journal.done) : []
+  const finished = left.every((step) => step?.op === "write" && step.file === "components.json" && step.after === configText)
+  if (config && finished && !(await isLegacyConfig(cwd, config))) return config
+  if (!config || !(await isLegacyConfig(cwd, config))) {
+    throw new RepairJournalError(
+      `${REPAIR_FILE} is here, but components.json isn't one from 0.3, so there is nothing to repair and nothing was changed. ` +
+        `If a repair has finished, or you didn't start one, delete ${REPAIR_FILE}.`
+    )
+  }
+  const reject = (why: string): never => {
+    throw new RepairJournalError(
+      `${REPAIR_FILE} asks to ${why}, which a 0.3 repair never does, so it was not resumed and nothing was changed. ` +
+        `If you didn't start a repair in this project, delete ${REPAIR_FILE}.`
+    )
+  }
+  const steps: unknown[] = journal.steps
+  if (!Number.isInteger(journal.done) || journal.done < 0 || journal.done > steps.length) {
+    reject(`record ${journal.done} of ${steps.length} steps as done`)
+  }
+
+  const paths = repairPaths(config, root)
+  const expected = await repairedConfig(cwd, config, root)
+  const expectedText = `${JSON.stringify(expected, null, 2)}\n`
+
+  // Every file the repair may take from, and where it goes.
+  const destinationOf = (from: string): string | undefined => {
+    if (paths.utilsSources.includes(from) && from !== paths.newUtilsFile) return paths.newUtilsFile
+    for (const dir of paths.sourceDirs) {
+      for (const type of TYPE_DIRS) {
+        const prefix = `${dir}/${type}/`
+        const name = from.slice(prefix.length)
+        if (from.startsWith(prefix) && COMPONENT_FILE.test(name)) {
+          const to = `${paths.newDir}/${type}/${name}`
+          return to === from ? undefined : to
+        }
+      }
+    }
+    return undefined
+  }
+  const ancestors = (file: string) => {
+    const out: string[] = []
+    for (let dir = path.posix.dirname(file); dir !== "." && dir !== ""; dir = path.posix.dirname(dir)) out.push(dir)
+    return out
+  }
+  const newDirs = new Set([...TYPE_DIRS.flatMap((type) => ancestors(`${paths.newDir}/${type}/x`)), ...ancestors(paths.newUtilsFile)])
+  const oldDirs = new Set([
+    ...paths.sourceDirs.flatMap((dir) => TYPE_DIRS.flatMap((type) => ancestors(`${dir}/${type}/x`))),
+    ...paths.utilsSources.flatMap(ancestors),
+  ])
+
+  // The imports the repair may update: one per component file it moves.
+  const specifiers = new Map<string, string>()
+  if (paths.oldUtils !== paths.newUtils) specifiers.set(paths.oldUtils, paths.newUtils)
+  const isString = (value: unknown): value is string => typeof value === "string"
+
+  for (const raw of steps) {
+    const step = raw as Partial<Record<string, unknown>>
+    if (step?.op === "move" && isString(step.from) && isString(step.to)) {
+      const to = destinationOf(step.from)
+      const backup = new RegExp(`^${step.from.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\.bak\\d*$`)
+      if (!to || (step.to !== to && !backup.test(step.to))) reject(`move ${step.from} to ${step.to}`)
+      noteSpecifier(step.from as string)
+    } else if (step?.op === "delete" && isString(step.file) && isString(step.before)) {
+      if (!destinationOf(step.file)) reject(`delete ${step.file}`)
+      noteSpecifier(step.file as string)
+    } else if (step?.op === "mkdir" && isString(step.dir)) {
+      if (!newDirs.has(step.dir)) reject(`create the folder ${step.dir}`)
+    } else if (step?.op === "rmdir" && isString(step.dir)) {
+      if (!oldDirs.has(step.dir)) reject(`remove the folder ${step.dir}`)
+    } else if (step?.op === "write" && isString(step.file) && isString(step.after) && (step.before === null || isString(step.before))) {
+      // Checked below, once every move has added its import.
+    } else {
+      reject(`run a step it doesn't recognise (${JSON.stringify(raw).slice(0, 80)})`)
+    }
+  }
+  function noteSpecifier(from: string) {
+    for (const type of TYPE_DIRS) {
+      for (const dir of paths.sourceDirs) {
+        const prefix = `${dir}/${type}/`
+        if (!from.startsWith(prefix)) continue
+        const bare = from.slice(prefix.length).replace(/\.[^.]+$/, "")
+        const oldSpec = `${paths.oldComponents}/${type}/${bare}`
+        const newSpec = `${paths.newComponents}/${type}/${bare}`
+        if (oldSpec !== newSpec) specifiers.set(oldSpec, newSpec)
+      }
+    }
+  }
+
+  const pairs = [...specifiers]
+  for (const step of journal.steps) {
+    if (step.op !== "write") continue
+    if (step.file === "components.json") {
+      if (step.after !== expectedText) reject(`write a components.json other than the repaired one`)
+      continue
+    }
+    const parts = step.file.split("/")
+    const isSource = SOURCE_FILE.test(step.file) && parts.every((part) => part && !part.startsWith(".") && part !== ".." && !SKIP_DIRS.has(part))
+    if (!isSource || step.before === null || step.after === step.before || step.after !== rewriteSpecifiers(step.before, pairs)) {
+      reject(`write ${step.file} with anything but updated component imports`)
+    }
+  }
+  return expected
+}
+
+/** The steps still to do, one line each, to show before asking to resume. */
+export function describeSteps(journal: RepairJournal): string[] {
+  return journal.steps.slice(journal.done).map((step) => {
+    if (step.op === "move") return /\.bak\d*$/.test(step.to) ? `keep ${step.from} as ${step.to}` : `move ${step.from} → ${step.to}`
+    if (step.op === "delete") return `delete ${step.file}, a copy of the file already at the new place`
+    if (step.op === "mkdir") return `create the folder ${step.dir}`
+    if (step.op === "rmdir") return `remove the folder ${step.dir} if it is empty`
+    return step.file === "components.json" ? "write the repaired components.json" : `update the imports in ${step.file}`
+  })
+}
+
+/** Another run holds the lock; the message says which and what to do. */
+export class RepairLockedError extends Error {}
+
+/**
+ * Runs `work` while holding `.fasla-repair.lock`, so only one run plans,
+ * resumes or undoes a repair at a time. The lock is created only if it isn't
+ * there, in one step, and records this process. A lock whose process has
+ * ended — a run that was killed — is cleared; one whose process is still
+ * running stops this run with a `RepairLockedError`.
+ */
+export async function withRepairLock<T>(cwd: string, work: () => Promise<T>): Promise<T> {
+  const lock = await resolveWritableFile(cwd, LOCK_FILE)
+  const owner = `${JSON.stringify({ pid: process.pid, startedAt: new Date().toISOString() })}\n`
+  if (!(await writeFileIfAbsent(lock, owner))) {
+    const held: { pid?: unknown } = await fs.readJson(lock).catch(() => ({}))
+    const pid = typeof held.pid === "number" ? held.pid : undefined
+    if (pid === undefined || isRunning(pid)) {
+      throw new RepairLockedError(
+        `Another fasla-ui run${pid ? ` (process ${pid})` : ""} is repairing this project. ` +
+          `Wait for it to finish and run this again. If no other run is going, delete ${LOCK_FILE}.`
+      )
+    }
+    // The run that held it is gone, killed part way. Take its place.
+    await fs.remove(lock)
+    if (!(await writeFileIfAbsent(lock, owner))) {
+      throw new RepairLockedError(`Another fasla-ui run started repairing this project just now. Wait for it to finish and run this again.`)
+    }
+  }
+  // process.exit skips finally blocks; this still removes the lock.
+  const release = () => {
+    try {
+      fs.removeSync(lock)
+    } catch {
+      // Already gone.
+    }
+  }
+  process.once("exit", release)
+  try {
+    return await work()
+  } finally {
+    process.removeListener("exit", release)
+    release()
+  }
+}
+
+/** Whether a process with this id is running. */
+function isRunning(pid: number): boolean {
+  try {
+    process.kill(pid, 0)
+    return true
+  } catch (error) {
+    // EPERM: it runs, as another user.
+    return (error as NodeJS.ErrnoException).code === "EPERM"
+  }
 }
 
 /**
