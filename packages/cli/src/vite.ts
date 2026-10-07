@@ -25,7 +25,15 @@ export async function findViteConfig(cwd: string): Promise<string | undefined> {
  * `find:` value, which is how every alias recipe spells it.
  */
 export function viteConfigHasAlias(source: string): boolean {
-  return /(["'`])@\/?\1\s*:/.test(source) || /find\s*:\s*(["'`])@\/?\1/.test(source)
+  return /(["'`])@\/?\1\s*:/.test(source) || /find\s*:\s*(["'`])@\/?\1/.test(source) || usesTsconfigPaths(source)
+}
+
+/**
+ * Whether the config loads vite-tsconfig-paths, which resolves `@/` from the
+ * tsconfig itself: with it, the tsconfig mapping is the only half needed.
+ */
+function usesTsconfigPaths(source: string): boolean {
+  return /from\s+(["'`])vite-tsconfig-paths\1|require\(\s*(["'`])vite-tsconfig-paths\2\s*\)/.test(source)
 }
 
 /**

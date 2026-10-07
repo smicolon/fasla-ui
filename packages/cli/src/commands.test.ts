@@ -226,6 +226,44 @@ describe("init", () => {
     expect(await fs.pathExists(path.join(dir, "src"))).toBe(false)
   })
 
+  it("names the files and the way out when a repair can neither finish nor be undone", async () => {
+    const dir = await legacyProject({
+      "app/page.tsx": `import { Badge } from "@/src/components/ui/badge"\n`,
+      "app/other.tsx": `import { cn } from "@/src/lib/utils"\n`,
+    })
+    const config = await fs.readJson(path.join(dir, "components.json"))
+    const journal = await beginLegacyRepair(dir, await planLegacyRepair(dir, config, ""))
+    const pageStep = journal.steps.findIndex((s) => s.op === "write" && s.file === "app/page.tsx")
+    const otherStep = journal.steps.findIndex((s) => s.op === "write" && s.file === "app/other.tsx")
+    // Killed after updating whichever page comes first; then both pages are
+    // edited by hand: the next step refuses, and its undo can't restore the first.
+    const [first, second] = pageStep < otherStep ? ["app/page.tsx", "app/other.tsx"] : ["app/other.tsx", "app/page.tsx"]
+    await expect(
+      executeJournal(dir, journal, {
+        afterStep: (i) => {
+          if (i === Math.min(pageStep, otherStep)) throw new Error("killed")
+        },
+      })
+    ).rejects.toThrow("killed")
+    await fs.writeFile(path.join(dir, first), "// edited after the repair wrote it\n")
+    await fs.writeFile(path.join(dir, second), "// edited before the repair reached it\n")
+
+    await expect(run("init", "--yes", "--no-install", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(output()).toContain(`couldn't put back ${first}`)
+    expect(output()).toContain(`delete ${REPAIR_FILE} to abandon the repair`)
+    expect(await fs.pathExists(path.join(dir, REPAIR_FILE))).toBe(true)
+
+    // Run again, it isn't stuck: the edited file's step is now the one that
+    // fails, so it counts as never made, and the rest is undone around it.
+    logs = []
+    await expect(run("add", "badge", "--yes", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(output()).toContain("Everything it had changed was put back")
+    expect(await fs.pathExists(path.join(dir, REPAIR_FILE))).toBe(false)
+    expect(await fs.pathExists(path.join(dir, "src/src/components/ui/badge.tsx"))).toBe(true)
+    expect(await fs.readFile(path.join(dir, first), "utf8")).toBe("// edited after the repair wrote it\n")
+    expect(await fs.readFile(path.join(dir, second), "utf8")).toBe("// edited before the repair reached it\n")
+  })
+
   it("does not repair a 0.3 project under --yes when @/ is only a guess", async () => {
     const dir = await legacyProject({ "tsconfig.json": JSON.stringify({ compilerOptions: {} }) })
     const before = await tree(dir)

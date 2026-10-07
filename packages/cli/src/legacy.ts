@@ -358,7 +358,9 @@ async function runJournal(cwd: string, journal: RepairJournal): Promise<void> {
     // Every step checks the files before it acts, so starting over is safe.
     journal.done = 0
     await saveJournal(cwd, journal).catch(() => undefined)
-    throw new RepairStoppedError(`${reason} Undoing it left these as they are: ${leftovers.join(", ")}.`)
+    throw new RepairStoppedError(
+      `${reason} Undoing it couldn't put back ${leftovers.join(", ")}, changed since the repair wrote ${leftovers.length === 1 ? "it" : "them"} or not writable.`
+    )
   }
 }
 

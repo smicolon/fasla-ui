@@ -41,6 +41,13 @@ describe("viteConfigHasAlias", () => {
     expect(viteConfigHasAlias("resolve: { alias: [{ find: `@`, replacement: src }] }")).toBe(true)
   })
 
+  it("counts vite-tsconfig-paths, which reads the alias from the tsconfig", () => {
+    expect(viteConfigHasAlias(`import tsconfigPaths from "vite-tsconfig-paths"\nexport default { plugins: [tsconfigPaths()] }`)).toBe(true)
+    expect(viteConfigHasAlias(`const paths = require('vite-tsconfig-paths')`)).toBe(true)
+    // Named in a comment only, it does nothing.
+    expect(viteConfigHasAlias(`// TODO: try vite-tsconfig-paths`)).toBe(false)
+  })
+
   it("does not count a package scope or an email as an alias", () => {
     expect(viteConfigHasAlias(TEMPLATE_CONFIG)).toBe(false)
     expect(viteConfigHasAlias(`import x from "@vitejs/plugin-react" // dev@example.com`)).toBe(false)
@@ -79,6 +86,16 @@ describe("aliasAdvice", () => {
     const advice = (await aliasAdvice(dir, { root: "src", mapped: false, pm: "npm" }))!.join("\n")
     expect(advice).toContain('"paths": { "@/*": ["./src/*"] }')
     expect(advice).not.toContain("resolve.alias")
+  })
+
+  it("asks only for the tsconfig, and says nothing once it is mapped, when vite-tsconfig-paths is loaded", async () => {
+    const config = `import tsconfigPaths from "vite-tsconfig-paths"\nexport default defineConfig({ plugins: [tsconfigPaths()] })`
+    const dir = await viteTemplate({ "vite.config.ts": config })
+    const advice = (await aliasAdvice(dir, { root: "src", mapped: false, pm: "npm" }))!.join("\n")
+    expect(advice).toContain('"paths": { "@/*": ["./src/*"] }')
+    expect(advice).not.toContain("resolve.alias")
+    expect(advice).not.toContain("@types/node")
+    expect(await aliasAdvice(dir, { root: "src", mapped: true, pm: "npm" })).toBeUndefined()
   })
 
   it("says nothing once both halves are there", async () => {

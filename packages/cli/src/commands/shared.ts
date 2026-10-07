@@ -155,7 +155,11 @@ async function repairOrExit<T>(run: () => Promise<T>): Promise<T> {
       console.log(chalk.red(`Error: ${error.message}`))
     } else if (error instanceof RepairStoppedError) {
       console.log(chalk.red(`Error: the repair stopped: ${error.message}`))
-      console.log(`Its plan is kept in ${REPAIR_FILE}. Run the command again to finish it.`)
+      console.log(
+        `Its plan is kept in ${REPAIR_FILE}. Run the command again: it finishes the repair if those files are as the ` +
+          `repair left them, and otherwise undoes the rest of it, keeping your edits. Or delete ${REPAIR_FILE} to ` +
+          `abandon the repair and keep the project as it is now.`
+      )
     } else {
       throw error
     }

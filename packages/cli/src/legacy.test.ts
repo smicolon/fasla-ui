@@ -268,7 +268,8 @@ describe("a repair that stops part way", () => {
         expect(await tree(dir), `stopped after step ${stop}, ${recorded ? "recorded" : "not recorded"}`).toEqual(expected)
       }
     }
-  })
+    // About forty whole repairs: well past the 5s default on a slow CI runner.
+  }, 60_000)
 
   it("puts everything back and removes the repair file when a step fails", async () => {
     const dir = await brokenProject()
