@@ -99,18 +99,26 @@ export function EmptyState({
 /** Pre-built empty state for no search results */
 export function EmptySearchResults({
   query,
-  onClear,
   title,
   description,
-  ...props
+  ...rest
 }: Omit<EmptyStateProps, "title" | "description"> & {
   /** Replaces the English title */
   title?: string
   /** Replaces the English description */
   description?: string
   query?: string
+  /**
+   * @deprecated Does nothing: this empty state has no clear control. Pass a
+   * button as `action` instead.
+   */
   onClear?: () => void
 }) {
+  // onClear is kept so existing callers still compile; take it out here so it
+  // never reaches the DOM through EmptyState's spread.
+  const props = { ...rest }
+  delete props.onClear
+
   return (
     <EmptyState
       // ?? rather than a later spread, so an undefined title keeps the English one
