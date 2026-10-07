@@ -43,31 +43,21 @@ export default function SkeletonPage() {
         <InstallCommand name="skeleton" />
       </section>
 
-      {/* Basic */}
+      {/* List Item Skeleton */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">{s("basicTitle")}</h2>
-        <p className="text-muted-foreground">{s.rich("basicBody", richCode)}</p>
+        <h2 className="text-2xl font-semibold">{s("listItemTitle")}</h2>
+        <p className="text-muted-foreground">{s.rich("listItemBody", richCode)}</p>
         <ComponentPreview>
-          <Skeleton className="h-4 w-48" />
+          <SkeletonListItem className={LIST_ITEM_WIDTH} />
         </ComponentPreview>
       </section>
 
-      {/* Variants */}
+      {/* Card Skeleton */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">{t("variants")}</h2>
-        <p className="text-muted-foreground">{s.rich("variantsBody", richCode)}</p>
+        <h2 className="text-2xl font-semibold">{s("cardTitle")}</h2>
+        <p className="text-muted-foreground">{s.rich("cardBody", richCode)}</p>
         <ComponentPreview>
-          <div className="flex flex-wrap items-end gap-8">
-            {(["default", "circular", "rectangular"] as const).map((variant) => (
-              <div key={variant} className="flex flex-col items-start gap-3">
-                <Skeleton
-                  variant={variant}
-                  className={variant === "circular" ? "h-12 w-12" : "h-12 w-24"}
-                />
-                <code className="text-sm text-muted-foreground">{variant}</code>
-              </div>
-            ))}
-          </div>
+          <SkeletonCard className={TEXT_WIDTH} />
         </ComponentPreview>
       </section>
 
@@ -92,21 +82,27 @@ export default function SkeletonPage() {
         </ComponentPreview>
       </section>
 
-      {/* List Item Skeleton */}
+      {/* Build your own: a single block and its shapes */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">{s("listItemTitle")}</h2>
-        <p className="text-muted-foreground">{s.rich("listItemBody", richCode)}</p>
+        <h2 className="text-2xl font-semibold">{s("buildTitle")}</h2>
+        <p className="text-muted-foreground">{s("buildBody")}</p>
+        <p className="text-muted-foreground">{s.rich("basicBody", richCode)}</p>
         <ComponentPreview>
-          <SkeletonListItem className={LIST_ITEM_WIDTH} />
+          <Skeleton className="h-4 w-48" />
         </ComponentPreview>
-      </section>
-
-      {/* Card Skeleton */}
-      <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">{s("cardTitle")}</h2>
-        <p className="text-muted-foreground">{s.rich("cardBody", richCode)}</p>
+        <p className="text-muted-foreground">{s.rich("variantsBody", richCode)}</p>
         <ComponentPreview>
-          <SkeletonCard className={TEXT_WIDTH} />
+          <div className="flex flex-wrap items-end gap-8">
+            {(["default", "circular", "rectangular"] as const).map((variant) => (
+              <div key={variant} className="flex flex-col items-start gap-3">
+                <Skeleton
+                  variant={variant}
+                  className={variant === "circular" ? "h-12 w-12" : "h-12 w-24"}
+                />
+                <code className="text-sm text-muted-foreground">{variant}</code>
+              </div>
+            ))}
+          </div>
         </ComponentPreview>
       </section>
 

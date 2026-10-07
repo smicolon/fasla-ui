@@ -562,7 +562,8 @@
     },
     "skeleton": {
       "lead": "Placeholders that hold the shape of content while it loads, so the page doesn't jump when it arrives.",
-      "basicTitle": "Basic",
+      "buildTitle": "Build your own",
+      "buildBody": "For layouts the three ready-made skeletons don't cover, compose your own from single blocks.",
       "basicBody": "A single block, sized with <code>className</code>. It replaces shadcn's Skeleton with no other changes.",
       "variantsBody": "<code>variant</code> sets the shape of a block: a bar with a 4px radius, a circle, or square corners.",
       "textTitle": "Text Skeleton",
