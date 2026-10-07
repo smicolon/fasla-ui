@@ -68,21 +68,21 @@ export async function missingPackages(cwd: string, packages: string[]): Promise<
 
 export type InstallResult = { ok: true } | { ok: false; output: string }
 
-/** Runs a command and resolves with its exit, never rejects. */
-export type Runner = (command: string, args: string[], cwd: string) => Promise<InstallResult>
+/** Runs a command and resolves with its exit, never rejects. `env` defaults to this process's. */
+export type Runner = (command: string, args: string[], cwd: string, env?: NodeJS.ProcessEnv) => Promise<InstallResult>
 
 /**
  * Runs the package manager with its output captured, so a failure can be
  * shown in full and a success stays quiet. A package manager that isn't
  * installed is a failure like any other, not a crash.
  */
-export const spawnRunner: Runner = (command, args, cwd) =>
+export const spawnRunner: Runner = (command, args, cwd, env = process.env) =>
   new Promise((resolve) => {
     let output = ""
     let child
     try {
       // Windows resolves npm, pnpm and yarn to .cmd shims, which only a shell runs.
-      child = spawn(command, args, { cwd, shell: process.platform === "win32", stdio: ["ignore", "pipe", "pipe"] })
+      child = spawn(command, args, { cwd, env, shell: process.platform === "win32", stdio: ["ignore", "pipe", "pipe"] })
     } catch (error) {
       resolve({ ok: false, output: (error as Error).message })
       return

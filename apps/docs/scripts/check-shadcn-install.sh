@@ -69,6 +69,67 @@ node -e '
 ' "$APP/components.json" "$BASE/{name}.json"
 echo "::endgroup::"
 
+# The theme, each layer first, as a developer installs it. The base layer must
+# add Fasla's classes without touching the project's own colours; the colours
+# layer must then replace them with Fasla's.
+CSS="$APP/app/globals.css"
+BRAND="#ff0066"
+mkdir -p "$APP/app/theme-check"
+cat > "$APP/app/theme-check/page.tsx" <<'PAGE'
+export default function ThemeCheck() {
+  return (
+    <main className="bg-success text-success-foreground">
+      <p className="bg-success/10 text-xxs">.</p>
+      <p className="bg-gradient-to-r from-soft-primary to-soft-primary text-info">.</p>
+    </main>
+  )
+}
+PAGE
+
+# Compiles the app's stylesheet and fails for any class that produced no rule.
+# Tailwind groups selectors, so a class may be followed by "," as well as "{".
+check_classes() {
+  local out="$WORK_DIR/$1.css"
+  (cd "$APP" && npx -y @tailwindcss/cli@4 -i app/globals.css -o "$out" >/dev/null 2>&1)
+  local missing=()
+  for cls in 'bg-success' 'bg-success\\/10' 'text-xxs' 'from-soft-primary' 'text-success-foreground' 'text-info'; do
+    grep -qE "\\.${cls}[,{ ]" "$out" || missing+=("$cls")
+  done
+  if [ ${#missing[@]} -gt 0 ]; then
+    echo "::error::After $1, these classes produce no CSS: ${missing[*]}"
+    exit 1
+  fi
+  echo "ok    every Fasla class has a rule after $1"
+}
+
+echo "::group::Theme: the base layer keeps the project's own colours"
+# Give the app its own primary, the first --primary in the file (:root's).
+node -e '
+  const fs = require("fs")
+  const [file, brand] = process.argv.slice(1)
+  fs.writeFileSync(file, fs.readFileSync(file, "utf8").replace(/--primary:[^;]+;/, `--primary: ${brand};`))
+' "$CSS" "$BRAND"
+shadcn add @fasla/theme-base --yes
+if ! grep -q -- "--primary: $BRAND;" "$CSS"; then
+  echo "::error::@fasla/theme-base changed the project's --primary"
+  grep -n -- "--primary:" "$CSS"
+  exit 1
+fi
+echo "ok    --primary is still $BRAND"
+check_classes theme-base
+echo "::endgroup::"
+
+echo "::group::Theme: the colours layer"
+FASLA_PRIMARY=$(node -e 'console.log(require(process.argv[1]).tokens.primary.light)' "$ROOT/design/tokens/mode.json")
+shadcn add @fasla/theme @fasla/font-geist --yes
+if ! grep -q -- "--primary: $FASLA_PRIMARY;" "$CSS"; then
+  echo "::error::@fasla/theme did not set --primary to Fasla's $FASLA_PRIMARY"
+  exit 1
+fi
+echo "ok    --primary is Fasla's $FASLA_PRIMARY"
+check_classes theme
+echo "::endgroup::"
+
 NAMES=$(node -e 'console.log(require(process.argv[1]).items.map((i) => i.name).join(" "))' "$DOCS/public/r/registry.json")
 COUNT=$(echo "$NAMES" | wc -w | tr -d ' ')
 

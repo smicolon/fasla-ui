@@ -10,6 +10,7 @@ import { aliasToPath, checkDestination, installFile, resolveInsideProject } from
 import { detectPackageManager, installCommand, missingPackages } from "../pm.js"
 import { writeCnHelper } from "./init.js"
 import { aliasRootOrExit, repairIfNeededOrExit, safeOrExit } from "./shared.js"
+import { isFaslaFile } from "../marker.js"
 
 /** `add`: copies registry components, and what they import, into the project. */
 export function addCommand() {
@@ -167,9 +168,42 @@ export function addCommand() {
       // there will be skipped — it won't be written, so a symlink there is no
       // reason to stop. Whether it exists is decided again when it is written.
       addSpinner.stop()
+
+      // A file of the same name from another library — shadcn's button.tsx —
+      // is replaced only when someone says so: asked, yes by default, or with
+      // --yes kept, with the command that replaces it. Fasla's own files keep
+      // the -o rule below.
+      const replace = new Set<string>()
+      const kept: { component: string; file: string }[] = []
+      if (!options.overwrite) {
+        for (const component of resolved.items) {
+          for (const file of component.files ?? []) {
+            const target = targetPathOf(file, component)
+            const stat = await fs.lstat(target).catch(() => undefined)
+            if (!stat?.isFile()) continue
+            const existing = await fs.readFile(target, "utf8")
+            if (isFaslaFile(existing, file.content ?? "")) continue
+            const name = path.relative(cwd, target)
+            if (yes) {
+              kept.push({ component: component.name, file: name })
+              continue
+            }
+            const { replaceIt } = await prompts({
+              type: "confirm",
+              name: "replaceIt",
+              message: `${path.basename(target)} exists and isn't Fasla's. Replace it?`,
+              initial: true,
+            })
+            if (replaceIt) replace.add(target)
+            else kept.push({ component: component.name, file: name })
+          }
+        }
+      }
+
       for (const component of resolved.items) {
         for (const file of component.files ?? []) {
-          await safeOrExit(() => checkDestination(cwd, targetPathOf(file, component), Boolean(options.overwrite)))
+          const target = targetPathOf(file, component)
+          await safeOrExit(() => checkDestination(cwd, target, Boolean(options.overwrite) || replace.has(target)))
         }
       }
 
@@ -219,7 +253,7 @@ export function addCommand() {
             // Whether the file may be written is decided as it is written, so
             // one created after the check above is skipped, not truncated.
             const outcome = await installFile(targetPath, content, componentName, {
-              overwrite: Boolean(options.overwrite),
+              overwrite: Boolean(options.overwrite) || replace.has(targetPath),
               writtenBy,
             })
             if (outcome.result === "exists") {
@@ -234,6 +268,14 @@ export function addCommand() {
       }
 
       addSpinner.succeed(`Added ${resolved.items.length} component(s)`)
+
+      if (kept.length > 0) {
+        console.log(chalk.yellow(`\nKept ${kept.map((k) => k.file).join(", ")}: not Fasla's, so not replaced.`))
+        if (yes) {
+          const names = [...new Set(kept.map((k) => k.component))].join(" ")
+          console.log(`To replace ${kept.length === 1 ? "it" : "them"} with Fasla's: ${chalk.cyan(`npx @smicolon/cli add ${names} -o`)}`)
+        }
+      }
 
       // Show the packages still to install, in the project's package manager:
       // `npm install` in a pnpm project fails, and in a bun or yarn one leaves a

@@ -222,15 +222,18 @@
       "cliDepsFallback": "<code>init</code> also writes the <code>cn</code> helper and installs the two packages it imports with your project’s package manager. If that install fails, <code>init</code> prints the command to run, which is one of these:",
       "cliAdd": "2. Add a component:",
       "cliList": "List everything the registry offers:",
+      "themeTitle": "Theme",
+      "themeBody": "Components take every colour from your theme. <code>init</code> asks which of two layers you want, or you can install one with the shadcn CLI. Both give you the base layer.",
+      "themeFasla": "Starting from scratch: use Fasla’s colours. Fasla’s light and dark palette, its radius and the Geist font, on top of the base layer:",
+      "themeNext14": "On Next.js 14, leave out <code>@fasla/font-geist</code>: <code>next/font</code> there has no Geist, and the Next.js 14 template already loads it. <code>init</code> does this for you.",
+      "themeBrand": "I have a brand: keep my colours. The base layer only: the tokens shadcn doesn’t have (success, warning, info and the soft tints), the type scale with Arabic line heights, the Arabic setting and the Cairo font. It changes no colour you already have:",
+      "themeArabicFont": "Arabic text is set in Cairo through the <code>--font-arabic</code> variable. To use another Arabic font, point <code>--font-arabic</code> at it.",
+      "themeReplaces": "Fasla’s base components replace shadcn’s components of the same name, such as <code>button</code> and <code>badge</code>, in <code>components/ui</code>. <code>add</code> asks before it replaces a file that isn’t Fasla’s. Blocks install to their own folder, <code>components/blocks</code>.",
       "manualTitle": "Manual Installation",
       "manualBody": "You can also copy components directly from the source code.",
       "manualDeps": "1. Install dependencies:",
       "manualCn": "2. Add the cn utility to your project:",
-      "manualCopy": "3. Copy the component source code from each component page.",
-      "tailwindTitle": "Tailwind Configuration",
-      "tailwindBody": "On Tailwind 3, map the semantic tokens into your theme. The <code>@smicolon/fasla-ui</code> package exports the whole set, already wrapped so that opacity modifiers keep working. Install it:",
-      "tailwindConfig": "Spread the tokens into <code>tailwind.config.ts</code>:",
-      "tailwindNote": "Then declare the matching CSS variables as full colours (hex or oklch) on <code>:root</code> and <code>.dark</code>. Mapping a token as a bare <code>var(--primary)</code> looks correct but silently drops Tailwind’s opacity modifiers — <code>bg-primary/10</code> compiles to no rule at all. That is why the exported map wraps each token in <code>color-mix()</code>."
+      "manualCopy": "3. Copy the component source code from each component page."
     },
     "propsTable": {
       "prop": "Prop",

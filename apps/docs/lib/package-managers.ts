@@ -13,6 +13,15 @@ export function installCommand(pm: PackageManager, packages: string): string {
 }
 
 /**
+ * A package run without installing it: `npx shadcn@latest add …` and its
+ * equivalents. bunx needs `--bun`, or a CLI with a node shebang runs on Node.
+ */
+export function runCommand(pm: PackageManager, command: string): string {
+  const runner = { npm: "npx", pnpm: "pnpm dlx", yarn: "yarn dlx", bun: "bunx --bun" }[pm]
+  return `${runner} ${command}`
+}
+
+/**
  * The tab an arrow, Home or End key moves to, wrapping at both ends, or
  * undefined for any other key. Arrows follow what is on screen: in a
  * right-to-left page the first tab is on the right, so ArrowLeft moves

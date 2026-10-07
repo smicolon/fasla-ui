@@ -34,9 +34,27 @@ npx @smicolon/cli init
 # Skip prompts with defaults
 npx @smicolon/cli init -y
 
-# Write the files but don't install; print the install command instead
+# Write the files but don't install; print the install commands instead
 npx @smicolon/cli init --no-install
+
+# Pick the theme without the question
+npx @smicolon/cli init --theme fasla   # Fasla's colours
+npx @smicolon/cli init --theme brand   # keep your colours
 ```
+
+`init` then asks how your components should look:
+
+1. **Starting from scratch: use Fasla's colours** installs `@fasla/theme` and
+   `@fasla/font-geist`: Fasla's palette, radius and Geist, on top of the base
+   layer. On Next.js 14 it leaves Geist out, as next/font there has none.
+2. **I have a brand: keep my colours** installs `@fasla/theme-base` only:
+   the tokens shadcn doesn't have, the type scale with Arabic line heights, the
+   Arabic setting and Cairo. It never changes a colour you already have.
+
+It installs them with the shadcn CLI, the same `npx shadcn@latest add` the docs
+show. With `--yes` and no `--theme`, it never replaces colours silently: a
+stylesheet that already has colour tokens gets the base layer only, and the
+command to switch; one with none gets Fasla's colours.
 
 `init` also handles two setups that need more than a config file:
 
@@ -87,6 +105,11 @@ npx @smicolon/cli add shimmer-button animated-gradient
 # Add app blocks
 npx @smicolon/cli add app-shell page-header data-table
 ```
+
+A file of the same name from another library, such as shadcn's `button.tsx`,
+is replaced only when you say so: `add` asks "button.tsx exists and isn't
+Fasla's. Replace it?", yes by default. With `--yes` it keeps the file and
+prints the `-o` command that replaces it.
 
 ### `list`
 

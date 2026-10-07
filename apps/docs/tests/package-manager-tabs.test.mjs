@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test"
 import { readdirSync, readFileSync, statSync } from "node:fs"
 import path from "node:path"
-import { installCommand, nextTabIndex, PACKAGE_MANAGERS } from "../lib/package-managers.ts"
+import { installCommand, nextTabIndex, PACKAGE_MANAGERS, runCommand } from "../lib/package-managers.ts"
 
 const docsRoot = path.resolve(import.meta.dir, "..")
 const read = (file) => readFileSync(path.join(docsRoot, file), "utf8")
@@ -22,6 +22,17 @@ describe("Package manager commands", () => {
       "pnpm add clsx tailwind-merge",
       "yarn add clsx tailwind-merge",
       "bun add clsx tailwind-merge",
+    ])
+  })
+})
+
+describe("Package manager run commands", () => {
+  test("run a package without installing it, the way each package manager does", () => {
+    expect(PACKAGE_MANAGERS.map((pm) => runCommand(pm, "shadcn@latest add @fasla/theme"))).toEqual([
+      "npx shadcn@latest add @fasla/theme",
+      "pnpm dlx shadcn@latest add @fasla/theme",
+      "yarn dlx shadcn@latest add @fasla/theme",
+      "bunx --bun shadcn@latest add @fasla/theme",
     ])
   })
 })
@@ -87,6 +98,32 @@ describe("Install commands on the docs pages", () => {
   test("show no npm-only install either; every install goes through the tabs", () => {
     const npmOnly = pages.filter((file) => /npm install /.test(read(file)))
     expect(npmOnly).toEqual([])
-    expect(read("app/[locale]/docs/installation/page.tsx").match(/<PackageManagerTabs /g)).toHaveLength(3)
+    expect(read("app/[locale]/docs/installation/page.tsx").match(/<PackageManagerTabs /g)).toHaveLength(4)
+  })
+})
+
+describe("Theme section of the Installation page", () => {
+  const page = read("app/[locale]/docs/installation/page.tsx")
+
+  test("installs each layer through the tabs, Fasla's colours first", () => {
+    const fasla = page.indexOf('<PackageManagerTabs run="shadcn@latest add @fasla/theme @fasla/font-geist" />')
+    const base = page.indexOf('<PackageManagerTabs run="shadcn@latest add @fasla/theme-base" />')
+    expect(fasla).toBeGreaterThan(-1)
+    expect(base).toBeGreaterThan(fasla)
+    // The old manual Tailwind setup is gone.
+    expect(page).not.toContain("tailwindSemanticColors")
+  })
+
+  test("says, in both languages, that Fasla's components replace shadcn's of the same name", () => {
+    const en = JSON.parse(read("messages/en.json")).docs.installation
+    const ar = JSON.parse(read("messages/ar.json")).docs.installation
+    expect(en.themeReplaces).toContain("replace shadcn’s components of the same name")
+    expect(ar.themeReplaces).toContain("تحل المكوّنات الأساسية في فاصلة محل مكوّنات shadcn/ui")
+    for (const key of ["themeTitle", "themeBody", "themeFasla", "themeNext14", "themeBrand", "themeArabicFont", "themeReplaces"]) {
+      expect(typeof en[key]).toBe("string")
+      expect(typeof ar[key]).toBe("string")
+    }
+    expect(en.themeArabicFont).toContain("<code>--font-arabic</code>")
+    expect(ar.themeArabicFont).toContain("<code>--font-arabic</code>")
   })
 })

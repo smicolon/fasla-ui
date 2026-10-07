@@ -9,6 +9,16 @@ import { NAMESPACE, namespaceUrl } from "../registry.js"
 import { detectPackageManager, install, installCommand, missingPackages, type PackageManager, type Runner } from "../pm.js"
 import type { ComponentsConfig } from "../legacy.js"
 import { aliasRootOrExit, repairIfNeededOrExit, safeOrExit } from "./shared.js"
+import {
+  applyTheme,
+  detectProjectStyle,
+  hasColourTokens,
+  THEME_CHOICES,
+  themeCommand,
+  themeWithoutAsking,
+  type ProjectStyle,
+  type ThemeChoice,
+} from "../theme.js"
 
 const UTILS_SOURCE = `import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
@@ -82,11 +92,16 @@ export function initCommand() {
     .name("init")
     .description("Initialize fasla-ui in your project")
     .option("-y, --yes", "Skip confirmation prompts")
-    .option("--no-install", "Don't install clsx and tailwind-merge; print the command instead")
+    .option("--no-install", "Don't install clsx, tailwind-merge or the theme; print the commands instead")
+    .option("--theme <choice>", 'The theme: "fasla" for Fasla\'s colours, "brand" to keep yours')
     .option("-c, --cwd <path>", "Working directory", process.cwd())
     .action(async (options) => {
       const cwd = path.resolve(options.cwd)
       const yes = Boolean(options.yes)
+      if (options.theme !== undefined && !THEME_CHOICES.some((c) => c.value === options.theme)) {
+        console.log(chalk.red(`Error: --theme is "fasla" or "brand", not "${options.theme}". Nothing was written.`))
+        process.exit(1)
+      }
 
       console.log(chalk.bold("\nInitializing fasla-ui...\n"))
 
@@ -115,7 +130,8 @@ export function initCommand() {
         }
       }
 
-      if (!config) config = await askForConfig(cwd, aliasRoot.root, yes)
+      const style = await detectProjectStyle(cwd, aliasRoot.root)
+      if (!config) config = await askForConfig(cwd, aliasRoot.root, yes, style)
       const aliases = config.aliases ?? {}
       const utilsAlias = aliases.utils ?? "@/lib/utils"
 
@@ -147,6 +163,10 @@ export function initCommand() {
 
       if (!(await installCnPackages(cwd, pm, { enabled: options.install !== false }))) process.exit(1)
 
+      const css = typeof config.tailwind?.css === "string" ? config.tailwind.css : style.css
+      const theme = { flag: options.theme, yes, install: options.install !== false, nextMajor: style.nextMajor }
+      if (!(await installTheme(cwd, css, theme))) process.exit(1)
+
       console.log(chalk.green("\nSuccess! fasla-ui has been initialized."))
       console.log("\nYou can now add components:")
       console.log(chalk.cyan("  npx @smicolon/cli add button"))
@@ -154,8 +174,67 @@ export function initCommand() {
     })
 }
 
+/**
+ * Asks which theme layer the project gets — or, with `--theme` or `--yes`,
+ * decides without asking, never replacing colours the project has unless
+ * `--theme fasla` says to — and installs it with the shadcn CLI. Returns false
+ * only when the install was tried and failed.
+ */
+export async function installTheme(
+  cwd: string,
+  css: string,
+  { flag, yes, install, nextMajor }: { flag?: string; yes: boolean; install: boolean; nextMajor?: number }
+): Promise<boolean> {
+  const hasColours = hasColourTokens(await fs.readFile(path.join(cwd, css), "utf8").catch(() => ""))
+  let choice = themeWithoutAsking({ flag, yes, hasColours })
+
+  if (!choice) {
+    const { theme } = await prompts({
+      type: "select",
+      name: "theme",
+      message: "How should your components look?",
+      choices: THEME_CHOICES.map(({ value, title }) => ({
+        value,
+        // Nothing to keep yet: say so, rather than leave the components colourless.
+        title: value === "brand" && !hasColours ? `${title} (${css} has no colours yet, so the components would have none)` : title,
+      })),
+      initial: 0,
+    })
+    if (theme === undefined) {
+      console.log(chalk.yellow("Cancelled."))
+      process.exit(0)
+    }
+    choice = theme as ThemeChoice
+  } else if (yes && !flag) {
+    console.log(
+      choice === "brand"
+        ? `\n${css} has its own colours, so they are kept: installing the base theme only.\n` +
+            `To use Fasla's colours instead: ${chalk.cyan("npx @smicolon/cli init --theme fasla")}`
+        : `\n${css} has no colours yet, so it gets Fasla's.`
+    )
+  }
+
+  const command = themeCommand(choice, { nextMajor })
+  if (!install) {
+    console.log(`\nInstall the theme:\n  ${chalk.cyan(command)}`)
+    return true
+  }
+  const label = choice === "fasla" ? "Fasla's colours and the base theme" : "the base theme"
+  const spinner = ora(`Installing ${label}...`).start()
+  const result = await applyTheme(cwd, choice, { nextMajor })
+  if (result.ok) {
+    spinner.succeed(`Installed ${label}`)
+    return true
+  }
+  spinner.fail(`Could not install ${label}`)
+  const tail = result.ok ? "" : result.output.trim().split("\n").slice(-15).join("\n")
+  if (tail) console.log(chalk.gray(tail))
+  console.log(`\nRun this to finish:\n  ${chalk.cyan(command)}`)
+  return false
+}
+
 /** The config for a new project, from the prompts or, with `--yes`, the defaults. */
-async function askForConfig(cwd: string, aliasRoot: string, yes: boolean): Promise<ComponentsConfig> {
+async function askForConfig(cwd: string, aliasRoot: string, yes: boolean, project: ProjectStyle): Promise<ComponentsConfig> {
   const under = (p: string) => (aliasRoot ? `${aliasRoot}/${p}` : p)
 
   let componentsAlias = "@/components"
@@ -209,11 +288,12 @@ async function askForConfig(cwd: string, aliasRoot: string, yes: boolean): Promi
   return {
     $schema: "https://ui.shadcn.com/schema.json",
     style,
-    rsc: true,
+    rsc: project.rsc,
     tsx: true,
     tailwind: {
-      config: "tailwind.config.ts",
-      css: under("app/globals.css"),
+      // Tailwind 4 has no config file; the shadcn CLI reads "" as that.
+      config: project.config,
+      css: project.css,
       baseColor: "slate",
       cssVariables: true,
     },

@@ -83,6 +83,29 @@ export default async function InstallationPage({
       </div>
 
       <div className="space-y-4">
+        <h2 className="text-2xl font-semibold">{i("themeTitle")}</h2>
+        <p className="text-muted-foreground">{i.rich("themeBody", rich)}</p>
+
+        <div className="space-y-4">
+          <div>
+            <p className="text-sm font-medium mb-2">{i.rich("themeFasla", rich)}</p>
+            <PackageManagerTabs run="shadcn@latest add @fasla/theme @fasla/font-geist" />
+            <p className="text-sm text-muted-foreground mt-2">{i.rich("themeNext14", rich)}</p>
+          </div>
+
+          <div>
+            <p className="text-sm font-medium mb-2">{i.rich("themeBrand", rich)}</p>
+            <PackageManagerTabs run="shadcn@latest add @fasla/theme-base" />
+          </div>
+
+          <p className="text-sm text-muted-foreground">{i.rich("themeArabicFont", rich)}</p>
+        </div>
+
+        {/* Said plainly, before anyone adds a component to a shadcn project. */}
+        <p className="rounded-lg border border-border p-4 text-sm">{i.rich("themeReplaces", rich)}</p>
+      </div>
+
+      <div className="space-y-4">
         <h2 className="text-2xl font-semibold">{i("manualTitle")}</h2>
         <p className="text-muted-foreground">{i("manualBody")}</p>
 
@@ -109,35 +132,6 @@ export function cn(...inputs: ClassValue[]) {
             <p className="text-sm font-medium mb-2">{i("manualCopy")}</p>
           </div>
         </div>
-      </div>
-
-      <div className="space-y-4">
-        <h2 className="text-2xl font-semibold">{i("tailwindTitle")}</h2>
-        <p className="text-muted-foreground">{i.rich("tailwindBody", rich)}</p>
-        <PackageManagerTabs packages="@smicolon/fasla-ui" />
-        <p className="text-muted-foreground">{i.rich("tailwindConfig", rich)}</p>
-        <pre className="overflow-x-auto rounded-lg bg-terminal p-4 text-sm">
-          <code className="text-gray-300">{`// tailwind.config.ts
-import type { Config } from "tailwindcss"
-import { tailwindSemanticColors } from "@smicolon/fasla-ui/tokens"
-
-const config: Config = {
-  darkMode: "class",
-  content: [
-    "./app/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-  ],
-  theme: {
-    extend: {
-      colors: tailwindSemanticColors,
-    },
-  },
-}
-
-export default config`}</code>
-        </pre>
-        <p className="text-muted-foreground text-sm">{i.rich("tailwindNote", rich)}</p>
       </div>
     </div>
   )

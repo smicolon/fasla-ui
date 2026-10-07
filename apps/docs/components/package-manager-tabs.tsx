@@ -4,7 +4,7 @@ import * as React from "react"
 import { useTranslations } from "next-intl"
 
 import { cn } from "@/lib/utils"
-import { installCommand, nextTabIndex, PACKAGE_MANAGERS, type PackageManager } from "@/lib/package-managers"
+import { installCommand, nextTabIndex, PACKAGE_MANAGERS, runCommand, type PackageManager } from "@/lib/package-managers"
 
 const STORAGE_KEY = "fasla-package-manager"
 const CHANGE_EVENT = "fasla-package-manager-change"
@@ -29,7 +29,7 @@ function readChoice(): PackageManager | undefined {
  * the right and the arrow keys moving the way the tabs are laid out. The
  * command itself is code and stays left to right in both.
  */
-export function PackageManagerTabs({ packages }: { packages: string }) {
+export function PackageManagerTabs(props: { packages: string } | { run: string }) {
   const t = useTranslations("docs")
   const id = React.useId()
   const [pm, setPm] = React.useState<PackageManager>("npm")
@@ -78,7 +78,8 @@ export function PackageManagerTabs({ packages }: { packages: string }) {
     tabs.current[next]?.focus()
   }
 
-  const command = installCommand(pm, packages)
+  // `packages` installs them; `run` runs a package's CLI without installing it.
+  const command = "run" in props ? runCommand(pm, props.run) : installCommand(pm, props.packages)
 
   const copy = async () => {
     try {

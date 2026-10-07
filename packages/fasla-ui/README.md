@@ -126,18 +126,28 @@ export function MyComponent() {
 }
 ```
 
-## Tailwind Configuration
+## Theme
 
-Add fasla-ui to your `tailwind.config.js`:
+Components take every colour from your theme. `init` asks which of two layers
+you want; both include the base layer.
 
-```js
-module.exports = {
-  content: [
-    // ... your content paths
-    "./node_modules/@smicolon/fasla-ui/**/*.{js,ts,jsx,tsx}",
-  ],
-}
+```bash
+# Starting from scratch: use Fasla's colours (palette, radius, Geist).
+# On Next.js 14, leave out @fasla/font-geist: next/font there has no Geist.
+npx shadcn@latest add @fasla/theme @fasla/font-geist
+
+# I have a brand: keep my colours (base layer only)
+npx shadcn@latest add @fasla/theme-base
 ```
+
+The base layer adds only what shadcn doesn't have: the success, warning and
+info tokens and the soft tints, the type scale with Arabic line heights, the
+Arabic setting, and the Cairo font. It never changes a colour you already
+have. Arabic text uses `--font-arabic`; point it at another font to swap Cairo.
+
+Fasla's base components replace shadcn's components of the same name in
+`components/ui`; `add` asks before replacing a file that isn't Fasla's. Blocks
+install to `components/blocks`.
 
 ## Documentation
 
