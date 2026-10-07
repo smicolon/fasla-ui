@@ -561,16 +561,39 @@
       }
     },
     "skeleton": {
-      "lead": "Loading placeholder components for content that is loading.",
+      "lead": "Placeholders that hold the shape of content while it loads, so the page doesn't jump when it arrives.",
       "basicTitle": "Basic",
+      "basicBody": "A single block, sized with <code>className</code>. It replaces shadcn's Skeleton with no other changes.",
+      "variantsBody": "<code>variant</code> sets the shape of a block: a bar with a 4px radius, a circle, or square corners.",
       "textTitle": "Text Skeleton",
+      "textBody": "<code>SkeletonText</code> draws full-width lines, 16px tall and 8px apart. It shows 2 lines unless you set <code>lines</code>.",
       "avatarTitle": "Avatar Skeleton",
+      "avatarBody": "<code>SkeletonAvatar</code> is a 48px circle. Pass another size in <code>className</code> to match a smaller or larger avatar.",
+      "listItemTitle": "List Item Skeleton",
+      "listItemBody": "<code>SkeletonListItem</code> puts an avatar at the start of the line and text lines beside it, 16px apart. Use it for lists, comments and profile rows.",
       "cardTitle": "Card Skeleton",
+      "cardBody": "<code>SkeletonCard</code> is a 122px media block above 2 text lines. It has no border or background of its own, so place it inside a Card when the real content has one.",
+      "examples": {
+        "comments": "Comments"
+      },
+      "a11y": {
+        "decorative": "Every block is <code>aria-hidden</code>, so screen readers skip the placeholders.",
+        "busy": "Mark the region that is loading with <code>aria-busy=\"true\"</code>, and set it to <code>false</code> when the content arrives.",
+        "motion": "The pulse stops when the user turns on <code>prefers-reduced-motion</code>. Set <code>animate</code> to <code>false</code> to turn it off everywhere.",
+        "direction": "Direction is inherited from <code>dir</code>, never a prop. The avatar always sits at the start of the line."
+      },
       "props": {
-        "variant": "The shape of the skeleton.",
-        "animate": "Whether to animate the skeleton.",
-        "lines": "Number of lines in <code>SkeletonText</code>.",
-        "className": "Sets the size, such as <code>h-12 w-48</code>."
+        "variant": "The shape of a single block: a rounded bar, a circle or a rectangle.",
+        "animate": "Pulses while loading. The pulse always stops under reduced motion.",
+        "lines": "Number of text lines in <code>SkeletonText</code>, <code>SkeletonListItem</code> and <code>SkeletonCard</code>.",
+        "className": "Sets the size, such as <code>h-4 w-48</code>."
+      },
+      "usage": {
+        "basic": "A single block",
+        "text": "Text lines",
+        "listItem": "A list row",
+        "card": "A card",
+        "loading": "Mark the region that is loading"
       }
     },
     "tabs": {
