@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test"
 import { readFileSync } from "node:fs"
 import path from "node:path"
-import { rewriteComponentImports } from "../scripts/build-registry.mjs"
+import { dependencyUrls, rewriteComponentImports, rewriteUtilsImport } from "../scripts/build-registry.mjs"
 
 const docsRoot = path.resolve(import.meta.dir, "..")
 const pkg = path.resolve(docsRoot, "../../packages/fasla-ui")
@@ -41,15 +41,50 @@ describe("Registry build — imports between components", () => {
     for (const item of registry.items) {
       for (const file of item.files) {
         const out = rewriteComponentImports(
-          readFileSync(path.join(pkg, file.path), "utf8"),
+          rewriteUtilsImport(readFileSync(path.join(pkg, file.path), "utf8")),
           file.target,
           targetOf
         )
         for (const [, spec] of out.matchAll(/from ["'](\.{1,2}\/[^"']+)["']/g)) {
-          if (spec.includes("lib/utils")) continue // the CLI rewrites this to the consumer's alias
           const resolved = path.posix.join(path.posix.dirname(file.target), spec)
           expect(published.has(resolved), `${item.name}: ${spec}`).toBe(true)
         }
+      }
+    }
+  })
+})
+
+describe("Registry build — what the shadcn CLI needs", () => {
+  test("imports cn from @/lib/utils, never from this repo's path", () => {
+    expect(rewriteUtilsImport(`import { cn } from "../../../src/lib/utils"`)).toBe(`import { cn } from "@/lib/utils"`)
+    expect(rewriteUtilsImport(`import { cn } from '../../lib/utils'`)).toBe(`import { cn } from '@/lib/utils'`)
+    expect(rewriteUtilsImport(`import { cn } from "@/lib/utils"`)).toBe(`import { cn } from "@/lib/utils"`)
+    expect(rewriteUtilsImport(`import { x } from "../../../src/lib/other"`)).toBe(`import { x } from "../../../src/lib/other"`)
+  })
+
+  test("no published item imports cn from a relative path", () => {
+    for (const item of registry.items) {
+      for (const file of item.files) {
+        const out = rewriteUtilsImport(readFileSync(path.join(pkg, file.path), "utf8"))
+        expect(out, `${item.name}: ${file.path}`).not.toMatch(/from ["']\.[^"']*lib\/utils["']/)
+      }
+    }
+  })
+
+  test("writes dependencies on Fasla items as full URLs and leaves shadcn's names bare", () => {
+    const own = new Set(["status-indicator", "button"])
+    expect(dependencyUrls(["status-indicator", "button", "dialog"], own, "https://ui.smicolon.com/r")).toEqual([
+      "https://ui.smicolon.com/r/status-indicator.json",
+      "https://ui.smicolon.com/r/button.json",
+      "dialog",
+    ])
+  })
+
+  test("every dependency on a Fasla item in registry.json becomes a URL", () => {
+    const own = new Set(registry.items.map((item) => item.name))
+    for (const item of registry.items) {
+      for (const dep of dependencyUrls(item.registryDependencies ?? [], own)) {
+        expect(own.has(dep), `${item.name}: ${dep} is still a bare Fasla name`).toBe(false)
       }
     }
   })
