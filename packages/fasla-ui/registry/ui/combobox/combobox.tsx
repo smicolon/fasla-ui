@@ -189,10 +189,13 @@ export function Combobox({
     }
   }, [highlightedIndex, open])
 
-  // Reset highlighted index when search changes
-  React.useEffect(() => {
+  // Reset highlighted index when search changes. Done while rendering rather
+  // than in an effect, so the list never paints with the old highlight.
+  const [highlightedSearch, setHighlightedSearch] = React.useState(search)
+  if (highlightedSearch !== search) {
+    setHighlightedSearch(search)
     setHighlightedIndex(0)
-  }, [search])
+  }
 
   // Close on outside click
   React.useEffect(() => {
@@ -334,7 +337,7 @@ export function Combobox({
                     )}
                   >
                     <PlusIcon size={16} strokeWidth={1.5} className="me-2" />
-                    {createText} "{search}"
+                    {createText} &quot;{search}&quot;
                   </li>
                 )}
               </>

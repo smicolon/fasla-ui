@@ -20,6 +20,11 @@ const widthClasses = {
   lg: "w-72",
 }
 
+/** The enclosing Sidebar's onCollapsedChange, for SidebarCollapseButton. */
+const SidebarCollapsedChangeContext = React.createContext<
+  ((collapsed: boolean) => void) | undefined
+>(undefined)
+
 export function Sidebar({
   collapsed = false,
   onCollapsedChange,
@@ -29,16 +34,18 @@ export function Sidebar({
   ...props
 }: SidebarProps) {
   return (
-    <aside
-      className={cn(
-        "flex h-full flex-col border-e bg-background transition-all duration-200",
-        collapsed ? "w-16" : widthClasses[width],
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </aside>
+    <SidebarCollapsedChangeContext.Provider value={onCollapsedChange}>
+      <aside
+        className={cn(
+          "flex h-full flex-col border-e bg-background transition-all duration-200",
+          collapsed ? "w-16" : widthClasses[width],
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </aside>
+    </SidebarCollapsedChangeContext.Provider>
   )
 }
 
@@ -174,9 +181,19 @@ export function SidebarCollapseButton({
   className,
   ...props
 }: SidebarCollapseButtonProps) {
+  const onSidebarCollapsedChange = React.useContext(SidebarCollapsedChangeContext)
+
+  // Tells the enclosing Sidebar too, once if both were given the same handler
+  const toggle = () => {
+    onCollapsedChange(!collapsed)
+    if (onSidebarCollapsedChange && onSidebarCollapsedChange !== onCollapsedChange) {
+      onSidebarCollapsedChange(!collapsed)
+    }
+  }
+
   return (
     <button
-      onClick={() => onCollapsedChange(!collapsed)}
+      onClick={toggle}
       className={cn(
         "flex h-8 w-8 items-center justify-center rounded-md hover:bg-accent",
         className

@@ -92,6 +92,17 @@ describe("EmptySearchResults", () => {
     const svg = container.querySelector("svg")
     expect(svg).toBeInTheDocument()
   })
+
+  it("accepts the deprecated onClear without passing it to the DOM or showing a control", () => {
+    const error = vi.spyOn(console, "error").mockImplementation(() => {})
+    try {
+      render(<EmptySearchResults onClear={() => {}} />)
+      expect(error).not.toHaveBeenCalled()
+      expect(screen.queryByRole("button")).not.toBeInTheDocument()
+    } finally {
+      error.mockRestore()
+    }
+  })
 })
 
 describe("EmptyData", () => {

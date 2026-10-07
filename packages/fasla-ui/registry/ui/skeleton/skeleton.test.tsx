@@ -107,6 +107,17 @@ describe("SkeletonText", () => {
     expect(container).not.toHaveAttribute("animate")
     expect(container).not.toHaveAttribute("variant")
   })
+
+  it("keeps variant off the DOM in the list item and card too", () => {
+    render(
+      <>
+        <SkeletonListItem variant="circular" data-testid="list-item" />
+        <SkeletonCard variant="circular" data-testid="card" />
+      </>
+    )
+    expect(screen.getByTestId("list-item")).not.toHaveAttribute("variant")
+    expect(screen.getByTestId("card")).not.toHaveAttribute("variant")
+  })
 })
 
 describe("SkeletonAvatar", () => {
