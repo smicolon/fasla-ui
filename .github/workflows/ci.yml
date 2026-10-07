@@ -97,8 +97,14 @@ jobs:
   shadcn-registry:
     name: Registry installs with shadcn
     runs-on: ubuntu-latest
+    # It runs code fetched at run time (shadcn, create-next-app and their
+    # packages), so it gets read-only access and no token left in .git/config.
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
 
       # The registry build uses only Node's standard library, so no bun install.
       - uses: actions/setup-node@v4
