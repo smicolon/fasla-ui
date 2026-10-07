@@ -29,7 +29,11 @@ separate diffs. Put no derivation in the capture script and no Figma calls in th
 
 A page is in scope only if **both** signals agree:
 
-1. the page name contains `🟢` **and** ends with `✅`
+1. the page name contains `🟢` **and** ends with `✅` — after stripping any trailing
+   reviewer marker (`| H 🟡`, `| Y/H 🟠`): a second designer's in-progress pass appended
+   after the signoff keeps the page in scope (Haneen, 2026-10-05, when
+   `Carousel ✅ | H🟡` appeared). `STRIP_REVIEWER` in `build-index.mjs` is the one
+   definition of that stripping; the capture snippets below inline the same regex.
 2. the page name does **not** match `/[-–—]\s*\d+\s*Blocks?/i`
 
 Signal 1 alone is not enough: `✅` means *complete*, not *atom*, so a block page would leak in
@@ -55,8 +59,9 @@ Load the `figma-use` skill first. Then run this against `fileKey` `yGEQmCZOvs7Kp
 in **two calls** — `k < 22` and `k >= 22`. One call over all 44 pages risks the internal timeout.
 
 ```js
+const done = n => n.trim().replace(/(\|\s*[A-Za-z/]{1,5}\s*[🟡🟠🔴🟢]\s*)+$/u, '').trim()
 const pick = figma.root.children.filter(
-  p => p.name.indexOf('🟢') !== -1 && p.name.trim().slice(-1) === '✅'
+  p => p.name.indexOf('🟢') !== -1 && done(p.name).slice(-1) === '✅'
 )
 const out = []
 for (let k = 0; k < 22; k++) {            // second call: k = 22 … pick.length
@@ -106,7 +111,8 @@ The capture passes through a chat transcript, so prove the committed file matche
 Run this read-only, then compare to `$meta.counts` and the hashes:
 
 ```js
-const pick = figma.root.children.filter(p => p.name.indexOf('🟢') !== -1 && p.name.trim().slice(-1) === '✅')
+const done = n => n.trim().replace(/(\|\s*[A-Za-z/]{1,5}\s*[🟡🟠🔴🟢]\s*)+$/u, '').trim()
+const pick = figma.root.children.filter(p => p.name.indexOf('🟢') !== -1 && done(p.name).slice(-1) === '✅')
 const rows = [], docs = []
 for (const p of pick) {
   await p.loadAsync()

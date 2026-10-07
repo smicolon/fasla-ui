@@ -65,6 +65,8 @@ Core building blocks with CVA variants for consistent styling:
 | **Card** | Flexible content containers |
 | **Skeleton** | Loading placeholders |
 | **Combobox** | Searchable select with autocomplete |
+| **Carousel** | Scroll-snap slides with a dot stepper |
+| **Content Carousel** | Card browser with previous/next arrows and 1-3 slots per view |
 
 ### App Blocks
 Pre-built page compositions for rapid development:

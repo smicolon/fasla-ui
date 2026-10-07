@@ -295,6 +295,36 @@ export const routes = [
   },
   {
     kind: "component",
+    category: "UI Primitives",
+    path: "/docs/components/carousel/",
+    title: "Carousel React Component | Fasla",
+    description:
+      "Build an accessible React carousel on CSS scroll snapping, with a dot stepper, controlled state, and RTL support with no extra code.",
+    h1: "Carousel",
+    ar: {
+      title: "المؤشر الدائري (Carousel) لتطبيقات React | فاصلة",
+      description:
+        "ابنِ مكوّن المؤشر الدائري (Carousel) على خاصية CSS scroll-snap، مع نقاط تنقّل وتحكم بالحالة ودعم كامل للعربية دون أي شيفرة إضافية.",
+      h1: "المؤشر الدائري (Carousel)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
+    path: "/docs/components/content-carousel/",
+    title: "Content Carousel React Component | Fasla",
+    description:
+      "Show cards in a React content carousel with previous and next arrows, one to three slots per view, and accessible keyboard control.",
+    h1: "Content Carousel",
+    ar: {
+      title: "الشريط الدوّار للمحتوى (Content Carousel) لتطبيقات React | فاصلة",
+      description:
+        "اعرض البطاقات في مكوّن الشريط الدوّار للمحتوى (Content Carousel) بسهمي تنقّل، ومن بطاقة إلى ثلاث بطاقات في العرض الواحد، مع تحكم كامل من لوحة المفاتيح.",
+      h1: "الشريط الدوّار للمحتوى (Content Carousel)",
+    },
+  },
+  {
+    kind: "component",
     category: "Blocks",
     path: "/docs/components/app-shell/",
     title: "App Shell React Layout | Fasla",

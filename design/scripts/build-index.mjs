@@ -24,11 +24,16 @@ const FILE_KEY = "yGEQmCZOvs7KptsYUdB0Xg"
 
 /* ── Selection rule ────────────────────────────────────────────────────────────────
  * A page is in scope for the atom index only if BOTH signals agree:
- *   (1) the page name carries 🟢 AND ends with ✅
+ *   (1) the page name carries 🟢 AND ends with ✅ — after stripping any trailing
+ *       reviewer marker ("| H 🟡", "| Y/H 🟠"): a second designer's in-progress pass,
+ *       appended after the signoff, does not pull the page out of scope
+ *       (Haneen, 2026-10-05, when "Carousel ✅ | H🟡" appeared)
  *   (2) the page name carries no "- N Blocks" suffix
  * (1) alone would leak block pages in the moment they are finished and earn a ✅.
  * If the two ever disagree on a page, the build STOPS and names it — it does not guess. */
-export const GREEN_TICK = (name) => name.includes("🟢") && name.trim().endsWith("✅")
+export const STRIP_REVIEWER = (name) =>
+  name.trim().replace(/(\|\s*[A-Za-z/]{1,5}\s*[🟡🟠🔴🟢]\s*)+$/u, "").trim()
+export const GREEN_TICK = (name) => name.includes("🟢") && STRIP_REVIEWER(name).endsWith("✅")
 export const BLOCK_SHAPED = (name) => /[-–—]\s*\d+\s*Blocks?\b/i.test(name)
 
 /* ── Status legend ─────────────────────────────────────────────────────────────────
@@ -78,6 +83,9 @@ export const CODE_MAP = {
   avatar: { set: "Avatar", page: "3710:7318" },
   badge: { set: "Badge", page: "3724:120666" },
   button: { set: "Button", page: "1:3" },
+  // Keyed on set+page, so the skeleton page's "carousel" placeholder is not claimed.
+  carousel: { set: "Carousel", page: "3762:15186" },
+  "content-carousel": { set: "Content Carousel", page: "3762:15186" },
   checkbox: { set: "Check Box", page: "3830:5150" },
   combobox: { set: "Combobox", page: "14852:8647" },
   input: { set: "Default Input", page: "3882:2381" },
@@ -115,11 +123,12 @@ function parseDoc(name) {
 
 function parsePage(name) {
   const status = ["🟢", "🟡", "🟠", "🔴", "❌"].find((e) => name.includes(e)) ?? null
-  const trimmed = name.trim()
+  // The tail and display describe the signoff, not a reviewer's in-progress marker.
+  const trimmed = STRIP_REVIEWER(name)
   const tail = trimmed.endsWith("✅") ? "✅" : (trimmed.match(/[^\w\s)\]]+$/)?.[0] ?? null)
-  const bar = name.indexOf("|")
-  const initials = bar > 0 ? (name.slice(0, bar).replace(/[^A-Za-z/]/g, "") || null) : null
-  const display = (bar > 0 ? name.slice(bar + 1) : name)
+  const bar = trimmed.indexOf("|")
+  const initials = bar > 0 ? (trimmed.slice(0, bar).replace(/[^A-Za-z/]/g, "") || null) : null
+  const display = (bar > 0 ? trimmed.slice(bar + 1) : trimmed)
     .replace(/[🟢🟡🟠🔴❌✅✦🔸🔺🙋]/g, "").replace(/\s+/g, " ").trim()
   return { status, tail, initials, display }
 }
@@ -265,7 +274,8 @@ export function build(capture) {
       measured: process.env.INDEX_MEASURED || new Date().toISOString().slice(0, 10),
       generatedBy: ".agents/skills/figma-index (read-only use_figma page walk) → design/scripts/build-index.mjs",
       selectionRule: {
-        inScope: "page name contains 🟢 AND page name ends with ✅",
+        inScope:
+          "page name contains 🟢 AND page name ends with ✅ once any trailing reviewer marker ('| H 🟡') is stripped — a review-in-progress note after the signoff keeps the page in scope (Haneen, 2026-10-05)",
         crossCheck: "page name must NOT match /[-–—]\\s*\\d+\\s*Blocks?/i",
         onDisagreement: "the build throws and names the pages; it never guesses",
         excluded: "test and scratch pages, section dividers, Component Atoms, the Lucide icon page, and every block page",

@@ -153,6 +153,48 @@
       ]
     },
     {
+      "name": "carousel",
+      "type": "registry:ui",
+      "title": "Carousel",
+      "description": "A scroll-snap carousel with a dot stepper: one dot per slide, the active one stretched into a pill, in either direction.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/carousel/carousel.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/carousel.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "navigation"
+      ]
+    },
+    {
+      "name": "content-carousel",
+      "type": "registry:ui",
+      "title": "Content Carousel",
+      "description": "A horizontal card browser with previous and next arrows, showing one, two or three content slots per view.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "carousel"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/content-carousel/content-carousel.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/content-carousel.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "navigation"
+      ]
+    },
+    {
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
