@@ -88,7 +88,7 @@ describe("readAliasRoot: reading tsconfig", () => {
 
   it("reports a config it can't parse instead of guessing silently", async () => {
     const found = await findAliasRoot(await project({ "tsconfig.json": "{ not json" }))
-    expect(found).toEqual({ root: "", problem: "tsconfig.json could not be read as JSON." })
+    expect(found).toEqual({ root: "", mapped: false, problem: "tsconfig.json could not be read as JSON." })
   })
 })
 
@@ -242,6 +242,12 @@ describe("readAliasRoot", () => {
     expect(await readAliasRoot(dir)).toBe("src")
   })
 
+  it("says whether @/ is mapped or only guessed", async () => {
+    expect(await findAliasRoot(await project({ "tsconfig.json": tsconfig({ "@/*": ["./src/*"] }) }))).toEqual({ root: "src", mapped: true })
+    // A fresh Vite app: a src/ folder, and no @/* anywhere.
+    expect(await findAliasRoot(await project({ "tsconfig.json": JSON.stringify({ files: [] }) }, ["src"]))).toEqual({ root: "src", mapped: false })
+  })
+
   it("guesses from the src/ folder when no config maps @/*", async () => {
     expect(await readAliasRoot(await project({}, ["src"]))).toBe("src")
     expect(await readAliasRoot(await project({}))).toBe("")
@@ -313,7 +319,7 @@ describe("findAliasRoot: package extends", () => {
         "tsconfig.json": JSON.stringify({ extends: "@repo/tsconfig" }),
       })
     )
-    expect(found).toEqual({ root: "app/src" })
+    expect(found).toEqual({ root: "app/src", mapped: true })
   })
 
   it("reads a bare package's tsconfig.json when it has no tsconfig field", async () => {
@@ -323,7 +329,7 @@ describe("findAliasRoot: package extends", () => {
         "tsconfig.json": JSON.stringify({ extends: "shared-config" }),
       })
     )
-    expect(found).toEqual({ root: "app/src" })
+    expect(found).toEqual({ root: "app/src", mapped: true })
   })
 
   it("adds .json to a subpath, and never picks a .js file of the same name", async () => {
@@ -333,7 +339,7 @@ describe("findAliasRoot: package extends", () => {
         "tsconfig.json": JSON.stringify({ extends: "@repo/tsconfig/nextjs" }),
       })
     )
-    expect(found).toEqual({ root: "app/src" })
+    expect(found).toEqual({ root: "app/src", mapped: true })
   })
 
   it("follows a JSON file the package's exports map", async () => {
@@ -343,7 +349,7 @@ describe("findAliasRoot: package extends", () => {
         "tsconfig.json": JSON.stringify({ extends: "@repo/tsconfig/nextjs" }),
       })
     )
-    expect(found).toEqual({ root: "app/src" })
+    expect(found).toEqual({ root: "app/src", mapped: true })
   })
 
   it("reports a JSON file the package's exports leave out, as tsc does", async () => {
@@ -359,6 +365,7 @@ describe("findAliasRoot: package extends", () => {
     )
     expect(found).toEqual({
       root: "src",
+      mapped: false,
       problem: 'tsconfig.json extends "@repo/tsconfig/nextjs.json", which could not be found.',
     })
   })
@@ -382,7 +389,7 @@ describe("findAliasRoot: package extends", () => {
         }),
       })
     )
-    expect(found).toEqual({ root: "src" })
+    expect(found).toEqual({ root: "src", mapped: true })
   })
 
   it("reports an unreadable parent that could still set baseUrl", async () => {
@@ -401,7 +408,7 @@ describe("chooseAliasRoot", () => {
   it("uses a readable config without asking", async () => {
     const dir = await project({ "tsconfig.json": tsconfig({ "@/*": ["./*"] }) })
     const ask = vi.fn()
-    expect(await chooseAliasRoot(dir, { yes: false, ask })).toBe("")
+    expect(await chooseAliasRoot(dir, { yes: false, ask })).toEqual({ root: "", mapped: true })
     expect(ask).not.toHaveBeenCalled()
   })
 
@@ -414,12 +421,12 @@ describe("chooseAliasRoot", () => {
 
   it("asks an interactive run, offering the guess, and uses the answer", async () => {
     const ask = vi.fn(async () => "./app/src/")
-    expect(await chooseAliasRoot(await unreadable(), { yes: false, ask })).toBe("app/src")
+    expect(await chooseAliasRoot(await unreadable(), { yes: false, ask })).toEqual({ root: "app/src", mapped: true })
     expect(ask).toHaveBeenCalledWith('tsconfig.json extends "@repo/missing", which could not be found.', "src")
   })
 
   it("reads an answer of . as the project root", async () => {
-    expect(await chooseAliasRoot(await unreadable(), { yes: false, ask: async () => "." })).toBe("")
+    expect((await chooseAliasRoot(await unreadable(), { yes: false, ask: async () => "." })).root).toBe("")
   })
 
   it("stops when the question is cancelled", async () => {

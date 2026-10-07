@@ -29,6 +29,12 @@ export interface AliasRoot {
    */
   root: string
   /**
+   * Whether a tsconfig or jsconfig maps `@/*`. When it doesn't, `root` is a
+   * guess from the folder layout, and nothing in the project resolves `@/`
+   * yet: a Vite app has no such mapping until someone adds one.
+   */
+  mapped: boolean
+  /**
    * Set when the configs could not all be read, so `root` is only a guess:
    * say so and let someone confirm it, never use it silently.
    */
@@ -51,33 +57,34 @@ export async function findAliasRoot(cwd: string): Promise<AliasRoot> {
     // `paths` is replaced whole, not merged: the nearest config that sets it
     // decides, even when its object has no `@/*` key.
     const withPaths = nearest(chain, (c) => c.compilerOptions.paths !== undefined)
-    if (withPaths && "problem" in withPaths) return { root: guess, problem: withPaths.problem }
+    if (withPaths && "problem" in withPaths) return { root: guess, mapped: false, problem: withPaths.problem }
     const target = withPaths?.compilerOptions.paths?.["@/*"]
     if (!withPaths || !Array.isArray(target) || typeof target[0] !== "string" || !target[0].endsWith("*")) continue
     // A mapping is relative to baseUrl when one is set anywhere in the chain,
     // and baseUrl to the config that sets it. Without one, it is relative to
     // the config that declares `paths`, not the one that extends it.
     const withBaseUrl = nearest(chain, (c) => typeof c.compilerOptions.baseUrl === "string")
-    if (withBaseUrl && "problem" in withBaseUrl) return { root: guess, problem: withBaseUrl.problem }
+    if (withBaseUrl && "problem" in withBaseUrl) return { root: guess, mapped: false, problem: withBaseUrl.problem }
     const base = withBaseUrl
       ? path.resolve(withBaseUrl.dir, withBaseUrl.compilerOptions.baseUrl as string)
       : withPaths.dir
-    return { root: normalise(path.relative(realCwd, path.resolve(base, target[0].slice(0, -1)))) }
+    return { root: normalise(path.relative(realCwd, path.resolve(base, target[0].slice(0, -1)))), mapped: true }
   }
-  return { root: guess }
+  return { root: guess, mapped: false }
 }
 
 /**
  * `findAliasRoot`, for a command. When the configs could not all be read, a
  * `--yes` run stops with an `UnknownAliasRootError`; an interactive run hands
  * the problem and the guess to `ask`, and uses the folder it returns.
+ * `mapped` is false only when no config maps `@/*` and the root is a guess.
  */
 export async function chooseAliasRoot(
   cwd: string,
   { yes, ask }: { yes: boolean; ask: (problem: string, guess: string) => Promise<string | undefined> }
-): Promise<string> {
+): Promise<{ root: string; mapped: boolean }> {
   const found = await findAliasRoot(cwd)
-  if (!found.problem) return found.root
+  if (!found.problem) return { root: found.root, mapped: found.mapped }
   if (yes) {
     throw new UnknownAliasRootError(
       `${found.problem} Can't tell where "@/" points. Fix that config — installing ` +
@@ -86,7 +93,8 @@ export async function chooseAliasRoot(
   }
   const answer = await ask(found.problem, found.root)
   if (answer === undefined) throw new UnknownAliasRootError("Cancelled.")
-  return normalise(answer.trim() || ".")
+  // Whoever answered says where `@/` points, so it counts as mapped.
+  return { root: normalise(answer.trim() || "."), mapped: true }
 }
 
 export class UnknownAliasRootError extends Error {}
