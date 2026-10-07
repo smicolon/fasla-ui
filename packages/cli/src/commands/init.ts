@@ -22,6 +22,7 @@ import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
 import { aliasToPath, outsideAliasMessage, pathToAlias, resolveInsideProject, resolveWritableFile, writeFileIfAbsent, writeFileNoFollow } from "../paths.js"
+import { NAMESPACE, namespaceUrl } from "../registry.js"
 import { aliasRootOrExit, safeOrExit } from "./shared.js"
 
 export const init = new Command()
@@ -123,10 +124,11 @@ export const init = new Command()
         lib: "@/lib",
         hooks: "@/hooks",
       },
+      // The shadcn CLI only accepts a namespace that starts with "@" and a URL
+      // with {name} in it; the old `smicolon: { url }` entry made every shadcn
+      // command in the project fail with "Invalid configuration".
       registries: {
-        smicolon: {
-          url: "https://ui.smicolon.com/r",
-        },
+        [NAMESPACE]: namespaceUrl(),
       },
     }
 

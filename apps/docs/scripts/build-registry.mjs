@@ -15,13 +15,42 @@ const Fasla_UI_DIR = path.join(ROOT_DIR, "packages/fasla-ui")
 const OUTPUT_DIR = path.join(__dirname, "../public/r")
 
 /**
+ * Where the registry is served. Every item's dependencies on other Fasla items
+ * are written as full URLs under it. CI builds against a local server by
+ * setting FASLA_REGISTRY_URL, so it tests the items in the PR, not the ones
+ * already deployed.
+ */
+export const REGISTRY_URL = (process.env.FASLA_REGISTRY_URL || "https://ui.smicolon.com/r").replace(/\/+$/, "")
+
+/**
+ * A dependency on another Fasla item, as a full URL. The shadcn CLI resolves a
+ * bare name such as `status-indicator` against shadcn's own registry, never
+ * ours, so `shadcn add @fasla/avatar` failed on a 404. A URL resolves the same
+ * whatever namespace the developer gave this registry, or none. Names that are
+ * not Fasla items stay bare: those are shadcn's own primitives.
+ */
+export function dependencyUrls(dependencies, ownNames, base = REGISTRY_URL) {
+  return dependencies.map((dep) => (ownNames.has(dep) ? `${base}/${dep}.json` : dep))
+}
+
+/**
+ * Registry source imports `cn` by its path in this repo,
+ * `../../../src/lib/utils`, which exists in no developer's project and which
+ * the shadcn CLI leaves alone. Publish it as `@/lib/utils`: the shadcn CLI
+ * rewrites that to the project's `aliases.utils`, and so does @smicolon/cli.
+ */
+export function rewriteUtilsImport(content) {
+  return content.replace(/from (["'])(?:\.\.?\/)+(?:src\/)?lib\/utils\1/g, `from $1@/lib/utils$1`)
+}
+
+/**
  * Registry files import each other the way the source tree lays them out —
  * `../status-indicator/status-indicator` from `registry/ui/avatar/`. Every CLI
  * writes each file to its `target`, so point the import at where that
- * component lands instead: `./status-indicator` beside `avatar.tsx`. Doing it
- * here, in the published JSON, is what lets a CLI that doesn't rewrite these
- * imports — @smicolon/cli 0.3.3, or shadcn — install a component that uses
- * another. Imports of anything that isn't a registry component are left alone.
+ * component lands instead: `./status-indicator` beside `avatar.tsx`. Neither
+ * the shadcn CLI nor @smicolon/cli 0.3.3 rewrites these imports, so the
+ * published JSON has to carry the right ones. Imports of anything that isn't a
+ * registry component are left alone.
  */
 export function rewriteComponentImports(content, fromTarget, targetOf) {
   return content.replace(
@@ -49,6 +78,7 @@ async function main() {
   // Where each component's main file lands in a consumer's project.
   const targets = new Map(registry.items.map((item) => [item.name, item.files[0]?.target]))
   const targetOf = (name) => targets.get(name)
+  const ownNames = new Set(registry.items.map((item) => item.name))
 
   // Process each component
   const processedItems = []
@@ -64,7 +94,7 @@ async function main() {
         const content = await fs.readFile(sourcePath, "utf-8")
         filesWithContent.push({
           ...file,
-          content: rewriteComponentImports(content, file.target, targetOf),
+          content: rewriteComponentImports(rewriteUtilsImport(content), file.target, targetOf),
         })
       } catch (err) {
         console.warn(`    Warning: Could not read ${file.path}`)
@@ -79,7 +109,7 @@ async function main() {
       description: item.description,
       dependencies: item.dependencies || [],
       devDependencies: item.devDependencies || [],
-      registryDependencies: item.registryDependencies || [],
+      registryDependencies: dependencyUrls(item.registryDependencies || [], ownNames),
       files: filesWithContent,
       categories: item.categories || [],
     }
@@ -98,7 +128,7 @@ async function main() {
       title: item.title,
       description: item.description,
       dependencies: item.dependencies || [],
-      registryDependencies: item.registryDependencies || [],
+      registryDependencies: dependencyUrls(item.registryDependencies || [], ownNames),
       categories: item.categories || [],
     })
   }
@@ -125,6 +155,7 @@ async function main() {
   console.log(`\nRegistry built successfully!`)
   console.log(`  - ${processedItems.length} components`)
   console.log(`  - Output: ${OUTPUT_DIR}`)
+  console.log(`  - Dependencies point at: ${REGISTRY_URL}`)
 }
 
 // Run only when invoked as a script, so tests can import the rewrite.

@@ -89,6 +89,34 @@ jobs:
       - name: Run tests
         run: bun run test
 
+  # The registry must always install with the official shadcn CLI, not only
+  # with ours. This builds it from the PR, serves it locally, and installs every
+  # item into a fresh Next.js app through the @fasla namespace, then runs tsc.
+  # shadcn is @latest on purpose — it is what developers run — so a failure
+  # here can also mean a new shadcn release broke something.
+  shadcn-registry:
+    name: Registry installs with shadcn
+    runs-on: ubuntu-latest
+    # It runs code fetched at run time (shadcn, create-next-app and their
+    # packages), so it gets read-only access and no token left in .git/config.
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      # The registry build uses only Node's standard library, so no bun install.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install every item with shadcn and type-check
+        run: bash apps/docs/scripts/check-shadcn-install.sh
+        env:
+          SHADCN_VERSION: latest
+          NEXT_VERSION: "16"
+
   storybook:
     name: Build Storybook
     runs-on: ubuntu-latest

@@ -4,8 +4,8 @@ import ora from "ora"
 import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
-import { fetchRegistry, fetchComponent, getTargetDirectory, type RegistryFile, type RegistryItem } from "../registry.js"
-import { resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
+import { DEFAULT_REGISTRY_URL, REGISTRY_URL, fetchRegistry, fetchComponent, getTargetDirectory, type RegistryFile, type RegistryItem } from "../registry.js"
+import { registryItemName, resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
 import { aliasToPath, checkDestination, installFile, resolveInsideProject } from "../paths.js"
 import { aliasRootOrExit, safeOrExit } from "./shared.js"
 
@@ -115,13 +115,14 @@ export const add = new Command()
 
     // Pull in every registry component the requested ones import, so `add
     // avatar` also writes status-indicator.tsx, which avatar.tsx imports.
+    // Dependencies on other Fasla items are full URLs, so the shadcn CLI can
+    // follow them too. Map each back to its name here, under the registry this
+    // run reads from or the default one the published URLs point at.
+    const known = new Set(registry.items.map((item) => item.name))
+    const nameOf = (dep: string) => registryItemName(dep, known, [REGISTRY_URL, DEFAULT_REGISTRY_URL])
     let resolved
     try {
-      resolved = await resolveWithDependencies(
-        validComponents,
-        new Set(registry.items.map((item) => item.name)),
-        fetchComponent
-      )
+      resolved = await resolveWithDependencies(validComponents, nameOf, fetchComponent)
     } catch (error) {
       addSpinner.fail("Failed to resolve components")
       console.error(chalk.red((error as Error).message))

@@ -15,13 +15,34 @@ export interface Resolved {
 }
 
 /**
+ * The registry item a `registryDependencies` entry points at, or undefined if
+ * it isn't one of ours. The registry writes dependencies on its own items as
+ * full URLs, `https://ui.smicolon.com/r/status-indicator.json`, so the shadcn
+ * CLI resolves them too; a bare name is still accepted from an older registry.
+ * A URL is ours only under one of `bases`, so a third-party URL that happens to
+ * end in a known name is still skipped.
+ */
+export function registryItemName(dep: string, known: Set<string>, bases: string[]): string | undefined {
+  if (known.has(dep)) return dep
+  for (const base of bases) {
+    const prefix = `${base.replace(/\/+$/, "")}/`
+    if (!dep.startsWith(prefix) || !dep.endsWith(".json")) continue
+    const name = dep.slice(prefix.length, -".json".length)
+    if (known.has(name)) return name
+  }
+  return undefined
+}
+
+/**
  * Walks `registryDependencies` from the requested names. Each item is fetched
  * once, however many items depend on it, and a cycle can't loop: an item
- * already on the path is not visited again.
+ * already on the path is not visited again. `nameOf` maps a dependency entry
+ * to the registry item it names, or undefined for one this registry can't
+ * resolve.
  */
 export async function resolveWithDependencies(
   requested: string[],
-  known: Set<string>,
+  nameOf: (dep: string) => string | undefined,
   fetchItem: (name: string) => Promise<RegistryItem>
 ): Promise<Resolved> {
   const items: RegistryItem[] = []
@@ -34,7 +55,8 @@ export async function resolveWithDependencies(
     visiting.add(name)
     const item = await fetchItem(name)
     for (const dep of item.registryDependencies ?? []) {
-      if (known.has(dep)) await visit(dep)
+      const depName = nameOf(dep)
+      if (depName) await visit(depName)
       else skipped.add(dep)
     }
     visiting.delete(name)
