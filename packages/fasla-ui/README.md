@@ -22,13 +22,13 @@ A professional React UI component library built on **shadcn/ui** primitives. Pro
 Components are copied into your project with the CLI, as with shadcn/ui:
 
 ```bash
-npx @smicolon/cli init              # once per project: writes components.json and lib/utils.ts
-npm install clsx tailwind-merge     # the two packages lib/utils.ts imports
+npx @smicolon/cli init              # once per project: writes components.json and lib/utils.ts,
+                                    # and installs clsx and tailwind-merge, which lib/utils.ts imports
 npx @smicolon/cli add button card shimmer-button
 ```
 
-`add` ends by printing an `npm install` line for the packages the components
-need. For `button card shimmer-button` it is:
+`add` ends by printing the install command for the packages the components
+need, in your project's package manager. For `button card shimmer-button` with npm it is:
 
 ```bash
 npm install @radix-ui/react-slot class-variance-authority lucide-react framer-motion

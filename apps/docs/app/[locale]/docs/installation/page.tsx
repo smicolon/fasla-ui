@@ -1,6 +1,7 @@
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { metadataForRoute } from "@/lib/seo-routes"
 import type { Locale } from "@/i18n/routing"
+import { PackageManagerTabs } from "@/components/package-manager-tabs"
 
 export async function generateMetadata({
   params,
@@ -26,15 +27,6 @@ export default async function InstallationPage({
   // Commands, file names and code stay Latin in both locales; the sentence
   // around them is the locale's.
   const rich = { code: (chunks: React.ReactNode) => <code>{chunks}</code> }
-
-  // `init` writes lib/utils.ts, which imports these two, but installs
-  // nothing; without them a fresh project fails tsc and the build.
-  const cnDeps = [
-    "npm install clsx tailwind-merge",
-    "pnpm add clsx tailwind-merge",
-    "yarn add clsx tailwind-merge",
-    "bun add clsx tailwind-merge",
-  ]
 
   return (
     <div className="space-y-8">
@@ -65,14 +57,9 @@ export default async function InstallationPage({
           </div>
 
           <div>
-            <p className="text-sm font-medium mb-2">{i.rich("cliDeps", rich)}</p>
-            <div className="space-y-2">
-              {cnDeps.map((command) => (
-                <pre key={command} className="overflow-x-auto rounded-lg bg-terminal p-4">
-                  <code className="text-green-400">{command}</code>
-                </pre>
-              ))}
-            </div>
+            {/* init installs these itself; this is the fallback when that fails. */}
+            <p className="text-sm text-muted-foreground mb-2">{i.rich("cliDepsFallback", rich)}</p>
+            <PackageManagerTabs packages="clsx tailwind-merge" />
           </div>
 
           <div>
@@ -102,9 +89,7 @@ export default async function InstallationPage({
         <div className="space-y-4">
           <div>
             <p className="text-sm font-medium mb-2">{i("manualDeps")}</p>
-            <pre className="overflow-x-auto rounded-lg bg-terminal p-4">
-              <code className="text-green-400">npm install class-variance-authority clsx tailwind-merge framer-motion</code>
-            </pre>
+            <PackageManagerTabs packages="class-variance-authority clsx tailwind-merge framer-motion" />
           </div>
 
           <div>
@@ -129,9 +114,7 @@ export function cn(...inputs: ClassValue[]) {
       <div className="space-y-4">
         <h2 className="text-2xl font-semibold">{i("tailwindTitle")}</h2>
         <p className="text-muted-foreground">{i.rich("tailwindBody", rich)}</p>
-        <pre className="overflow-x-auto rounded-lg bg-terminal p-4">
-          <code className="text-green-400">npm install @smicolon/fasla-ui</code>
-        </pre>
+        <PackageManagerTabs packages="@smicolon/fasla-ui" />
         <p className="text-muted-foreground">{i.rich("tailwindConfig", rich)}</p>
         <pre className="overflow-x-auto rounded-lg bg-terminal p-4 text-sm">
           <code className="text-gray-300">{`// tailwind.config.ts
