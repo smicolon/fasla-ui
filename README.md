@@ -113,11 +113,11 @@ you want; both include the base layer.
 
 ```bash
 # Starting from scratch: use Fasla's colours (palette, radius, Geist).
-# On Next.js 14, leave out @fasla/font-geist: next/font there has no Geist.
-npx shadcn@latest add @fasla/theme @fasla/font-geist
+# On Next.js 14, leave out the font-geist.json URL: next/font there has no Geist.
+npx shadcn@latest add https://ui.smicolon.com/r/theme.json https://ui.smicolon.com/r/font-geist.json
 
 # I have a brand: keep my colours (base layer only)
-npx shadcn@latest add @fasla/theme-base
+npx shadcn@latest add https://ui.smicolon.com/r/theme-base.json
 ```
 
 The base layer adds only what shadcn doesn't have: the success, warning and

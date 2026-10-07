@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 import { metadataForRoute } from "@/lib/seo-routes"
 import type { Locale } from "@/i18n/routing"
 import { PackageManagerTabs } from "@/components/package-manager-tabs"
+import { shadcnAdd } from "@/lib/package-managers"
 
 export async function generateMetadata({
   params,
@@ -89,13 +90,13 @@ export default async function InstallationPage({
         <div className="space-y-4">
           <div>
             <p className="text-sm font-medium mb-2">{i.rich("themeFasla", rich)}</p>
-            <PackageManagerTabs run="shadcn@latest add @fasla/theme @fasla/font-geist" />
+            <PackageManagerTabs run={shadcnAdd("theme", "font-geist")} />
             <p className="text-sm text-muted-foreground mt-2">{i.rich("themeNext14", rich)}</p>
           </div>
 
           <div>
             <p className="text-sm font-medium mb-2">{i.rich("themeBrand", rich)}</p>
-            <PackageManagerTabs run="shadcn@latest add @fasla/theme-base" />
+            <PackageManagerTabs run={shadcnAdd("theme-base")} />
           </div>
 
           <p className="text-sm text-muted-foreground">{i.rich("themeArabicFont", rich)}</p>

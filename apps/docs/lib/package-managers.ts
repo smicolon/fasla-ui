@@ -13,6 +13,18 @@ export function installCommand(pm: PackageManager, packages: string): string {
 }
 
 /**
+ * Where the registry is published. The docs write shadcn commands with full
+ * URLs from here, not the `@fasla` namespace: a URL works in any project, while
+ * the namespace needs a components.json entry that only our CLI's init writes.
+ */
+export const REGISTRY_URL = "https://ui.smicolon.com/r"
+
+/** `shadcn add` for registry items, by full URL. */
+export function shadcnAdd(...items: string[]): string {
+  return `shadcn@latest add ${items.map((name) => `${REGISTRY_URL}/${name}.json`).join(" ")}`
+}
+
+/**
  * A package run without installing it: `npx shadcn@latest add …` and its
  * equivalents. bunx needs `--bun`, or a CLI with a node shebang runs on Node.
  */

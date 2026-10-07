@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test"
 import { readdirSync, readFileSync, statSync } from "node:fs"
 import path from "node:path"
-import { installCommand, nextTabIndex, PACKAGE_MANAGERS, runCommand } from "../lib/package-managers.ts"
+import { installCommand, nextTabIndex, PACKAGE_MANAGERS, runCommand, shadcnAdd } from "../lib/package-managers.ts"
 
 const docsRoot = path.resolve(import.meta.dir, "..")
 const read = (file) => readFileSync(path.join(docsRoot, file), "utf8")
@@ -106,12 +106,24 @@ describe("Theme section of the Installation page", () => {
   const page = read("app/[locale]/docs/installation/page.tsx")
 
   test("installs each layer through the tabs, Fasla's colours first", () => {
-    const fasla = page.indexOf('<PackageManagerTabs run="shadcn@latest add @fasla/theme @fasla/font-geist" />')
-    const base = page.indexOf('<PackageManagerTabs run="shadcn@latest add @fasla/theme-base" />')
+    const fasla = page.indexOf('<PackageManagerTabs run={shadcnAdd("theme", "font-geist")} />')
+    const base = page.indexOf('<PackageManagerTabs run={shadcnAdd("theme-base")} />')
     expect(fasla).toBeGreaterThan(-1)
     expect(base).toBeGreaterThan(fasla)
     // The old manual Tailwind setup is gone.
     expect(page).not.toContain("tailwindSemanticColors")
+  })
+
+  test("writes shadcn commands with full registry URLs, which work without our init", () => {
+    expect(shadcnAdd("theme", "font-geist")).toBe(
+      "shadcn@latest add https://ui.smicolon.com/r/theme.json https://ui.smicolon.com/r/font-geist.json"
+    )
+    expect(runCommand("npm", shadcnAdd("theme-base"))).toBe("npx shadcn@latest add https://ui.smicolon.com/r/theme-base.json")
+    // The @fasla namespace needs a components.json entry only our init writes.
+    const offenders = [...sourceFiles("app"), ...sourceFiles("components"), ...sourceFiles("lib"), "messages/en.json", "messages/ar.json"].filter(
+      (file) => read(file).includes("@fasla/")
+    )
+    expect(offenders).toEqual([])
   })
 
   test("says, in both languages, that Fasla's components replace shadcn's of the same name", () => {
