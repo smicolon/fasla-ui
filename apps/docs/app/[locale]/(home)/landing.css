@@ -366,6 +366,47 @@
   scroll-padding-inline: var(--tp-pad);
 }
 
+/* ── The word as a window ────────────────────────────────────────────────
+   «العربية» with the AlUla dunes clipped into its letters, panning from one
+   side of the photo to the other and back. Without background-clip: text the
+   word falls back to the text colour; with reduced motion the photo holds
+   still, centred. */
+
+.l-word {
+  display: inline-block;
+  padding-block: 0.06em 0.12em;
+  font-size: clamp(120px, 23vw, 360px);
+  font-weight: 900;
+  letter-spacing: 0;
+  background-image: url("/landing/img/blocks/f-dunes.webp");
+  background-size: 140% auto;
+  background-position: 0% 50%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: l-pan 26s ease-in-out infinite alternate;
+}
+
+@supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+  .l-word {
+    background: none;
+    color: var(--foreground);
+  }
+}
+
+@keyframes l-pan {
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .l-word {
+    animation: none;
+    background-position: 50% 50%;
+  }
+}
+
 /* ── Wall of Love ──────────────────────────────────────────────────────
    Each column holds its cards twice and climbs by half its height, so the
    loop has no seam; the middle column runs the other way. */
