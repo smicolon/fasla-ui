@@ -1,12 +1,12 @@
 import { getTranslations } from "next-intl/server"
-import { StrokedWord } from "./section-head"
 
 /**
  * "Arabic is a launch language." «العربية» set huge, the AlUla dunes showing
  * through its letters and panning slowly (landing.css, .l-word), over a ruled
  * row: a short caption on the start side, the heading and lede on the other.
  * The word stays Arabic in both languages and is decoration, so screen
- * readers skip it.
+ * readers skip it. The word is this section's accent, so the heading has no
+ * red stroke under its last word, unlike the other section headings.
  */
 export async function ArabicWord() {
   const t = await getTranslations("landing.launch")
@@ -24,10 +24,7 @@ export async function ArabicWord() {
           </p>
           <div>
             <h2 id="launch-h" className="l-h2">
-              {t.rich("title", {
-                comma: (chunks) => <span className="font-arabic text-fasla-red">{chunks}</span>,
-                stroke: (chunks) => <StrokedWord>{chunks}</StrokedWord>,
-              })}
+              {t.rich("title", { comma: (chunks) => <span className="font-arabic text-fasla-red">{chunks}</span> })}
             </h2>
             {/* .l-lede is unlayered CSS, so only an important utility tightens its 20px to the reference's 16px. */}
             <p className="l-lede !mt-4">{t("lede")}</p>

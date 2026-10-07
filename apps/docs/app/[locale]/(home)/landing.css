@@ -375,7 +375,10 @@
 .l-word {
   display: inline-block;
   padding-block: 0.06em 0.12em;
-  font-size: clamp(120px, 23vw, 360px);
+  /* The reference's clamp, capped on narrow screens so the whole word fits
+     between the gutters: it is about 3.28em wide. The cap only bites below
+     about 430px; wider than that the clamp alone decides. */
+  font-size: min(clamp(120px, 23vw, 360px), calc((100vw - 2 * var(--l-gutter)) / 3.3));
   font-weight: 900;
   letter-spacing: 0;
   background-image: url("/landing/img/blocks/f-dunes.webp");
