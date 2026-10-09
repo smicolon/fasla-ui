@@ -39,12 +39,12 @@ export function CommandBand() {
     <section aria-labelledby="final-h" className="pb-[var(--l-section)]">
       <div className="l-wrap">
         <div className="rounded-2xl bg-muted px-[clamp(20px,6vw,88px)] py-[clamp(32px,6vw,88px)]">
-          {/* The line is about 15em wide and never wraps; 4.9vw keeps it inside the
-              band at every width, so the floor sits below 4.9vw of a 320px screen. */}
+          {/* The line is about 22em wide and never wraps; 3.4vw keeps it inside the
+              band at every width, so the floor sits below 3.4vw of a 320px screen. */}
           <h2
             id="final-h"
             dir="ltr"
-            className="whitespace-nowrap text-left font-mono text-[length:clamp(15px,4.9vw,66px)] font-medium leading-[1.15] tracking-[-0.03em] rtl:!text-right"
+            className="whitespace-nowrap text-left font-mono text-[length:clamp(10.5px,3.4vw,48px)] font-medium leading-[1.15] tracking-[-0.03em] rtl:!text-right"
           >
             <span className="text-muted-foreground">$ </span>
             {installCommand}

@@ -122,9 +122,9 @@ describe("Theme section of the Installation page", () => {
     expect(first).toBeLessThan(page.indexOf('shadcnAdd("theme", "font-geist")'))
     for (const lang of ["en", "ar"]) {
       const t = JSON.parse(read(`messages/${lang}.json`)).docs.installation
-      expect(t.themeSetupFirst).toContain("<code>npx @smicolon/cli init</code>")
+      expect(t.themeSetupFirst).toContain("<code>npx @smicolon/fasla-ui@latest init</code>")
       expect(t.themeSetupFirst).toContain("<code>npx shadcn@latest init</code>")
-      expect(t.themeNext14).toContain("<code>npx @smicolon/cli init</code>")
+      expect(t.themeNext14).toContain("<code>npx @smicolon/fasla-ui@latest init</code>")
       expect(t.cliLegacy).toContain("<code>init</code>")
       expect(t.manualTailwind3).toContain("<code>tailwind-merge@^2</code>")
       expect(t.manualCopy).toContain("<code>https://ui.smicolon.com/r/button.json</code>")

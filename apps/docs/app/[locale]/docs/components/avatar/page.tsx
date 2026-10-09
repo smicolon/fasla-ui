@@ -43,8 +43,8 @@ export default function AvatarPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
-        <CodeBlock language="bash">{`npx @smicolon/cli init
-npx @smicolon/cli add avatar status-indicator`}</CodeBlock>
+        <CodeBlock language="bash">{`npx @smicolon/fasla-ui@latest init
+npx @smicolon/fasla-ui@latest add avatar status-indicator`}</CodeBlock>
         <p className="text-muted-foreground">{a.rich("installNote", rich)}</p>
       </section>
 

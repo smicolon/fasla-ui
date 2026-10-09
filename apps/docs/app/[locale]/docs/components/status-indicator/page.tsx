@@ -33,8 +33,8 @@ export default function StatusIndicatorPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
-        <CodeBlock language="bash">{`npx @smicolon/cli init
-npx @smicolon/cli add status-indicator`}</CodeBlock>
+        <CodeBlock language="bash">{`npx @smicolon/fasla-ui@latest init
+npx @smicolon/fasla-ui@latest add status-indicator`}</CodeBlock>
       </section>
 
       {/* Preview */}

@@ -53,8 +53,11 @@ export default async function InstallationPage({
           <div>
             <p className="text-sm font-medium mb-2">{i.rich("cliInit", rich)}</p>
             <pre className="whitespace-pre-wrap break-words rounded-lg bg-terminal p-4">
-              <code className="text-green-400">npx @smicolon/cli init</code>
+              <code className="text-green-400">npx @smicolon/fasla-ui@latest init</code>
             </pre>
+            {/* The CLI moved into @smicolon/fasla-ui at 0.5.0; a project set
+                up with the old package carries on as it is. */}
+            <p className="text-sm text-muted-foreground mt-2">{i.rich("cliPrevious", rich)}</p>
             {/* 0.3's components.json is one the shadcn CLI rejects outright. */}
             <p className="text-sm text-muted-foreground mt-2">{i.rich("cliLegacy", rich)}</p>
           </div>
@@ -70,18 +73,18 @@ export default async function InstallationPage({
           <div>
             <p className="text-sm font-medium mb-2">{i("cliAdd")}</p>
             <pre className="whitespace-pre-wrap break-words rounded-lg bg-terminal p-4">
-              <code className="text-green-400">npx @smicolon/cli add button</code>
+              <code className="text-green-400">npx @smicolon/fasla-ui@latest add button</code>
             </pre>
             <p className="text-sm font-medium mt-4 mb-2">{t("addSeveral")}</p>
             <pre className="whitespace-pre-wrap break-words rounded-lg bg-terminal p-4">
-              <code className="text-green-400">npx @smicolon/cli add card input badge</code>
+              <code className="text-green-400">npx @smicolon/fasla-ui@latest add card input badge</code>
             </pre>
           </div>
 
           <div>
             <p className="text-sm font-medium mb-2">{i("cliList")}</p>
             <pre className="whitespace-pre-wrap break-words rounded-lg bg-terminal p-4">
-              <code className="text-green-400">npx @smicolon/cli list</code>
+              <code className="text-green-400">npx @smicolon/fasla-ui@latest list</code>
             </pre>
           </div>
         </div>
