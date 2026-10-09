@@ -1,5 +1,13 @@
 import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { extendTailwindMerge } from "tailwind-merge"
+
+/**
+ * tailwind-merge with Fasla's type sizes it doesn't know. Unknown, `text-xxs`
+ * reads as a colour, and merging drops the `text-foreground` beside it.
+ */
+const twMerge = extendTailwindMerge({
+  extend: { classGroups: { "font-size": [{ text: ["xxs", "link", "list-header"] }] } },
+})
 
 /**
  * Merge Tailwind CSS classes with clsx and tailwind-merge.

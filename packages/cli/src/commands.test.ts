@@ -3,6 +3,7 @@ import { spawn } from "child_process"
 import fs from "fs-extra"
 import os from "os"
 import path from "path"
+import { fileURLToPath } from "url"
 
 // Every prompt takes the answer it offers by default, as pressing Enter does,
 // and records what it asked.
@@ -152,6 +153,19 @@ describe("init", () => {
     await run("init", "--yes", "--no-install", "--cwd", dir)
     expect(output()).toContain("pnpm add clsx tailwind-merge")
     expect(await fs.pathExists(path.join(dir, "lib/utils.ts"))).toBe(true)
+  })
+
+  it("writes the cn helper the registry's components are built against, Fasla's type sizes and all", async () => {
+    const dir = await nextApp()
+    await run("init", "--yes", "--no-install", "--cwd", dir)
+    const registryUtils = fileURLToPath(new URL("../../fasla-ui/src/lib/utils.ts", import.meta.url))
+    expect(await fs.readFile(path.join(dir, "lib/utils.ts"), "utf8")).toBe(await fs.readFile(registryUtils, "utf8"))
+  })
+
+  it("leaves a cn helper the project already has as it is", async () => {
+    const dir = await nextApp({ "lib/utils.ts": "export const cn = () => ''\n" })
+    await run("init", "--yes", "--no-install", "--cwd", dir)
+    expect(await fs.readFile(path.join(dir, "lib/utils.ts"), "utf8")).toBe("export const cn = () => ''\n")
   })
 
   it("installs nothing, and says nothing about it, when package.json already lists both", async () => {

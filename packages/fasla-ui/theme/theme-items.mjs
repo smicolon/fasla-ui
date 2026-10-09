@@ -196,6 +196,28 @@ function pageColourRules(value) {
   }
 }
 
+/**
+ * The default border colour, for a bare `border`. Tailwind 4's preflight sets
+ * `border: 0 solid`, so without this every Card and DataTable border is drawn
+ * in currentColor: near-black, near-white in dark mode. Tailwind 3's preflight
+ * uses its grey, #e5e7eb, whatever the theme.
+ *
+ * `theme()` resolves to the project's own border colour on either version:
+ * `var(--border)` from Tailwind 4's @theme, Fasla's colour-mix or shadcn's
+ * `hsl(var(--border))` from a Tailwind 3 config. A plain `var(--border)` would
+ * be no colour at all in a Tailwind 3 shadcn project, whose token is bare HSL
+ * channels. With no border colour mapped, the fallback keeps each version's
+ * own default, so the rule changes nothing there.
+ *
+ * Preflight's selector, not `*`: the shadcn CLI merges an item's rule into a
+ * project's rule of the same selector, and replaced a `border-color` the
+ * project's own `*` rule set.
+ */
+export const BORDER_RULE = {
+  selector: "*, ::after, ::before, ::backdrop, ::file-selector-button",
+  value: "theme(colors.border, theme(borderColor.DEFAULT, currentColor))",
+}
+
 /** Registry URL of another item, as the shadcn CLI follows it. */
 const itemUrl = (registryUrl, name) => `${registryUrl.replace(/\/+$/, "")}/${name}.json`
 
@@ -266,6 +288,10 @@ export function buildThemeItems({ registryUrl, sources = loadSources() }) {
         // project stores --background as bare HSL channels, which
         // var(--background) would turn into no colour at all.
         ":where(body)": { "background-color": "var(--background)", color: "var(--foreground)" },
+        // After Tailwind's preflight in the same layer, so it wins over it; any
+        // border colour a utility or the project sets outside the layer wins
+        // over this. theme brings it through theme-base.
+        [BORDER_RULE.selector]: { "border-color": BORDER_RULE.value },
       },
       // Not in a layer, so it outweighs the tracking-, uppercase and italic
       // utilities it undoes.

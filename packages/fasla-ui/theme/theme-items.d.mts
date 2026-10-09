@@ -17,6 +17,7 @@ export type Sources = {
 }
 export const SHADCN_TOKENS: string[]
 export const LATIN_FONT: string
+export const BORDER_RULE: { selector: string; value: string }
 export const SHADCN_V3_MAPPED: string[]
 export function semanticColor(name: string): string
 export function loadSources(root?: string): Sources

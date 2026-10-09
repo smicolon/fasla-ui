@@ -31,10 +31,12 @@ describe("Avatar", () => {
       ["24", "size-6", "rounded-[var(--radius-md)]", "text-xs"],
       // Figma's XXS: 10px, leaded 14 in English and 16 in Arabic.
       ["12", "size-3", "rounded-[var(--radius-xs)]", "text-xxs"],
-    ] as const)("Standard %s is %s, %s, %s", (size, box, corner, text) => {
+    ] as const)("Standard %s is %s, %s, %s, in the foreground colour", (size, box, corner, text) => {
       const { root, frame } = avatar({ size, name: "Layla" })
       expect(root).toHaveClass(box)
-      expect(frame).toHaveClass(corner, text)
+      // text-foreground too: merged beside an unknown size, cn dropped it at
+      // 12 and the initials took the colour of whatever held them.
+      expect(frame).toHaveClass(corner, text, "text-foreground")
     })
 
     it.each(["32", "24", "12"] as const)("Rounded %s is a circle", (size) => {
