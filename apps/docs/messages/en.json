@@ -698,6 +698,7 @@
         "overdue": "Overdue",
         "featured": "Featured",
         "iconAvatar": "Icon and avatar — the badge sizes and colours them",
+        "photoNote": "The photo from your own data. Without one, the avatar shows the user icon.",
         "removable": "Removable",
         "removeFilter": "Remove filter",
         "tones": "Variants and tones"

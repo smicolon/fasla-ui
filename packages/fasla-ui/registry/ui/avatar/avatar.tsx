@@ -207,11 +207,16 @@ const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
         {...props}
       >
         <span
-          className={cn(
+          // Joined, not cn(): every class here is Avatar's own and none
+          // conflicts. A project's cn may not know `text-xxs` — shadcn's
+          // doesn't — and takes it for a colour, dropping `text-foreground`.
+          className={[
             avatarVariants({ size, radius, border }),
             // Figma's Image variants have no fill; the fallback sits on `muted`.
-            !loaded && "bg-muted"
-          )}
+            !loaded && "bg-muted",
+          ]
+            .filter(Boolean)
+            .join(" ")}
         >
           {!loaded &&
             (letters ? (

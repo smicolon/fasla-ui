@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest"
 
 import {
   baseTokenNames,
+  BORDER_RULE,
   buildThemeItems,
   LATIN_FONT,
   loadSources,
@@ -111,6 +112,18 @@ describe("theme-base", () => {
     const layer = base.css!["@layer base"] as Record<string, Record<string, string>>
     expect(layer[":where(body)"]).toEqual({ "background-color": "var(--background)", color: "var(--foreground)" })
     expect(layer).not.toHaveProperty("body")
+  })
+
+  it("draws a bare border in the project's border colour, never in a rule the shadcn CLI would merge into the project's own", () => {
+    const layer = base.css!["@layer base"] as Record<string, Record<string, string>>
+    expect(layer[BORDER_RULE.selector]).toEqual({ "border-color": BORDER_RULE.value })
+    expect(BORDER_RULE.value).toBe("theme(colors.border, theme(borderColor.DEFAULT, currentColor))")
+    // The shadcn CLI merges into a rule of the same selector: `*` would
+    // replace the border colour a project's own `*` rule sets.
+    expect(layer).not.toHaveProperty("*")
+    // The colours layer gets it through theme-base, not a second copy.
+    expect(theme.registryDependencies).toEqual([`${URL}/theme-base.json`])
+    expect(JSON.stringify(theme.css)).not.toContain("border-color")
   })
 
   it("maps only the extras on Tailwind 4", () => {

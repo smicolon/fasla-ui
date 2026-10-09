@@ -136,6 +136,15 @@ describe("Theme section of the Installation page", () => {
     expect(page.indexOf('<PackageManagerTabs run={shadcnAdd("theme")} />')).toBeGreaterThan(note)
   })
 
+  test("shows the cn helper with Fasla's type sizes, as init writes it", () => {
+    // Without them tailwind-merge reads `text-xxs` as a colour and drops the
+    // `text-foreground` beside it: Avatar's initials at size 12 lose colour.
+    const registryUtils = readFileSync(path.join(docsRoot, "../../packages/fasla-ui/src/lib/utils.ts"), "utf8")
+    const config = registryUtils.match(/const twMerge = extendTailwindMerge\(\{[\s\S]*?\n\}\)/)[0]
+    expect(page).toContain('import { extendTailwindMerge } from "tailwind-merge"')
+    expect(page).toContain(config)
+  })
+
   test("installs tailwind-merge 2 on Tailwind 3 in the manual install", () => {
     expect(page).toContain('<PackageManagerTabs packages="class-variance-authority clsx tailwind-merge@^2 framer-motion" />')
   })
