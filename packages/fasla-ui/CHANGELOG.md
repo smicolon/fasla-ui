@@ -1,5 +1,12 @@
 # @smicolon/fasla-ui
 
+## [0.4.2](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.4.1...fasla-ui-v0.4.2) (2026-10-09)
+
+
+### Bug Fixes
+
+* default border colour, cn type sizes and two docs examples ([#48](https://github.com/smicolon/fasla-ui/issues/48)) ([a781441](https://github.com/smicolon/fasla-ui/commit/a7814419f9893b820b6ff4e42d96e8b847ee75f8))
+
 ## [0.4.1](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.4.0...fasla-ui-v0.4.1) (2026-10-09)
 
 
