@@ -134,7 +134,7 @@ export function themeCommand(choice: ThemeChoice, project: { nextMajor?: number 
 
 /**
  * This process's environment, less what an outer `npx` passes down about its
- * own run: `npx --package=… @smicolon/cli` exports npm_config_package, and an
+ * own run: `npx --package=… @smicolon/fasla-ui` exports npm_config_package, and an
  * inner `npx shadcn@latest` would then look for `shadcn@latest` inside our
  * package and fail with "command not found".
  */

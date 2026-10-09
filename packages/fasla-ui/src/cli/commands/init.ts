@@ -249,8 +249,8 @@ export function initCommand() {
 
       console.log(chalk.green("\nSuccess! fasla-ui has been initialized."))
       console.log("\nYou can now add components:")
-      console.log(chalk.cyan("  npx @smicolon/cli add button"))
-      console.log(chalk.cyan("  npx @smicolon/cli add shimmer-button"))
+      console.log(chalk.cyan("  npx @smicolon/fasla-ui@latest add button"))
+      console.log(chalk.cyan("  npx @smicolon/fasla-ui@latest add shimmer-button"))
     })
 }
 
@@ -289,7 +289,7 @@ export async function installTheme(
     console.log(
       choice === "brand"
         ? `\n${css} has its own colours, so they are kept: installing the base theme only.\n` +
-            `To use Fasla's colours instead: ${chalk.cyan("npx @smicolon/cli init --theme fasla")}`
+            `To use Fasla's colours instead: ${chalk.cyan("npx @smicolon/fasla-ui@latest init --theme fasla")}`
         : `\n${css} has no colours yet, so it gets Fasla's.`
     )
   }

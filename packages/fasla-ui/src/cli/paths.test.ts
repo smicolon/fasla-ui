@@ -210,7 +210,7 @@ describe("pathToAlias", () => {
       ["src/components", "src"],
       ["components", ""],
       ["app/ui", ""],
-    ]) {
+    ] as const) {
       expect(aliasToPath(pathToAlias(answer, root)!, root)).toBe(answer)
     }
   })

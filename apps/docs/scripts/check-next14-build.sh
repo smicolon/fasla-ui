@@ -2,7 +2,7 @@
 #
 # Proves every registry item builds in the oldest stack Fasla supports: a fresh
 # Next.js 14 app on React 18 and Tailwind 3, with Next's own ESLint config. It
-# installs every item the documented way, `@smicolon/cli init` then `add
+# installs every item with the CLI in @smicolon/fasla-ui, `init` then `add
 # --all`, imports every installed file from a page so the bundler compiles it,
 # then runs `tsc` and `next build` with lint on. Any step failing fails the run.
 #
@@ -39,7 +39,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-fasla() { (cd "$APP" && FASLA_UI_REGISTRY_URL="$BASE" node "$ROOT/packages/cli/dist/index.js" "$@"); }
+fasla() { (cd "$APP" && FASLA_UI_REGISTRY_URL="$BASE" node "$ROOT/packages/fasla-ui/dist/cli/index.js" "$@"); }
 
 # The installed major version of a package in the app, or "none".
 major() {
@@ -50,7 +50,7 @@ major() {
 }
 
 echo "::group::Build the CLI"
-(cd "$ROOT/packages/cli" && bun run build)
+(cd "$ROOT/packages/fasla-ui" && bun run build)
 echo "::endgroup::"
 
 echo "::group::Build the registry against $BASE"
@@ -70,13 +70,13 @@ echo "::group::Create a Next.js 14 app"
   --ts --tailwind --eslint --app --no-src-dir --import-alias "@/*" --use-npm)
 echo "::endgroup::"
 
-echo "::group::@smicolon/cli init"
+echo "::group::fasla-ui init"
 fasla init --yes
 echo "::endgroup::"
 
 COUNT=$(node -e 'console.log(require(process.argv[1]).items.length)' "$DOCS/public/r/registry.json")
 
-echo "::group::@smicolon/cli add --all ($COUNT items)"
+echo "::group::fasla-ui add --all ($COUNT items)"
 fasla add --all --yes
 echo "::endgroup::"
 

@@ -280,7 +280,7 @@ export async function resolveInsideProject(cwd: string, rel: string): Promise<st
     throw new UnsafePathError(`${link} is a symlink to something that does not exist. ${SEE_CONFIG}`)
   }
   const real = path.join(realExisting, path.relative(existing, target))
-  for (const [base, p] of [[path.resolve(cwd), target], [root, real]]) {
+  for (const [base, p] of [[path.resolve(cwd), target], [root, real]] as const) {
     const inside = path.relative(base, p)
     if (inside === ".." || inside.startsWith(`..${path.sep}`) || path.isAbsolute(inside)) {
       throw new UnsafePathError(`${rel} resolves to ${real}, outside the project at ${root}. ${SEE_CONFIG}`)

@@ -158,7 +158,7 @@ describe("init", () => {
   it("writes the cn helper the registry's components are built against, Fasla's type sizes and all", async () => {
     const dir = await nextApp()
     await run("init", "--yes", "--no-install", "--cwd", dir)
-    const registryUtils = fileURLToPath(new URL("../../fasla-ui/src/lib/utils.ts", import.meta.url))
+    const registryUtils = fileURLToPath(new URL("../lib/utils.ts", import.meta.url))
     expect(await fs.readFile(path.join(dir, "lib/utils.ts"), "utf8")).toBe(await fs.readFile(registryUtils, "utf8"))
   })
 
@@ -255,7 +255,7 @@ describe("init", () => {
     // Killed after the first move, leaving the project half repaired.
     const killed = executeJournal(dir, journal, {
       afterStep: (i) => {
-        if (journal.steps[i].op === "move") throw new Error("killed")
+        if (journal.steps[i]?.op === "move") throw new Error("killed")
       },
     })
     await expect(killed).rejects.toThrow("killed")
@@ -272,7 +272,7 @@ describe("init", () => {
     logs = []
     await run("init", "--no-install", "--cwd", dir)
     expect(asked.map((q) => q.name)).toEqual(["resume", "theme"])
-    expect(asked[0].initial).toBe(true)
+    expect(asked[0]?.initial).toBe(true)
     expect(output()).toContain(`stopped after ${journal.done} of ${journal.steps.length} steps`)
     expect(output()).toContain("- write the repaired components.json")
     expect(await fs.pathExists(path.join(dir, REPAIR_FILE))).toBe(false)
@@ -534,7 +534,7 @@ describe("installCnPackages", () => {
 
 describe("--version", () => {
   it("prints the version in package.json", async () => {
-    const { version } = await fs.readJson(path.join(__dirname, "../package.json"))
+    const { version } = await fs.readJson(path.join(__dirname, "../../package.json"))
     let printed = ""
     const program = createProgram()
       .exitOverride()
@@ -547,8 +547,8 @@ describe("--version", () => {
 
 describe("list", () => {
   it("ends with a command that adds a real component, not a placeholder", () => {
-    expect(addExample([{ name: "avatar" }, { name: "button" }])).toBe("npx @smicolon/cli add button")
-    expect(addExample([{ name: "app-shell" }, { name: "navbar" }])).toBe("npx @smicolon/cli add app-shell")
+    expect(addExample([{ name: "avatar" }, { name: "button" }])).toBe("npx @smicolon/fasla-ui@latest add button")
+    expect(addExample([{ name: "app-shell" }, { name: "navbar" }])).toBe("npx @smicolon/fasla-ui@latest add app-shell")
     expect(addExample([])).toBeUndefined()
   })
 })
@@ -581,7 +581,7 @@ describe("init: the theme", () => {
     const dir = await withColours()
     await run("init", "--yes", "--cwd", dir, "--no-install")
     expect(output()).toContain("app/globals.css has its own colours, so they are kept: installing the base theme only.")
-    expect(output()).toContain("npx @smicolon/cli init --theme fasla")
+    expect(output()).toContain("npx @smicolon/fasla-ui@latest init --theme fasla")
     expect(output()).toContain("npx shadcn@latest add @fasla/theme-base")
     expect(asked.map((q) => q.name)).not.toContain("theme")
   })
@@ -687,7 +687,7 @@ describe("add: files of the same name from another library", () => {
     await run("add", "button", "badge", "--yes", "--cwd", dir)
     expect(await fs.readFile(path.join(dir, "components/ui/button.tsx"), "utf8")).toBe(shadcnButton)
     expect(await fs.pathExists(path.join(dir, "components/ui/badge.tsx"))).toBe(true)
-    expect(output()).toContain("To replace it with Fasla's: npx @smicolon/cli add button -o")
+    expect(output()).toContain("To replace it with Fasla's: npx @smicolon/fasla-ui@latest add button -o")
     expect(asked.map((q) => q.name)).not.toContain("replaceIt")
     // badge was written, button wasn't: the summary says so, and why.
     expect(output()).toContain("Added 1 of 2 component(s).\nNot added:\n  button: button.tsx is already there")
