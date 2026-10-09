@@ -4,7 +4,7 @@ import { useState } from "react"
 import { useLocale, useTranslations } from "next-intl"
 
 import { Switch } from "@fasla-ui/ui/switch"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, type PropRow } from "@/components/props-table"
@@ -191,39 +191,65 @@ export default function SwitchPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { Switch } from "@/components/ui/switch"
+        <UsageExample title={s("usage.basic")}>{`import { Switch } from "@/components/ui/switch"
 
-// ${s("usage.basic")}
-<Switch aria-label="${s("examples.airplane")}" />
+export function AirplaneModeSwitch() {
+  return <Switch name="airplane" aria-label="${s("examples.airplane")}" />
+}`}</UsageExample>
+        <UsageExample title={s("usage.withLabel")}>{`import { Switch } from "@/components/ui/switch"
 
-// ${s("usage.withLabel")}
-<Switch label="${s("examples.airplane")}" defaultChecked />
+export function AirplaneModeSwitch() {
+  return <Switch name="airplane" label="${s("examples.airplane")}" defaultChecked />
+}`}</UsageExample>
+        <UsageExample title={s("usage.withDescription")}>{`import { Switch } from "@/components/ui/switch"
 
-// ${s("usage.withDescription")}
-<Switch
-  label="${s("examples.dark")}"
-  description="${s("examples.darkDescription")}"
-/>
+export function DarkModeSwitch() {
+  return (
+    <Switch
+      name="dark-mode"
+      label="${s("examples.dark")}"
+      description="${s("examples.darkDescription")}"
+    />
+  )
+}`}</UsageExample>
+        <UsageExample title={s("usage.outline")}>{`import { Switch } from "@/components/ui/switch"
 
-// ${s("usage.outline")}
-<Switch variant="outline" label="${s("examples.sync")}" />
+export function AutoSyncSwitch() {
+  return <Switch name="auto-sync" variant="outline" label="${s("examples.sync")}" />
+}`}</UsageExample>
+        <UsageExample title={s("usage.labelFirst")}>{`import { Switch } from "@/components/ui/switch"
 
-// ${s("usage.labelFirst")}
-<Switch layout="label-first" label="${s("examples.notifications")}" />
+export function NotificationsSwitch() {
+  return <Switch name="notifications" layout="label-first" label="${s("examples.notifications")}" />
+}`}</UsageExample>
+        <UsageExample title={s("usage.sizes")}>{`import { Switch } from "@/components/ui/switch"
 
-// ${s("usage.sizes")}
-<Switch size="sm" label="${s("sizes.sm")}" />
-<Switch size="md" label="${s("sizes.md")}" />
-<Switch size="lg" label="${s("sizes.lg")}" />
+export function SwitchSizes() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Switch size="sm" label="${s("sizes.sm")}" />
+      <Switch size="md" label="${s("sizes.md")}" />
+      <Switch size="lg" label="${s("sizes.lg")}" />
+    </div>
+  )
+}`}</UsageExample>
+        <UsageExample title={s("usage.controlled")}>{`"use client"
 
-// ${s("usage.controlled")}
-const [enabled, setEnabled] = useState(true)
+import { useState } from "react"
+import { Switch } from "@/components/ui/switch"
 
-<Switch
-  label="${s("examples.notifications")}"
-  checked={enabled}
-  onChange={(e) => setEnabled(e.target.checked)}
-/>`}</CodeBlock>
+export function ControlledNotificationsSwitch() {
+  const [enabled, setEnabled] = useState(true)
+
+  return (
+    <Switch
+      name="notifications"
+      label="${s("examples.notifications")}"
+      checked={enabled}
+      onChange={(e) => setEnabled(e.target.checked)}
+    />
+  )
+}`}</UsageExample>
         <ComponentPreview>
           <div className="flex flex-col gap-3">
             <Switch

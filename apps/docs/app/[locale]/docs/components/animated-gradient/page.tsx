@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { AnimatedGradient } from "@fasla-ui/effects/animated-gradient/animated-gradient"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -86,15 +86,19 @@ export default function AnimatedGradientPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { AnimatedGradient } from "@/components/ui/animated-gradient"
+        <UsageExample>{`import { AnimatedGradient } from "@/components/ui/animated-gradient"
 
-<AnimatedGradient
-  className="flex h-56 items-center justify-center rounded-lg"
-  speed={3}
-  colors={["var(--chart-1)", "var(--chart-2)", "var(--chart-4)", "var(--chart-5)"]}
->
-  <h3 className="text-2xl font-bold">${g("content.title")}</h3>
-</AnimatedGradient>`}</CodeBlock>
+export function CollectionBanner() {
+  return (
+    <AnimatedGradient
+      className="flex h-56 items-center justify-center rounded-lg"
+      speed={3}
+      colors={["var(--chart-1)", "var(--chart-2)", "var(--chart-4)", "var(--chart-5)"]}
+    >
+      <h2 className="text-2xl font-bold">${g("content.title")}</h2>
+    </AnimatedGradient>
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

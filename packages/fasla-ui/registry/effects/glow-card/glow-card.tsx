@@ -3,21 +3,27 @@
 import * as React from "react"
 import { cn } from "../../../src/lib/utils"
 
+const REDUCED_MOTION = "(prefers-reduced-motion: reduce)"
+
+function subscribeToReducedMotion(onChange: () => void) {
+  if (typeof window.matchMedia !== "function") return () => {}
+  const query = window.matchMedia(REDUCED_MOTION)
+  query.addEventListener("change", onChange)
+  return () => query.removeEventListener("change", onChange)
+}
+
 /**
- * Whether the user asks for reduced motion. It starts false, so the server and
- * the first client render agree, then follows the setting as it changes.
+ * Whether the user asks for reduced motion. False on the server and while
+ * hydrating, so both renders agree, then the setting as it is and as it
+ * changes. Read through useSyncExternalStore, not set from an effect: an
+ * effect's setState renders everything twice, and React's lint rejects it.
  */
 function usePrefersReducedMotion() {
-  const [reduced, setReduced] = React.useState(false)
-  React.useEffect(() => {
-    if (typeof window.matchMedia !== "function") return
-    const query = window.matchMedia("(prefers-reduced-motion: reduce)")
-    setReduced(query.matches)
-    const onChange = () => setReduced(query.matches)
-    query.addEventListener("change", onChange)
-    return () => query.removeEventListener("change", onChange)
-  }, [])
-  return reduced
+  return React.useSyncExternalStore(
+    subscribeToReducedMotion,
+    () => typeof window.matchMedia === "function" && window.matchMedia(REDUCED_MOTION).matches,
+    () => false
+  )
 }
 
 /** The value, or the fallback when it is missing or blank (a cleared control, say). */

@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl"
 
 import { PageHeader } from "@fasla-ui/blocks/page-header/PageHeader"
 import { Button } from "@fasla-ui/ui/button"
-import { ComponentPreview } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -81,6 +81,31 @@ export default function PageHeaderPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("props")}</h2>
         <PropsTable rows={props} />
+      </section>
+
+      {/* Usage */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("usage")}</h2>
+        <UsageExample>{`import { PageHeader } from "@/components/blocks/page-header"
+import { Button } from "@/components/ui/button"
+
+export function ProductsHeader() {
+  return (
+    <PageHeader
+      title="${p("actions.title")}"
+      description="${p("actions.description")}"
+      breadcrumbLabel="${p("breadcrumb.label")}"
+      breadcrumb={
+        <div className="flex items-center gap-2 text-sm">
+          <a href="/dashboard">${p("breadcrumb.home")}</a>
+          <span aria-hidden="true">/</span>
+          <span>${p("actions.title")}</span>
+        </div>
+      }
+      actions={<Button>${p("actions.action")}</Button>}
+    />
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

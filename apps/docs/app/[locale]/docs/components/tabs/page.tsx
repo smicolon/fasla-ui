@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@fasla-ui/ui/tabs"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -91,28 +91,39 @@ export default function TabsPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+        <UsageExample title={a("usage.basic")}>{`import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
-// ${a("usage.basic")}
-<Tabs defaultValue="account">
-  <TabsList>
-    <TabsTrigger value="account">${a("tabs.account")}</TabsTrigger>
-    <TabsTrigger value="password">${a("tabs.password")}</TabsTrigger>
-  </TabsList>
-  <TabsContent value="account">
-    ${a("usage.accountContent")}
-  </TabsContent>
-  <TabsContent value="password">
-    ${a("usage.passwordContent")}
-  </TabsContent>
-</Tabs>
+export function AccountTabs() {
+  return (
+    <Tabs defaultValue="account">
+      <TabsList>
+        <TabsTrigger value="account">${a("tabs.account")}</TabsTrigger>
+        <TabsTrigger value="password">${a("tabs.password")}</TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">${a("usage.accountContent")}</TabsContent>
+      <TabsContent value="password">${a("usage.passwordContent")}</TabsContent>
+    </Tabs>
+  )
+}`}</UsageExample>
+        <UsageExample title={a("usage.controlled")}>{`"use client"
 
-// ${a("usage.controlled")}
-const [value, setValue] = useState("account")
+import { useState } from "react"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
 
-<Tabs value={value} onValueChange={setValue}>
-  ...
-</Tabs>`}</CodeBlock>
+export function ControlledAccountTabs() {
+  const [value, setValue] = useState("account")
+
+  return (
+    <Tabs value={value} onValueChange={setValue}>
+      <TabsList>
+        <TabsTrigger value="account">${a("tabs.account")}</TabsTrigger>
+        <TabsTrigger value="password">${a("tabs.password")}</TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">${a("usage.accountContent")}</TabsContent>
+      <TabsContent value="password">${a("usage.passwordContent")}</TabsContent>
+    </Tabs>
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

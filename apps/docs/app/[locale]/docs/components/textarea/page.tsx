@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { Textarea } from "@fasla-ui/ui/textarea"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -86,25 +86,54 @@ export default function TextareaPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { Textarea } from "@/components/ui/textarea"
+        <UsageExample title={a("usage.basic")}>{`"use client"
 
-// ${a("usage.basic")}
-<Textarea placeholder="${a("usage.codePlaceholder")}" />
+import { Textarea } from "@/components/ui/textarea"
 
-// ${a("usage.count")}
-<Textarea
-  placeholder="${a("usage.codeCount")}"
-  showCount
-  maxLength={200}
-/>
+export function MessageField() {
+  return (
+    <Textarea
+      name="message"
+      aria-label="${a("usage.messageLabel")}"
+      placeholder="${a("usage.codePlaceholder")}"
+    />
+  )
+}`}</UsageExample>
+        <UsageExample title={a("usage.count")}>{`"use client"
 
-// ${a("usage.resize")}
-<Textarea resize="none" />
-<Textarea resize="vertical" />
-<Textarea resize="both" />
+import { Textarea } from "@/components/ui/textarea"
 
-// ${a("usage.error")}
-<Textarea variant="error" />`}</CodeBlock>
+export function MessageFieldWithCount() {
+  return (
+    <Textarea
+      name="message"
+      aria-label="${a("usage.messageLabel")}"
+      placeholder="${a("usage.codeCount")}"
+      showCount
+      maxLength={200}
+    />
+  )
+}`}</UsageExample>
+        <UsageExample title={a("usage.resize")}>{`"use client"
+
+import { Textarea } from "@/components/ui/textarea"
+
+export function MessageFieldResize() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Textarea aria-label="${a("usage.messageLabel")}" resize="none" />
+      <Textarea aria-label="${a("usage.messageLabel")}" resize="vertical" />
+      <Textarea aria-label="${a("usage.messageLabel")}" resize="both" />
+    </div>
+  )
+}`}</UsageExample>
+        <UsageExample title={a("usage.error")}>{`"use client"
+
+import { Textarea } from "@/components/ui/textarea"
+
+export function MessageFieldWithError() {
+  return <Textarea name="message" aria-label="${a("usage.messageLabel")}" variant="error" aria-invalid />
+}`}</UsageExample>
       </section>
     </div>
   )

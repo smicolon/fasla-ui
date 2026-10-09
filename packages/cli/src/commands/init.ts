@@ -36,6 +36,39 @@ export function cn(...inputs: ClassValue[]) {
 export const CN_PACKAGES = ["clsx", "tailwind-merge"]
 
 /**
+ * The cn packages as they install for this project's Tailwind. tailwind-merge
+ * 3 knows only Tailwind 4's classes: it reads `outline` as the width
+ * `outline-1` also sets and drops it, and on Tailwind 3, where `outline-1`
+ * sets no style, the outline Switch lost its track and focus ring. Tailwind 3
+ * gets tailwind-merge 2, the last line that supports it.
+ */
+export function cnPackages(tailwindMajor: 3 | 4 = 4): string[] {
+  return tailwindMajor === 3 ? ["clsx", "tailwind-merge@^2"] : CN_PACKAGES
+}
+
+/** The name in an install spec: `tailwind-merge` from `tailwind-merge@^2`, `@scope/x` from `@scope/x@1`. */
+const specName = (spec: string) => spec.replace(/(?<=.)@.*$/, "")
+
+/**
+ * The cn packages to install: the ones package.json doesn't list, and on
+ * Tailwind 3 a listed tailwind-merge 3 or later, which `shadcn init` installs
+ * whatever the Tailwind.
+ */
+export async function cnPackagesToInstall(cwd: string, tailwindMajor: 3 | 4 = 4): Promise<string[]> {
+  const wanted = cnPackages(tailwindMajor)
+  const missing = new Set(await missingPackages(cwd, wanted.map(specName)))
+  const listed = await listedRange(cwd, "tailwind-merge")
+  const tooNew = tailwindMajor === 3 && listed !== undefined && Number(/\d+/.exec(listed)?.[0]) >= 3
+  return wanted.filter((spec) => missing.has(specName(spec)) || (tooNew && specName(spec) === "tailwind-merge"))
+}
+
+/** The version range package.json lists for `name`, if it lists one. */
+async function listedRange(cwd: string, name: string): Promise<string | undefined> {
+  const pkg = await fs.readJson(path.join(cwd, "package.json")).catch(() => ({}))
+  return pkg.dependencies?.[name] ?? pkg.devDependencies?.[name]
+}
+
+/**
  * Writes the cn helper at the utils alias when nothing is there yet, and says
  * whether it did. Every registry component imports it.
  */
@@ -55,9 +88,9 @@ export async function writeCnHelper(cwd: string, utilsAlias: string, aliasRoot: 
 export async function installCnPackages(
   cwd: string,
   pm: PackageManager,
-  { enabled = true, run }: { enabled?: boolean; run?: Runner } = {}
+  { enabled = true, run, tailwindMajor = 4 }: { enabled?: boolean; run?: Runner; tailwindMajor?: 3 | 4 } = {}
 ): Promise<boolean> {
-  const missing = await missingPackages(cwd, CN_PACKAGES)
+  const missing = await cnPackagesToInstall(cwd, tailwindMajor)
   if (missing.length === 0) return true
   const command = installCommand(pm, missing)
   if (!enabled) {
@@ -161,7 +194,7 @@ export function initCommand() {
         process.exit(1)
       }
 
-      if (!(await installCnPackages(cwd, pm, { enabled: options.install !== false }))) process.exit(1)
+      if (!(await installCnPackages(cwd, pm, { enabled: options.install !== false, tailwindMajor: style.tailwindMajor }))) process.exit(1)
 
       const css = typeof config.tailwind?.css === "string" ? config.tailwind.css : style.css
       const theme = { flag: options.theme, yes, install: options.install !== false, nextMajor: style.nextMajor }

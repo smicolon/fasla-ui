@@ -11,7 +11,7 @@ import {
   NavbarLink,
   NavbarToggle,
 } from "@fasla-ui/blocks/navbar/Navbar"
-import { ComponentPreview } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -108,6 +108,57 @@ export default function NavbarPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("props")}</h2>
         <PropsTable rows={props} />
+      </section>
+
+      {/* Usage */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("usage")}</h2>
+        <UsageExample>{`"use client"
+
+import { useState } from "react"
+import { Navbar, NavbarBrand, NavbarContent, NavbarMenu, NavbarLink, NavbarToggle } from "@/components/blocks/navbar"
+
+const links = [
+${LINKS.map((link) => `  { label: "${n(`links.${link}`)}", href: "/${link === "home" ? "" : link}" },`).join("\n")}
+]
+
+export function SiteNavbar() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <header>
+      <Navbar>
+        <NavbarBrand>
+          <span className="font-semibold">${n("brand")}</span>
+        </NavbarBrand>
+        <NavbarContent align="end">
+          <NavbarMenu mobileMenu>
+            {links.map((link, index) => (
+              <NavbarLink key={link.href} href={link.href} active={index === 0}>
+                {link.label}
+              </NavbarLink>
+            ))}
+          </NavbarMenu>
+          <NavbarToggle
+            open={open}
+            onClick={() => setOpen(!open)}
+            aria-label={open ? "${n("close")}" : "${n("open")}"}
+            aria-controls="mobile-menu"
+          />
+        </NavbarContent>
+      </Navbar>
+      {open && (
+        <nav id="mobile-menu" className="flex flex-col gap-3 border-b bg-background p-4 md:hidden">
+          {links.map((link, index) => (
+            <NavbarLink key={link.href} href={link.href} active={index === 0}>
+              {link.label}
+            </NavbarLink>
+          ))}
+        </nav>
+      )}
+    </header>
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

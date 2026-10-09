@@ -3,21 +3,27 @@
 import * as React from "react"
 import { cn } from "../../../src/lib/utils"
 
+const REDUCED_MOTION = "(prefers-reduced-motion: reduce)"
+
+function subscribeToReducedMotion(onChange: () => void) {
+  if (typeof window.matchMedia !== "function") return () => {}
+  const query = window.matchMedia(REDUCED_MOTION)
+  query.addEventListener("change", onChange)
+  return () => query.removeEventListener("change", onChange)
+}
+
 /**
- * Whether the user asks for reduced motion. It starts false, so the server and
- * the first client render agree, then follows the setting as it changes.
+ * Whether the user asks for reduced motion. False on the server and while
+ * hydrating, so both renders agree, then the setting as it is and as it
+ * changes. Read through useSyncExternalStore, not set from an effect: an
+ * effect's setState renders everything twice, and React's lint rejects it.
  */
 function usePrefersReducedMotion() {
-  const [reduced, setReduced] = React.useState(false)
-  React.useEffect(() => {
-    if (typeof window.matchMedia !== "function") return
-    const query = window.matchMedia("(prefers-reduced-motion: reduce)")
-    setReduced(query.matches)
-    const onChange = () => setReduced(query.matches)
-    query.addEventListener("change", onChange)
-    return () => query.removeEventListener("change", onChange)
-  }, [])
-  return reduced
+  return React.useSyncExternalStore(
+    subscribeToReducedMotion,
+    () => typeof window.matchMedia === "function" && window.matchMedia(REDUCED_MOTION).matches,
+    () => false
+  )
 }
 
 /** The value, or the fallback when it is missing or blank (a cleared control, say). */
@@ -56,57 +62,57 @@ export function TypewriterText({
   ...props
 }: TypewriterTextProps) {
   const cursorChar = filled(cursorCharProp, "|")
-  const [displayText, setDisplayText] = React.useState("")
-  const [isTyping, setIsTyping] = React.useState(false)
   const prefersReducedMotion = usePrefersReducedMotion()
   const showCursor = cursor && !prefersReducedMotion
 
+  // How far the current run has typed. A new text, speed or timing starts a
+  // new run, and progress left by an older one reads as nothing typed yet, so
+  // the run never has to clear state as it starts.
+  const run = JSON.stringify([text, speed, delay, loop, loopDelay])
+  const [progress, setProgress] = React.useState({ run: "", typed: 0, typing: false })
+  const current = progress.run === run
+  // Reduced motion: the whole text, at once.
+  const displayText = prefersReducedMotion ? text : current ? text.slice(0, progress.typed) : ""
+  const isTyping = current ? progress.typing : true
+
   // Held in a ref: an inline callback is a new function every render, and as
   // an effect dependency it restarted the typing each time the parent rendered.
+  // Updated after each render, never during one.
   const onCompleteRef = React.useRef(onComplete)
-  onCompleteRef.current = onComplete
+  React.useEffect(() => {
+    onCompleteRef.current = onComplete
+  })
 
   React.useEffect(() => {
-    // If user prefers reduced motion, show full text immediately
     if (prefersReducedMotion) {
-      setDisplayText(text)
       onCompleteRef.current?.()
       return
     }
 
     let timeoutId: ReturnType<typeof setTimeout>
-    let charIndex = 0
-    setDisplayText("")
-    setIsTyping(true)
 
     const startTyping = () => {
+      let charIndex = 0
       const typeChar = () => {
         if (charIndex < text.length) {
-          setDisplayText(text.slice(0, charIndex + 1))
           charIndex++
+          setProgress({ run, typed: charIndex, typing: true })
           timeoutId = setTimeout(typeChar, speed)
         } else {
-          setIsTyping(false)
+          setProgress({ run, typed: charIndex, typing: false })
           onCompleteRef.current?.()
-
-          if (loop) {
-            timeoutId = setTimeout(() => {
-              charIndex = 0
-              setDisplayText("")
-              setIsTyping(true)
-              startTyping()
-            }, loopDelay)
-          }
+          if (loop) timeoutId = setTimeout(startTyping, loopDelay)
         }
       }
 
+      setProgress({ run, typed: 0, typing: true })
       typeChar()
     }
 
     timeoutId = setTimeout(startTyping, delay)
 
     return () => clearTimeout(timeoutId)
-  }, [text, speed, delay, loop, loopDelay, prefersReducedMotion])
+  }, [run, text, speed, delay, loop, loopDelay, prefersReducedMotion])
 
   // Cursor blink effect
   const [cursorVisible, setCursorVisible] = React.useState(true)
@@ -163,25 +169,24 @@ export function TypewriterWords({
   ...props
 }: TypewriterWordsProps) {
   const [wordIndex, setWordIndex] = React.useState(0)
-  const [displayText, setDisplayText] = React.useState("")
+  const [typedText, setTypedText] = React.useState("")
   const [isDeleting, setIsDeleting] = React.useState(false)
 
   const prefersReducedMotion = usePrefersReducedMotion()
+  // Reduced motion: the first word, still.
+  const displayText = prefersReducedMotion ? (words[0] ?? "") : typedText
 
   React.useEffect(() => {
-    if (prefersReducedMotion) {
-      setDisplayText(words[0] ?? "")
-      return
-    }
+    if (prefersReducedMotion) return
 
     const currentWord = words[wordIndex] ?? ""
     let timeoutId: ReturnType<typeof setTimeout>
 
     if (!isDeleting) {
       // Typing
-      if (displayText.length < currentWord.length) {
+      if (typedText.length < currentWord.length) {
         timeoutId = setTimeout(() => {
-          setDisplayText(currentWord.slice(0, displayText.length + 1))
+          setTypedText(currentWord.slice(0, typedText.length + 1))
         }, speed)
       } else {
         // Word complete, wait then start deleting
@@ -191,21 +196,21 @@ export function TypewriterWords({
       }
     } else {
       // Deleting
-      if (displayText.length > 0) {
+      if (typedText.length > 0) {
         timeoutId = setTimeout(() => {
-          setDisplayText(displayText.slice(0, -1))
+          setTypedText(typedText.slice(0, -1))
         }, speed / 2)
       } else {
-        // Deletion complete, move to next word
-        setIsDeleting(false)
+        // Deletion complete: after a pause, type the next word.
         timeoutId = setTimeout(() => {
+          setIsDeleting(false)
           setWordIndex((prev) => (prev + 1) % words.length)
         }, wordDelay)
       }
     }
 
     return () => clearTimeout(timeoutId)
-  }, [displayText, isDeleting, wordIndex, words, speed, deleteDelay, wordDelay, prefersReducedMotion])
+  }, [typedText, isDeleting, wordIndex, words, speed, deleteDelay, wordDelay, prefersReducedMotion])
 
   // Cursor blink
   const [cursorVisible, setCursorVisible] = React.useState(true)

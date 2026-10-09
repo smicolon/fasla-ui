@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { StatsCard, StatsGrid } from "@fasla-ui/blocks/stats-card/StatsCard"
-import { ComponentPreview } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -79,6 +79,37 @@ export default function StatsCardPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("props")}</h2>
         <PropsTable rows={props} />
+      </section>
+
+      {/* Usage */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("usage")}</h2>
+        <UsageExample>{`import { StatsCard, StatsGrid } from "@/components/blocks/stats-card"
+
+export function StoreStats() {
+  return (
+    <StatsGrid columns={3}>
+      <StatsCard
+        title="${s("cards.revenue")}"
+        value="${s("cards.revenueValue")}"
+        description="${s("cards.vsLastMonth")}"
+        trend={{ value: 12.5, direction: "up" }}
+      />
+      <StatsCard
+        title="${s("cards.orders")}"
+        value="1,284"
+        description="${s("cards.vsLastMonth")}"
+        trend={{ value: 8, direction: "up" }}
+      />
+      <StatsCard
+        title="${s("cards.returns")}"
+        value="36"
+        description="${s("cards.vsLastMonth")}"
+        trend={{ value: -2.1, direction: "down" }}
+      />
+    </StatsGrid>
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

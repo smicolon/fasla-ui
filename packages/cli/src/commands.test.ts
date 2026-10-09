@@ -428,6 +428,30 @@ describe("installCnPackages", () => {
     expect(output()).toContain("Run this to finish:\n  pnpm add clsx tailwind-merge")
   })
 
+  it("installs tailwind-merge 2 on Tailwind 3, whose classes tailwind-merge 3 doesn't know", async () => {
+    const dir = await project({ "package.json": "{}" })
+    const runner = vi.fn(async () => ({ ok: true as const }))
+    expect(await installCnPackages(dir, "npm", { run: runner, tailwindMajor: 3 })).toBe(true)
+    expect(runner).toHaveBeenCalledWith("npm", ["install", "clsx", "tailwind-merge@^2"], dir)
+  })
+
+  it("replaces a tailwind-merge 3 already listed on Tailwind 3, and leaves it on Tailwind 4", async () => {
+    const dir = await project({ "package.json": JSON.stringify({ dependencies: { clsx: "^2", "tailwind-merge": "^3.7.0" } }) })
+    const runner = vi.fn(async () => ({ ok: true as const }))
+    await installCnPackages(dir, "pnpm", { run: runner, tailwindMajor: 3 })
+    expect(runner).toHaveBeenCalledWith("pnpm", ["add", "tailwind-merge@^2"], dir)
+    runner.mockClear()
+    await installCnPackages(dir, "pnpm", { run: runner, tailwindMajor: 4 })
+    expect(runner).not.toHaveBeenCalled()
+  })
+
+  it("leaves a tailwind-merge 2 alone on Tailwind 3", async () => {
+    const dir = await project({ "package.json": JSON.stringify({ dependencies: { clsx: "^2", "tailwind-merge": "^2.6.0" } }) })
+    const runner = vi.fn(async () => ({ ok: true as const }))
+    await installCnPackages(dir, "npm", { run: runner, tailwindMajor: 3 })
+    expect(runner).not.toHaveBeenCalled()
+  })
+
   it("prints the command instead of installing when there is no package.json", async () => {
     const runner = vi.fn()
     expect(await installCnPackages(await project({}), "npm", { run: runner })).toBe(true)
@@ -593,6 +617,18 @@ describe("add: files of the same name from another library", () => {
     expect(await fs.pathExists(path.join(dir, "components/ui/badge.tsx"))).toBe(true)
     expect(output()).toContain("To replace it with Fasla's: npx @smicolon/cli add button -o")
     expect(asked.map((q) => q.name)).not.toContain("replaceIt")
+    // badge was written, button wasn't: the summary says so.
+    expect(output()).toContain("Added 1 of 2 component(s). Not added, as their files were already there: button.")
+    expect(output()).toContain('import { ... } from "@/components/ui/badge"')
+    expect(output()).not.toContain('from "@/components/ui/button"')
+  })
+
+  it("doesn't say it added a component whose only file it kept under --yes", async () => {
+    const dir = await withShadcnButton()
+    await run("add", "button", "--yes", "--cwd", dir)
+    expect(output()).toContain("Added nothing: every file was already there.")
+    expect(output()).not.toContain("Components added successfully!")
+    expect(output()).not.toContain("Import them in your code:")
   })
 
   it("reads nothing through a folder that is a symlink out of the project", async () => {

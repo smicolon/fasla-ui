@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl"
 import { useState } from "react"
 import { Badge } from "@fasla-ui/ui/badge"
 import { Avatar } from "@fasla-ui/ui/avatar"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, CodeBlock, UsageExample } from "@/components/component-preview"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
 
@@ -218,23 +218,57 @@ npx @smicolon/cli add badge`}</CodeBlock>
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { Badge } from "@/components/ui/badge"
+        <UsageExample title={b("usage.tones")}>{`import { Badge } from "@/components/ui/badge"
+
+export function OrderBadges() {
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      <Badge>${b("usage.new")}</Badge>
+      <Badge variant="soft" tone="success">${b("usage.paid")}</Badge>
+      <Badge variant="outline" tone="destructive" size="md">${b("usage.overdue")}</Badge>
+    </div>
+  )
+}`}</UsageExample>
+        <UsageExample title={b("usage.iconAvatar")}>{`import { Star } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
 import { Avatar } from "@/components/ui/avatar"
 
-<Badge>${b("usage.new")}</Badge>
-<Badge variant="soft" tone="success">${b("usage.paid")}</Badge>
-<Badge variant="outline" tone="destructive" size="md">${b("usage.overdue")}</Badge>
+const user = { name: "${b("examples.person")}", photo: "/avatars/layla.jpg" }
 
-// ${b("usage.iconAvatar")}
-<Badge icon={<Star />}>${b("usage.featured")}</Badge>
-<Badge avatar={<Avatar size="12" radius="rounded" src={user.photo} name="" />}>
-  {user.name}
-</Badge>
+export function ReviewerBadges() {
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      <Badge icon={<Star />}>${b("usage.featured")}</Badge>
+      <Badge avatar={<Avatar size="12" radius="rounded" src={user.photo} name="" />}>
+        {user.name}
+      </Badge>
+    </div>
+  )
+}`}</UsageExample>
+        <UsageExample title={b("usage.removable")}>{`"use client"
 
-// ${b("usage.removable")}
-<Badge variant="soft" onClose={() => remove(tag)} closeLabel={\`${b("usage.removeFilter")}: \${tag}\`}>
-  {tag}
-</Badge>`}</CodeBlock>
+import { useState } from "react"
+import { Badge } from "@/components/ui/badge"
+
+export function FilterBadges() {
+  const [filters, setFilters] = useState(["${allFilters[0]}", "${allFilters[1]}", "${allFilters[2]}"])
+  const remove = (filter: string) => setFilters((current) => current.filter((f) => f !== filter))
+
+  return (
+    <div className="flex flex-wrap items-center gap-2">
+      {filters.map((filter) => (
+        <Badge
+          key={filter}
+          variant="soft"
+          onClose={() => remove(filter)}
+          closeLabel={\`${b("usage.removeFilter")}: \${filter}\`}
+        >
+          {filter}
+        </Badge>
+      ))}
+    </div>
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

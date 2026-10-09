@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { GlowCard, GlowContainer } from "@fasla-ui/effects/glow-card/glow-card"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -89,15 +89,24 @@ export default function GlowCardPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { GlowCard, GlowContainer } from "@/components/ui/glow-card"
+        <UsageExample title="GlowCard">{`import { GlowCard } from "@/components/ui/glow-card"
 
-<GlowCard glowColor="var(--chart-1)" followMouse>
-  <div className="p-6">${g("cards.returns.title")}</div>
-</GlowCard>
+export function ReturnsCard() {
+  return (
+    <GlowCard glowColor="var(--chart-1)" followMouse>
+      <div className="p-6">${g("cards.returns.title")}</div>
+    </GlowCard>
+  )
+}`}</UsageExample>
+        <UsageExample title="GlowContainer">{`import { GlowContainer } from "@/components/ui/glow-card"
 
-<GlowContainer duration={2}>
-  <p className="p-6">${g("container")}</p>
-</GlowContainer>`}</CodeBlock>
+export function MembersNotice() {
+  return (
+    <GlowContainer duration={2}>
+      <p className="p-6">${g("container")}</p>
+    </GlowContainer>
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

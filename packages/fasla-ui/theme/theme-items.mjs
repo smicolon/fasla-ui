@@ -165,6 +165,37 @@ const ARABIC_RULES = {
  */
 export const LATIN_FONT = 'var(--font-sans, var(--font-geist-sans, "Geist Variable", "Geist")), ui-sans-serif, system-ui, sans-serif'
 
+/**
+ * The page colours, for the colours layer, against the stylesheet the
+ * Next.js templates ship. Both 14 and 16 declare
+ *
+ *   :root { --background: #ffffff; --foreground: #171717 }
+ *   @media (prefers-color-scheme: dark) { :root { --background: #0a0a0a; --foreground: #ededed } }
+ *
+ * outside any layer, and the shadcn CLI keeps both. Fasla's dark mode is the
+ * `.dark` class, so those rules break it two ways:
+ *
+ * - With the OS in dark mode and no `.dark`, the media rule turns the page
+ *   black while every component stays light: a #0a0a0a primary button on a
+ *   #0a0a0a page. `:root:not(.dark)` outweighs the template's `:root` and keeps
+ *   the page light until the app sets `.dark`, as the components are.
+ * - On Tailwind 3 the CLI writes Fasla's palette into `@layer base`, which
+ *   loses to the template's unlayered `:root`: `.dark` turned the components
+ *   dark on a white page. The same two tokens, unlayered here, win again.
+ *
+ * Only these two tokens: they are all the templates set. The rules go in the
+ * stylesheet rather than `init` deleting the template's, so the shadcn-only
+ * route gets them too, and a stylesheet the developer wrote is never edited.
+ */
+function pageColourRules(value) {
+  const page = (scheme) => ({ "--background": value("background", scheme), "--foreground": value("foreground", scheme) })
+  return {
+    ":root": page("light"),
+    ".dark": page("dark"),
+    "@media (prefers-color-scheme: dark)": { ":root:not(.dark)": page("light") },
+  }
+}
+
 /** Registry URL of another item, as the shadcn CLI follows it. */
 const itemUrl = (registryUrl, name) => `${registryUrl.replace(/\/+$/, "")}/${name}.json`
 
@@ -228,6 +259,13 @@ export function buildThemeItems({ registryUrl, sources = loadSources() }) {
         },
         ":where(.dark)": Object.fromEntries(extras.map((name) => [`--${name}`, value(name, "dark")])),
         '[dir="rtl"]': leadingVars(typography, "ar"),
+        // The page in the theme's colours. The Next.js templates do this
+        // themselves; a Vite app's stylesheet doesn't, and its page stayed
+        // white with black text in dark mode. :where() like the tokens, so any
+        // body rule the project has wins wherever it sits: a Tailwind 3 shadcn
+        // project stores --background as bare HSL channels, which
+        // var(--background) would turn into no colour at all.
+        ":where(body)": { "background-color": "var(--background)", color: "var(--foreground)" },
       },
       // Not in a layer, so it outweighs the tracking-, uppercase and italic
       // utilities it undoes.
@@ -243,7 +281,7 @@ export function buildThemeItems({ registryUrl, sources = loadSources() }) {
     title: "Fasla theme: colours",
     description: "Fasla's full light and dark palette and radius, on top of the base theme. Replaces your project's colours.",
     registryDependencies: [itemUrl(registryUrl, "theme-base")],
-    css: { body: { "font-family": LATIN_FONT, ...SMOOTHING } },
+    css: { body: { "font-family": LATIN_FONT, ...SMOOTHING }, ...pageColourRules(value) },
     cssVars: {
       theme: radius,
       light: Object.fromEntries(all.map((name) => [name, value(name, "light")])),

@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { Spotlight, SpotlightCard } from "@fasla-ui/effects/spotlight/spotlight"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -82,15 +82,24 @@ export default function SpotlightPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { Spotlight, SpotlightCard } from "@/components/ui/spotlight"
+        <UsageExample title="Spotlight">{`import { Spotlight } from "@/components/ui/spotlight"
 
-<Spotlight className="h-64 rounded-lg border bg-card" size={300}>
-  <h3>${s("panel.title")}</h3>
-</Spotlight>
+export function CollectionPanel() {
+  return (
+    <Spotlight className="h-64 rounded-lg border bg-card" size={300}>
+      <h2>${s("panel.title")}</h2>
+    </Spotlight>
+  )
+}`}</UsageExample>
+        <UsageExample title="SpotlightCard">{`import { SpotlightCard } from "@/components/ui/spotlight"
 
-<SpotlightCard>
-  <p>${s("card.title")}</p>
-</SpotlightCard>`}</CodeBlock>
+export function DeliveryCard() {
+  return (
+    <SpotlightCard>
+      <p>${s("card.title")}</p>
+    </SpotlightCard>
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl"
 
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@fasla-ui/ui/card"
 import { Button } from "@fasla-ui/ui/button"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -71,9 +71,9 @@ export default function CardPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
+        <UsageExample>{`import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card"
 
-export function Example() {
+export function OrderCard() {
   return (
     <Card>
       <CardHeader>
@@ -84,7 +84,7 @@ export function Example() {
       <CardFooter>${c("usage.footer")}</CardFooter>
     </Card>
   )
-}`}</CodeBlock>
+}`}</UsageExample>
       </section>
     </div>
   )

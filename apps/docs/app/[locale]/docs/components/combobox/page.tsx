@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl"
 
 import { useState } from "react"
 import { Combobox } from "@fasla-ui/ui/combobox"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -156,43 +156,98 @@ export default function ComboboxPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { Combobox } from "@/components/ui/combobox"
+        <UsageExample title={c("usage.basic")}>{`import { Combobox } from "@/components/ui/combobox"
 
-const options = [
+const countries = [
 ${codeOptions}
 ]
 
-// ${c("usage.basic")}
-<Combobox
-  options={options}
-  placeholder="${c("usage.codePlaceholder")}"
-/>
+export function CountryCombobox() {
+  return (
+    <Combobox
+      options={countries}
+      placeholder="${c("usage.codePlaceholder")}"
+      searchPlaceholder="${c("text.search")}"
+      emptyText="${c("text.empty")}"
+    />
+  )
+}`}</UsageExample>
+        <UsageExample title={c("usage.controlled")}>{`"use client"
 
-// ${c("usage.controlled")}
-const [value, setValue] = useState("")
+import { useState } from "react"
+import { Combobox } from "@/components/ui/combobox"
 
-<Combobox
-  options={options}
-  value={value}
-  onChange={setValue}
-/>
+const countries = [
+${codeOptions}
+]
 
-// ${c("usage.multi")}
-<Combobox
-  options={options}
-  multiple
-  value={selectedValues}
-  onChange={setSelectedValues}
-/>
+export function ControlledCountryCombobox() {
+  const [country, setCountry] = useState("")
 
-// ${c("usage.creatable")}
-<Combobox
-  options={options}
-  creatable
-  onCreate={(value) => {
-    // ${c("usage.addNew")}
-  }}
-/>`}</CodeBlock>
+  return (
+    <Combobox
+      options={countries}
+      value={country}
+      onChange={(value) => setCountry(value as string)}
+      placeholder="${c("usage.codePlaceholder")}"
+      searchPlaceholder="${c("text.search")}"
+      emptyText="${c("text.empty")}"
+    />
+  )
+}`}</UsageExample>
+        <UsageExample title={c("usage.multi")}>{`"use client"
+
+import { useState } from "react"
+import { Combobox } from "@/components/ui/combobox"
+
+const countries = [
+${codeOptions}
+]
+
+export function CountriesCombobox() {
+  const [selected, setSelected] = useState<string[]>([])
+
+  return (
+    <Combobox
+      options={countries}
+      multiple
+      value={selected}
+      onChange={(value) => setSelected(value as string[])}
+      placeholder="${c("usage.codePlaceholder")}"
+      searchPlaceholder="${c("text.search")}"
+      emptyText="${c("text.empty")}"
+    />
+  )
+}`}</UsageExample>
+        <UsageExample title={c("usage.creatable")}>{`"use client"
+
+import { useState } from "react"
+import { Combobox } from "@/components/ui/combobox"
+
+export function CreatableCountryCombobox() {
+  const [countries, setCountries] = useState([
+${codeOptions.split("\n").map((line) => `  ${line}`).join("\n")}
+  ])
+  const [country, setCountry] = useState("")
+
+  return (
+    <Combobox
+      options={countries}
+      value={country}
+      onChange={(value) => setCountry(value as string)}
+      creatable
+      // ${c("usage.addNew")}
+      onCreate={(label) => {
+        setCountries((current) => [...current, { value: label, label }])
+        setCountry(label)
+      }}
+      placeholder="${c("usage.codePlaceholder")}"
+      searchPlaceholder="${c("text.search")}"
+      emptyText="${c("text.empty")}"
+      createText="${c("text.create")}"
+    />
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

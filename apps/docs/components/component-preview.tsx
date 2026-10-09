@@ -18,6 +18,20 @@ export function ComponentPreview({ children, className }: ComponentPreviewProps)
   )
 }
 
+/**
+ * One usage example: a heading that says what it shows, and a complete file —
+ * its imports, its state, a component around it — that pastes into a project
+ * and compiles as it stands. One example per block, so each copies on its own.
+ */
+export function UsageExample({ title, children }: { title?: string; children: string }) {
+  return (
+    <div className="space-y-3">
+      {title && <h3 className="text-lg font-semibold">{title}</h3>}
+      <CodeBlock>{children}</CodeBlock>
+    </div>
+  )
+}
+
 interface CodeBlockProps {
   children: string
   language?: string

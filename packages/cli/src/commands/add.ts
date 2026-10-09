@@ -213,6 +213,10 @@ export function addCommand() {
       // Which component wrote each file in this run, so two registry files with
       // the same destination can't replace each other, with or without -o.
       const writtenBy = new Map<string, string>()
+      // Components that wrote at least one file. A component whose every file
+      // was skipped — kept under --yes, or already there — wasn't added, and
+      // the summary mustn't say it was.
+      const added = new Set<string>()
 
       for (const component of resolved.items) {
         const componentName = component.name
@@ -259,7 +263,8 @@ export function addCommand() {
               overwrite: Boolean(options.overwrite) || replace.has(targetPath),
               writtenBy,
             })
-            if (outcome.result === "exists") {
+            if (outcome.result === "written") added.add(componentName)
+            else if (outcome.result === "exists") {
               addSpinner.warn(`${componentName}: ${filename} already exists, skipping (use -o to overwrite)`)
             } else if (outcome.result === "duplicate") {
               addSpinner.warn(`${componentName}: ${filename} was already written by ${outcome.by} in this run, skipping`)
@@ -270,7 +275,19 @@ export function addCommand() {
         }
       }
 
-      addSpinner.succeed(`Added ${resolved.items.length} component(s)`)
+      const total = resolved.items.length
+      const notAdded = resolved.items.map((item) => item.name).filter((name) => !added.has(name))
+      if (notAdded.length === 0) addSpinner.succeed(`Added ${total} component(s)`)
+      else {
+        addSpinner.stop()
+        console.log(
+          chalk.yellow(
+            added.size === 0
+              ? `Added nothing: every file was already there.`
+              : `Added ${added.size} of ${total} component(s). Not added, as their files were already there: ${notAdded.join(", ")}.`
+          )
+        )
+      }
 
       if (kept.length > 0) {
         console.log(chalk.yellow(`\nKept ${kept.map((k) => k.file).join(", ")}: not Fasla's, so not replaced.`))
@@ -289,10 +306,12 @@ export function addCommand() {
         console.log(chalk.gray(`  ${installCommand(pm, toInstall)}`))
       }
 
-      // Show import examples
-      console.log(chalk.green("\nComponents added successfully!"))
+      // Show import examples, for what was added.
+      const importable = validComponents.filter((name) => added.has(name))
+      if (importable.length === 0) return
+      console.log(chalk.green(`\n${notAdded.length === 0 ? "Components added successfully!" : "Added:"}`))
       console.log("\nImport them in your code:")
-      for (const componentName of validComponents) {
+      for (const componentName of importable) {
         const item = registry.items.find((i) => i.name === componentName)
         const importPath = `${getTargetDirectory(item?.type ?? "registry:ui", componentsAlias)}/${componentName}`
         console.log(chalk.cyan(`  import { ... } from "${importPath}"`))
