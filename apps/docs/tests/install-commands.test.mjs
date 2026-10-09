@@ -29,7 +29,9 @@ const files = [
 // npx, pnpm dlx, yarn dlx or bunx, then the package.
 const RUNNER = String.raw`(?:npx(?:\s+(?:-y|--yes))?|pnpm\s+dlx|yarn\s+dlx|bunx(?:\s+--bun)?)\s+`
 const OLD_CLI = new RegExp(`${RUNNER}@smicolon/cli\\b`, "g")
-const UNTAGGED = new RegExp(`${RUNNER}@smicolon/fasla-ui(?!@latest\\b)`, "g")
+// `@latest` must end the token: `\b` would let `@latest-extra` or `@latest.1`
+// through. A backtick, quote or `<` may follow it in the sources.
+const UNTAGGED = new RegExp(`${RUNNER}@smicolon/fasla-ui(?!@latest(?![\\w.-]))`, "g")
 
 function offenders(pattern) {
   return files.flatMap((file) =>
@@ -52,10 +54,10 @@ describe("Install commands", () => {
     for (const line of ["npx @smicolon/cli init", "pnpm dlx @smicolon/cli add button", "bunx --bun @smicolon/cli list"]) {
       expect(line.match(OLD_CLI), line).not.toBeNull()
     }
-    for (const line of ["npx @smicolon/fasla-ui init", "npx -y @smicolon/fasla-ui add", "npx @smicolon/fasla-ui@0.5.0 init", "yarn dlx @smicolon/fasla-ui"]) {
+    for (const line of ["npx @smicolon/fasla-ui init", "npx -y @smicolon/fasla-ui add", "npx @smicolon/fasla-ui@0.5.0 init", "npx @smicolon/fasla-ui@latest-extra init", "npx @smicolon/fasla-ui@latest.1 init", "yarn dlx @smicolon/fasla-ui"]) {
       expect(line.match(UNTAGGED), line).not.toBeNull()
     }
-    for (const line of ["npx @smicolon/fasla-ui@latest init", "npm install @smicolon/fasla-ui", "Set up with <code>@smicolon/cli</code> 0.3?"]) {
+    for (const line of ["npx @smicolon/fasla-ui@latest init", "`npx @smicolon/fasla-ui@latest`", "<code>npx @smicolon/fasla-ui@latest init</code>", "npm install @smicolon/fasla-ui", "Set up with <code>@smicolon/cli</code>?"]) {
       expect(line.match(OLD_CLI) ?? line.match(UNTAGGED), line).toBeNull()
     }
   })
@@ -69,14 +71,20 @@ describe("Install commands", () => {
     }
   })
 
-  test("tell people who used @smicolon/cli that their project carries on, in both languages", () => {
+  test("tell people who used @smicolon/cli what to do, both cases in one notice, in both languages", () => {
     const page = readFileSync(path.join(docsRoot, "app/[locale]/docs/installation/page.tsx"), "utf8")
-    // Under the init command, before the 0.3 note that is the one exception.
+    // One notice under the init command: 0.4 and later carry on, 0.3 and
+    // earlier run init once to repair. Two separate notes let one be read alone.
     expect(page.indexOf('i.rich("cliPrevious", rich)')).toBeGreaterThan(page.indexOf("npx @smicolon/fasla-ui@latest init"))
-    expect(page.indexOf('i.rich("cliPrevious", rich)')).toBeLessThan(page.indexOf('i.rich("cliLegacy", rich)'))
+    expect(page).not.toContain("cliLegacy")
     for (const lang of ["en", "ar"]) {
       const t = JSON.parse(readFileSync(path.join(docsRoot, `messages/${lang}.json`), "utf8")).docs.installation
+      expect(t.cliLegacy).toBeUndefined()
       expect(t.cliPrevious).toContain("<code>@smicolon/cli</code>")
+      expect(t.cliPrevious).toContain("0.4")
+      expect(t.cliPrevious).toContain("0.3")
+      expect(t.cliPrevious).toContain("<code>npx @smicolon/fasla-ui@latest init</code>")
+      expect(t.cliPrevious.indexOf("0.4")).toBeLessThan(t.cliPrevious.indexOf("0.3"))
       expect(t.cliBody).toContain("<code>@smicolon/fasla-ui</code>")
     }
   })

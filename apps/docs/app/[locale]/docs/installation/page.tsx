@@ -55,11 +55,11 @@ export default async function InstallationPage({
             <pre className="whitespace-pre-wrap break-words rounded-lg bg-terminal p-4">
               <code className="text-green-400">npx @smicolon/fasla-ui@latest init</code>
             </pre>
-            {/* The CLI moved into @smicolon/fasla-ui at 0.5.0; a project set
-                up with the old package carries on as it is. */}
-            <p className="text-sm text-muted-foreground mt-2">{i.rich("cliPrevious", rich)}</p>
-            {/* 0.3's components.json is one the shadcn CLI rejects outright. */}
-            <p className="text-sm text-muted-foreground mt-2">{i.rich("cliLegacy", rich)}</p>
+            {/* The CLI moved into @smicolon/fasla-ui at 0.5.0. A project set up
+                with @smicolon/cli 0.4 or later carries on as it is; 0.3 and
+                earlier wrote a components.json the shadcn CLI rejects outright,
+                which init repairs. One notice, so neither case is read alone. */}
+            <p className="mt-2 rounded-lg border border-border p-4 text-sm">{i.rich("cliPrevious", rich)}</p>
           </div>
 
           <div>
