@@ -98,7 +98,7 @@ describe("Install commands on the docs pages", () => {
   test("show no npm-only install either; every install goes through the tabs", () => {
     const npmOnly = pages.filter((file) => /npm install /.test(read(file)))
     expect(npmOnly).toEqual([])
-    expect(read("app/[locale]/docs/installation/page.tsx").match(/<PackageManagerTabs /g)).toHaveLength(4)
+    expect(read("app/[locale]/docs/installation/page.tsx").match(/<PackageManagerTabs /g)).toHaveLength(7)
   })
 })
 
@@ -112,6 +112,49 @@ describe("Theme section of the Installation page", () => {
     expect(base).toBeGreaterThan(fasla)
     // The old manual Tailwind setup is gone.
     expect(page).not.toContain("tailwindSemanticColors")
+  })
+
+  test("says to set the project up first, before any shadcn command, in both languages", () => {
+    // Without components.json, `shadcn add` runs its own setup and its
+    // preset's colours replace Fasla's; on Next.js 14 that setup fails the build.
+    const first = page.indexOf('i.rich("themeSetupFirst", rich)')
+    expect(first).toBeGreaterThan(-1)
+    expect(first).toBeLessThan(page.indexOf('shadcnAdd("theme", "font-geist")'))
+    for (const lang of ["en", "ar"]) {
+      const t = JSON.parse(read(`messages/${lang}.json`)).docs.installation
+      expect(t.themeSetupFirst).toContain("<code>npx @smicolon/cli init</code>")
+      expect(t.themeSetupFirst).toContain("<code>npx shadcn@latest init</code>")
+      expect(t.themeNext14).toContain("<code>npx @smicolon/cli init</code>")
+      expect(t.cliLegacy).toContain("<code>init</code>")
+      expect(t.manualTailwind3).toContain("<code>tailwind-merge@^2</code>")
+      expect(t.manualCopy).toContain("<code>https://ui.smicolon.com/r/button.json</code>")
+    }
+  })
+
+  test("gives Next.js 14 a command that builds there: theme.json without Geist", () => {
+    const note = page.indexOf('i.rich("themeNext14", rich)')
+    expect(page.indexOf('<PackageManagerTabs run={shadcnAdd("theme")} />')).toBeGreaterThan(note)
+  })
+
+  test("installs tailwind-merge 2 on Tailwind 3 in the manual install", () => {
+    expect(page).toContain('<PackageManagerTabs packages="class-variance-authority clsx tailwind-merge@^2 framer-motion" />')
+  })
+
+  test("shows init's fallback install for Tailwind 3 as its own command, with tailwind-merge 2", () => {
+    // The CLI prints tailwind-merge@^2 there; a reader copying the plain
+    // command into a Tailwind 3 project would get 3, which drops `outline`.
+    const plain = page.indexOf('<PackageManagerTabs packages="clsx tailwind-merge" />')
+    const note = page.indexOf('i.rich("cliDepsTailwind3", rich)')
+    const tw3 = page.indexOf('<PackageManagerTabs packages="clsx tailwind-merge@^2" />')
+    expect(plain).toBeGreaterThan(-1)
+    expect(note).toBeGreaterThan(plain)
+    expect(tw3).toBeGreaterThan(note)
+    for (const lang of ["en", "ar"]) {
+      const t = JSON.parse(read(`messages/${lang}.json`)).docs.installation
+      expect(t.cliDepsTailwind3).toContain("<code>tailwind-merge@^2</code>")
+      // The general sentence no longer carries the Tailwind 3 version on its own.
+      expect(t.cliDepsFallback).not.toContain("tailwind-merge@^2")
+    }
   })
 
   test("writes shadcn commands with full registry URLs, which work without our init", () => {

@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl"
 
 import { TextReveal, WordReveal } from "@fasla-ui/effects/text-reveal/text-reveal"
 import { Button } from "@fasla-ui/ui/button"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -94,11 +94,16 @@ export default function TextRevealPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { TextReveal, WordReveal } from "@/components/ui/text-reveal"
+        <UsageExample title="TextReveal">{`import { TextReveal } from "@/components/ui/text-reveal"
 
-<TextReveal text="${r("preview")}" className="text-4xl font-bold" />
+export function WelcomeHeading() {
+  return <TextReveal text="${r("preview")}" className="text-4xl font-bold" />
+}`}</UsageExample>
+        <UsageExample title="WordReveal">{`import { WordReveal } from "@/components/ui/text-reveal"
 
-<WordReveal text="${r("word")}" delay={0.1} />`}</CodeBlock>
+export function DeliveryNotice() {
+  return <WordReveal text="${r("word")}" delay={0.1} />
+}`}</UsageExample>
       </section>
     </div>
   )

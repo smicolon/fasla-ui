@@ -36,6 +36,9 @@ vi.mock("./registry", async (importOriginal) => {
   const items = [
     { name: "button", type: "registry:ui", dependencies: ["lucide-react"], files: [{ path: "registry/ui/button/button.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/button): https://ui.smicolon.com\nimport { cn } from "@/lib/utils"\nexport const Button = () => cn("b")\n` }] },
     { name: "badge", type: "registry:ui", files: [{ path: "registry/ui/badge/badge.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/badge): https://ui.smicolon.com\nimport { cn } from "@/lib/utils"\nexport const Badge = () => cn("x")\n` }] },
+    // Broken registry entries, for what add says when a component writes nothing.
+    { name: "hollow", type: "registry:ui", files: [] },
+    { name: "blank", type: "registry:ui", files: [{ path: "registry/ui/blank/blank.tsx", type: "registry:ui", target: "", content: "" }] },
   ]
   return {
     ...actual,
@@ -62,7 +65,7 @@ vi.mock("./theme", async (importOriginal) => {
 })
 
 const { createProgram } = await import("./program")
-const { installCnPackages } = await import("./commands/init")
+const { installCnPackages, rangeStaysBelow3 } = await import("./commands/init")
 const { beginLegacyRepair, executeJournal, LOCK_FILE, planLegacyRepair, REPAIR_FILE } = await import("./legacy")
 const { addExample } = await import("./commands/list")
 
@@ -428,6 +431,85 @@ describe("installCnPackages", () => {
     expect(output()).toContain("Run this to finish:\n  pnpm add clsx tailwind-merge")
   })
 
+  it("installs tailwind-merge 2 on Tailwind 3, whose classes tailwind-merge 3 doesn't know", async () => {
+    const dir = await project({ "package.json": "{}" })
+    const runner = vi.fn(async () => ({ ok: true as const }))
+    expect(await installCnPackages(dir, "npm", { run: runner, tailwindMajor: 3 })).toBe(true)
+    expect(runner).toHaveBeenCalledWith("npm", ["install", "clsx", "tailwind-merge@^2"], dir)
+  })
+
+  it("replaces a tailwind-merge 3 already listed on Tailwind 3, and leaves it on Tailwind 4", async () => {
+    const dir = await project({ "package.json": JSON.stringify({ dependencies: { clsx: "^2", "tailwind-merge": "^3.7.0" } }) })
+    const runner = vi.fn(async () => ({ ok: true as const }))
+    await installCnPackages(dir, "pnpm", { run: runner, tailwindMajor: 3 })
+    expect(runner).toHaveBeenCalledWith("pnpm", ["add", "tailwind-merge@^2"], dir)
+    runner.mockClear()
+    await installCnPackages(dir, "pnpm", { run: runner, tailwindMajor: 4 })
+    expect(runner).not.toHaveBeenCalled()
+  })
+
+  it("leaves a tailwind-merge 2 alone on Tailwind 3", async () => {
+    const dir = await project({
+      "package.json": JSON.stringify({ dependencies: { clsx: "^2", "tailwind-merge": "^2.6.0" } }),
+      "node_modules/tailwind-merge/package.json": JSON.stringify({ version: "2.6.1" }),
+    })
+    const runner = vi.fn(async () => ({ ok: true as const }))
+    await installCnPackages(dir, "npm", { run: runner, tailwindMajor: 3 })
+    expect(runner).not.toHaveBeenCalled()
+  })
+
+  it("on Tailwind 3, replaces any range that can resolve to tailwind-merge 3, and says why", async () => {
+    for (const range of [">=2.0.0", "*", "latest", "^2.6.0 || ^3.0.0", "3", "~3.7.0", "x"]) {
+      const dir = await project({ "package.json": JSON.stringify({ dependencies: { clsx: "^2", "tailwind-merge": range } }) })
+      const runner = vi.fn(async () => ({ ok: true as const }))
+      logs = []
+      await installCnPackages(dir, "npm", { run: runner, tailwindMajor: 3 })
+      expect(runner, range).toHaveBeenCalledWith("npm", ["install", "tailwind-merge@^2"], dir)
+      expect(output(), range).toContain(`package.json lists tailwind-merge "${range}", which can install 3.`)
+    }
+  })
+
+  it("on Tailwind 3, replaces an installed tailwind-merge 3 even when the range reads 2", async () => {
+    const dir = await project({
+      "package.json": JSON.stringify({ dependencies: { clsx: "^2", "tailwind-merge": "^2.6.0" } }),
+      "node_modules/tailwind-merge/package.json": JSON.stringify({ version: "3.7.0" }),
+    })
+    const runner = vi.fn(async () => ({ ok: true as const }))
+    await installCnPackages(dir, "npm", { run: runner, tailwindMajor: 3 })
+    expect(runner).toHaveBeenCalledWith("npm", ["install", "tailwind-merge@^2"], dir)
+    expect(output()).toContain("tailwind-merge 3.7.0 is installed. tailwind-merge 3 supports only Tailwind 4")
+  })
+
+  it("finds the installed copy in a monorepo's root node_modules", async () => {
+    const root = await project({
+      "node_modules/tailwind-merge/package.json": JSON.stringify({ version: "3.1.0" }),
+      "apps/web/package.json": JSON.stringify({ dependencies: { clsx: "^2", "tailwind-merge": "^2" } }),
+    })
+    const dir = path.join(root, "apps/web")
+    const runner = vi.fn(async () => ({ ok: true as const }))
+    await installCnPackages(dir, "pnpm", { run: runner, tailwindMajor: 3 })
+    expect(runner).toHaveBeenCalledWith("pnpm", ["add", "tailwind-merge@^2"], dir)
+  })
+
+  it("leaves any tailwind-merge alone on Tailwind 4", async () => {
+    const dir = await project({
+      "package.json": JSON.stringify({ dependencies: { clsx: "^2", "tailwind-merge": ">=2.0.0" } }),
+      "node_modules/tailwind-merge/package.json": JSON.stringify({ version: "3.7.0" }),
+    })
+    const runner = vi.fn(async () => ({ ok: true as const }))
+    await installCnPackages(dir, "npm", { run: runner, tailwindMajor: 4 })
+    expect(runner).not.toHaveBeenCalled()
+  })
+
+  it("reads only ranges that stay on major 2 or below as safe for Tailwind 3", () => {
+    for (const range of ["^2", "^2.6.0", "~2.6.1", "2", "2.x", "2.6.x", "2.6.1", "=2.6.1", "v2.6.1", "^1.14.0", "2.0.0-beta.1"]) {
+      expect(rangeStaysBelow3(range), range).toBe(true)
+    }
+    for (const range of [">=2.0.0", ">2", "*", "x", "latest", "next", "^3", "3.0.0", "^2 || ^3", "2 - 3", "<4", "npm:tailwind-merge@2", "workspace:*", ""]) {
+      expect(rangeStaysBelow3(range), range).toBe(false)
+    }
+  })
+
   it("prints the command instead of installing when there is no package.json", async () => {
     const runner = vi.fn()
     expect(await installCnPackages(await project({}), "npm", { run: runner })).toBe(true)
@@ -593,6 +675,29 @@ describe("add: files of the same name from another library", () => {
     expect(await fs.pathExists(path.join(dir, "components/ui/badge.tsx"))).toBe(true)
     expect(output()).toContain("To replace it with Fasla's: npx @smicolon/cli add button -o")
     expect(asked.map((q) => q.name)).not.toContain("replaceIt")
+    // badge was written, button wasn't: the summary says so, and why.
+    expect(output()).toContain("Added 1 of 2 component(s).\nNot added:\n  button: button.tsx is already there")
+    expect(output()).toContain('import { ... } from "@/components/ui/badge"')
+    expect(output()).not.toContain('from "@/components/ui/button"')
+  })
+
+  it("doesn't say it added a component whose only file it kept under --yes", async () => {
+    const dir = await withShadcnButton()
+    await run("add", "button", "--yes", "--cwd", dir)
+    expect(output()).toContain("Added nothing.\nNot added:\n  button: button.tsx is already there")
+    expect(output()).not.toContain("Components added successfully!")
+    expect(output()).not.toContain("Import them in your code:")
+  })
+
+  it("names the real reason a component wrote nothing: no files, or no content", async () => {
+    const dir = await withShadcnButton()
+    await run("add", "hollow", "blank", "badge", "--yes", "--cwd", dir)
+    const text = output()
+    expect(text).toContain("Added 1 of 3 component(s).")
+    expect(text).toContain("  hollow: the registry has no files for it")
+    expect(text).toContain("  blank: the registry has no content for registry/ui/blank/blank.tsx")
+    // Neither is blamed on a file that is already there.
+    expect(text).not.toMatch(/(hollow|blank): .*already there/)
   })
 
   it("reads nothing through a folder that is a symlink out of the project", async () => {

@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { Checkbox } from "@fasla-ui/ui/checkbox"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -93,25 +93,47 @@ export default function CheckboxPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { Checkbox } from "@/components/ui/checkbox"
+        <UsageExample title={c("usage.basic")}>{`"use client"
 
-// ${c("usage.basic")}
-<Checkbox />
+import { Checkbox } from "@/components/ui/checkbox"
 
-// ${c("usage.withLabel")}
-<Checkbox label="${c("usage.terms")}" />
+export function TermsCheckbox() {
+  return <Checkbox name="terms" aria-label="${c("usage.terms")}" />
+}`}</UsageExample>
+        <UsageExample title={c("usage.withLabel")}>{`"use client"
 
-// ${c("usage.withDescription")}
-<Checkbox
-  label="${c("usage.marketing")}"
-  description="${c("usage.marketingDescription")}"
-/>
+import { Checkbox } from "@/components/ui/checkbox"
 
-// ${c("usage.indeterminate")}
-<Checkbox indeterminate />
+export function TermsCheckbox() {
+  return <Checkbox name="terms" label="${c("usage.terms")}" />
+}`}</UsageExample>
+        <UsageExample title={c("usage.withDescription")}>{`"use client"
 
-// ${c("usage.error")}
-<Checkbox label="${c("usage.required")}" error />`}</CodeBlock>
+import { Checkbox } from "@/components/ui/checkbox"
+
+export function MarketingCheckbox() {
+  return (
+    <Checkbox
+      name="marketing"
+      label="${c("usage.marketing")}"
+      description="${c("usage.marketingDescription")}"
+    />
+  )
+}`}</UsageExample>
+        <UsageExample title={c("usage.indeterminate")}>{`"use client"
+
+import { Checkbox } from "@/components/ui/checkbox"
+
+export function SelectAllCheckbox() {
+  return <Checkbox label="${c("usage.selectAll")}" indeterminate />
+}`}</UsageExample>
+        <UsageExample title={c("usage.error")}>{`"use client"
+
+import { Checkbox } from "@/components/ui/checkbox"
+
+export function RequiredCheckbox() {
+  return <Checkbox name="terms" label="${c("usage.required")}" required error />
+}`}</UsageExample>
       </section>
     </div>
   )

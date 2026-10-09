@@ -25,8 +25,9 @@ npx @smicolon/cli list
 
 Initialize fasla-ui in your project. Writes `components.json` and the `cn` helper
 (`lib/utils.ts`), then installs `clsx` and `tailwind-merge`, the two packages the
-helper imports, with your project's package manager. If that install fails, it
-prints the exact command to run.
+helper imports, with your project's package manager. On Tailwind 3 it installs
+`tailwind-merge@^2`, as tailwind-merge 3 supports only Tailwind 4. If that
+install fails, it prints the exact command to run.
 
 ```bash
 npx @smicolon/cli init

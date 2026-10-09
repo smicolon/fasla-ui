@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { ShimmerButton } from "@fasla-ui/effects/shimmer-button"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -93,17 +93,25 @@ export default function ShimmerButtonPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { ShimmerButton } from "@/components/ui/shimmer-button"
+        <UsageExample title="ShimmerButton">{`import { ShimmerButton } from "@/components/ui/shimmer-button"
 
-<ShimmerButton>${s("preview")}</ShimmerButton>
+export function ShopButton() {
+  return <ShimmerButton type="button">${s("preview")}</ShimmerButton>
+}`}</UsageExample>
+        <UsageExample title={s("coloursTitle")}>{`import { ShimmerButton } from "@/components/ui/shimmer-button"
 
-<ShimmerButton
-  background="linear-gradient(135deg, var(--chart-2), var(--chart-3))"
-  shimmerColor="color-mix(in oklch, var(--primary-foreground) 35%, transparent)"
-  shimmerSize="40%"
->
-  ${s("colours.a")}
-</ShimmerButton>`}</CodeBlock>
+export function ShopButton() {
+  return (
+    <ShimmerButton
+      type="button"
+      background="linear-gradient(135deg, var(--chart-2), var(--chart-3))"
+      shimmerColor="color-mix(in oklch, var(--primary-foreground) 35%, transparent)"
+      shimmerSize="40%"
+    >
+      ${s("colours.a")}
+    </ShimmerButton>
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

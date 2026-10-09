@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { Input } from "@fasla-ui/ui/input"
-import { ComponentPreview } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -85,6 +85,21 @@ export default function InputPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("props")}</h2>
         <PropsTable rows={props} />
+      </section>
+
+      {/* Usage */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("usage")}</h2>
+        <UsageExample>{`import { Input } from "@/components/ui/input"
+
+export function EmailField() {
+  return (
+    <div className="grid max-w-sm gap-2">
+      <label htmlFor="email" className="text-sm font-medium">${i("usage.label")}</label>
+      <Input id="email" name="email" type="email" placeholder="you@example.com" />
+    </div>
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

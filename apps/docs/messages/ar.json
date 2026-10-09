@@ -36,7 +36,8 @@
         "initials": "الأحرف الأولى أو الأيقونة، أيًّا كان ما يُمرَّر",
         "lazy": "في القوائم الطويلة: أجّل تحميل الصور خارج الشاشة، وقدّم مصدرًا أوضح للشاشات الكثيفة",
         "circle": "دائرة بإطار ونقطة حالة",
-        "inline": "داخل السطر، بجانب اسم يعرّف صاحبه"
+        "inline": "داخل السطر، بجانب اسم يعرّف صاحبه",
+        "sampleName": "ليلى حسن"
       },
       "props": {
         "variant": "ما يظهر: صورة أو أحرف أولى أو أيقونة.",
@@ -63,7 +64,9 @@
       },
       "usage": {
         "context": "سياق أوضح لقارئ الشاشة",
-        "awayLabel": "بعيد الآن"
+        "awayLabel": "بعيد الآن",
+        "statuses": "الحالات والأحجام",
+        "sampleName": "ليلى"
       },
       "props": {
         "status": "الحالة التي تُعرض.",
@@ -192,7 +195,8 @@
         "standardDescription": "من ثلاثة إلى خمسة أيام عمل",
         "express": "شحن سريع",
         "expressDescription": "يصل غدًا",
-        "selected": "الخيار المحدد:"
+        "selected": "الخيار المحدد:",
+        "codeLegend": "التوصيل"
       },
       "props": {
         "variant": "عنصر بسيط أو بطاقة بإطار.",
@@ -219,13 +223,16 @@
       "cliTitle": "ثبّت بأداة الأوامر (CLI)",
       "cliBody": "أسهل طريقة لإضافة المكوّنات هي الحزمة <code>@smicolon/cli</code>، وتحتاج إلى خطوتين.",
       "cliInit": "1. هيّئ فاصلة مرة واحدة في كل مشروع. يكتب هذا الأمر الملف <code>components.json</code>، الذي يقرؤه كل أمر <code>add</code>:",
+      "cliLegacy": "هل أعددت مشروعك بالإصدار 0.3 من <code>@smicolon/cli</code>؟ شغّل الأمر <code>init</code> أولًا. يُصلح هذا الأمر الملف <code>components.json</code>، الذي لا تستطيع أداة الأوامر في shadcn/ui قراءته قبل ذلك، وينقل الملفات التي وضعها الإصدار 0.3 في مجلد خاطئ.",
       "cliDepsFallback": "يكتب الأمر <code>init</code> أيضًا الدالة المساعدة <code>cn</code>، ويثبّت الحزمتين اللتين تستوردهما بمدير الحزم (package manager) في مشروعك. إذا فشل التثبيت، يطبع الأمر <code>init</code> الأمر الذي تشغّله، وهو أحد هذه الأوامر:",
+      "cliDepsTailwind3": "في Tailwind 3، يثبّت الأمر <code>tailwind-merge@^2</code>، لأن الإصدار 3 من tailwind-merge يدعم Tailwind 4 وحده. ويستبدل الأمر <code>init</code> أيضًا أي tailwind-merge إصداره 3، أو قد يصير 3:",
       "cliAdd": "2. أضف مكوّنًا:",
       "cliList": "اعرض كل ما يقدّمه السجل (registry):",
       "themeTitle": "المظهر (theme)",
-      "themeBody": "تأخذ المكوّنات كل ألوانها من المظهر (theme) في مشروعك. يسألك الأمر <code>init</code> أي الطبقتين تريد، أو ثبّت إحداهما بأداة الأوامر (CLI) الخاصة بمكتبة shadcn/ui. تحصل في الحالتين على الطبقة الأساسية.",
+      "themeBody": "تأخذ المكوّنات كل ألوانها من المظهر (theme) في مشروعك. يسألك الأمر <code>init</code> أي الطبقتين تريد ويثبّتها. تثبّت أوامر shadcn/ui أدناه طبقةً أيضًا، أو تنقل المشروع إلى الطبقة الأخرى لاحقًا. تحصل في الحالتين على الطبقة الأساسية.",
+      "themeSetupFirst": "تحتاج أوامر shadcn/ui إلى مشروع مُعَدّ مسبقًا فيه الملف <code>components.json</code>. في مشروع جديد، شغّل <code>npx @smicolon/cli init</code> أولًا، أو <code>npx shadcn@latest init</code>. إذا شغّلتها في مشروع ليس فيه هذا الملف، تُعِدّ أداة shadcn/ui المشروع بنفسها، وتحل ألوان القالب الجاهز (preset) الذي تختاره محل ألوان فاصلة.",
       "themeFasla": "تبدأ من الصفر: استخدم ألوان فاصلة. تحصل على ألوان فاصلة للوضعين الفاتح والداكن، مع نصف قطر الزوايا (radius) والخط Geist، فوق الطبقة الأساسية:",
-      "themeNext14": "في Next.js 14، احذف الرابط <code>font-geist.json</code> من الأمر، لأن <code>next/font</code> فيه لا يتضمن الخط Geist، والقالب الأساسي يحمّله أصلًا. يفعل الأمر <code>init</code> ذلك تلقائيًا.",
+      "themeNext14": "في Next.js 14، أعِدّ المشروع بالأمر <code>npx @smicolon/cli init</code>، لا بالأمر <code>shadcn init</code>: يكتب إعداد shadcn/ui أنماط Tailwind 4 ويحمّل الخط Geist من <code>next/font</code>، ولا يتوفر أيٌّ منهما في Next.js 14، فيفشل البناء. ثم احذف الرابط <code>font-geist.json</code> من الأمر، لأن قالب Next.js 14 يحمّل الخط Geist أصلًا:",
       "themeBrand": "لديك هوية بصرية: احتفظ بألوانك. تحصل على الطبقة الأساسية وحدها: الـ tokens غير الموجودة في shadcn/ui، مثل النجاح، التحذير، المعلومات، ألوان Soft الخفيفة، مع سلّم أحجام النص بارتفاعات أسطر عربية، وقواعد الكتابة العربية، والخط Cairo. لا تغيّر أي لون موجود في مشروعك:",
       "themeConfirm": "تسألك أداة الأوامر في shadcn/ui: <code>Existing CSS variables and components will be overwritten. Continue?</code>، والجواب الافتراضي هو لا، لذلك اكتب <code>y</code>. لا تغيّر الطبقة الأساسية <code>theme-base</code> أي لون موجود في مشروعك.",
       "themeArabicFont": "يظهر النص العربي بالخط Cairo عبر المتغير <code>--font-arabic</code>. لاستخدام خط عربي آخر، اجعل <code>--font-arabic</code> يشير إليه.",
@@ -233,8 +240,10 @@
       "manualTitle": "ثبّت يدويًا",
       "manualBody": "يمكنك أيضًا نسخ المكوّنات مباشرة من الشيفرة المصدرية.",
       "manualDeps": "1. ثبّت الاعتماديات (dependency):",
+      "manualTailwind3": "في Tailwind 3، ثبّت <code>tailwind-merge@^2</code> بدلًا منها. يدعم الإصدار 3 من tailwind-merge إطار Tailwind 4 وحده، ويحذف في Tailwind 3 الأصناف (classes) التي لا يعرفها، مثل <code>outline</code>:",
       "manualCn": "2. أضف الدالة المساعدة <code>cn</code> إلى مشروعك:",
-      "manualCopy": "3. انسخ الشيفرة المصدرية لكل مكوّن من صفحته."
+      "manualCopy": "3. انسخ كل مكوّن من ملفه في السجل (registry)، مثل <code>https://ui.smicolon.com/r/button.json</code> للمكوّن Button. يسرد الملف <code>https://ui.smicolon.com/r/registry.json</code> المكوّنات كلها.",
+      "manualCopyDetail": "في كل ملف، يحمل <code>files</code> الشيفرة المصدرية في <code>content</code>، والمسار الذي تحفظها فيه في <code>target</code>. يسرد <code>dependencies</code> الحزم التي تثبّتها، ويسرد <code>registryDependencies</code> مكوّنات فاصلة الأخرى التي يحتاجها المكوّن، فتنسخها بالطريقة نفسها."
     },
     "propsTable": {
       "prop": "الخاصية",
@@ -273,7 +282,8 @@
         "terms": "أوافق على الشروط والأحكام",
         "marketing": "رسائل العروض",
         "marketingDescription": "تصلك رسائل عن المنتجات الجديدة",
-        "required": "حقل مطلوب"
+        "required": "حقل مطلوب",
+        "selectAll": "تحديد الكل"
       },
       "props": {
         "checked": "حالة التحديد، وتُستخدم مع <code>onChange</code>.",
@@ -370,7 +380,8 @@
       "usage": {
         "basic": "قائمة منسدلة بسيطة",
         "sizes": "أحجام مختلفة",
-        "error": "حالة الخطأ"
+        "error": "حالة الخطأ",
+        "cityLabel": "المدينة"
       },
       "props": {
         "options": "الخيارات المتاحة للاختيار.",
@@ -406,7 +417,8 @@
         "resize": "خيارات تغيير الحجم",
         "error": "حالة الخطأ",
         "codePlaceholder": "اكتب رسالتك…",
-        "codeCount": "اكتب هنا…"
+        "codeCount": "اكتب هنا…",
+        "messageLabel": "الرسالة"
       },
       "props": {
         "variant": "النمط (variant): الافتراضي أو الخطأ.",
@@ -449,6 +461,9 @@
         "value": "قيمة الحقل، وتُستخدم مع <code>onChange</code>.",
         "onChange": "تُستدعى عند تغيير النص.",
         "className": "أصناف (class) إضافية للمكوّن."
+      },
+      "usage": {
+        "label": "البريد الإلكتروني"
       }
     },
     "combobox": {
@@ -684,7 +699,8 @@
         "featured": "مميّز",
         "iconAvatar": "الأيقونة والصورة الرمزية: تحدد الشارة حجمهما ولونهما",
         "removable": "قابلة للإزالة",
-        "removeFilter": "إزالة عامل التصفية"
+        "removeFilter": "إزالة عامل التصفية",
+        "tones": "الأنماط والألوان الدلالية"
       },
       "props": {
         "children": "نص التسمية.",

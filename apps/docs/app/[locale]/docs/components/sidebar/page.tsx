@@ -12,7 +12,7 @@ import {
   SidebarItem,
   SidebarCollapseButton,
 } from "@fasla-ui/blocks/sidebar/Sidebar"
-import { ComponentPreview } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -106,6 +106,59 @@ export default function SidebarPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("props")}</h2>
         <PropsTable rows={props} />
+      </section>
+
+      {/* Usage */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("usage")}</h2>
+        <UsageExample>{`"use client"
+
+import { useState } from "react"
+import { LayoutDashboard, Package, Settings, ShoppingCart } from "lucide-react"
+import {
+  Sidebar,
+  SidebarHeader,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarItem,
+  SidebarCollapseButton,
+} from "@/components/blocks/sidebar"
+
+const items = [
+  { label: "${s("items.dashboard")}", icon: <LayoutDashboard className="size-4" /> },
+  { label: "${s("items.orders")}", icon: <ShoppingCart className="size-4" /> },
+  { label: "${s("items.products")}", icon: <Package className="size-4" /> },
+  { label: "${s("items.settings")}", icon: <Settings className="size-4" /> },
+]
+
+export function StoreSidebar() {
+  const [collapsed, setCollapsed] = useState(false)
+
+  return (
+    <Sidebar collapsed={collapsed} onCollapsedChange={setCollapsed}>
+      <SidebarHeader>
+        {!collapsed && <span className="font-semibold">${s("brand")}</span>}
+      </SidebarHeader>
+      <SidebarContent>
+        <SidebarGroup label={collapsed ? undefined : "${s("group")}"}>
+          {items.map((item, index) => (
+            <SidebarItem key={item.label} icon={item.icon} active={index === 0} collapsed={collapsed}>
+              {item.label}
+            </SidebarItem>
+          ))}
+        </SidebarGroup>
+      </SidebarContent>
+      <SidebarFooter>
+        <SidebarCollapseButton
+          collapsed={collapsed}
+          onCollapsedChange={setCollapsed}
+          aria-label={collapsed ? "${s("expand")}" : "${s("collapse")}"}
+        />
+      </SidebarFooter>
+    </Sidebar>
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

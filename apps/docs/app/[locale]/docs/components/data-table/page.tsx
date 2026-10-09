@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl"
 
 import { useState } from "react"
 import { DataTable, Pagination, type Column } from "@fasla-ui/blocks/data-table/DataTable"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -123,19 +123,41 @@ export default function DataTablePage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { DataTable, Column } from "@/components/blocks/data-table"
+        <UsageExample>{`"use client"
+
+import { useState } from "react"
+import { DataTable, type Column } from "@/components/blocks/data-table"
+
+interface User {
+  id: number
+  name: string
+  email: string
+  role: string
+}
+
+const users: User[] = [
+${users.map((u) => `  { id: ${u.id}, name: "${u.name}", email: "${u.email}", role: "${u.role}" },`).join("\n")}
+]
 
 const columns: Column<User>[] = [
   { id: "name", header: "${d("columns.name")}", cell: (row) => row.name },
   { id: "email", header: "${d("columns.email")}", cell: (row) => row.email },
+  { id: "role", header: "${d("columns.role")}", cell: (row) => row.role },
 ]
 
-<DataTable
-  data={users}
-  columns={columns}
-  getRowKey={(row) => row.id}
-  onRowClick={(row) => console.log(row)}
-/>`}</CodeBlock>
+export function UsersTable() {
+  const [selected, setSelected] = useState<number>()
+
+  return (
+    <DataTable
+      data={users}
+      columns={columns}
+      getRowKey={(row) => row.id}
+      selectedKey={selected}
+      onRowClick={(row) => setSelected(row.id)}
+    />
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl"
 import { FormSection, FormField, FormActions } from "@fasla-ui/blocks/form-section/FormSection"
 import { Input } from "@fasla-ui/ui/input"
 import { Button } from "@fasla-ui/ui/button"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -88,18 +88,26 @@ export default function FormSectionPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { FormSection, FormField, FormActions } from "@/components/blocks/form-section"
+        <UsageExample>{`import { FormSection, FormField, FormActions } from "@/components/blocks/form-section"
+import { Input } from "@/components/ui/input"
+import { Button } from "@/components/ui/button"
 
-<FormSection title="${f("usage.title")}" description="${f("usage.description")}">
-  <FormField label="${f("usage.email")}" required>
-    <Input type="email" />
-  </FormField>
-</FormSection>
+export function AccountForm() {
+  return (
+    <form>
+      <FormSection title="${f("usage.title")}" description="${f("usage.description")}">
+        <FormField label="${f("usage.email")}" htmlFor="email" required>
+          <Input id="email" name="email" type="email" required />
+        </FormField>
+      </FormSection>
 
-<FormActions>
-  <Button variant="outline">${f("actions.cancel")}</Button>
-  <Button>${f("actions.save")}</Button>
-</FormActions>`}</CodeBlock>
+      <FormActions>
+        <Button type="reset" variant="outline">${f("actions.cancel")}</Button>
+        <Button type="submit">${f("actions.save")}</Button>
+      </FormActions>
+    </form>
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

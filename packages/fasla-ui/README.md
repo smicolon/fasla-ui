@@ -129,12 +129,21 @@ export function MyComponent() {
 ## Theme
 
 Components take every colour from your theme. `init` asks which of two layers
-you want; both include the base layer.
+you want and installs it; both include the base layer. The shadcn commands below
+install one too, or switch a project to the other one later.
+
+They need a project that is already set up, with a `components.json`: in a new
+project, run `npx @smicolon/cli init` first, or `npx shadcn@latest init`. Without
+one, the shadcn CLI sets the project up itself, and its preset's colours replace
+Fasla's. On Next.js 14, use `npx @smicolon/cli init`: `shadcn init` writes
+Tailwind 4 styles and loads Geist from `next/font`, which Next.js 14 has neither of.
 
 ```bash
 # Starting from scratch: use Fasla's colours (palette, radius, Geist).
-# On Next.js 14, leave out the font-geist.json URL: next/font there has no Geist.
 npx shadcn@latest add https://ui.smicolon.com/r/theme.json https://ui.smicolon.com/r/font-geist.json
+
+# The same on Next.js 14, without Geist: its template already loads it.
+npx shadcn@latest add https://ui.smicolon.com/r/theme.json
 
 # I have a brand: keep my colours (base layer only)
 npx shadcn@latest add https://ui.smicolon.com/r/theme-base.json

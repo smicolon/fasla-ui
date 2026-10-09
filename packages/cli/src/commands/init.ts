@@ -36,6 +36,70 @@ export function cn(...inputs: ClassValue[]) {
 export const CN_PACKAGES = ["clsx", "tailwind-merge"]
 
 /**
+ * The cn packages as they install for this project's Tailwind. tailwind-merge
+ * 3 knows only Tailwind 4's classes: it reads `outline` as the width
+ * `outline-1` also sets and drops it, and on Tailwind 3, where `outline-1`
+ * sets no style, the outline Switch lost its track and focus ring. Tailwind 3
+ * gets tailwind-merge 2, the last line that supports it.
+ */
+export function cnPackages(tailwindMajor: 3 | 4 = 4): string[] {
+  return tailwindMajor === 3 ? ["clsx", "tailwind-merge@^2"] : CN_PACKAGES
+}
+
+/** The name in an install spec: `tailwind-merge` from `tailwind-merge@^2`, `@scope/x` from `@scope/x@1`. */
+const specName = (spec: string) => spec.replace(/(?<=.)@.*$/, "")
+
+/**
+ * Whether a package.json range can only resolve to major 2 or earlier: `^2`,
+ * `~2.6`, `2.x`, `2.6.1`. Anything else counts as no — `>=2`, `*`, `latest`,
+ * `^2 || ^3`, a tag, an alias — since it may resolve to 3, today or at the next
+ * install. Reading it strictly costs at most a reinstall of tailwind-merge 2.
+ */
+export function rangeStaysBelow3(range: string): boolean {
+  return /^\s*(?:[\^~]|=|v)?\s*[0-2](?:\.(?:\d+|x|\*)){0,2}(?:-[0-9A-Za-z.-]+)?\s*$/.test(range)
+}
+
+/**
+ * Why a tailwind-merge the project already has can't stay on Tailwind 3:
+ * a listed range that may resolve to 3 or later, or an installed copy that is
+ * 3 or later whatever the range says. Undefined when it can stay, or when there
+ * is none. `shadcn init` installs tailwind-merge 3 whatever the Tailwind.
+ */
+export async function tailwindMergeTooNew(cwd: string): Promise<string | undefined> {
+  const pkg = await fs.readJson(path.join(cwd, "package.json")).catch(() => ({}))
+  const listed: string | undefined = pkg.dependencies?.["tailwind-merge"] ?? pkg.devDependencies?.["tailwind-merge"]
+  if (listed === undefined) return undefined
+  const installed = await installedVersion(cwd, "tailwind-merge")
+  if (installed !== undefined && Number(installed.split(".")[0]) >= 3) return `tailwind-merge ${installed} is installed`
+  if (!rangeStaysBelow3(listed)) return `package.json lists tailwind-merge "${listed}", which can install 3`
+  return undefined
+}
+
+/**
+ * The version of `name` installed where Node would resolve it from `cwd`: its
+ * node_modules, then each folder above, as in a monorepo. Read from the file,
+ * not require.resolve: tailwind-merge 3's exports don't include package.json.
+ */
+async function installedVersion(cwd: string, name: string): Promise<string | undefined> {
+  for (let dir = path.resolve(cwd); ; dir = path.dirname(dir)) {
+    const pkg = await fs.readJson(path.join(dir, "node_modules", name, "package.json")).catch(() => undefined)
+    if (typeof pkg?.version === "string") return pkg.version
+    if (path.dirname(dir) === dir) return undefined
+  }
+}
+
+/**
+ * The cn packages to install: the ones package.json doesn't list, and on
+ * Tailwind 3 tailwind-merge@^2 in place of one that is or may become 3.
+ */
+export async function cnPackagesToInstall(cwd: string, tailwindMajor: 3 | 4 = 4): Promise<string[]> {
+  const wanted = cnPackages(tailwindMajor)
+  const missing = new Set(await missingPackages(cwd, wanted.map(specName)))
+  const replace = tailwindMajor === 3 && (await tailwindMergeTooNew(cwd)) !== undefined
+  return wanted.filter((spec) => missing.has(specName(spec)) || (replace && specName(spec) === "tailwind-merge"))
+}
+
+/**
  * Writes the cn helper at the utils alias when nothing is there yet, and says
  * whether it did. Every registry component imports it.
  */
@@ -55,11 +119,18 @@ export async function writeCnHelper(cwd: string, utilsAlias: string, aliasRoot: 
 export async function installCnPackages(
   cwd: string,
   pm: PackageManager,
-  { enabled = true, run }: { enabled?: boolean; run?: Runner } = {}
+  { enabled = true, run, tailwindMajor = 4 }: { enabled?: boolean; run?: Runner; tailwindMajor?: 3 | 4 } = {}
 ): Promise<boolean> {
-  const missing = await missingPackages(cwd, CN_PACKAGES)
+  const missing = await cnPackagesToInstall(cwd, tailwindMajor)
   if (missing.length === 0) return true
   const command = installCommand(pm, missing)
+  // Say why when it replaces a tailwind-merge the project chose.
+  const tooNew = tailwindMajor === 3 ? await tailwindMergeTooNew(cwd) : undefined
+  if (tooNew) {
+    console.log(
+      chalk.yellow(`\n${tooNew}. tailwind-merge 3 supports only Tailwind 4; this project is on Tailwind 3, so it gets tailwind-merge@^2.`)
+    )
+  }
   if (!enabled) {
     console.log(`\nInstall the packages the cn helper imports:\n  ${chalk.cyan(command)}`)
     return true
@@ -161,7 +232,7 @@ export function initCommand() {
         process.exit(1)
       }
 
-      if (!(await installCnPackages(cwd, pm, { enabled: options.install !== false }))) process.exit(1)
+      if (!(await installCnPackages(cwd, pm, { enabled: options.install !== false, tailwindMajor: style.tailwindMajor }))) process.exit(1)
 
       const css = typeof config.tailwind?.css === "string" ? config.tailwind.css : style.css
       const theme = { flag: options.theme, yes, install: options.install !== false, nextMajor: style.nextMajor }

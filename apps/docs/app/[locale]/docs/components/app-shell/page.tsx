@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { AppShell } from "@fasla-ui/blocks/app-shell/AppShell"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -78,19 +78,41 @@ export default function AppShellPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { AppShell } from "@/components/blocks/app-shell"
+        <UsageExample>{`import type { ReactNode } from "react"
+import { AppShell } from "@/components/blocks/app-shell"
 
-export function Layout() {
+const nav = [
+${NAV.map((item) => `  { label: "${a(`nav.${item}`)}", href: "/${item}" },`).join("\n")}
+]
+
+export function AppLayout({ children }: { children: ReactNode }) {
   return (
     <AppShell
-      sidebar={<Sidebar />}
-      header={<Header />}
       sidebarWidth="md"
+      sidebar={
+        <div className="flex h-full flex-col">
+          <div className="flex h-14 items-center border-b px-4">
+            <span className="font-semibold">${a("brand")}</span>
+          </div>
+          <nav className="flex-1 space-y-1 p-2">
+            {nav.map((item) => (
+              <a key={item.href} href={item.href} className="flex rounded-md px-3 py-2 text-sm hover:bg-accent">
+                {item.label}
+              </a>
+            ))}
+          </nav>
+        </div>
+      }
+      header={
+        <div className="flex h-14 items-center px-4">
+          <span className="text-sm text-muted-foreground">${a("welcome")}</span>
+        </div>
+      }
     >
       {children}
     </AppShell>
   )
-}`}</CodeBlock>
+}`}</UsageExample>
       </section>
     </div>
   )
