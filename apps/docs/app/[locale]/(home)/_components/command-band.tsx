@@ -8,10 +8,8 @@ import { ArrowEndIcon } from "./icons"
 import { installCommand, landingLinks } from "./links"
 
 /**
- * Where the command may wrap: after the scope, `npx @smicolon/` then
- * `fasla-ui@latest init`. At the band's size the command is about 21em and the
- * band holds about 16em at every width, as the type scales with the screen, so
- * it sets on two lines; no space-separated split fits, and this one does.
+ * Where the command wraps on a phone: after the scope, `npx @smicolon/` then
+ * `fasla-ui@latest init`. No split at a space leaves two lines that fit.
  */
 const scopeEnd = installCommand.indexOf("/") + 1
 
@@ -47,12 +45,16 @@ export function CommandBand() {
     <section aria-labelledby="final-h" className="pb-[var(--l-section)]">
       <div className="l-wrap">
         <div className="rounded-2xl bg-muted px-[clamp(20px,6vw,88px)] py-[clamp(32px,6vw,88px)]">
-          {/* Each half never wraps; <wbr> is the one place the line can break, and
+          {/* From 640px up, one line at 3.4vw: the command is about 22em with the
+              caret and the band about 80% of the screen, capped near 1072px, so
+              it fits with room to spare up to the 46px cap (48px leaves Arabic
+              under 8px), and is 21.8px at its smallest, above the 17px body text. Below 640px, two lines at 18 to
+              26px: <wbr> is the one break, between halves that never wrap, and
               it adds nothing to copied text, so a selection is still one line. */}
           <h2
             id="final-h"
             dir="ltr"
-            className="text-left font-mono text-[length:clamp(15px,4.9vw,66px)] font-medium leading-[1.15] tracking-[-0.03em] rtl:!text-right"
+            className="text-left font-mono text-[length:clamp(18px,5.8vw,26px)] font-medium leading-[1.15] tracking-[-0.03em] sm:whitespace-nowrap sm:text-[length:min(3.4vw,46px)] rtl:!text-right"
           >
             <span className="whitespace-nowrap">
               <span className="text-muted-foreground">$ </span>
