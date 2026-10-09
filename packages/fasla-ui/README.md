@@ -22,10 +22,13 @@ A professional React UI component library built on **shadcn/ui** primitives. Pro
 Components are copied into your project with the CLI, as with shadcn/ui:
 
 ```bash
-npx @smicolon/cli init              # once per project: writes components.json and lib/utils.ts,
-                                    # and installs clsx and tailwind-merge, which lib/utils.ts imports
-npx @smicolon/cli add button card shimmer-button
+npx @smicolon/fasla-ui@latest init   # once per project: writes components.json and lib/utils.ts,
+                                     # and installs clsx and tailwind-merge, which lib/utils.ts imports
+npx @smicolon/fasla-ui@latest add button card shimmer-button
 ```
+
+Keep `@latest`: without it, npx runs the copy of this package a project already
+has installed, and 0.4 or older has no CLI.
 
 `add` ends by printing the install command for the packages the components
 need, in your project's package manager. For `button card shimmer-button` with npm it is:
@@ -34,8 +37,9 @@ need, in your project's package manager. For `button card shimmer-button` with n
 npm install @radix-ui/react-slot class-variance-authority lucide-react framer-motion
 ```
 
-This package holds the design tokens, the Tailwind preset and the motion
-presets, not the components. Install it when you want those:
+The CLI runs from this package without installing it. The package also holds
+the design tokens, the Tailwind preset and the motion presets, not the
+components. Install it when you want those:
 
 ```bash
 npm install @smicolon/fasla-ui
@@ -133,10 +137,11 @@ you want and installs it; both include the base layer. The shadcn commands below
 install one too, or switch a project to the other one later.
 
 They need a project that is already set up, with a `components.json`: in a new
-project, run `npx @smicolon/cli init` first, or `npx shadcn@latest init`. Without
-one, the shadcn CLI sets the project up itself, and its preset's colours replace
-Fasla's. On Next.js 14, use `npx @smicolon/cli init`: `shadcn init` writes
-Tailwind 4 styles and loads Geist from `next/font`, which Next.js 14 has neither of.
+project, run `npx @smicolon/fasla-ui@latest init` first, or
+`npx shadcn@latest init`. Without one, the shadcn CLI sets the project up
+itself, and its preset's colours replace Fasla's. On Next.js 14, use
+`npx @smicolon/fasla-ui@latest init`: `shadcn init` writes Tailwind 4 styles and
+loads Geist from `next/font`, which Next.js 14 has neither of.
 
 ```bash
 # Starting from scratch: use Fasla's colours (palette, radius, Geist).
@@ -164,7 +169,6 @@ Visit [ui.smicolon.com](https://ui.smicolon.com) for full documentation, example
 
 ## Related
 
-- [@smicolon/cli](https://www.npmjs.com/package/@smicolon/cli) - CLI for adding components
 - [shadcn/ui](https://ui.shadcn.com) - The foundation this library builds on
 - [Tailwind CSS](https://tailwindcss.com) - Utility-first CSS framework
 - [Framer Motion](https://www.framer.com/motion/) - Animation library for React

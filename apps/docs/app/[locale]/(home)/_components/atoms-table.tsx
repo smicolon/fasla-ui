@@ -64,7 +64,7 @@ export async function AtomsTable() {
             dir="ltr"
             className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap rounded-md border bg-background px-3 py-2 font-mono text-[13px] text-foreground [unicode-bidi:isolate]"
           >
-            npx @smicolon/cli add button  →  components/ui/button.tsx
+            npx @smicolon/fasla-ui@latest add button  →  components/ui/button.tsx
           </span>
         </div>
       </div>

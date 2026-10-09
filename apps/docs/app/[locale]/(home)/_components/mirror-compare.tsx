@@ -487,7 +487,7 @@ function Specimen({ k, lang }: { k: RuleKey; lang: "en" | "ar" }) {
             +966 50 000 1234
           </span>
           <div className={caption}>{t("install")}</div>
-          <span className={ltrBox}>npx @smicolon/cli add button</span>
+          <span className={ltrBox}>npx @smicolon/fasla-ui@latest add button</span>
         </div>
       )
     case "r4":
