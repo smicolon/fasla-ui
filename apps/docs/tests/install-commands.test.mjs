@@ -29,9 +29,10 @@ const files = [
 // npx, pnpm dlx, yarn dlx or bunx, then the package.
 const RUNNER = String.raw`(?:npx(?:\s+(?:-y|--yes))?|pnpm\s+dlx|yarn\s+dlx|bunx(?:\s+--bun)?)\s+`
 const OLD_CLI = new RegExp(`${RUNNER}@smicolon/cli\\b`, "g")
-// `@latest` must end the token: `\b` would let `@latest-extra` or `@latest.1`
-// through. A backtick, quote or `<` may follow it in the sources.
-const UNTAGGED = new RegExp(`${RUNNER}@smicolon/fasla-ui(?!@latest(?![\\w.-]))`, "g")
+// `@latest` must end the token. Only whitespace, the end of the line, or what
+// closes a command in the sources (a backtick, quote, `<`, `)`, `]`, `}`) may
+// follow it, so `@latest-extra`, `@latest.1` or `@latest@0.4.2` fail.
+const UNTAGGED = new RegExp(`${RUNNER}@smicolon/fasla-ui(?!@latest(?=[\\s\`'"<)\\]}]|$))`, "gm")
 
 function offenders(pattern) {
   return files.flatMap((file) =>
@@ -54,10 +55,10 @@ describe("Install commands", () => {
     for (const line of ["npx @smicolon/cli init", "pnpm dlx @smicolon/cli add button", "bunx --bun @smicolon/cli list"]) {
       expect(line.match(OLD_CLI), line).not.toBeNull()
     }
-    for (const line of ["npx @smicolon/fasla-ui init", "npx -y @smicolon/fasla-ui add", "npx @smicolon/fasla-ui@0.5.0 init", "npx @smicolon/fasla-ui@latest-extra init", "npx @smicolon/fasla-ui@latest.1 init", "yarn dlx @smicolon/fasla-ui"]) {
+    for (const line of ["npx @smicolon/fasla-ui init", "npx -y @smicolon/fasla-ui add", "npx @smicolon/fasla-ui@0.5.0 init", "npx @smicolon/fasla-ui@latest-extra init", "npx @smicolon/fasla-ui@latest.1 init", "npx @smicolon/fasla-ui@latest@0.4.2 init", "npx @smicolon/fasla-ui@latest/x", "npx @smicolon/fasla-ui@latest+1", "npx @smicolon/fasla-ui@latest:", "yarn dlx @smicolon/fasla-ui"]) {
       expect(line.match(UNTAGGED), line).not.toBeNull()
     }
-    for (const line of ["npx @smicolon/fasla-ui@latest init", "`npx @smicolon/fasla-ui@latest`", "<code>npx @smicolon/fasla-ui@latest init</code>", "npm install @smicolon/fasla-ui", "Set up with <code>@smicolon/cli</code>?"]) {
+    for (const line of ["npx @smicolon/fasla-ui@latest init", "npx @smicolon/fasla-ui@latest", "`npx @smicolon/fasla-ui@latest`", "\"npx @smicolon/fasla-ui@latest\"", "<code>npx @smicolon/fasla-ui@latest init</code>", "(npx @smicolon/fasla-ui@latest)", "npm install @smicolon/fasla-ui", "Set up with <code>@smicolon/cli</code>?"]) {
       expect(line.match(OLD_CLI) ?? line.match(UNTAGGED), line).toBeNull()
     }
   })
