@@ -20,8 +20,7 @@
   },
   "include": [
     "src",
-    "registry",
-    "bin"
+    "registry"
   ],
   "exclude": [
     "node_modules",

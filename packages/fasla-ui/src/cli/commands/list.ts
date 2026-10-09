@@ -10,7 +10,7 @@ import { fetchRegistry, type RegistryItem } from "../registry.js"
  */
 export function addExample(items: Pick<RegistryItem, "name">[]): string | undefined {
   const name = items.find((item) => item.name === "button")?.name ?? items[0]?.name
-  return name ? `npx @smicolon/cli add ${name}` : undefined
+  return name ? `npx @smicolon/fasla-ui@latest add ${name}` : undefined
 }
 
 /** `list`: prints the registry's components by type. */

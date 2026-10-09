@@ -68,9 +68,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-artifacts
-          path: |
-            packages/fasla-ui/dist
-            packages/cli/dist
+          path: packages/fasla-ui/dist
           retention-days: 7
 
   test:
@@ -119,8 +117,9 @@ jobs:
 
   # Every item must also build in the oldest stack Fasla supports. This builds
   # the CLI and the registry from the PR, installs every item into a fresh
-  # Next.js 14 app (React 18, Tailwind 3) with `@smicolon/cli`, then runs tsc
-  # and `next build` with Next's ESLint config, which fails on lint errors.
+  # Next.js 14 app (React 18, Tailwind 3) with the CLI in @smicolon/fasla-ui,
+  # then runs tsc and `next build` with Next's ESLint config, which fails on
+  # lint errors.
   next14-build:
     name: Registry builds on Next.js 14
     runs-on: ubuntu-latest

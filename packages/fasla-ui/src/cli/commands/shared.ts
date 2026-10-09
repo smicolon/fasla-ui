@@ -169,7 +169,7 @@ async function repairLegacyOrExit(
   if (!yes) {
     const { repair } = await prompts({ type: "confirm", name: "repair", message: "Repair it?", initial: true })
     if (!repair) {
-      console.log(chalk.yellow("Left as it is. Run npx @smicolon/cli init to repair it later."))
+      console.log(chalk.yellow("Left as it is. Run npx @smicolon/fasla-ui@latest init to repair it later."))
       process.exit(0)
     }
   }
