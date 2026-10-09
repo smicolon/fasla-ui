@@ -1,5 +1,12 @@
 # @smicolon/cli
 
+## [0.5.1](https://github.com/smicolon/fasla-ui/compare/cli-v0.5.0...cli-v0.5.1) (2026-10-09)
+
+
+### Bug Fixes
+
+* make the theme, docs and examples work on a new project ([a9d7fab](https://github.com/smicolon/fasla-ui/commit/a9d7fab00a858d94b2b022bf65d4b718bf22ff1a))
+
 ## [0.5.0](https://github.com/smicolon/fasla-ui/compare/cli-v0.4.0...cli-v0.5.0) (2026-10-07)
 
 

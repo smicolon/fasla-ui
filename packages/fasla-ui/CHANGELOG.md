@@ -1,5 +1,12 @@
 # @smicolon/fasla-ui
 
+## [0.4.1](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.4.0...fasla-ui-v0.4.1) (2026-10-09)
+
+
+### Bug Fixes
+
+* make the theme, docs and examples work on a new project ([a9d7fab](https://github.com/smicolon/fasla-ui/commit/a9d7fab00a858d94b2b022bf65d4b718bf22ff1a))
+
 ## [0.4.0](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.3.0...fasla-ui-v0.4.0) (2026-10-07)
 
 
