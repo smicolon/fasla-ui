@@ -12,7 +12,10 @@ import { platformSite, type Platform } from "./wall-platforms"
  * For the three Clutch reviews the quote is the reviewer's own heading there:
  * the body smicolon.com shows for them is Clutch's third-person summary.
  * The pictures are the ones smicolon.com shows: Rasmus Aaberg's photo, and
- * each company's logo for the rest.
+ * each company's logo for the rest (media.smicolon.com, read 9 Oct 2026).
+ * Most logos are square tiles with their own background, so they fill the
+ * circle like a photo, as smicolon.com draws them; Nexpay's and Rentrant's
+ * are wordmarks and keep the padded dark disc.
  * A badge links to the review where it was posted; testimonials sent to
  * Smicolon directly have none.
  * Ratings are the CMS's own, out of 5; Rasmus Aaberg's has none, so his card
@@ -21,18 +24,18 @@ import { platformSite, type Platform } from "./wall-platforms"
 const PEOPLE: { name: string; image: string; kind: "photo" | "logo"; platform?: Platform; href?: string; rating?: number }[] = [
   { name: "Rasmus Aaberg", image: "/landing/img/wall/rasmus-aaberg.webp", kind: "photo" },
   { name: "Sean Holland", image: "/landing/img/wall/sean-holland.svg", kind: "logo", platform: "upwork", href: "https://www.upwork.com/agencies/smicolon/", rating: 5 },
-  { name: "Rad Dougall", image: "/landing/img/wall/rad-dougall.png", kind: "logo", platform: "upwork", href: "https://www.upwork.com/agencies/smicolon/", rating: 5 },
-  { name: "Kurt Thigpen", image: "/landing/img/wall/kurt-thigpen.png", kind: "logo", platform: "upwork", href: "https://www.upwork.com/agencies/smicolon/", rating: 5 },
-  { name: "Raymond Jenkins", image: "/landing/img/wall/raymond-jenkins.png", kind: "logo", platform: "upwork", href: "https://www.upwork.com/agencies/smicolon/", rating: 5 },
-  { name: "Amaroua Zidani", image: "/landing/img/wall/amaroua-zidani.svg", kind: "logo", platform: "upwork", href: "https://www.upwork.com/agencies/smicolon/", rating: 5 },
-  { name: "Claudio Kantner", image: "/landing/img/wall/claudio-kantner.png", kind: "logo", rating: 5 },
-  { name: "Zayad Abeya", image: "/landing/img/wall/zayad-abeya.svg", kind: "logo", rating: 5 },
-  { name: "Namit Jindal", image: "/landing/img/wall/namit-jindal.png", kind: "logo", platform: "upwork", href: "https://www.upwork.com/agencies/smicolon/", rating: 5 },
+  { name: "Rad Dougall", image: "/landing/img/wall/rad-dougall.webp", kind: "photo", platform: "upwork", href: "https://www.upwork.com/agencies/smicolon/", rating: 5 },
+  { name: "Kurt Thigpen", image: "/landing/img/wall/kurt-thigpen.webp", kind: "photo", platform: "upwork", href: "https://www.upwork.com/agencies/smicolon/", rating: 5 },
+  { name: "Raymond Jenkins", image: "/landing/img/wall/raymond-jenkins.webp", kind: "photo", platform: "upwork", href: "https://www.upwork.com/agencies/smicolon/", rating: 5 },
+  { name: "Amaroua Zidani", image: "/landing/img/wall/amaroua-zidani.webp", kind: "photo", platform: "upwork", href: "https://www.upwork.com/agencies/smicolon/", rating: 5 },
+  { name: "Claudio Kantner", image: "/landing/img/wall/claudio-kantner.webp", kind: "photo", rating: 5 },
+  { name: "Zayad Abeya", image: "/landing/img/wall/zayad-abeya.webp", kind: "photo", rating: 5 },
+  { name: "Namit Jindal", image: "/landing/img/wall/namit-jindal.webp", kind: "photo", platform: "upwork", href: "https://www.upwork.com/agencies/smicolon/", rating: 5 },
   { name: "Jeremy", image: "/landing/img/wall/jeremy.png", kind: "logo", platform: "upwork", href: "https://www.upwork.com/agencies/smicolon/", rating: 5 },
-  { name: "Mahmoud Darweash", image: "/landing/img/wall/mahmoud-darweash.svg", kind: "logo", rating: 5 },
-  { name: "Melvin Raaj", image: "/landing/img/wall/melvin-raaj.png", kind: "logo", platform: "clutch", href: "https://clutch.co/go-to-review/65426c35-7d85-44c8-bca7-a73fdacc7f0e/201975", rating: 5 },
-  { name: "Justin Weiland", image: "/landing/img/wall/justin-weiland.png", kind: "logo", platform: "clutch", href: "https://clutch.co/go-to-review/65426c35-7d85-44c8-bca7-a73fdacc7f0e/246485", rating: 5 },
-  { name: "Alexander Chumak", image: "/landing/img/wall/alexander-chumak.svg", kind: "logo", platform: "clutch", href: "https://clutch.co/go-to-review/65426c35-7d85-44c8-bca7-a73fdacc7f0e/322812", rating: 5 },
+  { name: "Mahmoud Darweash", image: "/landing/img/wall/mahmoud-darweash.webp", kind: "photo", rating: 5 },
+  { name: "Melvin Raaj", image: "/landing/img/wall/melvin-raaj.webp", kind: "photo", platform: "clutch", href: "https://clutch.co/go-to-review/65426c35-7d85-44c8-bca7-a73fdacc7f0e/201975", rating: 5 },
+  { name: "Justin Weiland", image: "/landing/img/wall/justin-weiland.webp", kind: "photo", platform: "clutch", href: "https://clutch.co/go-to-review/65426c35-7d85-44c8-bca7-a73fdacc7f0e/246485", rating: 5 },
+  { name: "Alexander Chumak", image: "/landing/img/wall/alexander-chumak.webp", kind: "photo", platform: "clutch", href: "https://clutch.co/go-to-review/65426c35-7d85-44c8-bca7-a73fdacc7f0e/322812", rating: 5 },
 ]
 
 /**
