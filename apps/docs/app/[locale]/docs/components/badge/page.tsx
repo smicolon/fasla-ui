@@ -233,14 +233,20 @@ export function OrderBadges() {
 import { Badge } from "@/components/ui/badge"
 import { Avatar } from "@/components/ui/avatar"
 
-const user = { name: "${b("examples.person")}", photo: "/avatars/layla.jpg" }
+interface Reviewer {
+  name: string
+  // ${b("usage.photoNote")}
+  photo?: string
+}
+
+const reviewer: Reviewer = { name: "${b("examples.person")}" }
 
 export function ReviewerBadges() {
   return (
     <div className="flex flex-wrap items-center gap-2">
       <Badge icon={<Star />}>${b("usage.featured")}</Badge>
-      <Badge avatar={<Avatar size="12" radius="rounded" src={user.photo} name="" />}>
-        {user.name}
+      <Badge avatar={<Avatar size="12" radius="rounded" src={reviewer.photo} name="" />}>
+        {reviewer.name}
       </Badge>
     </div>
   )

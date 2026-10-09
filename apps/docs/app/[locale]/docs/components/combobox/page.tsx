@@ -156,16 +156,23 @@ export default function ComboboxPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <UsageExample title={c("usage.basic")}>{`import { Combobox } from "@/components/ui/combobox"
+        <UsageExample title={c("usage.basic")}>{`"use client"
+
+import { useState } from "react"
+import { Combobox } from "@/components/ui/combobox"
 
 const countries = [
 ${codeOptions}
 ]
 
 export function CountryCombobox() {
+  const [country, setCountry] = useState("")
+
   return (
     <Combobox
       options={countries}
+      value={country}
+      onChange={(value) => setCountry(value as string)}
       placeholder="${c("usage.codePlaceholder")}"
       searchPlaceholder="${c("text.search")}"
       emptyText="${c("text.empty")}"
@@ -182,7 +189,7 @@ ${codeOptions}
 ]
 
 export function ControlledCountryCombobox() {
-  const [country, setCountry] = useState("")
+  const [country, setCountry] = useState("${initialOptions[0]!.value}")
 
   return (
     <Combobox
