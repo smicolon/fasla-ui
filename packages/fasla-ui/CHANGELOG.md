@@ -1,5 +1,24 @@
 # @smicolon/fasla-ui
 
+## [0.4.0](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.3.0...fasla-ui-v0.4.0) (2026-10-07)
+
+
+### ⚠ BREAKING CHANGES
+
+* **skeleton:** rebuild Skeleton to match the Figma set ([#42](https://github.com/smicolon/fasla-ui/issues/42))
+
+### Features
+
+* **cli:** use the project's package manager, repair 0.3 setups ([#41](https://github.com/smicolon/fasla-ui/issues/41)) ([61ec6b0](https://github.com/smicolon/fasla-ui/commit/61ec6b06b04873f392619ffce5bfa4aa1a7cb8ff))
+* ship the Fasla theme as base and colours registry items ([#43](https://github.com/smicolon/fasla-ui/issues/43)) ([7327c0c](https://github.com/smicolon/fasla-ui/commit/7327c0cc3537e857199bcd1d8cc85424e73f231a))
+* **skeleton:** rebuild Skeleton to match the Figma set ([#42](https://github.com/smicolon/fasla-ui/issues/42)) ([8b83ae3](https://github.com/smicolon/fasla-ui/commit/8b83ae3f0bd1edaa2cdee36333455ad94e30886c))
+
+
+### Bug Fixes
+
+* make the documented install work on React 19 and Tailwind 4 ([#39](https://github.com/smicolon/fasla-ui/issues/39)) ([1190b17](https://github.com/smicolon/fasla-ui/commit/1190b17b5ce85fea761ede18badba28d78e98188))
+* **ui:** make all components build on Next 14 with lint on ([#44](https://github.com/smicolon/fasla-ui/issues/44)) ([ece6c35](https://github.com/smicolon/fasla-ui/commit/ece6c35143ff8be3620b2aa622d614b6793aefab))
+
 ## [0.3.0](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.2.4...fasla-ui-v0.3.0) (2026-10-07)
 
 
