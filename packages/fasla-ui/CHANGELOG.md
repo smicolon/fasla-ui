@@ -1,5 +1,12 @@
 # @smicolon/fasla-ui
 
+## [0.5.1](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.5.0...fasla-ui-v0.5.1) (2026-10-09)
+
+
+### Documentation
+
+* install with npx @smicolon/fasla-ui@latest ([#52](https://github.com/smicolon/fasla-ui/issues/52)) ([373eb40](https://github.com/smicolon/fasla-ui/commit/373eb40ca667cddf507150e3abefbe1824389692))
+
 ## [0.5.0](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.4.2...fasla-ui-v0.5.0) (2026-10-09)
 
 
