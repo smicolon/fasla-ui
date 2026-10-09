@@ -49,8 +49,10 @@ describe("theme (Fasla's colours)", () => {
   })
 
   it("sets the page in Geist, outweighing a template's own body font, with fallbacks for Next.js and fontsource", () => {
-    expect(theme.css).toEqual({
-      body: { "font-family": LATIN_FONT, "-webkit-font-smoothing": "antialiased", "-moz-osx-font-smoothing": "grayscale" },
+    expect(theme.css!.body).toEqual({
+      "font-family": LATIN_FONT,
+      "-webkit-font-smoothing": "antialiased",
+      "-moz-osx-font-smoothing": "grayscale",
     })
     expect(LATIN_FONT).toMatch(/^var\(--font-sans, var\(--font-geist-sans, "Geist Variable", "Geist"\)\)/)
     expect(theme.tailwind!.config.theme.extend.fontFamily).toEqual({
@@ -58,6 +60,19 @@ describe("theme (Fasla's colours)", () => {
     })
     // The base layer leaves a brand's Latin font alone.
     expect(JSON.stringify(base.css)).not.toContain("font-sans")
+  })
+
+  it("keeps the page light under a dark OS until .dark, against the Next.js template's media rule", () => {
+    const light = { "--background": mode.tokens.background!.light, "--foreground": mode.tokens.foreground!.light }
+    const dark = { "--background": mode.tokens.background!.dark, "--foreground": mode.tokens.foreground!.dark }
+    expect(theme.css!["@media (prefers-color-scheme: dark)"]).toEqual({ ":root:not(.dark)": light })
+    // Unlayered, so they outweigh the template's unlayered :root on Tailwind 3,
+    // where the CLI writes the palette into @layer base.
+    expect(theme.css![":root"]).toEqual(light)
+    expect(theme.css![".dark"]).toEqual(dark)
+    // The same values the palette has: these only restate it outside a layer.
+    expect(light["--background"]).toBe(theme.cssVars!.light!.background)
+    expect(dark["--foreground"]).toBe(theme.cssVars!.dark!.foreground)
   })
 
   it("brings the base theme with it, and leaves Geist to be added beside it", () => {
@@ -90,6 +105,12 @@ describe("theme-base", () => {
     }
     const declared = Object.keys(light).filter((key) => !key.startsWith("--leading-"))
     expect(declared).toEqual(extras.map((name) => `--${name}`))
+  })
+
+  it("paints the page in the theme's colours, under :where() so a project's own body rule wins", () => {
+    const layer = base.css!["@layer base"] as Record<string, Record<string, string>>
+    expect(layer[":where(body)"]).toEqual({ "background-color": "var(--background)", color: "var(--foreground)" })
+    expect(layer).not.toHaveProperty("body")
   })
 
   it("maps only the extras on Tailwind 4", () => {

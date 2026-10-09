@@ -55,12 +55,16 @@ export default async function InstallationPage({
             <pre className="whitespace-pre-wrap break-words rounded-lg bg-terminal p-4">
               <code className="text-green-400">npx @smicolon/cli init</code>
             </pre>
+            {/* 0.3's components.json is one the shadcn CLI rejects outright. */}
+            <p className="text-sm text-muted-foreground mt-2">{i.rich("cliLegacy", rich)}</p>
           </div>
 
           <div>
             {/* init installs these itself; this is the fallback when that fails. */}
             <p className="text-sm text-muted-foreground mb-2">{i.rich("cliDepsFallback", rich)}</p>
             <PackageManagerTabs packages="clsx tailwind-merge" />
+            <p className="text-sm text-muted-foreground mt-2 mb-2">{i.rich("cliDepsTailwind3", rich)}</p>
+            <PackageManagerTabs packages="clsx tailwind-merge@^2" />
           </div>
 
           <div>
@@ -87,11 +91,16 @@ export default async function InstallationPage({
         <h2 className="text-2xl font-semibold">{i("themeTitle")}</h2>
         <p className="text-muted-foreground">{i.rich("themeBody", rich)}</p>
 
+        {/* Run where there is no components.json, `shadcn add` sets the project
+            up itself, and its preset's colours win over Fasla's. */}
+        <p className="rounded-lg border border-border p-4 text-sm">{i.rich("themeSetupFirst", rich)}</p>
+
         <div className="space-y-4">
           <div>
             <p className="text-sm font-medium mb-2">{i.rich("themeFasla", rich)}</p>
             <PackageManagerTabs run={shadcnAdd("theme", "font-geist")} />
-            <p className="text-sm text-muted-foreground mt-2">{i.rich("themeNext14", rich)}</p>
+            <p className="text-sm text-muted-foreground mt-2 mb-2">{i.rich("themeNext14", rich)}</p>
+            <PackageManagerTabs run={shadcnAdd("theme")} />
           </div>
 
           <div>
@@ -117,6 +126,8 @@ export default async function InstallationPage({
           <div>
             <p className="text-sm font-medium mb-2">{i("manualDeps")}</p>
             <PackageManagerTabs packages="class-variance-authority clsx tailwind-merge framer-motion" />
+            <p className="text-sm text-muted-foreground mt-2 mb-2">{i.rich("manualTailwind3", rich)}</p>
+            <PackageManagerTabs packages="class-variance-authority clsx tailwind-merge@^2 framer-motion" />
           </div>
 
           <div>
@@ -133,7 +144,8 @@ export function cn(...inputs: ClassValue[]) {
           </div>
 
           <div>
-            <p className="text-sm font-medium mb-2">{i("manualCopy")}</p>
+            <p className="text-sm font-medium mb-2">{i.rich("manualCopy", rich)}</p>
+            <p className="text-sm text-muted-foreground">{i.rich("manualCopyDetail", rich)}</p>
           </div>
         </div>
       </div>

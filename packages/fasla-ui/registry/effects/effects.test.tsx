@@ -61,6 +61,67 @@ describe("TypewriterText", () => {
     expect(first).not.toHaveBeenCalled()
     expect(latest).toHaveBeenCalledTimes(1)
   })
+
+  it("starts a new text from nothing, never showing the old one", () => {
+    vi.useFakeTimers()
+    const { container, rerender } = render(<TypewriterText text="Hello" speed={10} cursor={false} />)
+    act(() => {
+      vi.advanceTimersByTime(100)
+    })
+    expect(container.textContent).toBe("Hello")
+    rerender(<TypewriterText text="Bye" speed={10} cursor={false} />)
+    expect(container.textContent).toBe("")
+    act(() => {
+      vi.advanceTimersByTime(100)
+    })
+    expect(container.textContent).toBe("Bye")
+  })
+
+  it("types the text again after loopDelay when looping", () => {
+    vi.useFakeTimers()
+    const { container } = render(<TypewriterText text="Hi" speed={10} loop loopDelay={50} cursor={false} />)
+    act(() => {
+      vi.advanceTimersByTime(40)
+    })
+    expect(container.textContent).toBe("Hi")
+    // Done at 20ms; the second pass starts at 70ms and types its next letter at 80.
+    act(() => {
+      vi.advanceTimersByTime(35)
+    })
+    expect(container.textContent).toBe("H")
+  })
+})
+
+describe("Typewriter under reduced motion", () => {
+  const reduceMotion = () =>
+    vi.spyOn(window, "matchMedia").mockImplementation(
+      (query: string) =>
+        ({
+          matches: query.includes("reduce"),
+          media: query,
+          addEventListener: () => {},
+          removeEventListener: () => {},
+        }) as unknown as MediaQueryList
+    )
+
+  afterEach(() => {
+    vi.restoreAllMocks()
+  })
+
+  it("TypewriterText shows the whole text at once, with no cursor, and reports it complete", () => {
+    reduceMotion()
+    const onComplete = vi.fn()
+    const { container } = render(<TypewriterText text="Your order is on its way." onComplete={onComplete} />)
+    expect(container.textContent).toBe("Your order is on its way.")
+    expect(onComplete).toHaveBeenCalledTimes(1)
+  })
+
+  it("TypewriterWords shows the first word, still", async () => {
+    reduceMotion()
+    const { TypewriterWords } = await import("./typewriter-text/typewriter-text")
+    const { container } = render(<TypewriterWords words={["linen", "wool"]} />)
+    expect(container.textContent).toBe("linen")
+  })
 })
 
 describe("SpotlightCard", () => {

@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { Select } from "@fasla-ui/ui/select"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -93,25 +93,46 @@ export default function SelectPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { Select } from "@/components/ui/select"
+        <UsageExample title={s("usage.basic")}>{`import { Select } from "@/components/ui/select"
 
-const options = [
+const cities = [
 ${codeOptions}
 ]
 
-// ${s("usage.basic")}
-<Select
-  options={options}
-  placeholder="${s("placeholder")}"
-/>
+export function CitySelect() {
+  return (
+    <Select
+      name="city"
+      aria-label="${s("usage.cityLabel")}"
+      options={cities}
+      placeholder="${s("placeholder")}"
+    />
+  )
+}`}</UsageExample>
+        <UsageExample title={s("usage.sizes")}>{`import { Select } from "@/components/ui/select"
 
-// ${s("usage.sizes")}
-<Select options={options} selectSize="sm" />
-<Select options={options} selectSize="default" />
-<Select options={options} selectSize="lg" />
+const cities = [
+${codeOptions}
+]
 
-// ${s("usage.error")}
-<Select options={options} error />`}</CodeBlock>
+export function CitySelectSizes() {
+  return (
+    <div className="flex flex-col gap-4">
+      <Select aria-label="${s("usage.cityLabel")}" options={cities} selectSize="sm" />
+      <Select aria-label="${s("usage.cityLabel")}" options={cities} selectSize="default" />
+      <Select aria-label="${s("usage.cityLabel")}" options={cities} selectSize="lg" />
+    </div>
+  )
+}`}</UsageExample>
+        <UsageExample title={s("usage.error")}>{`import { Select } from "@/components/ui/select"
+
+const cities = [
+${codeOptions}
+]
+
+export function CitySelectWithError() {
+  return <Select name="city" aria-label="${s("usage.cityLabel")}" options={cities} error aria-invalid />
+}`}</UsageExample>
       </section>
     </div>
   )

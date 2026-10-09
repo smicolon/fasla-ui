@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { Avatar } from "@fasla-ui/ui/avatar"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, CodeBlock, UsageExample } from "@/components/component-preview"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
 
@@ -140,23 +140,62 @@ npx @smicolon/cli add avatar status-indicator`}</CodeBlock>
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { Avatar } from "@/components/ui/avatar"
+        <UsageExample title={a("usage.photo")}>{`import { Avatar } from "@/components/ui/avatar"
 
-// ${a("usage.photo")}
-<Avatar src={user.photo} name={user.name} />
+const user = { name: "${a("usage.sampleName")}", photo: "/avatars/layla.jpg" }
 
-// ${a("usage.initials")}
-<Avatar variant="initials" name={user.name} />
-<Avatar variant="icon" name={user.name} />
+export function UserAvatar() {
+  return <Avatar src={user.photo} name={user.name} />
+}`}</UsageExample>
+        <UsageExample title={a("usage.initials")}>{`import { Avatar } from "@/components/ui/avatar"
 
-// ${a("usage.lazy")}
-<Avatar src={user.photo} srcSet={\`\${user.photo} 1x, \${user.photo2x} 2x\`} loading="lazy" name={user.name} />
+const user = { name: "${a("usage.sampleName")}" }
 
-// ${a("usage.circle")}
-<Avatar src={user.photo} name={user.name} radius="rounded" border status="online" />
+export function UserAvatarWithoutPhoto() {
+  return (
+    <div className="flex items-center gap-4">
+      <Avatar variant="initials" name={user.name} />
+      <Avatar variant="icon" name={user.name} />
+    </div>
+  )
+}`}</UsageExample>
+        <UsageExample title={a("usage.lazy")}>{`import { Avatar } from "@/components/ui/avatar"
 
-// ${a("usage.inline")}
-<Avatar size="12" src={user.photo} name="" /> {user.name}`}</CodeBlock>
+const user = {
+  name: "${a("usage.sampleName")}",
+  photo: "/avatars/layla.jpg",
+  photo2x: "/avatars/layla@2x.jpg",
+}
+
+export function LazyUserAvatar() {
+  return (
+    <Avatar
+      src={user.photo}
+      srcSet={\`\${user.photo} 1x, \${user.photo2x} 2x\`}
+      loading="lazy"
+      name={user.name}
+    />
+  )
+}`}</UsageExample>
+        <UsageExample title={a("usage.circle")}>{`import { Avatar } from "@/components/ui/avatar"
+
+const user = { name: "${a("usage.sampleName")}", photo: "/avatars/layla.jpg" }
+
+export function OnlineUserAvatar() {
+  return <Avatar src={user.photo} name={user.name} radius="rounded" border status="online" />
+}`}</UsageExample>
+        <UsageExample title={a("usage.inline")}>{`import { Avatar } from "@/components/ui/avatar"
+
+const user = { name: "${a("usage.sampleName")}", photo: "/avatars/layla.jpg" }
+
+export function UserByline() {
+  return (
+    <span className="inline-flex items-center gap-2">
+      <Avatar size="12" src={user.photo} name="" />
+      {user.name}
+    </span>
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { TypewriterText, TypewriterWords } from "@fasla-ui/effects/typewriter-text/typewriter-text"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -82,13 +82,20 @@ export default function TypewriterTextPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { TypewriterText, TypewriterWords } from "@/components/ui/typewriter-text"
+        <UsageExample title="TypewriterText">{`import { TypewriterText } from "@/components/ui/typewriter-text"
 
-<TypewriterText text="${w("preview")}" speed={60} loop />
+export function OrderStatus() {
+  return <TypewriterText text="${w("preview")}" speed={60} loop />
+}`}</UsageExample>
+        <UsageExample title="TypewriterWords">{`import { TypewriterWords } from "@/components/ui/typewriter-text"
 
-<p>
-  ${w("wordsPrefix")} <TypewriterWords words={[${words.map((word) => `"${word}"`).join(", ")}]} />
-</p>`}</CodeBlock>
+export function NewIn() {
+  return (
+    <p>
+      ${w("wordsPrefix")} <TypewriterWords words={[${words.map((word) => `"${word}"`).join(", ")}]} />
+    </p>
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

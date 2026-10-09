@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { Button } from "@fasla-ui/ui/button"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -91,15 +91,15 @@ export default function ButtonPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { Button } from "@/components/ui/button"
+        <UsageExample>{`import { Button } from "@/components/ui/button"
 
-export function Example() {
+export function SaveButton() {
   return (
-    <Button variant="default" size="default">
+    <Button type="submit" variant="default" size="default">
       ${b("preview")}
     </Button>
   )
-}`}</CodeBlock>
+}`}</UsageExample>
       </section>
     </div>
   )

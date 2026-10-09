@@ -4,7 +4,7 @@ import { useLocale, useTranslations } from "next-intl"
 
 import { useState } from "react"
 import { Radio } from "@fasla-ui/ui/radio"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { PropsTable, type PropRow } from "@/components/props-table"
 import { componentRoutes, routeText } from "@/lib/seo-routes"
@@ -151,31 +151,78 @@ export default function RadioPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { Radio } from "@/components/ui/radio"
+        <UsageExample title={r("usage.commentGroup")}>{`import { Radio } from "@/components/ui/radio"
 
-// ${r("usage.commentGroup")}
-<Radio name="plan" value="standard" label="${r("usage.codeStandard")}" />
-<Radio name="plan" value="express" label="${r("usage.codeExpress")}" />
+export function DeliveryOptions() {
+  return (
+    <fieldset className="flex flex-col gap-3">
+      <legend className="mb-2 text-sm font-medium">${r("usage.codeLegend")}</legend>
+      <Radio name="delivery" value="standard" label="${r("usage.codeStandard")}" defaultChecked />
+      <Radio name="delivery" value="express" label="${r("usage.codeExpress")}" />
+    </fieldset>
+  )
+}`}</UsageExample>
+        <UsageExample title={r("usage.commentDescription")}>{`import { Radio } from "@/components/ui/radio"
 
-// ${r("usage.commentDescription")}
-<Radio
-  name="plan"
-  value="courier"
-  label="${r("usage.codeCourier")}"
-  description="${r("usage.codeCourierDescription")}"
-/>
+export function DeliveryOptions() {
+  return (
+    <fieldset className="flex flex-col gap-3">
+      <legend className="mb-2 text-sm font-medium">${r("usage.codeLegend")}</legend>
+      <Radio
+        name="delivery"
+        value="standard"
+        label="${r("usage.codeStandard")}"
+        description="${r("usage.standardDescription")}"
+        defaultChecked
+      />
+      <Radio
+        name="delivery"
+        value="courier"
+        label="${r("usage.codeCourier")}"
+        description="${r("usage.codeCourierDescription")}"
+      />
+    </fieldset>
+  )
+}`}</UsageExample>
+        <UsageExample title={r("usage.commentLayout")}>{`import { Radio } from "@/components/ui/radio"
 
-// ${r("usage.commentLayout")}
-<Radio variant="layout" name="plan" value="express" label="${r("usage.codeExpress")}" />
+export function DeliveryCards() {
+  return (
+    <fieldset className="flex flex-col gap-3">
+      <legend className="mb-2 text-sm font-medium">${r("usage.codeLegend")}</legend>
+      <Radio variant="layout" name="delivery" value="standard" label="${r("usage.codeStandard")}" defaultChecked />
+      <Radio variant="layout" name="delivery" value="express" label="${r("usage.codeExpress")}" />
+    </fieldset>
+  )
+}`}</UsageExample>
+        <UsageExample title={r("usage.commentControlled")}>{`"use client"
 
-// ${r("usage.commentControlled")}
-<Radio
-  name="plan"
-  value="express"
-  label="${r("usage.codeExpress")}"
-  checked={plan === "express"}
-  onChange={(e) => setPlan(e.target.value)}
-/>`}</CodeBlock>
+import { useState } from "react"
+import { Radio } from "@/components/ui/radio"
+
+export function ControlledDeliveryOptions() {
+  const [delivery, setDelivery] = useState("standard")
+
+  return (
+    <fieldset className="flex flex-col gap-3">
+      <legend className="mb-2 text-sm font-medium">${r("usage.codeLegend")}</legend>
+      <Radio
+        name="delivery"
+        value="standard"
+        label="${r("usage.codeStandard")}"
+        checked={delivery === "standard"}
+        onChange={(e) => setDelivery(e.target.value)}
+      />
+      <Radio
+        name="delivery"
+        value="express"
+        label="${r("usage.codeExpress")}"
+        checked={delivery === "express"}
+        onChange={(e) => setDelivery(e.target.value)}
+      />
+    </fieldset>
+  )
+}`}</UsageExample>
         <ComponentPreview>
           <div className="flex w-full max-w-sm flex-col gap-2">
             {[

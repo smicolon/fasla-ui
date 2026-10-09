@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 
 import { BorderBeam, GlowingBorder } from "@fasla-ui/effects/border-beam/border-beam"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -83,15 +83,24 @@ export default function BorderBeamPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import { BorderBeam, GlowingBorder } from "@/components/ui/border-beam"
+        <UsageExample title="BorderBeam">{`import { BorderBeam } from "@/components/ui/border-beam"
 
-<BorderBeam className="rounded-xl" duration={3}>
-  <div className="p-6">${b("card.title")}</div>
-</BorderBeam>
+export function SaleCard() {
+  return (
+    <BorderBeam className="rounded-xl" duration={3}>
+      <div className="p-6">${b("card.title")}</div>
+    </BorderBeam>
+  )
+}`}</UsageExample>
+        <UsageExample title="GlowingBorder">{`import { GlowingBorder } from "@/components/ui/border-beam"
 
-<GlowingBorder glowColor="var(--chart-2)" intensity="lg">
-  <div className="p-6">${b("card.title")}</div>
-</GlowingBorder>`}</CodeBlock>
+export function GlowingSaleCard() {
+  return (
+    <GlowingBorder glowColor="var(--chart-2)" intensity="lg">
+      <div className="p-6">${b("card.title")}</div>
+    </GlowingBorder>
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

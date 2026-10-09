@@ -3,7 +3,7 @@
 import { useLocale, useTranslations } from "next-intl"
 
 import { StatusIndicator, STATUS_LABELS } from "@fasla-ui/ui/status-indicator"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, CodeBlock, UsageExample } from "@/components/component-preview"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
 
@@ -98,13 +98,23 @@ npx @smicolon/cli add status-indicator`}</CodeBlock>
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
         <p className="text-muted-foreground">{s("onAvatar")}</p>
-        <CodeBlock>{`import { StatusIndicator } from "@/components/ui/status-indicator"
+        <UsageExample title={s("usage.statuses")}>{`import { StatusIndicator } from "@/components/ui/status-indicator"
 
-<StatusIndicator status="online" />
-<StatusIndicator status="busy" size="4" />
+export function PresenceDots() {
+  return (
+    <div className="flex items-center gap-4">
+      <StatusIndicator status="online" />
+      <StatusIndicator status="busy" size="4" />
+    </div>
+  )
+}`}</UsageExample>
+        <UsageExample title={s("usage.context")}>{`import { StatusIndicator } from "@/components/ui/status-indicator"
 
-// ${s("usage.context")}
-<StatusIndicator status="away" label={\`\${user.name} ${s("usage.awayLabel")}\`} />`}</CodeBlock>
+const user = { name: "${s("usage.sampleName")}" }
+
+export function UserPresence() {
+  return <StatusIndicator status="away" label={\`\${user.name} ${s("usage.awayLabel")}\`} />
+}`}</UsageExample>
       </section>
     </div>
   )

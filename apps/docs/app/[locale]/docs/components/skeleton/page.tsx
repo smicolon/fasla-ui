@@ -9,7 +9,7 @@ import {
   SkeletonListItem,
   SkeletonCard,
 } from "@fasla-ui/ui/skeleton"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
@@ -135,30 +135,51 @@ export default function SkeletonPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import {
-  Skeleton,
-  SkeletonText,
-  SkeletonListItem,
-  SkeletonCard,
-} from "@/components/ui/skeleton"
+        <UsageExample title={s("usage.basic")}>{`import { Skeleton } from "@/components/ui/skeleton"
 
-// ${s("usage.basic")}
-<Skeleton className="h-4 w-48" />
+export function TitleSkeleton() {
+  return <Skeleton className="h-4 w-48" />
+}`}</UsageExample>
+        <UsageExample title={s("usage.text")}>{`import { SkeletonText } from "@/components/ui/skeleton"
 
-// ${s("usage.text")}
-<SkeletonText lines={3} />
+export function ParagraphSkeleton() {
+  return <SkeletonText lines={3} />
+}`}</UsageExample>
+        <UsageExample title={s("usage.listItem")}>{`import { SkeletonListItem } from "@/components/ui/skeleton"
 
-// ${s("usage.listItem")}
-<SkeletonListItem />
+export function RowSkeleton() {
+  return <SkeletonListItem />
+}`}</UsageExample>
+        <UsageExample title={s("usage.card")}>{`import { SkeletonCard } from "@/components/ui/skeleton"
 
-// ${s("usage.card")}
-<SkeletonCard />
+export function CardSkeleton() {
+  return <SkeletonCard />
+}`}</UsageExample>
+        <UsageExample title={s("usage.loading")}>{`import { SkeletonListItem } from "@/components/ui/skeleton"
 
-// ${s("usage.loading")}
-<section aria-busy={isLoading} aria-labelledby="comments">
-  <h3 id="comments">${s("examples.comments")}</h3>
-  {isLoading ? <SkeletonListItem /> : <CommentList />}
-</section>`}</CodeBlock>
+interface Comment {
+  id: number
+  text: string
+}
+
+export function Comments({ comments }: { comments?: Comment[] }) {
+  const isLoading = comments === undefined
+
+  return (
+    <section aria-busy={isLoading} aria-labelledby="comments">
+      <h3 id="comments">${s("examples.comments")}</h3>
+      {isLoading ? (
+        <SkeletonListItem />
+      ) : (
+        <ul>
+          {comments.map((comment) => (
+            <li key={comment.id}>{comment.text}</li>
+          ))}
+        </ul>
+      )}
+    </section>
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

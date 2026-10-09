@@ -36,7 +36,8 @@
         "initials": "Initials or the icon, whatever else is passed",
         "lazy": "Long lists: defer photos below the fold, and give dense screens a sharper source",
         "circle": "Circle with a border and a presence dot",
-        "inline": "Inline, beside a name that already says who it is"
+        "inline": "Inline, beside a name that already says who it is",
+        "sampleName": "Layla Hassan"
       },
       "props": {
         "variant": "What it shows: photo, initials or icon.",
@@ -63,7 +64,9 @@
       },
       "usage": {
         "context": "More context for screen readers",
-        "awayLabel": "is away"
+        "awayLabel": "is away",
+        "statuses": "Statuses and sizes",
+        "sampleName": "Layla"
       },
       "props": {
         "status": "Presence to show.",
@@ -192,7 +195,8 @@
         "standardDescription": "3–5 business days",
         "express": "Express",
         "expressDescription": "Arrives tomorrow",
-        "selected": "Selected:"
+        "selected": "Selected:",
+        "codeLegend": "Delivery"
       },
       "props": {
         "variant": "A plain control or a bordered card.",
@@ -219,13 +223,16 @@
       "cliTitle": "Using the CLI",
       "cliBody": "The easiest way to add components is the <code>@smicolon/cli</code> package. It takes two steps.",
       "cliInit": "1. Initialize Fasla, once per project. This writes <code>components.json</code>, which every <code>add</code> reads:",
+      "cliLegacy": "Set up with <code>@smicolon/cli</code> 0.3? Run <code>init</code> first. It repairs the project’s <code>components.json</code>, which the shadcn CLI can’t read until then, and moves the files 0.3 put in the wrong folder.",
       "cliDepsFallback": "<code>init</code> also writes the <code>cn</code> helper and installs the two packages it imports with your project’s package manager. If that install fails, <code>init</code> prints the command to run, which is one of these:",
+      "cliDepsTailwind3": "On Tailwind 3, the command installs <code>tailwind-merge@^2</code>, as tailwind-merge 3 supports only Tailwind 4. <code>init</code> also replaces a tailwind-merge that is, or could become, 3:",
       "cliAdd": "2. Add a component:",
       "cliList": "List everything the registry offers:",
       "themeTitle": "Theme",
-      "themeBody": "Components take every colour from your theme. <code>init</code> asks which of two layers you want, or you can install one with the shadcn CLI. Both give you the base layer.",
+      "themeBody": "Components take every colour from your theme. <code>init</code> asks which of two layers you want and installs it. The shadcn CLI commands below install a layer too, or switch a project to the other one later. Both give you the base layer.",
+      "themeSetupFirst": "The shadcn commands need a project that is already set up, with a <code>components.json</code>. In a new project, run <code>npx @smicolon/cli init</code> first, or <code>npx shadcn@latest init</code>. Run in a project without one, the shadcn CLI sets the project up itself, and the colours of the preset it picks replace Fasla’s.",
       "themeFasla": "Starting from scratch: use Fasla’s colours. Fasla’s light and dark palette, its radius and the Geist font, on top of the base layer:",
-      "themeNext14": "On Next.js 14, leave out the <code>font-geist.json</code> URL: <code>next/font</code> there has no Geist, and the Next.js 14 template already loads it. <code>init</code> does this for you.",
+      "themeNext14": "On Next.js 14, set the project up with <code>npx @smicolon/cli init</code>, not <code>shadcn init</code>: shadcn’s setup writes Tailwind 4 styles and loads Geist from <code>next/font</code>, and Next.js 14 has neither, so the build fails. Then leave out <code>font-geist.json</code>, as the Next.js 14 template already loads Geist:",
       "themeBrand": "I have a brand: keep my colours. The base layer only: the tokens shadcn doesn’t have (success, warning, info and the soft tints), the type scale with Arabic line heights, the Arabic setting and the Cairo font. It changes no colour you already have:",
       "themeConfirm": "The shadcn CLI asks <code>Existing CSS variables and components will be overwritten. Continue?</code> with No as the default, so type <code>y</code>. The base layer, <code>theme-base</code>, doesn’t change any colour your project already has.",
       "themeArabicFont": "Arabic text is set in Cairo through the <code>--font-arabic</code> variable. To use another Arabic font, point <code>--font-arabic</code> at it.",
@@ -233,8 +240,10 @@
       "manualTitle": "Manual Installation",
       "manualBody": "You can also copy components directly from the source code.",
       "manualDeps": "1. Install dependencies:",
+      "manualTailwind3": "On Tailwind 3, install <code>tailwind-merge@^2</code> instead. tailwind-merge 3 supports only Tailwind 4, and on Tailwind 3 it drops classes it doesn’t know, such as <code>outline</code>:",
       "manualCn": "2. Add the cn utility to your project:",
-      "manualCopy": "3. Copy the component source code from each component page."
+      "manualCopy": "3. Copy each component from its file in the registry, such as <code>https://ui.smicolon.com/r/button.json</code> for Button. <code>https://ui.smicolon.com/r/registry.json</code> lists them all.",
+      "manualCopyDetail": "In each file, <code>files</code> holds the source in <code>content</code> and the path to save it at in <code>target</code>. <code>dependencies</code> lists the packages to install, and <code>registryDependencies</code> the other Fasla components it needs, which you copy the same way."
     },
     "propsTable": {
       "prop": "Prop",
@@ -273,7 +282,8 @@
         "terms": "Accept terms and conditions",
         "marketing": "Marketing emails",
         "marketingDescription": "Receive emails about new products",
-        "required": "Required field"
+        "required": "Required field",
+        "selectAll": "Select all"
       },
       "props": {
         "checked": "Checked state. Use it with <code>onChange</code>.",
@@ -370,7 +380,8 @@
       "usage": {
         "basic": "Basic select",
         "sizes": "Different sizes",
-        "error": "Error state"
+        "error": "Error state",
+        "cityLabel": "City"
       },
       "props": {
         "options": "Options to choose from.",
@@ -406,7 +417,8 @@
         "resize": "Different resize options",
         "error": "Error state",
         "codePlaceholder": "Type your message...",
-        "codeCount": "Type here..."
+        "codeCount": "Type here...",
+        "messageLabel": "Message"
       },
       "props": {
         "variant": "Visual style: default or error.",
@@ -449,6 +461,9 @@
         "value": "Field value. Use it with <code>onChange</code>.",
         "onChange": "Called when the text changes.",
         "className": "Extra classes for the component."
+      },
+      "usage": {
+        "label": "Email"
       }
     },
     "combobox": {
@@ -684,7 +699,8 @@
         "featured": "Featured",
         "iconAvatar": "Icon and avatar — the badge sizes and colours them",
         "removable": "Removable",
-        "removeFilter": "Remove filter"
+        "removeFilter": "Remove filter",
+        "tones": "Variants and tones"
       },
       "props": {
         "children": "The label.",
