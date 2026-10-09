@@ -63,6 +63,8 @@ export default async function InstallationPage({
             {/* init installs these itself; this is the fallback when that fails. */}
             <p className="text-sm text-muted-foreground mb-2">{i.rich("cliDepsFallback", rich)}</p>
             <PackageManagerTabs packages="clsx tailwind-merge" />
+            <p className="text-sm text-muted-foreground mt-2 mb-2">{i.rich("cliDepsTailwind3", rich)}</p>
+            <PackageManagerTabs packages="clsx tailwind-merge@^2" />
           </div>
 
           <div>

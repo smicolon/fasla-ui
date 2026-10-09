@@ -50,22 +50,53 @@ export function cnPackages(tailwindMajor: 3 | 4 = 4): string[] {
 const specName = (spec: string) => spec.replace(/(?<=.)@.*$/, "")
 
 /**
+ * Whether a package.json range can only resolve to major 2 or earlier: `^2`,
+ * `~2.6`, `2.x`, `2.6.1`. Anything else counts as no — `>=2`, `*`, `latest`,
+ * `^2 || ^3`, a tag, an alias — since it may resolve to 3, today or at the next
+ * install. Reading it strictly costs at most a reinstall of tailwind-merge 2.
+ */
+export function rangeStaysBelow3(range: string): boolean {
+  return /^\s*(?:[\^~]|=|v)?\s*[0-2](?:\.(?:\d+|x|\*)){0,2}(?:-[0-9A-Za-z.-]+)?\s*$/.test(range)
+}
+
+/**
+ * Why a tailwind-merge the project already has can't stay on Tailwind 3:
+ * a listed range that may resolve to 3 or later, or an installed copy that is
+ * 3 or later whatever the range says. Undefined when it can stay, or when there
+ * is none. `shadcn init` installs tailwind-merge 3 whatever the Tailwind.
+ */
+export async function tailwindMergeTooNew(cwd: string): Promise<string | undefined> {
+  const pkg = await fs.readJson(path.join(cwd, "package.json")).catch(() => ({}))
+  const listed: string | undefined = pkg.dependencies?.["tailwind-merge"] ?? pkg.devDependencies?.["tailwind-merge"]
+  if (listed === undefined) return undefined
+  const installed = await installedVersion(cwd, "tailwind-merge")
+  if (installed !== undefined && Number(installed.split(".")[0]) >= 3) return `tailwind-merge ${installed} is installed`
+  if (!rangeStaysBelow3(listed)) return `package.json lists tailwind-merge "${listed}", which can install 3`
+  return undefined
+}
+
+/**
+ * The version of `name` installed where Node would resolve it from `cwd`: its
+ * node_modules, then each folder above, as in a monorepo. Read from the file,
+ * not require.resolve: tailwind-merge 3's exports don't include package.json.
+ */
+async function installedVersion(cwd: string, name: string): Promise<string | undefined> {
+  for (let dir = path.resolve(cwd); ; dir = path.dirname(dir)) {
+    const pkg = await fs.readJson(path.join(dir, "node_modules", name, "package.json")).catch(() => undefined)
+    if (typeof pkg?.version === "string") return pkg.version
+    if (path.dirname(dir) === dir) return undefined
+  }
+}
+
+/**
  * The cn packages to install: the ones package.json doesn't list, and on
- * Tailwind 3 a listed tailwind-merge 3 or later, which `shadcn init` installs
- * whatever the Tailwind.
+ * Tailwind 3 tailwind-merge@^2 in place of one that is or may become 3.
  */
 export async function cnPackagesToInstall(cwd: string, tailwindMajor: 3 | 4 = 4): Promise<string[]> {
   const wanted = cnPackages(tailwindMajor)
   const missing = new Set(await missingPackages(cwd, wanted.map(specName)))
-  const listed = await listedRange(cwd, "tailwind-merge")
-  const tooNew = tailwindMajor === 3 && listed !== undefined && Number(/\d+/.exec(listed)?.[0]) >= 3
-  return wanted.filter((spec) => missing.has(specName(spec)) || (tooNew && specName(spec) === "tailwind-merge"))
-}
-
-/** The version range package.json lists for `name`, if it lists one. */
-async function listedRange(cwd: string, name: string): Promise<string | undefined> {
-  const pkg = await fs.readJson(path.join(cwd, "package.json")).catch(() => ({}))
-  return pkg.dependencies?.[name] ?? pkg.devDependencies?.[name]
+  const replace = tailwindMajor === 3 && (await tailwindMergeTooNew(cwd)) !== undefined
+  return wanted.filter((spec) => missing.has(specName(spec)) || (replace && specName(spec) === "tailwind-merge"))
 }
 
 /**
@@ -93,6 +124,13 @@ export async function installCnPackages(
   const missing = await cnPackagesToInstall(cwd, tailwindMajor)
   if (missing.length === 0) return true
   const command = installCommand(pm, missing)
+  // Say why when it replaces a tailwind-merge the project chose.
+  const tooNew = tailwindMajor === 3 ? await tailwindMergeTooNew(cwd) : undefined
+  if (tooNew) {
+    console.log(
+      chalk.yellow(`\n${tooNew}. tailwind-merge 3 supports only Tailwind 4; this project is on Tailwind 3, so it gets tailwind-merge@^2.`)
+    )
+  }
   if (!enabled) {
     console.log(`\nInstall the packages the cn helper imports:\n  ${chalk.cyan(command)}`)
     return true

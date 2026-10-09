@@ -217,6 +217,15 @@ export function addCommand() {
       // was skipped — kept under --yes, or already there — wasn't added, and
       // the summary mustn't say it was.
       const added = new Set<string>()
+      // Why each component wrote nothing, as it happened, so the summary names
+      // the real cause: a file already there, a registry entry with no files
+      // or no content, or an error.
+      const reasons = new Map<string, string[]>()
+      const because = (name: string, reason: string) => {
+        const list = reasons.get(name) ?? []
+        if (!list.includes(reason)) list.push(reason)
+        reasons.set(name, list)
+      }
 
       for (const component of resolved.items) {
         const componentName = component.name
@@ -225,6 +234,7 @@ export function addCommand() {
         try {
           if (!component.files || component.files.length === 0) {
             addSpinner.warn(`${componentName}: No files found`)
+            because(componentName, "the registry has no files for it")
             continue
           }
 
@@ -235,6 +245,7 @@ export function addCommand() {
           for (const file of component.files) {
             if (!file.content) {
               addSpinner.warn(`${componentName}: Missing content for ${file.path}`)
+              because(componentName, `the registry has no content for ${file.path}`)
               continue
             }
 
@@ -266,12 +277,15 @@ export function addCommand() {
             if (outcome.result === "written") added.add(componentName)
             else if (outcome.result === "exists") {
               addSpinner.warn(`${componentName}: ${filename} already exists, skipping (use -o to overwrite)`)
+              because(componentName, `${filename} is already there`)
             } else if (outcome.result === "duplicate") {
               addSpinner.warn(`${componentName}: ${filename} was already written by ${outcome.by} in this run, skipping`)
+              because(componentName, `${filename} was already written by ${outcome.by}`)
             }
           }
         } catch (error) {
           addSpinner.warn(`${componentName}: ${(error as Error).message}`)
+          because(componentName, `it failed: ${(error as Error).message}`)
         }
       }
 
@@ -280,13 +294,11 @@ export function addCommand() {
       if (notAdded.length === 0) addSpinner.succeed(`Added ${total} component(s)`)
       else {
         addSpinner.stop()
-        console.log(
-          chalk.yellow(
-            added.size === 0
-              ? `Added nothing: every file was already there.`
-              : `Added ${added.size} of ${total} component(s). Not added, as their files were already there: ${notAdded.join(", ")}.`
-          )
-        )
+        console.log(chalk.yellow(added.size === 0 ? "Added nothing." : `Added ${added.size} of ${total} component(s).`))
+        console.log("Not added:")
+        for (const name of notAdded) {
+          console.log(`  ${name}: ${(reasons.get(name) ?? ["it wrote no files"]).join("; ")}`)
+        }
       }
 
       if (kept.length > 0) {
