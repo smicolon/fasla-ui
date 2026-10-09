@@ -135,7 +135,11 @@ export default async function InstallationPage({
             <pre className="overflow-x-auto rounded-lg bg-terminal p-4 text-sm">
               <code className="text-gray-300">{`// lib/utils.ts
 import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { extendTailwindMerge } from "tailwind-merge"
+
+const twMerge = extendTailwindMerge({
+  extend: { classGroups: { "font-size": [{ text: ["xxs", "link", "list-header"] }] } },
+})
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
