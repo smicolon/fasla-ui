@@ -8,6 +8,12 @@ import { ArrowEndIcon } from "./icons"
 import { installCommand, landingLinks } from "./links"
 
 /**
+ * Where the command wraps on a phone: after the scope, `npx @smicolon/` then
+ * `fasla-ui@latest init`. No split at a space leaves two lines that fit.
+ */
+const scopeEnd = installCommand.indexOf("/") + 1
+
+/**
  * The page's last word: the install command, set large with a blinking caret,
  * one line on what it does, Get started, and a button that copies it. The
  * command is code, so it reads left to right in both languages and sits on
@@ -39,16 +45,26 @@ export function CommandBand() {
     <section aria-labelledby="final-h" className="pb-[var(--l-section)]">
       <div className="l-wrap">
         <div className="rounded-2xl bg-muted px-[clamp(20px,6vw,88px)] py-[clamp(32px,6vw,88px)]">
-          {/* The line is about 15em wide and never wraps; 4.9vw keeps it inside the
-              band at every width, so the floor sits below 4.9vw of a 320px screen. */}
+          {/* From 640px up, one line at 3.4vw: the command is about 22em with the
+              caret and the band about 80% of the screen, capped near 1072px, so
+              it fits with room to spare up to the 46px cap (48px leaves Arabic
+              under 8px), and is 21.8px at its smallest, above the 17px body text. Below 640px, two lines at 18 to
+              26px: <wbr> is the one break, between halves that never wrap, and
+              it adds nothing to copied text, so a selection is still one line. */}
           <h2
             id="final-h"
             dir="ltr"
-            className="whitespace-nowrap text-left font-mono text-[length:clamp(15px,4.9vw,66px)] font-medium leading-[1.15] tracking-[-0.03em] rtl:!text-right"
+            className="text-left font-mono text-[length:clamp(18px,5.8vw,26px)] font-medium leading-[1.15] tracking-[-0.03em] sm:whitespace-nowrap sm:text-[length:min(3.4vw,46px)] rtl:!text-right"
           >
-            <span className="text-muted-foreground">$ </span>
-            {installCommand}
-            <span aria-hidden="true" className="caret ms-px inline-block h-[.95em] w-[.55em] bg-foreground align-[-0.1em]" />
+            <span className="whitespace-nowrap">
+              <span className="text-muted-foreground">$ </span>
+              {installCommand.slice(0, scopeEnd)}
+            </span>
+            <wbr />
+            <span className="whitespace-nowrap">
+              {installCommand.slice(scopeEnd)}
+              <span aria-hidden="true" className="caret ms-px inline-block h-[.95em] w-[.55em] bg-foreground align-[-0.1em]" />
+            </span>
           </h2>
           <div className="mt-8 flex flex-wrap items-center justify-between gap-x-7 gap-y-5">
             <p className="max-w-[52ch] text-[17px] text-[color:var(--l-fg-2)] rtl:leading-[1.8]">{t("final.lede")}</p>

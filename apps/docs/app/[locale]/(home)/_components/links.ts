@@ -22,4 +22,4 @@ export const landingLinks = {
   discussions: "https://github.com/smicolon/fasla-ui/discussions",
 } as const
 
-export const installCommand = "npx @smicolon/cli init"
+export const installCommand = "npx @smicolon/fasla-ui@latest init"

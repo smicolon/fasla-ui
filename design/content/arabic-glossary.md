@@ -23,7 +23,7 @@
 | attribute | السمة (attribute) | نعم | سمة HTML، مثل "السمة (attribute) `dir`" | مقترح |
 | class | الصنف (class) | نعم | صنف CSS، الجمع: أصناف | مقترح |
 | screen reader | قارئ الشاشة | لا | | مقترح |
-| CLI | أداة الأوامر (CLI) | نعم | الحزمة `@smicolon/cli` | مقترح |
+| CLI | أداة الأوامر (CLI) | نعم | الحزمة `@smicolon/fasla-ui` | مقترح |
 | registry | السجل (registry) | نعم | سجل المكوّنات الذي تقرأ منه أداة الأوامر | مقترح |
 | dependency | الاعتماديات (dependency) | نعم | الحزم التي يحتاجها المكوّن | مقترح |
 | utility function | الدالة المساعدة | لا | مثل "الدالة المساعدة `cn`" | مقترح |

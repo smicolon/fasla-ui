@@ -55,9 +55,9 @@ bun run format
 bun run --cwd packages/fasla-ui build
 
 # CLI commands (after build)
-npx @smicolon/cli init          # Initialize in a project
-npx @smicolon/cli add button    # Add a component
-npx @smicolon/cli list          # List available components
+npx @smicolon/fasla-ui@latest init          # Initialize in a project
+npx @smicolon/fasla-ui@latest add button    # Add a component
+npx @smicolon/fasla-ui@latest list          # List available components
 ```
 
 ## Architecture
