@@ -1,5 +1,12 @@
 # @smicolon/fasla-ui
 
+## [0.5.0](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.4.2...fasla-ui-v0.5.0) (2026-10-09)
+
+
+### Features
+
+* merge @smicolon/cli into @smicolon/fasla-ui ([#50](https://github.com/smicolon/fasla-ui/issues/50)) ([452dc46](https://github.com/smicolon/fasla-ui/commit/452dc46b9ab114c068b6972ef19861d30d1d58cd))
+
 ## [0.4.2](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.4.1...fasla-ui-v0.4.2) (2026-10-09)
 
 
