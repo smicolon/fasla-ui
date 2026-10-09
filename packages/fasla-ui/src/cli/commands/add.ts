@@ -31,7 +31,7 @@ export function addCommand() {
 
       if (!hasConfig) {
         console.log(chalk.red("Error: components.json not found."))
-        console.log("Run", chalk.cyan("npx @smicolon/cli init"), "first.")
+        console.log("Run", chalk.cyan("npx @smicolon/fasla-ui@latest init"), "first.")
         process.exit(1)
       }
 
@@ -305,7 +305,7 @@ export function addCommand() {
         console.log(chalk.yellow(`\nKept ${kept.map((k) => k.file).join(", ")}: not Fasla's, so not replaced.`))
         if (yes) {
           const names = [...new Set(kept.map((k) => k.component))].join(" ")
-          console.log(`To replace ${kept.length === 1 ? "it" : "them"} with Fasla's: ${chalk.cyan(`npx @smicolon/cli add ${names} -o`)}`)
+          console.log(`To replace ${kept.length === 1 ? "it" : "them"} with Fasla's: ${chalk.cyan(`npx @smicolon/fasla-ui@latest add ${names} -o`)}`)
         }
       }
 

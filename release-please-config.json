@@ -22,9 +22,6 @@
   "packages": {
     "packages/fasla-ui": {
       "component": "fasla-ui"
-    },
-    "packages/cli": {
-      "component": "cli"
     }
   },
   "plugins": [

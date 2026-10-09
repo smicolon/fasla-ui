@@ -566,7 +566,7 @@ export async function executeJournal(
   { afterStep }: { afterStep?: (index: number) => void | Promise<void> } = {}
 ): Promise<void> {
   for (let i = journal.done; i < journal.steps.length; i++) {
-    await doStep(cwd, journal.steps[i])
+    await doStep(cwd, journal.steps[i]!)
     journal.done = i + 1
     await saveJournal(cwd, journal)
     await afterStep?.(i)
@@ -639,7 +639,7 @@ async function doStep(cwd: string, step: RepairStep): Promise<void> {
 async function rollback(cwd: string, steps: RepairStep[], failedAt: number): Promise<string[]> {
   const leftovers: string[] = []
   for (let i = Math.min(failedAt, steps.length - 1); i >= 0; i--) {
-    const step = steps[i]
+    const step = steps[i]!
     try {
       if (step.op === "mkdir") {
         const dir = await resolveInsideProject(cwd, step.dir)

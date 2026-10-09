@@ -66,18 +66,17 @@ npx @smicolon/cli list          # List available components
 ```
 fasla-ui/
 ├── packages/
-│   ├── fasla-ui/           # Core library
-│   │   ├── registry/
-│   │   │   ├── ui/       # Primitives (button, input, card)
-│   │   │   ├── blocks/   # Composites (AppShell, PageHeader)
-│   │   │   ├── effects/  # Animated components
-│   │   │   └── hooks/    # Shared hooks
-│   │   └── src/
-│   │       ├── tokens/   # Design tokens
-│   │       ├── motion/   # Motion presets
-│   │       └── lib/      # Utilities (cn)
-│   │
-│   └── cli/              # CLI package (@smicolon/cli)
+│   └── fasla-ui/           # Core library and its CLI
+│       ├── registry/
+│       │   ├── ui/       # Primitives (button, input, card)
+│       │   ├── blocks/   # Composites (AppShell, PageHeader)
+│       │   ├── effects/  # Animated components
+│       │   └── hooks/    # Shared hooks
+│       └── src/
+│           ├── tokens/   # Design tokens
+│           ├── motion/   # Motion presets
+│           ├── lib/      # Utilities (cn)
+│           └── cli/      # The `fasla-ui` bin: init, add, list
 │
 ├── apps/
 │   ├── storybook/        # Component showcase
