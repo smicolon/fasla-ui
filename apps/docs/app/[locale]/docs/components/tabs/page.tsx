@@ -28,6 +28,13 @@ export default function TabsPage() {
   )
   const rich = { code }
 
+  /** The four sample panels, one line each: every tab switches something. */
+  const panels = TABS.map((tab) => (
+    <TabsContent key={tab} value={tab} className="text-sm text-muted-foreground">
+      {a(`panels.${tab}`)}
+    </TabsContent>
+  ))
+
   /** One group of the four sample tabs, for the style and size sections. */
   const group = (variant: (typeof VARIANTS)[number], size?: (typeof SIZES)[number]) => (
     <Tabs defaultValue="account">
@@ -38,6 +45,7 @@ export default function TabsPage() {
           </TabsTrigger>
         ))}
       </TabsList>
+      {panels}
     </Tabs>
   )
 
@@ -46,9 +54,10 @@ export default function TabsPage() {
   const props: PropRow[] = [
     { prop: "value", type: "string", fallback: "", description: a.rich("props.value", rich) },
     { prop: "defaultValue", type: "string", fallback: "", description: a.rich("props.defaultValue", rich) },
-    { prop: "onValueChange", type: "(value) => void", fallback: "", description: a.rich("props.onValueChange", rich) },
+    { prop: "onValueChange", type: "(value, eventDetails) => void", fallback: "", description: a.rich("props.onValueChange", rich) },
     { prop: "variant", type: '"boxed" | "bordered" | "lifted"', fallback: '"boxed"', description: a.rich("props.variant", rich) },
     { prop: "size", type: '"sm" | "md" | "lg"', fallback: '"md"', description: a.rich("props.size", rich) },
+    { prop: "activateOnFocus", type: "boolean", fallback: "true", description: a.rich("props.activateOnFocus", rich) },
     { prop: "TabsTrigger", type: "{ value, disabled }", fallback: "", description: a.rich("props.trigger", rich) },
     { prop: "TabsContent", type: "{ value }", fallback: "", description: a.rich("props.content", rich) },
     { prop: "className", type: "string", fallback: "", description: a.rich("props.className", rich) },
@@ -65,6 +74,7 @@ export default function TabsPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
         <InstallCommand name="tabs" />
+        <p className="text-muted-foreground">{a.rich("installNote", rich)}</p>
       </section>
 
       {/* Preview */}
@@ -249,6 +259,7 @@ export function ControlledAccountTabs() {
                   </TabsTrigger>
                 ))}
               </TabsList>
+              {panels}
             </Tabs>
             <p className="text-sm text-muted-foreground">
               {a("usage.active")}{" "}

@@ -84,6 +84,7 @@ const Head = ({ children }: { children: React.ReactNode }) => (
   </span>
 )
 
+/** One sample group, each tab with its panel, so every tab switches something. */
 const Group = ({
   c,
   icons = false,
@@ -102,6 +103,11 @@ const Group = ({
         )
       })}
     </TabsList>
+    {TABS.map((tab) => (
+      <TabsContent key={tab} value={tab} className="text-sm text-muted-foreground">
+        {c.panels[tab]}
+      </TabsContent>
+    ))}
   </Tabs>
 )
 
@@ -184,7 +190,11 @@ export const WithIcons: Story = {
   },
 }
 
-/** A disabled tab is greyed out and skipped by the arrow keys. */
+/**
+ * A disabled tab is greyed out and can never be selected. The arrow keys
+ * still reach it, as WAI-ARIA allows, so a screen reader announces it as
+ * unavailable instead of hiding it.
+ */
 export const Disabled: Story = {
   render: (_args, ctx) => {
     const c = copy(ctx)
@@ -220,6 +230,11 @@ const ControlledDemo = ({ c }: { c: Copy }) => {
             </TabsTrigger>
           ))}
         </TabsList>
+        {TABS.map((tab) => (
+          <TabsContent key={tab} value={tab} className="text-sm text-muted-foreground">
+            {c.panels[tab]}
+          </TabsContent>
+        ))}
       </Tabs>
       <p className="text-sm text-muted-foreground">
         {c.active}:{" "}
@@ -257,6 +272,11 @@ export const ManyTabs: Story = {
                 </TabsTrigger>
               ))}
             </TabsList>
+            {c.many.map((label, i) => (
+              <TabsContent key={label} value={String(i)} className="text-sm text-muted-foreground">
+                {label}
+              </TabsContent>
+            ))}
           </Tabs>
         ))}
       </div>
@@ -276,9 +296,8 @@ const cellsFor = (state: (typeof STATES)[number]) =>
  * Every variant in the Tab item set, for the direction on the toolbar.
  *
  * Figma's axes are Direction × size × State × Style. Each row here is one
- * Style × size, with State across the top: 45 cells, every LTR variant plus
- * Focus for Lifted and Bordered, which Figma draws for Boxed only. Flip the
- * Direction toolbar for RTL.
+ * Style × size, with State across the top: 45 cells, one per LTR variant.
+ * Flip the Direction toolbar for RTL.
  *
  * Hover and Focus render statically: `storybook-addon-pseudo-states` applies
  * the real `:hover` and `:focus-visible` to those cells, so the grid cannot
