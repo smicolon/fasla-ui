@@ -542,7 +542,7 @@ mirror by toggling the booleans and setting the mirrored glyph. And `Solid`/`pri
 | `Textarea` `3928:2374` | 20 | `State` ×5 · `Filled` · LTR/RTL text + placeholder props |
 | `Input Number` `39043:1432` | 100 | `Variant` Default / Vertically Stacked / Horizontally Stacked / Horizontal Stretched / Mini · `State` ×5 |
 | `Check Box` `3830:2149` | 144 | `Type` Default/Layout · `State` Unchecked/Checked/Indeterminate · `Size` sm/md/lg · `Interaction` Enabled/Disabled/Hover/Focus |
-| `Radio` `3830:58457` | 48 | `Type` Default/Layout · `State` Unchecked/Checked · `Size Default` · `Disabled` |
+| `Radio` `3830:58457` | 96 | `Type` Default/Layout · `State` Unchecked/Checked · `Size` sm/md/lg · `Interaction` Enabled/Disabled/Hover/Focus |
 | `Switch` `3853:15460` | 144 | `Type` Control First/Label First · `Interaction` Default/Focus/Disabled · `State` Off/On · `Sizes` · `Style` Outline/Solid |
 | `Slider` `40500:60632` | 42 | `Style` Half-Full/Empty/Full/Double slider · `size` · `state` Default/focus · `Direction` LTR/RTL/**Both** |
 | `OTP Input` `40465:54984` | 8 | `Type` Digits only / Simple / With Separator / With Spacing (+ `Otp Input Item` `15097:22526`) |
