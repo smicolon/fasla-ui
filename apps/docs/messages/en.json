@@ -730,11 +730,11 @@
         "logical": "At the end of the line"
       },
       "props": {
-        "open": "Shows or hides the tooltip, when controlled. Set on <code>Tooltip</code>.",
-        "defaultOpen": "Shows the tooltip at first. Set on <code>Tooltip</code>.",
-        "onOpenChange": "Called when the tooltip opens or closes. Set on <code>Tooltip</code>.",
-        "disabled": "Stops the tooltip from opening. Set on <code>Tooltip</code>.",
-        "render": "Replaces the button <code>TooltipTrigger</code> renders with your element, such as a link or a Button.",
+        "open": "Shows or hides the tooltip, when controlled.",
+        "defaultOpen": "Shows the tooltip at first.",
+        "onOpenChange": "Called when the tooltip opens or closes.",
+        "disabled": "Stops the tooltip from opening.",
+        "render": "Replaces the default button with your element, such as a link or a Button.",
         "variant": "Colour of the tooltip.",
         "radius": "8px corners, or 16px: a pill on one line.",
         "side": "Side of the trigger it sits on. The <code>inline-*</code> sides follow the reading direction.",
@@ -745,7 +745,7 @@
         "icon": "A 16px glyph before the text.",
         "avatar": "Props for an Avatar before the text, always at size 12.",
         "container": "The element the tooltip renders into. Defaults to <code>body</code>.",
-        "delay": "How long to wait before opening, in milliseconds. Set on <code>TooltipProvider</code> or <code>TooltipTrigger</code>.",
+        "delay": "How long to wait before opening, in milliseconds.",
         "className": "Extra classes for the tooltip."
       }
     },

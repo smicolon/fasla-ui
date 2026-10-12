@@ -79,22 +79,26 @@ function readContext(node: HTMLElement): TriggerContext {
   }
 }
 
-export interface TooltipProviderProps
-  extends React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Provider> {}
+// Type aliases, not empty interfaces: Next.js's default lint config rejects
+// an interface that adds nothing to the type it extends.
+export type TooltipProviderProps = React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Provider>
 
 /**
- * Shares one delay across a group of tooltips, so moving from one trigger to
- * the next opens the next at once. Every `Tooltip` already has one; wrap a
- * toolbar in your own only to change the delays.
+ * Base UI's delay group, opening with no delay. Every `Tooltip` renders its
+ * own, as shadcn's does, and Base UI reads the nearest one — so wrapping
+ * tooltips in another provider does not change their delay. Set `delay` on
+ * `TooltipTrigger` instead.
  */
 function TooltipProvider({ delay = 0, ...props }: TooltipProviderProps) {
   return <TooltipPrimitive.Provider delay={delay} {...props} />
 }
 
-export interface TooltipProps
-  extends React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Root> {}
+export type TooltipProps = React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Root>
 
-/** One tooltip: a `TooltipTrigger` and a `TooltipContent`. Opens with no delay. */
+/**
+ * One tooltip: a `TooltipTrigger` and a `TooltipContent`. Opens with no
+ * delay; pass `delay` (in ms) to `TooltipTrigger` to wait first.
+ */
 function Tooltip(props: TooltipProps) {
   const [context, setContext] = React.useState<TriggerContext>({ direction: "ltr" })
   const read = React.useCallback((node: HTMLElement | null) => {
@@ -122,8 +126,7 @@ function Tooltip(props: TooltipProps) {
 }
 Tooltip.displayName = "Tooltip"
 
-export interface TooltipTriggerProps
-  extends React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Trigger> {}
+export type TooltipTriggerProps = React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Trigger>
 
 /**
  * What the tooltip describes. Renders a `<button>`; pass `render` to use your

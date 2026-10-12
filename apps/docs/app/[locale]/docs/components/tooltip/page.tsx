@@ -66,8 +66,13 @@ function Held({
   caption?: React.ReactNode
   cellClassName?: string
 }) {
+  // The caption sits on the side the tooltip leaves free: under the trigger,
+  // or above it when the tooltip opens below.
+  const captionNode = caption && <code className="text-xs text-muted-foreground">{caption}</code>
+  const below = content.side === "bottom"
   return (
     <div className={`flex flex-col items-center gap-3 ${cellClassName ?? ""}`}>
+      {below && captionNode}
       <Tooltip open>
         <TooltipTrigger className={TRIGGER}>{label}</TooltipTrigger>
         <TooltipContent
@@ -76,7 +81,7 @@ function Held({
           {...content}
         />
       </Tooltip>
-      {caption && <code className="text-xs text-muted-foreground">{caption}</code>}
+      {!below && captionNode}
     </div>
   )
 }
@@ -95,26 +100,46 @@ export default function TooltipPage() {
   const trigger = a("sample.trigger")
   const title = a("sample.title")
 
-  // One table, in a fixed order: the root, the trigger, then the content's
-  // look, placement and slots, then the provider and styling.
-  const props: PropRow[] = [
-    { prop: "open", type: "boolean", fallback: "", description: a.rich("props.open", rich) },
-    { prop: "defaultOpen", type: "boolean", fallback: "false", description: a.rich("props.defaultOpen", rich) },
-    { prop: "onOpenChange", type: "(open, eventDetails) => void", fallback: "", description: a.rich("props.onOpenChange", rich) },
-    { prop: "disabled", type: "boolean", fallback: "false", description: a.rich("props.disabled", rich) },
-    { prop: "render", type: "ReactElement", fallback: "", description: a.rich("props.render", rich) },
-    { prop: "variant", type: '"primary" | "secondary" | "info" | "success" | "warning" | "destructive"', fallback: '"primary"', description: a.rich("props.variant", rich) },
-    { prop: "radius", type: '"standard" | "rounded"', fallback: '"standard"', description: a.rich("props.radius", rich) },
-    { prop: "side", type: '"top" | "bottom" | "left" | "right" | "inline-start" | "inline-end"', fallback: '"top"', description: a.rich("props.side", rich) },
-    { prop: "align", type: '"start" | "center" | "end"', fallback: '"center"', description: a.rich("props.align", rich) },
-    { prop: "sideOffset", type: "number", fallback: "", description: a.rich("props.sideOffset", rich) },
-    { prop: "arrow", type: "boolean", fallback: "true", description: a.rich("props.arrow", rich) },
-    { prop: "description", type: "ReactNode", fallback: "", description: a.rich("props.description", rich) },
-    { prop: "icon", type: "ReactNode", fallback: "", description: a.rich("props.icon", rich) },
-    { prop: "avatar", type: "AvatarProps", fallback: "", description: a.rich("props.avatar", rich) },
-    { prop: "container", type: "HTMLElement", fallback: "", description: a.rich("props.container", rich) },
-    { prop: "delay", type: "number", fallback: "0", description: a.rich("props.delay", rich) },
-    { prop: "className", type: "string", fallback: "", description: a.rich("props.className", rich) },
+  // One table per part, as shadcn and Base UI document them.
+  const row = (prop: string, type: string, fallback: string, key: string): PropRow => ({
+    prop,
+    type,
+    fallback,
+    description: a.rich(`props.${key}`, rich),
+  })
+  const propTables: { part: string; rows: PropRow[] }[] = [
+    {
+      part: "Tooltip",
+      rows: [
+        row("open", "boolean", "", "open"),
+        row("defaultOpen", "boolean", "false", "defaultOpen"),
+        row("onOpenChange", "(open, eventDetails) => void", "", "onOpenChange"),
+        row("disabled", "boolean", "false", "disabled"),
+      ],
+    },
+    {
+      part: "TooltipTrigger",
+      rows: [
+        row("render", "ReactElement", "", "render"),
+        row("delay", "number", "0", "delay"),
+      ],
+    },
+    {
+      part: "TooltipContent",
+      rows: [
+        row("variant", '"primary" | "secondary" | "info" | "success" | "warning" | "destructive"', '"primary"', "variant"),
+        row("radius", '"standard" | "rounded"', '"standard"', "radius"),
+        row("side", '"top" | "bottom" | "left" | "right" | "inline-start" | "inline-end"', '"top"', "side"),
+        row("align", '"start" | "center" | "end"', '"center"', "align"),
+        row("sideOffset", "number", "", "sideOffset"),
+        row("arrow", "boolean", "true", "arrow"),
+        row("description", "ReactNode", "", "description"),
+        row("icon", "ReactNode", "", "icon"),
+        row("avatar", "AvatarProps", "", "avatar"),
+        row("container", "HTMLElement", "", "container"),
+        row("className", "string", "", "className"),
+      ],
+    },
   ]
 
   return (
@@ -222,14 +247,13 @@ export default function TooltipPage() {
               <Held
                 container={container}
                 label={trigger}
-                variant="secondary"
                 avatar={{ src: PHOTO, name: "" }}
                 description={a("sample.edited")}
                 caption="avatar"
               >
                 {a("sample.name")}
               </Held>
-              <Held container={container} label={trigger} variant="info" description={a("sample.longDescription")} caption="296px">
+              <Held container={container} label={trigger} description={a("sample.longDescription")} caption="296px">
                 {a("sample.longTitle")}
               </Held>
             </div>
@@ -252,7 +276,14 @@ export default function TooltipPage() {
       {/* Props */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("props")}</h2>
-        <PropsTable rows={props} />
+        {propTables.map(({ part, rows }) => (
+          <div key={part} className="space-y-3">
+            <h3 className="text-lg font-semibold">
+              <code dir="ltr">{part}</code>
+            </h3>
+            <PropsTable rows={rows} />
+          </div>
+        ))}
       </section>
 
       {/* Usage */}
