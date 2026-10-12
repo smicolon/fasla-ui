@@ -79,6 +79,8 @@ export default async function InstallationPage({
             <pre className="whitespace-pre-wrap break-words rounded-lg bg-terminal p-4">
               <code className="text-green-400">npx @smicolon/fasla-ui@latest add card input badge</code>
             </pre>
+            {/* add installs what the components import, as init does for the cn helper. */}
+            <p className="text-sm text-muted-foreground mt-2">{i.rich("cliAddInstalls", rich)}</p>
           </div>
 
           <div>

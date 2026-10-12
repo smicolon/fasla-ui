@@ -87,6 +87,28 @@ describe("missingPackages", () => {
   it("counts everything as missing without a package.json", async () => {
     expect(await missingPackages(await project(), ["clsx"])).toEqual(["clsx"])
   })
+
+  it("keeps a versioned spec's package when the listed range stays inside it", async () => {
+    const dir = await project({ "package.json": JSON.stringify({ dependencies: { "@base-ui/react": "^1.9.0", "@scope/x": "1.2.3" } }) })
+    expect(await missingPackages(dir, ["@base-ui/react@^1", "@scope/x@~1.2.0"])).toEqual([])
+  })
+
+  it("installs a versioned spec again when the listed range may resolve outside it", async () => {
+    for (const range of ["^0.4.0", "^2", ">=1", "*", "latest", "workspace:*", "npm:@base-ui/react@1"]) {
+      const dir = await project({ "package.json": JSON.stringify({ dependencies: { "@base-ui/react": range } }) })
+      expect(await missingPackages(dir, ["@base-ui/react@^1"]), range).toEqual(["@base-ui/react@^1"])
+    }
+  })
+
+  it("installs a versioned spec again when the installed copy is outside it, whatever the range says", async () => {
+    const dir = await project({
+      "package.json": JSON.stringify({ dependencies: { "@base-ui/react": "^1.9.0" } }),
+      "node_modules/@base-ui/react/package.json": JSON.stringify({ version: "0.9.0" }),
+    })
+    expect(await missingPackages(dir, ["@base-ui/react@^1"])).toEqual(["@base-ui/react@^1"])
+    await fs.writeJson(path.join(dir, "node_modules/@base-ui/react/package.json"), { version: "1.9.2" })
+    expect(await missingPackages(dir, ["@base-ui/react@^1"])).toEqual([])
+  })
 })
 
 describe("install", () => {
