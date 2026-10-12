@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { useTranslations } from "next-intl"
 import { Info } from "lucide-react"
 
@@ -38,62 +38,132 @@ const PHOTO = "/samples/avatar-portrait.png"
 const TRIGGER =
   "rounded-[var(--radius-md)] border border-border bg-background px-3 py-1.5 text-sm text-foreground outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
 
+// The page is prerendered, and useLayoutEffect warns on the server.
+const useIsomorphicLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect
+
+/**
+ * How far a held tooltip reaches past its trigger on each side, in px, read
+ * from where Base UI actually placed it. Readings taken before it is placed
+ * (it starts at the page origin) are ignored; after that the numbers are
+ * relative to the trigger, so making room for them cannot change them.
+ */
+function useHeldRoom() {
+  const trigger = useRef<HTMLButtonElement>(null)
+  const [popup, setPopup] = useState<HTMLDivElement | null>(null)
+  const [room, setRoom] = useState({ top: 0, right: 0, bottom: 0, left: 0 })
+
+  useIsomorphicLayoutEffect(() => {
+    const t = trigger.current
+    if (!t || !popup) return
+    const measure = () => {
+      const a = t.getBoundingClientRect()
+      const b = popup.getBoundingClientRect()
+      if (!b.width) return
+      const gap = Math.max(b.top - a.bottom, a.top - b.bottom, b.left - a.right, a.left - b.right)
+      if (gap > 24) return
+      const next = {
+        top: Math.max(0, Math.ceil(a.top - b.top)),
+        right: Math.max(0, Math.ceil(b.right - a.right)),
+        bottom: Math.max(0, Math.ceil(b.bottom - a.bottom)),
+        left: Math.max(0, Math.ceil(a.left - b.left)),
+      }
+      setRoom((prev) =>
+        prev.top === next.top && prev.right === next.right && prev.bottom === next.bottom && prev.left === next.left
+          ? prev
+          : next
+      )
+    }
+    measure()
+    const resize = new ResizeObserver(measure)
+    resize.observe(popup)
+    resize.observe(t)
+    const moves = new MutationObserver(measure)
+    if (popup.parentElement) moves.observe(popup.parentElement, { attributes: true, attributeFilter: ["style"] })
+    return () => {
+      resize.disconnect()
+      moves.disconnect()
+    }
+  }, [popup])
+
+  // Making room moves the trigger, and Base UI does not always notice a move
+  // caused by a parent's padding, which would leave the tooltip where it was.
+  // A resize event makes it re-place every open tooltip against its trigger.
+  useIsomorphicLayoutEffect(() => {
+    const frame = requestAnimationFrame(() => window.dispatchEvent(new Event("resize")))
+    return () => cancelAnimationFrame(frame)
+  }, [room])
+
+  return { trigger, popup: setPopup, room }
+}
+
 /**
  * A preview whose tooltips are held open, to show them without hovering.
- * They portal into the preview itself, so they scroll with the page and stay
- * under the site header (`isolate`), and they hold their side instead of
- * flipping at the window edge. `overflow-x-clip` keeps a narrow screen from
- * scrolling sideways.
+ * Each tooltip renders into its own cell, so it scrolls with the page and
+ * stays inside the preview; `isolate` keeps it under the site header and
+ * `overflow-x-clip` keeps a narrow screen from scrolling sideways.
  */
-function HeldPreview({ children }: { children: (container: HTMLElement) => React.ReactNode }) {
-  const [container, setContainer] = useState<HTMLDivElement | null>(null)
+function HeldPreview({ children }: { children: React.ReactNode }) {
   return (
-    <div ref={setContainer} className="relative isolate overflow-x-clip">
-      <ComponentPreview className="py-16">{container && children(container)}</ComponentPreview>
+    <div className="relative isolate overflow-x-clip">
+      {/* 8px of side padding on a phone, so a 320px tooltip and a row of
+          side tooltips still fit the preview. The captions' 24px below
+          plus 8px makes the bottom match the 32px top. */}
+      <ComponentPreview className="px-2 pb-2 pt-8 sm:px-6">{children}</ComponentPreview>
     </div>
   )
 }
 
+/**
+ * Layout rule for every preview grid here: cells in a row share a top edge,
+ * captions sit on a shared line, and no tooltip leaves its cell.
+ *
+ * Shared cells (the default) are four rows of their grid — room above, the
+ * trigger, room below, the caption — through `subgrid`, so each row is as
+ * tall as the tallest cell needs and every trigger and caption lines up.
+ * Put them in a `SHARED_GRID`. A standalone cell keeps only the room its own
+ * tooltip needs, for a row whose triggers should not line up.
+ */
+const SHARED_GRID = "grid items-stretch gap-y-0"
+
 function Held({
   label,
-  container,
   caption,
   cellClassName,
-  reserve,
+  standalone = false,
   ...content
 }: Partial<TooltipContentProps> & {
   label: string
-  container: HTMLElement
   caption?: React.ReactNode
   cellClassName?: string
-  /**
-   * Room for the held tooltip, so the caption never sits under it.
-   *  - `above` / `below`: exactly the bubble's height and its 8px offset, on
-   *    that side only — one line of `text-xs` (16px, or 20 in Arabic) plus
-   *    12px of padding and the offset. The cell starts at the top of whatever
-   *    comes first, so two cells side by side share their top edge and,
-   *    being the same height, their caption line.
-   *  - `both`: 44px on each side, for side tooltips, so a row lines up its
-   *    triggers and captions.
-   */
-  reserve?: "above" | "below" | "both"
+  standalone?: boolean
 }) {
-  const room = "h-[calc(1lh+20px)] text-xs"
+  const [portal, setPortal] = useState<HTMLDivElement | null>(null)
+  const { trigger, popup, room } = useHeldRoom()
+  const layout = standalone ? "flex flex-col items-center" : "row-span-4 grid grid-rows-subgrid justify-items-center"
   return (
-    <div className={`flex flex-col items-center gap-3 ${cellClassName ?? ""}`}>
-      <div className={reserve === "both" ? "py-11" : reserve ? "flex flex-col items-center" : undefined}>
-        {reserve === "above" && <div aria-hidden="true" className={room} />}
+    <div className={`relative ${layout} ${cellClassName ?? ""}`}>
+      <div style={{ height: room.top }} />
+      <div style={{ paddingLeft: room.left, paddingRight: room.right }}>
         <Tooltip open>
-          <TooltipTrigger className={TRIGGER}>{label}</TooltipTrigger>
-          <TooltipContent
-            container={container}
-            collisionAvoidance={{ side: "none", align: "none" }}
-            {...content}
-          />
+          <TooltipTrigger ref={trigger} className={TRIGGER}>
+            {label}
+          </TooltipTrigger>
+          {portal && (
+            <TooltipContent
+              ref={popup}
+              container={portal}
+              collisionAvoidance={{ side: "none", align: "none" }}
+              {...content}
+            />
+          )}
         </Tooltip>
-        {reserve === "below" && <div aria-hidden="true" className={room} />}
       </div>
-      {caption && <code className="text-xs text-muted-foreground">{caption}</code>}
+      <div style={{ height: room.bottom }} />
+      <div className="pb-6 pt-3">
+        {caption && <code className="text-xs text-muted-foreground">{caption}</code>}
+      </div>
+      {/* Out of the layout flow, so it takes no row. */}
+      <div ref={setPortal} className="absolute left-0 top-0" />
     </div>
   )
 }
@@ -185,24 +255,21 @@ export default function TooltipPage() {
         <h2 className="text-2xl font-semibold">{t("variants")}</h2>
         <p className="text-muted-foreground">{a.rich("variantsBody", rich)}</p>
         <HeldPreview>
-          {(container) => (
-            <div className="grid grid-cols-2 gap-x-6 gap-y-16 pt-6 sm:grid-cols-3">
-              {RADII.flatMap((radius) =>
-                VARIANTS.map((variant) => (
-                  <Held
-                    key={`${radius}-${variant}`}
-                    container={container}
-                    label={trigger}
-                    variant={variant}
-                    radius={radius}
-                    caption={radius === "rounded" ? `${variant} · rounded` : variant}
-                  >
-                    {title}
-                  </Held>
-                ))
-              )}
-            </div>
-          )}
+          <div className={`${SHARED_GRID} grid-cols-2 gap-x-6 sm:grid-cols-3`}>
+            {RADII.flatMap((radius) =>
+              VARIANTS.map((variant) => (
+                <Held
+                  key={`${radius}-${variant}`}
+                  label={trigger}
+                  variant={variant}
+                  radius={radius}
+                  caption={radius === "rounded" ? `${variant} · rounded` : variant}
+                >
+                  {title}
+                </Held>
+              ))
+            )}
+          </div>
         </HeldPreview>
       </section>
 
@@ -211,30 +278,28 @@ export default function TooltipPage() {
         <h2 className="text-2xl font-semibold">{a("placement.title")}</h2>
         <p className="text-muted-foreground">{a.rich("placement.body", rich)}</p>
         <HeldPreview>
-          {(container) => (
-            <div className="grid grid-cols-2 gap-x-6 gap-y-6 sm:gap-x-16">
-              {SIDES.map((side) => (
-                <Held
-                  key={side}
-                  container={container}
-                  label={trigger}
-                  side={side}
-                  caption={side}
-                  cellClassName={SIDE_CELL[side]}
-                  reserve={side === "top" ? "above" : side === "bottom" ? "below" : "both"}
-                >
-                  {title}
-                </Held>
-              ))}
-            </div>
-          )}
+          {/* Standalone cells: top stacks tooltip, button, label; bottom
+              stacks button, tooltip, label; both start at the same top edge.
+              Each side row's cells are the same height, so they line up. */}
+          <div className="grid grid-cols-2 items-start gap-x-3 sm:gap-x-16">
+            {SIDES.map((side) => (
+              <Held
+                key={side}
+                standalone
+                label={trigger}
+                side={side}
+                caption={side}
+                cellClassName={SIDE_CELL[side]}
+              >
+                {title}
+              </Held>
+            ))}
+          </div>
         </HeldPreview>
         <HeldPreview>
-          {(container) => (
-            <Held container={container} label={trigger} arrow={false} caption="arrow={false}">
-              {title}
-            </Held>
-          )}
+          <Held standalone label={trigger} arrow={false} caption="arrow={false}">
+            {title}
+          </Held>
         </HeldPreview>
       </section>
 
@@ -243,22 +308,19 @@ export default function TooltipPage() {
         <h2 className="text-2xl font-semibold">{a("content.title")}</h2>
         <p className="text-muted-foreground">{a.rich("content.body", rich)}</p>
         <HeldPreview>
-          {(container) => (
-            <div className="flex flex-col items-center gap-28 pt-10">
-              <Held container={container} label={trigger} description={a("sample.description")} caption="description">
+          {/* Two rows of two, each row sized to its own content so the
+              widest pair still fits; one column on a narrow screen. */}
+          <div className="flex flex-col items-center">
+            <div className={`${SHARED_GRID} grid-cols-1 gap-x-6 sm:grid-cols-[auto_auto]`}>
+              <Held label={trigger} description={a("sample.description")} caption="description">
                 {title}
               </Held>
-              <Held
-                container={container}
-                label={trigger}
-                icon={<Info />}
-                description={a("sample.description")}
-                caption="icon"
-              >
+              <Held label={trigger} icon={<Info />} description={a("sample.description")} caption="icon">
                 {title}
               </Held>
+            </div>
+            <div className={`${SHARED_GRID} grid-cols-1 gap-x-6 sm:grid-cols-[auto_auto]`}>
               <Held
-                container={container}
                 label={trigger}
                 avatar={{ src: PHOTO, name: "" }}
                 description={a("sample.edited")}
@@ -266,11 +328,11 @@ export default function TooltipPage() {
               >
                 {a("sample.name")}
               </Held>
-              <Held container={container} label={trigger} description={a("sample.longDescription")} caption="296px">
+              <Held label={trigger} description={a("sample.longDescription")} caption="296px">
                 {a("sample.longTitle")}
               </Held>
             </div>
-          )}
+          </div>
         </HeldPreview>
       </section>
 

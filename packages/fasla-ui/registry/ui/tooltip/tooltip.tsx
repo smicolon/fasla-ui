@@ -330,7 +330,10 @@ const TooltipContent = React.forwardRef<HTMLDivElement, TooltipContentProps>(
           dir={context.direction}
           lang={context.lang}
           style={{ fontFamily: context.fontFamily }}
-          className="z-50"
+          // `w-max`: the tooltip lays out at its own width — up to the 296px
+          // text cap — whatever it is portalled into. Without it, a narrow
+          // `container` would squeeze the text a letter per line.
+          className="z-50 w-max"
         >
           <TooltipPrimitive.Popup
             ref={ref}

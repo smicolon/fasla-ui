@@ -113,24 +113,133 @@ const Head = ({ children, className }: { children: React.ReactNode; className?: 
 )
 
 /**
- * A tooltip held open, for the static grids: the real component, so they
- * cannot drift from it. It holds its side instead of flipping at the window
- * edge, so a short window shows the same grid. `container` keeps it inside a
- * themed panel.
+ * How far a held tooltip reaches past its trigger on each side, in px, read
+ * from where Base UI actually placed it. Readings taken before it is placed
+ * (it starts at the page origin) are ignored; after that the numbers are
+ * relative to the trigger, so making room for them cannot change them.
  */
-const Open = ({
+function useHeldRoom() {
+  const trigger = React.useRef<HTMLButtonElement>(null)
+  const [popup, setPopup] = React.useState<HTMLDivElement | null>(null)
+  const [room, setRoom] = React.useState({ top: 0, right: 0, bottom: 0, left: 0 })
+
+  React.useLayoutEffect(() => {
+    const t = trigger.current
+    if (!t || !popup) return
+    const measure = () => {
+      const a = t.getBoundingClientRect()
+      const b = popup.getBoundingClientRect()
+      if (!b.width) return
+      const gap = Math.max(b.top - a.bottom, a.top - b.bottom, b.left - a.right, a.left - b.right)
+      if (gap > 24) return
+      const next = {
+        top: Math.max(0, Math.ceil(a.top - b.top)),
+        right: Math.max(0, Math.ceil(b.right - a.right)),
+        bottom: Math.max(0, Math.ceil(b.bottom - a.bottom)),
+        left: Math.max(0, Math.ceil(a.left - b.left)),
+      }
+      setRoom((prev) =>
+        prev.top === next.top && prev.right === next.right && prev.bottom === next.bottom && prev.left === next.left
+          ? prev
+          : next
+      )
+    }
+    measure()
+    const resize = new ResizeObserver(measure)
+    resize.observe(popup)
+    resize.observe(t)
+    const moves = new MutationObserver(measure)
+    if (popup.parentElement) moves.observe(popup.parentElement, { attributes: true, attributeFilter: ["style"] })
+    return () => {
+      resize.disconnect()
+      moves.disconnect()
+    }
+  }, [popup])
+
+  // Making room moves the trigger, and Base UI does not always notice a move
+  // caused by a parent's padding, which would leave the tooltip where it was.
+  // A resize event makes it re-place every open tooltip against its trigger.
+  React.useLayoutEffect(() => {
+    const frame = requestAnimationFrame(() => window.dispatchEvent(new Event("resize")))
+    return () => cancelAnimationFrame(frame)
+  }, [room])
+
+  return { trigger, popup: setPopup, room }
+}
+
+/**
+ * Layout rule for every grid of held tooltips here: cells in a row share a
+ * top edge, buttons and captions sit on shared lines, and no tooltip leaves
+ * its cell.
+ *
+ * Each `Held` cell is four rows of its grid — room above, the trigger, room
+ * below, the caption — shared through `subgrid`, so each row is as tall as
+ * the tallest cell needs and every trigger and caption in a row lines up.
+ * The room is measured, not guessed, so a two-line Arabic tooltip gets
+ * exactly the space it takes. Put cells in a grid with `gap-y-0`; the caption
+ * row carries the space between rows.
+ */
+const GRID = "grid items-stretch gap-y-0"
+const ROW = "row-span-4 grid grid-rows-subgrid"
+
+/**
+ * A tooltip held open, for the static grids: the real component, so it
+ * cannot drift from it. It renders into its own cell, so it scrolls and
+ * clips with the story, and holds its side instead of flipping at the window
+ * edge. A themed panel's tokens reach it because the cell is inside it.
+ */
+const Held = ({
   label,
-  container,
+  caption,
+  cellProps,
   ...content
-}: Partial<TooltipContentProps> & { label: string; container?: HTMLElement | null }) => (
-  <Tooltip open>
-    <TooltipTrigger className={TRIGGER}>{label}</TooltipTrigger>
-    <TooltipContent
-      container={container ?? undefined}
-      collisionAvoidance={{ side: "none", align: "none" }}
-      {...content}
-    />
-  </Tooltip>
+}: Partial<TooltipContentProps> & {
+  label: string
+  caption?: React.ReactNode
+  cellProps?: React.HTMLAttributes<HTMLDivElement>
+}) => {
+  const [portal, setPortal] = React.useState<HTMLDivElement | null>(null)
+  const { trigger, popup, room } = useHeldRoom()
+  return (
+    <div {...cellProps} className={["relative justify-items-center", ROW, cellProps?.className].join(" ")}>
+      <div style={{ height: room.top }} />
+      <div style={{ paddingLeft: room.left, paddingRight: room.right }}>
+        <Tooltip open>
+          <TooltipTrigger ref={trigger} className={TRIGGER}>
+            {label}
+          </TooltipTrigger>
+          {portal && (
+            <TooltipContent
+              ref={popup}
+              container={portal}
+              collisionAvoidance={{ side: "none", align: "none" }}
+              {...content}
+            />
+          )}
+        </Tooltip>
+      </div>
+      <div style={{ height: room.bottom }} />
+      <div className="pb-8 pt-3">{caption && <Head>{caption}</Head>}</div>
+      {/* Out of the grid flow, so it takes no row. */}
+      <div ref={setPortal} className="absolute left-0 top-0" />
+    </div>
+  )
+}
+
+/** A row label: four subgrid rows like a cell, the label on the given one. */
+const RowLabel = ({ children, on }: { children: React.ReactNode; on: "tooltip" | "trigger" }) => (
+  <div className={ROW}>
+    <Head
+      className={
+        on === "tooltip"
+          ? // The tooltip's first line: its top plus 6px of padding.
+            "row-start-1 self-start pt-1.5"
+          : "row-start-2 self-center"
+      }
+    >
+      {children}
+    </Head>
+  </div>
 )
 
 const positionProps = (position: (typeof POSITIONS)[number]) =>
@@ -144,12 +253,16 @@ export const Default: Story = {
   render: ({ open, ...args }, ctx) => {
     const c = copy(ctx)
     return (
-      // Remounted when `open` flips, so the tooltip moves cleanly between
-      // held open and opening on its own.
-      <Tooltip key={String(open)} open={open ? true : undefined}>
-        <TooltipTrigger className={TRIGGER}>{c.trigger}</TooltipTrigger>
-        <TooltipContent {...args}>{c.title}</TooltipContent>
-      </Tooltip>
+      // Room on every side, so the tooltip stays inside the story's box
+      // whichever side the controls put it on.
+      <div className="p-12">
+        {/* Remounted when `open` flips, so the tooltip moves cleanly between
+            held open and opening on its own. */}
+        <Tooltip key={String(open)} open={open ? true : undefined}>
+          <TooltipTrigger className={TRIGGER}>{c.trigger}</TooltipTrigger>
+          <TooltipContent {...args}>{c.title}</TooltipContent>
+        </Tooltip>
+      </div>
     )
   },
 }
@@ -166,19 +279,21 @@ export const AllVariants: Story = {
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className="grid w-max grid-cols-[8rem_repeat(5,14rem)] auto-rows-[7rem] items-center justify-items-center gap-x-10 p-10">
+      <div className={`${GRID} w-max grid-cols-[auto_repeat(5,auto)] gap-x-6`}>
         <span />
         {POSITIONS.map((position) => (
-          <Head key={position}>{position[0]!.toUpperCase() + position.slice(1)}</Head>
+          <Head key={position} className="justify-self-center pb-4">
+            {position[0]!.toUpperCase() + position.slice(1)}
+          </Head>
         ))}
         {VARIANTS.flatMap((variant) =>
           RADII.map((radius) => (
             <React.Fragment key={`${variant}-${radius}`}>
-              <Head className="justify-self-start">
+              <RowLabel on="trigger">
                 {variant} · {radius}
-              </Head>
+              </RowLabel>
               {POSITIONS.map((position) => (
-                <Open
+                <Held
                   key={position}
                   label={c.trigger}
                   variant={variant}
@@ -186,7 +301,7 @@ export const AllVariants: Story = {
                   {...positionProps(position)}
                 >
                   {c.title}
-                </Open>
+                </Held>
               ))}
             </React.Fragment>
           ))
@@ -209,14 +324,11 @@ export const Sides: Story = {
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className="grid w-max grid-cols-3 justify-items-center gap-x-44 gap-y-24 px-32 py-16">
+      <div className={`${GRID} w-max grid-cols-3 gap-x-12`}>
         {SIDES.map((side) => (
-          <div key={side} className="flex flex-col items-center gap-14">
-            <Head>side = {side}</Head>
-            <Open label={c.trigger} side={side}>
-              {c.title}
-            </Open>
-          </div>
+          <Held key={side} label={c.trigger} side={side} caption={`side = ${side}`}>
+            {c.title}
+          </Held>
         ))}
       </div>
     )
@@ -227,40 +339,31 @@ export const Sides: Story = {
  * Figma's optional slots, in every style: a description (70% of the text
  * colour, `muted-foreground` on Secondary), a 16px icon in the text colour,
  * and a round Avatar at size 12 in a 16px slot, so avatar and icon line up.
- * Both centre on the title's first line.
+ * Both centre on the title's first line. Each row label sits on the title
+ * line of the tooltips it names.
  */
 export const Slots: Story = {
   parameters: { layout: "padded" },
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className="grid w-max grid-cols-[7rem_repeat(3,18rem)] items-end justify-items-center gap-y-20 p-10 pt-24">
+      <div className={`${GRID} w-max grid-cols-[auto_repeat(3,auto)] gap-x-6`}>
         <span />
-        <Head>description</Head>
-        <Head>icon + description</Head>
-        <Head>avatar + description</Head>
+        <Head className="justify-self-center pb-4">description</Head>
+        <Head className="justify-self-center pb-4">icon + description</Head>
+        <Head className="justify-self-center pb-4">avatar + description</Head>
         {VARIANTS.map((variant) => (
           <React.Fragment key={variant}>
-            <Head className="justify-self-start self-center">{variant}</Head>
-            <Open label={c.trigger} variant={variant} description={c.description}>
+            <RowLabel on="tooltip">{variant}</RowLabel>
+            <Held label={c.trigger} variant={variant} description={c.description}>
               {c.title}
-            </Open>
-            <Open
-              label={c.trigger}
-              variant={variant}
-              icon={<Info />}
-              description={c.description}
-            >
+            </Held>
+            <Held label={c.trigger} variant={variant} icon={<Info />} description={c.description}>
               {c.title}
-            </Open>
-            <Open
-              label={c.trigger}
-              variant={variant}
-              avatar={{ src: PHOTO, name: "" }}
-              description={c.edited}
-            >
+            </Held>
+            <Held label={c.trigger} variant={variant} avatar={{ src: PHOTO, name: "" }} description={c.edited}>
               {c.name}
-            </Open>
+            </Held>
           </React.Fragment>
         ))}
       </div>
@@ -271,126 +374,112 @@ export const Slots: Story = {
 /**
  * The cap is on the text, as in Figma: title and description each wrap at
  * 296px. Without an icon the bubble tops out at 320px; with one, at 340. A
- * string with no spaces — a URL — breaks rather than overflowing.
+ * string with no spaces — a URL — breaks rather than overflowing. Every
+ * tooltip opens on top, so each row's triggers and captions line up with no
+ * empty room; Sides shows the other sides.
  */
 export const LongText: Story = {
   parameters: { layout: "padded" },
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className="flex w-max flex-col items-center gap-40 px-48 pb-10 pt-40">
-        {/* Each label sits on the side its tooltip leaves free. */}
-        <div className="flex flex-col items-center gap-3">
-          <Open label={c.trigger} description={c.longDescription}>
-            {c.longTitle}
-          </Open>
-          <Head>320px — text only</Head>
-        </div>
-        <div className="flex flex-col items-center gap-3">
-          <Open label={c.trigger} description={c.longDescription} icon={<Info />}>
-            {c.longTitle}
-          </Open>
-          <Head>340px — with an icon</Head>
-        </div>
-        <div className="flex flex-col items-center gap-3">
-          <Head>Rounded, bottom</Head>
-          <Open label={c.trigger} variant="secondary" radius="rounded" side="bottom">
-            {c.longTitle}
-          </Open>
-        </div>
-        <div className="flex flex-col items-center gap-3 pt-16">
-          <Open label={c.trigger} variant="info" description={LONG_URL}>
-            {c.title}
-          </Open>
-          <Head>An unbroken URL</Head>
-        </div>
+      <div className={`${GRID} w-max grid-cols-2 gap-x-12`}>
+        <Held label={c.trigger} description={c.longDescription} caption="320px — text only">
+          {c.longTitle}
+        </Held>
+        <Held label={c.trigger} description={c.longDescription} icon={<Info />} caption="340px — with an icon">
+          {c.longTitle}
+        </Held>
+        <Held label={c.trigger} variant="secondary" radius="rounded" caption="Rounded">
+          {c.longTitle}
+        </Held>
+        <Held label={c.trigger} variant="info" description={LONG_URL} caption="An unbroken URL">
+          {c.title}
+        </Held>
       </div>
     )
   },
 }
 
+const DIRECTIONS = ["ltr", "rtl"] as const
+const directionProps = (dir: (typeof DIRECTIONS)[number]) => ({
+  dir,
+  lang: dir === "rtl" ? "ar" : "en",
+  className: dir === "rtl" ? "font-arabic" : "",
+})
+
 /**
  * Figma's Rounded radius is `border radius/2xl`, 16px, not a full pill: once
  * the text wraps, a 9999px radius would clip the avatar, icon and text
  * corners. One line still reads as a pill, at 28px (32 in Arabic). Both
- * directions side by side, whatever the toolbar says — each panel sets its
- * own `dir`, `lang` and font, and the tooltip takes them from its trigger.
+ * directions side by side, whatever the toolbar says — each cell sets its own
+ * `dir`, `lang` and font, and the tooltip takes them from its trigger.
  */
 export const RoundedMultiline: Story = {
   parameters: { layout: "padded" },
   render: () => (
-    <div className="flex w-max flex-wrap items-end justify-center gap-x-24 gap-y-16 px-10 pt-44">
-      {(["ltr", "rtl"] as const).map((dir) => {
-        const c = COPY[dir]
-        return (
-          <div
-            key={dir}
-            dir={dir}
-            lang={dir === "rtl" ? "ar" : "en"}
-            className={["flex w-[22rem] flex-col items-center gap-24", dir === "rtl" ? "font-arabic" : ""].join(" ")}
-          >
-            <div className="flex flex-col items-center gap-3">
-              <Open
-                label={c.trigger}
-                radius="rounded"
-                icon={<Info />}
-                avatar={{ src: PHOTO, name: "" }}
-                description={c.longDescription}
-              >
-                {c.longTitle}
-              </Open>
-              <Head>{dir === "rtl" ? "RTL" : "LTR"} · rounded · avatar + icon</Head>
-            </div>
-            <div className="flex flex-col items-center gap-3">
-              <Open label={c.trigger} radius="rounded">
-                {c.title}
-              </Open>
-              <Head>{dir === "rtl" ? "RTL" : "LTR"} · rounded · one line</Head>
-            </div>
-          </div>
-        )
-      })}
+    <div className={`${GRID} w-max grid-cols-2 gap-x-12`}>
+      {DIRECTIONS.map((dir) => (
+        <Held
+          key={`${dir}-long`}
+          cellProps={directionProps(dir)}
+          label={COPY[dir].trigger}
+          radius="rounded"
+          icon={<Info />}
+          avatar={{ src: PHOTO, name: "" }}
+          description={COPY[dir].longDescription}
+          caption={`${dir.toUpperCase()} · rounded · avatar + icon`}
+        >
+          {COPY[dir].longTitle}
+        </Held>
+      ))}
+      {DIRECTIONS.map((dir) => (
+        <Held
+          key={`${dir}-short`}
+          cellProps={directionProps(dir)}
+          label={COPY[dir].trigger}
+          radius="rounded"
+          caption={`${dir.toUpperCase()} · rounded · one line`}
+        >
+          {COPY[dir].title}
+        </Held>
+      ))}
     </div>
   ),
 }
 
 const THEMES = ["light", "dark"] as const
 
-/** One themed panel, with its own portal container so its tooltips keep its tokens. */
-const ThemePanel = ({ theme, c }: { theme: (typeof THEMES)[number]; c: Copy }) => {
-  const [container, setContainer] = React.useState<HTMLDivElement | null>(null)
-  return (
-    <div className={[theme, "rounded-lg border bg-background p-6 text-foreground"].join(" ")}>
-      <Head>{theme === "dark" ? "Dark" : "Light"}</Head>
-      <div ref={setContainer} />
-      <div className="grid grid-cols-[repeat(2,18rem)] justify-items-center gap-y-24 pb-4 pt-20">
-        {container &&
-          VARIANTS.map((variant) => (
-            <Open
-              key={variant}
-              container={container}
-              label={c.trigger}
-              variant={variant}
-              description={variant === "primary" || variant === "secondary" ? c.description : undefined}
-            >
-              {c.title}
-            </Open>
-          ))}
-      </div>
+/** One themed panel. Its cells, and so its tooltips, sit inside the theme class. */
+const ThemePanel = ({ theme, c }: { theme: (typeof THEMES)[number]; c: Copy }) => (
+  <div className={[theme, "rounded-lg border bg-background p-6 text-foreground"].join(" ")}>
+    <Head className="block pb-4">{theme === "dark" ? "Dark" : "Light"}</Head>
+    <div className={`${GRID} grid-cols-3 gap-x-6`}>
+      {VARIANTS.map((variant) => (
+        <Held
+          key={variant}
+          label={c.trigger}
+          variant={variant}
+          description={variant === "primary" || variant === "secondary" ? c.description : undefined}
+        >
+          {c.title}
+        </Held>
+      ))}
     </div>
-  )
-}
+  </div>
+)
 
 /**
- * Light and Dark side by side, whatever the theme toolbar says, as Figma's
+ * Light and Dark, one panel each, whatever the theme toolbar says, as Figma's
  * doc shows each style. Language and direction follow the Direction toolbar.
+ * The panels stack so both fit the Docs page.
  */
 export const LightAndDark: Story = {
   parameters: { layout: "padded" },
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className="grid w-max gap-4 xl:grid-cols-2">
+      <div className="grid w-max gap-4">
         {THEMES.map((theme) => (
           <ThemePanel key={theme} theme={theme} c={c} />
         ))}

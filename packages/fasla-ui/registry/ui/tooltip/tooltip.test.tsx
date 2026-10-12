@@ -64,6 +64,15 @@ describe("Tooltip — behaviour", () => {
     expect(screen.queryByText("Copy link")).toBeNull()
   })
 
+  it("keeps its own width in a narrow container", () => {
+    const container = document.createElement("div")
+    container.style.width = "0px"
+    document.body.appendChild(container)
+    render(<Example container={container} />)
+    expect(positioner()).toHaveClass("w-max")
+    container.remove()
+  })
+
   it("portals the tooltip to <body>, or into the container it is given", () => {
     const { unmount } = render(<Example />)
     expect(positioner().parentElement?.parentElement).toBe(document.body)
