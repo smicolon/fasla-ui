@@ -13,6 +13,7 @@
     "test": "bun test tests"
   },
   "dependencies": {
+    "@base-ui/react": "^1.9.0",
     "@mdx-js/loader": "^3.0.0",
     "@mdx-js/react": "^3.0.0",
     "@next/mdx": "^14.2.0",

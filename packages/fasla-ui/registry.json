@@ -527,6 +527,7 @@
       "title": "Tabs",
       "description": "Accessible, keyboard-navigable tabs (also called pills): boxed, bordered and lifted styles in three sizes, with optional icons.",
       "dependencies": [
+        "@base-ui/react",
         "class-variance-authority"
       ],
       "registryDependencies": [],

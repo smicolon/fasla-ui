@@ -79,6 +79,7 @@
     "tailwind-merge": "^2.2.0"
   },
   "devDependencies": {
+    "@base-ui/react": "^1.9.0",
     "@testing-library/jest-dom": "^6.4.0",
     "@testing-library/react": "^14.2.0",
     "@types/fs-extra": "^11.0.0",
