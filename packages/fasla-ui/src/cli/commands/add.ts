@@ -5,7 +5,7 @@ import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
 import { DEFAULT_REGISTRY_URL, LEGACY_REGISTRY_URL, REGISTRY_URL, fetchRegistry, fetchComponent, getTargetDirectory, type RegistryFile, type RegistryItem } from "../registry.js"
-import { registryItemName, resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
+import { describeAdded, registryItemName, resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
 import { aliasToPath, checkDestination, installFile, resolveInsideProject } from "../paths.js"
 import { detectPackageManager, installCommand, missingPackages } from "../pm.js"
 import { writeCnHelper } from "./init.js"
@@ -149,7 +149,7 @@ export function addCommand() {
         process.exit(1)
       }
       if (resolved.added.length > 0) {
-        addSpinner.info(`Also adding ${resolved.added.join(", ")}, which ${validComponents.join(", ")} need(s)`)
+        addSpinner.info(describeAdded(resolved.added, resolved.neededBy))
       }
       if (resolved.skipped.length > 0) {
         addSpinner.warn(`Not resolvable from this registry, install separately: ${resolved.skipped.join(", ")}`)
