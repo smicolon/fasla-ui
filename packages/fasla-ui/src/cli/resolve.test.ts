@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest"
-import { registryItemName, resolveWithDependencies, rewriteComponentImports } from "./resolve"
+import { describeAdded, registryItemName, resolveWithDependencies, rewriteComponentImports } from "./resolve"
 import { NAMESPACE, namespaceUrl, type RegistryItem } from "./registry"
 
 const BASE = "https://ui.smicolon.com/r"
@@ -60,6 +60,37 @@ describe("resolveWithDependencies", () => {
     const r = await resolveWithDependencies(["a"], nameOf, fetchItem)
     expect(r.items.map((i) => i.name)).toEqual(["a"])
     expect(r.skipped).toEqual(["https://example.com/r/x.json", "ghost"])
+  })
+})
+
+describe("describeAdded", () => {
+  it("names only the requested components that need the dependency", async () => {
+    const { nameOf, fetchItem } = registry([
+      item("avatar", [`${BASE}/status-indicator.json`]),
+      item("data-table"),
+      item("card"),
+      item("button"),
+      item("status-indicator"),
+    ])
+    const r = await resolveWithDependencies(["avatar", "data-table", "card", "button"], nameOf, fetchItem)
+    expect(r.neededBy).toEqual({ "status-indicator": ["avatar"] })
+    expect(describeAdded(r.added, r.neededBy)).toBe("Also adding status-indicator, which avatar needs")
+  })
+
+  it("names every component that needs a shared dependency, and those that reach it through another", async () => {
+    const { nameOf, fetchItem } = registry([
+      item("avatar", ["status-indicator"]),
+      item("badge", ["status-indicator"]),
+      item("menu", ["list"]),
+      item("list", ["status-indicator"]),
+      item("card"),
+      item("status-indicator"),
+    ])
+    const r = await resolveWithDependencies(["avatar", "card", "badge", "menu"], nameOf, fetchItem)
+    expect(r.neededBy).toEqual({ "status-indicator": ["avatar", "badge", "menu"], list: ["menu"] })
+    expect(describeAdded(r.added, r.neededBy)).toBe(
+      "Also adding status-indicator, which avatar, badge and menu need; list, which menu needs"
+    )
   })
 })
 

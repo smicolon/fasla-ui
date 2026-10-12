@@ -10,6 +10,8 @@ export interface Resolved {
   items: RegistryItem[]
   /** Names pulled in only as dependencies, not asked for. */
   added: string[]
+  /** For each name in `added`, the requested names that need it, directly or through another dependency. */
+  neededBy: Record<string, string[]>
   /** `registryDependencies` this registry can't resolve — URLs or unknown names. */
   skipped: string[]
 }
@@ -49,15 +51,20 @@ export async function resolveWithDependencies(
   const done = new Set<string>()
   const visiting = new Set<string>()
   const skipped = new Set<string>()
+  const depsOf = new Map<string, string[]>()
 
   async function visit(name: string) {
     if (done.has(name) || visiting.has(name)) return
     visiting.add(name)
     const item = await fetchItem(name)
+    const deps: string[] = []
+    depsOf.set(name, deps)
     for (const dep of item.registryDependencies ?? []) {
       const depName = nameOf(dep)
-      if (depName) await visit(depName)
-      else skipped.add(dep)
+      if (depName) {
+        deps.push(depName)
+        await visit(depName)
+      } else skipped.add(dep)
     }
     visiting.delete(name)
     done.add(name)
@@ -67,11 +74,48 @@ export async function resolveWithDependencies(
   for (const name of requested) await visit(name)
 
   const asked = new Set(requested)
-  return {
-    items,
-    added: items.map((i) => i.name).filter((n) => !asked.has(n)),
-    skipped: [...skipped],
+  const added = items.map((i) => i.name).filter((n) => !asked.has(n))
+
+  // Each item is fetched once, so walk the graph again from every requested
+  // name to see which of them reach each added one.
+  const neededBy: Record<string, string[]> = Object.fromEntries(added.map((n) => [n, []]))
+  for (const root of asked) {
+    const seen = new Set<string>([root])
+    const stack = [...(depsOf.get(root) ?? [])]
+    while (stack.length > 0) {
+      const name = stack.pop()!
+      if (seen.has(name)) continue
+      seen.add(name)
+      neededBy[name]?.push(root)
+      stack.push(...(depsOf.get(name) ?? []))
+    }
   }
+
+  return { items, added, neededBy, skipped: [...skipped] }
+}
+
+/**
+ * What `add` says about the dependencies it pulled in, naming for each only
+ * the requested components that need it: "Also adding status-indicator, which
+ * avatar needs". Dependencies needed by the same components share a clause.
+ */
+export function describeAdded(added: string[], neededBy: Record<string, string[]>): string {
+  const groups = new Map<string, { deps: string[]; by: string[] }>()
+  for (const dep of added) {
+    const by = neededBy[dep] ?? []
+    const key = by.join(",")
+    const group = groups.get(key) ?? { deps: [], by }
+    group.deps.push(dep)
+    groups.set(key, group)
+  }
+  const clauses = [...groups.values()].map(
+    ({ deps, by }) => `${deps.join(", ")}, which ${andList(by)} ${by.length === 1 ? "needs" : "need"}`
+  )
+  return `Also adding ${clauses.join("; ")}`
+}
+
+function andList(names: string[]) {
+  return names.length <= 1 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`
 }
 
 /**
