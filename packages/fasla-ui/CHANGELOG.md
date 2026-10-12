@@ -1,5 +1,12 @@
 # @smicolon/fasla-ui
 
+## [0.6.0](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.5.1...fasla-ui-v0.6.0) (2026-10-12)
+
+
+### Features
+
+* make fasla.smicolon.com the main domain ([561d232](https://github.com/smicolon/fasla-ui/commit/561d232431d8945bb0d9c2f058ff6477440cc240))
+
 ## [0.5.1](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.5.0...fasla-ui-v0.5.1) (2026-10-09)
 
 
