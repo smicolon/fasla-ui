@@ -166,6 +166,20 @@ describe("Theme section of the Installation page", () => {
     }
   })
 
+  test("says, in both languages, that add installs what the components import, and how to only print it", () => {
+    // add used to print the install command only; the docs said so in two places.
+    expect(page.indexOf('i.rich("cliAddInstalls", rich)')).toBeGreaterThan(page.indexOf("add card input badge"))
+    for (const lang of ["en", "ar"]) {
+      const docs = JSON.parse(read(`messages/${lang}.json`)).docs
+      expect(docs.installation.cliAddInstalls).toContain("<code>--no-install</code>")
+      expect(docs.installation.cliDepsTailwind3).toContain("<code>add</code>")
+      expect(docs.tabs.installNote).toContain("<code>@base-ui/react</code>")
+    }
+    const en = JSON.parse(read("messages/en.json")).docs
+    expect(en.tabs.installNote).toContain("<code>add</code> installs it with the component")
+    expect(JSON.stringify(en)).not.toContain("among the packages to install")
+  })
+
   test("writes shadcn commands with full registry URLs, which work without our init", () => {
     expect(shadcnAdd("theme", "font-geist")).toBe(
       "shadcn@latest add https://fasla.smicolon.com/r/theme.json https://fasla.smicolon.com/r/font-geist.json"

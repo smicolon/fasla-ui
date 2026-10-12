@@ -6,6 +6,7 @@
 import { spawn } from "child_process"
 import fs from "fs-extra"
 import path from "path"
+import semver from "semver"
 
 export type PackageManager = "npm" | "pnpm" | "yarn" | "bun"
 
@@ -50,10 +51,33 @@ export function installCommand(pm: PackageManager, packages: string[], options: 
   return [pm, ...installArgs(pm, packages, options)].join(" ")
 }
 
+/** The name in an install spec: `tailwind-merge` from `tailwind-merge@^2`, `@scope/x` from `@scope/x@1`. */
+export const specName = (spec: string) => spec.replace(/(?<=.)@.*$/, "")
+
+/** The range in an install spec: `^2` from `tailwind-merge@^2`, undefined for a bare name. */
+const specRange = (spec: string) => (spec.length > specName(spec).length ? spec.slice(specName(spec).length + 1) : undefined)
+
 /**
- * The packages in `packages` that package.json does not already list, in
- * dependencies or devDependencies. With no readable package.json, all of
- * them.
+ * The version of `name` installed where Node would resolve it from `cwd`: its
+ * node_modules, then each folder above, as in a monorepo. Read from the file,
+ * not require.resolve: tailwind-merge 3's exports don't include package.json.
+ */
+export async function installedVersion(cwd: string, name: string): Promise<string | undefined> {
+  for (let dir = path.resolve(cwd); ; dir = path.dirname(dir)) {
+    const pkg = await fs.readJson(path.join(dir, "node_modules", name, "package.json")).catch(() => undefined)
+    if (typeof pkg?.version === "string") return pkg.version
+    if (path.dirname(dir) === dir) return undefined
+  }
+}
+
+/**
+ * The specs in `packages` the project doesn't already have at a compatible
+ * version. A bare name, `lucide-react`, is there once package.json lists it,
+ * in dependencies or devDependencies, at any version. A name with a range,
+ * `@base-ui/react@^1`, is there only when the listed range stays inside it and
+ * the installed copy, if any, satisfies it; a listed range that may resolve
+ * outside it, such as `*`, `latest` or a tag, counts as not, at the cost of a
+ * reinstall. With no readable package.json, all of them.
  */
 export async function missingPackages(cwd: string, packages: string[]): Promise<string[]> {
   let pkg: { dependencies?: Record<string, string>; devDependencies?: Record<string, string> } = {}
@@ -62,8 +86,28 @@ export async function missingPackages(cwd: string, packages: string[]): Promise<
   } catch {
     return packages
   }
-  const listed = { ...pkg.dependencies, ...pkg.devDependencies }
-  return packages.filter((name) => !(name in listed))
+  const listed: Record<string, string | undefined> = { ...pkg.dependencies, ...pkg.devDependencies }
+  const missing: string[] = []
+  for (const spec of packages) {
+    const name = specName(spec)
+    const range = listed[name]
+    const wanted = specRange(spec)
+    if (range === undefined) missing.push(spec)
+    else if (wanted !== undefined && !(await compatible(cwd, name, range, wanted))) missing.push(spec)
+  }
+  return missing
+}
+
+/** Whether `listed`, and the copy of `name` installed, if any, stay inside `wanted`. */
+async function compatible(cwd: string, name: string, listed: string, wanted: string): Promise<boolean> {
+  try {
+    if (!semver.subset(listed, wanted)) return false
+  } catch {
+    // Not a range semver reads: a tag, an alias, `workspace:*`.
+    return false
+  }
+  const installed = await installedVersion(cwd, name)
+  return installed === undefined || semver.satisfies(installed, wanted)
 }
 
 export type InstallResult = { ok: true } | { ok: false; output: string }
