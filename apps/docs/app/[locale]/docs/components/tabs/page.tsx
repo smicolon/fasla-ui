@@ -1,26 +1,66 @@
 "use client"
 
-import { useTranslations } from "next-intl"
+import { useState } from "react"
+import { useLocale, useTranslations } from "next-intl"
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@fasla-ui/ui/tabs"
 import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
-import { PropsTable, richCode, type PropRow } from "@/components/props-table"
+import { PropsTable, type PropRow } from "@/components/props-table"
+import { localeDirection, type Locale } from "@/i18n/routing"
 
-const TABS = ["account", "password", "settings"] as const
+const TABS = ["account", "password", "billing", "settings"] as const
+const VARIANTS = ["boxed", "bordered", "lifted"] as const
+const SIZES = ["sm", "md", "lg"] as const
 
 export default function TabsPage() {
   const t = useTranslations("docs.sections")
   const a = useTranslations("docs.tabs")
+  const isRtl = localeDirection[useLocale() as Locale] === "rtl"
+  const [value, setValue] = useState<string>("password")
 
+  // Prop and value names are code identifiers, so they stay Latin in both
+  // locales; the sentence around them is the locale's. `nowrap` keeps each one
+  // a single unit: `aria-labelledby` must not break at its hyphen.
+  const code = (chunks: React.ReactNode) => (
+    <code className="whitespace-nowrap text-sm">{chunks}</code>
+  )
+  const rich = { code }
+
+  /** The four sample panels, one line each: every tab switches something. */
+  const panels = TABS.map((tab) => (
+    <TabsContent key={tab} value={tab} className="text-sm text-muted-foreground">
+      {a(`panels.${tab}`)}
+    </TabsContent>
+  ))
+
+  /** One group of the four sample tabs, for the style and size sections. */
+  const group = (variant: (typeof VARIANTS)[number], size?: (typeof SIZES)[number]) => (
+    <Tabs defaultValue="account">
+      <TabsList variant={variant} size={size} aria-label={a("examples.label")}>
+        {TABS.map((tab) => (
+          <TabsTrigger key={tab} value={tab}>
+            {a(`tabs.${tab}`)}
+          </TabsTrigger>
+        ))}
+      </TabsList>
+      {panels}
+    </Tabs>
+  )
+
+  // One table, in a fixed order: state on Tabs, then appearance on TabsList,
+  // then the two parts, then styling.
   const props: PropRow[] = [
-    { prop: "value", type: "string", fallback: "", description: a.rich("props.value", richCode) },
-    { prop: "defaultValue", type: "string", fallback: "", description: a.rich("props.defaultValue", richCode) },
-    { prop: "onValueChange", type: "(value) => void", fallback: "", description: a.rich("props.onValueChange", richCode) },
-    { prop: "TabsTrigger", type: "{ value, disabled }", fallback: "", description: a.rich("props.trigger", richCode) },
-    { prop: "TabsContent", type: "{ value }", fallback: "", description: a.rich("props.content", richCode) },
-    { prop: "className", type: "string", fallback: "", description: a.rich("props.className", richCode) },
+    { prop: "value", type: "string", fallback: "", description: a.rich("props.value", rich) },
+    { prop: "defaultValue", type: "string", fallback: "", description: a.rich("props.defaultValue", rich) },
+    { prop: "onValueChange", type: "(value, eventDetails) => void", fallback: "", description: a.rich("props.onValueChange", rich) },
+    { prop: "variant", type: '"boxed" | "bordered" | "lifted"', fallback: '"boxed"', description: a.rich("props.variant", rich) },
+    { prop: "size", type: '"sm" | "md" | "lg"', fallback: '"md"', description: a.rich("props.size", rich) },
+    { prop: "activateOnFocus", type: "boolean", fallback: "true", description: a.rich("props.activateOnFocus", rich) },
+    { prop: "TabsTrigger", type: "{ value, disabled }", fallback: "", description: a.rich("props.trigger", rich) },
+    { prop: "TabsContent", type: "{ value }", fallback: "", description: a.rich("props.content", rich) },
+    { prop: "className", type: "string", fallback: "", description: a.rich("props.className", rich) },
   ]
 
   return (
@@ -34,6 +74,7 @@ export default function TabsPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
         <InstallCommand name="tabs" />
+        <p className="text-muted-foreground">{a.rich("installNote", rich)}</p>
       </section>
 
       {/* Preview */}
@@ -41,7 +82,7 @@ export default function TabsPage() {
         <h2 className="text-2xl font-semibold">{t("preview")}</h2>
         <ComponentPreview>
           <Tabs defaultValue="account" className="w-full max-w-md">
-            <TabsList>
+            <TabsList aria-label={a("examples.label")}>
               {TABS.map((tab) => (
                 <TabsTrigger key={tab} value={tab}>
                   {a(`tabs.${tab}`)}
@@ -50,7 +91,7 @@ export default function TabsPage() {
             </TabsList>
             {TABS.map((tab) => (
               <TabsContent key={tab} value={tab}>
-                <div className="mt-2 rounded-lg border p-4">
+                <div className="rounded-lg border p-4">
                   <h3 className="font-semibold">{a(`tabs.${tab}`)}</h3>
                   <p className="text-sm text-muted-foreground">{a(`panels.${tab}`)}</p>
                 </div>
@@ -60,26 +101,75 @@ export default function TabsPage() {
         </ComponentPreview>
       </section>
 
-      {/* With Disabled Tab */}
+      {/* Variants */}
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">{a("disabledTitle")}</h2>
+        <h2 className="text-2xl font-semibold">{t("variants")}</h2>
+        <p className="text-muted-foreground">{a.rich("variantsBody", rich)}</p>
         <ComponentPreview>
-          <Tabs defaultValue="current" className="w-full max-w-md">
-            <TabsList>
-              <TabsTrigger value="current">{a("disabled.current")}</TabsTrigger>
-              <TabsTrigger value="invoices" disabled>
-                {a("disabled.invoices")}
-              </TabsTrigger>
-              <TabsTrigger value="past">{a("disabled.past")}</TabsTrigger>
-            </TabsList>
-            <TabsContent value="current">
-              <div className="mt-2 rounded-lg border p-4">{a("disabled.currentText")}</div>
-            </TabsContent>
-            <TabsContent value="past">
-              <div className="mt-2 rounded-lg border p-4">{a("disabled.pastText")}</div>
-            </TabsContent>
-          </Tabs>
+          <div className="flex flex-col gap-6">
+            {VARIANTS.map((variant) => (
+              <div key={variant} className="flex flex-col gap-2">
+                <code className="w-fit text-sm text-muted-foreground">{variant}</code>
+                {group(variant)}
+              </div>
+            ))}
+          </div>
         </ComponentPreview>
+      </section>
+
+      {/* Sizes */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("sizes")}</h2>
+        <p className="text-muted-foreground">{a.rich("sizesBody", rich)}</p>
+        <ComponentPreview>
+          <div className="flex flex-col gap-4">
+            {SIZES.map((size) => (
+              <div key={size} className="flex flex-col gap-2">
+                <code className="w-fit text-sm text-muted-foreground">{size}</code>
+                {group("boxed", size)}
+              </div>
+            ))}
+          </div>
+        </ComponentPreview>
+      </section>
+
+      {/* States */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("states")}</h2>
+        <p className="text-muted-foreground">{a.rich("statesBody", rich)}</p>
+        <ComponentPreview>
+          <div className="flex flex-col gap-6">
+            {VARIANTS.map((variant) => (
+              <Tabs key={variant} defaultValue="current">
+                <TabsList variant={variant} aria-label={a("disabled.label")}>
+                  <TabsTrigger value="current">{a("disabled.current")}</TabsTrigger>
+                  <TabsTrigger value="invoices" disabled>
+                    {a("disabled.invoices")}
+                  </TabsTrigger>
+                  <TabsTrigger value="past">{a("disabled.past")}</TabsTrigger>
+                </TabsList>
+                <TabsContent value="current">
+                  <p className="text-sm text-muted-foreground">{a("disabled.currentText")}</p>
+                </TabsContent>
+                <TabsContent value="past">
+                  <p className="text-sm text-muted-foreground">{a("disabled.pastText")}</p>
+                </TabsContent>
+              </Tabs>
+            ))}
+          </div>
+        </ComponentPreview>
+      </section>
+
+      {/* Accessibility */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{t("accessibility")}</h2>
+        <ul className="list-disc space-y-2 ps-6 text-muted-foreground">
+          <li>{a.rich("a11y.roles", rich)}</li>
+          <li>{a.rich("a11y.keyboard", rich)}</li>
+          <li>{a.rich("a11y.label", rich)}</li>
+          <li>{a.rich("a11y.icons", rich)}</li>
+          <li>{a.rich("a11y.direction", rich)}</li>
+        </ul>
       </section>
 
       {/* Props */}
@@ -96,9 +186,44 @@ export default function TabsPage() {
 export function AccountTabs() {
   return (
     <Tabs defaultValue="account">
-      <TabsList>
+      <TabsList aria-label="${a("examples.label")}">
         <TabsTrigger value="account">${a("tabs.account")}</TabsTrigger>
         <TabsTrigger value="password">${a("tabs.password")}</TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">${a("usage.accountContent")}</TabsContent>
+      <TabsContent value="password">${a("usage.passwordContent")}</TabsContent>
+    </Tabs>
+  )
+}`}</UsageExample>
+        <UsageExample title={a("usage.variant")}>{`import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+
+export function BorderedAccountTabs() {
+  return (
+    <Tabs defaultValue="account">
+      <TabsList variant="bordered" size="lg" aria-label="${a("examples.label")}">
+        <TabsTrigger value="account">${a("tabs.account")}</TabsTrigger>
+        <TabsTrigger value="password">${a("tabs.password")}</TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">${a("usage.accountContent")}</TabsContent>
+      <TabsContent value="password">${a("usage.passwordContent")}</TabsContent>
+    </Tabs>
+  )
+}`}</UsageExample>
+        <UsageExample title={a("usage.icons")}>{`import { KeyRound, User } from "lucide-react"
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs"
+
+export function AccountTabsWithIcons() {
+  return (
+    <Tabs defaultValue="account">
+      <TabsList aria-label="${a("examples.label")}">
+        <TabsTrigger value="account">
+          <User aria-hidden="true" />
+          ${a("tabs.account")}
+        </TabsTrigger>
+        <TabsTrigger value="password">
+          <KeyRound aria-hidden="true" />
+          ${a("tabs.password")}
+        </TabsTrigger>
       </TabsList>
       <TabsContent value="account">${a("usage.accountContent")}</TabsContent>
       <TabsContent value="password">${a("usage.passwordContent")}</TabsContent>
@@ -115,7 +240,7 @@ export function ControlledAccountTabs() {
 
   return (
     <Tabs value={value} onValueChange={setValue}>
-      <TabsList>
+      <TabsList aria-label="${a("examples.label")}">
         <TabsTrigger value="account">${a("tabs.account")}</TabsTrigger>
         <TabsTrigger value="password">${a("tabs.password")}</TabsTrigger>
       </TabsList>
@@ -124,6 +249,31 @@ export function ControlledAccountTabs() {
     </Tabs>
   )
 }`}</UsageExample>
+        <ComponentPreview>
+          <div className="flex flex-col gap-3">
+            <Tabs value={value} onValueChange={setValue}>
+              <TabsList aria-label={a("examples.label")}>
+                {TABS.map((tab) => (
+                  <TabsTrigger key={tab} value={tab}>
+                    {a(`tabs.${tab}`)}
+                  </TabsTrigger>
+                ))}
+              </TabsList>
+              {panels}
+            </Tabs>
+            <p className="text-sm text-muted-foreground">
+              {a("usage.active")}{" "}
+              {/* Arabic never goes in a code span: its mono face has no Arabic glyphs. */}
+              {isRtl ? (
+                <span className="font-medium text-foreground">
+                  {a(`tabs.${value as (typeof TABS)[number]}`)}
+                </span>
+              ) : (
+                <code className="text-sm">{value}</code>
+              )}
+            </p>
+          </div>
+        </ComponentPreview>
       </section>
     </div>
   )
