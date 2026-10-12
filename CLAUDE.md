@@ -144,6 +144,25 @@ Adding a string means adding the key to **both** files — a parity test fails
 otherwise. Async server pages must call `setRequestLocale(locale)` or the
 static export breaks. See `docs/LOCALISATION.md`.
 
+## Stories and docs examples: layout rule
+
+Applies to every Storybook story and every docs-site example, for every
+component. Check it in Canvas and on the Storybook Docs page, LTR and RTL,
+light and dark, and on the docs site at desktop and phone width.
+
+- Items in the same row align to a shared top edge. No staggered offsets, no
+  large empty gaps.
+- A side label lines up with the thing it describes (a row label sits on the
+  line of the component it names, not the control below it).
+- A long single-column stack becomes a 2-column grid wherever it fits.
+- Everything fits its container: the Storybook Docs page gives a story about
+  1000px, a docs-site preview about 550px (300px on a phone). Nothing renders
+  outside its cell or its preview box.
+
+Floating content (tooltips, popovers, menus) held open in an example has to
+reserve its own room, because it is positioned out of flow. The Tooltip
+stories and docs page show the working pattern; see `apps/storybook/README.md`.
+
 ## Workflow
 
 1. Create a **Block Map** for each screen using `docs/BLOCK_MAP_TEMPLATE.md` (2-5 min)
