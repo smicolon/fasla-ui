@@ -217,7 +217,7 @@ export default function TooltipPage() {
         row("arrow", "boolean", "true", "arrow"),
         row("description", "ReactNode", "", "description"),
         row("icon", "ReactNode", "", "icon"),
-        row("avatar", "AvatarProps", "", "avatar"),
+        row("avatar", 'Omit<AvatarProps, "size">', "", "avatar"),
         row("container", "HTMLElement", "", "container"),
         row("className", "string", "", "className"),
       ],
