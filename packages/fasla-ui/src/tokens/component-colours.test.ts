@@ -27,8 +27,9 @@ const LITERAL = /#[0-9a-fA-F]{3,8}\b(?! 0 0\))|\b(?:rgba?|hsla?|oklch|oklab|lab|
 const TOKEN = /var\(--([a-z0-9-]+)\)/g
 
 const allowed = new Set(tokenNames(loadSources().mode))
-// Variables components set for themselves, not colours from the theme.
-const OWN = /^(tw-|radix-|beam-|glow-|shimmer-|spotlight-|text-reveal|leading-|font-|radius|border-radius|sw-)/
+// Variables components set for themselves, not colours from the theme —
+// including the sizes Base UI's positioner writes (`--available-width`).
+const OWN = /^(tw-|radix-|beam-|glow-|shimmer-|spotlight-|text-reveal|leading-|font-|radius|border-radius|sw-|available-(width|height)$|anchor-(width|height)$)/
 
 describe("component colours", () => {
   it("use no Tailwind palette colours", () => {

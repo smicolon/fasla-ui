@@ -586,6 +586,30 @@
       ]
     },
     {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "A short hint on hover or keyboard focus: six styles, two radii, an optional arrow, description, icon and avatar, placed on any side and flipped for RTL.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/tooltip/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/tooltip.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "feedback"
+      ]
+    },
+    {
       "name": "typewriter-text",
       "type": "registry:ui",
       "title": "Typewriter Text",
