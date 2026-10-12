@@ -36,6 +36,8 @@ vi.mock("./registry", async (importOriginal) => {
   const actual = await importOriginal<typeof import("./registry")>()
   const items = [
     { name: "button", type: "registry:ui", dependencies: ["lucide-react"], files: [{ path: "registry/ui/button/button.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/button): https://fasla.smicolon.com\nimport { cn } from "@/lib/utils"\nexport const Button = () => cn("b")\n` }] },
+    // Built on Base UI, as the real tabs is.
+    { name: "tabs", type: "registry:ui", dependencies: ["@base-ui/react"], files: [{ path: "registry/ui/tabs/tabs.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/tabs): https://fasla.smicolon.com\nimport { cn } from "@/lib/utils"\nexport const Tabs = () => cn("t")\n` }] },
     { name: "badge", type: "registry:ui", files: [{ path: "registry/ui/badge/badge.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/badge): https://fasla.smicolon.com\nimport { cn } from "@/lib/utils"\nexport const Badge = () => cn("x")\n` }] },
     // Its dependency on badge points at ui.smicolon.com, as the published registry's do.
     { name: "chip", type: "registry:ui", registryDependencies: ["https://ui.smicolon.com/r/badge.json"], files: [{ path: "registry/ui/chip/chip.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/chip): https://fasla.smicolon.com\nexport const Chip = () => null\n` }] },
@@ -50,6 +52,22 @@ vi.mock("./registry", async (importOriginal) => {
       return { name: "fasla", homepage: "", items: items.map(({ files, ...item }) => item) }
     },
     fetchComponent: async (name: string) => items.find((item) => item.name === name)!,
+  }
+})
+
+// Installs run the package manager: recorded here instead, unless a test hands
+// install its own runner. `installFails` makes them fail as npm does.
+const installs: { pm: string; packages: string[]; cwd: string }[] = []
+let installFails = false
+vi.mock("./pm", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("./pm")>()
+  return {
+    ...actual,
+    install: async (pm: import("./pm").PackageManager, packages: string[], cwd: string, run?: import("./pm").Runner) => {
+      if (run) return actual.install(pm, packages, cwd, run)
+      installs.push({ pm, packages, cwd })
+      return installFails ? { ok: false as const, output: "npm ERR! code E404\nnpm ERR! 404 Not Found - lucide-react" } : { ok: true as const }
+    },
   }
 })
 
@@ -81,6 +99,8 @@ beforeEach(() => {
   registryDown = false
   themesApplied.length = 0
   themeFails = false
+  installs.length = 0
+  installFails = false
   for (const key of Object.keys(overrides)) delete overrides[key]
   logs = []
   vi.spyOn(console, "log").mockImplementation((...args) => void logs.push(args.join(" ")))
@@ -427,7 +447,56 @@ describe("add", () => {
     expect(await fs.readFile(path.join(dir, "components/ui/badge.tsx"), "utf8")).toContain(`"@/lib/utils"`)
     expect(await fs.pathExists(path.join(dir, "components/ui/button.tsx"))).toBe(true)
     expect(await fs.pathExists(path.join(dir, "src"))).toBe(false)
-    expect(output()).toContain("pnpm add lucide-react")
+    expect(installs).toEqual([{ pm: "pnpm", packages: ["lucide-react"], cwd: dir }])
+  })
+})
+
+describe("add: installing what the components import", () => {
+  const app = (dependencies: Record<string, string>, extra: Record<string, string> = {}) =>
+    nextApp({
+      "package.json": JSON.stringify({ dependencies: { next: "16", ...dependencies } }),
+      "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" } }),
+      ...extra,
+    })
+
+  it("installs the packages the components list, and the cn helper's, with the project's package manager", async () => {
+    const dir = await app({}, { "pnpm-lock.yaml": "" })
+    await run("add", "button", "tabs", "--yes", "--cwd", dir)
+    expect(installs).toEqual([{ pm: "pnpm", packages: ["lucide-react", "@base-ui/react", "clsx", "tailwind-merge"], cwd: dir }])
+  })
+
+  it("installs only what package.json doesn't already list, and nothing when it lists everything", async () => {
+    const dir = await app({ clsx: "^2", "tailwind-merge": "^3", "lucide-react": "^1" }, { "bun.lock": "" })
+    await run("add", "button", "tabs", "--yes", "--cwd", dir)
+    expect(installs).toEqual([{ pm: "bun", packages: ["@base-ui/react"], cwd: dir }])
+    installs.length = 0
+    await run("add", "button", "--yes", "--overwrite", "--cwd", dir)
+    expect(installs).toEqual([])
+    expect(output()).not.toContain("Install")
+  })
+
+  it("installs tailwind-merge 2 on Tailwind 3, replacing a 3, and says why, as init does", async () => {
+    const dir = await app({ tailwindcss: "^3.4.1", clsx: "^2", "tailwind-merge": "^3.0.0", "lucide-react": "^1" })
+    await run("add", "button", "--yes", "--cwd", dir)
+    expect(installs).toEqual([{ pm: "npm", packages: ["tailwind-merge@^2"], cwd: dir }])
+    expect(output()).toContain(`package.json lists tailwind-merge "^3.0.0", which can install 3.`)
+  })
+
+  it("on a failed install keeps the files, prints the output and the exact command, and exits with an error last", async () => {
+    installFails = true
+    const dir = await app({ clsx: "^2", "tailwind-merge": "^3" })
+    await expect(run("add", "button", "--yes", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(await fs.pathExists(path.join(dir, "components/ui/button.tsx"))).toBe(true)
+    expect(output()).toContain("npm ERR! 404 Not Found - lucide-react")
+    // The import examples come first, so the command to run is the last word.
+    expect(output()).toMatch(/Import them in your code:[\s\S]*Run this to finish:\n  npm install lucide-react$/)
+  })
+
+  it("installs nothing with --no-install, and prints the command instead", async () => {
+    const dir = await app({}, { "yarn.lock": "" })
+    await run("add", "tabs", "--yes", "--no-install", "--cwd", dir)
+    expect(installs).toEqual([])
+    expect(output()).toContain("Install the packages these components import:\n  yarn add @base-ui/react clsx tailwind-merge")
   })
 })
 

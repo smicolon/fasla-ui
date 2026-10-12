@@ -3,8 +3,9 @@
 # Proves every registry item builds in the oldest stack Fasla supports: a fresh
 # Next.js 14 app on React 18 and Tailwind 3, with Next's own ESLint config. It
 # installs every item with the CLI in @smicolon/fasla-ui, `init` then `add
-# --all`, imports every installed file from a page so the bundler compiles it,
-# then runs `tsc` and `next build` with lint on. Any step failing fails the run.
+# --all`, checks that add installed the packages the items import, imports
+# every installed file from a page so the bundler compiles it, then runs `tsc`
+# and `next build` with lint on. Any step failing fails the run.
 #
 # Next 14 matters because its tsconfig sets no target, so TypeScript checks
 # for ES5, and because `next build` stops on ESLint errors — two things the
@@ -91,16 +92,25 @@ if [ ${#MISSING[@]} -gt 0 ]; then
   exit 1
 fi
 
-# add prints the packages the items import rather than installing them; install
-# the same set, as a developer following its output would.
-DEPS=$(node -e '
-  const deps = new Set()
-  for (const item of require(process.argv[1]).items) for (const d of item.dependencies ?? []) deps.add(d)
-  console.log([...deps].sort().join(" "))
-' "$DOCS/public/r/registry.json")
-echo "::group::npm install $DEPS"
-(cd "$APP" && npm install $DEPS)
-echo "::endgroup::"
+# add installs the packages the items import, with the app's package manager;
+# every one must now be in package.json and node_modules.
+NOT_INSTALLED=$(node -e '
+  const pkg = require(process.argv[2] + "/package.json")
+  const listed = { ...pkg.dependencies, ...pkg.devDependencies }
+  const missing = new Set()
+  for (const item of require(process.argv[1]).items)
+    for (const spec of item.dependencies ?? []) {
+      const name = spec.replace(/(?<=.)@.*$/, "")
+      // Read from the file: some packages export no package.json to require.
+      const installed = require("fs").existsSync(require("path").join(process.argv[2], "node_modules", name, "package.json"))
+      if (!(name in listed) || !installed) missing.add(name)
+    }
+  console.log([...missing].sort().join(" "))
+' "$DOCS/public/r/registry.json" "$APP")
+if [ -n "$NOT_INSTALLED" ]; then
+  echo "::error::add did not install: $NOT_INSTALLED"
+  exit 1
+fi
 
 # The stack under test, after every item's dependencies went in: an item that
 # pulls in a newer React, Next or Tailwind would otherwise pass on the wrong one.

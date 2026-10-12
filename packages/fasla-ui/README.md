@@ -38,8 +38,11 @@ npx @smicolon/fasla-ui@latest add button card shimmer-button
 Keep `@latest`: without it, npx runs the copy of this package a project already
 has installed, and 0.4 or older has no CLI.
 
-`add` ends by printing the install command for the packages the components
-need, in your project's package manager. For `button card shimmer-button` with npm it is:
+`add` ends by installing the packages the components import, with your
+project's package manager, and skips any the project already has at a
+compatible version. If the install fails, it keeps the files it wrote and
+prints the command to run. `--no-install` prints the command instead of
+installing; for `button card shimmer-button` with npm it is:
 
 ```bash
 npm install @radix-ui/react-slot class-variance-authority lucide-react framer-motion

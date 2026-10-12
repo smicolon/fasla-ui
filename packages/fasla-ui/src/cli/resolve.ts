@@ -114,7 +114,8 @@ export function describeAdded(added: string[], neededBy: Record<string, string[]
   return `Also adding ${clauses.join("; ")}`
 }
 
-function andList(names: string[]) {
+/** `a`, `a and b`, `a, b and c`. */
+export function andList(names: string[]) {
   return names.length <= 1 ? names.join("") : `${names.slice(0, -1).join(", ")} and ${names[names.length - 1]}`
 }
 

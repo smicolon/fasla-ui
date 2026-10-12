@@ -23,7 +23,7 @@ export default defineConfig([
   },
   {
     // The `fasla-ui` bin, run as `npx @smicolon/fasla-ui init`. Its packages
-    // (commander, prompts, chalk, ora, fs-extra, jsonc-parser) are bundled in
+    // (commander, prompts, chalk, ora, fs-extra, jsonc-parser, semver) are bundled in
     // and listed as devDependencies, so installing the library doesn't add
     // them to a project.
     entry: { index: "src/cli/index.ts" },

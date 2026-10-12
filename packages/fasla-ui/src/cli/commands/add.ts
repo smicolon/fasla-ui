@@ -7,12 +7,16 @@ import path from "path"
 import { DEFAULT_REGISTRY_URL, LEGACY_REGISTRY_URL, REGISTRY_URL, fetchRegistry, fetchComponent, getTargetDirectory, type RegistryFile, type RegistryItem } from "../registry.js"
 import { describeAdded, registryItemName, resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
 import { aliasToPath, checkDestination, installFile, resolveInsideProject } from "../paths.js"
-import { detectPackageManager, installCommand, missingPackages } from "../pm.js"
-import { writeCnHelper } from "./init.js"
+import { detectPackageManager } from "../pm.js"
+import { detectProjectStyle } from "../theme.js"
+import { installComponentPackages, writeCnHelper } from "./init.js"
 import { aliasRootOrExit, repairIfNeededOrExit, safeOrExit } from "./shared.js"
 import { isFaslaFile } from "../marker.js"
 
-/** `add`: copies registry components, and what they import, into the project. */
+/**
+ * `add`: copies registry components, and what they import, into the project,
+ * and installs the packages they import with the project's package manager.
+ */
 export function addCommand() {
   return new Command()
     .name("add")
@@ -21,6 +25,8 @@ export function addCommand() {
     .option("-y, --yes", "Skip confirmation")
     .option("-o, --overwrite", "Overwrite existing files")
     .option("-a, --all", "Add all available components")
+    // The shadcn CLI's add has no flag for this; init's is --no-install.
+    .option("--no-install", "Don't install the packages the components import; print the command instead")
     .option("-c, --cwd <path>", "Working directory", process.cwd())
     .action(async (components: string[], options) => {
       const cwd = path.resolve(options.cwd)
@@ -311,24 +317,28 @@ export function addCommand() {
         }
       }
 
-      // Show the packages still to install, in the project's package manager:
-      // `npm install` in a pnpm project fails, and in a bun or yarn one leaves a
-      // second lockfile. Ones package.json already lists are left out.
-      const toInstall = await missingPackages(cwd, [...allDependencies])
-      if (toInstall.length > 0) {
-        console.log(chalk.cyan("\nDependencies to install:"))
-        console.log(chalk.gray(`  ${installCommand(pm, toInstall)}`))
-      }
-
       // Show import examples, for what was added.
       const importable = validComponents.filter((name) => added.has(name))
-      if (importable.length === 0) return
-      console.log(chalk.green(`\n${notAdded.length === 0 ? "Components added successfully!" : "Added:"}`))
-      console.log("\nImport them in your code:")
-      for (const componentName of importable) {
-        const item = registry.items.find((i) => i.name === componentName)
-        const importPath = `${getTargetDirectory(item?.type ?? "registry:ui", componentsAlias)}/${componentName}`
-        console.log(chalk.cyan(`  import { ... } from "${importPath}"`))
+      if (importable.length > 0) {
+        console.log(chalk.green(`\n${notAdded.length === 0 ? "Components added successfully!" : "Added:"}`))
+        console.log("\nImport them in your code:")
+        for (const componentName of importable) {
+          const item = registry.items.find((i) => i.name === componentName)
+          const importPath = `${getTargetDirectory(item?.type ?? "registry:ui", componentsAlias)}/${componentName}`
+          console.log(chalk.cyan(`  import { ... } from "${importPath}"`))
+        }
       }
+
+      // Install what the components import, last, so a failure's command to
+      // run is the last thing printed. In the project's package manager: `npm
+      // install` in a pnpm project fails, and in a bun or yarn one leaves a
+      // second lockfile. A failed install keeps the files written and ends the
+      // run with an error.
+      const { tailwindMajor } = await detectProjectStyle(cwd, aliasRoot.root)
+      const installed = await installComponentPackages(cwd, pm, [...allDependencies], {
+        enabled: options.install !== false,
+        tailwindMajor,
+      })
+      if (!installed) process.exit(1)
     })
 }

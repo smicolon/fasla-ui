@@ -6,9 +6,9 @@ import fs from "fs-extra"
 import path from "path"
 import { aliasToPath, outsideAliasMessage, pathToAlias, resolveInsideProject, resolveWritableFile, writeFileIfAbsent, writeFileNoFollow } from "../paths.js"
 import { NAMESPACE, namespaceUrl } from "../registry.js"
-import { detectPackageManager, install, installCommand, missingPackages, type PackageManager, type Runner } from "../pm.js"
+import { detectPackageManager, installedVersion, missingPackages, specName, type PackageManager, type Runner } from "../pm.js"
 import type { ComponentsConfig } from "../legacy.js"
-import { aliasRootOrExit, repairIfNeededOrExit, safeOrExit } from "./shared.js"
+import { aliasRootOrExit, installOrPrint, repairIfNeededOrExit, safeOrExit } from "./shared.js"
 import {
   applyTheme,
   detectProjectStyle,
@@ -55,9 +55,6 @@ export function cnPackages(tailwindMajor: 3 | 4 = 4): string[] {
   return tailwindMajor === 3 ? ["clsx", "tailwind-merge@^2"] : CN_PACKAGES
 }
 
-/** The name in an install spec: `tailwind-merge` from `tailwind-merge@^2`, `@scope/x` from `@scope/x@1`. */
-const specName = (spec: string) => spec.replace(/(?<=.)@.*$/, "")
-
 /**
  * Whether a package.json range can only resolve to major 2 or earlier: `^2`,
  * `~2.6`, `2.x`, `2.6.1`. Anything else counts as no — `>=2`, `*`, `latest`,
@@ -82,19 +79,6 @@ export async function tailwindMergeTooNew(cwd: string): Promise<string | undefin
   if (installed !== undefined && Number(installed.split(".")[0]) >= 3) return `tailwind-merge ${installed} is installed`
   if (!rangeStaysBelow3(listed)) return `package.json lists tailwind-merge "${listed}", which can install 3`
   return undefined
-}
-
-/**
- * The version of `name` installed where Node would resolve it from `cwd`: its
- * node_modules, then each folder above, as in a monorepo. Read from the file,
- * not require.resolve: tailwind-merge 3's exports don't include package.json.
- */
-async function installedVersion(cwd: string, name: string): Promise<string | undefined> {
-  for (let dir = path.resolve(cwd); ; dir = path.dirname(dir)) {
-    const pkg = await fs.readJson(path.join(dir, "node_modules", name, "package.json")).catch(() => undefined)
-    if (typeof pkg?.version === "string") return pkg.version
-    if (path.dirname(dir) === dir) return undefined
-  }
 }
 
 /**
@@ -131,36 +115,50 @@ export async function installCnPackages(
   { enabled = true, run, tailwindMajor = 4 }: { enabled?: boolean; run?: Runner; tailwindMajor?: 3 | 4 } = {}
 ): Promise<boolean> {
   const missing = await cnPackagesToInstall(cwd, tailwindMajor)
-  if (missing.length === 0) return true
-  const command = installCommand(pm, missing)
-  // Say why when it replaces a tailwind-merge the project chose.
+  if (missing.length > 0) await sayWhyTailwindMerge2(cwd, tailwindMajor)
+  return installOrPrint(cwd, pm, missing, {
+    enabled,
+    run,
+    printed: "Install the packages the cn helper imports:",
+    failed: "The cn helper imports them, so the project won't compile without them.",
+  })
+}
+
+/**
+ * Installs what the components `add` wrote import, as `init` installs the cn
+ * helper's packages: the packages their registry items list, and the cn
+ * helper's own, which every component imports through it, with init's
+ * tailwind-merge@^2 on Tailwind 3. Ones the project already has at a
+ * compatible version are left out. Returns false only when an install was
+ * tried and failed.
+ */
+export async function installComponentPackages(
+  cwd: string,
+  pm: PackageManager,
+  dependencies: string[],
+  { enabled = true, run, tailwindMajor = 4 }: { enabled?: boolean; run?: Runner; tailwindMajor?: 3 | 4 } = {}
+): Promise<boolean> {
+  // A component that lists clsx or tailwind-merge itself gets them as the cn
+  // helper does, so Tailwind 3 still gets tailwind-merge 2.
+  const own = dependencies.filter((spec) => !CN_PACKAGES.includes(specName(spec)))
+  const cn = await cnPackagesToInstall(cwd, tailwindMajor)
+  const missing = [...(await missingPackages(cwd, own)), ...cn]
+  if (cn.length > 0) await sayWhyTailwindMerge2(cwd, tailwindMajor)
+  return installOrPrint(cwd, pm, missing, {
+    enabled,
+    run,
+    printed: "Install the packages these components import:",
+    failed: "The components import them, so the project won't compile without them.",
+  })
+}
+
+/** Says why, when Tailwind 3 replaces a tailwind-merge the project chose. */
+async function sayWhyTailwindMerge2(cwd: string, tailwindMajor: 3 | 4) {
   const tooNew = tailwindMajor === 3 ? await tailwindMergeTooNew(cwd) : undefined
-  if (tooNew) {
-    console.log(
-      chalk.yellow(`\n${tooNew}. tailwind-merge 3 supports only Tailwind 4; this project is on Tailwind 3, so it gets tailwind-merge@^2.`)
-    )
-  }
-  if (!enabled) {
-    console.log(`\nInstall the packages the cn helper imports:\n  ${chalk.cyan(command)}`)
-    return true
-  }
-  if (!(await fs.pathExists(path.join(cwd, "package.json")))) {
-    console.log(chalk.yellow(`\nNo package.json here, so nothing was installed. In your project, run:`))
-    console.log(`  ${chalk.cyan(command)}`)
-    return true
-  }
-  const spinner = ora(`Installing ${missing.join(" and ")} with ${pm}...`).start()
-  const result = await install(pm, missing, cwd, run)
-  if (result.ok) {
-    spinner.succeed(`Installed ${missing.join(" and ")} with ${pm}`)
-    return true
-  }
-  spinner.fail(`Could not install ${missing.join(" and ")} with ${pm}`)
-  const tail = result.output.trim().split("\n").slice(-15).join("\n")
-  if (tail) console.log(chalk.gray(tail))
-  console.log(`\nThe cn helper imports them, so the project won't compile without them. Run this to finish:`)
-  console.log(`  ${chalk.cyan(command)}`)
-  return false
+  if (!tooNew) return
+  console.log(
+    chalk.yellow(`\n${tooNew}. tailwind-merge 3 supports only Tailwind 4; this project is on Tailwind 3, so it gets tailwind-merge@^2.`)
+  )
 }
 
 /**

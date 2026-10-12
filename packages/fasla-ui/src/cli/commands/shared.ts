@@ -1,4 +1,5 @@
 import chalk from "chalk"
+import ora from "ora"
 import prompts from "prompts"
 import { chooseAliasRoot, UnknownAliasRootError, UnsafePathError } from "../paths.js"
 import fs from "fs-extra"
@@ -21,7 +22,8 @@ import {
   type ComponentsConfig,
   type RepairJournal,
 } from "../legacy.js"
-import type { PackageManager } from "../pm.js"
+import { install, installCommand, type PackageManager, type Runner } from "../pm.js"
+import { andList } from "../resolve.js"
 import { aliasAdvice } from "../vite.js"
 
 /**
@@ -213,4 +215,41 @@ async function repairOrExit<T>(run: () => Promise<T>): Promise<T> {
     }
     process.exit(1)
   }
+}
+
+/**
+ * Installs `packages` with the project's package manager. When installing is
+ * off or there is no package.json, or the install fails, prints the exact
+ * command to run instead, with `printed` or `failed` above it. Returns false
+ * only when an install was tried and failed.
+ */
+export async function installOrPrint(
+  cwd: string,
+  pm: PackageManager,
+  packages: string[],
+  { enabled = true, run, printed, failed }: { enabled?: boolean; run?: Runner; printed: string; failed: string }
+): Promise<boolean> {
+  if (packages.length === 0) return true
+  const command = installCommand(pm, packages)
+  if (!enabled) {
+    console.log(`\n${printed}\n  ${chalk.cyan(command)}`)
+    return true
+  }
+  if (!(await fs.pathExists(path.join(cwd, "package.json")))) {
+    console.log(chalk.yellow(`\nNo package.json here, so nothing was installed. In your project, run:`))
+    console.log(`  ${chalk.cyan(command)}`)
+    return true
+  }
+  const spinner = ora(`Installing ${andList(packages)} with ${pm}...`).start()
+  const result = await install(pm, packages, cwd, run)
+  if (result.ok) {
+    spinner.succeed(`Installed ${andList(packages)} with ${pm}`)
+    return true
+  }
+  spinner.fail(`Could not install ${andList(packages)} with ${pm}`)
+  const tail = result.output.trim().split("\n").slice(-15).join("\n")
+  if (tail) console.log(chalk.gray(tail))
+  console.log(`\n${failed} Run this to finish:`)
+  console.log(`  ${chalk.cyan(command)}`)
+  return false
 }
