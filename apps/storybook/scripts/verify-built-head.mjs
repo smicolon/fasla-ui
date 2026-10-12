@@ -3,7 +3,7 @@ import path from "node:path"
 import { fileURLToPath, pathToFileURL } from "node:url"
 
 const title = "Fasla Component Explorer | Smicolon"
-const canonical = "https://ui.smicolon.com/components/"
+const canonical = "https://fasla.smicolon.com/components/"
 
 function requireMarkup(html, markup, label) {
   if (!html.includes(markup)) {

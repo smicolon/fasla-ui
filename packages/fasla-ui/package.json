@@ -1,21 +1,25 @@
 {
   "name": "@smicolon/fasla-ui",
   "version": "0.5.1",
-  "description": "Professional UI components with animations and app building blocks",
+  "description": "Arabic-first React components and blocks, built on shadcn/ui. RTL by default, bilingual by design.",
   "license": "MIT",
   "author": "Smicolon",
   "repository": {
     "type": "git",
     "url": "https://github.com/smicolon/fasla-ui"
   },
-  "homepage": "https://ui.smicolon.com",
+  "homepage": "https://fasla.smicolon.com",
   "keywords": [
+    "arabic",
+    "rtl",
+    "right-to-left",
     "react",
     "components",
     "ui",
     "tailwindcss",
     "framer-motion",
     "shadcn",
+    "shadcn-ui",
     "design-system",
     "animations"
   ],

@@ -65,7 +65,7 @@ export function App() {
 
 ## Documentation
 
-Visit [ui.smicolon.com](https://ui.smicolon.com) for full documentation.
+Visit [fasla.smicolon.com](https://fasla.smicolon.com) for full documentation.
 
 ## Components
 
@@ -125,13 +125,13 @@ loads Geist from `next/font`, which Next.js 14 has neither of.
 
 ```bash
 # Starting from scratch: use Fasla's colours (palette, radius, Geist).
-npx shadcn@latest add https://ui.smicolon.com/r/theme.json https://ui.smicolon.com/r/font-geist.json
+npx shadcn@latest add https://fasla.smicolon.com/r/theme.json https://fasla.smicolon.com/r/font-geist.json
 
 # The same on Next.js 14, without Geist: its template already loads it.
-npx shadcn@latest add https://ui.smicolon.com/r/theme.json
+npx shadcn@latest add https://fasla.smicolon.com/r/theme.json
 
 # I have a brand: keep my colours (base layer only)
-npx shadcn@latest add https://ui.smicolon.com/r/theme-base.json
+npx shadcn@latest add https://fasla.smicolon.com/r/theme-base.json
 ```
 
 The base layer adds only what shadcn doesn't have: the success, warning and

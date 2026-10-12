@@ -1,5 +1,6 @@
 import { describe, expect, test } from "bun:test"
-import { readFileSync } from "node:fs"
+import { spawnSync } from "node:child_process"
+import { readdirSync, readFileSync } from "node:fs"
 import path from "node:path"
 import { dependencyUrls, rewriteComponentImports, rewriteUtilsImport } from "../scripts/build-registry.mjs"
 
@@ -86,6 +87,35 @@ describe("Registry build — what the shadcn CLI needs", () => {
       for (const dep of dependencyUrls(item.registryDependencies ?? [], own)) {
         expect(own.has(dep), `${item.name}: ${dep} is still a bare Fasla name`).toBe(false)
       }
+    }
+  })
+})
+
+describe("Registry build — dependency links stay on ui.smicolon.com", () => {
+  // Published CLIs (@smicolon/cli 0.4.0–0.5.2, @smicolon/fasla-ui 0.5.0–0.5.1)
+  // only follow a dependency under ui.smicolon.com/r. One on fasla.smicolon.com
+  // is skipped, so `add avatar` would write an avatar.tsx whose
+  // status-indicator import doesn't resolve. See docs/DOMAINS.md.
+  test("no built item has a registryDependencies link on fasla.smicolon.com", () => {
+    const env = { ...process.env }
+    delete env.FASLA_REGISTRY_URL
+    const build = spawnSync("node", ["scripts/build-registry.mjs"], { cwd: docsRoot, env, encoding: "utf8" })
+    expect(build.status, build.stderr).toBe(0)
+
+    const out = path.join(docsRoot, "public/r")
+    const links = readdirSync(out)
+      .filter((file) => file.endsWith(".json") && file !== "index.json" && file !== "registry.json")
+      .flatMap((file) => {
+        const item = JSON.parse(readFileSync(path.join(out, file), "utf8"))
+        return (item.registryDependencies ?? []).map((dep) => [item.name, dep])
+      })
+      .filter(([, dep]) => dep.includes("://"))
+
+    // avatar → status-indicator and the theme chain, at least.
+    expect(links.length).toBeGreaterThan(0)
+    for (const [name, dep] of links) {
+      expect(dep, `${name}: ${dep}`).not.toContain("fasla.smicolon.com")
+      expect(dep.startsWith("https://ui.smicolon.com/r/"), `${name}: ${dep}`).toBe(true)
     }
   })
 })

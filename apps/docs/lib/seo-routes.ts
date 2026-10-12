@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { locales, defaultLocale, type Locale } from "@/i18n/routing"
 import { registryCounts } from "@/lib/registry"
 
-export const SITE_URL = "https://ui.smicolon.com"
+export const SITE_URL = "https://fasla.smicolon.com"
 
 export type ComponentCategory = "UI Primitives" | "Blocks" | "Effects"
 

@@ -4,18 +4,26 @@
 [![npm downloads](https://img.shields.io/npm/dm/@smicolon/fasla-ui.svg)](https://www.npmjs.com/package/@smicolon/fasla-ui)
 [![license](https://img.shields.io/npm/l/@smicolon/fasla-ui.svg)](https://github.com/smicolon/fasla-ui/blob/main/LICENSE)
 
-A professional React UI component library built on **shadcn/ui** primitives. Provides animated effects components (like Magic UI), app building blocks, and design tokens - all distributed via a shadcn-compatible registry.
+Arabic-first React components and blocks, built on shadcn/ui. RTL by default, bilingual by design.
+
+Fasla (فاصلة) is a design system for React. Layouts use logical properties, so
+a component mirrors under `dir="rtl"` with no extra classes, and the theme
+brings a type scale with Arabic line heights and the Cairo font. Components are
+distributed through a shadcn-compatible registry and copied into your project,
+so the code is yours to change.
 
 ## Features
 
-- **30+ Components** - UI primitives, app blocks, and animated effects
+- **Arabic-first, RTL by default** - Logical properties throughout, so layouts mirror under `dir="rtl"`
+- **29 Components** - 14 UI primitives, 8 app blocks and 7 animated effects
+- **Themes** - Fasla's palette, or keep your brand's colours and add only the base layer
 - **shadcn Compatible** - Works seamlessly with existing shadcn/ui projects
 - **Tailwind CSS** - Utility-first styling with full customization
-- **Framer Motion** - Smooth animations with `prefers-reduced-motion` support
+- **Framer Motion** - Animated effects that respect `prefers-reduced-motion`
 - **TypeScript** - Full type safety and IntelliSense
 - **Design Tokens** - Consistent spacing, colors, and density profiles
-- **Accessible** - WCAG compliant with keyboard navigation support
-- **Tree Shakeable** - Import only what you need
+- **Accessible** - Keyboard navigation and visible focus styles on form controls
+- **Own the Code** - The CLI copies each component's source into your project, so you ship only what you add
 
 ## Installation
 
@@ -61,6 +69,7 @@ Core building blocks with CVA variants for consistent styling:
 | **Textarea** | Multi-line text input with auto-resize |
 | **Select** | Dropdown selection with search |
 | **Checkbox** | Checkbox with label and description |
+| **Radio** | Single choice from a set, as a plain control or a bordered card |
 | **Switch** | Toggle switch with multiple sizes |
 | **Tabs** | Tabbed navigation with animations |
 | **Badge** | Status indicators and labels |
@@ -145,13 +154,13 @@ loads Geist from `next/font`, which Next.js 14 has neither of.
 
 ```bash
 # Starting from scratch: use Fasla's colours (palette, radius, Geist).
-npx shadcn@latest add https://ui.smicolon.com/r/theme.json https://ui.smicolon.com/r/font-geist.json
+npx shadcn@latest add https://fasla.smicolon.com/r/theme.json https://fasla.smicolon.com/r/font-geist.json
 
 # The same on Next.js 14, without Geist: its template already loads it.
-npx shadcn@latest add https://ui.smicolon.com/r/theme.json
+npx shadcn@latest add https://fasla.smicolon.com/r/theme.json
 
 # I have a brand: keep my colours (base layer only)
-npx shadcn@latest add https://ui.smicolon.com/r/theme-base.json
+npx shadcn@latest add https://fasla.smicolon.com/r/theme-base.json
 ```
 
 The base layer adds only what shadcn doesn't have: the success, warning and
@@ -165,7 +174,7 @@ install to `components/blocks`.
 
 ## Documentation
 
-Visit [ui.smicolon.com](https://ui.smicolon.com) for full documentation, examples, and API reference.
+Visit [fasla.smicolon.com](https://fasla.smicolon.com) for full documentation, examples, and API reference.
 
 ## Related
 

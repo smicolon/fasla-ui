@@ -17,7 +17,7 @@ export function installCommand(pm: PackageManager, packages: string): string {
  * URLs from here, not the `@fasla` namespace: a URL works in any project, while
  * the namespace needs a components.json entry that only our CLI's init writes.
  */
-export const REGISTRY_URL = "https://ui.smicolon.com/r"
+export const REGISTRY_URL = "https://fasla.smicolon.com/r"
 
 /** `shadcn add` for registry items, by full URL. */
 export function shadcnAdd(...items: string[]): string {
@@ -36,7 +36,7 @@ export function runCommand(pm: PackageManager, command: string): string {
 /**
  * A command in pieces for display. The file name at the end of each URL is
  * its own piece, kept whole (`keep`) with a break allowed just before it, so a
- * URL too long for a narrow screen breaks as `https://ui.smicolon.com/r/` +
+ * URL too long for a narrow screen breaks as `https://fasla.smicolon.com/r/` +
  * `font-geist.json`: never after the hyphen in "font-". The pieces join back
  * into the command unchanged.
  */

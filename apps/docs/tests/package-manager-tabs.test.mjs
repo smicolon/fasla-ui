@@ -127,7 +127,7 @@ describe("Theme section of the Installation page", () => {
       expect(t.themeNext14).toContain("<code>npx @smicolon/fasla-ui@latest init</code>")
       expect(t.cliPrevious).toContain("<code>npx @smicolon/fasla-ui@latest init</code>")
       expect(t.manualTailwind3).toContain("<code>tailwind-merge@^2</code>")
-      expect(t.manualCopy).toContain("<code>https://ui.smicolon.com/r/button.json</code>")
+      expect(t.manualCopy).toContain("<code>https://fasla.smicolon.com/r/button.json</code>")
     }
   })
 
@@ -168,9 +168,9 @@ describe("Theme section of the Installation page", () => {
 
   test("writes shadcn commands with full registry URLs, which work without our init", () => {
     expect(shadcnAdd("theme", "font-geist")).toBe(
-      "shadcn@latest add https://ui.smicolon.com/r/theme.json https://ui.smicolon.com/r/font-geist.json"
+      "shadcn@latest add https://fasla.smicolon.com/r/theme.json https://fasla.smicolon.com/r/font-geist.json"
     )
-    expect(runCommand("npm", shadcnAdd("theme-base"))).toBe("npx shadcn@latest add https://ui.smicolon.com/r/theme-base.json")
+    expect(runCommand("npm", shadcnAdd("theme-base"))).toBe("npx shadcn@latest add https://fasla.smicolon.com/r/theme-base.json")
     // The @fasla namespace needs a components.json entry only our init writes.
     const offenders = [...sourceFiles("app"), ...sourceFiles("components"), ...sourceFiles("lib"), "messages/en.json", "messages/ar.json"].filter(
       (file) => read(file).includes("@fasla/")
@@ -222,10 +222,10 @@ describe("Command blocks", () => {
     const command = runCommand("npm", shadcnAdd("theme", "font-geist"))
     expect(wrapPieces(command)).toEqual([
       { text: "npx shadcn@latest add ", keep: false },
-      { text: "https://ui.smicolon.com/r/", keep: false },
+      { text: "https://fasla.smicolon.com/r/", keep: false },
       { text: "theme.json", keep: true },
       { text: " ", keep: false },
-      { text: "https://ui.smicolon.com/r/", keep: false },
+      { text: "https://fasla.smicolon.com/r/", keep: false },
       { text: "font-geist.json", keep: true },
     ])
     expect(wrapPieces(command).map((p) => p.text).join("")).toBe(command)

@@ -17,7 +17,7 @@ export const landingLinks = {
   templates: comingSoon,
   pro: comingSoon,
   team: comingSoon,
-  storybook: "https://ui.smicolon.com/components/",
+  storybook: "https://fasla.smicolon.com/components/",
   github: "https://github.com/smicolon/fasla-ui",
   discussions: "https://github.com/smicolon/fasla-ui/discussions",
 } as const

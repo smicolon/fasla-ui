@@ -6,7 +6,7 @@
 # the run.
 #
 # It installs the registry built from this checkout, served locally, not the
-# one deployed at ui.smicolon.com — so a PR is tested on its own items, and
+# one deployed at fasla.smicolon.com — so a PR is tested on its own items, and
 # FASLA_REGISTRY_URL makes every dependency between items point at that server
 # too.
 #

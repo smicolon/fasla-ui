@@ -4,7 +4,7 @@ import ora from "ora"
 import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
-import { DEFAULT_REGISTRY_URL, REGISTRY_URL, fetchRegistry, fetchComponent, getTargetDirectory, type RegistryFile, type RegistryItem } from "../registry.js"
+import { DEFAULT_REGISTRY_URL, LEGACY_REGISTRY_URL, REGISTRY_URL, fetchRegistry, fetchComponent, getTargetDirectory, type RegistryFile, type RegistryItem } from "../registry.js"
 import { registryItemName, resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
 import { aliasToPath, checkDestination, installFile, resolveInsideProject } from "../paths.js"
 import { detectPackageManager, installCommand, missingPackages } from "../pm.js"
@@ -135,9 +135,11 @@ export function addCommand() {
       // avatar` also writes status-indicator.tsx, which avatar.tsx imports.
       // Dependencies on other Fasla items are full URLs, so the shadcn CLI can
       // follow them too. Map each back to its name here, under the registry this
-      // run reads from or the default one the published URLs point at.
+      // run reads from, the default one, or ui.smicolon.com, which the published
+      // URLs point at.
       const known = new Set(registry.items.map((item) => item.name))
-      const nameOf = (dep: string) => registryItemName(dep, known, [REGISTRY_URL, DEFAULT_REGISTRY_URL])
+      const nameOf = (dep: string) =>
+        registryItemName(dep, known, [REGISTRY_URL, DEFAULT_REGISTRY_URL, LEGACY_REGISTRY_URL])
       let resolved
       try {
         resolved = await resolveWithDependencies(validComponents, nameOf, fetchComponent)
