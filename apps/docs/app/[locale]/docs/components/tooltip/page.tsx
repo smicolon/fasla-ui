@@ -59,7 +59,7 @@ function Held({
   container,
   caption,
   cellClassName,
-  reserve = false,
+  reserve,
   ...content
 }: Partial<TooltipContentProps> & {
   label: string
@@ -67,16 +67,22 @@ function Held({
   caption?: React.ReactNode
   cellClassName?: string
   /**
-   * Keep room above and below the trigger for a tooltip on either side, so a
-   * row of cells lines up its triggers and its captions whichever way each
-   * tooltip opens. 44px: the tallest bubble (32px in Arabic) plus its 8px
-   * offset, and a little air.
+   * Room for the held tooltip, so the caption never sits under it.
+   *  - `above` / `below`: exactly the bubble's height and its 8px offset, on
+   *    that side only — one line of `text-xs` (16px, or 20 in Arabic) plus
+   *    12px of padding and the offset. The cell starts at the top of whatever
+   *    comes first, so two cells side by side share their top edge and,
+   *    being the same height, their caption line.
+   *  - `both`: 44px on each side, for side tooltips, so a row lines up its
+   *    triggers and captions.
    */
-  reserve?: boolean
+  reserve?: "above" | "below" | "both"
 }) {
+  const room = "h-[calc(1lh+20px)] text-xs"
   return (
     <div className={`flex flex-col items-center gap-3 ${cellClassName ?? ""}`}>
-      <div className={reserve ? "py-11" : undefined}>
+      <div className={reserve === "both" ? "py-11" : reserve ? "flex flex-col items-center" : undefined}>
+        {reserve === "above" && <div aria-hidden="true" className={room} />}
         <Tooltip open>
           <TooltipTrigger className={TRIGGER}>{label}</TooltipTrigger>
           <TooltipContent
@@ -85,6 +91,7 @@ function Held({
             {...content}
           />
         </Tooltip>
+        {reserve === "below" && <div aria-hidden="true" className={room} />}
       </div>
       {caption && <code className="text-xs text-muted-foreground">{caption}</code>}
     </div>
@@ -214,7 +221,7 @@ export default function TooltipPage() {
                   side={side}
                   caption={side}
                   cellClassName={SIDE_CELL[side]}
-                  reserve
+                  reserve={side === "top" ? "above" : side === "bottom" ? "below" : "both"}
                 >
                   {title}
                 </Held>
