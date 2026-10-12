@@ -146,14 +146,17 @@ const tabsListVariants = cva("relative inline-flex items-center", {
  *    height from it; hover tints it `primary/20`, as Lifted's baseline. The
  *    shadow colour utilities recolour that one shadow. Active fills
  *    `background` and sets the text `primary`.
- *  - lifted: inactive tabs sit on a 1px `border` baseline (radius
- *    `--radius-sm`, 6px); the active tab rises out of it — `background`,
- *    1px `border` on three sides, Figma's raw 10px top radius, and the two
- *    flared corners each tab carries, shown only while it is active.
- *    Inactive tabs keep transparent side borders so switching never changes
- *    a tab's width. Hover is a `muted` fill and tints the baseline
- *    `primary/20` (Figma `opacity/primary-light`). Bordered hovers `muted`
- *    too.
+ *  - lifted: every tab but the active one sits on a 1px `border` baseline,
+ *    with `--radius-sm` (6px) on its top corners and square bottom corners,
+ *    so the baseline runs unbroken under the row. The active tab rises out
+ *    of it — `background`, 1px `border` on three sides, Figma's raw 10px top
+ *    radius, and the two flared corners each tab carries, shown only while
+ *    it is active. Every tab keeps transparent side borders so switching
+ *    never changes a tab's width. The baseline is an `::after` line that
+ *    runs under those side borders: a `border-bottom` would meet them in a
+ *    mitred corner and leave a notch at every tab edge. Hover is a `muted`
+ *    fill and tints the baseline `primary/20` (Figma
+ *    `opacity/primary-light`). Bordered hovers `muted` too.
  */
 const tabsTriggerVariants = cva(
   [
@@ -178,9 +181,10 @@ const tabsTriggerVariants = cva(
           "data-[active]:bg-background data-[active]:text-primary data-[active]:shadow-primary",
         ],
         lifted: [
-          "rounded-[var(--radius-sm)] border-x border-b border-transparent border-b-border",
-          "hover:bg-muted hover:border-b-primary/20",
-          "data-[active]:rounded-b-none data-[active]:rounded-t-[10px] data-[active]:border-b-0 data-[active]:border-t data-[active]:border-border data-[active]:bg-background data-[active]:text-primary",
+          "rounded-t-[var(--radius-sm)] border-x border-transparent",
+          "after:pointer-events-none after:absolute after:-inset-x-px after:bottom-0 after:h-px after:bg-border",
+          "hover:bg-muted hover:after:bg-primary/20",
+          "data-[active]:rounded-t-[10px] data-[active]:border-t data-[active]:border-border data-[active]:bg-background data-[active]:text-primary data-[active]:after:hidden",
         ],
       },
       // Icons are sized by size; the Lifted corners are SVGs too, so they

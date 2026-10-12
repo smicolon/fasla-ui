@@ -289,17 +289,26 @@ describe("Tabs", () => {
   it("paints lifted with Figma's tokens and flares only the active tab", () => {
     render(<Example defaultValue="two" listProps={{ variant: "lifted" }} />)
     expect(tab("one")).toHaveClass(
-      "rounded-[var(--radius-sm)]",
-      "border-b-border",
+      // Top corners only: the bottom stays square, so the baseline is unbroken.
+      "rounded-t-[var(--radius-sm)]",
       // Transparent sides, so the active tab's side borders change no width.
       "border-x",
       "border-transparent",
-      "hover:border-b-primary/20",
+      // The baseline: a 1px line that runs under those side borders too, so
+      // neighbouring tabs' lines meet with no notch between them.
+      "after:absolute",
+      "after:-inset-x-px",
+      "after:bottom-0",
+      "after:h-px",
+      "after:bg-border",
+      "hover:after:bg-primary/20",
       "data-[active]:rounded-t-[10px]",
       "data-[active]:border-t",
-      "data-[active]:border-b-0",
+      "data-[active]:after:hidden",
       "data-[active]:text-primary"
     )
+    // No bottom border and no bottom radius anywhere in Lifted.
+    expect(tab("one").className).not.toMatch(/(^|\s)(rounded-\[|rounded-b-|border-b)/)
     const corners = (t: HTMLElement) => Array.from(t.querySelectorAll("[data-slot=corner]"))
     // Every Lifted tab carries both corners; they show only on the active
     // one, keyed off the tab's own `data-active` through its named group.
