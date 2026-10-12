@@ -41,15 +41,15 @@
       "primary": 43,
       "componentSets": 157,
       "looseComponents": 1,
-      "variants": 4226,
+      "variants": 4310,
       "primaryWithEnDoc": 41,
-      "primaryWithArDoc": 37,
+      "primaryWithArDoc": 38,
       "withEnDoc": 41,
-      "withArDoc": 37,
+      "withArDoc": 38,
       "withRtl": 148,
       "withDescription": 1,
       "mappedToCode": 16,
-      "docFrames": 97
+      "docFrames": 98
     },
     "legend": {
       "confirmed": "partial",
@@ -2110,49 +2110,57 @@
         "initials": "Y"
       },
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3830-2149",
-      "variants": 60,
+      "variants": 144,
       "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
         "Type": [
           "Default",
           "Layout"
         ],
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
         "State": [
           "Unchecked",
           "Checked",
-          "Indeterminate",
-          "Disabled Uncheck",
-          "Disabled Checked"
+          "Indeterminate"
         ],
-        "Size Default": [
+        "Size": [
           "sm",
           "md",
           "lg"
+        ],
+        "Interaction": [
+          "Disabled",
+          "Enabled",
+          "Hover",
+          "Focus"
         ]
       },
       "axisNames": [
-        "Direction",
         "Type",
+        "Direction",
         "State",
-        "Size Default"
+        "Size",
+        "Interaction"
       ],
       "rtl": true,
       "docs": {
         "en": {
-          "id": "39777:114",
+          "id": "45933:242169",
           "name": "Check Box — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39777-114"
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=45933-242169"
         },
-        "ar": null,
+        "ar": {
+          "id": "45933:242591",
+          "name": "Check Box — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=45933-242591"
+        },
         "duplicates": []
       },
       "code": "checkbox",
       "hasDescription": false,
       "flags": [
-        "no-ar-doc",
         "no-description"
       ]
     },
