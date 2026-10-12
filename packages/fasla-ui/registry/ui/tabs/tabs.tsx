@@ -16,9 +16,9 @@ import { cn } from "../../../src/lib/utils"
  * owns the look.
  *
  * Figma axis → code:
- *  - `Style` (Lifted / Boxed / Borderd) → `variant` ("lifted" | "boxed" |
+ *  - `Style` (Lifted / Boxed / Bordered) → `variant` ("lifted" | "boxed" |
  *    "bordered") on `TabsList`, shared by every tab in it — Figma's doc says
- *    never to mix styles in one group. Figma's "Borderd" is a typo.
+ *    never to mix styles in one group.
  *  - `size` (sm / md / lg) → `size` on `TabsList`, for the same reason.
  *  - `State` → real interaction: inactive / Active (`data-active`), Hover,
  *    Focus (`:focus-visible`), disabled (`data-disabled`).
@@ -102,25 +102,44 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(
 Tabs.displayName = "Tabs"
 
 /**
- * The group. Figma's Tabs Component is a plain row: no track fill, no gap —
- * tabs sit flush, and each tab carries its own style.
+ * The group: Figma's Tabs Component. Tabs sit flush, with no gap.
+ *
+ *  - boxed: a track — `muted` fill, 4px padding (Figma `spacing/1`) and
+ *    `rounded-lg` — that the tabs sit in. Figma's `border radius/lg` is 10px,
+ *    shadcn's default `--radius`, which `rounded-lg` reads; the theme leaves
+ *    the lg step to the project on purpose, so this follows its `--radius`.
+ *  - bordered, lifted: a plain row; each tab carries its own line.
  */
-const tabsListVariants = cva("relative inline-flex items-center")
+const tabsListVariants = cva("relative inline-flex items-center", {
+  variants: {
+    variant: {
+      boxed: "rounded-lg bg-muted p-1",
+      bordered: "",
+      lifted: "",
+    },
+  },
+  defaultVariants: {
+    variant: "boxed",
+  },
+})
 
 /**
  * One tab, per Figma Style and size.
  *
  * Shared: Geist/Cairo Medium, `foreground` text, a 6px icon↔label gap, and
- * `muted-foreground` text when disabled. Hover is a `muted` fill: a plain
+ * `muted-foreground` text when disabled. Each tab is a fixed height with no
+ * vertical padding, its content centred. Hover is a plain
  * `hover:`, which the Storybook pseudo-states addon can force (it cannot
  * force a `:hover` chained with other pseudo-classes). Tailwind emits
  * `data-[active]:` after `hover:`, so the active fill still wins, and a
  * disabled tab takes no pointer events. Every style shows keyboard focus as
  * Figma's 3px halo, in `ring/50`; Boxed adds a 1px `ring` stroke.
  *
- *  - boxed: radius `--radius-md` (Figma `rounded-field`, 8px). Active is a
- *    `background` pill with Figma's `shadow/sm` — exactly Tailwind 3's
- *    `shadow`. Focus adds Figma's 1px `ring` stroke, drawn as an inset
+ *  - boxed: radius `--radius-md` (Figma `rounded-field`, 8px), inside the
+ *    list's `muted` track. Hover is `background/60` (Figma "Track Hover").
+ *    Active is a `background` pill with Figma's `shadow/sm` — exactly
+ *    Tailwind 3's `shadow` — so it stands out from the track in both
+ *    modes. Focus adds Figma's 1px `ring` stroke, drawn as an inset
  *    outline so the tab does not grow.
  *  - bordered: a 2px underline, `border` → `primary` when active, drawn as
  *    an inset shadow so it overlays the box as in Figma instead of taking
@@ -132,8 +151,9 @@ const tabsListVariants = cva("relative inline-flex items-center")
  *    1px `border` on three sides, Figma's raw 10px top radius, and the two
  *    flared corners each tab carries, shown only while it is active.
  *    Inactive tabs keep transparent side borders so switching never changes
- *    a tab's width. Hover tints the baseline `primary/20` (Figma
- *    `opacity/primary-light`).
+ *    a tab's width. Hover is a `muted` fill and tints the baseline
+ *    `primary/20` (Figma `opacity/primary-light`). Bordered hovers `muted`
+ *    too.
  */
 const tabsTriggerVariants = cva(
   [
@@ -148,7 +168,7 @@ const tabsTriggerVariants = cva(
       variant: {
         boxed: [
           "rounded-[var(--radius-md)]",
-          "hover:bg-muted",
+          "hover:bg-background/60",
           "data-[active]:bg-background data-[active]:shadow",
           "focus-visible:outline focus-visible:outline-1 focus-visible:-outline-offset-1 focus-visible:outline-ring",
         ],
@@ -213,7 +233,7 @@ const TabsList = React.forwardRef<HTMLDivElement, TabsListProps>(
           ref={ref}
           data-slot="tabs-list"
           activateOnFocus={activateOnFocus}
-          className={cn(tabsListVariants(), className)}
+          className={cn(tabsListVariants({ variant }), className)}
           {...props}
         />
       </TabsListContext.Provider>

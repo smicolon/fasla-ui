@@ -638,8 +638,8 @@
     "tabs": {
       "lead": "Tabs switch between related views in the same place and show one panel at a time. The same component is sometimes called Pills.",
       "installNote": "Tabs is built on Base UI, so it needs the <code>@base-ui/react</code> package. The shadcn CLI installs it with the component, and <code>add</code> lists it among the packages to install.",
-      "variantsBody": "Three styles, set on <code>TabsList</code> so a group never mixes them. <code>boxed</code>, the default, raises the active tab into a pill and suits toolbars and inline view switches. <code>bordered</code> underlines the active tab, for content navigation and dense layouts. <code>lifted</code> raises the active tab out of a baseline like a file folder, for page-level sections.",
-      "sizesBody": "Three sizes, also set on <code>TabsList</code> so every tab in a group matches. <code>md</code> is the default. Tabs are 28, 30 or 32px tall, and <code>lg</code> uses 16px text with 20px icons.",
+      "variantsBody": "Three styles, set on <code>TabsList</code> so a group never mixes them. <code>boxed</code>, the default, sets the tabs in a muted track and raises the active tab into a pill on it; it suits toolbars and inline view switches. <code>bordered</code> underlines the active tab, for content navigation and dense layouts. <code>lifted</code> raises the active tab out of a baseline like a file folder, for page-level sections.",
+      "sizesBody": "Three sizes, also set on <code>TabsList</code> so every tab in a group matches. <code>md</code> is the default. Tabs are 28, 30 or 32px tall, and <code>lg</code> uses 16px text with 20px icons. The <code>boxed</code> track adds 4px around them.",
       "statesBody": "The active tab follows <code>value</code>. Hover and focus are real CSS states rather than props, so tab into a group to see the focus ring. A disabled tab is greyed out, and you cannot select it.",
       "tabs": {
         "account": "Account",

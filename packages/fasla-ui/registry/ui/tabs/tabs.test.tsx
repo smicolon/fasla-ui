@@ -231,18 +231,43 @@ describe("Tabs", () => {
     expect(tab("one")).toHaveClass("h-[30px]", "rounded-[var(--radius-md)]")
   })
 
+  it("sets boxed tabs in a muted track, and leaves the other styles a plain row", () => {
+    const { unmount } = render(<Example defaultValue="one" listProps={{ variant: "boxed" }} />)
+    // Figma: `muted` fill, `spacing/1` padding, `border radius/lg`.
+    expect(screen.getByRole("tablist")).toHaveClass("bg-muted", "p-1", "rounded-lg", "inline-flex")
+    unmount()
+    for (const variant of ["bordered", "lifted"] as const) {
+      const { unmount } = render(<Example defaultValue="one" listProps={{ variant }} />)
+      expect(screen.getByRole("tablist").className).not.toMatch(/\bbg-|\bp-\d|\brounded/)
+      unmount()
+    }
+  })
+
+  it("keeps every tab a fixed height with no vertical padding, content centred", () => {
+    for (const variant of ["lifted", "boxed", "bordered"] as const) {
+      const { unmount } = render(<Example defaultValue="one" listProps={{ variant }} />)
+      for (const t of screen.getAllByRole("tab")) {
+        expect(t).toHaveClass("items-center")
+        expect(t.className).not.toMatch(/\bp[ytb]-/)
+      }
+      unmount()
+    }
+  })
+
   it("paints boxed with Figma's tokens", () => {
     render(<Example defaultValue="one" listProps={{ variant: "boxed" }} />)
     expect(tab("one")).toHaveClass(
       "text-foreground",
       "data-[active]:bg-background",
       "data-[active]:shadow",
-      "hover:bg-muted",
+      // Figma "Track Hover": `background` at 60%, on the track.
+      "hover:bg-background/60",
       // Figma's 1px ring stroke, inset so the tab does not grow.
       "focus-visible:outline-1",
       "focus-visible:-outline-offset-1",
       "focus-visible:outline-ring"
     )
+    expect(tab("one")).not.toHaveClass("hover:bg-muted")
     expect(screen.getByRole("tablist").querySelector("[data-slot=corner]")).toBeNull()
   })
 
@@ -313,7 +338,7 @@ describe("Tabs", () => {
       clone.querySelectorAll("[data-slot=corner]").forEach((c) => c.remove())
       expect(clone.innerHTML).not.toMatch(/\brtl:/)
       expect(clone.innerHTML).not.toMatch(/translate-x/)
-      expect(clone.innerHTML).not.toMatch(/\b-?(left|right)-|\b[mp][lr]-|\btext-(left|right)\b|\brounded-[lr]/)
+      expect(clone.innerHTML).not.toMatch(/\b-?(left|right)-|\b[mp][lr]-|\btext-(left|right)\b|\brounded-(?:[lr]|[tb][lr])(?=[-\s"])/)
       unmount()
     }
   })

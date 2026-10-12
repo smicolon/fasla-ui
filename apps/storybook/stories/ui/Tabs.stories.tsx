@@ -139,7 +139,7 @@ export const Default: Story = {
 
 /**
  * Figma's `Style` axis: Lifted (a raised file-folder tab), Boxed (a filled
- * pill — the "pills" look) and Bordered (an underline).
+ * pill on a muted track — the "pills" look) and Bordered (an underline).
  */
 export const Styles: Story = {
   render: (_args, ctx) => {
