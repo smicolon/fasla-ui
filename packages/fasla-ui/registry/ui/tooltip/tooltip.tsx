@@ -246,9 +246,11 @@ const GAP = 4
 const isInlineSide = (side: string) => side !== "top" && side !== "bottom"
 
 /**
- * Bubble-to-trigger distance that leaves 4px between the arrow's tip and the
- * trigger — 1px less where a Rounded bubble's side arrow overlaps the body.
- * Base UI passes the side it actually lands on, so a flip keeps the gap.
+ * The default distance from the trigger to the bubble: it leaves 4px between
+ * the arrow's tip and the trigger — 8 with the arrow, 4 without, and 7 where
+ * a Rounded bubble's side arrow overlaps the body by 1px. Base UI passes the
+ * side it actually lands on, so a flip keeps the gap. A `sideOffset` you pass
+ * is used as is, as in Base UI and shadcn.
  */
 function defaultSideOffset(arrow: boolean, radius: TooltipRadius) {
   if (!arrow) return GAP
@@ -258,52 +260,37 @@ function defaultSideOffset(arrow: boolean, radius: TooltipRadius) {
 
 export interface TooltipContentProps
   extends Omit<React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Popup>, "className"> {
-  /** Figma `Style`. */
+  /** Colour style. */
   variant?: TooltipVariant
-  /** Figma `Radius`: `standard` is 8px, `rounded` 16px — a pill on one line. */
+  /** Corner radius: 8px, or 16px. */
   radius?: TooltipRadius
   /**
-   * The side of the trigger the tooltip sits on. `left` and `right` stay put
-   * in RTL; `inline-start` and `inline-end` follow the reading direction. It
-   * flips to the opposite side when there is no room.
+   * Side of the trigger it opens on. `inline-start` and `inline-end` follow
+   * the reading direction.
    */
   side?: TooltipSide
-  /** Where along that side it lines up with the trigger. */
+  /** Where it lines up along that side. */
   align?: "start" | "center" | "end"
-  /**
-   * Distance from the trigger to the bubble, in px. Defaults to 4px between
-   * the trigger and the arrow's tip — 8 with the arrow, 4 without (7 for a
-   * Rounded bubble's side arrow, which overlaps the body by 1px).
-   */
+  /** Distance from the trigger to the tooltip, in px. */
   sideOffset?: number
-  /** Shifts the tooltip along `align`, in px. */
+  /** Shifts the tooltip along `align`, in px. Passed to Base UI. */
   alignOffset?: number
   /**
-   * How it avoids the viewport edge: by default it flips to the opposite
-   * side, then shifts along it. Pass `{ side: "none", align: "none" }` to
-   * hold it where `side` and `align` put it.
+   * How it avoids the window edge. Pass `{ side: "none", align: "none" }` to
+   * keep it in place.
    */
   collisionAvoidance?: React.ComponentPropsWithoutRef<
     typeof TooltipPrimitive.Positioner
   >["collisionAvoidance"]
-  /** Show the arrow. Off is Figma's `Position = None`. */
+  /** Shows the arrow. */
   arrow?: boolean
-  /**
-   * A second line under the title — Figma's Sub Text. It is 70% of the text
-   * colour, or `muted-foreground` on Secondary.
-   */
+  /** A second line under the title. */
   description?: React.ReactNode
-  /** A glyph before the text, shown at 16px in the text colour. */
+  /** An icon before the text, at 16px. */
   icon?: React.ReactNode
-  /**
-   * An Avatar before the text (and before `icon`), always at size 12. It is
-   * round, as in Figma, unless you pass `radius`.
-   */
+  /** An Avatar before the text, at size 12. */
   avatar?: Omit<AvatarProps, "size">
-  /**
-   * The element the tooltip is portalled into. Defaults to `<body>`; pass a
-   * container inside a themed subtree (a `.dark` panel) to keep its tokens.
-   */
+  /** Where the tooltip renders. Default `<body>`. */
   container?: React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Portal>["container"]
   className?: string
 }

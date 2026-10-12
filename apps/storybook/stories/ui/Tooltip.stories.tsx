@@ -11,9 +11,12 @@ import {
 
 /**
  * The look lives on `TooltipContent`, so the Controls panel drives it. The
- * trigger is a plain `<button>` — `TooltipTrigger`'s default element.
+ * trigger is a plain `<button>` — `TooltipTrigger`'s default element. `open`
+ * is the story's own control, on `Tooltip`, so every change shows at once.
  */
-const meta: Meta<typeof TooltipContent> = {
+type StoryArgs = TooltipContentProps & { open: boolean }
+
+const meta: Meta<StoryArgs> = {
   title: "UI/Tooltip",
   component: TooltipContent,
   parameters: { layout: "centered" },
@@ -29,21 +32,35 @@ const meta: Meta<typeof TooltipContent> = {
       options: ["top", "bottom", "left", "right", "inline-start", "inline-end"],
     },
     align: { control: "inline-radio", options: ["start", "center", "end"] },
+    // Empty unless set, so the component's own default applies: 8 with the
+    // arrow, 4 without, 7 on the left or right of a Rounded tooltip.
+    sideOffset: {
+      control: { type: "number", min: 0, step: 1 },
+      table: {
+        defaultValue: { summary: "8", detail: "4 without an arrow, 7 on the left or right of a Rounded tooltip" },
+      },
+    },
     arrow: { control: "boolean" },
     description: { control: "text" },
+    open: {
+      control: "boolean",
+      description: "Keeps the tooltip open. Turn it off to open it by hover or focus.",
+      table: { category: "Tooltip" },
+    },
     // Slots and Base UI's own escape hatches, not props a reader drives here.
     icon: { table: { disable: true } },
+    alignOffset: { table: { disable: true } },
     collisionAvoidance: { table: { disable: true } },
     avatar: { table: { disable: true } },
     container: { table: { disable: true } },
     style: { table: { disable: true } },
     render: { table: { disable: true } },
   },
-  args: { variant: "primary", radius: "standard", side: "top", align: "center", arrow: true },
+  args: { open: true, variant: "primary", radius: "standard", side: "top", align: "center", arrow: true },
 }
 
 export default meta
-type Story = StoryObj<typeof TooltipContent>
+type Story = StoryObj<StoryArgs>
 
 /**
  * Sample copy, per script: sharing a file. Only the rendered text changes —
@@ -119,12 +136,17 @@ const Open = ({
 const positionProps = (position: (typeof POSITIONS)[number]) =>
   position === "none" ? { side: "top" as const, arrow: false } : { side: position, arrow: true }
 
-/** Hover or focus the button. Every control in the Controls panel drives the tooltip. */
+/**
+ * Open from the start, so every control shows at once. Turn `open` off to
+ * open it by hover or focus instead.
+ */
 export const Default: Story = {
-  render: (args, ctx) => {
+  render: ({ open, ...args }, ctx) => {
     const c = copy(ctx)
     return (
-      <Tooltip>
+      // Remounted when `open` flips, so the tooltip moves cleanly between
+      // held open and opening on its own.
+      <Tooltip key={String(open)} open={open ? true : undefined}>
         <TooltipTrigger className={TRIGGER}>{c.trigger}</TooltipTrigger>
         <TooltipContent {...args}>{c.title}</TooltipContent>
       </Tooltip>

@@ -697,14 +697,14 @@
       "lead": "A short hint that appears while the pointer rests on an element or keyboard focus reaches it. Use it to name an icon button or add one line of context, and keep anything the reader must see on the page itself.",
       "installNote": "Tooltip is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its avatar slot uses <code>avatar</code>. <code>add</code> installs both with the component, and so does the shadcn CLI.",
       "previewHint": "Hover over the button, or move to it with Tab.",
-      "variantsBody": "Six styles, set with <code>variant</code>. <code>primary</code>, the default, is the dark hint for everyday labels, and <code>secondary</code> is a quieter neutral. <code>info</code>, <code>success</code>, <code>warning</code> and <code>destructive</code> carry the status colours: pick the one that matches what the message means, and make the words clear on their own. <code>radius</code> chooses between 8px corners for <code>standard</code> and 16px for <code>rounded</code>, which reads as a pill on a single line.",
+      "variantsBody": "Six styles, set with <code>variant</code>. <code>primary</code>, the default, suits everyday labels, and <code>secondary</code> is a quieter neutral. <code>info</code>, <code>success</code>, <code>warning</code> and <code>destructive</code> carry the status colours: pick the one that matches what the message means, and make the words clear on their own. <code>radius</code> chooses between 8px corners for <code>standard</code> and 16px for <code>rounded</code>, which reads as a pill on a single line.",
       "placement": {
         "title": "Placement",
         "body": "<code>side</code> picks the side of the trigger the tooltip sits on, and the arrow points back at it. <code>top</code>, <code>bottom</code>, <code>left</code> and <code>right</code> are fixed sides of the screen, so <code>left</code> stays put on a right-to-left page. <code>inline-start</code> and <code>inline-end</code> mean the start and end of the line, so they swap sides in Arabic. When there is no room, the tooltip flips to the opposite side. Set <code>arrow</code> to <code>false</code> to drop the arrow."
       },
       "content": {
         "title": "Content",
-        "body": "The text you put inside is the title. <code>description</code> adds a second line in a softer colour. <code>icon</code> puts a 16px glyph before the text, in the text colour, and <code>avatar</code> puts a round 12px avatar in the same place, to show who the hint is about. The text wraps at 296px, so a tooltip is at most 320px wide, or 340px with an icon."
+        "body": "The text you put inside is the title. <code>description</code> adds a second, less prominent line. <code>icon</code> puts a 16px glyph before the text, in the text colour, and <code>avatar</code> puts a round 12px avatar in the same place, to show who the hint is about. The text wraps at 296px, so a tooltip is at most 320px wide, or 340px with an icon."
       },
       "sample": {
         "trigger": "Share",
@@ -739,7 +739,7 @@
         "radius": "8px corners, or 16px: a pill on one line.",
         "side": "Side of the trigger it sits on. The <code>inline-*</code> sides follow the reading direction.",
         "align": "Where along that side it lines up with the trigger.",
-        "sideOffset": "Distance from the trigger, in px. By default the arrow’s tip stops 4px short of the trigger.",
+        "sideOffset": "Distance from the trigger to the tooltip, in px.",
         "arrow": "Shows the arrow.",
         "description": "A second line under the title.",
         "icon": "A 16px glyph before the text.",

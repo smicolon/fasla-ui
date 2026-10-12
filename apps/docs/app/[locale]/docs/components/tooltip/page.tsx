@@ -59,29 +59,34 @@ function Held({
   container,
   caption,
   cellClassName,
+  reserve = false,
   ...content
 }: Partial<TooltipContentProps> & {
   label: string
   container: HTMLElement
   caption?: React.ReactNode
   cellClassName?: string
+  /**
+   * Keep room above and below the trigger for a tooltip on either side, so a
+   * row of cells lines up its triggers and its captions whichever way each
+   * tooltip opens. 44px: the tallest bubble (32px in Arabic) plus its 8px
+   * offset, and a little air.
+   */
+  reserve?: boolean
 }) {
-  // The caption sits on the side the tooltip leaves free: under the trigger,
-  // or above it when the tooltip opens below.
-  const captionNode = caption && <code className="text-xs text-muted-foreground">{caption}</code>
-  const below = content.side === "bottom"
   return (
     <div className={`flex flex-col items-center gap-3 ${cellClassName ?? ""}`}>
-      {below && captionNode}
-      <Tooltip open>
-        <TooltipTrigger className={TRIGGER}>{label}</TooltipTrigger>
-        <TooltipContent
-          container={container}
-          collisionAvoidance={{ side: "none", align: "none" }}
-          {...content}
-        />
-      </Tooltip>
-      {!below && captionNode}
+      <div className={reserve ? "py-11" : undefined}>
+        <Tooltip open>
+          <TooltipTrigger className={TRIGGER}>{label}</TooltipTrigger>
+          <TooltipContent
+            container={container}
+            collisionAvoidance={{ side: "none", align: "none" }}
+            {...content}
+          />
+        </Tooltip>
+      </div>
+      {caption && <code className="text-xs text-muted-foreground">{caption}</code>}
     </div>
   )
 }
@@ -131,7 +136,7 @@ export default function TooltipPage() {
         row("radius", '"standard" | "rounded"', '"standard"', "radius"),
         row("side", '"top" | "bottom" | "left" | "right" | "inline-start" | "inline-end"', '"top"', "side"),
         row("align", '"start" | "center" | "end"', '"center"', "align"),
-        row("sideOffset", "number", "", "sideOffset"),
+        row("sideOffset", "number", "8", "sideOffset"),
         row("arrow", "boolean", "true", "arrow"),
         row("description", "ReactNode", "", "description"),
         row("icon", "ReactNode", "", "icon"),
@@ -200,7 +205,7 @@ export default function TooltipPage() {
         <p className="text-muted-foreground">{a.rich("placement.body", rich)}</p>
         <HeldPreview>
           {(container) => (
-            <div className="grid grid-cols-2 gap-x-6 gap-y-24 py-6 sm:gap-x-16">
+            <div className="grid grid-cols-2 gap-x-6 gap-y-6 sm:gap-x-16">
               {SIDES.map((side) => (
                 <Held
                   key={side}
@@ -209,6 +214,7 @@ export default function TooltipPage() {
                   side={side}
                   caption={side}
                   cellClassName={SIDE_CELL[side]}
+                  reserve
                 >
                   {title}
                 </Held>
