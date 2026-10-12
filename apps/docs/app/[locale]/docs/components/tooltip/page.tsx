@@ -42,30 +42,69 @@ const TRIGGER =
 const useIsomorphicLayoutEffect = typeof window === "undefined" ? useEffect : useLayoutEffect
 
 /**
- * How far a held tooltip reaches past its trigger on each side, in px, read
- * from where Base UI actually placed it. Readings taken before it is placed
- * (it starts at the page origin) are ignored; after that the numbers are
- * relative to the trigger, so making room for them cannot change them.
+ * The room a held tooltip needs around its trigger, in px, so the cell can
+ * reserve it.
+ *
+ * Sized from the tooltip's own width and height, which do not change when
+ * the trigger moves. Reading positions instead made a loop: reserving room
+ * nudges the trigger, Base UI moves the tooltip a frame later, and a reading
+ * taken in between was a pixel off, so the room changed again — the tooltip
+ * jittered for ever. The one positional number, the gap to the trigger, is
+ * read only right after Base UI places the tooltip, when it is fresh.
  */
 function useHeldRoom() {
   const trigger = useRef<HTMLButtonElement>(null)
+  const gap = useRef<number | null>(null)
   const [popup, setPopup] = useState<HTMLDivElement | null>(null)
   const [room, setRoom] = useState({ top: 0, right: 0, bottom: 0, left: 0 })
 
   useIsomorphicLayoutEffect(() => {
     const t = trigger.current
-    if (!t || !popup) return
+    const positioner = popup?.parentElement
+    if (!t || !popup || !positioner) return
+    /** The side it opened on, as a physical side. */
+    const physicalSide = () => {
+      const side = popup.dataset.side ?? "top"
+      if (side !== "inline-start" && side !== "inline-end") return side
+      const rtl = getComputedStyle(t).direction === "rtl"
+      return (side === "inline-start") !== rtl ? "left" : "right"
+    }
+    const readGap = () => {
+      const a = t.getBoundingClientRect()
+      const b = popup.getBoundingClientRect()
+      const side = physicalSide()
+      const reading =
+        side === "top" ? a.top - b.bottom : side === "bottom" ? b.top - a.bottom : side === "left" ? a.left - b.right : b.left - a.right
+      // Before it is first placed it sits at the page origin; ignore that.
+      if (reading < 0 || reading > 24) return
+      // Base UI rounds positions to whole device pixels, so the same 8px gap
+      // reads anywhere from 7.5 to 8.5 as the trigger moves. Keep the first
+      // reading unless a new one is more than a pixel off, or the room would
+      // flip by a pixel, move the trigger, and flip back.
+      if (gap.current === null || Math.abs(reading - gap.current) > 1) gap.current = reading
+    }
     const measure = () => {
+      if (gap.current === null) return
       const a = t.getBoundingClientRect()
       const b = popup.getBoundingClientRect()
       if (!b.width) return
-      const gap = Math.max(b.top - a.bottom, a.top - b.bottom, b.left - a.right, a.left - b.right)
-      if (gap > 24) return
+      const side = physicalSide()
+      const spreadX = Math.max(0, (b.width - a.width) / 2)
+      const spreadY = Math.max(0, (b.height - a.height) / 2)
+      const reach = (b: DOMRect) => (side === "top" || side === "bottom" ? b.height : b.width) + gap.current!
+      const raw =
+        side === "top"
+          ? { top: reach(b), right: spreadX, bottom: 0, left: spreadX }
+          : side === "bottom"
+            ? { top: 0, right: spreadX, bottom: reach(b), left: spreadX }
+            : side === "left"
+              ? { top: spreadY, right: 0, bottom: spreadY, left: reach(b) }
+              : { top: spreadY, right: reach(b), bottom: spreadY, left: 0 }
       const next = {
-        top: Math.max(0, Math.ceil(a.top - b.top)),
-        right: Math.max(0, Math.ceil(b.right - a.right)),
-        bottom: Math.max(0, Math.ceil(b.bottom - a.bottom)),
-        left: Math.max(0, Math.ceil(a.left - b.left)),
+        top: Math.ceil(raw.top),
+        right: Math.ceil(raw.right),
+        bottom: Math.ceil(raw.bottom),
+        left: Math.ceil(raw.left),
       }
       setRoom((prev) =>
         prev.top === next.top && prev.right === next.right && prev.bottom === next.bottom && prev.left === next.left
@@ -73,15 +112,20 @@ function useHeldRoom() {
           : next
       )
     }
-    measure()
+    // Base UI writes the positioner's style each time it places the tooltip.
+    const placed = new MutationObserver(() => {
+      readGap()
+      measure()
+    })
+    placed.observe(positioner, { attributes: true, attributeFilter: ["style"] })
     const resize = new ResizeObserver(measure)
     resize.observe(popup)
     resize.observe(t)
-    const moves = new MutationObserver(measure)
-    if (popup.parentElement) moves.observe(popup.parentElement, { attributes: true, attributeFilter: ["style"] })
+    readGap()
+    measure()
     return () => {
+      placed.disconnect()
       resize.disconnect()
-      moves.disconnect()
     }
   }, [popup])
 
@@ -152,7 +196,16 @@ function Held({
             <TooltipContent
               ref={popup}
               container={portal}
-              collisionAvoidance={{ side: "none", align: "none" }}
+              // Never flips sides. Above or below the trigger it may shift
+              // sideways, so a narrow preview narrows the tooltip instead of
+              // clipping it; that shift is horizontal only, so it never slides
+              // as the page scrolls. Beside the trigger it does not shift at
+              // all, or Base UI would pull it toward the visible part of the
+              // page and it would slide up and down while scrolling.
+              collisionAvoidance={{
+                side: "none",
+                align: !content.side || content.side === "top" || content.side === "bottom" ? "shift" : "none",
+              }}
               {...content}
             />
           )}
@@ -280,8 +333,10 @@ export default function TooltipPage() {
         <HeldPreview>
           {/* Standalone cells: top stacks tooltip, button, label; bottom
               stacks button, tooltip, label; both start at the same top edge.
-              Each side row's cells are the same height, so they line up. */}
-          <div className="grid grid-cols-2 items-start gap-x-3 sm:gap-x-16">
+              Each side row's cells are the same height, so they line up.
+              One column below 360px: two side tooltips in a row would leave
+              each only ~50px beside its button. */}
+          <div className="grid grid-cols-1 items-start gap-x-3 min-[360px]:grid-cols-2 sm:gap-x-16">
             {SIDES.map((side) => (
               <Held
                 key={side}

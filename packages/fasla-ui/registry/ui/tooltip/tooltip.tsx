@@ -170,7 +170,9 @@ TooltipTrigger.displayName = "TooltipTrigger"
  * which re-leads itself to Cairo's 20px under `dir="rtl"` — and no border or
  * shadow. The cap is on the text, as in Figma: title and description each
  * wrap at 296px, so the bubble is at most 320px wide, 340 with an icon. A
- * word longer than that breaks rather than overflowing.
+ * word longer than that breaks rather than overflowing. Where less room is
+ * available — a narrow phone — it shrinks to fit (`max-w-full`, inside the
+ * positioner's `--available-width` cap).
  *
  * Fades in and out over 150ms on Base UI's starting and ending styles; with
  * reduced motion it appears and disappears at once.
@@ -188,7 +190,7 @@ TooltipTrigger.displayName = "TooltipTrigger"
  */
 const tooltipVariants = cva(
   [
-    "flex w-fit items-start gap-1 px-3 py-1.5 text-start text-xs font-normal [overflow-wrap:anywhere]",
+    "flex w-fit max-w-full items-start gap-1 px-3 py-1.5 text-start text-xs font-normal [overflow-wrap:anywhere]",
     "transition-opacity duration-150 motion-reduce:transition-none",
     "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0",
   ],
@@ -258,6 +260,14 @@ function defaultSideOffset(arrow: boolean, radius: TooltipRadius) {
   return ({ side }: { side: string }) => ARROW_DEPTH + GAP - (isInlineSide(side) ? 1 : 0)
 }
 
+type CollisionAvoidance = React.ComponentPropsWithoutRef<
+  typeof TooltipPrimitive.Positioner
+>["collisionAvoidance"]
+
+/** Whether Base UI may shift the tooltip along its side, as it does by default. */
+const shiftsAlongSide = (avoidance: CollisionAvoidance) =>
+  !(avoidance?.align === "none" && avoidance?.side !== "shift")
+
 export interface TooltipContentProps
   extends Omit<React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Popup>, "className"> {
   /** Colour style. */
@@ -279,9 +289,7 @@ export interface TooltipContentProps
    * How it avoids the window edge. Pass `{ side: "none", align: "none" }` to
    * keep it in place.
    */
-  collisionAvoidance?: React.ComponentPropsWithoutRef<
-    typeof TooltipPrimitive.Positioner
-  >["collisionAvoidance"]
+  collisionAvoidance?: CollisionAvoidance
   /** Shows the arrow. */
   arrow?: boolean
   /** A second line under the title. */
@@ -333,7 +341,20 @@ const TooltipContent = React.forwardRef<HTMLDivElement, TooltipContentProps>(
           // `w-max`: the tooltip lays out at its own width — up to the 296px
           // text cap — whatever it is portalled into. Without it, a narrow
           // `container` would squeeze the text a letter per line.
-          className="z-50 w-max"
+          // The cap: on a narrow screen the tooltip wraps sooner rather than
+          // run off the edge. `--available-width` is the room Base UI reports
+          // inside the collision boundary (the viewport, or a clipping
+          // ancestor) — but only while it may shift the tooltip along its side.
+          // With shifting off, Base UI works that room out from the tooltip's
+          // current width, so capping the width by it feeds back on itself and
+          // the tooltip wobbles between two widths. Then the viewport, less
+          // Base UI's 5px collision padding a side, is the cap instead.
+          className={cn(
+            "z-50 w-max",
+            shiftsAlongSide(collisionAvoidance)
+              ? "max-w-[var(--available-width)]"
+              : "max-w-[calc(100vw-10px)]"
+          )}
         >
           <TooltipPrimitive.Popup
             ref={ref}

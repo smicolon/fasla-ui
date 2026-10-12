@@ -103,9 +103,15 @@ unless the example does.
 
 1. Portal it into its own cell (`container`), so it scrolls and clips with
    the story and inherits a themed panel's tokens.
-2. Measure how far it reaches past its trigger, from the rendered rects once
-   it is placed, and reserve exactly that around the trigger. Never guess a
-   height: Arabic lines are taller and text wraps.
+2. Reserve exactly the room it takes around the trigger, worked out from
+   its own rendered width and height plus its gap to the trigger. Never guess
+   a height: Arabic lines are taller and text wraps. Do **not** work the room
+   out from positions: reserving room moves the trigger, the tooltip follows
+   a frame later, and a reading taken in between makes the room change
+   again — the tooltip jitters for ever. Read the gap only right after Base
+   UI places it (its positioner's `style` changes), and keep it unless a new
+   reading is more than a pixel off, since positions are rounded to device
+   pixels.
 3. To line up triggers and captions across a row, make each cell
    `row-span-4 grid grid-rows-subgrid` (room above, trigger, room below,
    caption) inside a grid with `gap-y-0`: each row becomes as tall as its
@@ -115,4 +121,12 @@ unless the example does.
    padding, which leaves the tooltip where it was.
 5. Give the floating element `w-max` (Tooltip's positioner has it), or a
    narrow container squeezes its text a letter per line.
+6. Never let it flip sides (`collisionAvoidance.side: "none"`). Above or
+   below the trigger let it shift (`align: "shift"`): that only moves it
+   sideways, and keeps the room Base UI reports independent of position.
+   Beside the trigger turn shifting off (`align: "none"`), or Base UI pulls
+   it toward the visible part of the page and it slides as you scroll.
+7. Verify it stays still: sample each open tooltip's position for a few
+   seconds, and its position relative to its trigger while scrolling, in
+   both directions and themes, at desktop and phone width.
 

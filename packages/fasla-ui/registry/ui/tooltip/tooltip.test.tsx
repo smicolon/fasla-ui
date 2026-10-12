@@ -64,6 +64,28 @@ describe("Tooltip — behaviour", () => {
     expect(screen.queryByText("Copy link")).toBeNull()
   })
 
+  it("never grows past the room Base UI reports, and shrinks to it", () => {
+    render(<Example description="Members can still override this setting for their own account." />)
+    // The positioner is capped at Base UI's --available-width; the bubble
+    // fills no more than that, and its text column can shrink below 296px.
+    expect(positioner()).toHaveClass("max-w-[var(--available-width)]")
+    expect(popup()).toHaveClass("max-w-full")
+    expect(slot("tooltip-text")).toHaveClass("min-w-0", "max-w-[296px]")
+  })
+
+  it("caps at the viewport instead when shifting is off, so the width cannot wobble", () => {
+    // With shifting off, Base UI derives --available-width from the tooltip's
+    // own width; capping by it would feed back on itself.
+    const { unmount } = render(<Example collisionAvoidance={{ side: "none", align: "none" }} />)
+    expect(positioner()).toHaveClass("max-w-[calc(100vw-10px)]")
+    expect(positioner()).not.toHaveClass("max-w-[var(--available-width)]")
+    unmount()
+
+    // Shifting the side itself still shifts, so the reported room stays stable.
+    render(<Example collisionAvoidance={{ side: "shift", align: "none" }} />)
+    expect(positioner()).toHaveClass("max-w-[var(--available-width)]")
+  })
+
   it("keeps its own width in a narrow container", () => {
     const container = document.createElement("div")
     container.style.width = "0px"
@@ -173,7 +195,9 @@ describe("Tooltip — Figma Style and Radius", () => {
     render(<Example description="Sub title" />)
     expect(slot("tooltip-text")).toHaveClass("max-w-[296px]")
     expect(slot("tooltip-text")).toContainElement(slot("tooltip-description"))
-    expect(popup().className).not.toMatch(/\bmax-w-/)
+    // The bubble only shrinks to the room available (max-w-full); it has no
+    // width cap of its own.
+    expect(popup().className).not.toMatch(/\bmax-w-(?!full\b)/)
   })
 
   it("fades over 150ms, and not at all with reduced motion", () => {
