@@ -281,6 +281,21 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/tooltip/",
+    title: "Tooltip React Component | Fasla",
+    description:
+      "Add accessible React tooltips in six styles, with an arrow, description, icon or avatar, placed on any side and mirrored for RTL.",
+    h1: "Tooltip",
+    ar: {
+      title: "تلميح (Tooltip) لتطبيقات React | فاصلة",
+      description:
+        "أضف مكوّن تلميح (Tooltip) بستة أنماط، مع سهم ووصف وأيقونة أو صورة رمزية، في أي جهة من العنصر، وينعكس تلقائيًا في الصفحات العربية.",
+      h1: "تلميح (Tooltip)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/combobox/",
     title: "Combobox React Component | Fasla",
     description:

@@ -88,6 +88,7 @@ export const CODE_MAP = {
   switch: { set: "Switch", page: "3862:3097" },
   tabs: { set: "Tabs Component", page: "3808:12668" },
   textarea: { set: "Textarea", page: "3975:63617" },
+  tooltip: { set: "Tooltip", page: "3822:55767" },
   "data-table": { set: "Table", page: "14885:1510" },
   navbar: { set: "Navbar", page: "4108:1605" },
   sidebar: { set: "Side Bar", page: "14889:866" },
