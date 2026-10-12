@@ -636,36 +636,58 @@
       }
     },
     "tabs": {
-      "lead": "A set of layered sections of content that display one panel at a time.",
+      "lead": "Tabs switch between related views in the same place and show one panel at a time. The same component is sometimes called Pills.",
+      "installNote": "Tabs is built on Base UI, so it needs the <code>@base-ui/react</code> package. The shadcn CLI installs it with the component, and <code>add</code> lists it among the packages to install.",
+      "variantsBody": "Three styles, set on <code>TabsList</code> so a group never mixes them. <code>boxed</code>, the default, sets the tabs in a muted track and raises the active tab into a pill on it; it suits toolbars and inline view switches. <code>bordered</code> underlines the active tab, for content navigation and dense layouts. <code>lifted</code> raises the active tab out of a baseline like a file folder, for page-level sections.",
+      "sizesBody": "Three sizes, also set on <code>TabsList</code> so every tab in a group matches. <code>md</code> is the default. Tabs are 28, 30 or 32px tall, and <code>lg</code> uses 16px text with 20px icons. The <code>boxed</code> track adds 4px around them.",
+      "statesBody": "The active tab follows <code>value</code>. Hover and focus are real CSS states rather than props, so tab into a group to see the focus ring. A disabled tab is greyed out, and you cannot select it.",
       "tabs": {
         "account": "Account",
         "password": "Password",
+        "billing": "Billing",
         "settings": "Settings"
       },
       "panels": {
         "account": "Make changes to your account here.",
         "password": "Change your password here.",
+        "billing": "Review your plan and invoices here.",
         "settings": "Manage your settings here."
       },
-      "disabledTitle": "With Disabled Tab",
+      "examples": {
+        "label": "Account settings"
+      },
       "disabled": {
+        "label": "Orders",
         "current": "Current orders",
         "invoices": "Invoices",
         "past": "Past orders",
         "currentText": "You have two orders out for delivery.",
         "pastText": "Your last order was two weeks ago."
       },
+      "a11y": {
+        "roles": "Renders the <code>tablist</code>, <code>tab</code> and <code>tabpanel</code> roles. Each tab points to its panel with <code>aria-controls</code> while that panel is shown, and the panel takes its name from its tab through <code>aria-labelledby</code>.",
+        "keyboard": "Tab enters the group on the active tab. The arrow keys move to the previous or next tab and select it, wrapping at the ends. To select with Enter or Space instead, set <code>activateOnFocus</code> to <code>false</code>. Home and End jump to the first and last tab. The arrow keys also reach a disabled tab, so a screen reader announces it, but it cannot be selected.",
+        "label": "Give <code>TabsList</code> an <code>aria-label</code> that names the group.",
+        "icons": "An icon before the label is decorative, so mark it <code>aria-hidden</code> and let the label name the tab.",
+        "direction": "Direction is inherited from <code>dir</code>, never a prop. In right-to-left pages the arrow keys follow the reading order, so the left arrow moves to the next tab."
+      },
       "usage": {
         "basic": "Basic tabs",
+        "variant": "Another style and size",
+        "icons": "With an icon",
         "controlled": "Controlled tabs",
         "accountContent": "Account content here.",
-        "passwordContent": "Password content here."
+        "passwordContent": "Password content here.",
+        "active": "Active tab:"
       },
       "props": {
         "value": "Active tab, when controlled.",
-        "defaultValue": "Tab active at first.",
-        "onValueChange": "Called when the active tab changes.",
-        "trigger": "A tab button; its <code>value</code> names its panel.",
+        "defaultValue": "Tab active at first. Without it or <code>value</code>, the first enabled tab is active.",
+        "onValueChange": "Called when the active tab changes. Call <code>eventDetails.cancel()</code> to refuse the change.",
+        "variant": "How the active tab is shown. Set on <code>TabsList</code>.",
+        "size": "Size of every tab in the group. Set on <code>TabsList</code>.",
+        "activateOnFocus": "Whether the arrow keys also select the tab they move to. Set on <code>TabsList</code>.",
+        "trigger": "A tab button; its <code>value</code> names its panel, and <code>disabled</code> turns it off.",
         "content": "The panel shown for its <code>value</code>.",
         "className": "Extra classes for the part."
       }

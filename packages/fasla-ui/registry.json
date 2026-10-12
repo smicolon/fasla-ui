@@ -525,8 +525,11 @@
       "name": "tabs",
       "type": "registry:ui",
       "title": "Tabs",
-      "description": "Accessible tab lists, triggers, and keyboard-navigable panels.",
-      "dependencies": [],
+      "description": "Accessible, keyboard-navigable tabs (also called pills): boxed, bordered and lifted styles in three sizes, with optional icons.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
       "registryDependencies": [],
       "files": [
         {
