@@ -16,7 +16,7 @@ const geistFontsDirectory = path.join(
 const explorerTitle = "Fasla Component Explorer | Smicolon"
 const explorerDescription =
   "Explore the Fasla component explorer for accessible React primitives, application blocks, and animated effects by Smicolon."
-const explorerCanonical = "https://ui.smicolon.com/components/"
+const explorerCanonical = "https://fasla.smicolon.com/components/"
 
 function appendManagerMetadata(head: string) {
   return `${head}

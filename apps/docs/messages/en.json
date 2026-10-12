@@ -242,7 +242,7 @@
       "manualDeps": "1. Install dependencies:",
       "manualTailwind3": "On Tailwind 3, install <code>tailwind-merge@^2</code> instead. tailwind-merge 3 supports only Tailwind 4, and on Tailwind 3 it drops classes it doesn’t know, such as <code>outline</code>:",
       "manualCn": "2. Add the cn utility to your project:",
-      "manualCopy": "3. Copy each component from its file in the registry, such as <code>https://ui.smicolon.com/r/button.json</code> for Button. <code>https://ui.smicolon.com/r/registry.json</code> lists them all.",
+      "manualCopy": "3. Copy each component from its file in the registry, such as <code>https://fasla.smicolon.com/r/button.json</code> for Button. <code>https://fasla.smicolon.com/r/registry.json</code> lists them all.",
       "manualCopyDetail": "In each file, <code>files</code> holds the source in <code>content</code> and the path to save it at in <code>target</code>. <code>dependencies</code> lists the packages to install, and <code>registryDependencies</code> the other Fasla components it needs, which you copy the same way."
     },
     "propsTable": {

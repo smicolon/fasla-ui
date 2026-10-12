@@ -35,8 +35,10 @@ let registryDown = false
 vi.mock("./registry", async (importOriginal) => {
   const actual = await importOriginal<typeof import("./registry")>()
   const items = [
-    { name: "button", type: "registry:ui", dependencies: ["lucide-react"], files: [{ path: "registry/ui/button/button.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/button): https://ui.smicolon.com\nimport { cn } from "@/lib/utils"\nexport const Button = () => cn("b")\n` }] },
-    { name: "badge", type: "registry:ui", files: [{ path: "registry/ui/badge/badge.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/badge): https://ui.smicolon.com\nimport { cn } from "@/lib/utils"\nexport const Badge = () => cn("x")\n` }] },
+    { name: "button", type: "registry:ui", dependencies: ["lucide-react"], files: [{ path: "registry/ui/button/button.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/button): https://fasla.smicolon.com\nimport { cn } from "@/lib/utils"\nexport const Button = () => cn("b")\n` }] },
+    { name: "badge", type: "registry:ui", files: [{ path: "registry/ui/badge/badge.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/badge): https://fasla.smicolon.com\nimport { cn } from "@/lib/utils"\nexport const Badge = () => cn("x")\n` }] },
+    // Its dependency on badge points at ui.smicolon.com, as the published registry's do.
+    { name: "chip", type: "registry:ui", registryDependencies: ["https://ui.smicolon.com/r/badge.json"], files: [{ path: "registry/ui/chip/chip.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/chip): https://fasla.smicolon.com\nexport const Chip = () => null\n` }] },
     // Broken registry entries, for what add says when a component writes nothing.
     { name: "hollow", type: "registry:ui", files: [] },
     { name: "blank", type: "registry:ui", files: [{ path: "registry/ui/blank/blank.tsx", type: "registry:ui", target: "", content: "" }] },
@@ -192,7 +194,7 @@ describe("init", () => {
       { name: "theme", initial: 0 },
     ])
     const config = await fs.readJson(path.join(dir, "components.json"))
-    expect(config.registries).toEqual({ "@fasla": "https://ui.smicolon.com/r/{name}.json" })
+    expect(config.registries).toEqual({ "@fasla": "https://fasla.smicolon.com/r/{name}.json" })
     expect(config.aliases.components).toBe("@/components")
     expect(config.tailwind.css).toBe("app/globals.css")
     expect(await fs.readFile(path.join(dir, "components/ui/button.tsx"), "utf8")).toContain(`"@/lib/utils"`)
@@ -204,7 +206,7 @@ describe("init", () => {
     const dir = await nextApp({ "components.json": JSON.stringify({ aliases: {}, registries: { smicolon: { url: "x" } } }) })
     await run("init", "--yes", "--no-install", "--cwd", dir)
     expect((await fs.readJson(path.join(dir, "components.json"))).registries).toEqual({
-      "@fasla": "https://ui.smicolon.com/r/{name}.json",
+      "@fasla": "https://fasla.smicolon.com/r/{name}.json",
     })
   })
 
@@ -276,7 +278,7 @@ describe("init", () => {
     expect(output()).toContain(`stopped after ${journal.done} of ${journal.steps.length} steps`)
     expect(output()).toContain("- write the repaired components.json")
     expect(await fs.pathExists(path.join(dir, REPAIR_FILE))).toBe(false)
-    expect((await fs.readJson(path.join(dir, "components.json"))).registries).toEqual({ "@fasla": "https://ui.smicolon.com/r/{name}.json" })
+    expect((await fs.readJson(path.join(dir, "components.json"))).registries).toEqual({ "@fasla": "https://fasla.smicolon.com/r/{name}.json" })
     for (const file of ["components/ui/badge.tsx", "components/ui/button.tsx"]) {
       expect(await fs.readFile(path.join(dir, file), "utf8")).toContain(`"@/lib/utils"`)
     }
@@ -379,7 +381,7 @@ describe("init", () => {
     // That process is gone now: its lock is stale, so this run takes over.
     logs = []
     await run("init", "--yes", "--no-install", "--cwd", dir)
-    expect((await fs.readJson(path.join(dir, "components.json"))).registries).toEqual({ "@fasla": "https://ui.smicolon.com/r/{name}.json" })
+    expect((await fs.readJson(path.join(dir, "components.json"))).registries).toEqual({ "@fasla": "https://fasla.smicolon.com/r/{name}.json" })
     expect(await fs.pathExists(path.join(dir, LOCK_FILE))).toBe(false)
   })
 
@@ -654,6 +656,18 @@ describe("init: where the stylesheet and Tailwind are", () => {
     const config = await fs.readJson(path.join(dir, "components.json"))
     expect(config.tailwind).toMatchObject({ css: "app/globals.css", config: "tailwind.config.js" })
     expect(config.rsc).toBe(true)
+  })
+})
+
+describe("add: dependencies", () => {
+  it("follows a dependency under ui.smicolon.com, where the registry's dependencies point", async () => {
+    const dir = await nextApp({
+      "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }),
+    })
+    await run("add", "chip", "--yes", "--cwd", dir)
+    // Only chip was asked for, so badge is there because its dependency was followed.
+    expect(await fs.pathExists(path.join(dir, "components/ui/badge.tsx"))).toBe(true)
+    expect(await fs.pathExists(path.join(dir, "components/ui/chip.tsx"))).toBe(true)
   })
 })
 
