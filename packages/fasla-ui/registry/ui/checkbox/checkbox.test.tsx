@@ -1,6 +1,7 @@
 import * as React from "react"
 import { describe, it, expect, vi } from "vitest"
 import { render, screen, fireEvent } from "@testing-library/react"
+import { renderToString } from "react-dom/server"
 import { Checkbox } from "./checkbox"
 
 /**
@@ -18,7 +19,7 @@ import { Checkbox } from "./checkbox"
  * wired", not "it looks right".
  */
 
-/** label ▸ input ▸ focusRing ▸ band ▸ control ▸ [check, minus] */
+/** label ▸ input ▸ focusRing ▸ band ▸ [halo, control ▸ [check, minus]] */
 const parts = (input: HTMLElement) => {
   const root = input.closest("label") as HTMLElement
   const control = root.querySelector("[data-slot=control]") as HTMLElement
@@ -27,6 +28,7 @@ const parts = (input: HTMLElement) => {
     root,
     control,
     band: control.parentElement as HTMLElement,
+    halo: root.querySelector("[data-slot=halo]") as HTMLElement | null,
     focusRing:
       siblings.find((el) => el.className.includes("peer-focus-visible:opacity-100")) ?? null,
     check: control.querySelector("[data-slot=check]") as SVGElement,
@@ -51,18 +53,40 @@ describe("Checkbox", () => {
     expect(checkbox()).toBeChecked()
   })
 
-  it("sizes the box and glyph per Figma: 16/20/24 with the glyph 4px smaller", () => {
+  it("sizes the box, glyph and halo per Figma: 16/20/24, glyph 4px smaller, halo 8px larger", () => {
     const cases = [
-      ["sm", "size-4", "size-3"],
-      ["md", "size-5", "size-4"],
-      ["lg", "size-6", "size-5"],
+      ["sm", "size-4", "size-3", "size-6"],
+      ["md", "size-5", "size-4", "size-7"],
+      ["lg", "size-6", "size-5", "size-8"],
     ] as const
-    for (const [size, box, glyph] of cases) {
+    for (const [size, box, glyph, halo] of cases) {
       const { unmount } = render(<Checkbox size={size} label="Option" />)
       const p = parts(checkbox())
       expect(p.control).toHaveClass(box)
       expect(p.check).toHaveClass(glyph)
       expect(p.minus).toHaveClass(glyph)
+      expect(p.halo).toHaveClass(halo)
+      unmount()
+    }
+  })
+
+  it("grows the row to the box at lg and drops the text to stay centred", () => {
+    // A 24px box overhangs a 20px English line. Figma's lg row is 24px, with
+    // 8px from box to border in the Layout card.
+    render(<Checkbox size="lg" label="Option" />)
+    const { band, root } = parts(checkbox())
+    expect(band).toHaveClass("min-h-6")
+    const text = screen.getByText("Option").parentElement as HTMLElement
+    expect(text.className).toMatch(/\bpt-\[max\(0px,/)
+    expect(root.querySelector(".min-h-6")).not.toBeNull()
+  })
+
+  it("leaves the row one label line tall at sm and md", () => {
+    for (const size of ["sm", "md"] as const) {
+      const { unmount } = render(<Checkbox size={size} label="Option" />)
+      const { band } = parts(checkbox())
+      expect(band).not.toHaveClass("min-h-6")
+      expect((screen.getByText("Option").parentElement as HTMLElement).className).not.toMatch(/\bpt-/)
       unmount()
     }
   })
@@ -81,7 +105,9 @@ describe("Checkbox", () => {
   it("fills the box with primary when checked or indeterminate", () => {
     render(<Checkbox label="Option" />)
     const { control } = parts(checkbox())
-    expect(control).toHaveClass("rounded-sm", "border-input", "text-primary-foreground")
+    // `rounded` is a fixed 4px, as Figma binds it; `rounded-sm` would follow --radius.
+    expect(control).toHaveClass("rounded", "border-input", "text-primary-foreground")
+    expect(control).not.toHaveClass("rounded-sm")
     expect(control).toHaveClass(
       "group-has-[:checked]/checkbox:bg-primary",
       "group-has-[:indeterminate]/checkbox:bg-primary"
@@ -93,7 +119,9 @@ describe("Checkbox", () => {
     // would paint both glyphs on top of each other.
     render(<Checkbox label="Option" />)
     const { check, minus } = parts(checkbox())
-    expect(check).toHaveClass("group-has-[:checked:not(:indeterminate)]/checkbox:opacity-100")
+    expect(check).toHaveClass(
+      "group-has-[:checked:not(:indeterminate):not([data-indeterminate])]/checkbox:opacity-100"
+    )
     expect(minus).toHaveClass("group-has-[:indeterminate]/checkbox:opacity-100")
   })
 
@@ -114,6 +142,32 @@ describe("Checkbox", () => {
     render(<Parent />)
     fireEvent.click(checkbox())
     expect(checkbox().indeterminate).toBe(true)
+  })
+
+  it("shows the dash in server-rendered HTML, before the DOM property exists", () => {
+    // `indeterminate` has no attribute, so the first HTML of a static page
+    // would otherwise show an unchecked-looking box until hydration.
+    const html = renderToString(<Checkbox label="Select all" indeterminate />)
+    expect(html).toContain("data-indeterminate")
+    const { check, minus, control } = parts(
+      (() => {
+        render(<Checkbox label="Select all" indeterminate />)
+        return checkbox()
+      })()
+    )
+    expect(minus).toHaveClass("group-has-[[data-indeterminate]]/checkbox:opacity-100")
+    expect(control).toHaveClass("group-has-[[data-indeterminate]]/checkbox:bg-primary")
+    expect(check).toHaveClass(
+      "group-has-[:checked:not(:indeterminate):not([data-indeterminate])]/checkbox:opacity-100"
+    )
+  })
+
+  it("swaps the attribute for the DOM property once mounted", () => {
+    // Left in place, the attribute would keep the dash after a click clears
+    // the property, and the box would disagree with assistive technology.
+    render(<Checkbox label="Select all" indeterminate />)
+    expect(checkbox().indeterminate).toBe(true)
+    expect(checkbox()).not.toHaveAttribute("data-indeterminate")
   })
 
   it("is not indeterminate by default", () => {
@@ -149,22 +203,34 @@ describe("Checkbox", () => {
     expect(screen.getByText("Detail")).toHaveClass("text-muted-foreground")
   })
 
-  it("rings the box for the default variant, with no hover fill", () => {
+  it("rings the box for the default variant, and haloes it on hover", () => {
     render(<Checkbox label="Option" />)
-    const { root, focusRing } = parts(checkbox())
+    const { root, focusRing, halo, control } = parts(checkbox())
     expect(focusRing).not.toBeNull()
     const ring = focusRing!.firstElementChild as HTMLElement
-    expect(ring).toHaveClass("rounded-sm", "ring-2", "ring-ring", "ring-offset-2", "size-5")
+    expect(ring).toHaveClass("rounded", "ring-2", "ring-ring", "ring-offset-2", "size-5")
     // Tailwind's default offset colour is white, which shows as a halo in Dark.
     expect(ring).toHaveClass("ring-offset-background")
+    // Figma: a rounded square, box + 8px, radius 8, accent, behind the box.
+    expect(halo).toHaveClass(
+      "absolute",
+      "pointer-events-none",
+      "rounded-[0.5rem]",
+      "bg-accent",
+      "opacity-0",
+      "group-hover/checkbox:opacity-100",
+      "-start-1"
+    )
+    expect(halo!.nextElementSibling).toBe(control)
     expect(root).not.toHaveClass("hover:bg-accent")
   })
 
-  it("rings and fills the card for the layout variant", () => {
+  it("rings and fills the card for the layout variant, with no halo", () => {
     render(<Checkbox variant="layout" label="Option" />)
-    const { root, focusRing } = parts(checkbox())
+    const { root, focusRing, halo } = parts(checkbox())
     expect(root).toHaveClass("rounded-md", "border", "p-2", "hover:bg-accent")
     expect(focusRing).toHaveClass("-inset-[2px]", "ring-2", "ring-ring")
+    expect(halo).toBeNull()
   })
 
   it("drives focus without a has-[] utility", () => {

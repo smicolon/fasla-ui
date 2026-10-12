@@ -256,7 +256,7 @@
       "lead": "A control that allows the user to toggle between checked and not checked.",
       "variantsBody": "Two types, as in Figma. <code>default</code> is the box and its label on their own. <code>layout</code> wraps them in a bordered card that is all one click target, and fills on hover.",
       "sizesBody": "Three sizes. <code>md</code> is the default. The box is 16, 20 or 24px, and the label stays the same size.",
-      "statesBody": "Checked shows a tick, indeterminate shows a dash, and neither flips in right-to-left. Focus is a real CSS state rather than a prop. Tab to a checkbox to see the ring. Disabled dims the whole checkbox, label and description included.",
+      "statesBody": "Checked shows a tick, indeterminate shows a dash, and neither flips in right-to-left. Hover and focus are real CSS states rather than props. Hover a checkbox, or tab to it, to see them. Disabled dims the whole checkbox, label and description included.",
       "examples": {
         "terms": "Accept terms and conditions",
         "marketing": "Marketing emails",
@@ -282,7 +282,8 @@
         "checked": "Checked",
         "indeterminate": "Indeterminate",
         "disabledUnchecked": "Disabled, unchecked",
-        "disabledChecked": "Disabled, checked"
+        "disabledChecked": "Disabled, checked",
+        "disabledIndeterminate": "Disabled, indeterminate"
       },
       "a11y": {
         "nativeInput": "Renders a native <code>{input}</code>, so Space toggles it and it submits with a form without extra code.",

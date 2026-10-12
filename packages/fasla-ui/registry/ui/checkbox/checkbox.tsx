@@ -13,6 +13,23 @@ import { cn } from "../../../src/lib/utils"
 const LINE_BOX = "h-[calc(var(--leading-sm,calc(20/14))*0.875rem)]"
 
 /**
+ * Half of what a 24px box overhangs one label line: 2px in English, 0 in
+ * Arabic, whose line is already 24px. At `lg` it drops the text column by that
+ * much, so the first line stays centred on the box once the row grows to the
+ * box's height.
+ */
+const LG_TEXT_OFFSET =
+  "pt-[max(0px,calc((1.5rem_-_var(--leading-sm,calc(20/14))*0.875rem)/2))]"
+
+/*
+ * `indeterminate` has no HTML attribute, so server-rendered HTML cannot carry
+ * it. The component renders `data-indeterminate` instead and removes it once
+ * the DOM property is set. A layout effect, so the swap lands before paint.
+ */
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? React.useLayoutEffect : React.useEffect
+
+/**
  * Root layout. Figma's two Types:
  *  - `default`: box, then label, no frame.
  *  - `layout`: the same row inside a bordered card — 1px `border`, 8px
@@ -44,15 +61,19 @@ const checkboxVariants = cva(
 )
 
 /**
- * Box and glyph per size, straight from the Figma set. The glyph is always the
- * box less 4px. Figma draws lucide's `check` and `minus` with a 1px stroke at
- * 16px — 1.5 on lucide's 24-unit grid — and scales it, so the stroke is the
- * same 1.5 at every size.
+ * Box, glyph and hover halo per size, straight from the Figma set. The glyph is
+ * always the box less 4px; the halo is always the box plus 8px. Figma draws
+ * lucide's `check` and `minus` with a 1px stroke at 16px — 1.5 on lucide's
+ * 24-unit grid — and scales it, so the stroke is the same 1.5 at every size.
+ *
+ * `row` and `text` matter at `lg` only: the 24px box is taller than a 20px
+ * English line, so the row grows to the box (Figma's 24px row, and 8px from
+ * box to border in the Layout card) and the text drops to stay centred.
  */
 const sizeClasses = {
-  sm: { box: "size-4", glyph: "size-3" },
-  md: { box: "size-5", glyph: "size-4" },
-  lg: { box: "size-6", glyph: "size-5" },
+  sm: { box: "size-4", glyph: "size-3", halo: "size-6", row: "", text: "" },
+  md: { box: "size-5", glyph: "size-4", halo: "size-7", row: "", text: "" },
+  lg: { box: "size-6", glyph: "size-5", halo: "size-8", row: "min-h-6", text: LG_TEXT_OFFSET },
 }
 
 export interface CheckboxProps
@@ -78,6 +99,12 @@ export interface CheckboxProps
   indeterminate?: boolean
 }
 
+/**
+ * A native checkbox with an optional label and description, in Figma's two
+ * types (`default`, `layout`) and three sizes. Checked, indeterminate, hover,
+ * focus and disabled are CSS states of the real `<input>`, so the box always
+ * shows what the browser and assistive technology see.
+ */
 const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   (
     {
@@ -104,8 +131,11 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
      * DOM; if the parent re-renders with the prop still true, a deps-guarded
      * effect would never run again and the box would stay ticked.
      */
-    React.useEffect(() => {
-      if (inputRef.current) inputRef.current.indeterminate = indeterminate
+    useIsomorphicLayoutEffect(() => {
+      const input = inputRef.current
+      if (!input) return
+      input.indeterminate = indeterminate
+      input.removeAttribute("data-indeterminate")
     })
 
     // Called on every render, so the hook order holds when id comes and goes
@@ -146,6 +176,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           aria-label={ariaLabel}
           aria-labelledby={labelledBy}
           aria-describedby={describedBy}
+          data-indeterminate={indeterminate ? "" : undefined}
           {...props}
         />
         {/*
@@ -167,13 +198,14 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
             aria-hidden="true"
             className={cn(
               "pointer-events-none absolute start-0 top-0 flex items-center opacity-0 peer-focus-visible:opacity-100",
-              LINE_BOX
+              LINE_BOX,
+              sizes.row
             )}
           >
             {/* The 2px gap takes the page colour; Tailwind's default offset is white, which shows in Dark. */}
             <span
               className={cn(
-                "rounded-sm ring-2 ring-ring ring-offset-2 ring-offset-background",
+                "rounded ring-2 ring-ring ring-offset-2 ring-offset-background",
                 sizes.box
               )}
             />
@@ -182,16 +214,35 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
         {/*
          * The box sits in a band one label line tall and centres itself in it,
          * so it lines up with the *first* line of a wrapped label. At `lg` the
-         * 24px box is taller than a 20px English line and overflows the band by
-         * 2px a side — deliberate, as in Radio.
+         * band grows to the 24px box instead of letting it overhang a 20px
+         * English line, and the text column drops to match.
          */}
-        <span aria-hidden="true" className={cn("flex shrink-0 items-center", LINE_BOX)}>
+        <span
+          aria-hidden="true"
+          className={cn("relative flex shrink-0 items-center", LINE_BOX, sizes.row)}
+        >
+          {/*
+           * Hover halo — Default only; in Layout the card fills instead. The
+           * band is exactly as wide as the box, so `-start-1` centres the halo
+           * in both directions. Absolute, so it never moves anything: every
+           * Figma Interaction variant has the same frame size.
+           */}
+          {!isLayout && (
+            <span
+              data-slot="halo"
+              className={cn(
+                "pointer-events-none absolute -start-1 top-1/2 -translate-y-1/2 rounded-[0.5rem] bg-accent opacity-0 transition-opacity motion-reduce:transition-none group-hover/checkbox:opacity-100",
+                sizes.halo
+              )}
+            />
+          )}
           <span
             data-slot="control"
             className={cn(
-              "relative flex shrink-0 items-center justify-center rounded-sm border border-input text-primary-foreground transition-colors motion-reduce:transition-none",
+              "relative flex shrink-0 items-center justify-center rounded border border-input text-primary-foreground transition-colors motion-reduce:transition-none",
               "group-has-[:checked]/checkbox:border-primary group-has-[:checked]/checkbox:bg-primary",
               "group-has-[:indeterminate]/checkbox:border-primary group-has-[:indeterminate]/checkbox:bg-primary",
+              "group-has-[[data-indeterminate]]/checkbox:border-primary group-has-[[data-indeterminate]]/checkbox:bg-primary",
               sizes.box
             )}
           >
@@ -200,7 +251,7 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
               data-slot="check"
               strokeWidth={1.5}
               className={cn(
-                "absolute opacity-0 group-has-[:checked:not(:indeterminate)]/checkbox:opacity-100",
+                "absolute opacity-0 group-has-[:checked:not(:indeterminate):not([data-indeterminate])]/checkbox:opacity-100",
                 sizes.glyph
               )}
             />
@@ -208,14 +259,14 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
               data-slot="minus"
               strokeWidth={1.5}
               className={cn(
-                "absolute opacity-0 group-has-[:indeterminate]/checkbox:opacity-100",
+                "absolute opacity-0 group-has-[:indeterminate]/checkbox:opacity-100 group-has-[[data-indeterminate]]/checkbox:opacity-100",
                 sizes.glyph
               )}
             />
           </span>
         </span>
         {(label || description) && (
-          <span className="flex min-w-0 flex-col gap-2">
+          <span className={cn("flex min-w-0 flex-col gap-2", sizes.text)}>
             {label && (
               <span id={labelId} className="text-sm font-medium text-foreground">
                 {label}

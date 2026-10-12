@@ -143,6 +143,7 @@ export default function CheckboxPage() {
                 <Checkbox variant={variant} label={c("states.indeterminate")} indeterminate />
                 <Checkbox variant={variant} label={c("states.disabledUnchecked")} disabled />
                 <Checkbox variant={variant} label={c("states.disabledChecked")} disabled defaultChecked />
+                <Checkbox variant={variant} label={c("states.disabledIndeterminate")} disabled indeterminate />
               </div>
             ))}
           </div>

@@ -45,6 +45,7 @@ const COPY = {
     files: ["Annual report", "Invoices", "Contract"],
     disabledUnchecked: "Disabled, unchecked",
     disabledChecked: "Disabled, checked",
+    disabledIndeterminate: "Disabled, indeterminate",
     selected: "Files selected",
     long: "Email me a weekly summary of new components and release notes",
     longDesc: "Sent every Monday morning and easy to turn off at any time",
@@ -61,6 +62,7 @@ const COPY = {
     files: ["التقرير السنوي", "الفواتير", "العقد"],
     disabledUnchecked: "معطّل وغير محدد",
     disabledChecked: "معطّل ومحدد",
+    disabledIndeterminate: "معطّل ومحدد جزئيًا",
     selected: "عدد الملفات المحددة",
     long: "أرسل لي ملخصًا أسبوعيًا بالمكوّنات الجديدة وملاحظات الإصدار عبر البريد الإلكتروني",
     longDesc: "يصلك كل صباح اثنين ويمكنك إيقافه في أي وقت",
@@ -159,6 +161,7 @@ export const Disabled: Story = {
             <Head>{variant}</Head>
             <Checkbox variant={variant} label={c.disabledUnchecked} disabled />
             <Checkbox variant={variant} label={c.disabledChecked} disabled defaultChecked />
+            <Checkbox variant={variant} label={c.disabledIndeterminate} disabled indeterminate />
           </div>
         ))}
       </div>
@@ -209,42 +212,48 @@ export const SelectAll: Story = {
 }
 
 const STATES = [
-  { key: "unchecked", checked: false, indeterminate: false, disabled: false },
-  { key: "checked", checked: true, indeterminate: false, disabled: false },
-  { key: "indeterminate", checked: false, indeterminate: true, disabled: false },
-  { key: "disabled unchecked", checked: false, indeterminate: false, disabled: true },
-  { key: "disabled checked", checked: true, indeterminate: false, disabled: true },
+  { key: "unchecked", checked: false, indeterminate: false },
+  { key: "checked", checked: true, indeterminate: false },
+  { key: "indeterminate", checked: false, indeterminate: true },
 ] as const
-const INTERACTIONS = ["default", "focus"] as const
+const INTERACTIONS = ["enabled", "hover", "focus", "disabled"] as const
 
 const cellId = (variant: string, size: string, state: string, interaction: string) =>
-  `cb-${variant}-${size}-${state.replace(" ", "-")}-${interaction}`
+  `cb-${variant}-${size}-${state}-${interaction}`
 
-/** `focusVisible` goes on the `<input>`: the focus ring reads it through `peer`. */
-const focusTargets = VARIANTS.flatMap((v) =>
-  SIZES.flatMap((s) =>
-    STATES.filter((st) => !st.disabled).map((st) => `#${cellId(v, s, st.key, "focus")} input`)
+const capitalise = (s: string) => s[0]!.toUpperCase() + s.slice(1)
+
+/**
+ * The addon applies the state to whatever these select, so each points at the
+ * element the CSS actually keys off: `hover` at the `<label>` (the named
+ * `group/checkbox`), and `focusVisible` at the `<input>`, which the rings read
+ * through `peer`.
+ */
+const targets = (interaction: string, element: string) =>
+  VARIANTS.flatMap((v) =>
+    SIZES.flatMap((s) => STATES.map((st) => `#${cellId(v, s, st.key, interaction)} ${element}`))
   )
-)
+const hoverTargets = targets("hover", "label")
+const focusTargets = targets("focus", "input")
 
 /**
  * Every variant in the Figma set, for the direction on the toolbar.
  *
- * Figma's axes are Direction × Type × State × Interaction × Size: 60 variants.
- * Each section here is one Type, with Size down the side and State across the
- * top — Unchecked, Checked, Indeterminate, then Interaction = Disabled with
- * and without a tick. That is 30 cells, every LTR variant; flip the Direction
- * toolbar for the other 30.
+ * Figma's axes are Type × Direction × State × Size × Interaction: 144 variants.
+ * Each section here is one Type, with Size × State down the side and
+ * Interaction — Enabled / Hover / Focus / Disabled — across the top. That is
+ * 72 cells, every variant for one direction; flip the Direction toolbar for
+ * the other 72.
  *
- * Figma has no focus variant. The extra Focus row per size shows the code's
- * ring: `storybook-addon-pseudo-states` applies the real `:focus-visible` to
- * each cell's input, so the grid cannot drift from the component. Axis names
- * stay English in both directions — they are Figma property identifiers.
+ * `storybook-addon-pseudo-states` applies the real `:hover` and
+ * `:focus-visible` rather than an imitation built from utility classes, so the
+ * grid cannot drift from the component. Axis and value names stay English in
+ * both directions — they are Figma property identifiers.
  */
 export const AllStates: Story = {
   parameters: {
     layout: "padded",
-    pseudo: { focusVisible: focusTargets },
+    pseudo: { hover: hoverTargets, focusVisible: focusTargets },
   },
   render: (_args, ctx) => {
     const c = copy(ctx)
@@ -253,39 +262,35 @@ export const AllStates: Story = {
         {VARIANTS.map((variant) => (
           <div key={variant} className="space-y-3">
             <h3 dir="ltr" className="font-sans text-sm font-medium text-foreground">
-              Type = {variant}
+              Type = {capitalise(variant)}
             </h3>
-            <div className="grid grid-cols-[6rem_repeat(5,max-content)] items-center gap-x-6 gap-y-3">
+            <div className="grid grid-cols-[9rem_repeat(4,max-content)] items-center gap-x-6 gap-y-3">
               <span />
-              {STATES.map((st) => (
-                <Head key={st.key}>{st.key[0]!.toUpperCase() + st.key.slice(1)}</Head>
+              {INTERACTIONS.map((interaction) => (
+                <Head key={interaction}>{capitalise(interaction)}</Head>
               ))}
               {SIZES.flatMap((size) =>
-                INTERACTIONS.map((interaction) => (
-                  <React.Fragment key={`${size}-${interaction}`}>
+                STATES.map((st) => (
+                  <React.Fragment key={`${size}-${st.key}`}>
                     <Head>
-                      {size} · {interaction}
+                      {size} · {capitalise(st.key)}
                     </Head>
-                    {STATES.map((st) =>
-                      interaction === "focus" && st.disabled ? (
-                        <span key={st.key} />
-                      ) : (
-                        <div
-                          key={st.key}
-                          id={cellId(variant, size, st.key, interaction)}
-                          className="flex min-h-9 items-center"
-                        >
-                          <Checkbox
-                            variant={variant}
-                            size={size}
-                            label={c.backup}
-                            defaultChecked={st.checked}
-                            indeterminate={st.indeterminate}
-                            disabled={st.disabled}
-                          />
-                        </div>
-                      )
-                    )}
+                    {INTERACTIONS.map((interaction) => (
+                      <div
+                        key={interaction}
+                        id={cellId(variant, size, st.key, interaction)}
+                        className="flex min-h-9 items-center"
+                      >
+                        <Checkbox
+                          variant={variant}
+                          size={size}
+                          label={c.backup}
+                          defaultChecked={st.checked}
+                          indeterminate={st.indeterminate}
+                          disabled={interaction === "disabled"}
+                        />
+                      </div>
+                    ))}
                   </React.Fragment>
                 ))
               )}

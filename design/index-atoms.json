@@ -3,7 +3,7 @@
     "source": "Figma · Fasla · yGEQmCZOvs7KptsYUdB0Xg",
     "fileKey": "yGEQmCZOvs7KptsYUdB0Xg",
     "target": "atoms",
-    "measured": "2026-10-05",
+    "measured": "2026-10-12",
     "generatedBy": ".agents/skills/figma-index (read-only use_figma page walk) → design/scripts/build-index.mjs",
     "selectionRule": {
       "inScope": "page name contains 🟢 AND page name ends with ✅",
@@ -37,19 +37,19 @@
     },
     "counts": {
       "pagesInScope": 43,
-      "entries": 155,
-      "primary": 41,
-      "componentSets": 154,
+      "entries": 157,
+      "primary": 42,
+      "componentSets": 156,
       "looseComponents": 1,
-      "variants": 4200,
-      "primaryWithEnDoc": 39,
-      "primaryWithArDoc": 36,
-      "withEnDoc": 39,
-      "withArDoc": 36,
-      "withRtl": 146,
+      "variants": 4292,
+      "primaryWithEnDoc": 40,
+      "primaryWithArDoc": 38,
+      "withEnDoc": 40,
+      "withArDoc": 38,
+      "withRtl": 147,
       "withDescription": 1,
       "mappedToCode": 16,
-      "docFrames": 94
+      "docFrames": 97
     },
     "legend": {
       "confirmed": "partial",
@@ -133,6 +133,20 @@
       "orphanDocs": []
     },
     {
+      "id": "3830:5150",
+      "name": "✦  🟢 Y | Checkboxes ✅",
+      "display": "Checkboxes",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3830-5150",
+      "entryIds": [
+        "3830:2149"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
       "id": "3862:3097",
       "name": "✦  🟢 Y | Switch ✅ ✅",
       "display": "Switch",
@@ -204,6 +218,20 @@
       ]
     },
     {
+      "id": "14860:69258",
+      "name": "✦  🟢 Y |  Skeleton ✅ ✅",
+      "display": "Skeleton",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14860-69258",
+      "entryIds": [
+        "15120:8056"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
       "id": "3822:55767",
       "name": "✦  🟢 Y | Tooltip ✅",
       "display": "Tooltip",
@@ -213,20 +241,6 @@
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3822-55767",
       "entryIds": [
         "15139:15897"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "3791:57238",
-      "name": "✦  🟢 Y | Alert ✅",
-      "display": "Alert",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3791-57238",
-      "entryIds": [
-        "15226:58727"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -311,20 +325,6 @@
       ]
     },
     {
-      "id": "14860:69258",
-      "name": "✦  🟢 Y |  Skeleton ✅",
-      "display": "Skeleton",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14860-69258",
-      "entryIds": [
-        "15120:8056"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
       "id": "14860:68939",
       "name": "✦  🟢 Y | Separator ✅",
       "display": "Separator",
@@ -339,20 +339,6 @@
       "orphanDocs": []
     },
     {
-      "id": "3830:5150",
-      "name": "✦  🟢 Y | Checkboxes ✅",
-      "display": "Checkboxes",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3830-5150",
-      "entryIds": [
-        "3830:2149"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
       "id": "4108:1605",
       "name": "✦  🟢 Y | Navbar ✅",
       "display": "Navbar",
@@ -362,6 +348,22 @@
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4108-1605",
       "entryIds": [
         "4103:4910"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "3762:15186",
+      "name": "✦  🟢 Y | Carousel ✅ ✅",
+      "display": "Carousel",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3762-15186",
+      "entryIds": [
+        "15769:74332",
+        "40600:96137",
+        "40600:96155"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -1129,6 +1131,74 @@
         "no-description"
       ]
     },
+    "3830:2149": {
+      "name": "Check Box",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3830:5150",
+        "name": "✦  🟢 Y | Checkboxes ✅",
+        "display": "Checkboxes",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3830-2149",
+      "variants": 144,
+      "axes": {
+        "Type": [
+          "Default",
+          "Layout"
+        ],
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "State": [
+          "Unchecked",
+          "Checked",
+          "Indeterminate"
+        ],
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Interaction": [
+          "Disabled",
+          "Enabled",
+          "Hover",
+          "Focus"
+        ]
+      },
+      "axisNames": [
+        "Type",
+        "Direction",
+        "State",
+        "Size",
+        "Interaction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "45933:242169",
+          "name": "Check Box — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=45933-242169"
+        },
+        "ar": {
+          "id": "45933:242591",
+          "name": "Check Box — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=45933-242591"
+        },
+        "duplicates": []
+      },
+      "code": "checkbox",
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
     "3853:15460": {
       "name": "Switch",
       "node": "COMPONENT_SET",
@@ -1145,13 +1215,13 @@
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3853-15460",
       "variants": 144,
       "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
         "Type": [
           "Control First",
           "Label First"
+        ],
+        "Direction": [
+          "LTR",
+          "RTL"
         ],
         "Interaction": [
           "Default",
@@ -1173,8 +1243,8 @@
         ]
       },
       "axisNames": [
-        "Direction",
         "Type",
+        "Direction",
         "Interaction",
         "Sizes",
         "State",
@@ -1570,6 +1640,57 @@
         "no-description"
       ]
     },
+    "15120:8056": {
+      "name": "Skeleton",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "14860:69258",
+        "name": "✦  🟢 Y |  Skeleton ✅ ✅",
+        "display": "Skeleton",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15120-8056",
+      "variants": 4,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "Both",
+          "RTL"
+        ],
+        "Type": [
+          "List item",
+          "Card",
+          "Text"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Type"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "39936:21859",
+          "name": "Skeleton — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39936-21859"
+        },
+        "ar": {
+          "id": "39936:22094",
+          "name": "Skeleton — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39936-22094"
+        },
+        "duplicates": []
+      },
+      "code": "skeleton",
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
     "15139:15897": {
       "name": "Tooltip",
       "node": "COMPONENT_SET",
@@ -1633,61 +1754,6 @@
       "code": null,
       "hasDescription": false,
       "flags": [
-        "no-description"
-      ]
-    },
-    "15226:58727": {
-      "name": "Alert",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3791:57238",
-        "name": "✦  🟢 Y | Alert ✅",
-        "display": "Alert",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15226-58727",
-      "variants": 30,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Variants": [
-          "Default",
-          "Info",
-          "Success",
-          "Warning",
-          "Destructive"
-        ],
-        "Type": [
-          "Outline",
-          "Solid",
-          "Soft"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Variants",
-        "Type"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "39733:2101",
-          "name": "Alert — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39733-2101"
-        },
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-ar-doc",
         "no-description"
       ]
     },
@@ -1884,7 +1950,7 @@
         "initials": "Y"
       },
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=408-8904",
-      "variants": 78,
+      "variants": 90,
       "axes": {
         "Direction": [
           "LTR",
@@ -1991,57 +2057,6 @@
         "no-description"
       ]
     },
-    "15120:8056": {
-      "name": "Skeleton",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "14860:69258",
-        "name": "✦  🟢 Y |  Skeleton ✅",
-        "display": "Skeleton",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15120-8056",
-      "variants": 4,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "Both",
-          "RTL"
-        ],
-        "State": [
-          "Default",
-          "card",
-          "text"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "State"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "39936:21859",
-          "name": "Skeleton — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39936-21859"
-        },
-        "ar": {
-          "id": "39936:22094",
-          "name": "Skeleton — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39936-22094"
-        },
-        "duplicates": []
-      },
-      "code": "skeleton",
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
     "14860:69243": {
       "name": "Separator",
       "node": "COMPONENT",
@@ -2077,72 +2092,6 @@
       "hasDescription": false,
       "flags": [
         "no-direction-axis",
-        "no-description"
-      ]
-    },
-    "3830:2149": {
-      "name": "Check Box",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3830:5150",
-        "name": "✦  🟢 Y | Checkboxes ✅",
-        "display": "Checkboxes",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3830-2149",
-      "variants": 60,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Type": [
-          "Default",
-          "Layout"
-        ],
-        "State": [
-          "Unchecked",
-          "Checked",
-          "Indeterminate"
-        ],
-        "Interaction": [
-          "Default",
-          "Disabled"
-        ],
-        "Size": [
-          "sm",
-          "md",
-          "lg"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Type",
-        "State",
-        "Interaction",
-        "Size"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "39777:114",
-          "name": "Check Box — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39777-114"
-        },
-        "ar": {
-          "id": "39915:273",
-          "name": "Check Box — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39915-273"
-        },
-        "duplicates": []
-      },
-      "code": "checkbox",
-      "hasDescription": false,
-      "flags": [
         "no-description"
       ]
     },
@@ -2205,6 +2154,150 @@
         "duplicates": []
       },
       "code": "navbar",
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "15769:74332": {
+      "name": "Content Carousel",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3762:15186",
+        "name": "✦  🟢 Y | Carousel ✅ ✅",
+        "display": "Carousel",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15769-74332",
+      "variants": 6,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Type": [
+          "Single box",
+          "Two boxes",
+          "Three boxes"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Type"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "38948:6088",
+          "name": "Content Carousel — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38948-6088"
+        },
+        "ar": {
+          "id": "39802:6765",
+          "name": "Content Carousel — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39802-6765"
+        },
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "40600:96137": {
+      "name": "Carousel Item",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "3762:15186",
+        "name": "✦  🟢 Y | Carousel ✅ ✅",
+        "display": "Carousel",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40600-96137",
+      "variants": 2,
+      "axes": {
+        "Active": [
+          "False",
+          "True"
+        ]
+      },
+      "axisNames": [
+        "Active"
+      ],
+      "rtl": false,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-direction-axis",
+        "no-description"
+      ]
+    },
+    "40600:96155": {
+      "name": "Carousel",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3762:15186",
+        "name": "✦  🟢 Y | Carousel ✅ ✅",
+        "display": "Carousel",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40600-96155",
+      "variants": 18,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "No. of items": [
+          "2",
+          "3",
+          "4"
+        ],
+        "Active Item": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "No. of items",
+        "Active Item"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "40602:350",
+          "name": "Carousel — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40602-350"
+        },
+        "ar": {
+          "id": "40605:483",
+          "name": "Carousel — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40605-483"
+        },
+        "duplicates": []
+      },
+      "code": null,
       "hasDescription": false,
       "flags": [
         "no-description"
