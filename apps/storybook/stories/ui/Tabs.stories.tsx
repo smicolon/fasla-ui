@@ -21,6 +21,9 @@ const meta: Meta<typeof TabsList> = {
   argTypes: {
     variant: { control: "inline-radio", options: ["lifted", "boxed", "bordered"] },
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
+    // Base UI's own escape hatches, not Tabs props a reader needs here.
+    style: { table: { disable: true } },
+    render: { table: { disable: true } },
   },
   args: { variant: "boxed", size: "md" },
 }
@@ -78,8 +81,8 @@ const SIZES = ["sm", "md", "lg"] as const
 const TABS = ["account", "password", "billing", "settings"] as const
 const ICONS = { account: User, password: KeyRound, billing: CreditCard, settings: Settings }
 
-const Head = ({ children }: { children: React.ReactNode }) => (
-  <span dir="ltr" className="w-fit font-sans text-xs text-muted-foreground">
+const Head = ({ children, className }: { children: React.ReactNode; className?: string }) => (
+  <span dir="ltr" className={["w-fit font-sans text-xs text-muted-foreground", className].join(" ")}>
     {children}
   </span>
 )
@@ -89,11 +92,17 @@ const Group = ({
   c,
   icons = false,
   disabled,
+  tabs = TABS,
   ...listProps
-}: Partial<TabsListProps> & { c: Copy; icons?: boolean; disabled?: string }) => (
+}: Partial<TabsListProps> & {
+  c: Copy
+  icons?: boolean
+  disabled?: string
+  tabs?: readonly (typeof TABS)[number][]
+}) => (
   <Tabs defaultValue="account">
     <TabsList aria-label={c.tabs.settings} {...listProps}>
-      {TABS.map((tab) => {
+      {tabs.map((tab) => {
         const Icon = ICONS[tab]
         return (
           <TabsTrigger key={tab} value={tab} disabled={tab === disabled}>
@@ -103,7 +112,7 @@ const Group = ({
         )
       })}
     </TabsList>
-    {TABS.map((tab) => (
+    {tabs.map((tab) => (
       <TabsContent key={tab} value={tab} className="text-sm text-muted-foreground">
         {c.panels[tab]}
       </TabsContent>
@@ -157,17 +166,22 @@ export const Styles: Story = {
   },
 }
 
-/** sm, md and lg: 28, 30 and 32px tall, with 16, 16 and 20px icons. */
+/**
+ * sm, md and lg: 28, 30 and 32px tall, with 16, 16 and 20px icons. Three tabs
+ * per group; each style is a column as wide as its widest group, and the
+ * columns wrap rather than overlap when the canvas is narrow.
+ */
 export const Sizes: Story = {
+  parameters: { layout: "padded" },
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className="grid gap-x-12 gap-y-6 lg:grid-cols-3">
+      <div className="flex flex-wrap justify-center gap-x-16 gap-y-10">
         {VARIANTS.map((variant) => (
-          <div key={variant} className="flex flex-col gap-4">
+          <div key={variant} className="flex w-max flex-col gap-6">
             <Head>{variant}</Head>
             {SIZES.map((size) => (
-              <Group key={size} c={c} variant={variant} size={size} />
+              <Group key={size} c={c} variant={variant} size={size} tabs={TABS.slice(0, 3)} />
             ))}
           </div>
         ))}
@@ -262,7 +276,7 @@ export const ManyTabs: Story = {
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className="flex flex-col gap-6">
+      <div className="mx-auto flex w-max flex-col gap-6">
         {VARIANTS.map((variant) => (
           <Tabs key={variant} defaultValue="0">
             <TabsList variant={variant} size="sm" aria-label={c.many[0]}>
@@ -318,19 +332,21 @@ export const AllStates: Story = {
             <h3 dir="ltr" className="font-sans text-sm font-medium text-foreground">
               Style = {variant}
             </h3>
-            <div className="grid grid-cols-[3rem_repeat(5,7rem)] items-center gap-x-6 gap-y-4">
+            {/* Every header and cell is centred in its column, so each State
+                reads as one vertical line. */}
+            <div className="grid grid-cols-[3rem_repeat(5,7rem)] items-center justify-items-center gap-x-6 gap-y-4">
               <span />
               {STATES.map((state) => (
                 <Head key={state}>{state[0]!.toUpperCase() + state.slice(1)}</Head>
               ))}
               {SIZES.map((size) => (
                 <React.Fragment key={size}>
-                  <Head>{size}</Head>
+                  <Head className="justify-self-start">{size}</Head>
                   {STATES.map((state) => {
                     const isActive = state === "active" || state === "focus"
                     return (
-                      <div key={state} id={cellId(variant, size, state)} className="ps-3">
-                        <Tabs value={isActive ? "tab" : "other"}>
+                      <div key={state} id={cellId(variant, size, state)}>
+                        <Tabs value={isActive ? "tab" : "other"} className="w-auto">
                           <TabsList variant={variant} size={size} aria-label={c.tabs.account}>
                             <TabsTrigger value="tab" disabled={state === "disabled"}>
                               {c.tabs.account}
