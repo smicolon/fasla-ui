@@ -187,7 +187,7 @@ Identity V2.5, ICU plurals, and what does and does not mirror in RTL.
 
 - Open an issue for bugs or feature requests
 - Join discussions in existing issues
-- Check the documentation at [ui.smicolon.com](https://ui.smicolon.com)
+- Check the documentation at [fasla.smicolon.com](https://fasla.smicolon.com)
 
 ## Code of Conduct
 

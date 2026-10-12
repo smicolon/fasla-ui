@@ -29,7 +29,7 @@ import { TypeSpecimen } from "./_components/type-specimen"
 import { XrayStage } from "./_components/xray-stage"
 
 /**
- * The ui.smicolon.com home page: the Fasla landing page, in English and Arabic.
+ * The fasla.smicolon.com home page: the Fasla landing page, in English and Arabic.
  *
  * Built from the approved reference (fasla-landing-final, 6 Oct 2026) and its
  * handoff. The page is the demo: the hero's direction switch flips the whole

@@ -2,7 +2,14 @@
  * Registry module for fetching components from the fasla-ui registry
  */
 
-export const DEFAULT_REGISTRY_URL = "https://ui.smicolon.com/r"
+export const DEFAULT_REGISTRY_URL = "https://fasla.smicolon.com/r"
+
+/**
+ * Where the registry was served before fasla.smicolon.com. It still serves
+ * /r/* with no redirect, and the registry's dependencies between items point
+ * there (see docs/DOMAINS.md), so `add` still treats URLs under it as ours.
+ */
+export const LEGACY_REGISTRY_URL = "https://ui.smicolon.com/r"
 
 /**
  * Point the CLI at another registry — a local build, or a staging deploy —

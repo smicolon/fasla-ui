@@ -242,7 +242,7 @@
       "manualDeps": "1. ثبّت الاعتماديات (dependency):",
       "manualTailwind3": "في Tailwind 3، ثبّت <code>tailwind-merge@^2</code> بدلًا منها. يدعم الإصدار 3 من tailwind-merge إطار Tailwind 4 وحده، ويحذف في Tailwind 3 الأصناف (classes) التي لا يعرفها، مثل <code>outline</code>:",
       "manualCn": "2. أضف الدالة المساعدة <code>cn</code> إلى مشروعك:",
-      "manualCopy": "3. انسخ كل مكوّن من ملفه في السجل (registry)، مثل <code>https://ui.smicolon.com/r/button.json</code> للمكوّن Button. يسرد الملف <code>https://ui.smicolon.com/r/registry.json</code> المكوّنات كلها.",
+      "manualCopy": "3. انسخ كل مكوّن من ملفه في السجل (registry)، مثل <code>https://fasla.smicolon.com/r/button.json</code> للمكوّن Button. يسرد الملف <code>https://fasla.smicolon.com/r/registry.json</code> المكوّنات كلها.",
       "manualCopyDetail": "في كل ملف، يحمل <code>files</code> الشيفرة المصدرية في <code>content</code>، والمسار الذي تحفظها فيه في <code>target</code>. يسرد <code>dependencies</code> الحزم التي تثبّتها، ويسرد <code>registryDependencies</code> مكوّنات فاصلة الأخرى التي يحتاجها المكوّن، فتنسخها بالطريقة نفسها."
     },
     "propsTable": {

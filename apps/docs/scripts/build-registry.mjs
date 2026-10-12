@@ -17,19 +17,27 @@ const Fasla_UI_DIR = path.join(ROOT_DIR, "packages/fasla-ui")
 const OUTPUT_DIR = path.join(__dirname, "../public/r")
 
 /**
- * Where the registry is served. Every item's dependencies on other Fasla items
- * are written as full URLs under it. CI builds against a local server by
- * setting FASLA_REGISTRY_URL, so it tests the items in the PR, not the ones
- * already deployed.
+ * Where every item's dependencies on other Fasla items point, as full URLs.
+ * It stays ui.smicolon.com although the site moved to fasla.smicolon.com:
+ * published CLIs only follow a dependency under ui.smicolon.com/r, and skip
+ * one anywhere else. ui.smicolon.com keeps serving /r/* with no redirect. See
+ * docs/DOMAINS.md before changing it.
  */
-export const REGISTRY_URL = (process.env.FASLA_REGISTRY_URL || "https://ui.smicolon.com/r").replace(/\/+$/, "")
+export const DEPENDENCY_REGISTRY_URL = "https://ui.smicolon.com/r"
+
+/**
+ * The base the build writes dependencies under. CI builds against a local
+ * server by setting FASLA_REGISTRY_URL, so it tests the items in the PR, not
+ * the ones already deployed.
+ */
+export const REGISTRY_URL = (process.env.FASLA_REGISTRY_URL || DEPENDENCY_REGISTRY_URL).replace(/\/+$/, "")
 
 /**
  * The first line of every component file. @smicolon/cli's `add` reads it to
  * tell a Fasla file from another library's file of the same name, which it
  * asks before replacing. A comment may come before "use client".
  */
-export const fileMarker = (name) => `// From Fasla UI (@fasla/${name}): https://ui.smicolon.com`
+export const fileMarker = (name) => `// From Fasla UI (@fasla/${name}): https://fasla.smicolon.com`
 
 /**
  * A dependency on another Fasla item, as a full URL. The shadcn CLI resolves a

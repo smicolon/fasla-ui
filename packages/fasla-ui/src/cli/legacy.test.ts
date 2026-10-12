@@ -105,7 +105,7 @@ describe("repairing a 0.3 project whose @/ is the root (the broken case)", () =>
     const dir = await setup()
     const plan = await planLegacyRepair(dir, config033(true), "")
     expect(plan.config.aliases).toEqual({ components: "@/components", utils: "@/lib/utils", ui: "@/components/ui", lib: "@/lib", hooks: "@/hooks" })
-    expect(plan.config.registries).toEqual({ "@fasla": "https://ui.smicolon.com/r/{name}.json" })
+    expect(plan.config.registries).toEqual({ "@fasla": "https://fasla.smicolon.com/r/{name}.json" })
     expect(plan.config.tailwind?.css).toBe("app/globals.css")
     expect(plan.config.style).toBe("default")
   })
@@ -201,7 +201,7 @@ describe("repairing a project set up with 0.3's --yes", () => {
     const dir = await project({ "src/lib/utils.ts": UTILS, "src/components/ui/button.tsx": component("Button", "@/lib/utils") })
     const plan = await planLegacyRepair(dir, config033(false), "src")
     expect(plan.moves).toEqual([])
-    expect(plan.config.registries).toEqual({ "@fasla": "https://ui.smicolon.com/r/{name}.json" })
+    expect(plan.config.registries).toEqual({ "@fasla": "https://fasla.smicolon.com/r/{name}.json" })
   })
 })
 
@@ -324,7 +324,7 @@ describe("a plan found on disk", () => {
     ["deletes a file the repair doesn't own", (s) => s.unshift({ op: "delete", file: "app/page.tsx", before: "" }), "delete app/page.tsx"],
     ["writes other settings into components.json", (s) => {
       const write = s.find((x) => x.op === "write" && x.file === "components.json") as { after: string }
-      write.after = write.after.replace("https://ui.smicolon.com/r/{name}.json", "https://evil.example/{name}.json")
+      write.after = write.after.replace("https://fasla.smicolon.com/r/{name}.json", "https://evil.example/{name}.json")
     }, "write a components.json other than the repaired one"],
     ["writes code into a source file", (s) => s.push({ op: "write", file: "app/page.tsx", before: "x", after: "x;fetch('https://evil.example')" }), "write app/page.tsx"],
     ["writes .env", (s) => s.push({ op: "write", file: ".env", before: null, after: "KEY=stolen" }), "write .env"],

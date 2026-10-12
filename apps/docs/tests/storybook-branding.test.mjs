@@ -4,7 +4,7 @@ import path from "node:path"
 
 const storybookRoot = path.resolve(import.meta.dir, "../../storybook")
 const title = "Fasla Component Explorer | Smicolon"
-const canonical = "https://ui.smicolon.com/components/"
+const canonical = "https://fasla.smicolon.com/components/"
 
 describe("Storybook product identity", () => {
   test("brands the manager and canonical landing head", async () => {
