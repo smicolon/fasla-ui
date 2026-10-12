@@ -152,11 +152,17 @@ const tabsListVariants = cva("relative inline-flex items-center", {
  *    of it — `background`, 1px `border` on three sides, Figma's raw 10px top
  *    radius, and the two flared corners each tab carries, shown only while
  *    it is active. Every tab keeps transparent side borders so switching
- *    never changes a tab's width. The baseline is an `::after` line that
- *    runs under those side borders: a `border-bottom` would meet them in a
- *    mitred corner and leave a notch at every tab edge. Hover is a `muted`
- *    fill and tints the baseline `primary/20` (Figma
- *    `opacity/primary-light`). Bordered hovers `muted` too.
+ *    never changes a tab's width. The baseline is the bottom border of an
+ *    `::after` box that spans the tab's border box, under those side
+ *    borders: the tab's own `border-bottom` would meet them in a mitred
+ *    corner and leave a notch at every tab edge. The tabs either side of
+ *    the active one round the corner they share with it, by `--radius-md`
+ *    (8px, Figma `border radius/md`), on the tab and on its `::after`: the
+ *    hover fill follows the curve, and the baseline's curve falls inside
+ *    the flare's 1px band, so the line runs up into the flare with no
+ *    corner. Logical corners (`ee`, `es`) mirror it in RTL. Hover is a `muted` fill and
+ *    tints the baseline `primary/20` (Figma `opacity/primary-light`).
+ *    Bordered hovers `muted` too.
  */
 const tabsTriggerVariants = cva(
   [
@@ -182,8 +188,12 @@ const tabsTriggerVariants = cva(
         ],
         lifted: [
           "rounded-t-[var(--radius-sm)] border-x border-transparent",
-          "after:pointer-events-none after:absolute after:-inset-x-px after:bottom-0 after:h-px after:bg-border",
-          "hover:bg-muted hover:after:bg-primary/20",
+          "after:pointer-events-none after:absolute after:-inset-x-px after:inset-y-0 after:border-b after:border-border",
+          // The tabs either side of the active one round the corner they share
+          // with it, and their baseline curves up into its flare.
+          "[&:has(+[data-active])]:rounded-ee-[var(--radius-md)] [&:has(+[data-active])]:after:rounded-ee-[var(--radius-md)]",
+          "[[data-active]+&]:rounded-es-[var(--radius-md)] [[data-active]+&]:after:rounded-es-[var(--radius-md)]",
+          "hover:bg-muted hover:after:border-primary/20",
           "data-[active]:rounded-t-[10px] data-[active]:border-t data-[active]:border-border data-[active]:bg-background data-[active]:text-primary data-[active]:after:hidden",
         ],
       },
@@ -259,7 +269,9 @@ TabsList.displayName = "TabsList"
  *
  * Offset 9px from the padding edge, so the curve's top lands on the tab's
  * 1px side border and the `background` fill paints out the border below it:
- * the side border flows into the flare as one line.
+ * the side border flows into the flare as one line. `z-[1]` keeps both
+ * corners above the next tab, which paints later and would otherwise cover
+ * the corner on its side with its hover fill.
  */
 function LiftedCorner({ side }: { side: "left" | "right" }) {
   return (
@@ -268,7 +280,7 @@ function LiftedCorner({ side }: { side: "left" | "right" }) {
       data-slot="corner"
       viewBox="0 0 9 9"
       className={cn(
-        "pointer-events-none absolute bottom-0 hidden size-[9px] group-data-[active]/tab:block",
+        "pointer-events-none absolute bottom-0 z-[1] hidden size-[9px] group-data-[active]/tab:block",
         side === "left" ? "-left-[9px]" : "-right-[9px] -scale-x-100"
       )}
     >

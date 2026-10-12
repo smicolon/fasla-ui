@@ -294,21 +294,29 @@ describe("Tabs", () => {
       // Transparent sides, so the active tab's side borders change no width.
       "border-x",
       "border-transparent",
-      // The baseline: a 1px line that runs under those side borders too, so
-      // neighbouring tabs' lines meet with no notch between them.
+      // The baseline: the bottom border of an ::after box spanning the tab's
+      // border box, under its side borders, so neighbouring tabs' lines meet
+      // with no notch between them.
       "after:absolute",
       "after:-inset-x-px",
-      "after:bottom-0",
-      "after:h-px",
-      "after:bg-border",
-      "hover:after:bg-primary/20",
+      "after:inset-y-0",
+      "after:border-b",
+      "after:border-border",
+      "hover:after:border-primary/20",
+      // Beside the active tab, the shared bottom corner rounds by 8px on the
+      // tab and its ::after, so the baseline's curve lies inside the flare's.
+      // Logical corners, so RTL mirrors it.
+      "[&:has(+[data-active])]:rounded-ee-[var(--radius-md)]",
+      "[&:has(+[data-active])]:after:rounded-ee-[var(--radius-md)]",
+      "[[data-active]+&]:rounded-es-[var(--radius-md)]",
+      "[[data-active]+&]:after:rounded-es-[var(--radius-md)]",
       "data-[active]:rounded-t-[10px]",
       "data-[active]:border-t",
       "data-[active]:after:hidden",
       "data-[active]:text-primary"
     )
-    // No bottom border and no bottom radius anywhere in Lifted.
-    expect(tab("one").className).not.toMatch(/(^|\s)(rounded-\[|rounded-b-|border-b)/)
+    // No bottom border on the tab, and no unconditional bottom radius.
+    expect(tab("one").className).not.toMatch(/(^|\s)(rounded-\[|rounded-b-|rounded-e[se]-|rounded-s[se]-|border-b)/)
     const corners = (t: HTMLElement) => Array.from(t.querySelectorAll("[data-slot=corner]"))
     // Every Lifted tab carries both corners; they show only on the active
     // one, keyed off the tab's own `data-active` through its named group.
@@ -322,12 +330,22 @@ describe("Tabs", () => {
 
     const [left, right] = corners(tab("two")) as [Element, Element]
     expect(left).toHaveAttribute("aria-hidden", "true")
-    expect(left).toHaveClass("absolute", "bottom-0", "size-[9px]", "-left-[9px]")
+    // Above the next tab, which paints later and would cover it on hover.
+    expect(left).toHaveClass("absolute", "bottom-0", "z-[1]", "size-[9px]", "-left-[9px]")
     expect(right).toHaveClass("-right-[9px]", "-scale-x-100")
     // The icon sizing must not reach the corners.
     expect(tab("two").className).toMatch(/\[&_svg:not\(\[data-slot=corner\]\)\]:size-4/)
     expect(left.querySelector(".fill-background")).not.toBeNull()
     expect(left.querySelector(".fill-border")).not.toBeNull()
+  })
+
+  it("renders tabs as adjacent siblings, which the Lifted corner rules rely on", () => {
+    // `:has(+[data-active])` and `[data-active]+` find the tabs either side
+    // of the active one; anything rendered between them would break that.
+    render(<Example defaultValue="two" listProps={{ variant: "lifted" }} />)
+    expect(tab("one").nextElementSibling).toBe(tab("two"))
+    expect(tab("two").nextElementSibling).toBe(tab("three"))
+    expect(tab("two")).toHaveAttribute("data-active")
   })
 
   it("keeps a corner's name out of the tab's accessible name", () => {

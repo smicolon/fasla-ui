@@ -402,3 +402,60 @@ export const LightAndDark: Story = {
     )
   },
 }
+
+/** Where the active Lifted tab sits, and what its neighbours are doing. */
+const LIFTED_ROWS = [
+  { label: "Active first", value: "account" },
+  { label: "Active in the middle", value: "password" },
+  { label: "Active last", value: "settings" },
+  { label: "Disabled before, hover after", value: "billing", disabled: "password", hover: "settings" },
+] as const
+
+/**
+ * How Lifted joins the active tab to the baseline. The tabs either side of
+ * the active one round the corner they share with it, so the baseline curves
+ * up into the active tab's flare; when the active tab is first or last, only
+ * the side with a neighbour changes. The last row shows the join holding with
+ * a disabled neighbour before it and a hovered one after. Light and Dark side
+ * by side; language and direction follow the Direction toolbar.
+ */
+export const Lifted: Story = {
+  parameters: {
+    layout: "padded",
+    pseudo: { hover: ["[data-story-hover] [role=tab][data-value-hover]"] },
+  },
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <div className="grid gap-4 lg:grid-cols-2">
+        {THEMES.map((theme) => (
+          <div
+            key={theme}
+            className={["space-y-6 rounded-lg border bg-background p-6 text-foreground", theme].join(" ")}
+          >
+            <Head>{theme === "dark" ? "Dark" : "Light"}</Head>
+            {LIFTED_ROWS.map((row) => (
+              <div key={row.label} className="flex flex-col gap-2" data-story-hover="">
+                <Head>{row.label}</Head>
+                <Tabs defaultValue={row.value}>
+                  <TabsList variant="lifted" aria-label={c.tabs.settings}>
+                    {TABS.map((tab) => (
+                      <TabsTrigger
+                        key={tab}
+                        value={tab}
+                        disabled={"disabled" in row && tab === row.disabled}
+                        data-value-hover={"hover" in row && tab === row.hover ? "" : undefined}
+                      >
+                        {c.tabs[tab]}
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
+                </Tabs>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    )
+  },
+}
