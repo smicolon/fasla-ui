@@ -141,9 +141,10 @@ const Head = ({ children, className }: { children: React.ReactNode; className?: 
 )
 
 /**
- * A side row label. It aligns to the end of its column — next to the fields,
+ * A side row label. It aligns to the end of its column — toward the fields,
  * in either direction — through `text-end` on a cell that takes the story's
- * direction; only the caption inside is held left-to-right.
+ * direction; only the caption inside is held left-to-right. Its space from
+ * the first field is the grid's column gap, the same as between two fields.
  */
 const RowHead = ({ children }: { children: React.ReactNode }) => (
   <span className="whitespace-nowrap text-end font-sans text-xs text-muted-foreground">
@@ -330,7 +331,7 @@ export const AllVariants: Story = {
             <h3 dir="ltr" className="font-sans text-sm font-medium text-foreground">
               Radius = {title(radius)}
             </h3>
-            <div className="grid w-max grid-cols-[max-content_repeat(5,9.5rem)] items-center gap-x-3 gap-y-3">
+            <div className="grid w-max grid-cols-[max-content_repeat(5,9rem)] items-center gap-x-4 gap-y-3">
               <span />
               {STATES.map((state) => (
                 <Head key={state}>{title(state)}</Head>

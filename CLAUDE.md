@@ -160,6 +160,10 @@ light and dark, and on the docs site at desktop and phone width.
   description or counter.
 - Side labels never wrap. Their column is as wide as the longest label, and
   the content beside it moves over (or narrows a little) to make room.
+- Side row labels use `text-align: end` (logical, never left/right), so they
+  sit toward the component: on the right of their column in LTR, the left in
+  RTL. They never touch it: the gap from the label column to the first
+  component column is the same as the gap between component columns.
 - A long single-column stack becomes a 2-column grid wherever it fits.
 - Everything fits its container: the Storybook Docs page gives a story about
   1000px, a docs-site preview about 550px (300px on a phone). Nothing renders

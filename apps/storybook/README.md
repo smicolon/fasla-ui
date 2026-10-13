@@ -104,6 +104,13 @@ how to meet it:
 - **Side labels never wrap.** Give them `whitespace-nowrap` and size their
   column `max-content`, not a fixed rem width; let the columns beside it
   narrow a little if the row would otherwise overflow.
+- **Side row labels align to the end, one column gap from the component.**
+  `text-align: end` on a cell that takes the story's direction (hold only the
+  caption inside `dir="ltr"`), so the label sits toward the component in
+  either direction (`RowHead` in `stories/ui/Input.stories.tsx`). The space
+  between the label and the first component is the grid's column gap, the
+  same as between two component columns: no extra margin, and never a gap so
+  small (12px) that the text reads as touching the component's edge.
 - **Two columns, not one long stack,** wherever the content fits.
 - **Fit the Docs page.** Autodocs renders each story in a container about
   1000px wide that clips anything wider. Check every story there as well as
