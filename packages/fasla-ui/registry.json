@@ -4,6 +4,29 @@
   "homepage": "https://fasla.smicolon.com",
   "items": [
     {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Stacked headings that each show or hide a section of content: default, split, outline and table styles, a chevron or plus-and-minus indicator, one or many items open, mirrored for RTL.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/accordion/accordion.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/accordion.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "data-display"
+      ]
+    },
+    {
       "name": "animated-gradient",
       "type": "registry:ui",
       "title": "Animated Gradient",
