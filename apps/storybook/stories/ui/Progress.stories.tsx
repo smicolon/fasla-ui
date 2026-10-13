@@ -12,6 +12,9 @@ const meta: Meta<typeof Progress> = {
     value: { control: { type: "range", min: 0, max: 100, step: 1 } },
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
     showPercentage: { control: "boolean" },
+    // Base UI's own escape hatches, not Progress props a reader needs here.
+    style: { table: { disable: true } },
+    render: { table: { disable: true } },
   },
   args: {
     value: 50,
@@ -179,6 +182,8 @@ const PANELS = [
 export const Directions: Story = {
   parameters: { layout: "padded" },
   render: () => (
+    // Each panel is a subgrid of the same four rows, so a row is as tall as
+    // its taller Arabic bar on both sides and the bars share a top edge.
     <div className="grid gap-4 md:grid-cols-2">
       {PANELS.map((panel) => (
         <div
@@ -186,7 +191,7 @@ export const Directions: Story = {
           dir={panel.dir}
           lang={panel.lang}
           className={[
-            "flex flex-col gap-4 rounded-lg border p-6",
+            "row-span-4 grid grid-rows-subgrid items-center gap-4 rounded-lg border p-6",
             panel.dir === "rtl" ? "font-arabic" : "font-sans",
           ].join(" ")}
         >
@@ -194,7 +199,6 @@ export const Directions: Story = {
           {SIZES.map((size, i) => (
             <Progress key={size} size={size} value={[25, 50, 75][i]} aria-label={panel.label} />
           ))}
-          <Progress value={40} showPercentage={false} aria-label={panel.label} />
         </div>
       ))}
     </div>
@@ -221,7 +225,6 @@ export const LightAndDark: Story = {
           {SIZES.map((size, i) => (
             <Progress key={size} size={size} value={[0, 50, 100][i]} aria-label={copy(ctx).label} />
           ))}
-          <Progress value={75} showPercentage={false} aria-label={copy(ctx).label} />
         </div>
       ))}
     </div>
@@ -239,7 +242,7 @@ export const Changing: Story = {
     return (
       <div className="flex w-80 flex-col gap-4">
         <Progress value={value} aria-label={c.label} />
-        <div className="flex gap-2">
+        <div className="flex justify-center gap-2">
           <Button size="sm" variant="outline" onClick={() => setValue((v) => Math.max(0, v - 20))}>
             {c.step}
           </Button>
