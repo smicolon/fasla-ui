@@ -9,10 +9,6 @@ import {
   type TabsListProps,
 } from "../../../../packages/fasla-ui/registry/ui/tabs"
 
-/**
- * `variant` and `size` live on `TabsList` — one per group, as Figma's doc
- * asks — so the Controls panel drives the list.
- */
 const meta: Meta<typeof TabsList> = {
   title: "UI/Tabs",
   component: TabsList,
