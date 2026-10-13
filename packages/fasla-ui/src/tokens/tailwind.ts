@@ -2,7 +2,7 @@
  * Tailwind mapping for the Fasla semantic colour tokens.
  *
  * These are the 41 `theme/*` variables of the Figma "☾ Mode" collection, plus
- * the six `opacity/*` Soft tints. Figma
+ * the twelve `opacity/*` Soft tints. Figma
  * is the source of truth; `design/tokens/mode.json` holds the committed
  * snapshot, and both apps declare the same values in their own `globals.css`.
  *
@@ -55,16 +55,23 @@ export const tailwindSemanticColors = {
   warning: { DEFAULT: c("warning"), foreground: c("warning-foreground") },
   info: { DEFAULT: c("info"), foreground: c("info-foreground") },
 
-  // Soft tints — Figma's `opacity/*` variables, already translucent. The Badge
-  // Soft type lays one over `card`, exactly as Figma stacks the two fills, so
-  // the chip reads the same on any surface. Only `primary` changes in Dark.
+  // Soft tints — Figma's `opacity/*` variables, already translucent. Badge and
+  // Button Soft lay one over `card`, exactly as Figma stacks the two fills, so
+  // they read the same on any surface. `primary` and `secondary` change in
+  // Dark. The `-20` and `-30` steps are Soft Button's Hover and Clicked.
   soft: {
     primary: c("soft-primary"),
+    "primary-20": c("soft-primary-20"),
+    "primary-30": c("soft-primary-30"),
     secondary: c("soft-secondary"),
+    "secondary-20": c("soft-secondary-20"),
+    "secondary-30": c("soft-secondary-30"),
     info: c("soft-info"),
     success: c("soft-success"),
     warning: c("soft-warning"),
     destructive: c("soft-destructive"),
+    "destructive-20": c("soft-destructive-20"),
+    "destructive-30": c("soft-destructive-30"),
   },
 
   // Inverse — a fixed contrast band, not a mode-reactive surface.

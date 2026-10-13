@@ -28,7 +28,7 @@ import type { Config } from "tailwindcss"
  * rounding a source-of-truth value. calc() avoids that entirely.
  *
  * `null` means Figma has the rung on AUTO — the font's own metrics, which CSS
- * spells `normal`. No rung is currently on AUTO: all 144 styles are bound, in
+ * spells `normal`. No rung is currently on AUTO: all 148 styles are bound, in
  * both scripts, at every size. The mechanism stays because AUTO is a legitimate
  * choice Figma can express, and a rung may return to it.
  */
@@ -105,7 +105,7 @@ const leadingFor = (index: 0 | 1) =>
   )
 
 /**
- * Figma sets `letterSpacing` to 0% on all 144 text styles, both scripts, every
+ * Figma sets `letterSpacing` to 0% on all 148 text styles, both scripts, every
  * weight — so the ramp declares no tracking and components should set none.
  * Tailwind's stock `tracking-*` scale is left in place for the one sanctioned
  * exception, the letter-spaced eyebrow that design/DESIGN.md documents as
