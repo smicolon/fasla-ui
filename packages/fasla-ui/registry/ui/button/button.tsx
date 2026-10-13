@@ -61,7 +61,12 @@ const styles = cva(
     // Figma's Focus ring: a 2px band in `ring`, from 2px to 4px outside the
     // button, with the gap left clear. Its own layer, so it never competes
     // with Outline's inset ring and draws the same in Tailwind 3 and 4.
-    "outline-none after:pointer-events-none after:absolute after:-inset-1 after:opacity-0 after:ring-2 after:ring-inset after:ring-ring focus-visible:after:opacity-100",
+    "[outline:none] after:pointer-events-none after:absolute after:-inset-1 after:opacity-0 after:ring-2 after:ring-inset after:ring-ring focus-visible:after:opacity-100",
+    // Windows high contrast drops fills and box-shadows, so the ring and every
+    // fill vanish. The system border keeps the button's edge, and a system
+    // outline marks focus. (`[outline:none]`, not `outline-none`: Tailwind 3's
+    // version is a transparent outline that forced colours paints visibly.)
+    "forced-colors:border forced-colors:border-[ButtonText] forced-colors:focus-visible:[outline:2px_solid_Highlight] forced-colors:focus-visible:[outline-offset:2px]",
     // Disabled is the Enabled look at half opacity, in every Type.
     "disabled:pointer-events-none disabled:opacity-50 aria-disabled:pointer-events-none aria-disabled:opacity-50",
     "[&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
@@ -80,7 +85,7 @@ const styles = cva(
         ghost: "",
         // Always underlined, so a link reads as one at rest and on touch
         // screens. Hover and Clicked fade it like Solid.
-        link: "underline hover:opacity-90 active:opacity-80",
+        link: "underline hover:opacity-90 active:opacity-80 forced-colors:border-0",
       },
       tone: {
         primary: "",

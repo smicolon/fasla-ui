@@ -119,6 +119,17 @@ describe("Button", () => {
     )
   })
 
+  it("keeps an edge and a focus mark in forced colours", () => {
+    render(<Button>Save</Button>)
+    expect(button()).toHaveClass(
+      "[outline:none]",
+      "forced-colors:border",
+      "forced-colors:border-[ButtonText]",
+      "forced-colors:focus-visible:[outline:2px_solid_Highlight]"
+    )
+    expect(button()).not.toHaveClass("outline-none")
+  })
+
   it("dims every variant to half opacity when disabled", () => {
     render(
       <Button variant="soft" disabled>
