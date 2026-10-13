@@ -296,6 +296,21 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/progress/",
+    title: "Progress React Component | Fasla",
+    description:
+      "Show task completion with an accessible React progress bar in three sizes, with an optional percentage label, mirrored for RTL.",
+    h1: "Progress",
+    ar: {
+      title: "شريط التقدم (Progress) لتطبيقات React | فاصلة",
+      description:
+        "اعرض نسبة إنجاز المهام بمكوّن شريط التقدم، بثلاثة أحجام مع تسمية اختيارية للنسبة المئوية، ويمتلئ من بداية السطر في الصفحات العربية.",
+      h1: "شريط التقدم (Progress)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/combobox/",
     title: "Combobox React Component | Fasla",
     description:

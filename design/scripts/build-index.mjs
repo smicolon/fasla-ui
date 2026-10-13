@@ -81,6 +81,7 @@ export const CODE_MAP = {
   checkbox: { set: "Check Box", page: "3830:5150" },
   combobox: { set: "Combobox", page: "14852:8647" },
   input: { set: "Default Input", page: "3882:2381" },
+  progress: { set: "Progress", page: "3831:2712" },
   radio: { set: "Radio", page: "3830:60584" },
   select: { set: "Select Input", page: "3884:9073" },
   skeleton: { set: "Skeleton", page: "14860:69258" },

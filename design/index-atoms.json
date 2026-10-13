@@ -3,7 +3,7 @@
     "source": "Figma · Fasla · yGEQmCZOvs7KptsYUdB0Xg",
     "fileKey": "yGEQmCZOvs7KptsYUdB0Xg",
     "target": "atoms",
-    "measured": "2026-10-12",
+    "measured": "2026-10-13",
     "generatedBy": ".agents/skills/figma-index (read-only use_figma page walk) → design/scripts/build-index.mjs",
     "selectionRule": {
       "inScope": "page name contains 🟢 AND page name ends with ✅",
@@ -41,14 +41,14 @@
       "primary": 43,
       "componentSets": 157,
       "looseComponents": 1,
-      "variants": 4328,
+      "variants": 4568,
       "primaryWithEnDoc": 41,
       "primaryWithArDoc": 38,
       "withEnDoc": 41,
       "withArDoc": 38,
       "withRtl": 148,
       "withDescription": 1,
-      "mappedToCode": 17,
+      "mappedToCode": 18,
       "docFrames": 98
     },
     "legend": {
@@ -114,6 +114,53 @@
       "entryIds": [
         "307:333",
         "3615:13506"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "3882:2381",
+      "name": "✦  🟢 Y | Text Input ✅",
+      "display": "Text Input",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3882-2381",
+      "entryIds": [
+        "414:12784"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "3831:2712",
+      "name": "✦  🟢 Y/H | Progress ✅",
+      "display": "Progress",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y/H",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3831-2712",
+      "entryIds": [
+        "3831:2727"
+      ],
+      "legacyDocSections": [
+        {
+          "id": "40465:52431",
+          "name": "Progress Bar Documentation"
+        }
+      ],
+      "orphanDocs": []
+    },
+    {
+      "id": "3822:55767",
+      "name": "✦  🟢 Y | Tooltip ✅ ✅",
+      "display": "Tooltip",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3822-55767",
+      "entryIds": [
+        "15139:15897"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -272,20 +319,6 @@
       "orphanDocs": []
     },
     {
-      "id": "3822:55767",
-      "name": "✦  🟢 Y | Tooltip ✅",
-      "display": "Tooltip",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3822-55767",
-      "entryIds": [
-        "15139:15897"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
       "id": "3760:18379",
       "name": "✦  🟢 Y | Breadcrumbs ✅",
       "display": "Breadcrumbs",
@@ -325,59 +358,71 @@
       ]
     },
     {
-      "id": "3870:24176",
-      "name": "✦  🟢 Y | Rating ✅",
-      "display": "Rating",
+      "id": "3975:63617",
+      "name": "✦  🟢 Y | Textarea ✅",
+      "display": "Textarea",
       "status": "🟢",
       "tail": "✅",
       "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3870-24176",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3975-63617",
       "entryIds": [
-        "363:7242"
+        "3928:2374"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
     },
     {
-      "id": "14860:68939",
-      "name": "✦  🟢 Y | Separator ✅",
-      "display": "Separator",
+      "id": "3884:9073",
+      "name": "✦  🟢 Y/H | Select ✅",
+      "display": "Select",
       "status": "🟢",
       "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14860-68939",
+      "initials": "Y/H",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3884-9073",
       "entryIds": [
-        "14860:69243"
+        "3884:6936"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
     },
     {
-      "id": "4108:1605",
-      "name": "✦  🟢 Y | Navbar ✅",
-      "display": "Navbar",
+      "id": "3996:8715",
+      "name": "✦  🟢 Y/H |  Input Number ✅",
+      "display": "Input Number",
       "status": "🟢",
       "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4108-1605",
+      "initials": "Y/H",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3996-8715",
       "entryIds": [
-        "4103:4910"
+        "39043:1432"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
     },
     {
-      "id": "3762:15186",
-      "name": "✦  🟢 Y | Carousel ✅ ",
-      "display": "Carousel",
+      "id": "14833:10982",
+      "name": "✦  🟢 Y | Alert Dialog ✅",
+      "display": "Alert Dialog",
       "status": "🟢",
       "tail": "✅",
       "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3762-15186",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14833-10982",
       "entryIds": [
-        "15769:74332",
-        "40600:96137",
-        "40600:96155"
+        "15455:53947"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "14831:275398",
+      "name": "✦  🟢 Y/H | Date Picker ✅",
+      "display": "Date Picker",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y/H",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14831-275398",
+      "entryIds": [
+        "15113:5466"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -399,48 +444,6 @@
       "orphanDocs": []
     },
     {
-      "id": "3882:2381",
-      "name": "✦  🟢 Y | Text Input ✅",
-      "display": "Text Input",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3882-2381",
-      "entryIds": [
-        "414:12784"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "14833:10982",
-      "name": "✦  🟢 Y | Alert Dialog ✅",
-      "display": "Alert Dialog",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14833-10982",
-      "entryIds": [
-        "15455:53947"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "14855:66210",
-      "name": "✦  🟢 Y | Command ✅",
-      "display": "Command",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14855-66210",
-      "entryIds": [
-        "39712:171"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
       "id": "14885:1510",
       "name": "✦  🟢 Y | Table ✅",
       "display": "Table",
@@ -457,33 +460,6 @@
       "orphanDocs": []
     },
     {
-      "id": "452:4831",
-      "name": "✦  🟢 Y | Steps ✅",
-      "display": "Steps",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=452-4831",
-      "entryIds": [
-        "405:7832",
-        "3793:70328",
-        "3793:70403"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": [
-        {
-          "id": "40408:13261",
-          "name": "Steps — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40408-13261"
-        },
-        {
-          "id": "40408:13876",
-          "name": "Steps — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40408-13876"
-        }
-      ]
-    },
-    {
       "id": "14872:1780",
       "name": "✦  🟢 Y | Drawer ✅",
       "display": "Drawer",
@@ -495,39 +471,6 @@
         "15043:262710"
       ],
       "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "3975:63617",
-      "name": "✦  🟢 Y | Textarea ✅",
-      "display": "Textarea",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3975-63617",
-      "entryIds": [
-        "3928:2374"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "3831:2712",
-      "name": "✦  🟢 Y/H | Progress ✅",
-      "display": "Progress",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y/H",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3831-2712",
-      "entryIds": [
-        "3831:2727"
-      ],
-      "legacyDocSections": [
-        {
-          "id": "40465:52431",
-          "name": "Progress Bar Documentation"
-        }
-      ],
       "orphanDocs": []
     },
     {
@@ -546,45 +489,6 @@
         {
           "id": "40492:57888",
           "name": "Side bar Documentation"
-        }
-      ],
-      "orphanDocs": []
-    },
-    {
-      "id": "3868:82886",
-      "name": "✦  🟢 Y/H | Slider ✅",
-      "display": "Slider",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y/H",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3868-82886",
-      "entryIds": [
-        "40500:60632"
-      ],
-      "legacyDocSections": [
-        {
-          "id": "40500:61117",
-          "name": "Slider Documentation"
-        }
-      ],
-      "orphanDocs": []
-    },
-    {
-      "id": "14831:272551",
-      "name": "✦  🟢 Y/H | OTP Input ✅",
-      "display": "OTP Input",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y/H",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14831-272551",
-      "entryIds": [
-        "15097:22526",
-        "40465:54984"
-      ],
-      "legacyDocSections": [
-        {
-          "id": "40465:54852",
-          "name": "OTP Input Documentation"
         }
       ],
       "orphanDocs": []
@@ -619,57 +523,248 @@
       ]
     },
     {
-      "id": "14831:275398",
-      "name": "✦  🟢 Y/H | Date Picker ✅",
-      "display": "Date Picker",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y/H",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14831-275398",
-      "entryIds": [
-        "15113:5466"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "3884:9073",
-      "name": "✦  🟢 Y/H | Select ✅",
-      "display": "Select",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y/H",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3884-9073",
-      "entryIds": [
-        "3884:6936"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "3996:8715",
-      "name": "✦  🟢 Y/H |  Input Number ✅",
-      "display": "Input Number",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y/H",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3996-8715",
-      "entryIds": [
-        "39043:1432"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "14874:1846",
-      "name": "✦  🟢 H | Sonner ✅",
-      "display": "Sonner",
+      "id": "3707:28873",
+      "name": "✦  🟢 H | Accordion ✅",
+      "display": "Accordion",
       "status": "🟢",
       "tail": "✅",
       "initials": "H",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14874-1846",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3707-28873",
       "entryIds": [
-        "40227:10979"
+        "324:856",
+        "16293:144797",
+        "16293:145139",
+        "16293:147400",
+        "15217:41213"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "14852:8647",
+      "name": "✦  🟢 H | Combobox ✅",
+      "display": "Combobox",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "H",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14852-8647",
+      "entryIds": [
+        "14855:46197"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "4008:14165",
+      "name": "✦  🟢 H | Popover ✅",
+      "display": "Popover",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "H",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4008-14165",
+      "entryIds": [
+        "4007:13806"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "3868:82886",
+      "name": "✦  🟢 Y/H | Slider ✅",
+      "display": "Slider",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y/H",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3868-82886",
+      "entryIds": [
+        "40500:60632"
+      ],
+      "legacyDocSections": [
+        {
+          "id": "40500:61117",
+          "name": "Slider Documentation"
+        }
+      ],
+      "orphanDocs": []
+    },
+    {
+      "id": "452:4831",
+      "name": "✦  🟢 Y | Steps ✅",
+      "display": "Steps",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=452-4831",
+      "entryIds": [
+        "405:7832",
+        "3793:70328",
+        "3793:70403"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": [
+        {
+          "id": "40408:13261",
+          "name": "Steps — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40408-13261"
+        },
+        {
+          "id": "40408:13876",
+          "name": "Steps — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40408-13876"
+        }
+      ]
+    },
+    {
+      "id": "14831:272551",
+      "name": "✦  🟢 Y/H | OTP Input ✅",
+      "display": "OTP Input",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y/H",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14831-272551",
+      "entryIds": [
+        "15097:22526",
+        "40465:54984"
+      ],
+      "legacyDocSections": [
+        {
+          "id": "40465:54852",
+          "name": "OTP Input Documentation"
+        }
+      ],
+      "orphanDocs": []
+    },
+    {
+      "id": "3972:55121",
+      "name": "✦   🟢 H | Dropdown Menu ✅",
+      "display": "Dropdown Menu",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "H",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3972-55121",
+      "entryIds": [
+        "3969:51446"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "4043:19542",
+      "name": "✦   🟢 H | Timeline ✅",
+      "display": "Timeline",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "H",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4043-19542",
+      "entryIds": [
+        "15783:326560"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "14860:68939",
+      "name": "✦  🟢 Y | Separator ✅",
+      "display": "Separator",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14860-68939",
+      "entryIds": [
+        "14860:69243"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "4108:1605",
+      "name": "✦  🟢 Y | Navbar ✅",
+      "display": "Navbar",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4108-1605",
+      "entryIds": [
+        "4103:4910"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "3870:24176",
+      "name": "✦  🟢 Y | Rating ✅",
+      "display": "Rating",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3870-24176",
+      "entryIds": [
+        "363:7242"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "14849:15907",
+      "name": "✦   🟢 H | Context Menu ✅",
+      "display": "Context Menu",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "H",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14849-15907",
+      "entryIds": [
+        "40191:68742",
+        "40191:68792"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "14856:225540",
+      "name": "✦  🟢 H | Menubar ✅",
+      "display": "Menubar",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "H",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14856-225540",
+      "entryIds": [
+        "40217:11726",
+        "40217:11937"
+      ],
+      "legacyDocSections": [
+        {
+          "id": "40154:26184",
+          "name": "Menubar Documentation"
+        }
+      ],
+      "orphanDocs": []
+    },
+    {
+      "id": "14855:66210",
+      "name": "✦  🟢 Y | Command ✅",
+      "display": "Command",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14855-66210",
+      "entryIds": [
+        "39712:171"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "3762:15186",
+      "name": "✦  🟢 Y | Carousel ✅ ",
+      "display": "Carousel",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3762-15186",
+      "entryIds": [
+        "15769:74332",
+        "40600:96137",
+        "40600:96155"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -786,81 +881,6 @@
       ]
     },
     {
-      "id": "3707:28873",
-      "name": "✦  🟢 H | Accordion ✅",
-      "display": "Accordion",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "H",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3707-28873",
-      "entryIds": [
-        "324:856",
-        "16293:144797",
-        "16293:145139",
-        "16293:147400",
-        "15217:41213"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "4008:14165",
-      "name": "✦  🟢 H | Popover ✅",
-      "display": "Popover",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "H",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4008-14165",
-      "entryIds": [
-        "4007:13806"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "4043:19542",
-      "name": "✦   🟢 H | Timeline ✅",
-      "display": "Timeline",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "H",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4043-19542",
-      "entryIds": [
-        "15783:326560"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "3972:55121",
-      "name": "✦   🟢 H | Dropdown Menu ✅",
-      "display": "Dropdown Menu",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "H",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3972-55121",
-      "entryIds": [
-        "3969:51446"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "14849:15907",
-      "name": "✦   🟢 H | Context Menu ✅",
-      "display": "Context Menu",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "H",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14849-15907",
-      "entryIds": [
-        "40191:68742",
-        "40191:68792"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
       "id": "14964:12237",
       "name": "✦  🟢 H | Toggle ✅",
       "display": "Toggle",
@@ -891,35 +911,15 @@
       "orphanDocs": []
     },
     {
-      "id": "14856:225540",
-      "name": "✦  🟢 H | Menubar ✅",
-      "display": "Menubar",
+      "id": "14874:1846",
+      "name": "✦  🟢 H | Sonner ✅",
+      "display": "Sonner",
       "status": "🟢",
       "tail": "✅",
       "initials": "H",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14856-225540",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14874-1846",
       "entryIds": [
-        "40217:11726",
-        "40217:11937"
-      ],
-      "legacyDocSections": [
-        {
-          "id": "40154:26184",
-          "name": "Menubar Documentation"
-        }
-      ],
-      "orphanDocs": []
-    },
-    {
-      "id": "14852:8647",
-      "name": "✦  🟢 H | Combobox ✅",
-      "display": "Combobox",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "H",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14852-8647",
-      "entryIds": [
-        "14855:46197"
+        "40227:10979"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -941,7 +941,7 @@
         "initials": "Y"
       },
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=307-333",
-      "variants": 960,
+      "variants": 1200,
       "axes": {
         "Direction": [
           "LTR",
@@ -951,11 +951,12 @@
           "Solid",
           "Soft",
           "Outline",
-          "Ghost"
+          "Ghost",
+          "Link"
         ],
         "Style": [
-          "primary",
-          "secondary",
+          "Primary",
+          "Secondary",
           "Destructive"
         ],
         "Size": [
@@ -1028,8 +1029,8 @@
           "Ghost"
         ],
         "Style": [
-          "primary",
-          "secondary",
+          "Primary",
+          "Secondary",
           "Destructive"
         ],
         "Size": [
@@ -1075,6 +1076,214 @@
       "hasDescription": false,
       "flags": [
         "no-direction-axis",
+        "no-description"
+      ]
+    },
+    "414:12784": {
+      "name": "Default Input",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3882:2381",
+        "name": "✦  🟢 Y | Text Input ✅",
+        "display": "Text Input",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=414-12784",
+      "variants": 160,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Size": [
+          "xs",
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Filled": [
+          "No",
+          "Yes"
+        ],
+        "State": [
+          "Default",
+          "Focus",
+          "Success",
+          "Destructive",
+          "Disabled"
+        ],
+        "Radius": [
+          "Standard",
+          "Rounded"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Size",
+        "Filled",
+        "State",
+        "Radius"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "39828:1881",
+          "name": "Default Input — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39828-1881"
+        },
+        "ar": {
+          "id": "39853:395",
+          "name": "Default Input — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39853-395"
+        },
+        "duplicates": []
+      },
+      "code": "input",
+      "hasDescription": true,
+      "flags": []
+    },
+    "3831:2727": {
+      "name": "Progress",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3831:2712",
+        "name": "✦  🟢 Y/H | Progress ✅",
+        "display": "Progress",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y/H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3831-2727",
+      "variants": 126,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Percentage": [
+          "0%",
+          "5%",
+          "10%",
+          "15%",
+          "20%",
+          "25%",
+          "30%",
+          "35%",
+          "40%",
+          "45%",
+          "50%",
+          "55%",
+          "60%",
+          "65%",
+          "70%",
+          "75%",
+          "80%",
+          "85%",
+          "90%",
+          "95%",
+          "100%"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Size",
+        "Percentage"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "40478:180",
+          "name": "Progress — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40478-180"
+        },
+        "ar": {
+          "id": "40478:86743",
+          "name": "Progress — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40478-86743"
+        },
+        "duplicates": []
+      },
+      "code": "progress",
+      "hasDescription": false,
+      "flags": [
+        "legacy-doc-section-on-page",
+        "no-description"
+      ]
+    },
+    "15139:15897": {
+      "name": "Tooltip",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3822:55767",
+        "name": "✦  🟢 Y | Tooltip ✅ ✅",
+        "display": "Tooltip",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15139-15897",
+      "variants": 120,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Style": [
+          "Primary",
+          "Info",
+          "Success",
+          "Warning",
+          "Destructive",
+          "Secondary"
+        ],
+        "Position": [
+          "Top",
+          "Bottom",
+          "Left",
+          "Right",
+          "None"
+        ],
+        "Radius": [
+          "Standard",
+          "Rounded"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Style",
+        "Position",
+        "Radius"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "39783:2276",
+          "name": "Tooltip — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39783-2276"
+        },
+        "ar": {
+          "id": "39793:847",
+          "name": "Tooltip — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39793-847"
+        },
+        "duplicates": []
+      },
+      "code": "tooltip",
+      "hasDescription": false,
+      "flags": [
         "no-description"
       ]
     },
@@ -1882,72 +2091,6 @@
         "no-description"
       ]
     },
-    "15139:15897": {
-      "name": "Tooltip",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3822:55767",
-        "name": "✦  🟢 Y | Tooltip ✅",
-        "display": "Tooltip",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15139-15897",
-      "variants": 120,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Style": [
-          "Primary",
-          "Info",
-          "Success",
-          "Warning",
-          "Destructive",
-          "Secondary"
-        ],
-        "Position": [
-          "Top",
-          "Bottom",
-          "Left",
-          "Right",
-          "None"
-        ],
-        "Radius": [
-          "Standard",
-          "Rounded"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Style",
-        "Position",
-        "Radius"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "39783:2276",
-          "name": "Tooltip — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39783-2276"
-        },
-        "ar": {
-          "id": "39793:847",
-          "name": "Tooltip — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39793-847"
-        },
-        "duplicates": []
-      },
-      "code": "tooltip",
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
     "3771:68266": {
       "name": "Breadcrumbs",
       "node": "COMPONENT_SET",
@@ -2061,144 +2204,168 @@
         "no-description"
       ]
     },
-    "363:7242": {
-      "name": "Rating",
+    "3928:2374": {
+      "name": "Textarea",
       "node": "COMPONENT_SET",
       "kind": "atom",
       "role": "primary",
       "page": {
-        "id": "3870:24176",
-        "name": "✦  🟢 Y | Rating ✅",
-        "display": "Rating",
+        "id": "3975:63617",
+        "name": "✦  🟢 Y | Textarea ✅",
+        "display": "Textarea",
         "status": "🟢",
         "tail": "✅",
         "initials": "Y"
       },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=363-7242",
-      "variants": 48,
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3928-2374",
+      "variants": 20,
+      "axes": {
+        "State": [
+          "Default",
+          "Focus",
+          "Success",
+          "Error",
+          "Disabled"
+        ],
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Filled": [
+          "No",
+          "Yes"
+        ]
+      },
+      "axisNames": [
+        "State",
+        "Direction",
+        "Filled"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "40412:4386",
+          "name": "Textarea — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40412-4386"
+        },
+        "ar": {
+          "id": "40412:5184",
+          "name": "Textarea — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40412-5184"
+        },
+        "duplicates": []
+      },
+      "code": "textarea",
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "3884:6936": {
+      "name": "Select Input",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3884:9073",
+        "name": "✦  🟢 Y/H | Select ✅",
+        "display": "Select",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y/H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3884-6936",
+      "variants": 192,
       "axes": {
         "Direction": [
           "LTR",
           "RTL"
         ],
         "Size": [
+          "xs",
           "sm",
           "md",
           "lg"
         ],
         "Filled": [
+          "No",
+          "Yes"
+        ],
+        "State": [
+          "Default",
+          "Focus",
+          "Disabled"
+        ],
+        "Radius": [
+          "Standard",
+          "Rounded"
+        ],
+        "Multi Select": [
           "False",
           "True"
-        ],
-        "Type": [
-          "Star",
-          "Heart"
-        ],
-        "Colors": [
-          "Primary",
-          "Amber",
-          "Red"
         ]
       },
       "axisNames": [
         "Direction",
         "Size",
         "Filled",
-        "Type",
-        "Colors"
+        "State",
+        "Radius",
+        "Multi Select"
       ],
       "rtl": true,
       "docs": {
         "en": {
-          "id": "39820:2277",
-          "name": "Rating — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39820-2277"
+          "id": "40547:98092",
+          "name": "Select Input — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40547-98092"
         },
         "ar": {
-          "id": "39825:1872",
-          "name": "Rating — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39825-1872"
+          "id": "40554:2539",
+          "name": "Select Input — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40554-2539"
         },
         "duplicates": []
       },
-      "code": null,
+      "code": "select",
       "hasDescription": false,
       "flags": [
         "no-description"
       ]
     },
-    "14860:69243": {
-      "name": "Separator",
-      "node": "COMPONENT",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "14860:68939",
-        "name": "✦  🟢 Y | Separator ✅",
-        "display": "Separator",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14860-69243",
-      "variants": 1,
-      "axes": {},
-      "axisNames": [],
-      "rtl": false,
-      "docs": {
-        "en": {
-          "id": "39941:54298",
-          "name": "Separator — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39941-54298"
-        },
-        "ar": {
-          "id": "39943:208",
-          "name": "Separator — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39943-208"
-        },
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-direction-axis",
-        "no-description"
-      ]
-    },
-    "4103:4910": {
-      "name": "Navbar",
+    "39043:1432": {
+      "name": "Input Number",
       "node": "COMPONENT_SET",
       "kind": "atom",
       "role": "primary",
       "page": {
-        "id": "4108:1605",
-        "name": "✦  🟢 Y | Navbar ✅",
-        "display": "Navbar",
+        "id": "3996:8715",
+        "name": "✦  🟢 Y/H |  Input Number ✅",
+        "display": "Input Number",
         "status": "🟢",
         "tail": "✅",
-        "initials": "Y"
+        "initials": "Y/H"
       },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4103-4910",
-      "variants": 34,
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39043-1432",
+      "variants": 100,
       "axes": {
-        "Type": [
+        "Variant": [
           "Default",
-          "With Dropdown",
-          "With Icon Indicator & Avatar",
-          "With Centered Logo",
-          "With search input",
-          "With CTA Button",
-          "With Submenu",
-          "multiple action",
-          "Rounded",
-          "extended at top",
-          "Small navbar",
-          "Rounded small navbar",
-          "active action with border",
-          "Multiple icon",
-          "active action with round",
-          "Centered floating navbar",
-          "E- commerce navbar"
+          "Vertically Stacked Buttons",
+          "Horizontally Stacked Button",
+          "Horizontal Stretched Button",
+          "Mini"
+        ],
+        "Filled": [
+          "No",
+          "Yes"
+        ],
+        "State": [
+          "Default",
+          "Focus",
+          "Success",
+          "Error",
+          "Disabled"
         ],
         "Direction": [
           "LTR",
@@ -2206,70 +2373,22 @@
         ]
       },
       "axisNames": [
-        "Type",
+        "Variant",
+        "Filled",
+        "State",
         "Direction"
       ],
       "rtl": true,
       "docs": {
         "en": {
-          "id": "40409:34455",
-          "name": "Navbar — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40409-34455"
+          "id": "40559:2508",
+          "name": "Input Number — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40559-2508"
         },
         "ar": {
-          "id": "40409:36508",
-          "name": "Navbar — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40409-36508"
-        },
-        "duplicates": []
-      },
-      "code": "navbar",
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "15769:74332": {
-      "name": "Content Carousel",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3762:15186",
-        "name": "✦  🟢 Y | Carousel ✅ ",
-        "display": "Carousel",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15769-74332",
-      "variants": 6,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Type": [
-          "Single box",
-          "Two boxes",
-          "Three boxes"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Type"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "38948:6088",
-          "name": "Content Carousel — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38948-6088"
-        },
-        "ar": {
-          "id": "39802:6765",
-          "name": "Content Carousel — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39802-6765"
+          "id": "40561:1624",
+          "name": "Input Number — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40561-1624"
         },
         "duplicates": []
       },
@@ -2279,91 +2398,113 @@
         "no-description"
       ]
     },
-    "40600:96137": {
-      "name": "Carousel Item",
+    "15455:53947": {
+      "name": "Alert Dialog",
       "node": "COMPONENT_SET",
       "kind": "atom",
-      "role": "part",
+      "role": "primary",
       "page": {
-        "id": "3762:15186",
-        "name": "✦  🟢 Y | Carousel ✅ ",
-        "display": "Carousel",
+        "id": "14833:10982",
+        "name": "✦  🟢 Y | Alert Dialog ✅",
+        "display": "Alert Dialog",
         "status": "🟢",
         "tail": "✅",
         "initials": "Y"
       },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40600-96137",
-      "variants": 2,
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15455-53947",
+      "variants": 8,
       "axes": {
-        "Active": [
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Align": [
+          "Edge",
+          "Center"
+        ],
+        "Destructive": [
           "False",
           "True"
         ]
       },
       "axisNames": [
-        "Active"
+        "Direction",
+        "Align",
+        "Destructive"
       ],
-      "rtl": false,
+      "rtl": true,
       "docs": {
-        "en": null,
-        "ar": null,
+        "en": {
+          "id": "38958:1872",
+          "name": "Alert Dialog  — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38958-1872"
+        },
+        "ar": {
+          "id": "39867:5984",
+          "name": "Alert Dialog — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39867-5984"
+        },
         "duplicates": []
       },
       "code": null,
       "hasDescription": false,
       "flags": [
-        "no-direction-axis",
         "no-description"
       ]
     },
-    "40600:96155": {
-      "name": "Carousel",
+    "15113:5466": {
+      "name": "Date Picker",
       "node": "COMPONENT_SET",
       "kind": "atom",
       "role": "primary",
       "page": {
-        "id": "3762:15186",
-        "name": "✦  🟢 Y | Carousel ✅ ",
-        "display": "Carousel",
+        "id": "14831:275398",
+        "name": "✦  🟢 Y/H | Date Picker ✅",
+        "display": "Date Picker",
         "status": "🟢",
         "tail": "✅",
-        "initials": "Y"
+        "initials": "Y/H"
       },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40600-96155",
-      "variants": 18,
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15113-5466",
+      "variants": 48,
       "axes": {
+        "State": [
+          "Default",
+          "Hover",
+          "Focus"
+        ],
         "Direction": [
           "LTR",
           "RTL"
         ],
-        "No. of items": [
-          "2",
-          "3",
-          "4"
+        "Size": [
+          "xs",
+          "sm",
+          "md",
+          "lg"
         ],
-        "Active Item": [
-          "1",
-          "2",
-          "3",
-          "4"
+        "Variants": [
+          "Inactive",
+          "Active"
         ]
       },
       "axisNames": [
+        "State",
         "Direction",
-        "No. of items",
-        "Active Item"
+        "Size",
+        "Variants"
       ],
       "rtl": true,
       "docs": {
         "en": {
-          "id": "40602:350",
-          "name": "Carousel — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40602-350"
+          "id": "40483:1725",
+          "name": "Date Picker — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40483-1725"
         },
         "ar": {
-          "id": "40605:483",
-          "name": "Carousel — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40605-483"
+          "id": "40483:87457",
+          "name": "Date Picker — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40483-87457"
         },
         "duplicates": []
       },
@@ -2502,171 +2643,6 @@
       "docs": {
         "en": null,
         "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "414:12784": {
-      "name": "Default Input",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3882:2381",
-        "name": "✦  🟢 Y | Text Input ✅",
-        "display": "Text Input",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=414-12784",
-      "variants": 160,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Size": [
-          "xs",
-          "sm",
-          "md",
-          "lg"
-        ],
-        "Filled": [
-          "No",
-          "Yes"
-        ],
-        "State": [
-          "Default",
-          "Focus",
-          "Success",
-          "Destructive",
-          "Disabled"
-        ],
-        "Radius": [
-          "Standard",
-          "Rounded"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Size",
-        "Filled",
-        "State",
-        "Radius"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "39828:1881",
-          "name": "Default Input — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39828-1881"
-        },
-        "ar": {
-          "id": "39853:395",
-          "name": "Default Input — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39853-395"
-        },
-        "duplicates": []
-      },
-      "code": "input",
-      "hasDescription": true,
-      "flags": []
-    },
-    "15455:53947": {
-      "name": "Alert Dialog",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "14833:10982",
-        "name": "✦  🟢 Y | Alert Dialog ✅",
-        "display": "Alert Dialog",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15455-53947",
-      "variants": 8,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Align": [
-          "Edge",
-          "Center"
-        ],
-        "Destructive": [
-          "False",
-          "True"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Align",
-        "Destructive"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "38958:1872",
-          "name": "Alert Dialog  — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38958-1872"
-        },
-        "ar": {
-          "id": "39867:5984",
-          "name": "Alert Dialog — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39867-5984"
-        },
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "39712:171": {
-      "name": "Command Menu",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "14855:66210",
-        "name": "✦  🟢 Y | Command ✅",
-        "display": "Command",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39712-171",
-      "variants": 2,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "39944:23743",
-          "name": "Command Menu — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39944-23743"
-        },
-        "ar": {
-          "id": "39944:24301",
-          "name": "Command Menu — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39944-24301"
-        },
         "duplicates": []
       },
       "code": null,
@@ -2814,148 +2790,6 @@
         "no-description"
       ]
     },
-    "405:7832": {
-      "name": "Steps / Step item",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "unclassified",
-      "page": {
-        "id": "452:4831",
-        "name": "✦  🟢 Y | Steps ✅",
-        "display": "Steps",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=405-7832",
-      "variants": 48,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Status": [
-          "Done",
-          "Current",
-          "Upcoming"
-        ],
-        "Orientation": [
-          "Horizontal",
-          "Vertical"
-        ],
-        "Radius": [
-          "Standard",
-          "Rounded"
-        ],
-        "Has tail": [
-          "False",
-          "True"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Status",
-        "Orientation",
-        "Radius",
-        "Has tail"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "doc-name-mismatch",
-        "no-description"
-      ]
-    },
-    "3793:70328": {
-      "name": "Steps Horizontal",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "unclassified",
-      "page": {
-        "id": "452:4831",
-        "name": "✦  🟢 Y | Steps ✅",
-        "display": "Steps",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3793-70328",
-      "variants": 4,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Radius": [
-          "Standard",
-          "Rounded"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Radius"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "doc-name-mismatch",
-        "no-description"
-      ]
-    },
-    "3793:70403": {
-      "name": "Steps Vertical",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "unclassified",
-      "page": {
-        "id": "452:4831",
-        "name": "✦  🟢 Y | Steps ✅",
-        "display": "Steps",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3793-70403",
-      "variants": 4,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Radius": [
-          "Standard",
-          "Rounded"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Radius"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "doc-name-mismatch",
-        "no-description"
-      ]
-    },
     "15043:262710": {
       "name": "Drawer",
       "node": "COMPONENT_SET",
@@ -3008,138 +2842,6 @@
       "flags": [
         "no-ar-doc",
         "duplicate-doc-frame",
-        "no-description"
-      ]
-    },
-    "3928:2374": {
-      "name": "Textarea",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3975:63617",
-        "name": "✦  🟢 Y | Textarea ✅",
-        "display": "Textarea",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3928-2374",
-      "variants": 20,
-      "axes": {
-        "State": [
-          "Default",
-          "Focus",
-          "Success",
-          "Error",
-          "Disabled"
-        ],
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Filled": [
-          "No",
-          "Yes"
-        ]
-      },
-      "axisNames": [
-        "State",
-        "Direction",
-        "Filled"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "40412:4386",
-          "name": "Textarea — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40412-4386"
-        },
-        "ar": {
-          "id": "40412:5184",
-          "name": "Textarea — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40412-5184"
-        },
-        "duplicates": []
-      },
-      "code": "textarea",
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "3831:2727": {
-      "name": "Progress",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3831:2712",
-        "name": "✦  🟢 Y/H | Progress ✅",
-        "display": "Progress",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y/H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3831-2727",
-      "variants": 126,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "sizes": [
-          "sm",
-          "md",
-          "lg"
-        ],
-        "Percentage": [
-          "0%",
-          "5%",
-          "10%",
-          "15%",
-          "20%",
-          "25%",
-          "30%",
-          "35%",
-          "40%",
-          "45%",
-          "50%",
-          "55%",
-          "60%",
-          "65%",
-          "70%",
-          "75%",
-          "80%",
-          "85%",
-          "90%",
-          "95%",
-          "100%"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "sizes",
-        "Percentage"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "40478:180",
-          "name": "Progress — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40478-180"
-        },
-        "ar": {
-          "id": "40478:86743",
-          "name": "Progress — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40478-86743"
-        },
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "legacy-doc-section-on-page",
         "no-description"
       ]
     },
@@ -3227,162 +2929,6 @@
         "duplicates": []
       },
       "code": "sidebar",
-      "hasDescription": false,
-      "flags": [
-        "legacy-doc-section-on-page",
-        "no-description"
-      ]
-    },
-    "40500:60632": {
-      "name": "Slider",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3868:82886",
-        "name": "✦  🟢 Y/H | Slider ✅",
-        "display": "Slider",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y/H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40500-60632",
-      "variants": 42,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL",
-          "Both"
-        ],
-        "Style": [
-          "Half-Full",
-          "Empty",
-          "Full",
-          "Double slider"
-        ],
-        "size": [
-          "sm",
-          "md",
-          "lg"
-        ],
-        "state": [
-          "Default",
-          "focus"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Style",
-        "size",
-        "state"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "40504:1714",
-          "name": "Slider — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40504-1714"
-        },
-        "ar": {
-          "id": "40509:317",
-          "name": "Slider — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40509-317"
-        },
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "legacy-doc-section-on-page",
-        "no-description"
-      ]
-    },
-    "15097:22526": {
-      "name": "Otp Input Item",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "14831:272551",
-        "name": "✦  🟢 Y/H | OTP Input ✅",
-        "display": "OTP Input",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y/H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15097-22526",
-      "variants": 4,
-      "axes": {
-        "State": [
-          "Default",
-          "Active",
-          "Destructive Default",
-          "Destructive Active"
-        ]
-      },
-      "axisNames": [
-        "State"
-      ],
-      "rtl": false,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "legacy-doc-section-on-page",
-        "no-direction-axis",
-        "no-description"
-      ]
-    },
-    "40465:54984": {
-      "name": "OTP Input",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "14831:272551",
-        "name": "✦  🟢 Y/H | OTP Input ✅",
-        "display": "OTP Input",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y/H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40465-54984",
-      "variants": 8,
-      "axes": {
-        "Type": [
-          "Digits only",
-          "Simple",
-          "With Separator",
-          "With Spacing"
-        ],
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Type",
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "40480:238",
-          "name": "OTP Input — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40480-238"
-        },
-        "ar": {
-          "id": "40480:87265",
-          "name": "OTP Input — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40480-87265"
-        },
-        "duplicates": []
-      },
-      "code": null,
       "hasDescription": false,
       "flags": [
         "legacy-doc-section-on-page",
@@ -3619,60 +3165,39 @@
         "no-description"
       ]
     },
-    "15113:5466": {
-      "name": "Date Picker",
+    "324:856": {
+      "name": "Accordion Item",
       "node": "COMPONENT_SET",
       "kind": "atom",
-      "role": "primary",
+      "role": "part",
       "page": {
-        "id": "14831:275398",
-        "name": "✦  🟢 Y/H | Date Picker ✅",
-        "display": "Date Picker",
+        "id": "3707:28873",
+        "name": "✦  🟢 H | Accordion ✅",
+        "display": "Accordion",
         "status": "🟢",
         "tail": "✅",
-        "initials": "Y/H"
+        "initials": "H"
       },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15113-5466",
-      "variants": 48,
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=324-856",
+      "variants": 4,
       "axes": {
-        "State": [
-          "Default",
-          "Hover",
-          "Focus"
+        "Opened": [
+          "False",
+          "True"
         ],
         "Direction": [
           "LTR",
           "RTL"
-        ],
-        "Size": [
-          "xs",
-          "sm",
-          "md",
-          "lg"
-        ],
-        "Variants": [
-          "Inactive",
-          "Active"
         ]
       },
       "axisNames": [
-        "State",
-        "Direction",
-        "Size",
-        "Variants"
+        "Opened",
+        "Direction"
       ],
       "rtl": true,
       "docs": {
-        "en": {
-          "id": "40483:1725",
-          "name": "Date Picker — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40483-1725"
-        },
-        "ar": {
-          "id": "40483:87457",
-          "name": "Date Picker — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40483-87457"
-        },
+        "en": null,
+        "ar": null,
         "duplicates": []
       },
       "code": null,
@@ -3681,111 +3206,68 @@
         "no-description"
       ]
     },
-    "3884:6936": {
-      "name": "Select Input",
+    "16293:144797": {
+      "name": "Heading Font",
       "node": "COMPONENT_SET",
       "kind": "atom",
-      "role": "primary",
+      "role": "part",
       "page": {
-        "id": "3884:9073",
-        "name": "✦  🟢 Y/H | Select ✅",
-        "display": "Select",
+        "id": "3707:28873",
+        "name": "✦  🟢 H | Accordion ✅",
+        "display": "Accordion",
         "status": "🟢",
         "tail": "✅",
-        "initials": "Y/H"
+        "initials": "H"
       },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3884-6936",
-      "variants": 192,
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=16293-144797",
+      "variants": 6,
       "axes": {
+        "Font Size": [
+          "SM",
+          "MD",
+          "LG"
+        ],
         "Direction": [
           "LTR",
           "RTL"
-        ],
-        "Size": [
-          "xs",
-          "sm",
-          "md",
-          "lg"
-        ],
-        "Filled": [
-          "No",
-          "Yes"
-        ],
-        "State": [
-          "Default",
-          "Focus",
-          "Disabled"
-        ],
-        "Radius": [
-          "Standard",
-          "Rounded"
-        ],
-        "Multi Select": [
-          "False",
-          "True"
         ]
       },
       "axisNames": [
-        "Direction",
-        "Size",
-        "Filled",
-        "State",
-        "Radius",
-        "Multi Select"
+        "Font Size",
+        "Direction"
       ],
       "rtl": true,
       "docs": {
-        "en": {
-          "id": "40547:98092",
-          "name": "Select Input — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40547-98092"
-        },
-        "ar": {
-          "id": "40554:2539",
-          "name": "Select Input — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40554-2539"
-        },
+        "en": null,
+        "ar": null,
         "duplicates": []
       },
-      "code": "select",
+      "code": null,
       "hasDescription": false,
       "flags": [
         "no-description"
       ]
     },
-    "39043:1432": {
-      "name": "Input Number",
+    "16293:145139": {
+      "name": "Body Font",
       "node": "COMPONENT_SET",
       "kind": "atom",
-      "role": "primary",
+      "role": "part",
       "page": {
-        "id": "3996:8715",
-        "name": "✦  🟢 Y/H |  Input Number ✅",
-        "display": "Input Number",
+        "id": "3707:28873",
+        "name": "✦  🟢 H | Accordion ✅",
+        "display": "Accordion",
         "status": "🟢",
         "tail": "✅",
-        "initials": "Y/H"
+        "initials": "H"
       },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39043-1432",
-      "variants": 100,
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=16293-145139",
+      "variants": 6,
       "axes": {
-        "Variant": [
-          "Default",
-          "Vertically Stacked Buttons",
-          "Horizontally Stacked Button",
-          "Horizontal Stretched Button",
-          "Mini"
-        ],
-        "Filled": [
-          "No",
-          "Yes"
-        ],
-        "State": [
-          "Default",
-          "Focus",
-          "Success",
-          "Error",
-          "Disabled"
+        "Font Size": [
+          "SM",
+          "MD",
+          "LG"
         ],
         "Direction": [
           "LTR",
@@ -3793,22 +3275,109 @@
         ]
       },
       "axisNames": [
-        "Variant",
-        "Filled",
-        "State",
+        "Font Size",
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "16293:147400": {
+      "name": "Icon Size",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "3707:28873",
+        "name": "✦  🟢 H | Accordion ✅",
+        "display": "Accordion",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=16293-147400",
+      "variants": 6,
+      "axes": {
+        "Icon Size": [
+          "SM",
+          "MD",
+          "LG"
+        ],
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "Icon Size",
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "15217:41213": {
+      "name": "Accordion",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3707:28873",
+        "name": "✦  🟢 H | Accordion ✅",
+        "display": "Accordion",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15217-41213",
+      "variants": 16,
+      "axes": {
+        "Variants": [
+          "Split",
+          "plus minus icon",
+          "Avatar Accoordion",
+          "Outline",
+          "Table Accordion",
+          "Multi-level",
+          "icons",
+          "Default"
+        ],
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "Variants",
         "Direction"
       ],
       "rtl": true,
       "docs": {
         "en": {
-          "id": "40559:2508",
-          "name": "Input Number — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40559-2508"
+          "id": "42297:9047",
+          "name": "Accordion — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42297-9047"
         },
         "ar": {
-          "id": "40561:1624",
-          "name": "Input Number — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40561-1624"
+          "id": "42297:11244",
+          "name": "Accordion — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42297-11244"
         },
         "duplicates": []
       },
@@ -3818,20 +3387,79 @@
         "no-description"
       ]
     },
-    "40227:10979": {
-      "name": "Sonnar",
+    "14855:46197": {
+      "name": "Combobox",
       "node": "COMPONENT_SET",
       "kind": "atom",
       "role": "primary",
       "page": {
-        "id": "14874:1846",
-        "name": "✦  🟢 H | Sonner ✅",
-        "display": "Sonner",
+        "id": "14852:8647",
+        "name": "✦  🟢 H | Combobox ✅",
+        "display": "Combobox",
         "status": "🟢",
         "tail": "✅",
         "initials": "H"
       },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40227-10979",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14855-46197",
+      "variants": 28,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Type": [
+          "Default",
+          "Avatar",
+          "timezone",
+          "Multiselect",
+          "Dropdown",
+          "Reponsive",
+          "Form"
+        ],
+        "Open": [
+          "no",
+          "yes"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Type",
+        "Open"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "40079:10475",
+          "name": "Combobox — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40079-10475"
+        },
+        "ar": {
+          "id": "40080:25401",
+          "name": "Combobox — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40080-25401"
+        },
+        "duplicates": []
+      },
+      "code": "combobox",
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "4007:13806": {
+      "name": "Popover",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "4008:14165",
+        "name": "✦  🟢 H | Popover ✅",
+        "display": "Popover",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4007-13806",
       "variants": 2,
       "axes": {
         "Direction": [
@@ -3845,14 +3473,957 @@
       "rtl": true,
       "docs": {
         "en": {
-          "id": "40245:3726",
-          "name": "Sonnar — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40245-3726"
+          "id": "40131:35294",
+          "name": "Popover — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40131-35294"
         },
         "ar": {
-          "id": "40245:77134",
-          "name": "Sonnar — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40245-77134"
+          "id": "40134:1882",
+          "name": "Popover — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40134-1882"
+        },
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "40500:60632": {
+      "name": "Slider",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3868:82886",
+        "name": "✦  🟢 Y/H | Slider ✅",
+        "display": "Slider",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y/H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40500-60632",
+      "variants": 42,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL",
+          "Both"
+        ],
+        "Style": [
+          "Half-Full",
+          "Empty",
+          "Full",
+          "Double slider"
+        ],
+        "size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "state": [
+          "Default",
+          "focus"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Style",
+        "size",
+        "state"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "40504:1714",
+          "name": "Slider — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40504-1714"
+        },
+        "ar": {
+          "id": "40509:317",
+          "name": "Slider — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40509-317"
+        },
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "legacy-doc-section-on-page",
+        "no-description"
+      ]
+    },
+    "405:7832": {
+      "name": "Steps / Step item",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "unclassified",
+      "page": {
+        "id": "452:4831",
+        "name": "✦  🟢 Y | Steps ✅",
+        "display": "Steps",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=405-7832",
+      "variants": 48,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Status": [
+          "Done",
+          "Current",
+          "Upcoming"
+        ],
+        "Orientation": [
+          "Horizontal",
+          "Vertical"
+        ],
+        "Radius": [
+          "Standard",
+          "Rounded"
+        ],
+        "Has tail": [
+          "False",
+          "True"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Status",
+        "Orientation",
+        "Radius",
+        "Has tail"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "doc-name-mismatch",
+        "no-description"
+      ]
+    },
+    "3793:70328": {
+      "name": "Steps Horizontal",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "unclassified",
+      "page": {
+        "id": "452:4831",
+        "name": "✦  🟢 Y | Steps ✅",
+        "display": "Steps",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3793-70328",
+      "variants": 4,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Radius": [
+          "Standard",
+          "Rounded"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Radius"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "doc-name-mismatch",
+        "no-description"
+      ]
+    },
+    "3793:70403": {
+      "name": "Steps Vertical",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "unclassified",
+      "page": {
+        "id": "452:4831",
+        "name": "✦  🟢 Y | Steps ✅",
+        "display": "Steps",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3793-70403",
+      "variants": 4,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Radius": [
+          "Standard",
+          "Rounded"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Radius"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "doc-name-mismatch",
+        "no-description"
+      ]
+    },
+    "15097:22526": {
+      "name": "Otp Input Item",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "14831:272551",
+        "name": "✦  🟢 Y/H | OTP Input ✅",
+        "display": "OTP Input",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y/H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15097-22526",
+      "variants": 4,
+      "axes": {
+        "State": [
+          "Default",
+          "Active",
+          "Destructive Default",
+          "Destructive Active"
+        ]
+      },
+      "axisNames": [
+        "State"
+      ],
+      "rtl": false,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "legacy-doc-section-on-page",
+        "no-direction-axis",
+        "no-description"
+      ]
+    },
+    "40465:54984": {
+      "name": "OTP Input",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "14831:272551",
+        "name": "✦  🟢 Y/H | OTP Input ✅",
+        "display": "OTP Input",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y/H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40465-54984",
+      "variants": 8,
+      "axes": {
+        "Type": [
+          "Digits only",
+          "Simple",
+          "With Separator",
+          "With Spacing"
+        ],
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "Type",
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "40480:238",
+          "name": "OTP Input — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40480-238"
+        },
+        "ar": {
+          "id": "40480:87265",
+          "name": "OTP Input — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40480-87265"
+        },
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "legacy-doc-section-on-page",
+        "no-description"
+      ]
+    },
+    "3969:51446": {
+      "name": "Dropdown",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3972:55121",
+        "name": "✦   🟢 H | Dropdown Menu ✅",
+        "display": "Dropdown Menu",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3969-51446",
+      "variants": 20,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Variant": [
+          "DropdownItem with Switch",
+          "Dropdown Item with Avatar",
+          "Dropdown Item with Action",
+          "Dropdown Item with icon",
+          "Dropdown Checkboxes",
+          "Dropdown Radio Group",
+          "Dropdown Advanced",
+          "Basic Dropdown",
+          "Avatar Heading",
+          "Mini icon"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Variant"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "40207:542",
+          "name": "Dropdown — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40207-542"
+        },
+        "ar": {
+          "id": "40230:5414",
+          "name": "Dropdown — Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40230-5414"
+        },
+        "duplicates": [
+          {
+            "id": "40207:543",
+            "name": "Dropdown — Documentation (EN)",
+            "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40207-543"
+          }
+        ]
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "duplicate-doc-frame",
+        "no-description"
+      ]
+    },
+    "15783:326560": {
+      "name": "Timeline",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "4043:19542",
+        "name": "✦   🟢 H | Timeline ✅",
+        "display": "Timeline",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15783-326560",
+      "variants": 6,
+      "axes": {
+        "Variants": [
+          "Basic Timeline",
+          "Timeline with icon",
+          "Centered Timeline"
+        ],
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "Variants",
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "40203:342",
+          "name": "Timeline — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40203-342"
+        },
+        "ar": {
+          "id": "40214:2831",
+          "name": "Timeline — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40214-2831"
+        },
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "14860:69243": {
+      "name": "Separator",
+      "node": "COMPONENT",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "14860:68939",
+        "name": "✦  🟢 Y | Separator ✅",
+        "display": "Separator",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14860-69243",
+      "variants": 1,
+      "axes": {},
+      "axisNames": [],
+      "rtl": false,
+      "docs": {
+        "en": {
+          "id": "39941:54298",
+          "name": "Separator — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39941-54298"
+        },
+        "ar": {
+          "id": "39943:208",
+          "name": "Separator — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39943-208"
+        },
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-direction-axis",
+        "no-description"
+      ]
+    },
+    "4103:4910": {
+      "name": "Navbar",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "4108:1605",
+        "name": "✦  🟢 Y | Navbar ✅",
+        "display": "Navbar",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4103-4910",
+      "variants": 34,
+      "axes": {
+        "Type": [
+          "Default",
+          "With Dropdown",
+          "With Icon Indicator & Avatar",
+          "With Centered Logo",
+          "With search input",
+          "With CTA Button",
+          "With Submenu",
+          "multiple action",
+          "Rounded",
+          "extended at top",
+          "Small navbar",
+          "Rounded small navbar",
+          "active action with border",
+          "Multiple icon",
+          "active action with round",
+          "Centered floating navbar",
+          "E- commerce navbar"
+        ],
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "Type",
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "40409:34455",
+          "name": "Navbar — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40409-34455"
+        },
+        "ar": {
+          "id": "40409:36508",
+          "name": "Navbar — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40409-36508"
+        },
+        "duplicates": []
+      },
+      "code": "navbar",
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "363:7242": {
+      "name": "Rating",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3870:24176",
+        "name": "✦  🟢 Y | Rating ✅",
+        "display": "Rating",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=363-7242",
+      "variants": 48,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Size": [
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Filled": [
+          "False",
+          "True"
+        ],
+        "Type": [
+          "Star",
+          "Heart"
+        ],
+        "Colors": [
+          "Primary",
+          "Amber",
+          "Red"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Size",
+        "Filled",
+        "Type",
+        "Colors"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "39820:2277",
+          "name": "Rating — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39820-2277"
+        },
+        "ar": {
+          "id": "39825:1872",
+          "name": "Rating — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39825-1872"
+        },
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "40191:68742": {
+      "name": "Context Menu Design",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "14849:15907",
+        "name": "✦   🟢 H | Context Menu ✅",
+        "display": "Context Menu",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40191-68742",
+      "variants": 2,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "40191:68792": {
+      "name": "Context Menu",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "14849:15907",
+        "name": "✦   🟢 H | Context Menu ✅",
+        "display": "Context Menu",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40191-68792",
+      "variants": 4,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Size": [
+          "Lg",
+          "Sm"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Size"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "40209:284",
+          "name": "Context Menu — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40209-284"
+        },
+        "ar": {
+          "id": "40293:788",
+          "name": "Context Menu — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40293-788"
+        },
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "40217:11726": {
+      "name": "Menu bar content",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "14856:225540",
+        "name": "✦  🟢 H | Menubar ✅",
+        "display": "Menubar",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40217-11726",
+      "variants": 10,
+      "axes": {
+        "Variants": [
+          "Edit's menubar Container",
+          "More's menubar Container",
+          "Profile's menubar Container",
+          "files's menubar Container",
+          "view's menubar Container"
+        ],
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "Variants",
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "legacy-doc-section-on-page",
+        "no-description"
+      ]
+    },
+    "40217:11937": {
+      "name": "Menubar",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "14856:225540",
+        "name": "✦  🟢 H | Menubar ✅",
+        "display": "Menubar",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40217-11937",
+      "variants": 2,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "40222:3601",
+          "name": "Menubar — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40222-3601"
+        },
+        "ar": {
+          "id": "40229:3834",
+          "name": "Menubar — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40229-3834"
+        },
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "legacy-doc-section-on-page",
+        "no-description"
+      ]
+    },
+    "39712:171": {
+      "name": "Command Menu",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "14855:66210",
+        "name": "✦  🟢 Y | Command ✅",
+        "display": "Command",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39712-171",
+      "variants": 2,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "39944:23743",
+          "name": "Command Menu — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39944-23743"
+        },
+        "ar": {
+          "id": "39944:24301",
+          "name": "Command Menu — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39944-24301"
+        },
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "15769:74332": {
+      "name": "Content Carousel",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3762:15186",
+        "name": "✦  🟢 Y | Carousel ✅ ",
+        "display": "Carousel",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15769-74332",
+      "variants": 6,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Type": [
+          "Single box",
+          "Two boxes",
+          "Three boxes"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Type"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "38948:6088",
+          "name": "Content Carousel — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38948-6088"
+        },
+        "ar": {
+          "id": "39802:6765",
+          "name": "Content Carousel — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39802-6765"
+        },
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "40600:96137": {
+      "name": "Carousel Item",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "3762:15186",
+        "name": "✦  🟢 Y | Carousel ✅ ",
+        "display": "Carousel",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40600-96137",
+      "variants": 2,
+      "axes": {
+        "Active": [
+          "False",
+          "True"
+        ]
+      },
+      "axisNames": [
+        "Active"
+      ],
+      "rtl": false,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-direction-axis",
+        "no-description"
+      ]
+    },
+    "40600:96155": {
+      "name": "Carousel",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3762:15186",
+        "name": "✦  🟢 Y | Carousel ✅ ",
+        "display": "Carousel",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40600-96155",
+      "variants": 18,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "No. of items": [
+          "2",
+          "3",
+          "4"
+        ],
+        "Active Item": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "No. of items",
+        "Active Item"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "40602:350",
+          "name": "Carousel — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40602-350"
+        },
+        "ar": {
+          "id": "40605:483",
+          "name": "Carousel — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40605-483"
         },
         "duplicates": []
       },
@@ -6996,471 +7567,6 @@
         "no-description"
       ]
     },
-    "324:856": {
-      "name": "Accordion Item",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "3707:28873",
-        "name": "✦  🟢 H | Accordion ✅",
-        "display": "Accordion",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=324-856",
-      "variants": 4,
-      "axes": {
-        "Opened": [
-          "False",
-          "True"
-        ],
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Opened",
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "16293:144797": {
-      "name": "Heading Font",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "3707:28873",
-        "name": "✦  🟢 H | Accordion ✅",
-        "display": "Accordion",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=16293-144797",
-      "variants": 6,
-      "axes": {
-        "Font Size": [
-          "SM",
-          "MD",
-          "LG"
-        ],
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Font Size",
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "16293:145139": {
-      "name": "Body Font",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "3707:28873",
-        "name": "✦  🟢 H | Accordion ✅",
-        "display": "Accordion",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=16293-145139",
-      "variants": 6,
-      "axes": {
-        "Font Size": [
-          "SM",
-          "MD",
-          "LG"
-        ],
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Font Size",
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "16293:147400": {
-      "name": "Icon Size",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "3707:28873",
-        "name": "✦  🟢 H | Accordion ✅",
-        "display": "Accordion",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=16293-147400",
-      "variants": 6,
-      "axes": {
-        "Icon Size": [
-          "SM",
-          "MD",
-          "LG"
-        ],
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Icon Size",
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "15217:41213": {
-      "name": "Accordion",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3707:28873",
-        "name": "✦  🟢 H | Accordion ✅",
-        "display": "Accordion",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15217-41213",
-      "variants": 16,
-      "axes": {
-        "Variants": [
-          "Split",
-          "plus minus icon",
-          "Avatar Accoordion",
-          "Outline",
-          "Table Accordion",
-          "Multi-level",
-          "icons",
-          "Default"
-        ],
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Variants",
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "42297:9047",
-          "name": "Accordion — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42297-9047"
-        },
-        "ar": {
-          "id": "42297:11244",
-          "name": "Accordion — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42297-11244"
-        },
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "4007:13806": {
-      "name": "Popover",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "4008:14165",
-        "name": "✦  🟢 H | Popover ✅",
-        "display": "Popover",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4007-13806",
-      "variants": 2,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "40131:35294",
-          "name": "Popover — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40131-35294"
-        },
-        "ar": {
-          "id": "40134:1882",
-          "name": "Popover — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40134-1882"
-        },
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "15783:326560": {
-      "name": "Timeline",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "4043:19542",
-        "name": "✦   🟢 H | Timeline ✅",
-        "display": "Timeline",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15783-326560",
-      "variants": 6,
-      "axes": {
-        "Variants": [
-          "Basic Timeline",
-          "Timeline with icon",
-          "Centered Timeline"
-        ],
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Variants",
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "40203:342",
-          "name": "Timeline — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40203-342"
-        },
-        "ar": {
-          "id": "40214:2831",
-          "name": "Timeline — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40214-2831"
-        },
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "3969:51446": {
-      "name": "Dropdown",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3972:55121",
-        "name": "✦   🟢 H | Dropdown Menu ✅",
-        "display": "Dropdown Menu",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3969-51446",
-      "variants": 20,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Variant": [
-          "DropdownItem with Switch",
-          "Dropdown Item with Avatar",
-          "Dropdown Item with Action",
-          "Dropdown Item with icon",
-          "Dropdown Checkboxes",
-          "Dropdown Radio Group",
-          "Dropdown Advanced",
-          "Basic Dropdown",
-          "Avatar Heading",
-          "Mini icon"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Variant"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "40207:542",
-          "name": "Dropdown — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40207-542"
-        },
-        "ar": {
-          "id": "40230:5414",
-          "name": "Dropdown — Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40230-5414"
-        },
-        "duplicates": [
-          {
-            "id": "40207:543",
-            "name": "Dropdown — Documentation (EN)",
-            "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40207-543"
-          }
-        ]
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "duplicate-doc-frame",
-        "no-description"
-      ]
-    },
-    "40191:68742": {
-      "name": "Context Menu Design",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "14849:15907",
-        "name": "✦   🟢 H | Context Menu ✅",
-        "display": "Context Menu",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40191-68742",
-      "variants": 2,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "40191:68792": {
-      "name": "Context Menu",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "14849:15907",
-        "name": "✦   🟢 H | Context Menu ✅",
-        "display": "Context Menu",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40191-68792",
-      "variants": 4,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Size": [
-          "Lg",
-          "Sm"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Size"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "40209:284",
-          "name": "Context Menu — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40209-284"
-        },
-        "ar": {
-          "id": "40293:788",
-          "name": "Context Menu — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40293-788"
-        },
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
     "15088:228441": {
       "name": "Toggle",
       "node": "COMPONENT_SET",
@@ -7663,65 +7769,20 @@
         "no-description"
       ]
     },
-    "40217:11726": {
-      "name": "Menu bar content",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "14856:225540",
-        "name": "✦  🟢 H | Menubar ✅",
-        "display": "Menubar",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40217-11726",
-      "variants": 10,
-      "axes": {
-        "Variants": [
-          "Edit's menubar Container",
-          "More's menubar Container",
-          "Profile's menubar Container",
-          "files's menubar Container",
-          "view's menubar Container"
-        ],
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Variants",
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "legacy-doc-section-on-page",
-        "no-description"
-      ]
-    },
-    "40217:11937": {
-      "name": "Menubar",
+    "40227:10979": {
+      "name": "Sonnar",
       "node": "COMPONENT_SET",
       "kind": "atom",
       "role": "primary",
       "page": {
-        "id": "14856:225540",
-        "name": "✦  🟢 H | Menubar ✅",
-        "display": "Menubar",
+        "id": "14874:1846",
+        "name": "✦  🟢 H | Sonner ✅",
+        "display": "Sonner",
         "status": "🟢",
         "tail": "✅",
         "initials": "H"
       },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40217-11937",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40227-10979",
       "variants": 2,
       "axes": {
         "Direction": [
@@ -7735,78 +7796,18 @@
       "rtl": true,
       "docs": {
         "en": {
-          "id": "40222:3601",
-          "name": "Menubar — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40222-3601"
+          "id": "40245:3726",
+          "name": "Sonnar — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40245-3726"
         },
         "ar": {
-          "id": "40229:3834",
-          "name": "Menubar — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40229-3834"
+          "id": "40245:77134",
+          "name": "Sonnar — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40245-77134"
         },
         "duplicates": []
       },
       "code": null,
-      "hasDescription": false,
-      "flags": [
-        "legacy-doc-section-on-page",
-        "no-description"
-      ]
-    },
-    "14855:46197": {
-      "name": "Combobox",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "14852:8647",
-        "name": "✦  🟢 H | Combobox ✅",
-        "display": "Combobox",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14855-46197",
-      "variants": 28,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Type": [
-          "Default",
-          "Avatar",
-          "timezone",
-          "Multiselect",
-          "Dropdown",
-          "Reponsive",
-          "Form"
-        ],
-        "Open": [
-          "no",
-          "yes"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Type",
-        "Open"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "40079:10475",
-          "name": "Combobox — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40079-10475"
-        },
-        "ar": {
-          "id": "40080:25401",
-          "name": "Combobox — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40080-25401"
-        },
-        "duplicates": []
-      },
-      "code": "combobox",
       "hasDescription": false,
       "flags": [
         "no-description"
