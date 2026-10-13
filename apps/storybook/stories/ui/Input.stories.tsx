@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { Meta, StoryObj } from "@storybook/react"
+import type { Decorator, Meta, StoryObj } from "@storybook/react"
 import { Form } from "@base-ui/react/form"
 import { CheckIcon, EyeIcon, EyeOffIcon, MailIcon, MapPinIcon, SearchIcon, TicketIcon, UserIcon } from "lucide-react"
 import { Input, type InputProps } from "../../../../packages/fasla-ui/registry/ui/input"
@@ -132,25 +132,45 @@ const stateProps = (state: State): Partial<InputProps> =>
 
 const title = (s: string) => s[0]!.toUpperCase() + s.slice(1)
 
-/** A caption: Figma property names, so English and left-to-right in both directions. */
+/**
+ * A caption: Figma property names, so English and left-to-right in both
+ * directions. It never wraps; a side-label column is `max-content` wide.
+ */
 const Head = ({ children, className }: { children: React.ReactNode; className?: string }) => (
-  <span dir="ltr" className={["w-fit font-sans text-xs text-muted-foreground", className].join(" ")}>
+  <span dir="ltr" className={["w-fit whitespace-nowrap font-sans text-xs text-muted-foreground", className].join(" ")}>
     {children}
   </span>
 )
 
 /**
- * A row caption that sits on the line of the field's label. It is as tall as
- * the label row — 4px padding round one `text-sm` line, a zero-width strut
- * holding the line height — so it centres on the label in either script.
+ * A row caption centred on an `md` field's box, not on its label or helper
+ * text. A zero-width strut as tall as the label row — 4px padding round one
+ * `text-sm` line, so it matches in either script — sits over a strip as tall
+ * as the box, and the caption centres in the strip.
  */
-const LabelLineHead = ({ children }: { children: React.ReactNode }) => (
-  <span dir="ltr" className="flex items-center p-1 font-sans text-xs text-muted-foreground">
-    <span aria-hidden className="text-sm">
-      {"​"}
+const BoxLineHead = ({ children }: { children: React.ReactNode }) => (
+  <span dir="ltr" className="flex flex-col whitespace-nowrap font-sans text-xs text-muted-foreground">
+    <span aria-hidden className="p-1 text-sm">
+      {"\u200b"}
     </span>
-    {children}
+    <span className="flex h-9 items-center">{children}</span>
   </span>
+)
+
+/**
+ * The frame round every story but Default. It centres the content in the
+ * canvas in either direction, and scrolls it sideways when it is wider than
+ * the canvas (a phone): a matrix of fields cannot reflow into 350px. The
+ * scroll runs in the story's own direction, so in RTL the start of the
+ * content is in view and the rest is reached by scrolling left. 4px of
+ * padding keeps the focus halo of a field at the edge clear of the clip.
+ */
+const framed: Decorator = (Story) => (
+  <div data-story-frame className="overflow-x-auto">
+    <div className="mx-auto w-max p-1">
+      <Story />
+    </div>
+  </div>
 )
 
 /** Cells forced into Focus: the pseudo-states addon applies the real `:focus-within` to their boxes. */
@@ -179,11 +199,12 @@ export const Default: Story = {
  * gap change.
  */
 export const Sizes: Story = {
+  decorators: [framed],
   parameters: { layout: "padded" },
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className="grid w-max grid-cols-[3rem_repeat(2,18rem)] items-center gap-x-6 gap-y-4">
+      <div className="grid grid-cols-[max-content_repeat(2,18rem)] items-center gap-x-6 gap-y-4">
         <span />
         {FILLS.map((fill) => (
           <Head key={fill}>{title(fill)}</Head>
@@ -210,11 +231,12 @@ export const Sizes: Story = {
 
 /** Standard is Figma's `border radius/md` (8px); Rounded is a full pill. */
 export const Radius: Story = {
+  decorators: [framed],
   parameters: { layout: "padded" },
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className="grid w-max grid-cols-[5rem_repeat(2,18rem)] items-center gap-x-6 gap-y-4">
+      <div className="grid grid-cols-[max-content_repeat(2,18rem)] items-center gap-x-6 gap-y-4">
         <span />
         {FILLS.map((fill) => (
           <Head key={fill}>{title(fill)}</Head>
@@ -246,18 +268,19 @@ export const Radius: Story = {
  * error message in place of the description.
  */
 export const States: Story = {
+  decorators: [framed],
   parameters: { layout: "padded", pseudo: { focusWithin: FOCUS_CELLS } },
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className="grid w-max grid-cols-[6rem_repeat(2,18rem)] items-start gap-x-6 gap-y-5">
+      <div className="grid grid-cols-[max-content_repeat(2,18rem)] items-start gap-x-6 gap-y-5">
         <span />
         {FILLS.map((fill) => (
           <Head key={fill}>{title(fill)}</Head>
         ))}
         {STATES.map((state) => (
           <React.Fragment key={state}>
-            <LabelLineHead>{title(state)}</LabelLineHead>
+            <BoxLineHead>{title(state)}</BoxLineHead>
             {FILLS.map((fill) => (
               <div key={fill} data-state-cell={state}>
                 <Input
@@ -284,6 +307,7 @@ export const States: Story = {
  * — for the direction on the toolbar. Flip the Direction toolbar for RTL.
  */
 export const AllVariants: Story = {
+  decorators: [framed],
   parameters: { layout: "padded", pseudo: { focusWithin: FOCUS_CELLS } },
   render: (_args, ctx) => {
     const c = copy(ctx)
@@ -294,7 +318,7 @@ export const AllVariants: Story = {
             <h3 dir="ltr" className="font-sans text-sm font-medium text-foreground">
               Radius = {title(radius)}
             </h3>
-            <div className="grid w-max grid-cols-[5.5rem_repeat(5,9.5rem)] items-center gap-x-3 gap-y-3">
+            <div className="grid w-max grid-cols-[max-content_repeat(5,9.5rem)] items-center gap-x-3 gap-y-3">
               <span />
               {STATES.map((state) => (
                 <Head key={state}>{title(state)}</Head>
@@ -364,6 +388,7 @@ function PasswordField({ c, ...props }: { c: Copy } & Partial<InputProps>) {
  * at a start or an end swaps sides.
  */
 export const Parts: Story = {
+  decorators: [framed],
   parameters: { layout: "padded" },
   render: (_args, ctx) => {
     const c = copy(ctx)
@@ -407,7 +432,7 @@ export const Parts: Story = {
       ["endIcon as a button", <PasswordField c={c} />],
     ]
     return (
-      <div className="grid w-max grid-cols-[repeat(2,20rem)] items-start gap-x-8 gap-y-6">
+      <div className="grid grid-cols-[17rem] items-start gap-x-8 gap-y-6 sm:grid-cols-[repeat(2,20rem)]">
         {cells.map(([caption, field]) => (
           <div key={caption} className="flex flex-col gap-1.5">
             <Head>{caption}</Head>
@@ -426,11 +451,12 @@ export const Parts: Story = {
  * input does.
  */
 export const LongText: Story = {
+  decorators: [framed],
   parameters: { layout: "padded" },
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className="grid w-max grid-cols-[repeat(2,20rem)] items-start gap-x-8 gap-y-6">
+      <div className="grid grid-cols-[17rem] items-start gap-x-8 gap-y-6 sm:grid-cols-[repeat(2,20rem)]">
         <Input
           label={c.longLabel}
           labelEnd={c.longLabelEnd}
@@ -456,11 +482,12 @@ export const LongText: Story = {
  * and the error replaces the description. Typing a valid address clears it.
  */
 export const Validation: Story = {
+  decorators: [framed],
   parameters: { layout: "padded" },
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <Form className="flex w-80 flex-col items-start gap-3" onSubmit={(event) => event.preventDefault()}>
+      <Form className="flex w-[17rem] flex-col items-start gap-3 sm:w-80" onSubmit={(event) => event.preventDefault()}>
         <Input
           name="email"
           type="email"
@@ -485,15 +512,16 @@ const THEMES = ["light", "dark"] as const
  * that subtree. Language and direction follow the Direction toolbar.
  */
 export const LightAndDark: Story = {
+  decorators: [framed],
   parameters: { layout: "padded", pseudo: { focusWithin: FOCUS_CELLS } },
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className="grid w-max gap-4">
+      <div className="grid gap-4">
         {THEMES.map((theme) => (
           <div key={theme} className={[theme, "rounded-lg border bg-background p-6 text-foreground"].join(" ")}>
             <Head className="block pb-4">{title(theme)}</Head>
-            <div className="grid grid-cols-[repeat(3,15rem)] items-start gap-x-6 gap-y-5">
+            <div className="grid grid-cols-[14rem] items-start gap-x-6 gap-y-5 sm:grid-cols-[repeat(3,15rem)]">
               {STATES.map((state) => (
                 <div key={state} data-state-cell={state} className="flex flex-col gap-1.5">
                   <Head>{title(state)}</Head>

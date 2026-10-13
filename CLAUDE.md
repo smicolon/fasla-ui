@@ -150,10 +150,16 @@ Applies to every Storybook story and every docs-site example, for every
 component. Check it in Canvas and on the Storybook Docs page, LTR and RTL,
 light and dark, and on the docs site at desktop and phone width.
 
+- Preview content is horizontally centred in its box, in LTR and RTL. It
+  never hugs the start side and leaves the other side empty.
 - Items in the same row align to a shared top edge. No staggered offsets, no
   large empty gaps.
 - A side label lines up with the thing it describes (a row label sits on the
-  line of the component it names, not the control below it).
+  line of the component it names, not the control below it). It is centred
+  vertically on the component itself — an input's box, not its label,
+  description or counter.
+- Side labels never wrap. Their column is as wide as the longest label, and
+  the content beside it moves over (or narrows a little) to make room.
 - A long single-column stack becomes a 2-column grid wherever it fits.
 - Everything fits its container: the Storybook Docs page gives a story about
   1000px, a docs-site preview about 550px (300px on a phone). Nothing renders
