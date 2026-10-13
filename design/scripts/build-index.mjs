@@ -75,6 +75,7 @@ export const EXCLUDED_UNSIGNED = [
  *  `null` means the registry item has no Figma counterpart in scope — either none exists
  *  (all seven effects components) or its page fails the selection rule. */
 export const CODE_MAP = {
+  accordion: { set: "Accordion", page: "3707:28873" },
   avatar: { set: "Avatar", page: "3710:7318" },
   badge: { set: "Badge", page: "3724:120666" },
   button: { set: "Button", page: "1:3" },

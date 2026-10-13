@@ -311,6 +311,21 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/accordion/",
+    title: "Accordion React Component | Fasla",
+    description:
+      "Add accessible React accordions in four styles, with a chevron or plus indicator, one or several items open, and mirrored for RTL.",
+    h1: "Accordion",
+    ar: {
+      title: "الأكورديون (Accordion) لتطبيقات React | فاصلة",
+      description:
+        "أضف مكوّن أكورديون بأربعة أنماط، مع سهم أو علامة زائد، وعنصر مفتوح واحد أو أكثر، وينعكس تلقائيًا في الصفحات العربية.",
+      h1: "الأكورديون (Accordion)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/combobox/",
     title: "Combobox React Component | Fasla",
     description:

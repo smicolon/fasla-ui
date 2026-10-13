@@ -203,6 +203,7 @@ const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
     return (
       <span
         ref={ref}
+        data-slot="avatar"
         className={cn("relative inline-flex shrink-0 align-middle", ROOT_SIZE[size], className)}
         {...props}
       >
