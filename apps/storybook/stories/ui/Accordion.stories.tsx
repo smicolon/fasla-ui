@@ -10,12 +10,6 @@ import {
 } from "../../../../packages/fasla-ui/registry/ui/accordion"
 import { Avatar } from "../../../../packages/fasla-ui/registry/ui/avatar/avatar"
 
-/**
- * Headings that each show or hide a section of content. Set `variant` and
- * `indicator` on `Accordion` and every item in the group follows them. To add
- * an avatar or an icon, put it inside the trigger; to nest a second level,
- * put another Accordion inside the content. The stories below show each.
- */
 const meta: Meta<typeof Accordion> = {
   title: "UI/Accordion",
   component: Accordion,
