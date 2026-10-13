@@ -50,7 +50,7 @@ const COPY = {
     required: "Required",
     problemPlaceholder: "What did you order, and what went wrong?",
     problemHelp:
-      "Tell us what you ordered, what went wrong and what you would like us to do. Photos help, and you can add them on the next step.",
+      "Tell us what you ordered, what went wrong and what you would like us to do.",
     problemValue:
       "I ordered the oak side table on 3 May and it arrived yesterday with a deep scratch across the top. The box was not damaged, so I think it happened before packing.\n\nI would like a replacement rather than a refund. I am home every afternoon this week if a driver can collect the damaged one.",
     problemShort: "Write at least 20 characters so we can help.",
@@ -68,7 +68,7 @@ const COPY = {
     required: "مطلوب",
     problemPlaceholder: "ماذا طلبت؟ وما الخطأ الذي حدث؟",
     problemHelp:
-      "أخبرنا بما طلبته وما الخطأ الذي حدث وما تريد منا فعله. الصور تساعدنا، ويمكنك إضافتها في الخطوة التالية.",
+      "أخبرنا بما طلبته وما الخطأ الذي حدث وما تريد منا فعله.",
     problemValue:
       "طلبت طاولة جانبية من خشب البلوط يوم 3 مايو، ووصلت أمس وعلى سطحها خدش عميق. الصندوق سليم، لذلك أظن أن الخدش حدث قبل التغليف.\n\nأفضّل استبدال الطاولة على استرداد المبلغ. أنا في البيت كل يوم بعد الظهر هذا الأسبوع إن أمكن للمندوب استلام الطاولة المخدوشة.",
     problemShort: "اكتب 20 حرفًا على الأقل لنتمكن من مساعدتك.",

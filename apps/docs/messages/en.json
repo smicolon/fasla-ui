@@ -457,7 +457,7 @@
       "height": {
         "label": "Describe the problem",
         "labelEnd": "Required",
-        "description": "Tell us what you ordered, what went wrong and what you would like us to do. Photos help, and you can add them on the next step.",
+        "description": "Tell us what you ordered, what went wrong and what you would like us to do.",
         "value": "I ordered the oak side table on 3 May and it arrived yesterday with a deep scratch across the top. The box was not damaged, so I think it happened before packing.\n\nI would like a replacement rather than a refund. I am home every afternoon this week if a driver can collect the damaged one."
       },
       "partsTitle": "Labels and counter",
