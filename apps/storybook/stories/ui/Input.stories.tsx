@@ -70,12 +70,11 @@ const COPY = {
     couponSaving: "−20%",
     save: "Save",
     address: "Delivery address",
-    longLabel: "Name of the person who will collect the order from the pickup point",
-    longLabelEnd: "Required for pickup",
-    longHelp:
-      "We show this name to the courier and on the pickup slip, so use the name on the ID they will check at the counter.",
+    recipient: "Recipient name",
+    recipientNote: "Required for delivery",
+    recipientHelp: "Write it exactly as it appears on the ID they will show the driver on arrival.",
     longValue: "Building 14, King Fahd Road, Al Olaya District, Riyadh 12211, Saudi Arabia",
-    longError: "This address is outside our delivery area. Choose a pickup point or enter another address.",
+    addressError: "This address is outside our delivery area.",
   },
   rtl: {
     name: "الاسم الكامل",
@@ -101,12 +100,11 @@ const COPY = {
     couponSaving: "خصم 20%",
     save: "حفظ",
     address: "عنوان التوصيل",
-    longLabel: "اسم الشخص الذي سيستلم الطلب من نقطة الاستلام",
-    longLabelEnd: "مطلوب عند الاستلام",
-    longHelp:
-      "يظهر هذا الاسم لمندوب التوصيل وعلى إيصال الاستلام، فاكتبه كما هو في الهوية التي ستُعرض عند الاستلام.",
+    recipient: "اسم المستلم",
+    recipientNote: "مطلوب للتوصيل",
+    recipientHelp: "اكتبه كما يظهر في الهوية التي سيعرضها على مندوب التوصيل عند استلام الطلب.",
     longValue: "مبنى 14، طريق الملك فهد، حي العليا، الرياض 12211، المملكة العربية السعودية",
-    longError: "هذا العنوان خارج نطاق التوصيل. اختر نقطة استلام أو أدخل عنوانًا آخر.",
+    addressError: "العنوان خارج نطاق التوصيل.",
   },
 } as const
 
@@ -133,8 +131,8 @@ const stateProps = (state: State): Partial<InputProps> =>
 const title = (s: string) => s[0]!.toUpperCase() + s.slice(1)
 
 /**
- * A caption: Figma property names, so English and left-to-right in both
- * directions. It never wraps; a side-label column is `max-content` wide.
+ * A column header or a caption over a field: Figma property names, so
+ * English and left-to-right in both directions. It never wraps.
  */
 const Head = ({ children, className }: { children: React.ReactNode; className?: string }) => (
   <span dir="ltr" className={["w-fit whitespace-nowrap font-sans text-xs text-muted-foreground", className].join(" ")}>
@@ -143,17 +141,31 @@ const Head = ({ children, className }: { children: React.ReactNode; className?: 
 )
 
 /**
- * A row caption centred on an `md` field's box, not on its label or helper
+ * A side row label. It aligns to the end of its column — next to the fields,
+ * in either direction — through `text-end` on a cell that takes the story's
+ * direction; only the caption inside is held left-to-right.
+ */
+const RowHead = ({ children }: { children: React.ReactNode }) => (
+  <span className="whitespace-nowrap text-end font-sans text-xs text-muted-foreground">
+    <span dir="ltr">{children}</span>
+  </span>
+)
+
+/**
+ * A side row label centred on an `md` field's box, not on its label or helper
  * text. A zero-width strut as tall as the label row — 4px padding round one
  * `text-sm` line, so it matches in either script — sits over a strip as tall
- * as the box, and the caption centres in the strip.
+ * as the box, and the caption centres in the strip, aligned to its end as
+ * `RowHead` is.
  */
 const BoxLineHead = ({ children }: { children: React.ReactNode }) => (
-  <span dir="ltr" className="flex flex-col whitespace-nowrap font-sans text-xs text-muted-foreground">
+  <span className="flex flex-col whitespace-nowrap font-sans text-xs text-muted-foreground">
     <span aria-hidden className="p-1 text-sm">
       {"\u200b"}
     </span>
-    <span className="flex h-9 items-center">{children}</span>
+    <span className="grid h-9 content-center text-end">
+      <span dir="ltr">{children}</span>
+    </span>
   </span>
 )
 
@@ -211,7 +223,7 @@ export const Sizes: Story = {
         ))}
         {SIZES.map((size) => (
           <React.Fragment key={size}>
-            <Head>{size}</Head>
+            <RowHead>{size}</RowHead>
             {FILLS.map((fill) => (
               <Input
                 key={fill}
@@ -243,7 +255,7 @@ export const Radius: Story = {
         ))}
         {RADII.map((radius) => (
           <React.Fragment key={radius}>
-            <Head>{title(radius)}</Head>
+            <RowHead>{title(radius)}</RowHead>
             {FILLS.map((fill) => (
               <Input
                 key={fill}
@@ -326,9 +338,9 @@ export const AllVariants: Story = {
               {SIZES.map((size) =>
                 FILLS.map((fill) => (
                   <React.Fragment key={`${size}-${fill}`}>
-                    <Head>
+                    <RowHead>
                       {size} · {fill}
-                    </Head>
+                    </RowHead>
                     {STATES.map((state) => (
                       <div key={state} data-state-cell={state}>
                         <Input
@@ -445,10 +457,10 @@ export const Parts: Story = {
 }
 
 /**
- * Long copy in every part. The label and the helper text wrap; the notes at
- * the ends of the rows wrap within half the row; a value longer than the
- * field ends in an ellipsis until it has focus, then scrolls, as a native
- * input does.
+ * Long copy. Only the description wraps, onto a second line; the label,
+ * the notes at the ends of the rows and the error each stay on one line. A
+ * value longer than the field ends in an ellipsis until it has focus, then
+ * scrolls, as a native input does.
  */
 export const LongText: Story = {
   decorators: [framed],
@@ -458,9 +470,9 @@ export const LongText: Story = {
     return (
       <div className="grid grid-cols-[17rem] items-start gap-x-8 gap-y-6 sm:grid-cols-[repeat(2,20rem)]">
         <Input
-          label={c.longLabel}
-          labelEnd={c.longLabelEnd}
-          description={c.longHelp}
+          label={c.recipient}
+          labelEnd={c.recipientNote}
+          description={c.recipientHelp}
           descriptionEnd="0/40"
           placeholder={c.namePlaceholder}
         />
@@ -470,7 +482,7 @@ export const LongText: Story = {
           endIcon={<SearchIcon />}
           defaultValue={c.longValue}
           invalid
-          error={c.longError}
+          error={c.addressError}
         />
       </div>
     )
