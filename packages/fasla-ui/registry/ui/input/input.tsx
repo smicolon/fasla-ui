@@ -109,11 +109,16 @@ const inputBoxVariants = cva(
 
 /**
  * The label row and the helper row: Figma's `Top` and `Bottom` frames. 4px
- * padding all round and an 8px gap; the two labels sit at either end, aligned
- * to the top, as in Figma. When the description wraps, the note at the end
- * stays on its first line, next to the field, instead of following it down.
+ * padding all round and an 8px gap; the two labels sit at either end. Each
+ * row keeps its end note on its first line when the text beside it wraps:
+ *  - The label row aligns to the baseline, as in Figma, so the smaller
+ *    `labelEnd` sits on the label's first-line baseline.
+ *  - The helper row aligns to the top, as in Figma, so the counter stays next
+ *    to the field instead of following a wrapping description down.
  */
-const ROW = "flex items-start justify-between gap-2 p-1"
+const ROW = "flex justify-between gap-2 p-1"
+const LABEL_ROW = cn(ROW, "items-baseline")
+const HELPER_ROW = cn(ROW, "items-start")
 
 /**
  * Figma's Top Right and Bottom labels: XS Regular in `muted-foreground`, and
@@ -227,7 +232,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         className={cn("group/input flex w-full min-w-0 flex-col data-[disabled]:opacity-50", className)}
       >
         {(label || labelEnd) && (
-          <div data-slot="input-label-row" className={ROW}>
+          <div data-slot="input-label-row" className={LABEL_ROW}>
             {label && (
               <FieldPrimitive.Label
                 data-slot="input-label"
@@ -288,7 +293,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             const message = validity.valid === false ? (error ?? (validityError || null)) : null
             if (!message && !description && !descriptionEnd) return null
             return (
-              <div data-slot="input-helper-row" className={ROW}>
+              <div data-slot="input-helper-row" className={HELPER_ROW}>
                 {message ? (
                   <FieldPrimitive.Error
                     data-slot="input-error"

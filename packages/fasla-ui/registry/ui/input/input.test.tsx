@@ -104,13 +104,19 @@ describe("Input", () => {
     expect(container.querySelector("[data-slot=input-description-end]")).toHaveClass("ms-auto", "text-end")
   })
 
-  it("aligns both rows to the top, so an end note stays on the first line", () => {
+  it("keeps each end note on its row's first line", () => {
     const { container } = render(
       <Input label="Bio" labelEnd="Optional" description="Help" descriptionEnd="0/160" />
     )
-    for (const row of ["input-label-row", "input-helper-row"]) {
-      expect(container.querySelector(`[data-slot=${row}]`)).toHaveClass("items-start")
-    }
+    // The label row shares the label's baseline; the helper row is top-aligned.
+    const labelRow = container.querySelector("[data-slot=input-label-row]")
+    const helperRow = container.querySelector("[data-slot=input-helper-row]")
+    expect(labelRow).toHaveClass("items-baseline")
+    expect(labelRow).not.toHaveClass("items-start")
+    expect(labelRow).not.toHaveClass("items-center")
+    expect(helperRow).toHaveClass("items-start")
+    expect(helperRow).not.toHaveClass("items-baseline")
+    expect(helperRow).not.toHaveClass("items-center")
   })
 
   it("renders no label or helper row when they are not used", () => {
