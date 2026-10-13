@@ -225,7 +225,7 @@ resolve to the same neutral. The system does not have a brand hue doing hierarch
 comes from weight, spacing, and inversion to `{colors.background-inverse}`. Designers arriving from a
 more colourful system consistently mis-read this — see [Known Gaps](#known-gaps).
 
-**Scale.** 5 variable collections / 983 variables · 144 text styles · 80 effect styles · 158 component
+**Scale.** 5 variable collections / 983 variables · 148 text styles · 80 effect styles · 158 component
 sets across the 44 atom pages (71 product atoms plus an 87-set low-fidelity wireframe library).
 
 ---
@@ -324,7 +324,8 @@ modal scrims, `custom/shadow` `#000000 a0.10 → a0.30`, `custom/black` and `cus
 
 ## Typography
 
-Two ramps of 72 styles each, XXS → 9XL crossed with Light / Regular / Medium / Semi Bold / Bold.
+Two ramps of 74 styles each: XXS → 9XL crossed with Light / Regular / Medium / Semi Bold / Bold (70),
+plus four extras.
 **Geist** carries LTR through `Tailwind En/*`; **Cairo** carries RTL through `Tailwind AR/*`. The two
 are 1:1 by *size*, so swapping a style across the language boundary is a name substitution and never a
 redesign — that symmetry is what makes the `Direction` property viable at all.
@@ -393,9 +394,13 @@ different sizes, which is what makes the 1.56 → 1.40 drop so abrupt; `2XL` and
 1.33; and `7XL` rises to 1.25 between `6XL` at 1.20 and `8XL` at 1.13, the one place the descent
 reverses.
 
-Two extras sit outside the ramp, identical in both scripts: `Extra/Link` (16/24, Regular, underlined)
-and `Extra/List Header` (14/16, Medium, uppercase). Uppercase is English-only — Arabic has no
-uppercase, and the Arabic style carries `textCase: UPPER` only as a duplication artefact.
+Four extras sit outside the ramp, identical in both scripts: `Extra/Link` (16/24, Regular, underlined),
+`Extra/List Header` (14/16, Medium, uppercase), and `SM/Medium Underline` and `XS/Medium Underline` —
+exact copies of `SM/Medium` and `XS/Medium` plus an underline, used by the Button `Link` type on Hover
+and Clicked. Underline a property-bound label only through these styles: setting text decoration
+directly on one Button label spreads it to every label bound to the same text property. Uppercase is
+English-only — Arabic has no uppercase, and the Arabic style carries `textCase: UPPER` only as a
+duplication artefact.
 
 ### Font family
 
@@ -520,18 +525,18 @@ either sub-parts consumed by a parent that handles direction (`Carousel Item`, `
 
 | Component | Variants | Properties |
 |---|---|---|
-| ` Button` `307:333` | **960** | `Type` Solid/Soft/Outline/Ghost · `Style` primary/secondary/destructive · `Size` xs/sm/md/lg · `State` Enabled/Hover/Clicked/Focus/Disabled · `Radius` Standard/Fully · `Direction` · text props `¶ label` (LTR) and `label ¶` (RTL) · Left/Right icon booleans + swaps |
-| `Icon Button` `3615:13506` | 480 | same axes minus label; `Icon` instance swap |
+| ` Button` `307:333` | **1,200** | `Direction` LTR/RTL · `Type` Solid/Soft/Outline/Ghost/Link · `Style` Primary/Secondary/Destructive · `Size` xs/sm/md/lg · `State` Enabled/Hover/Clicked/Focus/Disabled · `Radius` Standard/Rounded · text props `¶ label` (LTR) and `label ¶` (RTL) · `Left Icon` / `Right Icon` booleans + `Icon (Left)` / `Icon (Right)` swaps on the `Left icon` / `Right icon` layers |
+| `Icon Button` `3615:13506` | 480 | `Type` Solid/Soft/Outline/Ghost (no Link) · `Style` Primary/Secondary/Destructive · `Size` xs/sm/md/lg · `State` · `Radius`; no `Direction` axis and no label; `Icon` instance swap |
 | `Toggle` `15088:228441` | 96 | `Type` Ghost/Outline · `state` Default/hover/Focus/Disabled/Pressed · `Size` sm/md/lg · `Text` On/Off · `Icon` |
 | `Toggle Group` `15095:16190` | 16 | `Variant` ×8 — Icon, Icon with text, Fix Outline text, Default text with/without Outline, With Avatar, Rounded, Alignment options |
 
-The Button set is the largest object in the system at 960 variants, and the reason the `Direction`
+The Button set is the largest object in the system at 1,200 variants, and the reason the `Direction`
 property must never be renamed: every instance in every block would drop its overrides.
 
 Two Button quirks that recur: its RTL variant does **not** physically swap the Left/Right icon slots —
-mirror by toggling the booleans and setting the mirrored glyph. And `Solid`/`primary` on a
+mirror by toggling the booleans and setting the mirrored glyph. And `Solid`/`Primary` on a
 `{colors.background-inverse}` band is invisible, because both are near-black in Light; use
-`Outline`/`secondary` there.
+`Outline`/`Secondary` there.
 
 ### Form & input
 
@@ -675,8 +680,8 @@ one component serves both directions, and an atom without it silently breaks tha
 `{colors.foreground-inverse}` and `{colors.muted-foreground-inverse}`. Because it inverts with the
 theme, the band stays correct in both modes.
 
-**Don't use `{colors.primary}` on an inverse band.** Both are near-black in Light, so a Solid/primary
-Button on a `{colors.background-inverse}` section is invisible. Use `Outline`/`secondary`.
+**Don't use `{colors.primary}` on an inverse band.** Both are near-black in Light, so a Solid/Primary
+Button on a `{colors.background-inverse}` section is invisible. Use `Outline`/`Secondary`.
 
 **Don't reach for `{colors.accent}`, `{colors.muted}` or `{colors.secondary}` to create contrast** —
 all three resolve to the same neutral. A "colour block" built from them reads as a tonal block. Use
@@ -773,9 +778,9 @@ Honest list of what this document does not cover and what the system does not ye
 
 - **No monospace type style exists.** Terminal, code and log UI currently uses
   `Tailwind En/SM/Regular`, which is a stopgap, not a decision.
-- **`Button` Solid/primary is unreadable in Dark mode** — near-white fill with a light-grey label,
-  because `theme/primary-foreground` resolves to `#a3a3a3` in Dark rather than a true dark ink. Known
-  and reported; it needs a token fix at the source, not per-instance patches.
+- **Resolved: `Button` Solid/Primary in Dark mode.** It used to show a light-grey label on a
+  near-white fill. `theme/primary-foreground` now resolves to `#0a0a0a` in Dark, so the label is dark
+  ink (checked 2026-10-13).
 - **`html.to.design`** (53 variables) is a leftover import collection and a cleanup candidate. Nothing
   should bind to it.
 - **Colour and effect *styles* cannot be read through the REST API** in this setup, as

@@ -264,7 +264,7 @@ with an Arabic word.**
 | `~1–2~` | «واحدة أو اثنتان» |
 
 `Creative Hero` AR shipped 10 nodes rewritten this way and every one verified by screenshot. Runs that
-begin with a Latin letter — `theme/background-inverse`, `Solid/primary`, `Type=Split Canvas,
+begin with a Latin letter — `theme/background-inverse`, `Solid/Primary`, `Type=Split Canvas,
 Breakpoint=Desktop, Direction=RTL`, `Work card — n` — need no change and were left alone.
 
 **A leading `-` is not an anchor either.** `~-inverse~` rendered as `inverse-`. Write the whole token
@@ -275,10 +275,10 @@ fragment.
 
 Two adjacent isolated runs are two LTR blocks inside an RTL paragraph, so they are laid out
 right-to-left and **B reads first in Arabic**. On `Creative Hero` AR this silently swapped
-`Solid/primary · Outline/primary` and `theme/foreground-inverse · theme/muted-foreground-inverse`
+`Solid/Primary · Outline/Primary` and `theme/foreground-inverse · theme/muted-foreground-inverse`
 against their English twins.
 
-Wrap the whole list as **one** run — `~Solid/primary · Outline/primary~` — exactly as the isolation
+Wrap the whole list as **one** run — `~Solid/Primary · Outline/Primary~` — exactly as the isolation
 convention above already implies when it says a `·` inside a wrapped run is part of the run. Six nodes
 on this doc were rebuilt that way.
 

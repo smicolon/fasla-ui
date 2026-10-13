@@ -233,13 +233,13 @@ The real work is overflow and restructuring:
 
 ## Known token traps
 
-- `theme/primary` is **near-black**; a `Solid`/`primary` Button on a `theme/background-inverse` band is
-  invisible. Use `Outline`/`secondary` on inverse sections, and `muted-foreground-inverse` for eyebrows.
+- `theme/primary` is **near-black**; a `Solid`/`Primary` Button on a `theme/background-inverse` band is
+  invisible. Use `Outline`/`Secondary` on inverse sections, and `muted-foreground-inverse` for eyebrows.
 - `theme/accent`, `theme/muted` and `theme/secondary` all resolve to `#f5f5f5` (light) / `#262626` (dark).
   The only saturated tokens are `theme/chart-1…5` and the status colours — use `background-inverse` for a
   genuinely bold band.
-- Button `Solid`/`primary` is unreadable in **Dark** mode (near-white fill, light grey label). Known,
-  reported, unpatched — do not patch instances around it.
+- Button `Solid`/`Primary` in **Dark** mode is fixed at the token: `theme/primary-foreground` resolves
+  to `#0a0a0a` in Dark (checked 2026-10-13). It was never patched per instance; keep it that way.
 - Setting `textCase='UPPER'` or any direct override on a styled TEXT (e.g. `letterSpacing`) **clears
   `textStyleId`**, silently detaching the token. Type uppercase literally. Audit with
   `findAll(n => n.type==='TEXT' && !n.textStyleId)` before shipping.
