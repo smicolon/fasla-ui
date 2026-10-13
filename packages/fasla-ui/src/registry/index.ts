@@ -26,9 +26,9 @@ export const registry: RegistryItem[] = [
     name: "input",
     type: "ui",
     title: "Input",
-    description: "An input component with variants for validation states and icon support.",
+    description: "A text field with a label, helper labels, start and end icons, success and invalid states, four sizes and two radii.",
     sourcePath: "registry/ui/input",
-    dependencies: ["class-variance-authority"],
+    dependencies: ["@base-ui/react", "class-variance-authority"],
     categories: ["primitives", "forms"],
   },
   {
