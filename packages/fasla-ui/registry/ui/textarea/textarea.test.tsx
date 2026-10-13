@@ -94,9 +94,10 @@ describe("Textarea", () => {
     }
   })
 
-  it("spaces the label row, the box and the helper row 6px apart, as Figma does", () => {
-    const { container } = render(<Textarea label="Bio" />)
-    expect(root(container)).toHaveClass("flex-col", "gap-1.5")
+  it("puts no gap between the label row, the box and the helper row, as Input does", () => {
+    const { container } = render(<Textarea label="Bio" description="Help" />)
+    expect(root(container)).toHaveClass("flex-col")
+    expect(root(container).getAttribute("class")).not.toMatch(/(^|\s)(gap|space-y)-/)
   })
 
   it("links the label to the textarea", () => {

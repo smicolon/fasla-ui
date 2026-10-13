@@ -113,15 +113,14 @@ const Head = ({ children, className }: { children: React.ReactNode; className?: 
 /**
  * A side row label centred on the field's box, not on its label or helper
  * text. A zero-width strut as tall as the label row — 4px padding round one
- * `text-sm` line, so it matches in either script — and the field's 6px gap
- * sit over a strip as tall as the box's 60px minimum, and the caption centres
- * in the strip. Left-aligned in both directions: the caption is an English
- * property name.
+ * `text-sm` line, so it matches in either script — sits over a strip as
+ * tall as the box's 60px minimum, and the caption centres in the strip.
+ * Left-aligned in both directions: the caption is an English property name.
  */
 const BoxLineHead = ({ children }: { children: React.ReactNode }) => (
-  <span dir="ltr" className="flex flex-col gap-1.5 whitespace-nowrap text-left font-sans text-xs text-muted-foreground">
+  <span dir="ltr" className="flex flex-col whitespace-nowrap text-left font-sans text-xs text-muted-foreground">
     <span aria-hidden className="p-1 text-sm">
-      {"​"}
+      {"\u200b"}
     </span>
     <span className="flex h-[60px] items-center">{children}</span>
   </span>
@@ -174,7 +173,6 @@ export const Default: Story = {
         label={args.label ?? c.notes}
         placeholder={args.placeholder ?? c.notesPlaceholder}
         description={args.description ?? c.notesHelp}
-        error={args.error ?? c.notesError}
       />
     )
   },

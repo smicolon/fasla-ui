@@ -107,7 +107,8 @@ const BOX = [
 /**
  * The label row and the helper row: Figma's `Top` and `Bottom` frames, as
  * Input's. 4px padding all round and an 8px gap; the two labels sit at either
- * end. The label row aligns to the baseline, so the smaller `labelEnd` sits
+ * end. The group has no gap of its own, as Input's has none: the rows' 4px
+ * padding is the only space between them and the box. The label row aligns to the baseline, so the smaller `labelEnd` sits
  * on the label's first line; the helper row aligns to the top, so the
  * counter stays on the first line of a wrapping description.
  */
@@ -264,7 +265,7 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
         data-status={status === "success" ? "success" : undefined}
         invalid={isInvalid}
         disabled={disabled}
-        className={cn("group/textarea flex w-full min-w-0 flex-col gap-1.5 data-[disabled]:opacity-50", className)}
+        className={cn("group/textarea flex w-full min-w-0 flex-col data-[disabled]:opacity-50", className)}
       >
         {(label || labelEnd) && (
           <div data-slot="textarea-label-row" className={LABEL_ROW}>
