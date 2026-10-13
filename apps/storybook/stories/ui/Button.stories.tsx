@@ -1,6 +1,6 @@
 import * as React from "react"
 import type { Meta, StoryObj } from "@storybook/react"
-import { DownloadIcon, UploadIcon, XIcon } from "lucide-react"
+import { DownloadIcon, UploadIcon } from "lucide-react"
 import { Button, type ButtonProps } from "../../../../packages/fasla-ui/registry/ui/button"
 import { HIDE_REST, Head, ICON_NAMES, StateGrid, StoryIcon, TONES, TYPES, pseudoFor, type IconName } from "./button-story-kit"
 
@@ -104,7 +104,6 @@ const COPY = {
     upload: "Upload",
     download: "Download",
     add: "Add",
-    close: "Close",
     next: "Next",
     edit: "Edit",
     forgot: "Forgot password?",
@@ -121,7 +120,6 @@ const COPY = {
     upload: "رفع ملف",
     download: "تنزيل",
     add: "إضافة",
-    close: "إغلاق",
     next: "التالي",
     edit: "تعديل",
     forgot: "نسيت كلمة المرور؟",
@@ -196,7 +194,7 @@ export const Sizes: Story = {
 export const Radius: Story = {
   parameters: { pseudo: { focusVisible: ["#radius-focus-standard button", "#radius-focus-rounded button"] } },
   render: (_args, ctx) => (
-    <div className="grid grid-cols-[5rem_repeat(3,max-content)] items-center gap-x-5 gap-y-4">
+    <div className="grid grid-cols-[5rem_repeat(2,max-content)] items-center gap-x-5 gap-y-4">
       {(["standard", "rounded"] as const).map((radius) => (
         <React.Fragment key={radius}>
           <Head>{radius}</Head>
@@ -206,9 +204,6 @@ export const Radius: Story = {
               {copy(ctx).save}
             </Button>
           </span>
-          <Button radius={radius} size="icon-md" variant="soft" aria-label={copy(ctx).add}>
-            <StoryIcon name="plus" />
-          </Button>
         </React.Fragment>
       ))}
     </div>
@@ -241,7 +236,6 @@ export const WithIcons: Story = {
 
 /**
  * Ghost is for actions on the same page; Link takes the reader somewhere else.
- * A link inside a sentence stays a plain text link, not a Button.
  */
 export const LinkAndGhost: Story = {
   name: "Link and Ghost",
@@ -258,9 +252,6 @@ export const LinkAndGhost: Story = {
           {c.elsewhere}
         </span>
         <div className="flex flex-wrap items-center gap-2">
-          <Button variant="ghost" size="icon-md" aria-label={c.close}>
-            <XIcon strokeWidth={1.5} />
-          </Button>
           <Button variant="ghost">{c.edit}</Button>
         </div>
         <div className="flex flex-wrap items-center gap-2">
