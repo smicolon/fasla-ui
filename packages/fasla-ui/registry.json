@@ -298,8 +298,9 @@
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
-      "description": "An input component with variants for validation states and icon support.",
+      "description": "A text field with a label, helper labels, start and end icons, success and invalid states, four sizes and two radii.",
       "dependencies": [
+        "@base-ui/react",
         "class-variance-authority"
       ],
       "registryDependencies": [],

@@ -83,6 +83,11 @@ export const Default: Story = {
 The same rule as `CLAUDE.md` ("Stories and docs examples: layout rule"), with
 how to meet it:
 
+- **Centre the content in its box.** The story's outermost element is
+  `mx-auto` (with `w-max` on a grid), so the whole block sits in the middle
+  of the canvas and of the Docs container in both directions, never against
+  the start side. The docs site's `ComponentPreview` already centres its
+  child; a grid inside it is `w-full` or `mx-auto w-max`.
 - **Rows share a top edge.** Lay a matrix out as a CSS grid with
   `items-start` (or `items-stretch` plus `subgrid`, below). Never offset a
   cell by hand to make it line up.
@@ -90,8 +95,21 @@ how to meet it:
   Do not pad a story to make room "just in case"; reserve exactly what is
   drawn.
 - **Labels sit with what they describe.** A row label aligns with the
-  component's own line (a tooltip's title, a field's label), not with the
-  control underneath.
+  component's own line (a tooltip's title), not with the control underneath.
+  Beside a field with a label or helper text above or below it, the row
+  label centres vertically on the field's box, not on its label: stack a
+  zero-width strut as tall as what sits above the box over a strip as tall
+  as the box, and centre the label in the strip (`BoxLineHead` in
+  `stories/ui/Input.stories.tsx`).
+- **Side labels never wrap.** Give them `whitespace-nowrap` and size their
+  column `max-content`, not a fixed rem width; let the columns beside it
+  narrow a little if the row would otherwise overflow.
+- **Side row labels are always left-aligned, a column gap from the component.**
+  `text-align: left`, physical, in LTR and RTL alike (`RowHead` in
+  `stories/ui/Input.stories.tsx`). The space between the label column and
+  the first component is the grid's column gap, the same as between two
+  component columns: no extra margin, and never a gap so small (12px) that
+  the text reads as touching the component's edge.
 - **Two columns, not one long stack,** wherever the content fits.
 - **Fit the Docs page.** Autodocs renders each story in a container about
   1000px wide that clips anything wider. Check every story there as well as

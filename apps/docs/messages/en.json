@@ -452,37 +452,78 @@
       }
     },
     "input": {
-      "lead": "A text input component with validation states and icon support.",
-      "placeholder": "Enter text...",
+      "lead": "A one-line text field, with an optional label, helper text and icons. It shows when a value passes or fails validation, in four sizes and two corner shapes.",
+      "preview": {
+        "label": "Full name",
+        "placeholder": "Layla Haddad",
+        "description": "As it appears on your ID."
+      },
       "variants": {
-        "default": "Default",
-        "error": "Error state",
-        "success": "Success state"
+        "standard": {
+          "label": "Full name",
+          "placeholder": "Layla Haddad"
+        },
+        "rounded": {
+          "label": "Search orders",
+          "placeholder": "Order number or product"
+        },
+        "filled": {
+          "label": "Full name",
+          "value": "Nadia Rahman"
+        },
+        "success": {
+          "label": "Coupon code",
+          "description": "Coupon applied to your order."
+        },
+        "invalid": {
+          "label": "Email",
+          "error": "Enter an email address, like name@example.com."
+        },
+        "disabled": {
+          "label": "Account number",
+          "description": "Contact support to change it."
+        }
       },
       "sizes": {
+        "label": "Search orders",
+        "xs": "Extra small",
         "sm": "Small",
-        "default": "Default",
+        "md": "Medium",
         "lg": "Large"
       },
-      "iconsTitle": "With Icons",
-      "icons": {
-        "search": "Search...",
-        "end": "With end icon"
+      "partsTitle": "Labels and icons",
+      "parts": {
+        "name": "Full name",
+        "optional": "Optional",
+        "nameHelp": "As it appears on your ID.",
+        "count": "12/40",
+        "nameValue": "Nadia Rahman",
+        "password": "Password",
+        "passwordHelp": "At least 8 characters.",
+        "show": "Show password"
       },
       "props": {
-        "variant": "Visual style for validation.",
-        "inputSize": "Field size.",
-        "startIcon": "Icon at the start of the field.",
-        "endIcon": "Icon at the end of the field.",
-        "placeholder": "Text shown while empty.",
+        "size": "Field height: 28, 32, 36 or 40px.",
+        "radius": "Corner shape: 8px corners, or fully rounded ends.",
+        "status": "Set to <code>success</code> to mark a value that passed validation.",
+        "invalid": "Marks the field invalid. <code>aria-invalid</code> does the same.",
+        "disabled": "Disables the field and dims the whole group.",
+        "label": "The field's label, linked to the input for you.",
+        "labelEnd": "A short note at the end of the label row, such as Optional.",
+        "description": "Helper text under the field. A screen reader reads it with the field.",
+        "descriptionEnd": "A note at the end of the helper row, such as a character count.",
+        "error": "The message shown in place of <code>description</code> while the field is invalid.",
+        "startIcon": "An icon at the start of the field.",
+        "endIcon": "An icon or a small button at the end of the field.",
+        "placeholder": "Text shown while the field is empty.",
         "type": "Input type, such as <code>email</code>.",
-        "disabled": "Disables the field and dims it.",
         "value": "Field value. Use it with <code>onChange</code>.",
         "onChange": "Called when the text changes.",
-        "className": "Extra classes for the component."
+        "className": "Extra CSS classes for the field group."
       },
       "usage": {
-        "label": "Email"
+        "label": "Email",
+        "description": "We send the receipt here."
       }
     },
     "combobox": {
