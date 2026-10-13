@@ -264,7 +264,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       loadingLabel = "Loading",
       children,
       disabled,
-      onClick,
+      onClickCapture,
       ...props
     },
     ref
@@ -299,17 +299,25 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         aria-disabled={asChild && inactive ? true : undefined}
         tabIndex={asChild && inactive ? -1 : undefined}
         aria-busy={loading || undefined}
-        onClick={
+        // Blocked in the capture phase: Slot runs the child's own onClick
+        // before the button's, so a bubble-phase guard would come too late.
+        onClickCapture={
           asChild && inactive
-            ? (event: React.MouseEvent<HTMLButtonElement>) => event.preventDefault()
-            : onClick
+            ? (event: React.MouseEvent<HTMLButtonElement>) => {
+                event.preventDefault()
+                event.stopPropagation()
+              }
+            : onClickCapture
         }
         {...props}
       >
         {loading && !asChild ? (
           <>
             <LoaderCircleIcon aria-hidden="true" className="animate-spin motion-reduce:animate-none" strokeWidth={1.5} />
-            <span className="sr-only">{loadingLabel}</span>
+            {/* A status, so it is announced even when aria-label names the button. */}
+            <span role="status" className="sr-only">
+              {loadingLabel}
+            </span>
             {/* An icon button has room for one glyph: the spinner replaces it. */}
             {!isIcon && children}
           </>

@@ -166,6 +166,8 @@ describe("Button", () => {
     )
     expect(screen.queryByTestId("plus")).not.toBeInTheDocument()
     expect(screen.getByRole("button", { name: "Add" })).toBeDisabled()
+    // The action name stays; the loading text is announced as a status.
+    expect(screen.getByRole("status")).toHaveTextContent("Loading")
   })
 
   it("calls onClick handler when clicked", () => {
@@ -234,9 +236,12 @@ describe("Button", () => {
 
     it("keeps a disabled link out of the tab order and stops it navigating", () => {
       const onClick = vi.fn()
+      const childClick = vi.fn()
       render(
         <Button asChild disabled onClick={onClick}>
-          <a href="/pricing">View all</a>
+          <a href="/pricing" onClick={childClick}>
+            View all
+          </a>
         </Button>
       )
       const link = screen.getByRole("link", { name: "View all" })
@@ -245,6 +250,8 @@ describe("Button", () => {
       link.dispatchEvent(click)
       expect(click.defaultPrevented).toBe(true)
       expect(onClick).not.toHaveBeenCalled()
+      // The child's own handler must not run either.
+      expect(childClick).not.toHaveBeenCalled()
     })
   })
 

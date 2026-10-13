@@ -645,7 +645,7 @@
         "next": "Next"
       },
       "loadingTitle": "Loading",
-      "loadingBody": "<code>loading</code> shows a spinner, disables the button and announces <code>loadingLabel</code> to screen readers.",
+      "loadingBody": "<code>loading</code> shows a spinner, disables the button and announces <code>loadingLabel</code> to screen readers. With <code>asChild</code> the child is only marked busy and disabled, so show your own progress inside it.",
       "loading": "Saving…",
       "loadingLabel": "Saving",
       "a11y": {
