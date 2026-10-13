@@ -25,7 +25,11 @@ import { cn } from "../../../src/lib/utils"
 
 type Variant = "default" | "secondary" | "destructive" | "outline" | "ghost" | "link" | "soft"
 type Tone = "primary" | "secondary" | "destructive"
-type Size = "xs" | "sm" | "default" | "lg" | "icon-xs" | "icon-sm" | "icon" | "icon-lg"
+type Size = "xs" | "sm" | "md" | "lg" | "icon-xs" | "icon-sm" | "icon-md" | "icon-lg"
+/** shadcn's names for the middle sizes, kept so existing calls keep working. */
+type SizeAlias = "default" | "icon"
+const SIZE_ALIAS: Record<SizeAlias, Size> = { default: "md", icon: "icon-md" }
+const resolveSize = (size: Size | SizeAlias): Size => SIZE_ALIAS[size as SizeAlias] ?? (size as Size)
 type Radius = "standard" | "rounded"
 
 /** Each shadcn variant is one Figma Type, in the Style that matches its name. */
@@ -96,11 +100,11 @@ const styles = cva(
         // 26px has no Tailwind step; it is Figma's xs height.
         xs: "h-[1.625rem] gap-1.5 px-2 text-xs",
         sm: "h-8 gap-1.5 px-3 text-sm",
-        default: "h-9 gap-2 px-4 text-sm",
+        md: "h-9 gap-2 px-4 text-sm",
         lg: "h-10 gap-2 px-6 text-sm",
         "icon-xs": "size-[1.625rem]",
         "icon-sm": "size-8",
-        icon: "size-9",
+        "icon-md": "size-9",
         "icon-lg": "size-10",
       },
       radius: {
@@ -176,7 +180,7 @@ const styles = cva(
     defaultVariants: {
       type: "solid",
       tone: "primary",
-      size: "default",
+      size: "md",
       radius: "standard",
     },
   }
@@ -185,7 +189,7 @@ const styles = cva(
 type ButtonVariantOptions = {
   variant?: Variant | null
   tone?: Tone | null
-  size?: Size | null
+  size?: Size | SizeAlias | null
   radius?: Radius | null
   className?: string
 }
@@ -196,29 +200,30 @@ type ButtonVariantOptions = {
  */
 function buttonVariants({ variant, tone, size, radius, className }: ButtonVariantOptions = {}) {
   const v = variant ?? "default"
-  return cn(styles({ type: TYPE[v], tone: tone ?? DEFAULT_TONE[v], size, radius }), className)
+  return cn(styles({ type: TYPE[v], tone: tone ?? DEFAULT_TONE[v], size: size ? resolveSize(size) : size, radius }), className)
 }
 
-const ICON_SIZES = new Set<Size>(["icon-xs", "icon-sm", "icon", "icon-lg"])
+const ICON_SIZES = new Set<Size>(["icon-xs", "icon-sm", "icon-md", "icon-lg"])
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   /**
-   * Figma `Type`, by shadcn's names: `default`, `secondary` and `destructive`
-   * are Solid; `outline`, `ghost`, `link` and `soft` are the other four.
-   */
-  variant?: Variant
-  /**
    * Figma `Style`. Each variant has its own default: Primary for `default`,
-   * `link` and `soft`, Secondary for `secondary`, `outline` and `ghost`,
-   * Destructive for `destructive`.
+   * `link` and `soft`, Secondary for `outline` and `ghost`.
    */
   tone?: Tone
   /**
-   * Figma `Size`: `xs` 26px, `sm` 32px, `default` 36px (Figma's md), `lg`
-   * 40px. The `icon-*` sizes are Icon Button, square at the same heights, and
-   * need an accessible name — `aria-label` or visually hidden text.
+   * Figma `Type`: `default` is Solid; `outline`, `ghost`, `soft` and `link`
+   * are the other four. shadcn's `secondary` and `destructive` still work:
+   * they are Solid in the Secondary and Destructive tones.
    */
-  size?: Size
+  variant?: Variant
+  /**
+   * Figma `Size`: `xs` 26px, `sm` 32px, `md` 36px, `lg` 40px. The `icon-*`
+   * sizes are Icon Button, square at the same heights, and need an accessible
+   * name — `aria-label` or visually hidden text. shadcn's `default` and `icon`
+   * still work as `md` and `icon-md`.
+   */
+  size?: Size | SizeAlias
   /** Figma `Radius`: `standard` is `border radius/md`, `rounded` is a pill. */
   radius?: Radius
   /** Renders its only child instead of a `<button>`, with the button's styles. */
@@ -257,7 +262,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       className,
       variant = "default",
       tone,
-      size = "default",
+      size: sizeProp = "md",
       radius = "standard",
       asChild = false,
       loading = false,
@@ -270,6 +275,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     ref
   ) => {
     const Comp = asChild ? Slot : "button"
+    const size = resolveSize(sizeProp)
     const isIcon = ICON_SIZES.has(size)
     const inactive = Boolean(disabled || loading)
 

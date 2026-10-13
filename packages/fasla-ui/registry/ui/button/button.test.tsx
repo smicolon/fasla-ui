@@ -13,7 +13,7 @@ describe("Button", () => {
     expect(button()).toHaveClass("bg-primary", "text-primary-foreground", "h-9", "px-4", "rounded-[var(--radius-md)]")
     expect(button()).toHaveAttribute("data-variant", "default")
     expect(button()).toHaveAttribute("data-tone", "primary")
-    expect(button()).toHaveAttribute("data-size", "default")
+    expect(button()).toHaveAttribute("data-size", "md")
   })
 
   describe("each variant is one Figma Type and Style", () => {
@@ -84,11 +84,11 @@ describe("Button", () => {
   it.each([
     ["xs", ["h-[1.625rem]", "px-2", "gap-1.5", "text-xs"]],
     ["sm", ["h-8", "px-3", "gap-1.5", "text-sm"]],
-    ["default", ["h-9", "px-4", "gap-2", "text-sm"]],
+    ["md", ["h-9", "px-4", "gap-2", "text-sm"]],
     ["lg", ["h-10", "px-6", "gap-2", "text-sm"]],
     ["icon-xs", ["size-[1.625rem]"]],
     ["icon-sm", ["size-8"]],
-    ["icon", ["size-9"]],
+    ["icon-md", ["size-9"]],
     ["icon-lg", ["size-10"]],
   ] as const)("size %s matches Figma", (size, classes) => {
     render(
@@ -97,6 +97,37 @@ describe("Button", () => {
       </Button>
     )
     expect(button()).toHaveClass(...classes, "[&_svg]:size-4")
+  })
+
+  it.each([
+    ["default", "md"],
+    ["icon", "icon-md"],
+  ] as const)("keeps shadcn's size %s as an alias of %s", (alias, size) => {
+    const { rerender } = render(
+      <Button size={alias} aria-label="Add">
+        Label
+      </Button>
+    )
+    const aliased = button().className
+    expect(button()).toHaveAttribute("data-size", size)
+    rerender(
+      <Button size={size} aria-label="Add">
+        Label
+      </Button>
+    )
+    expect(button().className).toBe(aliased)
+    expect(buttonVariants({ size: alias })).toBe(buttonVariants({ size }))
+  })
+
+  it("treats the icon alias as an icon size", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {})
+    render(
+      <Button size="icon">
+        <PlusIcon />
+      </Button>
+    )
+    expect(warn).toHaveBeenCalledTimes(1)
+    warn.mockRestore()
   })
 
   it("rounds to a pill, ring included", () => {
@@ -160,7 +191,7 @@ describe("Button", () => {
 
   it("swaps an icon button's glyph for the spinner while loading", () => {
     render(
-      <Button size="icon" aria-label="Add" loading>
+      <Button size="icon-md" aria-label="Add" loading>
         <PlusIcon data-testid="plus" />
       </Button>
     )
@@ -263,7 +294,7 @@ describe("Button", () => {
 
     it("warns in development when there is none", () => {
       render(
-        <Button size="icon">
+        <Button size="icon-md">
           <PlusIcon />
         </Button>
       )
@@ -295,12 +326,12 @@ describe("Button", () => {
 
     it("warns once, not on every render", () => {
       const { rerender } = render(
-        <Button size="icon">
+        <Button size="icon-md">
           <PlusIcon />
         </Button>
       )
       rerender(
-        <Button size="icon" className="x">
+        <Button size="icon-md" className="x">
           <PlusIcon />
         </Button>
       )
@@ -315,7 +346,7 @@ describe("Button", () => {
     it("is quiet in production", () => {
       vi.stubEnv("NODE_ENV", "production")
       render(
-        <Button size="icon">
+        <Button size="icon-md">
           <PlusIcon />
         </Button>
       )

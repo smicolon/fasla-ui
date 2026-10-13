@@ -12,7 +12,7 @@ import { PropsTable, type PropRow } from "@/components/props-table"
 /** Figma's Icon Button Types: Button's, without Link. */
 const TYPES = ["default", "soft", "outline", "ghost"] as const
 const TONES = ["primary", "secondary", "destructive"] as const
-const SIZES = ["icon-xs", "icon-sm", "icon", "icon-lg"] as const
+const SIZES = ["icon-xs", "icon-sm", "icon-md", "icon-lg"] as const
 
 export default function IconButtonPage() {
   const t = useTranslations("docs.sections")
@@ -21,16 +21,18 @@ export default function IconButtonPage() {
   const code = (chunks: React.ReactNode) => <code className="whitespace-nowrap text-sm">{chunks}</code>
   const rich = { code }
 
+  // `secondary` and `destructive` (variant) and `icon` (size) still work for
+  // shadcn compatibility; the note under the table says so.
   const props: PropRow[] = [
-    { prop: "size", type: '"icon-xs" | "icon-sm" | "icon" | "icon-lg"', fallback: "", description: b.rich("props.size", rich) },
-    { prop: "aria-label", type: "string", fallback: "", description: b.rich("props.ariaLabel", rich) },
+    { prop: "tone", type: '"primary" | "secondary" | "destructive"', fallback: "", description: b.rich("props.tone", rich) },
     {
       prop: "variant",
-      type: '"default" | "secondary" | "destructive" | "outline" | "ghost" | "soft"',
+      type: '"default" | "outline" | "ghost" | "soft"',
       fallback: '"default"',
       description: b.rich("props.variant", rich),
     },
-    { prop: "tone", type: '"primary" | "secondary" | "destructive"', fallback: "", description: b.rich("props.tone", rich) },
+    { prop: "size", type: '"icon-xs" | "icon-sm" | "icon-md" | "icon-lg"', fallback: "", description: b.rich("props.size", rich) },
+    { prop: "aria-label", type: "string", fallback: "", description: b.rich("props.ariaLabel", rich) },
     { prop: "radius", type: '"standard" | "rounded"', fallback: '"standard"', description: b.rich("props.radius", rich) },
     { prop: "loading", type: "boolean", fallback: "false", description: b.rich("props.loading", rich) },
     { prop: "disabled", type: "boolean", fallback: "false", description: b.rich("props.disabled", rich) },
@@ -56,13 +58,13 @@ export default function IconButtonPage() {
         <h2 className="text-2xl font-semibold">{t("preview")}</h2>
         <ComponentPreview>
           <div className="flex flex-wrap items-center gap-2">
-            <Button size="icon" aria-label={b("labels.add")}>
+            <Button size="icon-md" aria-label={b("labels.add")}>
               <PlusIcon aria-hidden="true" strokeWidth={1.5} />
             </Button>
-            <Button size="icon" variant="outline" aria-label={b("labels.like")}>
+            <Button size="icon-md" variant="outline" aria-label={b("labels.like")}>
               <HeartIcon aria-hidden="true" strokeWidth={1.5} />
             </Button>
-            <Button size="icon" variant="ghost" aria-label={b("labels.more")}>
+            <Button size="icon-md" variant="ghost" aria-label={b("labels.more")}>
               <EllipsisIcon aria-hidden="true" strokeWidth={1.5} />
             </Button>
           </div>
@@ -79,7 +81,7 @@ export default function IconButtonPage() {
               <div key={variant} className="contents">
                 <code className="w-fit text-sm text-muted-foreground">{variant}</code>
                 {TONES.map((tone) => (
-                  <Button key={tone} variant={variant} tone={tone} size="icon" aria-label={b("labels.like")}>
+                  <Button key={tone} variant={variant} tone={tone} size="icon-md" aria-label={b("labels.like")}>
                     <HeartIcon aria-hidden="true" strokeWidth={1.5} />
                   </Button>
                 ))}
@@ -123,7 +125,7 @@ export default function IconButtonPage() {
                     <Button
                       key={variant}
                       variant={variant}
-                      size="icon"
+                      size="icon-md"
                       aria-label={b("labels.edit")}
                       disabled={state === "disabled"}
                     >
@@ -158,6 +160,7 @@ export default function IconButtonPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("props")}</h2>
         <PropsTable rows={props} />
+        <p className="text-sm text-muted-foreground">{b.rich("propsNote", rich)}</p>
       </section>
 
       {/* Usage */}
@@ -168,7 +171,7 @@ import { Button } from "@/components/ui/button"
 
 export function AddButton() {
   return (
-    <Button size="icon" aria-label="${b("labels.add")}">
+    <Button size="icon-md" aria-label="${b("labels.add")}">
       <PlusIcon aria-hidden="true" strokeWidth={1.5} />
     </Button>
   )

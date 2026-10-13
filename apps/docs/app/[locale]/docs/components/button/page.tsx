@@ -1,7 +1,7 @@
 "use client"
 
 import { useTranslations } from "next-intl"
-import { ArrowRightIcon, DownloadIcon, UploadIcon, XIcon } from "lucide-react"
+import { ArrowRightIcon, DownloadIcon, UploadIcon } from "lucide-react"
 
 import { Button } from "@fasla-ui/ui/button"
 import { ComponentPreview, UsageExample } from "@/components/component-preview"
@@ -13,7 +13,7 @@ const VARIANTS = ["default", "secondary", "destructive", "outline", "ghost", "so
 const TONES = ["primary", "secondary", "destructive"] as const
 /** Figma's Types, each reached through one variant plus `tone`. */
 const TYPES = ["default", "soft", "outline", "ghost", "link"] as const
-const SIZES = ["xs", "sm", "default", "lg"] as const
+const SIZES = ["xs", "sm", "md", "lg"] as const
 
 export default function ButtonPage() {
   const t = useTranslations("docs.sections")
@@ -24,18 +24,20 @@ export default function ButtonPage() {
   const code = (chunks: React.ReactNode) => <code className="whitespace-nowrap text-sm">{chunks}</code>
   const rich = { code }
 
+  // `secondary` and `destructive` (variant) and `default` and `icon` (size)
+  // still work for shadcn compatibility; the note under the table says so.
   const props: PropRow[] = [
+    { prop: "tone", type: '"primary" | "secondary" | "destructive"', fallback: "", description: b.rich("props.tone", rich) },
     {
       prop: "variant",
-      type: '"default" | "secondary" | "destructive" | "outline" | "ghost" | "soft" | "link"',
+      type: '"default" | "outline" | "ghost" | "soft" | "link"',
       fallback: '"default"',
       description: b.rich("props.variant", rich),
     },
-    { prop: "tone", type: '"primary" | "secondary" | "destructive"', fallback: "", description: b.rich("props.tone", rich) },
     {
       prop: "size",
-      type: '"xs" | "sm" | "default" | "lg" | "icon-xs" | "icon-sm" | "icon" | "icon-lg"',
-      fallback: '"default"',
+      type: '"xs" | "sm" | "md" | "lg" | "icon-xs" | "icon-sm" | "icon-md" | "icon-lg"',
+      fallback: '"md"',
       description: b.rich("props.size", rich),
     },
     { prop: "radius", type: '"standard" | "rounded"', fallback: '"standard"', description: b.rich("props.radius", rich) },
@@ -166,13 +168,11 @@ export default function ButtonPage() {
         <h2 className="text-2xl font-semibold">{b("link.title")}</h2>
         <p className="text-muted-foreground">{b.rich("link.body", rich)}</p>
         <ComponentPreview>
-          <div className="grid w-full gap-6 sm:grid-cols-2">
+          {/* Ghost has one example and Link three, so the Link column takes the room. */}
+          <div className="grid w-full gap-6 sm:grid-cols-[auto_1fr] sm:gap-x-12">
             <div className="flex flex-col items-start gap-3">
               <span className="text-sm text-muted-foreground">{b("link.ghostLabel")}</span>
               <div className="flex flex-wrap items-center gap-2">
-                <Button variant="ghost" size="icon" aria-label={b("link.close")}>
-                  <XIcon aria-hidden="true" strokeWidth={1.5} />
-                </Button>
                 <Button variant="ghost">{b("link.edit")}</Button>
               </div>
             </div>
@@ -190,16 +190,6 @@ export default function ButtonPage() {
                 </Button>
               </div>
             </div>
-            {/* The other half of the rule: inside a sentence, a plain text link. */}
-            <p className="text-sm sm:col-span-2">
-              {b.rich("link.sentence", {
-                link: (chunks) => (
-                  <a href="#privacy" className="font-medium underline underline-offset-4">
-                    {chunks}
-                  </a>
-                ),
-              })}
-            </p>
           </div>
         </ComponentPreview>
       </section>
@@ -253,6 +243,7 @@ export default function ButtonPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("props")}</h2>
         <PropsTable rows={props} />
+        <p className="text-sm text-muted-foreground">{b.rich("propsNote", rich)}</p>
       </section>
 
       {/* Usage */}

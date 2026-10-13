@@ -11,17 +11,26 @@ const meta: Meta<typeof Button> = {
   },
   tags: ["autodocs"],
   argTypes: {
-    variant: {
-      control: "select",
-      options: ["default", "secondary", "destructive", "outline", "ghost", "link", "soft"],
-    },
+    // Tone first, then variant, as on the docs page. shadcn's `secondary` and
+    // `destructive` variants and its `default` and `icon` sizes still work,
+    // but the controls and table list the Figma names only.
     tone: {
       control: "select",
-      options: [undefined, "primary", "secondary", "destructive"],
+      options: ["primary", "secondary", "destructive"],
+      table: { type: { summary: '"primary" | "secondary" | "destructive"' } },
+    },
+    variant: {
+      control: "select",
+      options: ["default", "outline", "ghost", "soft", "link"],
+      table: { type: { summary: '"default" | "outline" | "ghost" | "soft" | "link"' }, defaultValue: { summary: '"default"' } },
     },
     size: {
       control: "select",
-      options: ["xs", "sm", "default", "lg", "icon-xs", "icon-sm", "icon", "icon-lg"],
+      options: ["xs", "sm", "md", "lg", "icon-xs", "icon-sm", "icon-md", "icon-lg"],
+      table: {
+        type: { summary: '"xs" | "sm" | "md" | "lg" | "icon-xs" | "icon-sm" | "icon-md" | "icon-lg"' },
+        defaultValue: { summary: '"md"' },
+      },
     },
     radius: {
       control: "inline-radio",
@@ -194,14 +203,14 @@ export const IconButtonStates: Story = {
   name: "Icon Button States",
   parameters: { pseudo: pseudoFor("ib", TYPES.slice(0, 4)) },
   render: (_args, ctx) => (
-    <StateGrid prefix="ib" types={TYPES.slice(0, 4)} size="icon">
+    <StateGrid prefix="ib" types={TYPES.slice(0, 4)} size="icon-md">
       <HeartIcon strokeWidth={1.5} />
       <span className="sr-only">{copy(ctx).like}</span>
     </StateGrid>
   ),
 }
 
-/** xs 26px, sm 32px, default 36px (Figma's md), lg 40px, and the icon sizes beside them. */
+/** xs 26px, sm 32px, md 36px, lg 40px, and the icon sizes beside them. */
 export const Sizes: Story = {
   render: (_args, ctx) => (
     <div className="grid grid-cols-[4rem_max-content_max-content] items-center gap-x-6 gap-y-4">
@@ -209,7 +218,7 @@ export const Sizes: Story = {
         [
           ["xs", "icon-xs"],
           ["sm", "icon-sm"],
-          ["default", "icon"],
+          ["md", "icon-md"],
           ["lg", "icon-lg"],
         ] as const
       ).map(([size, icon]) => (
@@ -242,7 +251,7 @@ export const Radius: Story = {
               {copy(ctx).save}
             </Button>
           </span>
-          <Button radius={radius} size="icon" variant="soft" aria-label={copy(ctx).add}>
+          <Button radius={radius} size="icon-md" variant="soft" aria-label={copy(ctx).add}>
             <PlusIcon strokeWidth={1.5} />
           </Button>
         </React.Fragment>
@@ -294,7 +303,7 @@ export const LinkAndGhost: Story = {
           {c.elsewhere}
         </span>
         <div className="flex flex-wrap items-center gap-2">
-          <Button variant="ghost" size="icon" aria-label={c.close}>
+          <Button variant="ghost" size="icon-md" aria-label={c.close}>
             <XIcon strokeWidth={1.5} />
           </Button>
           <Button variant="ghost">{c.edit}</Button>
@@ -321,7 +330,7 @@ export const Loading: Story = {
       <Button loading loadingLabel={copy(ctx).loadingLabel} {...args}>
         {args.children ?? copy(ctx).loading}
       </Button>
-      <Button loading loadingLabel={copy(ctx).loadingLabel} size="icon" variant="outline" aria-label={copy(ctx).add}>
+      <Button loading loadingLabel={copy(ctx).loadingLabel} size="icon-md" variant="outline" aria-label={copy(ctx).add}>
         <PlusIcon strokeWidth={1.5} />
       </Button>
     </div>
@@ -371,7 +380,7 @@ export const LightAndDark: Story = {
                 {t.name === "Link" ? (
                   <span />
                 ) : (
-                  <Button variant={t.variant} size="icon" aria-label={copy(ctx).like}>
+                  <Button variant={t.variant} size="icon-md" aria-label={copy(ctx).like}>
                     <HeartIcon strokeWidth={1.5} />
                   </Button>
                 )}
