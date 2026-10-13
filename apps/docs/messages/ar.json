@@ -643,14 +643,14 @@
         "next": "التالي"
       },
       "loadingTitle": "حالة التحميل",
-      "loadingBody": "تعرض الخاصية <code>loading</code> مؤشر تحميل دوّارًا وتعطّل الزر، ويقرأ قارئ الشاشة النص الذي في الخاصية <code>loadingLabel</code>. أما مع الخاصية <code>asChild</code> فيُعلَّم العنصر الابن مشغولًا ومعطّلًا فقط، فاعرض مؤشر التقدّم داخله بنفسك.",
+      "loadingBody": "تعرض الخاصية <code>loading</code> مؤشر تحميل دوّارًا وتعطّل الزر، ويقرأ قارئ الشاشة النص الذي في الخاصية <code>loadingLabel</code>. أما مع الخاصية <code>asChild</code> فيُعلَّم العنصر الابن مشغولًا بالسمة <code>aria-busy</code> ومعطّلًا فقط، فاعرض مؤشر التقدّم داخله بنفسك.",
       "loading": "جارٍ الحفظ…",
       "loadingLabel": "جارٍ الحفظ",
       "a11y": {
         "nativeButton": "يعرض المكوّن عنصر <code>button</code> أصليًا، فيُضغط بمفتاح Enter أو بمفتاح المسافة. اختر قيمة الخاصية <code>type</code> التي يحتاجها النموذج، مثل <code>submit</code> أو <code>button</code>.",
         "focus": "يرسم التركيز من لوحة المفاتيح حلقة بعرض 2px، على بعد 2px من الزر، باللون <code>ring</code>.",
         "asChild": "مع الخاصية <code>asChild</code> يطبّق الزر شكله على عنصره الابن الوحيد، مثل رابط. ويأخذ الابن المعطّل السمة <code>aria-disabled</code> بدل السمة <code>disabled</code>.",
-        "loading": "أثناء التحميل يكون الزر معطّلًا، ويحمل السمة <code>aria-busy</code>.",
+        "loading": "أثناء التحميل يكون الزر معطّلًا، ويُعلن النص الذي في الخاصية <code>loadingLabel</code> كرسالة حالة.",
         "direction": "يتبع الاتجاه السمة <code>dir</code> في الصفحة، ولا توجد له خاصية. وتتبادل الأيقونات مع التسمية مكانيهما في الصفحات من اليمين إلى اليسار."
       },
       "propsNote": "للتوافق مع shadcn/ui، ما زالت القيمتان <code>secondary</code>، <code>destructive</code> تعملان للخاصية <code>variant</code>، وهما النمط Solid بهذين اللونين. وما زالت القيمتان <code>default</code>، <code>icon</code> تعملان للخاصية <code>size</code>، وهما الحجمان <code>md</code>، <code>icon-md</code>.",

@@ -174,7 +174,9 @@ describe("Button", () => {
   it("shows loading state", () => {
     render(<Button loading>Submit</Button>)
     expect(button()).toBeDisabled()
-    expect(button()).toHaveAttribute("aria-busy", "true")
+    // Announced as a status, outside any busy region.
+    expect(button()).not.toHaveAttribute("aria-busy")
+    expect(screen.getByRole("status")).toHaveTextContent("Loading")
     expect(screen.getByText("Submit")).toBeInTheDocument()
     expect(screen.getByText("Loading")).toBeInTheDocument()
   })
@@ -263,6 +265,39 @@ describe("Button", () => {
       expect(link).toHaveAttribute("aria-disabled", "true")
       expect(link).not.toHaveAttribute("disabled")
       expect(link).toHaveClass("aria-disabled:opacity-50", "aria-disabled:pointer-events-none")
+    })
+
+    it.each([
+      ["disabled", { disabled: true }],
+      ["loading", { loading: true }],
+    ])("runs none of the child's own click handlers while %s", (_, state) => {
+      const childClick = vi.fn()
+      const childCapture = vi.fn()
+      render(
+        <Button asChild {...state}>
+          <a href="/pricing" onClick={childClick} onClickCapture={childCapture}>
+            View all
+          </a>
+        </Button>
+      )
+      const link = screen.getByRole("link", { name: "View all" })
+      link.click()
+      expect(childCapture).not.toHaveBeenCalled()
+      expect(childClick).not.toHaveBeenCalled()
+      if ("loading" in state) expect(link).toHaveAttribute("aria-busy", "true")
+    })
+
+    it("keeps the child's handlers when it is active", () => {
+      const childClick = vi.fn()
+      render(
+        <Button asChild>
+          <a href="#pricing" onClick={childClick}>
+            View all
+          </a>
+        </Button>
+      )
+      screen.getByRole("link", { name: "View all" }).click()
+      expect(childClick).toHaveBeenCalledTimes(1)
     })
 
     it("keeps a disabled link out of the tab order and stops it navigating", () => {

@@ -304,7 +304,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={asChild ? undefined : inactive}
         aria-disabled={asChild && inactive ? true : undefined}
         tabIndex={asChild && inactive ? -1 : undefined}
-        aria-busy={loading || undefined}
+        // Only a slotted child is marked busy: it has no status of its own,
+        // and a busy region can hold back the button's loading status.
+        aria-busy={(asChild && loading) || undefined}
         // Blocked in the capture phase: Slot runs the child's own onClick
         // before the button's, so a bubble-phase guard would come too late.
         onClickCapture={
@@ -327,6 +329,10 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             {/* An icon button has room for one glyph: the spinner replaces it. */}
             {!isIcon && children}
           </>
+        ) : asChild && inactive && React.isValidElement<React.HTMLAttributes<HTMLElement>>(children) ? (
+          // Slot runs the child's own handlers before the button's, so an
+          // inactive child is given none; the guard above stops navigation.
+          React.cloneElement(children, { onClick: undefined, onClickCapture: undefined })
         ) : (
           children
         )}

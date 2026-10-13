@@ -643,14 +643,14 @@
         "next": "Next"
       },
       "loadingTitle": "Loading",
-      "loadingBody": "<code>loading</code> shows a spinner, disables the button and announces <code>loadingLabel</code> to screen readers. With <code>asChild</code> the child is only marked busy and disabled, so show your own progress inside it.",
+      "loadingBody": "<code>loading</code> shows a spinner, disables the button and announces <code>loadingLabel</code> to screen readers. With <code>asChild</code> the child is only marked busy (<code>aria-busy</code>) and disabled, so show your own progress inside it.",
       "loading": "Saving…",
       "loadingLabel": "Saving",
       "a11y": {
         "nativeButton": "Renders a native <code>button</code>, so Enter and Space press it. Set <code>type=\"submit\"</code> or <code>type=\"button\"</code> as the form needs.",
         "focus": "Keyboard focus draws a 2px ring, 2px outside the button, in the <code>ring</code> colour.",
         "asChild": "With <code>asChild</code>, the button styles its only child, such as a link. A disabled child gets <code>aria-disabled</code> instead of <code>disabled</code>.",
-        "loading": "While it is loading, the button is disabled and marked <code>aria-busy</code>.",
+        "loading": "While it is loading, the button is disabled and announces <code>loadingLabel</code> as a status.",
         "direction": "Direction is inherited from <code>dir</code>, never a prop. Icons and label swap ends in right-to-left."
       },
       "propsNote": "Kept for shadcn compatibility: <code>secondary</code> and <code>destructive</code> still work as <code>variant</code> values (Solid in those tones), and <code>default</code> and <code>icon</code> as <code>size</code> values (the same as <code>md</code> and <code>icon-md</code>).",
