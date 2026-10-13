@@ -749,6 +749,20 @@
         "className": "Extra classes for the tooltip."
       }
     },
+    "progress": {
+      "lead": "A bar that shows how much of a task is done, from 0 to 100%. It comes in three sizes, can show the percentage before the bar, and fills from the start of the line, so it follows the page's reading direction.",
+      "preview": "Uploading quarterly report",
+      "showPercentageTitle": "Percentage label",
+      "props": {
+        "value": "How much is done, from <code>0</code> to <code>100</code>. Values outside the range are clamped.",
+        "size": "Bar height and label size.",
+        "showPercentage": "Shows the percentage before the bar.",
+        "ariaLabel": "Names the progress bar for screen readers.",
+        "getAriaValueText": "Returns the text screen readers hear for the value.",
+        "locale": "Locale used to format the percentage.",
+        "className": "Extra classes for the component."
+      }
+    },
     "badge": {
       "lead": "A compact inline label for status, category or metadata, with an optional icon, avatar and close button.",
       "preview": {
