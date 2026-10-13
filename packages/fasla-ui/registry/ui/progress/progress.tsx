@@ -85,12 +85,15 @@ const progressIndicatorClasses =
  * "100%", so the bar does not move as the number grows. The widths are in rem,
  * like the text, so a larger text setting widens the column with the number
  * instead of pushing "100%" into the bar.
+ *
+ * Tabular figures (code only; Figma sets proportional ones) give every digit
+ * the same width, so the number does not jitter as the value changes.
  * The text sits at the column's end, against the bar, in both directions.
  *
  * Sizes 12, 14 and 16px. The line height comes from the type ramp: 16/20/24px
  * in English and 20/24/28px in Arabic, as Figma's two ramps set it.
  */
-const progressPercentageVariants = cva("shrink-0 text-end font-medium text-foreground", {
+const progressPercentageVariants = cva("shrink-0 text-end font-medium tabular-nums text-foreground", {
   variants: {
     size: {
       sm: "w-8 text-xs",

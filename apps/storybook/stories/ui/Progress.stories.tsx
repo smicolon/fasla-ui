@@ -54,8 +54,12 @@ const SIZES = ["sm", "md", "lg"] as const
 const VALUES = [0, 25, 50, 75, 100] as const
 const THEMES = ["light", "dark"] as const
 
-const Head = ({ children, className }: { children: React.ReactNode; className?: string }) => (
-  <span dir="ltr" className={["w-fit font-sans text-xs text-muted-foreground", className].join(" ")}>
+const Head = ({
+  children,
+  className,
+  ...props
+}: { children: React.ReactNode; className?: string } & React.HTMLAttributes<HTMLSpanElement>) => (
+  <span dir="ltr" className={["w-fit font-sans text-xs text-muted-foreground", className].join(" ")} {...props}>
     {children}
   </span>
 )
@@ -130,6 +134,35 @@ export const ShowPercentage: Story = {
       ))}
     </div>
   ),
+}
+
+/**
+ * The bar alone, with `showPercentage={false}`. With no number on screen,
+ * the `aria-label` is the only thing that tells a screen reader what the bar
+ * tracks: it announces "Uploading quarterly report, progress bar, 45%". The
+ * caption under each bar only shows that name here; it is hidden from
+ * assistive tech, and a real screen needs no caption.
+ *
+ * The docs page links here from its Percentage label section.
+ */
+export const WithoutPercentage: Story = {
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      // Two shared rows, so every caption starts on one line whatever the
+      // height of the bar above it.
+      <div className="grid grid-cols-[repeat(3,200px)] items-start gap-x-6 gap-y-3">
+        {SIZES.map((size) => (
+          <Progress key={size} size={size} value={45} showPercentage={false} aria-label={c.label} />
+        ))}
+        {SIZES.map((size) => (
+          <Head key={size} className="block" aria-hidden>
+            aria-label="<bdi>{c.label}</bdi>"
+          </Head>
+        ))}
+      </div>
+    )
+  },
 }
 
 const PANELS = [

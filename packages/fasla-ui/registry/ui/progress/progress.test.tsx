@@ -132,7 +132,7 @@ describe("Progress — layers and sizes (Figma)", () => {
     render(<Progress value={50} size={size} aria-label="Sync" />)
     expect(bar()).toHaveAttribute("data-size", size)
     expect(slot("track")).toHaveClass(height)
-    expect(slot("percentage")).toHaveClass(width, text, "font-medium", "text-end")
+    expect(slot("percentage")).toHaveClass(width, text, "font-medium", "text-end", "tabular-nums")
   })
 
   it("is md by default", () => {

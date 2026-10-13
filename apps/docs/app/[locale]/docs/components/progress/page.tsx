@@ -1,7 +1,7 @@
 "use client"
 
 import type { ReactNode } from "react"
-import { useTranslations } from "next-intl"
+import { useLocale, useTranslations } from "next-intl"
 
 import { Progress } from "@fasla-ui/ui/progress"
 import { ComponentPreview, UsageExample } from "@/components/component-preview"
@@ -10,6 +10,9 @@ import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
 
 const VALUES = [0, 25, 50, 75, 100] as const
+
+/** Storybook is copied into the site at /components, outside the locale tree. */
+const STORY = "/components/?path=/story/ui-progress--without-percentage"
 const SIZES = ["sm", "md", "lg"] as const
 
 /** Numbers inside Arabic sentences keep their own left-to-right run. */
@@ -21,6 +24,7 @@ const rich = {
 export default function ProgressPage() {
   const t = useTranslations("docs.sections")
   const p = useTranslations("docs.progress")
+  const locale = useLocale()
 
   const props: PropRow[] = [
     { prop: "value", type: "number", fallback: "0", description: p.rich("props.value", rich) },
@@ -80,6 +84,21 @@ export default function ProgressPage() {
       {/* Percentage label */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{p("showPercentageTitle")}</h2>
+        <p className="text-muted-foreground">
+          {p.rich("showPercentageBody", {
+            ...rich,
+            story: (chunks) => (
+              // A plain link: the story opens in the Storybook app, in this
+              // page's direction.
+              <a
+                href={locale === "ar" ? `${STORY}&globals=direction:rtl` : STORY}
+                className="font-medium text-foreground underline underline-offset-4"
+              >
+                {chunks}
+              </a>
+            ),
+          })}
+        </p>
         <ComponentPreview>
           <div className="grid w-full gap-x-8 gap-y-4 sm:grid-cols-2">
             <Progress value={60} aria-label={p("preview")} />
