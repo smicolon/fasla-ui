@@ -75,6 +75,7 @@ Core building blocks with CVA variants for consistent styling:
 | **Radio** | Single choice from a set, as a plain control or a bordered card |
 | **Switch** | Toggle switch with multiple sizes |
 | **Tabs** | Tabbed navigation with animations |
+| **Accordion** | Headings that show or hide their content, in four styles |
 | **Badge** | Status indicators and labels |
 | **Avatar** | User avatars with fallback initials |
 | **Status Indicator** | Presence dot with a language-aware accessible name |

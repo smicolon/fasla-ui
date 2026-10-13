@@ -805,6 +805,106 @@
         "className": "Extra classes for the component."
       }
     },
+    "accordion": {
+      "lead": "Accordion stacks headings that each show or hide a section of content. Use it for questions and answers, settings groups and other content people scan before they read it in full.",
+      "installNote": "Accordion is built on Base UI, so it needs the <code>@base-ui/react</code> package. <code>add</code> installs it with the component, and so does the shadcn CLI.",
+      "previewHint": "Select a question, or move to it with Tab and press Enter or Space.",
+      "variantsBody": "Four styles, set with <code>variant</code> on <code>Accordion</code> so every item in a group matches. <code>default</code> divides the items with a line and suits FAQ pages. <code>split</code> sets each item on its own card with a shadow, and <code>outline</code> draws a border round each one. Both leave 8px between items, for an accordion that sits beside other cards. <code>table</code> draws one box round the whole group, for structured details.",
+      "indicator": {
+        "title": "Indicator",
+        "body": "<code>indicator</code> sets the mark at the end of each heading. <code>chevron</code>, the default, points down and turns to point up while the item is open. <code>plus</code> shows a plus that becomes a minus, which makes the action explicit. The mark sits at the end of the line, so on a right-to-left page it moves to the other side on its own."
+      },
+      "composition": {
+        "title": "Avatars, icons and nested accordions",
+        "body": "Put an Avatar or a 16px icon before the title, inside <code>AccordionTrigger</code>, and the row leaves 12px between them. Hover underlines the title only. Hide the avatar or icon from screen readers with <code>aria-hidden</code>, because the title already names the row. To line the content up under the title, indent it with a class such as <code>ps-11</code> on <code>AccordionContent</code>. For a second level, put another Accordion inside <code>AccordionContent</code>, and keep it for content that really has parents and children."
+      },
+      "sample": {
+        "faq": [
+          {
+            "q": "How long does delivery take?",
+            "a": "Orders arrive in 2 to 4 working days. You get a tracking link as soon as the parcel leaves our warehouse."
+          },
+          {
+            "q": "Can I change my order after paying?",
+            "a": "Yes, within an hour of paying. Open the order from your account and choose Edit order."
+          },
+          {
+            "q": "What is your returns policy?",
+            "a": "Return any unused item within 30 days and we refund the full amount."
+          }
+        ],
+        "people": [
+          {
+            "name": "Layla Haddad",
+            "role": "Handles billing and invoices. Replies within one working day."
+          },
+          {
+            "name": "Omar Khalil",
+            "role": "Looks after deliveries and returns, from courier issues to refunds."
+          },
+          {
+            "name": "Sara Mansour",
+            "role": "Answers product questions before you buy."
+          }
+        ],
+        "settings": [
+          {
+            "title": "Account",
+            "body": "Change your name, email address and the language the store shows you."
+          },
+          {
+            "title": "Notifications",
+            "body": "Choose which order updates reach you by email and which by text message."
+          },
+          {
+            "title": "Payment methods",
+            "body": "Add a card, remove an old one or pick the card you pay with by default."
+          }
+        ],
+        "nested": {
+          "title": "Account settings",
+          "body": "Everything about how you sign in and what we know about you.",
+          "children": [
+            {
+              "q": "Profile",
+              "a": "Your name, photo and the address we deliver to."
+            },
+            {
+              "q": "Sign-in and security",
+              "a": "Your password, two-step sign-in and active sessions."
+            }
+          ],
+          "rest": [
+            {
+              "q": "Orders",
+              "a": "Track, change or cancel an order."
+            },
+            {
+              "q": "Help",
+              "a": "Talk to our support team."
+            }
+          ]
+        }
+      },
+      "props": {
+        "variant": "The look of every item in the group.",
+        "indicator": "The mark at the end of each heading.",
+        "multiple": "Lets more than one item stay open at a time.",
+        "defaultValue": "The items open on first render, by their <code>value</code>.",
+        "value": "The open items, when you control them.",
+        "onValueChange": "Called with the open items whenever one opens or closes.",
+        "hiddenUntilFound": "Lets the browser's find in page search closed items and open the one it finds.",
+        "item": "One item. Its <code>value</code> is what <code>value</code> and <code>defaultValue</code> list.",
+        "trigger": "The heading: the title, with an optional avatar or icon before it. The indicator is added for you.",
+        "content": "The section that opens under the heading.",
+        "className": "Extra classes. On <code>AccordionContent</code> they go on the inner box, which holds the padding."
+      },
+      "usage": {
+        "basic": "Basic accordion",
+        "variant": "Another style and indicator",
+        "multiple": "Several items open at once"
+      }
+    },
     "badge": {
       "lead": "A compact inline label for status, category or metadata, with an optional icon, avatar and close button.",
       "preview": {
