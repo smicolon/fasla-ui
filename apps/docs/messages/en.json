@@ -415,40 +415,80 @@
       }
     },
     "textarea": {
-      "lead": "A multi-line text input with character count and resize options.",
-      "placeholder": "Type your message here...",
-      "countTitle": "With Character Count",
-      "countPlaceholder": "Type your message...",
-      "resizeTitle": "Resize Options",
-      "resize": {
-        "none": "No resize",
-        "vertical": "Vertical resize (default)",
-        "both": "Both directions"
+      "lead": "A multi-line text field that grows with its text, with an optional label, helper text and a character counter. It shows when a value passes or fails validation.",
+      "preview": {
+        "label": "Delivery notes",
+        "placeholder": "Gate code or a landmark",
+        "description": "The driver sees this on arrival."
       },
-      "states": {
-        "default": "Default",
-        "error": "Error state",
-        "disabled": "Disabled"
+      "variants": {
+        "default": {
+          "label": "Delivery notes",
+          "placeholder": "Gate code or a landmark"
+        },
+        "filled": {
+          "label": "Delivery notes",
+          "value": "Leave it with the building guard."
+        },
+        "success": {
+          "label": "Gift message",
+          "description": "It fits on the card.",
+          "value": "Happy birthday, Sara! Enjoy every page."
+        },
+        "invalid": {
+          "label": "Describe the problem",
+          "error": "Write at least 20 characters so we can help.",
+          "value": "It broke."
+        },
+        "disabled": {
+          "label": "Order notes",
+          "description": "Notes lock once the order ships.",
+          "value": "Leave it with the building guard."
+        },
+        "optional": {
+          "label": "Wrapping instructions",
+          "labelEnd": "Optional",
+          "description": "We gift-wrap for free.",
+          "placeholder": "For example, remove the price tag"
+        }
       },
-      "usage": {
-        "basic": "Basic textarea",
-        "count": "With character count",
-        "resize": "Different resize options",
-        "error": "Error state",
-        "codePlaceholder": "Type your message...",
-        "codeCount": "Type here...",
-        "messageLabel": "Message"
+      "heightTitle": "Height",
+      "heightLead": "The field starts 60px tall and grows a line at a time as the text gets longer, so all of it stays in view. Drag the corner to make it taller yourself.",
+      "height": {
+        "label": "Describe the problem",
+        "labelEnd": "Required",
+        "description": "Tell us what you ordered, what went wrong and what you would like us to do. Photos help, and you can add them on the next step.",
+        "value": "I ordered the oak side table on 3 May and it arrived yesterday with a deep scratch across the top. The box was not damaged, so I think it happened before packing.\n\nI would like a replacement rather than a refund. I am home every afternoon this week if a driver can collect the damaged one."
+      },
+      "partsTitle": "Labels and counter",
+      "parts": {
+        "notes": "Delivery notes",
+        "optional": "Optional",
+        "notesHelp": "The driver sees this on arrival.",
+        "notesValue": "Leave it with the building guard.",
+        "notesPlaceholder": "Gate code or a landmark",
+        "reason": "Reason for return",
+        "reasonHelp": "It helps us fix the problem for the next customer.",
+        "reasonError": "Tell us why you are returning the item."
       },
       "props": {
-        "variant": "Visual style: default or error.",
-        "resize": "Directions it can be resized in.",
-        "showCount": "Shows a character counter.",
-        "maxLength": "Maximum number of characters.",
-        "placeholder": "Text shown while empty.",
-        "disabled": "Disables the field and dims it.",
-        "value": "Text value. Use it with <code>onChange</code>.",
+        "status": "Set to <code>success</code> to mark a value that passed validation.",
+        "invalid": "Marks the field invalid. <code>aria-invalid</code> does the same.",
+        "disabled": "Disables the field and dims the whole group.",
+        "label": "The field's label, linked to the textarea for you.",
+        "labelEnd": "A short note at the end of the label row, such as Optional.",
+        "description": "Helper text under the field. A screen reader reads it with the field.",
+        "descriptionEnd": "A note at the end of the helper row, usually a character count.",
+        "error": "The message shown in place of <code>description</code> while the field is invalid.",
+        "placeholder": "Text shown while the field is empty.",
+        "maxLength": "The most characters the field accepts. Show the count in <code>descriptionEnd</code>.",
+        "value": "Field value. Use it with <code>onChange</code>.",
         "onChange": "Called when the text changes.",
-        "className": "Extra classes for the component."
+        "className": "Extra CSS classes for the field group."
+      },
+      "usage": {
+        "label": "Delivery notes",
+        "description": "The driver sees this on arrival."
       }
     },
     "input": {

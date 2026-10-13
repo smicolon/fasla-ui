@@ -614,9 +614,9 @@
       "name": "textarea",
       "type": "registry:ui",
       "title": "Textarea",
-      "description": "A multi-line text input with character counting and resize options.",
+      "description": "A multi-line text field that grows with its text, with a label, helper text, a character counter, and success and invalid states.",
       "dependencies": [
-        "class-variance-authority"
+        "@base-ui/react"
       ],
       "registryDependencies": [],
       "files": [
