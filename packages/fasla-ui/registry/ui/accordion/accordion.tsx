@@ -168,18 +168,26 @@ const accordionContentVariants = cva([
 export interface AccordionProps
   extends Omit<React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Root>, "className" | "orientation" | "loopFocus"> {
   /**
-   * The look of every item in the group: `default` divides items with a
-   * line, `split` sets each on its own card, `outline` gives each a border,
-   * and `table` boxes the whole group. Declared here rather than inherited
-   * from `VariantProps`, which widens it with `| null`.
+   * How the items look. `default` separates them with a line. `split` shows
+   * each item as a raised card, with a gap between them. `outline` draws a
+   * border round each item, with a gap between them. `table` puts the whole
+   * group in one bordered box.
    */
   variant?: AccordionVariant
-  /** What shows open and closed at the end of each heading: a chevron, or plus and minus. */
+  /**
+   * The mark at the end of each heading. `chevron` points down and turns up
+   * while the item is open. `plus` turns into a minus while it is open.
+   */
   indicator?: AccordionIndicator
+  /**
+   * Lets several items stay open at once. Off by default, so opening one item
+   * closes the one that was open.
+   */
+  multiple?: boolean
   className?: string
 }
 
-const Accordion = React.forwardRef<HTMLDivElement, AccordionProps>(
+const Accordion =React.forwardRef<HTMLDivElement, AccordionProps>(
   ({ className, variant = "default", indicator = "chevron", ...props }, ref) => {
     const context = React.useMemo(() => ({ variant, indicator }), [variant, indicator])
 

@@ -11,9 +11,10 @@ import {
 import { Avatar } from "../../../../packages/fasla-ui/registry/ui/avatar/avatar"
 
 /**
- * `variant` and `indicator` live on `Accordion`, so every item in a group
- * matches, as Figma's doc asks. Avatar, Icons and Multi-level are not props:
- * they are compositions, shown in their own stories below.
+ * Headings that each show or hide a section of content. Set `variant` and
+ * `indicator` on `Accordion` and every item in the group follows them. To add
+ * an avatar or an icon, put it inside the trigger; to nest a second level,
+ * put another Accordion inside the content. The stories below show each.
  */
 const meta: Meta<typeof Accordion> = {
   title: "UI/Accordion",
@@ -192,10 +193,17 @@ const Indicators = ({ c, args }: { c: Copy; args: Partial<AccordionProps> }) => 
   </div>
 )
 
-/** Figma `Variants=Default`: a divider under every item but the last. */
+/**
+ * One accordion, driven by every control. With `multiple` on, several items
+ * stay open at once; with it off, opening one closes the other.
+ */
 export const Default: Story = {
-  args: { variant: "default" },
-  render: (args, ctx) => <Indicators c={copy(ctx)} args={args} />,
+  render: (args, ctx) => (
+    <div className="mx-auto w-full max-w-[420px]">
+      {/* Remount when `multiple` changes, so turning it off starts from one open item. */}
+      <Faq key={String(args.multiple)} c={copy(ctx)} {...args} />
+    </div>
+  ),
 }
 
 /** Figma `Variants=Split`: each item a card with `shadow-md`, 8px apart. */
@@ -214,15 +222,6 @@ export const Outline: Story = {
 export const Table: Story = {
   args: { variant: "table" },
   render: (args, ctx) => <Indicators c={copy(ctx)} args={args} />,
-}
-
-/** Every control drives this one. Turn on `multiple` to keep several items open. */
-export const Playground: Story = {
-  render: (args, ctx) => (
-    <div className="mx-auto w-full max-w-[420px]">
-      <Faq c={copy(ctx)} {...args} />
-    </div>
-  ),
 }
 
 /**
