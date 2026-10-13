@@ -1,19 +1,39 @@
 import * as React from "react"
 import type { Meta, StoryObj } from "@storybook/react"
-import { ArrowRightIcon, DownloadIcon, HeartIcon, PlusIcon, UploadIcon, XIcon } from "lucide-react"
+import { DownloadIcon, UploadIcon, XIcon } from "lucide-react"
 import { Button, type ButtonProps } from "../../../../packages/fasla-ui/registry/ui/button"
+import { HIDE_REST, Head, ICON_NAMES, StateGrid, StoryIcon, TONES, TYPES, pseudoFor, type IconName } from "./button-story-kit"
 
-const meta: Meta<typeof Button> = {
+/**
+ * Button with a text label. Icon Button is the same component at the `icon-*`
+ * sizes; it has its own page, "UI/Icon Button".
+ *
+ * `label`, `iconPosition` and `icon` are this page's own controls, not props:
+ * the label is the button's children, and the icon is a child before or after
+ * it, in DOM order, so `start` sits on the right in right-to-left.
+ */
+type StoryArgs = ButtonProps & {
+  label?: string
+  iconPosition: "none" | "start" | "end"
+  icon: IconName
+}
+
+const story = { table: { category: "Story" } } as const
+
+const meta: Meta<StoryArgs> = {
   title: "UI/Button",
   component: Button,
   parameters: {
     layout: "centered",
+    controls: {
+      include: ["tone", "variant", "size", "radius", "loading", "loadingLabel", "disabled", "label", "iconPosition", "icon"],
+    },
   },
   tags: ["autodocs"],
   argTypes: {
     // Tone first, then variant, as on the docs page. shadcn's `secondary` and
-    // `destructive` variants and its `default` and `icon` sizes still work,
-    // but the controls and table list the Figma names only.
+    // `destructive` variants and its `default` size still work, but the
+    // controls and table list the Figma names only.
     tone: {
       control: "select",
       options: ["primary", "secondary", "destructive"],
@@ -26,24 +46,49 @@ const meta: Meta<typeof Button> = {
     },
     size: {
       control: "select",
-      options: ["xs", "sm", "md", "lg", "icon-xs", "icon-sm", "icon-md", "icon-lg"],
-      table: {
-        type: { summary: '"xs" | "sm" | "md" | "lg" | "icon-xs" | "icon-sm" | "icon-md" | "icon-lg"' },
-        defaultValue: { summary: '"md"' },
-      },
+      options: ["xs", "sm", "md", "lg"],
+      table: { type: { summary: '"xs" | "sm" | "md" | "lg"' }, defaultValue: { summary: '"md"' } },
     },
-    radius: {
-      control: "inline-radio",
-      options: ["standard", "rounded"],
-    },
+    radius: { control: "inline-radio", options: ["standard", "rounded"] },
     loading: { control: "boolean" },
+    loadingLabel: { control: "text" },
     disabled: { control: "boolean" },
-    asChild: { table: { disable: true } },
+    label: {
+      control: "text",
+      description: "The button's text. Empty shows the sample label for the current direction.",
+      ...story,
+    },
+    iconPosition: {
+      control: "inline-radio",
+      options: ["none", "start", "end"],
+      description: "One icon, before or after the label. `start` is the left in LTR and the right in RTL.",
+      ...story,
+    },
+    icon: {
+      control: "select",
+      options: ICON_NAMES,
+      description: "Which lucide icon shows when `iconPosition` is not `none`.",
+      ...story,
+    },
+    ...HIDE_REST,
+  },
+  // In panel order: Storybook lists the controls in the order of these keys.
+  args: {
+    tone: undefined,
+    variant: "default",
+    size: "md",
+    radius: "standard",
+    loading: false,
+    loadingLabel: "Loading",
+    disabled: false,
+    label: "",
+    iconPosition: "none",
+    icon: "plus",
   },
 }
 
 export default meta
-type Story = StoryObj<typeof meta>
+type Story = StoryObj<StoryArgs>
 
 /**
  * Sample copy, per script: the same account actions as the docs page. Only the
@@ -58,7 +103,6 @@ const COPY = {
     upload: "Upload",
     download: "Download",
     add: "Add",
-    like: "Like",
     close: "Close",
     next: "Next",
     edit: "Edit",
@@ -76,7 +120,6 @@ const COPY = {
     upload: "رفع ملف",
     download: "تنزيل",
     add: "إضافة",
-    like: "إعجاب",
     close: "إغلاق",
     next: "التالي",
     edit: "تعديل",
@@ -93,84 +136,16 @@ type StoryCtx = { globals: { direction?: string } }
 const copy = (ctx: StoryCtx): Copy => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
 
 const VARIANTS = ["default", "secondary", "destructive", "outline", "ghost", "link", "soft"] as const
-const TONES = ["primary", "secondary", "destructive"] as const
-const STATES = ["Enabled", "Hover", "Clicked", "Focus", "Disabled"] as const
-
-/** Figma's five Types, each reached through one shadcn variant plus `tone`. */
-const TYPES = [
-  { name: "Solid", variant: "default" },
-  { name: "Soft", variant: "soft" },
-  { name: "Outline", variant: "outline" },
-  { name: "Ghost", variant: "ghost" },
-  { name: "Link", variant: "link" },
-] as const
-
-/** A row or column label: always Latin, always on the line of what it names. */
-const Head = ({ children, className }: { children: React.ReactNode; className?: string }) => (
-  <span dir="ltr" className={["w-fit font-sans text-xs text-muted-foreground", className].filter(Boolean).join(" ")}>
-    {children}
-  </span>
-)
-
-const cell = (prefix: string, type: string, tone: string, state: string) =>
-  `${prefix}-${type}-${tone}-${state}`.toLowerCase()
-
-/** Pseudo-state targets for one grid: every Hover, Clicked and Focus cell's button. */
-const pseudoFor = (prefix: string, types: readonly { name: string }[]) => {
-  const ids = (state: string) =>
-    types.flatMap((t) => TONES.map((tone) => `#${cell(prefix, t.name, tone, state)} button`))
-  return { hover: ids("Hover"), active: ids("Clicked"), focusVisible: ids("Focus") }
-}
-
-/**
- * Figma's Type × Style × State grid: every row a Type in one tone, every
- * column a state. Hover, Clicked and Focus are the real `:hover`, `:active`
- * and `:focus-visible` rules, forced by `storybook-addon-pseudo-states`.
- */
-const StateGrid = ({
-  prefix,
-  types,
-  size,
-  children,
-}: {
-  prefix: string
-  types: readonly { name: string; variant: ButtonProps["variant"] }[]
-  size?: ButtonProps["size"]
-  children: React.ReactNode
-}) => (
-  <div className="grid grid-cols-[repeat(6,max-content)] items-center gap-x-5 gap-y-3">
-    <span />
-    {STATES.map((s) => (
-      <Head key={s}>{s}</Head>
-    ))}
-    {types.map((t) =>
-      TONES.map((tone) => (
-        <React.Fragment key={`${t.name}-${tone}`}>
-          <Head>
-            {t.name} / {tone}
-          </Head>
-          {STATES.map((state) => (
-            <span key={state} id={cell(prefix, t.name, tone, state)} className="inline-flex">
-              <Button variant={t.variant} tone={tone} size={size} disabled={state === "Disabled"}>
-                {children}
-              </Button>
-            </span>
-          ))}
-        </React.Fragment>
-      ))
-    )}
-  </div>
-)
-
 export const Default: Story = {
-  render: (args, ctx) => {
-    const isIcon = args.size?.startsWith("icon")
-    return isIcon ? (
-      <Button {...args} aria-label={copy(ctx).add}>
-        <PlusIcon strokeWidth={1.5} />
+  render: ({ label, iconPosition, icon, ...args }, ctx) => {
+    const text = label || copy(ctx).save
+    const glyph = iconPosition !== "none" ? <StoryIcon name={icon} /> : null
+    return (
+      <Button {...args}>
+        {iconPosition === "start" && glyph}
+        {text}
+        {iconPosition === "end" && glyph}
       </Button>
-    ) : (
-      <Button {...args}>{args.children ?? copy(ctx).save}</Button>
     )
   },
 }
@@ -198,38 +173,17 @@ export const States: Story = {
   ),
 }
 
-/** Figma's Icon Button set: the same states, square, with no Link Type. */
-export const IconButtonStates: Story = {
-  name: "Icon Button States",
-  parameters: { pseudo: pseudoFor("ib", TYPES.slice(0, 4)) },
-  render: (_args, ctx) => (
-    <StateGrid prefix="ib" types={TYPES.slice(0, 4)} size="icon-md">
-      <HeartIcon strokeWidth={1.5} />
-      <span className="sr-only">{copy(ctx).like}</span>
-    </StateGrid>
-  ),
-}
-
-/** xs 26px, sm 32px, md 36px, lg 40px, and the icon sizes beside them. */
+/** xs 26px, sm 32px, md 36px, lg 40px: the label alone, and with a leading icon. Icon-only sizes are on Icon Button. */
 export const Sizes: Story = {
   render: (_args, ctx) => (
     <div className="grid grid-cols-[4rem_max-content_max-content] items-center gap-x-6 gap-y-4">
-      {(
-        [
-          ["xs", "icon-xs"],
-          ["sm", "icon-sm"],
-          ["md", "icon-md"],
-          ["lg", "icon-lg"],
-        ] as const
-      ).map(([size, icon]) => (
+      {(["xs", "sm", "md", "lg"] as const).map((size) => (
         <React.Fragment key={size}>
           <Head>{size}</Head>
+          <Button size={size}>{copy(ctx).save}</Button>
           <Button size={size}>
-            <PlusIcon strokeWidth={1.5} />
+            <StoryIcon name="plus" />
             {copy(ctx).add}
-          </Button>
-          <Button size={icon} aria-label={copy(ctx).add}>
-            <PlusIcon strokeWidth={1.5} />
           </Button>
         </React.Fragment>
       ))}
@@ -252,7 +206,7 @@ export const Radius: Story = {
             </Button>
           </span>
           <Button radius={radius} size="icon-md" variant="soft" aria-label={copy(ctx).add}>
-            <PlusIcon strokeWidth={1.5} />
+            <StoryIcon name="plus" />
           </Button>
         </React.Fragment>
       ))}
@@ -278,7 +232,7 @@ export const WithIcons: Story = {
       </Button>
       <Button variant="soft" tone="secondary">
         {copy(ctx).next}
-        <ArrowRightIcon className="rtl:-scale-x-100" strokeWidth={1.5} />
+        <StoryIcon name="arrow-right" />
       </Button>
     </div>
   ),
@@ -331,7 +285,7 @@ export const Loading: Story = {
         {args.children ?? copy(ctx).loading}
       </Button>
       <Button loading loadingLabel={copy(ctx).loadingLabel} size="icon-md" variant="outline" aria-label={copy(ctx).add}>
-        <PlusIcon strokeWidth={1.5} />
+        <StoryIcon name="plus" />
       </Button>
     </div>
   ),
@@ -353,8 +307,8 @@ const THEMES = ["light", "dark"] as const
 
 /**
  * Light and Dark, one panel each, whatever the theme toolbar says, as Figma's
- * doc shows each Type. Each panel is every Type × Style at Enabled, plus the
- * Icon Button. Language and direction follow the Direction toolbar.
+ * doc shows each Type. Each panel is every Type × Style at Enabled. Language
+ * and direction follow the Direction toolbar.
  */
 export const LightAndDark: Story = {
   parameters: { layout: "padded" },
@@ -363,12 +317,11 @@ export const LightAndDark: Story = {
       {THEMES.map((theme) => (
         <div key={theme} className={[theme, "rounded-lg border bg-background p-6 text-foreground"].join(" ")}>
           <Head className="block pb-4">{theme === "dark" ? "Dark" : "Light"}</Head>
-          <div className="grid grid-cols-[repeat(5,max-content)] items-center gap-x-5 gap-y-3">
+          <div className="grid grid-cols-[repeat(4,max-content)] items-center gap-x-5 gap-y-3">
             <span />
             {TONES.map((tone) => (
               <Head key={tone}>{tone}</Head>
             ))}
-            <Head>icon</Head>
             {TYPES.map((t) => (
               <React.Fragment key={t.name}>
                 <Head>{t.name}</Head>
@@ -377,13 +330,6 @@ export const LightAndDark: Story = {
                     {copy(ctx).save}
                   </Button>
                 ))}
-                {t.name === "Link" ? (
-                  <span />
-                ) : (
-                  <Button variant={t.variant} size="icon-md" aria-label={copy(ctx).like}>
-                    <HeartIcon strokeWidth={1.5} />
-                  </Button>
-                )}
               </React.Fragment>
             ))}
           </div>
