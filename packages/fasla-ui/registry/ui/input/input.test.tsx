@@ -104,6 +104,15 @@ describe("Input", () => {
     expect(container.querySelector("[data-slot=input-description-end]")).toHaveClass("ms-auto", "text-end")
   })
 
+  it("aligns both rows to the top, so an end note stays on the first line", () => {
+    const { container } = render(
+      <Input label="Bio" labelEnd="Optional" description="Help" descriptionEnd="0/160" />
+    )
+    for (const row of ["input-label-row", "input-helper-row"]) {
+      expect(container.querySelector(`[data-slot=${row}]`)).toHaveClass("items-start")
+    }
+  })
+
   it("renders no label or helper row when they are not used", () => {
     const { container } = render(<Input aria-label="Search" />)
     expect(container.querySelector("[data-slot=input-label-row]")).toBeNull()

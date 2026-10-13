@@ -109,9 +109,11 @@ const inputBoxVariants = cva(
 
 /**
  * The label row and the helper row: Figma's `Top` and `Bottom` frames. 4px
- * padding all round and an 8px gap; the two labels sit at either end.
+ * padding all round and an 8px gap; the two labels sit at either end, aligned
+ * to the top, as in Figma. When the description wraps, the note at the end
+ * stays on its first line, next to the field, instead of following it down.
  */
-const ROW = "flex items-center justify-between gap-2 p-1"
+const ROW = "flex items-start justify-between gap-2 p-1"
 
 /**
  * Figma's Top Right and Bottom labels: XS Regular in `muted-foreground`, and

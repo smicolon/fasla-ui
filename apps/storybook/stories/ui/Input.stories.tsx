@@ -141,14 +141,13 @@ const Head = ({ children, className }: { children: React.ReactNode; className?: 
 )
 
 /**
- * A side row label. It aligns to the end of its column — toward the fields,
- * in either direction — through `text-end` on a cell that takes the story's
- * direction; only the caption inside is held left-to-right. Its space from
- * the first field is the grid's column gap, the same as between two fields.
+ * A side row label. Left-aligned in its column in both directions: the
+ * caption is an English property name. Its space from the first field is at
+ * least the grid's column gap, the same as between two fields.
  */
 const RowHead = ({ children }: { children: React.ReactNode }) => (
-  <span className="whitespace-nowrap text-end font-sans text-xs text-muted-foreground">
-    <span dir="ltr">{children}</span>
+  <span dir="ltr" className="whitespace-nowrap text-left font-sans text-xs text-muted-foreground">
+    {children}
   </span>
 )
 
@@ -156,17 +155,15 @@ const RowHead = ({ children }: { children: React.ReactNode }) => (
  * A side row label centred on an `md` field's box, not on its label or helper
  * text. A zero-width strut as tall as the label row — 4px padding round one
  * `text-sm` line, so it matches in either script — sits over a strip as tall
- * as the box, and the caption centres in the strip, aligned to its end as
+ * as the box, and the caption centres in the strip, left-aligned as
  * `RowHead` is.
  */
 const BoxLineHead = ({ children }: { children: React.ReactNode }) => (
-  <span className="flex flex-col whitespace-nowrap font-sans text-xs text-muted-foreground">
+  <span dir="ltr" className="flex flex-col whitespace-nowrap text-left font-sans text-xs text-muted-foreground">
     <span aria-hidden className="p-1 text-sm">
       {"\u200b"}
     </span>
-    <span className="grid h-9 content-center text-end">
-      <span dir="ltr">{children}</span>
-    </span>
+    <span className="flex h-9 items-center">{children}</span>
   </span>
 )
 
