@@ -453,7 +453,7 @@
         }
       },
       "heightTitle": "Height",
-      "heightLead": "The field starts 60px tall and grows a line at a time as the text gets longer, so all of it stays in view. Drag the corner to make it taller yourself.",
+      "heightLead": "The field starts 60px tall and grows a line at a time as the text gets longer, so all of it stays in view. Drag the corner to make it taller yourself. A disabled field keeps its height.",
       "height": {
         "label": "Describe the problem",
         "labelEnd": "Required",
@@ -474,7 +474,7 @@
       "props": {
         "status": "Set to <code>success</code> to mark a value that passed validation.",
         "invalid": "Marks the field invalid. <code>aria-invalid</code> does the same.",
-        "disabled": "Disables the field and dims the whole group.",
+        "disabled": "Disables the field, dims the whole group and turns off resizing.",
         "label": "The field's label, linked to the textarea for you.",
         "labelEnd": "A short note at the end of the label row, such as Optional.",
         "description": "Helper text under the field. A screen reader reads it with the field.",

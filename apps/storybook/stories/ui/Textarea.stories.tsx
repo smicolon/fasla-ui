@@ -185,7 +185,7 @@ export const Default: Story = {
  * the note at the end of its row, the helper text and the character counter.
  * Success and Error recolour them all; Error shows its message in place of
  * the helper text. Focus is the real `:focus-visible`, forced by the
- * pseudo-states addon.
+ * pseudo-states addon. Disabled has no grip: it cannot be resized.
  */
 export const States: Story = {
   decorators: [framed],

@@ -62,13 +62,18 @@ describe("Textarea", () => {
     )
   })
 
-  it("gives Default no shadow and Success and Error Figma's sm shadow", () => {
+  it("uses Input's shadow in every state and the ring in its place on focus", () => {
     render(<Textarea aria-label="Notes" />)
     const classes = screen.getByRole("textbox").getAttribute("class")!.split(/\s+/)
-    expect(classes).not.toContain("shadow")
-    expect(classes).not.toContain("shadow-sm")
-    expect(classes).toContain("group-data-[invalid]/textarea:shadow")
-    expect(classes).toContain("group-[:not([data-invalid])[data-status=success]]/textarea:shadow")
+    expect(classes).toContain("shadow-sm")
+    expect(classes).toContain("focus-visible:shadow-none")
+    // No status adds a shadow of its own.
+    expect(classes.filter((cls) => /:shadow(-|$)/.test(cls) && !cls.startsWith("focus-visible:"))).toEqual([])
+  })
+
+  it("turns resizing off, and with it the grip, while disabled", () => {
+    render(<Textarea aria-label="Notes" disabled />)
+    expect(screen.getByRole("textbox")).toHaveClass("resize-y", "disabled:resize-none")
   })
 
   it("mirrors the resize grip to the bottom-left corner in RTL", () => {

@@ -78,26 +78,29 @@ const GRIP = [
  * time from the minimum, and `useAutoGrow` does the same where the browser
  * lacks it. The grip still resizes it by hand, vertically only.
  *
- * Focus, Success and Error are Figma's and Input's: a `ring` border and a 3px
- * `ring/50` halo on focus; a `success` or `destructive` border that holds
- * through focus and tints the halo. Figma gives Default and Focus no shadow,
- * and Success and Error its `shadow/sm` — Tailwind 3's `shadow`. Success
- * matches only a field that is not invalid, so an invalid field never shows
- * as a success, and the group selectors out-rank `focus-visible:`.
+ * The shadow is Input's: Figma's xs shadow — Tailwind 3's `shadow-sm` — in
+ * every state but Focus, which swaps it for a `ring` border and a 3px
+ * `ring/50` halo. Success and Error recolour the border, keep it through
+ * focus and tint the halo. Success matches only a field that is not invalid,
+ * so an invalid field never shows as a success, and the group selectors
+ * out-rank `focus-visible:`.
+ *
+ * Disabled turns resizing off. With `resize: none` no browser draws a
+ * resizer, so the grip goes too, as in Figma's Disabled variants.
  */
 const BOX = [
-  "block min-h-[60px] w-full min-w-0 resize-y rounded-[var(--radius-md)] border border-input bg-background px-3.5 py-1.5 dark:bg-input/30",
+  "block min-h-[60px] w-full min-w-0 resize-y rounded-[var(--radius-md)] border border-input bg-background px-3.5 py-1.5 shadow-sm dark:bg-input/30",
   "[field-sizing:content]",
   "transition-[color,border-color,box-shadow] motion-reduce:transition-none",
-  "focus-visible:border-ring focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
-  "group-[:not([data-invalid])[data-status=success]]/textarea:border-success group-[:not([data-invalid])[data-status=success]]/textarea:shadow group-[:not([data-invalid])[data-status=success]]/textarea:ring-success/20 dark:group-[:not([data-invalid])[data-status=success]]/textarea:ring-success/40",
-  "group-data-[invalid]/textarea:border-destructive group-data-[invalid]/textarea:shadow group-data-[invalid]/textarea:ring-destructive/20 dark:group-data-[invalid]/textarea:ring-destructive/40",
+  "focus-visible:border-ring focus-visible:shadow-none focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+  "group-[:not([data-invalid])[data-status=success]]/textarea:border-success group-[:not([data-invalid])[data-status=success]]/textarea:ring-success/20 dark:group-[:not([data-invalid])[data-status=success]]/textarea:ring-success/40",
+  "group-data-[invalid]/textarea:border-destructive group-data-[invalid]/textarea:ring-destructive/20 dark:group-data-[invalid]/textarea:ring-destructive/40",
   // The value is 16px below `md` and Figma's SM (14px) from `md` up, as
   // Input's is: iOS Safari zooms the page into any field set under 16px when
   // it takes focus. Both rungs re-lead under `[dir="rtl"]` to Cairo's 28
   // and 24px.
   "text-start text-base text-foreground md:text-sm",
-  "placeholder:text-muted-foreground disabled:cursor-not-allowed",
+  "placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:resize-none",
   GRIP,
 ]
 
