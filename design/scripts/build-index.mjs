@@ -73,12 +73,17 @@ export const EXCLUDED_UNSIGNED = [
  *  the "Components Skeleton" page holds 87 loading placeholders literally named `button`,
  *  `input`, `badge` …, so a name-only lookup matches the wrong node.
  *  `null` means the registry item has no Figma counterpart in scope — either none exists
- *  (all seven effects components) or its page fails the selection rule. */
+ *  (all seven effects components) or its page fails the selection rule.
+ *  A list means one registry item implements several sets: `button` is both Figma's Button
+ *  and its Icon Button, which the code reaches through the `icon-*` sizes. */
 export const CODE_MAP = {
   accordion: { set: "Accordion", page: "3707:28873" },
   avatar: { set: "Avatar", page: "3710:7318" },
   badge: { set: "Badge", page: "3724:120666" },
-  button: { set: "Button", page: "1:3" },
+  button: [
+    { set: "Button", page: "1:3" },
+    { set: "Icon Button", page: "1:3" },
+  ],
   checkbox: { set: "Check Box", page: "3830:5150" },
   combobox: { set: "Combobox", page: "14852:8647" },
   input: { set: "Default Input", page: "3882:2381" },
@@ -142,7 +147,9 @@ export function build(capture) {
   const entries = {}
   const pages = []
   const codeByFigma = new Map(
-    Object.entries(CODE_MAP).filter(([, v]) => v).map(([k, v]) => [`${v.page}|${norm(v.set)}`, k])
+    Object.entries(CODE_MAP)
+      .filter(([, v]) => v)
+      .flatMap(([k, v]) => [v].flat().map((s) => [`${s.page}|${norm(s.set)}`, k]))
   )
 
   for (const p of capture) {

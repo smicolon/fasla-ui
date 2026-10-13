@@ -1072,7 +1072,7 @@
         },
         "duplicates": []
       },
-      "code": null,
+      "code": "button",
       "hasDescription": false,
       "flags": [
         "no-direction-axis",

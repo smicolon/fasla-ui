@@ -300,12 +300,12 @@ Four more, each of which survived both the Group-A and Group-B corrections above
   name **carries a space before the hash** — `LTR Placeholder#369:47` → `RTL Placeholder #38663:0`,
   `LTR Text#369:40` → `RTL Text#38663:21`. Without the space `setProperties` throws.
 - **`rebindIcon()` must re-assert the button's OWN foreground token, not `theme/primary-foreground`.**
-  Hardcoding primary-foreground is right for `Style=primary` and **silently wrong for
-  `Style=destructive`**, which is authored against `theme/destructive-foreground`. Both resolve
+  Hardcoding primary-foreground is right for `Style=Primary` and **silently wrong for
+  `Style=Destructive`**, which is authored against `theme/destructive-foreground`. Both resolve
   near-white, so the regression is invisible in a screenshot and passes every unbound-fill audit —
   only a token read catches it. The robust form is **preserve, don't guess**: snapshot each Button's
   nested VECTOR `boundVariables.color` id before the flip and re-assert that exact id after the
-  icon-slot swap. That also covers `Outline`/`destructive` (`theme/destructive`) and Ghost
+  icon-slot swap. That also covers `Outline`/`Destructive` (`theme/destructive`) and Ghost
   (`theme/foreground`) with no per-style table to maintain.
 - **The tail-less vertical `Steps / Step item` IS workable from an instance** — the Group-B note
   saying otherwise is superseded. The component defect is real, but the fix needs no atom change:

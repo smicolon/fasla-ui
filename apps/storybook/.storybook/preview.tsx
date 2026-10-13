@@ -54,6 +54,11 @@ const preview: Preview = {
       disable: true,
     },
     layout: "centered",
+    // Button and Icon Button lead the UI section; everything else keeps the
+    // order of its files, which is alphabetical.
+    options: {
+      storySort: { order: ["Blocks", "Effects", "UI", ["Button", "Icon Button"]] },
+    },
   },
   globalTypes: {
     direction: {

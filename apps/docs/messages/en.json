@@ -629,33 +629,133 @@
       }
     },
     "button": {
-      "lead": "A button component with multiple variants, sizes, and loading state.",
+      "lead": "Starts an action, or takes the reader somewhere else. Five types, three tones, four sizes and two radii, the same as the Figma set, with a loading state.",
       "preview": "Save changes",
+      "cancel": "Cancel",
+      "variantsBody": "<code>variant</code> sets the type. <code>default</code>, <code>secondary</code> and <code>destructive</code> are filled. <code>outline</code> has a border on the inside, <code>ghost</code> fills only when you hover it, and <code>soft</code> lays a light tint over the card surface. <code>link</code> is text, underlined in every state.",
       "variants": {
         "default": "Save changes",
         "secondary": "Preview",
         "destructive": "Delete account",
         "outline": "Cancel",
         "ghost": "Skip",
-        "link": "View details"
+        "link": "View details",
+        "soft": "Add filter"
       },
+      "tones": {
+        "title": "Tones",
+        "body": "<code>tone</code> picks the colour within a type: <code>primary</code>, <code>secondary</code> or <code>destructive</code>. Each variant has its own default, so <code>variant=\"outline\"</code> on its own is the neutral outline, and adding <code>tone=\"destructive\"</code> makes it the destructive one.",
+        "primary": "Save changes",
+        "secondary": "Preview",
+        "destructive": "Delete account"
+      },
+      "sizesBody": "Four sizes: <code>xs</code> is 26px tall, <code>sm</code> 32px, <code>md</code> 36px and <code>lg</code> 40px. Icons are 16px at every size. For a button with only an icon, use the icon sizes on the Icon Button page.",
       "sizes": {
+        "xs": "Save changes",
         "sm": "Save changes",
-        "default": "Save changes",
+        "md": "Save changes",
         "lg": "Save changes"
       },
+      "radius": {
+        "title": "Radius",
+        "body": "<code>radius=\"standard\"</code> rounds the corners by 8px, and <code>radius=\"rounded\"</code> makes a pill. The focus ring follows the shape."
+      },
+      "statesBody": "Hover, pressed and keyboard focus are real CSS states, not props: hover a button, press it, or tab to it. Filled buttons fade when you hover and press them. Soft, outline and ghost buttons deepen their tint instead, and a link keeps its underline and fades. Disabled dims every variant to half opacity.",
+      "states": {
+        "enabled": "Enabled",
+        "disabled": "Disabled"
+      },
+      "link": {
+        "title": "Link or ghost",
+        "body": "Both are quiet, but they mean different things. Use <code>ghost</code> for an action on the same page, such as closing a panel, editing a row or opening a menu. Use <code>link</code> to go somewhere else, such as Forgot password?, Learn more or View all, and render it as a real link with <code>asChild</code>.",
+        "ghostLabel": "An action on this page",
+        "linkLabel": "Goes somewhere else",
+        "edit": "Edit",
+        "forgot": "Forgot password?",
+        "learnMore": "Learn more",
+        "viewAll": "View all"
+      },
+      "icons": {
+        "title": "With icons",
+        "body": "Put an icon before or after the label, as a child. The button sizes it to 16px and gives it the label's colour. Icons follow the reading direction; flip one that points, such as an arrow, with <code>rtl:-scale-x-100</code>.",
+        "upload": "Upload",
+        "download": "Download",
+        "next": "Next"
+      },
       "loadingTitle": "Loading",
+      "loadingBody": "<code>loading</code> shows a spinner, disables the button and announces <code>loadingLabel</code> to screen readers. With <code>asChild</code> the child is only marked busy (<code>aria-busy</code>) and disabled, so show your own progress inside it.",
       "loading": "Saving…",
       "loadingLabel": "Saving",
+      "a11y": {
+        "nativeButton": "Renders a native <code>button</code>, so Enter and Space press it. Set <code>type=\"submit\"</code> or <code>type=\"button\"</code> as the form needs.",
+        "focus": "Keyboard focus draws a 2px ring, 2px outside the button, in the <code>ring</code> colour.",
+        "asChild": "With <code>asChild</code>, the button styles its only child, such as a link. A disabled child gets <code>aria-disabled</code> instead of <code>disabled</code>.",
+        "loading": "While it is loading, the button is disabled and announces <code>loadingLabel</code> as a status.",
+        "direction": "Direction is inherited from <code>dir</code>, never a prop. Icons and label swap ends in right-to-left."
+      },
+      "propsNote": "Kept for shadcn compatibility: <code>secondary</code> and <code>destructive</code> still work as <code>variant</code> values (Solid in those tones), and <code>default</code> and <code>icon</code> as <code>size</code> values (the same as <code>md</code> and <code>icon-md</code>).",
       "props": {
-        "variant": "The visual style of the button.",
-        "size": "The size of the button.",
-        "loading": "Shows a loading spinner.",
+        "variant": "The type: filled, outline, ghost, soft or link.",
+        "tone": "The colour within the type. Each variant has its own default.",
+        "size": "The height. The <code>icon</code> sizes are for icon buttons.",
+        "radius": "The corners: slightly rounded, or a pill.",
+        "loading": "Shows a spinner and disables the button.",
         "loadingLabel": "Screen-reader text while loading.",
         "disabled": "Disables the button.",
-        "asChild": "Renders its child element instead.",
+        "asChild": "Styles its only child, such as a link, instead of rendering a button.",
         "onClick": "Called when the button is pressed.",
         "className": "Extra classes for the component."
+      },
+      "usage": {
+        "basic": "Basic button",
+        "tone": "Outline in the destructive tone",
+        "link": "A link to another page",
+        "icon": "With an icon",
+        "loading": "Loading"
+      }
+    },
+    "iconButton": {
+      "lead": "A square button with one icon and no label, for toolbars and dense rows. It is the Button component at an icon size, so it has the same variants, tones, states and radius.",
+      "installNote": "Icon Button is part of the <code>button</code> item, so installing Button installs it.",
+      "variantsBody": "Four variants, as in Figma's Icon Button: <code>default</code>, <code>soft</code>, <code>outline</code> and <code>ghost</code>, each in the three tones. There is no link icon button: an icon on its own does not read as a link.",
+      "sizesBody": "Four square sizes: <code>icon-xs</code> is 26px, <code>icon-sm</code> 32px, <code>icon-md</code> 36px and <code>icon-lg</code> 40px. The icon is 16px at every size.",
+      "statesBody": "Hover, pressed and keyboard focus are real CSS states, as on Button. Filled icon buttons fade; soft, outline and ghost ones deepen their tint. Disabled dims every variant to half opacity.",
+      "name": {
+        "title": "Accessible name",
+        "body": "An icon has no text a screen reader can read, so every icon button needs a name: an <code>aria-label</code>, or text inside it that you hide visually. In development, the button warns in the console when it has none. To show the name on hover too, wrap the button in a tooltip."
+      },
+      "states": {
+        "enabled": "Enabled",
+        "disabled": "Disabled"
+      },
+      "labels": {
+        "add": "Add",
+        "like": "Like",
+        "edit": "Edit",
+        "delete": "Delete",
+        "close": "Close",
+        "more": "More options"
+      },
+      "a11y": {
+        "label": "Give every icon button an <code>aria-label</code>. The button warns in development when it has no name.",
+        "icon": "The icon is decorative. Hide it from assistive technology with <code>aria-hidden</code> if your icon library does not.",
+        "focus": "Keyboard focus draws a 2px ring, 2px outside the button, in the <code>ring</code> colour.",
+        "target": "At <code>icon-xs</code> the button is 26px square. WCAG 2.5.8 asks for at least 24px, so every size passes."
+      },
+      "propsNote": "Kept for shadcn compatibility: <code>secondary</code> and <code>destructive</code> still work as <code>variant</code> values (Solid in those tones), and <code>icon</code> as a <code>size</code> value (the same as <code>icon-md</code>).",
+      "props": {
+        "size": "The icon sizes: square, with one 16px icon.",
+        "ariaLabel": "The name a screen reader reads. Required unless the button has visually hidden text.",
+        "variant": "The type: filled, outline, ghost or soft.",
+        "tone": "The colour within the type. Each variant has its own default.",
+        "radius": "The corners: slightly rounded, or a circle.",
+        "loading": "Replaces the icon with a spinner and disables the button.",
+        "disabled": "Disables the button.",
+        "className": "Extra classes for the component."
+      },
+      "usage": {
+        "basic": "Icon button",
+        "toolbar": "A toolbar of icon buttons"
       }
     },
     "card": {

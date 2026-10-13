@@ -137,7 +137,7 @@
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "A button component with multiple variants, sizes, and loading state.",
+      "description": "A button in five types (solid, soft, outline, ghost, link) and three tones, four sizes and the matching icon-button sizes, two radii, and a loading state.",
       "dependencies": [
         "@radix-ui/react-slot",
         "class-variance-authority",

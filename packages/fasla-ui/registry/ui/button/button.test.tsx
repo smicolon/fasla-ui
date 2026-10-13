@@ -1,93 +1,406 @@
-import { describe, it, expect, vi } from "vitest"
+import { afterEach, describe, it, expect, vi } from "vitest"
 import { render, screen, fireEvent } from "@testing-library/react"
-import { Button } from "./button"
+import { PlusIcon } from "lucide-react"
+import { Button, buttonVariants } from "./button"
+
+const button = () => screen.getByRole("button")
 
 describe("Button", () => {
   it("renders with default props", () => {
     render(<Button>Click me</Button>)
     expect(screen.getByRole("button", { name: "Click me" })).toBeInTheDocument()
+    // Figma's default: Solid / Primary / md / Standard.
+    expect(button()).toHaveClass("bg-primary", "text-primary-foreground", "h-9", "px-4", "rounded-[var(--radius-md)]")
+    expect(button()).toHaveAttribute("data-variant", "default")
+    expect(button()).toHaveAttribute("data-tone", "primary")
+    expect(button()).toHaveAttribute("data-size", "md")
   })
 
-  it("renders with different variants", () => {
-    const { rerender } = render(<Button variant="default">Default</Button>)
-    expect(screen.getByRole("button")).toHaveClass("bg-primary")
-
-    rerender(<Button variant="destructive">Destructive</Button>)
-    expect(screen.getByRole("button")).toHaveClass("bg-destructive")
-
-    rerender(<Button variant="outline">Outline</Button>)
-    expect(screen.getByRole("button")).toHaveClass("border")
-
-    rerender(<Button variant="secondary">Secondary</Button>)
-    expect(screen.getByRole("button")).toHaveClass("bg-secondary")
-
-    rerender(<Button variant="ghost">Ghost</Button>)
-    expect(screen.getByRole("button")).toHaveClass("hover:bg-accent")
-
-    rerender(<Button variant="link">Link</Button>)
-    expect(screen.getByRole("button")).toHaveClass("underline-offset-4")
+  describe("each variant is one Figma Type and Style", () => {
+    it.each([
+      ["default", "primary", ["bg-primary", "text-primary-foreground", "hover:opacity-90", "active:opacity-80"]],
+      ["secondary", "secondary", ["bg-secondary", "text-secondary-foreground", "hover:opacity-90", "active:from-soft-primary"]],
+      ["destructive", "destructive", ["bg-destructive", "text-destructive-foreground", "hover:opacity-90", "active:opacity-80"]],
+      ["outline", "secondary", ["bg-background", "ring-1", "ring-inset", "ring-border", "text-foreground", "hover:bg-secondary"]],
+      ["ghost", "secondary", ["text-foreground", "hover:bg-accent", "active:from-soft-primary"]],
+      ["link", "primary", ["underline", "text-primary", "hover:opacity-90", "active:opacity-80"]],
+      ["soft", "primary", ["bg-card", "from-soft-primary", "hover:from-soft-primary-20", "active:from-soft-primary-30", "text-primary"]],
+    ] as const)("%s → %s", (variant, tone, classes) => {
+      render(<Button variant={variant}>Label</Button>)
+      expect(button()).toHaveClass(...classes)
+      expect(button()).toHaveAttribute("data-tone", tone)
+    })
   })
 
-  it("renders with different sizes", () => {
-    const { rerender } = render(<Button size="sm">Small</Button>)
-    expect(screen.getByRole("button")).toHaveClass("h-8")
+  describe("tone reaches the other Styles of a Type", () => {
+    it.each([
+      ["outline", "primary", ["ring-primary", "text-primary", "hover:bg-accent", "hover:text-accent-foreground"]],
+      ["outline", "destructive", ["ring-destructive", "text-destructive", "hover:bg-soft-destructive", "active:bg-soft-destructive-20"]],
+      ["ghost", "primary", ["text-primary", "hover:bg-accent", "hover:text-accent-foreground"]],
+      ["ghost", "destructive", ["text-destructive", "hover:bg-soft-destructive", "active:bg-soft-destructive-20"]],
+      ["link", "secondary", ["underline", "text-secondary-foreground"]],
+      ["link", "destructive", ["underline", "text-destructive"]],
+      ["soft", "secondary", ["from-soft-secondary", "hover:from-soft-secondary-20", "active:from-soft-secondary-30", "text-secondary-foreground"]],
+      ["soft", "destructive", ["from-soft-destructive", "hover:from-soft-destructive-20", "active:from-soft-destructive-30", "text-destructive"]],
+    ] as const)("%s + %s", (variant, tone, classes) => {
+      render(
+        <Button variant={variant} tone={tone}>
+          Label
+        </Button>
+      )
+      expect(button()).toHaveClass(...classes)
+    })
 
-    rerender(<Button size="default">Default</Button>)
-    expect(screen.getByRole("button")).toHaveClass("h-9")
+    it("does not leak another tone's colours", () => {
+      render(
+        <Button variant="outline" tone="destructive">
+          Delete
+        </Button>
+      )
+      expect(button()).not.toHaveClass("ring-border", "text-foreground", "hover:bg-secondary")
+    })
+  })
 
-    rerender(<Button size="lg">Large</Button>)
-    expect(screen.getByRole("button")).toHaveClass("h-10")
+  it("underlines a link in every state, not only on hover", () => {
+    render(
+      <Button variant="link" disabled>
+        Learn more
+      </Button>
+    )
+    expect(button()).toHaveClass("underline", "disabled:opacity-50")
+    expect(button().className).not.toMatch(/hover:underline/)
+  })
 
-    rerender(<Button size="icon">Icon</Button>)
-    expect(screen.getByRole("button")).toHaveClass("w-9")
+  it("keeps Link the same height and padding as the other Types", () => {
+    const { rerender } = render(<Button variant="link">Learn more</Button>)
+    const link = button().className
+    rerender(<Button variant="ghost">Learn more</Button>)
+    for (const c of ["h-9", "px-4", "gap-2", "text-sm"]) {
+      expect(link).toContain(c)
+      expect(button()).toHaveClass(c)
+    }
+  })
+
+  it.each([
+    ["xs", ["h-[1.625rem]", "px-2", "gap-1.5", "text-xs"]],
+    ["sm", ["h-8", "px-3", "gap-1.5", "text-sm"]],
+    ["md", ["h-9", "px-4", "gap-2", "text-sm"]],
+    ["lg", ["h-10", "px-6", "gap-2", "text-sm"]],
+    ["icon-xs", ["size-[1.625rem]"]],
+    ["icon-sm", ["size-8"]],
+    ["icon-md", ["size-9"]],
+    ["icon-lg", ["size-10"]],
+  ] as const)("size %s matches Figma", (size, classes) => {
+    render(
+      <Button size={size} aria-label="Add">
+        Label
+      </Button>
+    )
+    expect(button()).toHaveClass(...classes, "[&_svg]:size-4")
+  })
+
+  it.each([
+    ["default", "md"],
+    ["icon", "icon-md"],
+  ] as const)("keeps shadcn's size %s as an alias of %s", (alias, size) => {
+    const { rerender } = render(
+      <Button size={alias} aria-label="Add">
+        Label
+      </Button>
+    )
+    const aliased = button().className
+    expect(button()).toHaveAttribute("data-size", size)
+    rerender(
+      <Button size={size} aria-label="Add">
+        Label
+      </Button>
+    )
+    expect(button().className).toBe(aliased)
+    expect(buttonVariants({ size: alias })).toBe(buttonVariants({ size }))
+  })
+
+  it("treats the icon alias as an icon size", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {})
+    render(
+      <Button size="icon">
+        <PlusIcon />
+      </Button>
+    )
+    expect(warn).toHaveBeenCalledTimes(1)
+    warn.mockRestore()
+  })
+
+  it("rounds to a pill, ring included", () => {
+    render(<Button radius="rounded">Save</Button>)
+    expect(button()).toHaveClass("rounded-full", "after:rounded-full")
+    expect(button()).not.toHaveClass("rounded-[var(--radius-md)]")
+  })
+
+  it("draws Figma's focus ring: 2px, 2px outside, on keyboard focus only", () => {
+    render(<Button>Save</Button>)
+    expect(button()).toHaveClass(
+      "after:absolute",
+      "after:-inset-1",
+      "after:ring-2",
+      "after:ring-inset",
+      "after:ring-ring",
+      "after:opacity-0",
+      "focus-visible:after:opacity-100",
+      "after:rounded-[calc(var(--radius-md)+4px)]"
+    )
+  })
+
+  it("keeps an edge and a focus mark in forced colours", () => {
+    render(<Button>Save</Button>)
+    expect(button()).toHaveClass(
+      "[outline:none]",
+      "forced-colors:border",
+      "forced-colors:border-[ButtonText]",
+      "forced-colors:focus-visible:[outline:2px_solid_Highlight]"
+    )
+    expect(button()).not.toHaveClass("outline-none")
+  })
+
+  it("dims every variant to half opacity when disabled", () => {
+    render(
+      <Button variant="soft" disabled>
+        Save
+      </Button>
+    )
+    expect(button()).toBeDisabled()
+    expect(button()).toHaveClass("disabled:opacity-50", "disabled:pointer-events-none")
   })
 
   it("shows loading state", () => {
     render(<Button loading>Submit</Button>)
-    const button = screen.getByRole("button")
-    expect(button).toBeDisabled()
+    expect(button()).toBeDisabled()
+    // Announced as a status, outside any busy region.
+    expect(button()).not.toHaveAttribute("aria-busy")
+    expect(screen.getByRole("status")).toHaveTextContent("Loading")
     expect(screen.getByText("Submit")).toBeInTheDocument()
-    // Check for spinner (sr-only text)
     expect(screen.getByText("Loading")).toBeInTheDocument()
   })
 
   it("announces the loading text it is given", () => {
-    render(<Button loading loadingLabel="جارٍ الحفظ">حفظ</Button>)
+    render(
+      <Button loading loadingLabel="جارٍ الحفظ">
+        حفظ
+      </Button>
+    )
     expect(screen.getByText("جارٍ الحفظ")).toBeInTheDocument()
     expect(screen.queryByText("Loading")).not.toBeInTheDocument()
   })
 
-  it("is disabled when disabled prop is true", () => {
-    render(<Button disabled>Disabled</Button>)
-    expect(screen.getByRole("button")).toBeDisabled()
+  it("swaps an icon button's glyph for the spinner while loading", () => {
+    render(
+      <Button size="icon-md" aria-label="Add" loading>
+        <PlusIcon data-testid="plus" />
+      </Button>
+    )
+    expect(screen.queryByTestId("plus")).not.toBeInTheDocument()
+    expect(screen.getByRole("button", { name: "Add" })).toBeDisabled()
+    // The action name stays; the loading text is announced as a status.
+    expect(screen.getByRole("status")).toHaveTextContent("Loading")
   })
 
   it("calls onClick handler when clicked", () => {
     const handleClick = vi.fn()
     render(<Button onClick={handleClick}>Click me</Button>)
-
-    fireEvent.click(screen.getByRole("button"))
+    fireEvent.click(button())
     expect(handleClick).toHaveBeenCalledTimes(1)
   })
 
   it("does not call onClick when disabled", () => {
     const handleClick = vi.fn()
-    render(<Button onClick={handleClick} disabled>Click me</Button>)
-
-    fireEvent.click(screen.getByRole("button"))
+    render(
+      <Button onClick={handleClick} disabled>
+        Click me
+      </Button>
+    )
+    fireEvent.click(button())
     expect(handleClick).not.toHaveBeenCalled()
   })
 
   it("does not call onClick when loading", () => {
     const handleClick = vi.fn()
-    render(<Button onClick={handleClick} loading>Click me</Button>)
-
-    fireEvent.click(screen.getByRole("button"))
+    render(
+      <Button onClick={handleClick} loading>
+        Click me
+      </Button>
+    )
+    fireEvent.click(button())
     expect(handleClick).not.toHaveBeenCalled()
   })
 
   it("applies custom className", () => {
     render(<Button className="custom-class">Custom</Button>)
-    expect(screen.getByRole("button")).toHaveClass("custom-class")
+    expect(button()).toHaveClass("custom-class")
+  })
+
+  it("forwards its ref", () => {
+    const ref = { current: null as HTMLButtonElement | null }
+    render(<Button ref={ref}>Save</Button>)
+    expect(ref.current).toBe(button())
+  })
+
+  describe("asChild", () => {
+    it("styles its child as the button", () => {
+      render(
+        <Button asChild variant="link">
+          <a href="/pricing">View all</a>
+        </Button>
+      )
+      const link = screen.getByRole("link", { name: "View all" })
+      expect(link).toHaveClass("underline", "text-primary")
+      expect(link).not.toHaveAttribute("disabled")
+    })
+
+    it("marks a disabled link with aria-disabled instead of disabled", () => {
+      render(
+        <Button asChild disabled>
+          <a href="/pricing">View all</a>
+        </Button>
+      )
+      const link = screen.getByRole("link", { name: "View all" })
+      expect(link).toHaveAttribute("aria-disabled", "true")
+      expect(link).not.toHaveAttribute("disabled")
+      expect(link).toHaveClass("aria-disabled:opacity-50", "aria-disabled:pointer-events-none")
+    })
+
+    it.each([
+      ["disabled", { disabled: true }],
+      ["loading", { loading: true }],
+    ])("runs none of the child's own click handlers while %s", (_, state) => {
+      const childClick = vi.fn()
+      const childCapture = vi.fn()
+      render(
+        <Button asChild {...state}>
+          <a href="/pricing" onClick={childClick} onClickCapture={childCapture}>
+            View all
+          </a>
+        </Button>
+      )
+      const link = screen.getByRole("link", { name: "View all" })
+      link.click()
+      expect(childCapture).not.toHaveBeenCalled()
+      expect(childClick).not.toHaveBeenCalled()
+      if ("loading" in state) expect(link).toHaveAttribute("aria-busy", "true")
+    })
+
+    it("keeps the child's handlers when it is active", () => {
+      const childClick = vi.fn()
+      render(
+        <Button asChild>
+          <a href="#pricing" onClick={childClick}>
+            View all
+          </a>
+        </Button>
+      )
+      screen.getByRole("link", { name: "View all" }).click()
+      expect(childClick).toHaveBeenCalledTimes(1)
+    })
+
+    it("keeps a disabled link out of the tab order and stops it navigating", () => {
+      const onClick = vi.fn()
+      const childClick = vi.fn()
+      render(
+        <Button asChild disabled onClick={onClick}>
+          <a href="/pricing" onClick={childClick}>
+            View all
+          </a>
+        </Button>
+      )
+      const link = screen.getByRole("link", { name: "View all" })
+      expect(link).toHaveAttribute("tabindex", "-1")
+      const click = new MouseEvent("click", { bubbles: true, cancelable: true })
+      link.dispatchEvent(click)
+      expect(click.defaultPrevented).toBe(true)
+      expect(onClick).not.toHaveBeenCalled()
+      // The child's own handler must not run either.
+      expect(childClick).not.toHaveBeenCalled()
+    })
+  })
+
+  describe("icon sizes need an accessible name", () => {
+    const warn = vi.spyOn(console, "warn").mockImplementation(() => {})
+    afterEach(() => {
+      warn.mockClear()
+    })
+
+    it("warns in development when there is none", () => {
+      render(
+        <Button size="icon-md">
+          <PlusIcon />
+        </Button>
+      )
+      expect(warn).toHaveBeenCalledTimes(1)
+      expect(warn.mock.calls[0]?.[0]).toMatch(/icon-only button needs an accessible name/)
+    })
+
+    it.each([
+      ["aria-label", { "aria-label": "Add" }],
+      ["title", { title: "Add" }],
+    ])("is quiet with %s", (_, extra) => {
+      render(
+        <Button size="icon-sm" {...extra}>
+          <PlusIcon />
+        </Button>
+      )
+      expect(warn).not.toHaveBeenCalled()
+    })
+
+    it("is quiet with visually hidden text", () => {
+      render(
+        <Button size="icon-lg">
+          <PlusIcon />
+          <span className="sr-only">Add</span>
+        </Button>
+      )
+      expect(warn).not.toHaveBeenCalled()
+    })
+
+    it("warns once, not on every render", () => {
+      const { rerender } = render(
+        <Button size="icon-md">
+          <PlusIcon />
+        </Button>
+      )
+      rerender(
+        <Button size="icon-md" className="x">
+          <PlusIcon />
+        </Button>
+      )
+      expect(warn).toHaveBeenCalledTimes(1)
+    })
+
+    it("does not check buttons with a label", () => {
+      render(<Button size="sm" />)
+      expect(warn).not.toHaveBeenCalled()
+    })
+
+    it("is quiet in production", () => {
+      vi.stubEnv("NODE_ENV", "production")
+      render(
+        <Button size="icon-md">
+          <PlusIcon />
+        </Button>
+      )
+      vi.unstubAllEnvs()
+      expect(warn).not.toHaveBeenCalled()
+    })
+  })
+})
+
+describe("buttonVariants", () => {
+  it("styles another element with the same options", () => {
+    expect(buttonVariants({ variant: "outline" })).toContain("ring-border")
+    expect(buttonVariants({ variant: "outline", tone: "primary" })).toContain("ring-primary")
+    expect(buttonVariants({ variant: "soft", size: "lg", radius: "rounded" })).toContain("rounded-full")
+    expect(buttonVariants({ className: "w-full" })).toContain("w-full")
+  })
+
+  it("defaults to Figma's Solid / Primary / md / Standard", () => {
+    const classes = buttonVariants()
+    for (const c of ["bg-primary", "h-9", "rounded-[var(--radius-md)]"]) expect(classes).toContain(c)
   })
 })

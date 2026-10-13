@@ -89,13 +89,28 @@ export const routes = [
     path: "/docs/components/button/",
     title: "Button React Component | Fasla",
     description:
-      "Add an accessible React button with visual variants, responsive sizes, loading feedback, and composable child rendering.",
+      "Add an accessible React button in five types and three tones, four sizes and two radii, with a loading state and a link that is always underlined.",
     h1: "Button",
     ar: {
       title: "زر (Button) لتطبيقات React | فاصلة",
       description:
-        "أضف مكوّن زر (Button) مع أنماط (variant) مرئية وأحجام متجاوبة وحالة تحميل، ويمكنك وضع عناصر أخرى داخله.",
+        "أضف مكوّن زر بخمسة أنماط وثلاثة ألوان دلالية وأربعة أحجام وشكلين للزوايا، مع حالة تحميل ورابط تحته خط دائمًا.",
       h1: "زر (Button)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
+    path: "/docs/components/icon-button/",
+    title: "Icon Button React Component | Fasla",
+    description:
+      "Add an accessible square React icon button in four types and three tones, four sizes and two radii, with a warning when it has no accessible name.",
+    h1: "Icon Button",
+    ar: {
+      title: "زر الأيقونة (Icon Button) لتطبيقات React | فاصلة",
+      description:
+        "أضف زر أيقونة مربّعًا بأربعة أنماط وثلاثة ألوان دلالية وأربعة أحجام وشكلين للزوايا، مع تحذير إذا لم يكن له اسم يقرؤه قارئ الشاشة.",
+      h1: "زر الأيقونة (Icon Button)",
     },
   },
   {

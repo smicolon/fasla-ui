@@ -300,8 +300,9 @@ not roll into the next pass, even when she would obviously want it.
   the responsive and RTL passes attach later without a rebuild.
 - **Terminal/code blocks use `Tailwind En/SM/Regular`** — the file has no monospace style, and that was
   flagged rather than invented.
-- **`Button` Solid/primary is unreadable in Dark mode** — her call was *report it, don't patch
-  instances*. It needs its own session.
+- **`Button` Solid/Primary was unreadable in Dark mode** — her call was *report it, don't patch
+  instances*. It has since been fixed at the token (`theme/primary-foreground` is `#0a0a0a` in Dark,
+  checked 2026-10-13).
 - **Marquee text clipped by its band is intentional** (that's the overflow), not a defect to fix.
 
 ---
@@ -312,7 +313,7 @@ not roll into the next pass, even when she would obviously want it.
   Walkthroughs…`) — layer names and body copy, including one half-finished rename that broke a
   sentence. Raised, unresolved, **not** to be swept.
 - **`COMPONENT SMI-UI Logo`** on the `🟢 Logo` page — raised, deliberately left alone.
-- **Button Solid/primary Dark-mode contrast** — reported, unpatched.
+- **Button Solid/Primary Dark-mode contrast** — resolved at the token (checked 2026-10-13).
 - **`Hero` set (56 types)** — Desktop/LTR only; responsive and RTL passes still open.
 - **Documentation / content contracts** for the newer block families (Banners, Billing, Auth, Error
   State, Gallery, Features) — the `component-doc-generator` and `genui-component-docs` passes have not

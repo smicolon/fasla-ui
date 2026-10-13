@@ -148,7 +148,6 @@ Fasla apart.
 - **Known open defects against AA:**
   - `muted-foreground` on `muted` measures **4.35:1**, below the 4.5:1 minimum. It is used by
     placeholder and caption text.
-  - `Button` Solid/primary is unreadable in Dark mode.
   - No formal audit has been run yet. Contrast pairs are inherited from shadcn defaults, not
     measured.
 - **Inclusion means Arabic readers get equal quality**: correct mirroring, the Arabic line height

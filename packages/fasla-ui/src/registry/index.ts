@@ -17,7 +17,7 @@ export const registry: RegistryItem[] = [
     name: "button",
     type: "ui",
     title: "Button",
-    description: "A button component with multiple variants, sizes, and loading state.",
+    description: "A button in five types (solid, soft, outline, ghost, link) and three tones, four sizes and the matching icon-button sizes, two radii, and a loading state.",
     sourcePath: "registry/ui/button",
     dependencies: ["@radix-ui/react-slot", "class-variance-authority", "lucide-react"],
     categories: ["primitives", "forms"],
