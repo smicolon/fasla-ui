@@ -29,8 +29,9 @@ const TOKEN = /var\(--([a-z0-9-]+)\)/g
 const allowed = new Set(tokenNames(loadSources().mode))
 // Variables components set for themselves, not colours from the theme —
 // including the sizes Base UI writes: its positioner's (`--available-width`)
-// and the accordion panel's measured height.
-const OWN = /^(tw-|radix-|beam-|glow-|shimmer-|spotlight-|text-reveal|leading-|font-|radius|border-radius|sw-|available-(width|height)$|anchor-(width|height)$|accordion-panel-height$)/
+// and the accordion panel's measured height — and Textarea's resize grip,
+// whose strokes are `currentColor`.
+const OWN = /^(tw-|radix-|beam-|glow-|shimmer-|spotlight-|text-reveal|leading-|font-|radius|border-radius|sw-|available-(width|height)$|anchor-(width|height)$|accordion-panel-height$|textarea-grip-)/
 
 describe("component colours", () => {
   it("use no Tailwind palette colours", () => {

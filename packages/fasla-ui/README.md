@@ -69,7 +69,7 @@ Core building blocks with CVA variants for consistent styling:
 |-----------|-------------|
 | **Button** | Multiple variants (default, destructive, outline, secondary, ghost, link) with loading state |
 | **Input** | Text input with validation states and icon support |
-| **Textarea** | Multi-line text input with auto-resize |
+| **Textarea** | Multi-line text field that grows with its text, with a label, helper text and a counter |
 | **Select** | Dropdown selection with search |
 | **Checkbox** | Checkbox with label and description |
 | **Radio** | Single choice from a set, as a plain control or a bordered card |

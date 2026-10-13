@@ -254,12 +254,12 @@ export const routes = [
     path: "/docs/components/textarea/",
     title: "Textarea React Component | Fasla",
     description:
-      "Add a multi-line React text input with character counting, resize options, validation states, and accessible labels.",
+      "Add a multi-line React text field that grows with its text, with a label, helper text, a character counter, and validation states.",
     h1: "Textarea",
     ar: {
       title: "منطقة النص (Textarea) لتطبيقات React | فاصلة",
       description:
-        "أضف مكوّن منطقة النص (Textarea) لإدخال نص متعدد الأسطر، مع عدّاد للأحرف وخيارات لتغيير الحجم وحالات التحقق.",
+        "أضف مكوّن منطقة النص (Textarea) لكتابة نص من عدة أسطر يزداد ارتفاعه مع النص، مع تسمية ونص مساعد وعدّاد للأحرف وحالات التحقق.",
       h1: "منطقة النص (Textarea)",
     },
   },
