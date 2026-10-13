@@ -1,7 +1,7 @@
 import * as React from "react"
 import type { Meta, StoryObj } from "@storybook/react"
 import { Button, type ButtonProps } from "../../../../packages/fasla-ui/registry/ui/button"
-import { HIDE_REST, Head, ICON_NAMES, ICON_TYPES, StateGrid, StoryIcon, TONES, pseudoFor, type IconName } from "./button-story-kit"
+import { HIDE_REST, Head, ICON_NAMES, ICON_TYPES, StateGrid, StoryIcon, TONES, iconLabel, pseudoFor, type IconName } from "./button-story-kit"
 
 /**
  * Icon Button: Figma's separate set, built as the same `Button` at the `icon-*`
@@ -49,7 +49,7 @@ const meta: Meta<StoryArgs> = {
     "aria-label": {
       control: "text",
       description:
-        "The accessible name a screen reader reads. Empty uses the sample name for the current direction; in development the button warns when it has none.",
+        "The accessible name a screen reader reads. Empty uses the picked icon's action in the current direction; in development the button warns when it has none.",
       table: { type: { summary: "string" } },
     },
     ...HIDE_REST,
@@ -72,15 +72,19 @@ type Story = StoryObj<StoryArgs>
 
 /** Sample names, per script, for the icons the stories use. */
 const COPY = {
-  ltr: { add: "Add", like: "Like", edit: "Edit" },
-  rtl: { add: "إضافة", like: "إعجاب", edit: "تعديل" },
+  ltr: { add: "Add", like: "Like", edit: "Edit", loading: "Loading" },
+  rtl: { add: "إضافة", like: "إعجاب", edit: "تعديل", loading: "جارٍ التحميل" },
 }
 type StoryCtx = { globals: { direction?: string } }
 const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
 
 export const Default: Story = {
   render: ({ icon, "aria-label": ariaLabel, ...args }, ctx) => (
-    <Button {...args} aria-label={ariaLabel || copy(ctx).add}>
+    <Button
+      {...args}
+      aria-label={ariaLabel || iconLabel(icon, ctx.globals.direction)}
+      loadingLabel={copy(ctx).loading}
+    >
       <StoryIcon name={icon} />
     </Button>
   ),

@@ -79,7 +79,8 @@ const meta: Meta<StoryArgs> = {
     size: "md",
     radius: "standard",
     loading: false,
-    loadingLabel: "Loading",
+    // Empty: each story falls back to the loading text for its direction.
+    loadingLabel: undefined,
     disabled: false,
     label: "",
     iconPosition: "none",
@@ -137,11 +138,11 @@ const copy = (ctx: StoryCtx): Copy => (ctx.globals.direction === "rtl" ? COPY.rt
 
 const VARIANTS = ["default", "secondary", "destructive", "outline", "ghost", "link", "soft"] as const
 export const Default: Story = {
-  render: ({ label, iconPosition, icon, ...args }, ctx) => {
+  render: ({ label, iconPosition, icon, loadingLabel, ...args }, ctx) => {
     const text = label || copy(ctx).save
     const glyph = iconPosition !== "none" ? <StoryIcon name={icon} /> : null
     return (
-      <Button {...args}>
+      <Button {...args} loadingLabel={loadingLabel || copy(ctx).loadingLabel}>
         {iconPosition === "start" && glyph}
         {text}
         {iconPosition === "end" && glyph}
@@ -279,10 +280,12 @@ export const LinkAndGhost: Story = {
 }
 
 export const Loading: Story = {
-  render: (args, ctx) => (
+  // The page's args first, then this story's own loading state, so the
+  // default `loading: false` can't switch it off.
+  render: ({ label, iconPosition: _position, icon: _icon, loadingLabel, ...args }, ctx) => (
     <div className="flex items-center gap-4">
-      <Button loading loadingLabel={copy(ctx).loadingLabel} {...args}>
-        {args.children ?? copy(ctx).loading}
+      <Button {...args} loading loadingLabel={loadingLabel || copy(ctx).loadingLabel}>
+        {label || copy(ctx).loading}
       </Button>
       <Button loading loadingLabel={copy(ctx).loadingLabel} size="icon-md" variant="outline" aria-label={copy(ctx).add}>
         <StoryIcon name="plus" />

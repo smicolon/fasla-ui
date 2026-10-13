@@ -36,24 +36,29 @@ export const TYPES = [
 export const ICON_TYPES = TYPES.slice(0, 4)
 
 /**
- * The icon picker's choices: common lucide glyphs. `flips` marks the ones that
- * point a way, which mirror in right-to-left.
+ * The icon picker's choices: common lucide glyphs, each with the action it
+ * names in both languages, so an icon-only button's fallback name matches the
+ * icon. `flips` marks the ones that point a way, which mirror in right-to-left.
  */
-export const ICONS: Record<string, { Icon: LucideIcon; flips?: boolean }> = {
-  plus: { Icon: PlusIcon },
-  "arrow-right": { Icon: ArrowRightIcon, flips: true },
-  download: { Icon: DownloadIcon },
-  upload: { Icon: UploadIcon },
-  copy: { Icon: CopyIcon },
-  pencil: { Icon: PencilIcon },
-  "trash-2": { Icon: Trash2Icon },
-  search: { Icon: SearchIcon },
-  settings: { Icon: SettingsIcon },
-  heart: { Icon: HeartIcon },
-  x: { Icon: XIcon },
+export const ICONS: Record<string, { Icon: LucideIcon; label: { en: string; ar: string }; flips?: boolean }> = {
+  plus: { Icon: PlusIcon, label: { en: "Add", ar: "إضافة" } },
+  "arrow-right": { Icon: ArrowRightIcon, label: { en: "Next", ar: "التالي" }, flips: true },
+  download: { Icon: DownloadIcon, label: { en: "Download", ar: "تنزيل" } },
+  upload: { Icon: UploadIcon, label: { en: "Upload", ar: "رفع ملف" } },
+  copy: { Icon: CopyIcon, label: { en: "Copy", ar: "نسخ" } },
+  pencil: { Icon: PencilIcon, label: { en: "Edit", ar: "تعديل" } },
+  "trash-2": { Icon: Trash2Icon, label: { en: "Delete", ar: "حذف" } },
+  search: { Icon: SearchIcon, label: { en: "Search", ar: "بحث" } },
+  settings: { Icon: SettingsIcon, label: { en: "Settings", ar: "الإعدادات" } },
+  heart: { Icon: HeartIcon, label: { en: "Like", ar: "إعجاب" } },
+  x: { Icon: XIcon, label: { en: "Close", ar: "إغلاق" } },
 }
 export type IconName = keyof typeof ICONS
 export const ICON_NAMES = Object.keys(ICONS) as IconName[]
+
+/** The action an icon names, in the story's direction. */
+export const iconLabel = (name: IconName, direction?: string) =>
+  (ICONS[name] ?? ICONS.plus!).label[direction === "rtl" ? "ar" : "en"]
 
 /** Figma's icons are 1.5px strokes at 16px; the button sizes them. */
 export const StoryIcon = ({ name }: { name: IconName }) => {
