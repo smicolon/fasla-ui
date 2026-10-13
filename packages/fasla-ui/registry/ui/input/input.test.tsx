@@ -143,6 +143,22 @@ describe("Input", () => {
     expect(screen.getByLabelText("Bio")).toHaveAccessibleDescription("Check the spelling")
   })
 
+  it.each(["grammar", "spelling"] as const)("keeps aria-invalid=%s on the input", (value) => {
+    render(<Input label="Bio" aria-invalid={value} />)
+    expect(screen.getByLabelText("Bio")).toHaveAttribute("aria-invalid", value)
+  })
+
+  it("keeps the caller's aria-invalid token alongside `invalid`", () => {
+    render(<Input label="Bio" invalid aria-invalid="spelling" />)
+    expect(screen.getByLabelText("Bio")).toHaveAttribute("aria-invalid", "spelling")
+  })
+
+  it("lets `invalid={false}` win over an aria-invalid token", () => {
+    const { container } = render(<Input label="Bio" invalid={false} aria-invalid="spelling" />)
+    expect(root(container)).not.toHaveAttribute("data-invalid")
+    expect(screen.getByLabelText("Bio")).not.toHaveAttribute("aria-invalid", "spelling")
+  })
+
   it("treats aria-invalid=false as valid", () => {
     const { container } = render(<Input label="Bio" aria-invalid="false" />)
     expect(root(container)).not.toHaveAttribute("data-invalid")

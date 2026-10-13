@@ -150,7 +150,8 @@ export interface InputProps
   /**
    * Marks the field invalid: the border, the label and the helper labels turn
    * `destructive`, and the input gets `aria-invalid`. Passing `aria-invalid`
-   * does the same; so does Base UI's own validation.
+   * does the same — any value but `false` — and the input keeps the value
+   * passed (`grammar`, `spelling`); so does Base UI's own validation.
    */
   invalid?: boolean
   /** The field's label, above it. Without it, pass `aria-label` or label the input yourself. */
@@ -206,8 +207,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const mergedRef = React.useMemo(() => mergeRefs(ref, inputRef), [ref])
     // ARIA reads every `aria-invalid` value but `false` as invalid — `true`,
     // `grammar`, `spelling`, and any value it does not recognise.
-    const isInvalid =
-      invalid ?? (ariaInvalid !== undefined && ariaInvalid !== false && ariaInvalid !== "false")
+    const ariaSaysInvalid = ariaInvalid !== undefined && ariaInvalid !== false && ariaInvalid !== "false"
+    const isInvalid = invalid ?? ariaSaysInvalid
+    // Base UI writes `aria-invalid="true"` on an invalid field, after the
+    // caller's props, so a passed token would be lost. A caller's own token —
+    // `grammar`, `spelling` — says more, so the render function puts it back
+    // on the input. Only while the field is invalid: `invalid={false}` wins.
+    const ariaInvalidToken = isInvalid && ariaSaysInvalid ? ariaInvalid : undefined
 
     /**
      * A press on the box outside the text — its padding, a decorative icon —
@@ -277,6 +283,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               "placeholder:text-muted-foreground disabled:cursor-not-allowed"
             )}
             {...props}
+            render={(inputProps) => (
+              <input {...inputProps} aria-invalid={ariaInvalidToken ?? inputProps["aria-invalid"]} />
+            )}
           />
           {endIcon && (
             <span data-slot="input-end-icon" className={ICON}>
