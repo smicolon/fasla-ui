@@ -4,9 +4,9 @@
     "fileKey": "yGEQmCZOvs7KptsYUdB0Xg",
     "collectionId": "VariableCollectionId:82:3",
     "modes": { "light": "⚪️ Light", "dark": "🌑 Dark" },
-    "measured": "2026-09-24",
-    "count": 47,
-    "note": "Snapshot of the 41 theme/* variables in the ☾ Mode collection, plus the six opacity/* tints the Badge Soft type is filled with (`soft-*`), aliases resolved to primitives. `radius` holds the ☾ Mode radii components bind that no Tailwind class gives in both apps — `border radius/xs` and `border radius/md` (Avatar Standard), `border radius/sm` (Badge Standard); they are mode-independent, so only the light block declares them. Figma is the source of truth; this file is the committed record of what it said when the two apps were last synced to it. `light`/`dark` are the exact CSS values both apps must declare — tokens/mode.test.ts asserts that. `via` records the alias chain, so a future drift diff shows whether a value changed or was re-aliased. Pin the collection id when re-reading: 41 of these names also exist in 🌈 Themes with a single mode, and a name-only lookup silently returns that copy. Resolve every alias hop in the same mode as the token: `custom/black` and `custom/white` are themselves ☾ Mode variables that swap in Dark (`custom/black` is white there), so resolving an intermediate hop in its default mode gives the Light value — that is how `destructive-foreground` dark was once recorded as #000000."
+    "measured": "2026-10-13",
+    "count": 53,
+    "note": "Snapshot of the 41 theme/* variables in the ☾ Mode collection, plus twelve opacity/* Soft tints (`soft-*`): the six `/10` tints Badge Soft and Soft Button's Enabled are filled with, and the `/20` and `/30` steps of primary, secondary and destructive that Soft Button uses for Hover and Clicked, aliases resolved to primitives. `radius` holds the ☾ Mode radii components bind that no Tailwind class gives in both apps — `border radius/xs` and `border radius/md` (Avatar Standard), `border radius/sm` (Badge Standard); they are mode-independent, so only the light block declares them. Figma is the source of truth; this file is the committed record of what it said when the two apps were last synced to it. `light`/`dark` are the exact CSS values both apps must declare — tokens/mode.test.ts asserts that. `via` records the alias chain, so a future drift diff shows whether a value changed or was re-aliased. Pin the collection id when re-reading: 41 of these names also exist in 🌈 Themes with a single mode, and a name-only lookup silently returns that copy. Resolve every alias hop in the same mode as the token: `custom/black` and `custom/white` are themselves ☾ Mode variables that swap in Dark (`custom/black` is white there), so resolving an intermediate hop in its default mode gives the Light value — that is how `destructive-foreground` dark was once recorded as #000000."
   },
   "tokens": {
     "background": {
@@ -235,11 +235,11 @@
       }
     },
     "soft-secondary": {
-      "light": "rgb(244 244 245 / 60%)",
-      "dark": "rgb(244 244 245 / 60%)",
+      "light": "rgb(115 115 115 / 10%)",
+      "dark": "rgb(163 163 163 / 10%)",
       "via": {
-        "light": "opacity/secondary/60 → opacity/secondary/60 (raw)",
-        "dark": "opacity/secondary/60 → opacity/secondary/60 (raw)"
+        "light": "opacity/secondary/10 → opacity/secondary/10 (raw)",
+        "dark": "opacity/secondary/10 → opacity/secondary-dark/10 (raw)"
       }
     },
     "soft-info": {
@@ -272,6 +272,54 @@
       "via": {
         "light": "opacity/destructive/10 → opacity/destructive/10 (raw)",
         "dark": "opacity/destructive/10 → opacity/destructive/10 (raw)"
+      }
+    },
+    "soft-primary-20": {
+      "light": "rgb(23 23 23 / 20%)",
+      "dark": "rgb(250 250 250 / 20%)",
+      "via": {
+        "light": "opacity/primary/20 → opacity/primary/20 (raw)",
+        "dark": "opacity/primary/20 → opacity/primary-dark/20 (raw)"
+      }
+    },
+    "soft-primary-30": {
+      "light": "rgb(23 23 23 / 30%)",
+      "dark": "rgb(250 250 250 / 30%)",
+      "via": {
+        "light": "opacity/primary/30 → opacity/primary/30 (raw)",
+        "dark": "opacity/primary/30 → opacity/primary-dark/30 (raw)"
+      }
+    },
+    "soft-secondary-20": {
+      "light": "rgb(115 115 115 / 20%)",
+      "dark": "rgb(163 163 163 / 20%)",
+      "via": {
+        "light": "opacity/secondary/20 → opacity/secondary/20 (raw)",
+        "dark": "opacity/secondary/20 → opacity/secondary-dark/20 (raw)"
+      }
+    },
+    "soft-secondary-30": {
+      "light": "rgb(115 115 115 / 30%)",
+      "dark": "rgb(163 163 163 / 30%)",
+      "via": {
+        "light": "opacity/secondary/30 → opacity/secondary/30 (raw)",
+        "dark": "opacity/secondary/30 → opacity/secondary-dark/30 (raw)"
+      }
+    },
+    "soft-destructive-20": {
+      "light": "rgb(224 52 52 / 20%)",
+      "dark": "rgb(224 52 52 / 20%)",
+      "via": {
+        "light": "opacity/destructive/20 → opacity/destructive/20 (raw)",
+        "dark": "opacity/destructive/20 → opacity/destructive/20 (raw)"
+      }
+    },
+    "soft-destructive-30": {
+      "light": "rgb(224 52 52 / 30%)",
+      "dark": "rgb(224 52 52 / 30%)",
+      "via": {
+        "light": "opacity/destructive/30 → opacity/destructive/30 (raw)",
+        "dark": "opacity/destructive/30 → opacity/destructive/30 (raw)"
       }
     }
   },

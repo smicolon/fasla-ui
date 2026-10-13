@@ -133,11 +133,11 @@ describe("atom index — the code map keeps up with the registry", () => {
     const claimed = Object.values(ix.entries)
       .map((x) => (x as { code: string | null }).code)
       .filter(Boolean)
-    expect(new Set(claimed).size).toBe(claimed.length) // no code key claimed twice
+    // A key is claimed once per Figma set it maps to: `button` is Button and Icon Button.
     expect([...claimed].sort()).toEqual(
       Object.entries(CODE_MAP)
         .filter(([, v]) => v)
-        .map(([k]) => k)
+        .flatMap(([k, v]) => [v].flat().map(() => k))
         .sort()
     )
   })

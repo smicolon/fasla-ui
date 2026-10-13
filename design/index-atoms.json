@@ -48,7 +48,7 @@
       "withArDoc": 38,
       "withRtl": 148,
       "withDescription": 1,
-      "mappedToCode": 18,
+      "mappedToCode": 19,
       "docFrames": 98
     },
     "legend": {
@@ -1072,7 +1072,7 @@
         },
         "duplicates": []
       },
-      "code": null,
+      "code": "button",
       "hasDescription": false,
       "flags": [
         "no-direction-axis",

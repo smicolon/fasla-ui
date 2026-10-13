@@ -126,6 +126,26 @@ describe("Figma ☾ Mode snapshot", () => {
     expect(tok("destructive-foreground").dark).toBe("#ffffff")
   })
 
+  it("keeps the Soft secondary tint mode-reactive and visible on card", () => {
+    // It was #f4f4f5 at 60% in both modes: Badge Soft/Secondary vanished on a
+    // white card, and Soft Button's Enabled, Hover and Clicked looked the same.
+    // Figma now aliases neutral/500 in Light and neutral/400 in Dark.
+    expect(tok("soft-secondary").light).toBe("rgb(115 115 115 / 10%)")
+    expect(tok("soft-secondary").dark).toBe("rgb(163 163 163 / 10%)")
+  })
+
+  it.each(["primary", "secondary", "destructive"])(
+    "gives Soft %s its Hover and Clicked steps at 20% and 30%",
+    (tone) => {
+      for (const mode of ["light", "dark"] as const) {
+        const base = tok(`soft-${tone}`)[mode]
+        expect(base, `${tone} ${mode}`).toMatch(/\/ 10%\)$/)
+        expect(tok(`soft-${tone}-20`)[mode]).toBe(base.replace("/ 10%)", "/ 20%)"))
+        expect(tok(`soft-${tone}-30`)[mode]).toBe(base.replace("/ 10%)", "/ 30%)"))
+      }
+    }
+  )
+
   it("keeps destructive distinct from primary", () => {
     // Both were #e40017 in docs, so a delete button matched a confirm button.
     expect(tok("destructive").light).toBe("#dc2626")
