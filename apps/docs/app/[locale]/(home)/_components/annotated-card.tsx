@@ -233,7 +233,7 @@ export function AnnotatedCard({ components }: { components: number }) {
                   "grid gap-1.5",
                   <>
                     <span className="text-[12.5px] font-medium text-muted-foreground">{c("label")}</span>
-                    <Input readOnly value="noura@sanad.example" startIcon={<BI n="mail" className="size-4" />} className="h-10 rounded-[9px] text-sm" />
+                    <Input size="lg" readOnly value="noura@sanad.example" startIcon={<BI n="mail" className="size-4" />} />
                   </>
                 )}
 

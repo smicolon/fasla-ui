@@ -254,9 +254,9 @@ function Auth() {
         <div className={cn(H, "text-[26px]")}>{c.h}</div>
         <span className={cn(SUB, "mt-1")}>{c.p}</span>
         <label className="mb-[5px] mt-3 text-[12.5px] font-medium text-muted-foreground">{c.l1}</label>
-        <Input defaultValue={c.v1} startIcon={<BI n="mail" className="size-4" />} className="h-10 rounded-[10px] text-sm ring-2 ring-primary/10" />
+        <Input size="lg" defaultValue={c.v1} startIcon={<BI n="mail" className="size-4" />} />
         <label className="mb-[5px] mt-3 text-[12.5px] font-medium text-muted-foreground">{c.l2}</label>
-        <Input type="password" defaultValue="••••••••••" startIcon={<BI n="lock" className="size-4" />} className="h-10 rounded-[10px] text-sm" />
+        <Input size="lg" type="password" defaultValue="••••••••••" startIcon={<BI n="lock" className="size-4" />} />
         <div className="my-3 flex items-center justify-between text-[12.5px] text-muted-foreground">
           <Checkbox label={c.rm} defaultChecked className="[&_span]:text-[12.5px]" />
           <u className="no-underline">{c.fg}</u>

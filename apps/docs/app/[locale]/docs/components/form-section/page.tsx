@@ -62,7 +62,7 @@ export default function FormSectionPage() {
         <h2 className="text-2xl font-semibold">{f("errorTitle")}</h2>
         <ComponentPreview>
           <FormField label={f("error.label")} error={f("error.message")} required>
-            <Input variant="error" type="email" defaultValue="layla@example.com" />
+            <Input invalid type="email" defaultValue="layla@example.com" />
           </FormField>
         </ComponentPreview>
       </section>

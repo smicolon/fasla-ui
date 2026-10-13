@@ -112,7 +112,7 @@ export const WithError: Story = {
       <FormSection {...args} title={args.title ?? c.account.title} description={args.description ?? c.account.description}>
         <div className="grid gap-4">
           <FormField label={c.username} htmlFor="username" required error={c.usernameTaken}>
-            <Input id="username" variant="error" defaultValue="layla" />
+            <Input id="username" invalid defaultValue="layla" />
           </FormField>
           <FormField label={c.displayName} htmlFor="displayName">
             <Input id="displayName" placeholder={c.displayNamePlaceholder} />
