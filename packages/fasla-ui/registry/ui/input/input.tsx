@@ -197,7 +197,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ) => {
     const inputRef = React.useRef<HTMLInputElement | null>(null)
     const mergedRef = React.useMemo(() => mergeRefs(ref, inputRef), [ref])
-    const isInvalid = invalid ?? (ariaInvalid === true || ariaInvalid === "true")
+    // ARIA reads every `aria-invalid` value but `false` as invalid — `true`,
+    // `grammar`, `spelling`, and any value it does not recognise.
+    const isInvalid =
+      invalid ?? (ariaInvalid !== undefined && ariaInvalid !== false && ariaInvalid !== "false")
 
     /**
      * A press on the box outside the text — its padding, a decorative icon —

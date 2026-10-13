@@ -122,6 +122,17 @@ describe("Input", () => {
     expect(root(container)).toHaveAttribute("data-invalid")
   })
 
+  it.each(["grammar", "spelling"] as const)("treats aria-invalid=%s as invalid", (value) => {
+    const { container } = render(<Input label="Bio" aria-invalid={value} error="Check the spelling" />)
+    expect(root(container)).toHaveAttribute("data-invalid")
+    expect(screen.getByLabelText("Bio")).toHaveAccessibleDescription("Check the spelling")
+  })
+
+  it("treats aria-invalid=false as valid", () => {
+    const { container } = render(<Input label="Bio" aria-invalid="false" />)
+    expect(root(container)).not.toHaveAttribute("data-invalid")
+  })
+
   it("turns the box, label and helpers destructive while invalid", () => {
     const { container } = render(<Input label="Email" description="Help" invalid />)
     expect(box(container)).toHaveClass("group-data-[invalid]/input:border-destructive")
