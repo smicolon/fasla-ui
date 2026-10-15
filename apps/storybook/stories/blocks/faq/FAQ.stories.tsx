@@ -44,8 +44,7 @@ import { faqViewports, faqArgTypes, localeOf, withForeignTheme } from "./faq-sto
  */
 const meta: Meta = {
   title: "Blocks/FAQ",
-  // `expanded` shows each prop's description and default beside its control.
-  parameters: { layout: "fullscreen", viewport: { viewports: faqViewports }, controls: { expanded: true } },
+  parameters: { layout: "fullscreen", viewport: { viewports: faqViewports } },
   tags: ["autodocs"],
 }
 
