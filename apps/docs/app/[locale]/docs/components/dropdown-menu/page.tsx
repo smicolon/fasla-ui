@@ -373,7 +373,7 @@ export default function DropdownMenuPage() {
             <HeldMenu trigger={d("sample.open")}>
               <DropdownMenuLabel className="py-1.5 font-normal">
                 {/* Decorative: the name is printed beside it, so the image has an empty alt. */}
-                <Avatar src={PHOTO} name="" radius="rounded" className="size-10" />
+                <Avatar src={PHOTO} name="" size="32" radius="rounded" />
                 <span className="flex min-w-0 flex-col">
                   <span className="truncate font-semibold">{d("sample.name")}</span>
                   <span className="truncate text-xs text-muted-foreground">layla@example.com</span>

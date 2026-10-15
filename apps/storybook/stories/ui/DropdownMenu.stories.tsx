@@ -381,9 +381,8 @@ export const BasicDropdown: Story = {
 }
 
 /**
- * Figma's Avatar Heading: the label holds an Avatar, a name and an email.
- * Figma draws a 40px avatar; our Avatar's largest size is 32, so it is drawn
- * at 40 with a class.
+ * Figma's Avatar Heading: the label holds our Avatar at size 32, Rounded,
+ * with a name and an email.
  */
 export const AvatarHeading: Story = {
   name: "Avatar Heading",
@@ -395,7 +394,7 @@ export const AvatarHeading: Story = {
         <Held trigger={c.open} className="w-[282px]">
           <DropdownMenuLabel className="py-1.5 font-normal">
             {/* Decorative: the name is printed beside it. An empty name gives the image an empty alt, as in Tooltip. */}
-            <Avatar src={PHOTO} name="" radius="rounded" className="size-10" />
+            <Avatar src={PHOTO} name="" size="32" radius="rounded" />
             <span className="flex min-w-0 flex-col">
               <span className="truncate font-semibold">{c.name}</span>
               <span className="truncate text-xs text-muted-foreground">{EMAIL}</span>
@@ -446,8 +445,8 @@ export const ItemWithIcon: Story = {
 
 /**
  * Figma's Mini icon: a short menu of actions, the last one destructive. A
- * destructive row's text is `destructive`; its icon stays `foreground`, as
- * Figma draws it.
+ * destructive row's text and icon are both `destructive`, as Figma draws
+ * them.
  */
 export const MiniIcon: Story = {
   name: "Mini icon",

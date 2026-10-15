@@ -257,10 +257,10 @@ export const routes = [
       "Build a React select field for choosing one option or several, with badges, labels, keyboard support and RTL.",
     h1: "Select",
     ar: {
-      title: "قائمة منسدلة (Select) لتطبيقات React | فاصلة",
+      title: "حقل الاختيار (Select) لتطبيقات React | فاصلة",
       description:
-        "أنشئ مكوّن قائمة منسدلة (Select) لاختيار خيار واحد أو عدة خيارات، مع شارات وتسميات ودعم لوحة المفاتيح والاتجاه من اليمين إلى اليسار.",
-      h1: "قائمة منسدلة (Select)",
+        "أنشئ مكوّن حقل الاختيار (Select) لاختيار خيار واحد أو عدة خيارات، مع شارات وتسميات ودعم لوحة المفاتيح والاتجاه من اليمين إلى اليسار.",
+      h1: "حقل الاختيار (Select)",
     },
   },
   {

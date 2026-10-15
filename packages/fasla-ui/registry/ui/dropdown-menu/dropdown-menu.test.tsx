@@ -160,13 +160,28 @@ describe("DropdownMenu — rows", () => {
     expect(row).not.toHaveClass("outline-none")
   })
 
-  it("sets a destructive row's text in destructive, highlighted too", async () => {
-    render(<Basic />)
-    await open()
+  it("sets a destructive row's text and icon in destructive, highlighted too", async () => {
+    render(
+      <DropdownMenu open modal={false}>
+        <DropdownMenuTrigger>Account</DropdownMenuTrigger>
+        <DropdownMenuContent>
+          <DropdownMenuItem icon={<svg />}>Edit</DropdownMenuItem>
+          <DropdownMenuItem variant="destructive" icon={<svg />}>
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    )
     const row = screen.getByRole("menuitem", { name: "Delete" })
     expect(row).toHaveAttribute("data-variant", "destructive")
-    expect(row).toHaveClass("text-destructive", "data-[highlighted]:text-destructive")
-    expect(screen.getByRole("menuitem", { name: /Profile/ })).toHaveAttribute("data-variant", "default")
+    expect(row).toHaveClass("text-destructive", "data-[highlighted]:text-destructive", "[&>svg]:text-destructive")
+    const icon = slot("dropdown-menu-item-icon", row)!
+    expect(icon).toHaveClass("text-destructive")
+    expect(icon).not.toHaveClass("text-foreground")
+    // A default row's icon stays foreground.
+    const edit = screen.getByRole("menuitem", { name: "Edit" })
+    expect(edit).toHaveAttribute("data-variant", "default")
+    expect(slot("dropdown-menu-item-icon", edit)).toHaveClass("text-foreground")
   })
 
   it("dims a disabled row and will not run it", async () => {

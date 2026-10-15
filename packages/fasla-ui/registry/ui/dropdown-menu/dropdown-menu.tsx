@@ -93,8 +93,9 @@ const ContainerContext = React.createContext<Container>(undefined)
 const GroupContext = React.createContext(false)
 
 /**
- * A row's icon slot: Figma's 16px glyph, in `foreground` in every state and
- * type, as Figma binds it. The prefix icon and the submenu chevron.
+ * A row's icon slot: Figma's 16px glyph, in `foreground` in every state, as
+ * Figma binds it — except on a destructive row, which colours it
+ * `destructive` with its text. The prefix icon and the submenu chevron.
  */
 const ICON =
   "flex shrink-0 items-center text-foreground [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0"
@@ -326,8 +327,9 @@ export interface DropdownMenuItemProps
  * `accent` fill with `accent-foreground` text; disabled is half opacity.
  * Pressing it closes the menu.
  *
- * Destructive keeps its `destructive` text when highlighted. Its icon stays
- * `foreground`, as in Figma.
+ * Destructive sets the text and the icon in `destructive`, highlighted too,
+ * as Figma and shadcn do — the icon whether it comes through `icon` or as an
+ * `<svg>` child.
  */
 const DropdownMenuItem = React.forwardRef<HTMLDivElement, DropdownMenuItemProps>(
   ({ variant = "default", icon, inset, className, children, ...props }, ref) => (
@@ -337,14 +339,18 @@ const DropdownMenuItem = React.forwardRef<HTMLDivElement, DropdownMenuItemProps>
       data-variant={variant}
       className={cn(
         ROW,
-        variant === "destructive" && "text-destructive data-[highlighted]:text-destructive",
+        variant === "destructive" && "text-destructive data-[highlighted]:text-destructive [&>svg]:text-destructive",
         inset && INSET,
         className
       )}
       {...props}
     >
       {icon && (
-        <span data-slot="dropdown-menu-item-icon" aria-hidden="true" className={ICON}>
+        <span
+          data-slot="dropdown-menu-item-icon"
+          aria-hidden="true"
+          className={cn(ICON, variant === "destructive" && "text-destructive")}
+        >
           {icon}
         </span>
       )}
