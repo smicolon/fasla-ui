@@ -451,6 +451,52 @@ describe("Select — direction", () => {
     expect(positioner).toHaveAttribute("lang", "ar")
   })
 
+  it("renders a menu held open with open={true} in the wrapper's direction and language", () => {
+    render(
+      <div dir="rtl" lang="ar">
+        <Cities open modal={false} />
+      </div>
+    )
+    const positioner = slot("select-positioner")!
+    expect(positioner).toHaveAttribute("dir", "rtl")
+    expect(positioner).toHaveAttribute("lang", "ar")
+  })
+
+  it("follows a direction and language change while the menu is open", async () => {
+    render(
+      <div data-testid="page" dir="ltr" lang="en">
+        <Select
+          open
+          modal={false}
+          multiple
+          display="text"
+          aria-label="Cities"
+          items={CITIES}
+          defaultValue={["riyadh", "jeddah"]}
+        />
+      </div>
+    )
+    expect(slot("select-positioner")).toHaveAttribute("dir", "ltr")
+    expect(slot("select-value")).toHaveTextContent("Riyadh, Jeddah")
+
+    const page = screen.getByTestId("page")
+    await act(async () => {
+      page.setAttribute("dir", "rtl")
+      page.setAttribute("lang", "ar")
+    })
+    expect(slot("select-positioner")).toHaveAttribute("dir", "rtl")
+    expect(slot("select-positioner")).toHaveAttribute("lang", "ar")
+    // The text-mode separator follows the language too.
+    expect(slot("select-value")).toHaveTextContent("Riyadh، Jeddah")
+
+    await act(async () => {
+      page.setAttribute("dir", "ltr")
+      page.setAttribute("lang", "en")
+    })
+    expect(slot("select-positioner")).toHaveAttribute("dir", "ltr")
+    expect(slot("select-value")).toHaveTextContent("Riyadh, Jeddah")
+  })
+
   it("stays left-to-right on a left-to-right page", async () => {
     render(<Cities />)
     await open()

@@ -388,7 +388,27 @@ const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
           : next
       )
     }, [])
-    useIsomorphicLayoutEffect(() => read(triggerRef.current), [read])
+    // Read before the first paint, so a menu that renders open (`open` or
+    // `defaultOpen`) already has the right direction. Then read again whenever
+    // an ancestor's `dir`, `lang`, `class` or `style` changes — a locale
+    // switch, a font class, Storybook's toolbar — so a mounted or open menu,
+    // and the text-mode separator, follow the page. Each ancestor is observed
+    // on its own, without `subtree`, so changes elsewhere in the page never
+    // wake it.
+    useIsomorphicLayoutEffect(() => {
+      const node = triggerRef.current
+      read(node)
+      if (!node || typeof MutationObserver === "undefined") return
+      const observer = new MutationObserver(() => read(triggerRef.current))
+      for (let el = node.parentElement; el; el = el.parentElement) {
+        observer.observe(el, { attributes: true, attributeFilter: ["dir", "lang", "class", "style"] })
+      }
+      return () => observer.disconnect()
+    }, [read])
+    // A controlled `open` can open the menu with no press or focus to read on.
+    useIsomorphicLayoutEffect(() => {
+      if (open) read(triggerRef.current)
+    }, [open, read])
 
     // The value is held here, controlled or not, so a badge's remove can change
     // it. Base UI always sees a controlled select.
@@ -441,7 +461,10 @@ const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
             open={open}
             defaultOpen={defaultOpen}
             modal={modal}
-            onOpenChange={onOpenChange ? (next) => onOpenChange(next) : undefined}
+            onOpenChange={(next) => {
+              if (next) read(triggerRef.current)
+              onOpenChange?.(next)
+            }}
             items={options}
             multiple={multiple}
             value={value as never}
