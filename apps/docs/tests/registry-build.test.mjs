@@ -56,15 +56,20 @@ describe("Registry build — imports between components", () => {
 })
 
 describe("Registry build — what the shadcn CLI needs", () => {
-  test("no item passes asChild to another Fasla component", () => {
-    // In a Base UI project the shadcn CLI rewrites `asChild` into `render`,
-    // which Fasla's Button doesn't take, so the installed file fails to
-    // compile. A link styled as a button uses buttonVariants instead.
+  test("no item gives a Fasla component asChild with an element child", () => {
+    // In a Base UI project the shadcn CLI rewrites `<Button asChild><a …/>`
+    // into `render={<a …/>}`, which Fasla's Button doesn't take, so the
+    // installed file fails to compile. It leaves an expression child alone
+    // (Pagination's `{asChild ? children : <a>…</a>}`), which installs and
+    // type-checks. A link styled as a button uses buttonVariants instead.
+    const rewritten = /<[A-Z]\w*\b(?:[^>{]|\{[^{}]*\})*\basChild\b(?:[^>{]|\{[^{}]*\})*>\s*<[A-Za-z]/
+    expect(`<Button asChild>\n  <a href="/x">Go</a>\n</Button>`).toMatch(rewritten)
+    expect(`<Button asChild variant="outline">{asChild ? children : <a>{content}</a>}</Button>`).not.toMatch(rewritten)
     for (const item of registry.items) {
       if (item.name === "button") continue
       for (const file of item.files) {
         const source = readFileSync(path.join(pkg, file.path), "utf8")
-        expect(source, `${item.name}: ${file.path}`).not.toMatch(/<[A-Z]\w*[^>]*\basChild\b/)
+        expect(source, `${item.name}: ${file.path}`).not.toMatch(rewritten)
       }
     }
   })
