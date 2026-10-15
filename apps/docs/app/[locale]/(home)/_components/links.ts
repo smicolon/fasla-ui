@@ -7,11 +7,14 @@ const comingSoon = (locale: string) => `/${locale}/coming-soon/`
  * `blocks`, `templates`, `pro` and `team` go to the Coming soon page until
  * there is a block catalogue, a template gallery and a checkout. `components`
  * points at the first component page: there is no components index yet.
+ * `blocksDocs` is the Blocks section of the docs, which the header and footer
+ * list beside Components.
  * Change them here and every link on the page follows.
  */
 export const landingLinks = {
   docs: (locale: string) => `/${locale}/docs/`,
   components: (locale: string) => `/${locale}/docs/components/button/`,
+  blocksDocs: (locale: string) => `/${locale}/docs/blocks/`,
   comingSoon,
   blocks: comingSoon,
   templates: comingSoon,
