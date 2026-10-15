@@ -386,6 +386,21 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/breadcrumb/",
+    title: "Breadcrumb React Component | Fasla",
+    description:
+      "Show where a page sits with an accessible React breadcrumb: chevron or slash separators, optional icons, a collapsed trail, mirrored for RTL.",
+    h1: "Breadcrumb",
+    ar: {
+      title: "مسار التنقّل (Breadcrumb) لتطبيقات React | فاصلة",
+      description:
+        "اعرض موقع الصفحة بمكوّن مسار التنقّل، بفاصل سهم أو شرطة مائلة وأيقونات اختيارية ومسار مختصر، وينعكس تلقائيًا في الصفحات العربية.",
+      h1: "مسار التنقّل (Breadcrumb)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/combobox/",
     title: "Combobox React Component | Fasla",
     description:

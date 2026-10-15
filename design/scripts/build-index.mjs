@@ -81,6 +81,7 @@ export const CODE_MAP = {
   "alert-dialog": { set: "Alert Dialog", page: "14833:10982" },
   avatar: { set: "Avatar", page: "3710:7318" },
   badge: { set: "Badge", page: "3724:120666" },
+  breadcrumb: { set: "Breadcrumbs", page: "3760:18379" },
   button: [
     { set: "Button", page: "1:3" },
     { set: "Icon Button", page: "1:3" },
