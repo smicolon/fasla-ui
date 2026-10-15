@@ -76,6 +76,7 @@ Core building blocks with CVA variants for consistent styling:
 | **Switch** | Toggle switch with multiple sizes |
 | **Tabs** | Tabbed navigation with animations |
 | **Accordion** | Headings that show or hide their content, in four styles |
+| **Alert Dialog** | A modal that asks the user to confirm or cancel an action |
 | **Badge** | Status indicators and labels |
 | **Pagination** | Page links built on Button, with Previous, Next and an ellipsis, in three variants |
 | **Avatar** | User avatars with fallback initials |

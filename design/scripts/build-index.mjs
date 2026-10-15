@@ -78,6 +78,7 @@ export const EXCLUDED_UNSIGNED = [
  *  and its Icon Button, which the code reaches through the `icon-*` sizes. */
 export const CODE_MAP = {
   accordion: { set: "Accordion", page: "3707:28873" },
+  "alert-dialog": { set: "Alert Dialog", page: "14833:10982" },
   avatar: { set: "Avatar", page: "3710:7318" },
   badge: { set: "Badge", page: "3724:120666" },
   button: [
