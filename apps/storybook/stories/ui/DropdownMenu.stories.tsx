@@ -102,7 +102,7 @@ const COPY = {
     share: "Share",
     delete: "Delete",
     appsNotification: "Apps notification",
-    apps: ["Google", "Twitter", "Linkedin", "Dribbble", "Behance"],
+    apps: ["Google", "X", "Linkedin", "Dribbble", "Figma"],
     statusBar: "Status bar",
     panelPosition: "Panel Position",
     top: "Top",
@@ -130,7 +130,7 @@ const COPY = {
     share: "مشاركة",
     delete: "حذف",
     appsNotification: "إشعارات التطبيقات",
-    apps: ["جوجل", "تويتر", "لينكد إن", "دريبل", "بيهانس"],
+    apps: ["جوجل", "إكس", "لينكد إن", "دريبل", "فيجما"],
     statusBar: "شريط الحالة",
     panelPosition: "موضع اللوحة",
     top: "أعلى",
@@ -471,8 +471,9 @@ export const MiniIcon: Story = {
 /**
  * Figma's DropdownItem with Switch: checkbox rows with `indicator="switch"`.
  * Our Switch sits at the end of the row, Solid when on and Outline when off,
- * as Figma pairs them. Press a row to toggle it; the menu stays open. Figma's
- * brand logos are left out: our icon set has none.
+ * as Figma pairs them. Press a row to toggle it; the menu stays open. Figma
+ * puts a logo from its Social Icons set before each name; they are left out
+ * until the code has those icons.
  */
 export const ItemWithSwitch: Story = {
   name: "DropdownItem with Switch",
