@@ -11,6 +11,12 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "../../../../packages/fasla-ui/registry/ui/breadcrumb"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../../../../packages/fasla-ui/registry/ui/dropdown-menu"
 
 /** Figma's `Style` axis. The two badge styles are compositions with Badge, not props. */
 const STYLES = ["Default", "Custom Separator", "With Badge", "Outline Badge"] as const
@@ -72,20 +78,27 @@ export default meta
 type Story = StoryObj<StoryArgs>
 
 /**
- * Sample copy, per script: Figma's own trail, and its badge trail. The
- * Arabic is Modern Standard Arabic, from design/content/, and matches the
- * docs page.
+ * Sample copy, per script: Figma's own trail, and its badge trail. `hidden`
+ * and `hiddenSections` are the steps a collapsed trail's menu lists, and
+ * `menu` names its trigger. The Arabic is Modern Standard Arabic, from
+ * design/content/, and matches the docs page.
  */
 const COPY = {
   ltr: {
     label: "Breadcrumb",
     crumbs: ["Home", "Projects", "Documents", "Add Document"],
     sections: ["Home", "Departments", "Marketing", "Digital Marketing"],
+    hidden: ["Projects", "Website"],
+    hiddenSections: ["Company", "Departments"],
+    menu: "Hidden steps",
   },
   rtl: {
     label: "مسار التنقّل",
     crumbs: ["الرئيسية", "المشاريع", "المستندات", "إضافة مستند"],
     sections: ["الرئيسية", "الأقسام", "التسويق", "التسويق الإلكتروني"],
+    hidden: ["المشاريع", "الموقع الإلكتروني"],
+    hiddenSections: ["الشركة", "الأقسام"],
+    menu: "الخطوات المخفية",
   },
 } as const
 
@@ -115,22 +128,55 @@ const badgeIcon = (i: number, last: boolean) => {
 }
 
 /**
+ * The ellipsis as a menu trigger: a 24px target drawn around the 14px glyph,
+ * its 5px overhang taken back by the negative margin so the trail keeps
+ * Figma's spacing. Hover and the open menu fill it with `accent`, as a ghost
+ * Button does.
+ */
+const ELLIPSIS_TRIGGER = [
+  "-m-[5px] inline-flex size-6 cursor-pointer items-center justify-center rounded-[var(--radius-sm)]",
+  "transition-colors duration-150 hover:bg-accent data-[popup-open]:bg-accent motion-reduce:transition-none",
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring",
+].join(" ")
+
+/** The collapsed trail's ellipsis, opening a menu of the steps it hides, as links. */
+function HiddenStepsMenu({ label, steps }: { label: string; steps: readonly string[] }) {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger aria-label={label} className={ELLIPSIS_TRIGGER}>
+        <BreadcrumbEllipsis />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        {steps.map((text) => (
+          <DropdownMenuItem key={text} render={<a href="#" />}>
+            {text}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
+/**
  * One trail, composed from the parts the way a developer would, for any Style × Count.
  * `hasIcon` defaults to Figma's set: on for the text styles, off for the badge
  * styles, whose Figma variants carry none. Passing it turns icons on or off
- * in every style.
+ * in every style. With `menu`, a collapsed trail's ellipsis opens a menu of
+ * the steps it hides.
  */
 function Trail({
   c,
   style = "Default",
   count = "4",
   hasIcon,
+  menu = false,
   className,
 }: {
   c: Copy
   style?: Style
   count?: Count
   hasIcon?: boolean
+  menu?: boolean
   className?: string
 }) {
   const badge = style === "With Badge" ? "soft" : style === "Outline Badge" ? "outline" : null
@@ -152,7 +198,11 @@ function Trail({
               {i > 0 && <BreadcrumbSeparator>{style === "Default" ? undefined : <SlashIcon />}</BreadcrumbSeparator>}
               <BreadcrumbItem>
                 {step === null ? (
-                  <BreadcrumbEllipsis />
+                  menu ? (
+                    <HiddenStepsMenu label={c.menu} steps={badge ? c.hiddenSections : c.hidden} />
+                  ) : (
+                    <BreadcrumbEllipsis />
+                  )
                 ) : badge ? (
                   last ? (
                     <BreadcrumbPage>
@@ -282,6 +332,32 @@ export const Icons: Story = {
             <RowHead>{style}</RowHead>
             <Trail c={c} style={style} count="3" hasIcon />
             <Trail c={c} style={style} count="3" hasIcon={false} />
+          </React.Fragment>
+        ))}
+      </div>
+    )
+  },
+}
+
+/**
+ * The collapsed trail with its ellipsis as a Dropdown Menu trigger, in every
+ * Style. Press the ellipsis, or focus it and press Enter, Space or the down
+ * arrow: the menu lists the hidden steps as links, lined up with the
+ * ellipsis's start edge, and Escape returns focus to it. Screen readers name
+ * the trigger "Hidden steps", or "الخطوات المخفية" in Arabic. Follows the
+ * Direction and Theme toolbars.
+ */
+export const EllipsisMenu: Story = {
+  decorators: [framed],
+  parameters: { layout: "padded", controls: { disable: true } },
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <div className="grid grid-cols-[repeat(2,max-content)] items-center gap-x-8 gap-y-4">
+        {STYLES.map((style) => (
+          <React.Fragment key={style}>
+            <RowHead>{style}</RowHead>
+            <Trail c={c} style={style} count="+4" menu />
           </React.Fragment>
         ))}
       </div>

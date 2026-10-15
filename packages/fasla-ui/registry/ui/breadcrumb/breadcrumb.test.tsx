@@ -3,7 +3,7 @@ import { readFileSync } from "node:fs"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { beforeAll, describe, it, expect } from "vitest"
-import { render, screen, within } from "@testing-library/react"
+import { act, fireEvent, render, screen, within } from "@testing-library/react"
 import { HouseIcon, SlashIcon } from "lucide-react"
 import {
   Breadcrumb,
@@ -14,6 +14,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "./breadcrumb"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../dropdown-menu/dropdown-menu"
 
 const SOURCE = readFileSync(resolve(dirname(fileURLToPath(import.meta.url)), "breadcrumb.tsx"), "utf8")
 
@@ -58,6 +59,33 @@ const Collapsed = ({ separator }: { separator?: React.ReactNode }) => (
         <BreadcrumbLink href="/documents">Documents</BreadcrumbLink>
       </BreadcrumbItem>
       <BreadcrumbSeparator>{separator}</BreadcrumbSeparator>
+      <BreadcrumbItem>
+        <BreadcrumbPage>Add Document</BreadcrumbPage>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </Breadcrumb>
+)
+
+/** The docs' collapsed trail: the ellipsis opens a Dropdown Menu of the steps it hides, as links. */
+const CollapsedWithMenu = () => (
+  <Breadcrumb>
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="/">Home</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <DropdownMenu>
+          <DropdownMenuTrigger aria-label="Hidden steps">
+            <BreadcrumbEllipsis data-testid="ellipsis" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuItem render={<a href="/projects" />}>Projects</DropdownMenuItem>
+            <DropdownMenuItem render={<a href="/projects/website" />}>Website</DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
       <BreadcrumbItem>
         <BreadcrumbPage>Add Document</BreadcrumbPage>
       </BreadcrumbItem>
@@ -202,9 +230,45 @@ describe("BreadcrumbEllipsis", () => {
     expect(ellipsis.querySelector("svg")).toHaveAttribute("aria-hidden", "true")
   })
 
-  it("is not interactive yet", () => {
+  it("is not interactive on its own: a trigger wrapped around it is the button", () => {
     render(<Collapsed />)
-    expect(within(screen.getByTestId("ellipsis")).queryByRole("button")).toBeNull()
+    expect(within(screen.getByRole("navigation")).queryByRole("button")).toBeNull()
+
+    render(<CollapsedWithMenu />)
+    const trigger = screen.getByRole("button", { name: "Hidden steps" })
+    expect(trigger).toContainElement(screen.getAllByTestId("ellipsis").at(-1)!)
+    expect(trigger).toHaveAttribute("aria-haspopup", "menu")
+    expect(trigger).toHaveAttribute("aria-expanded", "false")
+  })
+
+  it("opens a menu of the hidden steps, each a link", async () => {
+    render(<CollapsedWithMenu />)
+    const trigger = screen.getByRole("button", { name: "Hidden steps" })
+    await act(async () => {
+      fireEvent.click(trigger)
+    })
+    expect(trigger).toHaveAttribute("aria-expanded", "true")
+    const menu = screen.getByRole("menu")
+    const rows = within(menu).getAllByRole("menuitem")
+    expect(rows.map((row) => row.textContent)).toEqual(["Projects", "Website"])
+    expect(rows.map((row) => [row.tagName, row.getAttribute("href")])).toEqual([
+      ["A", "/projects"],
+      ["A", "/projects/website"],
+    ])
+  })
+
+  it("closes on Escape and returns focus to the ellipsis", async () => {
+    render(<CollapsedWithMenu />)
+    const trigger = screen.getByRole("button", { name: "Hidden steps" })
+    await act(async () => {
+      fireEvent.click(trigger)
+    })
+    await act(async () => {
+      fireEvent.keyDown(screen.getByRole("menu"), { key: "Escape" })
+    })
+    expect(screen.queryByRole("menu")).toBeNull()
+    expect(trigger).toHaveAttribute("aria-expanded", "false")
+    expect(trigger).toHaveFocus()
   })
 
   it.each([

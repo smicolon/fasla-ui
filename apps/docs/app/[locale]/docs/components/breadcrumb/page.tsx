@@ -14,6 +14,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@fasla-ui/ui/breadcrumb"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@fasla-ui/ui/dropdown-menu"
 import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
@@ -29,20 +30,53 @@ const ICONS = [HouseIcon, WorkflowIcon, FileIcon, FolderIcon]
 type Step = { label: string; icon?: LucideIcon }
 
 /**
+ * The ellipsis as a menu trigger: a 24px target drawn around the 14px glyph,
+ * its 5px overhang taken back by the negative margin so the trail keeps
+ * Figma's spacing. Hover and the open menu fill it with `accent`, as a ghost
+ * Button does.
+ */
+const ELLIPSIS_TRIGGER = [
+  "-m-[5px] inline-flex size-6 cursor-pointer items-center justify-center rounded-[var(--radius-sm)]",
+  "transition-colors duration-150 hover:bg-accent data-[popup-open]:bg-accent motion-reduce:transition-none",
+  "focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring",
+].join(" ")
+
+/** The collapsed trail's ellipsis, opening a menu of the steps it hides, as links. */
+function HiddenStepsMenu({ label, steps }: { label: string; steps: string[] }) {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger aria-label={label} className={ELLIPSIS_TRIGGER}>
+        <BreadcrumbEllipsis />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        {steps.map((text) => (
+          <DropdownMenuItem key={text} render={<a href="#" />}>
+            {text}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
+/**
  * One trail, in any of Figma's Styles. `steps` are shown in order; with
- * `collapsed`, an ellipsis stands in after the first step, as in Count=+4.
+ * `collapsed`, an ellipsis stands in after the first step, as in Count=+4;
+ * with `menu` too, the ellipsis opens a menu of the steps it hides.
  */
 function Trail({
   label,
   steps,
   style = "default",
   collapsed = false,
+  menu,
   className,
 }: {
   label: string
   steps: Step[]
   style?: Style
   collapsed?: boolean
+  menu?: { label: string; steps: string[] }
   className?: string
 }) {
   const separator = style === "default" ? undefined : <SlashIcon />
@@ -63,7 +97,7 @@ function Trail({
               {i > 0 && <BreadcrumbSeparator>{separator}</BreadcrumbSeparator>}
               <BreadcrumbItem>
                 {step === "ellipsis" ? (
-                  <BreadcrumbEllipsis />
+                  menu ? <HiddenStepsMenu {...menu} /> : <BreadcrumbEllipsis />
                 ) : badge && last ? (
                   <BreadcrumbPage>
                     <Badge variant={badge} size="md" icon={chipIcon}>
@@ -112,6 +146,9 @@ export default function BreadcrumbPageDocs() {
   const label = b("sample.label")
   const crumbs = b.raw("sample.crumbs") as string[]
   const sections = b.raw("sample.sections") as string[]
+  const hidden = b.raw("sample.hidden") as string[]
+  const hiddenSections = b.raw("sample.hiddenSections") as string[]
+  const menuLabel = b("sample.menu")
 
   const steps = (icons: boolean): Step[] =>
     crumbs.map((text, i) => ({ label: text, icon: icons ? ICONS[i] : undefined }))
@@ -209,6 +246,15 @@ ${indent}${separator}`
       )
       .join("\n")
 
+  /** The collapsed example's menu: one link row per hidden step. */
+  const menuItems = (indent: string) =>
+    hidden
+      .map((text, i) => {
+        const href = ["/projects", "/projects/website"][i]
+        return element(indent, `<DropdownMenuItem render={<a href="${href}" />}>`, text, "</DropdownMenuItem>")
+      })
+      .join("\n")
+
   return (
     <div className="space-y-8">
       <div className="space-y-4">
@@ -274,12 +320,18 @@ ${indent}${separator}`
         <p className="text-muted-foreground">{b.rich("collapsed.body", richCode)}</p>
         <ComponentPreview>
           <div className="flex flex-col items-center gap-4">
-            <Trail label={`${label}: ${b("collapsed.title")}`} steps={steps(true)} collapsed />
+            <Trail
+              label={`${label}: ${b("collapsed.title")}`}
+              steps={steps(true)}
+              collapsed
+              menu={{ label: menuLabel, steps: hidden }}
+            />
             <Trail
               label={`${label}: ${b("collapsed.title")}${comma}${b("styles.badge")}`}
               steps={badgeSteps}
               style="badge"
               collapsed
+              menu={{ label: menuLabel, steps: hiddenSections }}
             />
           </div>
         </ComponentPreview>
@@ -292,6 +344,7 @@ ${indent}${separator}`
           <li>{b.rich("a11y.landmark", richCode)}</li>
           <li>{b.rich("a11y.current", richCode)}</li>
           <li>{b.rich("a11y.hidden", richCode)}</li>
+          <li>{b.rich("a11y.menu", richCode)}</li>
           <li>{b.rich("a11y.focus", richCode)}</li>
           <li>{b.rich("a11y.direction", richCode)}</li>
         </ul>
@@ -341,6 +394,20 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+const TRIGGER = [
+  "-m-[5px] inline-flex size-6 cursor-pointer items-center",
+  "justify-center rounded-[var(--radius-sm)] transition-colors",
+  "hover:bg-accent data-[popup-open]:bg-accent",
+  "focus-visible:outline focus-visible:outline-2",
+  "focus-visible:outline-ring motion-reduce:transition-none",
+].join(" ")
 
 export function CollapsedBreadcrumb() {
   return (
@@ -353,7 +420,17 @@ export function CollapsedBreadcrumb() {
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbEllipsis />
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              aria-label="${menuLabel}"
+              className={TRIGGER}
+            >
+              <BreadcrumbEllipsis />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+${menuItems("              ")}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>

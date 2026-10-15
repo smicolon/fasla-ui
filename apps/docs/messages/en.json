@@ -1536,12 +1536,21 @@
           "Documents",
           "Add Document"
         ],
+        "hidden": [
+          "Projects",
+          "Website"
+        ],
         "sections": [
           "Home",
           "Departments",
           "Marketing",
           "Digital Marketing"
-        ]
+        ],
+        "hiddenSections": [
+          "Company",
+          "Departments"
+        ],
+        "menu": "Hidden steps"
       },
       "variantsBody": "Figma has four styles. <code>BreadcrumbSeparator</code> draws a chevron unless you pass it an icon: a <code>SlashIcon</code> gives the custom separator. The two badge styles are compositions: a Soft or Outline <code>Badge</code> inside each step.",
       "styles": {
@@ -1556,13 +1565,14 @@
       },
       "collapsed": {
         "title": "Collapsed trail",
-        "body": "When the trail is long, keep the first step and the last two, and put <code>BreadcrumbEllipsis</code> in place of the steps between them. The order is the same in both directions. The ellipsis marks the gap; screen readers hear “More”."
+        "body": "When the trail is long, keep the first step and the last two, and put <code>BreadcrumbEllipsis</code> in place of the steps between them. The order is the same in both directions. To let the reader reach the hidden steps, make the ellipsis the trigger of a <code>DropdownMenu</code> that lists them as links, as these examples do: press the ellipsis to open it. On its own, the ellipsis only marks the gap."
       },
       "a11y": {
         "landmark": "<code>Breadcrumb</code> is a navigation landmark. Name it in the page's language with <code>aria-label</code>, as the examples here do; without one it is named <code>Breadcrumb</code>. The steps are an ordered list, so screen readers announce how many there are.",
         "current": "<code>BreadcrumbPage</code> carries <code>aria-current=\"page\"</code>. It is plain text, not a link to the page the reader is already on.",
         "hidden": "Separators and icons are hidden from screen readers. The ellipsis is read as “More”, or “المزيد” when the nearest <code>lang</code> is Arabic.",
-        "focus": "Links show a focus ring when you reach them with the keyboard.",
+        "menu": "As a menu trigger, the ellipsis is a button. Name it with <code>aria-label</code>, as the examples here do, so screen readers say what the menu holds. Enter, Space or the down arrow opens the menu, the arrow keys move between the steps, Enter follows a link, and Escape closes the menu and returns focus to the ellipsis.",
+        "focus": "Links, and the ellipsis when it opens a menu, show a focus ring when you reach them with the keyboard.",
         "direction": "The trail follows the page's <code>dir</code>: in Arabic it runs from right to left and the chevron turns to match. The taller Arabic line comes from the type scale, with nothing to set."
       },
       "props": {

@@ -170,7 +170,8 @@ BreadcrumbSeparator.displayName = "BreadcrumbSeparator"
 /**
  * Where collapsed steps would be. The glyph is hidden; screen readers hear
  * "More", or "المزيد" under an Arabic `lang`, so they know the trail is
- * shortened.
+ * shortened. To reach the hidden steps, put it inside a
+ * `DropdownMenuTrigger` that opens a menu of them, as links.
  */
 const BreadcrumbEllipsis = React.forwardRef<HTMLSpanElement, React.ComponentPropsWithoutRef<"span">>(
   ({ className, ...props }, ref) => (
