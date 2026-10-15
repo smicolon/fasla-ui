@@ -8,14 +8,15 @@ export interface PageHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
   description?: string
   /** Action buttons/controls on the right side */
   actions?: React.ReactNode
-  /** Breadcrumb navigation above the title */
+  /**
+   * The trail above the title: a `Breadcrumb`, which is its own navigation
+   * landmark and carries its own `aria-label`.
+   */
   breadcrumb?: React.ReactNode
   /** Whether to show the bottom border */
   bordered?: boolean
   /** Semantic heading level for the title */
   headingLevel?: 1 | 2 | 3
-  /** Accessible name of the breadcrumb landmark */
-  breadcrumbLabel?: string
 }
 
 /**
@@ -29,7 +30,6 @@ export function PageHeader({
   breadcrumb,
   bordered = true,
   headingLevel = 1,
-  breadcrumbLabel = "Breadcrumb",
   className,
   ...props
 }: PageHeaderProps) {
@@ -46,11 +46,7 @@ export function PageHeader({
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          {breadcrumb && (
-            <nav className="mb-2 text-sm text-muted-foreground" aria-label={breadcrumbLabel}>
-              {breadcrumb}
-            </nav>
-          )}
+          {breadcrumb && <div className="mb-2">{breadcrumb}</div>}
           <Heading className="truncate text-xl font-semibold md:text-2xl">
             {title}
           </Heading>

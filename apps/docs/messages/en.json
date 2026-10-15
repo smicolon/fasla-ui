@@ -1532,6 +1532,97 @@
         "className": "Extra classes for the component."
       }
     },
+    "breadcrumb": {
+      "lead": "A trail of links that shows where the current page sits in your site and takes the reader back up a level in one click. You compose it from parts, so it holds as many steps as the page needs, and it follows the page's reading direction.",
+      "sample": {
+        "label": "Breadcrumb",
+        "crumbs": [
+          "Home",
+          "Projects",
+          "Documents",
+          "Add Document"
+        ],
+        "hidden": [
+          "Projects",
+          "Website"
+        ],
+        "sections": [
+          "Home",
+          "Departments",
+          "Marketing",
+          "Digital Marketing"
+        ],
+        "hiddenSections": [
+          "Company",
+          "Departments"
+        ],
+        "menu": "Hidden steps"
+      },
+      "variantsBody": "Figma has four styles. <code>BreadcrumbSeparator</code> draws a chevron unless you pass it an icon: a <code>SlashIcon</code> gives the custom separator. The two badge styles are compositions: a Soft or Outline <code>Badge</code> inside each step.",
+      "styles": {
+        "default": "Default",
+        "separator": "Custom separator",
+        "badge": "With badge",
+        "outline": "Outline badge"
+      },
+      "icons": {
+        "title": "Icons",
+        "body": "Add an icon before a label with the <code>icon</code> prop of <code>BreadcrumbLink</code> or <code>BreadcrumbPage</code>. It is sized to 14px with a 4px gap, so pass the icon without a size of its own. In the badge styles, pass the icon to the <code>Badge</code> instead, through its own <code>icon</code> prop, which sizes and spaces it. Icons are decorative, so screen readers skip them."
+      },
+      "collapsed": {
+        "title": "Collapsed trail",
+        "body": "When the trail is long, keep the first step and the last two, and put <code>BreadcrumbEllipsis</code> in place of the steps between them. The order is the same in both directions. To let the reader reach the hidden steps, make the ellipsis the trigger of a <code>DropdownMenu</code> that lists them as links, as these examples do: press the ellipsis to open it. On its own, the ellipsis only marks the gap."
+      },
+      "a11y": {
+        "landmark": "<code>Breadcrumb</code> is a navigation landmark. Name it in the page's language with <code>aria-label</code>, as the examples here do; without one it is named <code>Breadcrumb</code>. The steps are an ordered list, so screen readers announce how many there are.",
+        "current": "<code>BreadcrumbPage</code> carries <code>aria-current=\"page\"</code>. It is plain text, not a link to the page the reader is already on.",
+        "hidden": "Separators and icons are hidden from screen readers. The ellipsis is read as “More”, or “المزيد” when the nearest <code>lang</code> is Arabic.",
+        "menu": "As a menu trigger, the ellipsis is a button. Name it with <code>aria-label</code>, as the examples here do, so screen readers say what the menu holds. Enter, Space or the down arrow opens the menu, the arrow keys move between the steps, Enter follows a link, and Escape closes the menu and returns focus to the ellipsis.",
+        "focus": "Links, and the ellipsis when it opens a menu, show a focus ring when you reach them with the keyboard.",
+        "direction": "The trail follows the page's <code>dir</code>: in Arabic it runs from right to left and the chevron turns to match. The taller Arabic line comes from the type scale, with nothing to set."
+      },
+      "props": {
+        "breadcrumb": {
+          "ariaLabel": "The landmark's name for screen readers, in the page's language.",
+          "children": "The <code>BreadcrumbList</code>.",
+          "className": "Extra classes for the <code>nav</code> element."
+        },
+        "list": {
+          "children": "The steps and separators, in reading order.",
+          "className": "Extra classes for the <code>ol</code> element."
+        },
+        "item": {
+          "children": "One step: a link, the current page or the ellipsis.",
+          "className": "Extra classes for the <code>li</code> element."
+        },
+        "link": {
+          "href": "Where the step goes. The link takes every other <code>a</code> attribute too.",
+          "asChild": "Makes its child, such as a Next.js <code>Link</code>, the link.",
+          "icon": "An icon before the label, sized to 14px.",
+          "children": "The step's label.",
+          "className": "Extra classes for the link."
+        },
+        "page": {
+          "icon": "An icon before the label, sized to 14px.",
+          "children": "The current page's name.",
+          "className": "Extra classes for the current page."
+        },
+        "separator": {
+          "children": "An icon in place of the chevron, such as <code>SlashIcon</code>.",
+          "className": "Extra classes for the separator."
+        },
+        "ellipsis": {
+          "className": "Extra classes for the ellipsis. Its screen-reader text is built in."
+        }
+      },
+      "usage": {
+        "basic": "Basic trail",
+        "collapsed": "Collapsed trail",
+        "separator": "Custom separator",
+        "router": "With a Next.js link",
+        "badge": "With badges"
+      }
+    },
     "appShell": {
       "lead": "Application layout with sidebar, header, and content areas.",
       "brand": "My store",
@@ -1576,8 +1667,7 @@
         "title": "Page title.",
         "description": "Text below the title.",
         "actions": "Controls at the end of the header.",
-        "breadcrumb": "Breadcrumb above the title.",
-        "breadcrumbLabel": "Breadcrumb landmark’s accessible name.",
+        "breadcrumb": "A <code>Breadcrumb</code> above the title, named with its own <code>aria-label</code>.",
         "bordered": "Shows the bottom border.",
         "headingLevel": "Heading level of the title.",
         "className": "Extra classes for the component."

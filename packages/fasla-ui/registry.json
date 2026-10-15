@@ -158,6 +158,28 @@
       ]
     },
     {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "A composable trail of links to the current page: chevron or custom separators, optional icons, an ellipsis for collapsed steps, mirrored for RTL.",
+      "dependencies": [
+        "@radix-ui/react-slot",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/breadcrumb/breadcrumb.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/breadcrumb.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "navigation"
+      ]
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",

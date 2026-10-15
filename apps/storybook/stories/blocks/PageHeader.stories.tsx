@@ -1,5 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { PageHeader } from "../../../../packages/fasla-ui/registry/blocks/page-header/PageHeader"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "../../../../packages/fasla-ui/registry/ui/breadcrumb"
 import { Button } from "../../../../packages/fasla-ui/registry/ui/button"
 
 const meta: Meta<typeof PageHeader> = {
@@ -62,14 +70,23 @@ type StoryCtx = { globals: { direction?: string } }
 type Copy = (typeof COPY)["ltr"]
 const copy = (ctx: StoryCtx): Copy => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
 
-const Breadcrumb = ({ c }: { c: Copy }) => (
-  <div className="flex items-center gap-2">
-    <a href="#" className="hover:text-foreground">{c.crumbs[0]}</a>
-    <span aria-hidden="true">/</span>
-    <a href="#" className="hover:text-foreground">{c.crumbs[1]}</a>
-    <span aria-hidden="true">/</span>
-    <span className="text-foreground">{c.crumbs[2]}</span>
-  </div>
+/** The library's own Breadcrumb, never a hand-built trail. */
+const Trail = ({ c }: { c: Copy }) => (
+  <Breadcrumb aria-label={c.breadcrumbLabel}>
+    <BreadcrumbList>
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#">{c.crumbs[0]}</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbLink href="#">{c.crumbs[1]}</BreadcrumbLink>
+      </BreadcrumbItem>
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <BreadcrumbPage>{c.crumbs[2]}</BreadcrumbPage>
+      </BreadcrumbItem>
+    </BreadcrumbList>
+  </Breadcrumb>
 )
 
 export const Default: Story = {
@@ -105,8 +122,7 @@ export const WithBreadcrumb: Story = {
         {...args}
         title={args.title ?? c.settings.title}
         description={args.description ?? c.settings.description}
-        breadcrumb={<Breadcrumb c={c} />}
-        breadcrumbLabel={args.breadcrumbLabel ?? c.breadcrumbLabel}
+        breadcrumb={<Trail c={c} />}
         actions={<Button>{c.saveChanges}</Button>}
       />
     )

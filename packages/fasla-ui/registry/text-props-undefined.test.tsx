@@ -2,6 +2,7 @@ import { describe, it, expect } from "vitest"
 import { render, screen } from "@testing-library/react"
 import { EmptySearchResults, EmptyData } from "./blocks/empty-state"
 import { PageHeader } from "./blocks/page-header/PageHeader"
+import { Breadcrumb } from "./ui/breadcrumb"
 import { Button } from "./ui/button"
 import { Combobox } from "./ui/combobox"
 
@@ -23,8 +24,8 @@ describe("text props passed as undefined keep their English default", () => {
     expect(screen.getByText("Get started by creating your first order.")).toBeTruthy()
   })
 
-  it("PageHeader", () => {
-    render(<PageHeader title="Orders" breadcrumb={<a href="/">Home</a>} breadcrumbLabel={undefined} />)
+  it("Breadcrumb, also inside PageHeader", () => {
+    render(<PageHeader title="Orders" breadcrumb={<Breadcrumb aria-label={undefined} />} />)
     expect(screen.getByRole("navigation", { name: "Breadcrumb" })).toBeTruthy()
   })
 

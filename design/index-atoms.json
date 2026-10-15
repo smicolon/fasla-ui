@@ -48,7 +48,7 @@
       "withArDoc": 39,
       "withRtl": 152,
       "withDescription": 5,
-      "mappedToCode": 23,
+      "mappedToCode": 24,
       "docFrames": 98
     },
     "legend": {
@@ -113,22 +113,6 @@
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3760-18379",
       "entryIds": [
         "3771:68266"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "3972:55121",
-      "name": "✦   🟢 H | Dropdown Menu ✅",
-      "display": "Dropdown Menu",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "H",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3972-55121",
-      "entryIds": [
-        "3969:51446",
-        "46229:3337",
-        "46229:243341"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -251,6 +235,21 @@
       "orphanDocs": []
     },
     {
+      "id": "1:3",
+      "name": "✦  🟢  Y | Buttons ✅ ✅",
+      "display": "Buttons",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=1-3",
+      "entryIds": [
+        "307:333",
+        "3615:13506"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
       "id": "3772:64720",
       "name": "✦  🟢 Y | Pagination ✅ ✅",
       "display": "Pagination",
@@ -266,16 +265,17 @@
       "orphanDocs": []
     },
     {
-      "id": "1:3",
-      "name": "✦  🟢  Y | Buttons ✅ ✅",
-      "display": "Buttons",
+      "id": "3972:55121",
+      "name": "✦   🟢 H | Dropdown Menu ✅ ✅",
+      "display": "Dropdown Menu",
       "status": "🟢",
       "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=1-3",
+      "initials": "H",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3972-55121",
       "entryIds": [
-        "307:333",
-        "3615:13506"
+        "3969:51446",
+        "46229:3337",
+        "46229:243341"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -972,156 +972,7 @@
         },
         "duplicates": []
       },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "3969:51446": {
-      "name": "Dropdown",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3972:55121",
-        "name": "✦   🟢 H | Dropdown Menu ✅",
-        "display": "Dropdown Menu",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3969-51446",
-      "variants": 20,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Variant": [
-          "DropdownItem with Switch",
-          "Dropdown Item with Avatar",
-          "Dropdown Item with Action",
-          "Dropdown Item with icon",
-          "Dropdown Checkboxes",
-          "Dropdown Radio Group",
-          "Dropdown Advanced",
-          "Basic Dropdown",
-          "Avatar Heading",
-          "Mini icon"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Variant"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "40207:542",
-          "name": "Dropdown — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40207-542"
-        },
-        "ar": {
-          "id": "40230:5414",
-          "name": "Dropdown — Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40230-5414"
-        },
-        "duplicates": [
-          {
-            "id": "40207:543",
-            "name": "Dropdown — Documentation (EN)",
-            "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40207-543"
-          }
-        ]
-      },
-      "code": "dropdown-menu",
-      "hasDescription": false,
-      "flags": [
-        "duplicate-doc-frame",
-        "no-description"
-      ]
-    },
-    "46229:3337": {
-      "name": "Dropdown Item",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "3972:55121",
-        "name": "✦   🟢 H | Dropdown Menu ✅",
-        "display": "Dropdown Menu",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46229-3337",
-      "variants": 24,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Type": [
-          "Default",
-          "Destructive",
-          "Checkbox",
-          "Radio"
-        ],
-        "State": [
-          "Default",
-          "Hover",
-          "Disabled"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Type",
-        "State"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "46229:243341": {
-      "name": "Dropdown Label",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "3972:55121",
-        "name": "✦   🟢 H | Dropdown Menu ✅",
-        "display": "Dropdown Menu",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46229-243341",
-      "variants": 2,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
+      "code": "breadcrumb",
       "hasDescription": false,
       "flags": [
         "no-description"
@@ -1870,104 +1721,6 @@
         "no-description"
       ]
     },
-    "400:6808": {
-      "name": "Pagination",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3772:64720",
-        "name": "✦  🟢 Y | Pagination ✅ ✅",
-        "display": "Pagination",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=400-6808",
-      "variants": 48,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "size": [
-          "xs",
-          "sm",
-          "md",
-          "lg"
-        ],
-        "Variants": [
-          "Default",
-          "Solid",
-          "Outlined"
-        ],
-        "Shape": [
-          "Square",
-          "Rounded"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "size",
-        "Variants",
-        "Shape"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "39663:1108",
-          "name": "Pagination — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39663-1108"
-        },
-        "ar": {
-          "id": "39668:1336",
-          "name": "Pagination — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39668-1336"
-        },
-        "duplicates": []
-      },
-      "code": "pagination",
-      "hasDescription": true,
-      "flags": []
-    },
-    "46207:243282": {
-      "name": "Pagination Ellipsis",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "3772:64720",
-        "name": "✦  🟢 Y | Pagination ✅ ✅",
-        "display": "Pagination",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46207-243282",
-      "variants": 4,
-      "axes": {
-        "Size": [
-          "xs",
-          "sm",
-          "md",
-          "lg"
-        ]
-      },
-      "axisNames": [
-        "Size"
-      ],
-      "rtl": false,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": true,
-      "flags": [
-        "no-direction-axis"
-      ]
-    },
     "307:333": {
       "name": "Button",
       "rawName": " Button",
@@ -2118,6 +1871,253 @@
       "hasDescription": false,
       "flags": [
         "no-direction-axis",
+        "no-description"
+      ]
+    },
+    "400:6808": {
+      "name": "Pagination",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3772:64720",
+        "name": "✦  🟢 Y | Pagination ✅ ✅",
+        "display": "Pagination",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=400-6808",
+      "variants": 48,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "size": [
+          "xs",
+          "sm",
+          "md",
+          "lg"
+        ],
+        "Variants": [
+          "Default",
+          "Solid",
+          "Outlined"
+        ],
+        "Shape": [
+          "Square",
+          "Rounded"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "size",
+        "Variants",
+        "Shape"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "39663:1108",
+          "name": "Pagination — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39663-1108"
+        },
+        "ar": {
+          "id": "39668:1336",
+          "name": "Pagination — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39668-1336"
+        },
+        "duplicates": []
+      },
+      "code": "pagination",
+      "hasDescription": true,
+      "flags": []
+    },
+    "46207:243282": {
+      "name": "Pagination Ellipsis",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "3772:64720",
+        "name": "✦  🟢 Y | Pagination ✅ ✅",
+        "display": "Pagination",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46207-243282",
+      "variants": 4,
+      "axes": {
+        "Size": [
+          "xs",
+          "sm",
+          "md",
+          "lg"
+        ]
+      },
+      "axisNames": [
+        "Size"
+      ],
+      "rtl": false,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": true,
+      "flags": [
+        "no-direction-axis"
+      ]
+    },
+    "3969:51446": {
+      "name": "Dropdown",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3972:55121",
+        "name": "✦   🟢 H | Dropdown Menu ✅ ✅",
+        "display": "Dropdown Menu",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3969-51446",
+      "variants": 20,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Variant": [
+          "DropdownItem with Switch",
+          "Dropdown Item with Avatar",
+          "Dropdown Item with Action",
+          "Dropdown Item with icon",
+          "Dropdown Checkboxes",
+          "Dropdown Radio Group",
+          "Dropdown Advanced",
+          "Basic Dropdown",
+          "Avatar Heading",
+          "Mini icon"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Variant"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "40207:542",
+          "name": "Dropdown — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40207-542"
+        },
+        "ar": {
+          "id": "40230:5414",
+          "name": "Dropdown — Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40230-5414"
+        },
+        "duplicates": [
+          {
+            "id": "40207:543",
+            "name": "Dropdown — Documentation (EN)",
+            "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40207-543"
+          }
+        ]
+      },
+      "code": "dropdown-menu",
+      "hasDescription": false,
+      "flags": [
+        "duplicate-doc-frame",
+        "no-description"
+      ]
+    },
+    "46229:3337": {
+      "name": "Dropdown Item",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "3972:55121",
+        "name": "✦   🟢 H | Dropdown Menu ✅ ✅",
+        "display": "Dropdown Menu",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46229-3337",
+      "variants": 24,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Type": [
+          "Default",
+          "Destructive",
+          "Checkbox",
+          "Radio"
+        ],
+        "State": [
+          "Default",
+          "Hover",
+          "Disabled"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Type",
+        "State"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "46229:243341": {
+      "name": "Dropdown Label",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "3972:55121",
+        "name": "✦   🟢 H | Dropdown Menu ✅ ✅",
+        "display": "Dropdown Menu",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46229-243341",
+      "variants": 2,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
         "no-description"
       ]
     },

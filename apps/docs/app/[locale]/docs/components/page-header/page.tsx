@@ -3,6 +3,14 @@
 import { useTranslations } from "next-intl"
 
 import { PageHeader } from "@fasla-ui/blocks/page-header/PageHeader"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@fasla-ui/ui/breadcrumb"
 import { Button } from "@fasla-ui/ui/button"
 import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
@@ -18,7 +26,6 @@ export default function PageHeaderPage() {
     { prop: "description", type: "string", fallback: "", description: p.rich("props.description", richCode) },
     { prop: "actions", type: "ReactNode", fallback: "", description: p.rich("props.actions", richCode) },
     { prop: "breadcrumb", type: "ReactNode", fallback: "", description: p.rich("props.breadcrumb", richCode) },
-    { prop: "breadcrumbLabel", type: "string", fallback: '"Breadcrumb"', description: p.rich("props.breadcrumbLabel", richCode) },
     { prop: "bordered", type: "boolean", fallback: "true", description: p.rich("props.bordered", richCode) },
     { prop: "headingLevel", type: "1 | 2 | 3", fallback: "1", description: p.rich("props.headingLevel", richCode) },
     { prop: "className", type: "string", fallback: "", description: p.rich("props.className", richCode) },
@@ -65,13 +72,18 @@ export default function PageHeaderPage() {
           <PageHeader
             title={p("breadcrumb.current")}
             headingLevel={3}
-            breadcrumbLabel={p("breadcrumb.label")}
             breadcrumb={
-              <div className="flex items-center gap-2 text-sm">
-                <a href="#">{p("breadcrumb.home")}</a>
-                <span aria-hidden="true">/</span>
-                <span>{p("breadcrumb.current")}</span>
-              </div>
+              <Breadcrumb aria-label={p("breadcrumb.label")}>
+                <BreadcrumbList>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink href="#">{p("breadcrumb.home")}</BreadcrumbLink>
+                  </BreadcrumbItem>
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbPage>{p("breadcrumb.current")}</BreadcrumbPage>
+                  </BreadcrumbItem>
+                </BreadcrumbList>
+              </Breadcrumb>
             }
           />
         </ComponentPreview>
@@ -87,6 +99,14 @@ export default function PageHeaderPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
         <UsageExample>{`import { PageHeader } from "@/components/blocks/page-header"
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb"
 import { Button } from "@/components/ui/button"
 
 export function ProductsHeader() {
@@ -94,13 +114,18 @@ export function ProductsHeader() {
     <PageHeader
       title="${p("actions.title")}"
       description="${p("actions.description")}"
-      breadcrumbLabel="${p("breadcrumb.label")}"
       breadcrumb={
-        <div className="flex items-center gap-2 text-sm">
-          <a href="/dashboard">${p("breadcrumb.home")}</a>
-          <span aria-hidden="true">/</span>
-          <span>${p("actions.title")}</span>
-        </div>
+        <Breadcrumb aria-label="${p("breadcrumb.label")}">
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/dashboard">${p("breadcrumb.home")}</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage>${p("actions.title")}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
       }
       actions={<Button>${p("actions.action")}</Button>}
     />
