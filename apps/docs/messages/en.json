@@ -1541,14 +1541,9 @@
           "Departments",
           "Marketing",
           "Digital Marketing"
-        ],
-        "long": [
-          "Home",
-          "Customer support and service quality",
-          "Quarterly satisfaction survey results for the northern region"
         ]
       },
-      "variantsBody": "Figma has four styles. <code>BreadcrumbSeparator</code> draws a chevron unless you pass it an icon: a <code>SlashIcon</code> gives the custom separator. The two badge styles are compositions: a Soft or Outline <code>Badge</code> inside each step, with the steps before the current page dimmed to <code>opacity-60</code>.",
+      "variantsBody": "Figma has four styles. <code>BreadcrumbSeparator</code> draws a chevron unless you pass it an icon: a <code>SlashIcon</code> gives the custom separator. The two badge styles are compositions: a Soft or Outline <code>Badge</code> inside each step.",
       "styles": {
         "default": "Default",
         "separator": "Custom separator",
@@ -1562,10 +1557,6 @@
       "collapsed": {
         "title": "Collapsed trail",
         "body": "When the trail is long, keep the first step and the last two, and put <code>BreadcrumbEllipsis</code> in place of the steps between them. The order is the same in both directions. The ellipsis only marks the gap and opens nothing; screen readers hear “More”."
-      },
-      "wrapping": {
-        "title": "Long labels",
-        "body": "A trail that runs out of room wraps onto the next line, and a label too long for one line wraps inside its step. The icon stays on the label's first line."
       },
       "a11y": {
         "landmark": "<code>Breadcrumb</code> is a navigation landmark. Name it in the page's language with <code>aria-label</code>, as the examples here do; without one it is named <code>Breadcrumb</code>. The steps are an ordered list, so screen readers announce how many there are.",

@@ -110,7 +110,6 @@ export default function BreadcrumbPageDocs() {
   const label = b("sample.label")
   const crumbs = b.raw("sample.crumbs") as string[]
   const sections = b.raw("sample.sections") as string[]
-  const long = b.raw("sample.long") as string[]
 
   const steps = (icons: boolean): Step[] =>
     crumbs.map((text, i) => ({ label: text, icon: icons ? ICONS[i] : undefined }))
@@ -221,19 +220,6 @@ ${indent}${separator}`
               collapsed
             />
           </div>
-        </ComponentPreview>
-      </section>
-
-      {/* Long labels */}
-      <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">{b("wrapping.title")}</h2>
-        <p className="text-muted-foreground">{b.rich("wrapping.body", richCode)}</p>
-        <ComponentPreview>
-          <Trail
-            label={`${label}: ${b("wrapping.title")}`}
-            steps={long.map((text, i) => ({ label: text, icon: ICONS[i] }))}
-            className="w-full max-w-xs"
-          />
         </ComponentPreview>
       </section>
 

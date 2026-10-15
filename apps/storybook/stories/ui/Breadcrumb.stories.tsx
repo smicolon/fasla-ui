@@ -81,15 +81,11 @@ const COPY = {
     label: "Breadcrumb",
     crumbs: ["Home", "Projects", "Documents", "Add Document"],
     sections: ["Home", "Departments", "Marketing", "Digital Marketing"],
-    long: ["Home", "Customer support and service quality", "Quarterly satisfaction survey results for the northern region"],
-    deep: ["Home", "Departments", "Marketing", "Digital Marketing", "Campaigns", "Spring launch"],
   },
   rtl: {
     label: "مسار التنقّل",
     crumbs: ["الرئيسية", "المشاريع", "المستندات", "إضافة مستند"],
     sections: ["الرئيسية", "الأقسام", "التسويق", "التسويق الإلكتروني"],
-    long: ["الرئيسية", "دعم العملاء وجودة الخدمة", "نتائج استطلاع رضا العملاء الربعي في المنطقة الشمالية"],
-    deep: ["الرئيسية", "الأقسام", "التسويق", "التسويق الإلكتروني", "الحملات", "إطلاق الربيع"],
   },
 } as const
 
@@ -114,18 +110,15 @@ function Trail({
   style = "Default",
   count = "4",
   hasIcon = true,
-  labels,
 }: {
   c: Copy
   style?: Style
   count?: Count
   hasIcon?: boolean
-  /** Replaces the sample steps, shown in order with no ellipsis. */
-  labels?: readonly string[]
 }) {
   const badge = style === "With Badge" ? "soft" : style === "Outline Badge" ? "outline" : null
-  const words = labels ?? (badge ? c.sections : c.crumbs)
-  const shown = labels ? labels.map((_, i) => i) : SHOWN[count]
+  const words = badge ? c.sections : c.crumbs
+  const shown = SHOWN[count]
 
   return (
     <Breadcrumb aria-label={c.label}>
@@ -347,32 +340,6 @@ export const LightAndDark: Story = {
             ))}
           </div>
         ))}
-      </div>
-    )
-  },
-}
-
-/**
- * Labels too long for the width. The trail wraps onto a second line, a
- * label longer than a line wraps inside its step, and each icon stays on its
- * label's first line. A six-level badge trail wraps the same way; a badge
- * itself never wraps. Both boxes are 288px wide, a phone's content width.
- */
-export const LongText: Story = {
-  decorators: [framed],
-  parameters: { layout: "padded", controls: { disable: true } },
-  render: (_args, ctx) => {
-    const c = copy(ctx)
-    return (
-      <div className="grid grid-cols-[repeat(2,18rem)] items-start gap-x-8 gap-y-3">
-        <Head>Wrapping trail</Head>
-        <Head>Badges, wrapping trail</Head>
-        <div className="rounded-lg border p-4">
-          <Trail c={c} labels={c.long} />
-        </div>
-        <div className="rounded-lg border p-4">
-          <Trail c={c} style="Outline Badge" labels={c.deep} />
-        </div>
       </div>
     )
   },
