@@ -219,13 +219,21 @@ describe("DropdownMenu — rows", () => {
     expect(slot("dropdown-menu-label")).toHaveClass("ps-8")
   })
 
-  it("sets the shortcut at the end, muted, left to right in both directions", async () => {
-    render(<Basic />)
+  it("sets the shortcut at the end, muted, with its keys left to right in both directions", async () => {
+    render(
+      <div dir="rtl">
+        <Basic />
+      </div>
+    )
     await open()
     const shortcut = slot("dropdown-menu-shortcut")!
     expect(shortcut).toHaveTextContent("⇧⌘P")
-    expect(shortcut).toHaveAttribute("dir", "ltr")
     expect(shortcut).toHaveClass("ms-auto", "text-xs", "text-muted-foreground")
+    // No `dir` on the pushed span itself: `ms-auto` must resolve against the
+    // row's direction, or an RTL row seats the keys beside the label.
+    expect(shortcut).not.toHaveAttribute("dir")
+    expect(shortcut.firstElementChild).toHaveAttribute("dir", "ltr")
+    expect(shortcut.firstElementChild).toHaveTextContent("⇧⌘P")
   })
 })
 

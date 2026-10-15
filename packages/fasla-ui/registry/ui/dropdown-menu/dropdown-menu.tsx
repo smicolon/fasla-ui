@@ -490,19 +490,24 @@ export type DropdownMenuShortcutProps = React.HTMLAttributes<HTMLSpanElement>
 
 /**
  * A keyboard shortcut at the end of a row: Figma's Shortcut, `text-xs` in
- * `muted-foreground`. It only shows the keys; listen for them yourself. It is
- * set left to right in both directions, so `⇧⌘P` keeps its order on an
- * Arabic page.
+ * `muted-foreground`, at the end of the row (inline-end) in both directions.
+ * It only shows the keys; listen for them yourself. The keys are set left to
+ * right in both directions, so `⇧⌘P` keeps its order on an Arabic page.
  */
 const DropdownMenuShortcut = React.forwardRef<HTMLSpanElement, DropdownMenuShortcutProps>(
-  ({ className, ...props }, ref) => (
+  ({ className, children, ...props }, ref) => (
+    // `ms-auto` pushes it to the end of the row, so it must resolve against
+    // the row's direction: the left-to-right run is an inner span. A `dir` on
+    // this span would turn `ms-auto` into `margin-left: auto` in an RTL row
+    // and seat the keys beside the label instead of at the row's end.
     <span
       ref={ref}
-      dir="ltr"
       data-slot="dropdown-menu-shortcut"
       className={cn("ms-auto shrink-0 text-xs text-muted-foreground", className)}
       {...props}
-    />
+    >
+      <span dir="ltr">{children}</span>
+    </span>
   )
 )
 DropdownMenuShortcut.displayName = "DropdownMenuShortcut"

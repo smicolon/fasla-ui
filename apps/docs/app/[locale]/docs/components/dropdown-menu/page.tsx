@@ -128,6 +128,8 @@ export default function DropdownMenuPage() {
   })
   const children = row("children", "ReactNode", "", "children")
   const className = row("className", "string", "", "className")
+  // One table, a Part column grouping each part's rows. Parts that take only
+  // `className` and `children` are named in the sentence under it instead.
   const propTables: { part: string; rows: PropRow[] }[] = [
     {
       part: "DropdownMenu",
@@ -176,7 +178,6 @@ export default function DropdownMenuPage() {
         row("className", "string", "", "contentClassName"),
       ],
     },
-    { part: "DropdownMenuGroup", rows: [children, className] },
     {
       part: "DropdownMenuLabel",
       rows: [row("inset", "boolean", "false", "inset"), children, className],
@@ -231,8 +232,6 @@ export default function DropdownMenuPage() {
         className,
       ],
     },
-    { part: "DropdownMenuSeparator", rows: [className] },
-    { part: "DropdownMenuShortcut", rows: [row("children", "ReactNode", "", "shortcutChildren"), className] },
     {
       part: "DropdownMenuSub",
       rows: [
@@ -475,14 +474,8 @@ export default function DropdownMenuPage() {
       {/* Props */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("props")}</h2>
-        {propTables.map(({ part, rows }) => (
-          <div key={part} className="space-y-3">
-            <h3 className="text-lg font-semibold">
-              <code dir="ltr">{part}</code>
-            </h3>
-            <PropsTable rows={rows} />
-          </div>
-        ))}
+        <PropsTable rows={propTables.flatMap(({ part, rows }) => rows.map((r) => ({ ...r, part })))} />
+        <p className="text-sm text-muted-foreground">{d.rich("propsNote", rich)}</p>
       </section>
 
       {/* Usage */}

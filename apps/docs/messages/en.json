@@ -247,6 +247,7 @@
       "manualCopyDetail": "In each file, <code>files</code> holds the source in <code>content</code> and the path to save it at in <code>target</code>. <code>dependencies</code> lists the packages to install, and <code>registryDependencies</code> the other Fasla components it needs, which you copy the same way."
     },
     "propsTable": {
+      "part": "Part",
       "prop": "Prop",
       "type": "Type",
       "default": "Default",
@@ -556,6 +557,7 @@
         "switch": "In a switch row, the row itself is the checkbox. The Switch only shows its state, so it is hidden from screen readers and takes no presses or focus of its own.",
         "direction": "The menu takes its direction, language and font from the trigger, even though it renders at the end of <code>body</code>. On an Arabic page it lines up with the trigger's right edge, and submenus open to the left. Direction is never a prop."
       },
+      "propsNote": "<code>DropdownMenuGroup</code> and <code>DropdownMenuShortcut</code> take only <code>className</code> and <code>children</code>, and <code>DropdownMenuSeparator</code> takes only <code>className</code>.",
       "usage": {
         "basic": "Basic menu",
         "icons": "Icons and a destructive action",
@@ -611,7 +613,6 @@
         "onValueChange": "Called with the new value when a row is chosen.",
         "groupDisabled": "Stops every row in the group from being chosen.",
         "radioValue": "The value this row sets on its group.",
-        "shortcutChildren": "The keys, such as <code>⇧⌘P</code>.",
         "subOpen": "Opens or closes the submenu, when controlled.",
         "subDefaultOpen": "Opens the submenu on first render.",
         "subOnOpenChange": "Called when the submenu opens or closes.",

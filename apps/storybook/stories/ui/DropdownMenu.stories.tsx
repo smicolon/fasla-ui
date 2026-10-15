@@ -55,10 +55,10 @@ const meta: Meta<StoryArgs> = {
     // Docgen reads this default as 0; the component's is 4.
     sideOffset: { control: { type: "number", min: 0, step: 1 }, table: { defaultValue: { summary: "4" } } },
     className: { control: "text" },
+    // The story's own control, in the same table as the rest.
     open: {
       control: "boolean",
       description: "Keeps the menu open. Turn it off to open it with the button.",
-      table: { category: "DropdownMenu" },
     },
     // Base UI's own escape hatches, not props a reader drives here. They are
     // on the docs page's Props table.
