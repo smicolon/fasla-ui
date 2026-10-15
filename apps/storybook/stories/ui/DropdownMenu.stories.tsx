@@ -2,7 +2,6 @@ import * as React from "react"
 import type { Decorator, Meta, StoryObj } from "@storybook/react"
 import {
   CircleHelpIcon,
-  CopyIcon,
   DollarSignIcon,
   PencilLineIcon,
   ReceiptIcon,
@@ -10,7 +9,6 @@ import {
   ShareIcon,
   Trash2Icon,
   UserIcon,
-  FolderInputIcon,
 } from "lucide-react"
 import {
   DropdownMenu,
@@ -120,10 +118,6 @@ const COPY = {
     stateHighlighted: "Highlighted",
     stateDisabled: "Disabled",
     stateDestructive: "Destructive",
-    longLabel: "Notifications for this workspace and every project in it",
-    longItem: "Export every report from the last quarter as a spreadsheet",
-    longShortcut: "Duplicate this page with all of its comments",
-    longSub: "Move to another workspace or team folder",
   },
   rtl: {
     open: "فتح القائمة",
@@ -156,10 +150,6 @@ const COPY = {
     stateHighlighted: "مُبرَز",
     stateDisabled: "معطّل",
     stateDestructive: "إجراء حذف",
-    longLabel: "إشعارات مساحة العمل هذه وكل مشروع فيها",
-    longItem: "تصدير كل تقارير الربع الأخير في جدول بيانات",
-    longShortcut: "تكرار هذه الصفحة مع جميع تعليقاتها",
-    longSub: "النقل إلى مساحة عمل أو مجلد فريق آخر",
   },
 }
 
@@ -548,38 +538,6 @@ export const States: Story = {
         <DropdownMenuItem variant="destructive" icon={<Trash2Icon strokeWidth={1.5} />}>
           {c.stateDestructive}
         </DropdownMenuItem>
-      </Held>
-    )
-  },
-}
-
-/**
- * Long copy in a 240px menu. A label or row longer than the menu wraps onto
- * more lines inside it, and the row grows from its 32px. The icon stays at
- * the row's start and the shortcut and submenu chevron at its end, centred on
- * the row, as Select's check is.
- */
-export const LongText: Story = {
-  decorators: [framed],
-  parameters: { layout: "padded" },
-  render: (_args, ctx) => {
-    const c = copy(ctx)
-    return (
-      <Held trigger={c.open} className="w-[240px]">
-        <DropdownMenuLabel>{c.longLabel}</DropdownMenuLabel>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>{c.longItem}</DropdownMenuItem>
-        <DropdownMenuItem icon={<CopyIcon strokeWidth={1.5} />}>
-          {c.longShortcut}
-          <DropdownMenuShortcut>⇧⌘D</DropdownMenuShortcut>
-        </DropdownMenuItem>
-        <DropdownMenuSub>
-          <DropdownMenuSubTrigger icon={<FolderInputIcon strokeWidth={1.5} />}>{c.longSub}</DropdownMenuSubTrigger>
-          <DropdownMenuSubContent>
-            <DropdownMenuItem>{c.email}</DropdownMenuItem>
-            <DropdownMenuItem>{c.message}</DropdownMenuItem>
-          </DropdownMenuSubContent>
-        </DropdownMenuSub>
       </Held>
     )
   },
