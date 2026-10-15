@@ -62,7 +62,8 @@ export function rewriteUtilsImport(content) {
 
 /**
  * Registry files import each other the way the source tree lays them out —
- * `../status-indicator/status-indicator` from `registry/ui/avatar/`. Every CLI
+ * `../status-indicator/status-indicator` from `registry/ui/avatar/`, or
+ * `../../ui/accordion/accordion` from a block in `registry/blocks/`. Every CLI
  * writes each file to its `target`, so point the import at where that
  * component lands instead: `./status-indicator` beside `avatar.tsx`. Neither
  * the shadcn CLI nor @smicolon/cli 0.3.3 rewrites these imports, so the
@@ -71,7 +72,7 @@ export function rewriteUtilsImport(content) {
  */
 export function rewriteComponentImports(content, fromTarget, targetOf) {
   return content.replace(
-    /from (["'])\.\.\/([a-z0-9-]+)\/([a-z0-9-]+)\1/g,
+    /from (["'])(?:\.\.\/)+(?:(?:ui|blocks|effects|hooks)\/)?([a-z0-9-]+)\/([a-z0-9-]+)\1/g,
     (match, quote, folder, file) => {
       const toTarget = folder === file ? targetOf(file) : undefined
       if (!toTarget) return match
@@ -95,7 +96,10 @@ async function main() {
   // Where each component's main file lands in a consumer's project.
   const targets = new Map(registry.items.map((item) => [item.name, item.files[0]?.target]))
   const targetOf = (name) => targets.get(name)
-  const ownNames = new Set(registry.items.map((item) => item.name))
+  // The theme items too: a block on an inverted surface depends on
+  // theme-inverse, which is published beside the components.
+  const themeItems = buildThemeItems({ registryUrl: REGISTRY_URL })
+  const ownNames = new Set([...registry.items.map((item) => item.name), ...themeItems.map((item) => item.name)])
 
   // Process each component
   const processedItems = []
@@ -154,7 +158,7 @@ async function main() {
   // snapshots. Published beside the components, so `@fasla/theme` resolves,
   // but kept out of the index: they install with `shadcn add` or our `init`,
   // not as components.
-  for (const item of buildThemeItems({ registryUrl: REGISTRY_URL })) {
+  for (const item of themeItems) {
     console.log(`  Processing ${item.name}...`)
     await fs.writeFile(path.join(OUTPUT_DIR, `${item.name}.json`), JSON.stringify(item, null, 2))
   }

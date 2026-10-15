@@ -7,6 +7,39 @@ import { renderToStaticMarkup } from "react-dom/server"
 const docsRoot = path.resolve(import.meta.dir, "..")
 const componentsRoot = path.join(docsRoot, "app/[locale]/docs/components")
 
+describe("Blocks section", () => {
+  test("has a page for every block family route, and lists every FAQ item in the registry", async () => {
+    const { blockRoutes } = await import("../lib/seo-routes")
+    const { FAQ_TYPES } = await import("../lib/blocks")
+    const blocksRoot = path.join(docsRoot, "app/[locale]/docs/blocks")
+    // installation/ is the section's own page, not a family.
+    const families = readdirSync(blocksRoot, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory() && entry.name !== "installation")
+      .map((entry) => `/docs/blocks/${entry.name}/`)
+    expect(blockRoutes.map((route) => route.path).sort()).toEqual(families.sort())
+
+    const registry = JSON.parse(readFileSync(path.join(docsRoot, "../../packages/fasla-ui/registry.json"), "utf8"))
+    const faqItems = registry.items.filter((item) => item.name.startsWith("faq-")).map((item) => item.name)
+    expect(FAQ_TYPES.map((type) => type.slug).sort()).toEqual(faqItems.sort())
+  })
+
+  test("marks exactly the blocks that depend on theme-inverse as inverse", async () => {
+    const { FAQ_TYPES } = await import("../lib/blocks")
+    const registry = JSON.parse(readFileSync(path.join(docsRoot, "../../packages/fasla-ui/registry.json"), "utf8"))
+    const inverse = registry.items
+      .filter((item) => item.registryDependencies?.includes("theme-inverse"))
+      .map((item) => item.name)
+    expect(FAQ_TYPES.filter((type) => type.inverse).map((type) => type.slug).sort()).toEqual(inverse.sort())
+  })
+
+  test("keeps the block previews out of the catalogue, and so out of the sitemap", async () => {
+    const { routes } = await import("../lib/seo-routes")
+    expect(routes.some((route) => route.path.includes("blocks-preview"))).toBe(false)
+    const page = readFileSync(path.join(docsRoot, "app/[locale]/blocks-preview/[slug]/page.tsx"), "utf8")
+    expect(page).toContain("robots: { index: false")
+  })
+})
+
 describe("SEO route catalog", () => {
   test("covers the filesystem component routes and core pages", async () => {
     const { componentRoutes, routes } = await import("../lib/seo-routes")
@@ -52,11 +85,14 @@ describe("SEO route catalog", () => {
   })
 
   test("wires every route to the shared metadata catalog", async () => {
-    const { componentRoutes } = await import("../lib/seo-routes")
+    const { blockRoutes, componentRoutes } = await import("../lib/seo-routes")
     const coreAdapters = [
       ["/", "app/[locale]/(home)/layout.tsx"],
       ["/docs/", "app/[locale]/docs/layout.tsx"],
       ["/docs/installation/", "app/[locale]/docs/installation/page.tsx"],
+      ["/docs/blocks/", "app/[locale]/docs/blocks/layout.tsx"],
+      ["/docs/blocks/installation/", "app/[locale]/docs/blocks/installation/layout.tsx"],
+      ...blockRoutes.map((route) => [route.path, `app/[locale]/docs${route.path.slice("/docs".length)}layout.tsx`]),
     ]
 
     for (const [route, relativeFile] of coreAdapters) {
@@ -75,11 +111,14 @@ describe("SEO route catalog", () => {
   })
 
   test("keeps exactly one page-level H1 on every canonical docs route", async () => {
-    const { componentRoutes } = await import("../lib/seo-routes")
+    const { blockRoutes, componentRoutes } = await import("../lib/seo-routes")
     const pageFiles = [
       "app/[locale]/(home)/page.tsx",
       "app/[locale]/docs/page.tsx",
       "app/[locale]/docs/installation/page.tsx",
+      "app/[locale]/docs/blocks/page.tsx",
+      "app/[locale]/docs/blocks/installation/page.tsx",
+      ...blockRoutes.map((route) => `app/[locale]/docs${route.path.slice("/docs".length)}page.tsx`),
       ...componentRoutes.map((route) => {
         const slug = route.path.split("/").at(-2)
         return `app/[locale]/docs/components/${slug}/page.tsx`

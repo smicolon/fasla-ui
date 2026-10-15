@@ -154,3 +154,20 @@ export function applyTheme(cwd: string, choice: ThemeChoice, project: { nextMajo
   const items = themeItems(choice, project).map((name) => `@fasla/${name}`)
   return run("npx", ["-y", "shadcn@latest", "add", ...items, "--yes"], cwd, childEnv())
 }
+
+/**
+ * The command that installs theme items a component depends on — theme-inverse
+ * for a block on an inverted surface — as `add` runs it. By URL, so it works
+ * whether or not components.json names the @fasla registry.
+ */
+export function themeItemsCommand(urls: string[]): string {
+  return `npx shadcn@latest add ${urls.join(" ")}`
+}
+
+/**
+ * Installs those theme items with the shadcn CLI, which writes their CSS for
+ * the project's Tailwind version. Like applyTheme, it touches no component.
+ */
+export function applyThemeItems(cwd: string, urls: string[], run: Runner = spawnRunner) {
+  return run("npx", ["-y", "shadcn@latest", "add", ...urls, "--yes"], cwd, childEnv())
+}

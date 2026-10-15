@@ -160,7 +160,7 @@
     --sidebar: #171717;
     --sidebar-foreground: #fafafa;
     --sidebar-primary: #3f3f46;
-    --sidebar-primary-foreground: #0a0a0a;
+    --sidebar-primary-foreground: #fafafa;
     --sidebar-accent: #262626;
     --sidebar-accent-foreground: #fafafa;
     --sidebar-border: #404040;
@@ -207,4 +207,13 @@
 .dark .docs-story {
   background-color: var(--background);
   color: var(--foreground);
+}
+
+/*
+ * All-caps doesn't exist in Arabic, as in the docs app's globals.css. Not in a
+ * layer, so it outweighs the `uppercase` utility: a block that sets its English
+ * in capitals keeps its Arabic, and any Latin word inside it, as written.
+ */
+[dir="rtl"] .uppercase {
+  text-transform: none;
 }

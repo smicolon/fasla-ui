@@ -8,7 +8,7 @@ export type ComponentCategory = "UI Primitives" | "Blocks" | "Effects"
 
 type CoreRoute = {
   kind: "core"
-  path: "/" | "/docs/" | "/docs/installation/"
+  path: "/" | "/docs/" | "/docs/installation/" | "/docs/blocks/" | "/docs/blocks/installation/"
   title: string
   description: string
   h1: string
@@ -43,7 +43,21 @@ type ComponentRoute = {
   ar?: { title: string; description: string; h1: string }
 }
 
-export type SeoRoute = CoreRoute | ComponentRoute
+/**
+ * A block family's page in the Blocks section: every Type of the family on one
+ * page, each previewed in a frame so its breakpoints change.
+ */
+type BlockRoute = {
+  kind: "block"
+  path: `/docs/blocks/${string}/`
+  title: string
+  description: string
+  h1: string
+  category: "Blocks"
+  ar?: { title: string; description: string; h1: string }
+}
+
+export type SeoRoute = CoreRoute | ComponentRoute | BlockRoute
 
 export const routes = [
   {
@@ -81,6 +95,47 @@ export const routes = [
       title: "ثبّت فاصلة في مشروع React مع Tailwind CSS",
       description:
         "ثبّت فاصلة بأداة الأوامر (CLI) أو يدويًا، ثم اضبط إعدادات Tailwind CSS والدالة المساعدة cn في مشروعك.",
+    },
+  },
+  {
+    kind: "core",
+    path: "/docs/blocks/",
+    title: "Fasla Blocks: Ready-Made React Page Sections",
+    description:
+      "What a Fasla block is: a whole page section built from Fasla components, responsive, mirrored for Arabic and filled from props.",
+    h1: "Introduction",
+    ar: {
+      title: "كتل فاصلة: أقسام صفحات جاهزة",
+      description:
+        "تعرّف على كتل فاصلة: أقسام صفحات كاملة مبنية من مكوّنات فاصلة، متجاوبة ومعكوسة للعربية، ويأتي محتواها من خصائصها.",
+    },
+  },
+  {
+    kind: "core",
+    path: "/docs/blocks/installation/",
+    title: "Install Fasla Blocks in a React Project",
+    description:
+      "Set the project up once with init, then add a block with one command that brings the components it uses, and the CSS for inverted blocks.",
+    h1: "Installation",
+    ar: {
+      title: "ثبّت كتل فاصلة في مشروع React",
+      description:
+        "اضبط مشروعك مرة واحدة بالأمر init، ثم أضف الكتلة بأمر واحد يثبّت معها المكوّنات التي تستخدمها، مع ما تحتاجه الكتل المعكوسة من CSS.",
+    },
+  },
+  {
+    kind: "block",
+    category: "Blocks",
+    path: "/docs/blocks/faq/",
+    title: "FAQ Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Twenty-six FAQ sections, from a centred accordion to search, topic tabs and a support chat, responsive and mirrored for Arabic.",
+    h1: "FAQ",
+    ar: {
+      title: "كتل الأسئلة الشائعة لمشاريع React | فاصلة",
+      description:
+        "ستة وعشرون قسمًا للأسئلة الشائعة، من قائمة أسئلة في الوسط إلى البحث والتبويبات ومحادثة الدعم، متجاوبة ومعكوسة للعربية.",
+      h1: "الأسئلة الشائعة (FAQ)",
     },
   },
   {
@@ -632,11 +687,25 @@ export const componentRoutes = routes.filter(
     route.kind === "component"
 )
 
+/** The block family pages, under /docs/blocks/. */
+export const blockRoutes = routes.filter(
+  (route): route is Extract<(typeof routes)[number], { kind: "block" }> => route.kind === "block"
+)
+
+/**
+ * The catalogue by category, for the docs landing and sidebar. Blocks lists
+ * the block family pages first, then the application blocks that still live
+ * under /docs/components/: they moved to the Blocks section with their URLs
+ * unchanged.
+ */
 export const componentRouteGroups = (
   ["UI Primitives", "Blocks", "Effects"] as const
 ).map((category) => ({
   category,
-  routes: componentRoutes.filter((route) => route.category === category),
+  routes: [
+    ...(category === "Blocks" ? blockRoutes : []),
+    ...componentRoutes.filter((route) => route.category === category),
+  ],
 }))
 
 /**

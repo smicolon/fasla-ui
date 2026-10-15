@@ -4,6 +4,8 @@ import {
   baseTokenNames,
   BORDER_RULE,
   buildThemeItems,
+  INVERSE_FALLBACKS,
+  inverseColor,
   LATIN_FONT,
   loadSources,
   semanticColor,
@@ -189,6 +191,42 @@ describe("fonts", () => {
   })
 })
 
+describe("theme-inverse", () => {
+  const inverse = item("theme-inverse")
+  const names = tokenNames(mode).filter((name) => name.endsWith("-inverse"))
+
+  it("gives every inverse token in Figma a fallback", () => {
+    expect(Object.keys(INVERSE_FALLBACKS).sort()).toEqual(names.sort())
+  })
+
+  it("maps each one on Tailwind 4, falling back to the page colours swapped", () => {
+    expect(inverse.cssVars).toEqual({
+      theme: {
+        "color-background-inverse": "var(--background-inverse, var(--foreground))",
+        "color-foreground-inverse": "var(--foreground-inverse, var(--background))",
+        "color-muted-foreground-inverse":
+          "var(--muted-foreground-inverse, color-mix(in oklab, var(--background) 75%, var(--foreground)))",
+      },
+    })
+  })
+
+  it("maps each one on Tailwind 3 exactly as tokens/tailwind.ts does, the fallback through theme()", () => {
+    const colors = inverse.tailwind!.config.theme.extend.colors!
+    for (const name of names) expect(colors[name]).toBe(tailwindSemanticColors[name as keyof typeof tailwindSemanticColors])
+    expect(colors["background-inverse"]).toContain("var(--background-inverse, theme(colors.foreground))")
+  })
+
+  it("sets no values, so a project's own inverse tokens, or its page colours, are what show", () => {
+    expect(inverse.css).toBeUndefined()
+    expect(inverse.cssVars!.light).toBeUndefined()
+    expect(inverse.cssVars!.dark).toBeUndefined()
+  })
+
+  it("is mapped the same way by theme-base", () => {
+    for (const [key, value] of Object.entries(inverse.cssVars!.theme!)) expect(base.cssVars!.theme![key]).toBe(value)
+  })
+})
+
 describe("tailwindV3Colors", () => {
   it("nests a token under its group the way tokens/tailwind.ts does", () => {
     const all = tokenNames(mode)
@@ -196,7 +234,7 @@ describe("tailwindV3Colors", () => {
       success: { DEFAULT: semanticColor("success"), foreground: semanticColor("success-foreground") },
       soft: { info: semanticColor("soft-info") },
       "chart-1": semanticColor("chart-1"),
-      "muted-foreground-inverse": semanticColor("muted-foreground-inverse"),
+      "muted-foreground-inverse": inverseColor("muted-foreground-inverse"),
     })
   })
 })

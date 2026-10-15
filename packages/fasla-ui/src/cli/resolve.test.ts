@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from "vitest"
 import { describeAdded, registryItemName, resolveWithDependencies, rewriteComponentImports } from "./resolve"
-import { NAMESPACE, namespaceUrl, type RegistryItem } from "./registry"
+import { NAMESPACE, THEME_ITEMS, namespaceUrl, type RegistryItem } from "./registry"
+import { buildThemeItems } from "../../theme/theme-items.mjs"
 
 const BASE = "https://ui.smicolon.com/r"
 
@@ -153,6 +154,13 @@ describe("rewriteComponentImports", () => {
     )
   })
 
+  it("points a block's import of an atom at the atom's directory", () => {
+    const src = `import { Accordion } from "../../ui/button/button"`
+    expect(rewriteComponentImports(src, "src/components/blocks", targetDirOf)).toBe(
+      `import { Accordion } from "../ui/button"`
+    )
+  })
+
   it("leaves anything that isn't a registry component alone", () => {
     const src = [
       `import { cn } from "../../../src/lib/utils"`,
@@ -160,5 +168,12 @@ describe("rewriteComponentImports", () => {
       `import { y } from "../status-indicator/other-file"`,
     ].join("\n")
     expect(rewriteComponentImports(src, "src/components/ui", targetDirOf)).toBe(src)
+  })
+})
+
+describe("THEME_ITEMS", () => {
+  it("names exactly the theme items the registry build publishes", () => {
+    const published = buildThemeItems({ registryUrl: "https://registry.example/r" }).map((item) => item.name)
+    expect([...THEME_ITEMS].sort()).toEqual(published.sort())
   })
 })

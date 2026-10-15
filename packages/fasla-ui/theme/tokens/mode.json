@@ -200,10 +200,10 @@
     },
     "sidebar-primary-foreground": {
       "light": "#171717",
-      "dark": "#0a0a0a",
+      "dark": "#fafafa",
       "via": {
         "light": "colors/neutral/900",
-        "dark": "theme/primary-foreground-dark → colors/neutral/950"
+        "dark": "colors/neutral/50"
       }
     },
     "sidebar-accent": {
