@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { Decorator } from "@storybook/react"
+import type { ArgTypes, Decorator } from "@storybook/react"
 
 /**
  * For FAQ.stories.tsx, beside it. The blocks bring their own English
@@ -28,14 +28,43 @@ type StoryContext = { globals: { direction?: string } }
 /** The block's copy language, from the Direction toolbar. */
 export const localeOf = (context: StoryContext): "en" | "ar" => (context.globals.direction === "rtl" ? "ar" : "en")
 
+type DocgenProp = { name: string; description?: string; type?: { name: string; value?: { value: string }[] } }
+type Documented = { __docgenInfo?: { props?: Record<string, DocgenProp> } }
+
+/** HTML attributes every section takes, and the language prop the toolbar sets. */
+const HIDDEN = new Set(["locale", "className", "style"])
+
 /**
- * Hides the props a reader doesn't set from the explorer: the HTML attributes
- * every section takes. The content props stay, so long copy can be pasted in.
+ * Controls for a block's own props, from the prop docs react-docgen-typescript
+ * attaches to the component: text for strings and copy, an object editor for
+ * item and category lists, a toggle for booleans, a select for unions, and the
+ * actions panel for callbacks. One file holds all 26 blocks, so the meta can't
+ * name a `component` for Storybook to read them from itself.
+ *
+ * A function, not a shared object: react-docgen-typescript stamps
+ * `displayName` and `__docgenInfo` on an exported object, and those then
+ * showed as controls.
  */
-export const hiddenArgTypes = {
-  locale: { table: { disable: true } },
-  className: { table: { disable: true } },
-  style: { table: { disable: true } },
+export function faqArgTypes(component: unknown): ArgTypes {
+  const props = (component as Documented).__docgenInfo?.props ?? {}
+  const argTypes: ArgTypes = {}
+  for (const [name, prop] of Object.entries(props)) {
+    if (HIDDEN.has(name)) continue
+    const type = prop.type?.name ?? ""
+    const base = { name, description: prop.description, table: { type: { summary: type } } }
+    if (type.includes("=>") || /Handler\b/.test(type)) argTypes[name] = { ...base, action: name }
+    else if (type === "boolean") argTypes[name] = { ...base, control: "boolean" }
+    else if (type === "number") argTypes[name] = { ...base, control: "number" }
+    else if (type === "enum" && prop.type?.value?.every((v) => /^"/.test(v.value)))
+      argTypes[name] = { ...base, control: "select", options: prop.type.value.map((v) => JSON.parse(v.value)) }
+    // Lists, object literals and the blocks' own types (FaqContactCtaCardAction):
+    // anything but a string or React node.
+    else if (/\[\]|^\{|Record</.test(type) || (/^[A-Z]/.test(type) && !/^(ReactNode|ReactElement|Element)\b/.test(type)))
+      argTypes[name] = { ...base, control: "object" }
+    else argTypes[name] = { ...base, control: "text" }
+  }
+  for (const name of HIDDEN) argTypes[name] = { table: { disable: true } }
+  return argTypes
 }
 
 /**
