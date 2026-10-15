@@ -35,14 +35,6 @@ type StoryArgs = {
 const meta: Meta<StoryArgs> = {
   title: "UI/Breadcrumb",
   component: Breadcrumb as unknown as React.ComponentType<StoryArgs>,
-  subcomponents: {
-    BreadcrumbList,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbPage,
-    BreadcrumbSeparator,
-    BreadcrumbEllipsis,
-  } as Record<string, React.ComponentType<unknown>>,
   parameters: { layout: "centered" },
   tags: ["autodocs"],
   argTypes: {

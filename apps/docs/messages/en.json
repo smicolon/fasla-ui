@@ -1566,16 +1566,38 @@
         "direction": "The trail follows the page's <code>dir</code>: in Arabic it runs from right to left and the chevron turns to match. The taller Arabic line comes from the type scale, with nothing to set."
       },
       "props": {
-        "ariaLabel": "On <code>Breadcrumb</code>: the landmark's name for screen readers.",
-        "list": "The ordered list of steps and separators.",
-        "item": "One step: a link, the current page or the ellipsis.",
-        "link": "A step the reader can go back to. Takes every <code>a</code> attribute.",
-        "asChild": "On <code>BreadcrumbLink</code>: makes its child, such as a Next.js <code>Link</code>, the link.",
-        "icon": "On <code>BreadcrumbLink</code> and <code>BreadcrumbPage</code>: an icon before the label.",
-        "page": "The current page, marked with <code>aria-current</code>.",
-        "separator": "The mark between two steps: a chevron, or the icon you pass as its child.",
-        "ellipsis": "Stands in for the steps left out of a collapsed trail.",
-        "className": "Extra classes for any part."
+        "breadcrumb": {
+          "ariaLabel": "The landmark's name for screen readers, in the page's language.",
+          "children": "The <code>BreadcrumbList</code>.",
+          "className": "Extra classes for the <code>nav</code> element."
+        },
+        "list": {
+          "children": "The steps and separators, in reading order.",
+          "className": "Extra classes for the <code>ol</code> element."
+        },
+        "item": {
+          "children": "One step: a link, the current page or the ellipsis.",
+          "className": "Extra classes for the <code>li</code> element."
+        },
+        "link": {
+          "href": "Where the step goes. The link takes every other <code>a</code> attribute too.",
+          "asChild": "Makes its child, such as a Next.js <code>Link</code>, the link.",
+          "icon": "An icon before the label, sized to 14px.",
+          "children": "The step's label.",
+          "className": "Extra classes for the link."
+        },
+        "page": {
+          "icon": "An icon before the label, sized to 14px.",
+          "children": "The current page's name.",
+          "className": "Extra classes for the current page."
+        },
+        "separator": {
+          "children": "An icon in place of the chevron, such as <code>SlashIcon</code>.",
+          "className": "Extra classes for the separator."
+        },
+        "ellipsis": {
+          "className": "Extra classes for the ellipsis. Its screen-reader text is built in."
+        }
       },
       "usage": {
         "basic": "Basic trail",

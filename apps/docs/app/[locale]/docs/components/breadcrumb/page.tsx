@@ -117,17 +117,65 @@ export default function BreadcrumbPageDocs() {
   /** The Variants rows are Figma's Count=3: home, then the last two steps. */
   const three = (list: Step[]) => [list[0]!, ...list.slice(-2)]
 
-  const props: PropRow[] = [
-    { prop: "aria-label", type: "string", fallback: '"Breadcrumb"', description: b.rich("props.ariaLabel", richCode) },
-    { prop: "BreadcrumbList", type: "ReactNode", fallback: "", description: b.rich("props.list", richCode) },
-    { prop: "BreadcrumbItem", type: "ReactNode", fallback: "", description: b.rich("props.item", richCode) },
-    { prop: "BreadcrumbLink", type: "{ href, asChild, icon }", fallback: "", description: b.rich("props.link", richCode) },
-    { prop: "asChild", type: "boolean", fallback: "false", description: b.rich("props.asChild", richCode) },
-    { prop: "icon", type: "ReactNode", fallback: "", description: b.rich("props.icon", richCode) },
-    { prop: "BreadcrumbPage", type: "{ icon }", fallback: "", description: b.rich("props.page", richCode) },
-    { prop: "BreadcrumbSeparator", type: "ReactNode", fallback: "", description: b.rich("props.separator", richCode) },
-    { prop: "BreadcrumbEllipsis", type: "", fallback: "", description: b.rich("props.ellipsis", richCode) },
-    { prop: "className", type: "string", fallback: "", description: b.rich("props.className", richCode) },
+  // One table per part, as the Tooltip page and shadcn document them.
+  const row = (prop: string, type: string, fallback: string, key: string): PropRow => ({
+    prop,
+    type,
+    fallback,
+    description: b.rich(`props.${key}`, richCode),
+  })
+  const propTables: { part: string; rows: PropRow[] }[] = [
+    {
+      part: "Breadcrumb",
+      rows: [
+        row("aria-label", "string", '"Breadcrumb"', "breadcrumb.ariaLabel"),
+        row("children", "ReactNode", "", "breadcrumb.children"),
+        row("className", "string", "", "breadcrumb.className"),
+      ],
+    },
+    {
+      part: "BreadcrumbList",
+      rows: [
+        row("children", "ReactNode", "", "list.children"),
+        row("className", "string", "", "list.className"),
+      ],
+    },
+    {
+      part: "BreadcrumbItem",
+      rows: [
+        row("children", "ReactNode", "", "item.children"),
+        row("className", "string", "", "item.className"),
+      ],
+    },
+    {
+      part: "BreadcrumbLink",
+      rows: [
+        row("href", "string", "", "link.href"),
+        row("asChild", "boolean", "false", "link.asChild"),
+        row("icon", "ReactNode", "", "link.icon"),
+        row("children", "ReactNode", "", "link.children"),
+        row("className", "string", "", "link.className"),
+      ],
+    },
+    {
+      part: "BreadcrumbPage",
+      rows: [
+        row("icon", "ReactNode", "", "page.icon"),
+        row("children", "ReactNode", "", "page.children"),
+        row("className", "string", "", "page.className"),
+      ],
+    },
+    {
+      part: "BreadcrumbSeparator",
+      rows: [
+        row("children", "ReactNode", "", "separator.children"),
+        row("className", "string", "", "separator.className"),
+      ],
+    },
+    {
+      part: "BreadcrumbEllipsis",
+      rows: [row("className", "string", "", "ellipsis.className")],
+    },
   ]
 
   /**
@@ -238,7 +286,14 @@ ${indent}${separator}`
       {/* Props */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("props")}</h2>
-        <PropsTable rows={props} />
+        {propTables.map(({ part, rows }) => (
+          <div key={part} className="space-y-3">
+            <h3 className="text-lg font-semibold">
+              <code dir="ltr">{part}</code>
+            </h3>
+            <PropsTable rows={rows} />
+          </div>
+        ))}
       </section>
 
       {/* Usage */}
