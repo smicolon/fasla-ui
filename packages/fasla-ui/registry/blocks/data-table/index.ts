@@ -1,8 +1,1 @@
-export {
-  DataTable,
-  Pagination,
-  type Column,
-  type DataTableProps,
-  type PaginationProps,
-  type PaginationLabels,
-} from "./DataTable"
+export { DataTable, type Column, type DataTableProps } from "./DataTable"
