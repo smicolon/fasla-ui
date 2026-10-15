@@ -37,10 +37,24 @@ function DocsNav() {
         : "text-muted-foreground hover:bg-accent hover:text-foreground",
     )
 
-  const gettingStarted = [
-    { title: t("introduction"), path: "/docs/" },
-    { title: t("installation"), path: "/docs/installation/" },
-  ]
+  // Blocks have their own section, opened from the header: its sidebar starts
+  // at the blocks introduction and lists only blocks. Everything else is the
+  // Components section, which no longer lists them.
+  const blocksGroup = componentRouteGroups.find((group) => group.category === "Blocks")
+  const inBlocks =
+    pathname.includes("/docs/blocks/") || pathname.endsWith("/docs/blocks") ||
+    (blocksGroup?.routes.some((route) => isActive(route.path)) ?? false)
+  const groups = componentRouteGroups.filter((group) => (group.category === "Blocks") === inBlocks)
+
+  const gettingStarted = inBlocks
+    ? [
+        { title: t("introduction"), path: "/docs/blocks/" },
+        { title: t("installation"), path: "/docs/blocks/installation/" },
+      ]
+    : [
+        { title: t("introduction"), path: "/docs/" },
+        { title: t("installation"), path: "/docs/installation/" },
+      ]
 
   return (
     <>
@@ -62,7 +76,7 @@ function DocsNav() {
           </ul>
         </div>
 
-        {componentRouteGroups.map((group) => (
+        {groups.map((group) => (
           <div key={group.category} className="space-y-2">
             <h4 className="text-sm font-semibold text-foreground">
               {categoryKeys[group.category] ? t(categoryKeys[group.category]) : group.category}

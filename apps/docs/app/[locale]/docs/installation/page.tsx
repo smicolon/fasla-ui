@@ -3,6 +3,9 @@ import { metadataForRoute } from "@/lib/seo-routes"
 import type { Locale } from "@/i18n/routing"
 import { PackageManagerTabs } from "@/components/package-manager-tabs"
 import { shadcnAdd } from "@/lib/package-managers"
+import { CodeBlock } from "@/components/component-preview"
+import { INVERSE_CONFIG, INVERSE_CSS } from "@/lib/inverse-tokens"
+import { inlineCode } from "@/components/inline-code"
 
 export async function generateMetadata({
   params,
@@ -121,6 +124,20 @@ export default async function InstallationPage({
 
         {/* Said plainly, before anyone adds a component to a shadcn project. */}
         <p className="rounded-lg border border-border p-4 text-sm">{i.rich("themeReplaces", rich)}</p>
+
+        {/* The one way Fasla inverts a surface. Linked from the Blocks
+            introduction and from each inverse block's manual steps. */}
+        <div className="space-y-4">
+          <h3 id="inverse-tokens" className="scroll-mt-24 text-xl font-semibold">
+            {i("inverseTitle")}
+          </h3>
+          <p className="text-muted-foreground">{i.rich("inverseBody", inlineCode)}</p>
+          <p className="text-muted-foreground">{i.rich("inverseFallback", inlineCode)}</p>
+          <p className="text-sm font-medium">{i.rich("inverseTailwind4", inlineCode)}</p>
+          <CodeBlock language="css">{INVERSE_CSS}</CodeBlock>
+          <p className="text-sm font-medium">{i.rich("inverseTailwind3", inlineCode)}</p>
+          <CodeBlock language="ts">{INVERSE_CONFIG}</CodeBlock>
+        </div>
       </div>
 
       <div className="space-y-4">

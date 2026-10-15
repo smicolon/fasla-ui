@@ -88,6 +88,13 @@ re-query every id before relying on it, and write corrections back into that fil
 6. **Light is the default mode.** Leave components on `inherit` for `☾  Mode`; fix any page-level pin
    with `page.clearExplicitVariableModeForCollection`. A block that should read dark gets that from
    `theme/background-inverse` + `foreground-inverse`, never from a Dark mode override.
+   **Inverted surfaces have one method: the inverse tokens** (`theme/background-inverse`,
+   `theme/foreground-inverse`, `theme/muted-foreground-inverse`), the only colour exception to "bind the
+   surface's own tokens". Never a raw colour, never `theme/foreground` as a fill with
+   `theme/background` text, never a frame pinned to the other mode. Every atom inside the surface
+   (Accordion questions, answers, dividers, chevrons) gets the inverse tokens too. The Figma name is the
+   code name: `theme/background-inverse` is `--background-inverse` and `bg-background-inverse`. A new
+   inverse colour is added the same way; see "Inverted surfaces" in `DESIGN.md`.
 7. **Never modify existing work in the file**, never edit component internals — instance overrides only.
 8. **Raise problems the moment they happen**, not in the final report.
 

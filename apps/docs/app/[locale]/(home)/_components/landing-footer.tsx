@@ -36,6 +36,9 @@ export async function LandingFooter() {
             <Link href={landingLinks.components(locale)} className={footLink}>
               {tn("components")}
             </Link>
+            <Link href={landingLinks.blocks(locale)} className={footLink}>
+              {tn("blocks")}
+            </Link>
             <a href={landingLinks.github} className={footLink}>
               {tn("github")}
             </a>

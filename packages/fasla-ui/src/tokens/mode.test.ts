@@ -218,7 +218,8 @@ describe("Tailwind mapping", () => {
     const mapped = new Set<string>()
     const walk = (v: unknown) => {
       if (typeof v === "string") {
-        const m = v.match(/var\(--([a-z0-9-]+)\)/)
+        // An inverse token's fallback follows a comma: var(--x, fallback).
+        const m = v.match(/var\(--([a-z0-9-]+)[,)]/)
         if (m?.[1]) mapped.add(m[1])
       } else if (v && typeof v === "object") {
         Object.values(v).forEach(walk)
@@ -234,6 +235,15 @@ describe("Tailwind mapping", () => {
     // placeholder is what prevents that — see semanticColor's comment.
     expect(semanticColor("primary")).toContain("<alpha-value>")
     expect(semanticColor("primary")).toContain("var(--primary)")
+  })
+
+  it("mixes in OKLab, so near-neutral tokens keep their hue", () => {
+    // In OKLCH a near-neutral colour mixed with `transparent` loses its hue
+    // and is drawn at hue 0: zinc-700 #3f3f46 rendered as a reddish grey.
+    for (const value of Object.values(tailwindSemanticColors).flatMap((v) => (typeof v === "string" ? [v] : Object.values(v)))) {
+      expect(value).toMatch(/^color-mix\(in oklab, /)
+      expect(value).not.toContain("in oklch")
+    }
   })
 })
 

@@ -19,12 +19,26 @@
  * placeholder keeps both `bg-primary` and `bg-primary/10` working, while letting
  * the CSS variables stay full colours rather than bare channel triplets.
  *
+ * Mixed in OKLab, not OKLCH: in OKLCH a near-neutral colour loses its hue
+ * against `transparent` and is drawn at hue 0, so zinc-700 #3f3f46 rendered a
+ * reddish grey and #f8fafc a pinkish white. OKLab has no hue to lose, and
+ * every Fasla token draws exactly.
+ *
  * Needs Chrome 111+, Safari 16.2+, Firefox 113+.
  */
 export const semanticColor = (name: string) =>
-  `color-mix(in oklch, var(--${name}) calc(<alpha-value> * 100%), transparent)`
+  `color-mix(in oklab, var(--${name}) calc(<alpha-value> * 100%), transparent)`
 
 const c = semanticColor
+
+/**
+ * An inverse token, falling back to the page colours swapped when a theme
+ * doesn't define it: `background-inverse` to `foreground`, and so on. Through
+ * `theme()`, so the fallback is whatever colour the project maps the page
+ * tokens to. theme/theme-items.mjs holds the fallbacks and maps them the same.
+ */
+const inverse = (name: string, fallback: string) =>
+  `color-mix(in oklab, var(--${name}, ${fallback}) calc(<alpha-value> * 100%), transparent)`
 
 export const tailwindSemanticColors = {
   // Surfaces
@@ -79,9 +93,12 @@ export const tailwindSemanticColors = {
   "backdrop-overlay": c("backdrop-overlay"),
 
   // Inverse — a fixed contrast band, not a mode-reactive surface.
-  "background-inverse": c("background-inverse"),
-  "foreground-inverse": c("foreground-inverse"),
-  "muted-foreground-inverse": c("muted-foreground-inverse"),
+  "background-inverse": inverse("background-inverse", "theme(colors.foreground)"),
+  "foreground-inverse": inverse("foreground-inverse", "theme(colors.background)"),
+  "muted-foreground-inverse": inverse(
+    "muted-foreground-inverse",
+    "color-mix(in oklab, theme(colors.background) 75%, theme(colors.foreground))"
+  ),
 
   // Charts
   "chart-1": c("chart-1"),

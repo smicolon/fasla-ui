@@ -13,7 +13,8 @@
     "home": "الصفحة الرئيسية لفاصلة",
     "toggleMenu": "فتح القائمة",
     "toggleTheme": "تبديل المظهر",
-    "switchLanguage": "تغيير اللغة"
+    "switchLanguage": "تغيير اللغة",
+    "blocks": "الكتل"
   },
   "docs": {
     "avatar": {
@@ -244,7 +245,12 @@
       "manualTailwind3": "في Tailwind 3، ثبّت <code>tailwind-merge@^2</code> بدلًا منها. يدعم الإصدار 3 من tailwind-merge إطار Tailwind 4 وحده، ويحذف في Tailwind 3 الأصناف (classes) التي لا يعرفها، مثل <code>outline</code>:",
       "manualCn": "2. أضف الدالة المساعدة <code>cn</code> إلى مشروعك:",
       "manualCopy": "3. انسخ كل مكوّن من ملفه في السجل (registry)، مثل <code>https://fasla.smicolon.com/r/button.json</code> للمكوّن Button. يسرد الملف <code>https://fasla.smicolon.com/r/registry.json</code> المكوّنات كلها.",
-      "manualCopyDetail": "في كل ملف، يحمل <code>files</code> الشيفرة المصدرية في <code>content</code>، والمسار الذي تحفظها فيه في <code>target</code>. يسرد <code>dependencies</code> الحزم التي تثبّتها، ويسرد <code>registryDependencies</code> مكوّنات فاصلة الأخرى التي يحتاجها المكوّن، فتنسخها بالطريقة نفسها."
+      "manualCopyDetail": "في كل ملف، يحمل <code>files</code> الشيفرة المصدرية في <code>content</code>، والمسار الذي تحفظها فيه في <code>target</code>. يسرد <code>dependencies</code> الحزم التي تثبّتها، ويسرد <code>registryDependencies</code> مكوّنات فاصلة الأخرى التي يحتاجها المكوّن، فتنسخها بالطريقة نفسها.",
+      "inverseTitle": "الرموز المعكوسة",
+      "inverseBody": "تلوّن الكتلة ذات السطح المعكوس، مثل اللوحة الداكنة في الأسئلة الشائعة، سطحها بثلاثة رموز: <code>background-inverse</code>، <code>foreground-inverse</code>، <code>muted-foreground-inverse</code>. يضبطها مظهر فاصلة فيكون السطح داكنًا في الوضع الفاتح وفاتحًا في الوضع الداكن. وهي الطريقة الوحيدة التي تعكس بها فاصلة سطحًا، فلا تفرض الكتلة صنف الوضع الداكن على قسم، ولا تستعير <code>bg-foreground</code>.",
+      "inverseFallback": "إذا أضفت كتلة كهذه بأيّ من أداتي الأوامر، فإنها تضيف معها ربط هذه الرموز. وإذا لم يضبطها مظهرك، فإن كل رمز يرجع إلى ألوان صفحتك معكوسةً: <code>foreground</code> للسطح، و <code>background</code> لنصه. ولتضبط ألوانك أنت، عرّف <code>--background-inverse</code>، <code>--foreground-inverse</code>، <code>--muted-foreground-inverse</code> للوضعين الفاتح والداكن.",
+      "inverseTailwind4": "لإضافة الربط يدويًا في Tailwind 4، ضع هذه الأسطر الثلاثة في كتلة <code>@theme inline</code> في ملف الأنماط:",
+      "inverseTailwind3": "في Tailwind 3، ضعها تحت <code>theme.extend.colors</code> في <code>tailwind.config</code>:"
     },
     "propsTable": {
       "prop": "الخاصية",
@@ -1918,6 +1924,96 @@
         "glowContainer": "حاوية ينزلق حول إطارها توهّج.",
         "className": "أصناف (class) إضافية للمكوّن."
       }
+    },
+    "blocksIntro": {
+      "title": "مقدّمة",
+      "lead": "الكتل أقسام صفحات كاملة، مبنية من مكوّنات فاصلة وجاهزة لتضعها في صفحتك.",
+      "whatTitle": "ما الكتلة",
+      "whatBody": "الكتلة ملف واحد يجمع مكوّنات فاصلة، مثل الأكورديون والتبويبات والزر، في قسم من الصفحة. تأخذ كل ألوانها من رموز مظهرك. وبعد أن تضيفها إلى مشروعك تصبح شيفرتها ملكك تعدّلها كما تشاء.",
+      "whatResponsive": "الكتلة متجاوبة: صُممت كل كتلة بعرض سطح المكتب والجهاز اللوحي والهاتف، ويتغيّر تخطيطها عند نقطتي التوقف <code>md</code>، <code>lg</code>.",
+      "whatDirection": "تتبع الكتلة اتجاه الصفحة. كل الجهات فيها منطقية، فتعرض الشيفرة نفسها المحتوى من اليسار إلى اليمين بالإنجليزية ومن اليمين إلى اليسار بالعربية.",
+      "whatContent": "يأتي محتوى الكتلة من خصائصها. لكل كتلة نصوص بالعربية والإنجليزية تختار بينها <code>locale</code>، وأي خاصية تمرّرها تحلّ محلّ النص الافتراضي.",
+      "imagesTitle": "الصور",
+      "imagesBody": "لا تتضمن الكتل صورًا. تعرض الكتلة التي فيها صورة مساحة بديلة، وتعرض الكتلة التي فيها أشخاص الأحرف الأولى من أسمائهم، حتى تمرّر صورك أنت: تأخذ <code>image</code> قيمتي <code>src</code>، <code>alt</code>، ويأخذ كل شخص <code>src</code>.",
+      "inverseTitle": "الكتل ذات السطح المعكوس",
+      "inverseBody": "بعض الكتل على سطح معكوس: داكن في الوضع الفاتح، وفاتح في الوضع الداكن. تُلوَّن هذه الكتل بالرموز المعكوسة، فلا تفرض صنف الوضع الداكن على أي قسم. وإذا ثبّتّ إحداها بالأمر <code>npx @smicolon/fasla-ui@latest add</code> أو بالأمر <code>npx shadcn@latest add</code>، فإن الأمر يضيف ربط هذه الرموز إلى ملف الأنماط.",
+      "inverseMore": "تحتاج الكتلة المعكوسة إذا ثبّتّها يدويًا إلى ثلاثة أسطر من CSS: راجع <link>التثبيت</link>.",
+      "familiesTitle": "عائلات الكتل"
+    },
+    "faqBlocks": {
+      "lead": "{count, plural, one {قسم واحد للأسئلة الشائعة} two {قسمان للأسئلة الشائعة} few {{n} أقسام للأسئلة الشائعة} many {{n} قسمًا للأسئلة الشائعة} other {{n} قسم للأسئلة الشائعة}}: قوائم أسئلة، وتخطيطات، وبحث وتنقّل بين المواضيع، وطرق للوصول إلى الدعم.",
+      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
+      "filterLabel": "التصفية حسب العائلة",
+      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
+      "families": {
+        "all": "الكل",
+        "lists": "القوائم",
+        "layouts": "التخطيطات",
+        "navigation": "التنقّل والبحث",
+        "support": "الدعم والتواصل"
+      },
+      "types": {
+        "faq-classic-centered": "كلاسيكي في الوسط",
+        "faq-split-sticky": "مقسوم بعنوان ثابت",
+        "faq-accent-active-card": "بطاقة نشطة بارزة",
+        "faq-soft-filled-rows": "صفوف بتعبئة هادئة",
+        "faq-numbered-editorial": "تحريري مرقّم",
+        "faq-dark-panel": "لوحة داكنة",
+        "faq-mono-index": "فهرس أحادي",
+        "faq-uppercase-dense": "كثيف بعناوين بارزة",
+        "faq-featured-question": "سؤال مميّز",
+        "faq-two-column-grid": "شبكة بعمودين",
+        "faq-masonry-cards": "بطاقات متراصّة",
+        "faq-category-columns": "أعمدة حسب الفئة",
+        "faq-grouped-sections": "أقسام مجمّعة",
+        "faq-table-compact": "جدول مضغوط",
+        "faq-search-categories": "بحث وفئات",
+        "faq-tabs-by-topic": "تبويبات حسب الموضوع",
+        "faq-sidebar-nav": "تنقّل جانبي",
+        "faq-category-chip-grid": "شبكة أزرار الفئات",
+        "faq-topic-tiles": "مربعات المواضيع",
+        "faq-help-hero-popular": "واجهة المساعدة والأكثر قراءة",
+        "faq-contact-cta-card": "بطاقة دعوة للتواصل",
+        "faq-support-channels": "قنوات الدعم",
+        "faq-newsletter-close": "خاتمة بالنشرة البريدية",
+        "faq-support-stats": "إحصاءات الدعم",
+        "faq-media-split": "مقسوم مع صورة",
+        "faq-chat-thread": "سلسلة محادثة"
+      }
+    },
+    "blockCard": {
+      "fullScreen": "فتح بملء الشاشة",
+      "newTab": "(يُفتح في علامة تبويب جديدة)",
+      "view": "طريقة العرض",
+      "preview": "معاينة",
+      "code": "الشيفرة",
+      "manual": "يدويًا",
+      "breakpoint": "العرض",
+      "desktop": "سطح المكتب",
+      "tablet": "جهاز لوحي",
+      "mobile": "هاتف",
+      "direction": "الاتجاه",
+      "frameTitle": "{name} بعرض {width} بكسل",
+      "loading": "جارٍ تحميل الشيفرة…",
+      "loadFailed": "تعذّر تحميل الشيفرة. ثبّت الكتلة بالأمر أدناه بدلًا من ذلك.",
+      "manualDependencies": "أضف المكوّنات التي تستخدمها:",
+      "manualPackages": "ثبّت الحزم التي تستوردها:",
+      "manualSource": "انسخ الشيفرة إلى <code>{file}</code>:",
+      "manualInverse": "أضف ربط الرموز المعكوسة إلى كتلة <code>@theme inline</code> في ملف الأنماط. ولإضافته في Tailwind 3، راجع <link>الرموز المعكوسة</link>.",
+      "install": "التثبيت"
+    },
+    "blocksInstall": {
+      "title": "التثبيت",
+      "lead": "اضبط مشروعك مرة واحدة، ثم أضف الكتلة بأمر واحد.",
+      "initTitle": "شغّل الأمر <code>init</code> أولًا",
+      "initBody": "شغّل الأمر <code>init</code> مرة واحدة في كل مشروع، قبل إضافة أول كتلة. يكتب الأمر الملف <code>components.json</code> الذي يقرؤه كل أمر <code>add</code>، ويضيف الدالة المساعدة <code>cn</code> التي تستوردها الكتل، ويثبّت المظهر.",
+      "initMore": "لطبقات المظهر وضبط المشروع يدويًا، راجع صفحة <link>التثبيت</link> في قسم المكوّنات.",
+      "addTitle": "ثبّت كتلة",
+      "addBody": "يكتب الأمر <code>add</code> الكتلة في <code>components/blocks/</code>، ويثبّت معها المكوّنات التي تستخدمها، مثل <code>accordion</code>، <code>tabs</code>، والحزم التي تستوردها، فلا تحتاج إلى إضافتها واحدًا واحدًا.",
+      "addShadcn": "ويثبّت الأمر <code>npx shadcn@latest add</code> الكتلة بالطريقة نفسها، من رابطها في السجل:",
+      "inverseTitle": "CSS للكتل ذات السطح المعكوس",
+      "inverseBody": "يضيف كلا الأمرين <code>add</code> ربط الرموز المعكوسة الذي تحتاجه الكتلة ذات السطح المعكوس. وإذا ثبّتّ إحداها يدويًا في Tailwind 4، فأضف هذه الأسطر الثلاثة إلى كتلة <code>@theme inline</code> في ملف الأنماط:",
+      "inverseMore": "راجع <link>الرموز المعكوسة</link> لطريقة الإضافة في Tailwind 3، ولشرح القيم البديلة وضبط ألوانك أنت."
     }
   },
   "copyCommand": {
@@ -1937,6 +2033,7 @@
       "label": "القائمة الرئيسية",
       "docs": "التوثيق",
       "components": "المكوّنات",
+      "blocks": "الكتل",
       "github": "GitHub",
       "lang": "English",
       "langLabel": "التبديل إلى الإنجليزية",
@@ -2985,7 +3082,7 @@
       "meta": "قريبًا | فاصلة",
       "badge": "قيد التطوير",
       "title": "قريبًا",
-      "lede": "مكتبة الكتل والقوالب وخطة Pro وخطة Team في الطريق. المكوّنات مفتوحة المصدر والتوثيق جاهزة للاستخدام اليوم.",
+      "lede": "القوالب وخطة Pro وخطة Team في الطريق. المكوّنات مفتوحة المصدر وأولى الكتل والتوثيق جاهزة للاستخدام اليوم.",
       "docs": "اقرأ التوثيق",
       "home": "العودة إلى الرئيسية"
     }

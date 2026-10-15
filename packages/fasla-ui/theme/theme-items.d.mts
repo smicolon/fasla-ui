@@ -20,6 +20,9 @@ export const LATIN_FONT: string
 export const BORDER_RULE: { selector: string; value: string }
 export const SHADCN_V3_MAPPED: string[]
 export function semanticColor(name: string): string
+export const INVERSE_FALLBACKS: Record<string, string>
+export function inverseThemeVars(): Record<string, string>
+export function inverseColor(name: string): string
 export function loadSources(root?: string): Sources
 export function tokenNames(mode: Sources["mode"]): string[]
 export function baseTokenNames(mode: Sources["mode"]): string[]

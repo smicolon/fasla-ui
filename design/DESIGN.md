@@ -284,6 +284,39 @@ must be checked in both.
 - `theme/card-foreground`, `theme/popover-foreground`, `theme/sidebar-foreground` `#404040 → #fafafa`
 - `theme/accent-foreground`, `theme/secondary-foreground` `#171717 → #fafafa`
 
+### Inverted surfaces
+
+An inverted surface (a dark band in Light, a light one in Dark) has one method, in Figma and in code:
+the inverse tokens. They are the one place the colour rule reaches past a surface's own tokens.
+
+- **Use** `theme/background-inverse` for the surface, `theme/foreground-inverse` for its text and
+  icons, `theme/muted-foreground-inverse` for supporting copy, dividers and outlines. Every atom on the
+  surface takes them too: in Figma as instance overrides, in code from the block's classes, never by
+  editing the atom.
+- **Never** a raw colour, never `theme/foreground` as a fill under `theme/background` text
+  (`bg-foreground text-background` in code), never a frame pinned to the other mode, and never a forced
+  `.dark` or `.light` class on a section.
+- **The Figma name is the code name.** `theme/background-inverse` is `--background-inverse` and the
+  `bg-background-inverse` class; the same for the other two.
+- **In code, each token falls back** to the page colours swapped when a theme doesn't define it, so a
+  block still reads in a project on another library's theme:
+
+  ```css
+  --color-background-inverse: var(--background-inverse, var(--foreground));
+  --color-foreground-inverse: var(--foreground-inverse, var(--background));
+  --color-muted-foreground-inverse: var(--muted-foreground-inverse, color-mix(in oklab, var(--background) 75%, var(--foreground)));
+  ```
+
+  The `theme-inverse` registry item carries this mapping, and every block that uses an inverse token
+  lists it in `registryDependencies`, so `add` installs it.
+
+**Adding an inverse colour.** Add it to `☾  Mode` as `theme/<name>-inverse` with Fasla's Light and Dark
+values, aliased to `💨 Tailwind` primitives. In code, use the same name: add its values to
+`design/tokens/mode.json` and both apps' `globals.css`, and its fallback to `INVERSE_FALLBACKS` in
+`packages/fasla-ui/theme/theme-items.mjs`, built from the tokens every shadcn theme has (`background`,
+`foreground` and the like), never from a raw colour. Map it in `src/tokens/tailwind.ts` the way the
+existing three are, and list it on the Installation page's Inverse tokens section.
+
 ### Hairlines & borders
 
 - `theme/border` `#e5e5e5 → #3f3f46` — every 1px rule, card edge and divider
@@ -748,7 +781,7 @@ oversight.
 **Adding a colour.** It goes in `☾  Mode` with values for both modes, aliased to a `💨 Tailwind`
 primitive rather than typed as a hex. Give it a semantic name describing its role, not its appearance —
 `theme/warning`, never `theme/amber`. If it will sit on an inverse band, add the `-inverse` partner at
-the same time.
+the same time, as "Inverted surfaces" above describes.
 
 **Adding a size to an atom.** Extend the existing `Size` axis (`xs/sm/md/lg`) rather than creating a
 parallel property; every variant in a set must declare the same property keys or Figma rejects it.

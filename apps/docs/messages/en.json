@@ -13,7 +13,8 @@
     "home": "Fasla — home",
     "toggleMenu": "Toggle menu",
     "toggleTheme": "Toggle theme",
-    "switchLanguage": "Switch language"
+    "switchLanguage": "Switch language",
+    "blocks": "Blocks"
   },
   "docs": {
     "avatar": {
@@ -244,7 +245,12 @@
       "manualTailwind3": "On Tailwind 3, install <code>tailwind-merge@^2</code> instead. tailwind-merge 3 supports only Tailwind 4, and on Tailwind 3 it drops classes it doesn’t know, such as <code>outline</code>:",
       "manualCn": "2. Add the cn utility to your project:",
       "manualCopy": "3. Copy each component from its file in the registry, such as <code>https://fasla.smicolon.com/r/button.json</code> for Button. <code>https://fasla.smicolon.com/r/registry.json</code> lists them all.",
-      "manualCopyDetail": "In each file, <code>files</code> holds the source in <code>content</code> and the path to save it at in <code>target</code>. <code>dependencies</code> lists the packages to install, and <code>registryDependencies</code> the other Fasla components it needs, which you copy the same way."
+      "manualCopyDetail": "In each file, <code>files</code> holds the source in <code>content</code> and the path to save it at in <code>target</code>. <code>dependencies</code> lists the packages to install, and <code>registryDependencies</code> the other Fasla components it needs, which you copy the same way.",
+      "inverseTitle": "Inverse tokens",
+      "inverseBody": "A block on an inverted surface, such as the FAQ Dark Panel, paints it with three tokens: <code>background-inverse</code>, <code>foreground-inverse</code> and <code>muted-foreground-inverse</code>. Fasla’s theme sets them: the surface is dark in light mode and light in dark mode. They are the only way Fasla inverts a surface, so a block never forces a dark class on a section or borrows <code>bg-foreground</code>.",
+      "inverseFallback": "Adding such a block with either CLI also adds the tokens’ mapping. When your theme doesn’t set the tokens, each falls back to your page colours, swapped: <code>foreground</code> for the surface, <code>background</code> for its text. To set your own, define <code>--background-inverse</code>, <code>--foreground-inverse</code> and <code>--muted-foreground-inverse</code> for light and dark.",
+      "inverseTailwind4": "Adding the mapping by hand on Tailwind 4: these three lines go in your stylesheet’s <code>@theme inline</code> block.",
+      "inverseTailwind3": "On Tailwind 3, these go under <code>theme.extend.colors</code> in <code>tailwind.config</code>:"
     },
     "propsTable": {
       "prop": "Prop",
@@ -1918,6 +1924,96 @@
         "glowContainer": "A container with a glow that slides round its border.",
         "className": "Extra classes for the component."
       }
+    },
+    "blocksIntro": {
+      "title": "Introduction",
+      "lead": "Blocks are whole page sections, built from Fasla’s components and ready to drop into a page.",
+      "whatTitle": "What a block is",
+      "whatBody": "A block is one file that composes Fasla components, such as Accordion, Tabs and Button, into a section of a page. It takes every colour from your theme tokens. Once it is in your project, the code is yours to change.",
+      "whatResponsive": "It is responsive: each block is designed at desktop, tablet and mobile widths, and changes layout at the <code>md</code> and <code>lg</code> breakpoints.",
+      "whatDirection": "It follows the page’s direction. Every side is a logical one, so the same code lays out left to right in English and right to left in Arabic.",
+      "whatContent": "Its content comes from props. Each block ships with English and Arabic copy; <code>locale</code> picks which, and any prop you pass replaces it.",
+      "imagesTitle": "Images",
+      "imagesBody": "Blocks don’t include images. A block with a photo shows a placeholder, and one with people shows their initials, until you pass your own: <code>image</code> takes a <code>src</code> and an <code>alt</code>, and each person takes a <code>src</code>.",
+      "inverseTitle": "Blocks on an inverted surface",
+      "inverseBody": "A few blocks sit on an inverted surface: dark in light mode, light in dark mode. They are painted with the inverse tokens, so they never force a dark class on a section. Installing one with <code>npx @smicolon/fasla-ui@latest add</code> or <code>npx shadcn@latest add</code> also adds the tokens’ mapping to your stylesheet.",
+      "inverseMore": "Installing one by hand takes three lines of CSS: see <link>Installation</link>.",
+      "familiesTitle": "Block families"
+    },
+    "faqBlocks": {
+      "lead": "{count, plural, one {One FAQ section} other {{n} FAQ sections}}: question lists, layouts, search and topic navigation, and ways to reach support.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "filterLabel": "Filter by family",
+      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
+      "families": {
+        "all": "All",
+        "lists": "Lists",
+        "layouts": "Layouts",
+        "navigation": "Navigation and search",
+        "support": "Support and contact"
+      },
+      "types": {
+        "faq-classic-centered": "Classic Centered",
+        "faq-split-sticky": "Split Sticky",
+        "faq-accent-active-card": "Accent Active Card",
+        "faq-soft-filled-rows": "Soft Filled Rows",
+        "faq-numbered-editorial": "Numbered Editorial",
+        "faq-dark-panel": "Dark Panel",
+        "faq-mono-index": "Mono Index",
+        "faq-uppercase-dense": "Uppercase Dense",
+        "faq-featured-question": "Featured Question",
+        "faq-two-column-grid": "Two-Column Grid",
+        "faq-masonry-cards": "Masonry Cards",
+        "faq-category-columns": "Category Columns",
+        "faq-grouped-sections": "Grouped Sections",
+        "faq-table-compact": "Table Compact",
+        "faq-search-categories": "Search + Categories",
+        "faq-tabs-by-topic": "Tabs by Topic",
+        "faq-sidebar-nav": "Sidebar Nav",
+        "faq-category-chip-grid": "Category Chip Grid",
+        "faq-topic-tiles": "Topic Tiles",
+        "faq-help-hero-popular": "Help Hero + Popular",
+        "faq-contact-cta-card": "Contact CTA Card",
+        "faq-support-channels": "Support Channels",
+        "faq-newsletter-close": "Newsletter Close",
+        "faq-support-stats": "Support Stats",
+        "faq-media-split": "Media Split",
+        "faq-chat-thread": "Chat Thread"
+      }
+    },
+    "blockCard": {
+      "fullScreen": "Open full screen",
+      "newTab": "(opens in a new tab)",
+      "view": "View",
+      "preview": "Preview",
+      "code": "Code",
+      "manual": "Manual",
+      "breakpoint": "Width",
+      "desktop": "Desktop",
+      "tablet": "Tablet",
+      "mobile": "Mobile",
+      "direction": "Direction",
+      "frameTitle": "{name} at {width} pixels wide",
+      "loading": "Loading the source…",
+      "loadFailed": "The source couldn’t be loaded. Install the block with the command below instead.",
+      "manualDependencies": "Add the components it uses:",
+      "manualPackages": "Install the packages it imports:",
+      "manualSource": "Copy the source into <code>{file}</code>:",
+      "manualInverse": "Add the inverse tokens’ mapping to your stylesheet’s <code>@theme inline</code> block. On Tailwind 3, see <link>Inverse tokens</link>.",
+      "install": "Install"
+    },
+    "blocksInstall": {
+      "title": "Installation",
+      "lead": "Set your project up once, then add a block with one command.",
+      "initTitle": "Run <code>init</code> first",
+      "initBody": "Run <code>init</code> once per project, before the first block. It writes <code>components.json</code>, which every <code>add</code> reads, adds the <code>cn</code> helper the blocks import, and installs the theme.",
+      "initMore": "The theme layers and setting up a project by hand: see <link>Installation</link> in the Components section.",
+      "addTitle": "Install a block",
+      "addBody": "<code>add</code> writes the block to <code>components/blocks/</code>. It also installs the components the block uses, such as <code>accordion</code> or <code>tabs</code>, and the packages they import. You don’t add them one by one.",
+      "addShadcn": "The shadcn CLI installs a block the same way, from its registry URL, with <code>npx shadcn@latest add</code>:",
+      "inverseTitle": "CSS for blocks on an inverted surface",
+      "inverseBody": "Both <code>add</code> commands also add the inverse tokens’ mapping that a block on an inverted surface needs. Installing one by hand on Tailwind 4, add these three lines to your stylesheet’s <code>@theme inline</code> block:",
+      "inverseMore": "On Tailwind 3, the fallbacks, and setting your own colours: see <link>Inverse tokens</link>."
     }
   },
   "copyCommand": {
@@ -1937,6 +2033,7 @@
       "label": "Main",
       "docs": "Docs",
       "components": "Components",
+      "blocks": "Blocks",
       "github": "GitHub",
       "lang": "العربية",
       "langLabel": "Switch to Arabic",
@@ -2985,7 +3082,7 @@
       "meta": "Coming soon | Fasla",
       "badge": "On the way",
       "title": "Coming soon",
-      "lede": "The block library, the templates and the Pro and Team plans are on their way. The open-source components and the docs are ready to use today.",
+      "lede": "The templates and the Pro and Team plans are on their way. The open-source components, the first blocks and the docs are ready to use today.",
       "docs": "Read the docs",
       "home": "Back to home"
     }
