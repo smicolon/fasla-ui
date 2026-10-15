@@ -18,8 +18,6 @@ type StoryArgs = ButtonProps & {
   icon: IconName
 }
 
-const story = { table: { category: "Story" } } as const
-
 const meta: Meta<StoryArgs> = {
   title: "UI/Button",
   component: Button,
@@ -56,19 +54,16 @@ const meta: Meta<StoryArgs> = {
     label: {
       control: "text",
       description: "The button's text. Empty shows the sample label for the current direction.",
-      ...story,
     },
     iconPosition: {
       control: "inline-radio",
       options: ["none", "start", "end"],
       description: "One icon, before or after the label. `start` is the left in LTR and the right in RTL.",
-      ...story,
     },
     icon: {
       control: "select",
       options: ICON_NAMES,
       description: "Which lucide icon shows when `iconPosition` is not `none`.",
-      ...story,
     },
     ...HIDE_REST,
     // HTML's own prop, which docgen leaves out; listed so every UI table has it.

@@ -26,6 +26,15 @@
             "id": "3884:83880"
           }
         ]
+      },
+      "excludedBlockPages": {
+        "reason": "Block pages that are 🟢 and end with ✅, so they passed the first signal and failed the cross-check. Each was settled by a designer as a block page: it belongs in the blocks index, not here.",
+        "pages": [
+          {
+            "page": "✦  🟢 Y | Error State - 28 Blocks ✅ ✅",
+            "id": "40935:43028"
+          }
+        ]
       }
     },
     "coverage": "walked all pages of the file; captured depth ≤5, INSTANCE subtrees skipped",
@@ -48,7 +57,7 @@
       "withArDoc": 39,
       "withRtl": 152,
       "withDescription": 5,
-      "mappedToCode": 24,
+      "mappedToCode": 25,
       "docFrames": 98
     },
     "legend": {
@@ -93,6 +102,32 @@
     "border-beam",
     "card",
     "empty-state",
+    "faq-accent-active-card",
+    "faq-category-chip-grid",
+    "faq-category-columns",
+    "faq-chat-thread",
+    "faq-classic-centered",
+    "faq-contact-cta-card",
+    "faq-dark-panel",
+    "faq-featured-question",
+    "faq-grouped-sections",
+    "faq-help-hero-popular",
+    "faq-masonry-cards",
+    "faq-media-split",
+    "faq-mono-index",
+    "faq-newsletter-close",
+    "faq-numbered-editorial",
+    "faq-search-categories",
+    "faq-sidebar-nav",
+    "faq-soft-filled-rows",
+    "faq-split-sticky",
+    "faq-support-channels",
+    "faq-support-stats",
+    "faq-table-compact",
+    "faq-tabs-by-topic",
+    "faq-topic-tiles",
+    "faq-two-column-grid",
+    "faq-uppercase-dense",
     "form-section",
     "glow-card",
     "page-header",
@@ -103,20 +138,6 @@
     "typewriter-text"
   ],
   "pages": [
-    {
-      "id": "3760:18379",
-      "name": "✦  🟢 Y | Breadcrumbs ✅",
-      "display": "Breadcrumbs",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3760-18379",
-      "entryIds": [
-        "3771:68266"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
     {
       "id": "3791:57238",
       "name": "✦  🟢 Y | Alert ✅",
@@ -141,20 +162,6 @@
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14831-275398",
       "entryIds": [
         "15113:5466"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "3996:8715",
-      "name": "✦  🟢 Y/H |  Input Number ✅",
-      "display": "Input Number",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y/H",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3996-8715",
-      "entryIds": [
-        "39043:1432"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -187,6 +194,40 @@
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40517-3798"
         }
       ]
+    },
+    {
+      "id": "3996:8715",
+      "name": "✦  🟢 Y/H |  Input Number ✅",
+      "display": "Input Number",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y/H",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3996-8715",
+      "entryIds": [
+        "39043:1432"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "14889:866",
+      "name": "✦  🟢 Y/H | Side bar ✅",
+      "display": "Side bar",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y/H",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14889-866",
+      "entryIds": [
+        "40492:58601",
+        "40503:333"
+      ],
+      "legacyDocSections": [
+        {
+          "id": "40492:57888",
+          "name": "Side bar Documentation"
+        }
+      ],
+      "orphanDocs": []
     },
     {
       "id": "3680:33667",
@@ -276,6 +317,20 @@
         "3969:51446",
         "46229:3337",
         "46229:243341"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "3760:18379",
+      "name": "✦  🟢 Y | Breadcrumbs ✅ ✅",
+      "display": "Breadcrumbs",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3760-18379",
+      "entryIds": [
+        "3771:68266"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -897,87 +952,9 @@
       ],
       "legacyDocSections": [],
       "orphanDocs": []
-    },
-    {
-      "id": "14889:866",
-      "name": "✦  🟢 Y/H | Side bar ✅",
-      "display": "Side bar",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y/H",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14889-866",
-      "entryIds": [
-        "40492:58601",
-        "40503:333"
-      ],
-      "legacyDocSections": [
-        {
-          "id": "40492:57888",
-          "name": "Side bar Documentation"
-        }
-      ],
-      "orphanDocs": []
     }
   ],
   "entries": {
-    "3771:68266": {
-      "name": "Breadcrumbs",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3760:18379",
-        "name": "✦  🟢 Y | Breadcrumbs ✅",
-        "display": "Breadcrumbs",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3771-68266",
-      "variants": 32,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Style": [
-          "Default",
-          "Custom Separator",
-          "With Badge",
-          "Outline Badge"
-        ],
-        "Count": [
-          "2",
-          "3",
-          "4",
-          "+4"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Style",
-        "Count"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "39731:584",
-          "name": "Breadcrumbs — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39731-584"
-        },
-        "ar": {
-          "id": "39865:736",
-          "name": "Breadcrumbs — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39865-736"
-        },
-        "duplicates": []
-      },
-      "code": "breadcrumb",
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
     "15226:58727": {
       "name": "Alert",
       "node": "COMPONENT_SET",
@@ -1026,7 +1003,7 @@
         "ar": null,
         "duplicates": []
       },
-      "code": null,
+      "code": "alert",
       "hasDescription": false,
       "flags": [
         "no-ar-doc",
@@ -1086,71 +1063,6 @@
           "id": "40483:87457",
           "name": "Date Picker — Fasla Component Documentation (AR)",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40483-87457"
-        },
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "39043:1432": {
-      "name": "Input Number",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3996:8715",
-        "name": "✦  🟢 Y/H |  Input Number ✅",
-        "display": "Input Number",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y/H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39043-1432",
-      "variants": 100,
-      "axes": {
-        "Variant": [
-          "Default",
-          "Vertically Stacked Buttons",
-          "Horizontally Stacked Button",
-          "Horizontal Stretched Button",
-          "Mini"
-        ],
-        "Filled": [
-          "No",
-          "Yes"
-        ],
-        "State": [
-          "Default",
-          "Focus",
-          "Success",
-          "Error",
-          "Disabled"
-        ],
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Variant",
-        "Filled",
-        "State",
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "40559:2508",
-          "name": "Input Number — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40559-2508"
-        },
-        "ar": {
-          "id": "40561:1624",
-          "name": "Input Number — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40561-1624"
         },
         "duplicates": []
       },
@@ -1387,6 +1299,161 @@
       "code": null,
       "hasDescription": false,
       "flags": [
+        "no-description"
+      ]
+    },
+    "39043:1432": {
+      "name": "Input Number",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3996:8715",
+        "name": "✦  🟢 Y/H |  Input Number ✅",
+        "display": "Input Number",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y/H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39043-1432",
+      "variants": 100,
+      "axes": {
+        "Variant": [
+          "Default",
+          "Vertically Stacked Buttons",
+          "Horizontally Stacked Button",
+          "Horizontal Stretched Button",
+          "Mini"
+        ],
+        "Filled": [
+          "No",
+          "Yes"
+        ],
+        "State": [
+          "Default",
+          "Focus",
+          "Success",
+          "Error",
+          "Disabled"
+        ],
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "Variant",
+        "Filled",
+        "State",
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "40559:2508",
+          "name": "Input Number — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40559-2508"
+        },
+        "ar": {
+          "id": "40561:1624",
+          "name": "Input Number — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40561-1624"
+        },
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "40492:58601": {
+      "name": "Side Bar Inside Item",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "14889:866",
+        "name": "✦  🟢 Y/H | Side bar ✅",
+        "display": "Side bar",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y/H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40492-58601",
+      "variants": 12,
+      "axes": {
+        "State": [
+          "Default",
+          "Hover",
+          "Selected"
+        ],
+        "Sub-item": [
+          "False",
+          "True"
+        ],
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "State",
+        "Sub-item",
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "40519:1765",
+          "name": "Side Bar Inside Item — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40519-1765"
+        },
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-ar-doc",
+        "legacy-doc-section-on-page",
+        "no-description"
+      ]
+    },
+    "40503:333": {
+      "name": "Side Bar",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "14889:866",
+        "name": "✦  🟢 Y/H | Side bar ✅",
+        "display": "Side bar",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y/H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40503-333",
+      "variants": 2,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": "sidebar",
+      "hasDescription": false,
+      "flags": [
+        "legacy-doc-section-on-page",
         "no-description"
       ]
     },
@@ -2116,6 +2183,64 @@
         "duplicates": []
       },
       "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "3771:68266": {
+      "name": "Breadcrumbs",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3760:18379",
+        "name": "✦  🟢 Y | Breadcrumbs ✅ ✅",
+        "display": "Breadcrumbs",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3771-68266",
+      "variants": 32,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Style": [
+          "Default",
+          "Custom Separator",
+          "With Badge",
+          "Outline Badge"
+        ],
+        "Count": [
+          "2",
+          "3",
+          "4",
+          "+4"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Style",
+        "Count"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "39731:584",
+          "name": "Breadcrumbs — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39731-584"
+        },
+        "ar": {
+          "id": "39865:736",
+          "name": "Breadcrumbs — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39865-736"
+        },
+        "duplicates": []
+      },
+      "code": "breadcrumb",
       "hasDescription": false,
       "flags": [
         "no-description"
@@ -7932,96 +8057,6 @@
       "code": null,
       "hasDescription": false,
       "flags": [
-        "no-description"
-      ]
-    },
-    "40492:58601": {
-      "name": "Side Bar Inside Item",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "14889:866",
-        "name": "✦  🟢 Y/H | Side bar ✅",
-        "display": "Side bar",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y/H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40492-58601",
-      "variants": 12,
-      "axes": {
-        "State": [
-          "Default",
-          "Hover",
-          "Selected"
-        ],
-        "Sub-item": [
-          "False",
-          "True"
-        ],
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "State",
-        "Sub-item",
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "40519:1765",
-          "name": "Side Bar Inside Item — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40519-1765"
-        },
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-ar-doc",
-        "legacy-doc-section-on-page",
-        "no-description"
-      ]
-    },
-    "40503:333": {
-      "name": "Side Bar",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "14889:866",
-        "name": "✦  🟢 Y/H | Side bar ✅",
-        "display": "Side bar",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y/H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40503-333",
-      "variants": 2,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": "sidebar",
-      "hasDescription": false,
-      "flags": [
-        "legacy-doc-section-on-page",
         "no-description"
       ]
     }

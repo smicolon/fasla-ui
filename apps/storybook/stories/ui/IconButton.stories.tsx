@@ -44,7 +44,6 @@ const meta: Meta<StoryArgs> = {
       control: "select",
       options: ICON_NAMES,
       description: "Which lucide icon the button shows.",
-      table: { category: "Story" },
     },
     "aria-label": {
       control: "text",

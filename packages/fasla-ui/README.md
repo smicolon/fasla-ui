@@ -80,6 +80,7 @@ Core building blocks with CVA variants for consistent styling:
 | **Alert Dialog** | A modal that asks the user to confirm or cancel an action |
 | **Badge** | Status indicators and labels |
 | **Breadcrumb** | A trail of links to the current page, with chevron or custom separators and a collapsed form |
+| **Alert** | Messages for information, success, warnings and errors, with an action and a close button |
 | **Pagination** | Page links built on Button, with Previous, Next and an ellipsis, in three variants |
 | **Avatar** | User avatars with fallback initials |
 | **Status Indicator** | Presence dot with a language-aware accessible name |
