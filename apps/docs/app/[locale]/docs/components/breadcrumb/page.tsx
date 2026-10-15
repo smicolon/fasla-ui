@@ -2,7 +2,7 @@
 
 import * as React from "react"
 import { useLocale, useTranslations } from "next-intl"
-import { FileIcon, FolderIcon, HouseIcon, SlashIcon, WorkflowIcon } from "lucide-react"
+import { FileIcon, FolderIcon, HouseIcon, SlashIcon, WorkflowIcon, type LucideIcon } from "lucide-react"
 
 import { Badge } from "@fasla-ui/ui/badge"
 import {
@@ -26,7 +26,7 @@ type Style = (typeof STYLES)[number]
 /** Figma's icons for the four steps: house, workflow, file, folder. */
 const ICONS = [HouseIcon, WorkflowIcon, FileIcon, FolderIcon]
 
-type Step = { label: string; icon?: React.ComponentType }
+type Step = { label: string; icon?: LucideIcon }
 
 /**
  * One trail, in any of Figma's Styles. `steps` are shown in order; with
@@ -56,6 +56,8 @@ function Trail({
           const last = i === shown.length - 1
           const Icon = step === "ellipsis" ? undefined : step.icon
           const icon = Icon && <Icon />
+          // Badge sizes its own icon slot but leaves the stroke: 1.5, as Badge's stories use.
+          const chipIcon = Icon && <Icon strokeWidth={1.5} />
           return (
             <React.Fragment key={i}>
               {i > 0 && <BreadcrumbSeparator>{separator}</BreadcrumbSeparator>}
@@ -64,7 +66,7 @@ function Trail({
                   <BreadcrumbEllipsis />
                 ) : badge && last ? (
                   <BreadcrumbPage>
-                    <Badge variant={badge} size="md">
+                    <Badge variant={badge} size="md" icon={chipIcon}>
                       {step.label}
                     </Badge>
                   </BreadcrumbPage>
@@ -72,7 +74,7 @@ function Trail({
                   // Figma dims the steps before the current page to 60%; the pill radius
                   // keeps the focus outline on the badge's own shape, at full strength.
                   <BreadcrumbLink href="#" className="rounded-full opacity-60 hover:opacity-100 focus-visible:opacity-100">
-                    <Badge variant={badge} size="md">
+                    <Badge variant={badge} size="md" icon={chipIcon}>
                       {step.label}
                     </Badge>
                   </BreadcrumbLink>
@@ -114,6 +116,11 @@ export default function BreadcrumbPageDocs() {
   const steps = (icons: boolean): Step[] =>
     crumbs.map((text, i) => ({ label: text, icon: icons ? ICONS[i] : undefined }))
   const badgeSteps: Step[] = sections.map((text) => ({ label: text }))
+  /** The badge trail with icons: the house first, a folder between, a file for the current page. */
+  const badgeIconSteps: Step[] = sections.map((text, i) => ({
+    label: text,
+    icon: i === 0 ? HouseIcon : i === sections.length - 1 ? FileIcon : FolderIcon,
+  }))
   /** The Variants rows are Figma's Count=3: home, then the last two steps. */
   const three = (list: Step[]) => [list[0]!, ...list.slice(-2)]
 
@@ -250,7 +257,14 @@ ${indent}${separator}`
         <h2 className="text-2xl font-semibold">{b("icons.title")}</h2>
         <p className="text-muted-foreground">{b.rich("icons.body", richCode)}</p>
         <ComponentPreview>
-          <Trail label={`${label}: ${b("icons.title")}`} steps={steps(true)} />
+          <div className="flex flex-col items-center gap-4">
+            <Trail label={`${label}: ${b("icons.title")}`} steps={steps(true)} />
+            <Trail
+              label={`${label}: ${b("icons.title")}${comma}${b("styles.badge")}`}
+              steps={three(badgeIconSteps)}
+              style="badge"
+            />
+          </div>
         </ComponentPreview>
       </section>
 

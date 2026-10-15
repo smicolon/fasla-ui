@@ -50,7 +50,8 @@ const meta: Meta<StoryArgs> = {
     },
     hasIcon: {
       control: "boolean",
-      description: "Figma `Has-Icon`: the `icon` prop on each `BreadcrumbLink` and `BreadcrumbPage`. The badge styles carry no icons.",
+      description:
+        "Figma `Has-Icon`: the `icon` prop on each `BreadcrumbLink` and `BreadcrumbPage`. In the badge styles, Badge's own `icon` instead: house, folder, file.",
     },
   },
   args: {
@@ -96,12 +97,27 @@ const SHOWN: Record<Count, (number | null)[]> = {
   "+4": [0, null, 2, 3],
 }
 
-/** One trail, composed from the parts the way a developer would, for any Style × Count. */
+/**
+ * The badge styles' icons, in Badge's own `icon` slot: the house first, a
+ * folder for every step between, a file for the current page. Badge sizes
+ * them to 12px; the 1.5 stroke is Badge's, as in its own stories.
+ */
+const badgeIcon = (i: number, last: boolean) => {
+  const Icon = i === 0 ? HouseIcon : last ? FileIcon : FolderIcon
+  return <Icon strokeWidth={1.5} />
+}
+
+/**
+ * One trail, composed from the parts the way a developer would, for any Style × Count.
+ * `hasIcon` defaults to Figma's set: on for the text styles, off for the badge
+ * styles, whose Figma variants carry none. Passing it turns icons on or off
+ * in every style.
+ */
 function Trail({
   c,
   style = "Default",
   count = "4",
-  hasIcon = true,
+  hasIcon,
 }: {
   c: Copy
   style?: Style
@@ -111,6 +127,7 @@ function Trail({
   const badge = style === "With Badge" ? "soft" : style === "Outline Badge" ? "outline" : null
   const words = badge ? c.sections : c.crumbs
   const shown = SHOWN[count]
+  const icons = hasIcon ?? !badge
 
   return (
     <Breadcrumb aria-label={c.label}>
@@ -118,7 +135,8 @@ function Trail({
         {shown.map((step, i) => {
           const last = i === shown.length - 1
           const Icon = step === null ? undefined : ICONS[step]
-          const icon = hasIcon && !badge && Icon ? <Icon /> : undefined
+          const icon = icons && !badge && Icon ? <Icon /> : undefined
+          const chipIcon = icons && badge ? badgeIcon(i, last) : undefined
           const text = step === null ? "" : words[step]
           return (
             <React.Fragment key={i}>
@@ -129,7 +147,7 @@ function Trail({
                 ) : badge ? (
                   last ? (
                     <BreadcrumbPage>
-                      <Badge variant={badge} size="md">
+                      <Badge variant={badge} size="md" icon={chipIcon}>
                         {text}
                       </Badge>
                     </BreadcrumbPage>
@@ -137,7 +155,7 @@ function Trail({
                     // Figma dims every step before the current page to 60%; the pill radius
                     // keeps the focus outline on the badge's own shape, at full strength.
                     <BreadcrumbLink href="#" className="rounded-full opacity-60 hover:opacity-100 focus-visible:opacity-100">
-                      <Badge variant={badge} size="md">
+                      <Badge variant={badge} size="md" icon={chipIcon}>
                         {text}
                       </Badge>
                     </BreadcrumbLink>
@@ -230,10 +248,15 @@ export const StylesAndCounts: Story = {
   },
 }
 
+/** The styles with a row in the Icons story: the chevron trail and both badge styles. */
+const ICON_STYLES = ["Default", "With Badge", "Outline Badge"] as const
+
 /**
- * Figma's `Has-Icon`, on and off. The icon is 14px, 4px before its label,
- * and set on `foreground` like the separators, while the link labels are
- * muted.
+ * Figma's `Has-Icon`, on and off, at Count=3. In the text styles the icon is
+ * 14px, 4px before its label, and set on `foreground` like the separators,
+ * while the link labels are muted. In the badge styles it sits in Badge's own
+ * icon slot (house, folder, file), sized and spaced by Badge md and coloured
+ * with the badge's text; the dimmed steps dim their icon with them.
  */
 export const Icons: Story = {
   decorators: [framed],
@@ -241,11 +264,15 @@ export const Icons: Story = {
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className="grid grid-cols-[max-content_max-content] items-center gap-x-8 gap-y-4">
-        {[true, false].map((hasIcon) => (
-          <React.Fragment key={String(hasIcon)}>
-            <RowHead>Has-Icon={String(hasIcon)}</RowHead>
-            <Trail c={c} hasIcon={hasIcon} />
+      <div className="grid grid-cols-[repeat(3,max-content)] items-center gap-x-8 gap-y-4">
+        <span />
+        <Head>Has-Icon=true</Head>
+        <Head>Has-Icon=false</Head>
+        {ICON_STYLES.map((style) => (
+          <React.Fragment key={style}>
+            <RowHead>{style}</RowHead>
+            <Trail c={c} style={style} count="3" hasIcon />
+            <Trail c={c} style={style} count="3" hasIcon={false} />
           </React.Fragment>
         ))}
       </div>

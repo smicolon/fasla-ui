@@ -168,9 +168,9 @@ const BreadcrumbSeparator = React.forwardRef<HTMLLIElement, React.ComponentProps
 BreadcrumbSeparator.displayName = "BreadcrumbSeparator"
 
 /**
- * Where collapsed steps would be. Visual only for now: it opens nothing.
- * The glyph is hidden; screen readers hear "More", or "المزيد" under an
- * Arabic `lang`, so they know the trail is shortened.
+ * Where collapsed steps would be. The glyph is hidden; screen readers hear
+ * "More", or "المزيد" under an Arabic `lang`, so they know the trail is
+ * shortened.
  */
 const BreadcrumbEllipsis = React.forwardRef<HTMLSpanElement, React.ComponentPropsWithoutRef<"span">>(
   ({ className, ...props }, ref) => (

@@ -1552,11 +1552,11 @@
       },
       "icons": {
         "title": "Icons",
-        "body": "Add an icon before a label with the <code>icon</code> prop of <code>BreadcrumbLink</code> or <code>BreadcrumbPage</code>. It is sized to 14px with a 4px gap, so pass the icon without a size of its own. Icons are decorative, so screen readers skip them."
+        "body": "Add an icon before a label with the <code>icon</code> prop of <code>BreadcrumbLink</code> or <code>BreadcrumbPage</code>. It is sized to 14px with a 4px gap, so pass the icon without a size of its own. In the badge styles, pass the icon to the <code>Badge</code> instead, through its own <code>icon</code> prop, which sizes and spaces it. Icons are decorative, so screen readers skip them."
       },
       "collapsed": {
         "title": "Collapsed trail",
-        "body": "When the trail is long, keep the first step and the last two, and put <code>BreadcrumbEllipsis</code> in place of the steps between them. The order is the same in both directions. The ellipsis only marks the gap and opens nothing; screen readers hear “More”."
+        "body": "When the trail is long, keep the first step and the last two, and put <code>BreadcrumbEllipsis</code> in place of the steps between them. The order is the same in both directions. The ellipsis marks the gap; screen readers hear “More”."
       },
       "a11y": {
         "landmark": "<code>Breadcrumb</code> is a navigation landmark. Name it in the page's language with <code>aria-label</code>, as the examples here do; without one it is named <code>Breadcrumb</code>. The steps are an ordered list, so screen readers announce how many there are.",
