@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from "next-intl"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@fasla-ui/ui/tabs/tabs"
 import { CodeBlock } from "@/components/component-preview"
 import { PackageManagerTabs } from "@/components/package-manager-tabs"
+import { inlineCode } from "@/components/inline-code"
 import { PREVIEW_HEIGHT_MESSAGE } from "@/components/blocks/block-preview"
 import { cn } from "@/lib/utils"
 import { BREAKPOINTS, addCommand, previewPath, type BlockType, type Breakpoint } from "@/lib/blocks"
@@ -262,14 +263,14 @@ export function BlockVariantCard({
               </li>
             ) : null}
             <li className="space-y-2">
-              <p>{t.rich("manualSource", { code: (chunks) => <code>{chunks}</code>, file: `components/blocks/${type.slug}.tsx` })}</p>
+              <p>{t.rich("manualSource", { ...inlineCode, file: `components/blocks/${type.slug}.tsx` })}</p>
               {source ? <CodeBlock>{source}</CodeBlock> : <p>{source === null ? t("loading") : t("loadFailed")}</p>}
             </li>
             {type.inverse ? (
               <li className="space-y-2">
                 <p>
                   {t.rich("manualInverse", {
-                    code: (chunks) => <code>{chunks}</code>,
+                    ...inlineCode,
                     link: (chunks) => (
                       <Link href={`/${locale}/docs/installation/#inverse-tokens`} className="font-medium text-foreground underline underline-offset-4">
                         {chunks}

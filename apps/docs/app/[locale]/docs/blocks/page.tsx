@@ -1,12 +1,10 @@
 import Link from "next/link"
 import { getTranslations, setRequestLocale } from "next-intl/server"
-import { CodeBlock } from "@/components/component-preview"
-import { InstallCommand } from "@/components/install-command"
+import { inlineCode } from "@/components/inline-code"
 import { blockRoutes, routeText } from "@/lib/seo-routes"
-import { INVERSE_CSS } from "@/lib/inverse-tokens"
 import type { Locale } from "@/i18n/routing"
 
-/** The Blocks section's first page: what a block is, and how to install one. */
+/** The Blocks section's first page: what a block is. Installing one has its own page. */
 export default async function BlocksIntroductionPage({
   params,
 }: {
@@ -18,7 +16,7 @@ export default async function BlocksIntroductionPage({
   setRequestLocale(locale)
   const b = await getTranslations("docs.blocksIntro")
 
-  const rich = { code: (chunks: React.ReactNode) => <code>{chunks}</code> }
+  const rich = inlineCode
   const p = (path: string) => `/${locale}${path}`
 
   return (
@@ -39,12 +37,6 @@ export default async function BlocksIntroductionPage({
       </section>
 
       <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">{b("installTitle")}</h2>
-        <p className="text-muted-foreground">{b.rich("installBody", rich)}</p>
-        <InstallCommand name="faq-classic-centered" />
-      </section>
-
-      <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{b("imagesTitle")}</h2>
         <p className="text-muted-foreground">{b.rich("imagesBody", rich)}</p>
       </section>
@@ -52,13 +44,11 @@ export default async function BlocksIntroductionPage({
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{b("inverseTitle")}</h2>
         <p className="text-muted-foreground">{b.rich("inverseBody", rich)}</p>
-        <p className="text-muted-foreground">{b.rich("inverseManual", rich)}</p>
-        <CodeBlock language="css">{INVERSE_CSS}</CodeBlock>
-        <p className="text-sm text-muted-foreground">
+        <p className="text-muted-foreground">
           {b.rich("inverseMore", {
             ...rich,
             link: (chunks) => (
-              <Link href={p("/docs/installation/#inverse-tokens")} className="font-medium text-foreground underline underline-offset-4">
+              <Link href={p("/docs/blocks/installation/#inverse-css")} className="font-medium text-foreground underline underline-offset-4">
                 {chunks}
               </Link>
             ),
@@ -74,7 +64,7 @@ export default async function BlocksIntroductionPage({
               <Link href={p(route.path)} className="font-medium underline underline-offset-4">
                 {routeText(route, locale as Locale).h1}
               </Link>
-              <span className="text-muted-foreground"> {routeText(route, locale as Locale).description}</span>
+              <span className="text-muted-foreground">: {routeText(route, locale as Locale).description}</span>
             </li>
           ))}
         </ul>

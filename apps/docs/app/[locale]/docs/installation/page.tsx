@@ -5,6 +5,7 @@ import { PackageManagerTabs } from "@/components/package-manager-tabs"
 import { shadcnAdd } from "@/lib/package-managers"
 import { CodeBlock } from "@/components/component-preview"
 import { INVERSE_CONFIG, INVERSE_CSS } from "@/lib/inverse-tokens"
+import { inlineCode } from "@/components/inline-code"
 
 export async function generateMetadata({
   params,
@@ -130,11 +131,11 @@ export default async function InstallationPage({
           <h3 id="inverse-tokens" className="scroll-mt-24 text-xl font-semibold">
             {i("inverseTitle")}
           </h3>
-          <p className="text-muted-foreground">{i.rich("inverseBody", rich)}</p>
-          <p className="text-muted-foreground">{i.rich("inverseFallback", rich)}</p>
-          <p className="text-sm font-medium">{i.rich("inverseTailwind4", rich)}</p>
+          <p className="text-muted-foreground">{i.rich("inverseBody", inlineCode)}</p>
+          <p className="text-muted-foreground">{i.rich("inverseFallback", inlineCode)}</p>
+          <p className="text-sm font-medium">{i.rich("inverseTailwind4", inlineCode)}</p>
           <CodeBlock language="css">{INVERSE_CSS}</CodeBlock>
-          <p className="text-sm font-medium">{i.rich("inverseTailwind3", rich)}</p>
+          <p className="text-sm font-medium">{i.rich("inverseTailwind3", inlineCode)}</p>
           <CodeBlock language="ts">{INVERSE_CONFIG}</CodeBlock>
         </div>
       </div>

@@ -123,8 +123,7 @@
         "width": "Width when expanded.",
         "children": "The sidebar’s parts.",
         "className": "Extra classes for the component."
-      },
-      "blocksIntroduction": "Introduction and installation"
+      }
     },
     "onThisPage": "On this page",
     "copyCode": "Copy code",
@@ -1515,21 +1514,18 @@
       }
     },
     "blocksIntro": {
-      "title": "Introduction and installation",
+      "title": "Introduction",
       "lead": "Blocks are whole page sections, built from Fasla’s components and ready to drop into a page.",
       "whatTitle": "What a block is",
       "whatBody": "A block is one file that composes Fasla components, such as Accordion, Tabs and Button, into a section of a page. It takes every colour from your theme tokens. Once it is in your project, the code is yours to change.",
       "whatResponsive": "It is responsive: each block is designed at desktop, tablet and mobile widths, and changes layout at the <code>md</code> and <code>lg</code> breakpoints.",
       "whatDirection": "It follows the page’s direction. Every side is a logical one, so the same code lays out left to right in English and right to left in Arabic.",
       "whatContent": "Its content comes from props. Each block ships with English and Arabic copy; <code>locale</code> picks which, and any prop you pass replaces it.",
-      "installTitle": "Install a block",
-      "installBody": "<code>add</code> writes the block to <code>components/blocks/</code> and installs the components it uses with it, along with their packages. You don’t add them one by one.",
       "imagesTitle": "Images",
       "imagesBody": "Blocks don’t include images. A block with a photo shows a placeholder, and one with people shows their initials, until you pass your own: <code>image</code> takes a <code>src</code> and an <code>alt</code>, and each person takes a <code>src</code>.",
       "inverseTitle": "Blocks on an inverted surface",
-      "inverseBody": "A few blocks sit on an inverted surface: dark in light mode, light in dark mode. They are painted with the inverse tokens, and installing one with either CLI adds the tokens’ mapping to your stylesheet.",
-      "inverseManual": "Installing one by hand on Tailwind 4, add these three lines to your stylesheet’s <code>@theme inline</code> block:",
-      "inverseMore": "Tailwind 3, the fallbacks and setting your own colours: see <link>Inverse tokens</link>.",
+      "inverseBody": "A few blocks sit on an inverted surface: dark in light mode, light in dark mode. They are painted with the inverse tokens, so they never force a dark class on a section. Installing one with <code>npx @smicolon/fasla-ui@latest add</code> or <code>npx shadcn@latest add</code> also adds the tokens’ mapping to your stylesheet.",
+      "inverseMore": "Installing one by hand takes three lines of CSS: see <link>Installation</link>.",
       "familiesTitle": "Block families"
     },
     "faqBlocks": {
@@ -1593,6 +1589,19 @@
       "manualSource": "Copy the source into <code>{file}</code>:",
       "manualInverse": "Add the inverse tokens’ mapping to your stylesheet’s <code>@theme inline</code> block. On Tailwind 3, see <link>Inverse tokens</link>.",
       "install": "Install"
+    },
+    "blocksInstall": {
+      "title": "Installation",
+      "lead": "Set your project up once, then add a block with one command.",
+      "initTitle": "Run <code>init</code> first",
+      "initBody": "Run <code>init</code> once per project, before the first block. It writes <code>components.json</code>, which every <code>add</code> reads, adds the <code>cn</code> helper the blocks import, and installs the theme.",
+      "initMore": "The theme layers and setting up a project by hand: see <link>Installation</link> in the Components section.",
+      "addTitle": "Install a block",
+      "addBody": "<code>add</code> writes the block to <code>components/blocks/</code>. It also installs the components the block uses, such as <code>accordion</code> or <code>tabs</code>, and the packages they import. You don’t add them one by one.",
+      "addShadcn": "The shadcn CLI installs a block the same way, from its registry URL, with <code>npx shadcn@latest add</code>:",
+      "inverseTitle": "CSS for blocks on an inverted surface",
+      "inverseBody": "Both <code>add</code> commands also add the inverse tokens’ mapping that a block on an inverted surface needs. Installing one by hand on Tailwind 4, add these three lines to your stylesheet’s <code>@theme inline</code> block:",
+      "inverseMore": "On Tailwind 3, the fallbacks, and setting your own colours: see <link>Inverse tokens</link>."
     }
   },
   "copyCommand": {

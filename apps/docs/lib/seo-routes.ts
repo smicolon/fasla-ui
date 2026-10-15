@@ -8,7 +8,7 @@ export type ComponentCategory = "UI Primitives" | "Blocks" | "Effects"
 
 type CoreRoute = {
   kind: "core"
-  path: "/" | "/docs/" | "/docs/installation/" | "/docs/blocks/"
+  path: "/" | "/docs/" | "/docs/installation/" | "/docs/blocks/" | "/docs/blocks/installation/"
   title: string
   description: string
   h1: string
@@ -102,12 +102,25 @@ export const routes = [
     path: "/docs/blocks/",
     title: "Fasla Blocks: Ready-Made React Page Sections",
     description:
-      "What a Fasla block is, how one installation brings the components it uses, and the CSS a block on an inverted surface needs.",
-    h1: "Introduction and installation",
+      "What a Fasla block is: a whole page section built from Fasla components, responsive, mirrored for Arabic and filled from props.",
+    h1: "Introduction",
     ar: {
       title: "كتل فاصلة: أقسام صفحات جاهزة",
       description:
-        "تعرّف على كتل فاصلة، وكيف يثبّت أمر واحد الكتلة مع المكوّنات التي تستخدمها، وما تحتاجه الكتل ذات السطح المعكوس من CSS.",
+        "تعرّف على كتل فاصلة: أقسام صفحات كاملة مبنية من مكوّنات فاصلة، متجاوبة ومعكوسة للعربية، ويأتي محتواها من خصائصها.",
+    },
+  },
+  {
+    kind: "core",
+    path: "/docs/blocks/installation/",
+    title: "Install Fasla Blocks in a React Project",
+    description:
+      "Set the project up once with init, then add a block with one command that brings the components it uses, and the CSS for inverted blocks.",
+    h1: "Installation",
+    ar: {
+      title: "ثبّت كتل فاصلة في مشروع React",
+      description:
+        "اضبط مشروعك مرة واحدة بالأمر init، ثم أضف الكتلة بأمر واحد يثبّت معها المكوّنات التي تستخدمها، مع ما تحتاجه الكتل المعكوسة من CSS.",
     },
   },
   {

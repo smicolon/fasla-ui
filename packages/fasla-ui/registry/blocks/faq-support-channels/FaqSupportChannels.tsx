@@ -62,9 +62,9 @@ const COPY: Record<"en" | "ar", FaqSupportChannelsCopy> = {
       {
         icon: icon(MailIcon),
         title: "Email us",
-        detail: "support@fasla.design",
+        detail: "support@example.com",
         note: "One business day, always a person",
-        href: "mailto:support@fasla.design",
+        href: "mailto:support@example.com",
       },
       {
         icon: icon(PhoneIcon),
@@ -115,9 +115,9 @@ const COPY: Record<"en" | "ar", FaqSupportChannelsCopy> = {
       {
         icon: icon(MailIcon),
         title: "راسلنا بالبريد",
-        detail: <bdi dir="ltr">support@fasla.design</bdi>,
+        detail: <bdi dir="ltr">support@example.com</bdi>,
         note: "يوم عمل واحد، ودائمًا شخص حقيقي",
-        href: "mailto:support@fasla.design",
+        href: "mailto:support@example.com",
       },
       {
         icon: icon(PhoneIcon),

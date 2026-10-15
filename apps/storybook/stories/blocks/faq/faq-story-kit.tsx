@@ -2,7 +2,7 @@ import * as React from "react"
 import type { Decorator } from "@storybook/react"
 
 /**
- * Shared by the four Blocks / FAQ files. The blocks bring their own English
+ * For FAQ.stories.tsx, beside it. The blocks bring their own English
  * and Arabic copy; the stories only pick the language from the Direction
  * toolbar, so a story shows the copy Figma has for that direction.
  */
@@ -15,9 +15,9 @@ export const faqViewports = {
 } as const
 
 /**
- * Every FAQ file's meta sets `parameters: { layout: "fullscreen", viewport: {
+ * The FAQ meta sets `parameters: { layout: "fullscreen", viewport: {
  * viewports: faqViewports } }`: full-bleed, as a block sits on a page, with
- * Figma's breakpoints in the viewport toolbar. Written out in each meta, not
+ * Figma's breakpoints in the viewport toolbar. Written out in the meta, not
  * shared as a variable: Storybook's docs plugin replaces a meta's
  * `parameters` that isn't an object literal, and the stories fall back to the
  * preview's centred layout.

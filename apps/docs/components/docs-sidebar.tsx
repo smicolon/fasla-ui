@@ -47,7 +47,10 @@ function DocsNav() {
   const groups = componentRouteGroups.filter((group) => (group.category === "Blocks") === inBlocks)
 
   const gettingStarted = inBlocks
-    ? [{ title: t("blocksIntroduction"), path: "/docs/blocks/" }]
+    ? [
+        { title: t("introduction"), path: "/docs/blocks/" },
+        { title: t("installation"), path: "/docs/blocks/installation/" },
+      ]
     : [
         { title: t("introduction"), path: "/docs/" },
         { title: t("installation"), path: "/docs/installation/" },

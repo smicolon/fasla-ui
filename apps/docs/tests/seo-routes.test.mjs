@@ -12,8 +12,9 @@ describe("Blocks section", () => {
     const { blockRoutes } = await import("../lib/seo-routes")
     const { FAQ_TYPES } = await import("../lib/blocks")
     const blocksRoot = path.join(docsRoot, "app/[locale]/docs/blocks")
+    // installation/ is the section's own page, not a family.
     const families = readdirSync(blocksRoot, { withFileTypes: true })
-      .filter((entry) => entry.isDirectory())
+      .filter((entry) => entry.isDirectory() && entry.name !== "installation")
       .map((entry) => `/docs/blocks/${entry.name}/`)
     expect(blockRoutes.map((route) => route.path).sort()).toEqual(families.sort())
 
@@ -90,6 +91,7 @@ describe("SEO route catalog", () => {
       ["/docs/", "app/[locale]/docs/layout.tsx"],
       ["/docs/installation/", "app/[locale]/docs/installation/page.tsx"],
       ["/docs/blocks/", "app/[locale]/docs/blocks/layout.tsx"],
+      ["/docs/blocks/installation/", "app/[locale]/docs/blocks/installation/layout.tsx"],
       ...blockRoutes.map((route) => [route.path, `app/[locale]/docs${route.path.slice("/docs".length)}layout.tsx`]),
     ]
 
@@ -115,6 +117,7 @@ describe("SEO route catalog", () => {
       "app/[locale]/docs/page.tsx",
       "app/[locale]/docs/installation/page.tsx",
       "app/[locale]/docs/blocks/page.tsx",
+      "app/[locale]/docs/blocks/installation/page.tsx",
       ...blockRoutes.map((route) => `app/[locale]/docs${route.path.slice("/docs".length)}page.tsx`),
       ...componentRoutes.map((route) => {
         const slug = route.path.split("/").at(-2)
