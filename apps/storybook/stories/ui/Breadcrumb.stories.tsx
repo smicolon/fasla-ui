@@ -30,6 +30,7 @@ type StoryArgs = {
   style: Style
   count: Count
   hasIcon: boolean
+  className?: string
 }
 
 const meta: Meta<StoryArgs> = {
@@ -52,6 +53,12 @@ const meta: Meta<StoryArgs> = {
       control: "boolean",
       description:
         "Figma `Has-Icon`: the `icon` prop on each `BreadcrumbLink` and `BreadcrumbPage`. In the badge styles, Badge's own `icon` instead: house, folder, file.",
+    },
+    // HTML's own prop, which docgen leaves out; listed so every UI table has it.
+    className: {
+      control: "text",
+      description: "Extra CSS classes, merged onto the root element.",
+      table: { type: { summary: "string" } },
     },
   },
   args: {
@@ -118,11 +125,13 @@ function Trail({
   style = "Default",
   count = "4",
   hasIcon,
+  className,
 }: {
   c: Copy
   style?: Style
   count?: Count
   hasIcon?: boolean
+  className?: string
 }) {
   const badge = style === "With Badge" ? "soft" : style === "Outline Badge" ? "outline" : null
   const words = badge ? c.sections : c.crumbs
@@ -130,7 +139,7 @@ function Trail({
   const icons = hasIcon ?? !badge
 
   return (
-    <Breadcrumb aria-label={c.label}>
+    <Breadcrumb aria-label={c.label} className={className}>
       <BreadcrumbList>
         {shown.map((step, i) => {
           const last = i === shown.length - 1
