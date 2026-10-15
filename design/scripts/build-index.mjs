@@ -59,6 +59,15 @@ export const LEGEND = {
   prefix: { "✦": "marks a component page (not a status)" },
 }
 
+/** Block pages that passed signal (1) once they earned a ✅, so the two signals
+ *  disagreed and the build stopped. Each was settled by a designer: a block page, kept out
+ *  of the atom index and left for the blocks index. Listed by id; a new disagreement still
+ *  stops the build until a designer settles it — never add a page here without asking. */
+export const EXCLUDED_BLOCK_PAGES = [
+  // Settled by Yasmin on 2026-10-15.
+  { page: "✦  🟢 Y | Error State - 28 Blocks ✅ ✅", id: "40935:43028" },
+]
+
 /** Atoms by shape whose page has no trailing ✅, so the selection rule excludes them.
  *  Settled by Yasmin on 2026-09-23: not signed off means not ready to be used. They join
  *  the index on their own when they earn a ✅ — do not special-case them, do not re-ask. */
@@ -78,6 +87,7 @@ export const EXCLUDED_UNSIGNED = [
  *  and its Icon Button, which the code reaches through the `icon-*` sizes. */
 export const CODE_MAP = {
   accordion: { set: "Accordion", page: "3707:28873" },
+  alert: { set: "Alert", page: "3791:57238" },
   "alert-dialog": { set: "Alert Dialog", page: "14833:10982" },
   avatar: { set: "Avatar", page: "3710:7318" },
   badge: { set: "Badge", page: "3724:120666" },
@@ -146,7 +156,8 @@ function parsePage(name) {
   return { status, tail, initials, display }
 }
 
-export function build(capture) {
+export function build(fullCapture) {
+  const capture = fullCapture.filter((p) => !EXCLUDED_BLOCK_PAGES.some((x) => x.id === p.pageId))
   const conflicts = capture
     .filter((p) => GREEN_TICK(p.page) && BLOCK_SHAPED(p.page))
     .map((p) => ({ pageId: p.pageId, name: p.page }))
@@ -296,6 +307,10 @@ export function build(capture) {
         excludedUnsigned: {
           reason: "Atoms by shape, but their page carries no trailing ✅. Settled by Yasmin on 2026-09-23: not signed off means not ready to be used. They enter the index on their own when they earn a ✅ — do not special-case them.",
           pages: EXCLUDED_UNSIGNED,
+        },
+        excludedBlockPages: {
+          reason: "Block pages that are 🟢 and end with ✅, so they passed the first signal and failed the cross-check. Each was settled by a designer as a block page: it belongs in the blocks index, not here.",
+          pages: EXCLUDED_BLOCK_PAGES,
         },
       },
       coverage: "walked all pages of the file; captured depth ≤5, INSTANCE subtrees skipped",

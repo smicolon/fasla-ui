@@ -172,6 +172,20 @@ Floating content (tooltips, popovers, menus) held open in an example has to
 reserve its own room, because it is positioned out of flow. The Tooltip
 stories and docs page show the working pattern; see `apps/storybook/README.md`.
 
+## Storybook controls table
+
+Applies to every component's Storybook controls table.
+
+- Every row visibly changes the preview.
+- Behaviour props (open state, change handlers, form, aria, ids) are removed
+  from the table completely: not grouped, and not shown without a control.
+  They are documented only in the docs-site Props table.
+- `className` stays in the table for every component.
+- No category groups or headers (such as "STORY"). Story-only args sit in the
+  same single table as the component's props.
+- A prop that takes an element or object (an icon, for example) never shows a
+  raw JSON control. Use a select with a few named options, or remove the row.
+
 ## Workflow
 
 1. Create a **Block Map** for each screen using `docs/BLOCK_MAP_TEMPLATE.md` (2-5 min)

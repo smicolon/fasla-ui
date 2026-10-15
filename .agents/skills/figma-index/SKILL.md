@@ -37,8 +37,11 @@ the moment it is finished. Signal 2 is the guard.
 
 **If the two ever disagree on a page — a `🟢…✅` page that also carries a `- N Blocks` suffix —
 `build-index.mjs` throws and names it. Do not override it, do not hand-edit the capture. Stop
-and ask the designer which index that page belongs to.** As of 2026-09-23 there are no
-disagreements: 44 pages qualify, and every `- N Blocks` page lacks a `✅`.
+and ask the designer which index that page belongs to.** A settled answer goes into
+`EXCLUDED_BLOCK_PAGES` in `build-index.mjs`, by page id, and into the `SKIP` list of the step 3
+snippet below, so the builder drops the page and the verification hash skips it too. Settled so
+far: `Error State - 28 Blocks` (`40935:43028`) is a block page — Yasmin, 2026-10-15. Every other
+`- N Blocks` page lacks a `✅`.
 
 Out of scope, deliberately: test and scratch pages, section dividers, `⚛️ Component Atoms`, the
 Lucide icon page (1,542 loose icons), and every block page.
@@ -106,7 +109,8 @@ The capture passes through a chat transcript, so prove the committed file matche
 Run this read-only, then compare to `$meta.counts` and the hashes:
 
 ```js
-const pick = figma.root.children.filter(p => p.name.indexOf('🟢') !== -1 && p.name.trim().slice(-1) === '✅')
+const SKIP = ['40935:43028']              // EXCLUDED_BLOCK_PAGES in design/scripts/build-index.mjs
+const pick = figma.root.children.filter(p => p.name.indexOf('🟢') !== -1 && p.name.trim().slice(-1) === '✅' && SKIP.indexOf(p.id) === -1)
 const rows = [], docs = []
 for (const p of pick) {
   await p.loadAsync()
