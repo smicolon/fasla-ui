@@ -1,6 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { useState } from "react"
-import { DataTable, Pagination, Column } from "../../../../packages/fasla-ui/registry/blocks/data-table/DataTable"
+import { DataTable, Column } from "../../../../packages/fasla-ui/registry/blocks/data-table/DataTable"
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "../../../../packages/fasla-ui/registry/ui/pagination"
 import { Badge } from "../../../../packages/fasla-ui/registry/ui/badge"
 import { Button } from "../../../../packages/fasla-ui/registry/ui/button"
 
@@ -40,7 +48,8 @@ const COPY = {
     empty: "No users found",
     addFirst: "Add your first user",
     clicked: (name: string) => `Clicked: ${name}`,
-    pagination: undefined,
+    pagination: "Pagination",
+    status: (page: number, total: number) => `Page ${page} of ${total}`,
   },
   rtl: {
     names: ["ليلى حداد", "عمر خليل", "سارة ناصر", "يوسف أمين", "نور صالح"],
@@ -51,15 +60,8 @@ const COPY = {
     empty: "لا يوجد مستخدمون",
     addFirst: "أضف أول مستخدم",
     clicked: (name: string) => `تم النقر على: ${name}`,
-    pagination: {
-      pagination: "التنقّل بين الصفحات",
-      status: (page: number, total: number) => `الصفحة ${page} من ${total}`,
-      previous: "السابق",
-      next: "التالي",
-      goToPrevious: "الانتقال إلى الصفحة السابقة",
-      goToNext: "الانتقال إلى الصفحة التالية",
-      goToPage: (page: number) => `الانتقال إلى الصفحة ${page}`,
-    },
+    pagination: "التنقّل بين الصفحات",
+    status: (page: number, total: number) => `الصفحة ${page} من ${total}`,
   },
 }
 
@@ -196,9 +198,35 @@ export const WithPagination: Story = {
     const paginatedData = users.slice((page - 1) * pageSize, page * pageSize)
 
     return (
-      <div>
+      <div className="space-y-3">
         <DataTable data={paginatedData} columns={columnsFor(c)} getRowKey={(row) => row.id} />
-        <Pagination page={page} totalPages={totalPages} onPageChange={setPage} labels={c.pagination} />
+        {/* The table's own Pagination: buttons, since paging here changes state, not the URL. */}
+        <div className="flex items-center justify-between gap-4">
+          <p className="text-sm text-muted-foreground">{c.status(page, totalPages)}</p>
+          <Pagination aria-label={c.pagination} size="sm" className="mx-0 w-auto">
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious asChild iconOnly disabled={page === 1}>
+                  <button type="button" onClick={() => setPage(page - 1)} />
+                </PaginationPrevious>
+              </PaginationItem>
+              {Array.from({ length: totalPages }, (_, i) => i + 1).map((n) => (
+                <PaginationItem key={n}>
+                  <PaginationLink asChild isActive={n === page}>
+                    <button type="button" onClick={() => setPage(n)}>
+                      {n}
+                    </button>
+                  </PaginationLink>
+                </PaginationItem>
+              ))}
+              <PaginationItem>
+                <PaginationNext asChild iconOnly disabled={page === totalPages}>
+                  <button type="button" onClick={() => setPage(page + 1)} />
+                </PaginationNext>
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
+        </div>
       </div>
     )
   },

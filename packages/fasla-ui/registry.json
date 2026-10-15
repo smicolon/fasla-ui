@@ -27,6 +27,30 @@
       ]
     },
     {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "A modal dialog on Base UI that asks the user to confirm or cancel an action: edge or centred layout, a destructive main action, an optional alert icon and a slot for extra content, mirrored for RTL.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/alert-dialog/alert-dialog.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/alert-dialog.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "feedback"
+      ]
+    },
+    {
       "name": "animated-gradient",
       "type": "registry:ui",
       "title": "Animated Gradient",
@@ -243,7 +267,7 @@
       "name": "data-table",
       "type": "registry:block",
       "title": "Data Table",
-      "description": "Data table with sorting, pagination, and custom cell rendering.",
+      "description": "Data table with row selection, a sticky header, loading and empty states, and custom cell rendering. Pair it with Pagination to page through rows.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
@@ -401,6 +425,29 @@
       ],
       "categories": [
         "layout",
+        "navigation"
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "A composable row of page links built on Button: Previous and Next with a label or icon only, an ellipsis for skipped pages, three variants, two shapes and four sizes, mirrored for RTL.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/pagination/pagination.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/pagination.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
         "navigation"
       ]
     },

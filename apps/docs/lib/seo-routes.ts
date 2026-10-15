@@ -326,6 +326,21 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/pagination/",
+    title: "Pagination React Component | Fasla",
+    description:
+      "Page through long lists with accessible React pagination built on Button: three variants, four sizes, an ellipsis, mirrored for RTL.",
+    h1: "Pagination",
+    ar: {
+      title: "التنقّل بين الصفحات (Pagination) لتطبيقات React | فاصلة",
+      description:
+        "تنقّل بين صفحات القوائم الطويلة بمكوّن مبني على الزر، بثلاثة أنماط وأربعة أحجام ونقاط ثلاث للصفحات المحذوفة، وينعكس تلقائيًا في الصفحات العربية.",
+      h1: "التنقّل بين الصفحات (Pagination)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/progress/",
     title: "Progress React Component | Fasla",
     description:
@@ -351,6 +366,21 @@ export const routes = [
       description:
         "أضف مكوّن أكورديون بأربعة أنماط، مع سهم أو علامة زائد، وعنصر مفتوح واحد أو أكثر، وينعكس تلقائيًا في الصفحات العربية.",
       h1: "الأكورديون (Accordion)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
+    path: "/docs/components/alert-dialog/",
+    title: "Alert Dialog React Component | Fasla",
+    description:
+      "Ask users to confirm or cancel an action in an accessible React alert dialog, with a destructive style, an icon, extra content and RTL.",
+    h1: "Alert Dialog",
+    ar: {
+      title: "حوار التنبيه (Alert Dialog) لتطبيقات React | فاصلة",
+      description:
+        "اطلب من المستخدم تأكيد إجراء أو إلغاءه بمكوّن حوار التنبيه، مع نمط للإجراءات الخطرة وأيقونة ومحتوى إضافي، وينعكس تلقائيًا في الصفحات العربية.",
+      h1: "حوار التنبيه (Alert Dialog)",
     },
   },
   {

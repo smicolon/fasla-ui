@@ -1159,6 +1159,82 @@
         "className": "Extra classes for the component."
       }
     },
+    "pagination": {
+      "lead": "A row of page links for moving through a long list or a set of results. The page links, Previous and Next are all Buttons, in three variants, two shapes and four sizes, the same as the Figma set.",
+      "installNote": "Pagination is built on Button, so adding it adds <code>button</code> too.",
+      "sample": {
+        "label": "Pagination"
+      },
+      "variantsBody": "<code>variant</code> picks the Button type of each part. <code>default</code> has ghost page links and a solid current page. <code>solid</code> has soft page links and a solid current page. <code>outlined</code> has outline page links, a soft current page, and outline Previous and Next. In the other two, Previous and Next are ghost.",
+      "sizesBody": "The four Button sizes: <code>xs</code> is 26px tall, <code>sm</code> 32px, <code>md</code> 36px and <code>lg</code> 40px. A page link is a square of that height, and its number is 14px at every size. A number too wide for its square, such as 100 at <code>xs</code>, widens it.",
+      "shape": {
+        "title": "Shape",
+        "body": "<code>shape=\"square\"</code> gives every part the Button's standard 8px corners, and <code>shape=\"rounded\"</code> its full radius: circles for the page links, pills for Previous and Next. The focus ring follows the shape."
+      },
+      "steps": {
+        "title": "Previous and Next",
+        "body": "<code>PaginationPrevious</code> and <code>PaginationNext</code> show a label and a chevron. The label follows the page's language, Previous and Next or السابق and التالي; pass <code>text</code> to change it. With <code>iconOnly</code> they show the chevron alone in a square, and keep the label for screen readers. Disable Previous on the first page and Next on the last with <code>disabled</code>.",
+        "text": "Label",
+        "icon": "Icon only",
+        "first": "First page"
+      },
+      "long": {
+        "title": "Long ranges",
+        "body": "Show the first and last pages, the current page with one on each side, and put <code>PaginationEllipsis</code> where pages are left out: 1 … 5 6 7 … 20. The ellipsis is a square the size of a page link, but not a link, and screen readers hear “More pages”. Icon-only Previous and Next keep a long row short. On a phone, show fewer pages around the current one, as this example does."
+      },
+      "a11y": {
+        "landmark": "<code>Pagination</code> is a <code>nav</code> landmark. Name it in the page's language with <code>aria-label</code>, as the examples here do; otherwise it is called Pagination. Give each one on a page its own name.",
+        "current": "The current page carries <code>aria-current=\"page\"</code>, so screen readers announce it as the current page.",
+        "steps": "Previous and Next are named by their label, which stays readable when <code>iconOnly</code> hides it. The chevrons are hidden from assistive technology.",
+        "ellipsis": "The ellipsis takes no focus. Its glyph is hidden, and screen readers hear “More pages”, or “مزيد من الصفحات” when the nearest <code>lang</code> is Arabic.",
+        "disabled": "A disabled link carries <code>aria-disabled</code>, leaves the tab order and ignores clicks. It stays a link, so screen readers still find it.",
+        "focus": "Every part is a Button, so keyboard focus draws the Button's 2px ring, 2px outside the link.",
+        "direction": "Direction follows the page's <code>dir</code>; there is no prop. Right to left, the row starts on the right with Previous, and each chevron turns to point outward. Page numbers stay in Western digits."
+      },
+      "props": {
+        "pagination": {
+          "variant": "The Button type of each part: ghost, soft or outline page links.",
+          "shape": "The corners of every part: the Button's standard radius, or its full radius.",
+          "size": "The height of every part, from 26px to 40px.",
+          "ariaLabel": "The landmark's name for screen readers, in the page's language.",
+          "children": "A <code>PaginationContent</code>.",
+          "className": "Extra classes for the <code>nav</code> element, a centred row by default."
+        },
+        "content": {
+          "children": "The <code>PaginationItem</code>s, in reading order.",
+          "className": "Extra classes for the <code>ul</code> element. It wraps onto a second row rather than overflow."
+        },
+        "item": {
+          "children": "One page link, Previous, Next or the ellipsis.",
+          "className": "Extra classes for the <code>li</code> element."
+        },
+        "link": {
+          "href": "Where the link goes. The link takes every other attribute of an <code>a</code> element too.",
+          "isActive": "Marks the current page: the current-page look and <code>aria-current=\"page\"</code>.",
+          "disabled": "Dims the link, takes it out of the tab order and ignores clicks.",
+          "asChild": "Makes its only child the link, with these styles: Next.js's <code>Link</code>, say, or a <code>button</code> when paging changes state rather than the URL.",
+          "children": "The page number, in Western digits on Arabic pages too.",
+          "className": "Extra classes for the link."
+        },
+        "step": {
+          "href": "Where the link goes.",
+          "text": "The label. Previous or Next by default, in the page's language.",
+          "iconOnly": "Shows the chevron alone, in a square. The label stays for screen readers.",
+          "disabled": "Dims the link, takes it out of the tab order and ignores clicks.",
+          "asChild": "Makes its only child the link, and puts the label and chevron inside it.",
+          "className": "Extra classes for the link."
+        },
+        "ellipsis": {
+          "className": "Extra classes for the ellipsis. Its screen-reader text is built in."
+        }
+      },
+      "usage": {
+        "basic": "Links to pages",
+        "long": "A long range",
+        "state": "Paging with state",
+        "router": "With the Next.js Link"
+      }
+    },
     "accordion": {
       "lead": "Accordion stacks headings that each show or hide a section of content. Use it for questions and answers, settings groups and other content people scan before they read it in full.",
       "installNote": "Accordion is built on Base UI, so it needs the <code>@base-ui/react</code> package. <code>add</code> installs it with the component, and so does the shadcn CLI.",
@@ -1257,6 +1333,133 @@
         "basic": "Basic accordion",
         "variant": "Another style and indicator",
         "multiple": "Several items open at once"
+      }
+    },
+    "alertDialog": {
+      "installNote": "Alert Dialog is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its actions use <code>button</code>. <code>add</code> installs both with the component, and so does the shadcn CLI.",
+      "previewHint": "Press the button to open the dialog. Tab moves between its buttons, and Escape closes it.",
+      "trigger": "Delete project",
+      "cancel": "Cancel",
+      "safe": {
+        "title": "Publish these changes?",
+        "description": "Everyone who visits the site sees the new version straight away. You can edit it again later.",
+        "action": "Publish"
+      },
+      "danger": {
+        "title": "Delete this project?",
+        "description": "The project and all of its files are deleted for everyone on your team. You can't get them back.",
+        "action": "Delete"
+      },
+      "align": {
+        "title": "Alignment",
+        "body": "<code>align</code> sets the layout. <code>edge</code>, the default, starts the title and description at the beginning of the line and puts the actions at the end of the row. <code>center</code> centres the text and the actions. Keep <code>center</code> for a short description: centred lines are harder to read once the text runs to several."
+      },
+      "destructive": {
+        "title": "Destructive",
+        "body": "Set <code>destructive</code> when the action can't be undone, such as deleting a project. The main action becomes the destructive Button, and Cancel stays as it is. Name the action in its label, such as Delete, so the button says what happens on its own."
+      },
+      "icon": {
+        "title": "Icon",
+        "body": "<code>icon</code> adds an alert icon to the title, 24px and in the title's colour. With <code>edge</code> it sits beside the title, centred on its first line, and the description and any additional content line up with the title, not the icon. With <code>center</code> it sits above the title. To show another icon, pass any icon element in place of <code>true</code>, such as a sign-out icon below. It takes the same size, colour and place.",
+        "custom": {
+          "title": "Sign out of every device?",
+          "description": "You'll need to sign in again on your phone, your laptop and any other device you use.",
+          "action": "Sign out"
+        }
+      },
+      "content": {
+        "title": "Additional content",
+        "body": "Anything you place between <code>AlertDialogHeader</code> and <code>AlertDialogFooter</code> sits between the text and the actions, 16px from each, as wide as the text. Use it for one short field or a checkbox the decision depends on, such as typing the project's name before deleting it. A longer form belongs in a page or a regular dialog.",
+        "label": "Type the project name to confirm",
+        "placeholder": "Orbit"
+      },
+      "pending": {
+        "title": "Waiting for the action",
+        "body": "The main action closes the dialog after its <code>onClick</code> runs. When the action takes time, call <code>event.preventBaseUIHandler()</code> in <code>onClick</code> to keep the dialog open, set <code>loading</code> on the action while the request runs, and close the dialog through <code>open</code> once it finishes.",
+        "label": "Deleting",
+        "action": "Deleting"
+      },
+      "long": {
+        "title": "Long text",
+        "body": "A long title or description wraps inside the 512px box. When the dialog is taller than the window, it scrolls inside, and on a phone it keeps 16px from each edge of the screen.",
+        "dialogTitle": "Remove every member who hasn't signed in to this workspace during the last ninety days?",
+        "description": "They lose access to every project, file and comment in the workspace straight away, and any invitations they sent are cancelled. Their work stays where it is, and you can invite any of them again later from the Members page.",
+        "action": "Remove members",
+        "cancel": "Keep everyone"
+      },
+      "a11y": {
+        "role": "The dialog has the <code>alertdialog</code> role. Its title names it and its description describes it, so a screen reader reads both when it opens.",
+        "icon": "The icon, built in or your own, is hidden from screen readers. Make the title name the action on its own, such as Sign out of every device.",
+        "focus": "When the dialog opens, focus moves to its first control: Cancel, or the first field of any additional content. Tab and Shift+Tab stay inside the dialog, and focus returns to the trigger when it closes.",
+        "dismiss": "Escape closes the dialog, as Cancel does. A press on the overlay does nothing, so a stray click never makes the decision.",
+        "page": "While the dialog is open, the page behind it can't be reached with the keyboard or the pointer, and it doesn't scroll.",
+        "direction": "The dialog takes the page's direction, language and font, though it renders at the end of <code>body</code>. In Arabic the whole layout mirrors and Cancel still comes first in reading order. Direction needs no prop."
+      },
+      "rootProps": {
+        "open": "Shows or hides the dialog, when you control it.",
+        "defaultOpen": "Shows the dialog on first render.",
+        "onOpenChange": "Called when the dialog opens or closes.",
+        "onOpenChangeComplete": "Called once the dialog has finished opening or closing.",
+        "actionsRef": "A ref with <code>close()</code>, to close the dialog from code.",
+        "handle": "Connects the dialog to triggers elsewhere on the page. Create one with <code>AlertDialog.createHandle()</code> from <code>@base-ui/react/alert-dialog</code>.",
+        "triggerId": "Which trigger the dialog belongs to, when several share it and you control <code>open</code>.",
+        "defaultTriggerId": "Which trigger the dialog belongs to on first render, with <code>defaultOpen</code>.",
+        "children": "The trigger and the content."
+      },
+      "triggerProps": {
+        "render": "Renders your own element in place of the plain button, such as a Button.",
+        "handle": "The handle of a dialog elsewhere that this trigger opens.",
+        "payload": "Data handed to the dialog when this trigger opens it.",
+        "disabled": "Stops this trigger opening the dialog.",
+        "children": "The trigger's label.",
+        "className": "Extra classes for the trigger."
+      },
+      "contentProps": {
+        "align": "<code>edge</code> starts the text at the beginning of the line and puts the actions at the end. <code>center</code> centres both.",
+        "destructive": "Turns the main action into the destructive Button.",
+        "icon": "<code>true</code> for the alert icon, or any icon element. Either way it is 24px, in the title's colour.",
+        "container": "Where the dialog renders. Defaults to <code>body</code>.",
+        "initialFocus": "The element focused when the dialog opens. Defaults to the first control.",
+        "finalFocus": "The element focused when the dialog closes. Defaults to the trigger.",
+        "children": "The header, any additional content and the footer.",
+        "className": "Extra classes for the dialog box."
+      },
+      "headerProps": {
+        "children": "The title and the description.",
+        "className": "Extra classes for the header."
+      },
+      "footerProps": {
+        "children": "Cancel, then the main action.",
+        "className": "Extra classes for the row of actions."
+      },
+      "titleProps": {
+        "children": "The question the dialog asks.",
+        "className": "Extra classes for the title."
+      },
+      "descriptionProps": {
+        "children": "What happens if the user goes ahead.",
+        "className": "Extra classes for the description."
+      },
+      "actionProps": {
+        "onClick": "Runs the action, then closes the dialog. Call <code>event.preventBaseUIHandler()</code> to keep it open.",
+        "loading": "Shows a spinner, disables the button and announces <code>loadingLabel</code>.",
+        "loadingLabel": "Screen-reader text announced while loading.",
+        "disabled": "Disables the button.",
+        "children": "The action's label.",
+        "className": "Extra classes for the button."
+      },
+      "cancelProps": {
+        "onClick": "Runs before the dialog closes.",
+        "disabled": "Disables the button.",
+        "children": "The label, usually Cancel.",
+        "className": "Extra classes for the button."
+      },
+      "usage": {
+        "basic": "Confirm a delete",
+        "content": "Ask for the project name",
+        "pending": "Keep it open while the action runs",
+        "project": "Orbit",
+        "custom": "Use your own icon"
       }
     },
     "badge": {
@@ -1463,14 +1666,10 @@
       "emptyTitle": "Empty State",
       "empty": "No users found",
       "paginationTitle": "Pagination",
+      "paginationBody": "Page through rows with <code>Pagination</code>, placed under the table. Here its links are buttons, because paging changes the rows shown rather than the URL.",
       "pagination": {
         "label": "Pagination",
-        "status": "Page {page} of {total}",
-        "previous": "Previous",
-        "next": "Next",
-        "goToPrevious": "Go to previous page",
-        "goToNext": "Go to next page",
-        "goToPage": "Go to page {page}"
+        "status": "Page {page} of {total}"
       },
       "props": {
         "data": "Rows to display.",
@@ -1481,7 +1680,6 @@
         "onRowClick": "Called when a row is clicked.",
         "selectedKey": "Key of the selected row.",
         "stickyHeader": "Keeps the header visible on scroll.",
-        "pagination": "Pages through rows; <code>labels</code> translates its text.",
         "className": "Extra classes for the component."
       }
     },

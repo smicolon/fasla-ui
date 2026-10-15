@@ -587,7 +587,7 @@ is deliberately set aside.
 | `Navbar` `4103:4910` | 34 | `Type` ×17 — Default, With Dropdown, With Icon Indicator & Avatar, With Centered Logo, With search input, With CTA Button, With Submenu, multiple action, Rounded, extended at top, Small navbar, Rounded small navbar, … |
 | `Tabs Component` `39913:32645` | 210 | `Tabs` 2–8 · `Active Tab` 1–8 · `Style` Boxed/Bordered/Lifted (+ `Tabs / Tab item` `408:8904`, 90 variants, `size` sm/md/lg · `State` inactive/Active/disabled/Focus/Hover · `Has Icon`). Also called Pills. Code: `Style` → `variant` boxed/bordered/lifted and `size` → `size`, both on `TabsList`; `State` is real interaction |
 | `Breadcrumbs` `3771:68266` | 32 | `Style` Default/Custom Separator/With Badge/Outline Badge · `Count` 2/3/4/+4 |
-| `Pagination Variants` `400:6808` | 48 | `size` xs–lg · `Variants` Default/Solid/Outlined · `Shape` Square/Rounded |
+| `Pagination` `400:6808` | 48 | `size` xs–lg · `Variants` Default/Solid/Outlined · `Shape` Square/Rounded |
 | `Accordion` `15217:41213` | 16 | `Variants` ×8 — Split, plus minus icon, Avatar, Outline, Table, Multi-level, icons, Default |
 | `Accordion Item` `324:856` | 4 | `Opened` · Avatar · Title Icon (+ `Heading Font`, `Body Font`, `Icon Size` sizing sets, SM/MD/LG) |
 | `Side Bar` `40503:333` | 2 | with `Side Bar Inside Item` `40492:58601`, 12 variants, `State` Default/Hover/Selected · `Sub-item` |

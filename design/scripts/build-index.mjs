@@ -78,6 +78,7 @@ export const EXCLUDED_UNSIGNED = [
  *  and its Icon Button, which the code reaches through the `icon-*` sizes. */
 export const CODE_MAP = {
   accordion: { set: "Accordion", page: "3707:28873" },
+  "alert-dialog": { set: "Alert Dialog", page: "14833:10982" },
   avatar: { set: "Avatar", page: "3710:7318" },
   badge: { set: "Badge", page: "3724:120666" },
   button: [
@@ -88,6 +89,7 @@ export const CODE_MAP = {
   combobox: { set: "Combobox", page: "14852:8647" },
   "dropdown-menu": { set: "Dropdown", page: "3972:55121" },
   input: { set: "Default Input", page: "3882:2381" },
+  pagination: { set: "Pagination", page: "3772:64720" },
   progress: { set: "Progress", page: "3831:2712" },
   radio: { set: "Radio", page: "3830:60584" },
   select: { set: "Select Input", page: "3884:9073" },

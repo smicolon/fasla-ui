@@ -77,7 +77,9 @@ Core building blocks with CVA variants for consistent styling:
 | **Switch** | Toggle switch with multiple sizes |
 | **Tabs** | Tabbed navigation with animations |
 | **Accordion** | Headings that show or hide their content, in four styles |
+| **Alert Dialog** | A modal that asks the user to confirm or cancel an action |
 | **Badge** | Status indicators and labels |
+| **Pagination** | Page links built on Button, with Previous, Next and an ellipsis, in three variants |
 | **Avatar** | User avatars with fallback initials |
 | **Status Indicator** | Presence dot with a language-aware accessible name |
 | **Card** | Flexible content containers |
@@ -91,7 +93,7 @@ Pre-built page compositions for rapid development:
 |-----------|-------------|
 | **AppShell** | Application layout with sidebar and header |
 | **PageHeader** | Title, breadcrumbs, and action buttons |
-| **DataTable** | Sortable, filterable tables with pagination |
+| **DataTable** | Tables with selection, loading and empty states; pair with Pagination |
 | **FormSection** | Grouped form fields with validation |
 | **EmptyState** | Empty content placeholders with CTAs |
 | **Sidebar** | Collapsible navigation sidebar |
