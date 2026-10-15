@@ -5,10 +5,10 @@ import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
 import { DEFAULT_REGISTRY_URL, LEGACY_REGISTRY_URL, REGISTRY_URL, fetchRegistry, fetchComponent, getTargetDirectory, type RegistryFile, type RegistryItem } from "../registry.js"
-import { describeAdded, registryItemName, resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
+import { describeAdded, ownItemName, registryItemName, resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
 import { aliasToPath, checkDestination, installFile, resolveInsideProject } from "../paths.js"
 import { detectPackageManager } from "../pm.js"
-import { detectProjectStyle } from "../theme.js"
+import { applyThemeItems, detectProjectStyle, themeItemsCommand } from "../theme.js"
 import { installComponentPackages, writeCnHelper } from "./init.js"
 import { aliasRootOrExit, repairIfNeededOrExit, safeOrExit } from "./shared.js"
 import { isFaslaFile } from "../marker.js"
@@ -144,8 +144,8 @@ export function addCommand() {
       // run reads from, the default one, or ui.smicolon.com, which the published
       // URLs point at.
       const known = new Set(registry.items.map((item) => item.name))
-      const nameOf = (dep: string) =>
-        registryItemName(dep, known, [REGISTRY_URL, DEFAULT_REGISTRY_URL, LEGACY_REGISTRY_URL])
+      const bases = [REGISTRY_URL, DEFAULT_REGISTRY_URL, LEGACY_REGISTRY_URL]
+      const nameOf = (dep: string) => registryItemName(dep, known, bases)
       let resolved
       try {
         resolved = await resolveWithDependencies(validComponents, nameOf, fetchComponent)
@@ -157,8 +157,13 @@ export function addCommand() {
       if (resolved.added.length > 0) {
         addSpinner.info(describeAdded(resolved.added, resolved.neededBy))
       }
-      if (resolved.skipped.length > 0) {
-        addSpinner.warn(`Not resolvable from this registry, install separately: ${resolved.skipped.join(", ")}`)
+      // Fasla items outside the index are theme items, which carry CSS and no
+      // files: theme-inverse, for a block on an inverted surface. The shadcn
+      // CLI installs those, below, as `init` installs the theme.
+      const themeItems = [...new Set(resolved.skipped.map((dep) => ownItemName(dep, bases)).filter((n) => n !== undefined))]
+      const unresolvable = resolved.skipped.filter((dep) => ownItemName(dep, bases) === undefined)
+      if (unresolvable.length > 0) {
+        addSpinner.warn(`Not resolvable from this registry, install separately: ${unresolvable.join(", ")}`)
       }
 
       // Where each registry component lands, for rewriting imports between them.
@@ -329,6 +334,29 @@ export function addCommand() {
         }
       }
 
+      // The CSS the components need, such as the inverse tokens' mapping. A
+      // failure keeps the files, says what to run, and ends the run with an
+      // error after the packages are installed.
+      let themed = true
+      if (themeItems.length > 0 && added.size > 0) {
+        const urls = themeItems.map((name) => `${REGISTRY_URL}/${name}.json`)
+        const command = themeItemsCommand(urls)
+        if (options.install === false) {
+          console.log(`\nInstall the CSS these components need:\n  ${chalk.cyan(command)}`)
+        } else {
+          const themeSpinner = ora(`Installing ${themeItems.join(", ")}...`).start()
+          const result = await applyThemeItems(cwd, urls)
+          if (result.ok) themeSpinner.succeed(`Installed ${themeItems.join(", ")}`)
+          else {
+            themeSpinner.fail(`Could not install ${themeItems.join(", ")}`)
+            const tail = result.output.trim().split("\n").slice(-15).join("\n")
+            if (tail) console.log(chalk.gray(tail))
+            console.log(`\nThe components need this CSS to show their colours. Run this to finish:\n  ${chalk.cyan(command)}`)
+            themed = false
+          }
+        }
+      }
+
       // Install what the components import, last, so a failure's command to
       // run is the last thing printed. In the project's package manager: `npm
       // install` in a pnpm project fails, and in a bun or yarn one leaves a
@@ -339,6 +367,6 @@ export function addCommand() {
         enabled: options.install !== false,
         tailwindMajor,
       })
-      if (!installed) process.exit(1)
+      if (!installed || !themed) process.exit(1)
     })
 }

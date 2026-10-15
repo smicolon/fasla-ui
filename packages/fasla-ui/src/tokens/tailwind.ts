@@ -26,6 +26,15 @@ export const semanticColor = (name: string) =>
 
 const c = semanticColor
 
+/**
+ * An inverse token, falling back to the page colours swapped when a theme
+ * doesn't define it: `background-inverse` to `foreground`, and so on. Through
+ * `theme()`, so the fallback is whatever colour the project maps the page
+ * tokens to. theme/theme-items.mjs holds the fallbacks and maps them the same.
+ */
+const inverse = (name: string, fallback: string) =>
+  `color-mix(in oklch, var(--${name}, ${fallback}) calc(<alpha-value> * 100%), transparent)`
+
 export const tailwindSemanticColors = {
   // Surfaces
   background: c("background"),
@@ -75,9 +84,12 @@ export const tailwindSemanticColors = {
   },
 
   // Inverse — a fixed contrast band, not a mode-reactive surface.
-  "background-inverse": c("background-inverse"),
-  "foreground-inverse": c("foreground-inverse"),
-  "muted-foreground-inverse": c("muted-foreground-inverse"),
+  "background-inverse": inverse("background-inverse", "theme(colors.foreground)"),
+  "foreground-inverse": inverse("foreground-inverse", "theme(colors.background)"),
+  "muted-foreground-inverse": inverse(
+    "muted-foreground-inverse",
+    "color-mix(in oklab, theme(colors.background) 75%, theme(colors.foreground))"
+  ),
 
   // Charts
   "chart-1": c("chart-1"),

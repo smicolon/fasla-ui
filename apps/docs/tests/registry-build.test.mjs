@@ -56,6 +56,19 @@ describe("Registry build — imports between components", () => {
 })
 
 describe("Registry build — what the shadcn CLI needs", () => {
+  test("no item passes asChild to another Fasla component", () => {
+    // In a Base UI project the shadcn CLI rewrites `asChild` into `render`,
+    // which Fasla's Button doesn't take, so the installed file fails to
+    // compile. A link styled as a button uses buttonVariants instead.
+    for (const item of registry.items) {
+      if (item.name === "button") continue
+      for (const file of item.files) {
+        const source = readFileSync(path.join(pkg, file.path), "utf8")
+        expect(source, `${item.name}: ${file.path}`).not.toMatch(/<[A-Z]\w*[^>]*\basChild\b/)
+      }
+    }
+  })
+
   test("imports cn from @/lib/utils, never from this repo's path", () => {
     expect(rewriteUtilsImport(`import { cn } from "../../../src/lib/utils"`)).toBe(`import { cn } from "@/lib/utils"`)
     expect(rewriteUtilsImport(`import { cn } from '../../lib/utils'`)).toBe(`import { cn } from '@/lib/utils'`)

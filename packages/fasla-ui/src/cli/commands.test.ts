@@ -41,6 +41,9 @@ vi.mock("./registry", async (importOriginal) => {
     { name: "badge", type: "registry:ui", files: [{ path: "registry/ui/badge/badge.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/badge): https://fasla.smicolon.com\nimport { cn } from "@/lib/utils"\nexport const Badge = () => cn("x")\n` }] },
     // Its dependency on badge points at ui.smicolon.com, as the published registry's do.
     { name: "chip", type: "registry:ui", registryDependencies: ["https://ui.smicolon.com/r/badge.json"], files: [{ path: "registry/ui/chip/chip.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/chip): https://fasla.smicolon.com\nexport const Chip = () => null\n` }] },
+    // A block on an inverted surface: it needs theme-inverse, a theme item
+    // published beside the components but not in the index.
+    { name: "dark-block", type: "registry:block", registryDependencies: ["https://ui.smicolon.com/r/theme-inverse.json"], files: [{ path: "registry/blocks/dark-block/DarkBlock.tsx", type: "registry:block", target: "components/blocks/dark-block.tsx", content: `// From Fasla UI (@fasla/dark-block): https://fasla.smicolon.com\nexport const DarkBlock = () => null\n` }] },
     // Broken registry entries, for what add says when a component writes nothing.
     { name: "hollow", type: "registry:ui", files: [] },
     { name: "blank", type: "registry:ui", files: [{ path: "registry/ui/blank/blank.tsx", type: "registry:ui", target: "", content: "" }] },
@@ -73,6 +76,7 @@ vi.mock("./pm", async (importOriginal) => {
 
 // The theme installs with the shadcn CLI, over the network: recorded here instead.
 const themesApplied: { cwd: string; choice: string }[] = []
+const themeItemsApplied: { cwd: string; urls: string[] }[] = []
 let themeFails = false
 vi.mock("./theme", async (importOriginal) => {
   const actual = await importOriginal<typeof import("./theme")>()
@@ -80,6 +84,10 @@ vi.mock("./theme", async (importOriginal) => {
     ...actual,
     applyTheme: async (cwd: string, choice: string, _project?: unknown) => {
       themesApplied.push({ cwd, choice })
+      return themeFails ? { ok: false, output: "ERR_SOME_SHADCN_FAILURE" } : { ok: true }
+    },
+    applyThemeItems: async (cwd: string, urls: string[]) => {
+      themeItemsApplied.push({ cwd, urls })
       return themeFails ? { ok: false, output: "ERR_SOME_SHADCN_FAILURE" } : { ok: true }
     },
   }
@@ -98,6 +106,7 @@ beforeEach(() => {
   prompted.length = 0
   registryDown = false
   themesApplied.length = 0
+  themeItemsApplied.length = 0
   themeFails = false
   installs.length = 0
   installFails = false
@@ -737,6 +746,40 @@ describe("add: dependencies", () => {
     // Only chip was asked for, so badge is there because its dependency was followed.
     expect(await fs.pathExists(path.join(dir, "components/ui/badge.tsx"))).toBe(true)
     expect(await fs.pathExists(path.join(dir, "components/ui/chip.tsx"))).toBe(true)
+  })
+})
+
+describe("add: theme items a component depends on", () => {
+  const app = () =>
+    nextApp({ "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" } }) })
+
+  it("installs theme-inverse with the shadcn CLI, by URL, and writes the block", async () => {
+    const dir = await app()
+    await run("add", "dark-block", "--yes", "--cwd", dir)
+    expect(await fs.pathExists(path.join(dir, "components/blocks/dark-block.tsx"))).toBe(true)
+    expect(themeItemsApplied).toEqual([{ cwd: dir, urls: ["https://fasla.smicolon.com/r/theme-inverse.json"] }])
+    expect(output()).not.toContain("install separately")
+  })
+
+  it("prints the command under --no-install", async () => {
+    const dir = await app()
+    await run("add", "dark-block", "--yes", "--no-install", "--cwd", dir)
+    expect(themeItemsApplied).toEqual([])
+    expect(output()).toContain("npx shadcn@latest add https://fasla.smicolon.com/r/theme-inverse.json")
+  })
+
+  it("keeps the block, says what to run, and exits with an error when the install fails", async () => {
+    themeFails = true
+    const dir = await app()
+    await expect(run("add", "dark-block", "--yes", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(await fs.pathExists(path.join(dir, "components/blocks/dark-block.tsx"))).toBe(true)
+    expect(output()).toContain("Run this to finish:\n  npx shadcn@latest add https://fasla.smicolon.com/r/theme-inverse.json")
+  })
+
+  it("installs nothing for a component that doesn't need it", async () => {
+    const dir = await app()
+    await run("add", "badge", "--yes", "--cwd", dir)
+    expect(themeItemsApplied).toEqual([])
   })
 })
 

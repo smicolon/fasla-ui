@@ -153,6 +153,13 @@ describe("rewriteComponentImports", () => {
     )
   })
 
+  it("points a block's import of an atom at the atom's directory", () => {
+    const src = `import { Accordion } from "../../ui/button/button"`
+    expect(rewriteComponentImports(src, "src/components/blocks", targetDirOf)).toBe(
+      `import { Accordion } from "../ui/button"`
+    )
+  })
+
   it("leaves anything that isn't a registry component alone", () => {
     const src = [
       `import { cn } from "../../../src/lib/utils"`,

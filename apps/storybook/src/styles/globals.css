@@ -202,3 +202,12 @@
   background-color: var(--background);
   color: var(--foreground);
 }
+
+/*
+ * All-caps doesn't exist in Arabic, as in the docs app's globals.css. Not in a
+ * layer, so it outweighs the `uppercase` utility: a block that sets its English
+ * in capitals keeps its Arabic, and any Latin word inside it, as written.
+ */
+[dir="rtl"] .uppercase {
+  text-transform: none;
+}

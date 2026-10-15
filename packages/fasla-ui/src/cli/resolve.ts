@@ -26,11 +26,21 @@ export interface Resolved {
  */
 export function registryItemName(dep: string, known: Set<string>, bases: string[]): string | undefined {
   if (known.has(dep)) return dep
+  const name = ownItemName(dep, bases)
+  return name !== undefined && known.has(name) ? name : undefined
+}
+
+/**
+ * The name of any item published under one of `bases`, whether or not the
+ * index lists it: the theme items, theme-inverse among them, are published
+ * beside the components but kept out of the index.
+ */
+export function ownItemName(dep: string, bases: string[]): string | undefined {
   for (const base of bases) {
     const prefix = `${base.replace(/\/+$/, "")}/`
     if (!dep.startsWith(prefix) || !dep.endsWith(".json")) continue
     const name = dep.slice(prefix.length, -".json".length)
-    if (known.has(name)) return name
+    if (/^[a-z0-9-]+$/.test(name)) return name
   }
   return undefined
 }
@@ -121,7 +131,8 @@ export function andList(names: string[]) {
 
 /**
  * Registry files import each other the way the source tree lays them out —
- * `../status-indicator/status-indicator` from `registry/ui/avatar/`. `add`
+ * `../status-indicator/status-indicator` from `registry/ui/avatar/`, or
+ * `../../ui/accordion/accordion` from a block in `registry/blocks/`. `add`
  * writes every file flat into its type's directory, so point each such import
  * at where that component actually lands. Imports of anything that isn't a
  * registry component are left alone.
@@ -132,7 +143,7 @@ export function rewriteComponentImports(
   targetDirOf: (name: string) => string | undefined
 ): string {
   return content.replace(
-    /from (["'])\.\.\/([a-z0-9-]+)\/([a-z0-9-]+)\1/g,
+    /from (["'])(?:\.\.\/)+(?:(?:ui|blocks|effects|hooks)\/)?([a-z0-9-]+)\/([a-z0-9-]+)\1/g,
     (match, quote: string, folder: string, file: string) => {
       const toDir = folder === file ? targetDirOf(file) : undefined
       if (!toDir) return match

@@ -212,7 +212,8 @@ describe("Tailwind mapping", () => {
     const mapped = new Set<string>()
     const walk = (v: unknown) => {
       if (typeof v === "string") {
-        const m = v.match(/var\(--([a-z0-9-]+)\)/)
+        // An inverse token's fallback follows a comma: var(--x, fallback).
+        const m = v.match(/var\(--([a-z0-9-]+)[,)]/)
         if (m?.[1]) mapped.add(m[1])
       } else if (v && typeof v === "object") {
         Object.values(v).forEach(walk)

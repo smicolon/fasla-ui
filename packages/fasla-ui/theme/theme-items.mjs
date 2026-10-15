@@ -73,6 +73,35 @@ export const SHADCN_V3_MAPPED = [...SHADCN_TOKENS, "destructive-foreground"]
 /** The Fasla look, the way tokens/tailwind.ts resolves every token. */
 export const semanticColor = (name) => `color-mix(in oklch, var(--${name}) calc(<alpha-value> * 100%), transparent)`
 
+/**
+ * What each inverse token falls back to in a theme that doesn't define it: the
+ * page's own colours, swapped. A block on an inverted surface then still reads
+ * in a project with another library's theme, or none of Fasla's. Figma's names;
+ * a new inverse token gets its fallback here, from the tokens every shadcn
+ * theme has.
+ */
+export const INVERSE_FALLBACKS = {
+  "background-inverse": "var(--foreground)",
+  "foreground-inverse": "var(--background)",
+  "muted-foreground-inverse": "color-mix(in oklab, var(--background) 75%, var(--foreground))",
+}
+
+/** The inverse tokens' Tailwind 4 mapping, each with its fallback. */
+export const inverseThemeVars = () =>
+  Object.fromEntries(Object.entries(INVERSE_FALLBACKS).map(([name, fallback]) => [`color-${name}`, `var(--${name}, ${fallback})`]))
+
+/**
+ * The same on Tailwind 3, as tokens/tailwind.ts maps it. The fallback reads the
+ * page colours through `theme()`, not `var()`: a shadcn project on Tailwind 3
+ * stores --foreground as bare HSL channels, which only its own mapping turns
+ * into a colour. Tailwind 3 resolves `theme()` inside a config colour.
+ */
+export const inverseColor = (name) =>
+  `color-mix(in oklch, var(--${name}, ${INVERSE_FALLBACKS[name].replace(/var\(--([a-z-]+)\)/g, "theme(colors.$1)")}) calc(<alpha-value> * 100%), transparent)`
+
+/** A token's Tailwind 3 colour: inverse tokens with their fallback, the rest as is. */
+const v3Color = (name) => (name in INVERSE_FALLBACKS ? inverseColor(name) : semanticColor(name))
+
 /** The Figma snapshots. `root` is the repository, for tests that use a copy. */
 export function loadSources(root = REPO) {
   const read = (file) => JSON.parse(readFileSync(path.join(root, "design/tokens", file), "utf8"))
@@ -98,13 +127,13 @@ export function tailwindV3Colors(names, all = names) {
   const colors = {}
   const group = (key) => (colors[key] = typeof colors[key] === "object" ? colors[key] : {})
   for (const name of names) {
-    if (name.startsWith("soft-")) group("soft")[name.slice(5)] = semanticColor(name)
-    else if (name === "sidebar") group("sidebar").DEFAULT = semanticColor(name)
-    else if (name.startsWith("sidebar-")) group("sidebar")[name.slice(8)] = semanticColor(name)
+    if (name.startsWith("soft-")) group("soft")[name.slice(5)] = v3Color(name)
+    else if (name === "sidebar") group("sidebar").DEFAULT = v3Color(name)
+    else if (name.startsWith("sidebar-")) group("sidebar")[name.slice(8)] = v3Color(name)
     else if (name.endsWith("-foreground") && all.includes(name.slice(0, -11)) && name !== "muted-foreground-inverse") {
-      group(name.slice(0, -11)).foreground = semanticColor(name)
-    } else if (all.includes(`${name}-foreground`) && name !== "background") group(name).DEFAULT = semanticColor(name)
-    else colors[name] = semanticColor(name)
+      group(name.slice(0, -11)).foreground = v3Color(name)
+    } else if (all.includes(`${name}-foreground`) && name !== "background") group(name).DEFAULT = v3Color(name)
+    else colors[name] = v3Color(name)
   }
   return colors
 }
@@ -235,6 +264,8 @@ export function buildThemeItems({ registryUrl, sources = loadSources() }) {
   // heights go through --leading-*, which [dir="rtl"] re-points.
   const baseTheme = {
     ...Object.fromEntries(extras.map((name) => [`color-${name}`, `var(--${name})`])),
+    // The inverse tokens with their fallbacks, exactly as theme-inverse maps them.
+    ...inverseThemeVars(),
     ...Object.fromEntries(
       Object.entries(typography.ramp).flatMap(([rung, r]) => [
         [`text-${rung}`, rem(r.size)],
@@ -340,9 +371,27 @@ export function buildThemeItems({ registryUrl, sources = loadSources() }) {
     font: { family, provider: "google", import: importName, variable, ...extra },
   })
 
+  // The inverse tokens' mapping alone, for a block on an inverted surface.
+  // Blocks that use the inverse tokens depend on it, so `add` brings the
+  // mapping into any project. It sets no values: a Fasla theme has them, and
+  // in any other theme the fallbacks apply.
+  const inverse = {
+    $schema: "https://ui.shadcn.com/schema/registry-item.json",
+    name: "theme-inverse",
+    type: "registry:theme",
+    title: "Fasla theme: inverse tokens",
+    description:
+      "Maps the inverse tokens (background-inverse, foreground-inverse, muted-foreground-inverse) for blocks on an inverted surface. Each falls back to your page colours, swapped, when your theme doesn't define it.",
+    cssVars: { theme: inverseThemeVars() },
+    tailwind: {
+      config: { theme: { extend: { colors: Object.fromEntries(Object.keys(INVERSE_FALLBACKS).map((name) => [name, inverseColor(name)])) } } },
+    },
+  }
+
   return [
     base,
     theme,
+    inverse,
     font("font-cairo", "Cairo Variable", "Cairo", "--font-arabic", {
       weight: ["400", "500", "600", "700"],
       subsets: ["arabic", "latin"],

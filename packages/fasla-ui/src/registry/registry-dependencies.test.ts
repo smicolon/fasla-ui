@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
 import { describe, it, expect } from "vitest"
+import { buildThemeItems } from "../../theme/theme-items.mjs"
 
 const PKG = resolve(dirname(fileURLToPath(import.meta.url)), "../..")
 
@@ -11,7 +12,7 @@ const names = new Set(registry.items.map((i) => i.name))
 
 /** Registry components a file imports the way the source tree lays them out. */
 function importedComponents(source: string) {
-  return [...source.matchAll(/from ["']\.\.\/([a-z0-9-]+)\/([a-z0-9-]+)["']/g)]
+  return [...source.matchAll(/from ["'](?:\.\.\/)+(?:(?:ui|blocks|effects|hooks)\/)?([a-z0-9-]+)\/([a-z0-9-]+)["']/g)]
     .filter(([, folder, file]) => folder === file && names.has(file!))
     .map(([, , file]) => file!)
 }
@@ -31,10 +32,12 @@ describe("registry dependencies", () => {
     }
   )
 
-  it("points every registry dependency at a component that exists", () => {
+  it("points every registry dependency at a component or theme item that exists", () => {
+    // theme-inverse: blocks on an inverted surface bring its mapping with them.
+    const themeNames = new Set(buildThemeItems({ registryUrl: "https://registry.example/r" }).map((i) => i.name))
     for (const item of registry.items) {
       for (const dep of item.registryDependencies ?? []) {
-        expect(names.has(dep), `${item.name} → ${dep}`).toBe(true)
+        expect(names.has(dep) || themeNames.has(dep), `${item.name} → ${dep}`).toBe(true)
       }
     }
   })

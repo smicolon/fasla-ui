@@ -105,6 +105,16 @@ export const CODE_MAP = {
   "app-shell": null, "empty-state": null, "page-header": null, "stats-card": null,
   "animated-gradient": null, "border-beam": null, "glow-card": null,
   "shimmer-button": null, spotlight: null, "text-reveal": null, "typewriter-text": null,
+  // Blocks: each FAQ item is one Type of the block set FAQ (42359:9029), not an atom.
+  ...Object.fromEntries(
+    [
+      "classic-centered", "split-sticky", "accent-active-card", "soft-filled-rows", "numbered-editorial",
+      "dark-panel", "mono-index", "uppercase-dense", "featured-question", "two-column-grid", "masonry-cards",
+      "category-columns", "grouped-sections", "table-compact", "search-categories", "tabs-by-topic",
+      "sidebar-nav", "category-chip-grid", "topic-tiles", "help-hero-popular", "contact-cta-card",
+      "support-channels", "newsletter-close", "support-stats", "media-split", "chat-thread",
+    ].map((type) => [`faq-${type}`, null])
+  ),
 }
 
 const FAMILY_MIN = 10

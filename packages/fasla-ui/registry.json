@@ -673,6 +673,582 @@
         "effects",
         "text"
       ]
+    },
+    {
+      "name": "faq-classic-centered",
+      "type": "registry:block",
+      "title": "FAQ: Classic Centered",
+      "description": "A centred header over one column of questions that open and close.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-classic-centered/FaqClassicCentered.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-classic-centered.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-split-sticky",
+      "type": "registry:block",
+      "title": "FAQ: Split Sticky",
+      "description": "An intro with a contact button that stays in view beside the questions on wide screens.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-split-sticky/FaqSplitSticky.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-split-sticky.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-accent-active-card",
+      "type": "registry:block",
+      "title": "FAQ: Accent Active Card",
+      "description": "One column of questions where the open one lifts out as a card with an accent bar at its start edge.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-accent-active-card/FaqAccentActiveCard.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-accent-active-card.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-soft-filled-rows",
+      "type": "registry:block",
+      "title": "FAQ: Soft Filled Rows",
+      "description": "Questions on soft filled rows, the open one on a bordered card, under a heading with a contact link.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-soft-filled-rows/FaqSoftFilledRows.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-soft-filled-rows.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-numbered-editorial",
+      "type": "registry:block",
+      "title": "FAQ: Numbered Editorial",
+      "description": "An editorial headline and intro over full-width numbered questions.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-numbered-editorial/FaqNumberedEditorial.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-numbered-editorial.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-dark-panel",
+      "type": "registry:block",
+      "title": "FAQ: Dark Panel",
+      "description": "Questions on an inverted panel, dark in light mode and light in dark mode, painted with the inverse tokens.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-dark-panel/FaqDarkPanel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-dark-panel.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-mono-index",
+      "type": "registry:block",
+      "title": "FAQ: Mono Index",
+      "description": "A full-bleed inverted band of indexed questions in capitals beside an intro, painted with the inverse tokens.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-mono-index/FaqMonoIndex.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-mono-index.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-uppercase-dense",
+      "type": "registry:block",
+      "title": "FAQ: Uppercase Dense",
+      "description": "A compact list of questions in capitals on a muted band, beside a two-line intro.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-uppercase-dense/FaqUppercaseDense.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-uppercase-dense.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-featured-question",
+      "type": "registry:block",
+      "title": "FAQ: Featured Question",
+      "description": "The most-asked question answered on a raised card with a was-this-helpful prompt, over the remaining questions.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-featured-question/FaqFeaturedQuestion.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-featured-question.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-two-column-grid",
+      "type": "registry:block",
+      "title": "FAQ: Two-Column Grid",
+      "description": "Question cards in two columns under a badge and heading, with links to more help below.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion",
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-two-column-grid/FaqTwoColumnGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-two-column-grid.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-masonry-cards",
+      "type": "registry:block",
+      "title": "FAQ: Masonry Cards",
+      "description": "Raised question cards in two columns that grow independently, with answers that can hold lists.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-masonry-cards/FaqMasonryCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-masonry-cards.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-category-columns",
+      "type": "registry:block",
+      "title": "FAQ: Category Columns",
+      "description": "Topics in columns, each a list of links to answers and a link to every article in the topic.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/faq-category-columns/FaqCategoryColumns.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-category-columns.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-grouped-sections",
+      "type": "registry:block",
+      "title": "FAQ: Grouped Sections",
+      "description": "Questions in labelled groups, each label beside its questions, with a plus that turns into a cross.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-grouped-sections/FaqGroupedSections.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-grouped-sections.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-table-compact",
+      "type": "registry:block",
+      "title": "FAQ: Table Compact",
+      "description": "Every answer on show in two columns of compact cards, with a link to the full list.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/faq-table-compact/FaqTableCompact.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-table-compact.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-search-categories",
+      "type": "registry:block",
+      "title": "FAQ: Search + Categories",
+      "description": "A search field and category chips over one column of questions; both filter the list as you type or press, with a no-results message.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "accordion",
+        "badge",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-search-categories/FaqSearchCategories.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-search-categories.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-tabs-by-topic",
+      "type": "registry:block",
+      "title": "FAQ: Tabs by Topic",
+      "description": "A row of tabs, one per topic, each showing that topic's questions.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion",
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-tabs-by-topic/FaqTabsByTopic.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-tabs-by-topic.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-sidebar-nav",
+      "type": "registry:block",
+      "title": "FAQ: Sidebar Nav",
+      "description": "A list of help topics, as vertical tabs, beside the selected topic's questions.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "accordion",
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-sidebar-nav/FaqSidebarNav.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-sidebar-nav.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-category-chip-grid",
+      "type": "registry:block",
+      "title": "FAQ: Category Chip Grid",
+      "description": "A wrapping grid of category chips that toggle; the pressed category shows its questions below.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-category-chip-grid/FaqCategoryChipGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-category-chip-grid.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-topic-tiles",
+      "type": "registry:block",
+      "title": "FAQ: Topic Tiles",
+      "description": "A grid of knowledge-base areas, each a linked tile with an icon, a summary and its article counts.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/faq-topic-tiles/FaqTopicTiles.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-topic-tiles.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-help-hero-popular",
+      "type": "registry:block",
+      "title": "FAQ: Help Hero + Popular",
+      "description": "A help-centre hero with a search field and popular searches, over two columns of the most asked questions.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-help-hero-popular/FaqHelpHeroPopular.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-help-hero-popular.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-contact-cta-card",
+      "type": "registry:block",
+      "title": "FAQ: Contact CTA Card",
+      "description": "Questions that open and close, closed by a card with the support team's faces and two actions to reach them.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion",
+        "avatar",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-contact-cta-card/FaqContactCtaCard.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-contact-cta-card.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-support-channels",
+      "type": "registry:block",
+      "title": "FAQ: Support Channels",
+      "description": "Three ways to reach a person, as cards, above the questions people ask most.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-support-channels/FaqSupportChannels.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-support-channels.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-newsletter-close",
+      "type": "registry:block",
+      "title": "FAQ: Newsletter Close",
+      "description": "Questions before a trial, then a sign-up band for the monthly release note with pending, success and error states.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion",
+        "button",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-newsletter-close/FaqNewsletterClose.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-newsletter-close.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-support-stats",
+      "type": "registry:block",
+      "title": "FAQ: Support Stats",
+      "description": "Support's own numbers in a column beside the questions about support.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-support-stats/FaqSupportStats.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-support-stats.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-media-split",
+      "type": "registry:block",
+      "title": "FAQ: Media Split",
+      "description": "A photo with a caption beside the heading and questions; pass your own photo.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "accordion"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-media-split/FaqMediaSplit.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-media-split.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
+    },
+    {
+      "name": "faq-chat-thread",
+      "type": "registry:block",
+      "title": "FAQ: Chat Thread",
+      "description": "Questions and answers set as a conversation, with a composer to ask another.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/faq-chat-thread/FaqChatThread.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/faq-chat-thread.tsx"
+        }
+      ],
+      "categories": [
+        "faq",
+        "marketing"
+      ]
     }
   ]
 }
