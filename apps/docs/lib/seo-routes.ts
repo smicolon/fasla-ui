@@ -362,10 +362,10 @@ export const routes = [
       "Create a searchable React combobox with single or multiple selection, accessible controls, and typed options.",
     h1: "Combobox",
     ar: {
-      title: "قائمة منسدلة بالبحث (Combobox) لتطبيقات React | فاصلة",
+      title: "حقل الاختيار بالبحث (Combobox) لتطبيقات React | فاصلة",
       description:
-        "أنشئ مكوّن قائمة منسدلة بالبحث (Combobox) لاختيار خيار واحد أو عدة خيارات، مع عناصر تحكم تراعي إتاحة الوصول (accessibility).",
-      h1: "قائمة منسدلة بالبحث (Combobox)",
+        "أنشئ مكوّن حقل الاختيار بالبحث (Combobox) لاختيار خيار واحد أو عدة خيارات، مع عناصر تحكم تراعي إتاحة الوصول (accessibility).",
+      h1: "حقل الاختيار بالبحث (Combobox)",
     },
   },
   {
