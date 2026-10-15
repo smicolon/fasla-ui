@@ -1,1 +1,1 @@
-export { FaqAccentActiveCard, type FaqAccentActiveCardCopy, type FaqAccentActiveCardItem, type FaqAccentActiveCardProps } from "./FaqAccentActiveCard"
+export { FaqAccentActiveCard, faqAccentActiveCardCopy, type FaqAccentActiveCardCopy, type FaqAccentActiveCardItem, type FaqAccentActiveCardProps } from "./FaqAccentActiveCard"

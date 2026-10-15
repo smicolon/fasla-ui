@@ -22,9 +22,11 @@ export interface FaqTableCompactItem {
 }
 
 export interface FaqTableCompactCopy {
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
   /** The link to the full list of questions. */
   viewAllLabel: React.ReactNode
+  /** The questions, in reading order down the two columns. Each item has a `question` and an `answer`, both always shown. */
   items: FaqTableCompactItem[]
   /** Shown in place of the questions when `items` is empty. */
   empty: React.ReactNode
@@ -210,3 +212,9 @@ export function FaqTableCompact({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqTableCompactCopy = COPY

@@ -44,6 +44,7 @@ export interface FaqSidebarNavTopic {
 export interface FaqSidebarNavCopy {
   /** The heading over the topics, which names the list. */
   navLabel: React.ReactNode
+  /** The topics in the sidebar, each a tab. Each has a `value`, a `label`, an optional `icon` and `description`, and its `items`, the questions its panel shows: `question`, `answer` and an optional `value`. */
   topics: FaqSidebarNavTopic[]
   /** Shown in place of a topic's questions when it has none. */
   empty: React.ReactNode
@@ -295,7 +296,10 @@ const VERTICAL = { orientation: "vertical" as const }
 export interface FaqSidebarNavProps extends Omit<React.HTMLAttributes<HTMLElement>, "title">, Partial<FaqSidebarNavCopy> {
   /** Which language the default copy is in. The page's `dir` sets the direction. */
   locale?: "en" | "ar"
-  /** The topic shown at first, by `value`. The first topic, by default. */
+  /**
+   * The topic shown at first, by `value`. The first topic, by default.
+   * @default the first topic
+   */
   defaultTopic?: string
   /** The items open at first in each topic, by `value`. The first item, by default. */
   defaultValue?: string[]
@@ -378,3 +382,9 @@ export function FaqSidebarNav({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqSidebarNavCopy = COPY

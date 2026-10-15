@@ -25,12 +25,17 @@ export interface FaqFeaturedQuestionItem {
 }
 
 export interface FaqFeaturedQuestionCopy {
+  /** The short label above the heading. */
   eyebrow: React.ReactNode
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
   /** The question answered on the card. */
   featured: { question: React.ReactNode; answer: React.ReactNode }
+  /** The question asking whether the featured answer helped. */
   helpfulPrompt: React.ReactNode
+  /** The text of the Yes button. */
   yesLabel: React.ReactNode
+  /** The text of the No button. */
   noLabel: React.ReactNode
   /** Replaces the prompt once the reader has answered it. */
   thanks: React.ReactNode
@@ -119,9 +124,15 @@ export interface FaqFeaturedQuestionProps
   locale?: "en" | "ar"
   /** Called with the reader's answer to "Was this helpful?". */
   onFeedback?: (value: "yes" | "no") => void
-  /** The list items open at first, by `value`. None, as in Figma. */
+  /**
+   * The list items open at first, by `value`. None, as in Figma.
+   * @default none open
+   */
   defaultValue?: string[]
-  /** Lets several questions stay open at once. */
+  /**
+   * Lets several questions stay open at once.
+   * @default false
+   */
   multiple?: boolean
 }
 
@@ -202,3 +213,9 @@ export function FaqFeaturedQuestion({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqFeaturedQuestionCopy = COPY

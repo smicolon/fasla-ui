@@ -1,5 +1,6 @@
 export {
   FaqSupportStats,
+  faqSupportStatsCopy,
   type FaqSupportStatsCopy,
   type FaqSupportStatsItem,
   type FaqSupportStatsProps,

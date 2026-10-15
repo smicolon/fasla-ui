@@ -36,14 +36,21 @@ export interface FaqNewsletterCloseValues {
 }
 
 export interface FaqNewsletterCloseCopy {
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
+  /** The questions, in order. Each item has a `question`, an `answer` and an optional `value` that `defaultValue` opens it by. */
   items: FaqNewsletterCloseItem[]
   /** Shown in place of the questions when `items` is empty. */
   empty: React.ReactNode
+  /** The heading of the newsletter band. */
   newsletterHeading: React.ReactNode
+  /** The line of text in the newsletter band. */
   newsletterDescription: React.ReactNode
+  /** The placeholder of the email field. */
   emailPlaceholder: string
+  /** The placeholder of the optional company field. */
   companyPlaceholder: string
+  /** The text of the subscribe button. */
   submitLabel: React.ReactNode
   /** Read out while the sign-up is sent. */
   pendingLabel: string
@@ -162,14 +169,20 @@ export interface FaqNewsletterCloseProps
   locale?: "en" | "ar"
   /** The items open at first, by `value`. The first item, by default. */
   defaultValue?: string[]
-  /** Lets several questions stay open at once. */
+  /**
+   * Lets several questions stay open at once.
+   * @default false
+   */
   multiple?: boolean
   /**
    * Sends the sign-up. The form shows its pending state until the promise
    * settles, then success, or the error line if it rejects.
    */
   onSubmit?: (values: FaqNewsletterCloseValues) => Promise<void> | void
-  /** Turns the sign-up off: the fields and the button are disabled. */
+  /**
+   * Turns the sign-up off: the fields and the button are disabled.
+   * @default false
+   */
   disabled?: boolean
 }
 
@@ -293,3 +306,9 @@ export function FaqNewsletterClose({
     </div>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqNewsletterCloseCopy = COPY

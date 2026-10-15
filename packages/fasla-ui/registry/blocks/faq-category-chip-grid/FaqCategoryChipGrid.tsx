@@ -37,9 +37,11 @@ export interface FaqCategoryChipGridCategory {
 }
 
 export interface FaqCategoryChipGridCopy {
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
   /** Accessible name of the grid of chips. */
   categoriesLabel: string
+  /** The chips, in order. Each category has a `value`, a `label` and its `items`, the questions shown while it is pressed: `question`, `answer` and an optional `value`. */
   categories: FaqCategoryChipGridCategory[]
   /** Shown in place of a category's questions when it has none. */
   empty: React.ReactNode
@@ -323,6 +325,7 @@ export interface FaqCategoryChipGridProps
   /**
    * The category pressed at first, by `value`: the first category by default,
    * as in Figma. `null` starts with none pressed and no questions shown.
+   * @default the first category
    */
   defaultCategory?: string | null
   /** Called with the pressed category's `value`, or undefined when none is. */
@@ -414,3 +417,9 @@ export function FaqCategoryChipGrid({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqCategoryChipGridCopy = COPY

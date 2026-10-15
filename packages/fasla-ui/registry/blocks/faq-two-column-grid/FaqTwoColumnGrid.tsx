@@ -26,13 +26,19 @@ export interface FaqTwoColumnGridItem {
 }
 
 export interface FaqTwoColumnGridCopy {
+  /** The badge above the heading. */
   badge: React.ReactNode
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
+  /** The questions, in order. Each item has a `question`, an `answer` and an optional `value` that `defaultValue` opens it by. */
   items: FaqTwoColumnGridItem[]
   /** The footer line: "{moreText} {docsLabel} {orText} {contactLabel}". */
   moreText: React.ReactNode
+  /** The text of the link to the docs, in the closing line. */
   docsLabel: React.ReactNode
+  /** The word between the two links in the closing line. */
   orText: React.ReactNode
+  /** The text of the link to contact support, in the closing line. */
   contactLabel: React.ReactNode
   /** Shown in place of the questions when `items` is empty. */
   empty: React.ReactNode
@@ -150,7 +156,10 @@ export interface FaqTwoColumnGridProps
   contactHref?: string
   /** The items open at first, by `value`. None, by default. */
   defaultValue?: string[]
-  /** Lets several questions stay open at once. */
+  /**
+   * Lets several questions stay open at once.
+   * @default false
+   */
   multiple?: boolean
 }
 
@@ -239,3 +248,9 @@ export function FaqTwoColumnGrid({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqTwoColumnGridCopy = COPY

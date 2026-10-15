@@ -25,10 +25,13 @@ export interface FaqSoftFilledRowsItem {
 }
 
 export interface FaqSoftFilledRowsCopy {
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
   /** The sentence before the contact link. */
   contactPrompt: React.ReactNode
+  /** The text of the link to contact support, after `contactPrompt`. */
   contactLabel: React.ReactNode
+  /** The questions, in order. Each item has a `question`, an `answer` and an optional `value` that `defaultValue` opens it by. */
   items: FaqSoftFilledRowsItem[]
   /** Shown in place of the questions when `items` is empty. */
   empty: React.ReactNode
@@ -131,7 +134,10 @@ export interface FaqSoftFilledRowsProps
   contactHref?: string
   /** The items open at first, by `value`. The second item, as in Figma. */
   defaultValue?: string[]
-  /** Lets several questions stay open at once. */
+  /**
+   * Lets several questions stay open at once.
+   * @default false
+   */
   multiple?: boolean
 }
 
@@ -195,3 +201,9 @@ export function FaqSoftFilledRows({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqSoftFilledRowsCopy = COPY

@@ -1,1 +1,1 @@
-export { FaqSoftFilledRows, type FaqSoftFilledRowsCopy, type FaqSoftFilledRowsItem, type FaqSoftFilledRowsProps } from "./FaqSoftFilledRows"
+export { FaqSoftFilledRows, faqSoftFilledRowsCopy, type FaqSoftFilledRowsCopy, type FaqSoftFilledRowsItem, type FaqSoftFilledRowsProps } from "./FaqSoftFilledRows"

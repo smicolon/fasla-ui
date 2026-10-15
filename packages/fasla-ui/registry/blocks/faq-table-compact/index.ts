@@ -1,1 +1,1 @@
-export { FaqTableCompact, type FaqTableCompactCopy, type FaqTableCompactItem, type FaqTableCompactProps } from "./FaqTableCompact"
+export { FaqTableCompact, faqTableCompactCopy, type FaqTableCompactCopy, type FaqTableCompactItem, type FaqTableCompactProps } from "./FaqTableCompact"

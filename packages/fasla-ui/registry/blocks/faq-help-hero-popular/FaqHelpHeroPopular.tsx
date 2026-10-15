@@ -26,6 +26,7 @@ export interface FaqHelpHeroPopularLink {
 }
 
 export interface FaqHelpHeroPopularCopy {
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
   /** The field's placeholder, and its accessible name. */
   searchPlaceholder: string
@@ -33,6 +34,7 @@ export interface FaqHelpHeroPopularCopy {
   popularSearchesLabel: React.ReactNode
   /** Popular searches: each fills the field and searches. */
   popularSearches: string[]
+  /** The heading over the list of popular questions. */
   popularHeading: React.ReactNode
   /** The most asked questions, split into two columns from Tablet up. */
   links: FaqHelpHeroPopularLink[]
@@ -202,3 +204,9 @@ export function FaqHelpHeroPopular({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqHelpHeroPopularCopy = COPY

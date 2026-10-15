@@ -29,8 +29,11 @@ export interface FaqTopicTilesTile {
 }
 
 export interface FaqTopicTilesCopy {
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
+  /** The line of text under the heading. */
   description: React.ReactNode
+  /** The tiles, each a link. Each has a `title`, a `description` and an `href`, and an optional `icon` and `categories` and `articles` counts. */
   tiles: FaqTopicTilesTile[]
   /** Shown in place of the tiles when `tiles` is empty. */
   empty: React.ReactNode
@@ -243,3 +246,9 @@ export function FaqTopicTiles({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqTopicTilesCopy = COPY

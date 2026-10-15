@@ -34,8 +34,11 @@ export interface FaqTabsByTopicTopic {
 }
 
 export interface FaqTabsByTopicCopy {
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
+  /** The line of text under the heading. */
   description: React.ReactNode
+  /** The tabs. Each topic has a `value`, a `label` and its `items`, the questions its panel shows: `question`, `answer` and an optional `value`. */
   topics: FaqTabsByTopicTopic[]
   /** Shown in place of a topic's questions when it has none. */
   empty: React.ReactNode
@@ -262,7 +265,10 @@ export interface FaqTabsByTopicProps
     Partial<FaqTabsByTopicCopy> {
   /** Which language the default copy is in. The page's `dir` sets the direction. */
   locale?: "en" | "ar"
-  /** The topic shown at first, by `value`. The first topic, by default. */
+  /**
+   * The topic shown at first, by `value`. The first topic, by default.
+   * @default the first topic
+   */
   defaultTopic?: string
   /** The items open at first in each topic, by `value`. The first item, by default. */
   defaultValue?: string[]
@@ -333,3 +339,9 @@ export function FaqTabsByTopic({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqTabsByTopicCopy = COPY

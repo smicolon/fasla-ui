@@ -38,6 +38,7 @@ export interface FaqSearchCategoriesCategory {
 }
 
 export interface FaqSearchCategoriesCopy {
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
   /** The field's placeholder, and its accessible name. */
   searchPlaceholder: string
@@ -45,7 +46,9 @@ export interface FaqSearchCategoriesCopy {
   allLabel: React.ReactNode
   /** Accessible name of the row of chips. */
   categoriesLabel: string
+  /** The category chips after All. Each has a `value`, which the questions' `category` refers to, and a `label`. */
   categories: FaqSearchCategoriesCategory[]
+  /** Every question the search and the chips filter. Each item has a `question`, an `answer`, an optional `category` (a category's `value`) and an optional `value` that `defaultValue` opens it by. */
   items: FaqSearchCategoriesItem[]
   /** Shown when the search and the chip leave nothing; given the search. */
   noResults: (query: string) => React.ReactNode
@@ -183,7 +186,10 @@ export interface FaqSearchCategoriesProps
     Partial<FaqSearchCategoriesCopy> {
   /** Which language the default copy is in. The page's `dir` sets the direction. */
   locale?: "en" | "ar"
-  /** The category selected at first, by `value`. All of them, by default. */
+  /**
+   * The category selected at first, by `value`. All of them, by default.
+   * @default none: All is selected
+   */
   defaultCategory?: string
   /** The search the field starts with. */
   defaultQuery?: string
@@ -298,3 +304,9 @@ export function FaqSearchCategories({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqSearchCategoriesCopy = COPY

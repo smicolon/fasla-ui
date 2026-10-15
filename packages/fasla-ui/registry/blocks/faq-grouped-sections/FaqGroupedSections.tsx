@@ -31,8 +31,11 @@ export interface FaqGroupedSectionsGroup {
 }
 
 export interface FaqGroupedSectionsCopy {
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
+  /** The line of text under the heading. */
   description: React.ReactNode
+  /** The groups of questions, each under its own label. Each group has a `label` and its `items`, which are questions like `items` elsewhere: `question`, `answer` and an optional `value`. */
   groups: FaqGroupedSectionsGroup[]
   /** Shown in place of the groups when `groups` is empty. */
   empty: React.ReactNode
@@ -175,7 +178,10 @@ export interface FaqGroupedSectionsProps
   locale?: "en" | "ar"
   /** The items open at first, by `value`. The first item of the first group, by default. */
   defaultValue?: string[]
-  /** Lets several questions stay open at once. */
+  /**
+   * Lets several questions stay open at once.
+   * @default false
+   */
   multiple?: boolean
 }
 
@@ -252,3 +258,9 @@ export function FaqGroupedSections({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqGroupedSectionsCopy = COPY

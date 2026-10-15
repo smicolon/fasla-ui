@@ -1,1 +1,1 @@
-export { FaqUppercaseDense, type FaqUppercaseDenseCopy, type FaqUppercaseDenseItem, type FaqUppercaseDenseProps } from "./FaqUppercaseDense"
+export { FaqUppercaseDense, faqUppercaseDenseCopy, type FaqUppercaseDenseCopy, type FaqUppercaseDenseItem, type FaqUppercaseDenseProps } from "./FaqUppercaseDense"

@@ -28,7 +28,9 @@ export interface FaqMasonryCardsItem {
 }
 
 export interface FaqMasonryCardsCopy {
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
+  /** The questions, as cards. Each item has a `question`, an `answer` and an optional `value` that `defaultValue` opens it by. An optional `column`, 1 or 2, pins a card to a column; without it the first half fill the first column. */
   items: FaqMasonryCardsItem[]
   /** Shown in place of the questions when `items` is empty. */
   empty: React.ReactNode
@@ -198,7 +200,10 @@ export interface FaqMasonryCardsProps
   locale?: "en" | "ar"
   /** The items open at first, by `value`. The first card of the second column, by default. */
   defaultValue?: string[]
-  /** Lets several questions stay open at once. */
+  /**
+   * Lets several questions stay open at once.
+   * @default false
+   */
   multiple?: boolean
 }
 
@@ -255,3 +260,9 @@ export function FaqMasonryCards({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqMasonryCardsCopy = COPY

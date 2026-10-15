@@ -34,8 +34,11 @@ export interface FaqMediaSplitImage {
 export interface FaqMediaSplitCopy {
   /** The chip on the photo. Hidden when empty. */
   caption: React.ReactNode
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
+  /** The line of text under the heading. */
   description: React.ReactNode
+  /** The questions, in order. Each item has a `question`, an `answer` and an optional `value` that `defaultValue` opens it by. */
   items: FaqMediaSplitItem[]
   /** Shown in place of the questions when `items` is empty. */
   empty: React.ReactNode
@@ -110,11 +113,17 @@ export interface FaqMediaSplitProps
     Partial<FaqMediaSplitCopy> {
   /** Which language the default copy is in. The page's `dir` sets the direction. */
   locale?: "en" | "ar"
-  /** The photo. None by default: the frame shows a `muted` placeholder. */
+  /**
+   * The photo. None by default: the frame shows a `muted` placeholder.
+   * @default none: a `muted` placeholder
+   */
   image?: FaqMediaSplitImage
   /** The items open at first, by `value`. The first item, by default. */
   defaultValue?: string[]
-  /** Lets several questions stay open at once. */
+  /**
+   * Lets several questions stay open at once.
+   * @default false
+   */
   multiple?: boolean
 }
 
@@ -180,3 +189,9 @@ export function FaqMediaSplit({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqMediaSplitCopy = COPY

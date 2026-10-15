@@ -1,5 +1,6 @@
 export {
   FaqContactCtaCard,
+  faqContactCtaCardCopy,
   type FaqContactCtaCardAction,
   type FaqContactCtaCardCopy,
   type FaqContactCtaCardItem,

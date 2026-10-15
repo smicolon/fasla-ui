@@ -35,10 +35,15 @@ export interface FaqSupportChannelsChannel {
 }
 
 export interface FaqSupportChannelsCopy {
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
+  /** The line of text under the heading. */
   description: React.ReactNode
+  /** The ways to reach support, as cards. Each has a `title`, a `detail` (an address or hours), a `note`, and an optional `icon`, and an `href` that makes the whole card a link. */
   channels: FaqSupportChannelsChannel[]
+  /** The heading over the questions, below the channels. */
   questionsHeading: React.ReactNode
+  /** The questions, in order. Each item has a `question`, an `answer` and an optional `value` that `defaultValue` opens it by. */
   items: FaqSupportChannelsItem[]
   /** Shown in place of the questions when `items` is empty. */
   empty: React.ReactNode
@@ -160,7 +165,10 @@ export interface FaqSupportChannelsProps
   locale?: "en" | "ar"
   /** The items open at first, by `value`. None, by default. */
   defaultValue?: string[]
-  /** Lets several questions stay open at once. */
+  /**
+   * Lets several questions stay open at once.
+   * @default false
+   */
   multiple?: boolean
 }
 
@@ -250,3 +258,9 @@ export function FaqSupportChannels({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqSupportChannelsCopy = COPY

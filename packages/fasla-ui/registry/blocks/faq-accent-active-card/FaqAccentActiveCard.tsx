@@ -25,8 +25,11 @@ export interface FaqAccentActiveCardItem {
 }
 
 export interface FaqAccentActiveCardCopy {
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
+  /** The line of text under the heading. */
   description: React.ReactNode
+  /** The questions, in order. Each item has a `question`, an `answer` and an optional `value` that `defaultValue` opens it by. */
   items: FaqAccentActiveCardItem[]
   /** Shown in place of the questions when `items` is empty. */
   empty: React.ReactNode
@@ -110,7 +113,10 @@ export interface FaqAccentActiveCardProps
   locale?: "en" | "ar"
   /** The items open at first, by `value`. The first item, by default. */
   defaultValue?: string[]
-  /** Lets several questions stay open at once; each open one becomes a card. */
+  /**
+   * Lets several questions stay open at once; each open one becomes a card.
+   * @default false
+   */
   multiple?: boolean
 }
 
@@ -172,3 +178,9 @@ export function FaqAccentActiveCard({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqAccentActiveCardCopy = COPY

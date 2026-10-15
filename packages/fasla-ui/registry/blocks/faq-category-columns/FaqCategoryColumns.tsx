@@ -33,8 +33,11 @@ export interface FaqCategoryColumnsCategory {
 }
 
 export interface FaqCategoryColumnsCopy {
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
+  /** The line of text under the heading. */
   description: React.ReactNode
+  /** The columns. Each category has a `title`, an optional `icon`, its `links` (each a `label` and an `href`), and an optional `moreLabel` and `moreHref` for its last link. */
   categories: FaqCategoryColumnsCategory[]
   /** Shown in place of the topics when `categories` is empty. */
   empty: React.ReactNode
@@ -237,3 +240,9 @@ export function FaqCategoryColumns({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqCategoryColumnsCopy = COPY

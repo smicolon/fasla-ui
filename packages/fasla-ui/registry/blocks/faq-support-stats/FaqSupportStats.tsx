@@ -35,10 +35,15 @@ export interface FaqSupportStatsStat {
 }
 
 export interface FaqSupportStatsCopy {
+  /** The short label above the heading. */
   eyebrow: React.ReactNode
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
+  /** The line of text under the heading. */
   description: React.ReactNode
+  /** The figures above the questions. Each stat has a `value`, a `label` and an optional `meta` line under it. */
   stats: FaqSupportStatsStat[]
+  /** The questions, in order. Each item has a `question`, an `answer` and an optional `value` that `defaultValue` opens it by. */
   items: FaqSupportStatsItem[]
   /** Shown in place of the questions when `items` is empty. */
   empty: React.ReactNode
@@ -160,7 +165,10 @@ export interface FaqSupportStatsProps
   locale?: "en" | "ar"
   /** The items open at first, by `value`. The first item, by default. */
   defaultValue?: string[]
-  /** Lets several questions stay open at once. */
+  /**
+   * Lets several questions stay open at once.
+   * @default false
+   */
   multiple?: boolean
 }
 
@@ -226,3 +234,9 @@ export function FaqSupportStats({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqSupportStatsCopy = COPY

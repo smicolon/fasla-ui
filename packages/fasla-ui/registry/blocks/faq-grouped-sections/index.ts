@@ -1,5 +1,6 @@
 export {
   FaqGroupedSections,
+  faqGroupedSectionsCopy,
   type FaqGroupedSectionsGroup,
   type FaqGroupedSectionsItem,
   type FaqGroupedSectionsCopy,

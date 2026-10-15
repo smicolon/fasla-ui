@@ -1,5 +1,6 @@
 export {
   FaqSupportChannels,
+  faqSupportChannelsCopy,
   type FaqSupportChannelsChannel,
   type FaqSupportChannelsCopy,
   type FaqSupportChannelsItem,

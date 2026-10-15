@@ -35,8 +35,11 @@ export interface FaqChatThreadMessage {
 }
 
 export interface FaqChatThreadCopy {
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
+  /** The line of text under the heading. */
   description: React.ReactNode
+  /** The conversation, oldest first. Each message has `from` (`"visitor"` or `"support"`), its `text` and an optional `meta` line, such as the time. */
   messages: FaqChatThreadMessage[]
   /** Shown in place of the thread when `messages` is empty. */
   empty: React.ReactNode
@@ -44,6 +47,7 @@ export interface FaqChatThreadCopy {
   supportName: string
   /** What a screen reader hears before each question. */
   visitorLabel: string
+  /** The placeholder of the message field. */
   placeholder: string
   /** The send button's accessible name. */
   sendLabel: string
@@ -126,11 +130,17 @@ export interface FaqChatThreadProps
     Partial<FaqChatThreadCopy> {
   /** Which language the default copy is in. The page's `dir` sets the direction. */
   locale?: "en" | "ar"
-  /** Support's photo. Without one, the avatar shows the initials of `supportName`. */
+  /**
+   * Support's photo. Without one, the avatar shows the initials of `supportName`.
+   * @default none: the initials of `supportName`
+   */
   supportAvatar?: string
   /** Sends the reader's question. The composer clears once it resolves. */
   onSend?: (message: string) => Promise<void> | void
-  /** Turns the composer off. */
+  /**
+   * Turns the composer off.
+   * @default false
+   */
   disabled?: boolean
 }
 
@@ -255,3 +265,9 @@ export function FaqChatThread({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqChatThreadCopy = COPY

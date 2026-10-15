@@ -26,11 +26,15 @@ export interface FaqSplitStickyItem {
 }
 
 export interface FaqSplitStickyCopy {
+  /** The short label above the heading. */
   eyebrow: React.ReactNode
+  /** The section's heading, an `h2`. */
   heading: React.ReactNode
+  /** The line of text under the heading. */
   description: React.ReactNode
   /** The contact button's label. */
   cta: React.ReactNode
+  /** The questions, in order. Each item has a `question`, an `answer` and an optional `value` that `defaultValue` opens it by. */
   items: FaqSplitStickyItem[]
   /** Shown in place of the questions when `items` is empty. */
   empty: React.ReactNode
@@ -112,13 +116,19 @@ const COPY: Record<"en" | "ar", FaqSplitStickyCopy> = {
 export interface FaqSplitStickyProps extends Omit<React.HTMLAttributes<HTMLElement>, "title">, Partial<FaqSplitStickyCopy> {
   /** Which language the default copy is in. The page's `dir` sets the direction. */
   locale?: "en" | "ar"
-  /** Where the contact button goes. Without it, the button calls `onCtaClick`. */
+  /**
+   * Where the contact button goes. Without it, the button calls `onCtaClick`.
+   * @default none: the button calls `onCtaClick`
+   */
   ctaHref?: string
   /** Called when the contact button is pressed, when it has no `ctaHref`. */
   onCtaClick?: React.MouseEventHandler<HTMLButtonElement>
   /** The items open at first, by `value`. The first item, by default. */
   defaultValue?: string[]
-  /** Lets several questions stay open at once. */
+  /**
+   * Lets several questions stay open at once.
+   * @default false
+   */
   multiple?: boolean
 }
 
@@ -187,3 +197,9 @@ export function FaqSplitSticky({
     </section>
   )
 }
+
+/**
+ * The default copy, English and Arabic, as `locale` picks it. Spread it to
+ * change a few strings and keep the rest.
+ */
+export const faqSplitStickyCopy = COPY
