@@ -43,7 +43,7 @@ export function LandingNav() {
           <Link href={landingLinks.components(locale)} className={navLink}>
             {t("components")}
           </Link>
-          <Link href={landingLinks.blocksDocs(locale)} className={navLink}>
+          <Link href={landingLinks.blocks(locale)} className={navLink}>
             {t("blocks")}
           </Link>
           <a href={landingLinks.github} className={navLink}>

@@ -18,15 +18,21 @@ describe("Top-level section links", () => {
   test("the landing header and footer list Blocks after Components", () => {
     for (const file of ["app/[locale]/(home)/_components/landing-nav.tsx", "app/[locale]/(home)/_components/landing-footer.tsx"]) {
       const source = read(file)
-      expect(count(source, /landingLinks\.blocksDocs\(locale\)/g), file).toBe(count(source, /landingLinks\.components\(locale\)/g))
-      expect(source.indexOf("landingLinks.blocksDocs"), file).toBeGreaterThan(source.indexOf("landingLinks.components"))
+      expect(count(source, /landingLinks\.blocks\(locale\)/g), file).toBe(count(source, /landingLinks\.components\(locale\)/g))
+      expect(source.indexOf("landingLinks.blocks("), file).toBeGreaterThan(source.indexOf("landingLinks.components"))
     }
+  })
+
+  test("the block catalogue's cards and its button lead to the Blocks introduction, not Coming soon", () => {
+    const source = read("app/[locale]/(home)/_components/blocks-grid.tsx")
+    expect(count(source, /href=\{landingLinks\.blocks\(locale\)\}/g)).toBe(2)
+    expect(source).not.toContain("comingSoon")
   })
 
   test("Blocks leads to the Blocks introduction, in both languages", async () => {
     const { landingLinks } = await import("../app/[locale]/(home)/_components/links")
-    expect(landingLinks.blocksDocs("en")).toBe("/en/docs/blocks/")
-    expect(landingLinks.blocksDocs("ar")).toBe("/ar/docs/blocks/")
+    expect(landingLinks.blocks("en")).toBe("/en/docs/blocks/")
+    expect(landingLinks.blocks("ar")).toBe("/ar/docs/blocks/")
     for (const [file, label] of [["messages/en.json", "Blocks"], ["messages/ar.json", "الكتل"]]) {
       const messages = JSON.parse(read(file))
       expect(messages.nav.blocks).toBe(label)
