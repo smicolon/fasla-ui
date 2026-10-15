@@ -26,6 +26,7 @@ const THEMES = ["light", "dark"] as const
 
 type Style = (typeof STYLES)[number]
 type Count = (typeof COUNTS)[number]
+type Theme = (typeof THEMES)[number]
 
 /**
  * The Default story's controls. Breadcrumb itself has no props for these:
@@ -53,7 +54,8 @@ const meta: Meta<StoryArgs> = {
     count: {
       control: "inline-radio",
       options: COUNTS,
-      description: "Figma `Count`: how many steps are composed. `+4` keeps the first step and the last two, with `BreadcrumbEllipsis` between.",
+      description:
+        "Figma `Count`: how many steps are composed. `+4` keeps the first step and the last two, with `BreadcrumbEllipsis` between, as the trigger of a `DropdownMenu` that lists the hidden steps.",
     },
     hasIcon: {
       control: "boolean",
@@ -139,14 +141,19 @@ const ELLIPSIS_TRIGGER = [
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-ring",
 ].join(" ")
 
-/** The collapsed trail's ellipsis, opening a menu of the steps it hides, as links. */
-function HiddenStepsMenu({ label, steps }: { label: string; steps: readonly string[] }) {
+/**
+ * The collapsed trail's ellipsis, opening a menu of the steps it hides, as
+ * links. Press it, or focus it and press Enter, Space or the down arrow;
+ * Escape returns focus to it. The menu renders at the end of `<body>`, so it
+ * takes the Theme toolbar's colours; `theme` pins it to a panel's instead.
+ */
+function HiddenStepsMenu({ label, steps, theme }: { label: string; steps: readonly string[]; theme?: Theme }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger aria-label={label} className={ELLIPSIS_TRIGGER}>
         <BreadcrumbEllipsis />
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent className={theme}>
         {steps.map((text) => (
           <DropdownMenuItem key={text} render={<a href="#" />}>
             {text}
@@ -161,22 +168,22 @@ function HiddenStepsMenu({ label, steps }: { label: string; steps: readonly stri
  * One trail, composed from the parts the way a developer would, for any Style × Count.
  * `hasIcon` defaults to Figma's set: on for the text styles, off for the badge
  * styles, whose Figma variants carry none. Passing it turns icons on or off
- * in every style. With `menu`, a collapsed trail's ellipsis opens a menu of
- * the steps it hides.
+ * in every style. At `+4` the ellipsis opens a menu of the steps it hides;
+ * `theme` gives that menu a panel's theme.
  */
 function Trail({
   c,
   style = "Default",
   count = "4",
   hasIcon,
-  menu = false,
+  theme,
   className,
 }: {
   c: Copy
   style?: Style
   count?: Count
   hasIcon?: boolean
-  menu?: boolean
+  theme?: Theme
   className?: string
 }) {
   const badge = style === "With Badge" ? "soft" : style === "Outline Badge" ? "outline" : null
@@ -198,11 +205,7 @@ function Trail({
               {i > 0 && <BreadcrumbSeparator>{style === "Default" ? undefined : <SlashIcon />}</BreadcrumbSeparator>}
               <BreadcrumbItem>
                 {step === null ? (
-                  menu ? (
-                    <HiddenStepsMenu label={c.menu} steps={badge ? c.hiddenSections : c.hidden} />
-                  ) : (
-                    <BreadcrumbEllipsis />
-                  )
+                  <HiddenStepsMenu label={c.menu} steps={badge ? c.hiddenSections : c.hidden} theme={theme} />
                 ) : badge ? (
                   last ? (
                     <BreadcrumbPage>
@@ -273,7 +276,8 @@ export const Default: Story = {
 /**
  * Every Style at every Count, two styles side by side. Rows are Figma's
  * counts; `+4` keeps the first step and the last two, with the ellipsis
- * between them, in the same order in both directions.
+ * between them, in the same order in both directions. Press the ellipsis
+ * for a menu of the steps it hides.
  */
 export const StylesAndCounts: Story = {
   decorators: [framed],
@@ -339,32 +343,6 @@ export const Icons: Story = {
   },
 }
 
-/**
- * The collapsed trail with its ellipsis as a Dropdown Menu trigger, in every
- * Style. Press the ellipsis, or focus it and press Enter, Space or the down
- * arrow: the menu lists the hidden steps as links, lined up with the
- * ellipsis's start edge, and Escape returns focus to it. Screen readers name
- * the trigger "Hidden steps", or "الخطوات المخفية" in Arabic. Follows the
- * Direction and Theme toolbars.
- */
-export const EllipsisMenu: Story = {
-  decorators: [framed],
-  parameters: { layout: "padded", controls: { disable: true } },
-  render: (_args, ctx) => {
-    const c = copy(ctx)
-    return (
-      <div className="grid grid-cols-[repeat(2,max-content)] items-center gap-x-8 gap-y-4">
-        {STYLES.map((style) => (
-          <React.Fragment key={style}>
-            <RowHead>{style}</RowHead>
-            <Trail c={c} style={style} count="+4" menu />
-          </React.Fragment>
-        ))}
-      </div>
-    )
-  },
-}
-
 const PANELS = [
   { dir: "ltr", lang: "en", title: "LTR", copy: COPY.ltr },
   { dir: "rtl", lang: "ar", title: "RTL", copy: COPY.rtl },
@@ -391,7 +369,8 @@ const THEME_ROWS: { style: Style; count: Count }[] = STYLES.flatMap((style) => [
  * trail runs from the inline start, the chevron turns to point along it, and
  * the icon stays before its label. Arabic rows are 24px tall against
  * English's 20px: Cairo's line, from the type ramp. Each panel is a subgrid
- * of the same rows, so the two sides share every row's top edge.
+ * of the same rows, so the two sides share every row's top edge. A `+4`
+ * trail's menu takes its panel's direction, language and font.
  */
 export const Directions: Story = {
   decorators: [framed],
@@ -421,7 +400,8 @@ export const Directions: Story = {
 /**
  * Light and Dark side by side, whatever the theme toolbar says. Language and
  * direction follow the Direction toolbar. Each panel's `light` or `dark`
- * class re-points every token for its subtree, on the Docs page too.
+ * class re-points every token for its subtree, on the Docs page too, and
+ * a `+4` trail's menu carries the same class, so it opens in its panel's theme.
  */
 export const LightAndDark: Story = {
   decorators: [framed],
@@ -440,7 +420,7 @@ export const LightAndDark: Story = {
           >
             <Head>{theme === "dark" ? "Dark" : "Light"}</Head>
             {THEME_ROWS.map(({ style, count }) => (
-              <Trail key={style + count} c={c} style={style} count={count} />
+              <Trail key={style + count} c={c} style={style} count={count} theme={theme} />
             ))}
           </div>
         ))}

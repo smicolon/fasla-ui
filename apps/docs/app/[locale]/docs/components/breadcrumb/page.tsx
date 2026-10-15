@@ -61,22 +61,21 @@ function HiddenStepsMenu({ label, steps }: { label: string; steps: string[] }) {
 
 /**
  * One trail, in any of Figma's Styles. `steps` are shown in order; with
- * `collapsed`, an ellipsis stands in after the first step, as in Count=+4;
- * with `menu` too, the ellipsis opens a menu of the steps it hides.
+ * `collapsed`, an ellipsis stands in after the first step, as in Count=+4,
+ * and opens a menu of the steps it hides: `collapsed` names the menu's
+ * trigger and lists those steps.
  */
 function Trail({
   label,
   steps,
   style = "default",
-  collapsed = false,
-  menu,
+  collapsed,
   className,
 }: {
   label: string
   steps: Step[]
   style?: Style
-  collapsed?: boolean
-  menu?: { label: string; steps: string[] }
+  collapsed?: { label: string; steps: string[] }
   className?: string
 }) {
   const separator = style === "default" ? undefined : <SlashIcon />
@@ -97,7 +96,7 @@ function Trail({
               {i > 0 && <BreadcrumbSeparator>{separator}</BreadcrumbSeparator>}
               <BreadcrumbItem>
                 {step === "ellipsis" ? (
-                  menu ? <HiddenStepsMenu {...menu} /> : <BreadcrumbEllipsis />
+                  <HiddenStepsMenu {...collapsed!} />
                 ) : badge && last ? (
                   <BreadcrumbPage>
                     <Badge variant={badge} size="md" icon={chipIcon}>
@@ -323,15 +322,13 @@ ${indent}${separator}`
             <Trail
               label={`${label}: ${b("collapsed.title")}`}
               steps={steps(true)}
-              collapsed
-              menu={{ label: menuLabel, steps: hidden }}
+              collapsed={{ label: menuLabel, steps: hidden }}
             />
             <Trail
               label={`${label}: ${b("collapsed.title")}${comma}${b("styles.badge")}`}
               steps={badgeSteps}
               style="badge"
-              collapsed
-              menu={{ label: menuLabel, steps: hiddenSections }}
+              collapsed={{ label: menuLabel, steps: hiddenSections }}
             />
           </div>
         </ComponentPreview>
