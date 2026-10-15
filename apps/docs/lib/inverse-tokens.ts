@@ -13,7 +13,7 @@ export const INVERSE_CSS = [
 
 /** Tailwind 3: under `theme.extend.colors` in tailwind.config. */
 export const INVERSE_CONFIG = [
-  `"background-inverse": "color-mix(in oklch, var(--background-inverse, theme(colors.foreground)) calc(<alpha-value> * 100%), transparent)",`,
-  `"foreground-inverse": "color-mix(in oklch, var(--foreground-inverse, theme(colors.background)) calc(<alpha-value> * 100%), transparent)",`,
-  `"muted-foreground-inverse": "color-mix(in oklch, var(--muted-foreground-inverse, color-mix(in oklab, theme(colors.background) 75%, theme(colors.foreground))) calc(<alpha-value> * 100%), transparent)",`,
+  `"background-inverse": "color-mix(in oklab, var(--background-inverse, theme(colors.foreground)) calc(<alpha-value> * 100%), transparent)",`,
+  `"foreground-inverse": "color-mix(in oklab, var(--foreground-inverse, theme(colors.background)) calc(<alpha-value> * 100%), transparent)",`,
+  `"muted-foreground-inverse": "color-mix(in oklab, var(--muted-foreground-inverse, color-mix(in oklab, theme(colors.background) 75%, theme(colors.foreground))) calc(<alpha-value> * 100%), transparent)",`,
 ].join("\n")

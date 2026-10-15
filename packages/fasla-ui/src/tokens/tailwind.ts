@@ -19,10 +19,15 @@
  * placeholder keeps both `bg-primary` and `bg-primary/10` working, while letting
  * the CSS variables stay full colours rather than bare channel triplets.
  *
+ * Mixed in OKLab, not OKLCH: in OKLCH a near-neutral colour loses its hue
+ * against `transparent` and is drawn at hue 0, so zinc-700 #3f3f46 rendered a
+ * reddish grey and #f8fafc a pinkish white. OKLab has no hue to lose, and
+ * every Fasla token draws exactly.
+ *
  * Needs Chrome 111+, Safari 16.2+, Firefox 113+.
  */
 export const semanticColor = (name: string) =>
-  `color-mix(in oklch, var(--${name}) calc(<alpha-value> * 100%), transparent)`
+  `color-mix(in oklab, var(--${name}) calc(<alpha-value> * 100%), transparent)`
 
 const c = semanticColor
 
@@ -33,7 +38,7 @@ const c = semanticColor
  * tokens to. theme/theme-items.mjs holds the fallbacks and maps them the same.
  */
 const inverse = (name: string, fallback: string) =>
-  `color-mix(in oklch, var(--${name}, ${fallback}) calc(<alpha-value> * 100%), transparent)`
+  `color-mix(in oklab, var(--${name}, ${fallback}) calc(<alpha-value> * 100%), transparent)`
 
 export const tailwindSemanticColors = {
   // Surfaces

@@ -71,7 +71,7 @@ export const SHADCN_TOKENS = [
 export const SHADCN_V3_MAPPED = [...SHADCN_TOKENS, "destructive-foreground"]
 
 /** The Fasla look, the way tokens/tailwind.ts resolves every token. */
-export const semanticColor = (name) => `color-mix(in oklch, var(--${name}) calc(<alpha-value> * 100%), transparent)`
+export const semanticColor = (name) => `color-mix(in oklab, var(--${name}) calc(<alpha-value> * 100%), transparent)`
 
 /**
  * What each inverse token falls back to in a theme that doesn't define it: the
@@ -97,7 +97,7 @@ export const inverseThemeVars = () =>
  * into a colour. Tailwind 3 resolves `theme()` inside a config colour.
  */
 export const inverseColor = (name) =>
-  `color-mix(in oklch, var(--${name}, ${INVERSE_FALLBACKS[name].replace(/var\(--([a-z-]+)\)/g, "theme(colors.$1)")}) calc(<alpha-value> * 100%), transparent)`
+  `color-mix(in oklab, var(--${name}, ${INVERSE_FALLBACKS[name].replace(/var\(--([a-z-]+)\)/g, "theme(colors.$1)")}) calc(<alpha-value> * 100%), transparent)`
 
 /** A token's Tailwind 3 colour: inverse tokens with their fallback, the rest as is. */
 const v3Color = (name) => (name in INVERSE_FALLBACKS ? inverseColor(name) : semanticColor(name))

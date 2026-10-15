@@ -230,6 +230,15 @@ describe("Tailwind mapping", () => {
     expect(semanticColor("primary")).toContain("<alpha-value>")
     expect(semanticColor("primary")).toContain("var(--primary)")
   })
+
+  it("mixes in OKLab, so near-neutral tokens keep their hue", () => {
+    // In OKLCH a near-neutral colour mixed with `transparent` loses its hue
+    // and is drawn at hue 0: zinc-700 #3f3f46 rendered as a reddish grey.
+    for (const value of Object.values(tailwindSemanticColors).flatMap((v) => (typeof v === "string" ? [v] : Object.values(v)))) {
+      expect(value).toMatch(/^color-mix\(in oklab, /)
+      expect(value).not.toContain("in oklch")
+    }
+  })
 })
 
 describe("colour dialect", () => {
