@@ -87,6 +87,7 @@ export const CODE_MAP = {
   ],
   checkbox: { set: "Check Box", page: "3830:5150" },
   combobox: { set: "Combobox", page: "14852:8647" },
+  "dropdown-menu": { set: "Dropdown", page: "3972:55121" },
   input: { set: "Default Input", page: "3882:2381" },
   pagination: { set: "Pagination", page: "3772:64720" },
   progress: { set: "Progress", page: "3831:2712" },

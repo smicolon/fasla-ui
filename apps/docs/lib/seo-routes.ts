@@ -257,10 +257,25 @@ export const routes = [
       "Build a React select field for choosing one option or several, with badges, labels, keyboard support and RTL.",
     h1: "Select",
     ar: {
-      title: "قائمة منسدلة (Select) لتطبيقات React | فاصلة",
+      title: "حقل الاختيار (Select) لتطبيقات React | فاصلة",
       description:
-        "أنشئ مكوّن قائمة منسدلة (Select) لاختيار خيار واحد أو عدة خيارات، مع شارات وتسميات ودعم لوحة المفاتيح والاتجاه من اليمين إلى اليسار.",
-      h1: "قائمة منسدلة (Select)",
+        "أنشئ مكوّن حقل الاختيار (Select) لاختيار خيار واحد أو عدة خيارات، مع شارات وتسميات ودعم لوحة المفاتيح والاتجاه من اليمين إلى اليسار.",
+      h1: "حقل الاختيار (Select)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
+    path: "/docs/components/dropdown-menu/",
+    title: "Dropdown Menu React Component | Fasla",
+    description:
+      "Add accessible React dropdown menus with icons, shortcuts, checkbox and radio items, switches and submenus, mirrored for RTL.",
+    h1: "Dropdown Menu",
+    ar: {
+      title: "قائمة منسدلة (Dropdown Menu) لتطبيقات React | فاصلة",
+      description:
+        "أضف مكوّن قائمة منسدلة للإجراءات، مع أيقونات واختصارات وصفوف اختيار ومفاتيح تبديل وقوائم فرعية، وينعكس تلقائيًا في الصفحات العربية.",
+      h1: "قائمة منسدلة (Dropdown Menu)",
     },
   },
   {
@@ -377,10 +392,10 @@ export const routes = [
       "Create a searchable React combobox with single or multiple selection, accessible controls, and typed options.",
     h1: "Combobox",
     ar: {
-      title: "قائمة منسدلة بالبحث (Combobox) لتطبيقات React | فاصلة",
+      title: "حقل الاختيار بالبحث (Combobox) لتطبيقات React | فاصلة",
       description:
-        "أنشئ مكوّن قائمة منسدلة بالبحث (Combobox) لاختيار خيار واحد أو عدة خيارات، مع عناصر تحكم تراعي إتاحة الوصول (accessibility).",
-      h1: "قائمة منسدلة بالبحث (Combobox)",
+        "أنشئ مكوّن حقل الاختيار بالبحث (Combobox) لاختيار خيار واحد أو عدة خيارات، مع عناصر تحكم تراعي إتاحة الوصول (accessibility).",
+      h1: "حقل الاختيار بالبحث (Combobox)",
     },
   },
   {
