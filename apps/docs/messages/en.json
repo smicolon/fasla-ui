@@ -2289,6 +2289,47 @@
         "faq-chat-thread": "Chat Thread"
       }
     },
+    "errorStateBlocks": {
+      "lead": "{count, plural, one {One error page} other {{n} error pages}}: 404 pages, and the states next to them, from a server error to a timed redirect.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "filterLabel": "Filter by family",
+      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
+      "families": {
+        "all": "All",
+        "not-found": "404 pages",
+        "other-states": "Other states"
+      },
+      "types": {
+        "error-state-centered-minimal": "Centered Minimal",
+        "error-state-search-recovery": "Search Recovery",
+        "error-state-display-numeral-split": "Display Numeral Split",
+        "error-state-editorial-photo-split": "Editorial Photo Split",
+        "error-state-full-bleed-photo": "Full-Bleed Photo",
+        "error-state-colour-field-scatter": "Colour Field Scatter",
+        "error-state-dark-spotlight": "Dark Spotlight",
+        "error-state-ghost-watermark": "Ghost Watermark",
+        "error-state-helpful-links-list": "Helpful Links List",
+        "error-state-popular-pages-grid": "Popular Pages Grid",
+        "error-state-error-card-panel": "Error Card Panel",
+        "error-state-illustrated-empty-state": "Illustrated Empty State",
+        "error-state-light-editorial": "Light Editorial",
+        "error-state-layered-badge-centered": "Layered Badge Centered",
+        "error-state-server-error-500": "Server Error 500",
+        "error-state-access-denied-403": "Access Denied 403",
+        "error-state-offline-state": "Offline State",
+        "error-state-maintenance-mode": "Maintenance Mode",
+        "error-state-empty-search-results": "Empty Search Results",
+        "error-state-recovery-bento": "Recovery Bento",
+        "error-state-sitemap-columns": "Sitemap Columns",
+        "error-state-terminal-console": "Terminal Console",
+        "error-state-photo-collage-scatter": "Photo Collage Scatter",
+        "error-state-support-escalation-band": "Support Escalation Band",
+        "error-state-split-colour-panel": "Split Colour Panel",
+        "error-state-marquee-404-band": "Marquee 404 Band",
+        "error-state-broken-trail-breadcrumb": "Broken Trail Breadcrumb",
+        "error-state-countdown-redirect": "Countdown Redirect"
+      }
+    },
     "blockCard": {
       "fullScreen": "Open full screen",
       "newTab": "(opens in a new tab)",

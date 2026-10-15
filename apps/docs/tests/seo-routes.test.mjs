@@ -8,9 +8,9 @@ const docsRoot = path.resolve(import.meta.dir, "..")
 const componentsRoot = path.join(docsRoot, "app/[locale]/docs/components")
 
 describe("Blocks section", () => {
-  test("has a page for every block family route, and lists every FAQ item in the registry", async () => {
+  test("has a page for every block family route, and lists every FAQ and Error State item in the registry", async () => {
     const { blockRoutes } = await import("../lib/seo-routes")
-    const { FAQ_TYPES } = await import("../lib/blocks")
+    const { FAQ_TYPES, ERROR_STATE_TYPES } = await import("../lib/blocks")
     const blocksRoot = path.join(docsRoot, "app/[locale]/docs/blocks")
     // installation/ is the section's own page, not a family.
     const families = readdirSync(blocksRoot, { withFileTypes: true })
@@ -21,15 +21,17 @@ describe("Blocks section", () => {
     const registry = JSON.parse(readFileSync(path.join(docsRoot, "../../packages/fasla-ui/registry.json"), "utf8"))
     const faqItems = registry.items.filter((item) => item.name.startsWith("faq-")).map((item) => item.name)
     expect(FAQ_TYPES.map((type) => type.slug).sort()).toEqual(faqItems.sort())
+    const errorStateItems = registry.items.filter((item) => item.name.startsWith("error-state-")).map((item) => item.name)
+    expect(ERROR_STATE_TYPES.map((type) => type.slug).sort()).toEqual(errorStateItems.sort())
   })
 
   test("marks exactly the blocks that depend on theme-inverse as inverse", async () => {
-    const { FAQ_TYPES } = await import("../lib/blocks")
+    const { ALL_BLOCK_TYPES } = await import("../lib/blocks")
     const registry = JSON.parse(readFileSync(path.join(docsRoot, "../../packages/fasla-ui/registry.json"), "utf8"))
     const inverse = registry.items
       .filter((item) => item.registryDependencies?.includes("theme-inverse"))
       .map((item) => item.name)
-    expect(FAQ_TYPES.filter((type) => type.inverse).map((type) => type.slug).sort()).toEqual(inverse.sort())
+    expect(ALL_BLOCK_TYPES.filter((type) => type.inverse).map((type) => type.slug).sort()).toEqual(inverse.sort())
   })
 
   test("keeps the block previews out of the catalogue, and so out of the sitemap", async () => {

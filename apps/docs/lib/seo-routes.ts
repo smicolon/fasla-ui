@@ -139,6 +139,21 @@ export const routes = [
     },
   },
   {
+    kind: "block",
+    category: "Blocks",
+    path: "/docs/blocks/error-state/",
+    title: "Error State Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Twenty-eight error pages, from a centred 404 to a server error, no access, offline and maintenance, responsive and mirrored for Arabic.",
+    h1: "Error State",
+    ar: {
+      title: "كتل حالة الخطأ لمشاريع React | فاصلة",
+      description:
+        "ثمانٍ وعشرون صفحة خطأ، من صفحة غير موجودة في الوسط إلى خطأ الخادم ورفض الوصول وانقطاع الاتصال والصيانة، متجاوبة ومعكوسة للعربية.",
+      h1: "حالة الخطأ (Error State)",
+    },
+  },
+  {
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/button/",
