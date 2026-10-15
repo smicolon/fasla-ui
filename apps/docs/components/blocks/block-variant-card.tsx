@@ -8,7 +8,7 @@ import { CodeBlock } from "@/components/component-preview"
 import { PackageManagerTabs } from "@/components/package-manager-tabs"
 import { PREVIEW_HEIGHT_MESSAGE } from "@/components/blocks/block-preview"
 import { cn } from "@/lib/utils"
-import { BREAKPOINTS, previewPath, type BlockType, type Breakpoint } from "@/lib/blocks"
+import { BREAKPOINTS, addCommand, previewPath, type BlockType, type Breakpoint } from "@/lib/blocks"
 import { INVERSE_CSS } from "@/lib/inverse-tokens"
 
 /** True once the element has come within a screen of the viewport, and stays true. */
@@ -247,16 +247,20 @@ export function BlockVariantCard({
 
         <TabsContent value="manual" className="mt-4 space-y-4">
           <ol className="list-decimal space-y-4 ps-5 text-sm text-muted-foreground marker:text-foreground">
-            <li className="space-y-2">
-              <p>{t("manualDependencies")}</p>
-              <CodeBlock language="bash">{`npx @smicolon/fasla-ui@latest add ${components.join(" ")}`}</CodeBlock>
-              {packages.length > 0 ? (
-                <>
-                  <p>{t("manualPackages")}</p>
-                  <PackageManagerTabs packages={packages.join(" ")} />
-                </>
-              ) : null}
-            </li>
+            {/* Only the steps this block needs: three blocks use no Fasla
+                component, and a bare `add` installs nothing. */}
+            {addCommand(components) ? (
+              <li className="space-y-2">
+                <p>{t("manualDependencies")}</p>
+                <CodeBlock language="bash">{addCommand(components)!}</CodeBlock>
+              </li>
+            ) : null}
+            {packages.length > 0 ? (
+              <li className="space-y-2">
+                <p>{t("manualPackages")}</p>
+                <PackageManagerTabs packages={packages.join(" ")} />
+              </li>
+            ) : null}
             <li className="space-y-2">
               <p>{t.rich("manualSource", { code: (chunks) => <code>{chunks}</code>, file: `components/blocks/${type.slug}.tsx` })}</p>
               {source ? <CodeBlock>{source}</CodeBlock> : <p>{source === null ? t("loading") : t("loadFailed")}</p>}

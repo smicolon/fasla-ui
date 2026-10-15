@@ -140,15 +140,18 @@ export interface FaqTableCompactProps
     Partial<FaqTableCompactCopy> {
   /** Which language the default copy is in. The page's `dir` sets the direction. */
   locale?: "en" | "ar"
-  /** Where the view-all link goes. Without one, the link is not shown. */
-  viewAllHref?: string
+  /**
+   * Where the view-all link goes: the page with every question, `/faq` by
+   * default. `null` leaves the link out.
+   */
+  viewAllHref?: string | null
 }
 
 export function FaqTableCompact({
   locale = "en",
   heading,
   viewAllLabel,
-  viewAllHref = "#",
+  viewAllHref = "/faq",
   items,
   empty,
   className,

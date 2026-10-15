@@ -8,19 +8,9 @@ import registry from "@fasla-ui/registry.json"
 import { ComponentName } from "@/components/component-name"
 import { BlockVariantCard } from "@/components/blocks/block-variant-card"
 import { cn } from "@/lib/utils"
-import { FAQ_FAMILIES, FAQ_TYPES, type FaqFamily } from "@/lib/blocks"
+import { FAQ_FAMILIES, FAQ_TYPES, blockRequirements, type FaqFamily } from "@/lib/blocks"
 
-type Item = { name: string; dependencies?: string[]; registryDependencies?: string[] }
-const items: Item[] = registry.items
-
-/** What each Type installs with it: Fasla components, and npm packages. */
-function requirements(slug: string) {
-  const item = items.find((candidate) => candidate.name === slug)
-  return {
-    components: (item?.registryDependencies ?? []).filter((dep) => dep !== "theme-inverse"),
-    packages: item?.dependencies ?? [],
-  }
-}
+const items: { name: string; dependencies?: string[]; registryDependencies?: string[] }[] = registry.items
 
 export default function FaqBlocksPage() {
   const t = useTranslations("docs.faqBlocks")
@@ -74,7 +64,7 @@ export default function FaqBlocksPage() {
 
       <div className="space-y-8">
         {shown.map((type) => (
-          <BlockVariantCard key={type.slug} type={type} name={t(`types.${type.slug}`)} {...requirements(type.slug)} />
+          <BlockVariantCard key={type.slug} type={type} name={t(`types.${type.slug}`)} {...blockRequirements(type.slug, items)} />
         ))}
       </div>
     </div>

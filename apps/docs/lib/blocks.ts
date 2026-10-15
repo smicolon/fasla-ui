@@ -51,3 +51,26 @@ export type Breakpoint = keyof typeof BREAKPOINTS
 
 /** Where a block renders alone, for the preview frames. Never in the sitemap. */
 export const previewPath = (locale: string, slug: string) => `/${locale}/blocks-preview/${slug}/`
+
+type RegistryEntry = { name: string; dependencies?: string[]; registryDependencies?: string[] }
+
+/**
+ * What a block needs installed before its source is copied in by hand: the
+ * Fasla components it imports, and the npm packages it imports itself.
+ * theme-inverse is CSS, not a component; the Manual tab shows its lines.
+ */
+export function blockRequirements(slug: string, items: RegistryEntry[]) {
+  const item = items.find((candidate) => candidate.name === slug)
+  return {
+    components: (item?.registryDependencies ?? []).filter((dep) => dep !== "theme-inverse"),
+    packages: item?.dependencies ?? [],
+  }
+}
+
+/**
+ * The command that adds those components, or null when there are none: a bare
+ * `add` installs nothing and stops to ask which components to add.
+ */
+export function addCommand(components: string[]): string | null {
+  return components.length > 0 ? `npx @smicolon/fasla-ui@latest add ${components.join(" ")}` : null
+}
