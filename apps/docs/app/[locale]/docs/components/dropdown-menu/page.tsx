@@ -128,8 +128,10 @@ export default function DropdownMenuPage() {
   })
   const children = row("children", "ReactNode", "", "children")
   const className = row("className", "string", "", "className")
-  // One table, a Part column grouping each part's rows. Parts that take only
-  // `className` and `children` are named in the sentence under it instead.
+  // One table per part, as on every component page, for the parts with props
+  // of their own; the ones that take only `className` and `children` are named
+  // in the sentence under the tables. Base UI's advanced props (handles,
+  // actions refs, trigger ids, focus management) are left out, as on Select.
   const propTables: { part: string; rows: PropRow[] }[] = [
     {
       part: "DropdownMenu",
@@ -140,13 +142,6 @@ export default function DropdownMenuPage() {
         row("onOpenChangeComplete", "(open) => void", "", "onOpenChangeComplete"),
         row("modal", "boolean", "true", "modal"),
         row("disabled", "boolean", "false", "disabled"),
-        row("loopFocus", "boolean", "true", "loopFocus"),
-        row("highlightItemOnHover", "boolean", "true", "highlightItemOnHover"),
-        row("orientation", '"vertical" | "horizontal"', '"vertical"', "orientation"),
-        row("actionsRef", "RefObject<{ close, unmount }>", "", "actionsRef"),
-        row("handle", "MenuHandle", "", "handle"),
-        row("triggerId", "string | null", "", "triggerId"),
-        row("defaultTriggerId", "string | null", "", "defaultTriggerId"),
         children,
       ],
     },
@@ -158,8 +153,6 @@ export default function DropdownMenuPage() {
         row("openOnHover", "boolean", "false", "openOnHover"),
         row("delay", "number", "100", "delay"),
         row("closeDelay", "number", "0", "closeDelay"),
-        row("handle", "MenuHandle", "", "triggerHandle"),
-        row("payload", "unknown", "", "payload"),
         children,
         className,
       ],
@@ -173,7 +166,6 @@ export default function DropdownMenuPage() {
         row("alignOffset", "number", "0", "alignOffset"),
         row("collisionAvoidance", "{ side, align, fallbackAxisSide }", "", "collisionAvoidance"),
         row("container", "HTMLElement", "", "container"),
-        row("finalFocus", "boolean | RefObject | (closeType) => …", "", "finalFocus"),
         children,
         row("className", "string", "", "contentClassName"),
       ],
@@ -239,7 +231,6 @@ export default function DropdownMenuPage() {
         row("defaultOpen", "boolean", "false", "subDefaultOpen"),
         row("onOpenChange", "(open, eventDetails) => void", "", "subOnOpenChange"),
         row("disabled", "boolean", "false", "subDisabled"),
-        row("closeParentOnEsc", "boolean", "false", "closeParentOnEsc"),
         children,
       ],
     },
@@ -474,7 +465,14 @@ export default function DropdownMenuPage() {
       {/* Props */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("props")}</h2>
-        <PropsTable rows={propTables.flatMap(({ part, rows }) => rows.map((r) => ({ ...r, part })))} />
+        {propTables.map(({ part, rows }) => (
+          <div key={part} className="space-y-3">
+            <h3 className="text-lg font-semibold">
+              <code dir="ltr">{part}</code>
+            </h3>
+            <PropsTable rows={rows} />
+          </div>
+        ))}
         <p className="text-sm text-muted-foreground">{d.rich("propsNote", rich)}</p>
       </section>
 
