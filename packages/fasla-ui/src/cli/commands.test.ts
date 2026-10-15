@@ -44,6 +44,9 @@ vi.mock("./registry", async (importOriginal) => {
     // A block on an inverted surface: it needs theme-inverse, a theme item
     // published beside the components but not in the index.
     { name: "dark-block", type: "registry:block", registryDependencies: ["https://ui.smicolon.com/r/theme-inverse.json"], files: [{ path: "registry/blocks/dark-block/DarkBlock.tsx", type: "registry:block", target: "components/blocks/dark-block.tsx", content: `// From Fasla UI (@fasla/dark-block): https://fasla.smicolon.com\nexport const DarkBlock = () => null\n` }] },
+    // Depends on a URL under our registry that names no component and no
+    // theme item: a dependency removed or misspelt, not a theme item.
+    { name: "ghost-block", type: "registry:block", registryDependencies: ["https://ui.smicolon.com/r/badge.json", "https://ui.smicolon.com/r/ghost.json"], files: [{ path: "registry/blocks/ghost-block/GhostBlock.tsx", type: "registry:block", target: "components/blocks/ghost-block.tsx", content: `// From Fasla UI (@fasla/ghost-block): https://fasla.smicolon.com\nexport const GhostBlock = () => null\n` }] },
     // Broken registry entries, for what add says when a component writes nothing.
     { name: "hollow", type: "registry:ui", files: [] },
     { name: "blank", type: "registry:ui", files: [{ path: "registry/ui/blank/blank.tsx", type: "registry:ui", target: "", content: "" }] },
@@ -774,6 +777,22 @@ describe("add: theme items a component depends on", () => {
     await expect(run("add", "dark-block", "--yes", "--cwd", dir)).rejects.toThrow("process.exit(1)")
     expect(await fs.pathExists(path.join(dir, "components/blocks/dark-block.tsx"))).toBe(true)
     expect(output()).toContain("Run this to finish:\n  npx shadcn@latest add https://fasla.smicolon.com/r/theme-inverse.json")
+  })
+
+  it("treats only its own theme items as theme items, and reports any other unknown URL under the registry", async () => {
+    // The warning comes from add's spinner, which writes to stderr.
+    const stderr: string[] = []
+    vi.spyOn(process.stderr, "write").mockImplementation(((chunk: string | Uint8Array) => {
+      stderr.push(String(chunk))
+      return true
+    }) as typeof process.stderr.write)
+    const dir = await app()
+    await run("add", "ghost-block", "--yes", "--cwd", dir)
+    expect(themeItemsApplied).toEqual([])
+    expect(await fs.pathExists(path.join(dir, "components/ui/badge.tsx"))).toBe(true)
+    expect(stderr.join("").replace(/\x1b\[[0-9;]*m/g, "")).toContain(
+      "Not resolvable from this registry, install separately: https://ui.smicolon.com/r/ghost.json"
+    )
   })
 
   it("installs nothing for a component that doesn't need it", async () => {

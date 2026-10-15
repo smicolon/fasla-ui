@@ -4,7 +4,7 @@ import ora from "ora"
 import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
-import { DEFAULT_REGISTRY_URL, LEGACY_REGISTRY_URL, REGISTRY_URL, fetchRegistry, fetchComponent, getTargetDirectory, type RegistryFile, type RegistryItem } from "../registry.js"
+import { DEFAULT_REGISTRY_URL, LEGACY_REGISTRY_URL, REGISTRY_URL, THEME_ITEMS, fetchRegistry, fetchComponent, getTargetDirectory, type RegistryFile, type RegistryItem } from "../registry.js"
 import { describeAdded, ownItemName, registryItemName, resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
 import { aliasToPath, checkDestination, installFile, resolveInsideProject } from "../paths.js"
 import { detectPackageManager } from "../pm.js"
@@ -157,11 +157,17 @@ export function addCommand() {
       if (resolved.added.length > 0) {
         addSpinner.info(describeAdded(resolved.added, resolved.neededBy))
       }
-      // Fasla items outside the index are theme items, which carry CSS and no
-      // files: theme-inverse, for a block on an inverted surface. The shadcn
-      // CLI installs those, below, as `init` installs the theme.
-      const themeItems = [...new Set(resolved.skipped.map((dep) => ownItemName(dep, bases)).filter((n) => n !== undefined))]
-      const unresolvable = resolved.skipped.filter((dep) => ownItemName(dep, bases) === undefined)
+      // Theme items are published outside the index and carry CSS, no files:
+      // theme-inverse, for a block on an inverted surface. The shadcn CLI
+      // installs those, below, as `init` installs the theme. Only our own
+      // theme items: any other URL the index doesn't list is a dependency this
+      // registry can't resolve, and is reported as one.
+      const themeItemOf = (dep: string) => {
+        const name = ownItemName(dep, bases)
+        return name !== undefined && THEME_ITEMS.includes(name) ? name : undefined
+      }
+      const themeItems = [...new Set(resolved.skipped.map(themeItemOf).filter((n) => n !== undefined))]
+      const unresolvable = resolved.skipped.filter((dep) => themeItemOf(dep) === undefined)
       if (unresolvable.length > 0) {
         addSpinner.warn(`Not resolvable from this registry, install separately: ${unresolvable.join(", ")}`)
       }
