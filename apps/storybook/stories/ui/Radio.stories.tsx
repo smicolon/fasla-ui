@@ -7,6 +7,14 @@ const meta: Meta<typeof Radio> = {
   component: Radio,
   parameters: { layout: "centered" },
   tags: ["autodocs"],
+  argTypes: {
+    // HTML's own prop, which docgen leaves out; listed so every UI table has it.
+    className: {
+      control: "text",
+      description: "Extra CSS classes, merged onto the root element.",
+      table: { type: { summary: "string" } },
+    },
+  },
 }
 
 export default meta
