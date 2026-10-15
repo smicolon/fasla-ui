@@ -283,6 +283,31 @@
       ]
     },
     {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "A menu of actions on Base UI, opened from a button: labels, groups, separators, icons, shortcuts, destructive and disabled items, checkbox items with a check or a switch, radio groups and submenus, mirrored for RTL.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "select",
+        "switch"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/dropdown-menu/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/dropdown-menu.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "navigation"
+      ]
+    },
+    {
       "name": "empty-state",
       "type": "registry:block",
       "title": "Empty State",
