@@ -88,7 +88,7 @@ Visit [fasla.smicolon.com](https://fasla.smicolon.com) for full documentation.
 |-----------|-------------|
 | AppShell | Sidebar and header layout system |
 | PageHeader | Title, breadcrumbs, actions |
-| DataTable | Sortable, filterable tables with pagination |
+| DataTable | Tables with selection, loading and empty states; pair with Pagination |
 | EmptyState | Contextual empty states with actions |
 | FormSection | Grouped form fields |
 

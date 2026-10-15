@@ -311,6 +311,21 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/pagination/",
+    title: "Pagination React Component | Fasla",
+    description:
+      "Page through long lists with accessible React pagination built on Button: three variants, four sizes, an ellipsis, mirrored for RTL.",
+    h1: "Pagination",
+    ar: {
+      title: "التنقّل بين الصفحات (Pagination) لتطبيقات React | فاصلة",
+      description:
+        "تنقّل بين صفحات القوائم الطويلة بمكوّن مبني على الزر، بثلاثة أنماط وأربعة أحجام ونقاط ثلاث للصفحات المحذوفة، وينعكس تلقائيًا في الصفحات العربية.",
+      h1: "التنقّل بين الصفحات (Pagination)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/progress/",
     title: "Progress React Component | Fasla",
     description:

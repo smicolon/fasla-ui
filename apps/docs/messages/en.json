@@ -1042,6 +1042,82 @@
         "className": "Extra classes for the component."
       }
     },
+    "pagination": {
+      "lead": "A row of page links for moving through a long list or a set of results. The page links, Previous and Next are all Buttons, in three variants, two shapes and four sizes, the same as the Figma set.",
+      "installNote": "Pagination is built on Button, so adding it adds <code>button</code> too.",
+      "sample": {
+        "label": "Pagination"
+      },
+      "variantsBody": "<code>variant</code> picks the Button type of each part. <code>default</code> has ghost page links and a solid current page. <code>solid</code> has soft page links and a solid current page. <code>outlined</code> has outline page links, a soft current page, and outline Previous and Next. In the other two, Previous and Next are ghost.",
+      "sizesBody": "The four Button sizes: <code>xs</code> is 26px tall, <code>sm</code> 32px, <code>md</code> 36px and <code>lg</code> 40px. A page link is a square of that height, and its number is 14px at every size. A number too wide for its square, such as 100 at <code>xs</code>, widens it.",
+      "shape": {
+        "title": "Shape",
+        "body": "<code>shape=\"square\"</code> gives every part the Button's standard 8px corners, and <code>shape=\"rounded\"</code> its full radius: circles for the page links, pills for Previous and Next. The focus ring follows the shape."
+      },
+      "steps": {
+        "title": "Previous and Next",
+        "body": "<code>PaginationPrevious</code> and <code>PaginationNext</code> show a label and a chevron. The label follows the page's language, Previous and Next or السابق and التالي; pass <code>text</code> to change it. With <code>iconOnly</code> they show the chevron alone in a square, and keep the label for screen readers. Disable Previous on the first page and Next on the last with <code>disabled</code>.",
+        "text": "Label",
+        "icon": "Icon only",
+        "first": "First page"
+      },
+      "long": {
+        "title": "Long ranges",
+        "body": "Show the first and last pages, the current page with one on each side, and put <code>PaginationEllipsis</code> where pages are left out: 1 … 5 6 7 … 20. The ellipsis is a square the size of a page link, but not a link, and screen readers hear “More pages”. Icon-only Previous and Next keep a long row short. On a phone, show fewer pages around the current one, as this example does."
+      },
+      "a11y": {
+        "landmark": "<code>Pagination</code> is a <code>nav</code> landmark. Name it in the page's language with <code>aria-label</code>, as the examples here do; otherwise it is called Pagination. Give each one on a page its own name.",
+        "current": "The current page carries <code>aria-current=\"page\"</code>, so screen readers announce it as the current page.",
+        "steps": "Previous and Next are named by their label, which stays readable when <code>iconOnly</code> hides it. The chevrons are hidden from assistive technology.",
+        "ellipsis": "The ellipsis takes no focus. Its glyph is hidden, and screen readers hear “More pages”, or “مزيد من الصفحات” when the nearest <code>lang</code> is Arabic.",
+        "disabled": "A disabled link carries <code>aria-disabled</code>, leaves the tab order and ignores clicks. It stays a link, so screen readers still find it.",
+        "focus": "Every part is a Button, so keyboard focus draws the Button's 2px ring, 2px outside the link.",
+        "direction": "Direction follows the page's <code>dir</code>; there is no prop. Right to left, the row starts on the right with Previous, and each chevron turns to point outward. Page numbers stay in Western digits."
+      },
+      "props": {
+        "pagination": {
+          "variant": "The Button type of each part: ghost, soft or outline page links.",
+          "shape": "The corners of every part: the Button's standard radius, or its full radius.",
+          "size": "The height of every part, from 26px to 40px.",
+          "ariaLabel": "The landmark's name for screen readers, in the page's language.",
+          "children": "A <code>PaginationContent</code>.",
+          "className": "Extra classes for the <code>nav</code> element, a centred row by default."
+        },
+        "content": {
+          "children": "The <code>PaginationItem</code>s, in reading order.",
+          "className": "Extra classes for the <code>ul</code> element. It wraps onto a second row rather than overflow."
+        },
+        "item": {
+          "children": "One page link, Previous, Next or the ellipsis.",
+          "className": "Extra classes for the <code>li</code> element."
+        },
+        "link": {
+          "href": "Where the link goes. The link takes every other attribute of an <code>a</code> element too.",
+          "isActive": "Marks the current page: the current-page look and <code>aria-current=\"page\"</code>.",
+          "disabled": "Dims the link, takes it out of the tab order and ignores clicks.",
+          "asChild": "Makes its only child the link, with these styles: Next.js's <code>Link</code>, say, or a <code>button</code> when paging changes state rather than the URL.",
+          "children": "The page number, in Western digits on Arabic pages too.",
+          "className": "Extra classes for the link."
+        },
+        "step": {
+          "href": "Where the link goes.",
+          "text": "The label. Previous or Next by default, in the page's language.",
+          "iconOnly": "Shows the chevron alone, in a square. The label stays for screen readers.",
+          "disabled": "Dims the link, takes it out of the tab order and ignores clicks.",
+          "asChild": "Makes its only child the link, and puts the label and chevron inside it.",
+          "className": "Extra classes for the link."
+        },
+        "ellipsis": {
+          "className": "Extra classes for the ellipsis. Its screen-reader text is built in."
+        }
+      },
+      "usage": {
+        "basic": "Links to pages",
+        "long": "A long range",
+        "state": "Paging with state",
+        "router": "With the Next.js Link"
+      }
+    },
     "accordion": {
       "lead": "Accordion stacks headings that each show or hide a section of content. Use it for questions and answers, settings groups and other content people scan before they read it in full.",
       "installNote": "Accordion is built on Base UI, so it needs the <code>@base-ui/react</code> package. <code>add</code> installs it with the component, and so does the shadcn CLI.",
@@ -1346,14 +1422,10 @@
       "emptyTitle": "Empty State",
       "empty": "No users found",
       "paginationTitle": "Pagination",
+      "paginationBody": "Page through rows with <code>Pagination</code>, placed under the table. Here its links are buttons, because paging changes the rows shown rather than the URL.",
       "pagination": {
         "label": "Pagination",
-        "status": "Page {page} of {total}",
-        "previous": "Previous",
-        "next": "Next",
-        "goToPrevious": "Go to previous page",
-        "goToNext": "Go to next page",
-        "goToPage": "Go to page {page}"
+        "status": "Page {page} of {total}"
       },
       "props": {
         "data": "Rows to display.",
@@ -1364,7 +1436,6 @@
         "onRowClick": "Called when a row is clicked.",
         "selectedKey": "Key of the selected row.",
         "stickyHeader": "Keeps the header visible on scroll.",
-        "pagination": "Pages through rows; <code>labels</code> translates its text.",
         "className": "Extra classes for the component."
       }
     },

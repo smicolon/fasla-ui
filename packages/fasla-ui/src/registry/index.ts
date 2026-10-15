@@ -122,7 +122,7 @@ export const registry: RegistryItem[] = [
     name: "data-table",
     type: "block",
     title: "Data Table",
-    description: "Data table with sorting, pagination, and custom cell rendering.",
+    description: "Data table with row selection, a sticky header, loading and empty states, and custom cell rendering. Pair it with Pagination to page through rows.",
     sourcePath: "registry/blocks/data-table",
     categories: ["data-display", "tables"],
   },

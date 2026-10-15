@@ -12,7 +12,6 @@ type Entry = { name: string; role: string; variants: number; rtl: boolean; code?
 /** Figma layer names that read differently on the page. */
 const DISPLAY: Record<string, string> = {
   Breadcrumbs: "Breadcrumb",
-  "Pagination Variants": "Pagination",
   "Check Box": "Checkbox",
   "Default Input": "Input",
   "Side Bar Inside Item": "Sidebar Item",
