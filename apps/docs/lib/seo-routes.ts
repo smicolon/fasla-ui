@@ -381,6 +381,21 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/alert/",
+    title: "Alert React Component | Fasla",
+    description:
+      "Show accessible React alerts for news, guidance, success, warnings and errors: three types, an action and a close button, mirrored for RTL.",
+    h1: "Alert",
+    ar: {
+      title: "تنبيه (Alert) لتطبيقات React | فاصلة",
+      description:
+        "اعرض رسائل الأخبار والإرشاد والنجاح والتحذير والأخطاء بمكوّن تنبيه بثلاثة أنواع، مع زر إجراء وزر إغلاق، وينعكس تلقائيًا في الصفحات العربية.",
+      h1: "تنبيه (Alert)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/pagination/",
     title: "Pagination React Component | Fasla",
     description:

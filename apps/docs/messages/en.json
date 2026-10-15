@@ -1165,6 +1165,128 @@
         "className": "Extra classes for the component."
       }
     },
+    "alert": {
+      "lead": "A message box that tells people about news, guidance, a finished task, something that needs attention, or an error. It comes in five variants and three types, the same as the Figma set, with an optional action and close button.",
+      "installNote": "Alert is built on Button, so adding it adds <code>button</code> too.",
+      "sample": {
+        "default": {
+          "title": "New message",
+          "description": "You have 12 unread messages in your inbox.",
+          "action": "View"
+        },
+        "info": {
+          "title": "Maintenance tonight",
+          "description": "The dashboard is offline from 22:00 to 23:00.",
+          "action": "Details"
+        },
+        "success": {
+          "title": "Payment received",
+          "description": "Your March invoice is paid in full.",
+          "action": "Receipt"
+        },
+        "warning": {
+          "title": "Storage almost full",
+          "description": "You have used 90% of your plan. Delete files or upgrade.",
+          "action": "Upgrade"
+        },
+        "destructive": {
+          "title": "Changes not saved",
+          "description": "The connection to the server dropped. Check your connection and try again.",
+          "action": "Retry"
+        },
+        "avatar": {
+          "title": "Layla Haddad replied",
+          "description": "“The new layout works. Ship it on Monday.”",
+          "action": "Reply"
+        },
+        "long": {
+          "title": "Your workspace moves to the new billing plan on 1 April, and some features change",
+          "description": "Projects, members and files carry over as they are. Shared links made before the move keep working for 30 days, then ask viewers to sign in.",
+          "more": "Read the full list of changes before the move, and tell your team which links to replace.",
+          "action": "Review"
+        }
+      },
+      "variantsBody": "<code>variant</code> says what the message is about: <code>default</code> for news, <code>info</code> for guidance, <code>success</code> for a finished task, <code>warning</code> for something that needs attention soon, and <code>destructive</code> for an error. Each variant has its own icon as well as its own colour token, so the meaning never rests on colour alone.",
+      "types": {
+        "title": "Types",
+        "body": "<code>type</code> sets how strongly the alert stands out. <code>outline</code>, the default, is a card with a 1px edge in the variant's colour. <code>soft</code> lays a 10% tint of that colour over the card. <code>solid</code> fills the alert with the colour and stands out most, so keep it for messages people must not miss. The action follows the type: an outline Button on <code>outline</code>, a solid Button on <code>soft</code>, and a secondary Button on <code>solid</code>."
+      },
+      "icon": {
+        "title": "Icon and avatar",
+        "body": "Each variant shows its own 16px icon, centred on the title's first line: an i in a circle for <code>default</code> and <code>info</code>, a check mark for <code>success</code>, a triangle for <code>warning</code> and an exclamation mark in a circle for <code>destructive</code>. Pass another icon to <code>icon</code> to replace it, an Avatar for a message from a person, or set <code>icon</code> to <code>false</code> to leave it out. An avatar is 32px and sits at the top.",
+        "withIcon": "Icon",
+        "withAvatar": "Avatar",
+        "none": "No icon"
+      },
+      "actions": {
+        "title": "Action and close button",
+        "body": "<code>AlertAction</code> is a Button at <code>xs</code>, 26px tall, and takes every Button prop, so <code>asChild</code> makes it a link. <code>AlertClose</code> is a ghost Icon Button with a 16px ×. Both sit at the end of the first line, the action first, 12px apart.",
+        "both": "Both",
+        "action": "Action only",
+        "close": "Close only"
+      },
+      "long": {
+        "title": "Long text",
+        "body": "The title and the description wrap in their own column. The icon stays on the title's first line, and the action and close button stay at the top. <code>AlertDescription</code> can hold more than a sentence: paragraphs, a list or a link."
+      },
+      "closing": {
+        "title": "Closing",
+        "body": "Pressing <code>AlertClose</code> hides the alert and calls <code>onOpenChange(false)</code>. Control the alert with <code>open</code> to show it again, or to remember that someone closed it. To keep it open, call <code>event.preventDefault()</code> in the close button's <code>onClick</code>.",
+        "closed": "The alert is closed.",
+        "reopen": "Show it again"
+      },
+      "a11y": {
+        "role": "The role follows the variant. <code>destructive</code> has <code>role=\"alert\"</code>: an error needs attention now, so screen readers interrupt what they are reading to announce it. The other variants have <code>role=\"status\"</code>, which screen readers announce once they finish the current sentence, because news, guidance, a finished task and a warning can wait that long. Pass <code>role</code> to choose another, such as <code>role=\"note\"</code> for a message that is part of the page from the start.",
+        "live": "Screen readers announce an alert when it appears. Render it when the event happens, and keep the title and description short, since both are read out.",
+        "icon": "The icon is decorative and hidden from assistive technology; the title says what the message is about.",
+        "close": "The close button is named “Close”, or “إغلاق” when the nearest <code>lang</code> is Arabic. Pass <code>label</code> to say what it closes.",
+        "focus": "When the alert closes while it holds focus, move focus on in <code>onOpenChange</code>, for example to the control that led to the message. Otherwise the next Tab starts again at the top of the page.",
+        "forcedColors": "In Windows high contrast mode the alert keeps a border in the system's text colour, so its edge stays visible when the fill is dropped.",
+        "direction": "Direction follows the page's <code>dir</code>; there is no prop. Right to left, the row starts on the right with the icon and ends with the close button, and the text is set in Cairo on its taller line."
+      },
+      "props": {
+        "alert": {
+          "variant": "What the message is about. Sets the icon, the colour and the default role.",
+          "type": "How strongly it stands out: a card with an edge, a tint, or a solid fill.",
+          "icon": "The variant's icon by default. <code>false</code> leaves it out; any element, such as an icon or an Avatar, replaces it.",
+          "open": "Whether the alert is shown. Set it to control the alert.",
+          "defaultOpen": "Whether the alert is shown at first, when you don't control it.",
+          "onOpenChange": "Called with <code>false</code> when the close button is pressed.",
+          "role": "<code>alert</code> for <code>destructive</code>, <code>status</code> for the rest, unless you pass another.",
+          "children": "The <code>AlertTitle</code>, <code>AlertDescription</code>, <code>AlertAction</code> and <code>AlertClose</code>, in that order.",
+          "className": "Extra classes for the alert. It fills its container's width."
+        },
+        "title": {
+          "children": "The title: one short line that says what happened.",
+          "className": "Extra classes for the title."
+        },
+        "description": {
+          "children": "More detail: a sentence, paragraphs, a list or a link.",
+          "className": "Extra classes for the description."
+        },
+        "action": {
+          "variant": "The Button type. Follows the alert's type unless you set it.",
+          "tone": "The Button tone. Follows the alert's type unless you set it.",
+          "size": "The Button size.",
+          "asChild": "Makes its only child the action, with these styles: a link, say.",
+          "onClick": "Called when the action is pressed.",
+          "children": "The label: a verb for what happens next.",
+          "className": "Extra classes for the action. It takes every other Button prop too."
+        },
+        "close": {
+          "label": "The button's name for screen readers. “Close” by default, in the page's language.",
+          "onClick": "Called before the alert closes. Call <code>event.preventDefault()</code> to keep it open.",
+          "children": "Another icon in place of the ×.",
+          "className": "Extra classes for the close button."
+        }
+      },
+      "usage": {
+        "basic": "A message",
+        "dismissible": "With an action and a close button",
+        "controlled": "Showing a closed alert again",
+        "avatar": "A message from a person"
+      }
+    },
     "pagination": {
       "lead": "A row of page links for moving through a long list or a set of results. The page links, Previous and Next are all Buttons, in three variants, two shapes and four sizes, the same as the Figma set.",
       "installNote": "Pagination is built on Button, so adding it adds <code>button</code> too.",

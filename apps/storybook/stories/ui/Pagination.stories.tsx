@@ -68,13 +68,11 @@ const meta: Meta<StoryArgs> = {
       options: ["text", "icon", "none"],
       description:
         "Figma `Next - Pre button` (`text`) and `Next - Pre icon button` (`icon`): `PaginationPrevious` and `PaginationNext` with a label, with `iconOnly`, or left out.",
-      table: { category: "Story" },
     },
     range: {
       control: "inline-radio",
       options: ["short", "long"],
       description: "Figma's pages 1 to 4, or a long range, 1 … 5 6 7 … 20, with `PaginationEllipsis` on each side.",
-      table: { category: "Story" },
     },
   },
   args: {
