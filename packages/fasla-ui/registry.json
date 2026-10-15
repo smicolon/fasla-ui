@@ -243,7 +243,7 @@
       "name": "data-table",
       "type": "registry:block",
       "title": "Data Table",
-      "description": "Data table with sorting, pagination, and custom cell rendering.",
+      "description": "Data table with row selection, a sticky header, loading and empty states, and custom cell rendering. Pair it with Pagination to page through rows.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
@@ -380,6 +380,29 @@
       ]
     },
     {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "A composable row of page links built on Button: Previous and Next with a label or icon only, an ellipsis for skipped pages, three variants, two shapes and four sizes, mirrored for RTL.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/pagination/pagination.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/pagination.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "navigation"
+      ]
+    },
+    {
       "name": "progress",
       "type": "registry:ui",
       "title": "Progress",
@@ -405,11 +428,15 @@
       "name": "select",
       "type": "registry:ui",
       "title": "Select",
-      "description": "A select control for choosing one option from a list.",
+      "description": "A select field on Base UI: single or multiple choice, chosen values as badges or text, a label, helper labels and a prefix icon, four sizes and two radii, mirrored for RTL.",
       "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
         "lucide-react"
       ],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "badge"
+      ],
       "files": [
         {
           "path": "registry/ui/select/select.tsx",

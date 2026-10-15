@@ -35,7 +35,10 @@ export default function IconButtonPage() {
     { prop: "aria-label", type: "string", fallback: "", description: b.rich("props.ariaLabel", rich) },
     { prop: "radius", type: '"standard" | "rounded"', fallback: '"standard"', description: b.rich("props.radius", rich) },
     { prop: "loading", type: "boolean", fallback: "false", description: b.rich("props.loading", rich) },
+    { prop: "loadingLabel", type: "string", fallback: '"Loading"', description: b.rich("props.loadingLabel", rich) },
     { prop: "disabled", type: "boolean", fallback: "false", description: b.rich("props.disabled", rich) },
+    { prop: "asChild", type: "boolean", fallback: "false", description: b.rich("props.asChild", rich) },
+    { prop: "onClick", type: "(event) => void", fallback: "", description: b.rich("props.onClick", rich) },
     { prop: "className", type: "string", fallback: "", description: b.rich("props.className", rich) },
   ]
 

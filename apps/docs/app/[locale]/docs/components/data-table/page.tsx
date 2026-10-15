@@ -3,7 +3,15 @@
 import { useTranslations } from "next-intl"
 
 import { useState } from "react"
-import { DataTable, Pagination, type Column } from "@fasla-ui/blocks/data-table/DataTable"
+import { DataTable, type Column } from "@fasla-ui/blocks/data-table/DataTable"
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@fasla-ui/ui/pagination"
 import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
@@ -41,15 +49,7 @@ export default function DataTablePage() {
     { id: "role", header: d("columns.role"), cell: (row) => row.role },
   ]
 
-  const labels = {
-    pagination: d("pagination.label"),
-    status: (current: number, total: number) => d("pagination.status", { page: current, total }),
-    previous: d("pagination.previous"),
-    next: d("pagination.next"),
-    goToPrevious: d("pagination.goToPrevious"),
-    goToNext: d("pagination.goToNext"),
-    goToPage: (target: number) => d("pagination.goToPage", { page: target }),
-  }
+  const TOTAL = 5
 
   const props: PropRow[] = [
     { prop: "data", type: "T[]", fallback: "", description: d.rich("props.data", richCode) },
@@ -60,7 +60,6 @@ export default function DataTablePage() {
     { prop: "onRowClick", type: "(row) => void", fallback: "", description: d.rich("props.onRowClick", richCode) },
     { prop: "selectedKey", type: "string | number", fallback: "", description: d.rich("props.selectedKey", richCode) },
     { prop: "stickyHeader", type: "boolean", fallback: "false", description: d.rich("props.stickyHeader", richCode) },
-    { prop: "Pagination", type: "{ page, totalPages, onPageChange, labels }", fallback: "", description: d.rich("props.pagination", richCode) },
     { prop: "className", type: "string", fallback: "", description: d.rich("props.className", richCode) },
   ]
 
@@ -88,8 +87,35 @@ export default function DataTablePage() {
       {/* Pagination */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{d("paginationTitle")}</h2>
+        <p className="text-muted-foreground">{d.rich("paginationBody", richCode)}</p>
         <ComponentPreview>
-          <Pagination page={page} totalPages={5} onPageChange={setPage} labels={labels} className="w-full" />
+          {/* Buttons, not links: paging here changes state, not the URL. */}
+          <div className="flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-2">
+            <p className="text-sm text-muted-foreground">{d("pagination.status", { page, total: TOTAL })}</p>
+            <Pagination aria-label={d("pagination.label")} size="sm" className="mx-0 w-auto">
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious asChild iconOnly disabled={page === 1}>
+                    <button type="button" onClick={() => setPage(page - 1)} />
+                  </PaginationPrevious>
+                </PaginationItem>
+                {Array.from({ length: TOTAL }, (_, i) => i + 1).map((n) => (
+                  <PaginationItem key={n}>
+                    <PaginationLink asChild isActive={n === page}>
+                      <button type="button" onClick={() => setPage(n)}>
+                        {n}
+                      </button>
+                    </PaginationLink>
+                  </PaginationItem>
+                ))}
+                <PaginationItem>
+                  <PaginationNext asChild iconOnly disabled={page === TOTAL}>
+                    <button type="button" onClick={() => setPage(page + 1)} />
+                  </PaginationNext>
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
         </ComponentPreview>
       </section>
 
