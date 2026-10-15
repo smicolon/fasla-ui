@@ -11,6 +11,12 @@ const meta: Meta<typeof Switch> = {
     variant: { control: "inline-radio", options: ["solid", "outline"] },
     layout: { control: "inline-radio", options: ["control-first", "label-first"] },
     size: { control: "inline-radio", options: ["sm", "md", "lg"] },
+    // HTML's own prop, which docgen leaves out; listed so every UI table has it.
+    className: {
+      control: "text",
+      description: "Extra CSS classes, merged onto the root element.",
+      table: { type: { summary: "string" } },
+    },
   },
 }
 

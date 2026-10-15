@@ -405,11 +405,15 @@
       "name": "select",
       "type": "registry:ui",
       "title": "Select",
-      "description": "A select control for choosing one option from a list.",
+      "description": "A select field on Base UI: single or multiple choice, chosen values as badges or text, a label, helper labels and a prefix icon, four sizes and two radii, mirrored for RTL.",
       "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
         "lucide-react"
       ],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "badge"
+      ],
       "files": [
         {
           "path": "registry/ui/select/select.tsx",
