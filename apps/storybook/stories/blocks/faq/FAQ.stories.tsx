@@ -35,6 +35,13 @@ import { faqViewports, hiddenArgTypes, localeOf, withForeignTheme } from "./faq-
  * support. Each Type's extra states follow it. Viewport, direction and theme
  * come from the toolbar.
  */
+/*
+ * The sidebar and the Docs page list the 26 Figma Types only. The extra
+ * states (a theme without the inverse tokens, keyboard focus, empty, error
+ * and disabled) are tagged `!dev` and `!autodocs`: hidden from both, but
+ * still built, so tests and visual checks reach them by id. The tags are
+ * written out on each story, as the indexer reads them statically.
+ */
 const meta: Meta = {
   title: "Blocks/FAQ",
   parameters: { layout: "fullscreen", viewport: { viewports: faqViewports } },
@@ -75,25 +82,12 @@ export const DarkPanel: StoryObj<typeof FaqDarkPanel> = {
   render: (args, context) => <FaqDarkPanel locale={localeOf(context)} {...args} />,
 }
 
-/** Light mode: the panel is dark. */
-export const DarkPanelLight: StoryObj<typeof FaqDarkPanel> = {
-  ...DarkPanel,
-  name: "Dark Panel: Light",
-  globals: { theme: "light" },
-}
-
-/** Dark mode: the same tokens turn the panel light. */
-export const DarkPanelDark: StoryObj<typeof FaqDarkPanel> = {
-  ...DarkPanel,
-  name: "Dark Panel: Dark",
-  globals: { theme: "dark" },
-}
-
 /**
  * In a theme without the inverse tokens, the mapping falls back to the page
  * colours swapped, so the panel still reads.
  */
 export const DarkPanelForeignTheme: StoryObj<typeof FaqDarkPanel> = {
+  tags: ["!dev", "!autodocs"],
   ...DarkPanel,
   name: "Dark Panel: Theme without inverse tokens",
   decorators: [withForeignTheme],
@@ -101,6 +95,7 @@ export const DarkPanelForeignTheme: StoryObj<typeof FaqDarkPanel> = {
 
 /** Keyboard focus on the panel: the ring is drawn in the inverse foreground. */
 export const DarkPanelFocus: StoryObj<typeof FaqDarkPanel> = {
+  tags: ["!dev", "!autodocs"],
   ...DarkPanel,
   name: "Dark Panel: Keyboard focus",
   parameters: { pseudo: { focusVisible: ["[data-slot=accordion-item]:nth-child(2) [data-slot=accordion-trigger]"] } },
@@ -112,25 +107,12 @@ export const MonoIndex: StoryObj<typeof FaqMonoIndex> = {
   render: (args, context) => <FaqMonoIndex locale={localeOf(context)} {...args} />,
 }
 
-/** Light mode: the band is dark. */
-export const MonoIndexLight: StoryObj<typeof FaqMonoIndex> = {
-  ...MonoIndex,
-  name: "Mono Index: Light",
-  globals: { theme: "light" },
-}
-
-/** Dark mode: the same tokens turn the band light. */
-export const MonoIndexDark: StoryObj<typeof FaqMonoIndex> = {
-  ...MonoIndex,
-  name: "Mono Index: Dark",
-  globals: { theme: "dark" },
-}
-
 /**
  * In a theme without the inverse tokens, the mapping falls back to the page
  * colours swapped, so the band still reads.
  */
 export const MonoIndexForeignTheme: StoryObj<typeof FaqMonoIndex> = {
+  tags: ["!dev", "!autodocs"],
   ...MonoIndex,
   name: "Mono Index: Theme without inverse tokens",
   decorators: [withForeignTheme],
@@ -138,6 +120,7 @@ export const MonoIndexForeignTheme: StoryObj<typeof FaqMonoIndex> = {
 
 /** Keyboard focus on the band: the ring is drawn in the inverse foreground. */
 export const MonoIndexFocus: StoryObj<typeof FaqMonoIndex> = {
+  tags: ["!dev", "!autodocs"],
   ...MonoIndex,
   name: "Mono Index: Keyboard focus",
   parameters: { pseudo: { focusVisible: ["[data-slot=accordion-item]:nth-child(2) [data-slot=accordion-trigger]"] } },
@@ -211,6 +194,7 @@ export const MediaSplit: StoryObj<typeof FaqMediaSplit> = {
 
 /** Without `image`, the frame is a token-coloured placeholder of the same size. */
 export const MediaSplitNoImage: StoryObj<typeof FaqMediaSplit> = {
+  tags: ["!dev", "!autodocs"],
   name: "Media Split: No image",
   argTypes: hiddenArgTypes,
   render: (args, context) => <FaqMediaSplit locale={localeOf(context)} {...args} />,
@@ -227,6 +211,7 @@ export const SearchCategories: StoryObj<typeof FaqSearchCategories> = {
 
 /** Nothing matches the search: the list gives way to a message naming it. */
 export const SearchCategoriesNoResults: StoryObj<typeof FaqSearchCategories> = {
+  tags: ["!dev", "!autodocs"],
   ...SearchCategories,
   name: "Search + Categories: No results",
   args: { defaultQuery: "pricing in yen" },
@@ -255,6 +240,7 @@ export const CategoryChipGrid: StoryObj<typeof FaqCategoryChipGrid> = {
 
 /** A chip pressed: the selected filter, and its questions below. */
 export const CategoryChipGridPressed: StoryObj<typeof FaqCategoryChipGrid> = {
+  tags: ["!dev", "!autodocs"],
   ...CategoryChipGrid,
   name: "Category Chip Grid: Pressed",
   args: { onCategoryChange: fn(), defaultCategory: "theming" },
@@ -317,6 +303,7 @@ export const NewsletterClose: StoryObj<typeof FaqNewsletterClose> = {
 
 /** The sign-up fails: the error line shows and the form keeps what was typed. */
 export const NewsletterCloseError: StoryObj<typeof FaqNewsletterClose> = {
+  tags: ["!dev", "!autodocs"],
   ...NewsletterClose,
   name: "Newsletter Close: Sign-up fails",
   render: (args, context) => <FaqNewsletterClose locale={localeOf(context)} onSubmit={later(true)} {...args} />,
@@ -324,6 +311,7 @@ export const NewsletterCloseError: StoryObj<typeof FaqNewsletterClose> = {
 
 /** The sign-up is turned off. */
 export const NewsletterCloseDisabled: StoryObj<typeof FaqNewsletterClose> = {
+  tags: ["!dev", "!autodocs"],
   ...NewsletterClose,
   name: "Newsletter Close: Disabled",
   args: { disabled: true },
@@ -351,6 +339,7 @@ export const ChatThread: StoryObj<typeof FaqChatThread> = {
 
 /** No messages yet: the empty line takes the thread's place. */
 export const ChatThreadEmpty: StoryObj<typeof FaqChatThread> = {
+  tags: ["!dev", "!autodocs"],
   ...ChatThread,
   name: "Chat Thread: Empty",
   args: { messages: [] },
