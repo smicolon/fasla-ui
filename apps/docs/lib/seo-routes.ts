@@ -266,6 +266,21 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/dropdown-menu/",
+    title: "Dropdown Menu React Component | Fasla",
+    description:
+      "Add accessible React dropdown menus with icons, shortcuts, checkbox and radio items, switches and submenus, mirrored for RTL.",
+    h1: "Dropdown Menu",
+    ar: {
+      title: "قائمة منسدلة (Dropdown Menu) لتطبيقات React | فاصلة",
+      description:
+        "أضف مكوّن قائمة منسدلة للإجراءات، مع أيقونات واختصارات وصفوف اختيار ومفاتيح تبديل وقوائم فرعية، وينعكس تلقائيًا في الصفحات العربية.",
+      h1: "قائمة منسدلة (Dropdown Menu)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/textarea/",
     title: "Textarea React Component | Fasla",
     description:

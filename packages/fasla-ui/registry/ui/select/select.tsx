@@ -174,23 +174,27 @@ const HELPER_ROW = cn(ROW, "items-start")
 const HELPER = "text-xs text-muted-foreground"
 
 /**
- * The menu: Figma's Select Menu. The trigger's width (`--anchor-width`, from
- * Base UI), 4px below it, `popover` with a 1px `input` border, 4px padding,
- * Figma's `border radius/md` and `shadow/md` — Tailwind 3's `shadow-md`. It
- * scrolls when the list is taller than the room left in the window.
+ * The menu surface: Figma's Select Menu, and the Dropdown Menu's popup too.
+ * `popover` with a 1px `input` border, 4px padding, Figma's
+ * `border radius/md` and `shadow/md` — Tailwind 3's `shadow-md`. It scrolls
+ * when its rows are taller than the room left in the window
+ * (`--available-height`, from Base UI's positioner).
  *
  * Fades in and out over 150ms on Base UI's starting and ending styles; with
  * reduced motion it appears and disappears at once.
  */
-const POPUP = cn(
-  "w-[var(--anchor-width)] max-h-[var(--available-height)] overflow-y-auto overscroll-contain",
+const menuPopupClasses = cn(
+  "max-h-[var(--available-height)] overflow-y-auto overscroll-contain",
   "rounded-[var(--radius-md)] border border-input bg-popover p-1 text-popover-foreground shadow-md [outline:none]",
   "transition-opacity duration-150 motion-reduce:transition-none",
   "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0"
 )
 
+/** Select's menu is the trigger's width (`--anchor-width`, from Base UI), 4px below it. */
+const POPUP = cn("w-[var(--anchor-width)]", menuPopupClasses)
+
 /**
- * One option: Figma's Select Item. 32px tall, 8px inline padding, an 8px gap
+ * One option: Figma's Select Item, and the Dropdown Menu's rows too. 32px tall, 8px inline padding, an 8px gap
  * and Figma's `border radius/sm` (6px, `--radius-sm`, as Badge reads it).
  * `text-sm` in `popover-foreground`.
  *
@@ -207,7 +211,7 @@ const POPUP = cn(
  * Forced colours drop the `accent` fill, so there the highlighted row draws a
  * 2px `Highlight` outline inside its edge instead.
  */
-const ITEM = cn(
+const menuItemClasses = cn(
   "relative flex min-h-8 w-full cursor-default select-none items-center gap-2 rounded-[var(--radius-sm)] px-2 py-1 text-start text-sm text-popover-foreground [outline:none]",
   "data-[highlighted]:bg-accent data-[highlighted]:text-accent-foreground",
   "forced-colors:data-[highlighted]:[outline:2px_solid_Highlight] forced-colors:data-[highlighted]:[outline-offset:-2px]",
@@ -645,7 +649,7 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
       ref={ref}
       data-slot="select-item"
       label={label}
-      className={cn(ITEM, className)}
+      className={cn(menuItemClasses, className)}
       {...props}
     >
       <SelectPrimitive.ItemText data-slot="select-item-text" className="min-w-0 flex-1 [overflow-wrap:anywhere]">
@@ -663,5 +667,5 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
 )
 SelectItem.displayName = "SelectItem"
 
-export { Select, SelectItem, selectTriggerVariants }
+export { Select, SelectItem, selectTriggerVariants, menuPopupClasses, menuItemClasses }
 export type { SelectSize, SelectRadius, SelectDisplay }
