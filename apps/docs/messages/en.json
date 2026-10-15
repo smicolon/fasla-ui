@@ -378,40 +378,120 @@
       }
     },
     "select": {
-      "lead": "A native select input with custom styling.",
-      "options": {
-        "a": "Riyadh",
-        "b": "Jeddah",
-        "c": "Dammam",
-        "d": "Makkah"
+      "lead": "Lets the reader choose one option from a list, or several. It has a label, helper text and a prefix icon, as Input does, shows several choices as badges or as text, and comes in four sizes and two corner shapes.",
+      "city": "City",
+      "cityPlaceholder": "Select a city",
+      "cityHelp": "Where we deliver your order.",
+      "delivery": "Delivery cities",
+      "deliveryPlaceholder": "Select cities",
+      "cities": {
+        "riyadh": "Riyadh",
+        "jeddah": "Jeddah",
+        "dammam": "Dammam",
+        "makkah": "Makkah",
+        "madinah": "Madinah",
+        "khobar": "Khobar"
       },
-      "placeholder": "Select a city",
+      "sizesBody": "Four sizes: <code>xs</code> is 28px tall, <code>sm</code> 32px, <code>md</code> 36px and <code>lg</code> 40px, the same heights as Input. As on Input, only the height and the gap between the icon and the text change: the padding is 12px and the icons 16px at every size. The text is 14px, or 16px on screens narrower than 768px, so iOS does not zoom in.",
       "sizes": {
-        "sm": "Select a city",
-        "default": "Select a city",
-        "lg": "Select a city"
+        "xs": "Extra small",
+        "sm": "Small",
+        "md": "Medium",
+        "lg": "Large"
       },
+      "radius": {
+        "title": "Radius",
+        "body": "<code>radius=\"standard\"</code> rounds the corners by 8px, and <code>radius=\"rounded\"</code> makes a pill. The focus ring follows the shape. The menu keeps its 8px corners either way."
+      },
+      "statesBody": "Focus is a real state, not a prop: tab to the field, or open it. The trigger draws the focus ring on keyboard focus and for as long as its menu is open. <code>disabled</code> dims the whole field to half opacity, its label and helper text included.",
       "states": {
-        "default": "Select a city",
-        "error": "Select a delivery city",
-        "disabled": "Select a branch"
+        "enabled": "Enabled",
+        "disabled": "Disabled"
+      },
+      "multiple": {
+        "title": "Multiple select",
+        "body": "<code>multiple</code> lets the reader choose several options. The menu stays open while they choose, and a check marks each chosen option. The trigger shows the choices as badges, or as one line of text with <code>display=\"text\"</code>. Badges wrap onto more rows, and the field grows to hold them. Press a badge's × to remove it.",
+        "badges": "Shown as badges.",
+        "text": "Shown as one line of text."
+      },
+      "parts": {
+        "title": "Labels and icons",
+        "body": "The label, the note at the end of the label row, the helper text and the prefix icon work as they do on Input, so the two line up side by side in a form. Put the icon in <code>startIcon</code>; the field sizes it to match.",
+        "name": "Full name",
+        "optional": "Optional",
+        "nameHelp": "As it appears on your ID.",
+        "namePlaceholder": "Layla Haddad",
+        "branch": "Pickup branch",
+        "branchPlaceholder": "Select a branch",
+        "branchHelp": "We hold your order for 3 days.",
+        "count": "6 branches"
+      },
+      "menu": {
+        "title": "The menu",
+        "body": "The menu opens under the trigger, 4px below it and exactly as wide. Pointing at an option, or moving to it with the arrow keys, highlights it. A check at the end of the row marks the chosen option. Its space is always kept, so the text never moves. On a right-to-left page the check and the chevron swap ends."
+      },
+      "long": {
+        "title": "Long options",
+        "body": "An option longer than the menu is wide wraps onto more lines inside it. In the trigger, the chosen option stays on one line and ends in an ellipsis.",
+        "label": "Pickup point",
+        "options": {
+          "airport": "King Khalid International Airport, Terminal 5, arrivals hall pickup counter",
+          "olaya": "Al Olaya District, King Fahd Road, Building 14, ground floor",
+          "park": "Riyadh Park Mall, north entrance"
+        }
+      },
+      "a11y": {
+        "roles": "Base UI gives the trigger, a <code>button</code>, the <code>combobox</code> role, and makes the menu a <code>listbox</code> of options. A hidden input submits the value with its form, under <code>name</code>.",
+        "keyboard": "Enter, Space and the arrow keys open the menu. The arrow keys, Home and End move through the options, and typing a letter jumps to a matching one. Enter chooses, and Escape closes the menu and returns focus to the trigger.",
+        "label": "<code>label</code> names the trigger, and the helper text is read with it. Without a label, pass <code>aria-label</code>. Pressing the label moves focus to the trigger without opening the menu.",
+        "badges": "A badge's × is for the pointer, and screen readers skip it. From the keyboard, open the menu and choose the option again to remove it.",
+        "direction": "Direction is inherited from <code>dir</code>, never a prop. The menu takes the page's direction, language and font from the trigger, though it renders at the end of <code>body</code>."
+      },
+      "props": {
+        "items": "The options as data: <code>value</code>, <code>label</code> and an optional <code>disabled</code>.",
+        "children": "<code>SelectItem</code> rows, in place of <code>items</code>.",
+        "placeholder": "Text shown while nothing is chosen.",
+        "size": "Field height: 28, 32, 36 or 40px.",
+        "radius": "Corner shape: 8px corners, or fully rounded ends.",
+        "multiple": "Lets the reader choose more than one option.",
+        "display": "With <code>multiple</code>, shows the choices as badges or as one line of text.",
+        "value": "The chosen value, or values with <code>multiple</code>. Use it with <code>onValueChange</code>.",
+        "defaultValue": "The value chosen on first render.",
+        "onValueChange": "Called with the new value, also when a badge is removed.",
+        "label": "The field's label, linked to the trigger for you.",
+        "labelEnd": "A short note at the end of the label row, such as Optional.",
+        "description": "Helper text under the field. A screen reader reads it with the field.",
+        "descriptionEnd": "A note at the end of the helper row, such as a count.",
+        "startIcon": "An icon at the start of the trigger.",
+        "disabled": "Disables the field and dims the whole group.",
+        "readOnly": "Shows the value but stops it changing.",
+        "required": "The form submits only once a value is chosen.",
+        "name": "The name the value is submitted under.",
+        "open": "Opens or closes the menu, when you control it.",
+        "onOpenChange": "Called when the menu opens or closes.",
+        "modal": "Blocks page scroll and presses outside while the menu is open.",
+        "container": "Where the menu renders. Default <code>body</code>.",
+        "className": "Extra CSS classes for the field group.",
+        "ariaLabel": "The trigger's accessible name when there is no visible <code>label</code>.",
+        "ariaLabelledby": "The id of an element that names the trigger, in place of <code>label</code>.",
+        "form": "The id of the form the value is submitted with, when the field sits outside it.",
+        "id": "The trigger's id, for a <code>label</code> element of your own.",
+        "defaultOpen": "Opens the menu on first render.",
+        "collisionAvoidance": "How the menu avoids the window edge. By default it flips above the trigger when there is no room below; <code>{ side: \"none\" }</code> keeps it below."
+      },
+      "itemProps": {
+        "value": "The value this option submits.",
+        "label": "Text for the trigger, the badges and type-ahead, when the row shows more than text.",
+        "disabled": "Shows the option but stops it being chosen.",
+        "children": "What the row shows."
       },
       "usage": {
         "basic": "Basic select",
-        "sizes": "Different sizes",
-        "error": "Error state",
-        "cityLabel": "City"
-      },
-      "props": {
-        "options": "Options to choose from.",
-        "placeholder": "Text shown before a choice.",
-        "selectSize": "Select size.",
-        "error": "Marks the select as invalid.",
-        "disabled": "Disables the select and dims it.",
-        "value": "Selected value. Use it with <code>onChange</code>.",
-        "name": "Name submitted with the form.",
-        "onChange": "Called when the choice changes.",
-        "className": "Extra classes for the component."
+        "multiple": "Multiple select, controlled",
+        "items": "With SelectItem rows",
+        "olaya": "Al Olaya branch",
+        "malqa": "Al Malqa branch",
+        "nakheel": "Al Nakheel branch"
       }
     },
     "textarea": {
@@ -751,7 +831,10 @@
         "radius": "The corners: slightly rounded, or a circle.",
         "loading": "Replaces the icon with a spinner and disables the button.",
         "disabled": "Disables the button.",
-        "className": "Extra classes for the component."
+        "className": "Extra classes for the component.",
+        "loadingLabel": "Screen-reader text while loading.",
+        "asChild": "Styles its only child, such as a link, instead of rendering a button.",
+        "onClick": "Called when the button is pressed."
       },
       "usage": {
         "basic": "Icon button",
@@ -927,7 +1010,21 @@
         "avatar": "Props for an Avatar before the text, always at size 12.",
         "container": "The element the tooltip renders into. Defaults to <code>body</code>.",
         "delay": "How long to wait before opening, in milliseconds.",
-        "className": "Extra classes for the tooltip."
+        "className": "Extra classes for the tooltip.",
+        "onOpenChangeComplete": "Called once the tooltip has finished opening or closing.",
+        "disableHoverablePopup": "Closes the tooltip as soon as the pointer leaves the trigger, even onto the tooltip.",
+        "trackCursorAxis": "Makes the tooltip follow the pointer along one axis, or both.",
+        "actionsRef": "A ref to close or unmount the tooltip from your own code.",
+        "handle": "Links the tooltip to triggers rendered elsewhere. Create it with <code>Tooltip.createHandle()</code> from <code>@base-ui/react/tooltip</code>.",
+        "triggerId": "Which of several triggers the tooltip belongs to, when <code>open</code> is controlled.",
+        "defaultTriggerId": "Which trigger the tooltip belongs to on first render, with <code>defaultOpen</code>.",
+        "closeDelay": "How long to wait before closing, in milliseconds.",
+        "closeOnClick": "Closes the tooltip when the trigger is pressed.",
+        "triggerDisabled": "Stops this trigger from opening the tooltip.",
+        "triggerHandle": "The handle of a tooltip rendered elsewhere that this trigger opens.",
+        "payload": "Data passed to the tooltip when this trigger opens it.",
+        "alignOffset": "Moves the tooltip along its side, in px.",
+        "collisionAvoidance": "How the tooltip avoids the window edge. <code>{ side: \"none\", align: \"none\" }</code> keeps it in place."
       }
     },
     "progress": {

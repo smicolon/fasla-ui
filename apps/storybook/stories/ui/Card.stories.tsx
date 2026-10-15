@@ -18,6 +18,14 @@ const meta: Meta<typeof Card> = {
     layout: "centered",
   },
   tags: ["autodocs"],
+  argTypes: {
+    // HTML's own prop, which docgen leaves out; listed so every UI table has it.
+    className: {
+      control: "text",
+      description: "Extra CSS classes, merged onto the root element.",
+      table: { type: { summary: "string" } },
+    },
+  },
 }
 
 export default meta
@@ -97,10 +105,10 @@ type StoryCtx = { globals: { direction?: string } }
 const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
 
 export const Default: Story = {
-  render: (_args, ctx) => {
+  render: (args, ctx) => {
     const c = copy(ctx)
     return (
-      <Card className="w-[350px]">
+      <Card className={["w-[350px]", args.className].filter(Boolean).join(" ")}>
         <CardHeader>
           <CardTitle>{c.title}</CardTitle>
           <CardDescription>{c.description}</CardDescription>
@@ -146,7 +154,7 @@ export const WithForm: Story = {
                 <label htmlFor="city" className="text-sm font-medium">
                   {f.city}
                 </label>
-                <Select id="city" options={f.cities} placeholder={f.cityPlaceholder} />
+                <Select id="city" items={f.cities} placeholder={f.cityPlaceholder} />
               </div>
             </div>
           </form>

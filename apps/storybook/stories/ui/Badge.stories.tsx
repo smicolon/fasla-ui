@@ -78,6 +78,12 @@ const meta: Meta<BadgeStoryArgs> = {
         "Not visible. The close button's accessible name, read by screen readers. Defaults to \"Remove {label}\", or \"إزالة {label}\" when the page's `lang` is Arabic.",
       if: { arg: "closable" },
     },
+    // HTML's own prop, which docgen leaves out; listed so every UI table has it.
+    className: {
+      control: "text",
+      description: "Extra CSS classes, merged onto the root element.",
+      table: { type: { summary: "string" } },
+    },
   },
 }
 

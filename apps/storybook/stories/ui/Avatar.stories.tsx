@@ -53,6 +53,12 @@ const meta: Meta<typeof Avatar> = {
     statusLabel: { control: "text", description: "Not visible. Overrides the dot's accessible name." },
     // Pass-throughs to the `<img>`: props of the component, not of the design.
     ...Object.fromEntries(IMAGE_ATTRS.map((attr) => [attr, { table: { disable: true } }])),
+    // HTML's own prop, which docgen leaves out; listed so every UI table has it.
+    className: {
+      control: "text",
+      description: "Extra CSS classes, merged onto the root element.",
+      table: { type: { summary: "string" } },
+    },
   },
 }
 

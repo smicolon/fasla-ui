@@ -17,7 +17,7 @@ const meta: Meta<StoryArgs> = {
   component: Button,
   parameters: {
     layout: "centered",
-    controls: { include: ["tone", "variant", "size", "radius", "loading", "disabled", "icon", "aria-label"] },
+    controls: { include: ["tone", "variant", "size", "radius", "loading", "disabled", "icon", "aria-label", "className"] },
   },
   tags: ["autodocs"],
   argTypes: {
@@ -53,6 +53,12 @@ const meta: Meta<StoryArgs> = {
       table: { type: { summary: "string" } },
     },
     ...HIDE_REST,
+    // HTML's own prop, which docgen leaves out; listed so every UI table has it.
+    className: {
+      control: "text",
+      description: "Extra CSS classes, merged onto the root element.",
+      table: { type: { summary: "string" } },
+    },
   },
   // In panel order: Storybook lists the controls in the order of these keys.
   args: {

@@ -143,11 +143,11 @@ export async function SanadWindow() {
               <>
                 <span {...tag("Select", 2, { space: "tight" })} className="inline-flex max-[560px]:hidden">
                   <Select
-                    selectSize="sm"
+                    size="sm"
                     aria-label={t("rangeLabel")}
-                    options={[{ value: "2025", label: t("range") }]}
+                    items={[{ value: "2025", label: t("range") }]}
                     defaultValue="2025"
-                    className="bg-background tabular-nums"
+                    className="w-auto tabular-nums"
                   />
                 </span>
                 <Button {...tag("Button", 3, { space: "tight" })} variant="outline" size="sm">

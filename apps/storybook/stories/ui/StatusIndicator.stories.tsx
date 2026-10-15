@@ -31,6 +31,12 @@ const meta: Meta<typeof StatusIndicator> = {
       description:
         "Not visible. The accessible name, read by screen readers. Defaults to the status in the page's language — switch the Direction toolbar to hear the Arabic.",
     },
+    // HTML's own prop, which docgen leaves out; listed so every UI table has it.
+    className: {
+      control: "text",
+      description: "Extra CSS classes, merged onto the root element.",
+      table: { type: { summary: "string" } },
+    },
   },
 }
 

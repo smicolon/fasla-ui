@@ -14,6 +14,12 @@ const meta: Meta<typeof Checkbox> = {
     description: { control: "text" },
     indeterminate: { control: "boolean" },
     disabled: { control: "boolean" },
+    // HTML's own prop, which docgen leaves out; listed so every UI table has it.
+    className: {
+      control: "text",
+      description: "Extra CSS classes, merged onto the root element.",
+      table: { type: { summary: "string" } },
+    },
   },
 }
 

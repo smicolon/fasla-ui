@@ -254,12 +254,12 @@ export const routes = [
     path: "/docs/components/select/",
     title: "Select React Component | Fasla",
     description:
-      "Build a typed React select control for choosing one option with accessible interaction and customizable styling.",
+      "Build a React select field for choosing one option or several, with badges, labels, keyboard support and RTL.",
     h1: "Select",
     ar: {
       title: "قائمة منسدلة (Select) لتطبيقات React | فاصلة",
       description:
-        "أنشئ مكوّن قائمة منسدلة (Select) لاختيار خيار واحد، مع تفاعل يراعي إتاحة الوصول (accessibility) وتنسيق قابل للتخصيص.",
+        "أنشئ مكوّن قائمة منسدلة (Select) لاختيار خيار واحد أو عدة خيارات، مع شارات وتسميات ودعم لوحة المفاتيح والاتجاه من اليمين إلى اليسار.",
       h1: "قائمة منسدلة (Select)",
     },
   },
