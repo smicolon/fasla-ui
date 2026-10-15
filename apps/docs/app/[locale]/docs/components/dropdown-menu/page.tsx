@@ -139,7 +139,6 @@ export default function DropdownMenuPage() {
         row("open", "boolean", "", "open"),
         row("defaultOpen", "boolean", "false", "defaultOpen"),
         row("onOpenChange", "(open, eventDetails) => void", "", "onOpenChange"),
-        row("onOpenChangeComplete", "(open) => void", "", "onOpenChangeComplete"),
         row("modal", "boolean", "true", "modal"),
         row("disabled", "boolean", "false", "disabled"),
         children,
@@ -278,7 +277,7 @@ export default function DropdownMenuPage() {
       {/* Preview */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("preview")}</h2>
-        <ComponentPreview className="py-12">
+        <ComponentPreview>
           <DropdownMenu>
             <DropdownMenuTrigger render={<Button variant="outline" />}>{d("sample.open")}</DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">

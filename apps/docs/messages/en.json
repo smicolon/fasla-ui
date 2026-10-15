@@ -570,7 +570,6 @@
         "open": "Opens or closes the menu, when controlled.",
         "defaultOpen": "Opens the menu on first render.",
         "onOpenChange": "Called when the menu opens or closes.",
-        "onOpenChangeComplete": "Called once the menu has finished opening or closing.",
         "modal": "While the menu is open, blocks presses outside it and the page's scroll. Pass <code>false</code> to keep the page live.",
         "disabled": "Stops the menu from opening.",
         "render": "Replaces the default button with your element, such as a Button.",

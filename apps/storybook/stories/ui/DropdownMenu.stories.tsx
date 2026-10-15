@@ -2,6 +2,7 @@ import * as React from "react"
 import type { Decorator, Meta, StoryObj } from "@storybook/react"
 import {
   CircleHelpIcon,
+  CopyIcon,
   DollarSignIcon,
   PencilLineIcon,
   ReceiptIcon,
@@ -9,6 +10,7 @@ import {
   ShareIcon,
   Trash2Icon,
   UserIcon,
+  FolderInputIcon,
 } from "lucide-react"
 import {
   DropdownMenu,
@@ -21,6 +23,7 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
+  DropdownMenuShortcut,
   DropdownMenuSub,
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
@@ -33,9 +36,14 @@ import { cn } from "../../../../packages/fasla-ui/src/lib/utils"
 /**
  * Figma: "Dropdown" (3969:51446), with "Dropdown Item" (46229:3337),
  * "Dropdown Label" and "Dropdown Separator" on the same page. The set's
- * Variants are compositions of the parts, so each core one is a story here.
- * Chat list, Contact List and Today's meetings are block-like examples and
- * come later.
+ * Variants are compositions of the parts, so each core one is a story here,
+ * under a short name: Basic Dropdown is Basic, Avatar Heading is With Avatar,
+ * Dropdown Item with icon is With Icons, Mini icon is Icon Actions,
+ * DropdownItem with Switch is With Switches, Dropdown Checkboxes is
+ * Checkboxes and Dropdown Radio Group is Radio Group. Chat list, Contact List
+ * and Today's meetings are block-like examples and come later. Every story
+ * follows the Direction and Theme toolbars, except Light And Dark and
+ * Directions, which show both at once.
  *
  * The look lives on `DropdownMenuContent`, so the Controls panel drives it.
  * `open` is the story's own control, so every change shows at once.
@@ -108,6 +116,14 @@ const COPY = {
     top: "Top",
     bottom: "Bottom",
     right: "Right",
+    stateDefault: "Default",
+    stateHighlighted: "Highlighted",
+    stateDisabled: "Disabled",
+    stateDestructive: "Destructive",
+    longLabel: "Notifications for this workspace and every project in it",
+    longItem: "Export every report from the last quarter as a spreadsheet",
+    longShortcut: "Duplicate this page with all of its comments",
+    longSub: "Move to another workspace or team folder",
   },
   rtl: {
     open: "فتح القائمة",
@@ -136,11 +152,18 @@ const COPY = {
     top: "أعلى",
     bottom: "أسفل",
     right: "يمين",
+    stateDefault: "افتراضي",
+    stateHighlighted: "مُبرَز",
+    stateDisabled: "معطّل",
+    stateDestructive: "إجراء حذف",
+    longLabel: "إشعارات مساحة العمل هذه وكل مشروع فيها",
+    longItem: "تصدير كل تقارير الربع الأخير في جدول بيانات",
+    longShortcut: "تكرار هذه الصفحة مع جميع تعليقاتها",
+    longSub: "النقل إلى مساحة عمل أو مجلد فريق آخر",
   },
 }
 
 type Copy = (typeof COPY)["ltr"]
-type Direction = keyof typeof COPY
 type StoryCtx = { globals: { direction?: string } }
 const copy = (ctx: StoryCtx): Copy => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
 
@@ -158,19 +181,8 @@ const title = (s: string) => s[0]!.toUpperCase() + s.slice(1)
 const FIGMA_HOVER = "bg-accent text-accent-foreground"
 
 /** A column header: English and left-to-right in both directions. It never wraps. */
-const Head = ({ children }: { children: React.ReactNode }) => (
-  <span dir="ltr" className="w-fit whitespace-nowrap font-sans text-xs text-muted-foreground">
-    {children}
-  </span>
-)
-
-/**
- * A side row label, centred on the panel beside it. Left-aligned in its
- * column in both directions: the caption is an English name. Its space from
- * the first panel is the grid's column gap, the same as between two panels.
- */
-const RowHead = ({ children }: { children: React.ReactNode }) => (
-  <span dir="ltr" className="self-center whitespace-nowrap text-left font-sans text-xs text-muted-foreground">
+const Head = ({ children, className }: { children: React.ReactNode; className?: string }) => (
+  <span dir="ltr" className={cn("w-fit whitespace-nowrap font-sans text-xs text-muted-foreground", className)}>
     {children}
   </span>
 )
@@ -276,49 +288,19 @@ function Held({ trigger, side = "bottom", align = "start", sideOffset = 4, class
   )
 }
 
-/**
- * One Figma variant in Light and Dark, LTR and RTL at once, whatever the
- * toolbars say. Each panel sets its own theme (the `light` or `dark` class
- * re-points every token for that subtree), `dir`, `lang` and font; the open
- * menu is portalled into the panel to take them.
- */
-function Matrix({ menu }: { menu: (c: Copy, direction: Direction) => React.ReactNode }) {
-  return (
-    <div className="grid grid-cols-[max-content_repeat(2,max-content)] items-start gap-x-6 gap-y-4">
-      <span />
-      {DIRECTIONS.map((direction) => (
-        <Head key={direction}>{direction.toUpperCase()}</Head>
-      ))}
-      {THEMES.map((theme) => (
-        <React.Fragment key={theme}>
-          <RowHead>{title(theme)}</RowHead>
-          {DIRECTIONS.map((direction) => (
-            <div
-              key={direction}
-              dir={direction}
-              lang={direction === "rtl" ? "ar" : "en"}
-              className={cn(
-                theme,
-                "rounded-lg border bg-background p-4 text-foreground",
-                direction === "rtl" && "font-arabic"
-              )}
-            >
-              {menu(COPY[direction], direction)}
-            </div>
-          ))}
-        </React.Fragment>
-      ))}
-    </div>
-  )
-}
-
-/** Figma's Basic Dropdown rows, shared by the playground and the Basic story. */
-const basicRows = (c: Copy) => (
+/** Figma's Basic Dropdown rows, shared by the playground, Basic and the both-at-once stories. */
+const basicRows = (c: Copy, { shortcuts = false } = {}) => (
   <>
     <DropdownMenuLabel>{c.myAccount}</DropdownMenuLabel>
     <DropdownMenuSeparator />
-    <DropdownMenuItem>{c.profile}</DropdownMenuItem>
-    <DropdownMenuItem className={FIGMA_HOVER}>{c.billing}</DropdownMenuItem>
+    <DropdownMenuItem>
+      {c.profile}
+      {shortcuts && <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>}
+    </DropdownMenuItem>
+    <DropdownMenuItem className={FIGMA_HOVER}>
+      {c.billing}
+      {shortcuts && <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>}
+    </DropdownMenuItem>
     <DropdownMenuSeparator />
     <DropdownMenuSub>
       <DropdownMenuSubTrigger>{c.inviteUsers}</DropdownMenuSubTrigger>
@@ -331,6 +313,43 @@ const basicRows = (c: Copy) => (
     <DropdownMenuItem>{c.support}</DropdownMenuItem>
     <DropdownMenuItem disabled>{c.api}</DropdownMenuItem>
   </>
+)
+
+/** Figma's Mini icon rows: two actions and a destructive one. */
+const iconActionRows = (c: Copy) => (
+  <>
+    <DropdownMenuItem icon={<PencilLineIcon strokeWidth={1.5} />}>{c.edit}</DropdownMenuItem>
+    <DropdownMenuItem icon={<ShareIcon strokeWidth={1.5} />}>{c.share}</DropdownMenuItem>
+    <DropdownMenuSeparator />
+    <DropdownMenuItem variant="destructive" icon={<Trash2Icon strokeWidth={1.5} />}>
+      {c.delete}
+    </DropdownMenuItem>
+  </>
+)
+
+/** Figma's DropdownItem with Switch rows. */
+const switchRows = (c: Copy) => (
+  <DropdownMenuGroup>
+    <DropdownMenuLabel>{c.appsNotification}</DropdownMenuLabel>
+    {c.apps.map((app, i) => (
+      <DropdownMenuCheckboxItem key={app} indicator="switch" defaultChecked={i === 0 || i === 4}>
+        {app}
+      </DropdownMenuCheckboxItem>
+    ))}
+  </DropdownMenuGroup>
+)
+
+/** Figma's Dropdown Radio Group rows. */
+const radioRows = (c: Copy) => (
+  <DropdownMenuRadioGroup defaultValue="top">
+    <DropdownMenuLabel>{c.panelPosition}</DropdownMenuLabel>
+    <DropdownMenuSeparator />
+    <DropdownMenuRadioItem value="top">{c.top}</DropdownMenuRadioItem>
+    <DropdownMenuRadioItem value="bottom">{c.bottom}</DropdownMenuRadioItem>
+    <DropdownMenuRadioItem value="right" className={FIGMA_HOVER}>
+      {c.right}
+    </DropdownMenuRadioItem>
+  </DropdownMenuRadioGroup>
 )
 
 /**
@@ -365,18 +384,13 @@ export const Default: Story = {
  * row. Point at Invite users, or move to it and press the arrow that points
  * into it, to open its submenu; its chevron points to the side it opens on.
  */
-export const BasicDropdown: Story = {
-  name: "Basic Dropdown",
+export const Basic: Story = {
   decorators: [framed],
   parameters: { layout: "padded" },
-  render: () => (
-    <Matrix
-      menu={(c) => (
-        <Held trigger={c.open} className="w-[282px]">
-          {basicRows(c)}
-        </Held>
-      )}
-    />
+  render: (_args, ctx) => (
+    <Held trigger={copy(ctx).open} className="w-[282px]">
+      {basicRows(copy(ctx))}
+    </Held>
   ),
 }
 
@@ -384,63 +398,59 @@ export const BasicDropdown: Story = {
  * Figma's Avatar Heading: the label holds our Avatar at size 32, Rounded,
  * with a name and an email.
  */
-export const AvatarHeading: Story = {
-  name: "Avatar Heading",
+export const WithAvatar: Story = {
   decorators: [framed],
   parameters: { layout: "padded" },
-  render: () => (
-    <Matrix
-      menu={(c) => (
-        <Held trigger={c.open} className="w-[282px]">
-          <DropdownMenuLabel className="py-1.5 font-normal">
-            {/* Decorative: the name is printed beside it. An empty name gives the image an empty alt, as in Tooltip. */}
-            <Avatar src={PHOTO} name="" size="32" radius="rounded" />
-            <span className="flex min-w-0 flex-col">
-              <span className="truncate font-semibold">{c.name}</span>
-              <span className="truncate text-xs text-muted-foreground">{EMAIL}</span>
-            </span>
-          </DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem>{c.profile}</DropdownMenuItem>
-          <DropdownMenuItem className={FIGMA_HOVER}>{c.billing}</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuSub>
-            <DropdownMenuSubTrigger>{c.inviteUsers}</DropdownMenuSubTrigger>
-            <DropdownMenuSubContent>
-              <DropdownMenuItem>{c.email}</DropdownMenuItem>
-              <DropdownMenuItem>{c.message}</DropdownMenuItem>
-            </DropdownMenuSubContent>
-          </DropdownMenuSub>
-          <DropdownMenuItem>{c.github}</DropdownMenuItem>
-          <DropdownMenuItem>{c.support}</DropdownMenuItem>
-          <DropdownMenuItem disabled>{c.api}</DropdownMenuItem>
-        </Held>
-      )}
-    />
-  ),
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <Held trigger={c.open} className="w-[282px]">
+        <DropdownMenuLabel className="py-1.5 font-normal">
+          {/* Decorative: the name is printed beside it. An empty name gives the image an empty alt, as in Tooltip. */}
+          <Avatar src={PHOTO} name="" size="32" radius="rounded" />
+          <span className="flex min-w-0 flex-col">
+            <span className="truncate font-semibold">{c.name}</span>
+            <span className="truncate text-xs text-muted-foreground">{EMAIL}</span>
+          </span>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>{c.profile}</DropdownMenuItem>
+        <DropdownMenuItem className={FIGMA_HOVER}>{c.billing}</DropdownMenuItem>
+        <DropdownMenuSeparator />
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>{c.inviteUsers}</DropdownMenuSubTrigger>
+          <DropdownMenuSubContent>
+            <DropdownMenuItem>{c.email}</DropdownMenuItem>
+            <DropdownMenuItem>{c.message}</DropdownMenuItem>
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>
+        <DropdownMenuItem>{c.github}</DropdownMenuItem>
+        <DropdownMenuItem>{c.support}</DropdownMenuItem>
+        <DropdownMenuItem disabled>{c.api}</DropdownMenuItem>
+      </Held>
+    )
+  },
 }
 
 /** Figma's Dropdown Item with icon: a 16px icon before each row's text, in `foreground`. */
-export const ItemWithIcon: Story = {
-  name: "Dropdown Item with icon",
+export const WithIcons: Story = {
   decorators: [framed],
   parameters: { layout: "padded" },
-  render: () => (
-    <Matrix
-      menu={(c) => (
-        <Held trigger={c.open} className="w-[297px]">
-          <DropdownMenuLabel>{c.userProfile}</DropdownMenuLabel>
-          <DropdownMenuItem icon={<UserIcon strokeWidth={1.5} />}>{c.profile}</DropdownMenuItem>
-          <DropdownMenuItem icon={<SettingsIcon strokeWidth={1.5} />} className={FIGMA_HOVER}>
-            {c.settings}
-          </DropdownMenuItem>
-          <DropdownMenuItem icon={<ReceiptIcon strokeWidth={1.5} />}>{c.billingPlans}</DropdownMenuItem>
-          <DropdownMenuItem icon={<DollarSignIcon strokeWidth={1.5} />}>{c.pricing}</DropdownMenuItem>
-          <DropdownMenuItem icon={<CircleHelpIcon strokeWidth={1.5} />}>{c.faq}</DropdownMenuItem>
-        </Held>
-      )}
-    />
-  ),
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <Held trigger={c.open} className="w-[297px]">
+        <DropdownMenuLabel>{c.userProfile}</DropdownMenuLabel>
+        <DropdownMenuItem icon={<UserIcon strokeWidth={1.5} />}>{c.profile}</DropdownMenuItem>
+        <DropdownMenuItem icon={<SettingsIcon strokeWidth={1.5} />} className={FIGMA_HOVER}>
+          {c.settings}
+        </DropdownMenuItem>
+        <DropdownMenuItem icon={<ReceiptIcon strokeWidth={1.5} />}>{c.billingPlans}</DropdownMenuItem>
+        <DropdownMenuItem icon={<DollarSignIcon strokeWidth={1.5} />}>{c.pricing}</DropdownMenuItem>
+        <DropdownMenuItem icon={<CircleHelpIcon strokeWidth={1.5} />}>{c.faq}</DropdownMenuItem>
+      </Held>
+    )
+  },
 }
 
 /**
@@ -448,23 +458,13 @@ export const ItemWithIcon: Story = {
  * destructive row's text and icon are both `destructive`, as Figma draws
  * them.
  */
-export const MiniIcon: Story = {
-  name: "Mini icon",
+export const IconActions: Story = {
   decorators: [framed],
   parameters: { layout: "padded" },
-  render: () => (
-    <Matrix
-      menu={(c) => (
-        <Held trigger={c.open} className="w-[134px]">
-          <DropdownMenuItem icon={<PencilLineIcon strokeWidth={1.5} />}>{c.edit}</DropdownMenuItem>
-          <DropdownMenuItem icon={<ShareIcon strokeWidth={1.5} />}>{c.share}</DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem variant="destructive" icon={<Trash2Icon strokeWidth={1.5} />}>
-            {c.delete}
-          </DropdownMenuItem>
-        </Held>
-      )}
-    />
+  render: (_args, ctx) => (
+    <Held trigger={copy(ctx).open} className="w-[134px]">
+      {iconActionRows(copy(ctx))}
+    </Held>
   ),
 }
 
@@ -475,25 +475,13 @@ export const MiniIcon: Story = {
  * puts a logo from its Social Icons set before each name; they are left out
  * until the code has those icons.
  */
-export const ItemWithSwitch: Story = {
-  name: "DropdownItem with Switch",
+export const WithSwitches: Story = {
   decorators: [framed],
   parameters: { layout: "padded" },
-  render: () => (
-    <Matrix
-      menu={(c) => (
-        <Held trigger={c.open} className="w-[297px]">
-          <DropdownMenuGroup>
-            <DropdownMenuLabel>{c.appsNotification}</DropdownMenuLabel>
-            {c.apps.map((app, i) => (
-              <DropdownMenuCheckboxItem key={app} indicator="switch" defaultChecked={i === 0 || i === 4}>
-                {app}
-              </DropdownMenuCheckboxItem>
-            ))}
-          </DropdownMenuGroup>
-        </Held>
-      )}
-    />
+  render: (_args, ctx) => (
+    <Held trigger={copy(ctx).open} className="w-[297px]">
+      {switchRows(copy(ctx))}
+    </Held>
   ),
 }
 
@@ -503,24 +491,22 @@ export const ItemWithSwitch: Story = {
  * it; the menu stays open.
  */
 export const Checkboxes: Story = {
-  name: "Dropdown Checkboxes",
   decorators: [framed],
   parameters: { layout: "padded" },
-  render: () => (
-    <Matrix
-      menu={(c) => (
-        <Held trigger={c.open} className="w-[282px]">
-          <DropdownMenuGroup>
-            <DropdownMenuLabel>{c.myAccount}</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuCheckboxItem defaultChecked>{c.statusBar}</DropdownMenuCheckboxItem>
-            <DropdownMenuCheckboxItem disabled>{c.api}</DropdownMenuCheckboxItem>
-            <DropdownMenuCheckboxItem className={FIGMA_HOVER}>{c.inviteUsers}</DropdownMenuCheckboxItem>
-          </DropdownMenuGroup>
-        </Held>
-      )}
-    />
-  ),
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <Held trigger={c.open} className="w-[282px]">
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>{c.myAccount}</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuCheckboxItem defaultChecked>{c.statusBar}</DropdownMenuCheckboxItem>
+          <DropdownMenuCheckboxItem disabled>{c.api}</DropdownMenuCheckboxItem>
+          <DropdownMenuCheckboxItem className={FIGMA_HOVER}>{c.inviteUsers}</DropdownMenuCheckboxItem>
+        </DropdownMenuGroup>
+      </Held>
+    )
+  },
 }
 
 /**
@@ -529,24 +515,141 @@ export const Checkboxes: Story = {
  * open.
  */
 export const RadioGroup: Story = {
-  name: "Dropdown Radio Group",
+  decorators: [framed],
+  parameters: { layout: "padded" },
+  render: (_args, ctx) => (
+    <Held trigger={copy(ctx).open} className="w-[282px]">
+      {radioRows(copy(ctx))}
+    </Held>
+  ),
+}
+
+/**
+ * Figma's Dropdown Item states, each row named after its state: default;
+ * highlighted, drawn with the classes Base UI's `data-highlighted` turns on so
+ * it shows without a pointer; disabled, at half opacity and not pressable but
+ * still reachable with the arrow keys; and destructive, whose text and icon are
+ * `destructive`. Point at a row, or use the arrow keys, to highlight it.
+ */
+export const States: Story = {
+  decorators: [framed],
+  parameters: { layout: "padded" },
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <Held trigger={c.open} className="w-[240px]">
+        <DropdownMenuItem icon={<UserIcon strokeWidth={1.5} />}>{c.stateDefault}</DropdownMenuItem>
+        <DropdownMenuItem icon={<UserIcon strokeWidth={1.5} />} className={FIGMA_HOVER}>
+          {c.stateHighlighted}
+        </DropdownMenuItem>
+        <DropdownMenuItem icon={<UserIcon strokeWidth={1.5} />} disabled>
+          {c.stateDisabled}
+        </DropdownMenuItem>
+        <DropdownMenuItem variant="destructive" icon={<Trash2Icon strokeWidth={1.5} />}>
+          {c.stateDestructive}
+        </DropdownMenuItem>
+      </Held>
+    )
+  },
+}
+
+/**
+ * Long copy in a 240px menu. A label or row longer than the menu wraps onto
+ * more lines inside it, and the row grows from its 32px. The icon stays at
+ * the row's start and the shortcut and submenu chevron at its end, centred on
+ * the row, as Select's check is.
+ */
+export const LongText: Story = {
+  decorators: [framed],
+  parameters: { layout: "padded" },
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <Held trigger={c.open} className="w-[240px]">
+        <DropdownMenuLabel>{c.longLabel}</DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem>{c.longItem}</DropdownMenuItem>
+        <DropdownMenuItem icon={<CopyIcon strokeWidth={1.5} />}>
+          {c.longShortcut}
+          <DropdownMenuShortcut>⇧⌘D</DropdownMenuShortcut>
+        </DropdownMenuItem>
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger icon={<FolderInputIcon strokeWidth={1.5} />}>{c.longSub}</DropdownMenuSubTrigger>
+          <DropdownMenuSubContent>
+            <DropdownMenuItem>{c.email}</DropdownMenuItem>
+            <DropdownMenuItem>{c.message}</DropdownMenuItem>
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>
+      </Held>
+    )
+  },
+}
+
+/**
+ * Light and Dark, one panel each, whatever the theme toolbar says. Each panel
+ * sets its own theme: the `light` or `dark` class re-points every token for
+ * that subtree, and the open menus are portalled into the panel to take them.
+ * The direction follows the toolbar.
+ */
+export const LightAndDark: Story = {
+  decorators: [framed],
+  parameters: { layout: "padded" },
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <div className="grid gap-4">
+        {THEMES.map((theme) => (
+          <div key={theme} className={cn(theme, "rounded-lg border bg-background p-6 text-foreground")}>
+            <Head className="block pb-4">{title(theme)}</Head>
+            <div className="grid grid-cols-[17.625rem] items-start gap-x-6 gap-y-5 sm:grid-cols-[repeat(2,17.625rem)]">
+              <Held trigger={c.open} className="w-[282px]">
+                {basicRows(c)}
+              </Held>
+              <Held trigger={c.open} className="w-[282px]">
+                {switchRows(c)}
+              </Held>
+              <Held trigger={c.open} className="w-[282px]">
+                {iconActionRows(c)}
+              </Held>
+              <Held trigger={c.open} className="w-[282px]">
+                {radioRows(c)}
+              </Held>
+            </div>
+          </div>
+        ))}
+      </div>
+    )
+  },
+}
+
+/**
+ * LTR and RTL at once, whatever the toolbar says: each panel sets its own
+ * `dir`, `lang` and font. In RTL the menu lines up with the trigger's right
+ * edge, the text and icons start on the right, the shortcuts and the submenu
+ * chevron sit at the left end and the chevron points left, toward the side
+ * the submenu opens on. The theme follows the toolbar.
+ */
+export const Directions: Story = {
   decorators: [framed],
   parameters: { layout: "padded" },
   render: () => (
-    <Matrix
-      menu={(c) => (
-        <Held trigger={c.open} className="w-[282px]">
-          <DropdownMenuRadioGroup defaultValue="top">
-            <DropdownMenuLabel>{c.panelPosition}</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuRadioItem value="top">{c.top}</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="bottom">{c.bottom}</DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="right" className={FIGMA_HOVER}>
-              {c.right}
-            </DropdownMenuRadioItem>
-          </DropdownMenuRadioGroup>
-        </Held>
-      )}
-    />
+    <div className="grid grid-cols-[17.625rem] items-start gap-x-8 gap-y-6 sm:grid-cols-[repeat(2,17.625rem)]">
+      {DIRECTIONS.map((direction) => {
+        const c = COPY[direction]
+        return (
+          <div
+            key={direction}
+            dir={direction}
+            lang={direction === "rtl" ? "ar" : "en"}
+            className={cn("flex flex-col gap-1.5", direction === "rtl" ? "font-arabic" : "font-sans")}
+          >
+            <Head>{direction.toUpperCase()}</Head>
+            <Held trigger={c.open} className="w-[282px]">
+              {basicRows(c, { shortcuts: true })}
+            </Held>
+          </div>
+        )
+      })}
+    </div>
   ),
 }
