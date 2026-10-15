@@ -14,9 +14,9 @@ import { Button } from "../../ui/button/button"
  * look from here: a 1px `input` stroke on `background`, `accent` on hover,
  * and while pressed a `ring` stroke with a 3px `ring/50` halo.
  *
- * Pressing a chip selects that category and shows its questions under the
- * grid; pressing it again, or another, changes the selection. With nothing
- * pressed, the block is Figma's: the heading and the chips alone.
+ * The first category is pressed at first, as in Figma, and its questions
+ * show under the grid. Pressing another chip changes the selection; pressing
+ * the pressed one again clears it, leaving the heading and the chips alone.
  *
  * Mobile first: the base classes are Figma's Mobile (360), `md:` its Tablet
  * (768) and `lg:` its Desktop (1440).
@@ -52,7 +52,11 @@ const category = (value: string, label: string, ...pairs: Pair[]): FaqCategoryCh
   items: pairs.map(([question, answer]) => ({ question, answer })),
 })
 
-/** Figma's copy, English and Arabic. Figma shows the chips; their questions are written to match. */
+/**
+ * Figma's copy, English and Arabic. Figma shows Getting started pressed, with
+ * the same six questions as Sidebar Nav's Getting started; the other
+ * categories' questions are written to match.
+ */
 const COPY: Record<"en" | "ar", FaqCategoryChipGridCopy> = {
   en: {
     heading: "Q&A",
@@ -61,8 +65,15 @@ const COPY: Record<"en" | "ar", FaqCategoryChipGridCopy> = {
       category(
         "getting-started",
         "Getting started",
-        ["How do I enable the library?", "Publish the file as a library, then enable it for your team in the Assets panel."],
-        ["Which page do I open first?", "Foundations: it shows the tokens every component reads."]
+        [
+          "How do I enable the library for my team?",
+          "From the file, open the Assets panel, choose Libraries, then publish. Anyone in a team with the library enabled sees Fasla components in their Assets panel immediately.",
+        ],
+        ["Which file should I open first?", "Open the Foundations page. It shows the tokens every component reads, before you place one."],
+        ["How is the file organised?", "One page per component family, with atoms first, then blocks, then templates."],
+        ["What do the emoji page prefixes mean?", "They show each page’s status: a green dot is ready to use, a yellow one is still in review."],
+        ["Where is the changelog?", "On the Changelog page, at the top of the file. Every release lists what was added and fixed."],
+        ["How do I report something broken?", "Leave a comment on the component in Figma, or write to support with a link to the frame."]
       ),
       category(
         "components",
@@ -176,8 +187,15 @@ const COPY: Record<"en" | "ar", FaqCategoryChipGridCopy> = {
       category(
         "getting-started",
         "البداية",
-        ["كيف أفعّل المكتبة؟", "انشر الملف كمكتبة، ثم فعّلها لفريقك من لوحة Assets."],
-        ["أي صفحة أفتح أولًا؟", "صفحة الأساسيات: تعرض الرموز التي يقرؤها كل مكوّن."]
+        [
+          "كيف أفعّل المكتبة لفريقي؟",
+          "من داخل الملف، افتح لوحة Assets واختر Libraries ثم انشر. وسيرى كل من فعّل المكتبة مكوّنات فاصلة في لوحته فورًا.",
+        ],
+        ["أي ملف ينبغي أن أفتح أولًا؟", "افتح صفحة الأساسيات. تعرض الرموز التي يقرؤها كل مكوّن قبل أن تضع أيًّا منها."],
+        ["كيف يُنظَّم الملف؟", "صفحة لكل عائلة مكوّنات: المكوّنات الأساسية أولًا، ثم الكتل، ثم القوالب."],
+        ["ماذا تعني رموز الإيموجي في أسماء الصفحات؟", "تبيّن حالة كل صفحة: النقطة الخضراء تعني أنها جاهزة، والصفراء أنها ما زالت قيد المراجعة."],
+        ["أين سجلّ التغييرات؟", "في صفحة سجلّ التغييرات أعلى الملف. يذكر كل إصدار ما أُضيف وما أُصلح."],
+        ["كيف أبلّغ عن خلل؟", "اترك تعليقًا على المكوّن في Figma، أو راسل الدعم مع رابط الإطار."]
       ),
       category(
         "components",
@@ -302,8 +320,11 @@ export interface FaqCategoryChipGridProps
     Partial<FaqCategoryChipGridCopy> {
   /** Which language the default copy is in. The page's `dir` sets the direction. */
   locale?: "en" | "ar"
-  /** The category pressed at first, by `value`. None, by default, as in Figma. */
-  defaultCategory?: string
+  /**
+   * The category pressed at first, by `value`: the first category by default,
+   * as in Figma. `null` starts with none pressed and no questions shown.
+   */
+  defaultCategory?: string | null
   /** Called with the pressed category's `value`, or undefined when none is. */
   onCategoryChange?: (value: string | undefined) => void
 }
@@ -323,7 +344,9 @@ export function FaqCategoryChipGrid({
   const headingId = React.useId()
   const panelId = React.useId()
   const list = categories ?? copy.categories
-  const [selected, setSelected] = React.useState<string | undefined>(defaultCategory)
+  const [selected, setSelected] = React.useState<string | undefined>(
+    defaultCategory === null ? undefined : (defaultCategory ?? list[0]?.value)
+  )
   const current = list.find((c) => c.value === selected)
 
   const select = (value: string | undefined) => {
@@ -372,7 +395,7 @@ export function FaqCategoryChipGrid({
         </ul>
 
         {current && (
-          <div id={panelId} className="w-full max-w-[880px]">
+          <div id={panelId} className="w-full max-w-[1120px]">
             {current.items.length === 0 ? (
               <p className="text-center text-sm text-muted-foreground">{empty ?? copy.empty}</p>
             ) : (

@@ -26,7 +26,7 @@ import { FaqSupportChannels } from "../../../../../packages/fasla-ui/registry/bl
 import { FaqNewsletterClose } from "../../../../../packages/fasla-ui/registry/blocks/faq-newsletter-close/FaqNewsletterClose"
 import { FaqSupportStats } from "../../../../../packages/fasla-ui/registry/blocks/faq-support-stats/FaqSupportStats"
 import { FaqChatThread } from "../../../../../packages/fasla-ui/registry/blocks/faq-chat-thread/FaqChatThread"
-import { faqViewports, hiddenArgTypes, localeOf, withForeignTheme } from "./faq-story-kit"
+import { faqViewports, faqArgTypes, localeOf, withForeignTheme } from "./faq-story-kit"
 
 /**
  * FAQ: the 26 Types of the Figma set, one block each. They are in Figma's
@@ -54,31 +54,31 @@ export default meta
 
 export const ClassicCentered: StoryObj<typeof FaqClassicCentered> = {
   name: "Classic Centered",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqClassicCentered),
   render: (args, context) => <FaqClassicCentered locale={localeOf(context)} {...args} />,
 }
 
 export const AccentActiveCard: StoryObj<typeof FaqAccentActiveCard> = {
   name: "Accent Active Card",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqAccentActiveCard),
   render: (args, context) => <FaqAccentActiveCard locale={localeOf(context)} {...args} />,
 }
 
 export const SoftFilledRows: StoryObj<typeof FaqSoftFilledRows> = {
   name: "Soft Filled Rows",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqSoftFilledRows),
   render: (args, context) => <FaqSoftFilledRows locale={localeOf(context)} {...args} />,
 }
 
 export const NumberedEditorial: StoryObj<typeof FaqNumberedEditorial> = {
   name: "Numbered Editorial",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqNumberedEditorial),
   render: (args, context) => <FaqNumberedEditorial locale={localeOf(context)} {...args} />,
 }
 
 export const DarkPanel: StoryObj<typeof FaqDarkPanel> = {
   name: "Dark Panel",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqDarkPanel),
   render: (args, context) => <FaqDarkPanel locale={localeOf(context)} {...args} />,
 }
 
@@ -103,7 +103,7 @@ export const DarkPanelFocus: StoryObj<typeof FaqDarkPanel> = {
 
 export const MonoIndex: StoryObj<typeof FaqMonoIndex> = {
   name: "Mono Index",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqMonoIndex),
   render: (args, context) => <FaqMonoIndex locale={localeOf(context)} {...args} />,
 }
 
@@ -128,19 +128,19 @@ export const MonoIndexFocus: StoryObj<typeof FaqMonoIndex> = {
 
 export const UppercaseDense: StoryObj<typeof FaqUppercaseDense> = {
   name: "Uppercase Dense",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqUppercaseDense),
   render: (args, context) => <FaqUppercaseDense locale={localeOf(context)} {...args} />,
 }
 
 export const TableCompact: StoryObj<typeof FaqTableCompact> = {
   name: "Table Compact",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqTableCompact),
   render: (args, context) => <FaqTableCompact locale={localeOf(context)} {...args} />,
 }
 
 export const FeaturedQuestion: StoryObj<typeof FaqFeaturedQuestion> = {
   name: "Featured Question",
-  argTypes: { ...hiddenArgTypes, onFeedback: { action: "feedback" } },
+  argTypes: { ...faqArgTypes(FaqFeaturedQuestion), onFeedback: { action: "feedback" } },
   render: (args, context) => <FaqFeaturedQuestion locale={localeOf(context)} {...args} />,
 }
 
@@ -148,38 +148,38 @@ export const FeaturedQuestion: StoryObj<typeof FaqFeaturedQuestion> = {
 
 export const SplitSticky: StoryObj<typeof FaqSplitSticky> = {
   name: "Split Sticky",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqSplitSticky),
   render: (args, context) => <FaqSplitSticky locale={localeOf(context)} {...args} />,
 }
 
 export const TwoColumnGrid: StoryObj<typeof FaqTwoColumnGrid> = {
   name: "Two-Column Grid",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqTwoColumnGrid),
   render: (args, context) => <FaqTwoColumnGrid locale={localeOf(context)} {...args} />,
 }
 
 export const MasonryCards: StoryObj<typeof FaqMasonryCards> = {
   name: "Masonry Cards",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqMasonryCards),
   render: (args, context) => <FaqMasonryCards locale={localeOf(context)} {...args} />,
 }
 
 export const CategoryColumns: StoryObj<typeof FaqCategoryColumns> = {
   name: "Category Columns",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqCategoryColumns),
   render: (args, context) => <FaqCategoryColumns locale={localeOf(context)} {...args} />,
 }
 
 export const GroupedSections: StoryObj<typeof FaqGroupedSections> = {
   name: "Grouped Sections",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqGroupedSections),
   render: (args, context) => <FaqGroupedSections locale={localeOf(context)} {...args} />,
 }
 
 /** The photo is Figma's, from the docs site's public folder; the block ships without one. */
 export const MediaSplit: StoryObj<typeof FaqMediaSplit> = {
   name: "Media Split",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqMediaSplit),
   render: (args, context) => (
     <FaqMediaSplit
       locale={localeOf(context)}
@@ -196,7 +196,7 @@ export const MediaSplit: StoryObj<typeof FaqMediaSplit> = {
 export const MediaSplitNoImage: StoryObj<typeof FaqMediaSplit> = {
   tags: ["!dev", "!autodocs"],
   name: "Media Split: No image",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqMediaSplit),
   render: (args, context) => <FaqMediaSplit locale={localeOf(context)} {...args} />,
 }
 
@@ -205,7 +205,7 @@ export const MediaSplitNoImage: StoryObj<typeof FaqMediaSplit> = {
 /** Type in the field or press a chip: the questions filter as you go. */
 export const SearchCategories: StoryObj<typeof FaqSearchCategories> = {
   name: "Search + Categories",
-  argTypes: { ...hiddenArgTypes, noResults: { table: { disable: true } }, resultCount: { table: { disable: true } } },
+  argTypes: { ...faqArgTypes(FaqSearchCategories), noResults: { table: { disable: true } }, resultCount: { table: { disable: true } } },
   render: (args, context) => <FaqSearchCategories locale={localeOf(context)} {...args} />,
 }
 
@@ -219,43 +219,43 @@ export const SearchCategoriesNoResults: StoryObj<typeof FaqSearchCategories> = {
 
 export const TabsByTopic: StoryObj<typeof FaqTabsByTopic> = {
   name: "Tabs by Topic",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqTabsByTopic),
   render: (args, context) => <FaqTabsByTopic locale={localeOf(context)} {...args} />,
 }
 
 /** The topics are vertical tabs: Up and Down move through them. */
 export const SidebarNav: StoryObj<typeof FaqSidebarNav> = {
   name: "Sidebar Nav",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqSidebarNav),
   render: (args, context) => <FaqSidebarNav locale={localeOf(context)} {...args} />,
 }
 
-/** As in Figma, no chip is pressed. Press one to see its questions. */
+/** As in Figma, Getting started is pressed and its questions show below. */
 export const CategoryChipGrid: StoryObj<typeof FaqCategoryChipGrid> = {
   name: "Category Chip Grid",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqCategoryChipGrid),
   args: { onCategoryChange: fn() },
   render: (args, context) => <FaqCategoryChipGrid locale={localeOf(context)} {...args} />,
 }
 
-/** A chip pressed: the selected filter, and its questions below. */
-export const CategoryChipGridPressed: StoryObj<typeof FaqCategoryChipGrid> = {
+/** No chip pressed: the heading and the chips alone. */
+export const CategoryChipGridNonePressed: StoryObj<typeof FaqCategoryChipGrid> = {
   tags: ["!dev", "!autodocs"],
   ...CategoryChipGrid,
-  name: "Category Chip Grid: Pressed",
-  args: { onCategoryChange: fn(), defaultCategory: "theming" },
+  name: "Category Chip Grid: None pressed",
+  args: { onCategoryChange: fn(), defaultCategory: null },
 }
 
 export const TopicTiles: StoryObj<typeof FaqTopicTiles> = {
   name: "Topic Tiles",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqTopicTiles),
   render: (args, context) => <FaqTopicTiles locale={localeOf(context)} {...args} />,
 }
 
 /** Press Enter in the field, or choose a popular search: `onSearch` gets the query. */
 export const HelpHeroPopular: StoryObj<typeof FaqHelpHeroPopular> = {
   name: "Help Hero + Popular",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqHelpHeroPopular),
   args: { onSearch: fn() },
   render: (args, context) => <FaqHelpHeroPopular locale={localeOf(context)} {...args} />,
 }
@@ -282,7 +282,7 @@ const later = (fail = false) => () =>
 
 export const ContactCtaCard: StoryObj<typeof FaqContactCtaCard> = {
   name: "Contact CTA Card",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqContactCtaCard),
   render: (args, context) => (
     <FaqContactCtaCard locale={localeOf(context)} people={PEOPLE[localeOf(context)]} {...args} />
   ),
@@ -290,14 +290,14 @@ export const ContactCtaCard: StoryObj<typeof FaqContactCtaCard> = {
 
 export const SupportChannels: StoryObj<typeof FaqSupportChannels> = {
   name: "Support Channels",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqSupportChannels),
   render: (args, context) => <FaqSupportChannels locale={localeOf(context)} {...args} />,
 }
 
 /** Subscribe shows the button's loading state, then the success line. */
 export const NewsletterClose: StoryObj<typeof FaqNewsletterClose> = {
   name: "Newsletter Close",
-  argTypes: { ...hiddenArgTypes, onSubmit: { table: { disable: true } } },
+  argTypes: { ...faqArgTypes(FaqNewsletterClose), onSubmit: { table: { disable: true } } },
   render: (args, context) => <FaqNewsletterClose locale={localeOf(context)} onSubmit={later()} {...args} />,
 }
 
@@ -319,14 +319,14 @@ export const NewsletterCloseDisabled: StoryObj<typeof FaqNewsletterClose> = {
 
 export const SupportStats: StoryObj<typeof FaqSupportStats> = {
   name: "Support Stats",
-  argTypes: hiddenArgTypes,
+  argTypes: faqArgTypes(FaqSupportStats),
   render: (args, context) => <FaqSupportStats locale={localeOf(context)} {...args} />,
 }
 
 /** Send stays disabled until something is typed, then loads while the question is sent. */
 export const ChatThread: StoryObj<typeof FaqChatThread> = {
   name: "Chat Thread",
-  argTypes: { ...hiddenArgTypes, onSend: { table: { disable: true } } },
+  argTypes: { ...faqArgTypes(FaqChatThread), onSend: { table: { disable: true } } },
   render: (args, context) => (
     <FaqChatThread
       locale={localeOf(context)}
