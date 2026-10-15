@@ -337,11 +337,22 @@ describe("Select — multiple", () => {
     <Select multiple aria-label="Cities" items={CITIES} defaultValue={["riyadh", "jeddah"]} {...(props as object)} />
   )
 
-  it("shows each chosen value as Figma's Badge: Soft, Primary, sm, Standard", () => {
+  it("shows each chosen value as Figma's Badge: Soft, Primary, sm, Standard on a Standard trigger", () => {
     render(<Multi />)
     const badges = slots("select-badge")
     expect(badges.map((b) => b.textContent)).toEqual(["Riyadh", "Jeddah"])
     expect(badges[0]).toHaveClass("from-soft-primary", "text-primary", "min-h-5", "rounded-[var(--radius-sm)]")
+  })
+
+  it.each([
+    ["standard", "rounded-[var(--radius-sm)]", "rounded-full"],
+    ["rounded", "rounded-full", "rounded-[var(--radius-sm)]"],
+  ] as const)("gives the badges the trigger's radius: %s", (radius, badgeRadius, notRadius) => {
+    render(<Multi radius={radius} />)
+    for (const badge of slots("select-badge")) {
+      expect(badge).toHaveClass(badgeRadius)
+      expect(badge).not.toHaveClass(notRadius)
+    }
   })
 
   it("lets the badges wrap, with block padding that fits one Arabic row", () => {

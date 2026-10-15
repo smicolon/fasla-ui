@@ -508,7 +508,9 @@ const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                   if (!multiple) return labelFor(value as string)
                   if (display === "text") return chosen.map(labelFor).join(separatorFor(context))
                   return chosen.map((v) => (
-                    // Figma's Badge: Soft, Primary, sm, Standard. Drawn here
+                    // Figma's Badge: Soft, Primary, sm, in the trigger's radius —
+                    // Standard on a Standard trigger, Rounded (a pill) on a
+                    // Rounded one. Drawn here
                     // rather than as a Badge with `onClose`: that is a button,
                     // and a button cannot sit inside the trigger's. The remove
                     // is for the pointer; from the keyboard, unchoose the item
@@ -517,7 +519,7 @@ const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                       key={v}
                       data-slot="select-badge"
                       className={cn(
-                        badgeVariants({ variant: "soft", tone: "primary", size: "sm", radius: "standard" }),
+                        badgeVariants({ variant: "soft", tone: "primary", size: "sm", radius }),
                         "max-w-full"
                       )}
                     >
