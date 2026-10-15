@@ -89,6 +89,9 @@
     --soft-destructive-20: rgb(224 52 52 / 20%);
     --soft-destructive-30: rgb(224 52 52 / 30%);
 
+    /* Overlay behind a modal — Figma custom/backdrop-overlay, the Alert Dialog backdrop */
+    --backdrop-overlay: rgb(60 58 64 / 60%);
+
     /* Radius — Figma border radius/xs, sm, md; mode-independent, so light only */
     --radius-xs: 2px;
     --radius-sm: 6px;
@@ -178,6 +181,9 @@
     --soft-secondary-30: rgb(163 163 163 / 30%);
     --soft-destructive-20: rgb(224 52 52 / 20%);
     --soft-destructive-30: rgb(224 52 52 / 30%);
+
+    /* Overlay behind a modal — Figma custom/backdrop-overlay, the Alert Dialog backdrop */
+    --backdrop-overlay: rgb(60 58 64 / 80%);
     /* ── figma:theme:end ─────────────────────────────────────────────── */
   }
 }

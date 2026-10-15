@@ -1218,6 +1218,133 @@
         "multiple": "Several items open at once"
       }
     },
+    "alertDialog": {
+      "installNote": "Alert Dialog is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its actions use <code>button</code>. <code>add</code> installs both with the component, and so does the shadcn CLI.",
+      "previewHint": "Press the button to open the dialog. Tab moves between its buttons, and Escape closes it.",
+      "trigger": "Delete project",
+      "cancel": "Cancel",
+      "safe": {
+        "title": "Publish these changes?",
+        "description": "Everyone who visits the site sees the new version straight away. You can edit it again later.",
+        "action": "Publish"
+      },
+      "danger": {
+        "title": "Delete this project?",
+        "description": "The project and all of its files are deleted for everyone on your team. You can't get them back.",
+        "action": "Delete"
+      },
+      "align": {
+        "title": "Alignment",
+        "body": "<code>align</code> sets the layout. <code>edge</code>, the default, starts the title and description at the beginning of the line and puts the actions at the end of the row. <code>center</code> centres the text and the actions. Keep <code>center</code> for a short description: centred lines are harder to read once the text runs to several."
+      },
+      "destructive": {
+        "title": "Destructive",
+        "body": "Set <code>destructive</code> when the action can't be undone, such as deleting a project. The main action becomes the destructive Button, and Cancel stays as it is. Name the action in its label, such as Delete, so the button says what happens on its own."
+      },
+      "icon": {
+        "title": "Icon",
+        "body": "<code>icon</code> adds an alert icon to the title, 24px and in the title's colour. With <code>edge</code> it sits beside the title, centred on its first line, and the description and any additional content line up with the title, not the icon. With <code>center</code> it sits above the title. To show another icon, pass any icon element in place of <code>true</code>, such as a sign-out icon below. It takes the same size, colour and place.",
+        "custom": {
+          "title": "Sign out of every device?",
+          "description": "You'll need to sign in again on your phone, your laptop and any other device you use.",
+          "action": "Sign out"
+        }
+      },
+      "content": {
+        "title": "Additional content",
+        "body": "Anything you place between <code>AlertDialogHeader</code> and <code>AlertDialogFooter</code> sits between the text and the actions, 16px from each, as wide as the text. Use it for one short field or a checkbox the decision depends on, such as typing the project's name before deleting it. A longer form belongs in a page or a regular dialog.",
+        "label": "Type the project name to confirm",
+        "placeholder": "Orbit"
+      },
+      "pending": {
+        "title": "Waiting for the action",
+        "body": "The main action closes the dialog after its <code>onClick</code> runs. When the action takes time, call <code>event.preventBaseUIHandler()</code> in <code>onClick</code> to keep the dialog open, set <code>loading</code> on the action while the request runs, and close the dialog through <code>open</code> once it finishes.",
+        "label": "Deleting",
+        "action": "Deleting"
+      },
+      "long": {
+        "title": "Long text",
+        "body": "A long title or description wraps inside the 512px box. When the dialog is taller than the window, it scrolls inside, and on a phone it keeps 16px from each edge of the screen.",
+        "dialogTitle": "Remove every member who hasn't signed in to this workspace during the last ninety days?",
+        "description": "They lose access to every project, file and comment in the workspace straight away, and any invitations they sent are cancelled. Their work stays where it is, and you can invite any of them again later from the Members page.",
+        "action": "Remove members",
+        "cancel": "Keep everyone"
+      },
+      "a11y": {
+        "role": "The dialog has the <code>alertdialog</code> role. Its title names it and its description describes it, so a screen reader reads both when it opens.",
+        "icon": "The icon, built in or your own, is hidden from screen readers. Make the title name the action on its own, such as Sign out of every device.",
+        "focus": "When the dialog opens, focus moves to its first control: Cancel, or the first field of any additional content. Tab and Shift+Tab stay inside the dialog, and focus returns to the trigger when it closes.",
+        "dismiss": "Escape closes the dialog, as Cancel does. A press on the overlay does nothing, so a stray click never makes the decision.",
+        "page": "While the dialog is open, the page behind it can't be reached with the keyboard or the pointer, and it doesn't scroll.",
+        "direction": "The dialog takes the page's direction, language and font, though it renders at the end of <code>body</code>. In Arabic the whole layout mirrors and Cancel still comes first in reading order. Direction needs no prop."
+      },
+      "rootProps": {
+        "open": "Shows or hides the dialog, when you control it.",
+        "defaultOpen": "Shows the dialog on first render.",
+        "onOpenChange": "Called when the dialog opens or closes.",
+        "onOpenChangeComplete": "Called once the dialog has finished opening or closing.",
+        "actionsRef": "A ref with <code>close()</code>, to close the dialog from code.",
+        "handle": "Connects the dialog to triggers elsewhere on the page. Create one with <code>AlertDialog.createHandle()</code> from <code>@base-ui/react/alert-dialog</code>.",
+        "triggerId": "Which trigger the dialog belongs to, when several share it and you control <code>open</code>.",
+        "defaultTriggerId": "Which trigger the dialog belongs to on first render, with <code>defaultOpen</code>.",
+        "children": "The trigger and the content."
+      },
+      "triggerProps": {
+        "render": "Renders your own element in place of the plain button, such as a Button.",
+        "handle": "The handle of a dialog elsewhere that this trigger opens.",
+        "payload": "Data handed to the dialog when this trigger opens it.",
+        "disabled": "Stops this trigger opening the dialog.",
+        "children": "The trigger's label.",
+        "className": "Extra classes for the trigger."
+      },
+      "contentProps": {
+        "align": "<code>edge</code> starts the text at the beginning of the line and puts the actions at the end. <code>center</code> centres both.",
+        "destructive": "Turns the main action into the destructive Button.",
+        "icon": "<code>true</code> for the alert icon, or any icon element. Either way it is 24px, in the title's colour.",
+        "container": "Where the dialog renders. Defaults to <code>body</code>.",
+        "initialFocus": "The element focused when the dialog opens. Defaults to the first control.",
+        "finalFocus": "The element focused when the dialog closes. Defaults to the trigger.",
+        "children": "The header, any additional content and the footer.",
+        "className": "Extra classes for the dialog box."
+      },
+      "headerProps": {
+        "children": "The title and the description.",
+        "className": "Extra classes for the header."
+      },
+      "footerProps": {
+        "children": "Cancel, then the main action.",
+        "className": "Extra classes for the row of actions."
+      },
+      "titleProps": {
+        "children": "The question the dialog asks.",
+        "className": "Extra classes for the title."
+      },
+      "descriptionProps": {
+        "children": "What happens if the user goes ahead.",
+        "className": "Extra classes for the description."
+      },
+      "actionProps": {
+        "onClick": "Runs the action, then closes the dialog. Call <code>event.preventBaseUIHandler()</code> to keep it open.",
+        "loading": "Shows a spinner, disables the button and announces <code>loadingLabel</code>.",
+        "loadingLabel": "Screen-reader text announced while loading.",
+        "disabled": "Disables the button.",
+        "children": "The action's label.",
+        "className": "Extra classes for the button."
+      },
+      "cancelProps": {
+        "onClick": "Runs before the dialog closes.",
+        "disabled": "Disables the button.",
+        "children": "The label, usually Cancel.",
+        "className": "Extra classes for the button."
+      },
+      "usage": {
+        "basic": "Confirm a delete",
+        "content": "Ask for the project name",
+        "pending": "Keep it open while the action runs",
+        "project": "Orbit",
+        "custom": "Use your own icon"
+      }
+    },
     "badge": {
       "lead": "A compact inline label for status, category or metadata, with an optional icon, avatar and close button.",
       "preview": {

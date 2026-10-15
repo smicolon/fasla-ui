@@ -146,6 +146,12 @@ describe("Figma ☾ Mode snapshot", () => {
     }
   )
 
+  it("keeps the modal overlay translucent, and denser in Dark", () => {
+    // Figma custom/backdrop-overlay: one colour, #3c3a40, at 60% and 80%.
+    expect(tok("backdrop-overlay").light).toBe("rgb(60 58 64 / 60%)")
+    expect(tok("backdrop-overlay").dark).toBe("rgb(60 58 64 / 80%)")
+  })
+
   it("keeps destructive distinct from primary", () => {
     // Both were #e40017 in docs, so a delete button matched a confirm button.
     expect(tok("destructive").light).toBe("#dc2626")

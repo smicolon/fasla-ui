@@ -356,6 +356,21 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/alert-dialog/",
+    title: "Alert Dialog React Component | Fasla",
+    description:
+      "Ask users to confirm or cancel an action in an accessible React alert dialog, with a destructive style, an icon, extra content and RTL.",
+    h1: "Alert Dialog",
+    ar: {
+      title: "حوار التنبيه (Alert Dialog) لتطبيقات React | فاصلة",
+      description:
+        "اطلب من المستخدم تأكيد إجراء أو إلغاءه بمكوّن حوار التنبيه، مع نمط للإجراءات الخطرة وأيقونة ومحتوى إضافي، وينعكس تلقائيًا في الصفحات العربية.",
+      h1: "حوار التنبيه (Alert Dialog)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/combobox/",
     title: "Combobox React Component | Fasla",
     description:

@@ -27,6 +27,30 @@
       ]
     },
     {
+      "name": "alert-dialog",
+      "type": "registry:ui",
+      "title": "Alert Dialog",
+      "description": "A modal dialog on Base UI that asks the user to confirm or cancel an action: edge or centred layout, a destructive main action, an optional alert icon and a slot for extra content, mirrored for RTL.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/alert-dialog/alert-dialog.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/alert-dialog.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "feedback"
+      ]
+    },
+    {
       "name": "animated-gradient",
       "type": "registry:ui",
       "title": "Animated Gradient",

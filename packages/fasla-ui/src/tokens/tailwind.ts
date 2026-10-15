@@ -2,7 +2,7 @@
  * Tailwind mapping for the Fasla semantic colour tokens.
  *
  * These are the 41 `theme/*` variables of the Figma "☾ Mode" collection, plus
- * the twelve `opacity/*` Soft tints. Figma
+ * the twelve `opacity/*` Soft tints and `custom/backdrop-overlay`. Figma
  * is the source of truth; `design/tokens/mode.json` holds the committed
  * snapshot, and both apps declare the same values in their own `globals.css`.
  *
@@ -73,6 +73,10 @@ export const tailwindSemanticColors = {
     "destructive-20": c("soft-destructive-20"),
     "destructive-30": c("soft-destructive-30"),
   },
+
+  // The overlay behind a modal: Figma's `custom/backdrop-overlay`, already
+  // translucent, and denser in Dark.
+  "backdrop-overlay": c("backdrop-overlay"),
 
   // Inverse — a fixed contrast band, not a mode-reactive surface.
   "background-inverse": c("background-inverse"),
