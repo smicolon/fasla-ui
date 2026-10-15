@@ -69,9 +69,9 @@ function Trail({
                     </Badge>
                   </BreadcrumbPage>
                 ) : badge ? (
-                  // Figma dims the steps before the current page to 50%; the pill radius
+                  // Figma dims the steps before the current page to 60%; the pill radius
                   // keeps the focus outline on the badge's own shape, at full strength.
-                  <BreadcrumbLink href="#" className="rounded-full opacity-50 hover:opacity-100 focus-visible:opacity-100">
+                  <BreadcrumbLink href="#" className="rounded-full opacity-60 hover:opacity-100 focus-visible:opacity-100">
                     <Badge variant={badge} size="md">
                       {step.label}
                     </Badge>
@@ -372,7 +372,7 @@ import {
 } from "@/components/ui/breadcrumb"
 
 const DIMMED = [
-  "rounded-full opacity-50",
+  "rounded-full opacity-60",
   "hover:opacity-100 focus-visible:opacity-100",
 ].join(" ")
 

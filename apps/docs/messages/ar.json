@@ -1548,7 +1548,7 @@
           "نتائج استطلاع رضا العملاء الربعي في المنطقة الشمالية"
         ]
       },
-      "variantsBody": "في Figma أربعة أنماط. يرسم المكوّن <code>BreadcrumbSeparator</code> سهمًا ما لم تمرّر إليه أيقونة، فالأيقونة <code>SlashIcon</code> تعطيك الفاصل المخصص. أما نمطا الشارة فتركيبان: شارة Soft أو Outline من المكوّن <code>Badge</code> داخل كل خطوة، والخطوات التي قبل الصفحة الحالية بنصف الشفافية.",
+      "variantsBody": "في Figma أربعة أنماط. يرسم المكوّن <code>BreadcrumbSeparator</code> سهمًا ما لم تمرّر إليه أيقونة، فالأيقونة <code>SlashIcon</code> تعطيك الفاصل المخصص. أما نمطا الشارة فتركيبان: شارة Soft أو Outline من المكوّن <code>Badge</code> داخل كل خطوة، والخطوات التي قبل الصفحة الحالية باهتة بالقيمة <code>opacity-60</code>.",
       "styles": {
         "default": "افتراضي",
         "separator": "فاصل مخصص",

@@ -1548,7 +1548,7 @@
           "Quarterly satisfaction survey results for the northern region"
         ]
       },
-      "variantsBody": "Figma has four styles. <code>BreadcrumbSeparator</code> draws a chevron unless you pass it an icon: a <code>SlashIcon</code> gives the custom separator. The two badge styles are compositions: a Soft or Outline <code>Badge</code> inside each step, with the steps before the current page at half opacity.",
+      "variantsBody": "Figma has four styles. <code>BreadcrumbSeparator</code> draws a chevron unless you pass it an icon: a <code>SlashIcon</code> gives the custom separator. The two badge styles are compositions: a Soft or Outline <code>Badge</code> inside each step, with the steps before the current page dimmed to <code>opacity-60</code>.",
       "styles": {
         "default": "Default",
         "separator": "Custom separator",
