@@ -355,10 +355,11 @@ function Calendar({
           // the start, so in RTL it is on the right. Where they do not fit
           // side by side (a phone), they wrap, centred, 16px apart.
           months: "relative flex flex-wrap justify-center gap-x-2 gap-y-4",
-          // The caption sits 16px above the grid. The arrows hang at its two
-          // ends; only the outer months have them.
+          // The caption — the month's name, or the month and year menus — sits
+          // 16px above the grid. The arrows hang at its two ends; only the
+          // outer months have them.
           month: "relative flex w-56 flex-col gap-4",
-          month_caption: dropdowns ? "mb-2 flex" : "flex min-h-6 justify-center pt-1",
+          month_caption: dropdowns ? "flex" : "flex min-h-6 justify-center pt-1",
           caption_label: "text-sm font-medium text-foreground",
           dropdowns: "flex w-full gap-1.5",
           button_previous: "absolute start-0 top-px z-10",

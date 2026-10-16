@@ -121,6 +121,10 @@ describe("Calendar — navigation", () => {
     )
     expect(document.querySelectorAll("[data-slot=select-trigger]")).toHaveLength(2)
     expect(screen.queryByRole("button", { name: /previous month/i })).toBeNull()
+    // The menus sit 16px above the grid, as the month's name does: the month's gap, no margin of their own.
+    const caption = document.querySelector("[data-slot=calendar] [data-slot=select-trigger]")!.closest("[data-slot=calendar] > div > div > div")!
+    expect(caption.parentElement).toHaveClass("gap-4")
+    expect(caption.className).not.toMatch(/(^|\s)m[tby]?-/)
   })
 })
 
