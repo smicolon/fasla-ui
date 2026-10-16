@@ -1,6 +1,6 @@
 ---
 name: figma-index
-description: Regenerates the committed index of Fasla design-system components in Figma — design/index-atoms.json and design/index-atoms.md. Use whenever the index is stale, whenever a pass adds or changes a component in the Figma file, or when the index-freshness test fails. Read-only against Figma; it never writes to the design file.
+description: Regenerates the committed indexes of the Fasla Figma file — design/index-atoms.{json,md} (atoms) and design/index-blocks.{json,md} (block families). Use whenever an index is stale, whenever a pass adds or changes a component or block in the Figma file, or when an index-freshness test fails. Read-only against Figma; it never writes to the design file.
 ---
 
 # figma-index — regenerate the committed component index
@@ -12,8 +12,8 @@ what it said at the last sync, and `design/index-<target>.md` is rendered from t
 calls, two or three minutes. Never patch either file by hand. Re-run this skill and let
 `git diff` show what moved: **a dirty `git status` afterwards _is_ the drift report.**
 
-Targets: `atoms` (built). `blocks` is reserved — the per-block marketing pages are mid-
-consolidation and get their own index later, with its own selection rule.
+Targets: `atoms` (the steps below) and `blocks` (its own scope rule, builder and verification —
+see **Target: blocks** at the end). Run the target whose pages changed; they are independent.
 
 ## Split of responsibility — do not blur it
 
@@ -167,3 +167,144 @@ no diff and nothing to commit — that is a clean result, not a failed run.
 If `design/index-atoms.notes.json` exists — `{ "<nodeId>": "note text" }` — the renderer appends
 each note to that component's row. It is the only hand-authored input, and regeneration never
 touches it. Everything else in both output files is generated.
+
+---
+
+## Target: blocks
+
+`design/index-blocks.json` and `.md` — every block family under the two section headers, every
+block (Type) linked to its Desktop/LTR variant, with status, owner, docs, code and flags.
+Builder: `design/scripts/build-blocks-index.mjs` (imports the shared legend and page-name parsing
+from `build-index.mjs`). Test: `packages/fasla-ui/src/design-index/index-blocks.test.ts`.
+
+**Scope rule.** Every page after `🟡 Marketing UI Components ↴` (`40935:41137`) and after
+`🟡 E-commerce UI Components ↴` (`43164:51148`), up to the next header (a name ending in `↴`) or
+divider page (blank or `---`). The E-commerce section must end on `Gift Cards` (`43164:52345`).
+The builder re-derives the scope from the page list, checks the capture against it, and throws if
+a page appears after Gift Cards — ask the designer, do not move the anchor on your own.
+
+**Ready** = the page's status emoji is 🟢, nothing else (Yasmin, 2026-10-16). There is no ✅
+rule for blocks; it is deliberately different from the atom rule.
+
+**Shape.** Each page must hold exactly one set with `Type × Breakpoint × Direction`. Sets with
+neither `Type` nor `Breakpoint` are helper parts (Download's `Device Mockup`, `Store Badge`). Any
+other set stops the build unless it is in `EXTRA_SETS` (today: `Banners — New Direction`, not
+counted as blocks). The 14 set-per-block pages were consolidated on 2026-10-16; if a page ever
+comes back in that shape the build names it and stops.
+
+### B1. Capture (read-only) — about 8 calls
+
+1. The page list, in order: `return figma.root.children.map(p => [p.id, p.name])`
+2. The pages in scope, in **six calls** (`FROM/TO` = 0/6, 6/12, 12/18, 18/24, 24/31, 31/99) —
+   larger batches exceed the 20 KB return limit:
+
+```js
+const FROM = 0, TO = 6
+const HEADERS = ['40935:41137', '43164:51148']
+const isHeader = n => n.trim().endsWith('↴')
+const isDivider = n => n.trim() === '' || /^-+$/.test(n.trim())
+const all = figma.root.children
+const scope = []
+for (const h of HEADERS) {
+  let i = all.findIndex(p => p.id === h) + 1
+  while (i < all.length && !isHeader(all[i].name) && !isDivider(all[i].name)) scope.push({ header: h, page: all[i++] })
+}
+const out = []
+for (const { header, page: p } of scope.slice(FROM, TO)) {
+  await p.loadAsync()
+  const sets = [], docs = []
+  const walk = (n, d) => {
+    if (d > 6) return
+    if (n.type === 'COMPONENT_SET') {
+      const vg = n.variantGroupProperties || {}
+      const axes = {}; for (const a of Object.keys(vg)) axes[a] = vg[a].values
+      const types = []
+      if (vg.Type) for (const t of vg.Type.values) {
+        const vs = n.children.filter(v => v.variantProperties && v.variantProperties.Type === t)
+        const dl = vs.find(v => v.variantProperties.Breakpoint === 'Desktop' && (v.variantProperties.Direction || 'LTR') === 'LTR') || vs[0]
+        types.push([t, vs.length, dl ? dl.id : null])
+      }
+      sets.push({ id: n.id, name: n.name, parent: n.parent.id, variants: n.children.length, axes, types, desc: (n.description || '').trim().length })
+      return
+    }
+    if (n.type === 'INSTANCE') return
+    if (n.type === 'FRAME' && /documentation/i.test(n.name)) docs.push({ id: n.id, name: n.name })
+    if ('children' in n) for (const c of n.children) walk(c, d + 1)
+  }
+  for (const c of p.children) walk(c, 0)
+  const sections = p.children.filter(c => c.type === 'SECTION' && /documentation/i.test(c.name))
+    .map(s => ({ id: s.id, name: s.name, children: s.children.map(c => [c.id, c.type, c.name]) }))
+  out.push({ header, pageId: p.id, page: p.name, top: p.children.map(c => [c.id, c.type, c.name]), sections, sets, docs })
+}
+return { scopeSize: scope.length, from: FROM, to: TO, pages: out }
+```
+
+Write the capture as `{ "pageList": [...], "pages": [...] }` — the six `pages` arrays concatenated
+in order. Copy names verbatim (trailing and double spaces are data; the builder flags them). A
+set's `Type` values may be dropped from `axes` when writing it out, since `types` holds them in
+the same order; the builder rebuilds `axes.Type` from `types`.
+
+### B2. Build
+
+```bash
+node design/scripts/build-blocks-index.mjs /path/to/capture.json
+```
+
+It throws rather than guesses when the scope rule and the capture disagree, when a page is not
+in the type-axis shape, when an unknown extra set appears, or when `CODE_PREFIX` and the registry
+disagree. `design/index-blocks.notes.json` (`{ "<nodeId>": "note" }`) is the one hand-written
+input; its notes are appended to the matching block row.
+
+### B3. Verify against Figma — mandatory
+
+```js
+const HEADERS = ['40935:41137', '43164:51148']
+const EXTRA = ['44907:354325']                       // EXTRA_SETS in design/scripts/build-blocks-index.mjs
+const isHeader = n => n.trim().endsWith('↴')
+const isDivider = n => n.trim() === '' || /^-+$/.test(n.trim())
+const all = figma.root.children
+const scope = []
+for (const h of HEADERS) { let i = all.findIndex(p => p.id === h) + 1; while (i < all.length && !isHeader(all[i].name) && !isDivider(all[i].name)) scope.push(all[i++]) }
+const sets = [], types = [], docs = []
+for (const p of scope) {
+  await p.loadAsync()
+  const walk = (n, d) => {
+    if (d > 6) return
+    if (n.type === 'COMPONENT_SET') {
+      const vg = n.variantGroupProperties || {}
+      sets.push(n.id + '|' + n.name + '|' + n.children.length + '|' + Object.keys(vg).join(','))
+      if (vg.Type && EXTRA.indexOf(n.id) === -1) for (const t of vg.Type.values) {
+        const vs = n.children.filter(v => v.variantProperties && v.variantProperties.Type === t)
+        const dl = vs.find(v => v.variantProperties.Breakpoint === 'Desktop' && (v.variantProperties.Direction || 'LTR') === 'LTR') || vs[0]
+        types.push(n.id + '|' + t + '|' + vs.length + '|' + (dl ? dl.id : ''))
+      }
+      return
+    }
+    if (n.type === 'INSTANCE') return
+    if (n.type === 'FRAME' && /documentation/i.test(n.name)) docs.push(n.id + '|' + n.name)
+    if ('children' in n) for (const c of n.children) walk(c, d + 1)
+  }
+  for (const c of p.children) walk(c, 0)
+}
+sets.sort(); types.sort(); docs.sort()
+const h = a => { let v = 0; const s = a.join('\n'); for (let i = 0; i < s.length; i++) v = (v * 31 + s.charCodeAt(i)) | 0; return v }
+return { pages: scope.length, sets: sets.length, blocks: types.length, docFrames: docs.length, setHash: h(sets), typeHash: h(types), docHash: h(docs) }
+```
+
+```bash
+node design/scripts/verify-index.mjs blocks
+```
+
+All three hashes must match. A mismatch means the transcription is wrong — fix the capture and
+rebuild; never commit a mismatch.
+
+### B4. Test, then commit
+
+`bun run --cwd packages/fasla-ui test` — then commit `index-blocks.json` and `.md` together.
+
+**Block-specific traps.** A page's `Component Name` panels can hold helper sets beside the
+family set (Download). `CODE_PREFIX` is hand-maintained per family set id — add a family when its
+blocks ship in code. Doc frames are named both with and without "(EN)"; the builder flags the
+minority style instead of pairing by name, and pairs a misnamed doc (Order summary) with the
+page's only family set.
+

@@ -3,7 +3,7 @@
     "source": "Figma · Fasla · yGEQmCZOvs7KptsYUdB0Xg",
     "fileKey": "yGEQmCZOvs7KptsYUdB0Xg",
     "target": "atoms",
-    "measured": "2026-10-15",
+    "measured": "2026-10-16",
     "generatedBy": ".agents/skills/figma-index (read-only use_figma page walk) → design/scripts/build-index.mjs",
     "selectionRule": {
       "inScope": "page name contains 🟢 AND page name ends with ✅",
@@ -52,12 +52,12 @@
       "looseComponents": 1,
       "variants": 4622,
       "primaryWithEnDoc": 43,
-      "primaryWithArDoc": 40,
+      "primaryWithArDoc": 41,
       "withEnDoc": 43,
-      "withArDoc": 40,
+      "withArDoc": 41,
       "withRtl": 152,
       "withDescription": 5,
-      "mappedToCode": 27,
+      "mappedToCode": 28,
       "docFrames": 98
     },
     "legend": {
@@ -65,14 +65,20 @@
       "note": "Inferred from usage across the whole file on 2026-09-23. Only the entries listed in `confirmedBy` have been settled by a designer; treat the rest as a reading.",
       "confirmedBy": {
         "✅": "Yasmin, 2026-09-23 — a page without one is not signed off, and its components are not ready to be used.",
+        "🟡": "Yasmin, 2026-10-16",
+        "🟠": "Yasmin, 2026-10-16",
         "Y": "Yasmin, 2026-09-23",
-        "H": "Yasmin, 2026-09-23",
+        "H": "Yasmin, 2026-09-23 — Haneen has left the project (Yasmin, 2026-10-16)",
         "Y/H": "Yasmin, 2026-09-23"
+      },
+      "readiness": {
+        "atoms": "page name contains 🟢 AND ends with ✅ (Yasmin, 2026-09-23)",
+        "blocks": "the page's status emoji is 🟢 — nothing else; there is no ✅ rule for blocks. Deliberately different from the atom rule (Yasmin, 2026-10-16)"
       },
       "status": {
         "🟢": "work on this page is done",
         "🟡": "in progress",
-        "🟠": "queued / not started — every 🟠 page lacks documentation",
+        "🟠": "in progress",
         "🔴": "not started",
         "❌": "cancelled or removed"
       },
@@ -84,7 +90,7 @@
       },
       "initials": {
         "Y": "Yasmin",
-        "H": "Haneen",
+        "H": "Haneen (has left the project)",
         "Y/H": "both"
       },
       "prefix": {
@@ -236,8 +242,8 @@
     },
     {
       "id": "14872:1780",
-      "name": "✦  🟢 Y | Drawer ✅",
-      "display": "Drawer",
+      "name": "✦  🟢 Y | Sheet ✅",
+      "display": "Sheet",
       "status": "🟢",
       "tail": "✅",
       "initials": "Y",
@@ -1592,14 +1598,14 @@
       ]
     },
     "15043:262710": {
-      "name": "Drawer",
+      "name": "Sheet",
       "node": "COMPONENT_SET",
       "kind": "atom",
       "role": "primary",
       "page": {
         "id": "14872:1780",
-        "name": "✦  🟢 Y | Drawer ✅",
-        "display": "Drawer",
+        "name": "✦  🟢 Y | Sheet ✅",
+        "display": "Sheet",
         "status": "🟢",
         "tail": "✅",
         "initials": "Y"
@@ -1607,11 +1613,11 @@
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15043-262710",
       "variants": 8,
       "axes": {
-        "Stats": [
+        "Side": [
           "Top",
           "Bottom",
-          "Left",
-          "Right"
+          "Start",
+          "End"
         ],
         "Direction": [
           "LTR",
@@ -1619,30 +1625,26 @@
         ]
       },
       "axisNames": [
-        "Stats",
+        "Side",
         "Direction"
       ],
       "rtl": true,
       "docs": {
         "en": {
           "id": "42470:2461",
-          "name": "Drawer — Fasla Component Documentation",
+          "name": "Sheet — Fasla Component Documentation",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42470-2461"
         },
-        "ar": null,
-        "duplicates": [
-          {
-            "id": "42791:65416",
-            "name": "Drawer — Fasla Component Documentation",
-            "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42791-65416"
-          }
-        ]
+        "ar": {
+          "id": "42791:65416",
+          "name": "Sheet — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42791-65416"
+        },
+        "duplicates": []
       },
-      "code": null,
+      "code": "sheet",
       "hasDescription": false,
       "flags": [
-        "no-ar-doc",
-        "duplicate-doc-frame",
         "no-description"
       ]
     },

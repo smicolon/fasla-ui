@@ -1,5 +1,5 @@
 import * as React from "react"
-import type { Decorator, Preview } from "@storybook/react"
+import type { ArgTypesEnhancer, Decorator, Preview } from "@storybook/react"
 import { withThemeByClassName } from "@storybook/addon-themes"
 
 // Self-hosted Cairo (arabic + latin), the Vite equivalent of the docs app's
@@ -41,6 +41,26 @@ const withDirection: Decorator = (Story, context) => {
     </div>
   )
 }
+
+/**
+ * `className` is always the last row of the controls table, for every
+ * component (CLAUDE.md, "Storybook controls table"). Storybook lists the
+ * props it reads from the component first and a story's own args after them,
+ * so without this `className` lands mid-table whenever a story adds args of
+ * its own, or whenever it comes early in the component's props. It is a
+ * second-pass enhancer, like Storybook's own `inferArgTypes`, which adds the
+ * rows for a story's `args` and puts them first; running after it, it sees
+ * the finished table. It only moves the row, and leaves every row's settings
+ * as they are.
+ */
+const classNameLast: ArgTypesEnhancer = Object.assign(
+  ({ argTypes }: Parameters<ArgTypesEnhancer>[0]) => {
+    if (!("className" in argTypes)) return argTypes
+    const { className, ...rest } = argTypes
+    return { ...rest, className }
+  },
+  { secondPass: true }
+)
 
 const preview: Preview = {
   parameters: {
@@ -85,6 +105,7 @@ const preview: Preview = {
       defaultTheme: "light",
     }),
   ],
+  argTypesEnhancers: [classNameLast],
   tags: ["autodocs"],
 }
 

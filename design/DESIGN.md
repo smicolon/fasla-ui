@@ -546,7 +546,7 @@ or `{colors.input}`.
 
 ## Components
 
-44 atom pages, from `⚛️ Component Atoms ↴` through `Drawer`. 71 product component sets plus one
+44 atom pages, from `⚛️ Component Atoms ↴` through `Sheet` (formerly `Drawer`). 71 product component sets plus one
 standalone component, and a separate 87-set wireframe library. Page status is encoded in the page name:
 🟢 done, 🟡 in progress, 🔴 not started; `Y` / `H` / `Y/H` marks the owner.
 
@@ -646,7 +646,7 @@ doubles.
 | `Footer Actions` `38975:3834` | 8 | `Actions` Primary/Danger · `Horizontal` · secondary and third action booleans |
 | `Alert Dialog` `15455:53947` | 8 | `Align` Edge/Center · `Destructive` · additional-content slot |
 | `Popover` `4007:13806` | 2 | `Sub-title` |
-| `Drawer` `15043:262710` | 8 | `Stats` Top/Bottom/Left/Right |
+| `Sheet` `15043:262710` | 8 | `Side` Top/Bottom/Start/End (Start and End follow `Direction`) |
 | `Command Menu` `39712:171` | 2 | direction only |
 | `Carousel` `40600:96155` | 18 | `No. of items` 2/3/4 · `Active Item` 1–4 — these are the stepper dots |
 | `Content Carousel` `15769:74332` | 6 | `Type` Single box / Two boxes / Three boxes, three content slots |
