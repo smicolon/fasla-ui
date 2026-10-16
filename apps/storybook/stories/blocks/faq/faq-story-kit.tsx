@@ -31,12 +31,13 @@ export const localeOf = (context: StoryContext): "en" | "ar" => (context.globals
 
 /**
  * Controls for one block's story: the shared rules in `../block-arg-types`,
- * the same for every block family. `screenReaderOnly` lists the block's props
- * that only name something for assistive tech or are read out while an action
- * runs; they get no row, as they change nothing on screen.
+ * the same for every block family. `hide` lists this story's props that change
+ * nothing on screen beyond the shared rules (names only assistive tech reads,
+ * copy the story leaves off screen); `show` keeps a message row for a story
+ * that opens on that state.
  */
-export const faqArgTypes = (component: unknown, copy?: BlockCopy, screenReaderOnly: string[] = []): ArgTypes =>
-  blockArgTypes(component, copy, { screenReaderOnly })
+export const faqArgTypes = (component: unknown, copy?: BlockCopy, hide: string[] = [], show: string[] = []): ArgTypes =>
+  blockArgTypes(component, copy, { hide, show })
 
 /**
  * A theme with none of Fasla's inverse tokens, as in a project on another

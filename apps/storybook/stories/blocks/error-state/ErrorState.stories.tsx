@@ -198,7 +198,7 @@ export const HelpfulLinksList: StoryObj<typeof ErrorStateHelpfulLinksList> = {
 export const HelpfulLinksListEmpty: StoryObj<typeof ErrorStateHelpfulLinksList> = {
   tags: ["!dev", "!autodocs"],
   name: "Helpful Links List: No destinations",
-  argTypes: errorStateArgTypes(ErrorStateHelpfulLinksList, errorStateHelpfulLinksListCopy),
+  argTypes: errorStateArgTypes(ErrorStateHelpfulLinksList, errorStateHelpfulLinksListCopy, ["destinationsLabel"]),
   args: { destinations: [] },
   render: (args, context) => <ErrorStateHelpfulLinksList locale={localeOf(context)} {...args} />,
 }
@@ -223,7 +223,7 @@ export const PopularPagesGridNoImages: StoryObj<typeof ErrorStatePopularPagesGri
 export const PopularPagesGridEmpty: StoryObj<typeof ErrorStatePopularPagesGrid> = {
   tags: ["!dev", "!autodocs"],
   name: "Popular Pages Grid: No pages",
-  argTypes: errorStateArgTypes(ErrorStatePopularPagesGrid, errorStatePopularPagesGridCopy),
+  argTypes: errorStateArgTypes(ErrorStatePopularPagesGrid, errorStatePopularPagesGridCopy, ["openLabel"]),
   args: { pages: [] },
   render: (args, context) => <ErrorStatePopularPagesGrid locale={localeOf(context)} {...args} />,
 }
