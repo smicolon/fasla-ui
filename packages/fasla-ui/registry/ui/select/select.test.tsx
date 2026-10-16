@@ -151,7 +151,7 @@ describe("Select — trigger", () => {
   it("keeps focus visible in forced colours, and draws no outline at rest there", () => {
     render(<Cities />)
     expect(trigger()).toHaveClass(
-      "forced-colors:focus-visible:[outline:2px_solid_Highlight]",
+      "focus-visible:forced-colors:[outline:2px_solid_Highlight]",
       "forced-colors:data-[popup-open]:[outline:2px_solid_Highlight]"
     )
     // Tailwind 3's `outline-none` is a transparent outline that forced colours paint.

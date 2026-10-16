@@ -1399,6 +1399,72 @@
         "className": "Extra classes for the component."
       }
     },
+    "slider": {
+      "lead": "Lets the reader choose a value, or a range of values, by dragging a thumb along a track or with the arrow keys. It comes in three sizes, and the track fills from the start of the line, so it follows the page's reading direction.",
+      "volume": "Volume",
+      "price": "Price",
+      "priceValue": "SAR {min} to SAR {max}",
+      "priceThumb": "SAR {value}",
+      "sizesBody": "The three sizes change only the track: <code>sm</code> is 6px tall, <code>md</code> 8px and <code>lg</code> 12px. The thumb is 16px at every size, so the slider is always 16px tall. It fills the width of its container.",
+      "sizes": {
+        "sm": "Small",
+        "md": "Medium",
+        "lg": "Large"
+      },
+      "values": {
+        "title": "Value",
+        "body": "The filled part of the track shows the value: it runs from the start of the track to the thumb. At the minimum the thumb sits at the start of the track and at the maximum at its end, never past either edge. Set the range with <code>min</code> and <code>max</code>, and how far one step moves with <code>step</code>.",
+        "min": "Minimum",
+        "mid": "Middle",
+        "max": "Maximum"
+      },
+      "statesBody": "Focus is a real state, not a prop: press Tab to reach a thumb. Keyboard focus draws a 4px ring around the thumb in place of its shadow. Pressing or dragging with the pointer draws no ring.",
+      "states": {
+        "default": "Default",
+        "focus": "Focus"
+      },
+      "range": {
+        "title": "Range",
+        "body": "Pass an array to <code>value</code> or <code>defaultValue</code>, such as <code>[25, 75]</code>, and the slider gets a thumb for each value, with the track filled between them. <code>onValueChange</code> then hands back an array. A thumb dragged past the other pushes it along, and <code>minStepsBetweenValues</code> keeps the two apart.",
+        "min": "Minimum price",
+        "max": "Maximum price"
+      },
+      "parts": {
+        "title": "Labels and values",
+        "body": "The slider shows no text of its own. Put a visible label above it and link the two with <code>aria-labelledby</code>, and show the current value beside the label, so the reader never has to judge it from the track."
+      },
+      "a11y": {
+        "roles": "Each thumb holds a real range input with the <code>slider</code> role, so screen readers announce its name, its value, and the minimum and maximum. With <code>name</code>, hidden inputs submit the value with its form.",
+        "keyboard": "Tab moves to each thumb in turn. The arrow keys move a thumb by one step, Page Up and Page Down by ten steps (<code>largeStep</code>), and Home and End move it to the minimum and the maximum.",
+        "label": "Always name the slider: <code>aria-labelledby</code> with a visible label, or <code>aria-label</code> when there is none. In a range, give each thumb its own name with <code>getAriaLabel</code>, such as Minimum price and Maximum price.",
+        "value": "Screen readers hear the number alone. When it needs a unit, such as a currency, return the full text from <code>getAriaValueText</code>.",
+        "direction": "Direction is inherited from <code>dir</code>, never a prop. On a right-to-left page the track fills from the right, the thumb starts at the right end, and the left arrow raises the value, so every arrow moves the thumb the way it points."
+      },
+      "usage": {
+        "basic": "Basic slider",
+        "range": "Price range, controlled",
+        "label": "With a visible label and value"
+      },
+      "props": {
+        "value": "The current value: a number, or an array for a range. Use it with <code>onValueChange</code>.",
+        "defaultValue": "The value on first render. An array gives a thumb for each value.",
+        "onValueChange": "Called with the new value while a thumb moves.",
+        "onValueCommitted": "Called once with the final value, when the pointer is released or a key changes it.",
+        "size": "Track height: 6, 8 or 12px. The thumb is 16px at every size.",
+        "min": "The lowest value.",
+        "max": "The highest value.",
+        "step": "How far one step moves the value. The value snaps to multiples of it.",
+        "largeStep": "How far Page Up and Page Down move the value.",
+        "minStepsBetweenValues": "In a range, the fewest steps allowed between the two thumbs.",
+        "ariaLabel": "Names the slider for screen readers when there is no visible label.",
+        "ariaLabelledby": "The id of the visible label that names the slider.",
+        "getAriaLabel": "Names each thumb of a range by its index: 0 for the start, 1 for the end.",
+        "getAriaValueText": "Returns the text screen readers hear for a thumb's value.",
+        "name": "The name the value is submitted under.",
+        "form": "The id of the form the value is submitted with, when the slider sits outside it.",
+        "className": "Extra classes for the slider."
+      }
+    },
     "alert": {
       "lead": "A message box that tells people about news, guidance, a finished task, something that needs attention, or an error. It comes in five variants and three types, the same as the Figma set, with an optional action and close button.",
       "installNote": "Alert is built on Button, so adding it adds <code>button</code> too.",
