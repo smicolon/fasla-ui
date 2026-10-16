@@ -15,8 +15,8 @@ It has light/dark theming and full LTR/RTL (English/Arabic) support. The project
 - 922 variables / 5 collections · 140 text styles
 - **Component counts here were stale by roughly 4× and have been removed.** The atoms are now
   indexed and verified in [`index-atoms.md`](index-atoms.md) (44 pages, 158 components, measured
-  2026-09-23). File-wide totals including blocks are not yet verified — do not quote a number for
-  them; walk the file or wait for `index-blocks.*`.
+  2026-09-23). Block families are indexed and verified in [`index-blocks.md`](index-blocks.md)
+  (37 families, 794 blocks, measured 2026-10-16). Quote counts from those files, not from here.
 
 There is no npm project, no build, no test suite. "Running" this project means driving Figma through
 MCP tools and verifying with screenshots. Do not look for package.json — the deliverable is Figma nodes.
@@ -274,17 +274,11 @@ Page names encode status and owner: `✦  {status} {owner} | {Name}` — 🟢 do
 
 ## Block sets shipped so far
 
-| Set | Page | Types | Passes done |
-|---|---|---|---|
-| `Features` `42367:57765` | `✦ 🟡 Y \| Features` `40935:41730` | 24 | Type × Breakpoint × Direction = 144 ✅ |
-| `Gallery` `42478:479` | `✦ 🟡 Y \| Gallery` `42413:38378` | 22 | 132 ✅ |
-| `Error State` `42556:548` | `✦ 🟡 Y \| Error State (404)` `40935:43028` | 28 | 168 ✅ |
-| `Banners` `42590:535` | `✦  🟡 Y \| Banners [CTAs]` `42510:68728` | 22 | 132 ✅ |
-| `Authentications` `42586:4669` | `✦  🟡 Y \| Authentications` `42415:39805` | 29 | 174 ✅ |
-| `Billing & Payments` `42603:215226` | `✦  🟡 Y \| Billing & Payments` `42415:39932` | 16 | 96 ✅ |
-| `Hero` `42618:13567` | `🧪🧪🧪🧪🧪 Testing Claude` `42458:4023` | 56 | Desktop/LTR only — responsive + RTL open |
-| `Checkout` `43933:9213` | `✦  🟡 Y \| Checkout` `43164:52067` | 10 | 60 ✅ + EN doc `44096:26625` + AR doc `44133:46162` |
-| `Order summary` `43623:378` | `✦  🟡 Y \| Order summary \| Test Fasla Agent` `43164:51788` | 17 | 102 ✅ + EN doc `44227:12463` + AR doc `44248:15124` |
+This table went stale (wrong Type counts, renamed pages, a Hero set that no longer exists) and has
+been replaced by the generated [`index-blocks.md`](index-blocks.md): every block family under the
+Marketing and E-commerce headers, with its set id, Type count, status, owner, docs and flags,
+measured and verified against the file. Regenerate it with the `figma-index` skill (target:
+blocks) instead of editing a list here.
 
 Copy in these sets is **generic SaaS**, with deliberate Fasla mentions only where a product name belongs.
 Sample people are fictional and transliterate in RTL rather than being swapped for a generic demo name.
@@ -299,3 +293,5 @@ Sample people are fictional and transliterate in RTL rather than being swapped f
 - `~/.claude/projects/-Users-jasmine-Desktop/memory/` — per-page project memories, richer than this summary
 - [`index-atoms.md`](index-atoms.md) / `index-atoms.json` — every atom in the file, generated and
   dated; rebuilt by `.agents/skills/figma-index/SKILL.md`, guarded by a staleness test
+- [`index-blocks.md`](index-blocks.md) / `index-blocks.json` — every block family and block in the
+  Marketing and E-commerce sections; same skill (target: blocks), same kind of staleness test

@@ -1,6 +1,6 @@
 ---
-description: Regenerate the committed Figma component index (design/index-atoms.json + .md)
-argument-hint: [atoms]
+description: Regenerate a committed Figma index — atoms (design/index-atoms.*) or blocks (design/index-blocks.*)
+argument-hint: [atoms|blocks]
 ---
 
 Regenerate the Fasla component index for target: $ARGUMENTS (default `atoms`).

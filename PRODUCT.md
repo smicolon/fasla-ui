@@ -74,8 +74,9 @@ Fasla apart.
 - **The documentation site (`apps/docs`) ships in both locales**, `/en` (LTR) and `/ar` (RTL), as
   a static export. `docs/LOCALISATION.md` is the rulebook. Storybook (`apps/storybook`) is the
   component showcase.
-- **Component status lives in the Figma page names** and is indexed in `design/index-atoms.md`.
-  That file is generated and dated, so check its date before trusting it.
+- **Component status lives in the Figma page names** and is indexed in `design/index-atoms.md`
+  (atoms) and `design/index-blocks.md` (blocks). Both are generated and dated, so check the date
+  before trusting them.
 - **Figma and code are out of step for now, on purpose.** The code components are being rebuilt
   to match Figma, and some components that exist in Figma are not built in code yet. Differences
   between Figma and code are expected until the rebuild lands. Don't report them as parity
@@ -116,7 +117,7 @@ Fasla apart.
 - **Brand assets** are in `apps/docs/public/brand/`: the mark, the comma, the app icon, the
   favicon, and the LTR and RTL lockups, each on light and dark.
 - **The Figma file itself**, with the atom inventory in `design/index-atoms.md` and `.json` and the
-  shipped block families listed in `design/FIGMA.md`.
+  block families in `design/index-blocks.md` and `.json`.
 - **The live bilingual docs site and Storybook** in `apps/`.
 - **No customer names, testimonials, case studies, adoption figures or benchmarks are recorded.**
   Do not invent any. Sample data in components uses fictional companies and people by design.
