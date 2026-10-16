@@ -2289,6 +2289,47 @@
         "faq-chat-thread": "سلسلة محادثة"
       }
     },
+    "errorStateBlocks": {
+      "lead": "{count, plural, one {صفحة خطأ واحدة} two {صفحتا خطأ} few {{n} صفحات خطأ} many {{n} صفحة خطأ} other {{n} صفحة خطأ}}: صفحات لم يُعثر عليها، والحالات المجاورة لها، من خطأ الخادم إلى إعادة التوجيه المؤقتة.",
+      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
+      "filterLabel": "التصفية حسب العائلة",
+      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
+      "families": {
+        "all": "الكل",
+        "not-found": "صفحات غير موجودة",
+        "other-states": "حالات أخرى"
+      },
+      "types": {
+        "error-state-centered-minimal": "بسيط في الوسط",
+        "error-state-search-recovery": "العودة بالبحث",
+        "error-state-display-numeral-split": "رقم عرضي مقسوم",
+        "error-state-editorial-photo-split": "صورة تحريرية مقسومة",
+        "error-state-full-bleed-photo": "صورة بعرض كامل",
+        "error-state-colour-field-scatter": "أرقام مبعثرة على لون",
+        "error-state-dark-spotlight": "بقعة ضوء داكنة",
+        "error-state-ghost-watermark": "علامة مائية باهتة",
+        "error-state-helpful-links-list": "قائمة روابط مفيدة",
+        "error-state-popular-pages-grid": "شبكة الصفحات الشائعة",
+        "error-state-error-card-panel": "بطاقة الخطأ",
+        "error-state-illustrated-empty-state": "حالة فارغة مرسومة",
+        "error-state-light-editorial": "تحريري خفيف",
+        "error-state-layered-badge-centered": "شارة بطبقات في الوسط",
+        "error-state-server-error-500": "خطأ الخادم 500",
+        "error-state-access-denied-403": "رفض الوصول 403",
+        "error-state-offline-state": "انقطاع الاتصال",
+        "error-state-maintenance-mode": "وضع الصيانة",
+        "error-state-empty-search-results": "نتائج بحث فارغة",
+        "error-state-recovery-bento": "شبكة بينتو للعودة",
+        "error-state-sitemap-columns": "أعمدة خريطة الموقع",
+        "error-state-terminal-console": "نافذة الطرفية",
+        "error-state-photo-collage-scatter": "صور مبعثرة",
+        "error-state-support-escalation-band": "شريط التصعيد إلى الدعم",
+        "error-state-split-colour-panel": "لوحة لونية مقسومة",
+        "error-state-marquee-404-band": "شريط 404 متحرك",
+        "error-state-broken-trail-breadcrumb": "مسار تنقّل منقطع",
+        "error-state-countdown-redirect": "إعادة توجيه بعدّ تنازلي"
+      }
+    },
     "blockCard": {
       "fullScreen": "فتح بملء الشاشة",
       "newTab": "(يُفتح في علامة تبويب جديدة)",

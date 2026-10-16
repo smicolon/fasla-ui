@@ -136,6 +136,17 @@ export const CODE_MAP = {
       "support-channels", "newsletter-close", "support-stats", "media-split", "chat-thread",
     ].map((type) => [`faq-${type}`, null])
   ),
+  // Blocks: each Error State item is one Type of the block set Error State (42556:548), not an atom.
+  ...Object.fromEntries(
+    [
+      "centered-minimal", "search-recovery", "display-numeral-split", "editorial-photo-split", "full-bleed-photo",
+      "colour-field-scatter", "dark-spotlight", "ghost-watermark", "helpful-links-list", "popular-pages-grid",
+      "error-card-panel", "illustrated-empty-state", "light-editorial", "layered-badge-centered", "server-error-500",
+      "access-denied-403", "offline-state", "maintenance-mode", "empty-search-results", "recovery-bento",
+      "sitemap-columns", "terminal-console", "photo-collage-scatter", "support-escalation-band",
+      "split-colour-panel", "marquee-404-band", "broken-trail-breadcrumb", "countdown-redirect",
+    ].map((type) => [`error-state-${type}`, null])
+  ),
 }
 
 const FAMILY_MIN = 10

@@ -205,7 +205,7 @@ export const MediaSplitNoImage: StoryObj<typeof FaqMediaSplit> = {
 /** Type in the field or press a chip: the questions filter as you go. */
 export const SearchCategories: StoryObj<typeof FaqSearchCategories> = {
   name: "Search + Categories",
-  argTypes: faqArgTypes(FaqSearchCategories, faqSearchCategoriesCopy),
+  argTypes: faqArgTypes(FaqSearchCategories, faqSearchCategoriesCopy, ["categoriesLabel"]),
   render: (args, context) => <FaqSearchCategories locale={localeOf(context)} {...args} />,
 }
 
@@ -214,6 +214,7 @@ export const SearchCategoriesNoResults: StoryObj<typeof FaqSearchCategories> = {
   tags: ["!dev", "!autodocs"],
   ...SearchCategories,
   name: "Search + Categories: No results",
+  argTypes: faqArgTypes(FaqSearchCategories, faqSearchCategoriesCopy, ["categoriesLabel", "searchPlaceholder"]),
   args: { defaultQuery: "pricing in yen" },
 }
 
@@ -233,7 +234,7 @@ export const SidebarNav: StoryObj<typeof FaqSidebarNav> = {
 /** As in Figma, Getting started is pressed and its questions show below. */
 export const CategoryChipGrid: StoryObj<typeof FaqCategoryChipGrid> = {
   name: "Category Chip Grid",
-  argTypes: faqArgTypes(FaqCategoryChipGrid, faqCategoryChipGridCopy),
+  argTypes: faqArgTypes(FaqCategoryChipGrid, faqCategoryChipGridCopy, ["categoriesLabel"]),
   args: { onCategoryChange: fn() },
   render: (args, context) => <FaqCategoryChipGrid locale={localeOf(context)} {...args} />,
 }
@@ -326,7 +327,7 @@ export const SupportStats: StoryObj<typeof FaqSupportStats> = {
 /** Send stays disabled until something is typed, then loads while the question is sent. */
 export const ChatThread: StoryObj<typeof FaqChatThread> = {
   name: "Chat Thread",
-  argTypes: faqArgTypes(FaqChatThread, faqChatThreadCopy),
+  argTypes: faqArgTypes(FaqChatThread, faqChatThreadCopy, ["supportName", "visitorLabel", "sendLabel"]),
   render: (args, context) => (
     <FaqChatThread
       locale={localeOf(context)}
@@ -342,5 +343,6 @@ export const ChatThreadEmpty: StoryObj<typeof FaqChatThread> = {
   tags: ["!dev", "!autodocs"],
   ...ChatThread,
   name: "Chat Thread: Empty",
+  argTypes: faqArgTypes(FaqChatThread, faqChatThreadCopy, ["supportAvatar"], ["empty"]),
   args: { messages: [] },
 }

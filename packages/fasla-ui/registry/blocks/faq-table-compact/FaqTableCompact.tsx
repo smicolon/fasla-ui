@@ -176,7 +176,7 @@ export function FaqTableCompact({
       <div className="mx-auto flex w-full max-w-[1248px] flex-col gap-12">
         <header className="flex items-center justify-between gap-4">
           <div className="flex items-center gap-2">
-            <CircleHelpIcon aria-hidden="true" strokeWidth={1.5} className="size-5 shrink-0 text-foreground" />
+            <CircleHelpIcon size={20} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-5 shrink-0 text-foreground" />
             <h2 id={headingId} className="text-xl font-semibold text-foreground md:text-2xl">
               {heading ?? copy.heading}
             </h2>
@@ -187,7 +187,7 @@ export function FaqTableCompact({
               className="inline-flex items-center gap-1 rounded-sm text-sm font-medium text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               {viewAllLabel ?? copy.viewAllLabel}
-              <ChevronRightIcon aria-hidden="true" strokeWidth={1.5} className="size-3.5 shrink-0 [&:dir(rtl)]:-scale-x-100" />
+              <ChevronRightIcon size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-3.5 shrink-0 [&:dir(rtl)]:-scale-x-100" />
             </a>
           ) : null}
         </header>
