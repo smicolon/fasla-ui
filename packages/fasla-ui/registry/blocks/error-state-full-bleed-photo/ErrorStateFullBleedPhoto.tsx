@@ -8,12 +8,15 @@ import { buttonVariants } from "../../ui/button/button"
 /*
  * Figma: `Error State` (42556:548), Type=Full-Bleed Photo.
  *
- * A photograph across the whole block under a scrim, with a centred message
- * on top. The scrim is `background-inverse` at 62%, as in Figma, so the
- * message is painted with the inverse tokens: dark scrim and light text in
- * light mode, the other way round in dark mode. No photo comes with the
- * block: pass `image`, and until then the stage is a `muted` placeholder
- * under the same scrim.
+ * A photograph across the whole block under a scrim, with a centred badge,
+ * heading and button on top. The scrim is dark and the text light in both
+ * modes, as Figma draws it: a photo needs a dark scrim whatever the theme.
+ * In light mode that is the inverse tokens, `background-inverse` at 62% and
+ * `foreground-inverse`; in dark mode the page's own `background` and
+ * `foreground` hold the same two colours, so `dark:` switches to them. The
+ * button keeps Figma's light secondary look the same way. No photo comes
+ * with the block: pass `image`, and until then the stage is a `muted`
+ * placeholder under the same scrim.
  *
  * Mobile first: the base classes are Figma's Mobile (360), `md:` its Tablet
  * (768) and `lg:` its Desktop (1440). The message is centred, so only the
@@ -36,8 +39,6 @@ export interface ErrorStateFullBleedPhotoCopy {
   badge: React.ReactNode
   /** The page's heading, an `h1`. Name what happened. */
   heading: React.ReactNode
-  /** The text under the heading: what to do next. */
-  description: React.ReactNode
   /** The button: the way out, usually home. Hidden when null. */
   action: ErrorStateFullBleedPhotoAction | null
 }
@@ -47,7 +48,6 @@ const COPY: Record<"en" | "ar", ErrorStateFullBleedPhotoCopy> = {
   en: {
     badge: "404 — PAGE NOT FOUND",
     heading: "You have wandered off the path",
-    description: "The page you asked for is not here. Head back to solid ground, or search for what you needed.",
     action: { label: "Back to home", href: "/" },
   },
   ar: {
@@ -57,7 +57,6 @@ const COPY: Record<"en" | "ar", ErrorStateFullBleedPhotoCopy> = {
       </>
     ),
     heading: "لقد ابتعدت عن المسار",
-    description: "الصفحة التي طلبتها ليست هنا. عد إلى أرض صلبة، أو ابحث عمّا تحتاجه.",
     action: { label: "العودة إلى الرئيسية", href: "/" },
   },
 }
@@ -79,7 +78,6 @@ export function ErrorStateFullBleedPhoto({
   locale = "en",
   badge,
   heading,
-  description,
   action,
   image,
   className,
@@ -99,20 +97,22 @@ export function ErrorStateFullBleedPhoto({
       {image ? (
         <img src={image.src} alt={image.alt} decoding="async" className="absolute inset-0 -z-10 size-full object-cover" />
       ) : null}
-      <div className="flex w-full flex-col items-center justify-center bg-background-inverse/[0.62] p-6 md:p-16 lg:p-24">
+      <div className="flex w-full flex-col items-center justify-center bg-background-inverse/[0.62] p-6 md:p-16 lg:p-24 dark:bg-background/[0.62]">
         <div className="flex w-full max-w-[784px] flex-col items-center gap-4 text-center">
           {status ? (
             <Badge variant="solid" tone="destructive" size="sm" radius="standard">
               {status}
             </Badge>
           ) : null}
-          <h1 id={headingId} className="text-3xl font-semibold text-foreground-inverse lg:text-5xl">
+          <h1 id={headingId} className="text-3xl font-semibold text-foreground-inverse lg:text-5xl dark:text-foreground">
             {heading ?? copy.heading}
           </h1>
-          <p className="text-base text-muted-foreground-inverse">{description ?? copy.description}</p>
           {cta ? (
             <div className="flex w-full flex-col md:w-auto md:flex-row">
-              <a href={cta.href} className={buttonVariants({ variant: "secondary" })}>
+              <a
+                href={cta.href}
+                className={buttonVariants({ variant: "secondary", className: "dark:bg-primary dark:text-primary-foreground" })}
+              >
                 {cta.label}
               </a>
             </div>

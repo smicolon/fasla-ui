@@ -1490,7 +1490,7 @@
       "name": "error-state-full-bleed-photo",
       "type": "registry:block",
       "title": "Error State: Full-Bleed Photo",
-      "description": "A centred 404 message over a full-width photo and an inverse scrim; pass your own photo.",
+      "description": "A centred 404 message over a full-width photo and a dark scrim; pass your own photo.",
       "dependencies": [],
       "registryDependencies": [
         "badge",
