@@ -471,6 +471,21 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/sheet/",
+    title: "Sheet React Component | Fasla",
+    description:
+      "Slide a panel in from any edge with an accessible React sheet: top, bottom, or start and end that follow the reading direction, mirrored for RTL.",
+    h1: "Sheet",
+    ar: {
+      title: "لوحة منزلقة (Sheet) لتطبيقات React | فاصلة",
+      description:
+        "أضف لوحة تنزلق من أي حافة للشاشة: من الأعلى أو الأسفل، أو من البداية والنهاية اللتين تتبعان اتجاه القراءة، وتنعكس تلقائيًا في الصفحات العربية.",
+      h1: "لوحة منزلقة (Sheet)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/combobox/",
     title: "Combobox React Component | Fasla",
     description:
