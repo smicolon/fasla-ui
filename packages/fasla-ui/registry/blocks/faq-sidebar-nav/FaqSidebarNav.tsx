@@ -51,13 +51,13 @@ export interface FaqSidebarNavCopy {
 }
 
 const ICONS = {
-  start: <RocketIcon aria-hidden="true" />,
-  billing: <CreditCardIcon aria-hidden="true" />,
-  theming: <PaletteIcon aria-hidden="true" />,
-  rtl: <LanguagesIcon aria-hidden="true" />,
-  responsive: <LayersIcon aria-hidden="true" />,
-  handoff: <CodeIcon aria-hidden="true" />,
-  releases: <RefreshCwIcon aria-hidden="true" />,
+  start: <RocketIcon size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />,
+  billing: <CreditCardIcon size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />,
+  theming: <PaletteIcon size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />,
+  rtl: <LanguagesIcon size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />,
+  responsive: <LayersIcon size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />,
+  handoff: <CodeIcon size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />,
+  releases: <RefreshCwIcon size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />,
 }
 
 /**

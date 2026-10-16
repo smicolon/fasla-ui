@@ -251,7 +251,7 @@ export function FaqChatThread({
                 loadingLabel={sendLabel ?? copy.sendLabel}
                 disabled={disabled || draft.trim() === ""}
               >
-                <SendIcon aria-hidden="true" className="[&:dir(rtl)]:-scale-x-100" />
+                <SendIcon size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="[&:dir(rtl)]:-scale-x-100" />
               </Button>
             }
           />

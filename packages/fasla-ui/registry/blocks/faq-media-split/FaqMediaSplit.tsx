@@ -158,7 +158,7 @@ export function FaqMediaSplit({
           ) : null}
           {chip ? (
             <p className="absolute bottom-6 start-6 flex max-w-[calc(100%-3rem)] items-center gap-2 rounded-full bg-card px-4 py-2 text-xs font-medium text-foreground lg:bottom-5">
-              <Headphones aria-hidden="true" className="size-3.5 shrink-0 text-primary" />
+              <Headphones size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-3.5 shrink-0 text-primary" />
               {chip}
             </p>
           ) : null}

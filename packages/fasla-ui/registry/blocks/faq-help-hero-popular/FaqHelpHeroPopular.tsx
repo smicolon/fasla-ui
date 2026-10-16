@@ -142,7 +142,7 @@ export function FaqHelpHeroPopular({
               type="search"
               size="lg"
               radius="rounded"
-              startIcon={<SearchIcon aria-hidden="true" />}
+              startIcon={<SearchIcon size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />}
               placeholder={placeholder}
               aria-label={placeholder}
               value={query}
@@ -170,7 +170,7 @@ export function FaqHelpHeroPopular({
       <div className="px-4 pb-24 pt-20 md:px-6 lg:px-8">
         <div className="mx-auto flex w-full max-w-[1248px] flex-col gap-6">
           <div className="flex items-center gap-2">
-            <ZapIcon aria-hidden="true" className="size-[18px] shrink-0 text-primary" />
+            <ZapIcon size={18} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-[18px] shrink-0 text-primary" />
             <h3 id={popularId} className="text-lg font-semibold text-foreground md:text-xl">
               {popularHeading ?? copy.popularHeading}
             </h3>
@@ -188,7 +188,7 @@ export function FaqHelpHeroPopular({
                         className="group/link flex items-center gap-3 border-b border-border py-3 text-sm text-foreground [outline:none] focus-visible:rounded-[var(--radius-sm)] focus-visible:ring-2 focus-visible:ring-ring/50"
                       >
                         <span className="min-w-0 flex-1 underline-offset-2 group-hover/link:underline">{link.question}</span>
-                        <ChevronRightIcon
+                        <ChevronRightIcon size={14} strokeWidth={1.5} absoluteStrokeWidth
                           aria-hidden="true"
                           className="size-3.5 shrink-0 text-muted-foreground [&:dir(rtl)]:-scale-x-100"
                         />
