@@ -156,7 +156,7 @@ describe("Button", () => {
       "[outline:none]",
       "forced-colors:border",
       "forced-colors:border-[ButtonText]",
-      "forced-colors:focus-visible:[outline:2px_solid_Highlight]"
+      "focus-visible:forced-colors:[outline:2px_solid_Highlight]"
     )
     expect(button()).not.toHaveClass("outline-none")
   })

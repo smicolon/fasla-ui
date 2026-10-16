@@ -561,6 +561,21 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/slider/",
+    title: "Slider React Component | Fasla",
+    description:
+      "Pick a value or a range by dragging a thumb with an accessible React slider in three sizes, with keyboard support, mirrored for RTL.",
+    h1: "Slider",
+    ar: {
+      title: "شريط تحديد القيمة (Slider) لتطبيقات React | فاصلة",
+      description:
+        "اختر قيمة أو نطاقًا من القيم بسحب مقبض على مسار، بثلاثة أحجام مع دعم كامل للوحة المفاتيح، ويمتلئ المسار من بداية السطر في الصفحات العربية.",
+      h1: "شريط تحديد القيمة (Slider)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/combobox/",
     title: "Combobox React Component | Fasla",
     description:

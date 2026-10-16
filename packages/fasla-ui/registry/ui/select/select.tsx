@@ -117,7 +117,7 @@ const selectTriggerVariants = cva(
     "transition-[color,border-color,box-shadow] motion-reduce:transition-none",
     "focus-visible:border-ring focus-visible:shadow-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
     "data-[popup-open]:border-ring data-[popup-open]:shadow-none data-[popup-open]:ring-[3px] data-[popup-open]:ring-ring/50",
-    "forced-colors:focus-visible:[outline:2px_solid_Highlight] forced-colors:data-[popup-open]:[outline:2px_solid_Highlight] forced-colors:[outline-offset:2px]",
+    "focus-visible:forced-colors:[outline:2px_solid_Highlight] forced-colors:data-[popup-open]:[outline:2px_solid_Highlight] forced-colors:[outline-offset:2px]",
     "data-[disabled]:cursor-not-allowed",
   ],
   {

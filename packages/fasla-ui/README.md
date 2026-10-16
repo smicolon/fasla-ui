@@ -78,6 +78,7 @@ Core building blocks with CVA variants for consistent styling:
 | **Checkbox** | Checkbox with label and description |
 | **Radio** | Single choice from a set, as a plain control or a bordered card |
 | **Switch** | Toggle switch with multiple sizes |
+| **Slider** | Choose a value or a range by dragging a thumb along a track, in three sizes |
 | **Tabs** | Tabbed navigation with animations |
 | **Accordion** | Headings that show or hide their content, in four styles |
 | **Alert Dialog** | A modal that asks the user to confirm or cancel an action |

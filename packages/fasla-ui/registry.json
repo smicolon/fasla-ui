@@ -730,6 +730,28 @@
       ]
     },
     {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "A slider on Base UI for one value or a range, in three track sizes with a 16px thumb. The thumbs stay inside the track's ends, and the fill and the arrow keys follow the reading direction, mirrored for RTL.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/slider/slider.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/slider.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "forms"
+      ]
+    },
+    {
       "name": "spotlight",
       "type": "registry:ui",
       "title": "Spotlight",
