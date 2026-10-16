@@ -172,6 +172,21 @@ const LABEL_ROW = cn(ROW, "items-baseline")
 const HELPER_ROW = cn(ROW, "items-start")
 /** Figma's Top Right and Bottom labels: XS Regular in `muted-foreground`, at full strength as on Input. */
 const HELPER = "text-xs text-muted-foreground"
+/** The label: SM Medium in `foreground`. */
+const LABEL = "min-w-0 text-sm font-medium text-foreground"
+
+/**
+ * The field's parts beside the trigger, for other fields built on it (Date
+ * Picker), so they line up with a Select exactly: the label and helper rows,
+ * the label, the helper text and an icon slot.
+ */
+const selectFieldClasses = {
+  labelRow: LABEL_ROW,
+  helperRow: HELPER_ROW,
+  label: LABEL,
+  helper: HELPER,
+  icon: ICON,
+} as const
 
 /**
  * The menu surface: Figma's Select Menu, and the Dropdown Menu's popup too.
@@ -484,7 +499,7 @@ const Select = React.forwardRef<HTMLButtonElement, SelectProps>(
                     nativeLabel={false}
                     render={<div />}
                     onClick={() => triggerRef.current?.focus()}
-                    className="min-w-0 text-sm font-medium text-foreground"
+                    className={LABEL}
                   >
                     {label}
                   </FieldPrimitive.Label>
@@ -667,5 +682,5 @@ const SelectItem = React.forwardRef<HTMLDivElement, SelectItemProps>(
 )
 SelectItem.displayName = "SelectItem"
 
-export { Select, SelectItem, selectTriggerVariants, menuPopupClasses, menuItemClasses }
+export { Select, SelectItem, selectTriggerVariants, selectFieldClasses, menuPopupClasses, menuItemClasses }
 export type { SelectSize, SelectRadius, SelectDisplay }

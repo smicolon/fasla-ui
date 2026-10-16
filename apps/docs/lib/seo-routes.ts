@@ -321,6 +321,36 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/calendar/",
+    title: "Calendar React Component | Fasla",
+    description:
+      "Add an accessible React calendar for choosing a day or a range across up to three months, with month and year menus and a mirrored RTL layout.",
+    h1: "Calendar",
+    ar: {
+      title: "تقويم (Calendar) لتطبيقات React | فاصلة",
+      description:
+        "أضف مكوّن تقويم لاختيار يوم أو مدة على ما يصل إلى ثلاثة أشهر، مع قائمتين للشهر والسنة، وأسماء الأشهر بالعربية، وأسبوع يبدأ يوم السبت في الصفحات العربية.",
+      h1: "تقويم (Calendar)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
+    path: "/docs/components/date-picker/",
+    title: "Date Picker React Component | Fasla",
+    description:
+      "Build a React date field that opens a calendar for one day or a range, with labels, helper text, four sizes, keyboard support and RTL.",
+    h1: "Date Picker",
+    ar: {
+      title: "منتقي التاريخ (Date Picker) لتطبيقات React | فاصلة",
+      description:
+        "أنشئ حقلًا للتاريخ يفتح تقويمًا لاختيار يوم أو مدة، مع تسمية ونص مساعد وأربعة أحجام ودعم لوحة المفاتيح والاتجاه من اليمين إلى اليسار.",
+      h1: "منتقي التاريخ (Date Picker)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/dropdown-menu/",
     title: "Dropdown Menu React Component | Fasla",
     description:
