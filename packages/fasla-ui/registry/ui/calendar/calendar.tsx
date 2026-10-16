@@ -128,11 +128,13 @@ function drawnSelection(modifiers: DayModifiers, multipleMonths: boolean) {
  * range's start to its end, rounded there and at both ends of each week row.
  */
 function CalendarDay({
-  day: _day,
   modifiers,
   className,
   ...props
-}: React.TdHTMLAttributes<HTMLTableCellElement> & { day: unknown; modifiers: DayModifiers }) {
+}: React.TdHTMLAttributes<HTMLTableCellElement> & { day?: unknown; modifiers: DayModifiers }) {
+  // The cell already carries the day as `data-day`; the object itself is not
+  // an attribute.
+  delete props.day
   const { radius, multipleMonths } = React.useContext(CalendarContext)
   const corners = RADIUS[radius]
   const { start, middle, end } = drawnSelection(modifiers, multipleMonths)
@@ -175,6 +177,7 @@ function CalendarDayButton({ day, modifiers, className, ...props }: DayButtonPro
     <button
       ref={ref}
       data-slot="calendar-day"
+      data-day={day.isoDate}
       data-chosen={chosen || undefined}
       data-range-start={start || undefined}
       data-range-middle={middle || undefined}
