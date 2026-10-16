@@ -77,7 +77,7 @@ re-query every id before relying on it, and write corrections back into that fil
 2. **One component set per block family.** Twelve hero layouts = one `Hero` set with twelve `Type`
    values, never twelve components side by side. The set is the only place `Breakpoint` and `Direction`
    can attach later. Variant values are descriptive, never numbered.
-3. **Reuse design-system components as instances.** Rebuilding something that exists (Modal, Accordion,
+3. **Reuse design-system components as instances.** Rebuilding something that exists (Dialog, Accordion,
    Steps, Carousel, Progress, Tabs, Badge, Avatar, Inputs, Alert, Skeleton) by hand is a defect.
 4. **Brand marks come from the `Social Icons` set (`40334:57763`)**, via its `Platform` property — never
    from the loose single-colour decoy glyphs that share the Icons page (`3637:6775`), never drawn.
