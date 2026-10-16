@@ -1,9 +1,9 @@
 "use client"
 
 import * as React from "react"
-import { CircleDot, Signpost } from "lucide-react"
+import { CircleDot, Pause, Play, Signpost } from "lucide-react"
 import { cn } from "../../../src/lib/utils"
-import { buttonVariants } from "../../ui/button/button"
+import { Button, buttonVariants } from "../../ui/button/button"
 
 /*
  * Figma: `Error State` (42556:548), Type=Marquee 404 Band.
@@ -20,6 +20,11 @@ import { buttonVariants } from "../../ui/button/button"
  * it back. In Arabic the start is the right, so both swap directions. Under
  * `prefers-reduced-motion: reduce` neither moves. The animation is the Web
  * Animations API, so the block needs no keyframes in your Tailwind config.
+ *
+ * A pause button at the end of the bottom band stops both tickers and starts
+ * them again, for keyboard and touch as well as the mouse. It is not in
+ * Figma: moving content needs a way to stop it (WCAG 2.2.2). It is hidden
+ * under reduced motion, when there is nothing to stop.
  *
  * The tickers repeat the heading's news, so they are hidden from assistive
  * technology; the heading carries it. The signpost is a pictogram and is never
@@ -45,6 +50,10 @@ export interface ErrorStateMarquee404BandCopy {
   primaryAction: ErrorStateMarquee404BandAction
   /** The outline button beside it. Hidden when null. */
   secondaryAction: ErrorStateMarquee404BandAction | null
+  /** The pause button's accessible name while the tickers move. */
+  pauseLabel: string
+  /** Its accessible name while they are paused. */
+  playLabel: string
 }
 
 /** Figma's copy, English and Arabic. */
@@ -57,6 +66,8 @@ const COPY: Record<"en" | "ar", ErrorStateMarquee404BandCopy> = {
       "The link may be old, or the page may have been renamed. Everything else on Fasla is exactly where it should be.",
     primaryAction: { label: "Take me home", href: "/" },
     secondaryAction: { label: "Search the site", href: "#search" },
+    pauseLabel: "Pause the animation",
+    playLabel: "Play the animation",
   },
   ar: {
     tickerCode: "404",
@@ -65,6 +76,8 @@ const COPY: Record<"en" | "ar", ErrorStateMarquee404BandCopy> = {
     description: "قد يكون الرابط قديمًا، أو أُعيدت تسمية الصفحة. كل شيء آخر في فاصلة في مكانه تمامًا.",
     primaryAction: { label: "خذني إلى الرئيسية", href: "/" },
     secondaryAction: { label: "ابحث في الموقع", href: "#search" },
+    pauseLabel: "إيقاف الحركة مؤقتًا",
+    playLabel: "تشغيل الحركة",
   },
 }
 
@@ -75,20 +88,41 @@ const RUN_LENGTH = 8
 /** How long a band takes to ease to a stop on hover, and back. */
 const EASE_MS = 300
 
+/** Whether the visitor asks for reduced motion, kept up to date. False on the server. */
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = React.useState(false)
+  React.useEffect(() => {
+    const query = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const update = () => setReduced(query.matches)
+    update()
+    query.addEventListener("change", update)
+    return () => query.removeEventListener("change", update)
+  }, [])
+  return reduced
+}
+
 function Ticker({
   code,
   label,
   toward,
+  paused,
+  children,
 }: {
   code: React.ReactNode
   label: React.ReactNode
   /** Which end of the line the run travels toward. */
   toward: "start" | "end"
+  /** Stopped with the pause button. */
+  paused: boolean
+  /** Sits over the band's end: the pause button. */
+  children?: React.ReactNode
 }) {
   const trackRef = React.useRef<HTMLDivElement>(null)
   const runRef = React.useRef<HTMLDivElement>(null)
   const animationRef = React.useRef<Animation | null>(null)
   const easeFrame = React.useRef(0)
+  const pausedRef = React.useRef(paused)
+  pausedRef.current = paused
 
   React.useEffect(() => {
     const track = trackRef.current
@@ -114,6 +148,8 @@ function Ticker({
         [{ transform: `translateX(${from}px)` }, { transform: `translateX(${to}px)` }],
         { duration: (width / speed) * 1000, iterations: Infinity, easing: "linear" }
       )
+      // A resize restarts the run; a paused band stays still.
+      if (pausedRef.current) animationRef.current.playbackRate = 0
     }
 
     play()
@@ -146,28 +182,41 @@ function Ticker({
     easeFrame.current = requestAnimationFrame(step)
   }
 
+  // The pause button eases the band to a stop, and back, as hovering does.
+  React.useEffect(() => {
+    easeTo(paused ? 0 : 1)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [paused])
+
   const pairs = Array.from({ length: RUN_LENGTH }, (_, index) => (
     <React.Fragment key={index}>
       <span className="text-foreground-inverse">{code}</span>
-      <CircleDot strokeWidth={1.5} className="size-3 shrink-0 text-muted-foreground-inverse" />
+      <CircleDot size={12} strokeWidth={1.5} absoluteStrokeWidth className="size-3 shrink-0 text-muted-foreground-inverse" />
       <span className="whitespace-nowrap text-muted-foreground-inverse">{label}</span>
-      <CircleDot strokeWidth={1.5} className="size-3 shrink-0 text-muted-foreground-inverse" />
+      <CircleDot size={12} strokeWidth={1.5} absoluteStrokeWidth className="size-3 shrink-0 text-muted-foreground-inverse" />
     </React.Fragment>
   ))
 
   return (
-    <div
-      aria-hidden="true"
-      onPointerEnter={() => easeTo(0)}
-      onPointerLeave={() => easeTo(1)}
-      className="flex h-14 items-center overflow-hidden bg-background-inverse ps-6 text-lg font-semibold md:h-[68px] md:text-xl lg:h-[76px]"
-    >
-      <div ref={trackRef} className="flex w-max shrink-0">
-        <div ref={runRef} className="flex shrink-0 items-center gap-4 pe-4 md:gap-6 md:pe-6">
-          {pairs}
+    <div className="relative">
+      <div
+        aria-hidden="true"
+        onPointerEnter={() => easeTo(0)}
+        onPointerLeave={() => {
+          if (!pausedRef.current) easeTo(1)
+        }}
+        className="flex h-14 items-center overflow-hidden bg-background-inverse ps-6 text-lg font-semibold md:h-[68px] md:text-xl lg:h-[76px]"
+      >
+        <div ref={trackRef} className="flex w-max shrink-0">
+          <div ref={runRef} className="flex shrink-0 items-center gap-4 pe-4 md:gap-6 md:pe-6">
+            {pairs}
+          </div>
+          <div className="flex shrink-0 items-center gap-4 pe-4 md:gap-6 md:pe-6">{pairs}</div>
         </div>
-        <div className="flex shrink-0 items-center gap-4 pe-4 md:gap-6 md:pe-6">{pairs}</div>
       </div>
+      {children ? (
+        <div className="absolute inset-y-0 end-0 flex items-center bg-background-inverse pe-4 ps-3 md:pe-6">{children}</div>
+      ) : null}
     </div>
   )
 }
@@ -192,21 +241,25 @@ export function ErrorStateMarquee404Band({
   description,
   primaryAction,
   secondaryAction,
+  pauseLabel,
+  playLabel,
   icon,
   className,
   ...props
 }: ErrorStateMarquee404BandProps) {
   const copy = COPY[locale]
+  const reduced = usePrefersReducedMotion()
+  const [paused, setPaused] = React.useState(false)
   const headingId = React.useId()
   const code = tickerCode ?? copy.tickerCode
   const label = tickerLabel ?? copy.tickerLabel
   const primary = primaryAction ?? copy.primaryAction
   const secondary = secondaryAction === undefined ? copy.secondaryAction : secondaryAction
-  const glyph = icon === undefined ? <Signpost aria-hidden="true" strokeWidth={1.5} className="size-7" /> : icon
+  const glyph = icon === undefined ? <Signpost aria-hidden="true" size={28} strokeWidth={1.5} absoluteStrokeWidth className="size-7" /> : icon
 
   return (
     <section aria-labelledby={headingId} className={cn("bg-background", className)} {...props}>
-      <Ticker code={code} label={label} toward="start" />
+      <Ticker code={code} label={label} toward="start" paused={paused} />
 
       <div className="p-8 md:px-16 md:py-12 lg:px-24 lg:py-16">
         <div className="mx-auto flex w-full max-w-[600px] flex-col items-center gap-6 text-center">
@@ -234,7 +287,24 @@ export function ErrorStateMarquee404Band({
         </div>
       </div>
 
-      <Ticker code={code} label={label} toward="end" />
+      <Ticker code={code} label={label} toward="end" paused={paused}>
+        {reduced ? null : (
+          <Button
+            type="button"
+            variant="secondary"
+            size="icon-sm"
+            aria-label={paused ? playLabel ?? copy.playLabel : pauseLabel ?? copy.pauseLabel}
+            onClick={() => setPaused((value) => !value)}
+            className="after:ring-foreground-inverse"
+          >
+            {paused ? (
+              <Play aria-hidden="true" size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            ) : (
+              <Pause aria-hidden="true" size={16} strokeWidth={1.5} absoluteStrokeWidth />
+            )}
+          </Button>
+        )}
+      </Ticker>
     </section>
   )
 }

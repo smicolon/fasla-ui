@@ -15,9 +15,9 @@ import { Progress } from "../../ui/progress/progress"
  * home now leaves at once. At zero the block calls `onRedirect`, or follows
  * the Go home now link when there is none.
  *
- * Under `prefers-reduced-motion` the countdown never starts: nothing moves
- * and nothing leaves the page on its own, and the visitor goes home with the
- * button. The block follows the setting live.
+ * Under `prefers-reduced-motion` the countdown and the redirect run as
+ * usual and only the bar holds still: the line under it counts the seconds.
+ * The block follows the setting live.
  *
  * Mobile first: the base classes are Figma's Mobile (360), `md:` its Tablet
  * (768) and `lg:` its Desktop (1440). Direction is the page's `dir`; every
@@ -39,15 +39,13 @@ export interface ErrorStateCountdownRedirectCopy {
   countdown: (seconds: number) => React.ReactNode
   /** The line under the bar once the visitor cancels. */
   cancelled: React.ReactNode
-  /** The line under the bar when reduced motion keeps the countdown from starting. */
-  paused: React.ReactNode
   /** The line under the bar at zero, while the app takes over. */
   redirecting: React.ReactNode
   /** The small button beside the countdown that stops it. */
   cancelLabel: React.ReactNode
   /** The solid button: leave now. Its `href` is also where the countdown goes. */
   primaryAction: ErrorStateCountdownRedirectAction
-  /** The ghost button beside it, which stops the countdown too. Hidden when empty. */
+  /** The ghost button beside it, which cancels the redirect too. Hidden when empty. */
   stayLabel: React.ReactNode
 }
 
@@ -61,7 +59,6 @@ const COPY: Record<"en" | "ar", ErrorStateCountdownRedirectCopy> = {
     description: "We’ll take you back to the homepage automatically, so you don’t have to do anything.",
     countdown: (seconds) => `Redirecting in ${seconds} ${seconds === 1 ? "second" : "seconds"}`,
     cancelled: "Redirect cancelled",
-    paused: "Automatic redirect is off",
     redirecting: "Redirecting…",
     cancelLabel: "Cancel",
     primaryAction: { label: "Go home now", href: "/" },
@@ -80,7 +77,6 @@ const COPY: Record<"en" | "ar", ErrorStateCountdownRedirectCopy> = {
       </>
     ),
     cancelled: "أُلغيت إعادة التوجيه",
-    paused: "إعادة التوجيه التلقائي متوقفة",
     redirecting: "جارٍ إعادة التوجيه…",
     cancelLabel: "إلغاء",
     primaryAction: { label: "اذهب إلى الرئيسية الآن", href: "/" },
@@ -109,7 +105,7 @@ export interface ErrorStateCountdownRedirectProps
   onCancel?: () => void
 }
 
-type Phase = "counting" | "cancelled" | "paused" | "redirecting"
+type Phase = "counting" | "cancelled" | "redirecting"
 
 /** Whether the visitor asks for reduced motion, kept up to date. False on the server. */
 function usePrefersReducedMotion() {
@@ -133,7 +129,6 @@ export function ErrorStateCountdownRedirect({
   description,
   countdown,
   cancelled,
-  paused,
   redirecting,
   cancelLabel,
   primaryAction,
@@ -153,15 +148,14 @@ export function ErrorStateCountdownRedirect({
   const [stopped, setStopped] = React.useState(false)
   const primary = primaryAction ?? copy.primaryAction
   const stay = stayLabel ?? copy.stayLabel
-  const glyph = icon === undefined ? <Timer aria-hidden="true" className="size-6" strokeWidth={1.5} /> : icon
+  const glyph = icon === undefined ? <Timer aria-hidden="true" className="size-6" size={24} strokeWidth={1.5} absoluteStrokeWidth /> : icon
 
-  const phase: Phase =
-    elapsed >= total ? "redirecting" : stopped ? "cancelled" : reduced ? "paused" : "counting"
+  const phase: Phase = elapsed >= total ? "redirecting" : stopped ? "cancelled" : "counting"
 
   // Restart when the length changes.
   React.useEffect(() => setElapsed(0), [total])
 
-  // The count runs only while it is counting: a cancel, reduced motion or zero stops it.
+  // The count runs only while it is counting: a cancel or zero stops it.
   React.useEffect(() => {
     if (phase !== "counting") return
     const startedAt = Date.now() - elapsed
@@ -202,22 +196,21 @@ export function ErrorStateCountdownRedirect({
   }
 
   const left = Math.ceil((total - elapsed) / 1000)
-  const value = phase === "paused" ? 0 : (elapsed / total) * 100
+  // Under reduced motion the bar holds still, empty, while the line counts.
+  const value = reduced ? 0 : (elapsed / total) * 100
   const line =
     phase === "cancelled"
       ? cancelled ?? copy.cancelled
-      : phase === "paused"
-        ? paused ?? copy.paused
-        : phase === "redirecting"
-          ? redirecting ?? copy.redirecting
-          : (countdown ?? copy.countdown)(left)
+      : phase === "redirecting"
+        ? redirecting ?? copy.redirecting
+        : (countdown ?? copy.countdown)(left)
   // Screen readers hear the state when it changes, not every second.
   const announcement =
     phase === "counting" ? (countdown ?? copy.countdown)(Math.ceil(total / 1000)) : line
 
   return (
     <section aria-labelledby={headingId} className={cn("bg-muted p-8 md:p-16 lg:p-24", className)} {...props}>
-      <div className="mx-auto flex w-full max-w-[520px] flex-col items-center gap-5 rounded-[14px] bg-card p-6 text-center shadow-lg ring-1 ring-inset ring-border md:gap-6 md:p-10">
+      <div className="mx-auto flex w-full max-w-[520px] flex-col items-center gap-5 rounded-xl bg-card p-6 text-center shadow-lg ring-1 ring-inset ring-border md:gap-6 md:p-10">
         {glyph ? (
           <div className="flex size-12 items-center justify-center rounded-full bg-muted text-muted-foreground md:size-14">
             {glyph}

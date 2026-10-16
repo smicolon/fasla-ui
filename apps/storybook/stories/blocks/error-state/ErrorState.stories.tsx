@@ -352,10 +352,10 @@ export const SplitColourPanel: StoryObj<typeof ErrorStateSplitColourPanel> = {
   render: (args, context) => <ErrorStateSplitColourPanel locale={localeOf(context)} {...args} />,
 }
 
-/** Two tickers scroll in opposite directions; hover one to ease it to a stop. */
+/** Two tickers scroll in opposite directions; hover one to ease it to a stop, or press the pause button to stop both. */
 export const Marquee404Band: StoryObj<typeof ErrorStateMarquee404Band> = {
   name: "Marquee 404 Band",
-  argTypes: errorStateArgTypes(ErrorStateMarquee404Band, errorStateMarquee404BandCopy),
+  argTypes: errorStateArgTypes(ErrorStateMarquee404Band, errorStateMarquee404BandCopy, ["pauseLabel", "playLabel"]),
   render: (args, context) => <ErrorStateMarquee404Band locale={localeOf(context)} {...args} />,
 }
 
@@ -484,6 +484,6 @@ export const EmptySearchResultsDisabled: StoryObj<typeof ErrorStateEmptySearchRe
  */
 export const CountdownRedirect: StoryObj<typeof ErrorStateCountdownRedirect> = {
   name: "Countdown Redirect",
-  argTypes: errorStateArgTypes(ErrorStateCountdownRedirect, errorStateCountdownRedirectCopy, ["paused"]),
+  argTypes: errorStateArgTypes(ErrorStateCountdownRedirect, errorStateCountdownRedirectCopy),
   render: (args, context) => <ErrorStateCountdownRedirect locale={localeOf(context)} onRedirect={() => {}} {...args} />,
 }
