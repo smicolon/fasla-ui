@@ -163,7 +163,8 @@ export interface ErrorStateAccessDenied403Props
   icon?: React.ReactNode
   /**
    * Sends the access request. The row shows a spinner until the promise
-   * settles; then it becomes `requestSent`, or shows `requestError`.
+   * settles; then it becomes `requestSent`, or shows `requestError`. Without
+   * it nothing is sent, so the row shows `requestError`.
    */
   onRequestAccess?: () => Promise<void> | void
 }
@@ -199,9 +200,11 @@ export function ErrorStateAccessDenied403({
   const send = <Send size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-4 [&:dir(rtl)]:-scale-x-100" />
 
   const ask = async () => {
+    // Nothing to send the request with: say so rather than confirm it.
+    if (!onRequestAccess) return setStatus("error")
     setStatus("pending")
     try {
-      await onRequestAccess?.()
+      await onRequestAccess()
       setStatus("success")
     } catch {
       setStatus("error")
