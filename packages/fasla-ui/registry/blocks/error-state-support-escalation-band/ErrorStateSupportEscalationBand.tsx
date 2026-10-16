@@ -44,7 +44,7 @@ export interface ErrorStateSupportEscalationBandCopy {
   description: React.ReactNode
   /** The support team, shown as an overlapping avatar stack, each marked online. */
   people: ErrorStateSupportEscalationBandPerson[]
-  /** Beside the avatars: who answers and how fast. */
+  /** Beside the avatars: who answers and how fast. Hidden when null. */
   teamNote: React.ReactNode
   /** The solid button. */
   primaryAction: ErrorStateSupportEscalationBandAction
@@ -114,6 +114,7 @@ export function ErrorStateSupportEscalationBand({
   const headingId = React.useId()
   const pill = badge ?? copy.badge
   const team = people ?? copy.people
+  const note = teamNote === undefined ? copy.teamNote : teamNote
   const primary = primaryAction ?? copy.primaryAction
   const secondary = secondaryAction === undefined ? copy.secondaryAction : secondaryAction
   const home = homeLink === undefined ? copy.homeLink : homeLink
@@ -131,7 +132,7 @@ export function ErrorStateSupportEscalationBand({
             {heading ?? copy.heading}
           </h1>
           <p className="text-base text-muted-foreground">{description ?? copy.description}</p>
-          {team.length > 0 || teamNote !== null ? (
+          {team.length > 0 || note ? (
             <div className="flex flex-col gap-2.5 max-md:order-first md:flex-row md:items-center md:gap-3">
               {team.length > 0 ? (
                 <ul className="flex shrink-0 items-center">
@@ -149,7 +150,7 @@ export function ErrorStateSupportEscalationBand({
                   ))}
                 </ul>
               ) : null}
-              <p className="max-w-[140px] text-sm text-muted-foreground md:max-w-none">{teamNote ?? copy.teamNote}</p>
+              {note ? <p className="max-w-[140px] text-sm text-muted-foreground md:max-w-none">{note}</p> : null}
             </div>
           ) : null}
         </div>
