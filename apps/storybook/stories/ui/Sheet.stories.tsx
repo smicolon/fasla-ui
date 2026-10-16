@@ -113,11 +113,17 @@ type Copy = (typeof COPY)[keyof typeof COPY]
 type StoryCtx = { globals: { direction?: string } }
 const copy = (ctx: StoryCtx): Copy => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
 
-/** A label set in the story's own chrome: English, left to right, small and muted. */
+/**
+ * A label set in the story's own chrome: English, left to right, small and
+ * muted. Its line is pinned at Geist's 16px (`leading-4`): `text-xs` alone
+ * takes its line height from the nearest `[dir]` ancestor's type ramp, which
+ * is Cairo's 20px inside an RTL column or under the RTL toolbar, so the labels
+ * in an RTL column grew 4px each and pushed its sheets below the LTR column's.
+ */
 const Head = ({ children, className }: { children: React.ReactNode; className?: string }) => (
   <span
     dir="ltr"
-    className={["w-fit self-center whitespace-nowrap text-left font-sans text-xs text-muted-foreground", className].join(" ")}
+    className={["w-fit self-center whitespace-nowrap text-left font-sans text-xs leading-4 text-muted-foreground", className].join(" ")}
   >
     {children}
   </span>
