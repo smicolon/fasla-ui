@@ -11,9 +11,11 @@ import { buttonVariants } from "../../ui/button/button"
  *
  * A status badge, heading, help text, two ways out and a quiet note on one
  * side; a photograph on the other. The photo sits at the end on Desktop and
- * under the copy on Tablet and Mobile. No photo comes with the block: pass
- * `image`, and until then the frame is a `muted` placeholder of the same
- * size.
+ * under the copy on Tablet and Mobile. Side by side, the copy keeps at least
+ * 360px and the photo narrows to make room, so the two never overlap below
+ * 1440; the buttons wrap if they still don't fit. No photo comes with the
+ * block: pass `image`, and until then the frame is a `muted` placeholder of
+ * the same size.
  *
  * Mobile first: the base classes are Figma's Mobile (360), `md:` its Tablet
  * (768) and `lg:` its Desktop (1440). Direction is the page's `dir`; every
@@ -106,7 +108,7 @@ export function ErrorStateEditorialPhotoSplit({
   return (
     <section aria-labelledby={headingId} className={cn("bg-background p-8 md:p-16 lg:p-24", className)} {...props}>
       <div className="mx-auto flex w-full max-w-[1248px] flex-col gap-6 md:gap-8 lg:flex-row lg:items-center lg:gap-16">
-        <div className="flex min-w-0 flex-1 flex-col items-start gap-5 md:gap-6">
+        <div className="flex min-w-0 flex-1 flex-col items-start gap-5 md:gap-6 lg:min-w-[22.5rem]">
           {status ? (
             <Badge variant="soft" tone="destructive" size="sm">
               {status}
@@ -116,7 +118,7 @@ export function ErrorStateEditorialPhotoSplit({
             {heading ?? copy.heading}
           </h1>
           <p className="text-base text-muted-foreground">{description ?? copy.description}</p>
-          <div className="flex w-full flex-col gap-2.5 md:w-auto md:flex-row md:gap-3">
+          <div className="flex w-full flex-col gap-2.5 md:w-auto md:flex-row md:flex-wrap md:gap-3">
             <a href={primary.href} className={buttonVariants()}>
               {primary.label}
             </a>
@@ -137,7 +139,7 @@ export function ErrorStateEditorialPhotoSplit({
           ) : null}
         </div>
 
-        <div className="relative h-[240px] w-full shrink-0 overflow-hidden rounded-lg bg-muted md:h-[380px] lg:h-[480px] lg:w-[560px]">
+        <div className="relative h-[240px] w-full shrink-0 overflow-hidden rounded-lg bg-muted md:h-[380px] lg:h-[480px] lg:w-[560px] lg:min-w-0 lg:shrink">
           {image ? (
             <img src={image.src} alt={image.alt} loading="lazy" decoding="async" className="absolute inset-0 size-full object-cover" />
           ) : null}
