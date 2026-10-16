@@ -71,6 +71,8 @@ Core building blocks with CVA variants for consistent styling:
 | **Input** | Text input with validation states and icon support |
 | **Textarea** | Multi-line text field that grows with its text, with a label, helper text and a counter |
 | **Select** | Dropdown selection with search |
+| **Calendar** | A month calendar for one day or a range, across up to three months, mirrored for RTL |
+| **Date Picker** | A date field on Select's trigger that opens a Calendar, for one day or a range |
 | **Dropdown Menu** | A menu of actions, checkboxes, radio choices and submenus, opened from a button |
 | **Checkbox** | Checkbox with label and description |
 | **Radio** | Single choice from a set, as a plain control or a bordered card |

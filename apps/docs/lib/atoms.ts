@@ -15,7 +15,6 @@ const DISPLAY: Record<string, string> = {
   "Check Box": "Checkbox",
   "Default Input": "Input",
   "Side Bar Inside Item": "Sidebar Item",
-  "Calendar View": "Calendar",
   "Select Input": "Select",
   Sonnar: "Sonner",
   Dropdown: "Dropdown Menu",

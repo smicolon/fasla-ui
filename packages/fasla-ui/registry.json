@@ -226,6 +226,31 @@
       ]
     },
     {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "A month calendar on react-day-picker: one day or a range, one to three months, a month and year caption menu, two radii, Arabic months and a Saturday week start in RTL.",
+      "dependencies": [
+        "react-day-picker",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "select"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/calendar/calendar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/calendar.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "forms"
+      ]
+    },
+    {
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
@@ -325,6 +350,32 @@
       "categories": [
         "data-display",
         "tables"
+      ]
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "A date field on Base UI's Popover: Select's trigger opening a Calendar, for one day or a range, with a label and helper text, four sizes, mirrored for RTL.",
+      "dependencies": [
+        "@base-ui/react",
+        "react-day-picker",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "calendar",
+        "select"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/date-picker/date-picker.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/date-picker.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "forms"
       ]
     },
     {
