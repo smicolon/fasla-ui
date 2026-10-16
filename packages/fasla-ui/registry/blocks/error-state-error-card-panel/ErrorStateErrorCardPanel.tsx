@@ -125,6 +125,8 @@ export function ErrorStateErrorCardPanel({
     setRetrying(true)
     try {
       await result
+    } catch {
+      // The app reports its own retry failures; the block only stops waiting.
     } finally {
       setRetrying(false)
     }
