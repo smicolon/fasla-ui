@@ -53,11 +53,6 @@ type StoryArgs = DialogContentProps & {
   title?: string
   /** The description text. Empty: the sample copy, in the toolbar's language. */
   description?: string
-  /**
-   * `className` on `DialogContent`, under its own key so it can be the last
-   * row: Storybook lists a component's own props before a story's args.
-   */
-  classes?: string
 }
 
 const meta: Meta<StoryArgs> = {
@@ -115,8 +110,7 @@ const meta: Meta<StoryArgs> = {
       description: "A Ghost Button that goes to the start of the row, or under the others when stacked.",
       table: { defaultValue: { summary: "false" } },
     },
-    // Shown as the `classes` row below, so it sits last in the table.
-    className: { table: { disable: true } },
+    className: { control: "text" },
     // Behaviour and Base UI's own escape hatches: they change nothing in the
     // preview. They are on the docs page's Props table.
     closeLabel: { table: { disable: true } },
@@ -126,12 +120,6 @@ const meta: Meta<StoryArgs> = {
     children: { table: { disable: true } },
     style: { table: { disable: true } },
     id: { table: { disable: true } },
-    classes: {
-      name: "className",
-      control: "text",
-      description: "Classes for the dialog box.",
-      table: { type: { summary: "string" } },
-    },
   },
   args: {
     size: "lg",
@@ -526,11 +514,11 @@ const BOX: Record<NonNullable<DialogContentProps["size"]>, string> = {
 export const Default: Story = {
   parameters: { layout: "padded" },
   render: (
-    { headerType, showDescription, showFooter, actions, layout, secondaryAction, thirdAction, title, description, classes, ...args },
+    { headerType, showDescription, showFooter, actions, layout, secondaryAction, thirdAction, title, description, ...args },
     ctx
   ) => (
     <div className={["mx-auto w-full", BOX[args.size ?? "lg"]].join(" ")}>
-      <Held {...args} className={classes}>
+      <Held {...args}>
         <Sample
           c={copy(ctx)}
           back={headerType === "back"}
@@ -556,14 +544,14 @@ export const Default: Story = {
  */
 export const Interactive: Story = {
   render: (
-    { headerType, showDescription, showFooter, actions, layout, secondaryAction, thirdAction, title, description, classes, ...args },
+    { headerType, showDescription, showFooter, actions, layout, secondaryAction, thirdAction, title, description, ...args },
     ctx
   ) => {
     const c = copy(ctx)
     return (
       <Dialog>
         <DialogTrigger render={<Button variant="outline" />}>{c.trigger}</DialogTrigger>
-        <DialogContent {...args} className={classes}>
+        <DialogContent {...args}>
           <Sample
             c={c}
             back={headerType === "back"}
