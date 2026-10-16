@@ -47,17 +47,17 @@
     "counts": {
       "pagesInScope": 44,
       "entries": 163,
-      "primary": 43,
+      "primary": 44,
       "componentSets": 162,
       "looseComponents": 1,
       "variants": 4622,
-      "primaryWithEnDoc": 42,
-      "primaryWithArDoc": 40,
-      "withEnDoc": 42,
-      "withArDoc": 40,
+      "primaryWithEnDoc": 43,
+      "primaryWithArDoc": 41,
+      "withEnDoc": 43,
+      "withArDoc": 41,
       "withRtl": 152,
       "withDescription": 5,
-      "mappedToCode": 27,
+      "mappedToCode": 29,
       "docFrames": 98
     },
     "legend": {
@@ -216,18 +216,7 @@
         "42278:36791"
       ],
       "legacyDocSections": [],
-      "orphanDocs": [
-        {
-          "id": "40505:2394",
-          "name": "Calendar Popover — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40505-2394"
-        },
-        {
-          "id": "40517:3798",
-          "name": "Calendar Popover — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40517-3798"
-        }
-      ]
+      "orphanDocs": []
     },
     {
       "id": "3996:8715",
@@ -1062,8 +1051,8 @@
       "axes": {
         "State": [
           "Default",
-          "Hover",
-          "Focus"
+          "Focus",
+          "Disabled"
         ],
         "Direction": [
           "LTR",
@@ -1100,17 +1089,17 @@
         },
         "duplicates": []
       },
-      "code": null,
+      "code": "date-picker",
       "hasDescription": false,
       "flags": [
         "no-description"
       ]
     },
     "15117:6294": {
-      "name": "Standard Calendar",
+      "name": "Calendar",
       "node": "COMPONENT_SET",
       "kind": "atom",
-      "role": "part",
+      "role": "primary",
       "page": {
         "id": "4108:1012",
         "name": "✦  🟢 Y/H | Calendar ✅",
@@ -1143,11 +1132,19 @@
       ],
       "rtl": true,
       "docs": {
-        "en": null,
-        "ar": null,
+        "en": {
+          "id": "40505:2394",
+          "name": "Calendar — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40505-2394"
+        },
+        "ar": {
+          "id": "40517:3798",
+          "name": "Calendar — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40517-3798"
+        },
         "duplicates": []
       },
-      "code": null,
+      "code": "calendar",
       "hasDescription": false,
       "flags": [
         "no-description"

@@ -55,15 +55,15 @@ Atoms by shape, but their page carries no trailing ✅. Settled by Yasmin on 202
 
 ## Components
 
-Of the **43 primary** components — the ones a doc is expected for — 42 have an English doc and 40 an Arabic one. Across all 163 entries, 152 carry an RTL direction, 5 have a Figma description, and 27 are implemented in the code registry.
+Of the **44 primary** components — the ones a doc is expected for — 43 have an English doc and 41 an Arabic one. Across all 163 entries, 152 carry an RTL direction, 5 have a Figma description, and 29 are implemented in the code registry.
 
 `role`: primary = an EN doc frame on the page names this set, or it is the only component there; part = a sub-component of a primary; family-member = an interchangeable placeholder on a family page; unclassified = several sets and no doc frame names any of them — not guessed
 
 | Component | Page | Role | Variants | Axes | RTL | EN | AR | Code | Flags |
 |---|---|---|---|---|---|---|---|---|---|
 | [Alert](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15226-58727) | [Alert](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3791-57238) | primary | 30 | Direction, Variants, Type | ✅ | [✅](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39733-2101) | — | `alert` | `no-ar-doc` |
-| [Date Picker](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15113-5466) | [Date Picker](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14831-275398) | primary | 48 | State, Direction, Size, Variants | ✅ | [✅](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40483-1725) | [✅](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40483-87457) | — | — |
-| [Standard Calendar](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15117-6294) | [Calendar](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4108-1012) | part | 16 | Variants, Direction | ✅ | — | — | — | — |
+| [Date Picker](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15113-5466) | [Date Picker](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14831-275398) | primary | 48 | State, Direction, Size, Variants | ✅ | [✅](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40483-1725) | [✅](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40483-87457) | `date-picker` | — |
+| [Calendar](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15117-6294) | [Calendar](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4108-1012) | primary | 16 | Variants, Direction | ✅ | [✅](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40505-2394) | [✅](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40517-3798) | `calendar` | — |
 | [Calendar Header](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40500-62423) | [Calendar](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4108-1012) | part | 10 | Type, Direction | ✅ | — | — | — | — |
 | [Calendar Cell](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40500-63031) | [Calendar](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4108-1012) | part | 14 | Type, Hover, Direction | ✅ | — | — | — | — |
 | [Calendar View](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40500-62496) | [Calendar](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4108-1012) | primary | 6 | View, Direction | ✅ | [✅](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42285-8315) | [✅](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42285-15929) | — | — |
@@ -154,8 +154,6 @@ Of the **43 primary** components — the ones a doc is expected for — 42 have 
 
 | Doc frame | Page |
 |---|---|
-| [Calendar Popover — Fasla Component Documentation](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40505-2394) | Calendar |
-| [Calendar Popover — Fasla Component Documentation (AR)](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40517-3798) | Calendar |
 | [Tabs — Fasla Component Documentation](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39931-19503) | Tabs & Pills |
 | [Tabs — Fasla Component Documentation (AR)](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39932-20214) | Tabs & Pills |
 | [Modifier / Indicator — Fasla Component Documentation](https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39921-18345) | Status Indicator |

@@ -102,8 +102,11 @@ export const CODE_MAP = {
     { set: "Button", page: "1:3" },
     { set: "Icon Button", page: "1:3" },
   ],
+  // The date-picker calendar. Calendar View, the scheduler, has its own page and is not built.
+  calendar: { set: "Calendar", page: "4108:1012" },
   checkbox: { set: "Check Box", page: "3830:5150" },
   combobox: { set: "Combobox", page: "14852:8647" },
+  "date-picker": { set: "Date Picker", page: "14831:275398" },
   dialog: { set: "Dialog", page: "3680:33667" },
   "dropdown-menu": { set: "Dropdown", page: "3972:55121" },
   input: { set: "Default Input", page: "3882:2381" },

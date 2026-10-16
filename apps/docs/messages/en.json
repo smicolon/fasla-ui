@@ -500,6 +500,164 @@
         "nakheel": "Al Nakheel branch"
       }
     },
+    "calendar": {
+      "lead": "A month calendar for choosing a day or a range of days. It shows one, two or three months, can swap its caption for a month and a year menu, and draws its days square or round. On an Arabic page it shows Arabic month names with Western digits, starts the week on Saturday and mirrors.",
+      "radius": {
+        "title": "Radius",
+        "body": "<code>radius=\"standard\"</code> gives the days and the range band 8px corners, and <code>radius=\"rounded\"</code> makes them full circles. The calendar's card keeps its 8px corners either way."
+      },
+      "statesBody": "The days the calendar draws: plain, outside the month in muted text, today on a soft fill, and the chosen day on a solid one. A chosen today keeps a dot under its number. Days you turn off with <code>disabled</code> show at half opacity and cannot be chosen. Point at a day to see its hover.",
+      "states": {
+        "single": "Chosen, today and turned-off days",
+        "today": "Chosen today"
+      },
+      "range": {
+        "title": "Range",
+        "body": "<code>mode=\"range\"</code> chooses a start and an end. Both ends are drawn as chosen days, and the days between sit on a band that breaks at the end of each week. Set <code>numberOfMonths</code> to 2 to show two months side by side; only the outer months carry arrows."
+      },
+      "longRange": {
+        "title": "Three months",
+        "body": "Up to three months sit side by side, for a range that runs across them. Where the page is too narrow for them, the months wrap onto more rows."
+      },
+      "dropdowns": {
+        "title": "Month and year menus",
+        "body": "<code>captionLayout=\"dropdown\"</code> replaces the month's name and its arrows with two Select menus, one for the month and one for the year. <code>startMonth</code> and <code>endMonth</code> set the years the menu lists."
+      },
+      "time": {
+        "title": "With time slots",
+        "body": "A composition rather than a prop: a column of time slots, headed by the chosen day, sits at the calendar's start, divided from it by a line. Slots that have passed are muted and cannot be chosen. The code is under Usage.",
+        "label": "Times",
+        "weekday": "EEEE, d"
+      },
+      "presets": {
+        "title": "With presets",
+        "body": "Also a composition: Ghost Buttons over the calendar choose a day in one press and move the calendar to its month. Here today is the 6th, so choosing Today shows the dot. The code is under Usage.",
+        "today": "Today",
+        "yesterday": "Yesterday",
+        "lastWeek": "Last week",
+        "lastMonth": "Last month"
+      },
+      "form": {
+        "title": "In a form",
+        "body": "In a form, use the calendar through Date Picker: a field with a label and helper text that opens the calendar under it and submits the chosen day with the form.",
+        "dob": "Date of birth",
+        "dobHelp": "Your date of birth is used to calculate your age.",
+        "submit": "Submit"
+      },
+      "a11y": {
+        "grid": "Each month is a <code>grid</code> of buttons, one per day, each named with its full date and whether it is today or chosen. The caption names the grid.",
+        "keyboard": "The arrow keys move a day or a week, Page Up and Page Down a month, and with Shift a year. Home and End go to the start and end of the week, and Enter or Space chooses the day.",
+        "focus": "Only one day is in the tab order: the chosen day, or else today. Tab reaches the arrows first, then that day.",
+        "direction": "Direction and language come from the page, never a prop. On an Arabic page the arrows swap ends and point the other way, the arrow keys follow the reading direction, and every label is read out in Arabic."
+      },
+      "props": {
+        "mode": "How days are chosen: one, several, or a range.",
+        "selected": "The chosen day, days or range. Use it with <code>onSelect</code>.",
+        "onSelect": "Called with the new selection when a day is pressed.",
+        "required": "Keeps a day chosen: pressing the chosen day again does not clear it.",
+        "defaultMonth": "The month shown on first render.",
+        "month": "The month shown, when you control it. Use it with <code>onMonthChange</code>.",
+        "onMonthChange": "Called with the new month when the arrows or the menus move it.",
+        "numberOfMonths": "How many months show side by side: 1, 2 or 3.",
+        "captionLayout": "The month's name with arrows, or a month and a year menu.",
+        "startMonth": "The earliest month the arrows and menus reach.",
+        "endMonth": "The latest month the arrows and menus reach.",
+        "radius": "Day and range corners: 8px, or full circles.",
+        "disabled": "Days that cannot be chosen: a date, a range, a weekday, or a function.",
+        "today": "The day drawn as today. Defaults to the real date.",
+        "showOutsideDays": "Shows the days of the months either side, muted.",
+        "fixedWeeks": "Always shows six weeks, so the calendar keeps its height between months.",
+        "weekStartsOn": "The first day of the week, 0 for Sunday to 6 for Saturday. Defaults to Saturday on a right-to-left page and Sunday otherwise.",
+        "locale": "The month and weekday names and the labels. Defaults to Arabic on an Arabic page and English otherwise.",
+        "className": "Extra CSS classes for the calendar's card."
+      },
+      "usage": {
+        "basic": "One day",
+        "range": "A range over two months",
+        "dropdowns": "Month and year menus",
+        "time": "With time slots",
+        "presets": "With presets"
+      }
+    },
+    "datePicker": {
+      "lead": "A date field that opens a calendar under it. Its trigger is Select's, so the two line up in a form: the same four sizes, label, helper text and focus ring. It holds one day or a range, and shows it as Jan 20, 2026, or 20 يناير 2026 on an Arabic page.",
+      "date": "Delivery date",
+      "dateHelp": "We deliver between 9am and 5pm.",
+      "stay": "Stay",
+      "stayHelp": "Check-in and check-out.",
+      "sizesBody": "Four sizes: <code>xs</code> is 28px tall, <code>sm</code> 32px, <code>md</code> 36px and <code>lg</code> 40px, the same as Select. Only the height and the gap between the icon and the text change: the padding is 12px and the calendar icon 16px at every size.",
+      "sizes": {
+        "xs": "Extra small",
+        "sm": "Small",
+        "md": "Medium",
+        "lg": "Large"
+      },
+      "statesBody": "Focus is a real state, not a prop: tab to the field, or open it. The trigger draws the focus ring on keyboard focus and for as long as the calendar is open. <code>disabled</code> dims the whole field to half opacity, its label and helper text included.",
+      "states": {
+        "enabled": "Enabled",
+        "disabled": "Disabled"
+      },
+      "range": {
+        "title": "Range",
+        "body": "<code>mode=\"range\"</code> holds a start and an end, joined with a dash. The calendar stays open after the first press and closes once both ends are chosen. Set <code>numberOfMonths</code> to 2 to open two months."
+      },
+      "parts": {
+        "title": "Beside a Select",
+        "body": "The label, the note at the end of the label row and the helper text work as on Select, and the trigger is Select's own, so a Date Picker and a Select line up side by side at every size.",
+        "optional": "Optional",
+        "city": "City",
+        "cityHelp": "Where we deliver your order.",
+        "riyadh": "Riyadh"
+      },
+      "calendar": {
+        "title": "The calendar",
+        "body": "The calendar opens 4px under the trigger, lined up with its start edge, and flips above it when there is no room below. Focus moves to the chosen day, or today, so the arrow keys work at once. Choosing a day closes it; Escape closes it too, and returns focus to the trigger."
+      },
+      "form": {
+        "title": "In a form",
+        "body": "Give the field a <code>name</code> and it submits with its form: a day as <code>2026-01-20</code>, and a range as <code>2026-01-20/2026-02-09</code>. Pass Calendar props through <code>calendarProps</code>, such as month and year menus for a date of birth.",
+        "dob": "Date of birth",
+        "dobHelp": "Your date of birth is used to calculate your age.",
+        "submit": "Submit"
+      },
+      "a11y": {
+        "roles": "The trigger is a <code>button</code> that opens a <code>dialog</code>. It is named by its label and its value together, so a screen reader says both, and its helper text is read with it.",
+        "keyboard": "Enter or Space opens the calendar and focuses its chosen day. The calendar's own keys then work: arrows, Page Up and Page Down, Home and End. Escape closes it and returns focus to the trigger.",
+        "label": "<code>label</code> names the trigger. Without one, pass <code>aria-label</code>. Pressing the label moves focus to the trigger without opening the calendar.",
+        "direction": "Direction is inherited from <code>dir</code>, never a prop. The calendar takes the page's direction, language and font from the trigger, though it renders at the end of <code>body</code>."
+      },
+      "props": {
+        "mode": "One day, or a range from one day to another.",
+        "value": "The chosen day, or the range with <code>mode=\"range\"</code>. Use it with <code>onValueChange</code>.",
+        "defaultValue": "The value chosen on first render.",
+        "onValueChange": "Called with the new day, or the range at each end.",
+        "placeholder": "Text shown while no date is chosen. Defaults to Pick a date, or its Arabic on an Arabic page.",
+        "size": "Field height: 28, 32, 36 or 40px.",
+        "numberOfMonths": "How many months the calendar shows side by side.",
+        "calendarProps": "More Calendar props: disabled days, the shown month, month and year menus, <code>radius</code>.",
+        "label": "The field's label, linked to the trigger for you.",
+        "ariaLabel": "The trigger's accessible name when there is no visible <code>label</code>.",
+        "ariaLabelledby": "The id of an element that names the trigger, in place of <code>label</code>.",
+        "labelEnd": "A short note at the end of the label row, such as Optional.",
+        "description": "Helper text under the field. A screen reader reads it with the field.",
+        "descriptionEnd": "A note at the end of the helper row.",
+        "disabled": "Disables the field and dims the whole group.",
+        "name": "The name the value is submitted under.",
+        "form": "The id of the form the value is submitted with, when the field sits outside it.",
+        "id": "The trigger's id.",
+        "open": "Opens or closes the calendar, when you control it.",
+        "defaultOpen": "Opens the calendar on first render.",
+        "onOpenChange": "Called when the calendar opens or closes.",
+        "collisionAvoidance": "How the calendar avoids the window edge. By default it flips above the trigger when there is no room below.",
+        "container": "Where the calendar renders. Default <code>body</code>.",
+        "className": "Extra CSS classes for the field group."
+      },
+      "usage": {
+        "basic": "One day",
+        "range": "A range",
+        "form": "In a form"
+      }
+    },
     "dropdownMenu": {
       "lead": "A menu of actions and settings that opens from a button. Use it for a short list of things the reader can do with the page, or with one item on it, such as editing, sharing or signing out.",
       "installNote": "Dropdown Menu is built on Base UI, so it needs the <code>@base-ui/react</code> package. It shares its menu styles with <code>select</code>, and its switch rows use <code>switch</code>. <code>add</code> installs both with the component, and so does the shadcn CLI.",
@@ -2744,6 +2902,7 @@
         "Slider": "Slider",
         "OTP Input": "OTP Input",
         "Calendar": "Calendar",
+        "Calendar View": "Calendar View",
         "Date Picker": "Date Picker",
         "Select": "Select",
         "Input Number": "Input Number",
