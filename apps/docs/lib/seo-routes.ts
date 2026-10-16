@@ -471,6 +471,21 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/dialog/",
+    title: "Dialog React Component | Fasla",
+    description:
+      "Collect input without leaving the page in an accessible React dialog: three widths, a back and close button, scrolling content and RTL.",
+    h1: "Dialog",
+    ar: {
+      title: "نافذة منبثقة (Dialog) لتطبيقات React | فاصلة",
+      description:
+        "اجمع مدخلات المستخدم دون مغادرة الصفحة بمكوّن النافذة المنبثقة، بثلاثة أحجام وزرّي رجوع وإغلاق ومحتوى يتمرّر، وينعكس تلقائيًا في الصفحات العربية.",
+      h1: "نافذة منبثقة (Dialog)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/breadcrumb/",
     title: "Breadcrumb React Component | Fasla",
     description:

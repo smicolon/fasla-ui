@@ -1581,6 +1581,146 @@
         "custom": "Use your own icon"
       }
     },
+    "dialog": {
+      "whenToUse": "Use Dialog for a focused task that needs the user's input, such as editing a profile or choosing a plan, without leaving the page. To ask the user to confirm or cancel one action, such as deleting a project, use <link>Alert Dialog</link> instead.",
+      "installNote": "Dialog is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its close and back buttons use <code>button</code>. <code>add</code> installs both with the component, and so does the shadcn CLI.",
+      "previewHint": "Press the button to open the dialog. Focus moves to the first field and Tab stays inside. Escape, the close button, Cancel or a press on the overlay closes it.",
+      "trigger": "Edit profile",
+      "cancel": "Cancel",
+      "profile": {
+        "title": "Edit profile",
+        "description": "Update your name and photo.",
+        "action": "Save changes",
+        "email": "Email address",
+        "password": "Password",
+        "placeholder": "Type here",
+        "agree": "I agree to the privacy policy and terms"
+      },
+      "size": {
+        "body": "<code>size</code> on <code>DialogContent</code> sets the width: <code>lg</code>, the default, is 512px, <code>xl</code> is 672px and <code>2xl</code> is 1148px. Every size is 634px tall, whatever its content. On a smaller screen it keeps 16px from every edge. Choose by content: <code>lg</code> for a short form, <code>2xl</code> for a table or an editor. Press a button to open that size.",
+        "open": "Open {size}"
+      },
+      "header": {
+        "title": "Header",
+        "body": "<code>DialogHeader</code> holds the title and an optional description 4px under it, with a line below them. Each stays on one line and ends with an ellipsis when it runs longer, so keep both short. The close button sits at the end of the title's line; <code>showCloseButton</code> on <code>DialogContent</code> turns it off. For a step in a flow, pass <code>onBack</code> to <code>DialogHeader</code>: a back button sits before the title. Its arrow points to the start of the line, so it turns round on an Arabic page.",
+        "step": {
+          "title": "Pick a workspace",
+          "description": "Step 2 of 3."
+        },
+        "workspace": "Workspace name",
+        "workspacePlaceholder": "Design team",
+        "next": "Next",
+        "first": {
+          "title": "Name your project",
+          "description": "Step 1 of 3."
+        },
+        "project": "Project name",
+        "projectPlaceholder": "Orbit",
+        "newProject": "New project",
+        "create": "Create project"
+      },
+      "footer": {
+        "title": "Actions",
+        "body": "Put Buttons in <code>DialogFooter</code>, and wrap Cancel in <code>DialogClose</code> so it closes the dialog. In a row, the default, write Cancel, then the main action: they sit at the end, 8px apart. A third action written before them, such as Skip, goes to the start of the row. <code>layout=\"stacked\"</code> makes each action full width, one under the other, so write the main action first. For an action that can't be undone, give the main Button <code>variant=\"destructive\"</code>.",
+        "tour": {
+          "title": "Welcome to our library",
+          "description": "One component at a time.",
+          "body": "Every component comes in English and Arabic, light and dark, and mirrors on its own in right-to-left pages. The next steps show where to find them.",
+          "skip": "Skip",
+          "previous": "Previous",
+          "next": "Next"
+        },
+        "danger": {
+          "title": "Delete workspace",
+          "description": "This can't be undone.",
+          "body": "Anyone with a link to one of its files will see a page that says it no longer exists.",
+          "action": "Delete workspace"
+        }
+      },
+      "long": {
+        "title": "Long content",
+        "body": "The dialog is 634px tall whatever its content. When the content is taller, the header and the footer stay where they are and only what sits between them scrolls: scroll inside the dialog below to read on. On a shorter screen the dialog keeps 16px from the top and the bottom and scrolls the same way. A field reached with Tab scrolls into view clear of the header and the footer.",
+        "dialogTitle": "Terms of service",
+        "description": "They take effect today.",
+        "accept": "Accept",
+        "decline": "Decline",
+        "paragraphs": {
+          "p1": "These terms cover your use of the workspace, the files you keep in it and the people you invite to it. By selecting Accept, you agree to them on behalf of everyone in your organisation.",
+          "p2": "You own everything you upload. We store it to show it to you and to the people you share it with, and we never sell it or use it to train models without asking first.",
+          "p3": "You can export your files at any time from the workspace settings. If you close your account, we keep a copy for thirty days, so you can change your mind, and then delete it for good.",
+          "p4": "We may change these terms when the product changes. We'll tell you by email at least thirty days before a change takes effect, and you can close your account before then if you don't agree.",
+          "p5": "Billing renews at the start of each cycle. A plan you cancel stays active until the end of the cycle you have already paid for.",
+          "p6": "Keep your password to yourself and turn on two-step sign-in. You are responsible for what happens under your account until you tell us it has been compromised.",
+          "p7": "These terms are governed by the laws of the country where your organisation is registered. If any part of them can't be enforced, the rest still applies.",
+          "p8": "Admins can add and remove members, change roles and see every project. Members see only the projects they are invited to, and guests can comment but not edit.",
+          "p9": "We keep a log of sign-ins and changes to settings for twelve months. Admins can download it from the workspace settings at any time.",
+          "p10": "If we can't provide the service for more than a day in a month, we credit part of that month's bill to your account. You can ask for the credit within thirty days."
+        }
+      },
+      "a11y": {
+        "role": "The dialog has the <code>dialog</code> role. Its title names it and its description describes it, so a screen reader reads both when it opens.",
+        "focus": "When the dialog opens, focus moves to its first control, such as the first field. Tab and Shift+Tab stay inside the dialog, and focus returns to the trigger when it closes.",
+        "dismiss": "Escape, the close button, a <code>DialogClose</code> button and a press on the overlay all close the dialog.",
+        "buttons": "The close button is named Close and the back button Back, or إغلاق and رجوع on an Arabic page. Their icons are hidden from screen readers.",
+        "page": "While the dialog is open, the page behind it can't be reached with the keyboard or the pointer, and it doesn't scroll.",
+        "motion": "The dialog fades in as it grows from 98%. When reduced motion is on, it only fades.",
+        "direction": "The dialog takes the page's direction, language and font, though it renders at the end of <code>body</code>. On an Arabic page the whole layout mirrors, and the back arrow turns round. Direction needs no prop."
+      },
+      "rootProps": {
+        "open": "Shows or hides the dialog, when you control it.",
+        "defaultOpen": "Shows the dialog on first render.",
+        "onOpenChange": "Called when the dialog opens or closes.",
+        "modal": "While the dialog is open, keeps focus inside it and stops the page scrolling. Pass <code>false</code> to let focus leave the dialog and the page scroll, or <code>\"trap-focus\"</code> to keep focus inside without locking the scroll.",
+        "children": "The trigger and the content."
+      },
+      "triggerProps": {
+        "render": "Renders your own element in place of the plain button, such as a Button.",
+        "disabled": "Stops this trigger opening the dialog.",
+        "children": "The trigger's label.",
+        "className": "Extra classes for the trigger."
+      },
+      "contentProps": {
+        "size": "The width: <code>lg</code> is 512px, <code>xl</code> 672px, <code>2xl</code> 1148px.",
+        "showCloseButton": "Shows the close button at the end of the title's line.",
+        "closeLabel": "The close button's name for screen readers. Defaults to Close, or إغلاق on an Arabic page.",
+        "container": "Where the dialog renders. Defaults to <code>body</code>.",
+        "children": "The header, the content and the footer.",
+        "className": "Extra classes for the dialog box."
+      },
+      "headerProps": {
+        "onBack": "Shows a back button before the title, and is called when it is pressed.",
+        "backLabel": "The back button's name for screen readers. Defaults to Back, or رجوع on an Arabic page.",
+        "children": "The title and the description.",
+        "className": "Extra classes for the header."
+      },
+      "titleProps": {
+        "children": "What the dialog is for.",
+        "className": "Extra classes for the title."
+      },
+      "descriptionProps": {
+        "children": "A line on what to do in the dialog.",
+        "className": "Extra classes for the description."
+      },
+      "footerProps": {
+        "layout": "<code>horizontal</code> puts the actions in a row at the end. <code>stacked</code> makes each one full width, one under the other.",
+        "showCloseButton": "Adds an Outline Close button that closes the dialog.",
+        "children": "The actions: Buttons, with Cancel in a <code>DialogClose</code>.",
+        "className": "Extra classes for the footer."
+      },
+      "closeProps": {
+        "render": "Renders your own element in place of the plain button, such as a Button.",
+        "onClick": "Runs before the dialog closes.",
+        "disabled": "Disables the button.",
+        "children": "The button's label, such as Cancel.",
+        "className": "Extra classes for the button."
+      },
+      "usage": {
+        "basic": "Edit a profile",
+        "steps": "Go back a step",
+        "controlled": "Close after saving",
+        "saving": "Saving"
+      }
+    },
     "sheet": {
       "installNote": "Sheet is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its close button uses <code>button</code>. <code>add</code> installs both with the component, and so does the shadcn CLI.",
       "previewHint": "Press a button to open the sheet from that side. Tab stays inside it, and Escape, the close button or a press on the overlay closes it.",
@@ -2592,7 +2732,7 @@
         "Navbar": "Navbar",
         "Carousel": "Carousel",
         "Content Carousel": "Content Carousel",
-        "Modal": "Modal",
+        "Dialog": "Dialog",
         "Input": "Input",
         "Alert Dialog": "Alert Dialog",
         "Command Menu": "Command Menu",
