@@ -180,7 +180,9 @@ Applies to every component's Storybook controls table.
 - Behaviour props (open state, change handlers, form, aria, ids) are removed
   from the table completely: not grouped, and not shown without a control.
   They are documented only in the docs-site Props table.
-- `className` stays in the table for every component.
+- `className` stays in the table for every component, always as the last row.
+  `.storybook/preview.tsx` enforces this; any docs-site Props table that lists
+  `className` ends with it too.
 - No category groups or headers (such as "STORY"). Story-only args sit in the
   same single table as the component's props.
 - A prop that takes an element or object (an icon, for example) never shows a

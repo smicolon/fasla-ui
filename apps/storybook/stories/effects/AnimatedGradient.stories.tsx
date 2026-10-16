@@ -59,10 +59,18 @@ const COOL = ["var(--chart-2)", "var(--chart-3)", "var(--chart-2)", "var(--chart
 
 // The default speed, 10 seconds a cycle, is calm by design; the stories use 3 so
 // the motion is easy to see at a glance.
+/**
+ * Storybook lists a story's own args first in the controls table, so the
+ * other rows are named here, unset, ahead of `className`: that keeps
+ * `className` the last row (CLAUDE.md, "Storybook controls table"). Unset is
+ * what they are anyway, so nothing in the preview or the table changes.
+ */
 export const Default: Story = {
   args: {
-    className: "h-64 w-96 rounded-xl",
     speed: 3,
+    colors: undefined,
+    blur: undefined,
+    className: "h-64 w-96 rounded-xl",
   },
 }
 
