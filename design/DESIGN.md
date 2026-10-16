@@ -192,11 +192,11 @@ components:
     typography: "{typography.eyebrow}"
     rounded: "{rounded.md}"
     padding: "{spacing.1.5} {spacing.2}"
-  modal:
+  dialog:
     backgroundColor: "{colors.popover}"
     textColor: "{colors.popover-foreground}"
-    rounded: "{rounded.lg}"
-    padding: "{spacing.6}"
+    rounded: "{rounded.md}"
+    padding: "{spacing.4}"
 ---
 
 # Fasla — Design System
@@ -641,8 +641,8 @@ doubles.
 
 | Component | Variants | Properties |
 |---|---|---|
-| `Modal` `38975:3887` | 6 | `Size` L/XL/2XL · `Show Footer` · a `Slot` that accepts children on instances |
-| `Modal Header` `38975:3913` | 4 | `Type` Default/Back · description, close, LTR + RTL title and description props |
+| `Dialog` (formerly `Modal`) `38975:3887` | 6 | `Size` L/XL/2XL · `Show Footer` · a `Slot` that accepts children on instances |
+| `Dialog Header` `38975:3913` | 4 | `Type` Default/Back · description, close, LTR + RTL title and description props |
 | `Footer Actions` `38975:3834` | 8 | `Actions` Primary/Danger · `Horizontal` · secondary and third action booleans |
 | `Alert Dialog` `15455:53947` | 8 | `Align` Edge/Center · `Destructive` · additional-content slot |
 | `Popover` `4007:13806` | 2 | `Sub-title` |
@@ -651,9 +651,9 @@ doubles.
 | `Carousel` `40600:96155` | 18 | `No. of items` 2/3/4 · `Active Item` 1–4 — these are the stepper dots |
 | `Content Carousel` `15769:74332` | 6 | `Type` Single box / Two boxes / Three boxes, three content slots |
 
-The Modal component is a dialog card. A lightbox is a different pattern and is built bespoke on
+The Dialog component (formerly Modal) is a dialog card. A lightbox is a different pattern and is built bespoke on
 `{colors.background-inverse}` — that call was made deliberately and should not be "corrected" back to
-Modal.
+Dialog.
 
 ### Data
 

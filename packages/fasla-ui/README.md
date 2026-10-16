@@ -81,6 +81,7 @@ Core building blocks with CVA variants for consistent styling:
 | **Accordion** | Headings that show or hide their content, in four styles |
 | **Alert Dialog** | A modal that asks the user to confirm or cancel an action |
 | **Sheet** | A panel that slides in from an edge of the screen, with a pinned footer and a scrolling body |
+| **Dialog** | A modal for a focused task or form, in three widths, with a back button, pinned header and footer, and scrolling content |
 | **Badge** | Status indicators and labels |
 | **Breadcrumb** | A trail of links to the current page, with chevron or custom separators and a collapsed form |
 | **Alert** | Messages for information, success, warnings and errors, with an action and a close button |

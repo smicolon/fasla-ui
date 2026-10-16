@@ -247,7 +247,7 @@ export function FaqSearchCategories({
             size="lg"
             radius="rounded"
             className="max-w-[560px]"
-            startIcon={<SearchIcon aria-hidden="true" />}
+            startIcon={<SearchIcon size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />}
             placeholder={searchPlaceholder ?? copy.searchPlaceholder}
             aria-label={searchPlaceholder ?? copy.searchPlaceholder}
             value={query}

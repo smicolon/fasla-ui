@@ -2,7 +2,7 @@ import { notFound } from "next/navigation"
 import { setRequestLocale } from "next-intl/server"
 import type { Metadata } from "next"
 import { BlockPreview } from "@/components/blocks/block-preview"
-import { FAQ_TYPES } from "@/lib/blocks"
+import { ALL_BLOCK_TYPES } from "@/lib/blocks"
 
 /**
  * One block alone on a page, for the preview frames on a block family's docs
@@ -11,7 +11,7 @@ import { FAQ_TYPES } from "@/lib/blocks"
  * sitemap: the docs page is the canonical one.
  */
 export function generateStaticParams() {
-  return FAQ_TYPES.map(({ slug }) => ({ slug }))
+  return ALL_BLOCK_TYPES.map(({ slug }) => ({ slug }))
 }
 
 export async function generateMetadata({
@@ -31,7 +31,7 @@ export default async function BlockPreviewPage({
   const { locale, slug } = await params
   // Static export: pin the locale or next-intl reads headers().
   setRequestLocale(locale)
-  if (!FAQ_TYPES.some((type) => type.slug === slug)) notFound()
+  if (!ALL_BLOCK_TYPES.some((type) => type.slug === slug)) notFound()
 
   return <BlockPreview slug={slug} locale={locale === "ar" ? "ar" : "en"} />
 }

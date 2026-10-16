@@ -107,6 +107,7 @@ export const CODE_MAP = {
   checkbox: { set: "Check Box", page: "3830:5150" },
   combobox: { set: "Combobox", page: "14852:8647" },
   "date-picker": { set: "Date Picker", page: "14831:275398" },
+  dialog: { set: "Dialog", page: "3680:33667" },
   "dropdown-menu": { set: "Dropdown", page: "3972:55121" },
   input: { set: "Default Input", page: "3882:2381" },
   pagination: { set: "Pagination", page: "3772:64720" },
@@ -138,6 +139,17 @@ export const CODE_MAP = {
       "sidebar-nav", "category-chip-grid", "topic-tiles", "help-hero-popular", "contact-cta-card",
       "support-channels", "newsletter-close", "support-stats", "media-split", "chat-thread",
     ].map((type) => [`faq-${type}`, null])
+  ),
+  // Blocks: each Error State item is one Type of the block set Error State (42556:548), not an atom.
+  ...Object.fromEntries(
+    [
+      "centered-minimal", "search-recovery", "display-numeral-split", "editorial-photo-split", "full-bleed-photo",
+      "colour-field-scatter", "dark-spotlight", "ghost-watermark", "helpful-links-list", "popular-pages-grid",
+      "error-card-panel", "illustrated-empty-state", "light-editorial", "layered-badge-centered", "server-error-500",
+      "access-denied-403", "offline-state", "maintenance-mode", "empty-search-results", "recovery-bento",
+      "sitemap-columns", "terminal-console", "photo-collage-scatter", "support-escalation-band",
+      "split-colour-panel", "marquee-404-band", "broken-trail-breadcrumb", "countdown-redirect",
+    ].map((type) => [`error-state-${type}`, null])
   ),
 }
 

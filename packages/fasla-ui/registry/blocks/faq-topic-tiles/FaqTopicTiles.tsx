@@ -40,12 +40,12 @@ export interface FaqTopicTilesCopy {
 }
 
 const ICONS = {
-  start: <RocketIcon aria-hidden="true" />,
-  using: <LayersIcon aria-hidden="true" />,
-  theming: <PaletteIcon aria-hidden="true" />,
-  rtl: <LanguagesIcon aria-hidden="true" />,
-  handoff: <CodeIcon aria-hidden="true" />,
-  billing: <CreditCardIcon aria-hidden="true" />,
+  start: <RocketIcon size={20} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />,
+  using: <LayersIcon size={20} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />,
+  theming: <PaletteIcon size={20} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />,
+  rtl: <LanguagesIcon size={20} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />,
+  handoff: <CodeIcon size={20} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />,
+  billing: <CreditCardIcon size={20} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />,
 }
 
 /** A count inside Arabic text, kept left to right. */
@@ -225,13 +225,13 @@ export function FaqTopicTiles({
                     <span className="mt-auto flex flex-wrap items-center gap-x-4 gap-y-1 pt-3 text-xs text-muted-foreground [&_svg]:size-3.5 [&_svg]:shrink-0">
                       {tile.categories && (
                         <span className="flex items-center gap-1.5">
-                          <ListIcon aria-hidden="true" />
+                          <ListIcon size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />
                           {tile.categories}
                         </span>
                       )}
                       {tile.articles && (
                         <span className="flex items-center gap-1.5">
-                          <FileTextIcon aria-hidden="true" />
+                          <FileTextIcon size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />
                           {tile.articles}
                         </span>
                       )}

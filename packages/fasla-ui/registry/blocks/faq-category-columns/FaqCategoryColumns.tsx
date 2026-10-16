@@ -51,7 +51,7 @@ const COPY: Record<"en" | "ar", FaqCategoryColumnsCopy> = {
     categories: [
       {
         title: "Getting started",
-        icon: <Rocket />,
+        icon: <Rocket size={18} strokeWidth={1.5} absoluteStrokeWidth />,
         links: [
           { label: "How do I add Fasla to my Figma team?", href: "#" },
           { label: "Which file do I open first?", href: "#" },
@@ -64,7 +64,7 @@ const COPY: Record<"en" | "ar", FaqCategoryColumnsCopy> = {
       },
       {
         title: "Licensing & billing",
-        icon: <CreditCard />,
+        icon: <CreditCard size={18} strokeWidth={1.5} absoluteStrokeWidth />,
         links: [
           { label: "What does a seat include?", href: "#" },
           { label: "Can I move a seat to a new designer?", href: "#" },
@@ -77,7 +77,7 @@ const COPY: Record<"en" | "ar", FaqCategoryColumnsCopy> = {
       },
       {
         title: "Theming & RTL",
-        icon: <Palette />,
+        icon: <Palette size={18} strokeWidth={1.5} absoluteStrokeWidth />,
         links: [
           { label: "How do I retheme Fasla to my brand?", href: "#" },
           { label: "Where do dark-mode values live?", href: "#" },
@@ -97,7 +97,7 @@ const COPY: Record<"en" | "ar", FaqCategoryColumnsCopy> = {
     categories: [
       {
         title: "البداية",
-        icon: <Rocket />,
+        icon: <Rocket size={18} strokeWidth={1.5} absoluteStrokeWidth />,
         links: [
           { label: "كيف أضيف فاصلة إلى فريقي في Figma؟", href: "#" },
           { label: "أي ملف أفتح أولًا؟", href: "#" },
@@ -114,7 +114,7 @@ const COPY: Record<"en" | "ar", FaqCategoryColumnsCopy> = {
       },
       {
         title: "التراخيص والفوترة",
-        icon: <CreditCard />,
+        icon: <CreditCard size={18} strokeWidth={1.5} absoluteStrokeWidth />,
         links: [
           { label: "ماذا يشمل المقعد؟", href: "#" },
           { label: "هل يمكنني نقل مقعد إلى مصمّم جديد؟", href: "#" },
@@ -131,7 +131,7 @@ const COPY: Record<"en" | "ar", FaqCategoryColumnsCopy> = {
       },
       {
         title: "السمات واتجاه اليمين إلى اليسار",
-        icon: <Palette />,
+        icon: <Palette size={18} strokeWidth={1.5} absoluteStrokeWidth />,
         links: [
           { label: "كيف أعيد تنسيق فاصلة لتناسب علامتي؟", href: "#" },
           { label: "أين توجد قيم الوضع الداكن؟", href: "#" },
@@ -212,7 +212,7 @@ export function FaqCategoryColumns({
                         )}
                       >
                         <span className="underline-offset-4 group-hover:underline">{link.label}</span>
-                        <ArrowUpRight
+                        <ArrowUpRight size={14} strokeWidth={1.5} absoluteStrokeWidth
                           aria-hidden="true"
                           className="size-3.5 shrink-0 text-muted-foreground [&:dir(rtl)]:-scale-x-100"
                         />
@@ -229,7 +229,7 @@ export function FaqCategoryColumns({
                     )}
                   >
                     {category.moreLabel}
-                    <ChevronRight aria-hidden="true" className="size-3.5 shrink-0 [&:dir(rtl)]:-scale-x-100" />
+                    <ChevronRight size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-3.5 shrink-0 [&:dir(rtl)]:-scale-x-100" />
                   </a>
                 ) : null}
               </div>

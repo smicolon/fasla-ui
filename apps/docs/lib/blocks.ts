@@ -1,22 +1,31 @@
 /**
  * The block families the Blocks section documents, and each family's Types in
  * Figma's order. Names and family labels are in the message catalogues
- * (docs.faqBlocks); the slug is the registry item's name.
+ * (docs.faqBlocks, docs.errorStateBlocks); the slug is the registry item's name.
  */
 
 export type FaqFamily = "lists" | "layouts" | "navigation" | "support"
 
 export const FAQ_FAMILIES: FaqFamily[] = ["lists", "layouts", "navigation", "support"]
 
-export type BlockType = {
+/**
+ * Error State's two groups, as its Figma documentation splits the 28 Types:
+ * the 404 pages, and the six states next to them (500, 403, offline,
+ * maintenance, empty search and a timed redirect).
+ */
+export type ErrorStateFamily = "not-found" | "other-states"
+
+export const ERROR_STATE_FAMILIES: ErrorStateFamily[] = ["not-found", "other-states"]
+
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
-  family: FaqFamily
+  family: Family
   /** Painted with the inverse tokens, so it needs their mapping. */
   inverse?: boolean
 }
 
-export const FAQ_TYPES: BlockType[] = [
+export const FAQ_TYPES: BlockType<FaqFamily>[] = [
   { slug: "faq-classic-centered", family: "lists" },
   { slug: "faq-split-sticky", family: "layouts" },
   { slug: "faq-accent-active-card", family: "lists" },
@@ -44,6 +53,40 @@ export const FAQ_TYPES: BlockType[] = [
   { slug: "faq-media-split", family: "layouts" },
   { slug: "faq-chat-thread", family: "support" },
 ]
+
+export const ERROR_STATE_TYPES: BlockType<ErrorStateFamily>[] = [
+  { slug: "error-state-centered-minimal", family: "not-found" },
+  { slug: "error-state-search-recovery", family: "not-found" },
+  { slug: "error-state-display-numeral-split", family: "not-found" },
+  { slug: "error-state-editorial-photo-split", family: "not-found" },
+  { slug: "error-state-full-bleed-photo", family: "not-found", inverse: true },
+  { slug: "error-state-colour-field-scatter", family: "not-found" },
+  { slug: "error-state-dark-spotlight", family: "not-found", inverse: true },
+  { slug: "error-state-ghost-watermark", family: "not-found" },
+  { slug: "error-state-helpful-links-list", family: "not-found" },
+  { slug: "error-state-popular-pages-grid", family: "not-found" },
+  { slug: "error-state-error-card-panel", family: "not-found" },
+  { slug: "error-state-illustrated-empty-state", family: "not-found" },
+  { slug: "error-state-light-editorial", family: "not-found" },
+  { slug: "error-state-layered-badge-centered", family: "not-found" },
+  { slug: "error-state-server-error-500", family: "other-states" },
+  { slug: "error-state-access-denied-403", family: "other-states" },
+  { slug: "error-state-offline-state", family: "other-states" },
+  { slug: "error-state-maintenance-mode", family: "other-states" },
+  { slug: "error-state-empty-search-results", family: "other-states", inverse: true },
+  { slug: "error-state-recovery-bento", family: "not-found" },
+  { slug: "error-state-sitemap-columns", family: "not-found" },
+  { slug: "error-state-terminal-console", family: "not-found", inverse: true },
+  { slug: "error-state-photo-collage-scatter", family: "not-found" },
+  { slug: "error-state-support-escalation-band", family: "not-found" },
+  { slug: "error-state-split-colour-panel", family: "not-found", inverse: true },
+  { slug: "error-state-marquee-404-band", family: "not-found", inverse: true },
+  { slug: "error-state-broken-trail-breadcrumb", family: "not-found" },
+  { slug: "error-state-countdown-redirect", family: "other-states" },
+]
+
+/** Every block a preview page renders, across the families. */
+export const ALL_BLOCK_TYPES: BlockType[] = [...FAQ_TYPES, ...ERROR_STATE_TYPES]
 
 /** Figma's three breakpoints, the widths a preview frame renders at. */
 export const BREAKPOINTS = { desktop: 1440, tablet: 768, mobile: 360 } as const

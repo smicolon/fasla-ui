@@ -379,6 +379,30 @@
       ]
     },
     {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "A modal dialog on Base UI for focused tasks and forms: three widths, a header with an optional back and close button, content that scrolls between a pinned header and footer, and horizontal or stacked actions, mirrored for RTL.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/dialog/dialog.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/dialog.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "layout"
+      ]
+    },
+    {
       "name": "dropdown-menu",
       "type": "registry:ui",
       "title": "Dropdown Menu",
@@ -1444,6 +1468,653 @@
       "categories": [
         "faq",
         "marketing"
+      ]
+    },
+    {
+      "name": "error-state-centered-minimal",
+      "type": "registry:block",
+      "title": "Error State: Centered Minimal",
+      "description": "A centred 404 page: an icon badge, the error code in display type, a heading, a line of help and two ways out.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-centered-minimal/ErrorStateCenteredMinimal.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-centered-minimal.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-search-recovery",
+      "type": "registry:block",
+      "title": "Error State: Search Recovery",
+      "description": "A centred message over a search field and quick links, so the way out is a search.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-search-recovery/ErrorStateSearchRecovery.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-search-recovery.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-display-numeral-split",
+      "type": "registry:block",
+      "title": "Error State: Display Numeral Split",
+      "description": "A label and back link over a hairline, then the error code in the largest display size with a short aside beside it.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-display-numeral-split/ErrorStateDisplayNumeralSplit.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-display-numeral-split.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-editorial-photo-split",
+      "type": "registry:block",
+      "title": "Error State: Editorial Photo Split",
+      "description": "A 404 message with a status badge, two ways out and a note beside a photo; pass your own photo.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-editorial-photo-split/ErrorStateEditorialPhotoSplit.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-editorial-photo-split.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-full-bleed-photo",
+      "type": "registry:block",
+      "title": "Error State: Full-Bleed Photo",
+      "description": "A centred 404 message over a full-width photo and a dark scrim; pass your own photo.",
+      "dependencies": [],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-full-bleed-photo/ErrorStateFullBleedPhoto.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-full-bleed-photo.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-colour-field-scatter",
+      "type": "registry:block",
+      "title": "Error State: Colour Field Scatter",
+      "description": "The error code's digits scattered across a destructive-coloured field, with the brand, a way home and a short message in its corners.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-colour-field-scatter/ErrorStateColourFieldScatter.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-colour-field-scatter.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-dark-spotlight",
+      "type": "registry:block",
+      "title": "Error State: Dark Spotlight",
+      "description": "The message on an inverted surface beside a glyph in two soft halo rings, painted with the inverse tokens.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-dark-spotlight/ErrorStateDarkSpotlight.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-dark-spotlight.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-ghost-watermark",
+      "type": "registry:block",
+      "title": "Error State: Ghost Watermark",
+      "description": "The error code as a faint watermark behind a centred heading, a line of help and two buttons.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-ghost-watermark/ErrorStateGhostWatermark.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-ghost-watermark.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-helpful-links-list",
+      "type": "registry:block",
+      "title": "Error State: Helpful Links List",
+      "description": "A centred 404 message over a card of popular destinations, then two ways out.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-helpful-links-list/ErrorStateHelpfulLinksList.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-helpful-links-list.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-popular-pages-grid",
+      "type": "registry:block",
+      "title": "Error State: Popular Pages Grid",
+      "description": "A 404 header over three photo cards of the pages people look for most; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-popular-pages-grid/ErrorStatePopularPagesGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-popular-pages-grid.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-error-card-panel",
+      "type": "registry:block",
+      "title": "Error State: Error Card Panel",
+      "description": "One card on a muted field with the heading, two buttons and an error ID the visitor can copy.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-error-card-panel/ErrorStateErrorCardPanel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-error-card-panel.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-illustrated-empty-state",
+      "type": "registry:block",
+      "title": "Error State: Illustrated Empty State",
+      "description": "An in-product empty state with a 404 illustration painted in your theme colours, a heading and two small buttons.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-illustrated-empty-state/ErrorStateIllustratedEmptyState.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-illustrated-empty-state.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-light-editorial",
+      "type": "registry:block",
+      "title": "Error State: Light Editorial",
+      "description": "A quiet centred page in light weights, with the code as a small label and underlined links in place of buttons.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-light-editorial/ErrorStateLightEditorial.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-light-editorial.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-layered-badge-centered",
+      "type": "registry:block",
+      "title": "Error State: Layered Badge Centered",
+      "description": "A centred message under an icon badge resting on two fanned cards, with a retry, a way back and a support line.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-layered-badge-centered/ErrorStateLayeredBadgeCentered.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-layered-badge-centered.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-server-error-500",
+      "type": "registry:block",
+      "title": "Error State: Server Error 500",
+      "description": "A 500 page with a retry, a link to the status page and a card listing each service's state.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-server-error-500/ErrorStateServerError500.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-server-error-500.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-access-denied-403",
+      "type": "registry:block",
+      "title": "Error State: Access Denied 403",
+      "description": "A 403 page with the signed-in account, a request-access row that confirms when sent, and a link to switch accounts.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-access-denied-403/ErrorStateAccessDenied403.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-access-denied-403.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-offline-state",
+      "type": "registry:block",
+      "title": "Error State: Offline State",
+      "description": "A lost-connection page with a retry, a link to work offline and a list of what still works.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-offline-state/ErrorStateOfflineState.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-offline-state.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-maintenance-mode",
+      "type": "registry:block",
+      "title": "Error State: Maintenance Mode",
+      "description": "A planned-downtime page with the return time, the upgrade's progress and a sign-up to hear when it is back.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "input",
+        "progress"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-maintenance-mode/ErrorStateMaintenanceMode.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-maintenance-mode.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-empty-search-results",
+      "type": "registry:block",
+      "title": "Error State: Empty Search Results",
+      "description": "A search that found nothing: the query in the field, an illustration, and suggested searches that run again.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "input",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-empty-search-results/ErrorStateEmptySearchResults.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-empty-search-results.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-recovery-bento",
+      "type": "registry:block",
+      "title": "Error State: Recovery Bento",
+      "description": "A start-aligned 404 header over a bento of ways forward: a search tile, the homepage and three more destinations.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-recovery-bento/ErrorStateRecoveryBento.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-recovery-bento.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-sitemap-columns",
+      "type": "registry:block",
+      "title": "Error State: Sitemap Columns",
+      "description": "The error code beside two ways out, a hairline, then the whole site in four columns of links.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-sitemap-columns/ErrorStateSitemapColumns.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-sitemap-columns.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-terminal-console",
+      "type": "registry:block",
+      "title": "Error State: Terminal Console",
+      "description": "A terminal window replays the failed request on an inverted surface, with a button that copies the request ID.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-terminal-console/ErrorStateTerminalConsole.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-terminal-console.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-photo-collage-scatter",
+      "type": "registry:block",
+      "title": "Error State: Photo Collage Scatter",
+      "description": "A centred 404 message among five scattered, tilted photo prints; pass your own photos.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-photo-collage-scatter/ErrorStatePhotoCollageScatter.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-photo-collage-scatter.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-support-escalation-band",
+      "type": "registry:block",
+      "title": "Error State: Support Escalation Band",
+      "description": "A card that hands the visitor to the support team, with their avatars, a live chat and email buttons and a link home.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-support-escalation-band/ErrorStateSupportEscalationBand.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-support-escalation-band.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-split-colour-panel",
+      "type": "registry:block",
+      "title": "Error State: Split Colour Panel",
+      "description": "An inverted panel holding the error code beside the message, a short list of reassurances and two ways out.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-split-colour-panel/ErrorStateSplitColourPanel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-split-colour-panel.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-marquee-404-band",
+      "type": "registry:block",
+      "title": "Error State: Marquee 404 Band",
+      "description": "A centred message between two inverted tickers that scroll in opposite directions and stop under reduced motion.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-marquee-404-band/ErrorStateMarquee404Band.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-marquee-404-band.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-broken-trail-breadcrumb",
+      "type": "registry:block",
+      "title": "Error State: Broken Trail Breadcrumb",
+      "description": "The page trail that led here, a rule, and a centred message with two ways back up the trail.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "breadcrumb",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-broken-trail-breadcrumb/ErrorStateBrokenTrailBreadcrumb.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-broken-trail-breadcrumb.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
+      ]
+    },
+    {
+      "name": "error-state-countdown-redirect",
+      "type": "registry:block",
+      "title": "Error State: Countdown Redirect",
+      "description": "A card that counts down to the homepage with a filling bar, and lets the visitor cancel or leave at once.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "progress"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/error-state-countdown-redirect/ErrorStateCountdownRedirect.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/error-state-countdown-redirect.tsx"
+        }
+      ],
+      "categories": [
+        "error-state",
+        "feedback"
       ]
     }
   ]

@@ -176,7 +176,7 @@ export function FaqSoftFilledRows({
               className="inline-flex items-center gap-1 rounded-sm font-medium text-primary underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               {contactLabel ?? copy.contactLabel}
-              <ChevronRightIcon aria-hidden="true" strokeWidth={1.5} className="size-3.5 [&:dir(rtl)]:-scale-x-100" />
+              <ChevronRightIcon size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-3.5 [&:dir(rtl)]:-scale-x-100" />
             </a>
           </p>
         </header>
