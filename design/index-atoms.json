@@ -57,7 +57,7 @@
       "withArDoc": 40,
       "withRtl": 152,
       "withDescription": 5,
-      "mappedToCode": 26,
+      "mappedToCode": 27,
       "docFrames": 98
     },
     "legend": {
@@ -98,7 +98,7 @@
       }
     },
     "siblingIndexes": {
-      "blocks": "design/index-blocks.json — not built yet"
+      "blocks": "design/index-blocks.json — built by design/scripts/build-blocks-index.mjs"
     },
     "note": "Node ids are the only stable join key: page order, page names and component names all drift, and three pages were deleted mid-session while this was being read."
   },
@@ -108,6 +108,34 @@
     "border-beam",
     "card",
     "empty-state",
+    "error-state-access-denied-403",
+    "error-state-broken-trail-breadcrumb",
+    "error-state-centered-minimal",
+    "error-state-colour-field-scatter",
+    "error-state-countdown-redirect",
+    "error-state-dark-spotlight",
+    "error-state-display-numeral-split",
+    "error-state-editorial-photo-split",
+    "error-state-empty-search-results",
+    "error-state-error-card-panel",
+    "error-state-full-bleed-photo",
+    "error-state-ghost-watermark",
+    "error-state-helpful-links-list",
+    "error-state-illustrated-empty-state",
+    "error-state-layered-badge-centered",
+    "error-state-light-editorial",
+    "error-state-maintenance-mode",
+    "error-state-marquee-404-band",
+    "error-state-offline-state",
+    "error-state-photo-collage-scatter",
+    "error-state-popular-pages-grid",
+    "error-state-recovery-bento",
+    "error-state-search-recovery",
+    "error-state-server-error-500",
+    "error-state-sitemap-columns",
+    "error-state-split-colour-panel",
+    "error-state-support-escalation-band",
+    "error-state-terminal-console",
     "faq-accent-active-card",
     "faq-category-chip-grid",
     "faq-category-columns",
@@ -237,8 +265,8 @@
     },
     {
       "id": "3680:33667",
-      "name": "✦  🟢 Y | Modal ✅",
-      "display": "Modal",
+      "name": "✦  🟢 Y | Dialog ✅",
+      "display": "Dialog",
       "status": "🟢",
       "tail": "✅",
       "initials": "Y",
@@ -1464,14 +1492,14 @@
       ]
     },
     "38975:3887": {
-      "name": "Modal",
+      "name": "Dialog",
       "node": "COMPONENT_SET",
       "kind": "atom",
       "role": "primary",
       "page": {
         "id": "3680:33667",
-        "name": "✦  🟢 Y | Modal ✅",
-        "display": "Modal",
+        "name": "✦  🟢 Y | Dialog ✅",
+        "display": "Dialog",
         "status": "🟢",
         "tail": "✅",
         "initials": "Y"
@@ -1497,17 +1525,17 @@
       "docs": {
         "en": {
           "id": "38975:2941",
-          "name": "Modal  — Fasla Component Documentation",
+          "name": "Dialog — Fasla Component Documentation",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=38975-2941"
         },
         "ar": {
           "id": "39860:3836",
-          "name": "Modal — Fasla Component Documentation (AR)",
+          "name": "Dialog — Fasla Component Documentation (AR)",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39860-3836"
         },
         "duplicates": []
       },
-      "code": null,
+      "code": "dialog",
       "hasDescription": false,
       "flags": [
         "no-description"
@@ -1520,8 +1548,8 @@
       "role": "part",
       "page": {
         "id": "3680:33667",
-        "name": "✦  🟢 Y | Modal ✅",
-        "display": "Modal",
+        "name": "✦  🟢 Y | Dialog ✅",
+        "display": "Dialog",
         "status": "🟢",
         "tail": "✅",
         "initials": "Y"
@@ -1560,14 +1588,14 @@
       ]
     },
     "38975:3913": {
-      "name": "Modal Header",
+      "name": "Dialog Header",
       "node": "COMPONENT_SET",
       "kind": "atom",
       "role": "part",
       "page": {
         "id": "3680:33667",
-        "name": "✦  🟢 Y | Modal ✅",
-        "display": "Modal",
+        "name": "✦  🟢 Y | Dialog ✅",
+        "display": "Dialog",
         "status": "🟢",
         "tail": "✅",
         "initials": "Y"

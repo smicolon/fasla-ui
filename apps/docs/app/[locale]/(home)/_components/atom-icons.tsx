@@ -94,7 +94,7 @@ const GLYPHS: Record<string, React.ReactNode> = {
       <rect x="6" y="5" width="12" height="12" rx="2" /><path d="M3 7v8M21 7v8" /><path d="M10 20.5h.01M12 20.5h.01M14 20.5h.01" />
     </>
   ),
-  "Modal": (
+  "Dialog": (
     <>
       <rect x="3" y="3" width="18" height="18" rx="2" opacity=".4" /><rect x="6" y="7" width="12" height="10" rx="2" />
     </>

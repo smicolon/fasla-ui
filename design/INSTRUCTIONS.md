@@ -293,7 +293,7 @@ not roll into the next pass, even when she would obviously want it.
   collection names that mode `🖥️ Web`. A mode and a variant value are different things. Closed.
 - **RTL keeps the same photos as LTR**, including photos with English UI baked into them.
 - **Scrims are one flat token-bound fill**, not a gradient.
-- The **Lightbox Viewer is bespoke**, not the Modal component — a lightbox is a different pattern.
+- The **Lightbox Viewer is bespoke**, not the Dialog component — a lightbox is a different pattern.
 - The **Error State family deliberately covers sibling states** (500, 403, offline, maintenance, empty
   search), because the section is named "Error States Documentation".
 - **Billing/Auth pages are built at marketing 1440 geometry** even though the content is product UI, so
