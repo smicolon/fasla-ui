@@ -133,6 +133,38 @@ describe("DatePicker — calendar", () => {
     expect(slot("calendar")).not.toHaveClass("bg-background", "shadow")
   })
 
+  it("focuses the chosen day without scrolling the page", async () => {
+    const focus = vi.spyOn(HTMLElement.prototype, "focus")
+    render(<Picker defaultValue={DAY} />)
+    await act(async () => {
+      fireEvent.pointerDown(trigger(), { pointerType: "mouse" })
+      fireEvent.mouseDown(trigger())
+      fireEvent.click(trigger())
+      await new Promise((resolve) => requestAnimationFrame(() => resolve(null)))
+    })
+    expect(document.activeElement).toBe(day("2026-06-06"))
+    const onDay = focus.mock.calls.filter((_, i) => (focus.mock.instances[i] as unknown) === day("2026-06-06"))
+    expect(onDay.length).toBeGreaterThan(0)
+    expect(onDay.every(([options]) => (options as FocusOptions | undefined)?.preventScroll === true)).toBe(true)
+    focus.mockRestore()
+  })
+
+  it("leaves focus alone when it opens without the user, with defaultOpen", async () => {
+    render(
+      <>
+        <button type="button">Elsewhere</button>
+        <Picker defaultOpen defaultValue={DAY} />
+      </>
+    )
+    const elsewhere = screen.getByRole("button", { name: "Elsewhere" })
+    elsewhere.focus()
+    await act(async () => {
+      await new Promise((resolve) => requestAnimationFrame(() => resolve(null)))
+    })
+    expect(slot("calendar")).not.toBeNull()
+    expect(document.activeElement).toBe(elsewhere)
+  })
+
   it("chooses a day and closes", async () => {
     const onValueChange = vi.fn()
     render(<Picker defaultValue={DAY} onValueChange={onValueChange} />)

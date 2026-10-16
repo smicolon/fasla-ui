@@ -367,11 +367,23 @@ const DatePicker = React.forwardRef<HTMLButtonElement, DatePickerProps>(
                   ref={popupRef}
                   data-slot="date-picker-content"
                   aria-labelledby={nameSource}
-                  // Focus the chosen day, or today: the day the grid's
-                  // arrow keys start from.
-                  initialFocus={() =>
-                    popupRef.current?.querySelector<HTMLElement>('[data-slot="calendar-day"][tabindex="0"]') ?? true
-                  }
+                  initialFocus={(openType) => {
+                    // Opened by `defaultOpen` or a controlled `open`, not by
+                    // the user: focus stays where it is.
+                    if (openType === "") return false
+                    // On touch, Base UI's own choice: the popup, so no
+                    // virtual keyboard opens.
+                    if (openType === "touch") return popupRef.current
+                    // Otherwise the chosen day, or today: the day the grid's
+                    // arrow keys start from. Focused here, without scrolling:
+                    // Base UI focuses a returned element with scrolling on,
+                    // and before the calendar is placed it sits at the end of
+                    // the page, so the page would scroll to the bottom.
+                    const day = popupRef.current?.querySelector<HTMLElement>('[data-slot="calendar-day"][tabindex="0"]')
+                    if (!day) return true
+                    day.focus({ preventScroll: true })
+                    return false
+                  }}
                   className={cn(
                     // Never wider than the window: a calendar of several months wraps instead.
                     "max-w-[var(--available-width)] [outline:none]",

@@ -110,7 +110,7 @@ function TimeSlots() {
   )
 }
 
-/** Figma's "With labels": two rows of two Ghost Buttons over the calendar. Today is the 6th here, as in Figma. */
+/** Figma's "With labels": one row of Ghost Buttons over the calendar, centred under them. Today is the 6th here, as in Figma. */
 function Presets() {
   const s = useTranslations("docs.calendar")
   const today = day(5, 6)
@@ -127,16 +127,14 @@ function Presets() {
     setMonth(new Date(date.getFullYear(), date.getMonth(), 1))
   }
   return (
-    <div className="flex w-fit flex-col gap-6 rounded-[var(--radius-md)] bg-background p-3 shadow">
-      <div className="flex flex-col gap-1">
-        {[0, 2].map((first) => (
-          <div key={first} className="flex gap-1">
-            {presets.slice(first, first + 2).map((preset) => (
-              <Button key={preset.label} variant="ghost" size="xs" onClick={() => choose(preset.date)}>
-                {preset.label}
-              </Button>
-            ))}
-          </div>
+    // The card is as wide as the preset row, and the calendar is centred under it.
+    <div className="flex w-fit flex-col items-center gap-6 rounded-[var(--radius-md)] bg-background p-3 shadow">
+      {/* One row, 4px apart. It never wraps: the card widens instead. */}
+      <div className="flex gap-1">
+        {presets.map((preset) => (
+          <Button key={preset.label} variant="ghost" size="xs" onClick={() => choose(preset.date)}>
+            {preset.label}
+          </Button>
         ))}
       </div>
       <Calendar
@@ -271,7 +269,16 @@ export default function CalendarPage() {
         <h2 className="text-2xl font-semibold">{s("presets.title")}</h2>
         <p className="text-muted-foreground">{s.rich("presets.body", rich)}</p>
         <ComponentPreview>
-          <Presets />
+          {/* The preset row never wraps, so on the narrowest phones the card
+              is wider than the preview: centred when it fits, it scrolls
+              sideways inside the box when it does not. The frame reaches
+              into the preview's 24px padding, so it scrolls only when the
+              card is wider than the box itself. */}
+          <div className="-mx-6 w-[calc(100%+3rem)] overflow-x-auto">
+            <div className="mx-auto w-max p-1">
+              <Presets />
+            </div>
+          </div>
         </ComponentPreview>
       </section>
 
@@ -413,8 +420,8 @@ export function DayWithPresets() {
     { label: "${s("presets.lastMonth")}", date: shift(today, 0, -1) },
   ]
   return (
-    <div className="flex w-fit flex-col gap-6 rounded-md bg-background p-3 shadow">
-      <div className="flex max-w-56 flex-wrap gap-1">
+    <div className="flex w-fit flex-col items-center gap-6 rounded-md bg-background p-3 shadow">
+      <div className="flex gap-1">
         {presets.map((preset) => (
           <Button
             key={preset.label}

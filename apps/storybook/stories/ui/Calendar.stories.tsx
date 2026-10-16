@@ -275,8 +275,8 @@ export const TimeLabels: Story = {
 }
 
 /**
- * Figma's "With labels": preset days as Ghost Buttons (`xs`) over the
- * calendar. Today is the 6th here, as in Figma; a chosen today keeps a dot
+ * Figma's "With labels": preset days as Ghost Buttons (`xs`) in one row over
+ * the calendar, which is centred under them. Today is the 6th here, as in Figma; a chosen today keeps a dot
  * under its number. A composition, not a prop.
  */
 function Presets({ rtl }: { rtl: boolean }) {
@@ -295,17 +295,14 @@ function Presets({ rtl }: { rtl: boolean }) {
     new Date(2026, 4, 6),
   ]
   return (
-    <div className="flex w-fit flex-col gap-6 rounded-[var(--radius-md)] bg-background p-3 shadow">
-      {/* Figma's two rows of two, 4px apart. */}
-      <div className="flex flex-col gap-1">
-        {[0, 2].map((first) => (
-          <div key={first} className="flex gap-1">
-            {c.presets.slice(first, first + 2).map((label, i) => (
-              <Button key={label} variant="ghost" size="xs" onClick={() => choose(presets[first + i]!)}>
-                {label}
-              </Button>
-            ))}
-          </div>
+    // The card is as wide as the preset row, and the calendar is centred under it.
+    <div className="flex w-fit flex-col items-center gap-6 rounded-[var(--radius-md)] bg-background p-3 shadow">
+      {/* Figma's one row, 4px apart. It never wraps: the card widens instead. */}
+      <div className="flex gap-1">
+        {c.presets.map((label, i) => (
+          <Button key={label} variant="ghost" size="xs" onClick={() => choose(presets[i]!)}>
+            {label}
+          </Button>
         ))}
       </div>
       <Calendar

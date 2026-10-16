@@ -161,9 +161,11 @@ function CalendarDay({
 function CalendarDayButton({ day, modifiers, className, ...props }: DayButtonProps) {
   const { radius, multipleMonths } = React.useContext(CalendarContext)
   const ref = React.useRef<HTMLButtonElement>(null)
-  // react-day-picker's own DayButton moves focus here as the grid's focus moves.
+  // react-day-picker's own DayButton moves focus here as the grid's focus
+  // moves. A day that already has focus is left alone: focusing it again would
+  // only risk scrolling the page.
   React.useEffect(() => {
-    if (modifiers.focused) ref.current?.focus()
+    if (modifiers.focused && ref.current && document.activeElement !== ref.current) ref.current.focus()
   }, [modifiers.focused])
 
   const { start, middle, end, chosen } = drawnSelection(modifiers, multipleMonths)
