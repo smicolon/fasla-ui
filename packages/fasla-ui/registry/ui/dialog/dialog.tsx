@@ -118,8 +118,8 @@ const PINNED_GAP = 16
  * against that area's edges, so a field reached with Shift+Tab would stop
  * behind the header. Scroll padding as tall as each one, and the 16px it
  * keeps clear, moves those edges in. It measures them while the dialog is
- * open and again whenever they change size (a title that wraps, a locale
- * switch) or are added or removed.
+ * open and again whenever they change size (a description shown, a locale
+ * switch to Cairo's taller lines) or are added or removed.
  */
 function PinnedInsets({ scrollRef }: { scrollRef: React.RefObject<HTMLDivElement | null> }) {
   useIsomorphicLayoutEffect(() => {
@@ -201,15 +201,13 @@ const DialogClose = React.forwardRef<HTMLButtonElement, DialogCloseProps>((props
 DialogClose.displayName = "DialogClose"
 
 /*
- * Motion, from the presets in src/motion/presets.ts. The dialog takes
- * `modalScale`: it fades in from 98% over `base` (180ms) on `emphasized`
- * easing, and out the same way. The overlay takes `fadeIn`: `base` on
- * `standard`. With reduced motion nothing moves; both fade over `fast`
- * (120ms), as the presets' reduced form does.
+ * Motion, as Alert Dialog's: 150ms on Tailwind's default easing. The dialog
+ * fades in as it grows from 98%, and out the same way; the overlay fades with
+ * it. With reduced motion the dialog does not grow, it only fades.
  */
 const OVERLAY = cn(
   "fixed inset-0 z-50 bg-backdrop-overlay",
-  "transition-opacity duration-[180ms] ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:duration-[120ms]",
+  "transition-opacity duration-150",
   "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0"
 )
 
@@ -219,18 +217,18 @@ const OVERLAY = cn(
  * `shadow/lg` (Tailwind 3's `shadow-lg`) and no border, except in forced
  * colours, where the shadow is dropped and a system border marks the edge.
  *
- * Centred in the window with a 16px gutter on a phone, as tall as its
- * content up to the window less that gutter. Past that, only what sits
- * between the header and the footer scrolls.
+ * Centred in the window with a 16px gutter on a phone. Figma's height for
+ * every size, 634px, whatever the content: the footer stays at the bottom
+ * and what sits between it and the header scrolls. On a window shorter than
+ * that, it keeps the same 16px from the top and the bottom.
  */
 const CONTENT = cn(
-  "fixed inset-x-4 top-1/2 z-50 mx-auto flex max-h-[calc(100dvh-2rem)] -translate-y-1/2 flex-col overflow-hidden",
+  "fixed inset-x-4 top-1/2 z-50 mx-auto flex h-[39.625rem] max-h-[calc(100dvh-2rem)] -translate-y-1/2 flex-col overflow-hidden",
   "rounded-[var(--radius-md)] bg-popover text-popover-foreground shadow-lg [outline:none]",
   "forced-colors:border forced-colors:border-[CanvasText]",
   // `transform` scales in Tailwind 3, `scale` in Tailwind 4.
-  "motion-safe:transition-[opacity,transform,scale] motion-safe:duration-[180ms] motion-safe:ease-[cubic-bezier(0.2,0.8,0.2,1)]",
+  "transition-[opacity,transform,scale] duration-150 motion-reduce:transition-opacity",
   "motion-safe:data-[starting-style]:scale-[0.98] motion-safe:data-[ending-style]:scale-[0.98]",
-  "motion-reduce:transition-opacity motion-reduce:duration-[120ms]",
   "data-[starting-style]:opacity-0 data-[ending-style]:opacity-0"
 )
 
@@ -311,22 +309,16 @@ const DialogContent = React.forwardRef<HTMLDivElement, DialogContentProps>(
             </div>
             <PinnedInsets scrollRef={scrollRef} />
             {showCloseButton && (
-              // A cell one title line tall (28px in Geist, 32 in Cairo: `1lh`
-              // of the same `text-lg`), 16px below the top, with the 26px Icon
-              // Button centred in it, so it sits on the middle of the title's
-              // first line in either script. Its 16px × ends 16px from the
-              // edge, where Figma draws it: the button's 5px of padding hangs
-              // past the content edge. Above the pinned header, and last in
-              // the DOM, so focus reaches the content first.
-              <div
-                data-slot="dialog-close-cell"
-                className="absolute end-4 top-4 z-[2] flex h-[1lh] items-center text-lg"
-              >
+              // A cell as tall as the title's row (Figma's 23px), 16px below the
+              // top, with the 26px Icon Button centred on it, so it sits on the
+              // title's line in either script. Its edge is flush with the
+              // content's, 16px in, as Alert's close button is. Above the
+              // pinned header, and last in the DOM, so focus reaches the
+              // content first.
+              <div data-slot="dialog-close-cell" className="absolute end-4 top-4 z-[2] flex h-[1.4375rem] items-center">
                 <DialogPrimitive.Close
                   data-slot="dialog-close-button"
-                  render={
-                    <Button variant="ghost" tone="secondary" size="icon-xs" aria-label={closeLabel} className="-me-[5px]" />
-                  }
+                  render={<Button variant="ghost" tone="secondary" size="icon-xs" aria-label={closeLabel} />}
                 >
                   <XIcon aria-hidden="true" strokeWidth={1.5} />
                   {!closeLabel && (
@@ -359,13 +351,16 @@ export interface DialogHeaderProps extends React.HTMLAttributes<HTMLDivElement> 
 }
 
 /**
- * Figma's Dialog Header: the title over the description, 4px apart, with a
- * 1px `border` under them and 16px of padding above it. It stays at the top
- * while the content under it scrolls, and the line marks where it goes under.
+ * Figma's Dialog Header: the title's 23px row over the description, 4px
+ * apart, 16px of padding under them and a 1px `border` line drawn inside that
+ * padding, as Figma's inside stroke is: a title-only header is 39px tall. It
+ * stays at the top while the content under it scrolls, and the line marks
+ * where it goes under.
  *
- * With `onBack` it is Figma's Back type: a 16px chevron before the title,
- * centred on its first line and 4px from it, and the description lines up
- * with the title. The chevron points to the start, so it mirrors in RTL.
+ * With `onBack` it is Figma's Back type: the 26px Icon Button at the content
+ * edge, centred on the title's row, and the title 4px after it. The
+ * description keeps Figma's 20px start padding. The chevron points to the
+ * start, so it mirrors in RTL.
  */
 const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
   ({ onBack, backLabel, className, children, ...props }, ref) => {
@@ -376,19 +371,24 @@ const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
         data-slot="dialog-header"
         data-type={back ? "back" : "default"}
         className={cn(
-          "sticky -top-4 z-[1] -mt-4 grid gap-y-1 border-b border-border bg-popover pb-4 pt-4 text-start",
+          "sticky -top-4 z-[1] -mt-4 grid gap-y-1 bg-popover pb-4 pt-4 text-start",
+          "after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-px after:bg-border forced-colors:after:bg-[CanvasText]",
           back
-            ? "grid-cols-[auto_minmax(0,1fr)] gap-x-1 [&>:not([data-slot=dialog-back-cell])]:col-start-2"
+            ? cn(
+                "grid-cols-[1.625rem_minmax(0,1fr)] gap-x-1",
+                // The two rules match different children, so neither overrides the other.
+                "[&>:not([data-slot=dialog-back-cell],[data-slot=dialog-description])]:col-start-2",
+                "[&>[data-slot=dialog-description]]:col-span-full [&>[data-slot=dialog-description]]:ps-5"
+              )
             : "grid-cols-[minmax(0,1fr)]",
           className
         )}
         {...props}
       >
         {back && (
-          // One title line tall, like the close cell, and 16px wide: the 26px
-          // button's 5px of padding hangs past it on both sides, so its
-          // chevron sits at the content edge and 4px from the title.
-          <div data-slot="dialog-back-cell" className="col-start-1 row-start-1 flex h-[1lh] w-4 items-center justify-center text-lg">
+          // As tall as the title's row, like the close cell, with the 26px
+          // button centred on it and flush with the content edge.
+          <div data-slot="dialog-back-cell" className="col-start-1 row-start-1 flex h-[1.4375rem] items-center">
             <Button
               type="button"
               data-slot="dialog-back-button"
@@ -396,7 +396,6 @@ const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(
               tone="secondary"
               size="icon-xs"
               aria-label={backLabel}
-              className="-mx-[5px]"
               onClick={onBack}
             >
               <ChevronLeftIcon aria-hidden="true" strokeWidth={1.5} className="[&:dir(rtl)]:-scale-x-100" />
@@ -428,9 +427,10 @@ export interface DialogFooterProps extends React.HTMLAttributes<HTMLDivElement> 
 }
 
 /**
- * Figma's Footer Actions: a 1px `border` above the actions and 16px of
- * padding under it. It stays at the bottom while the content above it
- * scrolls.
+ * Figma's Footer Actions: 16px of padding above the actions, with a 1px
+ * `border` line drawn inside it, as Figma's inside stroke is. 8px
+ * (`spacing-sm`) between actions, a third one included. It stays at the
+ * bottom while the content above it scrolls.
  *
  * Plain rows in DOM order, so a right-to-left page mirrors them.
  */
@@ -447,7 +447,8 @@ const DialogFooter = React.forwardRef<HTMLDivElement, DialogFooterProps>(
         data-slot="dialog-footer"
         data-layout={layout}
         className={cn(
-          "sticky -bottom-4 z-[1] -mb-4 mt-auto flex gap-2 border-t border-border bg-popover pb-4 pt-4",
+          "sticky -bottom-4 z-[1] -mb-4 mt-auto flex gap-2 bg-popover pb-4 pt-4",
+          "before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:h-px before:bg-border forced-colors:before:bg-[CanvasText]",
           layout === "stacked"
             ? "flex-col [&>*]:w-full"
             : // A third action goes to the start; one or two stay at the end.
@@ -472,8 +473,11 @@ export type DialogTitleProps = Omit<React.ComponentPropsWithoutRef<typeof Dialog
 
 /**
  * What the dialog is for. Names the dialog for assistive tech. LG Semi Bold
- * in `foreground`; with the close button showing, it keeps 32px clear of the
- * end for it (16px gap, 16px icon).
+ * in `foreground`, on one line cut with an ellipsis, as in Figma. Its row is
+ * Figma's 23px: the line (28px in Geist, 32 in Cairo) keeps its height, so
+ * no glyph is clipped, and negative margins give back the difference. With
+ * the close button showing, it keeps 42px clear of the end for it (16px gap,
+ * 26px button).
  */
 const DialogTitle = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(({ className, ...props }, ref) => {
   const { close } = React.useContext(LookContext)
@@ -481,7 +485,11 @@ const DialogTitle = React.forwardRef<HTMLHeadingElement, DialogTitleProps>(({ cl
     <DialogPrimitive.Title
       ref={ref}
       data-slot="dialog-title"
-      className={cn("text-lg font-semibold text-foreground [overflow-wrap:anywhere]", close && "pe-8", className)}
+      className={cn(
+        "my-[calc((1.4375rem_-_1lh)/2)] truncate text-lg font-semibold text-foreground",
+        close && "pe-[2.625rem]",
+        className
+      )}
       {...props}
     />
   )
@@ -497,14 +505,15 @@ export type DialogDescriptionProps = Omit<
 
 /**
  * A line on what to do in the dialog. Describes the dialog for assistive
- * tech. SM Regular in `foreground`, with 32px clear at the end, as in Figma.
+ * tech. SM Regular in `foreground`, on one line cut with an ellipsis, with
+ * 32px clear at the end, as in Figma.
  */
 const DialogDescription = React.forwardRef<HTMLParagraphElement, DialogDescriptionProps>(
   ({ className, ...props }, ref) => (
     <DialogPrimitive.Description
       ref={ref}
       data-slot="dialog-description"
-      className={cn("pe-8 text-sm text-foreground [overflow-wrap:anywhere]", className)}
+      className={cn("truncate pe-8 text-sm text-foreground", className)}
       {...props}
     />
   )

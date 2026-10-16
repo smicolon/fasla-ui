@@ -1597,12 +1597,12 @@
         "agree": "I agree to the privacy policy and terms"
       },
       "size": {
-        "body": "<code>size</code> on <code>DialogContent</code> sets the width: <code>lg</code>, the default, is 512px, <code>xl</code> is 672px and <code>2xl</code> is 1148px. On a narrower screen each one keeps 16px from both edges. Choose by content: <code>lg</code> for a short form, <code>2xl</code> for a table or an editor. Press a button to open that size.",
+        "body": "<code>size</code> on <code>DialogContent</code> sets the width: <code>lg</code>, the default, is 512px, <code>xl</code> is 672px and <code>2xl</code> is 1148px. Every size is 634px tall, whatever its content. On a smaller screen it keeps 16px from every edge. Choose by content: <code>lg</code> for a short form, <code>2xl</code> for a table or an editor. Press a button to open that size.",
         "open": "Open {size}"
       },
       "header": {
         "title": "Header",
-        "body": "<code>DialogHeader</code> holds the title and an optional description 4px under it, with a line below them. The close button sits at the end of the title's line; <code>showCloseButton</code> on <code>DialogContent</code> turns it off. For a step in a flow, pass <code>onBack</code> to <code>DialogHeader</code>: a back button sits before the title, and the description lines up with the title. Its arrow points to the start of the line, so it turns round on an Arabic page.",
+        "body": "<code>DialogHeader</code> holds the title and an optional description 4px under it, with a line below them. Each stays on one line and ends with an ellipsis when it runs longer, so keep both short. The close button sits at the end of the title's line; <code>showCloseButton</code> on <code>DialogContent</code> turns it off. For a step in a flow, pass <code>onBack</code> to <code>DialogHeader</code>: a back button sits before the title. Its arrow points to the start of the line, so it turns round on an Arabic page.",
         "step": {
           "title": "Choose a workspace",
           "description": "Step 2 of 3. Pick where the new project lives. You can move it later."
@@ -1639,7 +1639,7 @@
       },
       "long": {
         "title": "Long content",
-        "body": "When the dialog is taller than the window, the header and the footer stay where they are and only what sits between them scrolls. The box below stands in for a short window: scroll inside the dialog to read on. A field reached with Tab scrolls into view clear of both.",
+        "body": "The dialog is 634px tall whatever its content. When the content is taller, the header and the footer stay where they are and only what sits between them scrolls: scroll inside the dialog below to read on. On a shorter screen the dialog keeps 16px from the top and the bottom and scrolls the same way. A field reached with Tab scrolls into view clear of the header and the footer.",
         "dialogTitle": "Terms of service",
         "description": "Read the terms before you accept them. They take effect today.",
         "accept": "Accept",
@@ -1649,7 +1649,12 @@
           "p2": "You own everything you upload. We store it to show it to you and to the people you share it with, and we never sell it or use it to train models without asking first.",
           "p3": "You can export your files at any time from the workspace settings. If you close your account, we keep a copy for thirty days, so you can change your mind, and then delete it for good.",
           "p4": "We may change these terms when the product changes. We'll tell you by email at least thirty days before a change takes effect, and you can close your account before then if you don't agree.",
-          "p5": "Billing renews at the start of each cycle. A plan you cancel stays active until the end of the cycle you have already paid for."
+          "p5": "Billing renews at the start of each cycle. A plan you cancel stays active until the end of the cycle you have already paid for.",
+          "p6": "Keep your password to yourself and turn on two-step sign-in. You are responsible for what happens under your account until you tell us it has been compromised.",
+          "p7": "These terms are governed by the laws of the country where your organisation is registered. If any part of them can't be enforced, the rest still applies.",
+          "p8": "Admins can add and remove members, change roles and see every project. Members see only the projects they are invited to, and guests can comment but not edit.",
+          "p9": "We keep a log of sign-ins and changes to settings for twelve months. Admins can download it from the workspace settings at any time.",
+          "p10": "If we can't provide the service for more than a day in a month, we credit part of that month's bill to your account. You can ask for the credit within thirty days."
         }
       },
       "a11y": {

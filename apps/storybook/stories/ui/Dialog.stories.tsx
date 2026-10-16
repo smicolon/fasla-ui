@@ -53,6 +53,11 @@ type StoryArgs = DialogContentProps & {
   title?: string
   /** The description text. Empty: the sample copy, in the toolbar's language. */
   description?: string
+  /**
+   * `className` on `DialogContent`, under its own key so it can be the last
+   * row: Storybook lists a component's own props before a story's args.
+   */
+  classes?: string
 }
 
 const meta: Meta<StoryArgs> = {
@@ -110,7 +115,8 @@ const meta: Meta<StoryArgs> = {
       description: "A Ghost Button that goes to the start of the row, or under the others when stacked.",
       table: { defaultValue: { summary: "false" } },
     },
-    className: { control: "text" },
+    // Shown as the `classes` row below, so it sits last in the table.
+    className: { table: { disable: true } },
     // Behaviour and Base UI's own escape hatches: they change nothing in the
     // preview. They are on the docs page's Props table.
     closeLabel: { table: { disable: true } },
@@ -120,6 +126,12 @@ const meta: Meta<StoryArgs> = {
     children: { table: { disable: true } },
     style: { table: { disable: true } },
     id: { table: { disable: true } },
+    classes: {
+      name: "className",
+      control: "text",
+      description: "Classes for the dialog box.",
+      table: { type: { summary: "string" } },
+    },
   },
   args: {
     size: "lg",
@@ -206,6 +218,9 @@ const COPY = {
         "Billing renews at the start of each cycle. A plan you cancel stays active until the end of the cycle you have already paid for, and we don't refund part of a cycle.",
         "Keep your password to yourself and turn on two-step sign-in. You are responsible for what happens under your account until you tell us it has been compromised.",
         "These terms are governed by the laws of the country where your organisation is registered. If any part of them can't be enforced, the rest still applies.",
+        "Admins can add and remove members, change roles and see every project. Members see only the projects they are invited to, and guests can comment but not edit.",
+        "We keep a log of sign-ins and changes to settings for twelve months. Admins can download it from the workspace settings at any time.",
+        "If we can't provide the service for more than a day in a month, we credit part of that month's bill to your account. You can ask for the credit within thirty days.",
       ],
     },
   },
@@ -272,6 +287,9 @@ const COPY = {
         "يتجدّد الاشتراك في بداية كل دورة فوترة. وتبقى الخطة التي تلغيها فعّالة حتى نهاية الدورة التي دفعت ثمنها، ولا نردّ ثمن جزء من دورة.",
         "احتفظ بكلمة المرور لنفسك، وفعّل التحقق بخطوتين. وأنت مسؤول عمّا يحدث في حسابك حتى تبلغنا أنه تعرّض للاختراق.",
         "تخضع هذه الشروط لقوانين البلد المسجّلة فيه مؤسستك. وإذا تعذّر تطبيق أي جزء منها، تبقى الأجزاء الأخرى سارية.",
+        "يستطيع المشرفون إضافة الأعضاء وإزالتهم، وتغيير أدوارهم، ورؤية كل المشاريع. ولا يرى الأعضاء إلا المشاريع التي دُعوا إليها، ويستطيع الضيوف التعليق دون التعديل.",
+        "نحتفظ بسجل لعمليات تسجيل الدخول وتغييرات الإعدادات مدة اثني عشر شهرًا. ويستطيع المشرفون تنزيله من إعدادات مساحة العمل في أي وقت.",
+        "إذا تعذّر علينا تقديم الخدمة أكثر من يوم في الشهر، نُضيف إلى حسابك رصيدًا من فاتورة ذلك الشهر. ويمكنك طلب الرصيد خلال ثلاثين يومًا.",
       ],
     },
   },
@@ -508,11 +526,11 @@ const BOX: Record<NonNullable<DialogContentProps["size"]>, string> = {
 export const Default: Story = {
   parameters: { layout: "padded" },
   render: (
-    { headerType, showDescription, showFooter, actions, layout, secondaryAction, thirdAction, title, description, ...args },
+    { headerType, showDescription, showFooter, actions, layout, secondaryAction, thirdAction, title, description, classes, ...args },
     ctx
   ) => (
     <div className={["mx-auto w-full", BOX[args.size ?? "lg"]].join(" ")}>
-      <Held {...args}>
+      <Held {...args} className={classes}>
         <Sample
           c={copy(ctx)}
           back={headerType === "back"}
@@ -538,14 +556,14 @@ export const Default: Story = {
  */
 export const Interactive: Story = {
   render: (
-    { headerType, showDescription, showFooter, actions, layout, secondaryAction, thirdAction, title, description, ...args },
+    { headerType, showDescription, showFooter, actions, layout, secondaryAction, thirdAction, title, description, classes, ...args },
     ctx
   ) => {
     const c = copy(ctx)
     return (
       <Dialog>
         <DialogTrigger render={<Button variant="outline" />}>{c.trigger}</DialogTrigger>
-        <DialogContent {...args}>
+        <DialogContent {...args} className={classes}>
           <Sample
             c={c}
             back={headerType === "back"}
@@ -571,8 +589,9 @@ const SIZES = [
 ] as const
 
 /**
- * Figma's three widths: L 512px, XL 672px and 2XL 1148px. Every size has the
- * same parts, padding and gaps; only the width changes. Like a narrow window,
+ * Figma's three widths: L 512px, XL 672px and 2XL 1148px, each 634px tall.
+ * Every size has the same parts, padding and gaps; only the width changes.
+ * Like a narrow window,
  * a box narrower than 2XL's 1148px (this page, on most screens) holds it 16px
  * from each edge.
  */
@@ -615,10 +634,11 @@ const HEADER_ROWS = [
 
 /**
  * Figma's Dialog Header: Type Default and Back across the top, Description
- * and Close down the side. The back chevron sits at the start, centred on the
- * title's first line and 4px from it, and the description lines up with the
- * title. The × sits on the same line at the end. Flip the Direction toolbar
- * and both mirror; the chevron points the other way.
+ * and Close down the side. The back button sits at the content edge, 4px
+ * before the title, and the × at the other edge, both centred on the title's
+ * row. Flip the Direction toolbar and both mirror; the chevron points the
+ * other way. Held at their content's height so the headers compare side by
+ * side; the real dialog is 634px tall, as in Default.
  */
 export const HeaderTypes: Story = {
   decorators: [framed],
@@ -637,7 +657,7 @@ export const HeaderTypes: Story = {
           <React.Fragment key={label}>
             <Head>{label}</Head>
             {HEADER_TYPES.map((type) => (
-              <Held key={type} showCloseButton={close}>
+              <Held key={type} showCloseButton={close} className="h-auto">
                 <Sample c={c} back={type === "back"} {...props} />
               </Held>
             ))}
@@ -661,7 +681,8 @@ const FOOTER_ROWS = [
  * Figma's Footer Actions: Horizontal across the top; Actions, Secondary
  * Action and 3rd Action down the side. In a row the actions sit at the end,
  * 8px apart, and a third goes to the start. Stacked, each is full width with
- * the main action on top. All of them are Button md.
+ * the main action on top. All of them are Button md. Held at their content's
+ * height so the footers compare side by side; the real dialog is 634px tall.
  */
 export const FooterActions: Story = {
   decorators: [framed],
@@ -680,7 +701,7 @@ export const FooterActions: Story = {
           <React.Fragment key={label}>
             <Head>{label}</Head>
             {LAYOUTS.map((layout) => (
-              <Held key={layout}>
+              <Held key={layout} className="h-auto">
                 <Sample c={c} showDescription={false} layout={layout} {...footer} />
               </Held>
             ))}
@@ -804,10 +825,10 @@ export const Examples: Story = {
 }
 
 /**
- * Content taller than the window: the header and the footer stay where they
- * are and only what sits between them scrolls. Here the box stands in for
- * the window, 30rem tall; scroll inside the dialog to read on. Open the
- * Interactive story in a short window to see the real one.
+ * Content taller than the dialog's 634px: the header and the footer stay
+ * where they are and only what sits between them scrolls. Scroll inside the
+ * dialog to read on. On a window shorter than 634px the dialog keeps 16px
+ * from the top and the bottom, and scrolls the same way.
  */
 export const LongContent: Story = {
   parameters: { layout: "padded", controls: { disable: true } },
@@ -815,7 +836,7 @@ export const LongContent: Story = {
     const c = copy(ctx)
     return (
       <div className="mx-auto w-full max-w-[34rem]">
-        <Held scrolls box="h-[30rem]">
+        <Held scrolls box="h-[41.625rem]">
           <DialogHeader>
             <DialogTitle>{c.terms.title}</DialogTitle>
             <DialogDescription>{c.terms.description}</DialogDescription>

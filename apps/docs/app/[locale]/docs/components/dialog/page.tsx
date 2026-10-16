@@ -115,7 +115,11 @@ function Held({ children, className, scrolls = false, box, ...content }: HeldPro
   )
 }
 
-/** A preview of held dialogs, stacked one per row: two side by side would not fit its width. */
+/**
+ * A preview of held dialogs, stacked one per row: two side by side would not
+ * fit its width. The Header and Actions previews hold each dialog at its
+ * content's height, so the part they show is not lost in 634px of space.
+ */
 function HeldPreview({ children }: { children: React.ReactNode }) {
   return (
     <div className="relative isolate">
@@ -291,7 +295,7 @@ export default function DialogPage() {
         <h2 className="text-2xl font-semibold">{d("header.title")}</h2>
         <p className="text-muted-foreground">{d.rich("header.body", rich)}</p>
         <HeldPreview>
-          <Held>
+          <Held className="h-auto">
             <DialogHeader>
               <DialogTitle>{d("profile.title")}</DialogTitle>
               <DialogDescription>{d("profile.description")}</DialogDescription>
@@ -302,7 +306,7 @@ export default function DialogPage() {
               <Button>{d("profile.action")}</Button>
             </DialogFooter>
           </Held>
-          <Held>
+          <Held className="h-auto">
             <DialogHeader onBack={() => {}}>
               <DialogTitle>{d("header.step.title")}</DialogTitle>
               <DialogDescription>{d("header.step.description")}</DialogDescription>
@@ -321,7 +325,7 @@ export default function DialogPage() {
         <h2 className="text-2xl font-semibold">{d("footer.title")}</h2>
         <p className="text-muted-foreground">{d.rich("footer.body", rich)}</p>
         <HeldPreview>
-          <Held showCloseButton={false}>
+          <Held showCloseButton={false} className="h-auto">
             <DialogHeader>
               <DialogTitle>{d("footer.tour.title")}</DialogTitle>
               <DialogDescription>{d("footer.tour.description")}</DialogDescription>
@@ -339,7 +343,7 @@ export default function DialogPage() {
               </Button>
             </DialogFooter>
           </Held>
-          <Held>
+          <Held className="h-auto">
             <DialogHeader>
               <DialogTitle>{d("footer.danger.title")}</DialogTitle>
               <DialogDescription>{d("footer.danger.description")}</DialogDescription>
@@ -358,13 +362,13 @@ export default function DialogPage() {
         <h2 className="text-2xl font-semibold">{d("long.title")}</h2>
         <p className="text-muted-foreground">{d.rich("long.body", rich)}</p>
         <HeldPreview>
-          <Held scrolls box="h-[26rem]">
+          <Held scrolls box="h-[41.625rem]">
             <DialogHeader>
               <DialogTitle>{d("long.dialogTitle")}</DialogTitle>
               <DialogDescription>{d("long.description")}</DialogDescription>
             </DialogHeader>
             <div className="grid gap-3 text-sm">
-              {(["p1", "p2", "p3", "p4", "p5"] as const).map((key) => (
+              {(["p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", "p9", "p10"] as const).map((key) => (
                 <p key={key}>{d(`long.paragraphs.${key}`)}</p>
               ))}
             </div>

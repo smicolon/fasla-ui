@@ -192,11 +192,11 @@ components:
     typography: "{typography.eyebrow}"
     rounded: "{rounded.md}"
     padding: "{spacing.1.5} {spacing.2}"
-  modal:
+  dialog:
     backgroundColor: "{colors.popover}"
     textColor: "{colors.popover-foreground}"
-    rounded: "{rounded.lg}"
-    padding: "{spacing.6}"
+    rounded: "{rounded.md}"
+    padding: "{spacing.4}"
 ---
 
 # Fasla — Design System

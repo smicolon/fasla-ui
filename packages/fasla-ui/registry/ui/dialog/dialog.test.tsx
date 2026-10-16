@@ -22,10 +22,11 @@ import { Button } from "../button/button"
  * jsdom has no layout engine and runs no transitions, so nothing here proves
  * where the dialog sits, how wide it is, that the header and footer stay put
  * while the content scrolls, or that the type is Figma's. Those were measured
- * in a real browser in both directions: 512/672/1148px wide, 16px padding and
- * gaps, the 4px title gap, the close × 16px from the edge on the title's
- * line, the back chevron at the content edge 4px from the title. The visual
- * tests below assert class presence only.
+ * in a real browser in both directions: 512/672/1148px wide and 634px tall,
+ * 16px padding and gaps, a 39px title-only header, the 4px title gap, the
+ * close and back buttons flush with the content edge on the title's row, the
+ * title 4px after the back button. The visual tests below assert class
+ * presence only.
  */
 
 function Example({
@@ -222,7 +223,7 @@ describe("Dialog — Figma variants", () => {
     expect(content()).toHaveClass("max-w-[32rem]")
   })
 
-  it("draws Figma's box: popover fill, 8px radius, shadow lg, 16px padding and gaps, a 16px gutter", async () => {
+  it("draws Figma's box: 634px tall, popover fill, 8px radius, shadow lg, 16px padding and gaps, a 16px gutter", async () => {
     render(<Example />)
     await screen.findByRole("dialog")
     expect(content()).toHaveClass(
@@ -232,6 +233,7 @@ describe("Dialog — Figma variants", () => {
       "shadow-lg",
       "inset-x-4",
       "mx-auto",
+      "h-[39.625rem]",
       "max-h-[calc(100dvh-2rem)]"
     )
     expect(slot("dialog-scroll")).toHaveClass("p-4", "gap-4", "overflow-y-auto")
@@ -243,59 +245,70 @@ describe("Dialog — Figma variants", () => {
     expect(overlay()).toHaveClass("fixed", "inset-0", "bg-backdrop-overlay")
   })
 
-  it("draws the header: a border under it, 16px under the text, 4px between title and description", async () => {
+  it("draws the header: a line inside its 16px bottom padding, 4px between title and description", async () => {
     render(<Example />)
     await screen.findByRole("dialog")
     const header = slot("dialog-header")
     expect(header).toHaveAttribute("data-type", "default")
-    expect(header).toHaveClass("border-b", "border-border", "pb-4", "gap-y-1", "grid-cols-[minmax(0,1fr)]")
+    expect(header).toHaveClass("pb-4", "gap-y-1", "grid-cols-[minmax(0,1fr)]", "after:bottom-0", "after:h-px", "after:bg-border")
+    expect(header).not.toHaveClass("border-b")
     expect(header.querySelector("[data-slot=dialog-back-cell]")).toBeNull()
   })
 
-  it("sets the title LG Semi Bold and the description SM Regular, both in foreground", async () => {
+  it("sets the title LG Semi Bold and the description SM Regular, both in foreground, each on one truncated line", async () => {
     render(<Example />)
     await screen.findByRole("dialog")
-    expect(slot("dialog-title")).toHaveClass("text-lg", "font-semibold", "text-foreground")
+    expect(slot("dialog-title")).toHaveClass("text-lg", "font-semibold", "text-foreground", "truncate")
+    // A 23px row, as in Figma, whatever the script's line height.
+    expect(slot("dialog-title")).toHaveClass("my-[calc((1.4375rem_-_1lh)/2)]")
     expect(slot("dialog-title").tagName).toBe("H2")
-    expect(slot("dialog-description")).toHaveClass("text-sm", "text-foreground", "pe-8")
+    expect(slot("dialog-description")).toHaveClass("text-sm", "text-foreground", "pe-8", "truncate")
   })
 
   it("keeps the title clear of the close button, and lets it run to the edge without one", async () => {
     const { unmount } = render(<Example />)
     await screen.findByRole("dialog")
-    expect(slot("dialog-title")).toHaveClass("pe-8")
+    expect(slot("dialog-title")).toHaveClass("pe-[2.625rem]")
     unmount()
 
     render(<Example showCloseButton={false} />)
     await screen.findByRole("dialog")
-    expect(slot("dialog-title")).not.toHaveClass("pe-8")
+    expect(slot("dialog-title")).not.toHaveClass("pe-[2.625rem]")
     expect(content()!.querySelector("[data-slot=dialog-close-button]")).toBeNull()
   })
 
-  it("draws the × as Figma's Icon Button: Ghost Secondary xs, 16px icon, on the title's line, last in the DOM", async () => {
+  it("draws the × as Figma's Icon Button: Ghost Secondary xs, flush with the content edge on the title's row, last in the DOM", async () => {
     render(<Example />)
     await screen.findByRole("dialog")
     const cell = slot("dialog-close-cell")
-    expect(cell).toHaveClass("absolute", "top-4", "end-4", "h-[1lh]", "text-lg", "items-center")
+    expect(cell).toHaveClass("absolute", "top-4", "end-4", "h-[1.4375rem]", "items-center")
     expect(content()!.lastElementChild).toBe(cell)
     const button = slot("dialog-close-button")
     expect(button).toHaveAttribute("data-variant", "ghost")
     expect(button).toHaveAttribute("data-tone", "secondary")
     expect(button).toHaveAttribute("data-size", "icon-xs")
+    expect(button.className).not.toMatch(/(^|\s)-m[xe]-/)
     expect(button.querySelector("svg")).toHaveClass("lucide-x")
     expect(button.querySelector("svg")).toHaveAttribute("aria-hidden", "true")
   })
 
-  it("puts the back button before the title in the Back type, and lines the description up with the title", async () => {
+  it("puts the back button before the title in the Back type, 4px apart, with the description at Figma's 20px", async () => {
     render(<Example header={{ onBack: () => {} }} />)
     await screen.findByRole("dialog")
     const header = slot("dialog-header")
     expect(header).toHaveAttribute("data-type", "back")
-    expect(header).toHaveClass("grid-cols-[auto_minmax(0,1fr)]", "gap-x-1", "[&>:not([data-slot=dialog-back-cell])]:col-start-2")
+    expect(header).toHaveClass(
+      "grid-cols-[1.625rem_minmax(0,1fr)]",
+      "gap-x-1",
+      "[&>:not([data-slot=dialog-back-cell],[data-slot=dialog-description])]:col-start-2",
+      "[&>[data-slot=dialog-description]]:col-span-full",
+      "[&>[data-slot=dialog-description]]:ps-5"
+    )
     const cell = header.firstElementChild as HTMLElement
     expect(cell).toHaveAttribute("data-slot", "dialog-back-cell")
-    expect(cell).toHaveClass("col-start-1", "row-start-1", "h-[1lh]", "w-4", "text-lg")
+    expect(cell).toHaveClass("col-start-1", "row-start-1", "h-[1.4375rem]", "items-center")
     const button = slot("dialog-back-button")
+    expect(button.className).not.toMatch(/(^|\s)-m[xs]-/)
     expect(button).toHaveAttribute("type", "button")
     expect(button).toHaveAttribute("data-variant", "ghost")
     expect(button).toHaveAttribute("data-size", "icon-xs")
@@ -308,10 +321,18 @@ describe("Dialog — Figma variants", () => {
     expect(svg).toHaveClass("lucide-chevron-left", "[&:dir(rtl)]:-scale-x-100")
   })
 
-  it("draws the footer: a border above it, 16px above the actions, 8px between them", async () => {
+  it("draws the footer: a line inside its 16px top padding, 8px between the actions", async () => {
     render(<Example />)
     await screen.findByRole("dialog")
-    expect(slot("dialog-footer")).toHaveClass("border-t", "border-border", "pt-4", "gap-2")
+    expect(slot("dialog-footer")).toHaveClass("pt-4", "gap-2", "before:top-0", "before:h-px", "before:bg-border")
+    expect(slot("dialog-footer")).not.toHaveClass("border-t")
+  })
+
+  it("fades and grows from 98% over Alert Dialog's 150ms, and only fades with reduced motion", async () => {
+    render(<Example />)
+    await screen.findByRole("dialog")
+    expect(content()).toHaveClass("duration-150", "motion-reduce:transition-opacity", "motion-safe:data-[starting-style]:scale-[0.98]")
+    expect(overlay()).toHaveClass("transition-opacity", "duration-150")
   })
 
   it("lays the actions in a row at the end by default, and sends a third one to the start", async () => {
