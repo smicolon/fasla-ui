@@ -168,15 +168,9 @@ describe("Sheet — close button", () => {
   })
 
   it("sits 16px from the top and the end, in a cell one title line tall, over the sticky header", async () => {
-    const { unmount } = render(<Example />)
+    render(<Example />)
     await screen.findByRole("dialog")
     expect(slot("sheet-close-cell")).toHaveClass("absolute", "end-4", "top-4", "z-[2]", "h-[1lh]", "text-2xl", "items-center")
-    unmount()
-
-    // Start's border is on its end edge: 15px inside it is 16px from the outer edge.
-    render(<Example side="start" />)
-    await screen.findByRole("dialog")
-    expect(slot("sheet-close-cell")).toHaveClass("end-[0.9375rem]")
   })
 
   it("comes after the content in the DOM, so focus reaches the content first", async () => {
@@ -215,17 +209,18 @@ describe("Sheet — Figma variants", () => {
   })
 
   const SIDES: { side: SheetSide; classes: string[] }[] = [
-    { side: "end", classes: ["inset-y-0", "end-0", "h-full", "w-96", "border-s"] },
-    { side: "start", classes: ["inset-y-0", "start-0", "h-full", "w-96", "border-e"] },
-    { side: "top", classes: ["inset-x-0", "top-0", "border-b"] },
-    { side: "bottom", classes: ["inset-x-0", "bottom-0", "border-t"] },
+    { side: "end", classes: ["inset-y-0", "end-0", "h-full", "w-96", "after:start-0", "after:w-px"] },
+    { side: "start", classes: ["inset-y-0", "start-0", "h-full", "w-96", "after:end-0", "after:w-px"] },
+    { side: "top", classes: ["inset-x-0", "top-0", "after:bottom-0", "after:h-px"] },
+    { side: "bottom", classes: ["inset-x-0", "bottom-0", "after:top-0", "after:h-px"] },
   ]
 
-  it.each(SIDES)("places $side with a border on the edge that faces the page", async ({ side, classes }) => {
+  it.each(SIDES)("places $side with a border line on the edge that faces the page, taking no room", async ({ side, classes }) => {
     render(<Example side={side} />)
     await screen.findByRole("dialog")
     expect(content()).toHaveAttribute("data-side", side)
     expect(content()).toHaveClass(...classes)
+    expect(content()!.className).not.toMatch(/(?:^|\s)border-[setb](?:\s|$)/)
   })
 
   it.each(["top", "bottom"] as const)("lets %s hug its content: no fixed height", async (side) => {
@@ -238,7 +233,7 @@ describe("Sheet — Figma variants", () => {
   it("draws Figma's panel: card fill, card-foreground text, shadow lg, border token, no radius", async () => {
     render(<Example />)
     await screen.findByRole("dialog")
-    expect(content()).toHaveClass("bg-card", "text-card-foreground", "shadow-lg", "border-border")
+    expect(content()).toHaveClass("bg-card", "text-card-foreground", "shadow-lg", "after:bg-border")
     expect(content()!.className).not.toMatch(/rounded/)
   })
 

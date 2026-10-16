@@ -207,11 +207,18 @@ const OVERLAY = cn(
 /**
  * The sheet itself: Figma's Sheet content. `card` fill, `card-foreground`
  * text, Figma's `shadow/lg` (Tailwind 3's `shadow-lg`), no radius, and a 1px
- * `border` on the one edge that faces the page.
+ * `border` line on the one edge that faces the page.
+ *
+ * The line is drawn over the panel's edge, not as a CSS border: Figma's
+ * stroke sits inside the frame and takes no room, so the header starts 16px
+ * from the edge whichever side the line is on. A border would push the
+ * content 1px further in on that side. In forced colours it is drawn in the
+ * system's text colour, so the panel keeps its edge without the shadow.
  */
 const CONTENT = cn(
   "fixed z-50 flex flex-col overflow-hidden bg-card text-card-foreground shadow-lg [outline:none]",
-  "border-border forced-colors:border-[CanvasText]",
+  "after:pointer-events-none after:absolute after:z-[3] after:bg-border after:content-['']",
+  "forced-colors:after:bg-[CanvasText] forced-colors:after:[forced-color-adjust:none]",
   MOTION
 )
 
@@ -221,28 +228,28 @@ const CONTENT = cn(
  * still close them. Top and Bottom are as wide as the window and as tall as
  * their content, up to the window less the same 48px.
  *
- * Every side is written with logical properties (`start-0`, `border-e`), so
+ * Every side is written with logical properties (`start-0`, `after:end-0`), so
  * Start and End swap edges on a right-to-left page. The slide is the one
  * physical value — `translate` has no logical form — so End and Start flip
  * their offset under `:dir(rtl)`, which the popup's own `dir` sets.
  */
 const SIDE: Record<SheetSide, string> = {
   end: cn(
-    "inset-y-0 end-0 h-full w-96 max-w-[calc(100%-3rem)] border-s",
+    "inset-y-0 end-0 h-full w-96 max-w-[calc(100%-3rem)] after:inset-y-0 after:start-0 after:w-px",
     "motion-safe:data-[starting-style]:translate-x-full motion-safe:data-[ending-style]:translate-x-full",
     "motion-safe:[&:dir(rtl)]:data-[starting-style]:-translate-x-full motion-safe:[&:dir(rtl)]:data-[ending-style]:-translate-x-full"
   ),
   start: cn(
-    "inset-y-0 start-0 h-full w-96 max-w-[calc(100%-3rem)] border-e",
+    "inset-y-0 start-0 h-full w-96 max-w-[calc(100%-3rem)] after:inset-y-0 after:end-0 after:w-px",
     "motion-safe:data-[starting-style]:-translate-x-full motion-safe:data-[ending-style]:-translate-x-full",
     "motion-safe:[&:dir(rtl)]:data-[starting-style]:translate-x-full motion-safe:[&:dir(rtl)]:data-[ending-style]:translate-x-full"
   ),
   top: cn(
-    "inset-x-0 top-0 max-h-[calc(100%-3rem)] border-b",
+    "inset-x-0 top-0 max-h-[calc(100%-3rem)] after:inset-x-0 after:bottom-0 after:h-px",
     "motion-safe:data-[starting-style]:-translate-y-full motion-safe:data-[ending-style]:-translate-y-full"
   ),
   bottom: cn(
-    "inset-x-0 bottom-0 max-h-[calc(100%-3rem)] border-t",
+    "inset-x-0 bottom-0 max-h-[calc(100%-3rem)] after:inset-x-0 after:top-0 after:h-px",
     "motion-safe:data-[starting-style]:translate-y-full motion-safe:data-[ending-style]:translate-y-full"
   ),
 }
@@ -321,15 +328,11 @@ const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
               // of the same `text-2xl`), 16px below the header's top, with the
               // 26px button centred in it, so the button sits on the middle of
               // the title's first line in either script. 16px from the sheet's
-              // outer end edge, as in Figma: Start has its border on that edge,
-              // so it sits 15px inside the border. Above the sticky header, and
-              // last in the DOM, so focus reaches the content first.
+              // outer end edge, as in Figma, on every side. Above the sticky
+              // header, and last in the DOM, so focus reaches the content first.
               <div
                 data-slot="sheet-close-cell"
-                className={cn(
-                  "absolute top-4 z-[2] flex h-[1lh] items-center text-2xl",
-                  side === "start" ? "end-[0.9375rem]" : "end-4"
-                )}
+                className="absolute end-4 top-4 z-[2] flex h-[1lh] items-center text-2xl"
               >
                 <DialogPrimitive.Close
                   data-slot="sheet-close-button"

@@ -1527,17 +1527,10 @@
         "open": "Shows or hides the dialog, when you control it.",
         "defaultOpen": "Shows the dialog on first render.",
         "onOpenChange": "Called when the dialog opens or closes.",
-        "onOpenChangeComplete": "Called once the dialog has finished opening or closing.",
-        "actionsRef": "A ref with <code>close()</code>, to close the dialog from code.",
-        "handle": "Connects the dialog to triggers elsewhere on the page. Create one with <code>AlertDialog.createHandle()</code> from <code>@base-ui/react/alert-dialog</code>.",
-        "triggerId": "Which trigger the dialog belongs to, when several share it and you control <code>open</code>.",
-        "defaultTriggerId": "Which trigger the dialog belongs to on first render, with <code>defaultOpen</code>.",
         "children": "The trigger and the content."
       },
       "triggerProps": {
         "render": "Renders your own element in place of the plain button, such as a Button.",
-        "handle": "The handle of a dialog elsewhere that this trigger opens.",
-        "payload": "Data handed to the dialog when this trigger opens it.",
         "disabled": "Stops this trigger opening the dialog.",
         "children": "The trigger's label.",
         "className": "Extra classes for the trigger."
@@ -1547,8 +1540,6 @@
         "destructive": "Turns the main action into the destructive Button.",
         "icon": "<code>true</code> for the alert icon, or any icon element. Either way it is 24px, in the title's colour.",
         "container": "Where the dialog renders. Defaults to <code>body</code>.",
-        "initialFocus": "The element focused when the dialog opens. Defaults to the first control.",
-        "finalFocus": "The element focused when the dialog closes. Defaults to the trigger.",
         "children": "The header, any additional content and the footer.",
         "className": "Extra classes for the dialog box."
       },
@@ -1641,17 +1632,11 @@
         "open": "Shows or hides the sheet, when you control it.",
         "defaultOpen": "Shows the sheet on first render.",
         "onOpenChange": "Called when the sheet opens or closes.",
-        "onOpenChangeComplete": "Called once the sheet has finished opening or closing.",
-        "actionsRef": "A ref with <code>close()</code>, to close the sheet from code.",
-        "handle": "Connects the sheet to triggers elsewhere on the page. Create one with <code>Dialog.createHandle()</code> from <code>@base-ui/react/dialog</code>.",
-        "triggerId": "Which trigger the sheet belongs to, when several share it and you control <code>open</code>.",
-        "defaultTriggerId": "Which trigger the sheet belongs to on first render, with <code>defaultOpen</code>.",
+        "modal": "While the sheet is open, keeps focus inside it and stops the page scrolling. Pass <code>false</code> to let focus leave the sheet and the page scroll, or <code>\"trap-focus\"</code> to keep focus inside without locking the scroll.",
         "children": "The trigger and the content."
       },
       "triggerProps": {
         "render": "Renders your own element in place of the plain button, such as a Button.",
-        "handle": "The handle of a sheet elsewhere that this trigger opens.",
-        "payload": "Data handed to the sheet when this trigger opens it.",
         "disabled": "Stops this trigger opening the sheet.",
         "children": "The trigger's label.",
         "className": "Extra classes for the trigger."
@@ -1661,8 +1646,6 @@
         "showCloseButton": "Shows the close button at the end of the header.",
         "closeLabel": "The close button's name for screen readers. Defaults to Close, or إغلاق on an Arabic page.",
         "container": "Where the sheet renders. Defaults to <code>body</code>.",
-        "initialFocus": "The element focused when the sheet opens. Defaults to the first control.",
-        "finalFocus": "The element focused when the sheet closes. Defaults to the trigger.",
         "children": "The header, the content and the footer.",
         "className": "Extra classes for the sheet's panel."
       },
