@@ -168,7 +168,7 @@ export function ErrorStateSupportEscalationBand({
               href={home.href}
               className="flex items-center justify-center gap-2 self-center rounded-sm text-xs text-muted-foreground [outline:none] hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
             >
-              <Undo2 aria-hidden="true" className="size-3.5 shrink-0 [&:dir(rtl)]:-scale-x-100" strokeWidth={1.5} />
+              <Undo2 aria-hidden="true" className="size-3.5 shrink-0 [&:dir(rtl)]:-scale-x-100" size={14} strokeWidth={1.5} absoluteStrokeWidth />
               {home.label}
             </a>
           ) : null}

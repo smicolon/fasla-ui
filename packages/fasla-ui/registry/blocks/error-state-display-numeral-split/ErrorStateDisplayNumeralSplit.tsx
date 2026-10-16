@@ -99,7 +99,7 @@ export function ErrorStateDisplayNumeralSplit({
 
   const backContent = back ? (
     <>
-      <ArrowLeft strokeWidth={1.5} aria-hidden="true" className="size-3.5 shrink-0 [&:dir(rtl)]:-scale-x-100" />
+      <ArrowLeft size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-3.5 shrink-0 [&:dir(rtl)]:-scale-x-100" />
       {back.label}
     </>
   ) : null
@@ -136,7 +136,7 @@ export function ErrorStateDisplayNumeralSplit({
                   <li key={index} className="flex">
                     <a href={link.href} className={LINK}>
                       {link.label}
-                      <ArrowUpRight strokeWidth={1.5} aria-hidden="true" className="size-3.5 shrink-0" />
+                      <ArrowUpRight size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-3.5 shrink-0" />
                     </a>
                   </li>
                 ))}

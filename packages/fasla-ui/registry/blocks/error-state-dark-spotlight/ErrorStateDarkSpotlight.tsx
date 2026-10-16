@@ -97,7 +97,7 @@ export function ErrorStateDarkSpotlight({
   const secondary = secondaryAction === undefined ? copy.secondaryAction : secondaryAction
   const glyph =
     icon === undefined ? (
-      <Telescope aria-hidden="true" strokeWidth={1.5} className="size-[62px] md:size-[84px] lg:size-28" />
+      <Telescope aria-hidden="true" size={112} strokeWidth={1.5} absoluteStrokeWidth className="size-[62px] md:size-[84px] lg:size-28" />
     ) : (
       icon
     )
@@ -139,7 +139,7 @@ export function ErrorStateDarkSpotlight({
                 className="inline-flex items-center justify-center gap-1.5 self-center rounded-sm text-sm font-medium text-foreground-inverse underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-foreground-inverse focus-visible:ring-offset-2 focus-visible:ring-offset-background-inverse md:self-auto"
               >
                 {secondary.label}
-                <ArrowUpRight aria-hidden="true" strokeWidth={1.5} className="size-3.5 shrink-0" />
+                <ArrowUpRight aria-hidden="true" size={14} strokeWidth={1.5} absoluteStrokeWidth className="size-3.5 shrink-0" />
               </a>
             ) : null}
           </div>

@@ -120,7 +120,7 @@ const COPY: Record<"en" | "ar", ErrorStateAccessDenied403Copy> = {
 
 /** An option row: a bordered card with an icon tile, two lines and a chevron. */
 const ROW =
-  "flex w-full items-center justify-between gap-3 rounded-[10px] p-4 text-start ring-1 ring-inset ring-border transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+  "flex w-full items-center justify-between gap-3 rounded-lg p-4 text-start ring-1 ring-inset ring-border transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
 
 function OptionBody({
   icon,
@@ -149,7 +149,7 @@ function OptionBody({
   )
 }
 
-const chevron = <ChevronRight strokeWidth={1.5} aria-hidden="true" className="size-4 shrink-0 text-muted-foreground [&:dir(rtl)]:-scale-x-100" />
+const chevron = <ChevronRight size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-4 shrink-0 text-muted-foreground [&:dir(rtl)]:-scale-x-100" />
 
 export interface ErrorStateAccessDenied403Props
   extends Omit<React.HTMLAttributes<HTMLElement>, "title">,
@@ -195,8 +195,8 @@ export function ErrorStateAccessDenied403({
   const request = requestAccess ?? copy.requestAccess
   const sent = requestSent ?? copy.requestSent
   const other = switchAccount === undefined ? copy.switchAccount : switchAccount
-  const glyph = icon === undefined ? <LockKeyhole strokeWidth={1.5} aria-hidden="true" className="size-7" /> : icon
-  const send = <Send strokeWidth={1.5} aria-hidden="true" className="size-4 [&:dir(rtl)]:-scale-x-100" />
+  const glyph = icon === undefined ? <LockKeyhole size={28} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-7" /> : icon
+  const send = <Send size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-4 [&:dir(rtl)]:-scale-x-100" />
 
   const ask = async () => {
     setStatus("pending")
@@ -213,7 +213,7 @@ export function ErrorStateAccessDenied403({
       <div className="mx-auto flex w-full max-w-[1248px] flex-col gap-8 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
         <div className="flex flex-col items-start gap-6 lg:w-[540px]">
           {glyph ? (
-            <div className="flex size-14 items-center justify-center rounded-[10px] bg-destructive/10 text-destructive md:size-16">
+            <div className="flex size-14 items-center justify-center rounded-lg bg-destructive/10 text-destructive md:size-16">
               {glyph}
             </div>
           ) : null}
@@ -231,7 +231,7 @@ export function ErrorStateAccessDenied403({
           ) : null}
         </div>
 
-        <div className="flex w-full shrink-0 flex-col gap-5 rounded-[14px] bg-card p-5 shadow-md ring-1 ring-inset ring-border md:p-7 lg:w-[480px]">
+        <div className="flex w-full shrink-0 flex-col gap-5 rounded-xl bg-card p-5 shadow-md ring-1 ring-inset ring-border md:p-7 lg:w-[480px]">
           <div className="flex flex-col items-start gap-3 md:flex-row md:items-center">
             <div className="flex min-w-0 items-center gap-3 md:flex-1">
               <Avatar
@@ -258,7 +258,7 @@ export function ErrorStateAccessDenied403({
               {status === "success" ? (
                 <div className={ROW}>
                   <OptionBody
-                    icon={<Check strokeWidth={1.5} aria-hidden="true" className="size-4 text-success" />}
+                    icon={<Check size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-4 text-success" />}
                     title={sent.title}
                     description={sent.description}
                   />
@@ -296,7 +296,7 @@ export function ErrorStateAccessDenied403({
               <li>
                 <a href={other.href} className={cn(ROW, "hover:bg-muted")}>
                   <OptionBody
-                    icon={<UserX strokeWidth={1.5} aria-hidden="true" className="size-4" />}
+                    icon={<UserX size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-4" />}
                     title={other.title}
                     description={other.description}
                     trailing={chevron}

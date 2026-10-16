@@ -80,7 +80,7 @@ export function ErrorStateCenteredMinimal({
   const status = code ?? copy.code
   const primary = primaryAction ?? copy.primaryAction
   const secondary = secondaryAction === undefined ? copy.secondaryAction : secondaryAction
-  const glyph = icon === undefined ? <Compass strokeWidth={1.5} aria-hidden="true" className="size-8" /> : icon
+  const glyph = icon === undefined ? <Compass size={32} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-8" /> : icon
 
   return (
     <section aria-labelledby={headingId} className={cn("bg-background p-8 md:p-16 lg:p-24", className)} {...props}>

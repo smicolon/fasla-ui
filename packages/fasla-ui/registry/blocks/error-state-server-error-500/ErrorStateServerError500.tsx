@@ -219,7 +219,7 @@ export function ErrorStateServerError500({
           </p>
           {meta ? (
             <p className="flex items-center gap-2 text-xs text-muted-foreground">
-              <Clock strokeWidth={1.5} aria-hidden="true" className="size-3.5 shrink-0" />
+              <Clock size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-3.5 shrink-0" />
               <span>{meta}</span>
             </p>
           ) : null}
@@ -227,7 +227,7 @@ export function ErrorStateServerError500({
 
         <section
           aria-labelledby={cardId}
-          className="flex w-full shrink-0 flex-col gap-2 rounded-[14px] bg-card p-5 shadow-md ring-1 ring-inset ring-border md:gap-5 md:p-7 lg:w-[460px]"
+          className="flex w-full shrink-0 flex-col gap-2 rounded-xl bg-card p-5 shadow-md ring-1 ring-inset ring-border md:gap-5 md:p-7 lg:w-[460px]"
         >
           <div className="flex items-center justify-between gap-3">
             <h2 id={cardId} className="text-base font-semibold text-foreground">

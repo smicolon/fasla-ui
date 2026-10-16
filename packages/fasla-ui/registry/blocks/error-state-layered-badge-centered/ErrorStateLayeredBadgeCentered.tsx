@@ -87,7 +87,7 @@ export function ErrorStateLayeredBadgeCentered({
   const headingId = React.useId()
   const secondary = secondaryAction === undefined ? copy.secondaryAction : secondaryAction
   const note = supportNote ?? copy.supportNote
-  const glyph = icon === undefined ? <SearchX className="size-[30px]" strokeWidth={1.5} /> : icon
+  const glyph = icon === undefined ? <SearchX className="size-[30px]" size={30} strokeWidth={1.5} absoluteStrokeWidth /> : icon
 
   return (
     <section aria-labelledby={headingId} className={cn("bg-background p-8 md:p-16 lg:p-24", className)} {...props}>
@@ -96,8 +96,8 @@ export function ErrorStateLayeredBadgeCentered({
           <div aria-hidden="true" className="flex h-24 w-40 shrink-0 items-center justify-center md:h-[120px] md:w-[200px]">
             {/* Drawn at Desktop size and scaled down on Mobile, about its centre. */}
             <div className="relative h-[120px] w-[200px] shrink-0 scale-[0.8] md:scale-100">
-              <div className="absolute start-[10.5px] top-[19px] h-[72px] w-24 -rotate-[8deg] rounded-[10px] border border-border bg-muted" />
-              <div className="absolute start-[92.5px] top-[32.3px] h-[72px] w-24 rotate-[8deg] rounded-[10px] border border-border bg-muted" />
+              <div className="absolute start-[10.5px] top-[19px] h-[72px] w-24 -rotate-[8deg] rounded-lg border border-border bg-muted" />
+              <div className="absolute start-[92.5px] top-[32.3px] h-[72px] w-24 rotate-[8deg] rounded-lg border border-border bg-muted" />
               <div className="absolute start-16 top-6 flex size-[72px] items-center justify-center rounded-full border border-border bg-card text-foreground shadow-md">
                 {glyph}
               </div>
@@ -122,7 +122,7 @@ export function ErrorStateLayeredBadgeCentered({
         </div>
         {note ? (
           <p className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
-            <Headset aria-hidden="true" strokeWidth={1.5} className="size-3.5 shrink-0" />
+            <Headset aria-hidden="true" size={14} strokeWidth={1.5} absoluteStrokeWidth className="size-3.5 shrink-0" />
             {note}
           </p>
         ) : null}

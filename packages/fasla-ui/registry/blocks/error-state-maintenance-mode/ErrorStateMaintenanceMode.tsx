@@ -159,7 +159,7 @@ export function ErrorStateMaintenanceMode({
   const small = note ?? copy.note
   const percent = Math.round(Math.min(100, Math.max(0, progress)))
   const placeholder = emailPlaceholder ?? copy.emailPlaceholder
-  const glyph = icon === undefined ? <Wrench strokeWidth={1.5} aria-hidden="true" className="size-[30px]" /> : icon
+  const glyph = icon === undefined ? <Wrench size={30} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-[30px]" /> : icon
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -183,7 +183,7 @@ export function ErrorStateMaintenanceMode({
     <section aria-labelledby={headingId} className={cn("bg-muted p-8 md:p-16 lg:p-24", className)} {...props}>
       <div className="mx-auto flex w-full max-w-[620px] flex-col items-center gap-6 text-center md:max-w-none md:gap-7 lg:max-w-[620px]">
         {glyph ? (
-          <div className="flex size-14 items-center justify-center rounded-[14px] border border-border bg-card text-foreground shadow-sm md:size-[72px]">
+          <div className="flex size-14 items-center justify-center rounded-xl border border-border bg-card text-foreground shadow-sm md:size-[72px]">
             {glyph}
           </div>
         ) : null}
@@ -223,7 +223,7 @@ export function ErrorStateMaintenanceMode({
                 required
                 placeholder={placeholder}
                 aria-label={placeholder}
-                startIcon={<Mail strokeWidth={1.5} aria-hidden="true" />}
+                startIcon={<Mail size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />}
                 invalid={emailInvalid}
                 error={emailError ?? copy.emailError}
                 disabled={disabled || pending}

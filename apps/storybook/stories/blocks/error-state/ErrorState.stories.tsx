@@ -466,27 +466,8 @@ export const MaintenanceModeDisabled: StoryObj<typeof ErrorStateMaintenanceMode>
 /** Search again from the field or a suggestion: the heading names each query. */
 export const EmptySearchResults: StoryObj<typeof ErrorStateEmptySearchResults> = {
   name: "Empty Search Results",
-  argTypes: errorStateArgTypes(ErrorStateEmptySearchResults, errorStateEmptySearchResultsCopy, ["suggestionsLabel", "filtersLabel"]),
+  argTypes: errorStateArgTypes(ErrorStateEmptySearchResults, errorStateEmptySearchResultsCopy, ["suggestionsLabel"]),
   render: (args, context) => <ErrorStateEmptySearchResults locale={localeOf(context)} onSearch={settleSoon} {...args} />,
-}
-
-/** Filters applied to the search, as chips: removing one runs the search again. */
-export const EmptySearchResultsFilters: StoryObj<typeof ErrorStateEmptySearchResults> = {
-  tags: ["!dev", "!autodocs"],
-  ...EmptySearchResults,
-  name: "Empty Search Results: Filters",
-  render: (args, context) => (
-    <ErrorStateEmptySearchResults
-      locale={localeOf(context)}
-      onSearch={settleSoon}
-      filters={
-        localeOf(context) === "ar"
-          ? [{ label: "المستندات" }, { label: "هذا الشهر", value: "month" }]
-          : [{ label: "Documents" }, { label: "This month", value: "month" }]
-      }
-      {...args}
-    />
-  ),
 }
 
 /** The field, the button and the suggestions turned off. */

@@ -115,7 +115,7 @@ export function ErrorStateOfflineState({
   const [status, setStatus] = React.useState<"idle" | "pending" | "error">("idle")
   const link = offlineAction === undefined ? copy.offlineAction : offlineAction
   const list = available ?? copy.available
-  const glyph = icon === undefined ? <WifiOff strokeWidth={1.5} aria-hidden="true" className="size-[30px]" /> : icon
+  const glyph = icon === undefined ? <WifiOff size={30} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-[30px]" /> : icon
 
   const retry = async () => {
     if (!onRetry) {
@@ -161,7 +161,7 @@ export function ErrorStateOfflineState({
         {list.length > 0 ? (
           <section
             aria-labelledby={panelId}
-            className="flex w-full flex-col gap-3 rounded-[10px] bg-muted p-4 text-start md:p-5"
+            className="flex w-full flex-col gap-3 rounded-lg bg-muted p-4 text-start md:p-5"
           >
             <h2 id={panelId} className="text-xs font-medium text-muted-foreground">
               {availableHeading ?? copy.availableHeading}
@@ -169,7 +169,7 @@ export function ErrorStateOfflineState({
             <ul className="flex flex-col gap-3">
               {list.map((item, index) => (
                 <li key={index} className="flex items-center gap-2.5 text-sm text-muted-foreground">
-                  <Check strokeWidth={1.5} aria-hidden="true" className="size-3.5 shrink-0 text-success" />
+                  <Check size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-3.5 shrink-0 text-success" />
                   <span>{item}</span>
                 </li>
               ))}

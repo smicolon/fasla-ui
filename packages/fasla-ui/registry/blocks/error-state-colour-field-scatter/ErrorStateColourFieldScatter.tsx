@@ -123,7 +123,7 @@ export function ErrorStateColourFieldScatter({
           className="absolute start-6 top-[540px] inline-flex items-center gap-1.5 rounded-sm text-sm font-medium underline-offset-4 outline-none hover:underline focus-visible:ring-2 focus-visible:ring-destructive-foreground focus-visible:ring-offset-2 focus-visible:ring-offset-destructive md:start-auto md:end-[101px] md:top-12 lg:end-[149px] lg:top-16"
         >
           {back.label}
-          <ArrowRight aria-hidden="true" strokeWidth={1.5} className="size-3.5 shrink-0 [&:dir(rtl)]:-scale-x-100" />
+          <ArrowRight aria-hidden="true" size={14} strokeWidth={1.5} absoluteStrokeWidth className="size-3.5 shrink-0 [&:dir(rtl)]:-scale-x-100" />
         </a>
       ) : null}
 

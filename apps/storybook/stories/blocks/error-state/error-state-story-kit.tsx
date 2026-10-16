@@ -49,7 +49,6 @@ const NOUNS: Record<string, string> = {
   options: "options",
   checks: "checks",
   suggestions: "suggestions",
-  filters: "filters",
   lines: "lines",
   people: "people",
   photos: "photos",

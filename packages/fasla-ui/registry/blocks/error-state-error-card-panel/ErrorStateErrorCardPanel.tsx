@@ -112,7 +112,7 @@ export function ErrorStateErrorCardPanel({
   const headingId = React.useId()
   const primary = primaryAction ?? copy.primaryAction
   const retry = retryLabel ?? copy.retryLabel
-  const glyph = icon === undefined ? <TriangleAlert aria-hidden="true" className="size-6" strokeWidth={1.5} /> : icon
+  const glyph = icon === undefined ? <TriangleAlert aria-hidden="true" className="size-6" size={24} strokeWidth={1.5} absoluteStrokeWidth /> : icon
 
   const [retrying, setRetrying] = React.useState(false)
   const handleRetry = async () => {
@@ -148,7 +148,7 @@ export function ErrorStateErrorCardPanel({
 
   return (
     <section aria-labelledby={headingId} className={cn("bg-muted p-8 md:p-16 lg:p-24", className)} {...props}>
-      <div className="mx-auto flex w-full max-w-[560px] flex-col items-center gap-5 rounded-[14px] bg-card p-6 text-center shadow-lg ring-1 ring-inset ring-border md:gap-6 md:p-10">
+      <div className="mx-auto flex w-full max-w-[560px] flex-col items-center gap-5 rounded-xl bg-card p-6 text-center shadow-lg ring-1 ring-inset ring-border md:gap-6 md:p-10">
         {glyph ? (
           <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-destructive/[0.12] text-destructive">
             {glyph}
@@ -186,9 +186,9 @@ export function ErrorStateErrorCardPanel({
                   className="inline-flex size-3.5 items-center justify-center rounded-sm text-muted-foreground [outline:none] hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring/50"
                 >
                   {copied ? (
-                    <Check aria-hidden="true" className="size-3.5" strokeWidth={1.5} />
+                    <Check aria-hidden="true" className="size-3.5" size={14} strokeWidth={1.5} absoluteStrokeWidth />
                   ) : (
-                    <Copy aria-hidden="true" className="size-3.5" strokeWidth={1.5} />
+                    <Copy aria-hidden="true" className="size-3.5" size={14} strokeWidth={1.5} absoluteStrokeWidth />
                   )}
                 </TooltipTrigger>
                 <TooltipContent>{copiedLabel ?? copy.copiedLabel}</TooltipContent>

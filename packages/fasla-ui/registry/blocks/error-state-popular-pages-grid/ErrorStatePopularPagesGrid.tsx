@@ -153,7 +153,7 @@ export function ErrorStatePopularPagesGrid({
                   href={page.href}
                   // Figma's 1px stroke is inside the card, so it is drawn over
                   // the photo and adds nothing to the card's size.
-                  className="relative flex h-full flex-col overflow-hidden rounded-[14px] bg-card transition-shadow [outline:none] after:pointer-events-none after:absolute after:inset-0 after:rounded-[14px] after:ring-1 after:ring-inset after:ring-border hover:shadow-md focus-visible:ring-2 focus-visible:ring-ring/50"
+                  className="relative flex h-full flex-col overflow-hidden rounded-xl bg-card transition-shadow [outline:none] after:pointer-events-none after:absolute after:inset-0 after:rounded-xl after:ring-1 after:ring-inset after:ring-border hover:shadow-md focus-visible:ring-2 focus-visible:ring-ring/50"
                 >
                   <div className="relative h-40 w-full shrink-0 bg-muted md:h-[184px]">
                     {page.image ? (
@@ -173,7 +173,7 @@ export function ErrorStatePopularPagesGrid({
                       {open}
                       <ArrowRight
                         aria-hidden="true"
-                        strokeWidth={1.5}
+                        size={14} strokeWidth={1.5} absoluteStrokeWidth
                         className="size-3.5 shrink-0 text-muted-foreground [&:dir(rtl)]:-scale-x-100"
                       />
                     </span>

@@ -62,26 +62,26 @@ const COPY: Record<"en" | "ar", ErrorStateRecoveryBentoCopy> = {
       title: "Go to the homepage",
       description: "Start again from the top of Fasla.",
       href: "/",
-      icon: <House strokeWidth={1.5} className={glyph} />,
+      icon: <House size={18} strokeWidth={1.5} absoluteStrokeWidth className={glyph} />,
     },
     tiles: [
       {
         title: "Documentation",
         description: "Guides, references and integration notes.",
         href: "#docs",
-        icon: <BookOpen strokeWidth={1.5} className={glyph} />,
+        icon: <BookOpen size={18} strokeWidth={1.5} absoluteStrokeWidth className={glyph} />,
       },
       {
         title: "System status",
         description: "Check whether something is currently down.",
         href: "#status",
-        icon: <Activity strokeWidth={1.5} className={glyph} />,
+        icon: <Activity size={18} strokeWidth={1.5} absoluteStrokeWidth className={glyph} />,
       },
       {
         title: "Talk to support",
         description: "A real person replies within the hour.",
         href: "#support",
-        icon: <Headset strokeWidth={1.5} className={glyph} />,
+        icon: <Headset size={18} strokeWidth={1.5} absoluteStrokeWidth className={glyph} />,
       },
     ],
     openLabel: "Open",
@@ -101,26 +101,26 @@ const COPY: Record<"en" | "ar", ErrorStateRecoveryBentoCopy> = {
       title: "الذهاب إلى الصفحة الرئيسية",
       description: "ابدأ من جديد من أعلى فاصلة.",
       href: "/",
-      icon: <House strokeWidth={1.5} className={glyph} />,
+      icon: <House size={18} strokeWidth={1.5} absoluteStrokeWidth className={glyph} />,
     },
     tiles: [
       {
         title: "التوثيق",
         description: "أدلة ومراجع وملاحظات تكامل.",
         href: "#docs",
-        icon: <BookOpen strokeWidth={1.5} className={glyph} />,
+        icon: <BookOpen size={18} strokeWidth={1.5} absoluteStrokeWidth className={glyph} />,
       },
       {
         title: "حالة النظام",
         description: "تحقق مما إذا كان هناك عطل حاليًا.",
         href: "#status",
-        icon: <Activity strokeWidth={1.5} className={glyph} />,
+        icon: <Activity size={18} strokeWidth={1.5} absoluteStrokeWidth className={glyph} />,
       },
       {
         title: "تحدث إلى الدعم",
         description: "شخص حقيقي يرد خلال ساعة.",
         href: "#support",
-        icon: <Headset strokeWidth={1.5} className={glyph} />,
+        icon: <Headset size={18} strokeWidth={1.5} absoluteStrokeWidth className={glyph} />,
       },
     ],
     openLabel: "افتح",
@@ -141,7 +141,7 @@ export interface ErrorStateRecoveryBentoProps
   defaultQuery?: string
 }
 
-const TILE = "flex flex-col justify-between gap-4 rounded-[14px] border border-border bg-card p-7"
+const TILE = "flex flex-col justify-between gap-4 rounded-xl border border-border bg-card p-7"
 
 /** A tile's badge, title and line. */
 function TileCopy({ tile, titleId }: { tile: Pick<ErrorStateRecoveryBentoTile, "title" | "description" | "icon">; titleId?: string }) {
@@ -150,7 +150,7 @@ function TileCopy({ tile, titleId }: { tile: Pick<ErrorStateRecoveryBentoTile, "
       {tile.icon ? (
         <span
           aria-hidden="true"
-          className="flex size-10 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-muted text-muted-foreground [&_svg]:[stroke-width:1.5]"
+          className="flex size-10 shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-muted text-muted-foreground"
         >
           {tile.icon}
         </span>
@@ -180,7 +180,7 @@ function LinkTile({ tile, openLabel, className }: { tile: ErrorStateRecoveryBent
       <TileCopy tile={tile} />
       <span aria-hidden="true" className="flex items-center gap-1.5 text-sm font-medium text-foreground">
         {openLabel}
-        <ArrowRight strokeWidth={1.5} className="size-3.5 shrink-0 text-muted-foreground [&:dir(rtl)]:-scale-x-100" />
+        <ArrowRight size={14} strokeWidth={1.5} absoluteStrokeWidth className="size-3.5 shrink-0 text-muted-foreground [&:dir(rtl)]:-scale-x-100" />
       </span>
     </a>
   )
@@ -229,7 +229,7 @@ export function ErrorStateRecoveryBento({
               tile={{
                 title: searchTitle ?? copy.searchTitle,
                 description: searchDescription ?? copy.searchDescription,
-                icon: <Search strokeWidth={1.5} className={glyph} />,
+                icon: <Search size={18} strokeWidth={1.5} absoluteStrokeWidth className={glyph} />,
               }}
             />
             <form
@@ -242,7 +242,7 @@ export function ErrorStateRecoveryBento({
             >
               <Input
                 type="search"
-                startIcon={<Search strokeWidth={1.5} aria-hidden="true" />}
+                startIcon={<Search size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />}
                 placeholder={searchPlaceholder ?? copy.searchPlaceholder}
                 aria-labelledby={searchTitleId}
                 value={query}

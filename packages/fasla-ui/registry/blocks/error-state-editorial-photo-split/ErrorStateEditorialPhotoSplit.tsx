@@ -130,14 +130,14 @@ export function ErrorStateEditorialPhotoSplit({
             <>
               <hr className="w-full border-border" />
               <p className="flex items-center gap-2 text-sm text-muted-foreground">
-                <CircleHelp aria-hidden="true" strokeWidth={1.5} className="size-4 shrink-0" />
+                <CircleHelp aria-hidden="true" size={16} strokeWidth={1.5} absoluteStrokeWidth className="size-4 shrink-0" />
                 <span>{footnote}</span>
               </p>
             </>
           ) : null}
         </div>
 
-        <div className="relative h-[240px] w-full shrink-0 overflow-hidden rounded-[10px] bg-muted md:h-[380px] lg:h-[480px] lg:w-[560px]">
+        <div className="relative h-[240px] w-full shrink-0 overflow-hidden rounded-lg bg-muted md:h-[380px] lg:h-[480px] lg:w-[560px]">
           {image ? (
             <img src={image.src} alt={image.alt} loading="lazy" decoding="async" className="absolute inset-0 size-full object-cover" />
           ) : null}

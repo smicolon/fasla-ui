@@ -143,7 +143,7 @@ export function ErrorStateTerminalConsole({
         <div
           dir="ltr"
           lang="en"
-          className="w-full overflow-hidden rounded-[14px] bg-background-inverse text-start shadow-lg"
+          className="w-full overflow-hidden rounded-xl bg-background-inverse text-start shadow-lg"
         >
           <div className="flex h-11 items-center gap-3 border-b border-muted-foreground-inverse px-5">
             <span aria-hidden="true" className="flex shrink-0 gap-1.5">
@@ -168,7 +168,7 @@ export function ErrorStateTerminalConsole({
             {terminal.error ? (
               <p className="flex gap-2 text-destructive">
                 <span className="flex h-[1lh] shrink-0 items-center">
-                  <TriangleAlert aria-hidden="true" className="size-3.5" strokeWidth={1.5} />
+                  <TriangleAlert aria-hidden="true" className="size-3.5" size={14} strokeWidth={1.5} absoluteStrokeWidth />
                 </span>
                 <span className="min-w-0">{terminal.error}</span>
               </p>

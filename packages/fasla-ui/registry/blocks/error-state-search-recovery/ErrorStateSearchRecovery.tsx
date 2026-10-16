@@ -142,7 +142,7 @@ export function ErrorStateSearchRecovery({
             autoFocus={autoFocus}
             placeholder={placeholder ?? copy.placeholder}
             aria-label={searchLabel ?? copy.searchLabel}
-            startIcon={<Search strokeWidth={1.5} aria-hidden="true" />}
+            startIcon={<Search size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" />}
           />
         </form>
 
@@ -155,7 +155,7 @@ export function ErrorStateSearchRecovery({
                   className="inline-flex items-center gap-1.5 rounded-sm text-sm font-medium text-foreground underline-offset-4 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   {link.label}
-                  <ArrowUpRight strokeWidth={1.5} aria-hidden="true" className="size-3.5 shrink-0" />
+                  <ArrowUpRight size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden="true" className="size-3.5 shrink-0" />
                 </a>
               </li>
             ))}

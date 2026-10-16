@@ -19,18 +19,10 @@ import { Input } from "../../ui/input/input"
  * not a directional glyph, so it is never mirrored; every colour in it is a
  * theme token.
  *
- * The search is real: submitting the field, pressing a suggestion or removing
- * a filter calls `onSearch` with the query and the filters left. Return a
- * promise and the Search button shows its pending state until it settles.
+ * The search is real: submitting the field or pressing a suggestion calls
+ * `onSearch` with the query. Return a promise and the Search button shows its pending state until it settles.
  * The block is the empty state, so the app swaps it for its results.
  */
-
-export interface ErrorStateEmptySearchResultsFilter {
-  /** The chip's text. */
-  label: string
-  /** Identifies the filter in `onSearch` and `onFiltersChange`. Defaults to `label`. */
-  value?: string
-}
 
 export interface ErrorStateEmptySearchResultsCopy {
   /** The query that found nothing: the field's value, and the heading's subject. */
@@ -45,8 +37,6 @@ export interface ErrorStateEmptySearchResultsCopy {
   suggestions: string[]
   /** The accessible name of the suggestions list. */
   suggestionsLabel: string
-  /** The accessible name of the active filters list. */
-  filtersLabel: string
 }
 
 /** Figma's copy, English and Arabic. */
@@ -58,7 +48,6 @@ const COPY: Record<"en" | "ar", ErrorStateEmptySearchResultsCopy> = {
     searchLabel: "Search",
     suggestions: ["board deck", "quarterly report", "revenue summary"],
     suggestionsLabel: "Suggested searches",
-    filtersLabel: "Active filters",
   },
   ar: {
     query: "التقرير السنوى",
@@ -67,7 +56,6 @@ const COPY: Record<"en" | "ar", ErrorStateEmptySearchResultsCopy> = {
     searchLabel: "بحث",
     suggestions: ["عرض مجلس الإدارة", "التقرير الربع سنوي", "ملخص الإيرادات"],
     suggestionsLabel: "عمليات بحث مقترحة",
-    filtersLabel: "عوامل التصفية النشطة",
   },
 }
 
@@ -77,20 +65,12 @@ export interface ErrorStateEmptySearchResultsProps
   /** Which language the default copy is in. The page's `dir` sets the direction. */
   locale?: "en" | "ar"
   /**
-   * Filters applied to the search, as removable chips between the field and
-   * the results. Removing one runs the search again without it.
-   * @default none
-   */
-  filters?: ErrorStateEmptySearchResultsFilter[]
-  /**
-   * Turns the field, the button, the suggestions and the filter chips off.
+   * Turns the field, the button and the suggestions off.
    * @default false
    */
   disabled?: boolean
-  /** Called with the query and the filters left when the search runs. Return a promise to show the pending state. */
-  onSearch?: (query: string, filters: ErrorStateEmptySearchResultsFilter[]) => void | Promise<unknown>
-  /** Called with the filters left when a filter chip is removed. */
-  onFiltersChange?: (filters: ErrorStateEmptySearchResultsFilter[]) => void
+  /** Called with the query when the search runs. Return a promise to show the pending state. */
+  onSearch?: (query: string) => void | Promise<unknown>
 }
 
 /** Figma's `File Search` illustration, 308×220, drawn in theme tokens. */
@@ -143,8 +123,6 @@ function FileSearchArt({ className }: { className?: string }) {
   )
 }
 
-const filterValue = (filter: ErrorStateEmptySearchResultsFilter) => filter.value ?? filter.label
-
 export function ErrorStateEmptySearchResults({
   locale = "en",
   query,
@@ -153,11 +131,8 @@ export function ErrorStateEmptySearchResults({
   searchLabel,
   suggestions,
   suggestionsLabel,
-  filtersLabel,
-  filters,
   disabled = false,
   onSearch,
-  onFiltersChange,
   className,
   ...props
 }: ErrorStateEmptySearchResultsProps) {
@@ -166,24 +141,19 @@ export function ErrorStateEmptySearchResults({
   const initialQuery = query ?? copy.query
   const [value, setValue] = React.useState(initialQuery)
   const [searched, setSearched] = React.useState(initialQuery)
-  const [activeFilters, setActiveFilters] = React.useState(filters ?? [])
   const [pending, setPending] = React.useState(false)
   const label = searchLabel ?? copy.searchLabel
   const tries = suggestions ?? copy.suggestions
 
-  // A new `query` or `filters` from the app replaces what the block holds.
+  // A new `query` from the app replaces what the block holds.
   React.useEffect(() => {
     setValue(initialQuery)
     setSearched(initialQuery)
   }, [initialQuery])
-  // By their values, so a new array with the same filters keeps the chips as they are.
-  const filtersKey = (filters ?? []).map(filterValue).join("\u0000")
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  React.useEffect(() => setActiveFilters(filters ?? []), [filtersKey])
 
-  const run = async (next: string, nextFilters = activeFilters) => {
+  const run = async (next: string) => {
     setSearched(next)
-    const result = onSearch?.(next, nextFilters)
+    const result = onSearch?.(next)
     if (result && typeof (result as Promise<unknown>).then === "function") {
       setPending(true)
       try {
@@ -194,20 +164,13 @@ export function ErrorStateEmptySearchResults({
     }
   }
 
-  const removeFilter = (filter: ErrorStateEmptySearchResultsFilter) => {
-    const next = activeFilters.filter((item) => filterValue(item) !== filterValue(filter))
-    setActiveFilters(next)
-    onFiltersChange?.(next)
-    void run(searched, next)
-  }
-
   return (
     <section
       aria-labelledby={headingId}
       className={cn("flex flex-col gap-8 bg-background p-8 md:p-16 lg:p-24", className)}
       {...props}
     >
-      <div className="mx-auto flex w-full max-w-[1248px] flex-col gap-3">
+      <div className="mx-auto w-full max-w-[1248px]">
         <form
           role="search"
           className="flex flex-col gap-2.5 md:flex-row md:items-center md:gap-3"
@@ -223,29 +186,13 @@ export function ErrorStateEmptySearchResults({
             value={value}
             onChange={(event) => setValue(event.target.value)}
             disabled={disabled}
-            startIcon={<Search strokeWidth={1.5} />}
+            startIcon={<Search size={16} strokeWidth={1.5} absoluteStrokeWidth />}
             className="md:flex-1"
           />
           <Button type="submit" size="lg" disabled={disabled} loading={pending} className="w-full md:w-auto">
             {label}
           </Button>
         </form>
-        {activeFilters.length > 0 ? (
-          <ul aria-label={filtersLabel ?? copy.filtersLabel} className="flex flex-wrap gap-2">
-            {activeFilters.map((filter) => (
-              <li key={filterValue(filter)}>
-                <Badge
-                  variant="soft"
-                  tone="secondary"
-                  size="lg"
-                  onClose={disabled ? undefined : () => removeFilter(filter)}
-                >
-                  {filter.label}
-                </Badge>
-              </li>
-            ))}
-          </ul>
-        ) : null}
       </div>
 
       <div className="mx-auto flex w-full max-w-[520px] flex-col items-center gap-6 py-6 lg:py-2">
@@ -272,7 +219,7 @@ export function ErrorStateEmptySearchResults({
                   <Badge
                     variant="outline"
                     size="lg"
-                    icon={<Search strokeWidth={1.5} />}
+                    icon={<Search size={12} strokeWidth={1.5} absoluteStrokeWidth />}
                     className="cursor-pointer transition-colors group-hover/suggestion:bg-soft-primary group-disabled/suggestion:cursor-not-allowed"
                   >
                     {suggestion}

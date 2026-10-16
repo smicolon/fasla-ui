@@ -126,7 +126,7 @@ export function ErrorStateSplitColourPanel({
               <ul className="flex flex-col gap-3">
                 {list.map((item, index) => (
                   <li key={index} className="flex items-center gap-2.5 text-sm text-muted-foreground">
-                    <Check aria-hidden="true" strokeWidth={1.5} className="size-4 shrink-0" />
+                    <Check aria-hidden="true" size={16} strokeWidth={1.5} absoluteStrokeWidth className="size-4 shrink-0" />
                     {item}
                   </li>
                 ))}
