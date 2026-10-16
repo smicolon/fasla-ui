@@ -1589,7 +1589,7 @@
       "cancel": "Cancel",
       "profile": {
         "title": "Edit profile",
-        "description": "Make changes to your profile here. Save them when you're done.",
+        "description": "Update your name and photo.",
         "action": "Save changes",
         "email": "Email address",
         "password": "Password",
@@ -1604,15 +1604,15 @@
         "title": "Header",
         "body": "<code>DialogHeader</code> holds the title and an optional description 4px under it, with a line below them. Each stays on one line and ends with an ellipsis when it runs longer, so keep both short. The close button sits at the end of the title's line; <code>showCloseButton</code> on <code>DialogContent</code> turns it off. For a step in a flow, pass <code>onBack</code> to <code>DialogHeader</code>: a back button sits before the title. Its arrow points to the start of the line, so it turns round on an Arabic page.",
         "step": {
-          "title": "Choose a workspace",
-          "description": "Step 2 of 3. Pick where the new project lives. You can move it later."
+          "title": "Pick a workspace",
+          "description": "Step 2 of 3."
         },
         "workspace": "Workspace name",
         "workspacePlaceholder": "Design team",
         "next": "Next",
         "first": {
           "title": "Name your project",
-          "description": "Step 1 of 3. You can rename it at any time."
+          "description": "Step 1 of 3."
         },
         "project": "Project name",
         "projectPlaceholder": "Orbit",
@@ -1624,15 +1624,15 @@
         "body": "Put Buttons in <code>DialogFooter</code>, and wrap Cancel in <code>DialogClose</code> so it closes the dialog. In a row, the default, write Cancel, then the main action: they sit at the end, 8px apart. A third action written before them, such as Skip, goes to the start of the row. <code>layout=\"stacked\"</code> makes each action full width, one under the other, so write the main action first. For an action that can't be undone, give the main Button <code>variant=\"destructive\"</code>.",
         "tour": {
           "title": "Welcome to our library",
-          "description": "Crafting beautiful, modern interfaces, one component at a time.",
+          "description": "One component at a time.",
           "body": "Every component comes in English and Arabic, light and dark, and mirrors on its own in right-to-left pages. The next steps show where to find them.",
           "skip": "Skip",
           "previous": "Previous",
           "next": "Next"
         },
         "danger": {
-          "title": "Delete this workspace",
-          "description": "Its projects, files and members are removed for everyone.",
+          "title": "Delete workspace",
+          "description": "This can't be undone.",
           "body": "Anyone with a link to one of its files will see a page that says it no longer exists.",
           "action": "Delete workspace"
         }
@@ -1641,7 +1641,7 @@
         "title": "Long content",
         "body": "The dialog is 634px tall whatever its content. When the content is taller, the header and the footer stay where they are and only what sits between them scrolls: scroll inside the dialog below to read on. On a shorter screen the dialog keeps 16px from the top and the bottom and scrolls the same way. A field reached with Tab scrolls into view clear of the header and the footer.",
         "dialogTitle": "Terms of service",
-        "description": "Read the terms before you accept them. They take effect today.",
+        "description": "They take effect today.",
         "accept": "Accept",
         "decline": "Decline",
         "paragraphs": {

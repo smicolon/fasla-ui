@@ -161,7 +161,7 @@ const COPY = {
     third: "Save draft",
     profile: {
       title: "Edit profile",
-      description: "Make changes to your profile here. Save them when you're done.",
+      description: "Update your name and photo.",
       body: "Your name and photo appear on your comments and in every project you share.",
       action: "Save changes",
       email: "Email address",
@@ -171,8 +171,8 @@ const COPY = {
       agree: "I agree to the privacy policy and terms",
     },
     danger: {
-      title: "Delete this workspace",
-      description: "Its projects, files and members are removed for everyone.",
+      title: "Delete workspace",
+      description: "This can't be undone.",
       body: "Type the workspace name below to confirm. Anyone with a link to one of its files will see a page that says it no longer exists.",
       action: "Delete workspace",
     },
@@ -189,7 +189,7 @@ const COPY = {
     },
     tour: {
       title: "Welcome to our library",
-      description: "Crafting beautiful, modern interfaces, one component at a time.",
+      description: "One component at a time.",
       body: "Every component comes in English and Arabic, light and dark, and mirrors on its own in right-to-left pages. The next steps show where to find them and how to add one to your project.",
       skip: "Skip",
       previous: "Previous",
@@ -207,7 +207,7 @@ const COPY = {
     },
     terms: {
       title: "Terms of service",
-      description: "Read the terms before you accept them. They take effect today.",
+      description: "They take effect today.",
       accept: "Accept",
       decline: "Decline",
       paragraphs: [
@@ -230,7 +230,7 @@ const COPY = {
     third: "حفظ مسودة",
     profile: {
       title: "تعديل الملف الشخصي",
-      description: "عدّل بيانات ملفك الشخصي هنا، ثم اختر «حفظ التغييرات» عند الانتهاء.",
+      description: "حدّث اسمك وصورتك.",
       body: "يظهر اسمك وصورتك على تعليقاتك وفي كل مشروع تشاركه.",
       action: "حفظ التغييرات",
       email: "البريد الإلكتروني",
@@ -241,7 +241,7 @@ const COPY = {
     },
     danger: {
       title: "حذف مساحة العمل",
-      description: "تُحذف مشاريعها وملفاتها وأعضاؤها لدى الجميع.",
+      description: "لا يمكن التراجع عن ذلك.",
       body: "اكتب اسم مساحة العمل أدناه للتأكيد. ومن يفتح رابطًا لأحد ملفاتها بعد ذلك، سيرى صفحة تخبره أنه لم يعد موجودًا.",
       action: "حذف مساحة العمل",
     },
@@ -258,7 +258,7 @@ const COPY = {
     },
     tour: {
       title: "مرحبًا بك في مكتبتنا",
-      description: "واجهات جميلة وحديثة، مكوّنًا بعد مكوّن.",
+      description: "مكوّنًا بعد مكوّن.",
       body: "يأتي كل مكوّن بالعربية والإنجليزية، وبالوضعين الفاتح والداكن، وينعكس وحده في الصفحات العربية. توضّح الخطوات التالية أين تجد المكوّنات وكيف تضيف أحدها إلى مشروعك.",
       skip: "تخطٍّ",
       previous: "السابق",
@@ -276,7 +276,7 @@ const COPY = {
     },
     terms: {
       title: "شروط الخدمة",
-      description: "اقرأ الشروط قبل قبولها، فهي تسري من اليوم.",
+      description: "تسري الشروط من اليوم.",
       accept: "قبول",
       decline: "رفض",
       paragraphs: [
