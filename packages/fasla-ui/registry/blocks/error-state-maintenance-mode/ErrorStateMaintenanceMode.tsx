@@ -118,7 +118,8 @@ export interface ErrorStateMaintenanceModeProps
   icon?: React.ReactNode
   /**
    * Sends the sign-up. The button shows its spinner until the promise
-   * settles; then the form gives way to `success`, or shows `error`.
+   * settles; then the form gives way to `success`, or shows `error`. Without
+   * it nothing is sent, so the form shows `error`.
    */
   onSubscribe?: (email: string) => Promise<void> | void
   /**
@@ -170,9 +171,11 @@ export function ErrorStateMaintenanceMode({
       return
     }
     setEmailInvalid(false)
+    // Nothing to send the sign-up with: say so rather than confirm it.
+    if (!onSubscribe) return setStatus("error")
     setStatus("pending")
     try {
-      await onSubscribe?.(email.value.trim())
+      await onSubscribe(email.value.trim())
       setStatus("success")
     } catch {
       setStatus("error")
