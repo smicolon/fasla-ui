@@ -166,7 +166,7 @@ export function ErrorStateCountdownRedirect({
   }, [phase, total])
 
   // Keep the latest callbacks without restarting the count when they change.
-  const redirect = React.useRef<() => void>()
+  const redirect = React.useRef<() => void>(() => {})
   redirect.current = () => {
     if (onRedirect) onRedirect()
     else window.location.assign(primary.href)
