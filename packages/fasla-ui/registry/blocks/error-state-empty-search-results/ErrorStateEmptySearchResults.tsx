@@ -158,6 +158,8 @@ export function ErrorStateEmptySearchResults({
       setPending(true)
       try {
         await result
+      } catch {
+        // The app reports its own search failures; the block only stops waiting.
       } finally {
         setPending(false)
       }
