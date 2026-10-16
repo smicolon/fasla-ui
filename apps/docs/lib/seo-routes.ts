@@ -201,6 +201,21 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/input-number/",
+    title: "Input Number React Component | Fasla",
+    description:
+      "Add a React number field with step buttons in five layouts, min and max limits, keyboard stepping, Western digits and RTL.",
+    h1: "Input Number",
+    ar: {
+      title: "حقل الإدخال الرقمي (Input Number) لتطبيقات React | فاصلة",
+      description:
+        "أضف مكوّن حقل الإدخال الرقمي (Input Number) لإدخال الأعداد، مع أزرار زيادة وإنقاص بخمسة تخطيطات، وحدّين أدنى وأعلى، وأرقام لاتينية في اللغتين.",
+      h1: "حقل الإدخال الرقمي (Input Number)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/card/",
     title: "Card React Component | Fasla",
     description:

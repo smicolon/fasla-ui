@@ -927,6 +927,82 @@
         "description": "We send the receipt here."
       }
     },
+    "inputNumber": {
+      "lead": "A number field with buttons that step the value down and up. It has Input's height, border and states, comes in five layouts, keeps to a minimum and a maximum, and shows Western digits in every language.",
+      "quantity": "Quantity",
+      "variantsBody": "Five layouts, chosen with <code>variant</code>. <code>default</code> puts two Icon Buttons after the value. <code>vertically-stacked</code> stacks plus over minus in a narrow column, <code>horizontally-stacked</code> puts minus and plus side by side after the value, and <code>horizontally-stretched</code> puts minus before the value and plus after it. These three draw a 1px divider on the side of each button that faces the value. <code>mini</code> is 128px wide, for table cells and toolbars. Every layout is 36px tall, with the value centred.",
+      "variants": {
+        "default": "Default",
+        "verticallyStacked": "Vertically stacked",
+        "horizontallyStacked": "Horizontally stacked",
+        "horizontallyStretched": "Horizontally stretched",
+        "mini": "Mini"
+      },
+      "statesBody": "The states are Input's. Focus is a real state, not a prop: tab to the field, or press a button. <code>status=\"success\"</code> draws the border and the label in the <code>success</code> token, and <code>invalid</code> in the <code>destructive</code> token; the focus halo takes the same token. <code>disabled</code> turns off the field and both buttons, and dims the whole field to half opacity.",
+      "states": {
+        "enabled": "Enabled",
+        "success": "Success",
+        "invalid": "Invalid",
+        "disabled": "Disabled"
+      },
+      "limits": {
+        "title": "Limits and steps",
+        "body": "<code>min</code> and <code>max</code> keep the value in range. At a limit, the matching button is disabled and stays in place, so the layout never shifts. <code>step</code> sets how far each press and each arrow key moves the value; Shift with an arrow moves it by 10.",
+        "guests": "Guests",
+        "nights": "Nights",
+        "weight": "Weight (kg)",
+        "seats": "Seats"
+      },
+      "format": {
+        "title": "Digits and formatting",
+        "body": "The value is always drawn in Western digits, 0 to 9, in English and in Arabic, and a value typed in Arabic-Indic digits is read as the same number. <code>format</code> takes the options of <code>Intl.NumberFormat</code>, for a currency or a percentage, and <code>locale</code> sets the separators. The value keeps its own direction, so a minus sign stays before the digits on a right-to-left page.",
+        "price": "Price",
+        "discount": "Discount"
+      },
+      "label": {
+        "title": "Label",
+        "body": "<code>label</code> puts a label above the field and links it to the input. Where the context already names the field, as in a table row, leave the label out and pass <code>aria-label</code> instead."
+      },
+      "a11y": {
+        "roles": "The value is a text input with a numeric keyboard on phones. A hidden input submits the number with its form, under <code>name</code>.",
+        "keyboard": "ArrowUp and ArrowDown step the value, Shift with an arrow moves it by 10, and Home and End jump to <code>min</code> and <code>max</code> when they are set.",
+        "buttons": "The buttons are named Increase and Decrease, or زيادة and إنقاص under an Arabic <code>lang</code>. Rename them with <code>incrementLabel</code> and <code>decrementLabel</code>. They stay out of the tab order, since the arrow keys do the same from the input, and pressing and holding one keeps stepping.",
+        "touch": "Don’t use <code>vertically-stacked</code> on touch screens: its buttons are 23px wide and 17px tall, smaller than the 24px minimum touch target. Use <code>horizontally-stacked</code> or <code>horizontally-stretched</code> instead.",
+        "label": "<code>label</code> names the input. Without a visible label, pass <code>aria-label</code> or <code>aria-labelledby</code>.",
+        "direction": "Direction is inherited from <code>dir</code>, never a prop. The layout uses logical properties only, so in Arabic the buttons and their dividers move to the other side and minus and plus trade places. The stacked layout keeps plus on top."
+      },
+      "props": {
+        "variant": "Where the buttons sit: five layouts.",
+        "value": "The value, when you control it. Use it with <code>onValueChange</code>.",
+        "defaultValue": "The value on first render.",
+        "onValueChange": "Called with the new number, or <code>null</code> when the field is cleared.",
+        "min": "The lowest value. The decrement button is disabled there.",
+        "max": "The highest value. The increment button is disabled there.",
+        "step": "How far each press and each arrow key moves the value.",
+        "format": "Options for <code>Intl.NumberFormat</code>, such as a currency or a percentage. Digits stay Western.",
+        "locale": "The locale for separators and symbols. Default: the reader's.",
+        "placeholder": "Text shown while the field is empty.",
+        "label": "The field's label, linked to the input for you.",
+        "ariaLabel": "The input's accessible name when there is no visible <code>label</code>.",
+        "ariaLabelledby": "The id of an element that names the input, in place of <code>label</code>.",
+        "incrementLabel": "The increment button's name. Default: Increase, or زيادة in Arabic.",
+        "decrementLabel": "The decrement button's name. Default: Decrease, or إنقاص in Arabic.",
+        "status": "Pass <code>success</code> to mark a value that passed validation.",
+        "invalid": "Marks the field invalid; <code>aria-invalid</code> does the same.",
+        "disabled": "Disables the field and both buttons, and dims the whole group.",
+        "readOnly": "Shows the value but stops it changing.",
+        "required": "The form submits only once the field has a value.",
+        "name": "The name the value is submitted under.",
+        "form": "The id of the form the value is submitted with, when the field sits outside it.",
+        "id": "The input's id, for a <code>label</code> element of your own.",
+        "className": "Extra CSS classes for the field group."
+      },
+      "usage": {
+        "basic": "Basic number field",
+        "controlled": "Controlled, with limits",
+        "format": "Currency format"
+      }
+    },
     "combobox": {
       "lead": "A searchable dropdown with autocomplete, multi-select, and create-new functionality.",
       "options": {
