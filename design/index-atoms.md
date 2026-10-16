@@ -40,8 +40,8 @@ Atoms by shape, but their page carries no trailing ✅. Settled by Yasmin on 202
 | Mark | Where | Reading | Settled by |
 |---|---|---|---|
 | 🟢 | status slot | work on this page is done | *inferred — not confirmed* |
-| 🟡 | status slot | in progress | *inferred — not confirmed* |
-| 🟠 | status slot | queued / not started — every 🟠 page lacks documentation | *inferred — not confirmed* |
+| 🟡 | status slot | in progress | Yasmin, 2026-10-16 |
+| 🟠 | status slot | in progress | Yasmin, 2026-10-16 |
 | 🔴 | status slot | not started | *inferred — not confirmed* |
 | ❌ | status slot | cancelled or removed | *inferred — not confirmed* |
 | ✅ | trailing | signed off, and ready to be used | Yasmin, 2026-09-23 — a page without one is not signed off, and its components are not ready to be used. |
@@ -49,7 +49,7 @@ Atoms by shape, but their page carries no trailing ✅. Settled by Yasmin on 202
 | 🔺🔺 | trailing | meaning unknown (only on File Input) | *inferred — not confirmed* |
 | 🙋 | trailing | meaning unknown (only on Case Study Cards) | *inferred — not confirmed* |
 | `Y` | owner slot | Yasmin | Yasmin, 2026-09-23 |
-| `H` | owner slot | Haneen | Yasmin, 2026-09-23 |
+| `H` | owner slot | Haneen (has left the project) | Yasmin, 2026-09-23 — Haneen has left the project (Yasmin, 2026-10-16) |
 | `Y/H` | owner slot | both | Yasmin, 2026-09-23 |
 | ✦ | prefix | marks a component page (not a status) | *inferred — not confirmed* |
 

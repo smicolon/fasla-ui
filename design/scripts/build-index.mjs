@@ -20,7 +20,7 @@ import { fileURLToPath } from "node:url"
 
 const DESIGN = resolve(dirname(fileURLToPath(import.meta.url)), "..")
 const REPO = resolve(DESIGN, "..")
-const FILE_KEY = "yGEQmCZOvs7KptsYUdB0Xg"
+export const FILE_KEY = "yGEQmCZOvs7KptsYUdB0Xg"
 
 /* ── Selection rule ────────────────────────────────────────────────────────────────
  * A page is in scope for the atom index only if BOTH signals agree:
@@ -39,12 +39,18 @@ export const LEGEND = {
   note: "Inferred from usage across the whole file on 2026-09-23. Only the entries listed in `confirmedBy` have been settled by a designer; treat the rest as a reading.",
   confirmedBy: {
     "✅": "Yasmin, 2026-09-23 — a page without one is not signed off, and its components are not ready to be used.",
-    Y: "Yasmin, 2026-09-23", H: "Yasmin, 2026-09-23", "Y/H": "Yasmin, 2026-09-23",
+    "🟡": "Yasmin, 2026-10-16", "🟠": "Yasmin, 2026-10-16",
+    Y: "Yasmin, 2026-09-23", H: "Yasmin, 2026-09-23 — Haneen has left the project (Yasmin, 2026-10-16)", "Y/H": "Yasmin, 2026-09-23",
+  },
+  // What "ready" means differs between the two indexes. Do not merge the two rules.
+  readiness: {
+    atoms: "page name contains 🟢 AND ends with ✅ (Yasmin, 2026-09-23)",
+    blocks: "the page's status emoji is 🟢 — nothing else; there is no ✅ rule for blocks. Deliberately different from the atom rule (Yasmin, 2026-10-16)",
   },
   status: {
     "🟢": "work on this page is done",
     "🟡": "in progress",
-    "🟠": "queued / not started — every 🟠 page lacks documentation",
+    "🟠": "in progress",
     "🔴": "not started",
     "❌": "cancelled or removed",
   },
@@ -55,7 +61,7 @@ export const LEGEND = {
     "🙋": "meaning unknown (only on Case Study Cards)",
   },
   // Initials, not architectures or conventions — corrected by Yasmin on 2026-09-23.
-  initials: { Y: "Yasmin", H: "Haneen", "Y/H": "both" },
+  initials: { Y: "Yasmin", H: "Haneen (has left the project)", "Y/H": "both" },
   prefix: { "✦": "marks a component page (not a status)" },
 }
 
@@ -133,9 +139,9 @@ export const CODE_MAP = {
 
 const FAMILY_MIN = 10
 const norm = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "")
-const link = (id) => `https://www.figma.com/design/${FILE_KEY}/?node-id=${id.replace(":", "-")}`
+export const link = (id) => `https://www.figma.com/design/${FILE_KEY}/?node-id=${id.replace(":", "-")}`
 /** "Modal  — Fasla Component Documentation (AR)" -> { subject: "Modal", lang: "ar" } */
-function parseDoc(name) {
+export function parseDoc(name) {
   const lang = /\(AR\)\s*$/i.test(name) ? "ar" : "en"
   const subject = name
     .replace(/\((AR|EN)\)\s*$/i, "")
@@ -145,7 +151,7 @@ function parseDoc(name) {
   return { subject, lang, legacyName: /SMI[\s_-]?UI/i.test(name) }
 }
 
-function parsePage(name) {
+export function parsePage(name) {
   const status = ["🟢", "🟡", "🟠", "🔴", "❌"].find((e) => name.includes(e)) ?? null
   const trimmed = name.trim()
   const tail = trimmed.endsWith("✅") ? "✅" : (trimmed.match(/[^\w\s)\]]+$/)?.[0] ?? null)
@@ -337,7 +343,7 @@ export function build(fullCapture) {
         docFrames: placedDocs.size,
       },
       legend: LEGEND,
-      siblingIndexes: { blocks: "design/index-blocks.json — not built yet" },
+      siblingIndexes: { blocks: "design/index-blocks.json — built by design/scripts/build-blocks-index.mjs" },
       note: "Node ids are the only stable join key: page order, page names and component names all drift, and three pages were deleted mid-session while this was being read.",
     },
     unmappedCode,

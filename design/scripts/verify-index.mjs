@@ -4,6 +4,7 @@
  * read of Figma (step 3 of the `figma-index` skill).
  *
  *   node design/scripts/verify-index.mjs atoms
+ *   node design/scripts/verify-index.mjs blocks
  *
  * The capture travels through a chat transcript to reach this repo, so "the numbers look
  * about right" is not evidence. These two hashes are.
@@ -48,15 +49,25 @@ export function fingerprints(ix) {
   }
 }
 
+/** The blocks index, rebuilt into the rows the Figma-side snippet produces (skill, "Target:
+ *  blocks", step 3). Sets: every captured set — family, helper parts and extra sets. Types: the
+ *  family sets' Type values with their variant count and Desktop/LTR node. Docs: doc frames. */
+export function fingerprintsBlocks(ix) {
+  const sets = [], types = [], docs = []
+  for (const f of ix.families) {
+    for (const s of [f.set, ...f.parts, ...f.extraSets]) sets.push(`${s.id}|${s.name}|${s.variants}|${Object.keys(s.axes).join(",")}`)
+    for (const b of f.blocks) types.push(`${f.set.id}|${b.name}|${b.variants}|${b.nodeId}`)
+    for (const d of [f.docs.en, f.docs.ar, ...f.docs.duplicates]) if (d) docs.push(`${d.id}|${d.name}`)
+  }
+  sets.sort(); types.sort(); docs.sort()
+  return { pages: ix.families.length, sets: sets.length, blocks: types.length, docFrames: docs.length, setHash: hash(sets), typeHash: hash(types), docHash: hash(docs) }
+}
+
 const target = process.argv[2] ?? "atoms"
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   const ix = JSON.parse(readFileSync(resolve(DESIGN, `index-${target}.json`), "utf8"))
-  const f = fingerprints(ix)
+  const f = target === "blocks" ? fingerprintsBlocks(ix) : fingerprints(ix)
   console.log(`index-${target}.json  (measured ${ix.$meta.measured})`)
-  console.log(`  pages          ${f.pages}`)
-  console.log(`  components     ${f.components}`)
-  console.log(`  docFrames      ${f.docFrames}`)
-  console.log(`  componentHash  ${f.componentHash}`)
-  console.log(`  docHash        ${f.docHash}`)
-  console.log(`\nThese must equal the values returned by step 3 of the figma-index skill.`)
+  for (const [k, v] of Object.entries(f)) console.log(`  ${k.padEnd(14)} ${v}`)
+  console.log(`\nThese must equal the values returned by step 3 of the figma-index skill${target === "blocks" ? " (target: blocks)" : ""}.`)
 }

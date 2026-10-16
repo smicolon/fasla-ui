@@ -130,6 +130,9 @@ One message. No surprises — anything notable was raised when it happened, not 
 6. **Arabic doc** — frame name and node id, the Cairo/uppercase/glyph audit numbers.
 7. **Corrections written back** — drifted ids fixed in `file-inventory.md`, skill files updated.
 8. **Left open** — what remains and which skill owns it.
+9. **Index refreshed** — confirm the `figma-index` skill was run with target `blocks` and both
+   `design/index-blocks.*` files were committed. Agents read that index to find blocks and to see
+   which families are ready; a pass that changes a block page and leaves it stale has not finished.
 
 Then offer to record durable learnings to memory: new Arabic terms, a block-family quirk, a drifted id,
 a technique that belongs back in a skill.
