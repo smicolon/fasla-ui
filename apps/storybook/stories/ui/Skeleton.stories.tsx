@@ -66,9 +66,15 @@ const Head = ({ children }: { children: React.ReactNode }) => (
   </span>
 )
 
-/** Every control in the Controls panel drives this one: a 16px bar. */
+/**
+ * Every control in the Controls panel drives this one: a 16px bar.
+ *
+ * Storybook lists a story's own args first in the controls table, so the
+ * other rows are named here, unset, ahead of `className`: that keeps
+ * `className` the last row (CLAUDE.md, "Storybook controls table").
+ */
 export const Default: Story = {
-  args: { className: "h-4 w-48" },
+  args: { variant: undefined, animate: undefined, className: "h-4 w-48" },
 }
 
 /** `variant` sets the shape: a 4px-radius bar, a circle, or square corners. */

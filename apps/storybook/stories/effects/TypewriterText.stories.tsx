@@ -12,6 +12,29 @@ export default meta
 type Story = StoryObj<typeof TypewriterText>
 
 /**
+ * Storybook lists a story's own args first in the controls table, so the
+ * other rows are named here, unset, ahead of `className`: that keeps
+ * `className` the last row (CLAUDE.md, "Storybook controls table"). Unset is
+ * what they are anyway, so nothing in the preview or the table changes.
+ */
+const ROWS_BEFORE_CLASSNAME = {
+  text: undefined,
+  speed: undefined,
+  delay: undefined,
+  cursor: undefined,
+  cursorChar: undefined,
+  loop: undefined,
+  loopDelay: undefined,
+  onComplete: undefined,
+} satisfies Story["args"]
+
+/** A story's own settings first, as Storybook would list them, then the other rows, unset. */
+const rowsAfter = (own: NonNullable<Story["args"]>) => ({
+  ...own,
+  ...Object.fromEntries(Object.entries(ROWS_BEFORE_CLASSNAME).filter(([name]) => !(name in own))),
+})
+
+/**
  * Sample copy, per script: the same store as the docs page. The Arabic follows
  * design/content/. The cursor sits at the end of the line, so on the left in RTL.
  */
@@ -44,27 +67,27 @@ type StoryCtx = { globals: { direction?: string } }
 const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
 
 export const Default: Story = {
-  args: { className: "text-2xl font-bold" },
+  args: { ...ROWS_BEFORE_CLASSNAME, className: "text-2xl font-bold" },
   render: (args, ctx) => <TypewriterText {...args} text={args.text ?? copy(ctx).default} />,
 }
 
 export const SlowSpeed: Story = {
-  args: { speed: 150, className: "text-xl" },
+  args: { ...rowsAfter({ speed: 150 }), className: "text-xl" },
   render: (args, ctx) => <TypewriterText {...args} text={args.text ?? copy(ctx).slow} />,
 }
 
 export const WithDelay: Story = {
-  args: { delay: 1000, className: "text-xl" },
+  args: { ...rowsAfter({ delay: 1000 }), className: "text-xl" },
   render: (args, ctx) => <TypewriterText {...args} text={args.text ?? copy(ctx).delayed} />,
 }
 
 export const NoCursor: Story = {
-  args: { cursor: false, className: "text-xl" },
+  args: { ...rowsAfter({ cursor: false }), className: "text-xl" },
   render: (args, ctx) => <TypewriterText {...args} text={args.text ?? copy(ctx).noCursor} />,
 }
 
 export const Looping: Story = {
-  args: { loop: true, loopDelay: 1500, className: "text-xl" },
+  args: { ...rowsAfter({ loop: true, loopDelay: 1500 }), className: "text-xl" },
   render: (args, ctx) => <TypewriterText {...args} text={args.text ?? copy(ctx).looping} />,
 }
 

@@ -3,7 +3,7 @@
     "source": "Figma · Fasla · yGEQmCZOvs7KptsYUdB0Xg",
     "fileKey": "yGEQmCZOvs7KptsYUdB0Xg",
     "target": "atoms",
-    "measured": "2026-10-15",
+    "measured": "2026-10-16",
     "generatedBy": ".agents/skills/figma-index (read-only use_figma page walk) → design/scripts/build-index.mjs",
     "selectionRule": {
       "inScope": "page name contains 🟢 AND page name ends with ✅",
@@ -52,12 +52,12 @@
       "looseComponents": 1,
       "variants": 4622,
       "primaryWithEnDoc": 42,
-      "primaryWithArDoc": 39,
+      "primaryWithArDoc": 40,
       "withEnDoc": 42,
-      "withArDoc": 39,
+      "withArDoc": 40,
       "withRtl": 152,
       "withDescription": 5,
-      "mappedToCode": 25,
+      "mappedToCode": 26,
       "docFrames": 98
     },
     "legend": {
@@ -247,8 +247,8 @@
     },
     {
       "id": "14872:1780",
-      "name": "✦  🟢 Y | Drawer ✅",
-      "display": "Drawer",
+      "name": "✦  🟢 Y | Sheet ✅",
+      "display": "Sheet",
       "status": "🟢",
       "tail": "✅",
       "initials": "Y",
@@ -1595,14 +1595,14 @@
       ]
     },
     "15043:262710": {
-      "name": "Drawer",
+      "name": "Sheet",
       "node": "COMPONENT_SET",
       "kind": "atom",
       "role": "primary",
       "page": {
         "id": "14872:1780",
-        "name": "✦  🟢 Y | Drawer ✅",
-        "display": "Drawer",
+        "name": "✦  🟢 Y | Sheet ✅",
+        "display": "Sheet",
         "status": "🟢",
         "tail": "✅",
         "initials": "Y"
@@ -1610,11 +1610,11 @@
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15043-262710",
       "variants": 8,
       "axes": {
-        "Stats": [
+        "Side": [
           "Top",
           "Bottom",
-          "Left",
-          "Right"
+          "Start",
+          "End"
         ],
         "Direction": [
           "LTR",
@@ -1622,30 +1622,26 @@
         ]
       },
       "axisNames": [
-        "Stats",
+        "Side",
         "Direction"
       ],
       "rtl": true,
       "docs": {
         "en": {
           "id": "42470:2461",
-          "name": "Drawer — Fasla Component Documentation",
+          "name": "Sheet — Fasla Component Documentation",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42470-2461"
         },
-        "ar": null,
-        "duplicates": [
-          {
-            "id": "42791:65416",
-            "name": "Drawer — Fasla Component Documentation",
-            "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42791-65416"
-          }
-        ]
+        "ar": {
+          "id": "42791:65416",
+          "name": "Sheet — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42791-65416"
+        },
+        "duplicates": []
       },
-      "code": null,
+      "code": "sheet",
       "hasDescription": false,
       "flags": [
-        "no-ar-doc",
-        "duplicate-doc-frame",
         "no-description"
       ]
     },

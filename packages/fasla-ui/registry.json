@@ -544,6 +544,30 @@
       ]
     },
     {
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "A panel on Base UI that slides in from an edge of the screen: top, bottom, or the logical start and end, which follow the reading direction. A header with a close button, a scrolling body and a footer that stays at the bottom, mirrored for RTL.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/sheet/sheet.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sheet.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "layout"
+      ]
+    },
+    {
       "name": "shimmer-button",
       "type": "registry:ui",
       "title": "Shimmer Button",

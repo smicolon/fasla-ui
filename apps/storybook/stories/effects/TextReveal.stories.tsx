@@ -66,8 +66,18 @@ const COPY = {
 type StoryCtx = { globals: { direction?: string } }
 const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : COPY.ltr)
 
+/**
+ * Storybook lists a story's own args first in the controls table, so the
+ * other rows are named here, unset, ahead of `className`: that keeps
+ * `className` the last row (CLAUDE.md, "Storybook controls table"). Unset is
+ * what they are anyway, so nothing in the preview or the table changes.
+ */
 export const Default: Story = {
   args: {
+    text: undefined,
+    delay: undefined,
+    duration: undefined,
+    triggerOnView: undefined,
     className: "text-2xl font-semibold",
   },
   render: (args, ctx) => <TextReveal {...args} text={args.text ?? copy(ctx).welcome} />,
