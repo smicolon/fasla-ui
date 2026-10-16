@@ -372,7 +372,7 @@ export const BrokenTrailBreadcrumb: StoryObj<typeof ErrorStateBrokenTrailBreadcr
 export const ServerError500: StoryObj<typeof ErrorStateServerError500> = {
   name: "Server Error 500",
   argTypes: errorStateArgTypes(ErrorStateServerError500, errorStateServerError500Copy, ["retryingLabel"]),
-  render: (args, context) => <ErrorStateServerError500 locale={localeOf(context)} onRetry={settleSoon} {...args} />,
+  render: (args, context) => <ErrorStateServerError500 locale={localeOf(context)} {...args} onRetry={settleSoon} />,
 }
 
 /** The retry failed: a line under the actions says so. */
@@ -380,7 +380,7 @@ export const ServerError500RetryFails: StoryObj<typeof ErrorStateServerError500>
   tags: ["!dev", "!autodocs"],
   name: "Server Error 500: Retry fails",
   argTypes: errorStateArgTypes(ErrorStateServerError500, errorStateServerError500Copy, ["retryingLabel"]),
-  render: (args, context) => <ErrorStateServerError500 locale={localeOf(context)} onRetry={failSoon} {...args} />,
+  render: (args, context) => <ErrorStateServerError500 locale={localeOf(context)} {...args} onRetry={failSoon} />,
 }
 
 /** Press Request access: the row shows a spinner, then confirms. */
@@ -394,8 +394,8 @@ export const AccessDenied403: StoryObj<typeof ErrorStateAccessDenied403> = {
         ...errorStateAccessDenied403Copy[localeOf(context)].account,
         avatar: "/blocks/error-state/avatar.webp",
       }}
-      onRequestAccess={settleSoon}
       {...args}
+      onRequestAccess={settleSoon}
     />
   ),
 }
@@ -405,7 +405,7 @@ export const AccessDenied403NoPhoto: StoryObj<typeof ErrorStateAccessDenied403> 
   tags: ["!dev", "!autodocs"],
   name: "Access Denied 403: No photo",
   argTypes: errorStateArgTypes(ErrorStateAccessDenied403, errorStateAccessDenied403Copy),
-  render: (args, context) => <ErrorStateAccessDenied403 locale={localeOf(context)} onRequestAccess={settleSoon} {...args} />,
+  render: (args, context) => <ErrorStateAccessDenied403 locale={localeOf(context)} {...args} onRequestAccess={settleSoon} />,
 }
 
 /** The request failed: the row says so and can be pressed again. */
@@ -413,14 +413,14 @@ export const AccessDenied403RequestFails: StoryObj<typeof ErrorStateAccessDenied
   tags: ["!dev", "!autodocs"],
   name: "Access Denied 403: Request fails",
   argTypes: errorStateArgTypes(ErrorStateAccessDenied403, errorStateAccessDenied403Copy),
-  render: (args, context) => <ErrorStateAccessDenied403 locale={localeOf(context)} onRequestAccess={failSoon} {...args} />,
+  render: (args, context) => <ErrorStateAccessDenied403 locale={localeOf(context)} {...args} onRequestAccess={failSoon} />,
 }
 
 /** Press Try again: the button shows its spinner while it reconnects. */
 export const OfflineState: StoryObj<typeof ErrorStateOfflineState> = {
   name: "Offline State",
   argTypes: errorStateArgTypes(ErrorStateOfflineState, errorStateOfflineStateCopy, ["retryingLabel"]),
-  render: (args, context) => <ErrorStateOfflineState locale={localeOf(context)} onRetry={settleSoon} {...args} />,
+  render: (args, context) => <ErrorStateOfflineState locale={localeOf(context)} {...args} onRetry={settleSoon} />,
 }
 
 /** Still offline after Try again: a line under the actions says so. */
@@ -428,14 +428,14 @@ export const OfflineStateRetryFails: StoryObj<typeof ErrorStateOfflineState> = {
   tags: ["!dev", "!autodocs"],
   name: "Offline State: Retry fails",
   argTypes: errorStateArgTypes(ErrorStateOfflineState, errorStateOfflineStateCopy, ["retryingLabel"]),
-  render: (args, context) => <ErrorStateOfflineState locale={localeOf(context)} onRetry={failSoon} {...args} />,
+  render: (args, context) => <ErrorStateOfflineState locale={localeOf(context)} {...args} onRetry={failSoon} />,
 }
 
 /** Enter an address and press Notify me: pending, then the confirmation. */
 export const MaintenanceMode: StoryObj<typeof ErrorStateMaintenanceMode> = {
   name: "Maintenance Mode",
   argTypes: errorStateArgTypes(ErrorStateMaintenanceMode, errorStateMaintenanceModeCopy, ["pendingLabel"]),
-  render: (args, context) => <ErrorStateMaintenanceMode locale={localeOf(context)} onSubscribe={settleSoon} {...args} />,
+  render: (args, context) => <ErrorStateMaintenanceMode locale={localeOf(context)} {...args} onSubscribe={settleSoon} />,
 }
 
 /** The sign-up is held mid-send. */
@@ -443,7 +443,7 @@ export const MaintenanceModePending: StoryObj<typeof ErrorStateMaintenanceMode> 
   tags: ["!dev", "!autodocs"],
   name: "Maintenance Mode: Pending",
   argTypes: errorStateArgTypes(ErrorStateMaintenanceMode, errorStateMaintenanceModeCopy, ["pendingLabel"]),
-  render: (args, context) => <ErrorStateMaintenanceMode locale={localeOf(context)} onSubscribe={never} {...args} />,
+  render: (args, context) => <ErrorStateMaintenanceMode locale={localeOf(context)} {...args} onSubscribe={never} />,
 }
 
 /** The sign-up failed: the form stays as it was, with a line under it. */
@@ -451,7 +451,7 @@ export const MaintenanceModeFails: StoryObj<typeof ErrorStateMaintenanceMode> = 
   tags: ["!dev", "!autodocs"],
   name: "Maintenance Mode: Sign-up fails",
   argTypes: errorStateArgTypes(ErrorStateMaintenanceMode, errorStateMaintenanceModeCopy, ["pendingLabel"]),
-  render: (args, context) => <ErrorStateMaintenanceMode locale={localeOf(context)} onSubscribe={failSoon} {...args} />,
+  render: (args, context) => <ErrorStateMaintenanceMode locale={localeOf(context)} {...args} onSubscribe={failSoon} />,
 }
 
 /** The sign-up turned off. */
@@ -467,7 +467,7 @@ export const MaintenanceModeDisabled: StoryObj<typeof ErrorStateMaintenanceMode>
 export const EmptySearchResults: StoryObj<typeof ErrorStateEmptySearchResults> = {
   name: "Empty Search Results",
   argTypes: errorStateArgTypes(ErrorStateEmptySearchResults, errorStateEmptySearchResultsCopy, ["suggestionsLabel"]),
-  render: (args, context) => <ErrorStateEmptySearchResults locale={localeOf(context)} onSearch={settleSoon} {...args} />,
+  render: (args, context) => <ErrorStateEmptySearchResults locale={localeOf(context)} {...args} onSearch={settleSoon} />,
 }
 
 /** The field, the button and the suggestions turned off. */
@@ -485,5 +485,5 @@ export const EmptySearchResultsDisabled: StoryObj<typeof ErrorStateEmptySearchRe
 export const CountdownRedirect: StoryObj<typeof ErrorStateCountdownRedirect> = {
   name: "Countdown Redirect",
   argTypes: errorStateArgTypes(ErrorStateCountdownRedirect, errorStateCountdownRedirectCopy),
-  render: (args, context) => <ErrorStateCountdownRedirect locale={localeOf(context)} onRedirect={() => {}} {...args} />,
+  render: (args, context) => <ErrorStateCountdownRedirect locale={localeOf(context)} {...args} onRedirect={() => {}} />,
 }
