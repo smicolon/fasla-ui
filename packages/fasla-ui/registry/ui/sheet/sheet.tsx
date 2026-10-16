@@ -58,14 +58,15 @@ function readContext(node: HTMLElement): PlaceContext {
 }
 
 /**
- * Keeps the open sheet in step with the page it was written in. Rendered
- * inside the popup, so it runs only while the sheet is open.
- *
- * Reads before the first paint, so the sheet never slides in from the wrong
- * side, then again whenever an ancestor's `dir`, `lang`, `class` or `style`
- * changes — a locale switch, a font class, Storybook's toolbar. Each ancestor
- * is observed on its own, without `subtree`, so changes elsewhere in the page
+ * Keeps the open sheet in step with the page it was written in, after its
+ * first render: whenever an ancestor's `dir`, `lang`, `class` or `style`
+ * changes — a locale switch, a font class, Storybook's toolbar. Rendered
+ * inside the popup, so it runs only while the sheet is open. Each ancestor is
+ * observed on its own, without `subtree`, so changes elsewhere in the page
  * never wake it.
+ *
+ * It does not set the first direction: `SheetPopup` reads that before its
+ * first render (see there for why).
  */
 function FollowPlace({
   anchorRef,
@@ -288,66 +289,124 @@ export interface SheetContentProps extends Omit<PopupProps, "className" | "rende
   className?: string
 }
 
+type SheetPopupProps = Omit<SheetContentProps, "container" | "showCloseButton" | "closeLabel"> & {
+  side: SheetSide
+  showCloseButton: boolean
+  closeLabel?: string
+  anchorRef: React.RefObject<HTMLSpanElement | null>
+}
+
+/**
+ * The panel. It mounts only while the sheet is open (Base UI's Portal renders
+ * nothing while it is closed), so its first render is the moment it opens.
+ *
+ * The page's direction has to be on the panel from that first render. The
+ * slide is a transition on `transform`, and Start and End take opposite
+ * offsets in each direction (`translate-x-full` against `-translate-x-full`).
+ * A panel that rendered left-to-right and was then corrected to right-to-left
+ * while still in its starting style would see its offset change mid-start,
+ * and the browser would animate that change too: in Arabic, End would slide
+ * in from the page side, towards the left edge, instead of from off-screen.
+ * So the direction is read from the anchor, which is already in the page,
+ * before the first render.
+ *
+ * If the anchor is not in the page yet (a sheet open on its very first
+ * render, where the anchor and the panel arrive in the same commit), it falls
+ * back to `ltr`, `FollowPlace` corrects it before the first paint, and the
+ * transition is held off until the frame after, so the correction is never
+ * animated: that sheet appears without sliding rather than sliding the wrong
+ * way.
+ */
+const SheetPopup = React.forwardRef<HTMLDivElement, SheetPopupProps>(
+  ({ side, showCloseButton, closeLabel, anchorRef, className, style, children, ...props }, ref) => {
+    const scrollRef = React.useRef<HTMLDivElement>(null)
+    const [place, setPlace] = React.useState<PlaceContext | null>(() =>
+      anchorRef.current ? readContext(anchorRef.current) : null
+    )
+    const [settled, setSettled] = React.useState(place !== null)
+    const current = place ?? { direction: "ltr" as const }
+
+    React.useEffect(() => {
+      if (settled) return
+      const frame = requestAnimationFrame(() => setSettled(true))
+      return () => cancelAnimationFrame(frame)
+    }, [settled])
+
+    const followPlace = React.useCallback<React.Dispatch<React.SetStateAction<PlaceContext>>>(
+      (next) => setPlace((prev) => (typeof next === "function" ? next(prev ?? { direction: "ltr" }) : next)),
+      []
+    )
+
+    return (
+      <DialogPrimitive.Popup
+        ref={ref}
+        data-slot="sheet-content"
+        data-side={side}
+        dir={current.direction}
+        lang={current.lang}
+        style={
+          typeof style === "function"
+            ? style
+            : { fontFamily: current.fontFamily, ...(settled ? null : { transition: "none" }), ...style }
+        }
+        className={cn(CONTENT, SIDE[side], className)}
+        {...props}
+      >
+        <FollowPlace anchorRef={anchorRef} onChange={followPlace} />
+        <div ref={scrollRef} data-slot="sheet-scroll" className={SCROLL}>
+          {children}
+        </div>
+        <PinnedInsets scrollRef={scrollRef} />
+        {showCloseButton && (
+          // A cell one title line tall (32px in Geist, 40 in Cairo: `1lh`
+          // of the same `text-2xl`), 16px below the header's top, with the
+          // 26px button centred in it, so the button sits on the middle of
+          // the title's first line in either script. 16px from the sheet's
+          // outer end edge, as in Figma, on every side. Above the sticky
+          // header, and last in the DOM, so focus reaches the content first.
+          <div data-slot="sheet-close-cell" className="absolute end-4 top-4 z-[2] flex h-[1lh] items-center text-2xl">
+            <DialogPrimitive.Close
+              data-slot="sheet-close-button"
+              render={<Button variant="ghost" tone="secondary" size="icon-xs" aria-label={closeLabel} />}
+            >
+              <XIcon aria-hidden="true" strokeWidth={1.5} />
+              {!closeLabel && (
+                <span className="sr-only">
+                  <Localised en="Close" ar="إغلاق" />
+                </span>
+              )}
+            </DialogPrimitive.Close>
+          </div>
+        )}
+      </DialogPrimitive.Popup>
+    )
+  }
+)
+SheetPopup.displayName = "SheetPopup"
+
 /**
  * The sheet itself, over its overlay: a `SheetHeader`, any content of your
  * own, and a `SheetFooter`.
  */
 const SheetContent = React.forwardRef<HTMLDivElement, SheetContentProps>(
-  (
-    { side = "end", showCloseButton = true, closeLabel, container, className, style, children, ...props },
-    ref
-  ) => {
+  ({ side = "end", showCloseButton = true, closeLabel, container, ...props }, ref) => {
     // Rendered where the content is written, outside the portal, so the page's
     // direction, language and font can be read from it.
     const anchorRef = React.useRef<HTMLSpanElement>(null)
-    const scrollRef = React.useRef<HTMLDivElement>(null)
-    const [place, setPlace] = React.useState<PlaceContext>({ direction: "ltr" })
 
     return (
       <>
         <span ref={anchorRef} hidden data-slot="sheet-anchor" />
         <DialogPrimitive.Portal container={container}>
           <DialogPrimitive.Backdrop data-slot="sheet-overlay" className={OVERLAY} />
-          <DialogPrimitive.Popup
+          <SheetPopup
             ref={ref}
-            data-slot="sheet-content"
-            data-side={side}
-            dir={place.direction}
-            lang={place.lang}
-            style={typeof style === "function" ? style : { fontFamily: place.fontFamily, ...style }}
-            className={cn(CONTENT, SIDE[side], className)}
+            side={side}
+            showCloseButton={showCloseButton}
+            closeLabel={closeLabel}
+            anchorRef={anchorRef}
             {...props}
-          >
-            <FollowPlace anchorRef={anchorRef} onChange={setPlace} />
-            <div ref={scrollRef} data-slot="sheet-scroll" className={SCROLL}>
-              {children}
-            </div>
-            <PinnedInsets scrollRef={scrollRef} />
-            {showCloseButton && (
-              // A cell one title line tall (32px in Geist, 40 in Cairo: `1lh`
-              // of the same `text-2xl`), 16px below the header's top, with the
-              // 26px button centred in it, so the button sits on the middle of
-              // the title's first line in either script. 16px from the sheet's
-              // outer end edge, as in Figma, on every side. Above the sticky
-              // header, and last in the DOM, so focus reaches the content first.
-              <div
-                data-slot="sheet-close-cell"
-                className="absolute end-4 top-4 z-[2] flex h-[1lh] items-center text-2xl"
-              >
-                <DialogPrimitive.Close
-                  data-slot="sheet-close-button"
-                  render={<Button variant="ghost" tone="secondary" size="icon-xs" aria-label={closeLabel} />}
-                >
-                  <XIcon aria-hidden="true" strokeWidth={1.5} />
-                  {!closeLabel && (
-                    <span className="sr-only">
-                      <Localised en="Close" ar="إغلاق" />
-                    </span>
-                  )}
-                </DialogPrimitive.Close>
-              </div>
-            )}
-          </DialogPrimitive.Popup>
+          />
         </DialogPrimitive.Portal>
       </>
     )

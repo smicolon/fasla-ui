@@ -338,6 +338,50 @@ describe("Sheet — direction", () => {
     expect(content()).toHaveAttribute("lang", "ar")
   })
 
+  // The slide is a transition on transform, and Start/End take opposite offsets
+  // per direction. A panel that rendered `ltr` and was corrected to `rtl` while
+  // still starting would animate that correction: in Arabic, End slid in from
+  // the page side instead of from off-screen left (measured in Chrome before
+  // the fix: left edge 384 → 0 rather than -384 → 0). So the panel must be
+  // created with the page's direction, never flipped after.
+  it.each(["end", "start"] as const)(
+    "creates the %s panel with the page's direction when it opens, without flipping it after",
+    async (side) => {
+      render(
+        <div dir="rtl" lang="ar">
+          <Example defaultOpen={false} side={side} />
+        </div>
+      )
+      const records: MutationRecord[] = []
+      const observer = new MutationObserver((list) => records.push(...list))
+      observer.observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ["dir"], attributeOldValue: true })
+
+      fireEvent.click(screen.getByRole("button", { name: "Edit profile" }))
+      await screen.findByRole("dialog")
+      await new Promise((resolve) => setTimeout(resolve, 50))
+      records.push(...observer.takeRecords())
+      observer.disconnect()
+
+      const flips = records.filter(
+        (r) => r.type === "attributes" && (r.target as HTMLElement).dataset?.slot === "sheet-content"
+      )
+      expect(flips).toEqual([])
+      expect(content()).toHaveAttribute("dir", "rtl")
+      expect(content()!.style.transition).toBe("")
+    }
+  )
+
+  it("holds the slide off for a frame when it is open on its very first render, so a late correction never animates", async () => {
+    render(
+      <div dir="rtl" lang="ar">
+        <Example />
+      </div>
+    )
+    await screen.findByRole("dialog")
+    expect(content()).toHaveAttribute("dir", "rtl")
+    await waitFor(() => expect(content()!.style.transition).toBe(""))
+  })
+
   it("is left-to-right on a page with no direction", async () => {
     render(<Example />)
     await screen.findByRole("dialog")

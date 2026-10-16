@@ -124,13 +124,17 @@ const Head = ({ children, className }: { children: React.ReactNode; className?: 
 )
 
 /**
- * The frame round every story but Default and Interactive. It centres the
- * content in either direction, and scrolls it sideways in the story's own
- * direction when it is wider than the canvas (a phone).
+ * The frame round every story but Default and Interactive, as Alert's: as
+ * wide as the canvas, with the grid inside it centred and fluid, so a story
+ * fits the canvas at any width instead of scrolling sideways. A fixed-width
+ * grid here used to overflow a canvas narrower than its two 436px cells; the
+ * frame then scrolled, and in RTL the overflow went to the left, cutting the
+ * far column's sheet, its close button and its fields. The scroll stays as a
+ * last resort for anything that still cannot shrink.
  */
 const framed: Decorator = (Story) => (
   <div data-story-frame className="overflow-x-auto">
-    <div className="mx-auto w-max p-1">
+    <div className="mx-auto w-full p-1">
       <Story />
     </div>
   </div>
@@ -240,10 +244,25 @@ export const Interactive: Story = {
 }
 
 /**
- * Two held sheets per row, sized to fit the Storybook Docs page; each one's
- * caption sits above it, and the boxes in a row share a top edge.
+ * Two held sheets per row on the Storybook Docs page, one per row once the
+ * canvas is narrower than two 20rem cells. At its widest a cell is 436px, so
+ * Start and End are their full 384px with 48px of overlay; narrower, they keep
+ * the 48px and shrink, as on a phone. Every cell keeps its caption above it,
+ * so a caption never parts from its sheet when the grid wraps, and cells in a
+ * row share a top edge.
  */
-const PAIRS = "grid w-max grid-cols-[repeat(2,27.25rem)] gap-x-6 gap-y-2"
+const GRID =
+  "mx-auto grid w-full max-w-[56rem] grid-cols-[repeat(auto-fit,minmax(min(100%,20rem),1fr))] items-start gap-x-6 gap-y-4"
+
+/** One held sheet with its caption above it. */
+function Cell({ label, ...held }: React.ComponentProps<typeof Held> & { label: React.ReactNode }) {
+  return (
+    <div className="grid min-w-0 gap-2">
+      <Head className="justify-self-center">{label}</Head>
+      <Held {...held} />
+    </div>
+  )
+}
 
 /**
  * Figma's four sides for the direction on the toolbar. End and Start are
@@ -258,20 +277,11 @@ export const AllSides: Story = {
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className={PAIRS}>
-        {[SIDES.slice(0, 2), SIDES.slice(2)].map((row) => (
-          <React.Fragment key={row.join()}>
-            {row.map((side) => (
-              <Head key={side} className="justify-self-center">
-                side = {side}
-              </Head>
-            ))}
-            {row.map((side) => (
-              <Held key={side} side={side}>
-                <Body c={c} />
-              </Held>
-            ))}
-          </React.Fragment>
+      <div className={GRID}>
+        {SIDES.map((side) => (
+          <Cell key={side} label={`side = ${side}`} side={side}>
+            <Body c={c} />
+          </Cell>
         ))}
       </div>
     )
@@ -290,16 +300,11 @@ export const LongTitle: Story = {
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className={PAIRS}>
+      <div className={GRID}>
         {(["end", "top"] as const).map((side) => (
-          <Head key={side} className="justify-self-center">
-            side = {side}
-          </Head>
-        ))}
-        {(["end", "top"] as const).map((side) => (
-          <Held key={side} side={side} box="h-[36rem]">
+          <Cell key={side} label={`side = ${side}`} side={side} box="h-[36rem]">
             <Body c={c} text={c.long} />
-          </Held>
+          </Cell>
         ))}
       </div>
     )
@@ -318,16 +323,11 @@ export const ScrollingBody: Story = {
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className={PAIRS}>
+      <div className={GRID}>
         {(["end", "bottom"] as const).map((side) => (
-          <Head key={side} className="justify-self-center">
-            side = {side}
-          </Head>
-        ))}
-        {(["end", "bottom"] as const).map((side) => (
-          <Held key={side} side={side}>
+          <Cell key={side} label={`side = ${side}`} side={side}>
             <Body c={c} long />
-          </Held>
+          </Cell>
         ))}
       </div>
     )
@@ -337,35 +337,34 @@ export const ScrollingBody: Story = {
 const DIRECTIONS = ["ltr", "rtl"] as const
 
 /**
- * Both directions at once, whatever the toolbar says: each column sets its
- * own `dir`, `lang` and font, and the sheet takes them from where it is
- * written. End is on the right in LTR and on the left in RTL, Start the
- * other way round; the close button follows the end edge, and Arabic sets on
- * Cairo's taller lines (40px for the title).
+ * Both directions at once, whatever the toolbar says: one column per
+ * direction, each setting its own `dir`, `lang` and font (Geist or Cairo, as
+ * Alert's Directions story does), and the sheet takes them from where it is
+ * written. End is on the right in LTR and on the left in RTL, Start the other
+ * way round; the close button follows the end edge, and Arabic sets on
+ * Cairo's taller lines (40px for the title). On a narrow canvas the RTL
+ * column moves under the LTR one.
  */
 export const LtrAndRtl: Story = {
   decorators: [framed],
   // Fixed content: none of the controls would change it.
   parameters: { layout: "padded", controls: { disable: true } },
   render: () => (
-    <div className="grid w-max grid-cols-[max-content_repeat(2,27.25rem)] gap-x-6 gap-y-4">
-      <span />
+    <div className={GRID}>
       {DIRECTIONS.map((dir) => (
-        <Head key={dir} className="justify-self-center">
-          {dir.toUpperCase()}
-        </Head>
-      ))}
-      {SIDES.map((side) => (
-        <React.Fragment key={side}>
-          <Head>{side}</Head>
-          {DIRECTIONS.map((dir) => (
-            <div key={dir} dir={dir} lang={dir === "rtl" ? "ar" : "en"} className={dir === "rtl" ? "grid font-arabic" : "grid"}>
-              <Held side={side}>
-                <Body c={COPY[dir]} />
-              </Held>
-            </div>
+        <div
+          key={dir}
+          dir={dir}
+          lang={dir === "rtl" ? "ar" : "en"}
+          className={["grid min-w-0 gap-4", dir === "rtl" ? "font-arabic" : "font-sans"].join(" ")}
+        >
+          <Head className="justify-self-center">{dir.toUpperCase()}</Head>
+          {SIDES.map((side) => (
+            <Cell key={side} label={`side = ${side}`} side={side}>
+              <Body c={COPY[dir]} />
+            </Cell>
           ))}
-        </React.Fragment>
+        </div>
       ))}
     </div>
   ),
@@ -385,11 +384,11 @@ export const LightAndDark: Story = {
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className="grid gap-4">
+      <div className="mx-auto grid w-full max-w-[59.25rem] gap-4">
         {THEMES.map((theme) => (
-          <div key={theme} className={[theme, "rounded-lg border bg-background p-6 text-foreground"].join(" ")}>
+          <div key={theme} className={[theme, "min-w-0 rounded-lg border bg-background p-6 text-foreground"].join(" ")}>
             <Head className="block pb-4">{theme === "dark" ? "Dark" : "Light"}</Head>
-            <div className="grid grid-cols-[repeat(2,27.25rem)] gap-x-6">
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,20rem),1fr))] items-start gap-x-6 gap-y-4">
               <Held side="end">
                 <Body c={c} />
               </Held>
