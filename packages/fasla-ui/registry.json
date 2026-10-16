@@ -509,6 +509,32 @@
       ]
     },
     {
+      "name": "input-number",
+      "type": "registry:ui",
+      "title": "Input Number",
+      "description": "A number field with step buttons in five layouts, Input's success, invalid and disabled states, min and max limits, and Western digits in every language, mirrored for RTL.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/ui/input-number/input-number.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input-number.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "forms"
+      ]
+    },
+    {
       "name": "navbar",
       "type": "registry:block",
       "title": "Navbar",

@@ -46,18 +46,18 @@
     },
     "counts": {
       "pagesInScope": 44,
-      "entries": 163,
+      "entries": 164,
       "primary": 44,
-      "componentSets": 162,
+      "componentSets": 163,
       "looseComponents": 1,
-      "variants": 4622,
+      "variants": 4630,
       "primaryWithEnDoc": 43,
       "primaryWithArDoc": 41,
       "withEnDoc": 43,
       "withArDoc": 41,
-      "withRtl": 152,
-      "withDescription": 5,
-      "mappedToCode": 29,
+      "withRtl": 153,
+      "withDescription": 6,
+      "mappedToCode": 30,
       "docFrames": 98
     },
     "legend": {
@@ -227,7 +227,8 @@
       "initials": "Y/H",
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3996-8715",
       "entryIds": [
-        "39043:1432"
+        "39043:1432",
+        "46381:5702"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -1352,9 +1353,9 @@
         "Variant": [
           "Default",
           "Vertically Stacked Buttons",
-          "Horizontally Stacked Button",
-          "Horizontal Stretched Button",
-          "Mini"
+          "Mini",
+          "Horizontally Stacked Buttons",
+          "Horizontally Stretched Buttons"
         ],
         "Filled": [
           "No",
@@ -1364,7 +1365,7 @@
           "Default",
           "Focus",
           "Success",
-          "Error",
+          "Destructive",
           "Disabled"
         ],
         "Direction": [
@@ -1392,11 +1393,56 @@
         },
         "duplicates": []
       },
-      "code": null,
+      "code": "input-number",
       "hasDescription": false,
       "flags": [
         "no-description"
       ]
+    },
+    "46381:5702": {
+      "name": "Input Number Button",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "3996:8715",
+        "name": "✦  🟢 Y/H |  Input Number ✅",
+        "display": "Input Number",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y/H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46381-5702",
+      "variants": 8,
+      "axes": {
+        "Type": [
+          "Segment",
+          "Stack Top",
+          "Stack Bottom"
+        ],
+        "Divider": [
+          "Start",
+          "End"
+        ],
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "Type",
+        "Divider",
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": true,
+      "flags": []
     },
     "40492:58601": {
       "name": "Side Bar Inside Item",

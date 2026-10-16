@@ -121,6 +121,16 @@ const LABEL_ROW = cn(ROW, "items-baseline")
 const HELPER_ROW = cn(ROW, "items-start")
 
 /**
+ * Figma's Label: SM Medium in `foreground`, and the status colour in Success
+ * and Destructive. Exported with the label row, so the other fields built on
+ * Input's box (Input Number) carry the same label.
+ */
+const LABEL = cn(
+  "min-w-0 text-sm font-medium text-foreground",
+  "group-[:not([data-invalid])[data-status=success]]/input:text-success group-data-[invalid]/input:text-destructive"
+)
+
+/**
  * Figma's Top Right and Bottom labels: XS Regular in `muted-foreground`, and
  * the status colour in Success and Destructive. Full strength: Figma's 0.8
  * layer opacity put the grey text at 3.2:1, under AA's 4.5:1, so it was
@@ -240,13 +250,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         {(label || labelEnd) && (
           <div data-slot="input-label-row" className={LABEL_ROW}>
             {label && (
-              <FieldPrimitive.Label
-                data-slot="input-label"
-                className={cn(
-                  "min-w-0 text-sm font-medium text-foreground",
-                  "group-[:not([data-invalid])[data-status=success]]/input:text-success group-data-[invalid]/input:text-destructive"
-                )}
-              >
+              <FieldPrimitive.Label data-slot="input-label" className={LABEL}>
                 {label}
               </FieldPrimitive.Label>
             )}
@@ -339,5 +343,5 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 )
 Input.displayName = "Input"
 
-export { Input, inputBoxVariants }
+export { Input, inputBoxVariants, LABEL_ROW as inputLabelRowClassName, LABEL as inputLabelClassName }
 export type { InputSize, InputRadius, InputStatus }

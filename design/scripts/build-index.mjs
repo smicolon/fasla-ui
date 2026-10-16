@@ -110,6 +110,7 @@ export const CODE_MAP = {
   dialog: { set: "Dialog", page: "3680:33667" },
   "dropdown-menu": { set: "Dropdown", page: "3972:55121" },
   input: { set: "Default Input", page: "3882:2381" },
+  "input-number": { set: "Input Number", page: "3996:8715" },
   pagination: { set: "Pagination", page: "3772:64720" },
   progress: { set: "Progress", page: "3831:2712" },
   radio: { set: "Radio", page: "3830:60584" },
