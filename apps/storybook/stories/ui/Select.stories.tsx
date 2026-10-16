@@ -281,7 +281,8 @@ export const Default: Story = {
     const c = copy(ctx)
     const props: StoryArgs = {
       ...args,
-      className: "w-72",
+      // The story's width first, so the Controls' classes win.
+      className: ["w-72", args.className].filter(Boolean).join(" "),
       label: args.label ?? (args.multiple ? c.delivery : c.city),
       placeholder: args.placeholder ?? (args.multiple ? c.deliveryPlaceholder : c.cityPlaceholder),
       description: args.description ?? (args.multiple ? c.deliveryHelp : c.cityHelp),
@@ -754,7 +755,8 @@ export const LightAndDark: Story = {
 export const LtrAndRtl: Story = {
   decorators: [framed],
   parameters: { layout: "padded" },
-  render: () => (
+  argTypes: { className: { control: "text" } },
+  render: ({ className }) => (
     <div className="grid grid-cols-[17rem] items-start gap-x-8 gap-y-6 sm:grid-cols-[repeat(2,18rem)]">
       {(["ltr", "rtl"] as const).map((direction) => {
         const c = COPY[direction]
@@ -771,12 +773,14 @@ export const LtrAndRtl: Story = {
               startIcon={<MapPinIcon />}
               defaultValue={RIYADH}
               items={cityItems(c).slice(0, 4)}
+              className={className}
             />
             <Select
               multiple
               label={c.delivery}
               defaultValue={[RIYADH, JEDDAH, DAMMAM]}
               items={cityItems(c)}
+              className={className}
             />
           </div>
         )

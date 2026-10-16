@@ -24,6 +24,10 @@ const config: Config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+        // Figma `border radius/xl`, 14px: what rounded-xl draws on the docs
+        // site. Not the docs' `var(--radius) + 4px`: Storybook's --radius is
+        // 8px, not the docs' 10px, so that would draw 12px here.
+        xl: "0.875rem",
       },
     },
   },

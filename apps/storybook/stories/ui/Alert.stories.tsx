@@ -367,8 +367,8 @@ export const LongText: Story = {
  */
 export const Dismissible: Story = {
   decorators: [framed],
-  parameters: { layout: "padded", controls: { include: ["variant", "type"] } },
-  render: function Render({ variant, type }, ctx) {
+  parameters: { layout: "padded", controls: { include: ["variant", "type", "className"] } },
+  render: function Render({ variant, type, className }, ctx) {
     const [open, setOpen] = React.useState(true)
     const c = copy(ctx)
     return (
@@ -379,10 +379,15 @@ export const Dismissible: Story = {
           text={c.messages[variant]}
           open={open}
           onOpenChange={setOpen}
-          className="w-full [grid-area:1/1]"
+          className={["w-full [grid-area:1/1]", className].filter(Boolean).join(" ")}
         />
         {!open && (
-          <Composed variant={variant} type={type} text={c.messages[variant]} className="invisible w-full [grid-area:1/1]" />
+          <Composed
+            variant={variant}
+            type={type}
+            text={c.messages[variant]}
+            className={["invisible w-full [grid-area:1/1]", className].filter(Boolean).join(" ")}
+          />
         )}
         {!open && (
           <div className="flex flex-col items-center gap-2 text-sm text-muted-foreground [grid-area:1/1]">
@@ -411,8 +416,8 @@ const PANELS = [
  */
 export const Directions: Story = {
   decorators: [framed],
-  parameters: { layout: "padded", controls: { include: ["type"] } },
-  render: ({ type }) => (
+  parameters: { layout: "padded", controls: { include: ["type", "className"] } },
+  render: ({ type, className }) => (
     <div className={PANEL_GRID}>
       {PANELS.map((panel) => (
         <div
@@ -426,7 +431,13 @@ export const Directions: Story = {
         >
           <Head>{panel.title}</Head>
           {VARIANTS.map((variant) => (
-            <Composed key={variant} type={type} variant={variant} text={COPY[panel.lang].messages[variant]} className="w-full" />
+            <Composed
+              key={variant}
+              type={type}
+              variant={variant}
+              text={COPY[panel.lang].messages[variant]}
+              className={["w-full", className].filter(Boolean).join(" ")}
+            />
           ))}
         </div>
       ))}
@@ -442,8 +453,8 @@ export const Directions: Story = {
 export const LightAndDark: Story = {
   name: "Light and Dark",
   decorators: [framed],
-  parameters: { layout: "padded", controls: { include: ["type"] } },
-  render: ({ type }, ctx) => (
+  parameters: { layout: "padded", controls: { include: ["type", "className"] } },
+  render: ({ type, className }, ctx) => (
     <div className={PANEL_GRID}>
       {THEMES.map((theme) => (
         <div
@@ -455,7 +466,13 @@ export const LightAndDark: Story = {
         >
           <Head>{theme === "dark" ? "Dark" : "Light"}</Head>
           {VARIANTS.map((variant) => (
-            <Composed key={variant} type={type} variant={variant} text={copy(ctx).messages[variant]} className="w-full" />
+            <Composed
+              key={variant}
+              type={type}
+              variant={variant}
+              text={copy(ctx).messages[variant]}
+              className={["w-full", className].filter(Boolean).join(" ")}
+            />
           ))}
         </div>
       ))}
