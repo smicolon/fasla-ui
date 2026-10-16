@@ -49,8 +49,8 @@ export interface ErrorStateCountdownRedirectCopy {
   stayLabel: React.ReactNode
 }
 
-/** Arabic counts its nouns: ثوانٍ for three to ten, ثانية otherwise. */
-const arabicSeconds = (seconds: number) => (seconds >= 3 && seconds <= 10 ? "ثوانٍ" : "ثانية")
+/** Arabic counts its nouns: the dual ثانيتين for two, ثوانٍ for three to ten, ثانية otherwise. */
+const arabicSeconds = (seconds: number) => (seconds === 2 ? "ثانيتين" : seconds >= 3 && seconds <= 10 ? "ثوانٍ" : "ثانية")
 
 /** Figma's copy, English and Arabic. */
 const COPY: Record<"en" | "ar", ErrorStateCountdownRedirectCopy> = {
