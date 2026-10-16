@@ -104,6 +104,7 @@ export const CODE_MAP = {
   progress: { set: "Progress", page: "3831:2712" },
   radio: { set: "Radio", page: "3830:60584" },
   select: { set: "Select Input", page: "3884:9073" },
+  sheet: { set: "Sheet", page: "14872:1780" },
   skeleton: { set: "Skeleton", page: "14860:69258" },
   "status-indicator": { set: "Status Indicator", page: "38830:41585" },
   switch: { set: "Switch", page: "3862:3097" },

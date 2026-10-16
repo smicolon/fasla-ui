@@ -1590,6 +1590,119 @@
         "custom": "Use your own icon"
       }
     },
+    "sheet": {
+      "installNote": "Sheet is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its close button uses <code>button</code>. <code>add</code> installs both with the component, and so does the shadcn CLI.",
+      "previewHint": "Press a button to open the sheet from that side. Tab stays inside it, and Escape, the close button or a press on the overlay closes it.",
+      "trigger": "Edit profile",
+      "title": "Edit profile",
+      "description": "Make changes to your profile here. Click save when you're done.",
+      "name": "Name",
+      "nameValue": "Nadia Rahman",
+      "username": "Username",
+      "usernameValue": "nadia.rahman",
+      "save": "Save changes",
+      "cancel": "Cancel",
+      "sides": {
+        "end": "End",
+        "start": "Start",
+        "top": "Top",
+        "bottom": "Bottom"
+      },
+      "side": {
+        "title": "Side",
+        "body": "<code>side</code> sets the edge the sheet slides in from. <code>end</code>, the default, suits settings, details and filters. <code>start</code> suits navigation menus. Both are 384px wide and as tall as the window. <code>start</code> and <code>end</code> follow the reading direction: <code>end</code> is the right edge on an English page and the left edge on an Arabic one, and the sheet slides from that edge. <code>top</code> and <code>bottom</code> are as wide as the window and as tall as their content. Keep <code>bottom</code> for short actions and quick choices on a phone, and <code>top</code> for a notice or a toolbar."
+      },
+      "content": {
+        "title": "Content and footer",
+        "body": "Anything you place between <code>SheetHeader</code> and <code>SheetFooter</code> is the sheet's content, 16px from each. Give it 16px on each side with a class such as <code>px-4</code>, as the fields below have. When the content is longer than the sheet, only the content scrolls: the header stays at the top and the footer at the bottom. <code>SheetFooter</code> stacks its buttons full width, 16px apart, with the main action first.",
+        "about": "About",
+        "aboutText": "Product designer on the payments team, working across web and mobile. Previously led the design system at a logistics start-up, and before that ran a small studio for six years. Writes about interface type, right-to-left layout and the craft of design reviews."
+      },
+      "close": {
+        "title": "Close button",
+        "body": "The close button sits at the end of the header, 16px from the edge, on the middle of the title's first line. Its name for screen readers follows the page's language, Close or إغلاق; set <code>closeLabel</code> to change it. The header leaves 48px at its end, so a long title wraps before it reaches the button. To close from your own button, such as Cancel, wrap it in <code>SheetClose</code>. Set <code>showCloseButton</code> to <code>false</code> only when another button in the sheet closes it."
+      },
+      "long": {
+        "title": "Long title",
+        "body": "A long title wraps inside the header and the close button stays on its first line. Everything under it moves down to make room. Keep titles to a few words where you can, so the content starts high in the sheet.",
+        "sheetTitle": "Review the notification settings for every workspace you belong to before the weekly summary goes out",
+        "description": "Changes apply from the next summary. You can come back to this at any time."
+      },
+      "a11y": {
+        "role": "The sheet has the <code>dialog</code> role. Its title names it and its description describes it, so a screen reader reads both when it opens.",
+        "focus": "When the sheet opens, focus moves to its first control, such as the first field. Tab and Shift+Tab stay inside the sheet, and focus returns to the trigger when it closes.",
+        "dismiss": "Escape, the close button, a <code>SheetClose</code> button and a press on the overlay all close the sheet.",
+        "close": "The close button is named Close, or إغلاق on an Arabic page, and its × is hidden from screen readers.",
+        "page": "While the sheet is open, the page behind it can't be reached with the keyboard or the pointer, and it doesn't scroll.",
+        "motion": "The sheet slides in from its edge. When reduced motion is on, it fades in and out instead, without moving.",
+        "direction": "The sheet takes the page's direction, language and font, though it renders at the end of <code>body</code>. On an Arabic page <code>end</code> opens from the left and <code>start</code> from the right, and the close button moves with the end edge. Direction needs no prop."
+      },
+      "rootProps": {
+        "open": "Shows or hides the sheet, when you control it.",
+        "defaultOpen": "Shows the sheet on first render.",
+        "onOpenChange": "Called when the sheet opens or closes.",
+        "onOpenChangeComplete": "Called once the sheet has finished opening or closing.",
+        "actionsRef": "A ref with <code>close()</code>, to close the sheet from code.",
+        "handle": "Connects the sheet to triggers elsewhere on the page. Create one with <code>Dialog.createHandle()</code> from <code>@base-ui/react/dialog</code>.",
+        "triggerId": "Which trigger the sheet belongs to, when several share it and you control <code>open</code>.",
+        "defaultTriggerId": "Which trigger the sheet belongs to on first render, with <code>defaultOpen</code>.",
+        "children": "The trigger and the content."
+      },
+      "triggerProps": {
+        "render": "Renders your own element in place of the plain button, such as a Button.",
+        "handle": "The handle of a sheet elsewhere that this trigger opens.",
+        "payload": "Data handed to the sheet when this trigger opens it.",
+        "disabled": "Stops this trigger opening the sheet.",
+        "children": "The trigger's label.",
+        "className": "Extra classes for the trigger."
+      },
+      "contentProps": {
+        "side": "The edge the sheet slides in from. <code>start</code> and <code>end</code> follow the reading direction.",
+        "showCloseButton": "Shows the close button at the end of the header.",
+        "closeLabel": "The close button's name for screen readers. Defaults to Close, or إغلاق on an Arabic page.",
+        "container": "Where the sheet renders. Defaults to <code>body</code>.",
+        "initialFocus": "The element focused when the sheet opens. Defaults to the first control.",
+        "finalFocus": "The element focused when the sheet closes. Defaults to the trigger.",
+        "children": "The header, the content and the footer.",
+        "className": "Extra classes for the sheet's panel."
+      },
+      "headerProps": {
+        "children": "The title and the description.",
+        "className": "Extra classes for the header."
+      },
+      "titleProps": {
+        "children": "What the sheet is for.",
+        "className": "Extra classes for the title."
+      },
+      "descriptionProps": {
+        "children": "A line on what to do in the sheet.",
+        "className": "Extra classes for the description."
+      },
+      "footerProps": {
+        "children": "The actions, the main action first.",
+        "className": "Extra classes for the footer."
+      },
+      "closeProps": {
+        "render": "Renders your own element in place of the plain button, such as a Button.",
+        "onClick": "Runs before the sheet closes.",
+        "disabled": "Disables the button.",
+        "children": "The button's label, such as Cancel.",
+        "className": "Extra classes for the button."
+      },
+      "usage": {
+        "basic": "Edit a profile",
+        "start": "Open a menu from the start",
+        "controlled": "Close after saving",
+        "menu": "Menu",
+        "menuTitle": "Fasla",
+        "menuDescription": "Go to any part of your workspace.",
+        "links": {
+          "home": "Home",
+          "projects": "Projects",
+          "settings": "Settings"
+        }
+      }
+    },
     "badge": {
       "lead": "A compact inline label for status, category or metadata, with an optional icon, avatar and close button.",
       "preview": {
@@ -2460,7 +2573,7 @@
         "Alert Dialog": "Alert Dialog",
         "Command Menu": "Command Menu",
         "Table": "Table",
-        "Drawer": "Drawer",
+        "Sheet": "Sheet",
         "Textarea": "Textarea",
         "Progress": "Progress",
         "Sidebar Item": "Sidebar Item",

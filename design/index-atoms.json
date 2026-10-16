@@ -3,7 +3,7 @@
     "source": "Figma · Fasla · yGEQmCZOvs7KptsYUdB0Xg",
     "fileKey": "yGEQmCZOvs7KptsYUdB0Xg",
     "target": "atoms",
-    "measured": "2026-10-15",
+    "measured": "2026-10-16",
     "generatedBy": ".agents/skills/figma-index (read-only use_figma page walk) → design/scripts/build-index.mjs",
     "selectionRule": {
       "inScope": "page name contains 🟢 AND page name ends with ✅",
@@ -45,19 +45,19 @@
       "codeMap": "hand-maintained in design/scripts/build-index.mjs, keyed on {set, page} because the family page reuses atom names"
     },
     "counts": {
-      "pagesInScope": 44,
+      "pagesInScope": 45,
       "entries": 163,
-      "primary": 43,
+      "primary": 44,
       "componentSets": 162,
       "looseComponents": 1,
       "variants": 4622,
-      "primaryWithEnDoc": 42,
-      "primaryWithArDoc": 39,
-      "withEnDoc": 42,
-      "withArDoc": 39,
+      "primaryWithEnDoc": 43,
+      "primaryWithArDoc": 40,
+      "withEnDoc": 43,
+      "withArDoc": 40,
       "withRtl": 152,
       "withDescription": 5,
-      "mappedToCode": 25,
+      "mappedToCode": 26,
       "docFrames": 98
     },
     "legend": {
@@ -139,20 +139,6 @@
   ],
   "pages": [
     {
-      "id": "3791:57238",
-      "name": "✦  🟢 Y | Alert ✅",
-      "display": "Alert",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3791-57238",
-      "entryIds": [
-        "15226:58727"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
       "id": "14831:275398",
       "name": "✦  🟢 Y/H | Date Picker ✅",
       "display": "Date Picker",
@@ -176,24 +162,40 @@
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4108-1012",
       "entryIds": [
         "15117:6294",
-        "40500:62423",
-        "40500:63031",
-        "40500:62496",
         "42278:36791"
       ],
       "legacyDocSections": [],
-      "orphanDocs": [
-        {
-          "id": "40505:2394",
-          "name": "Calendar Popover — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40505-2394"
-        },
-        {
-          "id": "40517:3798",
-          "name": "Calendar Popover — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40517-3798"
-        }
-      ]
+      "orphanDocs": []
+    },
+    {
+      "id": "46349:8882",
+      "name": "✦  🟢 Y/H | Calendar View ✅",
+      "display": "Calendar View",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y/H",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46349-8882",
+      "entryIds": [
+        "40500:62423",
+        "40500:63031",
+        "40500:62496"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "14872:1780",
+      "name": "✦  🟢 Y | Sheet ✅",
+      "display": "Sheet",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14872-1780",
+      "entryIds": [
+        "15043:262710"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
     },
     {
       "id": "3996:8715",
@@ -241,36 +243,6 @@
         "38975:3887",
         "38975:3834",
         "38975:3913"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "14872:1780",
-      "name": "✦  🟢 Y | Drawer ✅",
-      "display": "Drawer",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14872-1780",
-      "entryIds": [
-        "15043:262710"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "14885:1510",
-      "name": "✦  🟢 Y | Table ✅",
-      "display": "Table",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14885-1510",
-      "entryIds": [
-        "39961:4559",
-        "39981:1576",
-        "40652:5959"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -331,6 +303,20 @@
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3760-18379",
       "entryIds": [
         "3771:68266"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "3791:57238",
+      "name": "✦  🟢 Y | Alert ✅ ✅",
+      "display": "Alert",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=3791-57238",
+      "entryIds": [
+        "15226:58727"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -579,6 +565,22 @@
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14860-69258",
       "entryIds": [
         "15120:8056"
+      ],
+      "legacyDocSections": [],
+      "orphanDocs": []
+    },
+    {
+      "id": "14885:1510",
+      "name": "✦  🟢 Y | Table ✅",
+      "display": "Table",
+      "status": "🟢",
+      "tail": "✅",
+      "initials": "Y",
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14885-1510",
+      "entryIds": [
+        "39961:4559",
+        "39981:1576",
+        "40652:5959"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -955,61 +957,6 @@
     }
   ],
   "entries": {
-    "15226:58727": {
-      "name": "Alert",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "3791:57238",
-        "name": "✦  🟢 Y | Alert ✅",
-        "display": "Alert",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15226-58727",
-      "variants": 30,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Variants": [
-          "Default",
-          "Info",
-          "Success",
-          "Warning",
-          "Destructive"
-        ],
-        "Type": [
-          "Outline",
-          "Solid",
-          "Soft"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Variants",
-        "Type"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "39733:2101",
-          "name": "Alert — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39733-2101"
-        },
-        "ar": null,
-        "duplicates": []
-      },
-      "code": "alert",
-      "hasDescription": false,
-      "flags": [
-        "no-ar-doc",
-        "no-description"
-      ]
-    },
     "15113:5466": {
       "name": "Date Picker",
       "node": "COMPONENT_SET",
@@ -1073,10 +1020,10 @@
       ]
     },
     "15117:6294": {
-      "name": "Standard Calendar",
+      "name": "Calendar",
       "node": "COMPONENT_SET",
       "kind": "atom",
-      "role": "part",
+      "role": "primary",
       "page": {
         "id": "4108:1012",
         "name": "✦  🟢 Y/H | Calendar ✅",
@@ -1109,149 +1056,15 @@
       ],
       "rtl": true,
       "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "40500:62423": {
-      "name": "Calendar Header",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "4108:1012",
-        "name": "✦  🟢 Y/H | Calendar ✅",
-        "display": "Calendar",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y/H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40500-62423",
-      "variants": 10,
-      "axes": {
-        "Type": [
-          "Day",
-          "Date",
-          "Current Date",
-          "Empty",
-          "Date & Year"
-        ],
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Type",
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "40500:63031": {
-      "name": "Calendar Cell",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "4108:1012",
-        "name": "✦  🟢 Y/H | Calendar ✅",
-        "display": "Calendar",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y/H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40500-63031",
-      "variants": 14,
-      "axes": {
-        "Type": [
-          "Time | Left",
-          "Cell",
-          "Month Date Current",
-          "Month Date"
-        ],
-        "Hover": [
-          "False",
-          "True"
-        ],
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Type",
-        "Hover",
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "40500:62496": {
-      "name": "Calendar View",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "4108:1012",
-        "name": "✦  🟢 Y/H | Calendar ✅",
-        "display": "Calendar",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y/H"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40500-62496",
-      "variants": 6,
-      "axes": {
-        "View": [
-          "Day",
-          "Week",
-          "Month"
-        ],
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "View",
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
         "en": {
-          "id": "42285:8315",
-          "name": "Calendar View — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42285-8315"
+          "id": "40505:2394",
+          "name": "Calendar — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40505-2394"
         },
         "ar": {
-          "id": "42285:15929",
-          "name": "Calendar View — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42285-15929"
+          "id": "40517:3798",
+          "name": "Calendar — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40517-3798"
         },
         "duplicates": []
       },
@@ -1299,6 +1112,203 @@
       "code": null,
       "hasDescription": false,
       "flags": [
+        "no-description"
+      ]
+    },
+    "40500:62423": {
+      "name": "Calendar Header",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "46349:8882",
+        "name": "✦  🟢 Y/H | Calendar View ✅",
+        "display": "Calendar View",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y/H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40500-62423",
+      "variants": 10,
+      "axes": {
+        "Type": [
+          "Day",
+          "Date",
+          "Current Date",
+          "Empty",
+          "Date & Year"
+        ],
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "Type",
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "40500:63031": {
+      "name": "Calendar Cell",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "46349:8882",
+        "name": "✦  🟢 Y/H | Calendar View ✅",
+        "display": "Calendar View",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y/H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40500-63031",
+      "variants": 14,
+      "axes": {
+        "Type": [
+          "Time | Left",
+          "Cell",
+          "Month Date Current",
+          "Month Date"
+        ],
+        "Hover": [
+          "False",
+          "True"
+        ],
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "Type",
+        "Hover",
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "40500:62496": {
+      "name": "Calendar View",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "46349:8882",
+        "name": "✦  🟢 Y/H | Calendar View ✅",
+        "display": "Calendar View",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y/H"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40500-62496",
+      "variants": 6,
+      "axes": {
+        "View": [
+          "Day",
+          "Week",
+          "Month"
+        ],
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "View",
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "42285:8315",
+          "name": "Calendar View — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42285-8315"
+        },
+        "ar": {
+          "id": "42285:15929",
+          "name": "Calendar View — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42285-15929"
+        },
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "15043:262710": {
+      "name": "Sheet",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "14872:1780",
+        "name": "✦  🟢 Y | Sheet ✅",
+        "display": "Sheet",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15043-262710",
+      "variants": 8,
+      "axes": {
+        "Side": [
+          "Top",
+          "Bottom",
+          "Start",
+          "End"
+        ],
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "Side",
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "42470:2461",
+          "name": "Sheet — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42470-2461"
+        },
+        "ar": null,
+        "duplicates": [
+          {
+            "id": "42791:65416",
+            "name": "Sheet — Fasla Component Documentation",
+            "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42791-65416"
+          }
+        ]
+      },
+      "code": "sheet",
+      "hasDescription": false,
+      "flags": [
+        "no-ar-doc",
+        "duplicate-doc-frame",
         "no-description"
       ]
     },
@@ -1581,200 +1591,6 @@
       "axisNames": [
         "Direction",
         "Type"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "15043:262710": {
-      "name": "Drawer",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "14872:1780",
-        "name": "✦  🟢 Y | Drawer ✅",
-        "display": "Drawer",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15043-262710",
-      "variants": 8,
-      "axes": {
-        "Stats": [
-          "Top",
-          "Bottom",
-          "Left",
-          "Right"
-        ],
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Stats",
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "42470:2461",
-          "name": "Drawer — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42470-2461"
-        },
-        "ar": null,
-        "duplicates": [
-          {
-            "id": "42791:65416",
-            "name": "Drawer — Fasla Component Documentation",
-            "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42791-65416"
-          }
-        ]
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-ar-doc",
-        "duplicate-doc-frame",
-        "no-description"
-      ]
-    },
-    "39961:4559": {
-      "name": "Table Cell",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "14885:1510",
-        "name": "✦  🟢 Y | Table ✅",
-        "display": "Table",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39961-4559",
-      "variants": 30,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Type": [
-          "Header label",
-          "Header More",
-          "Header Checkbox",
-          "Text",
-          "Status",
-          "Date & Time",
-          "Progress Bar",
-          "Icon CTA",
-          "Checkbox Default",
-          "Checkbox Selected",
-          "Swap",
-          "CTA",
-          "Text Input",
-          "Avatar",
-          "Multiple Avatars"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Type"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": null,
-        "ar": null,
-        "duplicates": []
-      },
-      "code": null,
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "39981:1576": {
-      "name": "Table",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "14885:1510",
-        "name": "✦  🟢 Y | Table ✅",
-        "display": "Table",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39981-1576",
-      "variants": 4,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ],
-        "Pinned Columns": [
-          "False",
-          "True"
-        ]
-      },
-      "axisNames": [
-        "Direction",
-        "Pinned Columns"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "40406:3530",
-          "name": "Table — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40406-3530"
-        },
-        "ar": {
-          "id": "40678:5517",
-          "name": "Table — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40678-5517"
-        },
-        "duplicates": []
-      },
-      "code": "data-table",
-      "hasDescription": false,
-      "flags": [
-        "no-description"
-      ]
-    },
-    "40652:5959": {
-      "name": "Bulk Actions Bar",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "part",
-      "page": {
-        "id": "14885:1510",
-        "name": "✦  🟢 Y | Table ✅",
-        "display": "Table",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40652-5959",
-      "variants": 2,
-      "axes": {
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Direction"
       ],
       "rtl": true,
       "docs": {
@@ -2243,6 +2059,61 @@
       "code": "breadcrumb",
       "hasDescription": false,
       "flags": [
+        "no-description"
+      ]
+    },
+    "15226:58727": {
+      "name": "Alert",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "3791:57238",
+        "name": "✦  🟢 Y | Alert ✅ ✅",
+        "display": "Alert",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15226-58727",
+      "variants": 30,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Variants": [
+          "Default",
+          "Info",
+          "Success",
+          "Warning",
+          "Destructive"
+        ],
+        "Type": [
+          "Outline",
+          "Solid",
+          "Soft"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Variants",
+        "Type"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "39733:2101",
+          "name": "Alert — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39733-2101"
+        },
+        "ar": null,
+        "duplicates": []
+      },
+      "code": "alert",
+      "hasDescription": false,
+      "flags": [
+        "no-ar-doc",
         "no-description"
       ]
     },
@@ -3693,6 +3564,145 @@
         "duplicates": []
       },
       "code": "skeleton",
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "39961:4559": {
+      "name": "Table Cell",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "14885:1510",
+        "name": "✦  🟢 Y | Table ✅",
+        "display": "Table",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39961-4559",
+      "variants": 30,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Type": [
+          "Header label",
+          "Header More",
+          "Header Checkbox",
+          "Text",
+          "Status",
+          "Date & Time",
+          "Progress Bar",
+          "Icon CTA",
+          "Checkbox Default",
+          "Checkbox Selected",
+          "Swap",
+          "CTA",
+          "Text Input",
+          "Avatar",
+          "Multiple Avatars"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Type"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "39981:1576": {
+      "name": "Table",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "primary",
+      "page": {
+        "id": "14885:1510",
+        "name": "✦  🟢 Y | Table ✅",
+        "display": "Table",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=39981-1576",
+      "variants": 4,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ],
+        "Pinned Columns": [
+          "False",
+          "True"
+        ]
+      },
+      "axisNames": [
+        "Direction",
+        "Pinned Columns"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "40406:3530",
+          "name": "Table — Fasla Component Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40406-3530"
+        },
+        "ar": {
+          "id": "40678:5517",
+          "name": "Table — Fasla Component Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40678-5517"
+        },
+        "duplicates": []
+      },
+      "code": "data-table",
+      "hasDescription": false,
+      "flags": [
+        "no-description"
+      ]
+    },
+    "40652:5959": {
+      "name": "Bulk Actions Bar",
+      "node": "COMPONENT_SET",
+      "kind": "atom",
+      "role": "part",
+      "page": {
+        "id": "14885:1510",
+        "name": "✦  🟢 Y | Table ✅",
+        "display": "Table",
+        "status": "🟢",
+        "tail": "✅",
+        "initials": "Y"
+      },
+      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40652-5959",
+      "variants": 2,
+      "axes": {
+        "Direction": [
+          "LTR",
+          "RTL"
+        ]
+      },
+      "axisNames": [
+        "Direction"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": null,
+        "ar": null,
+        "duplicates": []
+      },
+      "code": null,
       "hasDescription": false,
       "flags": [
         "no-description"
