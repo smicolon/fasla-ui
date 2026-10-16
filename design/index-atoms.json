@@ -57,7 +57,7 @@
       "withArDoc": 41,
       "withRtl": 153,
       "withDescription": 6,
-      "mappedToCode": 30,
+      "mappedToCode": 31,
       "docFrames": 98
     },
     "legend": {
@@ -3901,21 +3901,21 @@
           "Full",
           "Double slider"
         ],
-        "size": [
+        "Size": [
           "sm",
           "md",
           "lg"
         ],
-        "state": [
+        "State": [
           "Default",
-          "focus"
+          "Focus"
         ]
       },
       "axisNames": [
         "Direction",
         "Style",
-        "size",
-        "state"
+        "Size",
+        "State"
       ],
       "rtl": true,
       "docs": {
@@ -3931,7 +3931,7 @@
         },
         "duplicates": []
       },
-      "code": null,
+      "code": "slider",
       "hasDescription": false,
       "flags": [
         "legacy-doc-section-on-page",

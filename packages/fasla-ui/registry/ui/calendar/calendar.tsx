@@ -187,7 +187,7 @@ function CalendarDayButton({ day, modifiers, className, ...props }: DayButtonPro
         RADIUS[radius].box,
         "transition-[color,background-color,box-shadow] motion-reduce:transition-none",
         "focus-visible:z-10 focus-visible:ring-[3px] focus-visible:ring-ring/50",
-        "forced-colors:focus-visible:[outline:2px_solid_Highlight]",
+        "focus-visible:forced-colors:[outline:2px_solid_Highlight]",
         "disabled:cursor-not-allowed disabled:opacity-50",
         chosen
           ? "bg-primary text-primary-foreground forced-colors:[outline:1px_solid_Highlight]"

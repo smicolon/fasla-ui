@@ -212,7 +212,7 @@ export function FaqSupportChannels({
                 key={index}
                 className={cn(
                   "relative flex flex-col gap-3 rounded-xl border border-border bg-card p-6",
-                  channel.href && "transition-colors hover:bg-accent focus-within:ring-2 focus-within:ring-ring forced-colors:focus-within:outline forced-colors:focus-within:outline-2"
+                  channel.href && "transition-colors hover:bg-accent focus-within:ring-2 focus-within:ring-ring focus-within:forced-colors:outline focus-within:forced-colors:outline-2"
                 )}
               >
                 {channel.icon && (

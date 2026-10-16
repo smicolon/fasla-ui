@@ -78,6 +78,8 @@ export const Default: Story = {
 }
 ```
 
+**Write focus and hover variants first** (`focus-visible:forced-colors:…`, never `forced-colors:focus-visible:…` or `has-[:focus-visible]:…`), because the pseudo-states addon drops the rule otherwise; `packages/fasla-ui/src/storybook/pseudo-variant-order.test.ts` enforces it.
+
 ## Story layout rule
 
 The same rule as `CLAUDE.md` ("Stories and docs examples: layout rule"), with

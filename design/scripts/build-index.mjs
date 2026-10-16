@@ -117,6 +117,7 @@ export const CODE_MAP = {
   select: { set: "Select Input", page: "3884:9073" },
   sheet: { set: "Sheet", page: "14872:1780" },
   skeleton: { set: "Skeleton", page: "14860:69258" },
+  slider: { set: "Slider", page: "3868:82886" },
   "status-indicator": { set: "Status Indicator", page: "38830:41585" },
   switch: { set: "Switch", page: "3862:3097" },
   tabs: { set: "Tabs Component", page: "3808:12668" },
