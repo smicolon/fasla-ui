@@ -1698,8 +1698,10 @@
         "cartText": "3 منتجات",
         "shipping": "الشحن",
         "shippingText": "العنوان وطريقة التوصيل",
+        "shippingShort": "العنوان",
         "payment": "الدفع",
         "paymentText": "بطاقة أو محفظة",
+        "paymentShort": "بالبطاقة",
         "review": "المراجعة",
         "reviewText": "راجع طلبك"
       },

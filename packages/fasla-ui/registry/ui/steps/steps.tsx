@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 import { CheckIcon } from "lucide-react"
 import { cva } from "class-variance-authority"
@@ -165,28 +167,137 @@ const stepTailVariants = cva("flex", {
  * into the next label. `shrink-0` keeps the text at its own width: a flex
  * item would otherwise shrink to the 38px column and wrap at every word.
  *
- * The room is the bullets' pitch less 16px, read in `cqi`, the list's width,
- * with `--steps-count` and `--steps-tails` set by `Steps`. With the ends
- * inset (below), the pitch is (the row + 16px) / the steps; when the row is
- * too narrow for any inset, it is (the row − 38px) / the tails. The smaller
- * of the two is always the one in force.
+ * The room is the bullets' pitch less 16px: `--steps-cap`, which `Steps`
+ * works out from the real labels once the list is laid out (see
+ * `fitHorizontalSteps`). Before that, on the server and in the first layout,
+ * a CSS fallback reads the room in `cqi`, the list's width, for the widest
+ * labels the row could hold, so nothing ever overflows: with the ends inset
+ * for them, the pitch is (the row + 16px) / the steps; when the row is too
+ * narrow for any inset, it is (the row − 38px) / the tails, and the smaller
+ * of the two is the one in force.
  */
 const stepTextVariants = cva([
   "flex w-max shrink-0 flex-col items-center gap-0.5 break-words text-center",
   // Written out in full: Tailwind only generates classes it can read whole.
-  "max-w-[calc(min((100cqi_+_1rem)_/_var(--steps-count,2),(100cqi_-_2.375rem)_/_var(--steps-tails,1))_-_1rem)]",
+  "max-w-[var(--steps-cap,calc(min((100cqi_+_1rem)_/_var(--steps-count,2),(100cqi_-_2.375rem)_/_var(--steps-tails,1))_-_1rem))]",
 ])
 
 /**
  * The inset at each end of a horizontal list, on its first and last steps:
- * as far as the widest centred label may reach past its bullet, so the first
- * and last labels stay inside the list. From the room above, that is
- * (the pitch − 16px − 38px) / 2 = ((the row + 16px) / the steps − 54px) / 2,
- * and never below zero.
+ * as far as that step's own centred label reaches past its bullet, so the
+ * first and last labels stay inside the list and a short one adds nothing.
+ * `--steps-start` and `--steps-end` come from `Steps`, measured. The CSS
+ * fallback is the inset the widest possible label would need:
+ * ((the row + 16px) / the steps − 54px) / 2, never below zero.
  */
 const stepEndInset = {
-  start: "ps-[max(0px,calc(((100cqi_+_1rem)_/_var(--steps-count,2)_-_3.375rem)_/_2))]",
-  end: "pe-[max(0px,calc(((100cqi_+_1rem)_/_var(--steps-count,2)_-_3.375rem)_/_2))]",
+  start: "ps-[var(--steps-start,max(0px,calc(((100cqi_+_1rem)_/_var(--steps-count,2)_-_3.375rem)_/_2)))]",
+  end: "pe-[var(--steps-end,max(0px,calc(((100cqi_+_1rem)_/_var(--steps-count,2)_-_3.375rem)_/_2)))]",
+}
+
+/**
+ * The horizontal row's geometry, from the real first and last labels: how far
+ * to inset each end, and how wide any label may be (`cap`). Every length is in
+ * px: `width` is the list's, `first` and `last` the natural (unwrapped) width
+ * of the first and last steps' text, `bullet` the bullet's width and `gap` the
+ * least space between two labels.
+ *
+ * A label may reach halfway to each neighbouring bullet less half the gap, so
+ * `cap` is the bullets' pitch less the gap. An end inset is how far its label,
+ * at most `cap` wide, reaches past its bullet. The pitch shrinks as the insets
+ * grow, and the insets grow with `cap`, so the one `cap` that fits both is
+ * found by halving: the room left for a label never grows as `cap` does.
+ */
+function fitHorizontalSteps({
+  width,
+  count,
+  first,
+  last,
+  bullet,
+  gap,
+}: {
+  width: number
+  count: number
+  first: number
+  last: number
+  bullet: number
+  gap: number
+}): { start: number; end: number; cap: number } {
+  const inset = (text: number, cap: number) => Math.max(0, (Math.min(text, cap) - bullet) / 2)
+  if (count < 2) {
+    const start = inset(first, width)
+    return { start, end: start, cap: width }
+  }
+  const room = (cap: number) => (width - inset(first, cap) - inset(last, cap) - bullet) / (count - 1) - gap
+  let low = 0
+  let high = Math.max(0, width)
+  for (let i = 0; i < 40; i++) {
+    const mid = (low + high) / 2
+    if (room(mid) >= mid) low = mid
+    else high = mid
+  }
+  return { start: inset(first, low), end: inset(last, low), cap: low }
+}
+
+// useLayoutEffect warns during server rendering in React 18.
+const useIsomorphicLayoutEffect = typeof window === "undefined" ? React.useEffect : React.useLayoutEffect
+
+/**
+ * Measures a horizontal list's first and last labels and sets `--steps-start`,
+ * `--steps-end` and `--steps-cap` on it, before the browser paints. It measures
+ * again when the list or those labels change size, a font loading included,
+ * one frame later so the new values never resize what is being observed
+ * mid-delivery. The values follow from the labels' natural widths and the
+ * list's, so setting them does not change what is measured: no loop.
+ */
+function useHorizontalFit(list: React.RefObject<HTMLOListElement | null>, enabled: boolean, count: number) {
+  useIsomorphicLayoutEffect(() => {
+    const ol = list.current
+    if (!ol) return
+    const names = ["--steps-start", "--steps-end", "--steps-cap"] as const
+    if (!enabled) {
+      names.forEach((name) => ol.style.removeProperty(name))
+      return
+    }
+    const texts = () => Array.from(ol.querySelectorAll<HTMLElement>("[data-slot=step-text]"))
+    const fit = () => {
+      const all = texts()
+      const bulletEl = ol.querySelector<HTMLElement>("[data-slot=step-icon]")
+      const width = ol.clientWidth
+      if (!all.length || !bulletEl || width === 0) return
+      const ends = [all[0]!, all[all.length - 1]!]
+      // The natural width: the text with its cap lifted, read in one layout.
+      const caps = ends.map((el) => el.style.maxWidth)
+      ends.forEach((el) => (el.style.maxWidth = "none"))
+      const [first, last] = ends.map((el) => el.getBoundingClientRect().width)
+      ends.forEach((el, i) => (el.style.maxWidth = caps[i]!))
+      const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16
+      const fitted = fitHorizontalSteps({
+        width,
+        count: all.length,
+        first: first!,
+        last: last!,
+        bullet: bulletEl.getBoundingClientRect().width,
+        gap: rem,
+      })
+      ol.style.setProperty("--steps-start", `${fitted.start.toFixed(3)}px`)
+      ol.style.setProperty("--steps-end", `${fitted.end.toFixed(3)}px`)
+      ol.style.setProperty("--steps-cap", `${fitted.cap.toFixed(3)}px`)
+    }
+    fit()
+    if (typeof ResizeObserver === "undefined") return
+    let frame = 0
+    const observer = new ResizeObserver(() => {
+      cancelAnimationFrame(frame)
+      frame = requestAnimationFrame(fit)
+    })
+    observer.observe(ol)
+    texts().forEach((el) => observer.observe(el))
+    return () => {
+      cancelAnimationFrame(frame)
+      observer.disconnect()
+    }
+  }, [enabled, count])
 }
 
 const stepTailLineVariants = cva("block", {
@@ -235,10 +346,20 @@ const Steps = React.forwardRef<HTMLOListElement, StepsProps>(
   ({ orientation = "horizontal", radius = "standard", className, style, children, ...props }, ref) => {
     const look = React.useMemo(() => ({ orientation, radius }), [orientation, radius])
     const items = flattenSteps(children)
+    const list = React.useRef<HTMLOListElement | null>(null)
+    const setRef = React.useCallback(
+      (node: HTMLOListElement | null) => {
+        list.current = node
+        if (typeof ref === "function") ref(node)
+        else if (ref) ref.current = node
+      },
+      [ref]
+    )
+    useHorizontalFit(list, orientation === "horizontal", items.length)
     return (
       <StepsContext.Provider value={look}>
         <ol
-          ref={ref}
+          ref={setRef}
           data-slot="steps"
           data-orientation={orientation}
           data-radius={radius}
@@ -285,7 +406,7 @@ export interface StepsItemProps extends Omit<React.ComponentPropsWithoutRef<"li"
 /**
  * One step. Horizontal, the label and description are centred under the
  * bullet, on one line unless they are longer than the step's share of the
- * row; the list's ends are inset so the first and last labels fit.
+ * row; the list's ends are inset by as much as the first and last labels need.
  * Vertical, they sit beside the bullet, the label's first line on the
  * bullet's centre, and wrap.
  */
@@ -402,6 +523,7 @@ export {
   stepTailLineVariants,
   stepTextVariants,
   stepEndInset,
+  fitHorizontalSteps,
   type StepsOrientation,
   type StepsRadius,
   type StepStatus,

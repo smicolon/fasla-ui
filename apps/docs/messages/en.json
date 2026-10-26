@@ -1698,8 +1698,10 @@
         "cartText": "3 items",
         "shipping": "Shipping",
         "shippingText": "Address and delivery",
+        "shippingShort": "Address",
         "payment": "Payment",
         "paymentText": "Card or wallet",
+        "paymentShort": "By card",
         "review": "Review",
         "reviewText": "Check your order"
       },

@@ -24,21 +24,28 @@ const statusOf = (step: number, current: number): StepStatus =>
   step < current ? "done" : step === current ? "current" : "upcoming"
 
 /**
- * Room for a horizontal row with descriptions: each line may use the space up
- * to halfway to its neighbours' bullets, and "Address and delivery" needs
- * 134px, so three steps need 448px. Narrower, on a phone, the row scrolls
- * sideways inside its preview instead of wrapping.
+ * Steps whose description is too long for a phone's row. Each line may use the
+ * space up to halfway to its neighbours' bullets, and "Address and delivery"
+ * needs 134px, so three steps need a row of about 370px; a phone's preview is
+ * 262 to 292px. Below `sm` these steps show a short description instead, so
+ * every line stays on one line without scrolling.
  */
-const WIDE_ROW = "w-full overflow-x-auto"
-const WIDE_ROW_INNER = "min-w-[28rem]"
+const SHORT = { shipping: "shippingShort", payment: "paymentShort" } as const
 
 /** The checkout with step 2 current, as a developer would write it. */
 function Flow({
   current = 2,
   icon = false,
   descriptions = false,
+  shortOnPhone = false,
   ...props
-}: { current?: number; icon?: boolean; descriptions?: boolean } & Omit<StepsProps, "children">) {
+}: {
+  current?: number
+  icon?: boolean
+  descriptions?: boolean
+  /** Shows the short descriptions below `sm`. */
+  shortOnPhone?: boolean
+} & Omit<StepsProps, "children">) {
   const s = useTranslations("docs.steps")
   return (
     <Steps aria-label={s("name")} {...props}>
@@ -50,11 +57,25 @@ function Flow({
             status={status}
             icon={icon && status === "done"}
             label={s(`steps.${step}`)}
-            description={descriptions ? s(`steps.${step}Text`) : undefined}
+            description={descriptions ? <Description step={step} shortOnPhone={shortOnPhone} /> : undefined}
           />
         )
       })}
     </Steps>
+  )
+}
+
+/** A step's description; with `shortOnPhone`, the short one below `sm`. */
+function Description({ step, shortOnPhone }: { step: (typeof STEPS)[number]; shortOnPhone: boolean }) {
+  const s = useTranslations("docs.steps")
+  const full = s(`steps.${step}Text`)
+  const short = step === "cart" ? null : SHORT[step]
+  if (!shortOnPhone || !short) return full
+  return (
+    <>
+      <span className="sm:hidden">{s(`steps.${short}`)}</span>
+      <span className="hidden sm:inline">{full}</span>
+    </>
   )
 }
 
@@ -152,11 +173,7 @@ export default function StepsPage() {
         <p className="text-muted-foreground">{s("details.body")}</p>
         <ComponentPreview>
           <div className="flex w-full flex-col gap-8">
-            <div className={WIDE_ROW}>
-              <div className={WIDE_ROW_INNER}>
-                <Flow icon descriptions />
-              </div>
-            </div>
+            <Flow icon descriptions shortOnPhone />
             <Flow orientation="vertical" radius="rounded" icon descriptions className="mx-auto w-max" />
           </div>
         </ComponentPreview>

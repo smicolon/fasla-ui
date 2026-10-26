@@ -140,13 +140,12 @@ const statusOf = (step: number, current: number): StepStatus =>
  * Row widths. Each label may use the space up to halfway to its neighbours'
  * bullets, less 16px. The longest sample text, "Address and delivery", needs
  * 134px, so five steps need a 780px row (Figma's Steps Horizontal is 700px),
- * and a panel, two to a row on the Docs page, holds 448px: three steps with
- * descriptions, or four with labels only.
+ * and a panel, two to a row on the ~1000px Docs page with 24px of padding,
+ * holds 440px: three steps with descriptions, or four with labels only.
  */
 const ROW = "w-[780px]"
-const PANEL_ROW = "w-[448px]"
-/** A panel, two to a row: 20px of padding, so two 448px rows fit the ~1000px Docs page. */
-const PANEL = "rounded-lg border p-5"
+const PANEL_ROW = "w-[440px]"
+const PANEL = "rounded-lg border p-6"
 
 // A flow of steps, as a developer writes one: every step before `current`
 // done, then the current step, then the upcoming ones.

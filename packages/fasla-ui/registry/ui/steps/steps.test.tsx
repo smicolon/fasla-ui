@@ -1,7 +1,7 @@
 import * as React from "react"
 import { describe, it, expect } from "vitest"
 import { render, screen, within } from "@testing-library/react"
-import { Steps, StepsItem, stepEndInset, type StepStatus, type StepsProps } from "./steps"
+import { Steps, StepsItem, fitHorizontalSteps, stepEndInset, type StepStatus, type StepsProps } from "./steps"
 
 /**
  * What these tests can and cannot prove.
@@ -230,5 +230,40 @@ describe("Steps — look", () => {
     )
     expect(screen.getByRole("list")).toHaveClass("max-w-md", "flex")
     expect(items()[0]).toHaveClass("custom", "flex")
+  })
+})
+
+describe("Steps — fitting a horizontal row to its labels", () => {
+  const row = { bullet: 38, gap: 16 }
+  const pitch = (width: number, count: number, f: { start: number; end: number }) =>
+    (width - f.start - f.end - row.bullet) / (count - 1)
+
+  it("insets nothing for labels no wider than their bullets", () => {
+    const fitted = fitHorizontalSteps({ ...row, width: 400, count: 3, first: 32, last: 38 })
+    expect(fitted.start).toBe(0)
+    expect(fitted.end).toBe(0)
+    // Each label may reach halfway to its neighbours' bullets, less 8px on each side.
+    expect(fitted.cap).toBeCloseTo((400 - 38) / 2 - 16, 3)
+  })
+
+  it("insets each end by as far as its own label reaches past the bullet", () => {
+    const fitted = fitHorizontalSteps({ ...row, width: 440, count: 3, first: 48, last: 90 })
+    expect(fitted.start).toBeCloseTo(5, 3)
+    expect(fitted.end).toBeCloseTo(26, 3)
+    expect(fitted.cap).toBeCloseTo(pitch(440, 3, fitted) - 16, 3)
+  })
+
+  it("holds a label wider than its room to that room, and insets for the held width", () => {
+    const fitted = fitHorizontalSteps({ ...row, width: 300, count: 3, first: 400, last: 40 })
+    expect(fitted.start).toBeCloseTo((fitted.cap - 38) / 2, 3)
+    expect(fitted.cap).toBeCloseTo(pitch(300, 3, fitted) - 16, 3)
+    // The first label, held to `cap` and centred, starts exactly at the row's start.
+    expect(fitted.start + 19 - fitted.cap / 2).toBeCloseTo(0, 3)
+  })
+
+  it("centres a single step's label in its own room", () => {
+    const fitted = fitHorizontalSteps({ ...row, width: 300, count: 1, first: 80, last: 80 })
+    expect(fitted.start).toBe(21)
+    expect(fitted.end).toBe(21)
   })
 })
