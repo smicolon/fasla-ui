@@ -97,32 +97,145 @@
       "installation": "Installation",
       "playground": "Component Playground",
       "menu": "Docs menu",
-      "lead": "A collapsible sidebar navigation component for app layouts.",
-      "brand": "My store",
-      "group": "Store",
+      "lead": "App navigation that folds to icons: titled groups of links, sub-items under a parent, and the signed-in person at the foot. Expanded and collapsed, as in the Figma set, with an optional plan card.",
+      "installNote": "Sidebar is built on Base UI, so it needs the <code>@base-ui/react</code> package, and it uses <code>avatar</code> and <code>tooltip</code>. <code>add</code> installs them with the component, and so does the shadcn CLI.",
+      "previewHint": "Collapse the sidebar from the button in its header, then point at an icon to see its label.",
+      "logo": "Fasla",
+      "nav": "Main",
+      "groups": {
+        "store": "Store",
+        "account": "Account"
+      },
       "items": {
         "dashboard": "Dashboard",
         "orders": "Orders",
+        "allOrders": "All orders",
+        "returns": "Returns",
+        "drafts": "Drafts",
         "products": "Products",
-        "settings": "Settings"
+        "customers": "Customers",
+        "segments": "Segments",
+        "reviews": "Reviews",
+        "messages": "Messages",
+        "settings": "Settings",
+        "team": "Team",
+        "billing": "Billing"
       },
-      "collapse": "Collapse sidebar",
-      "expand": "Expand sidebar",
-      "parts": {
-        "sidebar": "Main container",
-        "header": "Header section",
-        "content": "Scrollable content area",
-        "footer": "Footer section",
-        "group": "Grouped items with label",
-        "item": "Navigation item with icon",
-        "collapseButton": "Toggle collapse state"
+      "profile": {
+        "name": "Nadia Rahman",
+        "description": "Fasla"
       },
-      "props": {
-        "collapsed": "Collapses it to icons only.",
-        "onCollapsedChange": "Called when it collapses or expands.",
-        "width": "Width when expanded.",
-        "children": "The sidebar’s parts.",
-        "className": "Extra classes for the component."
+      "plan": {
+        "title": "Pro plan",
+        "description": "3 team members",
+        "footer": "Next renewal: 10 Mar"
+      },
+      "collapsedState": {
+        "title": "Expanded and collapsed",
+        "body": "The sidebar expanded, with labels and section titles, and collapsed to a column of icons.",
+        "expanded": "Expanded",
+        "collapsed": "Collapsed"
+      },
+      "states": {
+        "body": "The four states of an item and a sub-item: default, hover, selected and focus.",
+        "default": "Default",
+        "hover": "Hover",
+        "selected": "Selected",
+        "focus": "Focus",
+        "item": "Item",
+        "subItem": "Sub-item"
+      },
+      "subItems": {
+        "title": "Items and sub-items",
+        "body": "Items with an icon and a notification dot, and sub-items that open and close under their parent."
+      },
+      "planCard": {
+        "title": "Plan card",
+        "body": "The optional plan card, shown above the profile at the foot of the sidebar."
+      },
+      "a11y": {
+        "landmarks": "The sidebar is an <code>aside</code> element, and <code>SidebarContent</code> is a <code>nav</code> element. Give the <code>nav</code> an <code>aria-label</code> when the page has another navigation landmark.",
+        "current": "<code>selected</code> sets <code>aria-current=\"page\"</code> on the item's link, so a screen reader announces the current page.",
+        "toggle": "The toggle in the header is named Collapse sidebar or Expand sidebar, in Arabic on an Arabic page, and reports its state with <code>aria-expanded</code>. Set <code>collapseLabel</code> and <code>expandLabel</code> to change the names.",
+        "subItems": "An item with sub-items is a button with <code>aria-expanded</code>. Enter and the Space key open and close it.",
+        "collapsed": "When the sidebar is collapsed, each icon keeps its label as its accessible name. The tooltip opens on hover and on keyboard focus, and Escape closes it.",
+        "focus": "Keyboard focus draws Select's ring: a <code>ring</code> border with a 3px <code>ring</code> halo at 50%. In forced colours it draws a 2px <code>Highlight</code> outline instead.",
+        "badge": "The notification dot is named New, or جديد on an Arabic page. Set <code>badgeLabel</code> to say more, such as how many updates there are.",
+        "motion": "The width and the sub-items ease open and closed over 180ms. When reduced motion is on, they change at once.",
+        "direction": "The sidebar takes the page's direction. On an Arabic page it sits on the right and every inset mirrors, and the toggle and chevrons flip. Direction needs no prop."
+      },
+      "rootProps": {
+        "collapsed": "Collapses it to icons only, when you control it.",
+        "defaultCollapsed": "Starts collapsed, when you do not control it.",
+        "onCollapsedChange": "Called with the new state when it collapses or expands.",
+        "children": "The header, content, plan card and footer, in that order. The plan card is hidden while the sidebar is collapsed.",
+        "className": "Extra classes for the <code>aside</code> element."
+      },
+      "headerProps": {
+        "logo": "The full logo, shown while expanded. In Figma the English logo is 90px wide and the Arabic logo 28px tall.",
+        "logoIcon": "The logo's icon alone, shown while collapsed. Figma sets it at 28px.",
+        "collapseLabel": "The toggle's accessible name while expanded.",
+        "expandLabel": "The toggle's accessible name while collapsed.",
+        "className": "Extra classes for the header."
+      },
+      "contentProps": {
+        "aria-label": "Names the navigation landmark.",
+        "children": "The <code>SidebarGroup</code> elements.",
+        "className": "Extra classes for the <code>nav</code> element."
+      },
+      "groupProps": {
+        "label": "The section title. When collapsed, it becomes a divider and stays the group's accessible name.",
+        "children": "The <code>SidebarItem</code> elements.",
+        "className": "Extra classes for the group."
+      },
+      "itemProps": {
+        "label": "The item's text. When collapsed, it is the tooltip and the accessible name.",
+        "icon": "A 16px icon before the label. When collapsed, only the icon shows, so give every item one.",
+        "selected": "Marks the current page. Set it on one item only.",
+        "badge": "Shows the notification dot at the end of the row.",
+        "badgeLabel": "The dot's name for screen readers.",
+        "href": "Renders the item as a link to this address.",
+        "render": "Renders this element in place of the link, such as a router's <code>Link</code>.",
+        "open": "Shows or hides its sub-items, when you control it.",
+        "defaultOpen": "Shows its sub-items on first render. By default it is open when one of them is selected.",
+        "onOpenChange": "Called when its sub-items open or close.",
+        "onClick": "Called when the item is pressed.",
+        "children": "The <code>SidebarSubItem</code> elements, one level deep. With any, the item opens and closes them instead of linking.",
+        "className": "Extra classes for the item's link or button."
+      },
+      "subItemProps": {
+        "label": "The sub-item's text.",
+        "selected": "Marks the current page. Its parent opens to show it, and shows as selected when the sidebar is collapsed.",
+        "badge": "Shows the notification dot at the end of the row.",
+        "badgeLabel": "The dot's name for screen readers.",
+        "href": "Renders the sub-item as a link to this address.",
+        "render": "Renders this element in place of the link, such as a router's <code>Link</code>.",
+        "onClick": "Called when the sub-item is pressed.",
+        "className": "Extra classes for the sub-item's link or button."
+      },
+      "planProps": {
+        "title": "The plan's name.",
+        "description": "A line under the name.",
+        "footer": "The line under the divider.",
+        "footerIcon": "A 16px icon before <code>footer</code>.",
+        "className": "Extra classes for the card."
+      },
+      "footerProps": {
+        "children": "The <code>SidebarProfile</code>.",
+        "className": "Extra classes for the footer."
+      },
+      "profileProps": {
+        "name": "The person's name. When collapsed, it is the button's accessible name.",
+        "description": "A line under the name, such as the workspace.",
+        "avatar": "The Avatar's props, such as <code>src</code>. It shows at 32px.",
+        "onClick": "Called when the profile is pressed, for example to open an account menu.",
+        "className": "Extra classes for the profile button."
+      },
+      "usage": {
+        "basic": "An app sidebar",
+        "controlled": "Control the collapsed state",
+        "router": "Link with your router",
+        "plan": "Add the plan card"
       }
     },
     "onThisPage": "On this page",

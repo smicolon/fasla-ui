@@ -591,6 +591,21 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/sidebar/",
+    title: "Sidebar React Component | Fasla",
+    description:
+      "Add a React app sidebar that collapses to icons, with grouped links, sub-items, tooltips and right-to-left support.",
+    h1: "Sidebar",
+    ar: {
+      title: "شريط جانبي (Sidebar) لتطبيقات React | فاصلة",
+      description:
+        "أضف إلى تطبيقك شريطًا جانبيًا للتنقّل ينطوي إلى أيقونات، مع مجموعات من الروابط وعناصر فرعية وتلميحات ودعم كامل للعربية.",
+      h1: "شريط جانبي (Sidebar)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/combobox/",
     title: "Combobox React Component | Fasla",
     description:
@@ -706,21 +721,6 @@ export const routes = [
       description:
         "اعرض بيانات منظّمة بكتلة جدول البيانات (DataTable)، مع أعمدة محددة الأنواع وترقيم للصفحات وحالات جاهزة للجدول.",
       h1: "جدول البيانات (DataTable)",
-    },
-  },
-  {
-    kind: "component",
-    category: "Blocks",
-    path: "/docs/components/sidebar/",
-    title: "Sidebar React Navigation Block | Fasla",
-    description:
-      "Add a responsive React sidebar for application navigation with collapsible structure and accessible links.",
-    h1: "Sidebar",
-    ar: {
-      title: "شريط جانبي (Sidebar) لتطبيقات React | فاصلة",
-      description:
-        "أضف كتلة شريط جانبي (Sidebar) متجاوبة لتنقّل تطبيقك، مع بنية قابلة للطي وروابط تراعي إتاحة الوصول (accessibility).",
-      h1: "شريط جانبي (Sidebar)",
     },
   },
   {
