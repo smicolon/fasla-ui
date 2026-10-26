@@ -33,11 +33,7 @@ export interface LogoCloudBentoLogoWallCopy {
   heading: React.ReactNode
   /** The line of text under the heading. Hidden when null. */
   description: React.ReactNode
-  /**
-   * The line under the featured company's name. It speaks about the wall, never for that
-   * company: the marks are real companies, so the block makes no claim on their behalf.
-   * Hidden when null.
-   */
+  /** The line under the featured company's name: what it does. Hidden when null. */
   featuredCaption: React.ReactNode
 }
 
@@ -46,12 +42,12 @@ const COPY: Record<"en" | "ar", LogoCloudBentoLogoWallCopy> = {
   en: {
     heading: "The companies we build alongside",
     description: "From two-person studios to listed enterprises.",
-    featuredCaption: "The companies here are listed in no particular order.",
+    featuredCaption: "Search, cloud and workplace tools.",
   },
   ar: {
     heading: "الشركات التي نبني إلى جانبها",
     description: "من استوديوهات من شخصين إلى مؤسسات مُدرَجة.",
-    featuredCaption: "الشركات هنا مذكورة دون ترتيب معيّن.",
+    featuredCaption: "البحث والحوسبة السحابية وأدوات العمل.",
   },
 }
 
