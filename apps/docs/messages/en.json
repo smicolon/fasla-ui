@@ -3120,8 +3120,8 @@
       }
     },
     "logoCloudBlocks": {
-      "lead": "{count, plural, one {One logo section} other {{n} logo sections}}: the companies that use you, in a row, a grid or a wall, some with a quote, figures or a sector filter beside them.",
-      "intro": "Each one installs on its own and takes the logos you pass it. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "lead": "{count, plural, one {One logo section} other {{n} logo sections}}, from a single row of marks to a full wall.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
       "filterLabel": "Filter by family",
       "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
       "families": {
