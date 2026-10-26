@@ -612,10 +612,10 @@ export const routes = [
       "Build an accessible React carousel on CSS scroll snapping, with a dot stepper, controlled state, and RTL support with no extra code.",
     h1: "Carousel",
     ar: {
-      title: "المؤشر الدائري (Carousel) لتطبيقات React | فاصلة",
+      title: "عارض الشرائح (Carousel) لتطبيقات React | فاصلة",
       description:
-        "ابنِ مكوّن المؤشر الدائري (Carousel) على خاصية CSS scroll-snap، مع نقاط تنقّل وتحكم بالحالة ودعم كامل للعربية دون أي شيفرة إضافية.",
-      h1: "المؤشر الدائري (Carousel)",
+        "ابنِ مكوّن عارض الشرائح (Carousel) على خاصية CSS scroll-snap، مع مؤشرات الشرائح وتحكم بالحالة ودعم كامل للعربية دون أي شيفرة إضافية.",
+      h1: "عارض الشرائح (Carousel)",
     },
   },
   {
