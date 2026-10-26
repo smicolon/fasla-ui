@@ -627,10 +627,10 @@ export const routes = [
       "Show cards in a React content carousel with previous and next arrows, one to three slots per view, and accessible keyboard control.",
     h1: "Content Carousel",
     ar: {
-      title: "الشريط الدوّار للمحتوى (Content Carousel) لتطبيقات React | فاصلة",
+      title: "عارض المحتوى (Content Carousel) لتطبيقات React | فاصلة",
       description:
-        "اعرض البطاقات في مكوّن الشريط الدوّار للمحتوى (Content Carousel) بسهمي تنقّل، ومن بطاقة إلى ثلاث بطاقات في العرض الواحد، مع تحكم كامل من لوحة المفاتيح.",
-      h1: "الشريط الدوّار للمحتوى (Content Carousel)",
+        "اعرض البطاقات في مكوّن عارض المحتوى (Content Carousel) بسهمي تنقّل، ومن بطاقة إلى ثلاث بطاقات في العرض الواحد، مع تحكم كامل من لوحة المفاتيح.",
+      h1: "عارض المحتوى (Content Carousel)",
     },
   },
   {
