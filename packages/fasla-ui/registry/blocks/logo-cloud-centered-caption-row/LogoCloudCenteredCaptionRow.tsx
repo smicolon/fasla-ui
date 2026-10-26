@@ -12,9 +12,9 @@ import { cn } from "../../../src/lib/utils"
  * Desktop holds the six marks in one row, spread from edge to edge inside a
  * 64px inset; the inset starts at 1280, so a narrow desktop gives the gaps
  * that room instead. Tablet breaks them into two rows of three, the outer marks
- * flush with the edges, and Mobile into three centred rows of two. Each mark
- * sits in a slot as tall as Figma's (28, 24, 20px) and no wider than its cap
- * (110, 100, 88px), keeping its own proportions.
+ * flush with the edges, and Mobile into three rows of two, each pair centred
+ * on its own. Each mark sits in a slot as tall as Figma's (28, 24, 20px) and
+ * no wider than its cap (110, 100, 88px), keeping its own proportions.
  *
  * The marks come in through `logos`, in reading order; the page's `dir` sets
  * which side the first one starts on, and the marks themselves are never
@@ -76,6 +76,7 @@ export function LogoCloudCenteredCaptionRow({
   const copy = COPY[locale]
   const captionId = React.useId()
   const slots = logos.length > 0 ? logos : Array.from({ length: PLACEHOLDERS }, () => null)
+  const pairs = Array.from({ length: Math.ceil(slots.length / 2) }, (_, row) => slots.slice(row * 2, row * 2 + 2))
 
   return (
     <section aria-labelledby={captionId} className={cn("bg-background p-8 md:p-16 lg:p-24", className)} {...props}>
@@ -84,25 +85,50 @@ export function LogoCloudCenteredCaptionRow({
           {caption ?? copy.caption}
         </p>
 
-        <ul
+        {/*
+          On a phone each row of two is centred on its own, as Figma's Mobile rows are, so the
+          marks sit in pairs, not in shared columns. From Tablet up the pairs dissolve
+          (`display: contents`) and every mark is a cell of one grid. The wrappers are `role="none"`,
+          so the list still reads as one list of marks.
+        */}
+        <div
+          role={logos.length > 0 ? "list" : undefined}
           aria-hidden={logos.length === 0 || undefined}
-          className="grid grid-cols-[repeat(2,auto)] items-center justify-center justify-items-center gap-x-8 gap-y-6 text-muted-foreground md:grid-cols-[repeat(3,auto)] md:justify-between md:gap-x-6 md:gap-y-8 md:[&>li:nth-child(3n)]:justify-self-end md:[&>li:nth-child(3n+1)]:justify-self-start lg:grid-cols-[repeat(6,auto)] lg:[&>li]:!justify-self-center xl:px-16"
+          className="flex flex-col items-center gap-y-6 text-muted-foreground md:grid md:grid-cols-[repeat(3,auto)] md:items-center md:justify-between md:gap-x-6 md:gap-y-8 lg:grid-cols-[repeat(6,auto)] xl:px-16"
         >
-          {slots.map((logo, index) => (
-            <li key={index} className="flex justify-center">
-              {logo ? (
-                <>
-                  <span className="sr-only">{logo.name}</span>
-                  <span aria-hidden="true" className={SLOT}>
-                    {logo.logo}
-                  </span>
-                </>
-              ) : (
-                <span className="block h-5 w-16 rounded-md bg-muted md:h-6 md:w-20 lg:h-7 lg:w-24" />
-              )}
-            </li>
+          {pairs.map((pair, row) => (
+            <div key={row} role="none" className="flex items-center justify-center gap-x-8 md:contents">
+              {pair.map((logo, offset) => {
+                const index = row * 2 + offset
+                return (
+                  <div
+                    key={index}
+                    role={logo ? "listitem" : undefined}
+                    className={cn(
+                      "flex justify-center",
+                      // Tablet: the outer marks of each row of three sit on the edges, as Figma's space-between rows do.
+                      index % 3 === 0 && "md:justify-self-start",
+                      index % 3 === 1 && "md:justify-self-center",
+                      index % 3 === 2 && "md:justify-self-end",
+                      "lg:!justify-self-center"
+                    )}
+                  >
+                    {logo ? (
+                      <>
+                        <span className="sr-only">{logo.name}</span>
+                        <span aria-hidden="true" className={SLOT}>
+                          {logo.logo}
+                        </span>
+                      </>
+                    ) : (
+                      <span className="block h-5 w-16 rounded-md bg-muted md:h-6 md:w-20 lg:h-7 lg:w-24" />
+                    )}
+                  </div>
+                )
+              })}
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   )

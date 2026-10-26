@@ -12,6 +12,11 @@ import { cn } from "../../../src/lib/utils"
  * or `.light` class and never borrows `bg-foreground`. The theme-inverse
  * registry item maps the tokens.
  *
+ * The heading is Figma's 4XL style at every breakpoint: its size steps down
+ * on smaller screens, but its line height stays the 4XL rung's (44px, 60px
+ * in Arabic), read from the type ramp so it follows the direction. `md:`
+ * repeats it because `md:text-3xl` would otherwise bring its own.
+ *
  * Rules run above and below the band, with a hairline between cells. On
  * Desktop the cells share one row; on Tablet they run three to a row, a
  * shorter last row splitting the width between its cells; on a phone they
@@ -45,10 +50,22 @@ export interface LogoCloudDividerRuleRowCopy {
 /** Figma's copy, English and Arabic. */
 const COPY: Record<"en" | "ar", LogoCloudDividerRuleRowCopy> = {
   en: {
-    heading: "See how our customers work with us to build trust.",
+    // Figma breaks the line after "work". On a phone that leaves "work" alone on its line, so
+    // the break starts at Tablet and the phone wraps on its own.
+    heading: (
+      <>
+        See how our customers work
+        <br className="hidden md:inline" /> with us to build trust.
+      </>
+    ),
   },
   ar: {
-    heading: "اطّلع على كيفية عمل عملائنا معنا لبناء الثقة.",
+    heading: (
+      <>
+        اطّلع على كيفية عمل عملائنا
+        <br /> معنا لبناء الثقة.
+      </>
+    ),
   },
 }
 
@@ -85,7 +102,7 @@ export function LogoCloudDividerRuleRow({ locale = "en", heading, logos = [], cl
       <div className="mx-auto flex w-full max-w-[1248px] flex-col gap-14">
         <h2
           id={headingId}
-          className="mx-auto max-w-[640px] text-balance text-center text-2xl font-semibold text-foreground-inverse md:text-3xl lg:text-4xl"
+          className="mx-auto max-w-[640px] text-balance text-center text-2xl font-semibold leading-[calc(var(--leading-4xl)*2.25rem)] text-foreground-inverse md:text-3xl md:leading-[calc(var(--leading-4xl)*2.25rem)] lg:text-4xl"
         >
           {heading ?? copy.heading}
         </h2>

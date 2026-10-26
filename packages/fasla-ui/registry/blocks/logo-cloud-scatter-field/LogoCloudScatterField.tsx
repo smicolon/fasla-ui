@@ -23,6 +23,10 @@ import { buttonVariants } from "../../ui/button/button"
  * tile sits at the top right. The logos themselves are never flipped. Figma's
  * RTL variants keep the LTR positions; the code mirrors, as every block does.
  *
+ * The heading breaks where Figma's does, after its first phrase. At Tablet
+ * the Arabic heading is one step smaller, as Figma sets it, so its second
+ * phrase still fits on one line.
+ *
  * Mobile first: the base classes are Figma's Mobile (360), `md:` its Tablet
  * (768) and `lg:` its Desktop (1440).
  */
@@ -51,12 +55,24 @@ export interface LogoCloudScatterFieldCopy {
 /** Figma's copy, English and Arabic. */
 const COPY: Record<"en" | "ar", LogoCloudScatterFieldCopy> = {
   en: {
-    heading: "Seamless integrations with your entire stack",
+    heading: (
+      <>
+        Seamless integrations
+        <br />
+        with your entire stack
+      </>
+    ),
     description: "Fasla connects to the tools your team already lives in — no glue code required.",
     action: { label: "See all integrations", href: "#integrations" },
   },
   ar: {
-    heading: "تكاملات سلسة مع منظومتك التقنية بالكامل",
+    heading: (
+      <>
+        تكاملات سلسة
+        <br />
+        مع منظومتك التقنية بالكامل
+      </>
+    ),
     description: "تتصل فاصلة بالأدوات التي يعمل بها فريقك يوميًا، دون الحاجة إلى شيفرة ربط.",
     action: { label: "اطّلع على كل التكاملات", href: "#integrations" },
   },
@@ -120,7 +136,7 @@ export function LogoCloudScatterField({
 
   return (
     <section aria-labelledby={headingId} className={cn("bg-background p-8 md:p-16 lg:px-24 lg:py-24", className)} {...props}>
-      <div className="relative mx-auto flex w-full max-w-[1248px] items-center justify-center overflow-hidden rounded-xl py-14 md:h-[420px] md:py-0 lg:h-[440px]">
+      <div className="relative mx-auto flex min-h-[470px] w-full max-w-[1248px] items-center justify-center overflow-hidden rounded-xl py-14 md:h-[420px] md:min-h-0 md:py-0 lg:h-[440px]">
         <div aria-hidden="true" className="absolute inset-0 grid grid-cols-[repeat(14,72px)] content-start gap-6 p-2">
           {LATTICE.map((cell) => (
             <span key={cell} className="size-[72px] rounded-md bg-muted opacity-[0.55]" />
@@ -152,7 +168,7 @@ export function LogoCloudScatterField({
         )}
 
         <div className="relative flex w-full flex-col items-center gap-5 rounded-xl bg-background px-8 py-6 text-center md:w-[min(460px,calc(100%-160px))] lg:w-[min(620px,calc(100%-320px))]">
-          <h2 id={headingId} className="text-balance text-3xl font-semibold text-foreground md:text-4xl">
+          <h2 id={headingId} className="text-3xl font-semibold text-foreground md:text-4xl md:[&:dir(rtl)]:text-3xl lg:[&:dir(rtl)]:text-4xl">
             {heading ?? copy.heading}
           </h2>
           {text ? <p className="text-base text-muted-foreground">{text}</p> : null}

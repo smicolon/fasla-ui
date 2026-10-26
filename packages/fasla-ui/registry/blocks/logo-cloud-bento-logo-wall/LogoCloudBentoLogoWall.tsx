@@ -14,7 +14,9 @@ import { cn } from "../../../src/lib/utils"
  * columns of tiles; on a phone every tile is full width.
  *
  * One grid holds every tile, so the layout follows the page's direction: in
- * Arabic the featured tile sits on the right. Figma's featured tile is 12px
+ * Arabic the featured tile sits on the right. The company's name is a Latin
+ * brand name, so it keeps Geist's face and line height in Arabic too, as
+ * Figma sets it. Figma's featured tile is 12px
  * shorter than the 2 × 2 block beside it; here it stretches to match.
  *
  * Mobile first: the base classes are Figma's Mobile (360), `md:` its Tablet
@@ -114,7 +116,7 @@ export function LogoCloudBentoLogoWall({
                 {featured.logo}
               </span>
               <div className="flex flex-col gap-1">
-                <p className="text-xl font-semibold text-foreground">{featured.name}</p>
+                <p className="font-sans text-xl font-semibold leading-7 text-foreground">{featured.name}</p>
                 {caption ? <p className="text-sm text-muted-foreground">{caption}</p> : null}
               </div>
             </li>

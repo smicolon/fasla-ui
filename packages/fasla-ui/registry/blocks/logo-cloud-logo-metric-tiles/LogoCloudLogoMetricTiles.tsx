@@ -17,7 +17,8 @@ import { cn } from "../../../src/lib/utils"
  * Figma draws the hairline with its Separator component; the code registry
  * has no Separator, so it is an `hr` in the `border` token. Each card's
  * content starts at the start edge, so in Arabic it sits on the right. The
- * marks are never mirrored.
+ * marks are never mirrored. A figure with no Arabic in it keeps Geist and the
+ * English line height in Arabic, as Figma's RTL variants set it.
  *
  * Mobile first: the base classes are Figma's Mobile (360), `md:` its Tablet
  * (768) and `lg:` its Desktop (1440).
@@ -66,9 +67,9 @@ const COPY: Record<"en" | "ar", LogoCloudLogoMetricTilesCopy> = {
     heading: "الأرقام خلف الشعارات",
     description: "ما الذي تغيّر للفرق في عامها الأول على فاصلة.",
     tiles: [
-      { value: <bdi dir="ltr">+38%</bdi>, label: "تسليم أسرع من التصميم إلى التطوير" },
-      { value: <bdi dir="ltr">2.4×</bdi>, label: "مكوّنات مُعاد استخدامها في كل إصدار" },
-      { value: <bdi dir="ltr">−61%</bdi>, label: "من الوقت المُنفَق على إعادة صياغة المواصفات" },
+      { value: "+38%", label: "تسليم أسرع من التصميم إلى التطوير" },
+      { value: "2.4×", label: "مكوّنات مُعاد استخدامها في كل إصدار" },
+      { value: "−61%", label: "من الوقت المُنفَق على إعادة صياغة المواصفات" },
       {
         value: (
           <>
@@ -77,11 +78,14 @@ const COPY: Record<"en" | "ar", LogoCloudLogoMetricTilesCopy> = {
         ),
         label: "مُوفَّرة في كل دورة إطلاق",
       },
-      { value: <bdi dir="ltr">99.98%</bdi>, label: "جاهزية عبر مسارات التدقيق" },
-      { value: <bdi dir="ltr">4,200</bdi>, label: "رمز تصميم مُتزامن" },
+      { value: "99.98%", label: "جاهزية عبر مسارات التدقيق" },
+      { value: "4,200", label: "رمز تصميم مُتزامن" },
     ],
   },
 }
+
+/** Arabic letters. Text without any is Latin: a figure or a brand name. */
+const ARABIC = /[\u0600-\u06FF]/
 
 export interface LogoCloudLogoMetricTilesProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "title">,
@@ -116,7 +120,7 @@ export function LogoCloudLogoMetricTiles({
         {list.length > 0 ? (
           <ul className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {list.map((tile, index) => (
-              <li key={index} className="flex flex-col gap-5 rounded-lg border border-border bg-card p-8">
+              <li key={index} className="flex flex-col gap-5 rounded-lg bg-card p-8 ring-1 ring-inset ring-border forced-colors:border">
                 {tile.logo ? (
                   <>
                     <span className="sr-only">{tile.logo.name}</span>
@@ -131,7 +135,13 @@ export function LogoCloudLogoMetricTiles({
                   <span aria-hidden="true" className="h-5 w-[72px] rounded-md bg-muted md:h-6 md:w-20 lg:h-7 lg:w-24" />
                 )}
                 <hr className="border-border" />
-                <p className="text-xl font-semibold text-card-foreground md:text-2xl lg:text-3xl">{tile.value}</p>
+                {typeof tile.value === "string" && !ARABIC.test(tile.value) ? (
+                  <p className="font-sans text-xl font-semibold leading-7 text-card-foreground md:text-2xl md:leading-8 lg:text-3xl lg:leading-10">
+                    <bdi dir="ltr">{tile.value}</bdi>
+                  </p>
+                ) : (
+                  <p className="text-xl font-semibold text-card-foreground md:text-2xl lg:text-3xl">{tile.value}</p>
+                )}
                 <p className="text-sm text-muted-foreground">{tile.label}</p>
               </li>
             ))}

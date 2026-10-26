@@ -11,6 +11,10 @@ import { cn } from "../../../src/lib/utils"
  * the same width and the mark sits in its middle, so a wide wordmark and a
  * square glyph line up on one grid.
  *
+ * The card's border is an inset ring, drawn inside its edge as Figma's inside
+ * stroke is, so it adds nothing to the card's size. Its corners are 10px on a
+ * phone and 14px from Tablet up, as Figma draws them.
+ *
  * The grid fills in reading order, so in Arabic the first mark sits at the
  * right of the first row, where Figma's RTL variants place it, with the same
  * list of logos. The marks themselves are never mirrored.
@@ -67,7 +71,7 @@ export function LogoCloudContainedCard({ locale = "en", caption, logos = [], cla
 
   return (
     <section aria-labelledby={captionId} className={cn("bg-background p-8 md:p-16 lg:p-24", className)} {...props}>
-      <div className="mx-auto flex w-full max-w-[1248px] flex-col items-center gap-12 rounded-xl border border-border bg-card px-5 py-6 md:p-8 lg:px-16 lg:py-14">
+      <div className="mx-auto flex w-full max-w-[1248px] flex-col items-center gap-12 rounded-lg bg-card px-5 py-6 ring-1 ring-inset ring-border forced-colors:border md:rounded-xl md:p-8 lg:px-16 lg:py-14">
         <p id={captionId} className="w-full text-center text-xs font-semibold uppercase text-muted-foreground">
           {caption ?? copy.caption}
         </p>

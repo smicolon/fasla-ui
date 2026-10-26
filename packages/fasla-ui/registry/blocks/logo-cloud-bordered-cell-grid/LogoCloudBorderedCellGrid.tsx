@@ -92,10 +92,14 @@ export function LogoCloudBorderedCellGrid({
         </p>
 
         <div className="overflow-hidden rounded-lg border border-border bg-card">
-          {/* Pulled out by a pixel on the end and bottom, so the card clips the outer cells' lines. */}
+          {/*
+            Pulled out by a pixel on every side but the start, so the card clips the outer cells' lines
+            and its border sits over the first row, as Figma's inside stroke does: the card is the rows'
+            height, not a pixel taller.
+          */}
           <ul
             aria-hidden={logos.length === 0 || undefined}
-            className="-mb-px -me-px grid grid-cols-2 text-muted-foreground lg:grid-cols-5"
+            className="-mb-px -me-px -mt-px grid grid-cols-2 text-muted-foreground lg:grid-cols-5"
           >
             {slots.map((logo, index) => (
               <li

@@ -14,9 +14,11 @@ import { Badge } from "../../ui/badge/badge"
  * holds five marks across; on a tablet and a phone the label sits above a
  * grid two marks across.
  *
- * The rules are each cell's bottom and end border. The grid is a pixel wider
- * and taller than its box, which clips it, so the last column's and last
- * row's rules disappear under the box's own border at any count of marks.
+ * The rules are each cell's bottom and end border. The grid overhangs its
+ * box by a pixel on every side and the box clips it: the box's border sits
+ * over the grid's edge, as Figma's inside stroke does, so the box is exactly
+ * its rows tall and the last column's and last row's rules disappear under
+ * the border at any count of marks.
  * Borders, corners and the label column are all logical, so in Arabic the
  * label moves to the right and the grid fills from the right, as Figma's RTL
  * variants draw them, with the same list of logos. The marks themselves are
@@ -58,8 +60,8 @@ const COPY: Record<"en" | "ar", LogoCloudSideLabelRailCopy> = {
 /** How many cells Figma draws, and so how many placeholders show without logos. */
 const PLACEHOLDERS = 10
 
-/** Figma's crosshairs, centred on the box's four outer corners. */
-const CORNERS = ["-start-[7px] -top-[7px]", "-end-[7px] -top-[7px]", "-bottom-[7px] -start-[7px]", "-bottom-[7px] -end-[7px]"]
+/** Figma's crosshairs: 14px, 8px out from each of the box's outer corners. */
+const CORNERS = ["-start-2 -top-2", "-end-2 -top-2", "-bottom-2 -start-2", "-bottom-2 -end-2"]
 
 export interface LogoCloudSideLabelRailProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "title">,
@@ -94,7 +96,7 @@ export function LogoCloudSideLabelRail({ locale = "en", label, badge, logos = []
 
         <div className="relative min-w-0 flex-1">
           <div className="overflow-hidden rounded-md border border-border">
-            <ul className="-mb-px -me-px grid grid-cols-2 lg:grid-cols-5">
+            <ul className="-m-px grid grid-cols-2 lg:grid-cols-5">
               {cells.map((item, index) => (
                 <li key={index} className="flex px-2 h-20 min-w-0 items-center justify-center border-b border-e border-border md:h-[88px] lg:h-[104px]">
                   {item ? (

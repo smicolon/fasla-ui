@@ -13,7 +13,7 @@ const config: Config = {
     "./stories/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
     "../../packages/fasla-ui/registry/**/*.{js,ts,jsx,tsx}",
-    // The Logo Cloud stories' example marks switch colour with the theme.
+    // The Logo Cloud stories' example marks bind some parts to theme tokens (fill-foreground).
     "../docs/components/blocks/brand-logos.tsx",
   ],
   theme: {

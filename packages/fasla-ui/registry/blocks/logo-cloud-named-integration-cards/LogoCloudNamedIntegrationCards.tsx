@@ -95,6 +95,9 @@ const COPY: Record<"en" | "ar", LogoCloudNamedIntegrationCardsCopy> = {
   },
 }
 
+/** Arabic letters. A name without any is Latin, and keeps Geist in Arabic, as Figma sets it. */
+const ARABIC = /[\u0600-\u06FF]/
+
 export interface LogoCloudNamedIntegrationCardsProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "title">,
     Partial<LogoCloudNamedIntegrationCardsCopy> {
@@ -132,7 +135,7 @@ export function LogoCloudNamedIntegrationCards({
         {list.length > 0 ? (
           <ul className="grid items-start gap-5 md:grid-cols-2 lg:grid-cols-4">
             {list.map((integration, index) => (
-              <li key={index} className="flex flex-col gap-4 rounded-lg border border-border bg-card p-6">
+              <li key={index} className="flex flex-col gap-4 rounded-lg bg-card p-6 ring-1 ring-inset ring-border forced-colors:border">
                 {integration.logo ? (
                   <>
                     <span
@@ -141,7 +144,13 @@ export function LogoCloudNamedIntegrationCards({
                     >
                       {integration.logo.logo}
                     </span>
-                    <h3 className="text-base font-semibold text-card-foreground">{integration.logo.name}</h3>
+                    {ARABIC.test(integration.logo.name) ? (
+                      <h3 className="text-base font-semibold text-card-foreground">{integration.logo.name}</h3>
+                    ) : (
+                      <h3 className="font-sans text-base font-semibold leading-6 text-card-foreground">
+                        <bdi dir="ltr">{integration.logo.name}</bdi>
+                      </h3>
+                    )}
                   </>
                 ) : (
                   <>

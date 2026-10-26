@@ -16,8 +16,8 @@ import { cn } from "../../../src/lib/utils"
  * mark drawn in `currentColor` follows the band.
  *
  * Three cards to a row on Desktop, two on Tablet, one on Mobile. Cards in a
- * row share their height, and the mark, quote glyph and quote stay at the
- * top of each, centred. The marks keep Figma's height per breakpoint (28,
+ * row share their height; a card stretched by a longer quote beside it
+ * centres its mark, glyph and quote, as Figma's RTL variants do. The marks keep Figma's height per breakpoint (28,
  * 24 and 20px), never past their width cap.
  *
  * Mirroring comes from the page's `dir`: the heading moves to the start
@@ -124,7 +124,7 @@ export function LogoCloudLogoQuoteCards({
           <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {list.map((item, index) => (
               <li key={index}>
-                <figure className="flex h-full flex-col items-center gap-5 rounded-lg border border-muted-foreground-inverse p-8 text-center">
+                <figure className="flex h-full flex-col items-center justify-center gap-5 rounded-lg border border-muted-foreground-inverse p-8 text-center">
                   {/* The company, read before its quote; the mark itself is hidden. */}
                   {item.logo ? <figcaption className="sr-only">{item.logo.name}</figcaption> : null}
                   {item.logo ? (

@@ -14,9 +14,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../ui/tabs/tabs"
  * library's: arrow keys move between them and the panel follows.
  *
  * The grid is four columns at Desktop and two below, with a hairline between
- * cells. Each cell draws its end and bottom edges and the grid is pulled out
- * by 1px under its rounded frame, which clips the last column's and last
- * row's lines, so a part-filled last row still closes cleanly.
+ * cells. Each cell draws its end and bottom edges, and the grid is pulled out
+ * by 1px on every side under its rounded frame, as Figma draws the frame's
+ * stroke inside: the frame clips the last column's and last row's lines, so a
+ * part-filled last row still closes cleanly.
  *
  * Mobile first: the base classes are Figma's Mobile (360), `md:` its Tablet
  * (768) and `lg:` its Desktop (1440).
@@ -121,7 +122,7 @@ export function LogoCloudTabbedIndustryFilter({
 
   const grid = (children: React.ReactNode) => (
     <div className="w-full overflow-hidden rounded-md border border-border">
-      <div className="-mb-px -me-px">{children}</div>
+      <div className="-m-px">{children}</div>
     </div>
   )
 

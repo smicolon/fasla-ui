@@ -17,7 +17,9 @@ import { cn } from "../../../src/lib/utils"
  * number of marks keeps a clean frame.
  *
  * The rules sit on the start edge and the grid fills from the start, so in
- * Arabic both follow the page's direction. The marks are never mirrored.
+ * Arabic both follow the page's direction. The marks are never mirrored. A
+ * figure with no Arabic in it keeps Geist and the English line height in
+ * Arabic, as Figma's RTL variants set it.
  *
  * Mobile first: the base classes are Figma's Mobile (360), `md:` its Tablet
  * (768) and `lg:` its Desktop (1440).
@@ -62,9 +64,9 @@ const COPY: Record<"en" | "ar", LogoCloudStatRailAboveGridCopy> = {
     eyebrow: "نجاح العملاء",
     heading: "حقّق نتائج أقوى مع الشركاء",
     stats: [
-      { value: <bdi dir="ltr">100%</bdi>, label: "تحسّن في وقت التحصيل اليدوي" },
-      { value: <bdi dir="ltr">16%</bdi>, label: "ارتفاع في معدل التحويل" },
-      { value: <bdi dir="ltr">150</bdi>, label: "دولة تم الوصول إليها بعد اعتماد فاصلة" },
+      { value: "100%", label: "تحسّن في وقت التحصيل اليدوي" },
+      { value: "16%", label: "ارتفاع في معدل التحويل" },
+      { value: "150", label: "دولة تم الوصول إليها بعد اعتماد فاصلة" },
       {
         value: (
           <>
@@ -76,6 +78,9 @@ const COPY: Record<"en" | "ar", LogoCloudStatRailAboveGridCopy> = {
     ],
   },
 }
+
+/** Arabic letters. Text without any is Latin: a figure or a brand name. */
+const ARABIC = /[\u0600-\u06FF]/
 
 /** Figma's grid: eight marks, two rows of four at Desktop. */
 const PLACEHOLDERS = 8
@@ -122,7 +127,13 @@ export function LogoCloudStatRailAboveGrid({
           <ul className="grid gap-6 md:grid-cols-2 md:gap-x-8 lg:grid-cols-4">
             {rail.map((stat, index) => (
               <li key={index} className="flex flex-col gap-1 border-s-2 border-border ps-5">
-                <p className="text-xl font-semibold text-foreground">{stat.value}</p>
+                {typeof stat.value === "string" && !ARABIC.test(stat.value) ? (
+                  <p className="font-sans text-xl font-semibold leading-7 text-foreground">
+                    <bdi dir="ltr">{stat.value}</bdi>
+                  </p>
+                ) : (
+                  <p className="text-xl font-semibold text-foreground">{stat.value}</p>
+                )}
                 <p className="text-sm text-muted-foreground">{stat.label}</p>
               </li>
             ))}

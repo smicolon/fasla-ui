@@ -14,9 +14,11 @@ import { buttonVariants } from "../../ui/button/button"
  * becomes a single column of marks and the buttons stretch to the full width,
  * one above the other.
  *
- * The rules are each cell's bottom and end border. The grid is a pixel wider
- * and taller than its box, which clips it, so the last column's and last
- * row's rules disappear under the box's own border at any count of marks.
+ * The rules are each cell's bottom and end border. The grid overhangs its
+ * box by a pixel on every side and the box clips it: the box's border sits
+ * over the grid's edge, as Figma's inside stroke does, so the box is exactly
+ * its rows tall and the last column's and last row's rules disappear under
+ * the border at any count of marks.
  * Everything is logical, so in Arabic the copy moves to the right and the grid
  * fills from the right, as Figma's RTL variants draw them, with the same list
  * of logos. The marks themselves are never mirrored.
@@ -117,7 +119,7 @@ export function LogoCloudHeadingLeftGridRight({
       <div className="mx-auto flex w-full max-w-[1248px] flex-col gap-10 md:gap-12 lg:flex-row lg:items-center lg:gap-20">
         <div className="flex flex-col items-start gap-5 lg:w-[min(440px,40%)] lg:shrink-0">
           {badge ? (
-            <Badge variant="soft" tone="secondary" radius="standard" className="uppercase">
+            <Badge variant="soft" tone="primary" radius="standard" className="uppercase">
               {badge}
             </Badge>
           ) : null}
@@ -138,7 +140,7 @@ export function LogoCloudHeadingLeftGridRight({
         </div>
 
         <div className="min-w-0 flex-1 overflow-hidden rounded-md border border-border">
-          <ul className="-mb-px -me-px grid grid-cols-1 md:grid-cols-3">
+          <ul className="-m-px grid grid-cols-1 md:grid-cols-3">
             {cells.map((item, index) => (
               <li key={index} className="flex px-2 h-[52px] min-w-0 items-center justify-center border-b border-e border-border md:h-[104px] lg:h-28">
                 {item ? (
