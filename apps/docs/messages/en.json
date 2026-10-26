@@ -3119,6 +3119,41 @@
         "error-state-countdown-redirect": "Countdown Redirect"
       }
     },
+    "logoCloudBlocks": {
+      "lead": "{count, plural, one {One logo section} other {{n} logo sections}}, from a single row of marks to a full wall.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "filterLabel": "Filter by family",
+      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
+      "families": {
+        "all": "All",
+        "walls": "Logo walls",
+        "proof": "With quotes, figures or a filter"
+      },
+      "types": {
+        "logo-cloud-centered-caption-row": "Centered Caption Row",
+        "logo-cloud-heading-grid": "Heading Grid",
+        "logo-cloud-bordered-cell-grid": "Bordered Cell Grid",
+        "logo-cloud-enterprise-wall": "Enterprise Wall",
+        "logo-cloud-contained-card": "Contained Card",
+        "logo-cloud-dark-logo-wall": "Dark Logo Wall",
+        "logo-cloud-side-label-rail": "Side Label Rail",
+        "logo-cloud-heading-left-grid-right": "Heading Left Grid Right",
+        "logo-cloud-editorial-eyebrow-split": "Editorial Eyebrow Split",
+        "logo-cloud-flanked-heading": "Flanked Heading",
+        "logo-cloud-quote-panel-grid": "Quote Panel Grid",
+        "logo-cloud-stat-rail-above-grid": "Stat Rail Above Grid",
+        "logo-cloud-logo-metric-tiles": "Logo Metric Tiles",
+        "logo-cloud-logo-quote-cards": "Logo Quote Cards",
+        "logo-cloud-named-integration-cards": "Named Integration Cards",
+        "logo-cloud-logo-testimonial-strip": "Logo Testimonial Strip",
+        "logo-cloud-scatter-field": "Scatter Field",
+        "logo-cloud-bento-logo-wall": "Bento Logo Wall",
+        "logo-cloud-divider-rule-row": "Divider Rule Row",
+        "logo-cloud-pyramid-row-stack": "Pyramid Row Stack",
+        "logo-cloud-tabbed-industry-filter": "Tabbed Industry Filter",
+        "logo-cloud-grid-closing-cta": "Grid Closing CTA"
+      }
+    },
     "blockCard": {
       "fullScreen": "Open full screen",
       "newTab": "(opens in a new tab)",

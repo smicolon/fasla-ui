@@ -154,6 +154,21 @@ export const routes = [
     },
   },
   {
+    kind: "block",
+    category: "Blocks",
+    path: "/docs/blocks/logo-cloud/",
+    title: "Logo Cloud Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Twenty-two logo sections, from a single row of customer marks to a full wall, quotes, figures and a sector filter, responsive and mirrored for Arabic.",
+    h1: "Logo Cloud",
+    ar: {
+      title: "كتل سحابة الشعارات لمشاريع React | فاصلة",
+      description:
+        "اثنان وعشرون قسمًا لشعارات العملاء، من صف واحد إلى جدار كامل، مع اقتباسات وأرقام وتصفية حسب القطاع، متجاوبة ومعكوسة للعربية.",
+      h1: "سحابة الشعارات (Logo Cloud)",
+    },
+  },
+  {
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/button/",
