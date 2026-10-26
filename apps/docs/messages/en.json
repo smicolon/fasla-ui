@@ -1003,6 +1003,80 @@
         "format": "Currency format"
       }
     },
+    "inputOtp": {
+      "lead": "A field for one-time codes, with one slot per character, so the reader can check each digit against the message they are copying from. It takes the code from the keyboard, a paste or the phone's code autofill, comes in four layouts, and follows the page's reading direction.",
+      "label": "Verification code",
+      "pin": "PIN",
+      "variantsBody": "Figma has four types. They are not a prop: each is a way of putting the parts together. Simple is two <code>InputOTPGroup</code> parts of three slots with an <code>InputOTPSeparator</code> between them, 6px apart (<code>containerClassName=\"gap-1.5\"</code>). Digits only is one group of six. With Separator is three groups of two, and With Spacing is six groups of one, so every slot has its own border and corners. Both keep the default 8px gap.",
+      "types": {
+        "simple": "Simple",
+        "digits": "Digits only",
+        "separator": "With Separator",
+        "spacing": "With Spacing"
+      },
+      "statesBody": "These are real states, not props. Active marks the slot the next character goes into while the field has focus: a 3px ring outside its border. Set <code>aria-invalid</code> on <code>InputOTP</code> and every slot's border turns red, and the ring with it. <code>disabled</code> dims the whole field to 50%.",
+      "states": {
+        "default": "Default",
+        "active": "Active",
+        "invalid": "Destructive",
+        "disabled": "Disabled"
+      },
+      "validation": {
+        "title": "Label and error",
+        "body": "The slots show no text of their own. Give the field a visible label and link the two with <code>aria-labelledby</code>. When a code is wrong, set <code>aria-invalid</code> and show the message under the field, linked with <code>aria-describedby</code>, so a screen reader reads it with the field.",
+        "description": "Enter the 6-digit code from the text message. In this example, it is {code}.",
+        "hint": "Enter the 6-digit code from the text message.",
+        "error": "That code is wrong. Check the message and try again."
+      },
+      "a11y": {
+        "input": "One real <code>input</code> lies over the slots and holds the whole code, so screen readers read it as one text field. It asks the phone for the code from a text message (<code>autoComplete=\"one-time-code\"</code>) and shows the numeric keyboard (<code>inputMode=\"numeric\"</code>). The slots are hidden from screen readers, so the code is not read twice.",
+        "label": "Always name the field: <code>aria-labelledby</code> with a visible label, or <code>aria-label</code> when there is none.",
+        "error": "<code>aria-invalid</code> goes to the input itself, so screen readers say the code is invalid. Link the error message with <code>aria-describedby</code>.",
+        "keyboard": "Typing fills the slots in order, and Backspace clears the last one. The arrow keys move between slots, and a paste fills them all at once. A character that fails <code>pattern</code> is ignored.",
+        "digits": "Digits typed or pasted in Arabic-Indic form, such as ١٢٣, are stored as Western digits, so the code is the same in every language and passes a digits-only <code>pattern</code>.",
+        "direction": "Direction is inherited from <code>dir</code>, never a prop. On a right-to-left page the first slot is on the right and the code fills from the right. Every arrow moves the way it points: the left arrow goes to the next slot, in every browser."
+      },
+      "usage": {
+        "basic": "Simple, six digits",
+        "validation": "With a label and an error",
+        "spacing": "PIN with spacing"
+      },
+      "props": {
+        "otp": {
+          "maxLength": "How many characters the code has: one slot for each. Required.",
+          "value": "The code, for a controlled field. Use it with <code>onChange</code>.",
+          "defaultValue": "The code on first render, for an uncontrolled field.",
+          "onChange": "Called with the new code on every change.",
+          "onComplete": "Called with the code once the last slot is filled.",
+          "pattern": "A regular expression the code must match, such as <code>REGEXP_ONLY_DIGITS</code> from <code>input-otp</code>. A change that fails it is ignored. Arabic-Indic digits are read as Western digits.",
+          "pasteTransformer": "Cleans pasted text before it is checked, such as removing the spaces and dashes from a copied code.",
+          "inputMode": "The on-screen keyboard to show. Use <code>\"text\"</code> for codes with letters.",
+          "autoComplete": "Lets the phone offer the code from a text message.",
+          "disabled": "Disables the field and dims it to 50%.",
+          "ariaInvalid": "Marks the code wrong: the input is announced as invalid, and every slot's border turns red.",
+          "ariaLabel": "Names the field for screen readers when there is no visible label.",
+          "ariaLabelledby": "The id of the visible label that names the field.",
+          "ariaDescribedby": "The id of the helper text or error message read with the field.",
+          "name": "The name the code is submitted under.",
+          "containerClassName": "Extra classes for the row that holds the groups and separators, such as <code>gap-1.5</code> for Simple.",
+          "children": "The groups and separators.",
+          "className": "Extra classes for the hidden input."
+        },
+        "group": {
+          "children": "The slots, side by side, sharing their borders.",
+          "className": "Extra classes for the group."
+        },
+        "slot": {
+          "index": "Which character of the code the slot shows, counting from 0.",
+          "ariaInvalid": "Marks this slot alone as wrong. Without it, the slot follows <code>aria-invalid</code> on <code>InputOTP</code>.",
+          "className": "Extra classes for the slot."
+        },
+        "separator": {
+          "children": "Replaces the line with your own content, in the same 24px box.",
+          "className": "Extra classes for the separator."
+        }
+      }
+    },
     "combobox": {
       "lead": "A searchable dropdown with autocomplete, multi-select, and create-new functionality.",
       "options": {
