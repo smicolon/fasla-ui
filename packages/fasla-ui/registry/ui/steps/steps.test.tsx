@@ -98,6 +98,20 @@ describe("Steps — content", () => {
     expect(items().map((item) => slot(item, "step-icon")!.textContent)).toEqual(["1", "2", "3"])
   })
 
+  it("counts steps grouped in a fragment one by one", () => {
+    render(
+      <Steps>
+        <StepsItem label="One" />
+        <>
+          <StepsItem label="Two" />
+          <StepsItem label="Three" />
+        </>
+      </Steps>
+    )
+    expect(items().map((item) => slot(item, "step-icon")!.textContent)).toEqual(["1", "2", "3"])
+    expect(items().map((item) => slot(item, "step-tail") !== null)).toEqual([true, true, false])
+  })
+
   it("shows the check instead of the number with icon", () => {
     render(
       <Steps>
@@ -106,7 +120,7 @@ describe("Steps — content", () => {
     )
     const icon = slot(items()[0], "step-icon")!
     expect(icon.textContent).toBe("")
-    expect(icon.querySelector("svg")).toHaveClass("size-[22px]")
+    expect(icon.querySelector("svg")).toHaveClass("size-[1.375rem]")
   })
 
   it("shows the description only when given", () => {
@@ -167,7 +181,7 @@ describe("Steps — look", () => {
     expect(list).toHaveAttribute("data-orientation", "horizontal")
     expect(list).not.toHaveClass("flex-col")
     expect(slot(items()[0], "step-details")!.contains(slot(items()[0], "step-text"))).toBe(true)
-    expect(slot(items()[0], "step-tail")).toHaveClass("h-[38px]", "px-2")
+    expect(slot(items()[0], "step-tail")).toHaveClass("h-[2.375rem]", "px-2")
 
     rerender(<Flow orientation="vertical" />)
     expect(list).toHaveAttribute("data-orientation", "vertical")
@@ -175,7 +189,7 @@ describe("Steps — look", () => {
     const first = items()[0]
     expect(slot(first, "step-details")!.contains(slot(first, "step-text"))).toBe(false)
     expect(slot(first, "step-details")!.contains(slot(first, "step-tail"))).toBe(true)
-    expect(slot(first, "step-tail")).toHaveClass("min-h-[46px]", "py-2")
+    expect(slot(first, "step-tail")).toHaveClass("min-h-[2.875rem]", "py-2")
   })
 
   it("lets every step but the last share the space", () => {

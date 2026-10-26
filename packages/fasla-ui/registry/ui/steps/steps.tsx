@@ -84,7 +84,7 @@ const stepsVariants = cva("m-0 flex list-none p-0", {
 })
 
 /**
- * The bullet: 38px, Figma's `step-icon`, with the number in `Tailwind
+ * The bullet: 38px (2.375rem), Figma's `step-icon`, with the number in `Tailwind
  * En/LG/Medium` (18px; the type ramp gives it a 28px line in English and 32px
  * in Arabic).
  *
@@ -99,13 +99,17 @@ const stepsVariants = cva("m-0 flex list-none p-0", {
  * Radius: Standard is Figma's 8px `rounded-field`, read through the preset's
  * `--radius-md`; Rounded is `border radius/rounded`, a circle.
  *
+ * Its size, and every length tied to it below, is in rem like the text, so a
+ * larger text setting grows the bullet with its number and keeps the tails and
+ * labels lined up on it. At the default 16px they are Figma's pixels.
+ *
  * In forced colors (Windows high contrast) the fills would be dropped and
  * Done would look like Upcoming, so each status keeps its look in system
  * colours: Done filled, Current outlined, Upcoming outlined in grey.
  */
 const stepIconVariants = cva(
   [
-    "inline-flex size-[38px] shrink-0 items-center justify-center border text-lg font-medium",
+    "inline-flex size-[2.375rem] shrink-0 items-center justify-center border text-lg font-medium",
     "forced-colors:[forced-color-adjust:none]",
   ],
   {
@@ -143,8 +147,8 @@ const stepIconVariants = cva(
 const stepTailVariants = cva("flex", {
   variants: {
     orientation: {
-      horizontal: "h-[38px] min-w-0 flex-1 items-center px-2",
-      vertical: "min-h-[46px] w-full flex-1 justify-center py-2",
+      horizontal: "h-[2.375rem] min-w-0 flex-1 items-center px-2",
+      vertical: "min-h-[2.875rem] w-full flex-1 justify-center py-2",
     },
   },
   defaultVariants: { orientation: "horizontal" },
@@ -173,9 +177,9 @@ const stepTextVariants = cva("mx-auto flex w-max shrink-0 flex-col items-center 
     // Written out in full, not built from a shared string: Tailwind only
     // generates classes it can read whole in the source.
     position: {
-      first: "max-w-[calc((100cqi_-_38px)_/_var(--steps-tails,1)_/_2_+_11px)]",
-      middle: "max-w-[calc((100cqi_-_38px)_/_var(--steps-tails,1)_-_16px)]",
-      last: "max-w-[calc((100cqi_-_38px)_/_var(--steps-tails,1)_/_2_+_11px)]",
+      first: "max-w-[calc((100cqi_-_2.375rem)_/_var(--steps-tails,1)_/_2_+_0.6875rem)]",
+      middle: "max-w-[calc((100cqi_-_2.375rem)_/_var(--steps-tails,1)_-_1rem)]",
+      last: "max-w-[calc((100cqi_-_2.375rem)_/_var(--steps-tails,1)_/_2_+_0.6875rem)]",
     },
   },
   defaultVariants: { position: "middle" },
@@ -196,6 +200,21 @@ const stepTailLineVariants = cva("block", {
   defaultVariants: { orientation: "horizontal", status: "upcoming" },
 })
 
+/**
+ * The steps, in order, as `Steps` numbers them: every element child, with
+ * fragments opened, so steps written one by one, in a map, or grouped in a
+ * fragment are counted alike.
+ */
+function flattenSteps(children: React.ReactNode): React.ReactElement[] {
+  return React.Children.toArray(children).flatMap((child) => {
+    if (!React.isValidElement(child)) return []
+    if (child.type === React.Fragment) {
+      return flattenSteps((child.props as { children?: React.ReactNode }).children)
+    }
+    return [child]
+  })
+}
+
 export interface StepsProps extends React.ComponentPropsWithoutRef<"ol"> {
   /** Figma `Orientation`: steps in a row with the labels below, or a column with the labels beside. */
   orientation?: StepsOrientation
@@ -211,7 +230,7 @@ export interface StepsProps extends React.ComponentPropsWithoutRef<"ol"> {
 const Steps = React.forwardRef<HTMLOListElement, StepsProps>(
   ({ orientation = "horizontal", radius = "standard", className, style, children, ...props }, ref) => {
     const look = React.useMemo(() => ({ orientation, radius }), [orientation, radius])
-    const items = React.Children.toArray(children).filter(React.isValidElement)
+    const items = flattenSteps(children)
     return (
       <StepsContext.Provider value={look}>
         <ol
@@ -273,7 +292,7 @@ const StepsItem = React.forwardRef<HTMLLIElement, StepsItemProps>(
       // Decorative: the list already numbers the steps for screen readers,
       // and the status is read after the label.
       <span aria-hidden="true" data-slot="step-icon" className={stepIconVariants({ status, radius })}>
-        {icon ? <CheckIcon strokeWidth={1.5} className="size-[22px]" /> : index + 1}
+        {icon ? <CheckIcon strokeWidth={1.5} className="size-[1.375rem]" /> : index + 1}
       </span>
     )
 
@@ -322,7 +341,7 @@ const StepsItem = React.forwardRef<HTMLLIElement, StepsItemProps>(
         {horizontal ? (
           <>
             {/* Figma's `step-details`: the bullet, then 10px (`spacing/2,5`), then the text. */}
-            <span data-slot="step-details" className="flex w-[38px] shrink-0 flex-col items-center gap-2.5">
+            <span data-slot="step-details" className="flex w-[2.375rem] shrink-0 flex-col items-center gap-2.5">
               {bullet}
               {/*
                * The auto margins centre the text on the bullet while it fits;
@@ -349,7 +368,7 @@ const StepsItem = React.forwardRef<HTMLLIElement, StepsItemProps>(
           </>
         ) : (
           <>
-            <span data-slot="step-details" className="flex w-[38px] shrink-0 flex-col items-center">
+            <span data-slot="step-details" className="flex w-[2.375rem] shrink-0 flex-col items-center">
               {bullet}
               {tail}
             </span>
@@ -362,7 +381,7 @@ const StepsItem = React.forwardRef<HTMLLIElement, StepsItemProps>(
             <span
               data-slot="step-text"
               className={cn(
-                "flex min-w-0 flex-col gap-0.5 pt-[calc((38px-1lh)/2)] text-start text-base",
+                "flex min-w-0 flex-col gap-0.5 pt-[calc((2.375rem-1lh)/2)] text-start text-base",
                 !last && "pb-2"
               )}
             >
