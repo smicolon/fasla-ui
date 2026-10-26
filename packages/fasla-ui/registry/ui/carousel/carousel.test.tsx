@@ -230,15 +230,18 @@ describe("Carousel", () => {
     expect(dots()[1]).toHaveAccessibleName("Slide 2 of 3")
   })
 
-  it("keeps the dots focusable buttons with a visible focus ring", () => {
+  it("keeps the dots focusable buttons that ring the dot on focus", () => {
+    // The Button's ring: 2px of `ring`, 2px clear, round with the dot. It is
+    // on the visual, not on the 12×20 hit box around it.
     renderCarousel()
-    for (const dot of dots()) {
+    for (const [i, dot] of dots().entries()) {
       expect(dot).toHaveAttribute("type", "button")
-      expect(dot).toHaveClass(
-        "focus-visible:outline-none",
-        "focus-visible:ring-2",
-        "focus-visible:ring-ring",
-        "focus-visible:ring-offset-2"
+      expect(dot).toHaveClass("group", "[outline:none]")
+      expect(dotVisual(i)).toHaveClass(
+        "group-focus-visible:outline",
+        "group-focus-visible:outline-2",
+        "group-focus-visible:outline-offset-2",
+        "group-focus-visible:outline-ring"
       )
     }
   })
@@ -249,11 +252,13 @@ describe("Carousel", () => {
     renderCarousel()
     const track = screen.getByTestId("slide-0").parentElement as HTMLElement
     expect(track).toHaveAttribute("tabindex", "0")
+    // An outline: a ring inside a scroller would be clipped and scroll away.
     expect(track).toHaveClass(
-      "focus-visible:outline-none",
-      "focus-visible:ring-2",
-      "focus-visible:ring-ring",
-      "focus-visible:ring-offset-2"
+      "[outline:none]",
+      "focus-visible:outline",
+      "focus-visible:outline-2",
+      "focus-visible:outline-offset-2",
+      "focus-visible:outline-ring"
     )
   })
 

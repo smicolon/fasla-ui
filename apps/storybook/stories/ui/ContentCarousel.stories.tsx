@@ -164,28 +164,51 @@ export const MediaSlots: Story = {
   },
 }
 
+/** A side row label: an English name, left-aligned in either direction. */
+const RowHead = ({ children }: { children: React.ReactNode }) => (
+  <span dir="ltr" className="whitespace-nowrap text-left font-sans text-xs text-muted-foreground">
+    {children}
+  </span>
+)
+
 /**
- * The ends. The backward arrow is off on the first card, the forward arrow
- * off on the last *page* — with three cards two-up, the last page starts at
- * the second card. Figma draws the off arrow at 50% opacity.
+ * The arrows' states, and Focus. The backward arrow is off on the first
+ * card and the forward arrow off on the last view: with three cards
+ * two-up, the last view starts at the second card. With every card in
+ * view both are off. Figma dims an off arrow to 50%.
+ *
+ * Focus is keyboard focus (`:focus-visible`). The arrows are Buttons and
+ * draw the Button's ring, 2px of `ring` 2px clear; the track draws the
+ * same ring. Those rows are held in Focus; tab in to see it live.
  */
-export const DisabledEnds: Story = {
-  parameters: { layout: "padded" },
+export const States: Story = {
+  parameters: {
+    layout: "padded",
+    controls: { disable: true },
+    pseudo: {
+      focusVisible: [
+        "#content-focus-arrow [data-slot=carousel-next]",
+        "#content-focus-track [data-slot=carousel-content]",
+      ],
+    },
+  },
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
-      <div className="space-y-8">
-        <div className="space-y-3">
-          <Head>first card</Head>
+      <div className="grid grid-cols-[max-content_minmax(0,40rem)] items-center gap-x-10 gap-y-8">
+        <RowHead>First card</RowHead>
+        <Quotes c={c} count={3} itemsPerView={2} />
+        <RowHead>Last view</RowHead>
+        <Quotes c={c} count={3} itemsPerView={2} defaultActiveIndex={1} />
+        <RowHead>Everything in view</RowHead>
+        <Quotes c={c} count={3} itemsPerView={3} />
+        <RowHead>Focus · arrow</RowHead>
+        <div id="content-focus-arrow">
           <Quotes c={c} count={3} itemsPerView={2} />
         </div>
-        <div className="space-y-3">
-          <Head>last page</Head>
-          <Quotes c={c} count={3} itemsPerView={2} defaultActiveIndex={1} />
-        </div>
-        <div className="space-y-3">
-          <Head>everything in view</Head>
-          <Quotes c={c} count={3} itemsPerView={3} />
+        <RowHead>Focus · track</RowHead>
+        <div id="content-focus-track">
+          <Quotes c={c} count={3} itemsPerView={2} />
         </div>
       </div>
     )

@@ -52,6 +52,13 @@ const Head = ({ children }: { children: React.ReactNode }) => (
   </span>
 )
 
+/** A side row label: an English Figma name, left-aligned in either direction. */
+const RowHead = ({ children }: { children: React.ReactNode }) => (
+  <span dir="ltr" className="justify-self-start whitespace-nowrap text-left font-sans text-xs text-muted-foreground">
+    {children}
+  </span>
+)
+
 /** A token-coloured stand-in for slide media — no raw colours, no assets. */
 const Slide = ({ caption }: { caption: string }) => (
   <div className="flex h-44 items-end rounded-lg bg-muted p-4">
@@ -131,9 +138,7 @@ export const AllStates: Story = {
       ))}
       {ITEM_COUNTS.map((count) => (
         <React.Fragment key={count}>
-          <span dir="ltr" className="justify-self-start whitespace-nowrap text-left font-sans text-xs text-muted-foreground">
-            {count} items
-          </span>
+          <RowHead>{count} items</RowHead>
           {ACTIVE_ITEMS.map((active) =>
             active <= count ? (
               <CarouselDots key={active} count={count} activeIndex={active - 1} />
@@ -145,6 +150,46 @@ export const AllStates: Story = {
       ))}
     </div>
   ),
+}
+
+/**
+ * Default and Focus. Focus is keyboard focus (`:focus-visible`) and draws
+ * the Button's ring: 2px of `ring`, 2px clear. On a dot it rings the pill or
+ * circle itself, not the larger area you can press; on the track it rings
+ * the track. The Focus column is held in that state; tab into a carousel to
+ * see it live. A pointer press draws no ring.
+ */
+export const States: Story = {
+  parameters: {
+    layout: "padded",
+    controls: { disable: true },
+    pseudo: {
+      focusVisible: [
+        "#carousel-focus-dots [data-slot=carousel-dot]:first-child",
+        "#carousel-focus-track [data-slot=carousel-content]",
+      ],
+    },
+  },
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <div className="grid grid-cols-[max-content_repeat(2,max-content)] items-center justify-center justify-items-center gap-x-10 gap-y-8">
+        <span />
+        <Head>Default</Head>
+        <Head>Focus</Head>
+        <RowHead>Dots</RowHead>
+        <CarouselDots count={3} activeIndex={0} />
+        <div id="carousel-focus-dots">
+          <CarouselDots count={3} activeIndex={0} />
+        </div>
+        <RowHead>Track</RowHead>
+        <Gallery c={c} className="w-64 space-y-4" />
+        <div id="carousel-focus-track">
+          <Gallery c={c} className="w-64 space-y-4" />
+        </div>
+      </div>
+    )
+  },
 }
 
 const StandaloneDemo = ({ c }: { c: Copy }) => {

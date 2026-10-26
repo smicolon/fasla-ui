@@ -50,6 +50,20 @@ export function useCarousel() {
 const byDocumentOrder = (a: Node, b: Node) =>
   a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1
 
+/**
+ * Figma's Focus ring, the Button's: a 2px band in `ring`, from 2px to 4px
+ * outside the edge, with the gap left clear. Drawn as an outline, which
+ * follows the radius, is never clipped by a scroller, and is repainted in a
+ * system colour by forced colours. (`[outline:none]` at rest, not
+ * `outline-none`: Tailwind 3's version is a transparent outline that forced
+ * colours paint visibly.)
+ */
+const FOCUS_RING =
+  "[outline:none] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+/** The same ring on a dot's visual, when its button has keyboard focus. */
+const DOT_FOCUS_RING =
+  "group-focus-visible:outline group-focus-visible:outline-2 group-focus-visible:outline-offset-2 group-focus-visible:outline-ring"
+
 /** The one ref-merging shape React bails out on: a stable callback. */
 function composeRefs<T>(...refs: (React.Ref<T> | undefined)[]) {
   return (node: T | null) => {
@@ -382,6 +396,10 @@ export interface CarouselContentProps extends React.HTMLAttributes<HTMLDivElemen
  * reach fails WCAG 2.1.1, and once it has focus the root's key handling moves
  * one slide per arrow press — so a carousel composed without dots or arrows
  * is still fully keyboard-operable.
+ *
+ * The ring is the Button's focus ring: a 2px band in `ring`, 2px clear of
+ * the edge. It is an outline, the one ring a scroller cannot clip or scroll
+ * away, and forced colours repaint it in a system colour on their own.
  */
 const CarouselContent = React.forwardRef<HTMLDivElement, CarouselContentProps>(
   ({ className, ...props }, ref) => {
@@ -395,7 +413,7 @@ const CarouselContent = React.forwardRef<HTMLDivElement, CarouselContentProps>(
         className={cn(
           "flex snap-x snap-mandatory gap-4 overflow-x-auto scroll-smooth motion-reduce:scroll-auto",
           "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden",
-          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+          FOCUS_RING,
           className
         )}
         {...props}
@@ -469,6 +487,9 @@ export interface CarouselDotsProps extends React.HTMLAttributes<HTMLDivElement> 
  * gap and neighbouring hit boxes touch without overlapping. 12px of pitch
  * cannot hold WCAG 2.5.8's 24px targets — the focusable, swipeable track and
  * the arrow keys are the equivalent controls.
+ *
+ * Focus rings the dot itself, not its hit box: the Button's 2px band, 2px
+ * clear of the circle or pill, following its round ends.
  */
 const CarouselDots = React.forwardRef<HTMLDivElement, CarouselDotsProps>(
   (
@@ -512,11 +533,12 @@ const CarouselDots = React.forwardRef<HTMLDivElement, CarouselDotsProps>(
               aria-label={label ? label(index, count) : `${index + 1} / ${count}`}
               aria-current={isActive ? "true" : undefined}
               onClick={() => select(index)}
-              className="-mx-0.5 -my-1.5 rounded-full px-0.5 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="group -mx-0.5 -my-1.5 rounded-full px-0.5 py-1.5 [outline:none]"
             >
               <span
                 className={cn(
                   "block h-2 rounded-full transition-[width,background-color] motion-reduce:transition-none",
+                  DOT_FOCUS_RING,
                   isActive ? "w-6 bg-primary" : "w-2 bg-muted-foreground"
                 )}
               />
