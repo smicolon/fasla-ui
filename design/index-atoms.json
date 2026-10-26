@@ -50,7 +50,7 @@
       "primary": 44,
       "componentSets": 163,
       "looseComponents": 1,
-      "variants": 4630,
+      "variants": 4636,
       "primaryWithEnDoc": 43,
       "primaryWithArDoc": 41,
       "withEnDoc": 43,
@@ -1458,12 +1458,13 @@
         "initials": "Y/H"
       },
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40492-58601",
-      "variants": 12,
+      "variants": 16,
       "axes": {
         "State": [
           "Default",
           "Hover",
-          "Selected"
+          "Selected",
+          "Focus"
         ],
         "Sub-item": [
           "False",
@@ -1511,15 +1512,20 @@
         "initials": "Y/H"
       },
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40503-333",
-      "variants": 2,
+      "variants": 4,
       "axes": {
         "Direction": [
           "LTR",
           "RTL"
+        ],
+        "State": [
+          "Collapsed",
+          "Expanded"
         ]
       },
       "axisNames": [
-        "Direction"
+        "Direction",
+        "State"
       ],
       "rtl": true,
       "docs": {

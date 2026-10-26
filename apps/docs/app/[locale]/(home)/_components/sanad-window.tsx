@@ -24,9 +24,21 @@ import { SanadChart } from "./sanad-chart"
 import { SanadTable } from "./sanad-table"
 import { xrayTag as tag } from "./xray-tag"
 
-/** Sidebar rows as the reference draws them: muted until active, the active one a raised pill. */
-const navItem = "h-9 gap-2.5 px-2.5 py-0 font-normal text-foreground/70 hover:bg-muted hover:text-foreground"
-const navActive = "border bg-card font-medium text-foreground shadow-sm hover:bg-card"
+/**
+ * The library Sidebar, restyled as the reference draws it: no bordered panel,
+ * flush rows muted until active, the active one a raised pill.
+ */
+const navShell =
+  "l-tag-in h-auto w-auto overflow-visible border-e bg-muted/50 p-0 [view-transition-name:p-side] max-[900px]:hidden " +
+  "[&>[data-slot=sidebar-panel]]:w-auto [&>[data-slot=sidebar-panel]]:flex-1 [&>[data-slot=sidebar-panel]]:gap-1 " +
+  "[&>[data-slot=sidebar-panel]]:overflow-visible [&>[data-slot=sidebar-panel]]:rounded-none [&>[data-slot=sidebar-panel]]:border-0 " +
+  "[&>[data-slot=sidebar-panel]]:bg-transparent [&>[data-slot=sidebar-panel]]:px-3.5 [&>[data-slot=sidebar-panel]]:py-[18px] " +
+  "[&>[data-slot=sidebar-panel]]:text-foreground"
+/** A group with the library's inset, line and title spacing taken off. */
+const navGroup = "gap-0 [&_li]:px-0 [&>ul]:gap-1 [&>ul]:border-0 [&>ul]:pb-0"
+const navItem =
+  "min-h-0 h-9 rounded-md border-0 px-2.5 py-0 font-normal text-foreground/70 hover:bg-muted hover:text-foreground [&>span]:gap-2.5"
+const navActive = "border border-border bg-card font-medium text-foreground shadow-sm hover:bg-card"
 
 /** A Card laid out as StatsCard lays itself out, for the stats it cannot show. */
 function ComposedStat({
@@ -85,41 +97,28 @@ export async function SanadWindow() {
       </div>
 
       <div className="grid min-h-[640px] grid-cols-[232px_minmax(0,1fr)] max-[1100px]:grid-cols-[200px_minmax(0,1fr)] max-[900px]:min-h-0 max-[900px]:grid-cols-1">
-        <Sidebar
-          {...tag("Sidebar", 0)}
-          className="l-tag-in h-auto w-auto gap-1 bg-muted/50 px-3.5 py-[18px] [view-transition-name:p-side] max-[900px]:hidden"
-        >
+        <Sidebar {...tag("Sidebar", 0)} className={navShell}>
           <div className="flex items-center gap-2.5 px-2 pb-[18px] pt-1 text-base font-semibold">
             <span className="grid size-7 place-items-center rounded-lg bg-primary text-[13px] font-bold text-primary-foreground">
               {t("mono")}
             </span>
             {t("brand")}
           </div>
-          <SidebarItem active icon={<OverviewIcon />} className={cn(navItem, navActive)}>
-            {t("nav1")}
-          </SidebarItem>
-          <SidebarItem icon={<TransactionsIcon />} className={navItem}>
-            {t("nav2")}
-          </SidebarItem>
-          <SidebarItem icon={<CardIcon />} className={navItem}>
-            {t("nav3")}
-          </SidebarItem>
-          <SidebarItem icon={<ArrowEndIcon />} className={navItem}>
-            {t("nav4")}
-          </SidebarItem>
-          <SidebarItem icon={<TargetIcon />} className={navItem}>
-            {t("nav5")}
-          </SidebarItem>
-          {/* The group label is uppercase in the library; the reference sets it as written. */}
+          <SidebarGroup className={navGroup}>
+            <SidebarItem selected icon={<OverviewIcon />} label={t("nav1")} className={cn(navItem, navActive)} />
+            <SidebarItem icon={<TransactionsIcon />} label={t("nav2")} className={navItem} />
+            <SidebarItem icon={<CardIcon />} label={t("nav3")} className={navItem} />
+            <SidebarItem icon={<ArrowEndIcon />} label={t("nav4")} className={navItem} />
+            <SidebarItem icon={<TargetIcon />} label={t("nav5")} className={navItem} />
+          </SidebarGroup>
+          {/* The reference sets the group title smaller and closer than the library. */}
           <SidebarGroup
             label={t("secAcc")}
-            className="mt-2.5 [&>div:first-child]:mb-1 [&>div:first-child]:px-2.5 [&>div:first-child]:font-normal [&>div:first-child]:normal-case"
+            className={cn(navGroup, "mt-2.5 py-2 [&>div:first-child]:mb-1 [&>div:first-child]:px-2.5")}
           >
-            <SidebarItem icon={<SettingsIcon />} className={navItem}>
-              {t("nav6")}
-            </SidebarItem>
+            <SidebarItem icon={<SettingsIcon />} label={t("nav6")} className={navItem} />
           </SidebarGroup>
-          <SidebarFooter className="mt-auto flex items-center gap-2.5 px-2.5 pb-1 pt-3 text-[13px]">
+          <SidebarFooter className="mt-auto flex items-center gap-2.5 border-t px-2.5 pb-1 pt-3 text-[13px]">
             <Initials>{t("userIni")}</Initials>
             <span>
               {t("user")}

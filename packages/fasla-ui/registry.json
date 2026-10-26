@@ -714,11 +714,15 @@
       "name": "sidebar",
       "type": "registry:block",
       "title": "Sidebar",
-      "description": "Responsive sidebar navigation with collapsible structure.",
+      "description": "App navigation that collapses to icons: titled groups of items with sub-items, a selected state, notification dots, an optional plan card and a profile footer, with tooltips when collapsed and mirrored for RTL.",
       "dependencies": [
+        "@base-ui/react",
         "lucide-react"
       ],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "avatar",
+        "tooltip"
+      ],
       "files": [
         {
           "path": "registry/blocks/sidebar/Sidebar.tsx",

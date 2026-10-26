@@ -31,7 +31,7 @@ const allowed = new Set(tokenNames(loadSources().mode))
 // including the sizes Base UI writes: its positioner's (`--available-width`)
 // and the accordion panel's measured height — and Textarea's resize grip,
 // whose strokes are `currentColor`.
-const OWN = /^(tw-|radix-|beam-|glow-|shimmer-|spotlight-|text-reveal|leading-|font-|radius|border-radius|sw-|available-(width|height)$|anchor-(width|height)$|accordion-panel-height$|textarea-grip-)/
+const OWN = /^(tw-|radix-|beam-|glow-|shimmer-|spotlight-|text-reveal|leading-|font-|radius|border-radius|sw-|available-(width|height)$|anchor-(width|height)$|accordion-panel-height$|collapsible-panel-height$|textarea-grip-)/
 
 describe("component colours", () => {
   it("use no Tailwind palette colours", () => {
