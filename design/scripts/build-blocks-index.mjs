@@ -50,7 +50,7 @@ export const EXTRA_SETS = {
 /** Family set id -> registry name prefix. Each Type maps to `${prefix}${slug(type)}`; the
  *  builder fails if a derived name is missing from the registry or a registry item with the
  *  prefix is left unclaimed. Hand-maintained: add a family when its blocks ship in code. */
-export const CODE_PREFIX = { "42359:9029": "faq-" }
+export const CODE_PREFIX = { "42359:9029": "faq-", "42556:548": "error-state-", "42806:232717": "logo-cloud-" }
 
 export const OWNERS = { Y: { name: "Yasmin", active: true }, H: { name: "Haneen", active: false }, "Y/H": { name: "Yasmin and Haneen", active: true } }
 

@@ -38,8 +38,8 @@
       "variants": 4764,
       "withEnDoc": 17,
       "withArDoc": 17,
-      "blocksInCode": 26,
-      "familiesInCode": 1,
+      "blocksInCode": 76,
+      "familiesInCode": 3,
       "parts": 2,
       "extraSets": 1,
       "flagged": 29
@@ -4534,8 +4534,8 @@
         "duplicates": []
       },
       "code": {
-        "prefix": null,
-        "built": 0,
+        "prefix": "error-state-",
+        "built": 28,
         "of": 28
       },
       "blocks": [
@@ -4544,196 +4544,196 @@
           "nodeId": "42520:210133",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42520-210133",
           "variants": 6,
-          "code": null
+          "code": "error-state-centered-minimal"
         },
         {
           "name": "Search Recovery",
           "nodeId": "42520:210162",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42520-210162",
           "variants": 6,
-          "code": null
+          "code": "error-state-search-recovery"
         },
         {
           "name": "Display Numeral Split",
           "nodeId": "42528:423",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42528-423",
           "variants": 6,
-          "code": null
+          "code": "error-state-display-numeral-split"
         },
         {
           "name": "Editorial Photo Split",
           "nodeId": "42528:444",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42528-444",
           "variants": 6,
-          "code": null
+          "code": "error-state-editorial-photo-split"
         },
         {
           "name": "Full-Bleed Photo",
           "nodeId": "42530:429",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42530-429",
           "variants": 6,
-          "code": null
+          "code": "error-state-full-bleed-photo"
         },
         {
           "name": "Colour Field Scatter",
           "nodeId": "42530:459",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42530-459",
           "variants": 6,
-          "code": null
+          "code": "error-state-colour-field-scatter"
         },
         {
           "name": "Dark Spotlight",
           "nodeId": "42531:415",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42531-415",
           "variants": 6,
-          "code": null
+          "code": "error-state-dark-spotlight"
         },
         {
           "name": "Ghost Watermark",
           "nodeId": "42531:443",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42531-443",
           "variants": 6,
-          "code": null
+          "code": "error-state-ghost-watermark"
         },
         {
           "name": "Helpful Links List",
           "nodeId": "42536:209889",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42536-209889",
           "variants": 6,
-          "code": null
+          "code": "error-state-helpful-links-list"
         },
         {
           "name": "Popular Pages Grid",
           "nodeId": "42536:209967",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42536-209967",
           "variants": 6,
-          "code": null
+          "code": "error-state-popular-pages-grid"
         },
         {
           "name": "Error Card Panel",
           "nodeId": "42539:276",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42539-276",
           "variants": 6,
-          "code": null
+          "code": "error-state-error-card-panel"
         },
         {
           "name": "Illustrated Empty State",
           "nodeId": "42539:316",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42539-316",
           "variants": 6,
-          "code": null
+          "code": "error-state-illustrated-empty-state"
         },
         {
           "name": "Light Editorial",
           "nodeId": "42542:1112",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42542-1112",
           "variants": 6,
-          "code": null
+          "code": "error-state-light-editorial"
         },
         {
           "name": "Layered Badge Centered",
           "nodeId": "42542:1125",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42542-1125",
           "variants": 6,
-          "code": null
+          "code": "error-state-layered-badge-centered"
         },
         {
           "name": "Server Error 500",
           "nodeId": "42544:211064",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42544-211064",
           "variants": 6,
-          "code": null
+          "code": "error-state-server-error-500"
         },
         {
           "name": "Access Denied 403",
           "nodeId": "42544:211147",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42544-211147",
           "variants": 6,
-          "code": null
+          "code": "error-state-access-denied-403"
         },
         {
           "name": "Offline State",
           "nodeId": "42546:611",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42546-611",
           "variants": 6,
-          "code": null
+          "code": "error-state-offline-state"
         },
         {
           "name": "Maintenance Mode",
           "nodeId": "42546:659",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42546-659",
           "variants": 6,
-          "code": null
+          "code": "error-state-maintenance-mode"
         },
         {
           "name": "Empty Search Results",
           "nodeId": "42549:210568",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42549-210568",
           "variants": 6,
-          "code": null
+          "code": "error-state-empty-search-results"
         },
         {
           "name": "Recovery Bento",
           "nodeId": "42549:210651",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42549-210651",
           "variants": 6,
-          "code": null
+          "code": "error-state-recovery-bento"
         },
         {
           "name": "Sitemap Columns",
           "nodeId": "42550:6590",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42550-6590",
           "variants": 6,
-          "code": null
+          "code": "error-state-sitemap-columns"
         },
         {
           "name": "Terminal Console",
           "nodeId": "42550:6648",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42550-6648",
           "variants": 6,
-          "code": null
+          "code": "error-state-terminal-console"
         },
         {
           "name": "Photo Collage Scatter",
           "nodeId": "42552:870",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42552-870",
           "variants": 6,
-          "code": null
+          "code": "error-state-photo-collage-scatter"
         },
         {
           "name": "Support Escalation Band",
           "nodeId": "42552:910",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42552-910",
           "variants": 6,
-          "code": null
+          "code": "error-state-support-escalation-band"
         },
         {
           "name": "Split Colour Panel",
           "nodeId": "42554:212088",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42554-212088",
           "variants": 6,
-          "code": null
+          "code": "error-state-split-colour-panel"
         },
         {
           "name": "Marquee 404 Band",
           "nodeId": "42554:212128",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42554-212128",
           "variants": 6,
-          "code": null
+          "code": "error-state-marquee-404-band"
         },
         {
           "name": "Broken Trail Breadcrumb",
           "nodeId": "42555:493",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42555-493",
           "variants": 6,
-          "code": null
+          "code": "error-state-broken-trail-breadcrumb"
         },
         {
           "name": "Countdown Redirect",
           "nodeId": "42555:591",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42555-591",
           "variants": 6,
-          "code": null
+          "code": "error-state-countdown-redirect"
         }
       ],
       "leftovers": [],
@@ -5088,8 +5088,8 @@
         "duplicates": []
       },
       "code": {
-        "prefix": null,
-        "built": 0,
+        "prefix": "logo-cloud-",
+        "built": 22,
         "of": 22
       },
       "blocks": [
@@ -5098,154 +5098,154 @@
           "nodeId": "42768:233590",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42768-233590",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-centered-caption-row"
         },
         {
           "name": "Heading Grid",
           "nodeId": "42768:233618",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42768-233618",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-heading-grid"
         },
         {
           "name": "Bordered Cell Grid",
           "nodeId": "42768:233666",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42768-233666",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-bordered-cell-grid"
         },
         {
           "name": "Enterprise Wall",
           "nodeId": "42771:357",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42771-357",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-enterprise-wall"
         },
         {
           "name": "Contained Card",
           "nodeId": "42771:486",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42771-486",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-contained-card"
         },
         {
           "name": "Dark Logo Wall",
           "nodeId": "42771:553",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42771-553",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-dark-logo-wall"
         },
         {
           "name": "Side Label Rail",
           "nodeId": "42772:233781",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42772-233781",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-side-label-rail"
         },
         {
           "name": "Heading Left Grid Right",
           "nodeId": "42772:233862",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42772-233862",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-heading-left-grid-right"
         },
         {
           "name": "Editorial Eyebrow Split",
           "nodeId": "42772:233952",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42772-233952",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-editorial-eyebrow-split"
         },
         {
           "name": "Flanked Heading",
           "nodeId": "42783:307",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42783-307",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-flanked-heading"
         },
         {
           "name": "Quote Panel Grid",
           "nodeId": "42783:355",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42783-355",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-quote-panel-grid"
         },
         {
           "name": "Stat Rail Above Grid",
           "nodeId": "42783:467",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42783-467",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-stat-rail-above-grid"
         },
         {
           "name": "Logo Metric Tiles",
           "nodeId": "42790:232280",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42790-232280",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-logo-metric-tiles"
         },
         {
           "name": "Logo Quote Cards",
           "nodeId": "42790:232342",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42790-232342",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-logo-quote-cards"
         },
         {
           "name": "Named Integration Cards",
           "nodeId": "42793:386",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42793-386",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-named-integration-cards"
         },
         {
           "name": "Logo Testimonial Strip",
           "nodeId": "42793:457",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42793-457",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-logo-testimonial-strip"
         },
         {
           "name": "Bento Logo Wall",
           "nodeId": "42799:418",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42799-418",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-bento-logo-wall"
         },
         {
           "name": "Divider Rule Row",
           "nodeId": "42799:475",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42799-475",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-divider-rule-row"
         },
         {
           "name": "Pyramid Row Stack",
           "nodeId": "42799:504",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42799-504",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-pyramid-row-stack"
         },
         {
           "name": "Tabbed Industry Filter",
           "nodeId": "42802:454",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42802-454",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-tabbed-industry-filter"
         },
         {
           "name": "Grid Closing CTA",
           "nodeId": "42802:536",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42802-536",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-grid-closing-cta"
         },
         {
           "name": "Scatter Field",
           "nodeId": "42805:1166",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42805-1166",
           "variants": 6,
-          "code": null
+          "code": "logo-cloud-scatter-field"
         }
       ],
       "leftovers": [],

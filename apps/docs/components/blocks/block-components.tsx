@@ -4,8 +4,8 @@ import * as React from "react"
 import dynamic from "next/dynamic"
 
 /**
- * Every FAQ and Error State Type by registry name, each loaded on its own so a
- * preview frame downloads only the block it shows.
+ * Every FAQ, Error State and Logo Cloud Type by registry name, each loaded on
+ * its own so a preview frame downloads only the block it shows.
  */
 /** Each block has its own props; a frame passes only the locale and demo props. */
 type AnyBlock = React.ComponentType<any>
@@ -54,6 +54,19 @@ const withAccountPhoto = (Block: AnyBlock, copy: AccountCopy) =>
   function AccessDeniedPreview(props: { locale: Locale }) {
     return <Block account={{ ...copy[props.locale].account, avatar: "/blocks/error-state/avatar.webp" }} {...props} />
   }
+
+/**
+ * Logo Cloud ships no logos: each Type's preview passes Figma's Brand Logos
+ * from the example data, loaded with the block so only Logo Cloud frames
+ * download the marks.
+ */
+const withLogoCloudExample = (slug: string, block: Promise<AnyBlock>) =>
+  Promise.all([block, import("./logo-cloud-examples")]).then(([Block, { LOGO_CLOUD_EXAMPLES }]) =>
+    function LogoCloudPreview(props: { locale: Locale }) {
+      const example = (LOGO_CLOUD_EXAMPLES[props.locale] as Record<string, object>)[slug]
+      return <Block {...example} {...props} />
+    }
+  )
 
 export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "faq-classic-centered": dynamic(() => import("@fasla-ui/blocks/faq-classic-centered/FaqClassicCentered").then((m) => m.FaqClassicCentered)),
@@ -114,6 +127,72 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "error-state-marquee-404-band": dynamic(() => import("@fasla-ui/blocks/error-state-marquee-404-band/ErrorStateMarquee404Band").then((m) => m.ErrorStateMarquee404Band)),
   "error-state-broken-trail-breadcrumb": dynamic(() => import("@fasla-ui/blocks/error-state-broken-trail-breadcrumb/ErrorStateBrokenTrailBreadcrumb").then((m) => m.ErrorStateBrokenTrailBreadcrumb)),
   "error-state-countdown-redirect": dynamic(() => import("@fasla-ui/blocks/error-state-countdown-redirect/ErrorStateCountdownRedirect").then((m) => m.ErrorStateCountdownRedirect)),
+  "logo-cloud-centered-caption-row": dynamic(() =>
+    withLogoCloudExample("logo-cloud-centered-caption-row", import("@fasla-ui/blocks/logo-cloud-centered-caption-row/LogoCloudCenteredCaptionRow").then((m) => m.LogoCloudCenteredCaptionRow))
+  ),
+  "logo-cloud-heading-grid": dynamic(() =>
+    withLogoCloudExample("logo-cloud-heading-grid", import("@fasla-ui/blocks/logo-cloud-heading-grid/LogoCloudHeadingGrid").then((m) => m.LogoCloudHeadingGrid))
+  ),
+  "logo-cloud-bordered-cell-grid": dynamic(() =>
+    withLogoCloudExample("logo-cloud-bordered-cell-grid", import("@fasla-ui/blocks/logo-cloud-bordered-cell-grid/LogoCloudBorderedCellGrid").then((m) => m.LogoCloudBorderedCellGrid))
+  ),
+  "logo-cloud-enterprise-wall": dynamic(() =>
+    withLogoCloudExample("logo-cloud-enterprise-wall", import("@fasla-ui/blocks/logo-cloud-enterprise-wall/LogoCloudEnterpriseWall").then((m) => m.LogoCloudEnterpriseWall))
+  ),
+  "logo-cloud-contained-card": dynamic(() =>
+    withLogoCloudExample("logo-cloud-contained-card", import("@fasla-ui/blocks/logo-cloud-contained-card/LogoCloudContainedCard").then((m) => m.LogoCloudContainedCard))
+  ),
+  "logo-cloud-dark-logo-wall": dynamic(() =>
+    withLogoCloudExample("logo-cloud-dark-logo-wall", import("@fasla-ui/blocks/logo-cloud-dark-logo-wall/LogoCloudDarkLogoWall").then((m) => m.LogoCloudDarkLogoWall))
+  ),
+  "logo-cloud-side-label-rail": dynamic(() =>
+    withLogoCloudExample("logo-cloud-side-label-rail", import("@fasla-ui/blocks/logo-cloud-side-label-rail/LogoCloudSideLabelRail").then((m) => m.LogoCloudSideLabelRail))
+  ),
+  "logo-cloud-heading-left-grid-right": dynamic(() =>
+    withLogoCloudExample("logo-cloud-heading-left-grid-right", import("@fasla-ui/blocks/logo-cloud-heading-left-grid-right/LogoCloudHeadingLeftGridRight").then((m) => m.LogoCloudHeadingLeftGridRight))
+  ),
+  "logo-cloud-editorial-eyebrow-split": dynamic(() =>
+    withLogoCloudExample("logo-cloud-editorial-eyebrow-split", import("@fasla-ui/blocks/logo-cloud-editorial-eyebrow-split/LogoCloudEditorialEyebrowSplit").then((m) => m.LogoCloudEditorialEyebrowSplit))
+  ),
+  "logo-cloud-flanked-heading": dynamic(() =>
+    withLogoCloudExample("logo-cloud-flanked-heading", import("@fasla-ui/blocks/logo-cloud-flanked-heading/LogoCloudFlankedHeading").then((m) => m.LogoCloudFlankedHeading))
+  ),
+  "logo-cloud-quote-panel-grid": dynamic(() =>
+    withLogoCloudExample("logo-cloud-quote-panel-grid", import("@fasla-ui/blocks/logo-cloud-quote-panel-grid/LogoCloudQuotePanelGrid").then((m) => m.LogoCloudQuotePanelGrid))
+  ),
+  "logo-cloud-stat-rail-above-grid": dynamic(() =>
+    withLogoCloudExample("logo-cloud-stat-rail-above-grid", import("@fasla-ui/blocks/logo-cloud-stat-rail-above-grid/LogoCloudStatRailAboveGrid").then((m) => m.LogoCloudStatRailAboveGrid))
+  ),
+  "logo-cloud-logo-metric-tiles": dynamic(() =>
+    withLogoCloudExample("logo-cloud-logo-metric-tiles", import("@fasla-ui/blocks/logo-cloud-logo-metric-tiles/LogoCloudLogoMetricTiles").then((m) => m.LogoCloudLogoMetricTiles))
+  ),
+  "logo-cloud-logo-quote-cards": dynamic(() =>
+    withLogoCloudExample("logo-cloud-logo-quote-cards", import("@fasla-ui/blocks/logo-cloud-logo-quote-cards/LogoCloudLogoQuoteCards").then((m) => m.LogoCloudLogoQuoteCards))
+  ),
+  "logo-cloud-named-integration-cards": dynamic(() =>
+    withLogoCloudExample("logo-cloud-named-integration-cards", import("@fasla-ui/blocks/logo-cloud-named-integration-cards/LogoCloudNamedIntegrationCards").then((m) => m.LogoCloudNamedIntegrationCards))
+  ),
+  "logo-cloud-logo-testimonial-strip": dynamic(() =>
+    withLogoCloudExample("logo-cloud-logo-testimonial-strip", import("@fasla-ui/blocks/logo-cloud-logo-testimonial-strip/LogoCloudLogoTestimonialStrip").then((m) => m.LogoCloudLogoTestimonialStrip))
+  ),
+  "logo-cloud-scatter-field": dynamic(() =>
+    withLogoCloudExample("logo-cloud-scatter-field", import("@fasla-ui/blocks/logo-cloud-scatter-field/LogoCloudScatterField").then((m) => m.LogoCloudScatterField))
+  ),
+  "logo-cloud-bento-logo-wall": dynamic(() =>
+    withLogoCloudExample("logo-cloud-bento-logo-wall", import("@fasla-ui/blocks/logo-cloud-bento-logo-wall/LogoCloudBentoLogoWall").then((m) => m.LogoCloudBentoLogoWall))
+  ),
+  "logo-cloud-divider-rule-row": dynamic(() =>
+    withLogoCloudExample("logo-cloud-divider-rule-row", import("@fasla-ui/blocks/logo-cloud-divider-rule-row/LogoCloudDividerRuleRow").then((m) => m.LogoCloudDividerRuleRow))
+  ),
+  "logo-cloud-pyramid-row-stack": dynamic(() =>
+    withLogoCloudExample("logo-cloud-pyramid-row-stack", import("@fasla-ui/blocks/logo-cloud-pyramid-row-stack/LogoCloudPyramidRowStack").then((m) => m.LogoCloudPyramidRowStack))
+  ),
+  "logo-cloud-tabbed-industry-filter": dynamic(() =>
+    withLogoCloudExample("logo-cloud-tabbed-industry-filter", import("@fasla-ui/blocks/logo-cloud-tabbed-industry-filter/LogoCloudTabbedIndustryFilter").then((m) => m.LogoCloudTabbedIndustryFilter))
+  ),
+  "logo-cloud-grid-closing-cta": dynamic(() =>
+    withLogoCloudExample("logo-cloud-grid-closing-cta", import("@fasla-ui/blocks/logo-cloud-grid-closing-cta/LogoCloudGridClosingCta").then((m) => m.LogoCloudGridClosingCta))
+  ),
 }
 
 /** Settles after a moment, so a form shows its pending state before its result. */
