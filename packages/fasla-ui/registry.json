@@ -297,6 +297,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
+        "button",
         "carousel"
       ],
       "files": [

@@ -3,6 +3,7 @@
 import * as React from "react"
 import { ArrowLeftIcon, ArrowRightIcon } from "lucide-react"
 import { cn } from "../../../src/lib/utils"
+import { Button, type ButtonProps } from "../button/button"
 import {
   Carousel,
   CarouselContent,
@@ -34,14 +35,6 @@ const basisClasses = {
 }
 
 const ItemsPerViewContext = React.createContext<1 | 2 | 3>(1)
-
-/**
- * Figma's Icon Button, which has no code atom yet: 32px round — 8px padding
- * around a 16px icon — on `background` with a 1px `border` stroke and
- * `shadow/default/sm`. Disabled is the variant root at 50% opacity.
- */
-const arrowClasses =
-  "inline-flex size-8 shrink-0 items-center justify-center rounded-full border bg-background text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground motion-reduce:transition-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
 
 export interface ContentCarouselProps extends React.HTMLAttributes<HTMLDivElement> {
   /**
@@ -119,57 +112,64 @@ const ContentCarouselItem = React.forwardRef<HTMLDivElement, ContentCarouselItem
 ContentCarouselItem.displayName = "ContentCarouselItem"
 
 /**
- * The arrows advance one card at a time and disable at the ends, where Figma
- * dims them to 50%. The lucide arrows point backward and forward along the
- * *line*, so each mirrors under RTL — the one sanctioned `rtl:` use, and a
- * mirror rather than a rotation so a diagonal glyph would stay upright.
+ * The arrows are Figma's Icon Button, which is the Button atom at an icon
+ * size: Outline, Secondary, `sm` (32px, a 16px icon), Rounded. Its focus
+ * ring, hover, pressed and disabled looks are the Button's own; disabled is
+ * the Enabled look at 50%, as Figma dims the arrows at the ends.
+ *
+ * They advance one card at a time. The lucide arrows point backward and
+ * forward along the *line*, so each mirrors in RTL, reading its own
+ * direction (`:dir(rtl)`) rather than any ancestor's, and a mirror rather
+ * than a rotation so a diagonal glyph would stay upright.
  */
-const ContentCarouselPrevious = React.forwardRef<
-  HTMLButtonElement,
-  React.ButtonHTMLAttributes<HTMLButtonElement>
->(({ className, ...props }, ref) => {
-  const { activeIndex, scrollTo } = useCarousel()
-  return (
-    <button
-      ref={ref}
-      type="button"
-      data-slot="carousel-previous"
-      aria-label="Previous"
-      disabled={activeIndex <= 0}
-      onClick={() => scrollTo(activeIndex - 1)}
-      className={cn(arrowClasses, className)}
-      {...props}
-    >
-      <ArrowLeftIcon aria-hidden="true" className="size-4 rtl:-scale-x-100" />
-    </button>
-  )
-})
+type ArrowProps = Omit<ButtonProps, "variant" | "tone" | "size" | "radius" | "asChild">
+
+const arrowProps = { type: "button", variant: "outline", size: "icon-sm", radius: "rounded" } as const
+
+const ContentCarouselPrevious = React.forwardRef<HTMLButtonElement, ArrowProps>(
+  ({ className, ...props }, ref) => {
+    const { activeIndex, scrollTo } = useCarousel()
+    return (
+      <Button
+        ref={ref}
+        {...arrowProps}
+        data-slot="carousel-previous"
+        aria-label="Previous"
+        disabled={activeIndex <= 0}
+        onClick={() => scrollTo(activeIndex - 1)}
+        className={className}
+        {...props}
+      >
+        <ArrowLeftIcon aria-hidden="true" className="[&:dir(rtl)]:-scale-x-100" />
+      </Button>
+    )
+  }
+)
 ContentCarouselPrevious.displayName = "ContentCarouselPrevious"
 
-const ContentCarouselNext = React.forwardRef<
-  HTMLButtonElement,
-  React.ButtonHTMLAttributes<HTMLButtonElement>
->(({ className, ...props }, ref) => {
-  const { activeIndex, count, lastIndex, scrollTo } = useCarousel()
-  const itemsPerView = React.useContext(ItemsPerViewContext)
-  return (
-    <button
-      ref={ref}
-      type="button"
-      data-slot="carousel-next"
-      aria-label="Next"
-      // The last page starts at `count - itemsPerView`: past it there is
-      // nothing left to bring into view. The carousel measures the same stop
-      // from layout; the arithmetic holds before layout exists.
-      disabled={activeIndex >= Math.min(lastIndex, count - itemsPerView)}
-      onClick={() => scrollTo(activeIndex + 1)}
-      className={cn(arrowClasses, className)}
-      {...props}
-    >
-      <ArrowRightIcon aria-hidden="true" className="size-4 rtl:-scale-x-100" />
-    </button>
-  )
-})
+const ContentCarouselNext = React.forwardRef<HTMLButtonElement, ArrowProps>(
+  ({ className, ...props }, ref) => {
+    const { activeIndex, count, lastIndex, scrollTo } = useCarousel()
+    const itemsPerView = React.useContext(ItemsPerViewContext)
+    return (
+      <Button
+        ref={ref}
+        {...arrowProps}
+        data-slot="carousel-next"
+        aria-label="Next"
+        // The last page starts at `count - itemsPerView`: past it there is
+        // nothing left to bring into view. The carousel measures the same stop
+        // from layout; the arithmetic holds before layout exists.
+        disabled={activeIndex >= Math.min(lastIndex, count - itemsPerView)}
+        onClick={() => scrollTo(activeIndex + 1)}
+        className={className}
+        {...props}
+      >
+        <ArrowRightIcon aria-hidden="true" className="[&:dir(rtl)]:-scale-x-100" />
+      </Button>
+    )
+  }
+)
 ContentCarouselNext.displayName = "ContentCarouselNext"
 
 export {

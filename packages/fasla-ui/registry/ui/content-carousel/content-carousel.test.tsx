@@ -131,27 +131,21 @@ describe("ContentCarousel", () => {
     expect(screen.getByTestId("card-0")).toHaveClass("basis-full")
   })
 
-  it("draws the arrows as Figma's 32px round icon buttons", () => {
+  it("builds the arrows from Button, as Figma's Icon Button", () => {
+    // Figma: Icon Button, Outline / Secondary / sm / Rounded. The Button atom
+    // owns the look (32px, 16px icon, focus ring, 50% disabled); these pin
+    // the choice of variant, not the Button's own classes.
     renderCarousel()
     for (const arrow of [prev(), next()]) {
       expect(arrow).toHaveAttribute("type", "button")
-      expect(arrow).toHaveClass(
-        "size-8",
-        "shrink-0",
-        "rounded-full",
-        "border",
-        "bg-background",
-        "shadow-sm",
-        // Figma dims a disabled arrow to 50%, on the whole button.
-        "disabled:opacity-50",
-        "disabled:pointer-events-none",
-        "focus-visible:ring-2",
-        "focus-visible:ring-ring"
-      )
-      expect(arrow).toHaveClass("transition-colors", "motion-reduce:transition-none")
+      expect(arrow).toHaveAttribute("data-slot", expect.stringMatching(/^carousel-(previous|next)$/))
+      expect(arrow).toHaveAttribute("data-variant", "outline")
+      expect(arrow).toHaveAttribute("data-tone", "secondary")
+      expect(arrow).toHaveAttribute("data-size", "icon-sm")
+      expect(arrow).toHaveClass("size-8", "rounded-full", "disabled:opacity-50")
       const icon = arrow.querySelector("svg") as SVGElement
-      // The one sanctioned `rtl:` use: a directional icon, mirrored not rotated.
-      expect(icon).toHaveClass("size-4", "rtl:-scale-x-100")
+      // A directional icon mirrors in RTL, reading its own direction.
+      expect(icon).toHaveClass("[&:dir(rtl)]:-scale-x-100")
       expect(icon).toHaveAttribute("aria-hidden", "true")
     }
   })
@@ -159,10 +153,11 @@ describe("ContentCarousel", () => {
   it("keeps every other class logical for RTL", () => {
     renderCarousel({ itemsPerView: 2 })
     const html = screen.getByRole("region").outerHTML
-    // Only the icon mirror may mention rtl:.
-    expect(html.match(/rtl:[\w[\]().-]*/g)).toEqual([
-      "rtl:-scale-x-100",
-      "rtl:-scale-x-100",
+    // Only the icon mirror reads the direction, and never through rtl:.
+    expect(html).not.toMatch(/\brtl:/)
+    expect(html.match(/:dir\(rtl\)\]:\S+?(?=["\s])/g)).toEqual([
+      ":dir(rtl)]:-scale-x-100",
+      ":dir(rtl)]:-scale-x-100",
     ])
     expect(html).not.toMatch(/translate-x/)
     expect(html).not.toMatch(/\b(left|right)-/)
