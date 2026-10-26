@@ -112,11 +112,11 @@ export default function ContentCarouselPage() {
           <div className="flex w-full flex-col gap-8">
             <div className="flex flex-col gap-3">
               <span className="w-fit text-sm text-muted-foreground">{s("states.first")}</span>
-              {carousel(3, { itemsPerView: 2, activeIndex: 0 })}
+              {carousel(3, { itemsPerView: 2 })}
             </div>
             <div className="flex flex-col gap-3">
               <span className="w-fit text-sm text-muted-foreground">{s("states.last")}</span>
-              {carousel(3, { itemsPerView: 2, activeIndex: 1 })}
+              {carousel(3, { itemsPerView: 2, defaultActiveIndex: 1 })}
             </div>
             <div className="flex flex-col gap-3">
               <span className="w-fit text-sm text-muted-foreground">{s("states.all")}</span>

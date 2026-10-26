@@ -102,35 +102,58 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
 
     const [track, setTrack] = React.useState<HTMLDivElement | null>(null)
 
-    // What the track actually shows, as last reported by the observer. Keeps
-    // the controlled-sync effect from re-scrolling to where the user already is.
-    const visibleIndexRef = React.useRef(activeIndex)
+    // What the track actually shows, as last reported by the observer. It
+    // starts at the start, where every scroller does.
+    const visibleIndexRef = React.useRef(0)
+    // The slide a navigation is scrolling to. Until the track gets there, the
+    // observer's reports of the slides it passes on the way are not changes.
+    const targetRef = React.useRef<number | null>(null)
 
     const itemsRef = React.useRef(items)
     itemsRef.current = items
 
+    /** Whether the track is, or is on its way to, showing `index`. */
+    const isShowing = React.useCallback(
+      (index: number) =>
+        targetRef.current === null ? visibleIndexRef.current === index : targetRef.current === index,
+      []
+    )
+
     const scrollToItem = React.useCallback((index: number, behavior?: ScrollBehavior) => {
+      const item = itemsRef.current[index]
+      if (!item) return
+      if (!isShowing(index)) targetRef.current = index
       // No behavior for user navigation: `scroll-smooth motion-reduce:scroll-auto`
       // on the track decides, so reduced motion is honoured by CSS alone.
-      itemsRef.current[index]?.scrollIntoView?.({
+      item.scrollIntoView?.({
         block: "nearest",
         inline: "start",
         ...(behavior ? { behavior } : {}),
       })
-    }, [])
+    }, [isShowing])
 
     const stateRef = React.useRef({ isControlled, activeIndex, onActiveIndexChange })
     stateRef.current = { isControlled, activeIndex, onActiveIndexChange }
 
+    /**
+     * Navigation asks for a slide. Uncontrolled, the carousel takes it;
+     * controlled, the parent decides, and the track only moves when the new
+     * `activeIndex` arrives. Either way the track follows the index (the
+     * effect below), so the dots and arrows always describe what is shown.
+     */
     const scrollTo = React.useCallback(
       (index: number) => {
         const clamped = Math.max(0, Math.min(itemsRef.current.length - 1, index))
         const state = stateRef.current
-        if (!state.isControlled) setInternalIndex(clamped)
-        if (clamped !== state.activeIndex) state.onActiveIndexChange?.(clamped)
-        scrollToItem(clamped)
+        if (clamped !== state.activeIndex) {
+          if (!state.isControlled) setInternalIndex(clamped)
+          state.onActiveIndexChange?.(clamped)
+        } else if (!isShowing(clamped)) {
+          // The index already says so but the track is elsewhere: bring it back.
+          scrollToItem(clamped)
+        }
       },
-      [scrollToItem]
+      [scrollToItem, isShowing]
     )
 
     // Starting off-zero means scrolling there before the observer first looks,
@@ -157,9 +180,14 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
           const next = items.findIndex((item) => (ratios.get(item) ?? 0) >= 0.5)
           if (next === -1 || next === visibleIndexRef.current) return
           visibleIndexRef.current = next
+          if (targetRef.current !== null) {
+            if (next !== targetRef.current) return
+            targetRef.current = null
+          }
           const state = stateRef.current
+          if (next === state.activeIndex) return
           if (!state.isControlled) setInternalIndex(next)
-          if (next !== state.activeIndex) state.onActiveIndexChange?.(next)
+          state.onActiveIndexChange?.(next)
         },
         { root: track, threshold: 0.5 }
       )
@@ -167,12 +195,54 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       return () => observer.disconnect()
     }, [track, items])
 
-    // A controlled index is an instruction: scroll there, unless the track
-    // already shows it (the change came *from* the observer).
+    /*
+     * When scrolling settles, the track and the index must agree. A
+     * navigation that never arrived stops waiting; the track's slide wins
+     * when the carousel owns its index, and a controlled carousel whose
+     * parent kept its index (it refused the swipe) scrolls back to it. The
+     * check waits two frames, so the observer's report of the last position
+     * is in first. `scrollend` where the browser has it; a quiet 150ms of
+     * `scroll` events where it does not.
+     */
     React.useEffect(() => {
-      if (controlledIndex === undefined || !didInit.current) return
-      if (controlledIndex !== visibleIndexRef.current) scrollToItem(controlledIndex)
-    }, [controlledIndex, scrollToItem])
+      if (!track) return
+      let quiet: ReturnType<typeof setTimeout> | undefined
+      let frame = 0
+      const settle = () => {
+        clearTimeout(quiet)
+        cancelAnimationFrame(frame)
+        frame = requestAnimationFrame(() => {
+          frame = requestAnimationFrame(() => {
+            targetRef.current = null
+            const visible = visibleIndexRef.current
+            const state = stateRef.current
+            if (visible === state.activeIndex) return
+            if (state.isControlled) return scrollToItem(state.activeIndex)
+            setInternalIndex(visible)
+            state.onActiveIndexChange?.(visible)
+          })
+        })
+      }
+      const onScroll = () => {
+        clearTimeout(quiet)
+        quiet = setTimeout(settle, 150)
+      }
+      track.addEventListener("scroll", onScroll, { passive: true })
+      track.addEventListener("scrollend", settle)
+      return () => {
+        clearTimeout(quiet)
+        cancelAnimationFrame(frame)
+        track.removeEventListener("scroll", onScroll)
+        track.removeEventListener("scrollend", settle)
+      }
+    }, [track, scrollToItem])
+
+    // The track follows the index: scroll there, unless it already shows it
+    // or is on its way (the change came *from* the observer, or a navigation).
+    React.useEffect(() => {
+      if (!didInit.current) return
+      if (!isShowing(activeIndex)) scrollToItem(activeIndex)
+    }, [activeIndex, scrollToItem, isShowing])
 
     const context = React.useMemo<CarouselContextValue>(
       () => ({

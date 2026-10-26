@@ -177,11 +177,11 @@ export const DisabledEnds: Story = {
       <div className="space-y-8">
         <div className="space-y-3">
           <Head>first card</Head>
-          <Quotes c={c} count={3} itemsPerView={2} activeIndex={0} />
+          <Quotes c={c} count={3} itemsPerView={2} />
         </div>
         <div className="space-y-3">
           <Head>last page</Head>
-          <Quotes c={c} count={3} itemsPerView={2} activeIndex={1} />
+          <Quotes c={c} count={3} itemsPerView={2} defaultActiveIndex={1} />
         </div>
         <div className="space-y-3">
           <Head>everything in view</Head>

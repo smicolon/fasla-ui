@@ -336,10 +336,11 @@ describe("Carousel", () => {
         <CarouselDots />
       </Carousel>
     )
-    // A dot click asks; it does not take.
+    // A dot click asks; it does not take, and the track stays where it is.
     fireEvent.click(dots()[2]!)
     expect(onChange).toHaveBeenCalledWith(2)
     expect(dots()[0]).toHaveAttribute("aria-current", "true")
+    expect(scrollCalls).toHaveLength(0)
 
     rerender(
       <Carousel aria-label="Gallery" activeIndex={2} onActiveIndexChange={onChange}>
@@ -355,6 +356,52 @@ describe("Carousel", () => {
     )
     expect(dots()[2]).toHaveAttribute("aria-current", "true")
     expect(scrollCalls.at(-1)!.el).toBe(screen.getByTestId("slide-2"))
+  })
+
+  it("moves nothing when a controlled parent keeps its index", () => {
+    // The parent never takes the change: dots, keys and the track all stay
+    // on the slide it says, so nothing on screen contradicts the dots.
+    renderCarousel({ activeIndex: 0 })
+    const track = screen.getByTestId("slide-0").parentElement as HTMLElement
+    fireEvent.click(dots()[1]!)
+    fireEvent.keyDown(track, { key: "End" })
+    expect(scrollCalls).toHaveLength(0)
+    expect(dots()[0]).toHaveAttribute("aria-current", "true")
+  })
+
+  it("scrolls back when a controlled parent refuses a swipe", () => {
+    vi.stubGlobal("requestAnimationFrame", (callback: FrameRequestCallback) => {
+      callback(0)
+      return 0
+    })
+    const onChange = vi.fn()
+    renderCarousel({ activeIndex: 0, onActiveIndexChange: onChange })
+    const track = screen.getByTestId("slide-0").parentElement as HTMLElement
+    showSlide(1)
+    expect(onChange).toHaveBeenCalledWith(1)
+    // The parent kept 0. Once the scroll settles, the track goes back.
+    act(() => {
+      track.dispatchEvent(new Event("scrollend"))
+    })
+    expect(scrollCalls.at(-1)!.el).toBe(screen.getByTestId("slide-0"))
+    expect(dots()[0]).toHaveAttribute("aria-current", "true")
+  })
+
+  it("ignores the slides a navigation passes on its way", () => {
+    // A smooth scroll from the first slide to the third shows the second on
+    // the way; that is not a change, and the pill must not flicker back.
+    const onChange = vi.fn()
+    renderCarousel({ onActiveIndexChange: onChange })
+    fireEvent.click(dots()[2]!)
+    expect(onChange).toHaveBeenLastCalledWith(2)
+    showSlide(1)
+    expect(dots()[2]).toHaveAttribute("aria-current", "true")
+    showSlide(2)
+    expect(onChange).toHaveBeenCalledTimes(1)
+    // Arrived: the observer leads again.
+    showSlide(0)
+    expect(onChange).toHaveBeenLastCalledWith(0)
+    expect(dots()[0]).toHaveAttribute("aria-current", "true")
   })
 
   it("clamps navigation to the slides that exist", () => {
