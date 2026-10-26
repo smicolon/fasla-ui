@@ -120,14 +120,25 @@ export default function CarouselPage() {
         <h2 className="text-2xl font-semibold">{t("variants")}</h2>
         <p className="text-muted-foreground">{s.rich("variantsBody", rich)}</p>
         <ComponentPreview>
-          <div className="flex flex-col gap-8">
+          {/* Three columns from `sm` up, sharing a top edge; one on a phone. */}
+          <div className="grid w-full items-start justify-items-center gap-6 sm:grid-cols-3">
             {ITEM_COUNTS.map((count) => (
-              <div key={count} className="flex flex-col items-center gap-3">
+              <div key={count} className="flex w-40 flex-col items-center gap-3">
                 <code className="w-fit text-sm text-muted-foreground">{count}</code>
-                {gallery(
-                  Array.from({ length: count }, (_, i) => `${s("examples.slide")} ${i + 1}`),
-                  { className: "w-64 space-y-3" }
-                )}
+                <Carousel aria-label={s("examples.gallery")} className="w-full space-y-3">
+                  <CarouselContent>
+                    {Array.from({ length: count }, (_, i) => (
+                      <CarouselItem key={i}>
+                        <div className="flex h-28 items-end rounded-lg bg-muted p-3">
+                          <span className="text-sm font-medium text-foreground">
+                            {s("examples.slide")} {i + 1}
+                          </span>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselDots />
+                </Carousel>
               </div>
             ))}
           </div>
