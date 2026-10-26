@@ -88,7 +88,6 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
   ) => {
     const [internalIndex, setInternalIndex] = React.useState(defaultActiveIndex)
     const isControlled = controlledIndex !== undefined
-    const activeIndex = isControlled ? controlledIndex : internalIndex
 
     // Items in DOM order, registered by each CarouselItem on mount. State, not
     // a ref: the dots and the observer must re-render when slides come and go.
@@ -130,6 +129,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
      * the last slide.
      */
     const [measuredLast, setMeasuredLast] = React.useState<number | null>(null)
+    const lastIndexRef = React.useRef(-1)
     useIsomorphicLayoutEffect(() => {
       if (!track || items.length === 0) return
       const measure = () => {
@@ -143,6 +143,8 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
           return Math.max(box.right, end.right) - Math.min(box.left, end.left) <= view + 1
         })
         setMeasuredLast(last === -1 ? null : last)
+        // Effects of this same commit (the first jump) read it before the re-render.
+        if (last !== -1) lastIndexRef.current = Math.min(last, items.length - 1)
       }
       measure()
       if (typeof ResizeObserver === "undefined") return
@@ -152,8 +154,12 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       return () => observer.disconnect()
     }, [track, items])
     const lastIndex = items.length === 0 ? -1 : Math.min(measuredLast ?? items.length, items.length - 1)
-    const lastIndexRef = React.useRef(lastIndex)
     lastIndexRef.current = lastIndex
+
+    // The index as given, held to the slides there are: one past the end, or
+    // past the last view of a several-per-view track, means the last view.
+    const givenIndex = isControlled ? controlledIndex : internalIndex
+    const activeIndex = items.length === 0 ? givenIndex : Math.max(0, Math.min(lastIndex, givenIndex))
 
     /** Whether the track is, or is on its way to, showing `index`. */
     const isShowing = React.useCallback(
@@ -162,7 +168,8 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       []
     )
 
-    const scrollToItem = React.useCallback((index: number, behavior?: ScrollBehavior) => {
+    const scrollToItem = React.useCallback((to: number, behavior?: ScrollBehavior) => {
+      const index = Math.max(0, Math.min(lastIndexRef.current, to))
       const item = itemsRef.current[index]
       if (!item) return
       if (!isShowing(index)) targetRef.current = index

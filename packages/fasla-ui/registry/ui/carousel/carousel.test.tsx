@@ -6,6 +6,7 @@ import {
   CarouselContent,
   CarouselItem,
   CarouselDots,
+  useCarousel,
 } from "./carousel"
 
 /**
@@ -485,13 +486,50 @@ describe("Carousel", () => {
   })
 
   it("clamps navigation to the slides that exist", () => {
+    const GoTo = ({ index }: { index: number }) => {
+      const { scrollTo } = useCarousel()
+      return (
+        <button type="button" onClick={() => scrollTo(index)}>
+          Go to {index}
+        </button>
+      )
+    }
     const onChange = vi.fn()
-    renderCarousel({ onActiveIndexChange: onChange, defaultActiveIndex: 0 })
-    fireEvent.click(dots()[2]!)
+    render(
+      <Carousel aria-label="Gallery" onActiveIndexChange={onChange}>
+        <CarouselContent>
+          {SLIDES.map((slide, i) => (
+            <CarouselItem key={slide} data-testid={`slide-${i}`}>
+              {slide}
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselDots />
+        <GoTo index={SLIDES.length} />
+      </Carousel>
+    )
+    fireEvent.click(screen.getByRole("button", { name: `Go to ${SLIDES.length}` }))
+    expect(onChange).toHaveBeenCalledWith(2)
+    expect(scrollCalls.at(-1)!.el).toBe(screen.getByTestId("slide-2"))
+    expect(screen.getByRole("button", { name: "3 / 3" })).toHaveAttribute("aria-current", "true")
+  })
+
+  it("reads an out-of-range activeIndex as the nearest end", () => {
+    const { rerender } = renderCarousel({ activeIndex: 7 })
     expect(dots()[2]).toHaveAttribute("aria-current", "true")
-    // No dot points past the end, so drive the context directly via a rerender
-    // with an out-of-range controlled index: nothing blows up.
-    expect(onChange).toHaveBeenCalledTimes(1)
+    rerender(
+      <Carousel aria-label="Gallery" activeIndex={-3}>
+        <CarouselContent>
+          {SLIDES.map((slide, i) => (
+            <CarouselItem key={slide} data-testid={`slide-${i}`}>
+              {slide}
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselDots />
+      </Carousel>
+    )
+    expect(dots()[0]).toHaveAttribute("aria-current", "true")
   })
 
   it("lays the carousel out with logical properties only", () => {

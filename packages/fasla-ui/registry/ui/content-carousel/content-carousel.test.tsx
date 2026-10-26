@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest"
-import { render, screen, fireEvent } from "@testing-library/react"
+import { render, screen, fireEvent, act } from "@testing-library/react"
 import { ContentCarousel, ContentCarouselItem } from "./content-carousel"
 
 /**
@@ -16,8 +16,38 @@ import { ContentCarousel, ContentCarouselItem } from "./content-carousel"
 
 let scrollCalls: { el: Element; options?: ScrollIntoViewOptions }[] = []
 
+/** A ResizeObserver the tests fire by hand, after giving the DOM a layout. */
+let resizeCallbacks: ResizeObserverCallback[] = []
+class StubResizeObserver {
+  constructor(callback: ResizeObserverCallback) {
+    resizeCallbacks.push(callback)
+  }
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
+/**
+ * Lays the cards out as a browser would — `perView` to a 600px track, 16px
+ * apart — and lets the engine measure its last view. jsdom has no layout.
+ */
+const layOut = (perView: number, view = 600) => {
+  const track = screen.getByTestId("card-0").parentElement as HTMLElement
+  Object.defineProperty(track, "clientWidth", { configurable: true, value: view })
+  const width = (view - 16 * (perView - 1)) / perView
+  CARDS.forEach((_, i) => {
+    const left = i * (width + 16)
+    screen.getByTestId(`card-${i}`).getBoundingClientRect = () => ({ left, right: left + width }) as DOMRect
+  })
+  act(() => {
+    for (const callback of resizeCallbacks) callback([], {} as ResizeObserver)
+  })
+}
+
 beforeEach(() => {
   scrollCalls = []
+  resizeCallbacks = []
+  vi.stubGlobal("ResizeObserver", StubResizeObserver)
   Element.prototype.scrollIntoView = function (
     this: Element,
     options?: ScrollIntoViewOptions | boolean
@@ -168,6 +198,32 @@ describe("ContentCarousel", () => {
     fireEvent.click(next())
     expect(next()).toBeDisabled()
     expect(prev()).toBeEnabled()
+  })
+
+  it("stops End and the forward key at the last full view", () => {
+    // Three cards, two in view: the last view starts at card 1, so End goes
+    // there and a forward key past it changes nothing.
+    const onChange = vi.fn()
+    renderCarousel({ itemsPerView: 2, onActiveIndexChange: onChange })
+    layOut(2)
+    fireEvent.keyDown(screen.getByTestId("card-0"), { key: "End" })
+    expect(onChange).toHaveBeenLastCalledWith(1)
+    expect(scrollCalls.at(-1)!.el).toBe(screen.getByTestId("card-1"))
+    fireEvent.keyDown(screen.getByTestId("card-1"), { key: "ArrowRight" })
+    expect(onChange).toHaveBeenCalledTimes(1)
+    expect(next()).toBeDisabled()
+  })
+
+  it("holds an index past the last full view to that view", () => {
+    // activeIndex 2 cannot start a two-up view of three cards: it is read as
+    // 1, so Previous goes to 0 instead of to where the track already is.
+    const onChange = vi.fn()
+    renderCarousel({ itemsPerView: 2, activeIndex: 2, onActiveIndexChange: onChange })
+    layOut(2)
+    expect(next()).toBeDisabled()
+    expect(prev()).toBeEnabled()
+    fireEvent.click(prev())
+    expect(onChange).toHaveBeenLastCalledWith(0)
   })
 
   it("disables both arrows when every card is already in view", () => {
