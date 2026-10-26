@@ -1,3 +1,4 @@
+import * as React from "react"
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
 import { render, screen, fireEvent, act } from "@testing-library/react"
 import {
@@ -417,10 +418,73 @@ describe("Carousel", () => {
   it("throws when a part is used outside the provider", () => {
     // React logs the error it rethrows; silence the noise, keep the assertion.
     const spy = vi.spyOn(console, "error").mockImplementation(() => {})
-    expect(() => render(<CarouselDots />)).toThrow(
+    expect(() => render(<CarouselItem />)).toThrow(
       "Carousel components must be used within a Carousel provider"
     )
+    expect(() => render(<CarouselDots />)).toThrow(
+      "CarouselDots needs a Carousel around it, or a count of its own"
+    )
     spy.mockRestore()
+  })
+
+  describe("dots on their own", () => {
+    it("draw count dots with no Carousel around them", () => {
+      render(<CarouselDots count={4} activeIndex={3} />)
+      expect(dots()).toHaveLength(4)
+      // Figma's "4 items, Active Item 4": the fourth dot is the pill.
+      expect(dots()[3]).toHaveAttribute("aria-current", "true")
+      expect(dotVisual(3)).toHaveClass("w-6", "bg-primary")
+      for (const i of [0, 1, 2]) {
+        expect(dots()[i]).not.toHaveAttribute("aria-current")
+        expect(dotVisual(i)).toHaveClass("w-2", "bg-muted-foreground")
+      }
+      expect(dots()[3]).toHaveAccessibleName("4 / 4")
+    })
+
+    it("report a press and leave the state to the caller", () => {
+      const onChange = vi.fn()
+      render(<CarouselDots count={3} activeIndex={0} onActiveIndexChange={onChange} />)
+      fireEvent.click(dots()[2]!)
+      expect(onChange).toHaveBeenCalledWith(2)
+      expect(dots()[0]).toHaveAttribute("aria-current", "true")
+      expect(scrollCalls).toHaveLength(0)
+    })
+
+    it("follow a caller's state", () => {
+      const Stepper = () => {
+        const [index, setIndex] = React.useState(0)
+        return <CarouselDots count={3} activeIndex={index} onActiveIndexChange={setIndex} />
+      }
+      render(<Stepper />)
+      fireEvent.click(dots()[1]!)
+      expect(dots()[1]).toHaveAttribute("aria-current", "true")
+    })
+
+    it("clamp an index past either end, and draw nothing for no dots", () => {
+      const { rerender } = render(<CarouselDots count={3} activeIndex={7} />)
+      expect(dots()[2]).toHaveAttribute("aria-current", "true")
+      rerender(<CarouselDots count={3} activeIndex={-1} />)
+      expect(dots()[0]).toHaveAttribute("aria-current", "true")
+      rerender(<CarouselDots count={0} data-testid="dots" />)
+      expect(screen.queryByTestId("dots")).toBeNull()
+    })
+
+    it("take labels and a ref like the carousel's dots", () => {
+      const ref = { current: null as HTMLDivElement | null }
+      render(<CarouselDots ref={ref} count={2} label={(i, n) => `Photo ${i + 1} of ${n}`} />)
+      expect(dots()[1]).toHaveAccessibleName("Photo 2 of 2")
+      expect(ref.current).toHaveAttribute("data-slot", "carousel-dots")
+    })
+
+    it("win over the carousel when given a count inside one", () => {
+      const onChange = vi.fn()
+      renderCarousel({}, { count: 2, activeIndex: 1, onActiveIndexChange: onChange })
+      expect(dots()).toHaveLength(2)
+      expect(dots()[1]).toHaveAttribute("aria-current", "true")
+      fireEvent.click(dots()[0]!)
+      expect(onChange).toHaveBeenCalledWith(0)
+      expect(scrollCalls).toHaveLength(0)
+    })
   })
 
   it("rejects a string as an index", () => {

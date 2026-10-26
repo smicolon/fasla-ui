@@ -1,5 +1,6 @@
 "use client"
 
+import * as React from "react"
 import { useTranslations } from "next-intl"
 
 import {
@@ -18,6 +19,7 @@ const ITEM_COUNTS = [2, 3, 4] as const
 export default function CarouselPage() {
   const t = useTranslations("docs.sections")
   const s = useTranslations("docs.carousel")
+  const [photo, setPhoto] = React.useState(0)
 
   // Prop and value names are code identifiers, so they stay Latin in both
   // locales; the sentence around them is the locale's.
@@ -55,7 +57,7 @@ export default function CarouselPage() {
     { prop: "onActiveIndexChange", type: "(index) => void", fallback: "", description: s.rich("props.onActiveIndexChange", rich) },
     { prop: "CarouselContent", type: "{ className }", fallback: "", description: s.rich("props.content", rich) },
     { prop: "CarouselItem", type: "{ className }", fallback: "", description: s.rich("props.item", rich) },
-    { prop: "CarouselDots", type: "{ label, className }", fallback: "", description: s.rich("props.dots", rich) },
+    { prop: "CarouselDots", type: "{ count, activeIndex, onActiveIndexChange, label, className }", fallback: "", description: s.rich("props.dots", rich) },
     { prop: "className", type: "string", fallback: "", description: s.rich("props.className", rich) },
   ]
 
@@ -104,6 +106,22 @@ export default function CarouselPage() {
         <p className="text-muted-foreground">{s.rich("statesBody", rich)}</p>
         <ComponentPreview>
           {gallery(slides, { defaultActiveIndex: 2 })}
+        </ComponentPreview>
+      </section>
+
+      {/* Dots on their own */}
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">{s("standalone.title")}</h2>
+        <p className="text-muted-foreground">{s.rich("standalone.body", rich)}</p>
+        <ComponentPreview>
+          <div className="flex w-80 flex-col gap-4">
+            {slide(slides[photo]!)}
+            <CarouselDots
+              count={slides.length}
+              activeIndex={photo}
+              onActiveIndexChange={setPhoto}
+            />
+          </div>
         </ComponentPreview>
       </section>
 
@@ -165,6 +183,22 @@ export function CityGuide() {
       </CarouselContent>
       <CarouselDots />
     </Carousel>
+  )
+}`}</UsageExample>
+        <UsageExample title={s("usage.standalone")}>{`"use client"
+
+import * as React from "react"
+import { CarouselDots } from "@/components/ui/carousel"
+
+const PHOTOS = ["${s("examples.slide1")}", "${s("examples.slide2")}", "${s("examples.slide3")}"]
+
+export function PhotoStepper() {
+  const [index, setIndex] = React.useState(0)
+  return (
+    <div className="flex flex-col gap-4">
+      <p className="text-sm font-medium">{PHOTOS[index]}</p>
+      <CarouselDots count={PHOTOS.length} activeIndex={index} onActiveIndexChange={setIndex} />
+    </div>
   )
 }`}</UsageExample>
         <UsageExample title={s("usage.controlled")}>{`"use client"

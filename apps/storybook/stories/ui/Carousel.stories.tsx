@@ -87,43 +87,59 @@ export const StartingSlide: Story = {
 }
 
 const ITEM_COUNTS = [2, 3, 4] as const
+const ACTIVE_ITEMS = [1, 2, 3, 4] as const
 
 /**
- * Figma's dot stepper itself: one row per `No. of items` (2, 3, 4), one cell
- * per `Active Item`. The track is collapsed so only the indicator shows, as
- * in the Figma set; flip the Direction toolbar for the RTL half.
+ * Figma's dot stepper, every variant: one row per `No. of items`, one column
+ * per `Active Item`. These are dots on their own, with a `count` and an
+ * `activeIndex` and no Carousel around them, which is how a gallery uses
+ * them. The Direction toolbar shows the RTL half: the first dot is on the
+ * right.
  */
 export const AllStates: Story = {
-  parameters: { layout: "padded" },
-  render: (_args, ctx) => {
-    const c = copy(ctx)
-    return (
-      <div className="space-y-8">
-        {ITEM_COUNTS.map((count) => (
-          <div key={count} className="space-y-3">
-            <h3 dir="ltr" className="font-sans text-sm font-medium text-foreground">
-              No. of items = {count}
-            </h3>
-            <div className="flex items-center gap-10">
-              {Array.from({ length: count }, (_, active) => (
-                <div key={active} className="flex flex-col items-center gap-2">
-                  <Head>Active Item = {active + 1}</Head>
-                  <Carousel aria-label={`${c.gallery} ${count}-${active + 1}`} activeIndex={active}>
-                    <CarouselContent className="h-0 gap-0 overflow-hidden" aria-hidden="true">
-                      {Array.from({ length: count }, (_, i) => (
-                        <CarouselItem key={i} />
-                      ))}
-                    </CarouselContent>
-                    <CarouselDots />
-                  </Carousel>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
-      </div>
-    )
-  },
+  parameters: { layout: "padded", controls: { disable: true } },
+  render: () => (
+    <div className="grid grid-cols-[max-content_repeat(4,max-content)] items-center justify-center justify-items-center gap-x-10 gap-y-6">
+      <span />
+      {ACTIVE_ITEMS.map((active) => (
+        <Head key={active}>Active Item {active}</Head>
+      ))}
+      {ITEM_COUNTS.map((count) => (
+        <React.Fragment key={count}>
+          <span dir="ltr" className="justify-self-start whitespace-nowrap text-left font-sans text-xs text-muted-foreground">
+            {count} items
+          </span>
+          {ACTIVE_ITEMS.map((active) =>
+            active <= count ? (
+              <CarouselDots key={active} count={count} activeIndex={active - 1} />
+            ) : (
+              <span key={active} />
+            )
+          )}
+        </React.Fragment>
+      ))}
+    </div>
+  ),
+}
+
+const StandaloneDemo = ({ c }: { c: Copy }) => {
+  const [index, setIndex] = React.useState(0)
+  return (
+    <div className="flex w-80 flex-col gap-4">
+      <Slide caption={c.slides[index]!} />
+      <CarouselDots count={c.slides.length} activeIndex={index} onActiveIndexChange={setIndex} />
+    </div>
+  )
+}
+
+/**
+ * Dots on their own: `count`, `activeIndex` and `onActiveIndexChange`, and
+ * no Carousel. The picture above is plain state, as a gallery block would
+ * hold it; press a dot to change it.
+ */
+export const StandaloneDots: Story = {
+  parameters: { controls: { disable: true } },
+  render: (_args, ctx) => <StandaloneDemo c={copy(ctx)} />,
 }
 
 const ControlledDemo = ({ c }: { c: Copy }) => {

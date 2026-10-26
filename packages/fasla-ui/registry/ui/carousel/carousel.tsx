@@ -299,12 +299,24 @@ const CarouselItem = React.forwardRef<HTMLDivElement, CarouselItemProps>(
 CarouselItem.displayName = "CarouselItem"
 
 export interface CarouselDotsProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * How many dots, for dots used on their own. Inside a `Carousel` leave it
+   * out: the carousel counts its own slides. Passing it makes the dots
+   * standalone, driven by `activeIndex` and `onActiveIndexChange`.
+   */
+  count?: number
+  /** The active dot, when standalone. */
+  activeIndex?: number
+  /** Called with a dot's index when it is pressed, when standalone. */
+  onActiveIndexChange?: (index: number) => void
   /** Accessible name per dot. The default is the slide's own "N / M". */
   label?: (index: number, count: number) => string
 }
 
 /**
- * Figma's dot stepper, one dot per slide. The geometry is the set's exactly:
+ * Figma's dot stepper, one dot per slide. Inside a `Carousel` it reads the
+ * carousel; with a `count` of its own it stands alone, for a gallery or a
+ * stepper whose slides are not a Carousel. The geometry is the set's exactly:
  * dots 8px tall and 4px apart, the inactive a `muted-foreground` 8px circle
  * (rebound from `muted` on 2026-10-06 — `muted` on `background` was ~1.07:1,
  * far under WCAG 1.4.11's 3:1), the active a `primary` 24px pill, everything
@@ -319,8 +331,27 @@ export interface CarouselDotsProps extends React.HTMLAttributes<HTMLDivElement> 
  * the arrow keys are the equivalent controls.
  */
 const CarouselDots = React.forwardRef<HTMLDivElement, CarouselDotsProps>(
-  ({ className, label, ...props }, ref) => {
-    const { activeIndex, count, scrollTo } = useCarousel()
+  (
+    {
+      count: ownCount,
+      activeIndex: ownIndex,
+      onActiveIndexChange,
+      className,
+      label,
+      ...props
+    },
+    ref
+  ) => {
+    const carousel = React.useContext(CarouselContext)
+    const standalone = ownCount !== undefined
+    if (!standalone && !carousel) {
+      throw new Error("CarouselDots needs a Carousel around it, or a count of its own")
+    }
+    const count = standalone ? Math.max(0, ownCount) : carousel!.count
+    const activeIndex = standalone
+      ? Math.max(0, Math.min(count - 1, ownIndex ?? 0))
+      : carousel!.activeIndex
+    const select = standalone ? (index: number) => onActiveIndexChange?.(index) : carousel!.scrollTo
     if (count === 0) return null
     return (
       <div
@@ -338,7 +369,7 @@ const CarouselDots = React.forwardRef<HTMLDivElement, CarouselDotsProps>(
               data-slot="carousel-dot"
               aria-label={label ? label(index, count) : `${index + 1} / ${count}`}
               aria-current={isActive ? "true" : undefined}
-              onClick={() => scrollTo(index)}
+              onClick={() => select(index)}
               className="-mx-0.5 -my-1.5 rounded-full px-0.5 py-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               <span

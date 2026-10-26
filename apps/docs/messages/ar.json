@@ -1082,6 +1082,10 @@
       "previewBody": "المسار شريط تمرير أصلي مثبّت بخاصية <code>scroll-snap</code>، فيتحرك بالسحب ولوحة التتبّع والنقاط على حد سواء، وتتبع النقطة النشطة تمريرك في أي اتجاه.",
       "variantsBody": "محور <code>No. of items</code> في Figma هو ببساطة عدد الشرائح التي تعرضها: صف النقاط يتبع عدد الشرائح، والحبة الممدودة هي <code>Active Item</code>.",
       "statesBody": "النقطة النشطة حبة ممدودة بعرض 24px بلون <code>primary</code>، والبقية دوائر 8px بلون <code>muted-foreground</code>، ويتحرك الامتداد بينهما ما لم تكن الحركة مخفّضة. تبدأ <code>defaultActiveIndex</code> من شريحة لاحقة بقفزة فورية دون تمرير.",
+      "standalone": {
+        "title": "مؤشرات الشرائح وحدها",
+        "body": "إذا أعطيت <code>CarouselDots</code> قيمة <code>count</code> فلن يحتاج إلى عارض شرائح حوله: يعرض <code>activeIndex</code> ويُبلغ عن كل ضغطة عبر <code>onActiveIndexChange</code>، فيمكن لمعرض صور أو لخطوات متتابعة أن يتحكم فيه بحالته الخاصة."
+      },
       "examples": {
         "gallery": "دليل المدينة",
         "slide": "الشريحة",
@@ -1100,7 +1104,8 @@
       "usage": {
         "basic": "شرائح مع نقاط تنقّل",
         "startingSlide": "البدء من شريحة لاحقة",
-        "controlled": "التحكم بالحالة"
+        "controlled": "التحكم بالحالة",
+        "standalone": "مؤشرات الشرائح وحدها"
       },
       "props": {
         "activeIndex": "الشريحة النشطة عند التحكم بالحالة من الخارج.",
@@ -1108,7 +1113,7 @@
         "onActiveIndexChange": "تُستدعى عند تغيّر الشريحة النشطة، سواء من النقاط أو من التمرير اليدوي.",
         "content": "مسار <code>scroll-snap</code> الذي يحمل الشرائح.",
         "item": "شريحة واحدة. بدّل <code>basis-full</code> لعرض أكثر من شريحة في المرة الواحدة.",
-        "dots": "نقاط التنقّل، وتسمّي <code>label</code> كل نقطة بلغتك.",
+        "dots": "مؤشرات الشرائح. داخل عارض الشرائح تقرأ حالته، وتعمل وحدها مع الخصائص <code>count</code>، <code>activeIndex</code>، <code>onActiveIndexChange</code>. وتسمّي <code>label</code> كل نقطة بلغتك.",
         "className": "أصناف إضافية للجزء."
       }
     },

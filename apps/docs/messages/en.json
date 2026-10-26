@@ -1082,6 +1082,10 @@
       "previewBody": "The track is a native scroller with CSS scroll snapping, so swipe, trackpad and the dots all move it. The active dot follows whichever way you scroll.",
       "variantsBody": "Figma's <code>No. of items</code> axis is simply how many slides you render: the dot row follows the slide count, and the pill is its <code>Active Item</code>.",
       "statesBody": "The active dot is a 24px <code>primary</code> pill, the rest are 8px <code>muted-foreground</code> circles, and the stretch between them animates unless motion is reduced. <code>defaultActiveIndex</code> starts on a later slide, jumping there instantly rather than scrolling.",
+      "standalone": {
+        "title": "Dots on their own",
+        "body": "Give <code>CarouselDots</code> a <code>count</code> and it needs no Carousel around it: it shows <code>activeIndex</code> and reports each press through <code>onActiveIndexChange</code>, so a gallery or a stepper can drive it with state of its own."
+      },
       "examples": {
         "gallery": "City guide",
         "slide": "Slide",
@@ -1100,7 +1104,8 @@
       "usage": {
         "basic": "Slides with a dot stepper",
         "startingSlide": "Start on a later slide",
-        "controlled": "Controlled"
+        "controlled": "Controlled",
+        "standalone": "Dots on their own"
       },
       "props": {
         "activeIndex": "Active slide, when controlled.",
@@ -1108,7 +1113,7 @@
         "onActiveIndexChange": "Called when the active slide changes, dots and manual scrolling alike.",
         "content": "The scroll-snap track that holds the slides.",
         "item": "One slide. Override <code>basis-full</code> to show more than one per view.",
-        "dots": "The dot stepper; <code>label</code> names each dot for your locale.",
+        "dots": "The dot stepper. Inside a Carousel it reads the carousel; with <code>count</code>, <code>activeIndex</code> and <code>onActiveIndexChange</code> it stands alone. <code>label</code> names each dot for your locale.",
         "className": "Extra classes for the part."
       }
     },
