@@ -57,7 +57,7 @@
       "withArDoc": 41,
       "withRtl": 153,
       "withDescription": 6,
-      "mappedToCode": 31,
+      "mappedToCode": 32,
       "docFrames": 98
     },
     "legend": {
@@ -4165,7 +4165,7 @@
         },
         "duplicates": []
       },
-      "code": null,
+      "code": "input-otp",
       "hasDescription": false,
       "flags": [
         "legacy-doc-section-on-page",

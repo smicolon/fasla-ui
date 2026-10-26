@@ -70,6 +70,7 @@ Core building blocks with CVA variants for consistent styling:
 | **Button** | Multiple variants (default, destructive, outline, secondary, ghost, link) with loading state |
 | **Input** | Text input with validation states and icon support |
 | **Input Number** | A number field with step buttons in five layouts, min and max limits, and Western digits in every language |
+| **OTP Input** | A one-time code field with a slot per character, in four layouts, with SMS autofill and paste |
 | **Textarea** | Multi-line text field that grows with its text, with a label, helper text and a counter |
 | **Select** | Dropdown selection with search |
 | **Calendar** | A month calendar for one day or a range, across up to three months, mirrored for RTL |

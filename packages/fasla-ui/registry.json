@@ -535,6 +535,27 @@
       ]
     },
     {
+      "name": "input-otp",
+      "type": "registry:ui",
+      "title": "OTP Input",
+      "description": "A one-time code field on input-otp, with a slot per character in groups, separators or spaced slots. SMS autofill, paste, an invalid state through aria-invalid, Western digits in every language, mirrored for RTL.",
+      "dependencies": [
+        "input-otp"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/input-otp/input-otp.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/input-otp.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "forms"
+      ]
+    },
+    {
       "name": "navbar",
       "type": "registry:block",
       "title": "Navbar",
