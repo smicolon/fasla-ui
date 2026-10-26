@@ -17,12 +17,12 @@ import { cn } from "../../../src/lib/utils"
  *
  * Figma axis → code:
  *  - `Type` → how the parts are composed, never a prop:
- *     - Simple: two groups of three slots, a separator between, 6px apart.
+ *     - Simple: two groups of three slots, a separator between.
  *     - Digits only: one group of six slots.
- *     - With Separator: three groups of two slots, separators between, 8px
- *       apart.
- *     - With Spacing: six groups of one slot, 8px apart, so every slot has
- *       its own border and corners.
+ *     - With Separator: three groups of two slots, separators between.
+ *     - With Spacing: six groups of one slot, so every slot has its own
+ *       border and corners.
+ *    Every type is 8px between its groups and separators.
  *  - `Direction` → the page's `dir`, never a prop. In Arabic the first slot
  *    is on the right, and the arrow keys move the way they point.
  *  - Otp Input Item `State`:
@@ -99,9 +99,8 @@ export type InputOTPProps = Omit<OTPInputProps, "value" | "defaultValue" | "onCh
 }
 
 /**
- * The field: one `<input>` and the row of groups drawn under it. The row is
- * 8px between its groups and separators, Figma's gap for With Separator and
- * With Spacing; Simple sets 6px with `containerClassName="gap-1.5"`.
+ * The field: one `<input>` and the row of groups drawn under it, 8px
+ * between its groups and separators in every Figma type (`spacing/2`).
  *
  * `aria-invalid` goes to the input, so a screen reader hears the field is
  * invalid, and turns every slot `destructive`. `disabled` dims the whole
@@ -198,12 +197,20 @@ InputOTPGroup.displayName = "InputOTPGroup"
  * first slot is the one on the right.
  *
  * Active: the slot the next character goes into, while the field has focus.
- * A 3px `ring` outside the border, which keeps its `input` colour, as in
- * Figma. It rises over its neighbours so the ring is never covered.
+ * It draws Input's focus exactly, with Input's classes: a `ring` border and
+ * a 3px `ring/50` halo outside it. It rises over its neighbours so the halo
+ * is never covered. A slot inside a group has no start edge of its own, so
+ * while Active it draws one and moves 1px back over its neighbour's edge,
+ * 1px wider: the border is whole on all four sides, as Input's is, and the
+ * character and the slots after it stay where they were.
  *
- * Destructive: the border turns `destructive`, and the Active ring is
- * `destructive` at 20% (Figma's `opacity/destructive/20`, in Light and
- * Dark). Set by `aria-invalid` on `InputOTP`, or on one slot.
+ * Destructive: Input's invalid state, with Input's classes. The border turns
+ * `destructive`, and the Active halo is `destructive` at 20%, 40% in Dark.
+ * They must win over Active's `ring` colours, as Input's do. Input wins with
+ * group selectors that out-rank its focus; a slot's two states are
+ * attributes of equal weight, so the invalid ones carry `!` and win
+ * whatever order Tailwind writes them in. Set by `aria-invalid` on
+ * `InputOTP`, or on one slot.
  *
  * In forced colors (Windows high contrast), where rings are not painted, the
  * Active slot gets a 2px system `Highlight` outline instead.
@@ -214,9 +221,10 @@ InputOTPGroup.displayName = "InputOTPGroup"
 const inputOTPSlotClasses = cn(
   "relative flex size-9 items-center justify-center border-y border-e border-input text-sm text-foreground",
   "first:rounded-s-lg first:border-s last:rounded-e-lg",
-  "transition-[border-color,box-shadow] motion-reduce:transition-none",
-  "data-[active]:z-10 data-[active]:ring-[3px] data-[active]:ring-ring",
-  "data-[invalid]:border-destructive data-[invalid]:data-[active]:ring-destructive/20",
+  "transition-[color,border-color,box-shadow] motion-reduce:transition-none",
+  "data-[active]:z-10 data-[active]:border-ring data-[active]:ring-[3px] data-[active]:ring-ring/50",
+  "data-[active]:border-s data-[active]:[&:not(:first-child)]:-ms-px data-[active]:[&:not(:first-child)]:w-[37px]",
+  "data-[invalid]:!border-destructive data-[invalid]:!ring-destructive/20 dark:data-[invalid]:!ring-destructive/40",
   "forced-colors:data-[active]:[outline:2px_solid_Highlight]"
 )
 

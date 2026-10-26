@@ -165,22 +165,13 @@ function Parts({ type }: { type: OtpType }) {
   }
 }
 
-/**
- * One six-digit field in any Figma Type. Simple sets Figma's 6px gap; the
- * other types keep the component's 8px.
- */
+/** One six-digit field in any Figma Type, at the component's 8px gap. */
 function Code({
   type = "Simple",
-  containerClassName,
   ...props
 }: { type?: OtpType } & Omit<InputOTPProps, "maxLength" | "children" | "render">) {
   return (
-    <InputOTP
-      maxLength={6}
-      pattern={REGEXP_ONLY_DIGITS}
-      containerClassName={[type === "Simple" ? "gap-1.5" : "", containerClassName ?? ""].join(" ")}
-      {...props}
-    >
+    <InputOTP maxLength={6} pattern={REGEXP_ONLY_DIGITS} {...props}>
       <Parts type={type} />
     </InputOTP>
   )
@@ -209,7 +200,7 @@ const RowHead = ({ children }: { children: React.ReactNode }) => (
 /**
  * The frame round every story but Default. It centres the content in either
  * direction, and scrolls it sideways in the story's own direction when it is
- * wider than the canvas (a phone). 4px of padding keeps the 3px Active ring
+ * wider than the canvas (a phone). 4px of padding keeps the 3px Active halo
  * at the edge clear of the clip.
  */
 const framed: Decorator = (Story) => (
@@ -225,7 +216,7 @@ const framed: Decorator = (Story) => (
  * is the slot the next character goes into; only one field on a page can
  * have focus. So this sets the slot's own `data-active` attribute on the
  * slot named by the cell's `data-hold-active` index, and the slot draws the
- * component's own ring. Click into any field to see the real thing.
+ * component's own focus. Click into any field to see the real thing.
  */
 function HoldActive({ children }: { children: React.ReactNode }) {
   const ref = React.useRef<HTMLDivElement>(null)
@@ -300,11 +291,11 @@ const STATES = [
 /**
  * Figma's slot states, empty and filled. Active is the slot the next
  * character goes into, while the field has focus: the first slot of an
- * empty code, the last of a full one. It draws a 3px `ring` outside the
- * slot's border. Destructive (`aria-invalid`) turns the borders
- * `destructive` and the ring `destructive` at 20%. Disabled dims the whole
- * field to 50%. The Active rows are held; click into any field to see it
- * live.
+ * empty code, the last of a full one. It draws Input's focus: a `ring`
+ * border and a 3px `ring` halo at 50%. Destructive (`aria-invalid`) is
+ * Input's invalid state: the borders turn `destructive`, and the Active halo
+ * `destructive` at 20%, 40% in Dark. Disabled dims the whole field to 50%.
+ * The Active rows are held; click into any field to see it live.
  */
 export const States: Story = {
   decorators: [heldActive, framed],

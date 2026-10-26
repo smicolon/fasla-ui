@@ -1007,14 +1007,14 @@
       "lead": "A field for one-time codes, with one slot per character, so the reader can check each digit against the message they are copying from. It takes the code from the keyboard, a paste or the phone's code autofill, comes in four layouts, and follows the page's reading direction.",
       "label": "Verification code",
       "pin": "PIN",
-      "variantsBody": "Figma has four types. They are not a prop: each is a way of putting the parts together. Simple is two <code>InputOTPGroup</code> parts of three slots with an <code>InputOTPSeparator</code> between them, 6px apart (<code>containerClassName=\"gap-1.5\"</code>). Digits only is one group of six. With Separator is three groups of two, and With Spacing is six groups of one, so every slot has its own border and corners. Both keep the default 8px gap.",
+      "variantsBody": "Figma has four types. They are not a prop: each is a way of putting the parts together. Simple is two <code>InputOTPGroup</code> parts of three slots with an <code>InputOTPSeparator</code> between them. Digits only is one group of six. With Separator is three groups of two, and With Spacing is six groups of one, so every slot has its own border and corners. Every type keeps 8px between its groups and separators.",
       "types": {
         "simple": "Simple",
         "digits": "Digits only",
         "separator": "With Separator",
         "spacing": "With Spacing"
       },
-      "statesBody": "These are real states, not props. Active marks the slot the next character goes into while the field has focus: a 3px ring outside its border. Set <code>aria-invalid</code> on <code>InputOTP</code> and every slot's border turns red, and the ring with it. <code>disabled</code> dims the whole field to 50%.",
+      "statesBody": "These are real states, not props. Active marks the slot the next character goes into while the field has focus, with Input's focus style: the border takes the ring colour, and a 3px ring at 50% surrounds it. Set <code>aria-invalid</code> on <code>InputOTP</code> and every slot's border turns red, as an invalid Input's does, and the Active ring with it. <code>disabled</code> dims the whole field to 50%.",
       "states": {
         "default": "Default",
         "active": "Active",
@@ -1058,7 +1058,7 @@
           "ariaLabelledby": "The id of the visible label that names the field.",
           "ariaDescribedby": "The id of the helper text or error message read with the field.",
           "name": "The name the code is submitted under.",
-          "containerClassName": "Extra classes for the row that holds the groups and separators, such as <code>gap-1.5</code> for Simple.",
+          "containerClassName": "Extra classes for the row that holds the groups and separators, such as <code>gap-3</code> for more than the default 8px between them.",
           "children": "The groups and separators.",
           "className": "Extra classes for the hidden input."
         },

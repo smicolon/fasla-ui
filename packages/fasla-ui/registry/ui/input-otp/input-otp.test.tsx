@@ -2,6 +2,7 @@ import * as React from "react"
 import { afterEach, describe, it, expect, vi } from "vitest"
 import { fireEvent, render, screen } from "@testing-library/react"
 import { REGEXP_ONLY_DIGITS } from "input-otp"
+import { inputBoxVariants } from "../input/input"
 import { InputOTP, InputOTPGroup, InputOTPSeparator, InputOTPSlot, type InputOTPProps } from "./input-otp"
 
 /**
@@ -237,14 +238,40 @@ describe("InputOTP — look", () => {
     expect(slots()[0]!.className).not.toMatch(/rounded-(l|r)-|border-(l|r)\b/)
   })
 
-  it("draws Active as a 3px ring, destructive at 20% when invalid", () => {
+  /** Input's classes after a variant prefix, such as `focus-within:` → `ring-ring/50`. */
+  const inputClasses = (variant: string) =>
+    inputBoxVariants()
+      .split(" ")
+      .filter((cls) => cls.startsWith(variant))
+      .map((cls) => cls.slice(variant.length))
+
+  it("draws Active with Input's focus classes: a ring border and a 3px ring/50 halo", () => {
     render(<Simple />)
+    // Input's resting shadow has no counterpart here: the slot has no shadow to remove.
+    const focus = inputClasses("focus-within:").filter((cls) => cls !== "shadow-none")
+    expect(focus).toEqual(["border-ring", "ring-[3px]", "ring-ring/50"])
+    expect(slots()[0]).toHaveClass("data-[active]:z-10", ...focus.map((cls) => `data-[active]:${cls}`))
+  })
+
+  it("closes an Active slot's border on its start side without moving anything", () => {
+    render(<Simple />)
+    expect(slots()[1]).toHaveClass(
+      "data-[active]:border-s",
+      "data-[active]:[&:not(:first-child)]:-ms-px",
+      "data-[active]:[&:not(:first-child)]:w-[37px]"
+    )
+  })
+
+  it("draws Destructive with Input's invalid classes, 40% in Dark", () => {
+    render(<Simple />)
+    const invalid = inputClasses("group-data-[invalid]/input:")
+    const invalidDark = inputClasses("dark:group-data-[invalid]/input:")
+    expect(invalid).toEqual(["border-destructive", "ring-destructive/20"])
+    expect(invalidDark).toEqual(["ring-destructive/40"])
+    // Important, so they win over Active's ring colours as Input's do.
     expect(slots()[0]).toHaveClass(
-      "data-[active]:z-10",
-      "data-[active]:ring-[3px]",
-      "data-[active]:ring-ring",
-      "data-[invalid]:border-destructive",
-      "data-[invalid]:data-[active]:ring-destructive/20"
+      ...invalid.map((cls) => `data-[invalid]:!${cls}`),
+      ...invalidDark.map((cls) => `dark:data-[invalid]:!${cls}`)
     )
   })
 
@@ -260,13 +287,13 @@ describe("InputOTP — look", () => {
     expect(input()).toHaveClass("[forced-color-adjust:none]")
   })
 
-  it("spaces the row 8px by default, and takes containerClassName over it", () => {
+  it("spaces every type 8px, and takes containerClassName over it", () => {
     const { unmount } = render(<Simple />)
     expect(input().closest("[data-input-otp-container]")).toHaveClass("gap-2")
     unmount()
-    render(<Simple containerClassName="gap-1.5" />)
+    render(<Simple containerClassName="gap-3" />)
     const container = input().closest("[data-input-otp-container]")!
-    expect(container).toHaveClass("gap-1.5")
+    expect(container).toHaveClass("gap-3")
     expect(container).not.toHaveClass("gap-2")
   })
 })

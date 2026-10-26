@@ -61,18 +61,13 @@ function Parts({ type }: { type: OtpType }) {
   }
 }
 
-/** A six-digit field in any Figma Type. Simple sets Figma's 6px gap; the others keep the 8px default. */
+/** A six-digit field in any Figma Type, at the component's 8px gap. */
 function Code({
   type = "simple",
   ...props
 }: { type?: OtpType } & Omit<InputOTPProps, "maxLength" | "children" | "render">) {
   return (
-    <InputOTP
-      maxLength={6}
-      pattern={REGEXP_ONLY_DIGITS}
-      containerClassName={type === "simple" ? "gap-1.5" : undefined}
-      {...props}
-    >
+    <InputOTP maxLength={6} pattern={REGEXP_ONLY_DIGITS} {...props}>
       <Parts type={type} />
     </InputOTP>
   )
@@ -312,7 +307,6 @@ export function VerificationCode() {
     <InputOTP
       maxLength={6}
       pattern={REGEXP_ONLY_DIGITS}
-      containerClassName="gap-1.5"
       aria-label="${o("label")}"
     >
       <InputOTPGroup>
