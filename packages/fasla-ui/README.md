@@ -80,6 +80,7 @@ Core building blocks with CVA variants for consistent styling:
 | **Radio** | Single choice from a set, as a plain control or a bordered card |
 | **Switch** | Toggle switch with multiple sizes |
 | **Slider** | Choose a value or a range by dragging a thumb along a track, in three sizes |
+| **Steps** | A display-only stepper for multi-step flows, horizontal or vertical, with done, current and upcoming steps |
 | **Tabs** | Tabbed navigation with animations |
 | **Accordion** | Headings that show or hide their content, in four styles |
 | **Alert Dialog** | A modal that asks the user to confirm or cancel an action |
