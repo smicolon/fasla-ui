@@ -1,6 +1,5 @@
 "use client"
 
-import { useState } from "react"
 import { useTranslations } from "next-intl"
 
 import {
@@ -9,7 +8,7 @@ import {
   CarouselItem,
   CarouselDots,
 } from "@fasla-ui/ui/carousel"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, type PropRow } from "@/components/props-table"
@@ -19,7 +18,6 @@ const ITEM_COUNTS = [2, 3, 4] as const
 export default function CarouselPage() {
   const t = useTranslations("docs.sections")
   const s = useTranslations("docs.carousel")
-  const [index, setIndex] = useState(0)
 
   // Prop and value names are code identifiers, so they stay Latin in both
   // locales; the sentence around them is the locale's.
@@ -131,46 +129,72 @@ export default function CarouselPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import {
+        <UsageExample title={s("usage.basic")}>{`import {
   Carousel,
   CarouselContent,
-  CarouselItem,
   CarouselDots,
+  CarouselItem,
 } from "@/components/ui/carousel"
 
-// ${s("usage.basic")}
-<Carousel aria-label="${s("examples.gallery")}" className="space-y-4">
-  <CarouselContent>
-    <CarouselItem>…</CarouselItem>
-    <CarouselItem>…</CarouselItem>
-    <CarouselItem>…</CarouselItem>
-  </CarouselContent>
-  <CarouselDots />
-</Carousel>
+export function CityGuide() {
+  return (
+    <Carousel aria-label="${s("examples.gallery")}" className="space-y-4">
+      <CarouselContent>
+        <CarouselItem>${s("examples.slide1")}</CarouselItem>
+        <CarouselItem>${s("examples.slide2")}</CarouselItem>
+        <CarouselItem>${s("examples.slide3")}</CarouselItem>
+      </CarouselContent>
+      <CarouselDots />
+    </Carousel>
+  )
+}`}</UsageExample>
+        <UsageExample title={s("usage.startingSlide")}>{`import {
+  Carousel,
+  CarouselContent,
+  CarouselDots,
+  CarouselItem,
+} from "@/components/ui/carousel"
 
-// ${s("usage.startingSlide")}
-<Carousel aria-label="${s("examples.gallery")}" defaultActiveIndex={2}>…</Carousel>
+export function CityGuide() {
+  return (
+    <Carousel aria-label="${s("examples.gallery")}" defaultActiveIndex={2} className="space-y-4">
+      <CarouselContent>
+        <CarouselItem>${s("examples.slide1")}</CarouselItem>
+        <CarouselItem>${s("examples.slide2")}</CarouselItem>
+        <CarouselItem>${s("examples.slide3")}</CarouselItem>
+      </CarouselContent>
+      <CarouselDots />
+    </Carousel>
+  )
+}`}</UsageExample>
+        <UsageExample title={s("usage.controlled")}>{`"use client"
 
-// ${s("usage.controlled")}
-const [index, setIndex] = useState(0)
+import * as React from "react"
+import {
+  Carousel,
+  CarouselContent,
+  CarouselDots,
+  CarouselItem,
+} from "@/components/ui/carousel"
 
-<Carousel
-  aria-label="${s("examples.gallery")}"
-  activeIndex={index}
-  onActiveIndexChange={setIndex}
->…</Carousel>`}</CodeBlock>
-        <ComponentPreview>
-          <div className="flex flex-col items-center gap-3">
-            {gallery(slides, { activeIndex: index, onActiveIndexChange: setIndex })}
-            <p className="text-sm text-muted-foreground">
-              {s("usage.state")}{" "}
-              {/* Digits are bidi-safe; "2 / 3" reads the same both ways. */}
-              <span className="font-medium text-foreground" dir="ltr">
-                {index + 1} / {slides.length}
-              </span>
-            </p>
-          </div>
-        </ComponentPreview>
+export function CityGuide() {
+  const [index, setIndex] = React.useState(0)
+  return (
+    <Carousel
+      aria-label="${s("examples.gallery")}"
+      activeIndex={index}
+      onActiveIndexChange={setIndex}
+      className="space-y-4"
+    >
+      <CarouselContent>
+        <CarouselItem>${s("examples.slide1")}</CarouselItem>
+        <CarouselItem>${s("examples.slide2")}</CarouselItem>
+        <CarouselItem>${s("examples.slide3")}</CarouselItem>
+      </CarouselContent>
+      <CarouselDots />
+    </Carousel>
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

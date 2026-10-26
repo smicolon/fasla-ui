@@ -1,13 +1,12 @@
 "use client"
 
-import { useState } from "react"
 import { useTranslations } from "next-intl"
 
 import {
   ContentCarousel,
   ContentCarouselItem,
 } from "@fasla-ui/ui/content-carousel"
-import { ComponentPreview, CodeBlock } from "@/components/component-preview"
+import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, type PropRow } from "@/components/props-table"
@@ -17,7 +16,6 @@ const ITEMS_PER_VIEW = [1, 2, 3] as const
 export default function ContentCarouselPage() {
   const t = useTranslations("docs.sections")
   const s = useTranslations("docs.contentCarousel")
-  const [index, setIndex] = useState(0)
 
   // Prop and value names are code identifiers, so they stay Latin in both
   // locales; the sentence around them is the locale's.
@@ -150,53 +148,116 @@ export default function ContentCarouselPage() {
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <CodeBlock>{`import {
+        <UsageExample title={s("usage.basic")}>{`import {
   ContentCarousel,
   ContentCarouselItem,
 } from "@/components/ui/content-carousel"
 
-// ${s("usage.basic")}
-<ContentCarousel aria-label="${s("examples.label")}">
-  <ContentCarouselItem>…</ContentCarouselItem>
-  <ContentCarouselItem>…</ContentCarouselItem>
-  <ContentCarouselItem>…</ContentCarouselItem>
-</ContentCarousel>
+export function CustomerStories() {
+  return (
+    <ContentCarousel
+      aria-label="${s("examples.label")}"
+      previousLabel="${s("examples.previous")}"
+      nextLabel="${s("examples.next")}"
+    >
+      <ContentCarouselItem>
+        <blockquote className="p-6 text-sm">${s("examples.quote1")}</blockquote>
+      </ContentCarouselItem>
+      <ContentCarouselItem>
+        <blockquote className="p-6 text-sm">${s("examples.quote2")}</blockquote>
+      </ContentCarouselItem>
+      <ContentCarouselItem>
+        <blockquote className="p-6 text-sm">${s("examples.quote3")}</blockquote>
+      </ContentCarouselItem>
+    </ContentCarousel>
+  )
+}`}</UsageExample>
+        <UsageExample title={s("usage.itemsPerView")}>{`import {
+  ContentCarousel,
+  ContentCarouselItem,
+} from "@/components/ui/content-carousel"
 
-// ${s("usage.itemsPerView")}
-<ContentCarousel aria-label="${s("examples.label")}" itemsPerView={3}>…</ContentCarousel>
+export function CustomerStories() {
+  return (
+    <ContentCarousel
+      aria-label="${s("examples.label")}"
+      previousLabel="${s("examples.previous")}"
+      nextLabel="${s("examples.next")}"
+      itemsPerView={3}
+    >
+      <ContentCarouselItem>
+        <blockquote className="p-6 text-sm">${s("examples.quote1")}</blockquote>
+      </ContentCarouselItem>
+      <ContentCarouselItem>
+        <blockquote className="p-6 text-sm">${s("examples.quote2")}</blockquote>
+      </ContentCarouselItem>
+      <ContentCarouselItem>
+        <blockquote className="p-6 text-sm">${s("examples.quote3")}</blockquote>
+      </ContentCarouselItem>
+      <ContentCarouselItem>
+        <blockquote className="p-6 text-sm">${s("examples.quote4")}</blockquote>
+      </ContentCarouselItem>
+    </ContentCarousel>
+  )
+}`}</UsageExample>
+        <UsageExample title={s("usage.media")}>{`import {
+  ContentCarousel,
+  ContentCarouselItem,
+} from "@/components/ui/content-carousel"
 
-// ${s("usage.media")}
-<ContentCarouselItem>
-  <img src="…" alt="…" className="h-full w-full object-cover" />
-</ContentCarouselItem>
+const PHOTOS = [
+  { src: "/photos/old-town.jpg", alt: "${s("examples.photo1")}" },
+  { src: "/photos/harbour.jpg", alt: "${s("examples.photo2")}" },
+  { src: "/photos/corniche.jpg", alt: "${s("examples.photo3")}" },
+]
 
-// ${s("usage.labels")}
-<ContentCarousel
-  aria-label="${s("examples.label")}"
-  previousLabel="${s("examples.previous")}"
-  nextLabel="${s("examples.next")}"
->…</ContentCarousel>
+export function PhotoTour() {
+  return (
+    <ContentCarousel
+      aria-label="${s("examples.gallery")}"
+      previousLabel="${s("examples.previous")}"
+      nextLabel="${s("examples.next")}"
+      itemsPerView={2}
+    >
+      {PHOTOS.map((photo) => (
+        <ContentCarouselItem key={photo.src}>
+          <img src={photo.src} alt={photo.alt} className="h-full w-full object-cover" />
+        </ContentCarouselItem>
+      ))}
+    </ContentCarousel>
+  )
+}`}</UsageExample>
+        <UsageExample title={s("usage.controlled")}>{`"use client"
 
-// ${s("usage.controlled")}
-const [index, setIndex] = useState(0)
+import * as React from "react"
+import {
+  ContentCarousel,
+  ContentCarouselItem,
+} from "@/components/ui/content-carousel"
 
-<ContentCarousel
-  aria-label="${s("examples.label")}"
-  activeIndex={index}
-  onActiveIndexChange={setIndex}
->…</ContentCarousel>`}</CodeBlock>
-        <ComponentPreview>
-          <div className="flex w-full flex-col items-center gap-3">
-            {carousel(4, { itemsPerView: 2, activeIndex: index, onActiveIndexChange: setIndex })}
-            <p className="text-sm text-muted-foreground">
-              {s("usage.state")}{" "}
-              {/* Digits are bidi-safe; "2 / 4" reads the same both ways. */}
-              <span className="font-medium text-foreground" dir="ltr">
-                {index + 1} / {quotes.length}
-              </span>
-            </p>
-          </div>
-        </ComponentPreview>
+export function CustomerStories() {
+  const [index, setIndex] = React.useState(0)
+  return (
+    <ContentCarousel
+      aria-label="${s("examples.label")}"
+      previousLabel="${s("examples.previous")}"
+      nextLabel="${s("examples.next")}"
+      itemsPerView={2}
+      activeIndex={index}
+      onActiveIndexChange={setIndex}
+    >
+      <ContentCarouselItem>
+        <blockquote className="p-6 text-sm">${s("examples.quote1")}</blockquote>
+      </ContentCarouselItem>
+      <ContentCarouselItem>
+        <blockquote className="p-6 text-sm">${s("examples.quote2")}</blockquote>
+      </ContentCarouselItem>
+      <ContentCarouselItem>
+        <blockquote className="p-6 text-sm">${s("examples.quote3")}</blockquote>
+      </ContentCarouselItem>
+    </ContentCarousel>
+  )
+}`}</UsageExample>
       </section>
     </div>
   )

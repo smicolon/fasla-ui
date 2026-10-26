@@ -1100,8 +1100,7 @@
       "usage": {
         "basic": "Slides with a dot stepper",
         "startingSlide": "Start on a later slide",
-        "controlled": "Controlled",
-        "state": "Slide:"
+        "controlled": "Controlled"
       },
       "props": {
         "activeIndex": "Active slide, when controlled.",
@@ -1134,7 +1133,11 @@
         "quote3": "The empty and error states were already thought through, which is usually where libraries leave you alone.",
         "name3": "Lina, design engineer",
         "quote4": "Storybook, docs and tokens all agree with each other. That is rarer than it should be.",
-        "name4": "Karim, staff engineer"
+        "name4": "Karim, staff engineer",
+        "gallery": "City guide",
+        "photo1": "The old town at dawn",
+        "photo2": "The harbour market",
+        "photo3": "The corniche at sunset"
       },
       "a11y": {
         "region": "The root is a <code>region</code> with <code>aria-roledescription</code> set to <code>carousel</code>; always pass an <code>aria-label</code> to name it.",
@@ -1148,9 +1151,7 @@
         "basic": "Cards with arrows",
         "itemsPerView": "Three cards per view",
         "media": "Edge-to-edge media: the slot adds no padding of its own",
-        "labels": "Arrow names for the locale",
-        "controlled": "Controlled",
-        "state": "First visible card:"
+        "controlled": "Controlled"
       },
       "props": {
         "itemsPerView": "How many cards share the view: Figma's <code>Type</code> axis.",
