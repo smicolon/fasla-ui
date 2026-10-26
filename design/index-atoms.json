@@ -57,7 +57,7 @@
       "withArDoc": 41,
       "withRtl": 153,
       "withDescription": 6,
-      "mappedToCode": 32,
+      "mappedToCode": 34,
       "docFrames": 98
     },
     "legend": {
@@ -4653,7 +4653,7 @@
         },
         "duplicates": []
       },
-      "code": null,
+      "code": "content-carousel",
       "hasDescription": false,
       "flags": [
         "no-description"
@@ -4747,7 +4747,7 @@
         },
         "duplicates": []
       },
-      "code": null,
+      "code": "carousel",
       "hasDescription": false,
       "flags": [
         "no-description"
