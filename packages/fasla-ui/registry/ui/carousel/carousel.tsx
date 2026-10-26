@@ -47,6 +47,9 @@ export function useCarousel() {
   return context
 }
 
+const byDocumentOrder = (a: Node, b: Node) =>
+  a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1
+
 /** The one ref-merging shape React bails out on: a stable callback. */
 function composeRefs<T>(...refs: (React.Ref<T> | undefined)[]) {
   return (node: T | null) => {
@@ -93,13 +96,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
     // a ref: the dots and the observer must re-render when slides come and go.
     const [items, setItems] = React.useState<HTMLElement[]>([])
     const registerItem = React.useCallback((el: HTMLElement) => {
-      setItems((prev) => {
-        const next = [...prev, el]
-        next.sort((a, b) =>
-          a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1
-        )
-        return next
-      })
+      setItems((prev) => [...prev, el].sort(byDocumentOrder))
       return () => setItems((prev) => prev.filter((item) => item !== el))
     }, [])
     const indexOf = React.useCallback(
@@ -108,6 +105,20 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
     )
 
     const [track, setTrack] = React.useState<HTMLDivElement | null>(null)
+
+    // Keyed slides can be reordered without remounting, which registers
+    // nothing: re-read the order whenever the track's children move.
+    React.useEffect(() => {
+      if (!track || typeof MutationObserver === "undefined") return
+      const observer = new MutationObserver(() =>
+        setItems((prev) => {
+          const sorted = [...prev].sort(byDocumentOrder)
+          return sorted.every((item, i) => item === prev[i]) ? prev : sorted
+        })
+      )
+      observer.observe(track, { childList: true, subtree: true })
+      return () => observer.disconnect()
+    }, [track])
 
     // What the track actually shows, as last reported by the observer. It
     // starts at the start, where every scroller does.

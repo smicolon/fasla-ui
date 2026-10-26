@@ -1,6 +1,6 @@
 import * as React from "react"
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest"
-import { render, screen, fireEvent, act } from "@testing-library/react"
+import { render, screen, fireEvent, act, waitFor } from "@testing-library/react"
 import {
   Carousel,
   CarouselContent,
@@ -538,6 +538,30 @@ describe("Carousel", () => {
     expect(onChange).toHaveBeenCalledWith(2)
     expect(scrollCalls.at(-1)!.el).toBe(screen.getByTestId("slide-2"))
     expect(screen.getByRole("button", { name: "3 / 3" })).toHaveAttribute("aria-current", "true")
+  })
+
+  it("re-reads the slide order after a keyed reorder", async () => {
+    // The same keyed slides, moved: nothing remounts, so nothing registers.
+    const Reorderable = ({ order }: { order: string[] }) => (
+      <Carousel aria-label="Gallery">
+        <CarouselContent>
+          {order.map((slide) => (
+            <CarouselItem key={slide} data-testid={`slide-${slide}`}>
+              {slide}
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselDots />
+      </Carousel>
+    )
+    const { rerender } = render(<Reorderable order={["A", "B", "C"]} />)
+    rerender(<Reorderable order={["C", "A", "B"]} />)
+    await waitFor(() => expect(screen.getByTestId("slide-C")).toHaveAccessibleName("1 / 3"))
+    expect(screen.getByTestId("slide-A")).toHaveAccessibleName("2 / 3")
+    // The first dot now brings in the slide that is first on screen.
+    fireEvent.click(dots()[0]!)
+    fireEvent.click(dots()[2]!)
+    expect(scrollCalls.at(-1)!.el).toBe(screen.getByTestId("slide-B"))
   })
 
   it("reads an out-of-range activeIndex as the nearest end", () => {
