@@ -1004,17 +1004,17 @@
       }
     },
     "inputOtp": {
-      "lead": "A field for one-time codes, with one slot per character, so the reader can check each digit against the message they are copying from. It takes the code from the keyboard, a paste or the phone's code autofill, comes in four layouts, and follows the page's reading direction.",
+      "lead": "A field for one-time codes, with one slot per character. The code can be typed, pasted or filled in automatically from a text message.",
       "label": "Verification code",
       "pin": "PIN",
-      "variantsBody": "Figma has four types. They are not a prop: each is a way of putting the parts together. Simple is two <code>InputOTPGroup</code> parts of three slots with an <code>InputOTPSeparator</code> between them. Digits only is one group of six. With Separator is three groups of two, and With Spacing is six groups of one, so every slot has its own border and corners. Every type keeps 8px between its groups and separators.",
+      "variantsBody": "Four types that differ in how the slots are grouped.",
       "types": {
         "simple": "Simple",
         "digits": "Digits only",
         "separator": "With Separator",
         "spacing": "With Spacing"
       },
-      "statesBody": "These are real states, not props. Active marks the slot the next character goes into while the field has focus, with Input's focus style: the border takes the ring colour, and a 3px ring at 50% surrounds it. Set <code>aria-invalid</code> on <code>InputOTP</code> and every slot's border turns red, as an invalid Input's does, and the Active ring with it. <code>disabled</code> dims the whole field to 50%.",
+      "statesBody": "The active slot is where the next character goes. The field shows an error state when the code is wrong, and fades when disabled.",
       "states": {
         "default": "Default",
         "active": "Active",
@@ -1022,8 +1022,8 @@
         "disabled": "Disabled"
       },
       "validation": {
-        "title": "Label and error",
-        "body": "The slots show no text of their own. Give the field a visible label and link the two with <code>aria-labelledby</code>. When a code is wrong, set <code>aria-invalid</code> and show the message under the field, linked with <code>aria-describedby</code>, so a screen reader reads it with the field.",
+        "title": "Label and error message",
+        "body": "Give the field a visible label, and show any error message below it so screen readers read it with the field.",
         "description": "Enter the 6-digit code from the text message. In this example, it is {code}.",
         "hint": "Enter the 6-digit code from the text message.",
         "error": "That code is wrong. Check the message and try again."
