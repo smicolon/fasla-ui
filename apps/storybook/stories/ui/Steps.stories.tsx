@@ -98,23 +98,13 @@ const COPY = {
       { label: "Review", description: "Check your order" },
       { label: "Confirmation", description: "Order placed" },
     ],
+    // Two-word labels that stay on one line; the descriptions are the long
+    // part, about one and a half lines each in the horizontal row.
     long: [
-      {
-        label: "Create your account with your work email",
-        description: "Your name, your work email and a password of at least 8 characters",
-      },
-      {
-        label: "Enter the 6-digit code we sent to your inbox",
-        description: "The code expires after 10 minutes; you can ask for a new one",
-      },
-      {
-        label: "Invite your teammates and choose their roles",
-        description: "Add as many people as you like now, or invite them later from Settings",
-      },
-      {
-        label: "Choose a monthly or yearly plan for your team",
-        description: "You can change your plan or cancel it at any time from Billing",
-      },
+      { label: "Create account", description: "Use your work email and a strong password." },
+      { label: "Verify email", description: "Enter the 6-digit code we sent to your inbox." },
+      { label: "Invite team", description: "Add your teammates now or invite them later." },
+      { label: "Choose plan", description: "Pay monthly or yearly, and switch at any time." },
     ],
   },
   rtl: {
@@ -127,22 +117,10 @@ const COPY = {
       { label: "التأكيد", description: "تم الطلب" },
     ],
     long: [
-      {
-        label: "أنشئ حسابك باستخدام بريد العمل الإلكتروني",
-        description: "اسمك وبريد العمل الإلكتروني وكلمة مرور من 8 أحرف على الأقل",
-      },
-      {
-        label: "أدخل الرمز المكوّن من 6 أرقام الذي أرسلناه إلى بريدك",
-        description: "تنتهي صلاحية الرمز بعد 10 دقائق، ويمكنك طلب رمز جديد",
-      },
-      {
-        label: "ادعُ أعضاء فريقك وحدّد صلاحيات كل منهم",
-        description: "أضف من تشاء الآن، أو ادعُهم لاحقًا من صفحة الإعدادات",
-      },
-      {
-        label: "اختر خطة شهرية أو سنوية تناسب فريقك",
-        description: "يمكنك تغيير خطتك أو إلغاؤها في أي وقت من صفحة الفوترة",
-      },
+      { label: "أنشئ حسابك", description: "استخدم بريد العمل، واختر كلمة مرور لا تقل عن 8 أحرف." },
+      { label: "أكّد بريدك", description: "أدخل الرمز المكوّن من 6 أرقام الذي وصلك في البريد." },
+      { label: "ادعُ فريقك", description: "أضف زملاءك الآن، أو ادعُهم لاحقًا من الإعدادات." },
+      { label: "اختر خطتك", description: "اختر الفوترة الشهرية أو السنوية، وغيّرها متى شئت." },
     ],
   },
 }
@@ -337,7 +315,7 @@ export const WithDescription: Story = {
   },
 }
 
-/** Long labels and descriptions, which wrap to fit the space each step has. */
+/** Long descriptions, which wrap to fit the space each step has. */
 export const LongText: Story = {
   decorators: [framed],
   parameters: { layout: "padded", controls: { disable: true } },
@@ -350,7 +328,7 @@ export const LongText: Story = {
           <Flow steps={c.long} name={c.name} current={2} descriptions />
         </div>
         <RowHead>vertical</RowHead>
-        <div className="w-[320px]">
+        <div className="w-[240px]">
           <Flow steps={c.long} name={c.name} orientation="vertical" current={2} descriptions />
         </div>
       </div>
