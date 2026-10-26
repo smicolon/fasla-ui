@@ -883,6 +883,28 @@
       ]
     },
     {
+      "name": "steps",
+      "type": "registry:ui",
+      "title": "Steps",
+      "description": "A display-only stepper for multi-step flows: numbered or checked bullets, labels and optional descriptions, done, current and upcoming steps, and tails between them. Horizontal or vertical, square or round, aria-current on the current step, mirrored for RTL.",
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/steps/steps.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/steps.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "data-display"
+      ]
+    },
+    {
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",

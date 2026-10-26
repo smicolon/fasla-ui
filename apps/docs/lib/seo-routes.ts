@@ -501,6 +501,21 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/steps/",
+    title: "Steps React Component | Fasla",
+    description:
+      "Show progress through a multi-step flow with an accessible React stepper: done, current and upcoming steps, in a row or a column, mirrored for RTL.",
+    h1: "Steps",
+    ar: {
+      title: "مؤشر الخطوات (Steps) لتطبيقات React | فاصلة",
+      description:
+        "اعرض تقدّم المستخدم في عملية من عدة خطوات بمكوّن مؤشر الخطوات، بخطوات مكتملة وحالية وقادمة، في صف أو عمود، وينعكس في الصفحات العربية.",
+      h1: "مؤشر الخطوات (Steps)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/accordion/",
     title: "Accordion React Component | Fasla",
     description:

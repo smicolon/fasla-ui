@@ -124,6 +124,12 @@ export const CODE_MAP = {
   skeleton: { set: "Skeleton", page: "14860:69258" },
   slider: { set: "Slider", page: "3868:82886" },
   "status-indicator": { set: "Status Indicator", page: "38830:41585" },
+  // Step item is StepsItem; the two assembled sets are Steps in each orientation.
+  steps: [
+    { set: "Steps / Step item", page: "452:4831" },
+    { set: "Steps Horizontal", page: "452:4831" },
+    { set: "Steps Vertical", page: "452:4831" },
+  ],
   switch: { set: "Switch", page: "3862:3097" },
   tabs: { set: "Tabs Component", page: "3808:12668" },
   textarea: { set: "Textarea", page: "3975:63617" },

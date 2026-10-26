@@ -1690,6 +1690,62 @@
         "className": "Extra classes for the component."
       }
     },
+    "steps": {
+      "lead": "Shows where the reader is in a flow of several steps: which are done, which is current, and which are still to come.",
+      "name": "Checkout",
+      "steps": {
+        "cart": "Cart",
+        "cartText": "3 items",
+        "shipping": "Shipping",
+        "shippingText": "Address and delivery",
+        "payment": "Payment",
+        "paymentText": "Card or wallet",
+        "review": "Review",
+        "reviewText": "Check your order"
+      },
+      "variantsBody": "Two bullet shapes: square or round.",
+      "radius": {
+        "standard": "Standard",
+        "rounded": "Rounded"
+      },
+      "orientation": {
+        "title": "Orientation",
+        "body": "Steps run in a row, or in a column when there are many steps or long labels."
+      },
+      "details": {
+        "title": "Icon and description",
+        "body": "A done step can show a check instead of its number, and any step can have a description."
+      },
+      "a11y": {
+        "list": "<code>Steps</code> is an ordered list, so screen readers say how many steps there are and where each one sits.",
+        "current": "The current step has <code>aria-current=\"step\"</code>, so screen readers say it is the current one.",
+        "status": "Done and upcoming steps say their status after the label, \"completed\" or \"not started\", in the page's language. Change it with <code>statusLabel</code>.",
+        "display": "The steps only show progress. None is a link or a button, so Tab never stops on them.",
+        "direction": "Direction is inherited from <code>dir</code>, never a prop. On a right-to-left page the first step is on the right. The numbers stay Western."
+      },
+      "usage": {
+        "basic": "Checkout steps",
+        "current": "Statuses from the current step",
+        "vertical": "Vertical, with descriptions"
+      },
+      "props": {
+        "steps": {
+          "orientation": "A row with the labels under the bullets, or a column with the labels beside them.",
+          "radius": "The bullet shape for every step: an 8px square or a circle.",
+          "ariaLabel": "Names the list for screen readers, such as the name of the flow.",
+          "children": "The steps, as <code>StepsItem</code>s, in order. Each is numbered, and every step but the last gets a tail.",
+          "className": "Extra classes for the list."
+        },
+        "item": {
+          "status": "Whether the step is done, current or still to come. Sets the bullet's and tail's colours, and <code>aria-current</code> on the current step.",
+          "label": "The step's name.",
+          "description": "A line of text under the label.",
+          "icon": "Shows a check instead of the number. Meant for done steps.",
+          "statusLabel": "What screen readers hear after the label. Defaults to \"completed\" or \"not started\" in the page's language. <code>\"\"</code> turns it off.",
+          "className": "Extra classes for the step."
+        }
+      }
+    },
     "slider": {
       "lead": "Lets the reader choose a value, or a range of values, by dragging a thumb along a track or with the arrow keys. It comes in three sizes, and the track fills from the start of the line, so it follows the page's reading direction.",
       "volume": "Volume",
