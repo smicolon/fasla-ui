@@ -6,6 +6,7 @@ export {
   stepTailVariants,
   stepTailLineVariants,
   stepTextVariants,
+  stepEndInset,
   type StepsProps,
   type StepsItemProps,
   type StepsOrientation,

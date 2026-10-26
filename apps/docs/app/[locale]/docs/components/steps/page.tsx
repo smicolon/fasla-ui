@@ -8,8 +8,11 @@ import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, richCode, type PropRow } from "@/components/props-table"
 
-/** The sample flow, in order: a checkout. */
-const STEPS = ["cart", "shipping", "payment", "review"] as const
+/**
+ * The sample flow, in order: three steps of a checkout, one done, one current
+ * and one to come. Three keep every label on one line in a phone's preview.
+ */
+const STEPS = ["cart", "shipping", "payment"] as const
 
 const RADII = ["standard", "rounded"] as const
 
@@ -20,9 +23,18 @@ const CAPTION = "text-sm text-muted-foreground"
 const statusOf = (step: number, current: number): StepStatus =>
   step < current ? "done" : step === current ? "current" : "upcoming"
 
-/** The checkout with step 3 current, as a developer would write it. */
+/**
+ * Room for a horizontal row with descriptions: each line may use the space up
+ * to halfway to its neighbours' bullets, and "Address and delivery" needs
+ * 134px, so three steps need 448px. Narrower, on a phone, the row scrolls
+ * sideways inside its preview instead of wrapping.
+ */
+const WIDE_ROW = "w-full overflow-x-auto"
+const WIDE_ROW_INNER = "min-w-[28rem]"
+
+/** The checkout with step 2 current, as a developer would write it. */
 function Flow({
-  current = 3,
+  current = 2,
   icon = false,
   descriptions = false,
   ...props
@@ -140,7 +152,11 @@ export default function StepsPage() {
         <p className="text-muted-foreground">{s("details.body")}</p>
         <ComponentPreview>
           <div className="flex w-full flex-col gap-8">
-            <Flow icon descriptions />
+            <div className={WIDE_ROW}>
+              <div className={WIDE_ROW_INNER}>
+                <Flow icon descriptions />
+              </div>
+            </div>
             <Flow orientation="vertical" radius="rounded" icon descriptions className="mx-auto w-max" />
           </div>
         </ComponentPreview>

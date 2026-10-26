@@ -1,7 +1,7 @@
 import * as React from "react"
 import { describe, it, expect } from "vitest"
 import { render, screen, within } from "@testing-library/react"
-import { Steps, StepsItem, type StepStatus, type StepsProps } from "./steps"
+import { Steps, StepsItem, stepEndInset, type StepStatus, type StepsProps } from "./steps"
 
 /**
  * What these tests can and cannot prove.
@@ -197,12 +197,29 @@ describe("Steps — look", () => {
     expect(items().map((item) => item.classList.contains("flex-1"))).toEqual([true, true, false])
   })
 
-  it("keeps the first and last horizontal labels inside the list", () => {
+  it("centres every horizontal label under its own bullet, the first and last too", () => {
     render(<Flow />)
-    const justify = items().map((item) => slot(item, "step-text")!.parentElement!.className)
-    expect(justify[0]).toContain("justify-start")
-    expect(justify[1]).toContain("justify-center")
-    expect(justify[2]).toContain("justify-end")
+    for (const item of items()) {
+      expect(slot(item, "step-text")!.parentElement).toHaveClass("justify-center")
+      expect(slot(item, "step-text")).toHaveClass("w-max", "shrink-0", "text-center")
+    }
+  })
+
+  it("insets the list's ends on the first and last steps only, horizontally", () => {
+    const { rerender } = render(<Flow />)
+    const inset = (item: HTMLElement | undefined) =>
+      [stepEndInset.start, stepEndInset.end].filter((c) => item!.classList.contains(c))
+    expect(items().map(inset)).toEqual([[stepEndInset.start], [], [stepEndInset.end]])
+
+    rerender(<Flow orientation="vertical" />)
+    expect(items().map(inset)).toEqual([[], [], []])
+  })
+
+  it("tells the labels how many steps and tails share the row", () => {
+    render(<Flow />)
+    const list = screen.getByRole("list")
+    expect(list.style.getPropertyValue("--steps-count")).toBe("3")
+    expect(list.style.getPropertyValue("--steps-tails")).toBe("2")
   })
 
   it("merges className on the list and on a step", () => {

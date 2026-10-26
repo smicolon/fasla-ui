@@ -36,7 +36,15 @@ type StoryArgs = {
 const meta: Meta<StoryArgs> = {
   title: "UI/Steps",
   component: Steps as unknown as React.ComponentType<StoryArgs>,
-  parameters: { layout: "centered" },
+  parameters: {
+    layout: "centered",
+    docs: {
+      description: {
+        component:
+          "Shows where the reader is in a flow of several steps: which are done, which is current, and which are still to come.",
+      },
+    },
+  },
   tags: ["autodocs"],
   argTypes: {
     orientation: {
@@ -91,9 +99,22 @@ const COPY = {
       { label: "Confirmation", description: "Order placed" },
     ],
     long: [
-      { label: "Create your account", description: "Your name, email and a password of at least 8 characters" },
-      { label: "Verify your email", description: "Enter the 6-digit code we sent to your inbox" },
-      { label: "Choose a plan", description: "Pick a monthly or yearly plan; you can change it at any time" },
+      {
+        label: "Create your account with your work email",
+        description: "Your name, your work email and a password of at least 8 characters",
+      },
+      {
+        label: "Enter the 6-digit code we sent to your inbox",
+        description: "The code expires after 10 minutes; you can ask for a new one",
+      },
+      {
+        label: "Invite your teammates and choose their roles",
+        description: "Add as many people as you like now, or invite them later from Settings",
+      },
+      {
+        label: "Choose a monthly or yearly plan for your team",
+        description: "You can change your plan or cancel it at any time from Billing",
+      },
     ],
   },
   rtl: {
@@ -106,9 +127,22 @@ const COPY = {
       { label: "التأكيد", description: "تم الطلب" },
     ],
     long: [
-      { label: "أنشئ حسابك", description: "اسمك وبريدك الإلكتروني وكلمة مرور من 8 أحرف على الأقل" },
-      { label: "أكّد بريدك الإلكتروني", description: "أدخل الرمز المكوّن من 6 أرقام الذي أرسلناه إلى بريدك" },
-      { label: "اختر خطة", description: "اختر خطة شهرية أو سنوية، ويمكنك تغييرها في أي وقت" },
+      {
+        label: "أنشئ حسابك باستخدام بريد العمل الإلكتروني",
+        description: "اسمك وبريد العمل الإلكتروني وكلمة مرور من 8 أحرف على الأقل",
+      },
+      {
+        label: "أدخل الرمز المكوّن من 6 أرقام الذي أرسلناه إلى بريدك",
+        description: "تنتهي صلاحية الرمز بعد 10 دقائق، ويمكنك طلب رمز جديد",
+      },
+      {
+        label: "ادعُ أعضاء فريقك وحدّد صلاحيات كل منهم",
+        description: "أضف من تشاء الآن، أو ادعُهم لاحقًا من صفحة الإعدادات",
+      },
+      {
+        label: "اختر خطة شهرية أو سنوية تناسب فريقك",
+        description: "يمكنك تغيير خطتك أو إلغاؤها في أي وقت من صفحة الفوترة",
+      },
     ],
   },
 }
@@ -124,18 +158,20 @@ const THEMES = ["light", "dark"] as const
 const statusOf = (step: number, current: number): StepStatus =>
   step < current ? "done" : step === current ? "current" : "upcoming"
 
-/**
- * Row widths. Figma's Steps Horizontal is 700px; 560px fits the Docs page
- * beside a row label. A panel, two to a row, holds 400px, so it shows four
- * steps: five would leave each label under 60px.
+/*
+ * Row widths. Each label may use the space up to halfway to its neighbours'
+ * bullets, less 16px. The longest sample text, "Address and delivery", needs
+ * 134px, so five steps need a 780px row (Figma's Steps Horizontal is 700px),
+ * and a panel, two to a row on the Docs page, holds 448px: three steps with
+ * descriptions, or four with labels only.
  */
-const ROW = "w-[560px]"
-const PANEL_ROW = "w-[400px]"
+const ROW = "w-[780px]"
+const PANEL_ROW = "w-[448px]"
+/** A panel, two to a row: 20px of padding, so two 448px rows fit the ~1000px Docs page. */
+const PANEL = "rounded-lg border p-5"
 
-/**
- * A flow of steps, as a developer writes one: every step before `current`
- * done, then the current step, then the upcoming ones.
- */
+// A flow of steps, as a developer writes one: every step before `current`
+// done, then the current step, then the upcoming ones.
 function Flow({
   steps,
   current = 3,
@@ -171,46 +207,37 @@ function Flow({
   )
 }
 
-/**
- * A column header or panel title: a Figma property value, so English and
- * left-to-right in both directions. It never wraps.
- */
+// A column header or panel title: a Figma property value, so English and
+// left-to-right in both directions. It never wraps.
 const Head = ({ children, className }: { children: React.ReactNode; className?: string }) => (
   <span dir="ltr" className={["w-fit whitespace-nowrap font-sans text-xs text-muted-foreground", className].join(" ")}>
     {children}
   </span>
 )
 
-/**
- * A side row label: left-aligned in both directions, never wrapped, and a
- * full column gap from the steps. It is 38px tall, so it centres on the
- * bullets' line, not on the labels under them.
- */
+// A side row label: left-aligned in both directions, never wrapped, and a
+// full column gap from the steps. It is as tall as a bullet, so it centres on
+// the bullets' line, not on the labels under them.
 const RowHead = ({ children }: { children: React.ReactNode }) => (
-  <span dir="ltr" className="flex h-[38px] items-center whitespace-nowrap text-left font-sans text-xs text-muted-foreground">
+  <span dir="ltr" className="flex h-[2.375rem] items-center whitespace-nowrap text-left font-sans text-xs text-muted-foreground">
     {children}
   </span>
 )
 
-/**
- * The frame round every story but Default. It centres the content in either
- * direction, and scrolls it sideways in the story's own direction when it is
- * wider than the canvas (a phone).
- */
+// The frame round every story. It centres the content in either direction,
+// and scrolls it sideways in the story's own direction when it is wider than
+// the canvas (a phone). No padding: Steps has no focus ring to keep clear.
 const framed: Decorator = (Story) => (
   <div data-story-frame className="overflow-x-auto">
-    <div className="mx-auto w-max p-1">
+    <div className="mx-auto w-max">
       <Story />
     </div>
   </div>
 )
 
-/**
- * The playground: every row on the Controls panel changes it. Horizontal, the
- * list takes its container's width (560px here); vertical, it is as tall as
- * its steps.
- */
+/** A checkout you can change from the Controls panel. */
 export const Default: Story = {
+  decorators: [framed],
   render: ({ orientation, radius, current, icon, descriptions, className }, ctx) => {
     const c = copy(ctx)
     return (
@@ -230,12 +257,7 @@ export const Default: Story = {
   },
 }
 
-/**
- * Figma's Steps Horizontal, in both radii: done, current and upcoming steps
- * with the labels centred under the bullets. Each tail fills the space to the
- * next step, `primary` after a done step and `border` after the others. The
- * last step has none.
- */
+/** Steps in a row, with square and round bullets. */
 export const Horizontal: Story = {
   decorators: [framed],
   parameters: { layout: "padded", controls: { disable: true } },
@@ -256,11 +278,7 @@ export const Horizontal: Story = {
   },
 }
 
-/**
- * Figma's Steps Vertical, in both radii. The labels sit beside the bullets,
- * the first line on the bullet's centre, and each tail runs down from the
- * bullet to the next step, at least 46px long.
- */
+/** Steps in a column, with square and round bullets. */
 export const Vertical: Story = {
   decorators: [framed],
   parameters: { layout: "padded", controls: { disable: true } },
@@ -279,10 +297,7 @@ export const Vertical: Story = {
   },
 }
 
-/**
- * Figma's Step Icon: `icon` on the done steps puts a 22px check in place of
- * the number, in `primary-foreground`. Shown in both orientations and radii.
- */
+/** Done steps with a check in place of their number. */
 export const StepIcon: Story = {
   decorators: [framed],
   parameters: { layout: "padded", controls: { disable: true } },
@@ -303,11 +318,7 @@ export const StepIcon: Story = {
   },
 }
 
-/**
- * Figma's Sub Text: a `description` under each label, in `muted-foreground`,
- * 2px below it. Horizontal, it is centred with the label; vertical, it starts
- * where the label starts.
- */
+/** Steps with a short description under each label. */
 export const WithDescription: Story = {
   decorators: [framed],
   parameters: { layout: "padded", controls: { disable: true } },
@@ -326,13 +337,7 @@ export const WithDescription: Story = {
   },
 }
 
-/**
- * Long text. Horizontal, a label wider than its bullet reaches out on both
- * sides, up to its share of the row, and wraps there, so two labels always
- * keep 16px apart; the first and last keep inside the list, against its
- * start and end. Vertical, the label and description wrap in their column,
- * and the tail grows to the next step.
- */
+/** Long labels and descriptions, which wrap to fit the space each step has. */
 export const LongText: Story = {
   decorators: [framed],
   parameters: { layout: "padded", controls: { disable: true } },
@@ -342,7 +347,7 @@ export const LongText: Story = {
       <div className="grid grid-cols-[max-content_max-content] items-start gap-x-6 gap-y-8">
         <RowHead>horizontal</RowHead>
         <div className={ROW}>
-          <Flow steps={c.long} name={c.name} current={2} />
+          <Flow steps={c.long} name={c.name} current={2} descriptions />
         </div>
         <RowHead>vertical</RowHead>
         <div className="w-[320px]">
@@ -353,23 +358,18 @@ export const LongText: Story = {
   },
 }
 
-/**
- * Light and Dark, one panel each, whatever the theme toolbar says. Each panel
- * sets its own theme: the `light` or `dark` class re-points every token for
- * that subtree. Language and direction follow the toolbar.
- */
+/** The same steps in the light and dark themes. */
 export const LightAndDark: Story = {
   decorators: [framed],
   parameters: { layout: "padded", controls: { disable: true } },
   render: (_args, ctx) => {
     const c = copy(ctx)
     return (
+      // Each panel's `light` or `dark` class re-points every token for its
+      // subtree. Language and direction follow the toolbar.
       <div className="grid gap-4 md:grid-cols-2">
         {THEMES.map((theme) => (
-          <div
-            key={theme}
-            className={[theme, "flex flex-col gap-6 rounded-lg border bg-background p-6 text-foreground"].join(" ")}
-          >
+          <div key={theme} className={[theme, PANEL, "flex flex-col gap-6 bg-background text-foreground"].join(" ")}>
             <Head>{theme === "dark" ? "Dark" : "Light"}</Head>
             <div className={PANEL_ROW}>
               <Flow steps={c.steps.slice(0, 4)} name={c.name} current={3} icon />
@@ -382,18 +382,13 @@ export const LightAndDark: Story = {
   },
 }
 
-/**
- * Both directions at once, whatever the toolbar says: each panel sets its own
- * `dir`, `lang` and font. In Arabic the first step is on the right and the
- * tails run to the left; vertical, the bullets are on the right and the labels
- * to their left. The numbers stay Western.
- */
+/** The same steps in English and Arabic, mirrored for right-to-left. */
 export const LtrAndRtl: Story = {
   decorators: [framed],
   parameters: { layout: "padded", controls: { disable: true } },
   render: () => (
-    // Each panel is a subgrid of the same rows, so the two sides share every
-    // row's top edge.
+    // Each panel sets its own `dir`, `lang` and font, and is a subgrid of the
+    // same rows, so the two sides share every row's top edge.
     <div className="grid gap-4 md:grid-cols-2">
       {(["ltr", "rtl"] as const).map((direction) => {
         const c = COPY[direction]
@@ -403,15 +398,16 @@ export const LtrAndRtl: Story = {
             dir={direction}
             lang={direction === "rtl" ? "ar" : "en"}
             className={[
-              "row-span-3 grid grid-rows-subgrid gap-6 rounded-lg border p-6",
+              PANEL,
+              "row-span-3 grid grid-rows-subgrid gap-6",
               direction === "rtl" ? "font-arabic" : "font-sans",
             ].join(" ")}
           >
             <Head>{direction.toUpperCase()}</Head>
             <div className={PANEL_ROW}>
-              <Flow steps={c.steps.slice(0, 4)} name={c.name} current={3} descriptions />
+              <Flow steps={c.steps.slice(0, 3)} name={c.name} current={2} descriptions />
             </div>
-            <Flow steps={c.steps} name={c.name} orientation="vertical" current={3} descriptions />
+            <Flow steps={c.steps.slice(0, 3)} name={c.name} orientation="vertical" current={2} descriptions />
           </div>
         )
       })}

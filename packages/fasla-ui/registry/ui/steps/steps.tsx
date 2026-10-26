@@ -69,9 +69,10 @@ const STATUS_TEXT = {
  * Figma's 500px Steps Vertical.
  *
  * Horizontal, the list is a size container (`container-type: inline-size`),
- * so each label can be held to its share of the row (see `stepTextVariants`).
- * It fills its container's width and takes none from its content, so give it
- * a block to sit in, as Figma's 700px Steps Horizontal does.
+ * so each label can be held to its share of the row and the ends can be
+ * inset to fit it (see `stepTextVariants` and `stepEndInset`). It fills its
+ * container's width and takes none from its content, so give it a block to
+ * sit in, as Figma's 700px Steps Horizontal does.
  */
 const stepsVariants = cva("m-0 flex list-none p-0", {
   variants: {
@@ -156,34 +157,37 @@ const stepTailVariants = cva("flex", {
 
 /**
  * The text under a horizontal bullet: the label, then 2px, then the
- * description, centred on the bullet. It is as wide as its text, so a label
- * wider than the bullet reaches out on both sides, as in Figma, but never
- * wider than its share of the row, so two labels always keep 16px between
- * them (the two 8px ends of the tail between their bullets), and a longer
- * label wraps. A single word longer than that breaks rather than run into
- * the next label. `shrink-0` keeps the text at that width: a flex item would
- * otherwise shrink to the 38px column and wrap at every word.
+ * description, always centred on its own bullet. It is as wide as its text,
+ * so short text stays on one line, and it may reach halfway to each
+ * neighbouring bullet less 8px, so two labels always keep 16px between them
+ * (the two 8px ends of the tail between their bullets). Only text longer
+ * than that wraps, and a single word longer than that breaks rather than run
+ * into the next label. `shrink-0` keeps the text at its own width: a flex
+ * item would otherwise shrink to the 38px column and wrap at every word.
  *
- * The share comes from the bullets' pitch: the row less the last 38px bullet,
- * over the number of tails (`--steps-tails`, set by `Steps`), read in `cqi`,
- * the list's width. A step between two others may reach half a pitch less
- * 8px each way. The first and last steps sit at the row's ends, so their text
- * starts at the start (or ends at the end) once it is wider than the bullet,
- * and may reach half a pitch plus 11px into the row, which keeps the same
- * 16px from the next label's room.
+ * The room is the bullets' pitch less 16px, read in `cqi`, the list's width,
+ * with `--steps-count` and `--steps-tails` set by `Steps`. With the ends
+ * inset (below), the pitch is (the row + 16px) / the steps; when the row is
+ * too narrow for any inset, it is (the row − 38px) / the tails. The smaller
+ * of the two is always the one in force.
  */
-const stepTextVariants = cva("mx-auto flex w-max shrink-0 flex-col items-center gap-0.5 break-words text-center", {
-  variants: {
-    // Written out in full, not built from a shared string: Tailwind only
-    // generates classes it can read whole in the source.
-    position: {
-      first: "max-w-[calc((100cqi_-_2.375rem)_/_var(--steps-tails,1)_/_2_+_0.6875rem)]",
-      middle: "max-w-[calc((100cqi_-_2.375rem)_/_var(--steps-tails,1)_-_1rem)]",
-      last: "max-w-[calc((100cqi_-_2.375rem)_/_var(--steps-tails,1)_/_2_+_0.6875rem)]",
-    },
-  },
-  defaultVariants: { position: "middle" },
-})
+const stepTextVariants = cva([
+  "flex w-max shrink-0 flex-col items-center gap-0.5 break-words text-center",
+  // Written out in full: Tailwind only generates classes it can read whole.
+  "max-w-[calc(min((100cqi_+_1rem)_/_var(--steps-count,2),(100cqi_-_2.375rem)_/_var(--steps-tails,1))_-_1rem)]",
+])
+
+/**
+ * The inset at each end of a horizontal list, on its first and last steps:
+ * as far as the widest centred label may reach past its bullet, so the first
+ * and last labels stay inside the list. From the room above, that is
+ * (the pitch − 16px − 38px) / 2 = ((the row + 16px) / the steps − 54px) / 2,
+ * and never below zero.
+ */
+const stepEndInset = {
+  start: "ps-[max(0px,calc(((100cqi_+_1rem)_/_var(--steps-count,2)_-_3.375rem)_/_2))]",
+  end: "pe-[max(0px,calc(((100cqi_+_1rem)_/_var(--steps-count,2)_-_3.375rem)_/_2))]",
+}
 
 const stepTailLineVariants = cva("block", {
   variants: {
@@ -239,7 +243,13 @@ const Steps = React.forwardRef<HTMLOListElement, StepsProps>(
           data-orientation={orientation}
           data-radius={radius}
           className={cn(stepsVariants({ orientation }), className)}
-          style={{ "--steps-tails": Math.max(items.length - 1, 1), ...style } as React.CSSProperties}
+          style={
+            {
+              "--steps-count": Math.max(items.length, 2),
+              "--steps-tails": Math.max(items.length - 1, 1),
+              ...style,
+            } as React.CSSProperties
+          }
           {...props}
         >
           {items.map((child, index) => (
@@ -274,8 +284,8 @@ export interface StepsItemProps extends Omit<React.ComponentPropsWithoutRef<"li"
 
 /**
  * One step. Horizontal, the label and description are centred under the
- * bullet, and wrap within the step's share of the row; the first and last
- * steps keep a long label inside the list, against its start and end.
+ * bullet, on one line unless they are longer than the step's share of the
+ * row; the list's ends are inset so the first and last labels fit.
  * Vertical, they sit beside the bullet, the label's first line on the
  * bullet's centre, and wrap.
  */
@@ -334,6 +344,8 @@ const StepsItem = React.forwardRef<HTMLLIElement, StepsItemProps>(
           "relative flex min-w-0",
           last ? "flex-none" : "flex-1",
           horizontal ? "items-start" : "gap-2.5",
+          horizontal && first && stepEndInset.start,
+          horizontal && last && stepEndInset.end,
           className
         )}
         {...props}
@@ -343,23 +355,9 @@ const StepsItem = React.forwardRef<HTMLLIElement, StepsItemProps>(
             {/* Figma's `step-details`: the bullet, then 10px (`spacing/2,5`), then the text. */}
             <span data-slot="step-details" className="flex w-[2.375rem] shrink-0 flex-col items-center gap-2.5">
               {bullet}
-              {/*
-               * The auto margins centre the text on the bullet while it fits;
-               * once it is wider, they drop to zero and the row's
-               * justification takes over: the first step's text starts at the
-               * list's start and the last step's ends at its end, so neither
-               * leaves the list.
-               */}
-              <span
-                className={cn(
-                  "flex w-full",
-                  first ? "justify-start" : last ? "justify-end" : "justify-center"
-                )}
-              >
-                <span
-                  data-slot="step-text"
-                  className={stepTextVariants({ position: first ? "first" : last ? "last" : "middle" })}
-                >
+              {/* Centred on the bullet: text wider than it reaches out evenly on both sides. */}
+              <span className="flex w-full justify-center">
+                <span data-slot="step-text" className={stepTextVariants()}>
                   {text}
                 </span>
               </span>
@@ -403,6 +401,7 @@ export {
   stepTailVariants,
   stepTailLineVariants,
   stepTextVariants,
+  stepEndInset,
   type StepsOrientation,
   type StepsRadius,
   type StepStatus,
