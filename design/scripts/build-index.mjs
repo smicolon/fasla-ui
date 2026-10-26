@@ -120,6 +120,7 @@ export const CODE_MAP = {
   radio: { set: "Radio", page: "3830:60584" },
   select: { set: "Select Input", page: "3884:9073" },
   sheet: { set: "Sheet", page: "14872:1780" },
+  sidebar: { set: "Side Bar", page: "14889:866" },
   skeleton: { set: "Skeleton", page: "14860:69258" },
   slider: { set: "Slider", page: "3868:82886" },
   "status-indicator": { set: "Status Indicator", page: "38830:41585" },
@@ -129,7 +130,6 @@ export const CODE_MAP = {
   tooltip: { set: "Tooltip", page: "3822:55767" },
   "data-table": { set: "Table", page: "14885:1510" },
   navbar: { set: "Navbar", page: "4108:1605" },
-  sidebar: { set: "Side Bar", page: "14889:866" },
   // No in-scope Figma atom:
   card: null,          // Figma page "✦ 🟢 Y | Card 🔸" has no trailing ✅
   "form-section": null, // Figma page "✦ 🟡 Y | Form" is 🟡, not 🟢+✅
