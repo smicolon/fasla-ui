@@ -216,6 +216,21 @@ export const routes = [
   {
     kind: "component",
     category: "UI Primitives",
+    path: "/docs/components/input-otp/",
+    title: "OTP Input React Component | Fasla",
+    description:
+      "Add a React one-time code field with a slot per digit, SMS autofill, paste and four layouts, built on input-otp and mirrored for RTL.",
+    h1: "OTP Input",
+    ar: {
+      title: "حقل الرمز (OTP Input) لتطبيقات React | فاصلة",
+      description:
+        "أضف حقل الرمز (OTP Input) لإدخال رموز التحقق، بخانة لكل رقم مع الملء التلقائي من الرسائل النصية واللصق وأربعة تخطيطات، ويمتلئ من اليمين في الصفحات العربية.",
+      h1: "حقل الرمز (OTP Input)",
+    },
+  },
+  {
+    kind: "component",
+    category: "UI Primitives",
     path: "/docs/components/card/",
     title: "Card React Component | Fasla",
     description:
