@@ -76,7 +76,7 @@ function Mark({ alt }: { alt: string }) {
  * Arabic, whose Cairo lines are taller: the sidebar fills its container, as it
  * fills a page in an app.
  */
-const HEIGHT = { base: "h-[50rem]", plan: "h-[60rem]", long: "h-[54rem]" } as const
+const HEIGHT = { base: "h-[50rem]", plan: "h-[60rem]" } as const
 
 /**
  * Item rows held in a state, for the States table: a 240px strip of the
@@ -106,8 +106,8 @@ export default function SidebarPage() {
   const [collapsed, setCollapsed] = React.useState(false)
 
   /** The sample store, laid out as the Figma frame: two titled groups, one parent open on its selected sub-item. */
-  const sidebar = (props: Partial<SidebarProps> & { plan?: boolean; long?: boolean } = {}) => {
-    const { plan = false, long = false, ...root } = props
+  const sidebar = (props: Partial<SidebarProps> & { plan?: boolean } = {}) => {
+    const { plan = false, ...root } = props
     return (
       <Sidebar {...root}>
         <SidebarHeader logo={<Logo rtl={rtl} alt={s("logo")} />} logoIcon={<Mark alt={s("logo")} />} />
@@ -116,17 +116,17 @@ export default function SidebarPage() {
             <SidebarItem icon={icon(LayoutDashboardIcon)} label={s("items.dashboard")} href="#dashboard" />
             <SidebarItem icon={icon(ShoppingCartIcon)} label={s("items.orders")}>
               <SidebarSubItem label={s("items.allOrders")} href="#orders" selected />
-              <SidebarSubItem label={long ? s("long.subItem") : s("items.returns")} href="#returns" />
+              <SidebarSubItem label={s("items.returns")} href="#returns" />
               <SidebarSubItem label={s("items.drafts")} href="#drafts" />
             </SidebarItem>
-            <SidebarItem icon={icon(PackageIcon)} label={long ? s("long.item") : s("items.products")} href="#products" />
+            <SidebarItem icon={icon(PackageIcon)} label={s("items.products")} href="#products" />
             <SidebarItem icon={icon(UsersIcon)} label={s("items.customers")}>
               <SidebarSubItem label={s("items.segments")} href="#segments" />
               <SidebarSubItem label={s("items.reviews")} href="#reviews" />
             </SidebarItem>
             <SidebarItem icon={icon(MessageSquareIcon)} label={s("items.messages")} href="#messages" badge />
           </SidebarGroup>
-          <SidebarGroup label={long ? s("long.group") : s("groups.account")}>
+          <SidebarGroup label={s("groups.account")}>
             <SidebarItem icon={icon(SettingsIcon)} label={s("items.settings")} href="#settings" />
             <SidebarItem icon={icon(UsersRoundIcon)} label={s("items.team")} href="#team" />
             <SidebarItem icon={icon(CreditCardIcon)} label={s("items.billing")} href="#billing" />
@@ -142,8 +142,8 @@ export default function SidebarPage() {
         )}
         <SidebarFooter>
           <SidebarProfile
-            name={long ? s("long.name") : s("profile.name")}
-            description={long ? s("long.description") : s("profile.description")}
+            name={s("profile.name")}
+            description={s("profile.description")}
             avatar={{ src: PHOTO }}
           />
         </SidebarFooter>
@@ -363,15 +363,6 @@ export default function SidebarPage() {
         <p className="text-muted-foreground">{s.rich("planCard.body", rich)}</p>
         <ComponentPreview>
           <div className={HEIGHT.plan}>{sidebar({ plan: true })}</div>
-        </ComponentPreview>
-      </section>
-
-      {/* Long labels */}
-      <section className="space-y-4">
-        <h2 className="text-2xl font-semibold">{s("long.title")}</h2>
-        <p className="text-muted-foreground">{s.rich("long.body", rich)}</p>
-        <ComponentPreview>
-          <div className={HEIGHT.long}>{sidebar({ long: true })}</div>
         </ComponentPreview>
       </section>
 

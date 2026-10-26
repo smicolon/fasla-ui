@@ -88,13 +88,6 @@ const COPY = {
     },
     profile: { name: "Nadia Rahman", description: "Fasla" },
     plan: { title: "Pro plan", description: "3 team members", footer: "Next renewal: 10 Mar" },
-    long: {
-      group: "Customer accounts and permissions",
-      item: "Reports on returns and refunds this quarter",
-      subItem: "Refunds waiting for approval from finance",
-      name: "Nadia Rahman Al-Hashimi",
-      description: "Fasla workspace for the Gulf region",
-    },
   },
   rtl: {
     nav: "الرئيسية",
@@ -116,13 +109,6 @@ const COPY = {
     },
     profile: { name: "نادية رحمن", description: "فاصلة" },
     plan: { title: "الخطة الاحترافية", description: "3 أعضاء في الفريق", footer: "التجديد التالي: 10 مارس" },
-    long: {
-      group: "حسابات العملاء وصلاحياتهم",
-      item: "تقارير المرتجعات والمبالغ المستردّة في هذا الربع",
-      subItem: "مبالغ مستردّة بانتظار موافقة قسم المالية",
-      name: "نادية رحمن الهاشمي",
-      description: "مساحة عمل فاصلة لمنطقة الخليج",
-    },
   },
 } as const
 
@@ -163,7 +149,6 @@ type SampleOptions = {
   dir: Dir
   theme?: "light" | "dark"
   plan?: boolean
-  long?: boolean
 } & Partial<SidebarProps>
 
 /**
@@ -171,7 +156,7 @@ type SampleOptions = {
  * second item a parent open on its selected sub-item, the fourth a closed
  * parent, a badge on the fifth, and the profile at the foot.
  */
-function Sample({ dir, theme, plan = false, long = false, ...root }: SampleOptions) {
+function Sample({ dir, theme, plan = false, ...root }: SampleOptions) {
   const c: Copy = COPY[dir]
   return (
     <Sidebar {...root}>
@@ -181,17 +166,17 @@ function Sample({ dir, theme, plan = false, long = false, ...root }: SampleOptio
           <SidebarItem icon={icon(LayoutDashboardIcon)} label={c.items.dashboard} href="#dashboard" />
           <SidebarItem icon={icon(ShoppingCartIcon)} label={c.items.orders}>
             <SidebarSubItem label={c.items.allOrders} href="#orders" selected />
-            <SidebarSubItem label={long ? c.long.subItem : c.items.returns} href="#returns" />
+            <SidebarSubItem label={c.items.returns} href="#returns" />
             <SidebarSubItem label={c.items.drafts} href="#drafts" />
           </SidebarItem>
-          <SidebarItem icon={icon(PackageIcon)} label={long ? c.long.item : c.items.products} href="#products" />
+          <SidebarItem icon={icon(PackageIcon)} label={c.items.products} href="#products" />
           <SidebarItem icon={icon(UsersIcon)} label={c.items.customers}>
             <SidebarSubItem label={c.items.segments} href="#segments" />
             <SidebarSubItem label={c.items.reviews} href="#reviews" />
           </SidebarItem>
           <SidebarItem icon={icon(MessageSquareIcon)} label={c.items.messages} href="#messages" badge />
         </SidebarGroup>
-        <SidebarGroup label={long ? c.long.group : c.groups.account}>
+        <SidebarGroup label={c.groups.account}>
           <SidebarItem icon={icon(SettingsIcon)} label={c.items.settings} href="#settings" />
           <SidebarItem icon={icon(UsersRoundIcon)} label={c.items.team} href="#team" />
           <SidebarItem icon={icon(CreditCardIcon)} label={c.items.billing} href="#billing" />
@@ -207,8 +192,8 @@ function Sample({ dir, theme, plan = false, long = false, ...root }: SampleOptio
       )}
       <SidebarFooter>
         <SidebarProfile
-          name={long ? c.long.name : c.profile.name}
-          description={long ? c.long.description : c.profile.description}
+          name={c.profile.name}
+          description={c.profile.description}
           avatar={{ src: PHOTO }}
         />
       </SidebarFooter>
@@ -221,7 +206,7 @@ function Sample({ dir, theme, plan = false, long = false, ...root }: SampleOptio
  * Arabic, whose Cairo lines are taller. The sidebar fills its container, as
  * it fills a page in an app.
  */
-const HEIGHT = { base: "h-[50rem]", plan: "h-[60rem]", long: "h-[54rem]" } as const
+const HEIGHT = { base: "h-[50rem]", plan: "h-[60rem]" } as const
 
 /**
  * A label set in the story's own chrome: English, left to right, small and
@@ -381,18 +366,6 @@ export const PlanCard: Story = {
           </div>
         </div>
       ))}
-    </div>
-  ),
-}
-
-/** Long labels, titles and names wrap onto more lines instead of being cut off. */
-export const LongLabels: Story = {
-  decorators: [framed],
-  // Fixed content: none of the controls would change it.
-  parameters: { controls: { disable: true } },
-  render: (_args, ctx) => (
-    <div className={HEIGHT.long}>
-      <Sample dir={dirOf(ctx)} long />
     </div>
   ),
 }

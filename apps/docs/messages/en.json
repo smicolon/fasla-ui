@@ -153,15 +153,6 @@
         "title": "Plan card",
         "body": "The optional plan card, shown above the profile at the foot of the sidebar."
       },
-      "long": {
-        "title": "Long labels",
-        "body": "Long labels, titles and names wrap onto more lines instead of being cut off.",
-        "group": "Customer accounts and permissions",
-        "item": "Reports on returns and refunds this quarter",
-        "subItem": "Refunds waiting for approval from finance",
-        "name": "Nadia Rahman Al-Hashimi",
-        "description": "Fasla workspace for the Gulf region"
-      },
       "a11y": {
         "landmarks": "The sidebar is an <code>aside</code> element, and <code>SidebarContent</code> is a <code>nav</code> element. Give the <code>nav</code> an <code>aria-label</code> when the page has another navigation landmark.",
         "current": "<code>selected</code> sets <code>aria-current=\"page\"</code> on the item's link, so a screen reader announces the current page.",
