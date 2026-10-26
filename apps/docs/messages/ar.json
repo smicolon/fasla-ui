@@ -3119,6 +3119,41 @@
         "error-state-countdown-redirect": "إعادة توجيه بعدّ تنازلي"
       }
     },
+    "logoCloudBlocks": {
+      "lead": "{count, plural, one {قسم شعارات واحد} two {قسما شعارات} few {{n} أقسام شعارات} many {{n} قسمًا للشعارات} other {{n} قسم شعارات}}: الشركات التي تستخدم منتجك، في صف أو شبكة أو جدار، وبعضها مع اقتباس أو أرقام أو تصفية حسب القطاع.",
+      "intro": "يُثبَّت كل قسم وحده ويعرض الشعارات التي تمرّرها إليه. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
+      "filterLabel": "التصفية حسب العائلة",
+      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
+      "families": {
+        "all": "الكل",
+        "walls": "جدران الشعارات",
+        "proof": "مع اقتباس أو أرقام أو تصفية"
+      },
+      "types": {
+        "logo-cloud-centered-caption-row": "صف بتعليق في الوسط",
+        "logo-cloud-heading-grid": "شبكة بعنوان",
+        "logo-cloud-bordered-cell-grid": "شبكة خلايا بإطار",
+        "logo-cloud-enterprise-wall": "جدار المؤسسات",
+        "logo-cloud-contained-card": "داخل بطاقة",
+        "logo-cloud-dark-logo-wall": "جدار شعارات داكن",
+        "logo-cloud-side-label-rail": "شريط بتسمية جانبية",
+        "logo-cloud-heading-left-grid-right": "عنوان بجانب الشبكة",
+        "logo-cloud-editorial-eyebrow-split": "تحريري مقسوم بعنوان تمهيدي",
+        "logo-cloud-flanked-heading": "عنوان بين الشعارات",
+        "logo-cloud-quote-panel-grid": "شبكة مع لوحة اقتباس",
+        "logo-cloud-stat-rail-above-grid": "أرقام فوق الشبكة",
+        "logo-cloud-logo-metric-tiles": "مربعات الشعارات والأرقام",
+        "logo-cloud-logo-quote-cards": "بطاقات الشعارات والاقتباسات",
+        "logo-cloud-named-integration-cards": "بطاقات التكاملات بأسمائها",
+        "logo-cloud-logo-testimonial-strip": "شريط الشعارات مع شهادة",
+        "logo-cloud-scatter-field": "شعارات متناثرة",
+        "logo-cloud-bento-logo-wall": "جدار شعارات بينتو",
+        "logo-cloud-divider-rule-row": "صف بخطوط فاصلة",
+        "logo-cloud-pyramid-row-stack": "صفوف هرمية",
+        "logo-cloud-tabbed-industry-filter": "تصفية حسب القطاع",
+        "logo-cloud-grid-closing-cta": "شبكة بدعوة ختامية"
+      }
+    },
     "blockCard": {
       "fullScreen": "فتح بملء الشاشة",
       "newTab": "(يُفتح في علامة تبويب جديدة)",

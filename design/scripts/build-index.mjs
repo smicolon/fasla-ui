@@ -163,6 +163,16 @@ export const CODE_MAP = {
       "split-colour-panel", "marquee-404-band", "broken-trail-breadcrumb", "countdown-redirect",
     ].map((type) => [`error-state-${type}`, null])
   ),
+  // Blocks: each Logo Cloud item is one Type of the block set Logo Cloud (42806:232717), not an atom.
+  ...Object.fromEntries(
+    [
+      "centered-caption-row", "heading-grid", "bordered-cell-grid", "enterprise-wall", "contained-card",
+      "dark-logo-wall", "side-label-rail", "heading-left-grid-right", "editorial-eyebrow-split", "flanked-heading",
+      "quote-panel-grid", "stat-rail-above-grid", "logo-metric-tiles", "logo-quote-cards", "named-integration-cards",
+      "logo-testimonial-strip", "scatter-field", "bento-logo-wall", "divider-rule-row", "pyramid-row-stack",
+      "tabbed-industry-filter", "grid-closing-cta",
+    ].map((type) => [`logo-cloud-${type}`, null])
+  ),
 }
 
 const FAMILY_MIN = 10

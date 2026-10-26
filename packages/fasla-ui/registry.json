@@ -2254,6 +2254,458 @@
         "error-state",
         "feedback"
       ]
+    },
+    {
+      "name": "logo-cloud-centered-caption-row",
+      "type": "registry:block",
+      "title": "Logo Cloud: Centered Caption Row",
+      "description": "A short caption over one row of marks, wrapping to rows of three and then two on smaller screens.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-centered-caption-row/LogoCloudCenteredCaptionRow.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-centered-caption-row.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-heading-grid",
+      "type": "registry:block",
+      "title": "Logo Cloud: Heading Grid",
+      "description": "A centred heading and supporting line over an even grid of marks, four, three or two to a row.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-heading-grid/LogoCloudHeadingGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-heading-grid.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-bordered-cell-grid",
+      "type": "registry:block",
+      "title": "Logo Cloud: Bordered Cell Grid",
+      "description": "A small caption over a card ruled into equal cells, one mark in each.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-bordered-cell-grid/LogoCloudBorderedCellGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-bordered-cell-grid.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-enterprise-wall",
+      "type": "registry:block",
+      "title": "Logo Cloud: Enterprise Wall",
+      "description": "A centred heading over a dense wall of up to 24 marks, six, three or two to a row.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-enterprise-wall/LogoCloudEnterpriseWall.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-enterprise-wall.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-contained-card",
+      "type": "registry:block",
+      "title": "Logo Cloud: Contained Card",
+      "description": "A small caption and a grid of marks inside a bordered card.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-contained-card/LogoCloudContainedCard.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-contained-card.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-dark-logo-wall",
+      "type": "registry:block",
+      "title": "Logo Cloud: Dark Logo Wall",
+      "description": "A centred heading over a grid of single-colour marks, on a band painted with the inverse tokens.",
+      "dependencies": [],
+      "registryDependencies": [
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-dark-logo-wall/LogoCloudDarkLogoWall.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-dark-logo-wall.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-side-label-rail",
+      "type": "registry:block",
+      "title": "Logo Cloud: Side Label Rail",
+      "description": "A label and a Badge beside the marks in a ruled grid with crosshairs at its corners.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-side-label-rail/LogoCloudSideLabelRail.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-side-label-rail.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-heading-left-grid-right",
+      "type": "registry:block",
+      "title": "Logo Cloud: Heading Left Grid Right",
+      "description": "A Badge, heading, text and two buttons beside the marks in a ruled grid.",
+      "dependencies": [],
+      "registryDependencies": [
+        "badge",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-heading-left-grid-right/LogoCloudHeadingLeftGridRight.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-heading-left-grid-right.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-editorial-eyebrow-split",
+      "type": "registry:block",
+      "title": "Logo Cloud: Editorial Eyebrow Split",
+      "description": "An eyebrow and a sentence split across the top, a hairline, then the marks spread across one row.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-editorial-eyebrow-split/LogoCloudEditorialEyebrowSplit.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-editorial-eyebrow-split.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-flanked-heading",
+      "type": "registry:block",
+      "title": "Logo Cloud: Flanked Heading",
+      "description": "A centred heading, sentence and button flanked by the marks in small square cards.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-flanked-heading/LogoCloudFlankedHeading.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-flanked-heading.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-quote-panel-grid",
+      "type": "registry:block",
+      "title": "Logo Cloud: Quote Panel Grid",
+      "description": "A testimonial on an inverted panel beside the marks in a ruled grid, painted with the inverse tokens.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-quote-panel-grid/LogoCloudQuotePanelGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-quote-panel-grid.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-stat-rail-above-grid",
+      "type": "registry:block",
+      "title": "Logo Cloud: Stat Rail Above Grid",
+      "description": "An eyebrow and a heading, a rail of four results, and the logos in a ruled grid under them.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-stat-rail-above-grid/LogoCloudStatRailAboveGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-stat-rail-above-grid.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-logo-metric-tiles",
+      "type": "registry:block",
+      "title": "Logo Cloud: Logo Metric Tiles",
+      "description": "A grid of cards, each pairing a logo with one figure and what it measures.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-logo-metric-tiles/LogoCloudLogoMetricTiles.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-logo-metric-tiles.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-logo-quote-cards",
+      "type": "registry:block",
+      "title": "Logo Cloud: Logo Quote Cards",
+      "description": "Outlined cards that pair each customer's mark with a one-line quote, on an inverted band painted with the inverse tokens.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-logo-quote-cards/LogoCloudLogoQuoteCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-logo-quote-cards.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-named-integration-cards",
+      "type": "registry:block",
+      "title": "Logo Cloud: Named Integration Cards",
+      "description": "A grid of integration cards, each a logo, the company's name and what the integration does, closed by a button.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-named-integration-cards/LogoCloudNamedIntegrationCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-named-integration-cards.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-logo-testimonial-strip",
+      "type": "registry:block",
+      "title": "Logo Cloud: Logo Testimonial Strip",
+      "description": "One testimonial with its attribution beside a borderless three-by-three grid of marks.",
+      "dependencies": [],
+      "registryDependencies": [
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-logo-testimonial-strip/LogoCloudLogoTestimonialStrip.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-logo-testimonial-strip.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-scatter-field",
+      "type": "registry:block",
+      "title": "Logo Cloud: Scatter Field",
+      "description": "Twelve logo tiles scattered over a faint lattice around a centred heading, line of text and button.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-scatter-field/LogoCloudScatterField.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-scatter-field.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-bento-logo-wall",
+      "type": "registry:block",
+      "title": "Logo Cloud: Bento Logo Wall",
+      "description": "A bento of logo tiles, the first one large and featuring the company's name and a caption.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-bento-logo-wall/LogoCloudBentoLogoWall.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-bento-logo-wall.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-divider-rule-row",
+      "type": "registry:block",
+      "title": "Logo Cloud: Divider Rule Row",
+      "description": "A heading over the marks in a ruled band with hairlines between cells, painted with the inverse tokens.",
+      "dependencies": [],
+      "registryDependencies": [
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-divider-rule-row/LogoCloudDividerRuleRow.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-divider-rule-row.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-pyramid-row-stack",
+      "type": "registry:block",
+      "title": "Logo Cloud: Pyramid Row Stack",
+      "description": "A caption over the marks in centred rows that narrow as they go down.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-pyramid-row-stack/LogoCloudPyramidRowStack.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-pyramid-row-stack.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-tabbed-industry-filter",
+      "type": "registry:block",
+      "title": "Logo Cloud: Tabbed Industry Filter",
+      "description": "A row of tabs, one per industry, that filter a bordered grid of logos tagged with that industry.",
+      "dependencies": [],
+      "registryDependencies": [
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-tabbed-industry-filter/LogoCloudTabbedIndustryFilter.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-tabbed-industry-filter.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
+    },
+    {
+      "name": "logo-cloud-grid-closing-cta",
+      "type": "registry:block",
+      "title": "Logo Cloud: Grid Closing CTA",
+      "description": "An even grid of logos under a centred heading, closed by a sentence, a text link and a button.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/logo-cloud-grid-closing-cta/LogoCloudGridClosingCta.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/logo-cloud-grid-closing-cta.tsx"
+        }
+      ],
+      "categories": [
+        "logo-cloud",
+        "marketing"
+      ]
     }
   ]
 }

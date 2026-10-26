@@ -8,9 +8,9 @@ const docsRoot = path.resolve(import.meta.dir, "..")
 const componentsRoot = path.join(docsRoot, "app/[locale]/docs/components")
 
 describe("Blocks section", () => {
-  test("has a page for every block family route, and lists every FAQ and Error State item in the registry", async () => {
+  test("has a page for every block family route, and lists every FAQ, Error State and Logo Cloud item in the registry", async () => {
     const { blockRoutes } = await import("../lib/seo-routes")
-    const { FAQ_TYPES, ERROR_STATE_TYPES } = await import("../lib/blocks")
+    const { FAQ_TYPES, ERROR_STATE_TYPES, LOGO_CLOUD_TYPES } = await import("../lib/blocks")
     const blocksRoot = path.join(docsRoot, "app/[locale]/docs/blocks")
     // installation/ is the section's own page, not a family.
     const families = readdirSync(blocksRoot, { withFileTypes: true })
@@ -23,6 +23,8 @@ describe("Blocks section", () => {
     expect(FAQ_TYPES.map((type) => type.slug).sort()).toEqual(faqItems.sort())
     const errorStateItems = registry.items.filter((item) => item.name.startsWith("error-state-")).map((item) => item.name)
     expect(ERROR_STATE_TYPES.map((type) => type.slug).sort()).toEqual(errorStateItems.sort())
+    const logoCloudItems = registry.items.filter((item) => item.name.startsWith("logo-cloud-")).map((item) => item.name)
+    expect(LOGO_CLOUD_TYPES.map((type) => type.slug).sort()).toEqual(logoCloudItems.sort())
   })
 
   test("marks exactly the blocks that depend on theme-inverse as inverse", async () => {
