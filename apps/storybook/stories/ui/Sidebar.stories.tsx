@@ -23,7 +23,7 @@ import {
   SidebarFooter,
   SidebarProfile,
   type SidebarProps,
-} from "../../../../packages/fasla-ui/registry/blocks/sidebar"
+} from "../../../../packages/fasla-ui/registry/ui/sidebar"
 
 /**
  * Figma: "Side Bar" (40503:333), Direction × State × Plan card, and "Side Bar
@@ -38,7 +38,7 @@ type StoryArgs = Pick<SidebarProps, "collapsed" | "className"> & {
 }
 
 const meta: Meta<StoryArgs> = {
-  title: "Blocks/Sidebar",
+  title: "UI/Sidebar",
   component: Sidebar,
   parameters: { layout: "centered" },
   tags: ["autodocs"],
@@ -249,10 +249,8 @@ const framed: Decorator = (Story) => (
 )
 
 /**
- * The playground. The toggle in the header collapses it, and `collapsed`
- * starts it either way; `planCard` adds the optional plan card. Collapsed,
- * point at an icon or tab to it to see its tooltip, and press Orders to
- * expand the sidebar with its sub-items open.
+ * The sidebar with every control. Collapse it from the button in its header,
+ * then point at an icon to see its label.
  */
 export const Default: Story = {
   render: ({ collapsed, planCard, className }, ctx) => (
@@ -263,11 +261,7 @@ export const Default: Story = {
   ),
 }
 
-/**
- * Figma's State axis, side by side: Expanded (256px) and Collapsed (80px,
- * a 64px panel). Collapsed, the titles are dividers, the logo is its icon,
- * only the avatar shows in the footer, and the toggle sits under the header.
- */
+/** The sidebar expanded, with labels and section titles, and collapsed to a column of icons. */
 export const ExpandedAndCollapsed: Story = {
   decorators: [framed],
   // A fixed pair: none of the controls would change it.
@@ -298,12 +292,9 @@ const PSEUDO = {
 /** A 240px strip of the sidebar's own background, as Figma draws the item set. */
 const STRIP = "w-60 rounded-[var(--radius-md)] bg-sidebar py-1"
 
-/**
- * Figma's Side Bar Inside Item: the four states, for an item and a sub-item.
- * Hover and Focus are the real pseudo-classes, forced by the pseudo-states
- * addon. Focus is Select's ring: a `ring` border and a 3px halo.
- */
+/** The four states of an item and a sub-item: default, hover, selected and focus. */
 export const ItemStates: Story = {
+  // Hover and Focus are the real pseudo-classes, forced by the pseudo-states addon.
   decorators: [framed],
   // A fixed table: none of the controls would change it.
   parameters: { controls: { disable: true }, pseudo: PSEUDO },
@@ -335,12 +326,7 @@ export const ItemStates: Story = {
   },
 }
 
-/**
- * Figma's item booleans: Icon on and off, Badge (the 8px `destructive` dot at
- * the end of the row), and Have sub-items, closed (chevron to the end edge)
- * and open (chevron up, sub-items under it). Press a parent to open or close
- * it.
- */
+/** An item with and without an icon, with a notification dot, and with sub-items closed and open. */
 export const ItemOptions: Story = {
   decorators: [framed],
   // A fixed table: none of the controls would change it.
@@ -380,10 +366,7 @@ export const ItemOptions: Story = {
   },
 }
 
-/**
- * Figma's `Plan card=True`: the card at the foot of the body, above the
- * profile. Collapsed, it is hidden.
- */
+/** The optional plan card above the profile. It is hidden while the sidebar is collapsed. */
 export const PlanCard: Story = {
   decorators: [framed],
   // A fixed pair: none of the controls would change it.
@@ -402,11 +385,7 @@ export const PlanCard: Story = {
   ),
 }
 
-/**
- * Long text wraps: an item, a sub-item, a section title and the profile's
- * name and line all grow onto more lines, and no word is cut off. Collapsed,
- * the tooltip carries the whole label.
- */
+/** Long labels, titles and names wrap onto more lines instead of being cut off. */
 export const LongLabels: Story = {
   decorators: [framed],
   // Fixed content: none of the controls would change it.
@@ -420,12 +399,9 @@ export const LongLabels: Story = {
 
 const THEMES = ["light", "dark"] as const
 
-/**
- * Light and Dark, one panel each, whatever the theme toolbar says, expanded
- * and collapsed. Every colour is a `sidebar-*`, `border`, `ring` or `card`
- * token, so the panel follows the theme it sits in.
- */
+/** The sidebar in the light and dark themes, expanded and collapsed. */
 export const LightAndDark: Story = {
+  // One panel per theme, whatever the theme toolbar says.
   decorators: [framed],
   // Fixed content: none of the controls would change it.
   parameters: { controls: { disable: true } },
@@ -447,12 +423,11 @@ export const LightAndDark: Story = {
 const DIRECTIONS = ["ltr", "rtl"] as const
 
 /**
- * Both directions at once, whatever the toolbar says: one column per
- * direction, each setting its own `dir`, `lang` and font. In RTL every inset
- * mirrors, the sub-item rail moves to the right, and the toggle and the
- * chevrons flip.
+ * The sidebar in English and Arabic, side by side. In Arabic it mirrors, and
+ * the toggle and chevrons flip.
  */
 export const LtrAndRtl: Story = {
+  // One column per direction, each with its own dir, lang and font, whatever the toolbar says.
   decorators: [framed],
   // Fixed content: none of the controls would change it.
   parameters: { controls: { disable: true } },

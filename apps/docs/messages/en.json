@@ -99,7 +99,7 @@
       "menu": "Docs menu",
       "lead": "App navigation that folds to icons: titled groups of links, sub-items under a parent, and the signed-in person at the foot. Expanded and collapsed, as in the Figma set, with an optional plan card.",
       "installNote": "Sidebar is built on Base UI, so it needs the <code>@base-ui/react</code> package, and it uses <code>avatar</code> and <code>tooltip</code>. <code>add</code> installs them with the component, and so does the shadcn CLI.",
-      "previewHint": "Press the button in the header to collapse the sidebar. Collapsed, point at an icon or move focus to it to see its label, and press Orders to expand the sidebar with its sub-items open.",
+      "previewHint": "Collapse the sidebar from the button in its header, then point at an icon to see its label.",
       "logo": "Fasla",
       "nav": "Main",
       "groups": {
@@ -132,12 +132,12 @@
       },
       "collapsedState": {
         "title": "Expanded and collapsed",
-        "body": "Expanded, the sidebar is 256px wide: an 8px margin round a 240px panel. Collapsed, the panel is 64px wide and shows icons only. The section titles become dividers, the logo shows its icon alone, the footer shows only the avatar, and the plan card is hidden. The button in the header switches between the two: set <code>defaultCollapsed</code> to start collapsed, or <code>collapsed</code> with <code>onCollapsedChange</code> to control it.",
+        "body": "The sidebar expanded, with labels and section titles, and collapsed to a column of icons.",
         "expanded": "Expanded",
         "collapsed": "Collapsed"
       },
       "states": {
-        "body": "Each item has four states. Default sets the label in <code>sidebar-foreground</code>. Hover fills the row with <code>sidebar-accent</code>. Selected fills it with <code>sidebar-primary</code> and marks the current page: set <code>selected</code> on one item only. Focus, from the keyboard, draws Select's ring: a <code>ring</code> border with a 3px halo. Sub-items have the same states.",
+        "body": "The four states of an item and a sub-item: default, hover, selected and focus.",
         "default": "Default",
         "hover": "Hover",
         "selected": "Selected",
@@ -147,15 +147,15 @@
       },
       "subItems": {
         "title": "Items and sub-items",
-        "body": "An item takes a 16px <code>icon</code> and a <code>label</code>. Set <code>badge</code> to add the notification dot at the end of the row. Place <code>SidebarSubItem</code> elements inside an item to nest them one level, with a line along their start edge. The parent then opens and closes them, and its chevron points to the end edge when closed and up when open. A parent with a selected sub-item opens by default. Keep sub-items to one level."
+        "body": "Items with an icon and a notification dot, and sub-items that open and close under their parent."
       },
       "planCard": {
         "title": "Plan card",
-        "body": "The plan card is optional and off by default, as in Figma. To show it, place <code>SidebarPlanCard</code> between <code>SidebarContent</code> and <code>SidebarFooter</code>. It sits at the foot of the body, above the profile, and it is hidden while the sidebar is collapsed."
+        "body": "The optional plan card, shown above the profile at the foot of the sidebar."
       },
       "long": {
         "title": "Long labels",
-        "body": "A long label wraps onto more lines and the row grows to fit, so no word is cut off. Section titles and the profile name wrap the same way. When the sidebar is collapsed, the tooltip shows the whole label. Keep labels to a word or two where you can, so the list stays easy to scan.",
+        "body": "Long labels, titles and names wrap onto more lines instead of being cut off.",
         "group": "Customer accounts and permissions",
         "item": "Reports on returns and refunds this quarter",
         "subItem": "Refunds waiting for approval from finance",
@@ -177,7 +177,7 @@
         "collapsed": "Collapses it to icons only, when you control it.",
         "defaultCollapsed": "Starts collapsed, when you do not control it.",
         "onCollapsedChange": "Called with the new state when it collapses or expands.",
-        "children": "The header, content, plan card and footer.",
+        "children": "The header, content, plan card and footer, in that order. The plan card is hidden while the sidebar is collapsed.",
         "className": "Extra classes for the <code>aside</code> element."
       },
       "headerProps": {
@@ -200,7 +200,7 @@
       "itemProps": {
         "label": "The item's text. When collapsed, it is the tooltip and the accessible name.",
         "icon": "A 16px icon before the label. When collapsed, only the icon shows, so give every item one.",
-        "selected": "Marks the current page.",
+        "selected": "Marks the current page. Set it on one item only.",
         "badge": "Shows the notification dot at the end of the row.",
         "badgeLabel": "The dot's name for screen readers.",
         "href": "Renders the item as a link to this address.",
@@ -209,7 +209,7 @@
         "defaultOpen": "Shows its sub-items on first render. By default it is open when one of them is selected.",
         "onOpenChange": "Called when its sub-items open or close.",
         "onClick": "Called when the item is pressed.",
-        "children": "The <code>SidebarSubItem</code> elements. With any, the item opens and closes them instead of linking.",
+        "children": "The <code>SidebarSubItem</code> elements, one level deep. With any, the item opens and closes them instead of linking.",
         "className": "Extra classes for the item's link or button."
       },
       "subItemProps": {

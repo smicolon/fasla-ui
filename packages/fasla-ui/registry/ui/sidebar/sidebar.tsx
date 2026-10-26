@@ -5,8 +5,8 @@ import { Collapsible } from "@base-ui/react/collapsible"
 import { useRender } from "@base-ui/react/use-render"
 import { ChevronRightIcon, ChevronsUpDownIcon, PanelLeftCloseIcon, PanelLeftOpenIcon } from "lucide-react"
 import { cn } from "../../../src/lib/utils"
-import { Avatar, type AvatarProps } from "../../ui/avatar/avatar"
-import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip/tooltip"
+import { Avatar, type AvatarProps } from "../avatar/avatar"
+import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip/tooltip"
 
 /*
  * Figma: "Side Bar" (40503:333), Direction × State × Plan card, and its item,
@@ -82,14 +82,13 @@ export interface SidebarProps extends React.HTMLAttributes<HTMLElement> {
   children: React.ReactNode
 }
 
-/**
- * The sidebar: an `<aside>` holding a bordered panel, 256px wide and 80px
- * collapsed, as tall as its container. The width eases between the two over
- * 180ms. The panel takes its final width at once and the aside clips it while
- * it moves, so the labels never re-wrap mid-way.
- */
+/** App navigation that collapses to a column of icons, as tall as its container. */
 const Sidebar = React.forwardRef<HTMLElement, SidebarProps>(
   ({ collapsed: collapsedProp, defaultCollapsed = false, onCollapsedChange, className, children, ...props }, ref) => {
+    // An `<aside>` holding a bordered panel, 256px wide and 80px collapsed. The
+    // width eases between the two over 180ms. The panel takes its final width
+    // at once and the aside clips it while it moves, so the labels never
+    // re-wrap mid-way.
     const [uncontrolled, setUncontrolled] = React.useState(defaultCollapsed)
     const collapsed = collapsedProp ?? uncontrolled
 

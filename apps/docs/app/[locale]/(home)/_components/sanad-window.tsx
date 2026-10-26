@@ -4,7 +4,7 @@ import { Button } from "@fasla-ui/ui/button/button"
 import { Card } from "@fasla-ui/ui/card/card"
 import { Select } from "@fasla-ui/ui/select/select"
 import { PageHeader } from "@fasla-ui/blocks/page-header/PageHeader"
-import { Sidebar, SidebarFooter, SidebarGroup, SidebarItem } from "@fasla-ui/blocks/sidebar/Sidebar"
+import { Sidebar, SidebarFooter, SidebarGroup, SidebarItem } from "@fasla-ui/ui/sidebar/sidebar"
 import { StatsCard, StatsGrid } from "@fasla-ui/blocks/stats-card/StatsCard"
 import { cn } from "@/lib/utils"
 import {

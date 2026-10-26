@@ -18,4 +18,4 @@ export {
   type SidebarPlanCardProps,
   type SidebarFooterProps,
   type SidebarProfileProps,
-} from "./Sidebar"
+} from "./sidebar"

@@ -712,7 +712,7 @@
     },
     {
       "name": "sidebar",
-      "type": "registry:block",
+      "type": "registry:ui",
       "title": "Sidebar",
       "description": "App navigation that collapses to icons: titled groups of items with sub-items, a selected state, notification dots, an optional plan card and a profile footer, with tooltips when collapsed and mirrored for RTL.",
       "dependencies": [
@@ -725,14 +725,14 @@
       ],
       "files": [
         {
-          "path": "registry/blocks/sidebar/Sidebar.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/sidebar.tsx"
+          "path": "registry/ui/sidebar/sidebar.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/sidebar.tsx"
         }
       ],
       "categories": [
-        "navigation",
-        "layout"
+        "primitives",
+        "navigation"
       ]
     },
     {

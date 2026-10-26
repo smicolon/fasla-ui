@@ -11,7 +11,7 @@ import {
   SidebarFooter,
   SidebarProfile,
   type SidebarProps,
-} from "./Sidebar"
+} from "./sidebar"
 
 /**
  * What these tests can and cannot prove.

@@ -27,7 +27,7 @@ import {
   SidebarFooter,
   SidebarProfile,
   type SidebarProps,
-} from "@fasla-ui/blocks/sidebar/Sidebar"
+} from "@fasla-ui/ui/sidebar"
 import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
@@ -417,7 +417,7 @@ import {
   SidebarItem,
   SidebarProfile,
   SidebarSubItem,
-} from "@/components/blocks/sidebar"
+} from "@/components/ui/sidebar"
 
 export function AppSidebar() {
   return (
@@ -454,7 +454,7 @@ import {
   SidebarGroup,
   SidebarHeader,
   SidebarItem,
-} from "@/components/blocks/sidebar"
+} from "@/components/ui/sidebar"
 
 export function CollapsibleSidebar() {
   // Keep it in your layout state, or in a cookie, to remember it between pages.
@@ -476,7 +476,7 @@ export function CollapsibleSidebar() {
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { LayoutDashboardIcon, ShoppingCartIcon } from "lucide-react"
-import { Sidebar, SidebarContent, SidebarGroup, SidebarItem } from "@/components/blocks/sidebar"
+import { Sidebar, SidebarContent, SidebarGroup, SidebarItem } from "@/components/ui/sidebar"
 
 const links = [
   { href: "/dashboard", label: "${s("items.dashboard")}", icon: LayoutDashboardIcon },
@@ -513,7 +513,7 @@ import {
   SidebarItem,
   SidebarPlanCard,
   SidebarProfile,
-} from "@/components/blocks/sidebar"
+} from "@/components/ui/sidebar"
 
 export function SidebarWithPlan() {
   return (
