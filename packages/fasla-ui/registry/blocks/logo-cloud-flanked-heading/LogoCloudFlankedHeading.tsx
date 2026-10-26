@@ -12,7 +12,8 @@ import { buttonVariants } from "../../ui/button/button"
  * the copy at the start and the second half at the end, each in two rows of
  * two with the second row stepped in towards the copy. From Tablet down the
  * flanks become rows of four above and below the copy; on a phone the four
- * cards shrink to share the width instead of overflowing it.
+ * 64px cards sit 12px apart, as Figma has them, and shrink only on a screen
+ * narrower than that row.
  *
  * The rows are in DOM order with logical offsets, so `dir="rtl"` on the page
  * puts the first half on the right and steps the rows in from the right, as
@@ -83,7 +84,7 @@ function Flank({ logos, count, side }: { logos: LogoCloudFlankedHeadingLogo[]; c
   return (
     <ul
       className={cn(
-        "grid w-full max-w-[304px] shrink-0 grid-cols-4 gap-4 md:w-auto md:max-w-none md:grid-cols-[repeat(4,5rem)] lg:flex lg:w-[200px] lg:flex-wrap",
+        "grid w-full max-w-[292px] shrink-0 grid-cols-4 gap-3 md:w-auto md:max-w-none md:grid-cols-[repeat(4,5rem)] md:gap-4 lg:flex lg:w-[200px] lg:flex-wrap",
         side === "start" ? "lg:justify-start lg:[&>li:nth-child(4n+3)]:ms-6" : "lg:justify-end lg:[&>li:nth-child(4n)]:me-6"
       )}
     >

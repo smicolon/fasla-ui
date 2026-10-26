@@ -124,13 +124,17 @@ export function LogoCloudLogoQuoteCards({
           <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {list.map((item, index) => (
               <li key={index}>
-                <figure className="flex h-full flex-col items-center justify-center gap-5 rounded-lg border border-muted-foreground-inverse p-8 text-center">
+                <figure className="flex h-full flex-col items-center justify-center gap-5 rounded-lg p-8 text-center ring-1 ring-inset ring-muted-foreground-inverse forced-colors:border">
                   {/* The company, read before its quote; the mark itself is hidden. */}
                   {item.logo ? <figcaption className="sr-only">{item.logo.name}</figcaption> : null}
+                  {/* The mark's box is the width cap, and its height follows the mark's
+                      proportions up to the slot height, so a wide wordmark (Microsoft) is
+                      shorter, as Figma sizes it, and its card no taller than its neighbours.
+                      The mark is centred in the box, so the box's width never shows. */}
                   {item.logo ? (
                     <span
                       aria-hidden="true"
-                      className="flex h-5 max-w-[88px] items-center justify-center text-foreground-inverse md:h-6 md:max-w-[100px] lg:h-7 lg:max-w-[110px] [&>*]:h-full [&>*]:w-auto [&>*]:max-w-full [&>img]:object-contain"
+                      className="flex items-center justify-center text-foreground-inverse [&>*]:h-auto [&>*]:max-h-5 [&>*]:w-[88px] md:[&>*]:max-h-6 md:[&>*]:w-[100px] lg:[&>*]:max-h-7 lg:[&>*]:w-[110px] [&>img]:object-contain"
                     >
                       {item.logo.logo}
                     </span>

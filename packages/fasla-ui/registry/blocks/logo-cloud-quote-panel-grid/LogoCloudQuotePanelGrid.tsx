@@ -137,9 +137,11 @@ export function LogoCloudQuotePanelGrid({
           </figure>
 
           {/* The rules: every cell draws its end and bottom edges, and the box
-              clips the last column's and last row's, so only inner lines show. */}
+              clips the last column's and last row's, so only inner lines show.
+              The list tucks a pixel under the box's top edge too, so the box is
+              the rows' height, as Figma's inside stroke is. */}
           <div className="min-w-0 flex-1 overflow-hidden rounded-md border border-border lg:self-start">
-            <ul className="-mb-px -me-px grid grid-cols-2 lg:grid-cols-4">
+            <ul className="-mb-px -me-px -mt-px grid grid-cols-2 lg:grid-cols-4">
               {cells.map((item, index) => (
                 <li
                   key={item ? `${item.name}-${index}` : index}

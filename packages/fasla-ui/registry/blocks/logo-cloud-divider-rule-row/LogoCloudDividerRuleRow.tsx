@@ -107,7 +107,8 @@ export function LogoCloudDividerRuleRow({ locale = "en", heading, logos = [], cl
           {heading ?? copy.heading}
         </h2>
 
-        <ul className="flex flex-col border-y border-muted-foreground-inverse md:flex-row md:flex-wrap lg:flex-nowrap">
+        {/* `-my-px`: the rules above and below take no height, as Figma draws them inside the band. */}
+        <ul className="-my-px flex flex-col border-y border-muted-foreground-inverse md:flex-row md:flex-wrap lg:flex-nowrap">
           {Array.from({ length: count }, (_, index) => {
             const logo = logos[index]
             return (

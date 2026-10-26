@@ -11,7 +11,9 @@ import { cn } from "../../../src/lib/utils"
  * tile per logo for the rest. At Desktop the featured tile takes half the
  * width and two rows, with four logos in a 2 × 2 block beside it and the rest
  * in rows of four below. At Tablet the featured tile runs full width over two
- * columns of tiles; on a phone every tile is full width.
+ * columns of tiles; on a phone every tile is full width. Every small tile's
+ * mark has one height per breakpoint (16, 20 and 28px), its width in
+ * proportion, as Figma sizes them.
  *
  * One grid holds every tile, so the layout follows the page's direction: in
  * Arabic the featured tile sits on the right. The company's name is a Latin
@@ -53,7 +55,7 @@ const COPY: Record<"en" | "ar", LogoCloudBentoLogoWallCopy> = {
   },
 }
 
-const TILE = "rounded-lg border border-border bg-card"
+const TILE = "rounded-lg bg-card ring-1 ring-inset ring-border forced-colors:border"
 
 /** The featured tile: half the bento and two rows at Desktop, full width below. */
 const FEATURED = cn(TILE, "flex flex-col p-5 md:col-span-2 lg:row-span-2 lg:justify-between lg:gap-3")
@@ -125,7 +127,7 @@ export function LogoCloudBentoLogoWall({
                 <span className="sr-only">{item.name}</span>
                 <span
                   aria-hidden="true"
-                  className={cn("flex h-5 max-w-[84px] items-center justify-center text-muted-foreground md:h-6 md:max-w-[100px] lg:h-8 lg:max-w-[150px]", SIZED)}
+                  className={cn("flex h-4 items-center justify-center text-muted-foreground md:h-5 lg:h-7", SIZED)}
                 >
                   {item.logo}
                 </span>

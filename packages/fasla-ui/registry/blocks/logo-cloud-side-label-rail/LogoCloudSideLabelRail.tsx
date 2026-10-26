@@ -60,8 +60,8 @@ const COPY: Record<"en" | "ar", LogoCloudSideLabelRailCopy> = {
 /** How many cells Figma draws, and so how many placeholders show without logos. */
 const PLACEHOLDERS = 10
 
-/** Figma's crosshairs: 14px, 8px out from each of the box's outer corners. */
-const CORNERS = ["-start-2 -top-2", "-end-2 -top-2", "-bottom-2 -start-2", "-bottom-2 -end-2"]
+/** Figma's crosshairs: the 14px plus icon with its own 1.5px stroke, centred on each of the box's outer corners. */
+const CORNERS = ["-start-[7px] -top-[7px]", "-end-[7px] -top-[7px]", "-bottom-[7px] -start-[7px]", "-bottom-[7px] -end-[7px]"]
 
 export interface LogoCloudSideLabelRailProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "title">,
