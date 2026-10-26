@@ -58,8 +58,43 @@ const showSlide = (index: number) => {
   })
 }
 
+/** A ResizeObserver the tests fire by hand, after giving the DOM a layout. */
+class StubResizeObserver {
+  static instances: StubResizeObserver[] = []
+  callback: ResizeObserverCallback
+  constructor(callback: ResizeObserverCallback) {
+    this.callback = callback
+    StubResizeObserver.instances.push(this)
+  }
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
+/**
+ * Gives the track the layout a browser would: a `view`px track holding
+ * `perView` slides side by side, 16px apart, then tells the carousel to
+ * measure again. jsdom has no layout of its own.
+ */
+const layOut = (perView: number, view = 600) => {
+  const track = screen.getByTestId("slide-0").parentElement as HTMLElement
+  Object.defineProperty(track, "clientWidth", { configurable: true, value: view })
+  const width = (view - 16 * (perView - 1)) / perView
+  screen.getAllByRole("group").forEach((slide, i) => {
+    const left = i * (width + 16)
+    slide.getBoundingClientRect = () => ({ left, right: left + width }) as DOMRect
+  })
+  act(() => {
+    for (const observer of StubResizeObserver.instances) {
+      observer.callback([], observer as unknown as ResizeObserver)
+    }
+  })
+}
+
 beforeEach(() => {
   scrollCalls = []
+  StubResizeObserver.instances = []
+  vi.stubGlobal("ResizeObserver", StubResizeObserver)
   StubObserver.instances = []
   vi.stubGlobal("IntersectionObserver", StubObserver)
   Element.prototype.scrollIntoView = function (
@@ -402,6 +437,51 @@ describe("Carousel", () => {
     showSlide(0)
     expect(onChange).toHaveBeenLastCalledWith(0)
     expect(dots()[0]).toHaveAttribute("aria-current", "true")
+  })
+
+  describe("with several slides per view", () => {
+    it("draws a dot per view the track can reach", () => {
+      // Three half-width slides: the track stops with the second at the
+      // start, showing the second and the third. Two views, two dots.
+      renderCarousel()
+      layOut(2)
+      expect(dots()).toHaveLength(2)
+      expect(dots()[1]).toHaveAccessibleName("2 / 2")
+    })
+
+    it("selects the last dot when a swipe reaches the end", () => {
+      const onChange = vi.fn()
+      renderCarousel({ onActiveIndexChange: onChange })
+      layOut(2)
+      // At the end the first slide at least half shown is the second.
+      showSlide(1)
+      expect(dots()[1]).toHaveAttribute("aria-current", "true")
+      expect(onChange).toHaveBeenLastCalledWith(1)
+    })
+
+    it("scrolls the last dot's view in, and stops End and the arrows there", () => {
+      renderCarousel()
+      layOut(2)
+      fireEvent.click(dots()[1]!)
+      expect(scrollCalls.at(-1)!.el).toBe(screen.getByTestId("slide-1"))
+      const track = screen.getByTestId("slide-0").parentElement as HTMLElement
+      fireEvent.keyDown(track, { key: "ArrowRight" })
+      fireEvent.keyDown(track, { key: "End" })
+      expect(scrollCalls.at(-1)!.el).toBe(screen.getByTestId("slide-1"))
+      expect(dots()[1]).toHaveAttribute("aria-current", "true")
+    })
+
+    it("draws one dot when every slide fits", () => {
+      renderCarousel()
+      layOut(3)
+      expect(dots()).toHaveLength(1)
+    })
+
+    it("keeps a dot per slide when each fills the view", () => {
+      renderCarousel()
+      layOut(1)
+      expect(dots()).toHaveLength(3)
+    })
   })
 
   it("clamps navigation to the slides that exist", () => {

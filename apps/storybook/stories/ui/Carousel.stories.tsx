@@ -86,6 +86,31 @@ export const StartingSlide: Story = {
   render: (args, ctx) => <Gallery c={copy(ctx)} defaultActiveIndex={2} {...args} />,
 }
 
+/**
+ * Two slides per view (`basis-[calc(50%-8px)]`, half the track less half
+ * the 16px gap). Four slides make three views, so there are three dots:
+ * the last view shows the third and fourth slides, and a swipe to the end
+ * selects the last dot.
+ */
+export const SeveralPerView: Story = {
+  parameters: { controls: { disable: true } },
+  render: (_args, ctx) => {
+    const c = copy(ctx)
+    return (
+      <Carousel aria-label={c.gallery} className="w-[36rem] max-w-full space-y-4">
+        <CarouselContent>
+          {c.slides.map((caption) => (
+            <CarouselItem key={caption} className="basis-[calc(50%-8px)]">
+              <Slide caption={caption} />
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselDots />
+      </Carousel>
+    )
+  },
+}
+
 const ITEM_COUNTS = [2, 3, 4] as const
 const ACTIVE_ITEMS = [1, 2, 3, 4] as const
 

@@ -150,7 +150,7 @@ const ContentCarouselNext = React.forwardRef<
   HTMLButtonElement,
   React.ButtonHTMLAttributes<HTMLButtonElement>
 >(({ className, ...props }, ref) => {
-  const { activeIndex, count, scrollTo } = useCarousel()
+  const { activeIndex, count, lastIndex, scrollTo } = useCarousel()
   const itemsPerView = React.useContext(ItemsPerViewContext)
   return (
     <button
@@ -159,8 +159,9 @@ const ContentCarouselNext = React.forwardRef<
       data-slot="carousel-next"
       aria-label="Next"
       // The last page starts at `count - itemsPerView`: past it there is
-      // nothing left to bring into view.
-      disabled={activeIndex >= count - itemsPerView}
+      // nothing left to bring into view. The carousel measures the same stop
+      // from layout; the arithmetic holds before layout exists.
+      disabled={activeIndex >= Math.min(lastIndex, count - itemsPerView)}
       onClick={() => scrollTo(activeIndex + 1)}
       className={cn(arrowClasses, className)}
       {...props}

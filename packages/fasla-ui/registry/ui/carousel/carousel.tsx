@@ -7,7 +7,9 @@ import { cn } from "../../../src/lib/utils"
  * A scroll-snap carousel. The engine is the browser's: the track is a real
  * `overflow-x` scroller with `scroll-snap`, so touch, trackpad and scrollbar
  * gestures all work, and RTL comes free from logical layout — no `rtl:`
- * overrides, no physical offsets, no measuring in JavaScript.
+ * overrides and no physical offsets. The one thing it measures is how far
+ * the track can scroll, so that several slides per view still end on a
+ * reachable slide.
  *
  * The active slide is *read back* from the scroller with an
  * IntersectionObserver rather than derived from React state, so it stays
@@ -19,9 +21,15 @@ import { cn } from "../../../src/lib/utils"
  * never a prop.
  */
 
+// useLayoutEffect warns during server rendering in React 18.
+const useIsomorphicLayoutEffect =
+  typeof window === "undefined" ? React.useEffect : React.useLayoutEffect
+
 interface CarouselContextValue {
   activeIndex: number
   count: number
+  /** The last slide that can sit at the start of the view; -1 with no slides. */
+  lastIndex: number
   /** Navigate to a slide: scrolls the track and (uncontrolled) sets the index. */
   scrollTo: (index: number) => void
   registerItem: (el: HTMLElement) => () => void
@@ -112,6 +120,41 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
     const itemsRef = React.useRef(items)
     itemsRef.current = items
 
+    /*
+     * The last slide that can sit at the start of the view. With one slide
+     * per view it is the last slide. With several, the track runs out of room
+     * sooner: three half-width slides stop at the second, which shows the
+     * second and the third. Navigation and the observer both stop there, and
+     * there is a dot per stop, so every dot names a view the track can reach.
+     * Measured from layout; with none (a hidden carousel, a test DOM) it is
+     * the last slide.
+     */
+    const [measuredLast, setMeasuredLast] = React.useState<number | null>(null)
+    useIsomorphicLayoutEffect(() => {
+      if (!track || items.length === 0) return
+      const measure = () => {
+        const view = track.clientWidth
+        if (view === 0) return setMeasuredLast(null)
+        const end = items[items.length - 1]!.getBoundingClientRect()
+        // The first slide from which everything to the end fits in the view.
+        // The span runs edge to edge, so it holds whichever side is the start.
+        const last = items.findIndex((item) => {
+          const box = item.getBoundingClientRect()
+          return Math.max(box.right, end.right) - Math.min(box.left, end.left) <= view + 1
+        })
+        setMeasuredLast(last === -1 ? null : last)
+      }
+      measure()
+      if (typeof ResizeObserver === "undefined") return
+      const observer = new ResizeObserver(measure)
+      observer.observe(track)
+      for (const item of items) observer.observe(item)
+      return () => observer.disconnect()
+    }, [track, items])
+    const lastIndex = items.length === 0 ? -1 : Math.min(measuredLast ?? items.length, items.length - 1)
+    const lastIndexRef = React.useRef(lastIndex)
+    lastIndexRef.current = lastIndex
+
     /** Whether the track is, or is on its way to, showing `index`. */
     const isShowing = React.useCallback(
       (index: number) =>
@@ -143,7 +186,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
      */
     const scrollTo = React.useCallback(
       (index: number) => {
-        const clamped = Math.max(0, Math.min(itemsRef.current.length - 1, index))
+        const clamped = Math.max(0, Math.min(lastIndexRef.current, index))
         const state = stateRef.current
         if (clamped !== state.activeIndex) {
           if (!state.isControlled) setInternalIndex(clamped)
@@ -177,8 +220,11 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       const observer = new IntersectionObserver(
         (entries) => {
           for (const entry of entries) ratios.set(entry.target, entry.intersectionRatio)
-          const next = items.findIndex((item) => (ratios.get(item) ?? 0) >= 0.5)
-          if (next === -1 || next === visibleIndexRef.current) return
+          const first = items.findIndex((item) => (ratios.get(item) ?? 0) >= 0.5)
+          if (first === -1) return
+          // At the end of a multi-slide view the start can't go past the last stop.
+          const next = Math.min(first, lastIndexRef.current)
+          if (next === visibleIndexRef.current) return
           visibleIndexRef.current = next
           if (targetRef.current !== null) {
             if (next !== targetRef.current) return
@@ -248,12 +294,13 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       () => ({
         activeIndex,
         count: items.length,
+        lastIndex,
         scrollTo,
         registerItem,
         indexOf,
         setTrack,
       }),
-      [activeIndex, items.length, scrollTo, registerItem, indexOf]
+      [activeIndex, items.length, lastIndex, scrollTo, registerItem, indexOf]
     )
 
     /*
@@ -274,7 +321,7 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
       if (target.closest('input, textarea, select, [contenteditable="true"]')) return
       event.preventDefault()
       if (key === "Home") return scrollTo(0)
-      if (key === "End") return scrollTo(itemsRef.current.length - 1)
+      if (key === "End") return scrollTo(lastIndexRef.current)
       const isRtl = getComputedStyle(event.currentTarget).direction === "rtl"
       const forward = (key === "ArrowRight") !== isRtl
       scrollTo(stateRef.current.activeIndex + (forward ? 1 : -1))
@@ -417,7 +464,9 @@ const CarouselDots = React.forwardRef<HTMLDivElement, CarouselDotsProps>(
     if (!standalone && !carousel) {
       throw new Error("CarouselDots needs a Carousel around it, or a count of its own")
     }
-    const count = standalone ? Math.max(0, ownCount) : carousel!.count
+    // One dot per view the track can reach: a dot per slide, unless several
+    // share the view.
+    const count = standalone ? Math.max(0, ownCount) : carousel!.lastIndex + 1
     const activeIndex = standalone
       ? Math.max(0, Math.min(count - 1, ownIndex ?? 0))
       : carousel!.activeIndex
