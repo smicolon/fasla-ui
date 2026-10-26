@@ -114,6 +114,20 @@ describe("Sidebar — expanded and collapsed", () => {
     expect(screen.getByText("Dashboard")).toHaveClass("sr-only")
   })
 
+  it("collapsed: cells take the expanded rows' corners and tokens", () => {
+    render(<Example defaultCollapsed />)
+    expect(screen.getByRole("link", { name: "Dashboard" })).toHaveClass(
+      "rounded-[var(--radius-sm)]",
+      "text-sidebar-foreground",
+      "hover:bg-sidebar-accent"
+    )
+    expect(screen.getByRole("button", { name: "Orders" })).toHaveClass(
+      "rounded-[var(--radius-sm)]",
+      "bg-sidebar-primary",
+      "text-sidebar-primary-foreground"
+    )
+  })
+
   it("collapsed: an item whose sub-item is the current page shows as selected", () => {
     render(<Example defaultCollapsed />)
     expect(screen.getByRole("button", { name: "Orders" })).toHaveAttribute("data-selected")

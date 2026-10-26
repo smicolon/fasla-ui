@@ -156,7 +156,7 @@ function ToggleName({ collapsed, collapseLabel, expandLabel }: { collapsed: bool
 }
 
 export interface SidebarHeaderProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "children"> {
-  /** The full logo, shown expanded. Figma: 28px tall. */
+  /** The full logo, shown expanded. Figma: the English lockup 90px wide, the Arabic 28px tall. */
   logo?: React.ReactNode
   /** The logo's icon alone, shown collapsed. Figma: 28 × 28px. */
   logoIcon?: React.ReactNode
@@ -451,12 +451,14 @@ const SidebarItem = React.forwardRef<HTMLElement, SidebarItemProps>(
                 }
               }}
               className={cn(
-                "relative flex size-10 items-center justify-center",
+                // Corners and icon colour as the expanded rows: Figma `Radius Corner/XS`
+                // (6px) and `sidebar-foreground` at rest.
+                "relative flex size-10 items-center justify-center rounded-[var(--radius-sm)]",
                 "transition-[color,background-color,border-color,box-shadow] duration-150 motion-reduce:transition-none",
                 focusRing,
                 current
                   ? "bg-sidebar-primary text-sidebar-primary-foreground forced-colors:border-[Highlight]"
-                  : "text-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
+                  : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground",
                 className
               )}
               {...props}

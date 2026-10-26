@@ -181,7 +181,7 @@
         "className": "Extra classes for the <code>aside</code> element."
       },
       "headerProps": {
-        "logo": "The full logo, shown while expanded. Figma sets it 28px tall.",
+        "logo": "The full logo, shown while expanded. In Figma the English logo is 90px wide and the Arabic logo 28px tall.",
         "logoIcon": "The logo's icon alone, shown while collapsed. Figma sets it at 28px.",
         "collapseLabel": "The toggle's accessible name while expanded.",
         "expandLabel": "The toggle's accessible name while collapsed.",

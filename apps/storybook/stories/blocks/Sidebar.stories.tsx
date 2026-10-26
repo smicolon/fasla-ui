@@ -137,18 +137,20 @@ const PHOTO = "/samples/avatar-portrait.png"
 const icon = (Icon: LucideIcon) => <Icon strokeWidth={1.5} />
 
 /**
- * The Fasla lockup at Figma's 28px, drawn, never re-set: the Arabic lockup in
+ * The Fasla lockup at Figma's size — the English one 90px wide, the Arabic one
+ * 28px tall — drawn, never re-set: the Arabic lockup in
  * RTL, ink on light and white on dark. With no `theme` it follows the theme
  * toolbar; a Light And Dark panel passes its own.
  */
 function Logo({ dir, theme }: { dir: Dir; theme?: "light" | "dark" }) {
   const alt = dir === "rtl" ? "فاصلة" : "Fasla"
+  const size = dir === "rtl" ? "h-7 w-auto" : "h-auto w-[90px]"
   const src = (dark: boolean) => `/brand/fasla-lockup-${dir}${dark ? "-onDark" : ""}.svg`
-  if (theme) return <img src={src(theme === "dark")} alt={alt} className="h-7 w-auto" />
+  if (theme) return <img src={src(theme === "dark")} alt={alt} className={size} />
   return (
     <>
-      <img src={src(false)} alt={alt} className="h-7 w-auto dark:hidden" />
-      <img src={src(true)} alt={alt} className="hidden h-7 w-auto dark:block" />
+      <img src={src(false)} alt={alt} className={`${size} dark:hidden`} />
+      <img src={src(true)} alt={alt} className={`hidden ${size} dark:block`} />
     </>
   )
 }

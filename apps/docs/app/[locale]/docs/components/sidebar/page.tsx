@@ -39,28 +39,32 @@ const PHOTO = "/samples/avatar-portrait.png"
 const icon = (Icon: LucideIcon) => <Icon strokeWidth={1.5} />
 
 /**
- * The Fasla lockup at Figma's 28px (87px wide), drawn, never re-set: ink on
- * light, white on dark, and the Arabic lockup on the Arabic page.
+ * The Fasla lockup at Figma's size, drawn, never re-set: the English one 90px
+ * wide, the Arabic one 28px tall. Ink on light, white on dark, and the Arabic
+ * lockup on the Arabic page.
  */
 function Logo({ rtl, alt }: { rtl: boolean; alt: string }) {
   const file = rtl ? "rtl" : "ltr"
-  const width = rtl ? 98 : 87
+  const width = rtl ? 98 : 90
+  const height = rtl ? 28 : 29
+  const style = rtl ? LOCKUP_RTL : LOCKUP_LTR
   return (
     <>
-      <Image src={`/brand/fasla-lockup-${file}.svg`} alt={alt} width={width} height={28} style={LOCKUP} className="dark:hidden" />
+      <Image src={`/brand/fasla-lockup-${file}.svg`} alt={alt} width={width} height={height} style={style} className="dark:hidden" />
       <Image
         src={`/brand/fasla-lockup-${file}-onDark.svg`}
         alt={alt}
         width={width}
-        height={28}
-        style={LOCKUP}
+        height={height}
+        style={style}
         className="hidden dark:block"
       />
     </>
   )
 }
 
-const LOCKUP = { height: 28, width: "auto" } as const
+const LOCKUP_LTR = { width: 90, height: "auto" } as const
+const LOCKUP_RTL = { height: 28, width: "auto" } as const
 
 /** The mark alone, 28px, for the collapsed header. */
 function Mark({ alt }: { alt: string }) {
