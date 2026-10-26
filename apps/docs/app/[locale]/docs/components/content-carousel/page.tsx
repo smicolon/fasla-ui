@@ -53,17 +53,35 @@ export default function ContentCarouselPage() {
     </ContentCarousel>
   )
 
-  // One table: the view, then the state trio, then the arrows, then parts
-  // and styling.
-  const props: PropRow[] = [
-    { prop: "itemsPerView", type: "1 | 2 | 3", fallback: "1", description: s.rich("props.itemsPerView", rich) },
-    { prop: "activeIndex", type: "number", fallback: "", description: s.rich("props.activeIndex", rich) },
-    { prop: "defaultActiveIndex", type: "number", fallback: "0", description: s.rich("props.defaultActiveIndex", rich) },
-    { prop: "onActiveIndexChange", type: "(index) => void", fallback: "", description: s.rich("props.onActiveIndexChange", rich) },
-    { prop: "previousLabel", type: "string", fallback: '"Previous"', description: s.rich("props.previousLabel", rich) },
-    { prop: "nextLabel", type: "string", fallback: '"Next"', description: s.rich("props.nextLabel", rich) },
-    { prop: "ContentCarouselItem", type: "{ className }", fallback: "", description: s.rich("props.item", rich) },
-    { prop: "className", type: "string", fallback: "", description: s.rich("props.className", rich) },
+  const row = (prop: string, type: string, fallback: string, key: string): PropRow => ({
+    prop,
+    type,
+    fallback,
+    description: s.rich(`props.${key}`, rich),
+  })
+  const propTables: { part: string; rows: PropRow[] }[] = [
+    {
+      part: "ContentCarousel",
+      rows: [
+        row("itemsPerView", "1 | 2 | 3", "1", "itemsPerView"),
+        row("activeIndex", "number", "", "activeIndex"),
+        row("defaultActiveIndex", "number", "0", "defaultActiveIndex"),
+        row("onActiveIndexChange", "(index) => void", "", "onActiveIndexChange"),
+        row("previousLabel", "string", '"Previous"', "previousLabel"),
+        row("nextLabel", "string", '"Next"', "nextLabel"),
+        row("aria-label", "string", "", "ariaLabel"),
+        row("children", "ReactNode", "", "children"),
+        row("className", "string", "", "className"),
+      ],
+    },
+    {
+      part: "ContentCarouselItem",
+      rows: [
+        row("aria-label", "string", "", "itemAriaLabel"),
+        row("children", "ReactNode", "", "itemChildren"),
+        row("className", "string", "", "className"),
+      ],
+    },
   ]
 
   return (
@@ -143,7 +161,14 @@ export default function ContentCarouselPage() {
       {/* Props */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("props")}</h2>
-        <PropsTable rows={props} />
+        {propTables.map(({ part, rows }) => (
+          <div key={part} className="space-y-3">
+            <h3 className="text-lg font-semibold">
+              <code dir="ltr">{part}</code>
+            </h3>
+            <PropsTable rows={rows} />
+          </div>
+        ))}
       </section>
 
       {/* Usage */}

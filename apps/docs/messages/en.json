@@ -1112,10 +1112,17 @@
         "activeIndex": "Active slide, when controlled.",
         "defaultActiveIndex": "Slide shown at first.",
         "onActiveIndexChange": "Called when the active slide changes, dots and manual scrolling alike.",
-        "content": "The scroll-snap track that holds the slides.",
-        "item": "One slide. Override <code>basis-full</code> to show more than one per view.",
-        "dots": "The dot stepper. Inside a Carousel it reads the carousel; with <code>count</code>, <code>activeIndex</code> and <code>onActiveIndexChange</code> it stands alone. <code>label</code> names each dot for your locale.",
-        "className": "Extra classes for the part."
+        "ariaLabel": "Names the carousel for assistive technology. Always pass it, or <code>aria-labelledby</code>.",
+        "children": "The track, <code>CarouselContent</code>, and the dots, <code>CarouselDots</code>.",
+        "className": "Extra classes for the part.",
+        "contentChildren": "The slides, one <code>CarouselItem</code> each.",
+        "itemAriaLabel": "Names the slide by its content. The default is its position, “2 / 3”.",
+        "itemChildren": "The slide's content.",
+        "itemClassName": "Extra classes. Override <code>basis-full</code> to show more than one slide per view.",
+        "dotsCount": "How many dots, for dots on their own. Leave it out inside a Carousel, which counts its own slides.",
+        "dotsActiveIndex": "The active dot, for dots on their own.",
+        "dotsOnActiveIndexChange": "Called with a dot's index when it is pressed, for dots on their own.",
+        "dotsLabel": "Names each dot for your locale. The default is its position, “2 / 3”."
       }
     },
     "contentCarousel": {
@@ -1167,8 +1174,11 @@
         "onActiveIndexChange": "Called when the first visible card changes.",
         "previousLabel": "Accessible name for the backward arrow.",
         "nextLabel": "Accessible name for the forward arrow.",
-        "item": "One card slot: <code>card</code> on a 1px border, with no padding of its own.",
-        "className": "Extra classes for the part."
+        "ariaLabel": "Names the carousel for assistive technology. Always pass it, or <code>aria-labelledby</code>.",
+        "children": "The cards, one <code>ContentCarouselItem</code> each.",
+        "className": "Extra classes for the part.",
+        "itemAriaLabel": "Names the card by its content. The default is its position, “2 / 4”.",
+        "itemChildren": "The card's content: text with padding of its own, or media edge to edge."
       }
     },
     "combobox": {

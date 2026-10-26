@@ -1112,10 +1112,17 @@
         "activeIndex": "الشريحة النشطة عند التحكم بالحالة من الخارج.",
         "defaultActiveIndex": "الشريحة المعروضة في البداية.",
         "onActiveIndexChange": "تُستدعى عند تغيّر الشريحة النشطة، سواء من النقاط أو من التمرير اليدوي.",
-        "content": "مسار <code>scroll-snap</code> الذي يحمل الشرائح.",
-        "item": "شريحة واحدة. بدّل <code>basis-full</code> لعرض أكثر من شريحة في المرة الواحدة.",
-        "dots": "مؤشرات الشرائح. داخل عارض الشرائح تقرأ حالته، وتعمل وحدها مع الخصائص <code>count</code>، <code>activeIndex</code>، <code>onActiveIndexChange</code>. وتسمّي <code>label</code> كل نقطة بلغتك.",
-        "className": "أصناف إضافية للجزء."
+        "ariaLabel": "يسمّي المكوّن للتقنيات المساعدة. مرّره دائمًا، أو مرّر <code>aria-labelledby</code> بدلًا منه.",
+        "children": "المسار <code>CarouselContent</code> ومؤشرات الشرائح <code>CarouselDots</code>.",
+        "className": "أصناف إضافية للجزء.",
+        "contentChildren": "الشرائح، لكل شريحة <code>CarouselItem</code>.",
+        "itemAriaLabel": "يسمّي الشريحة بمحتواها. والاسم الافتراضي موضعها، مثل \"2 / 3\".",
+        "itemChildren": "محتوى الشريحة.",
+        "itemClassName": "أصناف إضافية. بدّل <code>basis-full</code> لعرض أكثر من شريحة في المرة الواحدة.",
+        "dotsCount": "عدد النقاط، عند استخدام المؤشرات وحدها. اتركه داخل عارض الشرائح، فهو يعدّ شرائحه بنفسه.",
+        "dotsActiveIndex": "النقطة النشطة، عند استخدام المؤشرات وحدها.",
+        "dotsOnActiveIndexChange": "تُستدعى برقم النقطة عند الضغط عليها، عند استخدام المؤشرات وحدها.",
+        "dotsLabel": "تسمّي كل نقطة بلغتك. والاسم الافتراضي موضعها، مثل \"2 / 3\"."
       }
     },
     "contentCarousel": {
@@ -1167,8 +1174,11 @@
         "onActiveIndexChange": "تُستدعى عند تغيّر أول بطاقة ظاهرة.",
         "previousLabel": "الاسم الذي يسمعه قارئ الشاشة لسهم الرجوع.",
         "nextLabel": "الاسم الذي يسمعه قارئ الشاشة لسهم التقدّم.",
-        "item": "موضع (slot) لبطاقة واحدة: خلفية <code>card</code> وإطار بلا حشو داخلي.",
-        "className": "أصناف إضافية للجزء."
+        "ariaLabel": "يسمّي المكوّن للتقنيات المساعدة. مرّره دائمًا، أو مرّر <code>aria-labelledby</code> بدلًا منه.",
+        "children": "البطاقات، لكل بطاقة <code>ContentCarouselItem</code>.",
+        "className": "أصناف إضافية للجزء.",
+        "itemAriaLabel": "يسمّي البطاقة بمحتواها. والاسم الافتراضي موضعها، مثل \"2 / 4\".",
+        "itemChildren": "محتوى البطاقة: نص بحشو داخلي خاص به، أو وسائط من حافة إلى حافة."
       }
     },
     "combobox": {
