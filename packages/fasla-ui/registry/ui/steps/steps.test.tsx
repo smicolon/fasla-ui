@@ -1,6 +1,6 @@
 import * as React from "react"
-import { describe, it, expect } from "vitest"
-import { render, screen, within } from "@testing-library/react"
+import { describe, it, expect, beforeEach, afterEach, vi } from "vitest"
+import { act, render, screen, within } from "@testing-library/react"
 import { Steps, StepsItem, fitHorizontalSteps, stepEndInset, type StepStatus, type StepsProps } from "./steps"
 
 /**
@@ -265,5 +265,171 @@ describe("Steps — fitting a horizontal row to its labels", () => {
     const fitted = fitHorizontalSteps({ ...row, width: 300, count: 1, first: 80, last: 80 })
     expect(fitted.start).toBe(21)
     expect(fitted.end).toBe(21)
+  })
+})
+
+/**
+ * The measuring in a browser, simulated: jsdom has no layout, so these give
+ * each label a width from its text (`charWidth` px a character, held to its
+ * `max-width`), the list a width, and stand in for ResizeObserver, the next
+ * frame and `document.fonts`. What they prove is when Steps measures again,
+ * not the layout itself, which was measured in Chrome, Safari and Firefox.
+ */
+describe("Steps — measuring the labels again", () => {
+  let listWidth = 400
+  let charWidth = 10
+  const observers: FakeResizeObserver[] = []
+  const fonts = new EventTarget()
+  const restore: (() => void)[] = []
+
+  class FakeResizeObserver {
+    observed = new Set<Element>()
+    constructor(private readonly callback: ResizeObserverCallback) {
+      observers.push(this)
+    }
+    observe(el: Element) {
+      this.observed.add(el)
+    }
+    unobserve(el: Element) {
+      this.observed.delete(el)
+    }
+    disconnect() {
+      this.observed.clear()
+    }
+    /** Reports a size change, as the browser would. */
+    fire() {
+      this.callback([], this as unknown as ResizeObserver)
+    }
+  }
+
+  const override = <T extends object, K extends keyof T>(target: T, key: K, descriptor: PropertyDescriptor) => {
+    const previous = Object.getOwnPropertyDescriptor(target, key)
+    Object.defineProperty(target, key, { configurable: true, ...descriptor })
+    restore.push(() => (previous ? Object.defineProperty(target, key, previous) : delete target[key]))
+  }
+
+  beforeEach(() => {
+    listWidth = 400
+    charWidth = 10
+    observers.length = 0
+    vi.stubGlobal("ResizeObserver", FakeResizeObserver)
+    vi.stubGlobal("requestAnimationFrame", (run: FrameRequestCallback) => {
+      run(0)
+      return 1
+    })
+    vi.stubGlobal("cancelAnimationFrame", () => {})
+    override(document, "fonts", { value: fonts })
+    override(HTMLElement.prototype, "clientWidth", {
+      get(this: HTMLElement) {
+        return this.dataset.slot === "steps" ? listWidth : 0
+      },
+    })
+    override(HTMLElement.prototype, "getBoundingClientRect", {
+      value(this: HTMLElement) {
+        const width =
+          this.dataset.slot === "step-icon"
+            ? 38
+            : this.dataset.slot === "step-text"
+              ? Math.min(
+                  (this.textContent ?? "").length * charWidth,
+                  this.style.maxWidth && this.style.maxWidth !== "none" ? parseFloat(this.style.maxWidth) : Infinity
+                )
+              : 0
+        return { x: 0, y: 0, top: 0, left: 0, right: width, bottom: 0, height: 0, width } as DOMRect
+      },
+    })
+  })
+
+  afterEach(() => {
+    vi.unstubAllGlobals()
+    restore.splice(0).reverse().forEach((undo) => undo())
+  })
+
+  const Row = ({ first = "Basket", last = "Payment" }: { first?: string; last?: string }) => (
+    <Steps>
+      <StepsItem key={first} label={first} statusLabel="" />
+      <StepsItem label="Shipping" statusLabel="" />
+      <StepsItem key={last} label={last} statusLabel="" />
+    </Steps>
+  )
+  const list = () => screen.getByRole("list")
+  const inset = (side: "start" | "end") => parseFloat(list().style.getPropertyValue(`--steps-${side}`))
+  const watched = () => [...observers.at(-1)!.observed]
+  const label = (text: string) => screen.getByText(text).closest<HTMLElement>("[data-slot=step-text]")!
+
+  it("measures the first and last labels before the first paint", () => {
+    render(<Row />)
+    // "Basket" is 60px: it reaches 11px past its 38px bullet. "Payment", 70px, 16px.
+    expect(inset("start")).toBeCloseTo(11, 3)
+    expect(inset("end")).toBeCloseTo(16, 3)
+    expect(watched()).toEqual([list(), label("Basket"), label("Payment")])
+  })
+
+  it("measures again when a web font finishes loading", () => {
+    render(<Row />)
+    charWidth = 12
+    act(() => {
+      fonts.dispatchEvent(new Event("loadingdone"))
+    })
+    expect(inset("start")).toBeCloseTo((6 * 12 - 38) / 2, 3)
+    expect(inset("end")).toBeCloseTo((7 * 12 - 38) / 2, 3)
+  })
+
+  it("measures again when a label or the list changes size", () => {
+    render(<Row />)
+    const cap = () => parseFloat(list().style.getPropertyValue("--steps-cap"))
+    const before = cap()
+    listWidth = 600
+    act(() => observers.at(-1)!.fire())
+    expect(cap()).toBeGreaterThan(before)
+    expect(cap()).toBeCloseTo(fitHorizontalSteps({ width: 600, count: 3, first: 60, last: 70, bullet: 38, gap: 16 }).cap, 3)
+  })
+
+  it("measures again, and watches the new labels, when the labels are replaced", async () => {
+    const { rerender } = render(<Row />)
+    const old = label("Basket")
+    // A language switch: new labels, new keys, so new elements.
+    rerender(<Row first="السلة الكبيرة" last="الدفع" />)
+    await act(async () => {})
+    expect(inset("start")).toBeCloseTo((13 * 10 - 38) / 2, 3)
+    expect(inset("end")).toBeCloseTo((5 * 10 - 38) / 2, 3)
+    expect(watched()).toContain(label("السلة الكبيرة"))
+    expect(watched()).not.toContain(old)
+  })
+
+  it("measures again when a label's text changes in place", async () => {
+    const { rerender } = render(
+      <Steps>
+        <StepsItem label="Cart" statusLabel="" />
+        <StepsItem label="Payment" statusLabel="" />
+      </Steps>
+    )
+    expect(inset("start")).toBeCloseTo(1, 3)
+    rerender(
+      <Steps>
+        <StepsItem label="Shopping cart" statusLabel="" />
+        <StepsItem label="Payment" statusLabel="" />
+      </Steps>
+    )
+    await act(async () => {})
+    expect(inset("start")).toBeCloseTo((13 * 10 - 38) / 2, 3)
+  })
+
+  it("stops measuring, and clears the values, when the list turns vertical", () => {
+    const { rerender } = render(<Row />)
+    const observer = observers.at(-1)!
+    rerender(
+      <Steps orientation="vertical">
+        <StepsItem label="Basket" statusLabel="" />
+        <StepsItem label="Payment" statusLabel="" />
+      </Steps>
+    )
+    expect(observer.observed.size).toBe(0)
+    expect(list().style.getPropertyValue("--steps-start")).toBe("")
+    charWidth = 20
+    act(() => {
+      fonts.dispatchEvent(new Event("loadingdone"))
+    })
+    expect(list().style.getPropertyValue("--steps-start")).toBe("")
   })
 })

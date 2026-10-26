@@ -244,13 +244,22 @@ const useIsomorphicLayoutEffect = typeof window === "undefined" ? React.useEffec
 
 /**
  * Measures a horizontal list's first and last labels and sets `--steps-start`,
- * `--steps-end` and `--steps-cap` on it, before the browser paints. It measures
- * again when the list or those labels change size, a font loading included,
- * one frame later so the new values never resize what is being observed
+ * `--steps-end` and `--steps-cap` on it, before the browser paints, then keeps
+ * them right as long as the list is mounted. It measures again, one frame
+ * later, whenever:
+ *  - the list changes size (a window resize, a container that narrows);
+ *  - the first or last label changes size (a web font finishing loading, a
+ *    larger text setting, its text changing in place);
+ *  - the steps or their text change in the DOM (a label replaced by a new
+ *    one, the language switched, a step added or removed): the new first and
+ *    last labels are watched from then on;
+ *  - the page's fonts finish loading, in case a font changed a label's
+ *    natural width but not its held size.
+ * One frame later, so the new values never resize what is being observed
  * mid-delivery. The values follow from the labels' natural widths and the
- * list's, so setting them does not change what is measured: no loop.
+ * list's, so setting them changes nothing that is measured: no loop.
  */
-function useHorizontalFit(list: React.RefObject<HTMLOListElement | null>, enabled: boolean, count: number) {
+function useHorizontalFit(list: React.RefObject<HTMLOListElement | null>, enabled: boolean) {
   useIsomorphicLayoutEffect(() => {
     const ol = list.current
     if (!ol) return
@@ -259,24 +268,28 @@ function useHorizontalFit(list: React.RefObject<HTMLOListElement | null>, enable
       names.forEach((name) => ol.style.removeProperty(name))
       return
     }
-    const texts = () => Array.from(ol.querySelectorAll<HTMLElement>("[data-slot=step-text]"))
+    /** The first and last steps' text, the only labels the insets depend on. */
+    const ends = () => {
+      const all = Array.from(ol.querySelectorAll<HTMLElement>("[data-slot=step-text]"))
+      return { count: all.length, first: all[0], last: all[all.length - 1] }
+    }
     const fit = () => {
-      const all = texts()
+      const { count, first, last } = ends()
       const bulletEl = ol.querySelector<HTMLElement>("[data-slot=step-icon]")
       const width = ol.clientWidth
-      if (!all.length || !bulletEl || width === 0) return
-      const ends = [all[0]!, all[all.length - 1]!]
+      if (!first || !last || !bulletEl || width === 0) return
       // The natural width: the text with its cap lifted, read in one layout.
-      const caps = ends.map((el) => el.style.maxWidth)
-      ends.forEach((el) => (el.style.maxWidth = "none"))
-      const [first, last] = ends.map((el) => el.getBoundingClientRect().width)
-      ends.forEach((el, i) => (el.style.maxWidth = caps[i]!))
+      const pair = [first, last]
+      const caps = pair.map((el) => el.style.maxWidth)
+      pair.forEach((el) => (el.style.maxWidth = "none"))
+      const [firstWidth, lastWidth] = pair.map((el) => el.getBoundingClientRect().width)
+      pair.forEach((el, i) => (el.style.maxWidth = caps[i]!))
       const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16
       const fitted = fitHorizontalSteps({
         width,
-        count: all.length,
-        first: first!,
-        last: last!,
+        count,
+        first: firstWidth!,
+        last: lastWidth!,
         bullet: bulletEl.getBoundingClientRect().width,
         gap: rem,
       })
@@ -285,19 +298,47 @@ function useHorizontalFit(list: React.RefObject<HTMLOListElement | null>, enable
       ol.style.setProperty("--steps-cap", `${fitted.cap.toFixed(3)}px`)
     }
     fit()
-    if (typeof ResizeObserver === "undefined") return
+
     let frame = 0
-    const observer = new ResizeObserver(() => {
+    const schedule = () => {
       cancelAnimationFrame(frame)
       frame = requestAnimationFrame(fit)
-    })
-    observer.observe(ol)
-    texts().forEach((el) => observer.observe(el))
+    }
+
+    // The list and its current first and last labels, swapped as they change.
+    const sizes = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(schedule)
+    let watched: HTMLElement[] = []
+    const watch = () => {
+      if (!sizes) return
+      const { first, last } = ends()
+      const next = [ol, first, last].filter((el): el is HTMLElement => Boolean(el))
+      watched.filter((el) => !next.includes(el)).forEach((el) => sizes.unobserve(el))
+      next.filter((el) => !watched.includes(el)).forEach((el) => sizes.observe(el))
+      watched = next
+    }
+    watch()
+
+    // Steps or text changing in the DOM. Attributes are left out: `fit` sets
+    // styles, and must not wake this up.
+    const content =
+      typeof MutationObserver === "undefined"
+        ? null
+        : new MutationObserver(() => {
+            watch()
+            schedule()
+          })
+    content?.observe(ol, { childList: true, subtree: true, characterData: true })
+
+    const fonts = typeof document !== "undefined" ? document.fonts : undefined
+    fonts?.addEventListener?.("loadingdone", schedule)
+
     return () => {
       cancelAnimationFrame(frame)
-      observer.disconnect()
+      sizes?.disconnect()
+      content?.disconnect()
+      fonts?.removeEventListener?.("loadingdone", schedule)
     }
-  }, [enabled, count])
+  }, [enabled])
 }
 
 const stepTailLineVariants = cva("block", {
@@ -355,7 +396,7 @@ const Steps = React.forwardRef<HTMLOListElement, StepsProps>(
       },
       [ref]
     )
-    useHorizontalFit(list, orientation === "horizontal", items.length)
+    useHorizontalFit(list, orientation === "horizontal")
     return (
       <StepsContext.Provider value={look}>
         <ol
