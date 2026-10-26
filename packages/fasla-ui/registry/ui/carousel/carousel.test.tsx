@@ -311,6 +311,32 @@ describe("Carousel", () => {
     expect(dots()[0]).toHaveAttribute("aria-current", "true")
   })
 
+  it.each(["", "true", "plaintext-only"])(
+    "keeps its hands off arrow keys in contenteditable=%j",
+    (value) => {
+      render(
+        <Carousel aria-label="Gallery">
+          <CarouselContent>
+            <CarouselItem>
+              <div contentEditable={value as "true"} suppressContentEditableWarning data-testid="editor">
+                <span data-testid="word">Note</span>
+              </div>
+            </CarouselItem>
+            <CarouselItem>B</CarouselItem>
+          </CarouselContent>
+          <CarouselDots />
+        </Carousel>
+      )
+      for (const key of ["ArrowRight", "End"]) {
+        const event = new KeyboardEvent("keydown", { key, bubbles: true, cancelable: true })
+        screen.getByTestId("word").dispatchEvent(event)
+        expect(event.defaultPrevented).toBe(false)
+      }
+      expect(scrollCalls).toHaveLength(0)
+      expect(dots()[0]).toHaveAttribute("aria-current", "true")
+    }
+  )
+
   it("lets a caller's onKeyDown cancel the navigation", () => {
     const onKeyDown = vi.fn((event: React.KeyboardEvent) => event.preventDefault())
     renderCarousel({ onKeyDown })

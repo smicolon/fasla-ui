@@ -325,7 +325,12 @@ const Carousel = React.forwardRef<HTMLDivElement, CarouselProps>(
         return
       }
       const target = event.target as HTMLElement
-      if (target.closest('input, textarea, select, [contenteditable="true"]')) return
+      // Every editable state: `contenteditable` empty, "true" or
+      // "plaintext-only", as well as the native fields.
+      const editable =
+        target.isContentEditable ||
+        target.closest('input, textarea, select, [contenteditable]:not([contenteditable="false"])')
+      if (editable) return
       event.preventDefault()
       if (key === "Home") return scrollTo(0)
       if (key === "End") return scrollTo(lastIndexRef.current)
