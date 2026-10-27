@@ -72,6 +72,8 @@ export const LEGEND = {
 export const EXCLUDED_BLOCK_PAGES = [
   // Settled by Yasmin on 2026-10-15.
   { page: "✦  🟢 Y | Error State - 28 Blocks ✅ ✅", id: "40935:43028" },
+  // Settled by Yasmin on 2026-10-27: Navbar is a block (Type × Breakpoint × Direction).
+  { page: "✦  🟢 Y | Navbar - 17 Blocks ✅", id: "4108:1605" },
 ]
 
 /** Atoms by shape whose page has no trailing ✅, so the selection rule excludes them.
@@ -135,7 +137,8 @@ export const CODE_MAP = {
   textarea: { set: "Textarea", page: "3975:63617" },
   tooltip: { set: "Tooltip", page: "3822:55767" },
   "data-table": { set: "Table", page: "14885:1510" },
-  navbar: { set: "Navbar", page: "4108:1605" },
+  // Block: the Navbar block set (4103:4910) is in index-blocks, not an atom (Yasmin, 2026-10-27).
+  navbar: null,
   // No in-scope Figma atom:
   // Social Icons sits on the Icons page (🟡) and Fasla Logo on the Logo page (no ✅).
   "social-icons": null, "fasla-logo": null,
@@ -196,6 +199,15 @@ export const CODE_MAP = {
       "hover-index-list", "mosaic-statement-tile", "contact-sheet-wall", "featured-thumb-rail", "album-cards",
       "timeline-gallery", "photo-spotlight",
     ].map((type) => [`gallery-${type}`, null])
+  ),
+  // Blocks: each Navbar item is one Type of the block set Navbar (4103:4910), not an atom.
+  ...Object.fromEntries(
+    [
+      "default", "with-dropdown", "with-icon-indicator-avatar", "with-centered-logo", "with-cta-button",
+      "with-submenu", "rounded", "with-search-input", "multiple-icon", "multiple-action", "extended-at-top",
+      "small", "rounded-small", "centered-floating", "active-action-with-border", "active-action-with-round",
+      "e-commerce",
+    ].map((type) => [`navbar-${type}`, null])
   ),
 }
 

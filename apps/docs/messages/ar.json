@@ -2795,33 +2795,6 @@
         "className": "أصناف (class) إضافية للمكوّن."
       }
     },
-    "navbar": {
-      "lead": "تعرض كتلة شريط التنقّل (Navbar) شريط تنقّل متجاوبًا، مع قائمة للجوّال.",
-      "brand": "متجري",
-      "links": {
-        "home": "الرئيسية",
-        "products": "المنتجات",
-        "orders": "الطلبات"
-      },
-      "open": "فتح القائمة",
-      "close": "إغلاق القائمة",
-      "parts": {
-        "navbar": "الحاوية الرئيسية",
-        "brand": "منطقة الشعار",
-        "content": "أقسام المحتوى",
-        "menu": "قائمة التنقّل",
-        "link": "روابط التنقّل",
-        "item": "عناصر عامة في الشريط",
-        "toggle": "زر قائمة الجوّال"
-      },
-      "props": {
-        "sticky": "يثبّت الشريط في الأعلى عند التمرير.",
-        "bordered": "يُظهر الحد السفلي.",
-        "children": "أجزاء شريط التنقّل.",
-        "content": "قسم محاذى إلى البداية أو الوسط أو النهاية.",
-        "className": "أصناف (class) إضافية للمكوّن."
-      }
-    },
     "statsCard": {
       "lead": "تعرض كتلة بطاقة الإحصاءات (Stats Card) المقاييس الأساسية مع الاتجاه والأيقونات.",
       "cards": {
@@ -3167,6 +3140,37 @@
         "auth-waitlist-early-access": "قائمة انتظار الوصول المبكر"
       }
     },
+    "navbarBlocks": {
+      "lead": "{count, plural, one {شريط تنقّل واحد} two {شريطا تنقّل} few {{n} أشرطة تنقّل} many {{n} شريط تنقّل} other {{n} شريط تنقّل}} لأعلى الصفحة: روابط موقع، أو شريط عائم، أو بحث تطبيق وإشعاراته وحسابه.",
+      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
+      "filterLabel": "التصفية حسب العائلة",
+      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
+      "families": {
+        "all": "الكل",
+        "site": "أشرطة المواقع",
+        "floating": "عائمة",
+        "app": "التطبيقات والمتاجر"
+      },
+      "types": {
+        "navbar-default": "الافتراضي",
+        "navbar-with-dropdown": "مع قائمة منسدلة",
+        "navbar-with-icon-indicator-avatar": "مع مؤشر الإشعارات والصورة الرمزية",
+        "navbar-with-centered-logo": "مع شعار في الوسط",
+        "navbar-with-cta-button": "مع زر إجراء",
+        "navbar-with-submenu": "مع قائمة فرعية",
+        "navbar-rounded": "مستدير",
+        "navbar-with-search-input": "مع حقل بحث",
+        "navbar-multiple-icon": "أيقونات متعددة",
+        "navbar-multiple-action": "إجراءات متعددة",
+        "navbar-extended-at-top": "مع شريط علوي",
+        "navbar-small": "صغير",
+        "navbar-rounded-small": "صغير مستدير",
+        "navbar-centered-floating": "عائم في الوسط",
+        "navbar-active-action-with-border": "رابط نشط بخط",
+        "navbar-active-action-with-round": "رابط نشط بنقطة",
+        "navbar-e-commerce": "متجر إلكتروني"
+      }
+    },
     "logoCloudBlocks": {
       "lead": "{count, plural, one {قسم شعارات واحد} two {قسما شعارات} few {{n} أقسام شعارات} many {{n} قسمًا للشعارات} other {{n} قسم شعارات}}، من صف واحد إلى جدار كامل.",
       "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
@@ -3497,7 +3501,6 @@
         "Separator": "خط فاصل",
         "Checkbox": "مربع اختيار",
         "Switch": "مفتاح تبديل",
-        "Navbar": "شريط التنقل",
         "Carousel": "عارض الشرائح",
         "Content Carousel": "عارض المحتوى",
         "Dialog": "نافذة منبثقة",

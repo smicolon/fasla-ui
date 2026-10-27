@@ -9,5 +9,5 @@ export async function generateMetadata({
   params: Promise<{ locale: string }>
 }) {
   const { locale } = await params
-  return metadataForRoute("/docs/components/navbar/", locale as Locale)
+  return metadataForRoute("/docs/blocks/navbar/", locale as Locale)
 }

@@ -31,15 +31,15 @@
     "readiness": "the page's status emoji is 🟢 — nothing else; there is no ✅ rule for blocks. Deliberately different from the atom rule (Yasmin, 2026-10-16)",
     "counts": {
       "sections": 2,
-      "families": 37,
-      "readyFamilies": 16,
-      "blocks": 794,
-      "readyBlocks": 297,
-      "variants": 4764,
-      "withEnDoc": 17,
-      "withArDoc": 17,
-      "blocksInCode": 124,
-      "familiesInCode": 5,
+      "families": 38,
+      "readyFamilies": 17,
+      "blocks": 811,
+      "readyBlocks": 314,
+      "variants": 4866,
+      "withEnDoc": 18,
+      "withArDoc": 18,
+      "blocksInCode": 141,
+      "familiesInCode": 6,
       "parts": 2,
       "extraSets": 1,
       "flagged": 29
@@ -94,6 +94,7 @@
       "header": "40935:41137",
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40935-41137",
       "familyIds": [
+        "4108:1605",
         "40935:41138",
         "40935:41258",
         "41185:16887",
@@ -122,7 +123,7 @@
         "42756:2305",
         "42510:68728"
       ],
-      "blocks": 635
+      "blocks": 652
     },
     {
       "key": "ecommerce",
@@ -145,6 +146,221 @@
     }
   ],
   "families": [
+    {
+      "id": "4108:1605",
+      "section": "marketing",
+      "family": "Navbar",
+      "page": {
+        "id": "4108:1605",
+        "name": "✦  🟢 Y | Navbar - 17 Blocks ✅",
+        "display": "Navbar - 17 Blocks",
+        "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4108-1605"
+      },
+      "status": "🟢",
+      "ready": true,
+      "tail": "✅",
+      "owner": {
+        "initials": "Y",
+        "name": "Yasmin",
+        "active": true
+      },
+      "count": {
+        "inName": 17,
+        "source": "suffix",
+        "counted": 17,
+        "matches": true
+      },
+      "set": {
+        "id": "4103:4910",
+        "name": "Navbar",
+        "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4103-4910",
+        "variants": 102,
+        "axes": {
+          "Type": [
+            "Default",
+            "With Dropdown",
+            "With Icon Indicator & Avatar",
+            "With Centered Logo",
+            "With CTA Button",
+            "With Submenu",
+            "Rounded",
+            "With Search Input",
+            "Multiple Icon",
+            "Multiple Action",
+            "Extended at Top",
+            "Small",
+            "Rounded Small",
+            "Centered Floating",
+            "Active Action with Border",
+            "Active Action with Round",
+            "E-commerce"
+          ],
+          "Breakpoint": [
+            "Desktop",
+            "Tablet",
+            "Mobile"
+          ],
+          "Direction": [
+            "LTR",
+            "RTL"
+          ]
+        },
+        "hasDescription": false
+      },
+      "parts": [],
+      "extraSets": [],
+      "breakpoints": [
+        "Desktop",
+        "Tablet",
+        "Mobile"
+      ],
+      "directions": [
+        "LTR",
+        "RTL"
+      ],
+      "rtl": true,
+      "docs": {
+        "en": {
+          "id": "46644:11498",
+          "name": "Navbar — Fasla UI Block Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46644-11498"
+        },
+        "ar": {
+          "id": "46651:25087",
+          "name": "Navbar — Fasla UI Block Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46651-25087"
+        },
+        "duplicates": []
+      },
+      "code": {
+        "prefix": "navbar-",
+        "built": 17,
+        "of": 17
+      },
+      "blocks": [
+        {
+          "name": "Default",
+          "nodeId": "4103:4907",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4103-4907",
+          "variants": 6,
+          "code": "navbar-default"
+        },
+        {
+          "name": "With Dropdown",
+          "nodeId": "4103:4904",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4103-4904",
+          "variants": 6,
+          "code": "navbar-with-dropdown"
+        },
+        {
+          "name": "With Icon Indicator & Avatar",
+          "nodeId": "4103:4909",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4103-4909",
+          "variants": 6,
+          "code": "navbar-with-icon-indicator-avatar"
+        },
+        {
+          "name": "With Centered Logo",
+          "nodeId": "4103:4908",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4103-4908",
+          "variants": 6,
+          "code": "navbar-with-centered-logo"
+        },
+        {
+          "name": "With CTA Button",
+          "nodeId": "4103:4905",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4103-4905",
+          "variants": 6,
+          "code": "navbar-with-cta-button"
+        },
+        {
+          "name": "With Submenu",
+          "nodeId": "4103:4903",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4103-4903",
+          "variants": 6,
+          "code": "navbar-with-submenu"
+        },
+        {
+          "name": "Rounded",
+          "nodeId": "15783:326248",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15783-326248",
+          "variants": 6,
+          "code": "navbar-rounded"
+        },
+        {
+          "name": "With Search Input",
+          "nodeId": "4103:4906",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4103-4906",
+          "variants": 6,
+          "code": "navbar-with-search-input"
+        },
+        {
+          "name": "Multiple Icon",
+          "nodeId": "15935:11738",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15935-11738",
+          "variants": 6,
+          "code": "navbar-multiple-icon"
+        },
+        {
+          "name": "Multiple Action",
+          "nodeId": "15783:326059",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15783-326059",
+          "variants": 6,
+          "code": "navbar-multiple-action"
+        },
+        {
+          "name": "Extended at Top",
+          "nodeId": "15783:326308",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15783-326308",
+          "variants": 6,
+          "code": "navbar-extended-at-top"
+        },
+        {
+          "name": "Small",
+          "nodeId": "15933:3177",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15933-3177",
+          "variants": 6,
+          "code": "navbar-small"
+        },
+        {
+          "name": "Rounded Small",
+          "nodeId": "15933:11541",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15933-11541",
+          "variants": 6,
+          "code": "navbar-rounded-small"
+        },
+        {
+          "name": "Centered Floating",
+          "nodeId": "15935:12006",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15935-12006",
+          "variants": 6,
+          "code": "navbar-centered-floating"
+        },
+        {
+          "name": "Active Action with Border",
+          "nodeId": "15935:11606",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15935-11606",
+          "variants": 6,
+          "code": "navbar-active-action-with-border"
+        },
+        {
+          "name": "Active Action with Round",
+          "nodeId": "15935:11968",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15935-11968",
+          "variants": 6,
+          "code": "navbar-active-action-with-round"
+        },
+        {
+          "name": "E-commerce",
+          "nodeId": "15935:29723",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=15935-29723",
+          "variants": 6,
+          "code": "navbar-e-commerce"
+        }
+      ],
+      "leftovers": [],
+      "flags": []
+    },
     {
       "id": "40935:41138",
       "section": "marketing",

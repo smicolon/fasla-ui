@@ -109,7 +109,7 @@ Pre-built page compositions for rapid development:
 | **FormSection** | Grouped form fields with validation |
 | **EmptyState** | Empty content placeholders with CTAs |
 | **Sidebar** | Collapsible navigation sidebar |
-| **Navbar** | Top navigation bar |
+| **Navbar** | 17 navigation bars (`navbar-*`), from a logo and links to floating pills and a shop header |
 | **StatsCard** | Metric display cards |
 
 ### Effects

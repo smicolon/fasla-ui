@@ -106,7 +106,7 @@ that file.
    Steps, Carousel, Progress, Tabs, Badge, Avatar, Inputs, Alert, Skeleton) by hand is a defect.
 4. **Brand marks come from the `Social Icons` set (`40334:57763`)**, via its `Platform` property — never
    from the loose single-colour decoy glyphs that share the Icons page (`3637:6775`), never drawn.
-   Google, Apple and Behance are **not** in the set — an SSO row is a stop-and-ask before you lay it out.
+   Google and Apple are in the set; Behance is **not** — a Behance mark is a stop-and-ask before you lay it out.
 5. **Every brand name is `Fasla` (LTR) / `فاصلة` (RTL).** Never an invented filler brand (Acme, Your
    Brand), never mixed scripts. A leftover `SMI-UI` / `smicolon` / `;` logo is a **stop-and-ask, not a
    silent fix** — 111 known occurrences remain unresolved on two pages; do not sweep them.
