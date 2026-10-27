@@ -395,8 +395,9 @@ export function AuthTabbedSignInSignUp({
                   />
                   <div className="flex items-center justify-between gap-4">
                     <Checkbox name="remember" size="sm" label={rememberLabel ?? copy.rememberLabel} />
+                    {/* The link's 2px of padding each way is taken back by its margin: a 24px target in the 20px row. */}
                     {forgot ? (
-                      <a href={forgot.href} className={cn(LINK, "shrink-0")}>
+                      <a href={forgot.href} className={cn(LINK, "-my-0.5 shrink-0 py-0.5")}>
                         {forgot.label}
                       </a>
                     ) : null}

@@ -77,7 +77,7 @@ const COPY: Record<"en" | "ar", AuthTwoFactorMethodChooserCopy> = {
       {
         value: "authenticator",
         label: "تطبيق المصادقة",
-        description: <>أدخل رمزًا من 6 أرقام من تطبيق <bdi dir="ltr">Fasla Authenticator</bdi>.</>,
+        description: "أدخل رمزًا من 6 أرقام من تطبيق المصادقة في فاصلة.",
         icon: tile(ShieldCheck),
       },
       { value: "sms", label: "رسالة نصية", description: <>إرسال رمز إلى <bdi dir="ltr">+962 7•• ••• 418</bdi>.</>, icon: tile(MessageSquare) },

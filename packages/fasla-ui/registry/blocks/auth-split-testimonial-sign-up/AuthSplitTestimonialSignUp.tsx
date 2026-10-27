@@ -185,7 +185,7 @@ const COPY: Record<"en" | "ar", AuthSplitTestimonialSignUpCopy> = {
     ),
     showPassword: "إظهار كلمة المرور",
     hidePassword: "إخفاء كلمة المرور",
-    termsLabel: "أوافق على شروط الخدمة وسياسة الخصوصية.",
+    termsLabel: "أوافق على الشروط وسياسة الخصوصية.",
     submitLabel: "إنشاء الحساب",
     pendingLabel: "جارٍ إنشاء حسابك",
     error: "تعذّر إنشاء حسابك. تحقّق من بياناتك ثم حاول مجددًا.",

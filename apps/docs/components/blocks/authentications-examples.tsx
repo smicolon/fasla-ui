@@ -1,3 +1,4 @@
+import * as React from "react"
 import { QrCode } from "lucide-react"
 import { FaslaLogo } from "../../../../packages/fasla-ui/registry/ui/fasla-logo/fasla-logo"
 
@@ -21,11 +22,11 @@ const DIR = "/blocks/authentications"
 
 // Built once, not per render: Storybook's source panel and React both expect
 // the same element each time.
-const ICON = <FaslaLogo variant="icon" />
-const LOCKUP = <FaslaLogo />
-const LOCKUP_ON_DARK = <FaslaLogo className="text-foreground-inverse" />
+const ICON: React.ReactElement = <FaslaLogo variant="icon" />
+const LOCKUP: React.ReactElement = <FaslaLogo />
+const LOCKUP_ON_DARK: React.ReactElement = <FaslaLogo className="text-foreground-inverse" />
 // Figma draws the lucide `qr-code` glyph scaled up, so its stroke scales too.
-const QR = <QrCode size={120} strokeWidth={1.5} aria-hidden="true" className="size-[120px] text-foreground" />
+const QR: React.ReactElement = <QrCode size={120} strokeWidth={1.5} aria-hidden="true" className="size-[120px] text-foreground" />
 
 const MEMBERS = [1, 2, 3, 4].map((n) => `${DIR}/avatar-member-${n}.webp`)
 
