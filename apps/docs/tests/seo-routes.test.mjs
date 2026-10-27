@@ -8,9 +8,11 @@ const docsRoot = path.resolve(import.meta.dir, "..")
 const componentsRoot = path.join(docsRoot, "app/[locale]/docs/components")
 
 describe("Blocks section", () => {
-  test("has a page for every block family route, and lists every FAQ, Error State, Logo Cloud, Authentications, Gallery and Navbar item in the registry", async () => {
+  test("has a page for every block family route, and lists every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar and Pricing item in the registry", async () => {
     const { blockRoutes } = await import("../lib/seo-routes")
-    const { FAQ_TYPES, ERROR_STATE_TYPES, LOGO_CLOUD_TYPES, AUTHENTICATIONS_TYPES, GALLERY_TYPES, NAVBAR_TYPES } = await import("../lib/blocks")
+    const { FAQ_TYPES, ERROR_STATE_TYPES, LOGO_CLOUD_TYPES, AUTHENTICATIONS_TYPES, GALLERY_TYPES, NAVBAR_TYPES, PRICING_TYPES } = await import(
+      "../lib/blocks"
+    )
     const blocksRoot = path.join(docsRoot, "app/[locale]/docs/blocks")
     // installation/ is the section's own page, not a family.
     const families = readdirSync(blocksRoot, { withFileTypes: true })
@@ -32,6 +34,9 @@ describe("Blocks section", () => {
     // `navbar` itself is the parts every Navbar block shares, not a Type.
     const navbarItems = registry.items.filter((item) => item.name.startsWith("navbar-")).map((item) => item.name)
     expect(NAVBAR_TYPES.map((type) => type.slug).sort()).toEqual(navbarItems.sort())
+    // `pricing` itself is the parts every Pricing block shares, not a Type.
+    const pricingItems = registry.items.filter((item) => item.name.startsWith("pricing-")).map((item) => item.name)
+    expect(PRICING_TYPES.map((type) => type.slug).sort()).toEqual(pricingItems.sort())
   })
 
   test("marks exactly the blocks that depend on theme-inverse as inverse", async () => {

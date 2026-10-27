@@ -209,6 +209,12 @@ export const CODE_MAP = {
       "e-commerce",
     ].map((type) => [`navbar-${type}`, null])
   ),
+  // Block: the parts every Pricing block shares, from the block set Pricing (46332:2894), not an atom.
+  pricing: null,
+  // Blocks: each Pricing item is one Type of the block set Pricing (46332:2894), not an atom.
+  ...Object.fromEntries(
+    ["tiers", "two-plan-compare", "plan-spotlight", "comparison-matrix", "plan-picker-summary"].map((type) => [`pricing-${type}`, null])
+  ),
 }
 
 const FAMILY_MIN = 10

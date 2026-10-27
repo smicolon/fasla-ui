@@ -4284,6 +4284,151 @@
         "gallery",
         "marketing"
       ]
+    },
+    {
+      "name": "pricing",
+      "type": "registry:block",
+      "title": "Pricing",
+      "description": "The parts every Pricing block is built from: the section and its centred header, a price with its unit, the plan card, the list of features with a check before each, and the hairline between groups.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/pricing/pricing.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/pricing.tsx"
+        }
+      ],
+      "categories": [
+        "pricing",
+        "marketing"
+      ]
+    },
+    {
+      "name": "pricing-tiers",
+      "type": "registry:block",
+      "title": "Pricing: Pricing Tiers",
+      "description": "Three plan cards under a Monthly and Yearly toggle that swaps every price, with the recommended plan tinted.",
+      "dependencies": [],
+      "registryDependencies": [
+        "badge",
+        "tabs",
+        "pricing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/pricing-tiers/PricingTiers.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/pricing-tiers.tsx"
+        }
+      ],
+      "categories": [
+        "pricing",
+        "marketing"
+      ]
+    },
+    {
+      "name": "pricing-two-plan-compare",
+      "type": "registry:block",
+      "title": "Pricing: Two-Plan Compare",
+      "description": "A free plan beside the paid one, the paid plan recommended with its old price struck through.",
+      "dependencies": [],
+      "registryDependencies": [
+        "pricing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/pricing-two-plan-compare/PricingTwoPlanCompare.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/pricing-two-plan-compare.tsx"
+        }
+      ],
+      "categories": [
+        "pricing",
+        "marketing"
+      ]
+    },
+    {
+      "name": "pricing-plan-spotlight",
+      "type": "registry:block",
+      "title": "Pricing: Plan Spotlight",
+      "description": "One plan in one card: pick how to pay from a list of billing options, beside the plan's features.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "radio",
+        "pricing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/pricing-plan-spotlight/PricingPlanSpotlight.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/pricing-plan-spotlight.tsx"
+        }
+      ],
+      "categories": [
+        "pricing",
+        "marketing"
+      ]
+    },
+    {
+      "name": "pricing-comparison-matrix",
+      "type": "registry:block",
+      "title": "Pricing: Comparison Matrix",
+      "description": "Every plan's features in one table, grouped, with the recommended plan's column tinted; a card per plan on phones.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "pricing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/pricing-comparison-matrix/PricingComparisonMatrix.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/pricing-comparison-matrix.tsx"
+        }
+      ],
+      "categories": [
+        "pricing",
+        "marketing"
+      ]
+    },
+    {
+      "name": "pricing-plan-picker-summary",
+      "type": "registry:block",
+      "title": "Pricing: Plan Picker + Summary",
+      "description": "A checkout step: choose a plan from a list and see its order summary, with a discount code field and the total due.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "input",
+        "radio",
+        "pricing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/pricing-plan-picker-summary/PricingPlanPickerSummary.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/pricing-plan-picker-summary.tsx"
+        }
+      ],
+      "categories": [
+        "pricing",
+        "marketing"
+      ]
     }
   ]
 }

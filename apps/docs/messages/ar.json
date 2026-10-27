@@ -3242,6 +3242,24 @@
         "gallery-photo-spotlight": "صورة في الواجهة"
       }
     },
+    "pricingBlocks": {
+      "lead": "{count, plural, one {قسم أسعار واحد} two {قسما أسعار} few {{n} أقسام للأسعار} many {{n} قسمًا للأسعار} other {{n} قسم للأسعار}}: خطط تقارن بينها جنبًا إلى جنب، واختيار للخطة أو لدورة الفوترة يقود إلى الدفع.",
+      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
+      "filterLabel": "التصفية حسب العائلة",
+      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
+      "families": {
+        "all": "الكل",
+        "compare": "مقارنة الخطط",
+        "choose": "الاختيار والدفع"
+      },
+      "types": {
+        "pricing-tiers": "فئات الأسعار",
+        "pricing-two-plan-compare": "مقارنة بين خطتين",
+        "pricing-plan-spotlight": "خطة واحدة بارزة",
+        "pricing-comparison-matrix": "جدول المقارنة",
+        "pricing-plan-picker-summary": "اختيار الخطة مع ملخص الطلب"
+      }
+    },
     "blockCard": {
       "fullScreen": "فتح بملء الشاشة",
       "newTab": "(يُفتح في علامة تبويب جديدة)",
