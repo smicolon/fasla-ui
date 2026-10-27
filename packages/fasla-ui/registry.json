@@ -3400,6 +3400,509 @@
         "authentications",
         "forms"
       ]
+    },
+    {
+      "name": "gallery-culture-photo-grid",
+      "type": "registry:block",
+      "title": "Gallery: Culture Photo Grid",
+      "description": "A grid of captioned photos, a title and a date under each, three across on desktop; pass your own photos.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-culture-photo-grid/GalleryCulturePhotoGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-culture-photo-grid.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-masonry-gallery",
+      "type": "registry:block",
+      "title": "Gallery: Masonry Gallery",
+      "description": "A centred masonry of photos in three heights with a Load more button; pass your own photos.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-masonry-gallery/GalleryMasonryGallery.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-masonry-gallery.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-photo-bento",
+      "type": "registry:block",
+      "title": "Gallery: Photo Bento",
+      "description": "A large hero photo beside a two-by-two of smaller ones, with a link to the full gallery; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-photo-bento/GalleryPhotoBento.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-photo-bento.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-filmstrip-carousel",
+      "type": "registry:block",
+      "title": "Gallery: Filmstrip Carousel",
+      "description": "A big stage over a strip of thumbnails, with a caption card, a counter and arrows to step through the set; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-filmstrip-carousel/GalleryFilmstripCarousel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-filmstrip-carousel.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-full-bleed-slider",
+      "type": "registry:block",
+      "title": "Gallery: Full-Bleed Slider",
+      "description": "Edge-to-edge photo slides under a scrim, each with its own caption, and a counter with arrows to move through them; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "carousel",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-full-bleed-slider/GalleryFullBleedSlider.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-full-bleed-slider.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-filter-tabs-grid",
+      "type": "registry:block",
+      "title": "Gallery: Filter Tabs + Grid",
+      "description": "A portfolio grid of project cards under tabs that filter it by category, with a live result count; pass your own photos.",
+      "dependencies": [],
+      "registryDependencies": [
+        "badge",
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-filter-tabs-grid/GalleryFilterTabsGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-filter-tabs-grid.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-hover-caption-cards",
+      "type": "registry:block",
+      "title": "Gallery: Hover Caption Cards",
+      "description": "Three tall photo cards under a centred header, each with a caption that slides up on hover and a + button to open the photo; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-hover-caption-cards/GalleryHoverCaptionCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-hover-caption-cards.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-lightbox-viewer",
+      "type": "registry:block",
+      "title": "Gallery: Lightbox Viewer",
+      "description": "A photo viewer on a dark band, with one large photo between two arrows and a strip of thumbnails under it; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-lightbox-viewer/GalleryLightboxViewer.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-lightbox-viewer.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-horizontal-scroll-rail",
+      "type": "registry:block",
+      "title": "Gallery: Horizontal Scroll Rail",
+      "description": "A snap-scrolling row of photo cards that runs off the page edge, with arrow buttons and Carousel dots; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "carousel"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-horizontal-scroll-rail/GalleryHorizontalScrollRail.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-horizontal-scroll-rail.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-editorial-split",
+      "type": "registry:block",
+      "title": "Gallery: Editorial Split",
+      "description": "An editorial intro beside a staggered cluster of four photos, with a team link and a gallery link; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-editorial-split/GalleryEditorialSplit.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-editorial-split.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-scattered-collage",
+      "type": "registry:block",
+      "title": "Gallery: Scattered Collage",
+      "description": "Seven captioned prints scattered at an angle under a centred header, with a link to the full album; pass your own photos.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-scattered-collage/GalleryScatteredCollage.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-scattered-collage.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-social-feed-strip",
+      "type": "registry:block",
+      "title": "Gallery: Social Feed Strip",
+      "description": "A social profile row (avatar, handle, follower count, Follow) over a strip of six post tiles that show likes and comments on hover; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "social-icons",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-social-feed-strip/GallerySocialFeedStrip.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-social-feed-strip.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-video-gallery",
+      "type": "registry:block",
+      "title": "Gallery: Video Gallery",
+      "description": "A featured video poster with a play disc over a row of three clips with play buttons and duration badges; pass your own posters and links or a play handler.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-video-gallery/GalleryVideoGallery.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-video-gallery.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-before-after-compare",
+      "type": "registry:block",
+      "title": "Gallery: Before / After Compare",
+      "description": "Two photos of the same place in one frame, split by a draggable divider you can also move with the keyboard; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "slider"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-before-after-compare/GalleryBeforeAfterCompare.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-before-after-compare.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-dark-cinema-wall",
+      "type": "registry:block",
+      "title": "Gallery: Dark Cinema Wall",
+      "description": "Two staggered rows of wide stills on an inverted surface, running past both edges and fading out at the sides; pass your own photos.",
+      "dependencies": [],
+      "registryDependencies": [
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-dark-cinema-wall/GalleryDarkCinemaWall.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-dark-cinema-wall.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-hover-index-list",
+      "type": "registry:block",
+      "title": "Gallery: Hover Index List",
+      "description": "A ruled index of projects whose preview photo follows the row you hover or focus; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-hover-index-list/GalleryHoverIndexList.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-hover-index-list.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-mosaic-statement-tile",
+      "type": "registry:block",
+      "title": "Gallery: Mosaic + Statement Tile",
+      "description": "A full-bleed mosaic of square photos with one primary-colour tile holding the heading, a line of text and a link; pass your own photos.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-mosaic-statement-tile/GalleryMosaicStatementTile.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-mosaic-statement-tile.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-contact-sheet-wall",
+      "type": "registry:block",
+      "title": "Gallery: Contact Sheet Wall",
+      "description": "An archive laid out like a contact sheet: a dense grid of numbered frames under filter tabs, with a running count and a load-more button; pass your own photos.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-contact-sheet-wall/GalleryContactSheetWall.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-contact-sheet-wall.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-featured-thumb-rail",
+      "type": "registry:block",
+      "title": "Gallery: Featured + Thumb Rail",
+      "description": "A large featured story under a scrim beside a rail of thumbnail rows that switch it, with chevron controls; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-featured-thumb-rail/GalleryFeaturedThumbRail.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-featured-thumb-rail.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-album-cards",
+      "type": "registry:block",
+      "title": "Gallery: Album Cards",
+      "description": "Albums drawn as stacks of prints, each with its name, photo count and date; pass your own covers.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-album-cards/GalleryAlbumCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-album-cards.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-timeline-gallery",
+      "type": "registry:block",
+      "title": "Gallery: Timeline Gallery",
+      "description": "An archive in yearly rows, each with its year, photo count, an Open year link and a strip of four photos; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-timeline-gallery/GalleryTimelineGallery.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-timeline-gallery.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
+    },
+    {
+      "name": "gallery-photo-spotlight",
+      "type": "registry:block",
+      "title": "Gallery: Photo Spotlight",
+      "description": "One photo on a large 4:3 stage beside its title, story, a table of details and Open series and Download actions; pass your own photo.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/gallery-photo-spotlight/GalleryPhotoSpotlight.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/gallery-photo-spotlight.tsx"
+        }
+      ],
+      "categories": [
+        "gallery",
+        "marketing"
+      ]
     }
   ]
 }

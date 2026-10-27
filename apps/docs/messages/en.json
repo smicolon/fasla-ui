@@ -3202,6 +3202,42 @@
         "logo-cloud-grid-closing-cta": "Grid Closing CTA"
       }
     },
+    "galleryBlocks": {
+      "lead": "{count, plural, one {One photo gallery} other {{n} photo galleries}}: captioned grids and walls, carousels, and viewers with controls of their own.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "filterLabel": "Filter by family",
+      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
+      "families": {
+        "all": "All",
+        "grids": "Grids and walls",
+        "carousels": "Carousels",
+        "viewers": "Viewers"
+      },
+      "types": {
+        "gallery-culture-photo-grid": "Culture Photo Grid",
+        "gallery-masonry-gallery": "Masonry Gallery",
+        "gallery-photo-bento": "Photo Bento",
+        "gallery-filmstrip-carousel": "Filmstrip Carousel",
+        "gallery-full-bleed-slider": "Full-Bleed Slider",
+        "gallery-filter-tabs-grid": "Filter Tabs + Grid",
+        "gallery-hover-caption-cards": "Hover Caption Cards",
+        "gallery-lightbox-viewer": "Lightbox Viewer",
+        "gallery-horizontal-scroll-rail": "Horizontal Scroll Rail",
+        "gallery-editorial-split": "Editorial Split",
+        "gallery-scattered-collage": "Scattered Collage",
+        "gallery-social-feed-strip": "Social Feed Strip",
+        "gallery-video-gallery": "Video Gallery",
+        "gallery-before-after-compare": "Before / After Compare",
+        "gallery-dark-cinema-wall": "Dark Cinema Wall",
+        "gallery-hover-index-list": "Hover Index List",
+        "gallery-mosaic-statement-tile": "Mosaic + Statement Tile",
+        "gallery-contact-sheet-wall": "Contact Sheet Wall",
+        "gallery-featured-thumb-rail": "Featured + Thumb Rail",
+        "gallery-album-cards": "Album Cards",
+        "gallery-timeline-gallery": "Timeline Gallery",
+        "gallery-photo-spotlight": "Photo Spotlight"
+      }
+    },
     "blockCard": {
       "fullScreen": "Open full screen",
       "newTab": "(opens in a new tab)",
