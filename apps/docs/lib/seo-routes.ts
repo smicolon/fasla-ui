@@ -199,6 +199,21 @@ export const routes = [
     },
   },
   {
+    kind: "block",
+    category: "Blocks",
+    path: "/docs/blocks/navbar/",
+    title: "Navbar Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Seventeen navigation bars, from a logo and links to floating pills, search, an account menu and a shop header, responsive and mirrored for Arabic.",
+    h1: "Navbar",
+    ar: {
+      title: "كتل شريط التنقّل لمشاريع React | فاصلة",
+      description:
+        "سبعة عشر شريط تنقّل، من شعار وروابط إلى أشرطة عائمة وبحث وقائمة للحساب وترويسة متجر، متجاوبة ومعكوسة للعربية.",
+      h1: "شريط التنقّل (Navbar)",
+    },
+  },
+  {
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/button/",
@@ -781,21 +796,6 @@ export const routes = [
       description:
         "اعرض بيانات منظّمة بكتلة جدول البيانات (DataTable)، مع أعمدة محددة الأنواع وترقيم للصفحات وحالات جاهزة للجدول.",
       h1: "جدول البيانات (DataTable)",
-    },
-  },
-  {
-    kind: "component",
-    category: "Blocks",
-    path: "/docs/components/navbar/",
-    title: "Navbar React Navigation Block | Fasla",
-    description:
-      "Create a responsive React navigation bar with desktop links, mobile menu behavior, and flexible brand content.",
-    h1: "Navbar",
-    ar: {
-      title: "شريط التنقّل (Navbar) لتطبيقات React | فاصلة",
-      description:
-        "أنشئ كتلة شريط التنقّل (Navbar) متجاوبة، مع روابط لسطح المكتب وقائمة للهاتف ومساحة مرنة لهوية المنتج.",
-      h1: "شريط التنقّل (Navbar)",
     },
   },
   {

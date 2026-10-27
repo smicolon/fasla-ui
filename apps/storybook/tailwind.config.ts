@@ -17,6 +17,8 @@ const config: Config = {
     "../docs/components/blocks/brand-logos.tsx",
     // The Authentications examples (logo, photos) the stories share with the docs site.
     "../docs/components/blocks/authentications-examples.tsx",
+    // The Navbar examples (logo, avatar, the page under the bar) the stories share with the docs site.
+    "../docs/components/blocks/navbar-examples.tsx",
   ],
   theme: {
     extend: {

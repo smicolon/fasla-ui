@@ -2795,33 +2795,6 @@
         "className": "Extra classes for the component."
       }
     },
-    "navbar": {
-      "lead": "A responsive navigation bar with mobile menu support.",
-      "brand": "My store",
-      "links": {
-        "home": "Home",
-        "products": "Products",
-        "orders": "Orders"
-      },
-      "open": "Open menu",
-      "close": "Close menu",
-      "parts": {
-        "navbar": "Main container",
-        "brand": "Logo/brand area",
-        "content": "Content sections",
-        "menu": "Navigation menu",
-        "link": "Navigation links",
-        "item": "Generic navbar items",
-        "toggle": "Mobile menu toggle"
-      },
-      "props": {
-        "sticky": "Sticks to the top on scroll.",
-        "bordered": "Shows the bottom border.",
-        "children": "The navbar’s parts.",
-        "content": "A section aligned to the start, centre or end.",
-        "className": "Extra classes for the component."
-      }
-    },
     "statsCard": {
       "lead": "Display key metrics with trends and icons.",
       "cards": {
@@ -3167,6 +3140,37 @@
         "auth-waitlist-early-access": "Waitlist Early Access"
       }
     },
+    "navbarBlocks": {
+      "lead": "{count, plural, one {One navigation bar} other {{n} navigation bars}} for the top of a page: a site's links, a floating pill, or an app's search, notifications and account.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "filterLabel": "Filter by family",
+      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
+      "families": {
+        "all": "All",
+        "site": "Site bars",
+        "floating": "Floating",
+        "app": "Apps and shops"
+      },
+      "types": {
+        "navbar-default": "Default",
+        "navbar-with-dropdown": "With Dropdown",
+        "navbar-with-icon-indicator-avatar": "With Icon Indicator & Avatar",
+        "navbar-with-centered-logo": "With Centered Logo",
+        "navbar-with-cta-button": "With CTA Button",
+        "navbar-with-submenu": "With Submenu",
+        "navbar-rounded": "Rounded",
+        "navbar-with-search-input": "With Search Input",
+        "navbar-multiple-icon": "Multiple Icon",
+        "navbar-multiple-action": "Multiple Action",
+        "navbar-extended-at-top": "Extended at Top",
+        "navbar-small": "Small",
+        "navbar-rounded-small": "Rounded Small",
+        "navbar-centered-floating": "Centered Floating",
+        "navbar-active-action-with-border": "Active Action with Border",
+        "navbar-active-action-with-round": "Active Action with Round",
+        "navbar-e-commerce": "E-commerce"
+      }
+    },
     "logoCloudBlocks": {
       "lead": "{count, plural, one {One logo section} other {{n} logo sections}}, from a single row of marks to a full wall.",
       "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
@@ -3497,7 +3501,6 @@
         "Separator": "Separator",
         "Checkbox": "Checkbox",
         "Switch": "Switch",
-        "Navbar": "Navbar",
         "Carousel": "Carousel",
         "Content Carousel": "Content Carousel",
         "Dialog": "Dialog",
