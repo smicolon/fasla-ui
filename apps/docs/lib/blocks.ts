@@ -2,7 +2,7 @@
  * The block families the Blocks section documents, and each family's Types in
  * Figma's order. Names and family labels are in the message catalogues
  * (docs.faqBlocks, docs.errorStateBlocks, docs.logoCloudBlocks,
- * docs.authenticationsBlocks); the slug is the registry item's name.
+ * docs.authenticationsBlocks, docs.galleryBlocks); the slug is the registry item's name.
  */
 
 export type FaqFamily = "lists" | "layouts" | "navigation" | "support"
@@ -36,7 +36,16 @@ export type AuthenticationsFamily = "ways-in" | "next-steps"
 
 export const AUTHENTICATIONS_FAMILIES: AuthenticationsFamily[] = ["ways-in", "next-steps"]
 
-export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily> = {
+/**
+ * Gallery's three groups, from its Figma documentation, which sets seven
+ * layouts apart as carrying their own controls rather than a caption grid:
+ * the grids and walls, the four that scroll, and those seven viewers.
+ */
+export type GalleryFamily = "grids" | "carousels" | "viewers"
+
+export const GALLERY_FAMILIES: GalleryFamily[] = ["grids", "carousels", "viewers"]
+
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
   family: Family
@@ -158,8 +167,33 @@ export const AUTHENTICATIONS_TYPES: BlockType<AuthenticationsFamily>[] = [
   { slug: "auth-waitlist-early-access", family: "ways-in" },
 ]
 
+export const GALLERY_TYPES: BlockType<GalleryFamily>[] = [
+  { slug: "gallery-culture-photo-grid", family: "grids" },
+  { slug: "gallery-masonry-gallery", family: "grids" },
+  { slug: "gallery-photo-bento", family: "grids" },
+  { slug: "gallery-filmstrip-carousel", family: "carousels" },
+  { slug: "gallery-full-bleed-slider", family: "carousels", inverse: true },
+  { slug: "gallery-filter-tabs-grid", family: "grids" },
+  { slug: "gallery-hover-caption-cards", family: "grids" },
+  { slug: "gallery-lightbox-viewer", family: "viewers", inverse: true },
+  { slug: "gallery-horizontal-scroll-rail", family: "carousels" },
+  { slug: "gallery-editorial-split", family: "grids" },
+  { slug: "gallery-scattered-collage", family: "grids" },
+  { slug: "gallery-social-feed-strip", family: "viewers", inverse: true },
+  { slug: "gallery-video-gallery", family: "viewers", inverse: true },
+  { slug: "gallery-before-after-compare", family: "viewers" },
+  { slug: "gallery-dark-cinema-wall", family: "viewers", inverse: true },
+  { slug: "gallery-hover-index-list", family: "viewers" },
+  { slug: "gallery-mosaic-statement-tile", family: "grids" },
+  { slug: "gallery-contact-sheet-wall", family: "grids" },
+  { slug: "gallery-featured-thumb-rail", family: "carousels", inverse: true },
+  { slug: "gallery-album-cards", family: "grids" },
+  { slug: "gallery-timeline-gallery", family: "grids" },
+  { slug: "gallery-photo-spotlight", family: "viewers" },
+]
+
 /** Every block a preview page renders, across the families. */
-export const ALL_BLOCK_TYPES: BlockType[] = [...FAQ_TYPES, ...ERROR_STATE_TYPES, ...LOGO_CLOUD_TYPES, ...AUTHENTICATIONS_TYPES]
+export const ALL_BLOCK_TYPES: BlockType[] = [...FAQ_TYPES, ...ERROR_STATE_TYPES, ...LOGO_CLOUD_TYPES, ...AUTHENTICATIONS_TYPES, ...GALLERY_TYPES]
 
 /** Figma's three breakpoints, the widths a preview frame renders at. */
 export const BREAKPOINTS = { desktop: 1440, tablet: 768, mobile: 360 } as const
