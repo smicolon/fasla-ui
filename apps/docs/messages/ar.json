@@ -783,7 +783,8 @@
       },
       "checkbox": {
         "title": "صفوف الاختيار",
-        "body": "المكوّن <code>DropdownMenuCheckboxItem</code> إعداد يُفعَّل أو يُلغى. الضغط عليه يبدّل حالته ويُبقي القائمة مفتوحة. افتراضيًا تظهر علامة الصح قبل النص حين يكون مفعّلًا، ويبقى مكانها محجوزًا حين يكون ملغى، فلا يتحرك النص. ومع <code>indicator=\"switch\"</code> يعرض مفتاح التبديل في نهاية الصف الحالة بدلًا منها."
+        "body": "المكوّن <code>DropdownMenuCheckboxItem</code> إعداد يُفعَّل أو يُلغى. الضغط عليه يبدّل حالته ويُبقي القائمة مفتوحة. افتراضيًا تظهر علامة الصح قبل النص حين يكون مفعّلًا، ويبقى مكانها محجوزًا حين يكون ملغى، فلا يتحرك النص. ومع <code>indicator=\"switch\"</code> يعرض مفتاح التبديل في نهاية الصف الحالة بدلًا منها.",
+        "icons": "ويمكن أن يبدأ الصف بأيقونة أيضًا، مثل شعار التطبيق."
       },
       "radio": {
         "title": "مجموعة الخيارات",
@@ -824,7 +825,15 @@
         "bottom": "أسفل",
         "end": "يمين",
         "newTab": "علامة تبويب جديدة",
-        "newWindow": "نافذة جديدة"
+        "newWindow": "نافذة جديدة",
+        "appsNotification": "إشعارات التطبيقات",
+        "apps": {
+          "google": "جوجل",
+          "x": "إكس",
+          "linkedin": "لينكد إن",
+          "dribbble": "دريبل",
+          "figma": "فيجما"
+        }
       },
       "a11y": {
         "roles": "تمنح مكتبة Base UI القائمة الدور <code>menu</code>، وكل صف الدور <code>menuitem</code> أو <code>menuitemcheckbox</code> أو <code>menuitemradio</code>، فيعلن قارئ الشاشة نوع كل صف وهل هو مفعّل. ويُعلم العنصر المُشغِّل هل القائمة مفتوحة.",
@@ -3117,6 +3126,45 @@
         "error-state-marquee-404-band": "شريط 404 متحرك",
         "error-state-broken-trail-breadcrumb": "مسار تنقّل منقطع",
         "error-state-countdown-redirect": "إعادة توجيه بعدّ تنازلي"
+      }
+    },
+    "authenticationsBlocks": {
+      "lead": "{count, plural, one {شاشة واحدة} two {شاشتان} few {{n} شاشات} many {{n} شاشة} other {{n} شاشة}} بين الزائر وحسابه: طرق الدخول، والخطوات التي تليها، من رمز التحقق إلى الجلسة المقفلة.",
+      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
+      "filterLabel": "التصفية حسب العائلة",
+      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
+      "families": {
+        "all": "الكل",
+        "ways-in": "طرق الدخول",
+        "next-steps": "الخطوات التالية"
+      },
+      "types": {
+        "auth-centered-card-sign-in": "بطاقة دخول في الوسط",
+        "auth-social-first-sign-in": "الدخول بالحسابات أولًا",
+        "auth-split-photo-sign-in": "دخول بجانب صورة",
+        "auth-split-testimonial-sign-up": "تسجيل بجانب رأي عميل",
+        "auth-minimal-centered-sign-in": "دخول بسيط في الوسط",
+        "auth-sign-up-password-strength": "تسجيل مع قوة كلمة المرور",
+        "auth-sign-up-benefits-column": "تسجيل مع عمود المزايا",
+        "auth-tabbed-sign-in-sign-up": "دخول وتسجيل بتبويبين",
+        "auth-magic-link-request": "طلب رابط الدخول",
+        "auth-check-your-email": "تحقّق من بريدك",
+        "auth-otp-verification": "التحقق برمز لمرة واحدة",
+        "auth-two-factor-authenticator": "التحقق بخطوتين عبر التطبيق",
+        "auth-two-factor-method-chooser": "اختيار طريقة التحقق بخطوتين",
+        "auth-forgot-password": "نسيت كلمة المرور",
+        "auth-reset-password": "إعادة تعيين كلمة المرور",
+        "auth-password-changed": "تم تغيير كلمة المرور",
+        "auth-team-invite-accept": "قبول دعوة الفريق",
+        "auth-profile-setup-onboarding": "إعداد الملف الشخصي",
+        "auth-photo-background-sign-in": "دخول على خلفية صورة",
+        "auth-phone-number-sign-in": "الدخول برقم الهاتف",
+        "auth-qr-device-login": "الدخول برمز QR",
+        "auth-passkey-sign-in": "الدخول بمفتاح المرور",
+        "auth-locked-session-re-authenticate": "فتح جلسة مقفلة",
+        "auth-multi-step-sign-up-wizard": "تسجيل على خطوات",
+        "auth-sign-in-error-state": "خطأ في تسجيل الدخول",
+        "auth-waitlist-early-access": "قائمة انتظار الوصول المبكر"
       }
     },
     "logoCloudBlocks": {

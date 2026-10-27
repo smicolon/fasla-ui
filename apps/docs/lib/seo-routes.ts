@@ -169,6 +169,21 @@ export const routes = [
     },
   },
   {
+    kind: "block",
+    category: "Blocks",
+    path: "/docs/blocks/authentications/",
+    title: "Authentication Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Twenty-six sign-in and account screens, from a centred sign-in card to codes, two-factor, password recovery and onboarding, responsive and mirrored for Arabic.",
+    h1: "Authentications",
+    ar: {
+      title: "كتل تسجيل الدخول لمشاريع React | فاصلة",
+      description:
+        "ست وعشرون شاشة لتسجيل الدخول والحساب، من بطاقة دخول في الوسط إلى رموز التحقق والتحقق بخطوتين واستعادة كلمة المرور والإعداد الأول، متجاوبة ومعكوسة للعربية.",
+      h1: "تسجيل الدخول (Authentications)",
+    },
+  },
+  {
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/button/",

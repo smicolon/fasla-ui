@@ -19,6 +19,10 @@ const files = (dir: string): string[] =>
     return /\.tsx?$/.test(name) && !/\.(test|stories)\./.test(name) ? [full] : []
   })
 const sources = files(REGISTRY).map((file) => ({ file: relative(REGISTRY, file), text: readFileSync(file, "utf8") }))
+// Brand artwork: a platform's mark and Fasla's own logo are drawn in the brand's
+// colours, which no theme supplies (Figma keeps them as raw hex too). Only
+// these two files may write colours out; they still read only theme tokens.
+const BRAND_ART = /^ui\/(social-icons|fasla-logo)\//
 
 const PALETTE =
   /\b(?:bg|text|border|ring|from|to|via|fill|stroke|outline|shadow|divide|decoration|caret|accent|placeholder)-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-\d{2,3}\b|\b(?:bg|text|border|ring|fill|stroke)-(?:white|black)\b/g
@@ -40,7 +44,7 @@ describe("component colours", () => {
   })
 
   it("write out no colour values", () => {
-    const found = sources.flatMap(({ file, text }) =>
+    const found = sources.filter(({ file }) => !BRAND_ART.test(file)).flatMap(({ file, text }) =>
       text
         .split("\n")
         .filter((line) => !/^\s*(\/\/|\*|\/\*)/.test(line))

@@ -335,6 +335,25 @@
       ]
     },
     {
+      "name": "fasla-logo",
+      "type": "registry:ui",
+      "title": "Fasla Logo",
+      "description": "The Fasla logo: the English and Arabic lockups and the icon on its own. The lockup follows the page's direction by default; the wordmark follows the theme.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/fasla-logo/fasla-logo.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/fasla-logo.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "data-display"
+      ]
+    },
+    {
       "name": "radio",
       "type": "registry:ui",
       "title": "Radio",
@@ -859,6 +878,25 @@
       "categories": [
         "data-display",
         "application"
+      ]
+    },
+    {
+      "name": "social-icons",
+      "type": "registry:ui",
+      "title": "Social Icons",
+      "description": "Brand marks for 32 platforms, from Google and Apple to Slack and Zoom, in their own colours or one quiet muted colour. Decorative unless given a title; never mirrored.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/ui/social-icons/social-icons.tsx",
+          "type": "registry:ui",
+          "target": "components/ui/social-icons.tsx"
+        }
+      ],
+      "categories": [
+        "primitives",
+        "data-display"
       ]
     },
     {
@@ -2705,6 +2743,662 @@
       "categories": [
         "logo-cloud",
         "marketing"
+      ]
+    },
+    {
+      "name": "auth-centered-card-sign-in",
+      "type": "registry:block",
+      "title": "Authentications: Centered Card Sign In",
+      "description": "A sign-in card in the middle of the page, with email and password, remember me, and provider buttons under it.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "checkbox",
+        "input",
+        "social-icons"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-centered-card-sign-in/AuthCenteredCardSignIn.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-centered-card-sign-in.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-social-first-sign-in",
+      "type": "registry:block",
+      "title": "Authentications: Social-First Sign In",
+      "description": "Provider buttons first, then one email field, for a single screen that signs people in or up.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "social-icons"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-social-first-sign-in/AuthSocialFirstSignIn.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-social-first-sign-in.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-split-photo-sign-in",
+      "type": "registry:block",
+      "title": "Authentications: Split Photo Sign In",
+      "description": "A sign-in form beside a photo with a customer quote; pass your own logo and photo.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "checkbox",
+        "input",
+        "social-icons"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-split-photo-sign-in/AuthSplitPhotoSignIn.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-split-photo-sign-in.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-split-testimonial-sign-up",
+      "type": "registry:block",
+      "title": "Authentications: Split Testimonial Sign Up",
+      "description": "A sign-up form beside a dark panel with a customer quote and two figures.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "checkbox",
+        "input",
+        "social-icons",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-split-testimonial-sign-up/AuthSplitTestimonialSignUp.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-split-testimonial-sign-up.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-minimal-centered-sign-in",
+      "type": "registry:block",
+      "title": "Authentications: Minimal Centered Sign In",
+      "description": "A quiet sign-in column with no card: a large heading, two pill fields and one large button.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-minimal-centered-sign-in/AuthMinimalCenteredSignIn.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-minimal-centered-sign-in.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-sign-up-password-strength",
+      "type": "registry:block",
+      "title": "Authentications: Sign Up + Password Strength",
+      "description": "A set-your-password card with a live strength meter and a checklist of password rules.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "progress"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-sign-up-password-strength/AuthSignUpPasswordStrength.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-sign-up-password-strength.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-sign-up-benefits-column",
+      "type": "registry:block",
+      "title": "Authentications: Sign Up + Benefits Column",
+      "description": "A sign-up card beside the product's benefits and a row of member faces.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "input",
+        "social-icons"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-sign-up-benefits-column/AuthSignUpBenefitsColumn.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-sign-up-benefits-column.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-tabbed-sign-in-sign-up",
+      "type": "registry:block",
+      "title": "Authentications: Tabbed Sign In / Sign Up",
+      "description": "One card that switches between signing in and creating an account, with provider icon buttons below.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "checkbox",
+        "input",
+        "social-icons",
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-tabbed-sign-in-sign-up/AuthTabbedSignInSignUp.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-tabbed-sign-in-sign-up.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-magic-link-request",
+      "type": "registry:block",
+      "title": "Authentications: Magic Link Request",
+      "description": "Passwordless sign-in: one email field that sends a sign-in link, with a password and a provider as other ways in.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "input",
+        "social-icons"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-magic-link-request/AuthMagicLinkRequest.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-magic-link-request.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-check-your-email",
+      "type": "registry:block",
+      "title": "Authentications: Check Your Email",
+      "description": "The screen after a link is sent: the address it went to, shortcuts to Gmail and Outlook, and a resend button with a countdown.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "social-icons"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-check-your-email/AuthCheckYourEmail.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-check-your-email.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-otp-verification",
+      "type": "registry:block",
+      "title": "Authentications: OTP Verification",
+      "description": "A card for the 6-digit code sent by text message, with a resend countdown and a way to use another number.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input-otp"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-otp-verification/AuthOtpVerification.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-otp-verification.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-two-factor-authenticator",
+      "type": "registry:block",
+      "title": "Authentications: Two-Factor Authenticator",
+      "description": "The second sign-in step for an authenticator app: six code slots, remember this device, and other ways through.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "checkbox",
+        "input-otp"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-two-factor-authenticator/AuthTwoFactorAuthenticator.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-two-factor-authenticator.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-two-factor-method-chooser",
+      "type": "registry:block",
+      "title": "Authentications: Two-Factor Method Chooser",
+      "description": "A list of second-step methods to pick one from, each with an icon, a line about it and a radio.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "radio"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-two-factor-method-chooser/AuthTwoFactorMethodChooser.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-two-factor-method-chooser.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-forgot-password",
+      "type": "registry:block",
+      "title": "Authentications: Forgot Password",
+      "description": "An email field that sends a reset link, with a way back to sign in and two ways to get help.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-forgot-password/AuthForgotPassword.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-forgot-password.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-reset-password",
+      "type": "registry:block",
+      "title": "Authentications: Reset Password",
+      "description": "A card for choosing a new password twice, with a live match check and a way back to sign in.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-reset-password/AuthResetPassword.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-reset-password.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-password-changed",
+      "type": "registry:block",
+      "title": "Authentications: Password Changed",
+      "description": "A confirmation after a password reset: an illustration, a summary of the change and a button on to sign in.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-password-changed/AuthPasswordChanged.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-password-changed.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-team-invite-accept",
+      "type": "registry:block",
+      "title": "Authentications: Team Invite Accept",
+      "description": "An invitation card with a banner, the team's faces, the workspace details, and Accept or Decline.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-team-invite-accept/AuthTeamInviteAccept.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-team-invite-accept.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-profile-setup-onboarding",
+      "type": "registry:block",
+      "title": "Authentications: Profile Setup Onboarding",
+      "description": "The profile step of a sign-up: progress steps, a photo upload, name, role, team size and location.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "input",
+        "select",
+        "steps"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-profile-setup-onboarding/AuthProfileSetupOnboarding.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-profile-setup-onboarding.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-photo-background-sign-in",
+      "type": "registry:block",
+      "title": "Authentications: Photo Background Sign In",
+      "description": "A sign-in card over a full-bleed photo; pass your own photo.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "checkbox",
+        "input",
+        "social-icons"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-photo-background-sign-in/AuthPhotoBackgroundSignIn.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-photo-background-sign-in.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-phone-number-sign-in",
+      "type": "registry:block",
+      "title": "Authentications: Phone Number Sign In",
+      "description": "Sign in with a texted code: a country picker, a number that groups as it is typed, and email or WhatsApp as other ways.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "checkbox",
+        "input",
+        "select",
+        "social-icons"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-phone-number-sign-in/AuthPhoneNumberSignIn.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-phone-number-sign-in.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-qr-device-login",
+      "type": "registry:block",
+      "title": "Authentications: QR Device Login",
+      "description": "Sign in by scanning a QR code with the app, with an expiry timer, a refresh and an email fallback.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-qr-device-login/AuthQrDeviceLogin.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-qr-device-login.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-passkey-sign-in",
+      "type": "registry:block",
+      "title": "Authentications: Passkey Sign In",
+      "description": "A passwordless sign-in: one passkey button, the passkeys saved on the account, and two other ways in.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-passkey-sign-in/AuthPasskeySignIn.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-passkey-sign-in.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-locked-session-re-authenticate",
+      "type": "registry:block",
+      "title": "Authentications: Locked Session Re-authenticate",
+      "description": "An unlock card for a timed-out session: the person's photo and email, a password field and a way to switch account.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-locked-session-re-authenticate/AuthLockedSessionReAuthenticate.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-locked-session-re-authenticate.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-multi-step-sign-up-wizard",
+      "type": "registry:block",
+      "title": "Authentications: Multi-Step Sign Up Wizard",
+      "description": "The invite-your-team step of a sign-up: a stepper, email and role rows, a shareable link, and finish or skip.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "select",
+        "steps"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-multi-step-sign-up-wizard/AuthMultiStepSignUpWizard.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-multi-step-sign-up-wizard.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-sign-in-error-state",
+      "type": "registry:block",
+      "title": "Authentications: Sign In Error State",
+      "description": "The sign-in card after a failed attempt: an alert, an invalid password field and a way to reset or get help.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "alert",
+        "button",
+        "checkbox",
+        "input",
+        "social-icons"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-sign-in-error-state/AuthSignInErrorState.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-sign-in-error-state.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
+      ]
+    },
+    {
+      "name": "auth-waitlist-early-access",
+      "type": "registry:block",
+      "title": "Authentications: Waitlist Early Access",
+      "description": "A waitlist sign-up beside an art panel, with the queue and what members get on day one.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/auth-waitlist-early-access/AuthWaitlistEarlyAccess.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/auth-waitlist-early-access.tsx"
+        }
+      ],
+      "categories": [
+        "authentications",
+        "forms"
       ]
     }
   ]
