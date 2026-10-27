@@ -4,6 +4,7 @@ import * as React from "react"
 import dynamic from "next/dynamic"
 
 import { authExample } from "@/components/blocks/authentications-examples"
+import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
 
 /**
  * Every FAQ, Error State, Logo Cloud and Authentications Type by registry
@@ -79,6 +80,16 @@ const withLogoCloudExample = (slug: string, block: Promise<AnyBlock>) =>
 const withAuthExample = (Block: AnyBlock, slug: string, copy: object) =>
   function AuthenticationsPreview(props: { locale: Locale }) {
     return <Block {...authExample(slug, props.locale, copy as Parameters<typeof authExample>[2])} {...props} />
+  }
+
+/**
+ * A Gallery Type with its demo photos, from public/images/gallery/: as a
+ * `photos` list, or added to each item of the block's own copy.
+ */
+type GalleryCopy = Record<Locale, object>
+const withGalleryPhotos = (Block: AnyBlock, type: string, copy: GalleryCopy) =>
+  function GalleryPreview(props: { locale: Locale }) {
+    return <Block {...galleryPhotoProps(type, props.locale, copy)} {...props} />
   }
 
 export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
@@ -283,6 +294,72 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   ),
   "auth-waitlist-early-access": dynamic(() =>
     import("@fasla-ui/blocks/auth-waitlist-early-access/AuthWaitlistEarlyAccess").then((m) => withAuthExample(m.AuthWaitlistEarlyAccess, "auth-waitlist-early-access", m.authWaitlistEarlyAccessCopy))
+  ),
+  "gallery-culture-photo-grid": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-culture-photo-grid/GalleryCulturePhotoGrid").then((m) => withGalleryPhotos(m.GalleryCulturePhotoGrid, "culture-photo-grid", m.galleryCulturePhotoGridCopy))
+  ),
+  "gallery-masonry-gallery": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-masonry-gallery/GalleryMasonryGallery").then((m) => withGalleryPhotos(m.GalleryMasonryGallery, "masonry-gallery", m.galleryMasonryGalleryCopy))
+  ),
+  "gallery-photo-bento": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-photo-bento/GalleryPhotoBento").then((m) => withGalleryPhotos(m.GalleryPhotoBento, "photo-bento", m.galleryPhotoBentoCopy))
+  ),
+  "gallery-filmstrip-carousel": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-filmstrip-carousel/GalleryFilmstripCarousel").then((m) => withGalleryPhotos(m.GalleryFilmstripCarousel, "filmstrip-carousel", m.galleryFilmstripCarouselCopy))
+  ),
+  "gallery-full-bleed-slider": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-full-bleed-slider/GalleryFullBleedSlider").then((m) => withGalleryPhotos(m.GalleryFullBleedSlider, "full-bleed-slider", m.galleryFullBleedSliderCopy))
+  ),
+  "gallery-filter-tabs-grid": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-filter-tabs-grid/GalleryFilterTabsGrid").then((m) => withGalleryPhotos(m.GalleryFilterTabsGrid, "filter-tabs-grid", m.galleryFilterTabsGridCopy))
+  ),
+  "gallery-hover-caption-cards": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-hover-caption-cards/GalleryHoverCaptionCards").then((m) => withGalleryPhotos(m.GalleryHoverCaptionCards, "hover-caption-cards", m.galleryHoverCaptionCardsCopy))
+  ),
+  "gallery-lightbox-viewer": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-lightbox-viewer/GalleryLightboxViewer").then((m) => withGalleryPhotos(m.GalleryLightboxViewer, "lightbox-viewer", m.galleryLightboxViewerCopy))
+  ),
+  "gallery-horizontal-scroll-rail": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-horizontal-scroll-rail/GalleryHorizontalScrollRail").then((m) => withGalleryPhotos(m.GalleryHorizontalScrollRail, "horizontal-scroll-rail", m.galleryHorizontalScrollRailCopy))
+  ),
+  "gallery-editorial-split": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-editorial-split/GalleryEditorialSplit").then((m) => withGalleryPhotos(m.GalleryEditorialSplit, "editorial-split", m.galleryEditorialSplitCopy))
+  ),
+  "gallery-scattered-collage": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-scattered-collage/GalleryScatteredCollage").then((m) => withGalleryPhotos(m.GalleryScatteredCollage, "scattered-collage", m.galleryScatteredCollageCopy))
+  ),
+  "gallery-social-feed-strip": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-social-feed-strip/GallerySocialFeedStrip").then((m) => withGalleryPhotos(m.GallerySocialFeedStrip, "social-feed-strip", m.gallerySocialFeedStripCopy))
+  ),
+  "gallery-video-gallery": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-video-gallery/GalleryVideoGallery").then((m) => withGalleryPhotos(m.GalleryVideoGallery, "video-gallery", m.galleryVideoGalleryCopy))
+  ),
+  "gallery-before-after-compare": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-before-after-compare/GalleryBeforeAfterCompare").then((m) => withGalleryPhotos(m.GalleryBeforeAfterCompare, "before-after-compare", m.galleryBeforeAfterCompareCopy))
+  ),
+  "gallery-dark-cinema-wall": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-dark-cinema-wall/GalleryDarkCinemaWall").then((m) => withGalleryPhotos(m.GalleryDarkCinemaWall, "dark-cinema-wall", m.galleryDarkCinemaWallCopy))
+  ),
+  "gallery-hover-index-list": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-hover-index-list/GalleryHoverIndexList").then((m) => withGalleryPhotos(m.GalleryHoverIndexList, "hover-index-list", m.galleryHoverIndexListCopy))
+  ),
+  "gallery-mosaic-statement-tile": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-mosaic-statement-tile/GalleryMosaicStatementTile").then((m) => withGalleryPhotos(m.GalleryMosaicStatementTile, "mosaic-statement-tile", m.galleryMosaicStatementTileCopy))
+  ),
+  "gallery-contact-sheet-wall": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-contact-sheet-wall/GalleryContactSheetWall").then((m) => withGalleryPhotos(m.GalleryContactSheetWall, "contact-sheet-wall", m.galleryContactSheetWallCopy))
+  ),
+  "gallery-featured-thumb-rail": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-featured-thumb-rail/GalleryFeaturedThumbRail").then((m) => withGalleryPhotos(m.GalleryFeaturedThumbRail, "featured-thumb-rail", m.galleryFeaturedThumbRailCopy))
+  ),
+  "gallery-album-cards": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-album-cards/GalleryAlbumCards").then((m) => withGalleryPhotos(m.GalleryAlbumCards, "album-cards", m.galleryAlbumCardsCopy))
+  ),
+  "gallery-timeline-gallery": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-timeline-gallery/GalleryTimelineGallery").then((m) => withGalleryPhotos(m.GalleryTimelineGallery, "timeline-gallery", m.galleryTimelineGalleryCopy))
+  ),
+  "gallery-photo-spotlight": dynamic(() =>
+    import("@fasla-ui/blocks/gallery-photo-spotlight/GalleryPhotoSpotlight").then((m) => withGalleryPhotos(m.GalleryPhotoSpotlight, "photo-spotlight", m.galleryPhotoSpotlightCopy))
   ),
 }
 

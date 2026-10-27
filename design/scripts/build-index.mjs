@@ -187,6 +187,16 @@ export const CODE_MAP = {
       "waitlist-early-access",
     ].map((type) => [`auth-${type}`, null])
   ),
+  // Blocks: each Gallery item is one Type of the block set Gallery (42478:479), not an atom.
+  ...Object.fromEntries(
+    [
+      "culture-photo-grid", "masonry-gallery", "photo-bento", "filmstrip-carousel", "full-bleed-slider",
+      "filter-tabs-grid", "hover-caption-cards", "lightbox-viewer", "horizontal-scroll-rail", "editorial-split",
+      "scattered-collage", "social-feed-strip", "video-gallery", "before-after-compare", "dark-cinema-wall",
+      "hover-index-list", "mosaic-statement-tile", "contact-sheet-wall", "featured-thumb-rail", "album-cards",
+      "timeline-gallery", "photo-spotlight",
+    ].map((type) => [`gallery-${type}`, null])
+  ),
 }
 
 const FAMILY_MIN = 10

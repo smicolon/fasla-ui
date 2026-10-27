@@ -184,6 +184,21 @@ export const routes = [
     },
   },
   {
+    kind: "block",
+    category: "Blocks",
+    path: "/docs/blocks/gallery/",
+    title: "Gallery Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Twenty-two photo galleries, from a captioned grid and a masonry wall to carousels, a lightbox and a before-and-after slider, responsive and mirrored for Arabic.",
+    h1: "Gallery",
+    ar: {
+      title: "كتل معرض الصور لمشاريع React | فاصلة",
+      description:
+        "اثنان وعشرون معرضًا للصور، من شبكة بتسميات وجدار متدرّج إلى العروض المتحركة وعارض الصور ومنزلق المقارنة قبل وبعد، متجاوبة ومعكوسة للعربية.",
+      h1: "معرض الصور (Gallery)",
+    },
+  },
+  {
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/button/",

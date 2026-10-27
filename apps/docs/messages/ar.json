@@ -3202,6 +3202,42 @@
         "logo-cloud-grid-closing-cta": "شبكة بدعوة ختامية"
       }
     },
+    "galleryBlocks": {
+      "lead": "{count, plural, one {معرض صور واحد} two {معرضا صور} few {{n} معارض صور} many {{n} معرضًا للصور} other {{n} معرض صور}}: شبكات وجدران بتسميات، وعارضات شرائح، وعارضات بأدوات تحكّم خاصة بها.",
+      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
+      "filterLabel": "التصفية حسب العائلة",
+      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
+      "families": {
+        "all": "الكل",
+        "grids": "الشبكات والجدران",
+        "carousels": "عارضات الشرائح",
+        "viewers": "العارضات التفاعلية"
+      },
+      "types": {
+        "gallery-culture-photo-grid": "شبكة صور الفريق",
+        "gallery-masonry-gallery": "معرض متراصّ",
+        "gallery-photo-bento": "شبكة بينتو للصور",
+        "gallery-filmstrip-carousel": "عارض بشريط مصغّرات",
+        "gallery-full-bleed-slider": "عارض بعرض كامل",
+        "gallery-filter-tabs-grid": "شبكة بتبويبات للتصفية",
+        "gallery-hover-caption-cards": "بطاقات بتسمية عند التمرير",
+        "gallery-lightbox-viewer": "عارض الصور المكبّرة",
+        "gallery-horizontal-scroll-rail": "شريط تمرير أفقي",
+        "gallery-editorial-split": "تحريري مقسوم",
+        "gallery-scattered-collage": "صور مبعثرة",
+        "gallery-social-feed-strip": "شريط منشورات التواصل",
+        "gallery-video-gallery": "معرض الفيديو",
+        "gallery-before-after-compare": "مقارنة قبل وبعد",
+        "gallery-dark-cinema-wall": "جدار سينمائي داكن",
+        "gallery-hover-index-list": "فهرس بمعاينة عند التمرير",
+        "gallery-mosaic-statement-tile": "فسيفساء مع بطاقة نصية",
+        "gallery-contact-sheet-wall": "جدار الصور المصغّرة",
+        "gallery-featured-thumb-rail": "صورة مميّزة وشريط مصغّرات",
+        "gallery-album-cards": "بطاقات الألبومات",
+        "gallery-timeline-gallery": "معرض على خط زمني",
+        "gallery-photo-spotlight": "صورة في الواجهة"
+      }
+    },
     "blockCard": {
       "fullScreen": "فتح بملء الشاشة",
       "newTab": "(يُفتح في علامة تبويب جديدة)",
