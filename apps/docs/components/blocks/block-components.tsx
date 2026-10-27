@@ -5,11 +5,12 @@ import dynamic from "next/dynamic"
 
 import { authExample } from "@/components/blocks/authentications-examples"
 import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
+import { NavbarStage, navbarExample } from "@/components/blocks/navbar-examples"
 
 /**
- * Every FAQ, Error State, Logo Cloud and Authentications Type by registry
- * name, each loaded on its own so a preview frame downloads only the block it
- * shows.
+ * Every FAQ, Error State, Logo Cloud, Authentications, Gallery and Navbar Type
+ * by registry name, each loaded on its own so a preview frame downloads only
+ * the block it shows.
  */
 /** Each block has its own props; a frame passes only the locale and demo props. */
 type AnyBlock = React.ComponentType<any>
@@ -90,6 +91,19 @@ type GalleryCopy = Record<Locale, object>
 const withGalleryPhotos = (Block: AnyBlock, type: string, copy: GalleryCopy) =>
   function GalleryPreview(props: { locale: Locale }) {
     return <Block {...galleryPhotoProps(type, props.locale, copy)} {...props} />
+  }
+
+/**
+ * A Navbar block with its example (the Fasla Logo, the account photo), with
+ * the room its menus and Sheet need to open inside the frame.
+ */
+const withNavbarExample = (Block: AnyBlock, slug: string) =>
+  function NavbarPreview(props: { locale: Locale }) {
+    return (
+      <NavbarStage slug={slug}>
+        <Block {...navbarExample(slug)} {...props} />
+      </NavbarStage>
+    )
   }
 
 export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
@@ -360,6 +374,57 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   ),
   "gallery-photo-spotlight": dynamic(() =>
     import("@fasla-ui/blocks/gallery-photo-spotlight/GalleryPhotoSpotlight").then((m) => withGalleryPhotos(m.GalleryPhotoSpotlight, "photo-spotlight", m.galleryPhotoSpotlightCopy))
+  ),
+  "navbar-default": dynamic(() =>
+    import("@fasla-ui/blocks/navbar-default/NavbarDefault").then((m) => withNavbarExample(m.NavbarDefault, "navbar-default"))
+  ),
+  "navbar-with-dropdown": dynamic(() =>
+    import("@fasla-ui/blocks/navbar-with-dropdown/NavbarWithDropdown").then((m) => withNavbarExample(m.NavbarWithDropdown, "navbar-with-dropdown"))
+  ),
+  "navbar-with-icon-indicator-avatar": dynamic(() =>
+    import("@fasla-ui/blocks/navbar-with-icon-indicator-avatar/NavbarWithIconIndicatorAvatar").then((m) => withNavbarExample(m.NavbarWithIconIndicatorAvatar, "navbar-with-icon-indicator-avatar"))
+  ),
+  "navbar-with-centered-logo": dynamic(() =>
+    import("@fasla-ui/blocks/navbar-with-centered-logo/NavbarWithCenteredLogo").then((m) => withNavbarExample(m.NavbarWithCenteredLogo, "navbar-with-centered-logo"))
+  ),
+  "navbar-with-cta-button": dynamic(() =>
+    import("@fasla-ui/blocks/navbar-with-cta-button/NavbarWithCtaButton").then((m) => withNavbarExample(m.NavbarWithCtaButton, "navbar-with-cta-button"))
+  ),
+  "navbar-with-submenu": dynamic(() =>
+    import("@fasla-ui/blocks/navbar-with-submenu/NavbarWithSubmenu").then((m) => withNavbarExample(m.NavbarWithSubmenu, "navbar-with-submenu"))
+  ),
+  "navbar-rounded": dynamic(() =>
+    import("@fasla-ui/blocks/navbar-rounded/NavbarRounded").then((m) => withNavbarExample(m.NavbarRounded, "navbar-rounded"))
+  ),
+  "navbar-with-search-input": dynamic(() =>
+    import("@fasla-ui/blocks/navbar-with-search-input/NavbarWithSearchInput").then((m) => withNavbarExample(m.NavbarWithSearchInput, "navbar-with-search-input"))
+  ),
+  "navbar-multiple-icon": dynamic(() =>
+    import("@fasla-ui/blocks/navbar-multiple-icon/NavbarMultipleIcon").then((m) => withNavbarExample(m.NavbarMultipleIcon, "navbar-multiple-icon"))
+  ),
+  "navbar-multiple-action": dynamic(() =>
+    import("@fasla-ui/blocks/navbar-multiple-action/NavbarMultipleAction").then((m) => withNavbarExample(m.NavbarMultipleAction, "navbar-multiple-action"))
+  ),
+  "navbar-extended-at-top": dynamic(() =>
+    import("@fasla-ui/blocks/navbar-extended-at-top/NavbarExtendedAtTop").then((m) => withNavbarExample(m.NavbarExtendedAtTop, "navbar-extended-at-top"))
+  ),
+  "navbar-small": dynamic(() =>
+    import("@fasla-ui/blocks/navbar-small/NavbarSmall").then((m) => withNavbarExample(m.NavbarSmall, "navbar-small"))
+  ),
+  "navbar-rounded-small": dynamic(() =>
+    import("@fasla-ui/blocks/navbar-rounded-small/NavbarRoundedSmall").then((m) => withNavbarExample(m.NavbarRoundedSmall, "navbar-rounded-small"))
+  ),
+  "navbar-centered-floating": dynamic(() =>
+    import("@fasla-ui/blocks/navbar-centered-floating/NavbarCenteredFloating").then((m) => withNavbarExample(m.NavbarCenteredFloating, "navbar-centered-floating"))
+  ),
+  "navbar-active-action-with-border": dynamic(() =>
+    import("@fasla-ui/blocks/navbar-active-action-with-border/NavbarActiveActionWithBorder").then((m) => withNavbarExample(m.NavbarActiveActionWithBorder, "navbar-active-action-with-border"))
+  ),
+  "navbar-active-action-with-round": dynamic(() =>
+    import("@fasla-ui/blocks/navbar-active-action-with-round/NavbarActiveActionWithRound").then((m) => withNavbarExample(m.NavbarActiveActionWithRound, "navbar-active-action-with-round"))
+  ),
+  "navbar-e-commerce": dynamic(() =>
+    import("@fasla-ui/blocks/navbar-e-commerce/NavbarECommerce").then((m) => withNavbarExample(m.NavbarECommerce, "navbar-e-commerce"))
   ),
 }
 

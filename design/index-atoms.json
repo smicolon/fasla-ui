@@ -33,6 +33,10 @@
           {
             "page": "✦  🟢 Y | Error State - 28 Blocks ✅ ✅",
             "id": "40935:43028"
+          },
+          {
+            "page": "✦  🟢 Y | Navbar - 17 Blocks ✅",
+            "id": "4108:1605"
           }
         ]
       }
@@ -45,20 +49,20 @@
       "codeMap": "hand-maintained in design/scripts/build-index.mjs, keyed on {set, page} because the family page reuses atom names"
     },
     "counts": {
-      "pagesInScope": 44,
-      "entries": 164,
-      "primary": 44,
-      "componentSets": 163,
+      "pagesInScope": 43,
+      "entries": 163,
+      "primary": 43,
+      "componentSets": 162,
       "looseComponents": 1,
-      "variants": 4636,
-      "primaryWithEnDoc": 43,
-      "primaryWithArDoc": 41,
-      "withEnDoc": 43,
-      "withArDoc": 41,
-      "withRtl": 153,
+      "variants": 4602,
+      "primaryWithEnDoc": 42,
+      "primaryWithArDoc": 40,
+      "withEnDoc": 42,
+      "withArDoc": 40,
+      "withRtl": 152,
       "withDescription": 6,
-      "mappedToCode": 37,
-      "docFrames": 98
+      "mappedToCode": 36,
+      "docFrames": 96
     },
     "legend": {
       "confirmed": "partial",
@@ -105,6 +109,32 @@
   "unmappedCode": [
     "animated-gradient",
     "app-shell",
+    "auth-centered-card-sign-in",
+    "auth-check-your-email",
+    "auth-forgot-password",
+    "auth-locked-session-re-authenticate",
+    "auth-magic-link-request",
+    "auth-minimal-centered-sign-in",
+    "auth-multi-step-sign-up-wizard",
+    "auth-otp-verification",
+    "auth-passkey-sign-in",
+    "auth-password-changed",
+    "auth-phone-number-sign-in",
+    "auth-photo-background-sign-in",
+    "auth-profile-setup-onboarding",
+    "auth-qr-device-login",
+    "auth-reset-password",
+    "auth-sign-in-error-state",
+    "auth-sign-up-benefits-column",
+    "auth-sign-up-password-strength",
+    "auth-social-first-sign-in",
+    "auth-split-photo-sign-in",
+    "auth-split-testimonial-sign-up",
+    "auth-tabbed-sign-in-sign-up",
+    "auth-team-invite-accept",
+    "auth-two-factor-authenticator",
+    "auth-two-factor-method-chooser",
+    "auth-waitlist-early-access",
     "border-beam",
     "card",
     "empty-state",
@@ -162,10 +192,74 @@
     "faq-topic-tiles",
     "faq-two-column-grid",
     "faq-uppercase-dense",
+    "fasla-logo",
     "form-section",
+    "gallery-album-cards",
+    "gallery-before-after-compare",
+    "gallery-contact-sheet-wall",
+    "gallery-culture-photo-grid",
+    "gallery-dark-cinema-wall",
+    "gallery-editorial-split",
+    "gallery-featured-thumb-rail",
+    "gallery-filmstrip-carousel",
+    "gallery-filter-tabs-grid",
+    "gallery-full-bleed-slider",
+    "gallery-horizontal-scroll-rail",
+    "gallery-hover-caption-cards",
+    "gallery-hover-index-list",
+    "gallery-lightbox-viewer",
+    "gallery-masonry-gallery",
+    "gallery-mosaic-statement-tile",
+    "gallery-photo-bento",
+    "gallery-photo-spotlight",
+    "gallery-scattered-collage",
+    "gallery-social-feed-strip",
+    "gallery-timeline-gallery",
+    "gallery-video-gallery",
     "glow-card",
+    "logo-cloud-bento-logo-wall",
+    "logo-cloud-bordered-cell-grid",
+    "logo-cloud-centered-caption-row",
+    "logo-cloud-contained-card",
+    "logo-cloud-dark-logo-wall",
+    "logo-cloud-divider-rule-row",
+    "logo-cloud-editorial-eyebrow-split",
+    "logo-cloud-enterprise-wall",
+    "logo-cloud-flanked-heading",
+    "logo-cloud-grid-closing-cta",
+    "logo-cloud-heading-grid",
+    "logo-cloud-heading-left-grid-right",
+    "logo-cloud-logo-metric-tiles",
+    "logo-cloud-logo-quote-cards",
+    "logo-cloud-logo-testimonial-strip",
+    "logo-cloud-named-integration-cards",
+    "logo-cloud-pyramid-row-stack",
+    "logo-cloud-quote-panel-grid",
+    "logo-cloud-scatter-field",
+    "logo-cloud-side-label-rail",
+    "logo-cloud-stat-rail-above-grid",
+    "logo-cloud-tabbed-industry-filter",
+    "navbar",
+    "navbar-active-action-with-border",
+    "navbar-active-action-with-round",
+    "navbar-centered-floating",
+    "navbar-default",
+    "navbar-e-commerce",
+    "navbar-extended-at-top",
+    "navbar-multiple-action",
+    "navbar-multiple-icon",
+    "navbar-rounded",
+    "navbar-rounded-small",
+    "navbar-small",
+    "navbar-with-centered-logo",
+    "navbar-with-cta-button",
+    "navbar-with-dropdown",
+    "navbar-with-icon-indicator-avatar",
+    "navbar-with-search-input",
+    "navbar-with-submenu",
     "page-header",
     "shimmer-button",
+    "social-icons",
     "spotlight",
     "stats-card",
     "text-reveal",
@@ -725,20 +819,6 @@
       "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=14860-68939",
       "entryIds": [
         "14860:69243"
-      ],
-      "legacyDocSections": [],
-      "orphanDocs": []
-    },
-    {
-      "id": "4108:1605",
-      "name": "✦  🟢 Y | Navbar ✅",
-      "display": "Navbar",
-      "status": "🟢",
-      "tail": "✅",
-      "initials": "Y",
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4108-1605",
-      "entryIds": [
-        "4103:4910"
       ],
       "legacyDocSections": [],
       "orphanDocs": []
@@ -4263,70 +4343,6 @@
       "hasDescription": false,
       "flags": [
         "no-direction-axis",
-        "no-description"
-      ]
-    },
-    "4103:4910": {
-      "name": "Navbar",
-      "node": "COMPONENT_SET",
-      "kind": "atom",
-      "role": "primary",
-      "page": {
-        "id": "4108:1605",
-        "name": "✦  🟢 Y | Navbar ✅",
-        "display": "Navbar",
-        "status": "🟢",
-        "tail": "✅",
-        "initials": "Y"
-      },
-      "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=4103-4910",
-      "variants": 34,
-      "axes": {
-        "Type": [
-          "Default",
-          "With Dropdown",
-          "With Icon Indicator & Avatar",
-          "With Centered Logo",
-          "With search input",
-          "With CTA Button",
-          "With Submenu",
-          "multiple action",
-          "Rounded",
-          "extended at top",
-          "Small navbar",
-          "Rounded small navbar",
-          "active action with border",
-          "Multiple icon",
-          "active action with round",
-          "Centered floating navbar",
-          "E- commerce navbar"
-        ],
-        "Direction": [
-          "LTR",
-          "RTL"
-        ]
-      },
-      "axisNames": [
-        "Type",
-        "Direction"
-      ],
-      "rtl": true,
-      "docs": {
-        "en": {
-          "id": "40409:34455",
-          "name": "Navbar — Fasla Component Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40409-34455"
-        },
-        "ar": {
-          "id": "40409:36508",
-          "name": "Navbar — Fasla Component Documentation (AR)",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40409-36508"
-        },
-        "duplicates": []
-      },
-      "code": "navbar",
-      "hasDescription": false,
-      "flags": [
         "no-description"
       ]
     },

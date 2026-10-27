@@ -621,21 +621,402 @@
       "name": "navbar",
       "type": "registry:block",
       "title": "Navbar",
-      "description": "Responsive navigation bar with desktop links and mobile menu.",
+      "description": "The parts every Navbar block is built from: the padded bar, the logo, links and their active styles, a link that opens a menu, search, icon actions, the notification dot, the account, and the menu button that opens a Sheet on small screens.",
       "dependencies": [
         "lucide-react"
       ],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "dropdown-menu",
+        "input",
+        "sheet",
+        "status-indicator"
+      ],
       "files": [
         {
-          "path": "registry/blocks/navbar/Navbar.tsx",
+          "path": "registry/blocks/navbar/navbar.tsx",
           "type": "registry:block",
           "target": "components/blocks/navbar.tsx"
         }
       ],
       "categories": [
-        "navigation",
-        "layout"
+        "navbar",
+        "marketing"
+      ]
+    },
+    {
+      "name": "navbar-default",
+      "type": "registry:block",
+      "title": "Navbar: Default",
+      "description": "The logo and the links, the current one on a fill. On phones the links move into a Sheet.",
+      "dependencies": [],
+      "registryDependencies": [
+        "navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-default/NavbarDefault.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-default.tsx"
+        }
+      ],
+      "categories": [
+        "navbar",
+        "marketing"
+      ]
+    },
+    {
+      "name": "navbar-with-dropdown",
+      "type": "registry:block",
+      "title": "Navbar: With Dropdown",
+      "description": "Default's bar, with a link that opens a menu of its pages.",
+      "dependencies": [],
+      "registryDependencies": [
+        "navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-with-dropdown/NavbarWithDropdown.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-with-dropdown.tsx"
+        }
+      ],
+      "categories": [
+        "navbar",
+        "marketing"
+      ]
+    },
+    {
+      "name": "navbar-with-icon-indicator-avatar",
+      "type": "registry:block",
+      "title": "Navbar: With Icon Indicator & Avatar",
+      "description": "The logo, a bell with its notification dot, and the account's avatar.",
+      "dependencies": [],
+      "registryDependencies": [
+        "navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-with-icon-indicator-avatar/NavbarWithIconIndicatorAvatar.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-with-icon-indicator-avatar.tsx"
+        }
+      ],
+      "categories": [
+        "navbar",
+        "marketing"
+      ]
+    },
+    {
+      "name": "navbar-with-centered-logo",
+      "type": "registry:block",
+      "title": "Navbar: With Centered Logo",
+      "description": "The logo in the middle, the menu button at the start, search and the avatar at the end.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-with-centered-logo/NavbarWithCenteredLogo.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-with-centered-logo.tsx"
+        }
+      ],
+      "categories": [
+        "navbar",
+        "marketing"
+      ]
+    },
+    {
+      "name": "navbar-with-cta-button",
+      "type": "registry:block",
+      "title": "Navbar: With CTA Button",
+      "description": "The logo, the links in the middle and a button that stays on phones.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-with-cta-button/NavbarWithCtaButton.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-with-cta-button.tsx"
+        }
+      ],
+      "categories": [
+        "navbar",
+        "marketing"
+      ]
+    },
+    {
+      "name": "navbar-with-submenu",
+      "type": "registry:block",
+      "title": "Navbar: With Submenu",
+      "description": "Search and the avatar over a second row of links. On phones the search field takes a row of its own.",
+      "dependencies": [],
+      "registryDependencies": [
+        "navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-with-submenu/NavbarWithSubmenu.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-with-submenu.tsx"
+        }
+      ],
+      "categories": [
+        "navbar",
+        "marketing"
+      ]
+    },
+    {
+      "name": "navbar-rounded",
+      "type": "registry:block",
+      "title": "Navbar: Rounded",
+      "description": "The bar as a full-width pill, with a dot under the current link and a button.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-rounded/NavbarRounded.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-rounded.tsx"
+        }
+      ],
+      "categories": [
+        "navbar",
+        "marketing"
+      ]
+    },
+    {
+      "name": "navbar-with-search-input",
+      "type": "registry:block",
+      "title": "Navbar: With Search Input",
+      "description": "The logo, a search field and the avatar. On phones the search field takes a row of its own.",
+      "dependencies": [],
+      "registryDependencies": [
+        "navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-with-search-input/NavbarWithSearchInput.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-with-search-input.tsx"
+        }
+      ],
+      "categories": [
+        "navbar",
+        "marketing"
+      ]
+    },
+    {
+      "name": "navbar-multiple-icon",
+      "type": "registry:block",
+      "title": "Navbar: Multiple Icon",
+      "description": "Notifications, messages, search and an account menu beside the logo.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-multiple-icon/NavbarMultipleIcon.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-multiple-icon.tsx"
+        }
+      ],
+      "categories": [
+        "navbar",
+        "marketing"
+      ]
+    },
+    {
+      "name": "navbar-multiple-action",
+      "type": "registry:block",
+      "title": "Navbar: Multiple Action",
+      "description": "The links with a line under the current one, and Log in and Sign up buttons.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-multiple-action/NavbarMultipleAction.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-multiple-action.tsx"
+        }
+      ],
+      "categories": [
+        "navbar",
+        "marketing"
+      ]
+    },
+    {
+      "name": "navbar-extended-at-top",
+      "type": "registry:block",
+      "title": "Navbar: Extended at Top",
+      "description": "A primary band with the contact email and social links over the bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "navbar",
+        "social-icons"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-extended-at-top/NavbarExtendedAtTop.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-extended-at-top.tsx"
+        }
+      ],
+      "categories": [
+        "navbar",
+        "marketing"
+      ]
+    },
+    {
+      "name": "navbar-small",
+      "type": "registry:block",
+      "title": "Navbar: Small",
+      "description": "A compact card panel hanging from the top of the page, in the middle.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-small/NavbarSmall.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-small.tsx"
+        }
+      ],
+      "categories": [
+        "navbar",
+        "marketing"
+      ]
+    },
+    {
+      "name": "navbar-rounded-small",
+      "type": "registry:block",
+      "title": "Navbar: Rounded Small",
+      "description": "A compact pill in the middle of the page, with muted links.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-rounded-small/NavbarRoundedSmall.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-rounded-small.tsx"
+        }
+      ],
+      "categories": [
+        "navbar",
+        "marketing"
+      ]
+    },
+    {
+      "name": "navbar-centered-floating",
+      "type": "registry:block",
+      "title": "Navbar: Centered Floating",
+      "description": "A slim pill in the middle of the page, with a round button.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-centered-floating/NavbarCenteredFloating.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-centered-floating.tsx"
+        }
+      ],
+      "categories": [
+        "navbar",
+        "marketing"
+      ]
+    },
+    {
+      "name": "navbar-active-action-with-border",
+      "type": "registry:block",
+      "title": "Navbar: Active Action with Border",
+      "description": "Muted links in the middle, a line under the current one, and a Log in button.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-active-action-with-border/NavbarActiveActionWithBorder.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-active-action-with-border.tsx"
+        }
+      ],
+      "categories": [
+        "navbar",
+        "marketing"
+      ]
+    },
+    {
+      "name": "navbar-active-action-with-round",
+      "type": "registry:block",
+      "title": "Navbar: Active Action with Round",
+      "description": "Muted links at the end, a dot under the current one, and a Log in button.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-active-action-with-round/NavbarActiveActionWithRound.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-active-action-with-round.tsx"
+        }
+      ],
+      "categories": [
+        "navbar",
+        "marketing"
+      ]
+    },
+    {
+      "name": "navbar-e-commerce",
+      "type": "registry:block",
+      "title": "Navbar: E-commerce",
+      "description": "A shop's header: search, home, wishlist, cart and the account, over a row of categories.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/navbar-e-commerce/NavbarECommerce.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/navbar-e-commerce.tsx"
+        }
+      ],
+      "categories": [
+        "navbar",
+        "marketing"
       ]
     },
     {
@@ -884,7 +1265,7 @@
       "name": "social-icons",
       "type": "registry:ui",
       "title": "Social Icons",
-      "description": "Brand marks for 32 platforms, from Google and Apple to Slack and Zoom, in their own colours or one quiet muted colour. Decorative unless given a title; never mirrored.",
+      "description": "Brand marks for 32 platforms, from Google and Apple to Slack and Zoom, in their own colours, one quiet muted colour, or the text colour around them. Decorative unless given a title; never mirrored.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [

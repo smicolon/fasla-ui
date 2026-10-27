@@ -79,11 +79,6 @@ const GLYPHS: Record<string, React.ReactNode> = {
       <rect x="2.5" y="7" width="19" height="10" rx="5" /><circle cx="16.5" cy="12" r="2.5" fill="currentColor" stroke="none" />
     </>
   ),
-  "Navbar": (
-    <>
-      <rect x="3" y="4" width="18" height="16" rx="2" /><path d="M3 9h18M6 6.5h3" />
-    </>
-  ),
   "Content Carousel": (
     <>
       <rect x="3" y="5" width="18" height="11" rx="2" /><path d="M7 19h10M9 9h6M9 12h4" />

@@ -617,7 +617,7 @@ is deliberately set aside.
 
 | Component | Variants | Properties |
 |---|---|---|
-| `Navbar` `4103:4910` | 34 | `Type` ×17 — Default, With Dropdown, With Icon Indicator & Avatar, With Centered Logo, With search input, With CTA Button, With Submenu, multiple action, Rounded, extended at top, Small navbar, Rounded small navbar, … |
+| `Navbar` `4103:4910` | 102 | `Type` ×17 — Default, With Dropdown, With Icon Indicator & Avatar, With Centered Logo, With CTA Button, With Submenu, Rounded, With Search Input, Multiple Icon, Multiple Action, Extended at Top, Small, Rounded Small, Centered Floating, Active Action with Border, Active Action with Round, E-commerce · `Breakpoint` Desktop/Tablet/Mobile · `Direction` LTR/RTL. A block family: in code each Type is a `navbar-*` registry block, built on the shared `navbar` parts |
 | `Tabs Component` `39913:32645` | 210 | `Tabs` 2–8 · `Active Tab` 1–8 · `Style` Boxed/Bordered/Lifted (+ `Tabs / Tab item` `408:8904`, 90 variants, `size` sm/md/lg · `State` inactive/Active/disabled/Focus/Hover · `Has Icon`). Also called Pills. Code: `Style` → `variant` boxed/bordered/lifted and `size` → `size`, both on `TabsList`; `State` is real interaction |
 | `Breadcrumbs` `3771:68266` | 32 | `Style` Default/Custom Separator/With Badge/Outline Badge · `Count` 2/3/4/+4 |
 | `Pagination` `400:6808` | 48 | `size` xs–lg · `Variants` Default/Solid/Outlined · `Shape` Square/Rounded |

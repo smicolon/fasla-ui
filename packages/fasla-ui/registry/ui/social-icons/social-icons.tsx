@@ -15,6 +15,9 @@ import { cn } from "../../../src/lib/utils"
  * white frame behind Original is left out: the mark sits on whatever surface
  * holds it.
  *
+ * `current` is code only: Negative's shapes in the surrounding text colour, for
+ * a mark on a coloured band (the Navbar's top bar sets `text-primary-foreground`).
+ *
  * The marks never mirror in RTL: a logo is not a direction.
  */
 
@@ -225,20 +228,28 @@ const ICONS: Record<SocialPlatform, [original: SvgNode[], negative: SvgNode[]]> 
   ],
 }
 
-/** Renders one element. `__U__` in an id or a `url(#…)` becomes this icon's own id, so two icons never share a gradient. */
-function renderNode([tag, attrs, ...children]: SvgNode, uid: string, key: number): React.ReactNode {
+/**
+ * Renders one element. `__U__` in an id or a `url(#…)` becomes this icon's own
+ * id, so two icons never share a gradient. With `current`, Negative's
+ * `muted-foreground` fill becomes the text colour.
+ */
+function renderNode([tag, attrs, ...children]: SvgNode, uid: string, key: number, current = false): React.ReactNode {
   const props: Record<string, unknown> = { key }
   for (const [name, value] of Object.entries(attrs)) {
     props[name] = typeof value === "string" ? value.replace(/__U__/g, uid) : value
   }
-  return React.createElement(tag, props, ...children.map((child, index) => renderNode(child, uid, index)))
+  if (current && props.className === "fill-muted-foreground") props.className = "fill-current"
+  return React.createElement(tag, props, ...children.map((child, index) => renderNode(child, uid, index, current)))
 }
 
 export interface SocialIconProps extends Omit<React.SVGProps<SVGSVGElement>, "color"> {
   /** Which platform's mark. */
   platform: SocialPlatform
-  /** Figma `Color`: the brand's own colours, or one quiet `muted-foreground` colour. */
-  color?: "original" | "negative"
+  /**
+   * Figma `Color`: the brand's own colours, or one quiet `muted-foreground`
+   * colour. `current` draws Negative's shapes in the text colour around it.
+   */
+  color?: "original" | "negative" | "current"
   /** An accessible name. Without it the mark is decorative and hidden from assistive tech. */
   title?: string
 }
@@ -249,7 +260,7 @@ export interface SocialIconProps extends Omit<React.SVGProps<SVGSVGElement>, "co
  */
 export function SocialIcon({ platform, color = "original", title, className, ...props }: SocialIconProps) {
   const uid = "si" + React.useId().replace(/[^a-zA-Z0-9]/g, "")
-  const nodes = ICONS[platform][color === "negative" ? 1 : 0]
+  const nodes = ICONS[platform][color === "original" ? 0 : 1]
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -267,7 +278,7 @@ export function SocialIcon({ platform, color = "original", title, className, ...
       className={cn("size-6 shrink-0", className)}
       {...props}
     >
-      {nodes.map((node, index) => renderNode(node, uid, index))}
+      {nodes.map((node, index) => renderNode(node, uid, index, color === "current"))}
     </svg>
   )
 }

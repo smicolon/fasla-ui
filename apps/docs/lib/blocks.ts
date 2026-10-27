@@ -2,7 +2,8 @@
  * The block families the Blocks section documents, and each family's Types in
  * Figma's order. Names and family labels are in the message catalogues
  * (docs.faqBlocks, docs.errorStateBlocks, docs.logoCloudBlocks,
- * docs.authenticationsBlocks, docs.galleryBlocks); the slug is the registry item's name.
+ * docs.authenticationsBlocks, docs.galleryBlocks, docs.navbarBlocks); the slug
+ * is the registry item's name.
  */
 
 export type FaqFamily = "lists" | "layouts" | "navigation" | "support"
@@ -45,7 +46,16 @@ export type GalleryFamily = "grids" | "carousels" | "viewers"
 
 export const GALLERY_FAMILIES: GalleryFamily[] = ["grids", "carousels", "viewers"]
 
-export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily> = {
+/**
+ * Navbar's three groups: the full-width bars of a marketing site, the four
+ * that float as a pill or a panel, and the six built around an app or a shop
+ * (search, notifications, the account, a cart).
+ */
+export type NavbarFamily = "site" | "floating" | "app"
+
+export const NAVBAR_FAMILIES: NavbarFamily[] = ["site", "floating", "app"]
+
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
   family: Family
@@ -193,7 +203,27 @@ export const GALLERY_TYPES: BlockType<GalleryFamily>[] = [
 ]
 
 /** Every block a preview page renders, across the families. */
-export const ALL_BLOCK_TYPES: BlockType[] = [...FAQ_TYPES, ...ERROR_STATE_TYPES, ...LOGO_CLOUD_TYPES, ...AUTHENTICATIONS_TYPES, ...GALLERY_TYPES]
+export const NAVBAR_TYPES: BlockType<NavbarFamily>[] = [
+  { slug: "navbar-default", family: "site" },
+  { slug: "navbar-with-dropdown", family: "site" },
+  { slug: "navbar-with-icon-indicator-avatar", family: "app" },
+  { slug: "navbar-with-centered-logo", family: "app" },
+  { slug: "navbar-with-cta-button", family: "site" },
+  { slug: "navbar-with-submenu", family: "app" },
+  { slug: "navbar-rounded", family: "floating" },
+  { slug: "navbar-with-search-input", family: "app" },
+  { slug: "navbar-multiple-icon", family: "app" },
+  { slug: "navbar-multiple-action", family: "site" },
+  { slug: "navbar-extended-at-top", family: "site" },
+  { slug: "navbar-small", family: "floating" },
+  { slug: "navbar-rounded-small", family: "floating" },
+  { slug: "navbar-centered-floating", family: "floating" },
+  { slug: "navbar-active-action-with-border", family: "site" },
+  { slug: "navbar-active-action-with-round", family: "site" },
+  { slug: "navbar-e-commerce", family: "app" },
+]
+
+export const ALL_BLOCK_TYPES: BlockType[] = [...FAQ_TYPES, ...ERROR_STATE_TYPES, ...LOGO_CLOUD_TYPES, ...AUTHENTICATIONS_TYPES, ...GALLERY_TYPES, ...NAVBAR_TYPES]
 
 /** Figma's three breakpoints, the widths a preview frame renders at. */
 export const BREAKPOINTS = { desktop: 1440, tablet: 768, mobile: 360 } as const
