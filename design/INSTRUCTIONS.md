@@ -74,6 +74,31 @@ link. Treat them as the spec even when a skill wants to ask more.
   misalignment here? please fix all of this and don't repeat that issue again."*
 - She sometimes asks you to **remember the conversation** before continuing — write the durable parts
   to memory, don't just acknowledge.
+- **Read the index before you use the Figma MCP. This is required, not a suggestion** (2026-10-27).
+  Take the node id, URL, variant count and axes from `index-atoms.json` (atoms) or
+  `index-blocks.json` (blocks), and go to Figma only for what the index does not contain. The full
+  rule is in [FIGMA.md → Read the index before Figma](FIGMA.md#read-the-index-before-figma).
+
+---
+
+## 2b. Verify your own work before reporting it finished
+
+Standing instruction (2026-10-27). Before you report a task as finished, open every file you changed
+and check it directly. A subagent's report and your own summary are claims, not evidence; the file
+is the evidence. Check that:
+
+- **The files you changed match what was asked.** Read the diff (`git diff`) or the files
+  themselves, not your memory of writing them.
+- **Nothing unrelated was touched.** `git status` lists only the files the task needed, with no
+  stray reformatting, reordering or edits outside the scope.
+- **The index entry was updated if it needed to be.** If the work added or changed a component or
+  block in Figma, or changed its code status, the index was regenerated with the `figma-index` skill
+  (never by hand), the entry for that component shows the change, and no other entries moved.
+- **Anything a subagent reported as done is confirmed in the actual file.** Open the file or node it
+  names and find the change. If it isn't there, it isn't done.
+
+For Figma work, the same applies to nodes: re-read the node and screenshot it. If something could
+not be checked, say so instead of reporting it as done.
 
 ---
 
@@ -314,7 +339,8 @@ not roll into the next pass, even when she would obviously want it.
   sentence. Raised, unresolved, **not** to be swept.
 - **`COMPONENT SMI-UI Logo`** on the `🟢 Logo` page — raised, deliberately left alone.
 - **Button Solid/Primary Dark-mode contrast** — resolved at the token (checked 2026-10-13).
-- **`Hero` set (56 types)** — Desktop/LTR only; responsive and RTL passes still open.
+- **`Hero` set (50 types, 300 variants)** — responsive and RTL passes done (Desktop/Tablet/Mobile ×
+  LTR/RTL, per `index-blocks.json`, measured 2026-10-16); English and Arabic docs still open.
 - **Documentation / content contracts** for the newer block families (Banners, Billing, Auth, Error
   State, Gallery, Features) — the `component-doc-generator` and `genui-component-docs` passes have not
   been run on them.

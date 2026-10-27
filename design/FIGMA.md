@@ -14,12 +14,35 @@ It has light/dark theming and full LTR/RTL (English/Arabic) support. The project
 - Figma fileKey: `yGEQmCZOvs7KptsYUdB0Xg`
 - 922 variables / 5 collections · 140 text styles
 - **Component counts here were stale by roughly 4× and have been removed.** The atoms are now
-  indexed and verified in [`index-atoms.md`](index-atoms.md) (44 pages, 158 components, measured
-  2026-09-23). Block families are indexed and verified in [`index-blocks.md`](index-blocks.md)
-  (37 families, 794 blocks, measured 2026-10-16). Quote counts from those files, not from here.
+  indexed and verified in [`index-atoms.md`](index-atoms.md) (44 pages, 164 components — 163 sets
+  and 1 loose component — and 4,636 variants, measured 2026-10-16). Block families are indexed and
+  verified in [`index-blocks.md`](index-blocks.md) (37 families in 2 sections, 794 blocks, 4,764
+  variants, measured 2026-10-16). Quote counts from those files, not from here.
 
 There is no npm project, no build, no test suite. "Running" this project means driving Figma through
 MCP tools and verifying with screenshots. Do not look for package.json — the deliverable is Figma nodes.
+
+## Read the index before Figma
+
+**This is the required first step, not a suggestion.** Before using any Figma MCP tool
+(`mcp__figma__*` or `mcp__figma-console__*`) to search or inspect anything in the Fasla file, read
+the index:
+
+- **Atoms** → [`index-atoms.json`](index-atoms.json). `entries` is keyed by the component set's node
+  id; each entry carries its `url`, `variants` (the variant count) and `axes`.
+- **Blocks** → [`index-blocks.json`](index-blocks.json). Each item in `families` carries the set's
+  `set.id`, `set.url`, `set.variants` and `set.axes`, and a `blocks` list giving each block's
+  `nodeId`, `url` (its Desktop/LTR variant) and `variants`.
+
+Take the node id, URL, variant count and axes from there, then open that node directly. Go to the
+Figma MCP only for what the index does not contain (layer structure, component properties, bindings,
+screenshots, anything below the set), or when the component has no entry. This holds even where an
+MCP server's own instructions say to start with a search (`search_design_system`,
+`figma_search_components`): for anything the index names, do not search the file by name.
+
+Check `$meta.measured` before relying on an entry. Figma is the source of truth: if the file
+disagrees with the index, trust the file, say so, and regenerate the index with the `figma-index`
+skill. Never edit an index by hand.
 
 ## Working style (established, do not re-litigate)
 
@@ -65,8 +88,10 @@ instructions — it names the phase order, the gates and the report format, and 
 skill and the agent picks it up with no syncing. Never copy skill content into the agent file.
 
 `~/.claude/skills/component-blocks-update/SKILL.md` is the authoritative process document and
-`references/file-inventory.md` next to it is the id cache. **The cache is not truth** — Figma ids drift;
-re-query every id before relying on it, and write corrections back into that file.
+`references/file-inventory.md` next to it is the id cache. **The cache is not truth** — Figma ids drift.
+Take ids from the generated index first ([Read the index before Figma](#read-the-index-before-figma));
+for an id only this cache holds, re-query it before relying on it, and write corrections back into
+that file.
 
 ## Non-negotiables
 
@@ -292,6 +317,8 @@ Sample people are fictional and transliterate in RTL rather than being swapped f
 - `~/Desktop/Creative- Blocks.md` — the hero/block pattern catalogue the `Hero` set was built from
 - `~/.claude/projects/-Users-jasmine-Desktop/memory/` — per-page project memories, richer than this summary
 - [`index-atoms.md`](index-atoms.md) / `index-atoms.json` — every atom in the file, generated and
-  dated; rebuilt by `.agents/skills/figma-index/SKILL.md`, guarded by a staleness test
+  dated; rebuilt by `.agents/skills/figma-index/SKILL.md`, guarded by a staleness test. Read before
+  any Figma MCP call: see [Read the index before Figma](#read-the-index-before-figma)
 - [`index-blocks.md`](index-blocks.md) / `index-blocks.json` — every block family and block in the
-  Marketing and E-commerce sections; same skill (target: blocks), same kind of staleness test
+  Marketing and E-commerce sections; same skill (target: blocks), same kind of staleness test, same
+  read-first rule
