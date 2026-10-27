@@ -28,6 +28,7 @@ import {
   type DropdownMenuContentProps,
 } from "../../../../packages/fasla-ui/registry/ui/dropdown-menu"
 import { Button } from "../../../../packages/fasla-ui/registry/ui/button"
+import { SocialIcon, type SocialPlatform } from "../../../../packages/fasla-ui/registry/ui/social-icons/social-icons"
 import { Avatar } from "../../../../packages/fasla-ui/registry/ui/avatar"
 import { cn } from "../../../../packages/fasla-ui/src/lib/utils"
 
@@ -317,12 +318,16 @@ const iconActionRows = (c: Copy) => (
   </>
 )
 
-/** Figma's DropdownItem with Switch rows. */
+/** The mark beside each app in `switchRows`, in `COPY.apps` order. */
+const APP_PLATFORMS: SocialPlatform[] = ["google", "x", "linkedin", "dribbble", "figma"]
+
+/** Figma's DropdownItem with Switch rows, each app with its Social Icons mark. */
 const switchRows = (c: Copy) => (
   <DropdownMenuGroup>
     <DropdownMenuLabel>{c.appsNotification}</DropdownMenuLabel>
     {c.apps.map((app, i) => (
       <DropdownMenuCheckboxItem key={app} indicator="switch" defaultChecked={i === 0 || i === 4}>
+        <SocialIcon platform={APP_PLATFORMS[i]!} className="size-4" />
         {app}
       </DropdownMenuCheckboxItem>
     ))}

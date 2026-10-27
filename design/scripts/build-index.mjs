@@ -137,6 +137,8 @@ export const CODE_MAP = {
   "data-table": { set: "Table", page: "14885:1510" },
   navbar: { set: "Navbar", page: "4108:1605" },
   // No in-scope Figma atom:
+  // Social Icons sits on the Icons page (🟡) and Fasla Logo on the Logo page (no ✅).
+  "social-icons": null, "fasla-logo": null,
   card: null,          // Figma page "✦ 🟢 Y | Card 🔸" has no trailing ✅
   "form-section": null, // Figma page "✦ 🟡 Y | Form" is 🟡, not 🟢+✅
   "app-shell": null, "empty-state": null, "page-header": null, "stats-card": null,
@@ -172,6 +174,18 @@ export const CODE_MAP = {
       "logo-testimonial-strip", "scatter-field", "bento-logo-wall", "divider-rule-row", "pyramid-row-stack",
       "tabbed-industry-filter", "grid-closing-cta",
     ].map((type) => [`logo-cloud-${type}`, null])
+  ),
+  // Blocks: each Authentications item is one Type of the block set Authentications (42586:4669), not an atom.
+  ...Object.fromEntries(
+    [
+      "centered-card-sign-in", "social-first-sign-in", "split-photo-sign-in", "split-testimonial-sign-up",
+      "minimal-centered-sign-in", "sign-up-password-strength", "sign-up-benefits-column", "tabbed-sign-in-sign-up",
+      "magic-link-request", "check-your-email", "otp-verification", "two-factor-authenticator",
+      "two-factor-method-chooser", "forgot-password", "reset-password", "password-changed", "team-invite-accept",
+      "profile-setup-onboarding", "photo-background-sign-in", "phone-number-sign-in", "qr-device-login",
+      "passkey-sign-in", "locked-session-re-authenticate", "multi-step-sign-up-wizard", "sign-in-error-state",
+      "waitlist-early-access",
+    ].map((type) => [`auth-${type}`, null])
   ),
 }
 

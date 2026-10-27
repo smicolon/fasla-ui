@@ -38,8 +38,8 @@
       "variants": 4764,
       "withEnDoc": 17,
       "withArDoc": 17,
-      "blocksInCode": 76,
-      "familiesInCode": 3,
+      "blocksInCode": 102,
+      "familiesInCode": 4,
       "parts": 2,
       "extraSets": 1,
       "flagged": 29
@@ -5349,8 +5349,8 @@
         "duplicates": []
       },
       "code": {
-        "prefix": null,
-        "built": 0,
+        "prefix": "auth-",
+        "built": 26,
         "of": 26
       },
       "blocks": [
@@ -5359,182 +5359,182 @@
           "nodeId": "42521:125038",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42521-125038",
           "variants": 6,
-          "code": null
+          "code": "auth-centered-card-sign-in"
         },
         {
           "name": "Social-First Sign In",
           "nodeId": "42521:125180",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42521-125180",
           "variants": 6,
-          "code": null
+          "code": "auth-social-first-sign-in"
         },
         {
           "name": "Split Photo Sign In",
           "nodeId": "42521:125288",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42521-125288",
           "variants": 6,
-          "code": null
+          "code": "auth-split-photo-sign-in"
         },
         {
           "name": "Split Testimonial Sign Up",
           "nodeId": "42521:125479",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42521-125479",
           "variants": 6,
-          "code": null
+          "code": "auth-split-testimonial-sign-up"
         },
         {
           "name": "Minimal Centered Sign In",
           "nodeId": "42521:125693",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42521-125693",
           "variants": 6,
-          "code": null
+          "code": "auth-minimal-centered-sign-in"
         },
         {
           "name": "Sign Up + Password Strength",
           "nodeId": "42521:125780",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42521-125780",
           "variants": 6,
-          "code": null
+          "code": "auth-sign-up-password-strength"
         },
         {
           "name": "Sign Up + Benefits Column",
           "nodeId": "42526:125934",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42526-125934",
           "variants": 6,
-          "code": null
+          "code": "auth-sign-up-benefits-column"
         },
         {
           "name": "Tabbed Sign In / Sign Up",
           "nodeId": "42526:126151",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42526-126151",
           "variants": 6,
-          "code": null
+          "code": "auth-tabbed-sign-in-sign-up"
         },
         {
           "name": "Magic Link Request",
           "nodeId": "42526:126288",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42526-126288",
           "variants": 6,
-          "code": null
+          "code": "auth-magic-link-request"
         },
         {
           "name": "Check Your Email",
           "nodeId": "42526:126436",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42526-126436",
           "variants": 6,
-          "code": null
+          "code": "auth-check-your-email"
         },
         {
           "name": "OTP Verification",
           "nodeId": "42526:126485",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42526-126485",
           "variants": 6,
-          "code": null
+          "code": "auth-otp-verification"
         },
         {
           "name": "Two-Factor Authenticator",
           "nodeId": "42526:126677",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42526-126677",
           "variants": 6,
-          "code": null
+          "code": "auth-two-factor-authenticator"
         },
         {
           "name": "Two-Factor Method Chooser",
           "nodeId": "42526:126849",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42526-126849",
           "variants": 6,
-          "code": null
+          "code": "auth-two-factor-method-chooser"
         },
         {
           "name": "Forgot Password",
           "nodeId": "42526:127174",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42526-127174",
           "variants": 6,
-          "code": null
+          "code": "auth-forgot-password"
         },
         {
           "name": "Reset Password",
           "nodeId": "42526:127238",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42526-127238",
           "variants": 6,
-          "code": null
+          "code": "auth-reset-password"
         },
         {
           "name": "Password Changed",
           "nodeId": "42526:127992",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42526-127992",
           "variants": 6,
-          "code": null
+          "code": "auth-password-changed"
         },
         {
           "name": "Team Invite Accept",
           "nodeId": "42526:128379",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42526-128379",
           "variants": 6,
-          "code": null
+          "code": "auth-team-invite-accept"
         },
         {
           "name": "Profile Setup Onboarding",
           "nodeId": "42526:128514",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42526-128514",
           "variants": 6,
-          "code": null
+          "code": "auth-profile-setup-onboarding"
         },
         {
           "name": "Photo Background Sign In",
           "nodeId": "42526:129156",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42526-129156",
           "variants": 6,
-          "code": null
+          "code": "auth-photo-background-sign-in"
         },
         {
           "name": "Phone Number Sign In",
           "nodeId": "42560:129449",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42560-129449",
           "variants": 6,
-          "code": null
+          "code": "auth-phone-number-sign-in"
         },
         {
           "name": "QR Device Login",
           "nodeId": "42560:129616",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42560-129616",
           "variants": 6,
-          "code": null
+          "code": "auth-qr-device-login"
         },
         {
           "name": "Passkey Sign In",
           "nodeId": "42586:3130",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42586-3130",
           "variants": 6,
-          "code": null
+          "code": "auth-passkey-sign-in"
         },
         {
           "name": "Locked Session Re-authenticate",
           "nodeId": "42586:3210",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42586-3210",
           "variants": 6,
-          "code": null
+          "code": "auth-locked-session-re-authenticate"
         },
         {
           "name": "Multi-Step Sign Up Wizard",
           "nodeId": "42586:3280",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42586-3280",
           "variants": 6,
-          "code": null
+          "code": "auth-multi-step-sign-up-wizard"
         },
         {
           "name": "Sign In Error State",
           "nodeId": "42586:4105",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42586-4105",
           "variants": 6,
-          "code": null
+          "code": "auth-sign-in-error-state"
         },
         {
           "name": "Waitlist Early Access",
           "nodeId": "42586:4478",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42586-4478",
           "variants": 6,
-          "code": null
+          "code": "auth-waitlist-early-access"
         }
       ],
       "leftovers": [],

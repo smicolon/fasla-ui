@@ -783,7 +783,8 @@
       },
       "checkbox": {
         "title": "Checkbox items",
-        "body": "<code>DropdownMenuCheckboxItem</code> is a setting that is on or off. Pressing it toggles it and keeps the menu open. By default a check before the text shows that it is on; its space is kept when it is off, so the text never moves. With <code>indicator=\"switch\"</code>, a Switch at the end of the row shows the state instead."
+        "body": "<code>DropdownMenuCheckboxItem</code> is a setting that is on or off. Pressing it toggles it and keeps the menu open. By default a check before the text shows that it is on; its space is kept when it is off, so the text never moves. With <code>indicator=\"switch\"</code>, a Switch at the end of the row shows the state instead.",
+        "icons": "A row can also lead with an icon, such as an app’s mark."
       },
       "radio": {
         "title": "Radio group",
@@ -824,7 +825,15 @@
         "bottom": "Bottom",
         "end": "Right",
         "newTab": "New tab",
-        "newWindow": "New window"
+        "newWindow": "New window",
+        "appsNotification": "Apps notification",
+        "apps": {
+          "google": "Google",
+          "x": "X",
+          "linkedin": "LinkedIn",
+          "dribbble": "Dribbble",
+          "figma": "Figma"
+        }
       },
       "a11y": {
         "roles": "Base UI gives the menu the <code>menu</code> role and each row <code>menuitem</code>, <code>menuitemcheckbox</code> or <code>menuitemradio</code>, so screen readers announce what each row is and whether it is checked. The trigger reports whether the menu is open.",
@@ -3117,6 +3126,45 @@
         "error-state-marquee-404-band": "Marquee 404 Band",
         "error-state-broken-trail-breadcrumb": "Broken Trail Breadcrumb",
         "error-state-countdown-redirect": "Countdown Redirect"
+      }
+    },
+    "authenticationsBlocks": {
+      "lead": "{count, plural, one {One screen} other {{n} screens}} between a visitor and their account: the ways in, and the steps that follow, from a code to a locked session.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "filterLabel": "Filter by family",
+      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
+      "families": {
+        "all": "All",
+        "ways-in": "Ways in",
+        "next-steps": "Next steps"
+      },
+      "types": {
+        "auth-centered-card-sign-in": "Centered Card Sign In",
+        "auth-social-first-sign-in": "Social-First Sign In",
+        "auth-split-photo-sign-in": "Split Photo Sign In",
+        "auth-split-testimonial-sign-up": "Split Testimonial Sign Up",
+        "auth-minimal-centered-sign-in": "Minimal Centered Sign In",
+        "auth-sign-up-password-strength": "Sign Up + Password Strength",
+        "auth-sign-up-benefits-column": "Sign Up + Benefits Column",
+        "auth-tabbed-sign-in-sign-up": "Tabbed Sign In / Sign Up",
+        "auth-magic-link-request": "Magic Link Request",
+        "auth-check-your-email": "Check Your Email",
+        "auth-otp-verification": "OTP Verification",
+        "auth-two-factor-authenticator": "Two-Factor Authenticator",
+        "auth-two-factor-method-chooser": "Two-Factor Method Chooser",
+        "auth-forgot-password": "Forgot Password",
+        "auth-reset-password": "Reset Password",
+        "auth-password-changed": "Password Changed",
+        "auth-team-invite-accept": "Team Invite Accept",
+        "auth-profile-setup-onboarding": "Profile Setup Onboarding",
+        "auth-photo-background-sign-in": "Photo Background Sign In",
+        "auth-phone-number-sign-in": "Phone Number Sign In",
+        "auth-qr-device-login": "QR Device Login",
+        "auth-passkey-sign-in": "Passkey Sign In",
+        "auth-locked-session-re-authenticate": "Locked Session Re-authenticate",
+        "auth-multi-step-sign-up-wizard": "Multi-Step Sign Up Wizard",
+        "auth-sign-in-error-state": "Sign In Error State",
+        "auth-waitlist-early-access": "Waitlist Early Access"
       }
     },
     "logoCloudBlocks": {
