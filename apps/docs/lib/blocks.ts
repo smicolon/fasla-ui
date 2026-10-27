@@ -2,8 +2,8 @@
  * The block families the Blocks section documents, and each family's Types in
  * Figma's order. Names and family labels are in the message catalogues
  * (docs.faqBlocks, docs.errorStateBlocks, docs.logoCloudBlocks,
- * docs.authenticationsBlocks, docs.galleryBlocks, docs.navbarBlocks); the slug
- * is the registry item's name.
+ * docs.authenticationsBlocks, docs.galleryBlocks, docs.navbarBlocks,
+ * docs.pricingBlocks); the slug is the registry item's name.
  */
 
 export type FaqFamily = "lists" | "layouts" | "navigation" | "support"
@@ -55,7 +55,16 @@ export type NavbarFamily = "site" | "floating" | "app"
 
 export const NAVBAR_FAMILIES: NavbarFamily[] = ["site", "floating", "app"]
 
-export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily> = {
+/**
+ * Pricing's two groups: the three that lay plans side by side to compare
+ * (tier cards, two plans, a full matrix), and the two built around a choice
+ * (one plan's billing options, and a plan list beside an order summary).
+ */
+export type PricingFamily = "compare" | "choose"
+
+export const PRICING_FAMILIES: PricingFamily[] = ["compare", "choose"]
+
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
   family: Family
@@ -223,7 +232,23 @@ export const NAVBAR_TYPES: BlockType<NavbarFamily>[] = [
   { slug: "navbar-e-commerce", family: "app" },
 ]
 
-export const ALL_BLOCK_TYPES: BlockType[] = [...FAQ_TYPES, ...ERROR_STATE_TYPES, ...LOGO_CLOUD_TYPES, ...AUTHENTICATIONS_TYPES, ...GALLERY_TYPES, ...NAVBAR_TYPES]
+export const PRICING_TYPES: BlockType<PricingFamily>[] = [
+  { slug: "pricing-tiers", family: "compare" },
+  { slug: "pricing-two-plan-compare", family: "compare" },
+  { slug: "pricing-plan-spotlight", family: "choose" },
+  { slug: "pricing-comparison-matrix", family: "compare" },
+  { slug: "pricing-plan-picker-summary", family: "choose" },
+]
+
+export const ALL_BLOCK_TYPES: BlockType[] = [
+  ...FAQ_TYPES,
+  ...ERROR_STATE_TYPES,
+  ...LOGO_CLOUD_TYPES,
+  ...AUTHENTICATIONS_TYPES,
+  ...GALLERY_TYPES,
+  ...NAVBAR_TYPES,
+  ...PRICING_TYPES,
+]
 
 /** Figma's three breakpoints, the widths a preview frame renders at. */
 export const BREAKPOINTS = { desktop: 1440, tablet: 768, mobile: 360 } as const

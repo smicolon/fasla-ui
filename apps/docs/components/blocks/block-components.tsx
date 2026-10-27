@@ -8,7 +8,7 @@ import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
 import { NavbarStage, navbarExample } from "@/components/blocks/navbar-examples"
 
 /**
- * Every FAQ, Error State, Logo Cloud, Authentications, Gallery and Navbar Type
+ * Every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar and Pricing Type
  * by registry name, each loaded on its own so a preview frame downloads only
  * the block it shows.
  */
@@ -425,6 +425,19 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   ),
   "navbar-e-commerce": dynamic(() =>
     import("@fasla-ui/blocks/navbar-e-commerce/NavbarECommerce").then((m) => withNavbarExample(m.NavbarECommerce, "navbar-e-commerce"))
+  ),
+  "pricing-tiers": dynamic(() => import("@fasla-ui/blocks/pricing-tiers/PricingTiers").then((m) => m.PricingTiers)),
+  "pricing-two-plan-compare": dynamic(() =>
+    import("@fasla-ui/blocks/pricing-two-plan-compare/PricingTwoPlanCompare").then((m) => m.PricingTwoPlanCompare)
+  ),
+  "pricing-plan-spotlight": dynamic(() =>
+    import("@fasla-ui/blocks/pricing-plan-spotlight/PricingPlanSpotlight").then((m) => m.PricingPlanSpotlight)
+  ),
+  "pricing-comparison-matrix": dynamic(() =>
+    import("@fasla-ui/blocks/pricing-comparison-matrix/PricingComparisonMatrix").then((m) => m.PricingComparisonMatrix)
+  ),
+  "pricing-plan-picker-summary": dynamic(() =>
+    import("@fasla-ui/blocks/pricing-plan-picker-summary/PricingPlanPickerSummary").then((m) => m.PricingPlanPickerSummary)
   ),
 }
 

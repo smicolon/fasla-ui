@@ -214,6 +214,21 @@ export const routes = [
     },
   },
   {
+    kind: "block",
+    category: "Blocks",
+    path: "/docs/blocks/pricing/",
+    title: "Pricing Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Five pricing sections, from tier cards with a billing toggle and two plans side by side to a full feature matrix and a checkout step, responsive and mirrored for Arabic.",
+    h1: "Pricing",
+    ar: {
+      title: "كتل الأسعار لمشاريع React | فاصلة",
+      description:
+        "خمسة أقسام للأسعار، من بطاقات الخطط مع مبدّل للفوترة وخطتين متجاورتين إلى جدول كامل للميزات وخطوة للدفع، متجاوبة ومعكوسة للعربية.",
+      h1: "الأسعار (Pricing)",
+    },
+  },
+  {
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/button/",

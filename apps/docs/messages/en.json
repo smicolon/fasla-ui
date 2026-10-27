@@ -3242,6 +3242,24 @@
         "gallery-photo-spotlight": "Photo Spotlight"
       }
     },
+    "pricingBlocks": {
+      "lead": "{count, plural, one {One pricing section} other {{n} pricing sections}}: plans to compare side by side, and a choice of plan or billing that leads to checkout.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "filterLabel": "Filter by family",
+      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
+      "families": {
+        "all": "All",
+        "compare": "Compare plans",
+        "choose": "Choose and pay"
+      },
+      "types": {
+        "pricing-tiers": "Pricing Tiers",
+        "pricing-two-plan-compare": "Two-Plan Compare",
+        "pricing-plan-spotlight": "Plan Spotlight",
+        "pricing-comparison-matrix": "Comparison Matrix",
+        "pricing-plan-picker-summary": "Plan Picker + Summary"
+      }
+    },
     "blockCard": {
       "fullScreen": "Open full screen",
       "newTab": "(opens in a new tab)",
