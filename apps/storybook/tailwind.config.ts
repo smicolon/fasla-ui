@@ -15,6 +15,8 @@ const config: Config = {
     "../../packages/fasla-ui/registry/**/*.{js,ts,jsx,tsx}",
     // The Logo Cloud stories' example marks bind some parts to theme tokens (fill-foreground).
     "../docs/components/blocks/brand-logos.tsx",
+    // The Authentications examples (logo, photos) the stories share with the docs site.
+    "../docs/components/blocks/authentications-examples.tsx",
   ],
   theme: {
     extend: {

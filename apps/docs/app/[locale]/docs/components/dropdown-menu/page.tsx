@@ -22,12 +22,16 @@ import {
 } from "@fasla-ui/ui/dropdown-menu"
 import { Button } from "@fasla-ui/ui/button"
 import { Avatar } from "@fasla-ui/ui/avatar"
+import { SocialIcon } from "@fasla-ui/ui/social-icons"
 import { ComponentPreview, UsageExample } from "@/components/component-preview"
 import { InstallCommand } from "@/components/install-command"
 import { ComponentName } from "@/components/component-name"
 import { PropsTable, type PropRow } from "@/components/props-table"
 
 const PHOTO = "/samples/avatar-portrait.png"
+
+/** Figma's apps in the switch rows, each with its Social Icons mark. */
+const APPS = ["google", "x", "linkedin", "dribbble", "figma"] as const
 
 /** Menus side by side from `sm` up, sharing a top edge; one column on a phone. */
 const GRID = "grid w-full items-start justify-items-center gap-x-6 gap-y-5 sm:grid-cols-2"
@@ -403,6 +407,20 @@ export default function DropdownMenuPage() {
               </DropdownMenuGroup>
             </HeldMenu>
           </div>
+        </HeldPreview>
+        <p className="text-muted-foreground">{d("checkbox.icons")}</p>
+        <HeldPreview>
+          <HeldMenu trigger={d("sample.open")}>
+            <DropdownMenuGroup>
+              <DropdownMenuLabel>{d("sample.appsNotification")}</DropdownMenuLabel>
+              {APPS.map((platform, index) => (
+                <DropdownMenuCheckboxItem key={platform} indicator="switch" defaultChecked={index === 0 || index === 4}>
+                  <SocialIcon platform={platform} className="size-4" />
+                  {d(`sample.apps.${platform}`)}
+                </DropdownMenuCheckboxItem>
+              ))}
+            </DropdownMenuGroup>
+          </HeldMenu>
         </HeldPreview>
       </section>
 

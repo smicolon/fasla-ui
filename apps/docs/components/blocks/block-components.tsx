@@ -3,9 +3,12 @@
 import * as React from "react"
 import dynamic from "next/dynamic"
 
+import { authExample } from "@/components/blocks/authentications-examples"
+
 /**
- * Every FAQ, Error State and Logo Cloud Type by registry name, each loaded on
- * its own so a preview frame downloads only the block it shows.
+ * Every FAQ, Error State, Logo Cloud and Authentications Type by registry
+ * name, each loaded on its own so a preview frame downloads only the block it
+ * shows.
  */
 /** Each block has its own props; a frame passes only the locale and demo props. */
 type AnyBlock = React.ComponentType<any>
@@ -67,6 +70,16 @@ const withLogoCloudExample = (slug: string, block: Promise<AnyBlock>) =>
       return <Block {...example} {...props} />
     }
   )
+
+/**
+ * An Authentications block with its example: the Fasla Logo, and the photos
+ * and avatars from public/blocks/authentications/, added to the block's own
+ * copy once the block has loaded.
+ */
+const withAuthExample = (Block: AnyBlock, slug: string, copy: object) =>
+  function AuthenticationsPreview(props: { locale: Locale }) {
+    return <Block {...authExample(slug, props.locale, copy as Parameters<typeof authExample>[2])} {...props} />
+  }
 
 export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "faq-classic-centered": dynamic(() => import("@fasla-ui/blocks/faq-classic-centered/FaqClassicCentered").then((m) => m.FaqClassicCentered)),
@@ -193,10 +206,120 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "logo-cloud-grid-closing-cta": dynamic(() =>
     withLogoCloudExample("logo-cloud-grid-closing-cta", import("@fasla-ui/blocks/logo-cloud-grid-closing-cta/LogoCloudGridClosingCta").then((m) => m.LogoCloudGridClosingCta))
   ),
+  "auth-centered-card-sign-in": dynamic(() =>
+    import("@fasla-ui/blocks/auth-centered-card-sign-in/AuthCenteredCardSignIn").then((m) => withAuthExample(m.AuthCenteredCardSignIn, "auth-centered-card-sign-in", m.authCenteredCardSignInCopy))
+  ),
+  "auth-social-first-sign-in": dynamic(() =>
+    import("@fasla-ui/blocks/auth-social-first-sign-in/AuthSocialFirstSignIn").then((m) => withAuthExample(m.AuthSocialFirstSignIn, "auth-social-first-sign-in", m.authSocialFirstSignInCopy))
+  ),
+  "auth-split-photo-sign-in": dynamic(() =>
+    import("@fasla-ui/blocks/auth-split-photo-sign-in/AuthSplitPhotoSignIn").then((m) => withAuthExample(m.AuthSplitPhotoSignIn, "auth-split-photo-sign-in", m.authSplitPhotoSignInCopy))
+  ),
+  "auth-split-testimonial-sign-up": dynamic(() =>
+    import("@fasla-ui/blocks/auth-split-testimonial-sign-up/AuthSplitTestimonialSignUp").then((m) => withAuthExample(m.AuthSplitTestimonialSignUp, "auth-split-testimonial-sign-up", m.authSplitTestimonialSignUpCopy))
+  ),
+  "auth-minimal-centered-sign-in": dynamic(() =>
+    import("@fasla-ui/blocks/auth-minimal-centered-sign-in/AuthMinimalCenteredSignIn").then((m) => withAuthExample(m.AuthMinimalCenteredSignIn, "auth-minimal-centered-sign-in", m.authMinimalCenteredSignInCopy))
+  ),
+  "auth-sign-up-password-strength": dynamic(() =>
+    import("@fasla-ui/blocks/auth-sign-up-password-strength/AuthSignUpPasswordStrength").then((m) => withAuthExample(m.AuthSignUpPasswordStrength, "auth-sign-up-password-strength", m.authSignUpPasswordStrengthCopy))
+  ),
+  "auth-sign-up-benefits-column": dynamic(() =>
+    import("@fasla-ui/blocks/auth-sign-up-benefits-column/AuthSignUpBenefitsColumn").then((m) => withAuthExample(m.AuthSignUpBenefitsColumn, "auth-sign-up-benefits-column", m.authSignUpBenefitsColumnCopy))
+  ),
+  "auth-tabbed-sign-in-sign-up": dynamic(() =>
+    import("@fasla-ui/blocks/auth-tabbed-sign-in-sign-up/AuthTabbedSignInSignUp").then((m) => withAuthExample(m.AuthTabbedSignInSignUp, "auth-tabbed-sign-in-sign-up", m.authTabbedSignInSignUpCopy))
+  ),
+  "auth-magic-link-request": dynamic(() =>
+    import("@fasla-ui/blocks/auth-magic-link-request/AuthMagicLinkRequest").then((m) => withAuthExample(m.AuthMagicLinkRequest, "auth-magic-link-request", m.authMagicLinkRequestCopy))
+  ),
+  "auth-check-your-email": dynamic(() =>
+    import("@fasla-ui/blocks/auth-check-your-email/AuthCheckYourEmail").then((m) => withAuthExample(m.AuthCheckYourEmail, "auth-check-your-email", m.authCheckYourEmailCopy))
+  ),
+  "auth-otp-verification": dynamic(() =>
+    import("@fasla-ui/blocks/auth-otp-verification/AuthOtpVerification").then((m) => withAuthExample(m.AuthOtpVerification, "auth-otp-verification", m.authOtpVerificationCopy))
+  ),
+  "auth-two-factor-authenticator": dynamic(() =>
+    import("@fasla-ui/blocks/auth-two-factor-authenticator/AuthTwoFactorAuthenticator").then((m) => withAuthExample(m.AuthTwoFactorAuthenticator, "auth-two-factor-authenticator", m.authTwoFactorAuthenticatorCopy))
+  ),
+  "auth-two-factor-method-chooser": dynamic(() =>
+    import("@fasla-ui/blocks/auth-two-factor-method-chooser/AuthTwoFactorMethodChooser").then((m) => withAuthExample(m.AuthTwoFactorMethodChooser, "auth-two-factor-method-chooser", m.authTwoFactorMethodChooserCopy))
+  ),
+  "auth-forgot-password": dynamic(() =>
+    import("@fasla-ui/blocks/auth-forgot-password/AuthForgotPassword").then((m) => withAuthExample(m.AuthForgotPassword, "auth-forgot-password", m.authForgotPasswordCopy))
+  ),
+  "auth-reset-password": dynamic(() =>
+    import("@fasla-ui/blocks/auth-reset-password/AuthResetPassword").then((m) => withAuthExample(m.AuthResetPassword, "auth-reset-password", m.authResetPasswordCopy))
+  ),
+  "auth-password-changed": dynamic(() =>
+    import("@fasla-ui/blocks/auth-password-changed/AuthPasswordChanged").then((m) => withAuthExample(m.AuthPasswordChanged, "auth-password-changed", m.authPasswordChangedCopy))
+  ),
+  "auth-team-invite-accept": dynamic(() =>
+    import("@fasla-ui/blocks/auth-team-invite-accept/AuthTeamInviteAccept").then((m) => withAuthExample(m.AuthTeamInviteAccept, "auth-team-invite-accept", m.authTeamInviteAcceptCopy))
+  ),
+  "auth-profile-setup-onboarding": dynamic(() =>
+    import("@fasla-ui/blocks/auth-profile-setup-onboarding/AuthProfileSetupOnboarding").then((m) => withAuthExample(m.AuthProfileSetupOnboarding, "auth-profile-setup-onboarding", m.authProfileSetupOnboardingCopy))
+  ),
+  "auth-photo-background-sign-in": dynamic(() =>
+    import("@fasla-ui/blocks/auth-photo-background-sign-in/AuthPhotoBackgroundSignIn").then((m) => withAuthExample(m.AuthPhotoBackgroundSignIn, "auth-photo-background-sign-in", m.authPhotoBackgroundSignInCopy))
+  ),
+  "auth-phone-number-sign-in": dynamic(() =>
+    import("@fasla-ui/blocks/auth-phone-number-sign-in/AuthPhoneNumberSignIn").then((m) => withAuthExample(m.AuthPhoneNumberSignIn, "auth-phone-number-sign-in", m.authPhoneNumberSignInCopy))
+  ),
+  "auth-qr-device-login": dynamic(() =>
+    import("@fasla-ui/blocks/auth-qr-device-login/AuthQrDeviceLogin").then((m) => withAuthExample(m.AuthQrDeviceLogin, "auth-qr-device-login", m.authQrDeviceLoginCopy))
+  ),
+  "auth-passkey-sign-in": dynamic(() =>
+    import("@fasla-ui/blocks/auth-passkey-sign-in/AuthPasskeySignIn").then((m) => withAuthExample(m.AuthPasskeySignIn, "auth-passkey-sign-in", m.authPasskeySignInCopy))
+  ),
+  "auth-locked-session-re-authenticate": dynamic(() =>
+    import("@fasla-ui/blocks/auth-locked-session-re-authenticate/AuthLockedSessionReAuthenticate").then((m) => withAuthExample(m.AuthLockedSessionReAuthenticate, "auth-locked-session-re-authenticate", m.authLockedSessionReAuthenticateCopy))
+  ),
+  "auth-multi-step-sign-up-wizard": dynamic(() =>
+    import("@fasla-ui/blocks/auth-multi-step-sign-up-wizard/AuthMultiStepSignUpWizard").then((m) => withAuthExample(m.AuthMultiStepSignUpWizard, "auth-multi-step-sign-up-wizard", m.authMultiStepSignUpWizardCopy))
+  ),
+  "auth-sign-in-error-state": dynamic(() =>
+    import("@fasla-ui/blocks/auth-sign-in-error-state/AuthSignInErrorState").then((m) => withAuthExample(m.AuthSignInErrorState, "auth-sign-in-error-state", m.authSignInErrorStateCopy))
+  ),
+  "auth-waitlist-early-access": dynamic(() =>
+    import("@fasla-ui/blocks/auth-waitlist-early-access/AuthWaitlistEarlyAccess").then((m) => withAuthExample(m.AuthWaitlistEarlyAccess, "auth-waitlist-early-access", m.authWaitlistEarlyAccessCopy))
+  ),
 }
 
 /** Settles after a moment, so a form shows its pending state before its result. */
 const settleSoon = () => new Promise<void>((resolve) => setTimeout(resolve, 1200))
+
+/**
+ * Each Authentications block's callbacks that stand for a round trip to a
+ * server. In a preview they settle after a moment.
+ */
+const AUTH_ACTIONS: Record<string, string[]> = {
+  "auth-centered-card-sign-in": ["onProviderSelect", "onSubmit"],
+  "auth-social-first-sign-in": ["onProviderSelect", "onSubmit"],
+  "auth-split-photo-sign-in": ["onProviderSelect", "onSubmit"],
+  "auth-split-testimonial-sign-up": ["onProviderSelect", "onSubmit"],
+  "auth-minimal-centered-sign-in": ["onSubmit"],
+  "auth-sign-up-password-strength": ["onSubmit"],
+  "auth-sign-up-benefits-column": ["onProviderSelect", "onSubmit"],
+  "auth-tabbed-sign-in-sign-up": ["onProviderSelect", "onSignIn", "onSignUp"],
+  "auth-magic-link-request": ["onProviderSelect", "onSubmit"],
+  "auth-check-your-email": ["onResend"],
+  "auth-otp-verification": ["onResend", "onSubmit"],
+  "auth-two-factor-authenticator": ["onAlternativeSelect", "onSubmit"],
+  "auth-two-factor-method-chooser": ["onSubmit"],
+  "auth-forgot-password": ["onSubmit"],
+  "auth-reset-password": ["onSubmit"],
+  "auth-team-invite-accept": ["onAccept", "onDecline"],
+  "auth-profile-setup-onboarding": ["onSubmit"],
+  "auth-photo-background-sign-in": ["onProviderSelect", "onSubmit"],
+  "auth-phone-number-sign-in": ["onAlternativeSelect", "onSubmit"],
+  "auth-qr-device-login": ["onRefresh"],
+  "auth-passkey-sign-in": ["onPasskey"],
+  "auth-locked-session-re-authenticate": ["onSubmit"],
+  "auth-multi-step-sign-up-wizard": ["onSubmit"],
+  "auth-sign-in-error-state": ["onProviderSelect", "onSubmit"],
+  "auth-waitlist-early-access": ["onSubmit"],
+}
 
 /**
  * What a preview passes beyond the locale: the photos, which no block ships
@@ -263,6 +386,8 @@ export function blockDemoProps(slug: string, locale: Locale): Record<string, unk
     case "error-state-countdown-redirect":
       return { onRedirect: () => {} }
     default:
-      return {}
+      // Authentications: every action that would reach a server settles after a
+      // moment, so the buttons show their pending state and what follows.
+      return Object.fromEntries((AUTH_ACTIONS[slug] ?? []).map((name) => [name, settleSoon]))
   }
 }
