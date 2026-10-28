@@ -57,4 +57,14 @@ describe("Team Founder Spotlight", () => {
     const { container } = render(<TeamFounderSpotlight supporters={[]} />)
     expect(container.querySelector("ul")).toBeNull()
   })
+
+  it("leaves the feature card off with feature={null}, and draws nothing but the heading when there are no supporters either", () => {
+    const { container, rerender } = render(<TeamFounderSpotlight feature={null} />)
+    expect(container.querySelector("article")).toBeNull()
+    expect(container.querySelectorAll("li").length).toBe(3)
+    rerender(<TeamFounderSpotlight feature={null} supporters={[]} />)
+    expect(container.querySelector("article")).toBeNull()
+    expect(container.querySelector("ul")).toBeNull()
+    expect(screen.getByRole("heading", { level: 2 })).toBeTruthy()
+  })
 })

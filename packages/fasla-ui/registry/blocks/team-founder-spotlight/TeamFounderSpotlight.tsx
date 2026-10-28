@@ -88,44 +88,54 @@ const COPY: Record<TeamLocale, TeamFounderSpotlightCopy> = {
 
 export interface TeamFounderSpotlightProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "title">,
-    Partial<TeamFounderSpotlightCopy> {
+    Partial<Omit<TeamFounderSpotlightCopy, "feature">> {
+  /** The founder on the feature card. `null` leaves the card off; left out, Figma's founder shows. */
+  feature?: TeamFounder | null
   /** Which language the default copy is in. The page's `dir` sets the direction. */
   locale?: TeamLocale
 }
 
-/** A founder on the feature card, or `feature` left out to leave the card off. */
+/** A founder on the feature card, with up to three supporting people beside or under it. */
 export function TeamFounderSpotlight({ locale = "en", eyebrow, heading, feature, supporters, className, ...props }: TeamFounderSpotlightProps) {
   const copy = COPY[locale]
   const headingId = React.useId()
-  const main = feature ?? copy.feature
+  const main = feature === undefined ? copy.feature : feature
   const others = (supporters ?? copy.supporters).slice(0, 3)
 
   return (
     <TeamSection labelledBy={headingId} className={className} contentClassName="gap-16" {...props}>
       <TeamHeader headingId={headingId} eyebrow={eyebrow === undefined ? copy.eyebrow : eyebrow} heading={heading ?? copy.heading} />
-      <div className="grid w-full grid-cols-1 gap-6 [@container(min-width:40rem)]:gap-8 [@container(min-width:64rem)]:grid-cols-[minmax(0,760fr)_minmax(0,488fr)]">
-        <article className="flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-md [@container(min-width:40rem)]:flex-row">
-          {/* The portrait fades in while it settles from 1.04; the box clips the scale. */}
-          <Reveal
-            y={0}
-            className="relative h-[300px] w-full shrink-0 motion-safe:duration-[600ms] [@container(min-width:40rem)]:h-auto [@container(min-width:40rem)]:w-[280px] [@container(min-width:64rem)]:w-[300px]"
-          >
-            <TeamPortrait
-              person={main}
-              className="size-full min-h-[260px] [@container(min-width:40rem)]:absolute [@container(min-width:40rem)]:inset-0"
-              imageClassName="motion-safe:transition-transform motion-safe:duration-[600ms] motion-safe:ease-out motion-safe:group-data-[reveal=pending]/team:scale-[1.04]"
-            />
-          </Reveal>
-          <div className="flex min-w-0 flex-1 flex-col gap-6 p-10">
-            <Reveal index={1} className="flex flex-col gap-6">
-              <blockquote className="text-lg font-light text-foreground [@container(min-width:40rem)]:text-xl">{main.quote}</blockquote>
-              <div className="flex flex-col">
-                <span className="text-base font-semibold text-foreground">{main.name}</span>
-                <span className="text-sm text-muted-foreground">{main.role}</span>
-              </div>
+      {main || others.length > 0 ? (
+      <div
+        className={cn(
+          "grid w-full grid-cols-1 gap-6 [@container(min-width:40rem)]:gap-8",
+          main && "[@container(min-width:64rem)]:grid-cols-[minmax(0,760fr)_minmax(0,488fr)]"
+        )}
+      >
+        {main ? (
+          <article className="flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-md [@container(min-width:40rem)]:flex-row">
+            {/* The portrait fades in while it settles from 1.04; the box clips the scale. */}
+            <Reveal
+              y={0}
+              className="relative h-[300px] w-full shrink-0 motion-safe:duration-[600ms] [@container(min-width:40rem)]:h-auto [@container(min-width:40rem)]:w-[280px] [@container(min-width:64rem)]:w-[300px]"
+            >
+              <TeamPortrait
+                person={main}
+                className="size-full min-h-[260px] [@container(min-width:40rem)]:absolute [@container(min-width:40rem)]:inset-0"
+                imageClassName="motion-safe:transition-transform motion-safe:duration-[600ms] motion-safe:ease-out motion-safe:group-data-[reveal=pending]/team:scale-[1.04]"
+              />
             </Reveal>
-          </div>
-        </article>
+            <div className="flex min-w-0 flex-1 flex-col gap-6 p-10">
+              <Reveal index={1} className="flex flex-col gap-6">
+                <blockquote className="text-lg font-light text-foreground [@container(min-width:40rem)]:text-xl">{main.quote}</blockquote>
+                <div className="flex flex-col">
+                  <span className="text-base font-semibold text-foreground">{main.name}</span>
+                  <span className="text-sm text-muted-foreground">{main.role}</span>
+                </div>
+              </Reveal>
+            </div>
+          </article>
+        ) : null}
 
         {others.length > 0 ? (
           <ul className="grid grid-cols-1 gap-4 [@container(min-width:40rem)]:grid-cols-3 [@container(min-width:64rem)]:grid-cols-1 [@container(min-width:64rem)]:gap-5">
@@ -157,6 +167,7 @@ export function TeamFounderSpotlight({ locale = "en", eyebrow, heading, feature,
           </ul>
         ) : null}
       </div>
+      ) : null}
     </TeamSection>
   )
 }

@@ -219,7 +219,7 @@ export const FounderSpotlightEmpty: StoryObj<typeof TeamFounderSpotlight> = {
   name: "Founder Spotlight: Empty",
   tags: ["!dev", "!autodocs"],
   argTypes: teamArgTypes(TeamFounderSpotlight, teamFounderSpotlightCopy),
-  render: (args, context) => <TeamFounderSpotlight locale={localeOf(context)} {...emptyPropsOf(teamFounderSpotlightCopy)} {...args} />,
+  render: (args, context) => <TeamFounderSpotlight locale={localeOf(context)} {...emptyPropsOf(teamFounderSpotlightCopy)} feature={null} {...args} />,
 }
 
 export const CompactDirectoryRows: StoryObj<typeof TeamCompactDirectoryRows> = {
