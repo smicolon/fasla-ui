@@ -251,7 +251,7 @@ export const CODE_MAP = {
   ...Object.fromEntries(
     [
       "classic-3-up-grid", "featured-two-up", "compact-4-up-thumb-grid", "bento-editorial-grid", "overlay-photo-trio",
-      "journal-bento",
+      "journal-bento", "left-thumb-row-cards", "hairline-text-index", "numbered-reading-list", "latest-popular-split",
     ].map((type) => [`blog-cards-${type}`, null])
   ),
 }

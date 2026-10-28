@@ -4,6 +4,10 @@ import { BlogCardsFeaturedTwoUp, blogCardsFeaturedTwoUpCopy } from "../../../../
 import { BlogCardsCompact4UpThumbGrid, blogCardsCompact4UpThumbGridCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-compact-4-up-thumb-grid/BlogCardsCompact4UpThumbGrid"
 import { BlogCardsBentoEditorialGrid, blogCardsBentoEditorialGridCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-bento-editorial-grid/BlogCardsBentoEditorialGrid"
 import { BlogCardsOverlayPhotoTrio, blogCardsOverlayPhotoTrioCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-overlay-photo-trio/BlogCardsOverlayPhotoTrio"
+import { BlogCardsLeftThumbRowCards, blogCardsLeftThumbRowCardsCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-left-thumb-row-cards/BlogCardsLeftThumbRowCards"
+import { BlogCardsHairlineTextIndex, blogCardsHairlineTextIndexCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-hairline-text-index/BlogCardsHairlineTextIndex"
+import { BlogCardsNumberedReadingList, blogCardsNumberedReadingListCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-numbered-reading-list/BlogCardsNumberedReadingList"
+import { BlogCardsLatestPopularSplit, blogCardsLatestPopularSplitCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-latest-popular-split/BlogCardsLatestPopularSplit"
 import { BlogCardsJournalBento, blogCardsJournalBentoCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-journal-bento/BlogCardsJournalBento"
 import { blogCardsArgTypes, blogCardsViewports, emptyPropsOf, localeOf, photoPropsOf } from "./blog-cards-story-kit"
 
@@ -127,6 +131,86 @@ export const OverlayPhotoTrioEmpty: StoryObj<typeof BlogCardsOverlayPhotoTrio> =
   tags: ["!dev", "!autodocs"],
   argTypes: blogCardsArgTypes(BlogCardsOverlayPhotoTrio, blogCardsOverlayPhotoTrioCopy, [], ["emptyLabel"]),
   render: (args, context) => <BlogCardsOverlayPhotoTrio locale={localeOf(context)} {...emptyPropsOf(blogCardsOverlayPhotoTrioCopy)} {...args} />,
+}
+
+export const LeftThumbRowCards: StoryObj<typeof BlogCardsLeftThumbRowCards> = {
+  name: "Left-Thumb Row Cards",
+  argTypes: blogCardsArgTypes(BlogCardsLeftThumbRowCards, blogCardsLeftThumbRowCardsCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsLeftThumbRowCards locale={localeOf(context)} {...photoPropsOf("left-thumb-row-cards", context, blogCardsLeftThumbRowCardsCopy)} {...args} />,
+}
+
+export const LeftThumbRowCardsWithoutPhotos: StoryObj<typeof BlogCardsLeftThumbRowCards> = {
+  name: "Left-Thumb Row Cards: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsLeftThumbRowCards, blogCardsLeftThumbRowCardsCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsLeftThumbRowCards locale={localeOf(context)} {...args} />,
+}
+
+export const LeftThumbRowCardsEmpty: StoryObj<typeof BlogCardsLeftThumbRowCards> = {
+  name: "Left-Thumb Row Cards: Empty",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsLeftThumbRowCards, blogCardsLeftThumbRowCardsCopy, [], ["emptyLabel"]),
+  render: (args, context) => <BlogCardsLeftThumbRowCards locale={localeOf(context)} {...emptyPropsOf(blogCardsLeftThumbRowCardsCopy)} {...args} />,
+}
+
+export const HairlineTextIndex: StoryObj<typeof BlogCardsHairlineTextIndex> = {
+  name: "Hairline Text Index",
+  argTypes: blogCardsArgTypes(BlogCardsHairlineTextIndex, blogCardsHairlineTextIndexCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsHairlineTextIndex locale={localeOf(context)} {...photoPropsOf("hairline-text-index", context, blogCardsHairlineTextIndexCopy)} {...args} />,
+}
+
+export const HairlineTextIndexWithoutPhotos: StoryObj<typeof BlogCardsHairlineTextIndex> = {
+  name: "Hairline Text Index: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsHairlineTextIndex, blogCardsHairlineTextIndexCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsHairlineTextIndex locale={localeOf(context)} {...args} />,
+}
+
+export const HairlineTextIndexEmpty: StoryObj<typeof BlogCardsHairlineTextIndex> = {
+  name: "Hairline Text Index: Empty",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsHairlineTextIndex, blogCardsHairlineTextIndexCopy, [], ["emptyLabel"]),
+  render: (args, context) => <BlogCardsHairlineTextIndex locale={localeOf(context)} {...emptyPropsOf(blogCardsHairlineTextIndexCopy)} {...args} />,
+}
+
+export const NumberedReadingList: StoryObj<typeof BlogCardsNumberedReadingList> = {
+  name: "Numbered Reading List",
+  argTypes: blogCardsArgTypes(BlogCardsNumberedReadingList, blogCardsNumberedReadingListCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsNumberedReadingList locale={localeOf(context)} {...photoPropsOf("numbered-reading-list", context, blogCardsNumberedReadingListCopy)} {...args} />,
+}
+
+export const NumberedReadingListWithoutPhotos: StoryObj<typeof BlogCardsNumberedReadingList> = {
+  name: "Numbered Reading List: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsNumberedReadingList, blogCardsNumberedReadingListCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsNumberedReadingList locale={localeOf(context)} {...args} />,
+}
+
+export const NumberedReadingListEmpty: StoryObj<typeof BlogCardsNumberedReadingList> = {
+  name: "Numbered Reading List: Empty",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsNumberedReadingList, blogCardsNumberedReadingListCopy, [], ["emptyLabel"]),
+  render: (args, context) => <BlogCardsNumberedReadingList locale={localeOf(context)} {...emptyPropsOf(blogCardsNumberedReadingListCopy)} {...args} />,
+}
+
+export const LatestPopularSplit: StoryObj<typeof BlogCardsLatestPopularSplit> = {
+  name: "Latest / Popular Split",
+  argTypes: blogCardsArgTypes(BlogCardsLatestPopularSplit, blogCardsLatestPopularSplitCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsLatestPopularSplit locale={localeOf(context)} {...photoPropsOf("latest-popular-split", context, blogCardsLatestPopularSplitCopy)} {...args} />,
+}
+
+export const LatestPopularSplitWithoutPhotos: StoryObj<typeof BlogCardsLatestPopularSplit> = {
+  name: "Latest / Popular Split: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsLatestPopularSplit, blogCardsLatestPopularSplitCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsLatestPopularSplit locale={localeOf(context)} {...args} />,
+}
+
+export const LatestPopularSplitEmpty: StoryObj<typeof BlogCardsLatestPopularSplit> = {
+  name: "Latest / Popular Split: Empty",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsLatestPopularSplit, blogCardsLatestPopularSplitCopy, [], ["emptyLabel"]),
+  render: (args, context) => <BlogCardsLatestPopularSplit locale={localeOf(context)} {...emptyPropsOf(blogCardsLatestPopularSplitCopy)} {...args} />,
 }
 
 export const JournalBento: StoryObj<typeof BlogCardsJournalBento> = {

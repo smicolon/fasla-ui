@@ -711,6 +711,18 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "team-grid-backdrop-roster": dynamic(() =>
     import("@fasla-ui/blocks/team-grid-backdrop-roster/TeamGridBackdropRoster").then((m) => withTeamPhotos(m.TeamGridBackdropRoster, "grid-backdrop-roster", m.teamGridBackdropRosterCopy))
   ),
+  "blog-cards-left-thumb-row-cards": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-left-thumb-row-cards/BlogCardsLeftThumbRowCards").then((m) => withBlogCardsPhotos(m.BlogCardsLeftThumbRowCards, "left-thumb-row-cards", m.blogCardsLeftThumbRowCardsCopy))
+  ),
+  "blog-cards-hairline-text-index": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-hairline-text-index/BlogCardsHairlineTextIndex").then((m) => withBlogCardsPhotos(m.BlogCardsHairlineTextIndex, "hairline-text-index", m.blogCardsHairlineTextIndexCopy))
+  ),
+  "blog-cards-numbered-reading-list": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-numbered-reading-list/BlogCardsNumberedReadingList").then((m) => withBlogCardsPhotos(m.BlogCardsNumberedReadingList, "numbered-reading-list", m.blogCardsNumberedReadingListCopy))
+  ),
+  "blog-cards-latest-popular-split": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-latest-popular-split/BlogCardsLatestPopularSplit").then((m) => withBlogCardsPhotos(m.BlogCardsLatestPopularSplit, "latest-popular-split", m.blogCardsLatestPopularSplitCopy))
+  ),
   "blog-cards-classic-3-up-grid": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-classic-3-up-grid/BlogCardsClassic3UpGrid").then((m) => withBlogCardsPhotos(m.BlogCardsClassic3UpGrid, "classic-3-up-grid", m.blogCardsClassic3UpGridCopy))
   ),

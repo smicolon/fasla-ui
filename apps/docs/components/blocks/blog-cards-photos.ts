@@ -94,6 +94,8 @@ const PHOTO_PROP: Record<string, { list: string; key: string } | { object: strin
   "bento-editorial-grid": { list: "photoTiles", key: "image" },
   "overlay-photo-trio": { list: "posts", key: "image" },
   "journal-bento": { list: "features", key: "image" },
+  "left-thumb-row-cards": { list: "posts", key: "image" },
+  "latest-popular-split": { list: "latest", key: "image" },
 }
 
 type BlockCopy = Record<Locale, object>

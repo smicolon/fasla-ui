@@ -3443,7 +3443,11 @@
         "blog-cards-compact-4-up-thumb-grid": "شبكة مدمجة بأربع صور مصغّرة",
         "blog-cards-bento-editorial-grid": "شبكة تحريرية بنمط بينتو",
         "blog-cards-overlay-photo-trio": "ثلاث صور بنص فوقها",
-        "blog-cards-journal-bento": "بينتو اليوميات"
+        "blog-cards-journal-bento": "بينتو اليوميات",
+        "blog-cards-left-thumb-row-cards": "بطاقات صفوف بصورة جانبية",
+        "blog-cards-hairline-text-index": "فهرس نصي بخطوط رفيعة",
+        "blog-cards-numbered-reading-list": "قائمة قراءة مرقّمة",
+        "blog-cards-latest-popular-split": "الأحدث والأكثر قراءة"
       }
     }
   },

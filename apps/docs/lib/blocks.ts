@@ -385,6 +385,10 @@ export const BLOG_CARDS_TYPES: BlockType<BlogCardsFamily>[] = [
   { slug: "blog-cards-compact-4-up-thumb-grid", family: "grids" },
   { slug: "blog-cards-bento-editorial-grid", family: "grids", inverse: true },
   { slug: "blog-cards-overlay-photo-trio", family: "grids", inverse: true },
+  { slug: "blog-cards-left-thumb-row-cards", family: "lists" },
+  { slug: "blog-cards-hairline-text-index", family: "lists" },
+  { slug: "blog-cards-numbered-reading-list", family: "lists" },
+  { slug: "blog-cards-latest-popular-split", family: "lists" },
   { slug: "blog-cards-journal-bento", family: "grids", inverse: true },
 ]
 

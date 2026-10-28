@@ -3443,7 +3443,11 @@
         "blog-cards-compact-4-up-thumb-grid": "Compact 4-Up Thumb Grid",
         "blog-cards-bento-editorial-grid": "Bento Editorial Grid",
         "blog-cards-overlay-photo-trio": "Overlay Photo Trio",
-        "blog-cards-journal-bento": "Journal Bento"
+        "blog-cards-journal-bento": "Journal Bento",
+        "blog-cards-left-thumb-row-cards": "Left-Thumb Row Cards",
+        "blog-cards-hairline-text-index": "Hairline Text Index",
+        "blog-cards-numbered-reading-list": "Numbered Reading List",
+        "blog-cards-latest-popular-split": "Latest / Popular Split"
       }
     }
   },

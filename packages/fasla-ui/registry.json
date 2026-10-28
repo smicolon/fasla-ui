@@ -6256,6 +6256,95 @@
         "blog-cards",
         "marketing"
       ]
+    },
+    {
+      "name": "blog-cards-left-thumb-row-cards",
+      "type": "registry:block",
+      "title": "Blog Cards: Left-Thumb Row Cards",
+      "description": "A heading with a sort note over a ruled list of article rows: a thumbnail, a category badge with the date and read time, a title, a summary and the author, and an arrow at the end.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "avatar",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-left-thumb-row-cards/BlogCardsLeftThumbRowCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-left-thumb-row-cards.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
+    },
+    {
+      "name": "blog-cards-hairline-text-index",
+      "type": "registry:block",
+      "title": "Blog Cards: Hairline Text Index",
+      "description": "A large heading over an index of articles set in type alone: a year label, then one hairline-ruled row per article with its title, category, date and an arrow that appears on hover.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-hairline-text-index/BlogCardsHairlineTextIndex.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-hairline-text-index.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
+    },
+    {
+      "name": "blog-cards-numbered-reading-list",
+      "type": "registry:block",
+      "title": "Blog Cards: Numbered Reading List",
+      "description": "A heading with an update note over a ruled list of numbered articles on a muted band: a large rank, a title, a summary, a category badge with the read time, and an outline arrow button.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-numbered-reading-list/BlogCardsNumberedReadingList.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-numbered-reading-list.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
+    },
+    {
+      "name": "blog-cards-latest-popular-split",
+      "type": "registry:block",
+      "title": "Blog Cards: Latest / Popular Split",
+      "description": "Two columns of compact rows: Latest with small thumbnails, and Most read with rank numbers, each with a heading and a note.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-latest-popular-split/BlogCardsLatestPopularSplit.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-latest-popular-split.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
     }
   ]
 }
