@@ -133,7 +133,7 @@ export function TeamMetaProfileCards({
                   </div>
                   <dl className="flex flex-col">
                     {labels.map((label, row) => (
-                      <Reveal key={row} index={row + 1} y={8} step={40} className="flex items-center justify-between gap-3 border-b border-border py-2">
+                      <Reveal key={row} index={row + 1} y={8} step={40} className="flex items-center justify-between gap-3 border-t border-border py-2">
                         <dt className="text-xs font-medium text-muted-foreground">{label}</dt>
                         <dd className="text-end text-sm text-foreground">
                           <TeamFigures>{person.meta[row]}</TeamFigures>
