@@ -75,7 +75,7 @@ const LAYOUTS = [
   { cols: 3, rows: 2, show: "hidden [@container(min-width:64rem)]:block" },
 ] as const
 
-const PENDING = "motion-safe:group-data-[reveal=pending]/team"
+// The pending classes are written out whole below: Tailwind only generates a class it can read in the source.
 
 /** The draw-in strips and the crosshairs for one layout. Decorative; the rules themselves are the cells' borders. */
 function Lattice({ cols, rows, show }: (typeof LAYOUTS)[number]) {
@@ -91,7 +91,7 @@ function Lattice({ cols, rows, show }: (typeof LAYOUTS)[number]) {
           className={cn(
             "absolute inset-y-0 -ms-[1.5px] w-[3px] origin-bottom scale-y-0 bg-background-inverse",
             "motion-safe:transition-transform motion-safe:duration-700 motion-safe:ease-out motion-safe:[transition-delay:var(--team-d)]",
-            `${PENDING}:scale-y-100`
+            "motion-safe:group-data-[reveal=pending]/team:scale-y-100"
           )}
           style={{ insetInlineStart: `${(i / cols) * 100}%`, "--team-d": `${i * 80}ms` } as React.CSSProperties}
         />
@@ -102,7 +102,7 @@ function Lattice({ cols, rows, show }: (typeof LAYOUTS)[number]) {
           className={cn(
             "absolute inset-x-0 -mt-[1.5px] h-[3px] origin-right scale-x-0 bg-background-inverse rtl:origin-left",
             "motion-safe:transition-transform motion-safe:duration-700 motion-safe:ease-out motion-safe:[transition-delay:var(--team-d)]",
-            `${PENDING}:scale-x-100`
+            "motion-safe:group-data-[reveal=pending]/team:scale-x-100"
           )}
           style={{ top: `${(j / rows) * 100}%`, "--team-d": `${rulesAt + j * 60}ms` } as React.CSSProperties}
         />
@@ -114,7 +114,7 @@ function Lattice({ cols, rows, show }: (typeof LAYOUTS)[number]) {
             className={cn(
               "absolute -ms-[5.5px] -mt-[5.5px] size-[11px]",
               "motion-safe:transition-[opacity,transform] motion-safe:duration-300 motion-safe:ease-out motion-safe:[transition-delay:var(--team-d)]",
-              `${PENDING}:scale-50 ${PENDING}:opacity-0`
+              "motion-safe:group-data-[reveal=pending]/team:scale-50 motion-safe:group-data-[reveal=pending]/team:opacity-0"
             )}
             style={{ insetInlineStart: `${(i / cols) * 100}%`, top: `${(j / rows) * 100}%`, "--team-d": `${crossAt}ms` } as React.CSSProperties}
           >
