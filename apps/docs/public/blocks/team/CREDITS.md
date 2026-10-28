@@ -26,4 +26,4 @@ All photos are from [Unsplash](https://unsplash.com/?utm_source=fasla-ui&utm_med
 
 Layla's photo has a near-identical twin on Unsplash ([-WGbMJU-lPI](https://unsplash.com/photos/-WGbMJU-lPI), same photographer) that scores the same; the first match is used.
 
-Figma's Team set also shows three photos that are not here: Nadia Rahman and Dana Haddad could not be traced to Unsplash, and Amira Sultan's only match is an Unsplash+ photo, which this repo doesn't use. The demo roster uses the fifteen traced people instead.
+Figma's Team set also shows four photos that are not here: Nadia Rahman and Dana Haddad could not be traced to Unsplash, Amira Sultan's only match is an Unsplash+ photo, which this repo doesn't use, and Zainab Idris was not traced. The demo roster uses the fifteen traced people instead.
