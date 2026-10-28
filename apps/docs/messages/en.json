@@ -3447,7 +3447,12 @@
         "blog-cards-left-thumb-row-cards": "Left-Thumb Row Cards",
         "blog-cards-hairline-text-index": "Hairline Text Index",
         "blog-cards-numbered-reading-list": "Numbered Reading List",
-        "blog-cards-latest-popular-split": "Latest / Popular Split"
+        "blog-cards-latest-popular-split": "Latest / Popular Split",
+        "blog-cards-split-feature": "Split Feature",
+        "blog-cards-lead-ranked-picks": "Lead + Ranked Picks",
+        "blog-cards-dark-editorial-feature": "Dark Editorial Feature",
+        "blog-cards-magazine-cover-story": "Magazine Cover Story",
+        "blog-cards-pull-quote-feature": "Pull-Quote Feature"
       }
     }
   },

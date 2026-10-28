@@ -6345,6 +6345,121 @@
         "blog-cards",
         "marketing"
       ]
+    },
+    {
+      "name": "blog-cards-split-feature",
+      "type": "registry:block",
+      "title": "Blog Cards: Split Feature",
+      "description": "One article half text and half photo on a muted band: an eyebrow, a large title, a summary, a category badge with the date and read time, the author, and a solid button with an arrow beside a rounded cover.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "avatar",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-split-feature/BlogCardsSplitFeature.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-split-feature.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
+    },
+    {
+      "name": "blog-cards-lead-ranked-picks",
+      "type": "registry:block",
+      "title": "Blog Cards: Lead + Ranked Picks",
+      "description": "A lead story with a cover, a badge, a large title, a summary and the author, beside a muted panel of five numbered editor's picks.",
+      "dependencies": [],
+      "registryDependencies": [
+        "badge",
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-lead-ranked-picks/BlogCardsLeadRankedPicks.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-lead-ranked-picks.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
+    },
+    {
+      "name": "blog-cards-dark-editorial-feature",
+      "type": "registry:block",
+      "title": "Blog Cards: Dark Editorial Feature",
+      "description": "One long read on an inverted band painted with the inverse tokens: a very large linked title, a summary, the author, a secondary button, and a ruled list of more reads with thumbnails.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-dark-editorial-feature/BlogCardsDarkEditorialFeature.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-dark-editorial-feature.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
+    },
+    {
+      "name": "blog-cards-magazine-cover-story",
+      "type": "registry:block",
+      "title": "Blog Cards: Magazine Cover Story",
+      "description": "A magazine page in text and one photograph: a masthead over a heavy rule, a cover story with a kicker, a very large title, a wide cover and a standfirst with a byline, and four ruled briefs beside it.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-magazine-cover-story/BlogCardsMagazineCoverStory.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-magazine-cover-story.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
+    },
+    {
+      "name": "blog-cards-pull-quote-feature",
+      "type": "registry:block",
+      "title": "Blog Cards: Pull-Quote Feature",
+      "description": "An essay set as a quote on a muted panel: a quotation mark, a large light pull quote, the author and role, and a button with an arrow, over three bordered related-article cards.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-pull-quote-feature/BlogCardsPullQuoteFeature.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-pull-quote-feature.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
     }
   ]
 }

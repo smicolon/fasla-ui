@@ -3447,7 +3447,12 @@
         "blog-cards-left-thumb-row-cards": "بطاقات صفوف بصورة جانبية",
         "blog-cards-hairline-text-index": "فهرس نصي بخطوط رفيعة",
         "blog-cards-numbered-reading-list": "قائمة قراءة مرقّمة",
-        "blog-cards-latest-popular-split": "الأحدث والأكثر قراءة"
+        "blog-cards-latest-popular-split": "الأحدث والأكثر قراءة",
+        "blog-cards-split-feature": "مقال مميز بتخطيط منقسم",
+        "blog-cards-lead-ranked-picks": "مقال رئيسي واختيارات مرتبة",
+        "blog-cards-dark-editorial-feature": "مقال تحريري داكن",
+        "blog-cards-magazine-cover-story": "قصة غلاف المجلة",
+        "blog-cards-pull-quote-feature": "مقال باقتباس بارز"
       }
     }
   },

@@ -711,6 +711,21 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "team-grid-backdrop-roster": dynamic(() =>
     import("@fasla-ui/blocks/team-grid-backdrop-roster/TeamGridBackdropRoster").then((m) => withTeamPhotos(m.TeamGridBackdropRoster, "grid-backdrop-roster", m.teamGridBackdropRosterCopy))
   ),
+  "blog-cards-split-feature": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-split-feature/BlogCardsSplitFeature").then((m) => withBlogCardsPhotos(m.BlogCardsSplitFeature, "split-feature", m.blogCardsSplitFeatureCopy))
+  ),
+  "blog-cards-lead-ranked-picks": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-lead-ranked-picks/BlogCardsLeadRankedPicks").then((m) => withBlogCardsPhotos(m.BlogCardsLeadRankedPicks, "lead-ranked-picks", m.blogCardsLeadRankedPicksCopy))
+  ),
+  "blog-cards-dark-editorial-feature": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-dark-editorial-feature/BlogCardsDarkEditorialFeature").then((m) => withBlogCardsPhotos(m.BlogCardsDarkEditorialFeature, "dark-editorial-feature", m.blogCardsDarkEditorialFeatureCopy))
+  ),
+  "blog-cards-magazine-cover-story": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-magazine-cover-story/BlogCardsMagazineCoverStory").then((m) => withBlogCardsPhotos(m.BlogCardsMagazineCoverStory, "magazine-cover-story", m.blogCardsMagazineCoverStoryCopy))
+  ),
+  "blog-cards-pull-quote-feature": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-pull-quote-feature/BlogCardsPullQuoteFeature").then((m) => withBlogCardsPhotos(m.BlogCardsPullQuoteFeature, "pull-quote-feature", m.blogCardsPullQuoteFeatureCopy))
+  ),
   "blog-cards-left-thumb-row-cards": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-left-thumb-row-cards/BlogCardsLeftThumbRowCards").then((m) => withBlogCardsPhotos(m.BlogCardsLeftThumbRowCards, "left-thumb-row-cards", m.blogCardsLeftThumbRowCardsCopy))
   ),

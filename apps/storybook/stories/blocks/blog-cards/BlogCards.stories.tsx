@@ -9,6 +9,11 @@ import { BlogCardsHairlineTextIndex, blogCardsHairlineTextIndexCopy } from "../.
 import { BlogCardsNumberedReadingList, blogCardsNumberedReadingListCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-numbered-reading-list/BlogCardsNumberedReadingList"
 import { BlogCardsLatestPopularSplit, blogCardsLatestPopularSplitCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-latest-popular-split/BlogCardsLatestPopularSplit"
 import { BlogCardsJournalBento, blogCardsJournalBentoCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-journal-bento/BlogCardsJournalBento"
+import { BlogCardsSplitFeature, blogCardsSplitFeatureCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-split-feature/BlogCardsSplitFeature"
+import { BlogCardsLeadRankedPicks, blogCardsLeadRankedPicksCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-lead-ranked-picks/BlogCardsLeadRankedPicks"
+import { BlogCardsDarkEditorialFeature, blogCardsDarkEditorialFeatureCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-dark-editorial-feature/BlogCardsDarkEditorialFeature"
+import { BlogCardsMagazineCoverStory, blogCardsMagazineCoverStoryCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-magazine-cover-story/BlogCardsMagazineCoverStory"
+import { BlogCardsPullQuoteFeature, blogCardsPullQuoteFeatureCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-pull-quote-feature/BlogCardsPullQuoteFeature"
 import { blogCardsArgTypes, blogCardsViewports, emptyPropsOf, localeOf, photoPropsOf } from "./blog-cards-story-kit"
 
 /**
@@ -231,4 +236,104 @@ export const JournalBentoEmpty: StoryObj<typeof BlogCardsJournalBento> = {
   tags: ["!dev", "!autodocs"],
   argTypes: blogCardsArgTypes(BlogCardsJournalBento, blogCardsJournalBentoCopy, [], ["emptyLabel"]),
   render: (args, context) => <BlogCardsJournalBento locale={localeOf(context)} {...emptyPropsOf(blogCardsJournalBentoCopy)} {...args} />,
+}
+
+export const SplitFeature: StoryObj<typeof BlogCardsSplitFeature> = {
+  name: "Split Feature",
+  argTypes: blogCardsArgTypes(BlogCardsSplitFeature, blogCardsSplitFeatureCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsSplitFeature locale={localeOf(context)} {...photoPropsOf("split-feature", context, blogCardsSplitFeatureCopy)} {...args} />,
+}
+
+export const SplitFeatureWithoutPhotos: StoryObj<typeof BlogCardsSplitFeature> = {
+  name: "Split Feature: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsSplitFeature, blogCardsSplitFeatureCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsSplitFeature locale={localeOf(context)} {...args} />,
+}
+
+export const SplitFeatureEmpty: StoryObj<typeof BlogCardsSplitFeature> = {
+  name: "Split Feature: Empty",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsSplitFeature, blogCardsSplitFeatureCopy, [], ["emptyLabel"]),
+  render: (args, context) => <BlogCardsSplitFeature locale={localeOf(context)} {...emptyPropsOf(blogCardsSplitFeatureCopy)} post={null} {...args} />,
+}
+
+export const LeadRankedPicks: StoryObj<typeof BlogCardsLeadRankedPicks> = {
+  name: "Lead + Ranked Picks",
+  argTypes: blogCardsArgTypes(BlogCardsLeadRankedPicks, blogCardsLeadRankedPicksCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsLeadRankedPicks locale={localeOf(context)} {...photoPropsOf("lead-ranked-picks", context, blogCardsLeadRankedPicksCopy)} {...args} />,
+}
+
+export const LeadRankedPicksWithoutPhotos: StoryObj<typeof BlogCardsLeadRankedPicks> = {
+  name: "Lead + Ranked Picks: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsLeadRankedPicks, blogCardsLeadRankedPicksCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsLeadRankedPicks locale={localeOf(context)} {...args} />,
+}
+
+export const LeadRankedPicksEmpty: StoryObj<typeof BlogCardsLeadRankedPicks> = {
+  name: "Lead + Ranked Picks: Empty",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsLeadRankedPicks, blogCardsLeadRankedPicksCopy, [], ["emptyLabel"]),
+  render: (args, context) => <BlogCardsLeadRankedPicks locale={localeOf(context)} {...emptyPropsOf(blogCardsLeadRankedPicksCopy)} lead={null} {...args} />,
+}
+
+export const DarkEditorialFeature: StoryObj<typeof BlogCardsDarkEditorialFeature> = {
+  name: "Dark Editorial Feature",
+  argTypes: blogCardsArgTypes(BlogCardsDarkEditorialFeature, blogCardsDarkEditorialFeatureCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsDarkEditorialFeature locale={localeOf(context)} {...photoPropsOf("dark-editorial-feature", context, blogCardsDarkEditorialFeatureCopy)} {...args} />,
+}
+
+export const DarkEditorialFeatureWithoutPhotos: StoryObj<typeof BlogCardsDarkEditorialFeature> = {
+  name: "Dark Editorial Feature: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsDarkEditorialFeature, blogCardsDarkEditorialFeatureCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsDarkEditorialFeature locale={localeOf(context)} {...args} />,
+}
+
+export const DarkEditorialFeatureEmpty: StoryObj<typeof BlogCardsDarkEditorialFeature> = {
+  name: "Dark Editorial Feature: Empty",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsDarkEditorialFeature, blogCardsDarkEditorialFeatureCopy, [], ["emptyLabel"]),
+  render: (args, context) => <BlogCardsDarkEditorialFeature locale={localeOf(context)} {...emptyPropsOf(blogCardsDarkEditorialFeatureCopy)} post={null} {...args} />,
+}
+
+export const MagazineCoverStory: StoryObj<typeof BlogCardsMagazineCoverStory> = {
+  name: "Magazine Cover Story",
+  argTypes: blogCardsArgTypes(BlogCardsMagazineCoverStory, blogCardsMagazineCoverStoryCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsMagazineCoverStory locale={localeOf(context)} {...photoPropsOf("magazine-cover-story", context, blogCardsMagazineCoverStoryCopy)} {...args} />,
+}
+
+export const MagazineCoverStoryWithoutPhotos: StoryObj<typeof BlogCardsMagazineCoverStory> = {
+  name: "Magazine Cover Story: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsMagazineCoverStory, blogCardsMagazineCoverStoryCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsMagazineCoverStory locale={localeOf(context)} {...args} />,
+}
+
+export const MagazineCoverStoryEmpty: StoryObj<typeof BlogCardsMagazineCoverStory> = {
+  name: "Magazine Cover Story: Empty",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsMagazineCoverStory, blogCardsMagazineCoverStoryCopy, [], ["emptyLabel"]),
+  render: (args, context) => <BlogCardsMagazineCoverStory locale={localeOf(context)} {...emptyPropsOf(blogCardsMagazineCoverStoryCopy)} story={null} masthead={null} {...args} />,
+}
+
+export const PullQuoteFeature: StoryObj<typeof BlogCardsPullQuoteFeature> = {
+  name: "Pull-Quote Feature",
+  argTypes: blogCardsArgTypes(BlogCardsPullQuoteFeature, blogCardsPullQuoteFeatureCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsPullQuoteFeature locale={localeOf(context)} {...photoPropsOf("pull-quote-feature", context, blogCardsPullQuoteFeatureCopy)} {...args} />,
+}
+
+export const PullQuoteFeatureWithoutPhotos: StoryObj<typeof BlogCardsPullQuoteFeature> = {
+  name: "Pull-Quote Feature: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsPullQuoteFeature, blogCardsPullQuoteFeatureCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsPullQuoteFeature locale={localeOf(context)} {...args} />,
+}
+
+export const PullQuoteFeatureEmpty: StoryObj<typeof BlogCardsPullQuoteFeature> = {
+  name: "Pull-Quote Feature: Empty",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsPullQuoteFeature, blogCardsPullQuoteFeatureCopy, [], ["emptyLabel"]),
+  render: (args, context) => <BlogCardsPullQuoteFeature locale={localeOf(context)} {...emptyPropsOf(blogCardsPullQuoteFeatureCopy)} panel={null} {...args} />,
 }
