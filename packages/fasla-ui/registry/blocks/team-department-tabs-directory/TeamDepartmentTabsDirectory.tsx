@@ -281,6 +281,7 @@ export function TeamDepartmentTabsDirectory({
     onValueChange?.(next)
   }
   const tabId = (id: string) => `${baseId}-tab-${id}`
+  const panelId = `${baseId}-panel`
 
   return (
     <TeamSection labelledBy={headingId} className={className} {...props}>
@@ -299,6 +300,7 @@ export function TeamDepartmentTabsDirectory({
                 key={tab.id}
                 id={tabId(tab.id)}
                 value={tab.id}
+                aria-controls={panelId}
                 // The atom underlines its active tab itself; hold that line at the border colour so the sliding bar is the only one.
                 className="data-[active]:!shadow-[inset_0_-2px_0_0_var(--border)]"
               >
@@ -310,7 +312,14 @@ export function TeamDepartmentTabsDirectory({
       </Reveal>
 
       {people.length > 0 ? (
-        <div role="tabpanel" aria-labelledby={tabId(value)} className="w-full">
+        <div
+          id={panelId}
+          role="tabpanel"
+          tabIndex={0}
+          aria-labelledby={tabId(value)}
+          className="w-full rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          {/* One panel for every filter, so the grid can re-flow between them. The cards hold nothing a keyboard can reach, so the panel is the stop that takes it from the tabs to the results. */}
           <ul
             ref={gridRef}
             className="relative m-0 grid w-full list-none grid-cols-1 gap-6 p-0 [@container(min-width:40rem)]:grid-cols-2 [@container(min-width:64rem)]:grid-cols-4"

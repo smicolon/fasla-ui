@@ -73,4 +73,15 @@ describe("Team Department Tabs Directory", () => {
     const { container } = render(<TeamDepartmentTabsDirectory />)
     expect(container.querySelector('[data-slot="tab-underline"]')).toBeTruthy()
   })
+
+  it("gives the results a keyboard stop: the panel is focusable and every tab points at it", () => {
+    render(<TeamDepartmentTabsDirectory />)
+    const panel = screen.getByRole("tabpanel")
+    expect(panel.id).not.toBe("")
+    expect(panel.getAttribute("tabindex")).toBe("0")
+    for (const tab of screen.getAllByRole("tab")) expect(tab.getAttribute("aria-controls")).toBe(panel.id)
+    fireEvent.click(screen.getByRole("tab", { name: "Engineering" }))
+    expect(screen.getByRole("tabpanel").id).toBe(panel.id)
+    expect(panel.getAttribute("aria-labelledby")).toBe(screen.getByRole("tab", { name: "Engineering" }).id)
+  })
 })
