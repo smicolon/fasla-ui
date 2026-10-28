@@ -38,8 +38,8 @@
       "variants": 4914,
       "withEnDoc": 19,
       "withArDoc": 19,
-      "blocksInCode": 141,
-      "familiesInCode": 6,
+      "blocksInCode": 160,
+      "familiesInCode": 7,
       "parts": 2,
       "extraSets": 1,
       "flagged": 29
@@ -2189,8 +2189,8 @@
         "duplicates": []
       },
       "code": {
-        "prefix": null,
-        "built": 0,
+        "prefix": "about-",
+        "built": 19,
         "of": 19
       },
       "blocks": [
@@ -2199,133 +2199,133 @@
           "nodeId": "41103:136117",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41103-136117",
           "variants": 6,
-          "code": null
+          "code": "about-mission-statement-hero"
         },
         {
           "name": "Collage Hero",
           "nodeId": "41105:183",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41105-183",
           "variants": 6,
-          "code": null
+          "code": "about-collage-hero"
         },
         {
           "name": "Statement Band",
           "nodeId": "41107:184",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41107-184",
           "variants": 6,
-          "code": null
+          "code": "about-statement-band"
         },
         {
           "name": "Values Spotlight",
           "nodeId": "41109:196",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41109-196",
           "variants": 6,
-          "code": null
+          "code": "about-values-spotlight"
         },
         {
           "name": "Values Connector List",
           "nodeId": "41111:197",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41111-197",
           "variants": 6,
-          "code": null
+          "code": "about-values-connector-list"
         },
         {
           "name": "Approach Stack Cards",
           "nodeId": "41115:209",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41115-209",
           "variants": 6,
-          "code": null
+          "code": "about-approach-stack-cards"
         },
         {
           "name": "Story & Snapshots",
           "nodeId": "41117:2446",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41117-2446",
           "variants": 6,
-          "code": null
+          "code": "about-story-snapshots"
         },
         {
           "name": "Bento",
           "nodeId": "41121:254",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41121-254",
           "variants": 6,
-          "code": null
+          "code": "about-bento"
         },
         {
           "name": "Culture Masonry",
           "nodeId": "41121:255",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41121-255",
           "variants": 6,
-          "code": null
+          "code": "about-culture-masonry"
         },
         {
           "name": "Impact Stats Band",
           "nodeId": "41123:259",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41123-259",
           "variants": 6,
-          "code": null
+          "code": "about-impact-stats-band"
         },
         {
           "name": "Story Photos",
           "nodeId": "46718:44332",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46718-44332",
           "variants": 6,
-          "code": null
+          "code": "about-story-photos"
         },
         {
           "name": "Split Panel",
           "nodeId": "46718:44333",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46718-44333",
           "variants": 6,
-          "code": null
+          "code": "about-split-panel"
         },
         {
           "name": "Letter Card",
           "nodeId": "46718:44334",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46718-44334",
           "variants": 6,
-          "code": null
+          "code": "about-letter-card"
         },
         {
           "name": "Values Focus",
           "nodeId": "46718:44335",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46718-44335",
           "variants": 6,
-          "code": null
+          "code": "about-values-focus"
         },
         {
           "name": "Spotlight",
           "nodeId": "46718:44336",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46718-44336",
           "variants": 6,
-          "code": null
+          "code": "about-spotlight"
         },
         {
           "name": "Headline Photos",
           "nodeId": "46718:44337",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46718-44337",
           "variants": 6,
-          "code": null
+          "code": "about-headline-photos"
         },
         {
           "name": "Type Stack",
           "nodeId": "46718:44338",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46718-44338",
           "variants": 6,
-          "code": null
+          "code": "about-type-stack"
         },
         {
           "name": "Color Bento",
           "nodeId": "46718:44339",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46718-44339",
           "variants": 6,
-          "code": null
+          "code": "about-color-bento"
         },
         {
           "name": "Numbered Rows",
           "nodeId": "46718:44340",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46718-44340",
           "variants": 6,
-          "code": null
+          "code": "about-numbered-rows"
         }
       ],
       "leftovers": [],
