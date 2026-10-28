@@ -51,8 +51,8 @@ export interface AboutStoryPhotosCopy {
   /** The story's paragraph. */
   body: React.ReactNode
   /**
-   * The snapshot cards, from the start side. Figma draws three; more repeat
-   * the tilt pattern and wrap onto further rows.
+   * The snapshot cards, from the start side. Figma draws three, and the
+   * row holds three: cards past the third are not shown.
    */
   items: AboutStoryPhotosItem[]
   /** Shown in place of the cards when `items` is empty. */
@@ -85,7 +85,10 @@ const COPY: Record<"en" | "ar", AboutStoryPhotosCopy> = {
   },
 }
 
-/** Each slot's tilt, repeating every three cards. RTL mirrors it. */
+/** The most cards the row shows, as Figma draws it. */
+const CARDS = 3
+
+/** Each card's tilt, in slot order. RTL mirrors it. */
 const TILTS = ["rotate-[4deg] [&:dir(rtl)]:rotate-[-4deg]", "", "rotate-[-3deg] [&:dir(rtl)]:rotate-[3deg]"]
 
 /**
@@ -177,7 +180,7 @@ export function AboutStoryPhotos({
   const copy = COPY[locale]
   const headingId = React.useId()
   const rootRef = React.useRef<HTMLElement>(null)
-  const list = items ?? copy.items
+  const list = (items ?? copy.items).slice(0, CARDS)
   useReveal(rootRef)
 
   return (
@@ -216,7 +219,7 @@ export function AboutStoryPhotos({
                   "w-full max-w-[280px] [@container(min-width:40rem)]:max-w-[216px] [@container(min-width:40rem)]:flex-1 [@container(min-width:64rem)]:max-w-[340px]",
                   "transition-transform duration-200 ease-out motion-reduce:transition-none",
                   "hover:[@media(pointer:fine)]:!rotate-0 hover:[@media(pointer:fine)]:-translate-y-1",
-                  TILTS[index % TILTS.length]
+                  TILTS[index]
                 )}
               >
                 <figure className="flex flex-col gap-3 rounded-sm border border-border bg-card p-3 shadow-md">

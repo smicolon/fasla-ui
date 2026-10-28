@@ -218,6 +218,14 @@ export function AboutImpactStatsBand({
   const video = React.useRef<HTMLVideoElement>(null)
   const [started, setStarted] = React.useState(false)
   const [playing, setPlaying] = React.useState(false)
+  // A new or removed video starts over: not mounted, not playing, so the
+  // chip never shows Pause for a video that isn't playing.
+  const [source, setSource] = React.useState(videoSrc)
+  if (source !== videoSrc) {
+    setSource(videoSrc)
+    setStarted(false)
+    setPlaying(false)
+  }
   const figures = stats ?? copy.stats
   const button = action === undefined ? copy.action : action
   const photo = photos?.[0]

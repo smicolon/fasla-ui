@@ -104,14 +104,13 @@ const COPY: Record<"en" | "ar", AboutStorySnapshotsCopy> = {
  * Each slot's drop and tilt, in Figma's order, repeating every four cards.
  * Mobile tilts 3°, −3°, −2°, 4°; Tablet and Desktop 4°, −3°, 2°, −5° (CSS
  * degrees, clockwise; Figma stores the opposite sign). RTL mirrors each one.
+ * Every class is written out in full, so Tailwind finds it in this file.
  */
-const T = "[@container(min-width:40rem)]:"
-const D = "[@container(min-width:64rem)]:"
 const SLOTS = [
-  `mt-4 rotate-[3deg] [&:dir(rtl)]:rotate-[-3deg] ${T}mt-5 ${T}rotate-[4deg] ${T}[&:dir(rtl)]:rotate-[-4deg] ${D}mt-10`,
-  `rotate-[-3deg] [&:dir(rtl)]:rotate-[3deg] ${D}mt-[14px]`,
-  `mt-4 rotate-[-2deg] [&:dir(rtl)]:rotate-[2deg] ${T}mt-5 ${T}rotate-[2deg] ${T}[&:dir(rtl)]:rotate-[-2deg] ${D}mt-11`,
-  `rotate-[4deg] [&:dir(rtl)]:rotate-[-4deg] ${T}rotate-[-5deg] ${T}[&:dir(rtl)]:rotate-[5deg] ${D}mt-2`,
+  "mt-4 rotate-[3deg] [&:dir(rtl)]:rotate-[-3deg] [@container(min-width:40rem)]:mt-5 [@container(min-width:40rem)]:rotate-[4deg] [@container(min-width:40rem)]:[&:dir(rtl)]:rotate-[-4deg] [@container(min-width:64rem)]:mt-10",
+  "rotate-[-3deg] [&:dir(rtl)]:rotate-[3deg] [@container(min-width:64rem)]:mt-[14px]",
+  "mt-4 rotate-[-2deg] [&:dir(rtl)]:rotate-[2deg] [@container(min-width:40rem)]:mt-5 [@container(min-width:40rem)]:rotate-[2deg] [@container(min-width:40rem)]:[&:dir(rtl)]:rotate-[-2deg] [@container(min-width:64rem)]:mt-11",
+  "rotate-[4deg] [&:dir(rtl)]:rotate-[-4deg] [@container(min-width:40rem)]:rotate-[-5deg] [@container(min-width:40rem)]:[&:dir(rtl)]:rotate-[5deg] [@container(min-width:64rem)]:mt-2",
 ]
 
 /**

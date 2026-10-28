@@ -192,7 +192,8 @@ export const BentoEmpty: StoryObj<typeof AboutBento> = {
   name: "Bento: Empty",
   tags: ["!dev", "!autodocs"],
   argTypes: aboutArgTypes(AboutBento, aboutBentoCopy),
-  render: (args, context) => <AboutBento locale={localeOf(context)} {...emptyPropsOf(aboutBentoCopy)} {...args} />,
+  // The tags are text, which emptyPropsOf leaves alone, so the tile's empty line is asked for here.
+  render: (args, context) => <AboutBento locale={localeOf(context)} {...emptyPropsOf(aboutBentoCopy)} capabilities={[]} {...args} />,
 }
 
 export const CultureMasonry: StoryObj<typeof AboutCultureMasonry> = {
