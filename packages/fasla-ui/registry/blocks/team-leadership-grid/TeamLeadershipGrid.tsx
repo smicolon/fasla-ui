@@ -3,20 +3,20 @@
 import * as React from "react"
 import { cn } from "../../../src/lib/utils"
 import { Button, buttonVariants } from "../../ui/button/button"
-import { Reveal, TeamHeader, TeamLinkArrow, TeamPortrait, TeamSection, type TeamLocale, type TeamPerson } from "../team/team"
+import { Reveal, TeamHeader, TeamPortrait, TeamSection, type TeamLocale, type TeamPerson } from "../team/team"
 
 /*
  * Figma: `Team` (46368:243916), Type=Leadership Grid (Desktop LTR 41435:1079).
  *
  * Three leader cards under a header: a 300px portrait, then the name, the
- * role, a short bio and a Ghost "Read full bio" button with the link arrow.
+ * role, a short bio and a Ghost "Read full bio" button.
  * Desktop sets the cards three to a row; Tablet two to a row, the third
  * card left alone at half width as Figma draws it (it does not stretch);
  * phones stack them. Cards in a row share the tallest one's height.
  *
  * Motion (motion card): the cards rise 12px and fade in once, 60ms apart,
  * from the start side. Hover lifts a card to `shadow-md` and nudges the
- * button's label and arrow 4px toward the end (the other way in Arabic);
+ * button's label 4px toward the end (the other way in Arabic);
  * a press scales the card to 0.99, which is what a phone gets.
  *
  * Mobile first: base classes are Figma's Mobile (360),
@@ -142,7 +142,6 @@ export function TeamLeadershipGrid({
             const content = (
               <span className="inline-flex items-center gap-1.5 motion-safe:transition-transform motion-safe:duration-200 group-hover/card:translate-x-1 group-focus-within/card:translate-x-1 rtl:group-hover/card:-translate-x-1 rtl:group-focus-within/card:-translate-x-1">
                 {label}
-                <TeamLinkArrow />
               </span>
             )
             return (
