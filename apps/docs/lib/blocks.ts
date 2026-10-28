@@ -339,7 +339,7 @@ export const TEAM_TYPES: BlockType<TeamFamily>[] = [
   { slug: "team-meta-profile-cards", family: "grids-and-walls" },
   { slug: "team-we-re-hiring-cta", family: "spotlights" },
   { slug: "team-hairline-grid", family: "grids-and-walls", inverse: true },
-  { slug: "team-overlay-portrait-cards", family: "grids-and-walls" },
+  { slug: "team-overlay-portrait-cards", family: "grids-and-walls", inverse: true },
   { slug: "team-annotated-portrait-lineup", family: "grids-and-walls" },
   { slug: "team-grid-backdrop-roster", family: "grids-and-walls" },
 ]

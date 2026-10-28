@@ -5562,6 +5562,7 @@
       "description": "Full-bleed portrait cards with the name and role set over a scrim at the foot of the photo.",
       "dependencies": [],
       "registryDependencies": [
+        "theme-inverse",
         "team"
       ],
       "files": [
