@@ -20,8 +20,8 @@ import { buttonVariants } from "../../ui/button/button"
  *
  * Hover and keyboard focus turn the rank from the border colour to the
  * foreground and the title `info` (180ms), and move the arrow 2px toward the
- * upper end corner while it comes from 60% to full strength. The badge does
- * not move. On Mobile there is no hover; pressing a row dims it to 92%.
+ * upper end corner. The arrow is at full strength at rest, as in Figma. The
+ * badge does not move. On Mobile there is no hover; pressing a row dims it to 92%.
  * Reduced motion turns all of it off. Nothing plays on load or on a timer.
  *
  * Arabic mirrors by the page's `dir`: the rank is at the right end of the
@@ -171,7 +171,7 @@ const RANK_HOVER =
 const TITLE_HOVER =
   "group-hover/row:[@container(min-width:40rem)]:text-info group-focus-visible/row:[@container(min-width:40rem)]:text-info"
 const ARROW_MOVE =
-  "rtl:-scale-x-100 transition duration-[180ms] ease-out motion-reduce:transition-none [@container(min-width:40rem)]:motion-safe:opacity-60 group-hover/row:[@container(min-width:40rem)]:motion-safe:opacity-100 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:opacity-100 group-hover/row:[@container(min-width:40rem)]:motion-safe:-translate-y-0.5 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:-translate-y-0.5 group-hover/row:[@container(min-width:40rem)]:motion-safe:ltr:translate-x-0.5 group-hover/row:[@container(min-width:40rem)]:motion-safe:rtl:-translate-x-0.5 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:ltr:translate-x-0.5 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:rtl:-translate-x-0.5"
+  "rtl:-scale-x-100 transition duration-[180ms] ease-out motion-reduce:transition-none group-hover/row:[@container(min-width:40rem)]:motion-safe:-translate-y-0.5 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:-translate-y-0.5 group-hover/row:[@container(min-width:40rem)]:motion-safe:ltr:translate-x-0.5 group-hover/row:[@container(min-width:40rem)]:motion-safe:rtl:-translate-x-0.5 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:ltr:translate-x-0.5 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:rtl:-translate-x-0.5"
 
 export interface BlogCardsNumberedReadingListProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "title">,

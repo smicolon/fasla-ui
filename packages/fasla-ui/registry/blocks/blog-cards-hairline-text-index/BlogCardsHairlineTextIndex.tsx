@@ -16,16 +16,16 @@ import { cn } from "../../../src/lib/utils"
  * side, the title wrapping to two lines on Tablet. Mobile (360) stacks them:
  * the title over the meta, with the arrow after the date.
  *
- * Hover and keyboard focus slide the title 8px toward the end (200ms), bring
- * the arrow from nothing to full strength, sliding in from 6px, and thicken
- * the hairline under the row from 1px to 2px in the foreground colour. There
- * is no horizontal travel on Mobile, where the arrow is always shown and
- * pressing a row highlights it. Reduced motion turns the slide and the fade
- * off and leaves the arrow showing. Nothing plays on load or on a timer.
+ * The arrow is shown at rest at every breakpoint, as in Figma. Hover and
+ * keyboard focus slide the title 8px toward the end (200ms), nudge the arrow
+ * 2px toward the upper end corner, and thicken the hairline under the row from
+ * 1px to 2px in the foreground colour. On Mobile there is no horizontal
+ * travel: pressing a row highlights it. Reduced motion turns the slide and
+ * the nudge off. Nothing plays on load or on a timer.
  *
  * Arabic mirrors by the page's `dir`: the title slides toward the left, and
- * the arrow is mirrored, `arrow-up-right` becoming `arrow-up-left`, sliding in
- * from the other side. Nothing here is a photograph.
+ * the arrow is mirrored, `arrow-up-right` becoming `arrow-up-left`, and nudges
+ * toward the upper left. Nothing here is a photograph.
  *
  * Mobile first, and sized by the block's own width, not the window's: the
  * section is a query container. The base classes are Figma's Mobile (360);
@@ -106,8 +106,8 @@ const ROW_HAIRLINE =
   "hover:[@container(min-width:40rem)]:after:h-0.5 hover:[@container(min-width:40rem)]:after:bg-foreground focus-visible:after:h-0.5 focus-visible:after:bg-foreground"
 const TITLE_SLIDE =
   "transition-transform duration-200 ease-out motion-reduce:transition-none group-hover/row:[@container(min-width:40rem)]:motion-safe:ltr:translate-x-2 group-hover/row:[@container(min-width:40rem)]:motion-safe:rtl:-translate-x-2 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:ltr:translate-x-2 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:rtl:-translate-x-2"
-const ARROW_IN =
-  "shrink-0 rtl:-scale-x-100 transition duration-200 ease-out motion-reduce:transition-none [@container(min-width:40rem)]:motion-safe:opacity-0 [@container(min-width:40rem)]:motion-safe:ltr:-translate-x-1.5 [@container(min-width:40rem)]:motion-safe:rtl:translate-x-1.5 group-hover/row:[@container(min-width:40rem)]:motion-safe:opacity-100 group-hover/row:[@container(min-width:40rem)]:motion-safe:translate-x-0 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:opacity-100 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:translate-x-0"
+const ARROW_NUDGE =
+  "shrink-0 rtl:-scale-x-100 transition-transform duration-200 ease-out motion-reduce:transition-none group-hover/row:[@container(min-width:40rem)]:motion-safe:-translate-y-0.5 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:-translate-y-0.5 group-hover/row:[@container(min-width:40rem)]:motion-safe:ltr:translate-x-0.5 group-hover/row:[@container(min-width:40rem)]:motion-safe:rtl:-translate-x-0.5 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:ltr:translate-x-0.5 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:rtl:-translate-x-0.5"
 
 export interface BlogCardsHairlineTextIndexProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "title">,
@@ -179,7 +179,7 @@ export function BlogCardsHairlineTextIndex({
                     <span className="flex shrink-0 items-center gap-3 text-sm text-muted-foreground [@container(min-width:40rem)]:gap-6">
                       <span>{post.category}</span>
                       <span>{post.date}</span>
-                      <ArrowUpRightIcon aria-hidden="true" className={cn("size-4", ARROW_IN)} />
+                      <ArrowUpRightIcon aria-hidden="true" className={cn("size-4", ARROW_NUDGE)} />
                     </span>
                   </a>
                 </li>

@@ -22,8 +22,8 @@ import { buttonVariants } from "../../ui/button/button"
  *
  * Hover and keyboard focus scale the thumbnail from 1.00 to 1.04 inside its
  * clip (280ms), turn the title `info`, and move the arrow 2px toward the
- * upper end corner while it comes from 60% to full strength. On Mobile there
- * is no hover; pressing a row dims it to 92% for 120ms. Reduced motion turns
+ * upper end corner. The arrow is at full strength at rest, as in Figma. On
+ * Mobile there is no hover; pressing a row dims it to 92% for 120ms. Reduced motion turns
  * all of it off. Nothing plays on load or on a timer.
  *
  * Arabic mirrors by the page's `dir`: the thumbnail moves to the end side of
@@ -175,7 +175,7 @@ const THUMB_HOVER =
 const TITLE_HOVER =
   "group-hover/row:[@container(min-width:40rem)]:text-info group-focus-visible/row:[@container(min-width:40rem)]:text-info"
 const ARROW_MOVE =
-  "rtl:-scale-x-100 transition duration-[280ms] ease-out motion-reduce:transition-none [@container(min-width:40rem)]:motion-safe:opacity-60 group-hover/row:[@container(min-width:40rem)]:motion-safe:opacity-100 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:opacity-100 group-hover/row:[@container(min-width:40rem)]:motion-safe:-translate-y-0.5 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:-translate-y-0.5 group-hover/row:[@container(min-width:40rem)]:motion-safe:ltr:translate-x-0.5 group-hover/row:[@container(min-width:40rem)]:motion-safe:rtl:-translate-x-0.5 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:ltr:translate-x-0.5 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:rtl:-translate-x-0.5"
+  "rtl:-scale-x-100 transition duration-[280ms] ease-out motion-reduce:transition-none group-hover/row:[@container(min-width:40rem)]:motion-safe:-translate-y-0.5 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:-translate-y-0.5 group-hover/row:[@container(min-width:40rem)]:motion-safe:ltr:translate-x-0.5 group-hover/row:[@container(min-width:40rem)]:motion-safe:rtl:-translate-x-0.5 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:ltr:translate-x-0.5 group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:rtl:-translate-x-0.5"
 
 export interface BlogCardsLeftThumbRowCardsProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "title">,
