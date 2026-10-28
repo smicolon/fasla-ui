@@ -117,7 +117,7 @@ export function TeamMemberTable({ locale = "en", eyebrow, heading, columns, link
             <thead className={cn("hidden bg-muted", `[@container(min-width:40rem)]:table-header-group`)}>
               <tr>
                 <th scope="col" className={cn(HEAD_CELL)}>{cols.member}</th>
-                <th scope="col" className={cn(HEAD_CELL, `[@container(min-width:40rem)]:w-[12.5rem]`, `[@container(min-width:64rem)]:w-[16.25rem]`)}>{cols.role}</th>
+                <th scope="col" className={cn(HEAD_CELL, `[@container(min-width:40rem)]:w-[15rem]`, `[@container(min-width:64rem)]:w-[16.25rem]`)}>{cols.role}</th>
                 <th scope="col" className={cn(HEAD_CELL, `[@container(min-width:40rem)]:w-[8.75rem]`, `[@container(min-width:64rem)]:w-40`)}>{cols.team}</th>
                 <th scope="col" className={cn(HEAD_CELL, "hidden", `[@container(min-width:64rem)]:table-cell [@container(min-width:64rem)]:w-[8.75rem]`)}>{cols.location}</th>
                 <th scope="col" className={cn(HEAD_CELL, `w-8 [@container(min-width:64rem)]:w-10`)}>

@@ -108,11 +108,11 @@ export function TeamFounderSpotlight({ locale = "en", eyebrow, heading, feature,
           {/* The portrait fades in while it settles from 1.04; the box clips the scale. */}
           <Reveal
             y={0}
-            className="h-[300px] w-full shrink-0 motion-safe:duration-[600ms] [@container(min-width:40rem)]:h-auto [@container(min-width:40rem)]:w-[280px] [@container(min-width:64rem)]:w-[300px]"
+            className="relative h-[300px] w-full shrink-0 motion-safe:duration-[600ms] [@container(min-width:40rem)]:h-auto [@container(min-width:40rem)]:w-[280px] [@container(min-width:64rem)]:w-[300px]"
           >
             <TeamPortrait
               person={main}
-              className="size-full min-h-[260px]"
+              className="size-full min-h-[260px] [@container(min-width:40rem)]:absolute [@container(min-width:40rem)]:inset-0"
               imageClassName="motion-safe:transition-transform motion-safe:duration-[600ms] motion-safe:ease-out motion-safe:group-data-[reveal=pending]/team:scale-[1.04]"
             />
           </Reveal>
