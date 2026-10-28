@@ -289,6 +289,21 @@ export const routes = [
     },
   },
   {
+    kind: "block",
+    category: "Blocks",
+    path: "/docs/blocks/blog-cards/",
+    title: "Blog Cards Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Sections that show articles to readers: card grids, lead features, lists, panels beside a post and browsing controls, responsive and mirrored for Arabic.",
+    h1: "Blog Cards",
+    ar: {
+      title: "كتل بطاقات المدونة لمشاريع React | فاصلة",
+      description:
+        "أقسام تعرض المقالات للقرّاء: شبكات بطاقات ومقالات مميزة وقوائم ولوحات بجانب المقال وأدوات للتصفح، متجاوبة ومعكوسة للعربية.",
+      h1: "بطاقات المدونة (Blog Cards)",
+    },
+  },
+  {
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/button/",

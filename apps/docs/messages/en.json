@@ -3423,6 +3423,21 @@
         "team-annotated-portrait-lineup": "Annotated Portrait Lineup",
         "team-grid-backdrop-roster": "Grid Backdrop Roster"
       }
+    },
+    "blogCardsBlocks": {
+      "lead": "Sections that show articles to readers: card grids and features, lists and indexes, the panels that sit beside a post, and the controls for browsing.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "filterLabel": "Filter by family",
+      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
+      "families": {
+        "all": "All",
+        "grids": "Card grids",
+        "features": "Features",
+        "lists": "Lists and indexes",
+        "alongside": "Alongside a post",
+        "browse": "Browse and filter"
+      },
+      "types": {}
     }
   },
   "copyCommand": {

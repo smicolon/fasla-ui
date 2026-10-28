@@ -4,7 +4,7 @@
  * (docs.faqBlocks, docs.errorStateBlocks, docs.logoCloudBlocks,
  * docs.authenticationsBlocks, docs.galleryBlocks, docs.navbarBlocks,
  * docs.pricingBlocks, docs.heroBlocks, docs.aboutBlocks, docs.teamBlocks,
- * docs.careersBlocks); the slug is the registry item's name.
+ * docs.careersBlocks, docs.blogCardsBlocks); the slug is the registry item's name.
  */
 
 export type FaqFamily = "lists" | "layouts" | "navigation" | "support"
@@ -104,7 +104,18 @@ export type TeamFamily = "grids-and-walls" | "directories" | "spotlights"
 
 export const TEAM_FAMILIES: TeamFamily[] = ["grids-and-walls", "directories", "spotlights"]
 
-export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily> = {
+/**
+ * Blog Cards' five groups: the card grids that show several articles at once,
+ * the features built around one lead article, the lists and indexes that
+ * read as rows, the panels that sit beside a post (a newsletter, its author,
+ * related articles), and the three that help a reader browse (a filter, a
+ * search, a carousel).
+ */
+export type BlogCardsFamily = "grids" | "features" | "lists" | "alongside" | "browse"
+
+export const BLOG_CARDS_FAMILIES: BlogCardsFamily[] = ["grids", "features", "lists", "alongside", "browse"]
+
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | BlogCardsFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
   family: Family
@@ -367,6 +378,9 @@ export const TEAM_TYPES: BlockType<TeamFamily>[] = [
   { slug: "team-grid-backdrop-roster", family: "grids-and-walls" },
 ]
 
+/** Blog Cards' 21 Types in Figma's order, added a family at a time. */
+export const BLOG_CARDS_TYPES: BlockType<BlogCardsFamily>[] = []
+
 export const ALL_BLOCK_TYPES: BlockType[] = [
   ...FAQ_TYPES,
   ...ERROR_STATE_TYPES,
@@ -379,6 +393,7 @@ export const ALL_BLOCK_TYPES: BlockType[] = [
   ...ABOUT_TYPES,
   ...CAREERS_TYPES,
   ...TEAM_TYPES,
+  ...BLOG_CARDS_TYPES,
 ]
 
 /** Figma's three breakpoints, the widths a preview frame renders at. */
