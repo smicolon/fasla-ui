@@ -3304,6 +3304,39 @@
         "hero-video-in-type": "فيديو داخل النص"
       }
     },
+    "aboutBlocks": {
+      "lead": "أقسام تعرّف بالشركة: بيانات وواجهات بالصور، وقصتها وقيمها، وثقافتها وأرقامها.",
+      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
+      "filterLabel": "التصفية حسب العائلة",
+      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
+      "families": {
+        "all": "الكل",
+        "statements": "البيانات والواجهات",
+        "story": "القصة والقيم",
+        "culture": "الثقافة والأرقام"
+      },
+      "types": {
+        "about-mission-statement-hero": "واجهة بيان المهمة",
+        "about-collage-hero": "واجهة كولاج الصور",
+        "about-statement-band": "شريط البيان",
+        "about-values-spotlight": "القيم تحت الضوء",
+        "about-values-connector-list": "قائمة القيم الموصولة",
+        "about-approach-stack-cards": "بطاقات المنهج المكدّسة",
+        "about-story-snapshots": "القصة واللقطات",
+        "about-bento": "بنتو",
+        "about-culture-masonry": "جدار الثقافة",
+        "about-impact-stats-band": "شريط أرقام الأثر",
+        "about-story-photos": "القصة بالصور",
+        "about-split-panel": "اللوحة المقسومة",
+        "about-letter-card": "بطاقة الرسالة",
+        "about-values-focus": "القيم في التركيز",
+        "about-spotlight": "بقعة الضوء",
+        "about-headline-photos": "العنوان والصور",
+        "about-type-stack": "الحروف المكدّسة",
+        "about-color-bento": "بنتو الألوان",
+        "about-numbered-rows": "الصفوف المرقّمة"
+      }
+    },
     "blockCard": {
       "fullScreen": "فتح بملء الشاشة",
       "newTab": "(يُفتح في علامة تبويب جديدة)",

@@ -219,6 +219,15 @@ export const CODE_MAP = {
   ...Object.fromEntries(
     ["editorial-arch", "photo-constellation", "arc-gallery", "inline-image-headline", "bento-split", "framed-full-bleed", "annotated-object", "editorial-triptych", "colour-stage", "twin-panels", "split-band-headline", "textured-dark", "component-pattern", "curved-media-rail", "framed-studio-card", "orbit-track", "floating-integrations", "shape-grid", "wave-band", "studio-mosaic", "illustration-split", "masked-type-reveal", "velocity-marquee", "duo-card", "video-spotlight", "brand-color-block", "scramble-decode", "split-flap-counters", "video-in-type"].map((type) => [`hero-${type}`, null])
   ),
+  // Blocks: each About item is one Type of the block set About (46368:243915), not an atom.
+  ...Object.fromEntries(
+    [
+      "mission-statement-hero", "collage-hero", "statement-band", "values-spotlight", "values-connector-list",
+      "approach-stack-cards", "story-snapshots", "bento", "culture-masonry", "impact-stats-band", "story-photos",
+      "split-panel", "letter-card", "values-focus", "spotlight", "headline-photos", "type-stack", "color-bento",
+      "numbered-rows",
+    ].map((type) => [`about-${type}`, null])
+  ),
 }
 
 const FAMILY_MIN = 10

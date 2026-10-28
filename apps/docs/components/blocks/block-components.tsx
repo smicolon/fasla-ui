@@ -4,14 +4,15 @@ import * as React from "react"
 import dynamic from "next/dynamic"
 
 import { authExample } from "@/components/blocks/authentications-examples"
+import { aboutPhotoProps } from "@/components/blocks/about-photos"
 import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
 import { NavbarStage, navbarExample } from "@/components/blocks/navbar-examples"
 import { heroPhotoProps } from "@/components/blocks/hero-photos"
 
 /**
  * Every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar,
- * Pricing and Hero Type by registry name, each loaded on its own so a preview
- * frame downloads only the block it shows.
+ * Pricing, Hero and About Type by registry name, each loaded on its own so a
+ * preview frame downloads only the block it shows.
  */
 /** Each block has its own props; a frame passes only the locale and demo props. */
 type AnyBlock = React.ComponentType<any>
@@ -111,6 +112,17 @@ const withNavbarExample = (Block: AnyBlock, slug: string) =>
 const withHeroPhotos = (Block: AnyBlock, type: string) =>
   function HeroPreview(props: { locale: Locale }) {
     return <Block {...heroPhotoProps(type, props.locale)} {...props} />
+  }
+
+/**
+ * An About Type with its demo photos, from public/images/gallery/ and
+ * public/images/about/: as a `photos` list, or added to each item of the
+ * block's own copy. Types without photos render as they are.
+ */
+type AboutCopy = Record<Locale, object>
+const withAboutPhotos = (Block: AnyBlock, type: string, copy: AboutCopy) =>
+  function AboutPreview(props: { locale: Locale }) {
+    return <Block {...aboutPhotoProps(type, props.locale, copy)} {...props} />
   }
 
 export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
@@ -532,6 +544,63 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   ),
   "hero-video-in-type": dynamic(() =>
     import("@fasla-ui/blocks/hero-video-in-type/HeroVideoInType").then((m) => withHeroPhotos(m.HeroVideoInType, "video-in-type"))
+  ),
+  "about-mission-statement-hero": dynamic(() =>
+    import("@fasla-ui/blocks/about-mission-statement-hero/AboutMissionStatementHero").then((m) => withAboutPhotos(m.AboutMissionStatementHero, "mission-statement-hero", m.aboutMissionStatementHeroCopy))
+  ),
+  "about-collage-hero": dynamic(() =>
+    import("@fasla-ui/blocks/about-collage-hero/AboutCollageHero").then((m) => withAboutPhotos(m.AboutCollageHero, "collage-hero", m.aboutCollageHeroCopy))
+  ),
+  "about-statement-band": dynamic(() =>
+    import("@fasla-ui/blocks/about-statement-band/AboutStatementBand").then((m) => withAboutPhotos(m.AboutStatementBand, "statement-band", m.aboutStatementBandCopy))
+  ),
+  "about-values-spotlight": dynamic(() =>
+    import("@fasla-ui/blocks/about-values-spotlight/AboutValuesSpotlight").then((m) => withAboutPhotos(m.AboutValuesSpotlight, "values-spotlight", m.aboutValuesSpotlightCopy))
+  ),
+  "about-values-connector-list": dynamic(() =>
+    import("@fasla-ui/blocks/about-values-connector-list/AboutValuesConnectorList").then((m) => withAboutPhotos(m.AboutValuesConnectorList, "values-connector-list", m.aboutValuesConnectorListCopy))
+  ),
+  "about-approach-stack-cards": dynamic(() =>
+    import("@fasla-ui/blocks/about-approach-stack-cards/AboutApproachStackCards").then((m) => withAboutPhotos(m.AboutApproachStackCards, "approach-stack-cards", m.aboutApproachStackCardsCopy))
+  ),
+  "about-story-snapshots": dynamic(() =>
+    import("@fasla-ui/blocks/about-story-snapshots/AboutStorySnapshots").then((m) => withAboutPhotos(m.AboutStorySnapshots, "story-snapshots", m.aboutStorySnapshotsCopy))
+  ),
+  "about-bento": dynamic(() =>
+    import("@fasla-ui/blocks/about-bento/AboutBento").then((m) => withAboutPhotos(m.AboutBento, "bento", m.aboutBentoCopy))
+  ),
+  "about-culture-masonry": dynamic(() =>
+    import("@fasla-ui/blocks/about-culture-masonry/AboutCultureMasonry").then((m) => withAboutPhotos(m.AboutCultureMasonry, "culture-masonry", m.aboutCultureMasonryCopy))
+  ),
+  "about-impact-stats-band": dynamic(() =>
+    import("@fasla-ui/blocks/about-impact-stats-band/AboutImpactStatsBand").then((m) => withAboutPhotos(m.AboutImpactStatsBand, "impact-stats-band", m.aboutImpactStatsBandCopy))
+  ),
+  "about-story-photos": dynamic(() =>
+    import("@fasla-ui/blocks/about-story-photos/AboutStoryPhotos").then((m) => withAboutPhotos(m.AboutStoryPhotos, "story-photos", m.aboutStoryPhotosCopy))
+  ),
+  "about-split-panel": dynamic(() =>
+    import("@fasla-ui/blocks/about-split-panel/AboutSplitPanel").then((m) => withAboutPhotos(m.AboutSplitPanel, "split-panel", m.aboutSplitPanelCopy))
+  ),
+  "about-letter-card": dynamic(() =>
+    import("@fasla-ui/blocks/about-letter-card/AboutLetterCard").then((m) => withAboutPhotos(m.AboutLetterCard, "letter-card", m.aboutLetterCardCopy))
+  ),
+  "about-values-focus": dynamic(() =>
+    import("@fasla-ui/blocks/about-values-focus/AboutValuesFocus").then((m) => withAboutPhotos(m.AboutValuesFocus, "values-focus", m.aboutValuesFocusCopy))
+  ),
+  "about-spotlight": dynamic(() =>
+    import("@fasla-ui/blocks/about-spotlight/AboutSpotlight").then((m) => withAboutPhotos(m.AboutSpotlight, "spotlight", m.aboutSpotlightCopy))
+  ),
+  "about-headline-photos": dynamic(() =>
+    import("@fasla-ui/blocks/about-headline-photos/AboutHeadlinePhotos").then((m) => withAboutPhotos(m.AboutHeadlinePhotos, "headline-photos", m.aboutHeadlinePhotosCopy))
+  ),
+  "about-type-stack": dynamic(() =>
+    import("@fasla-ui/blocks/about-type-stack/AboutTypeStack").then((m) => withAboutPhotos(m.AboutTypeStack, "type-stack", m.aboutTypeStackCopy))
+  ),
+  "about-color-bento": dynamic(() =>
+    import("@fasla-ui/blocks/about-color-bento/AboutColorBento").then((m) => withAboutPhotos(m.AboutColorBento, "color-bento", m.aboutColorBentoCopy))
+  ),
+  "about-numbered-rows": dynamic(() =>
+    import("@fasla-ui/blocks/about-numbered-rows/AboutNumberedRows").then((m) => withAboutPhotos(m.AboutNumberedRows, "numbered-rows", m.aboutNumberedRowsCopy))
   ),
 }
 
