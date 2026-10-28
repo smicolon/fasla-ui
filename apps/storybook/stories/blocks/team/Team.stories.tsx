@@ -28,6 +28,11 @@ import { emptyPropsOf, localeOf, photoPropsOf, teamArgTypes, teamViewports } fro
  * (no people), are tagged `!dev` and `!autodocs`: hidden from both, but still
  * built, so tests and visual checks reach them by id. The tags are written
  * out on each story, as the indexer reads them statically.
+ *
+ * Controls: every row changes the preview. What only assistive tech reads
+ * (Member Table's `linkLabel`, Department Tabs' `tabsLabel`), starting and
+ * controlled state (Department Tabs' `value`) and a list of labels that Controls
+ * would edit as raw text (Meta Profile Cards' `metaLabels`) are hidden per story.
  */
 const meta: Meta = {
   title: "Blocks/Team",
@@ -59,21 +64,21 @@ export const LeadershipGridEmpty: StoryObj<typeof TeamLeadershipGrid> = {
 
 export const MetaProfileCards: StoryObj<typeof TeamMetaProfileCards> = {
   name: "Meta Profile Cards",
-  argTypes: teamArgTypes(TeamMetaProfileCards, teamMetaProfileCardsCopy),
+  argTypes: teamArgTypes(TeamMetaProfileCards, teamMetaProfileCardsCopy, ["metaLabels"]),
   render: (args, context) => <TeamMetaProfileCards locale={localeOf(context)} {...photoPropsOf("meta-profile-cards", context, teamMetaProfileCardsCopy)} {...args} />,
 }
 
 export const MetaProfileCardsWithoutPhotos: StoryObj<typeof TeamMetaProfileCards> = {
   name: "Meta Profile Cards: Without Photos",
   tags: ["!dev", "!autodocs"],
-  argTypes: teamArgTypes(TeamMetaProfileCards, teamMetaProfileCardsCopy),
+  argTypes: teamArgTypes(TeamMetaProfileCards, teamMetaProfileCardsCopy, ["metaLabels"]),
   render: (args, context) => <TeamMetaProfileCards locale={localeOf(context)} {...args} />,
 }
 
 export const MetaProfileCardsEmpty: StoryObj<typeof TeamMetaProfileCards> = {
   name: "Meta Profile Cards: Empty",
   tags: ["!dev", "!autodocs"],
-  argTypes: teamArgTypes(TeamMetaProfileCards, teamMetaProfileCardsCopy),
+  argTypes: teamArgTypes(TeamMetaProfileCards, teamMetaProfileCardsCopy, ["metaLabels"]),
   render: (args, context) => <TeamMetaProfileCards locale={localeOf(context)} {...emptyPropsOf(teamMetaProfileCardsCopy)} {...args} />,
 }
 
@@ -239,21 +244,21 @@ export const CompactDirectoryRowsEmpty: StoryObj<typeof TeamCompactDirectoryRows
 
 export const MemberTable: StoryObj<typeof TeamMemberTable> = {
   name: "Team Table",
-  argTypes: teamArgTypes(TeamMemberTable, teamMemberTableCopy),
+  argTypes: teamArgTypes(TeamMemberTable, teamMemberTableCopy, ["linkLabel"]),
   render: (args, context) => <TeamMemberTable locale={localeOf(context)} {...photoPropsOf("member-table", context, teamMemberTableCopy)} {...args} />,
 }
 
 export const MemberTableWithoutPhotos: StoryObj<typeof TeamMemberTable> = {
   name: "Team Table: Without Photos",
   tags: ["!dev", "!autodocs"],
-  argTypes: teamArgTypes(TeamMemberTable, teamMemberTableCopy),
+  argTypes: teamArgTypes(TeamMemberTable, teamMemberTableCopy, ["linkLabel"]),
   render: (args, context) => <TeamMemberTable locale={localeOf(context)} {...args} />,
 }
 
 export const MemberTableEmpty: StoryObj<typeof TeamMemberTable> = {
   name: "Team Table: Empty",
   tags: ["!dev", "!autodocs"],
-  argTypes: teamArgTypes(TeamMemberTable, teamMemberTableCopy),
+  argTypes: teamArgTypes(TeamMemberTable, teamMemberTableCopy, ["linkLabel"]),
   render: (args, context) => <TeamMemberTable locale={localeOf(context)} {...emptyPropsOf(teamMemberTableCopy)} {...args} />,
 }
 
@@ -299,20 +304,20 @@ export const SplitIntroMemberRailEmpty: StoryObj<typeof TeamSplitIntroMemberRail
 
 export const DepartmentTabsDirectory: StoryObj<typeof TeamDepartmentTabsDirectory> = {
   name: "Department Tabs Directory",
-  argTypes: teamArgTypes(TeamDepartmentTabsDirectory, teamDepartmentTabsDirectoryCopy),
+  argTypes: teamArgTypes(TeamDepartmentTabsDirectory, teamDepartmentTabsDirectoryCopy, ["tabsLabel", "value"]),
   render: (args, context) => <TeamDepartmentTabsDirectory locale={localeOf(context)} {...photoPropsOf("department-tabs-directory", context, teamDepartmentTabsDirectoryCopy)} {...args} />,
 }
 
 export const DepartmentTabsDirectoryWithoutPhotos: StoryObj<typeof TeamDepartmentTabsDirectory> = {
   name: "Department Tabs Directory: Without Photos",
   tags: ["!dev", "!autodocs"],
-  argTypes: teamArgTypes(TeamDepartmentTabsDirectory, teamDepartmentTabsDirectoryCopy),
+  argTypes: teamArgTypes(TeamDepartmentTabsDirectory, teamDepartmentTabsDirectoryCopy, ["tabsLabel", "value"]),
   render: (args, context) => <TeamDepartmentTabsDirectory locale={localeOf(context)} {...args} />,
 }
 
 export const DepartmentTabsDirectoryEmpty: StoryObj<typeof TeamDepartmentTabsDirectory> = {
   name: "Department Tabs Directory: Empty",
   tags: ["!dev", "!autodocs"],
-  argTypes: teamArgTypes(TeamDepartmentTabsDirectory, teamDepartmentTabsDirectoryCopy),
+  argTypes: teamArgTypes(TeamDepartmentTabsDirectory, teamDepartmentTabsDirectoryCopy, ["tabsLabel", "value"]),
   render: (args, context) => <TeamDepartmentTabsDirectory locale={localeOf(context)} {...emptyPropsOf(teamDepartmentTabsDirectoryCopy)} {...args} />,
 }
