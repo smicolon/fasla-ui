@@ -203,6 +203,21 @@ export function HeroTexturedDark({
   const tour = tourAction === undefined ? copy.tourAction : tourAction
   const badge = sticker ?? copy.sticker
   const tabList = tabs ?? copy.tabs
+
+  // Whether the tab row overflows and scrolls: only then is it a stop for the keyboard.
+  const tabsRef = React.useRef<HTMLUListElement>(null)
+  const [tabsScroll, setTabsScroll] = React.useState(false)
+  React.useEffect(() => {
+    const list = tabsRef.current
+    if (!list || typeof ResizeObserver === "undefined") return
+    const check = () => setTabsScroll(list.scrollWidth > list.clientWidth + 1)
+    check()
+    // The row for its width, each tab for its text (a font that loads late widens it).
+    const observer = new ResizeObserver(check)
+    observer.observe(list)
+    for (const item of Array.from(list.children)) observer.observe(item)
+    return () => observer.disconnect()
+  }, [tabList.length])
   const boardList = boards ?? copy.boards
 
   return (
@@ -284,13 +299,28 @@ export function HeroTexturedDark({
           </div>
 
           {tabList.length > 0 ? (
-            <ul className={cn(badge ? "mt-[72px]" : "mt-10", "flex flex-wrap gap-x-6 gap-y-2 text-base font-medium [@container(min-width:48rem)]:mt-12 [@container(min-width:48rem)]:gap-x-12 [@container(min-width:48rem)]:text-lg [@container(min-width:90rem)]:mt-[108px]")}>
+            /*
+             * One line, as Figma draws it: 24px apart on Mobile (12 in Arabic,
+             * whose words run wider), 48 from Tablet up. Should the tabs ever
+             * outgrow the row, it scrolls sideways rather than wrapping, and
+             * takes keyboard focus then so the hidden tabs can be reached.
+             * A scrolling box clips, so 4px of bottom padding, taken back by
+             * the margin, keeps the underline in view.
+             */
+            <ul
+              ref={tabsRef}
+              tabIndex={tabsScroll ? 0 : undefined}
+              className={cn(
+                badge ? "mt-[72px]" : "mt-10",
+                "-mb-1 flex gap-x-6 overflow-x-auto pb-1 text-base font-medium [outline:none] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-foreground-inverse focus-visible:dark:outline-foreground [&:dir(rtl)]:gap-x-3 [@container(min-width:48rem)]:mt-12 [@container(min-width:48rem)]:gap-x-12 [@container(min-width:48rem)]:text-lg [@container(min-width:48rem)]:[&:dir(rtl)]:gap-x-12 [@container(min-width:90rem)]:mt-[108px]"
+              )}
+            >
               {tabList.map((tab, index) => (
                 <li
                   key={index}
                   aria-current={index === activeTab ? "true" : undefined}
                   className={cn(
-                    "whitespace-nowrap",
+                    "shrink-0 whitespace-nowrap",
                     // Every tab is the same light colour, for contrast on the
                     // texture; the underline marks the active one.
                     index === activeTab
