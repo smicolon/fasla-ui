@@ -22,9 +22,9 @@ import { Reveal, TeamHeader, TeamPortrait, TeamSection, type TeamLocale, type Te
  * Motion (motion card): the portraits scale 1.08 to 1 once on entry; the
  * cards' own entrance runs from the start side. Nothing else moves.
  *
- * The scrim is dark and the text light in both modes: a photograph does not
- * change with the theme, so `dark:` switches to the page's own tokens that
- * hold the same two colours, as Gallery Full-Bleed Slider does.
+ * The caption bar follows the inverse tokens, as the section does: a dark scrim
+ * with light text in light mode, and in dark mode a light scrim with dark text,
+ * as Figma draws both.
  *
  * The photographs are in greyscale, as Figma draws them.
  *
@@ -49,26 +49,26 @@ export interface TeamOverlayPortraitCardsCopy {
   people: TeamOverlayPerson[]
 }
 
-/** Figma's copy, English and Arabic. */
+/** Figma's copy, English and Arabic, with a one-line sample bio each for the hover. */
 const COPY: Record<TeamLocale, TeamOverlayPortraitCardsCopy> = {
   en: {
     eyebrow: "IN THE ROOM",
     heading: "The people you will actually work with",
     people: [
-      { id: "omar-nasser", name: "Omar Nasser", role: "Head of Product" },
-      { id: "grace-okafor", name: "Grace Okafor", role: "Principal Engineer" },
-      { id: "sofia-marchetti", name: "Sofia Marchetti", role: "Brand Designer" },
-      { id: "mei-tanaka", name: "Mei Tanaka", role: "Customer Success Lead" },
+      { id: "omar-nasser", name: "Omar Nasser", role: "Head of Product", bio: "Sets the product direction and keeps every release honest." },
+      { id: "grace-okafor", name: "Grace Okafor", role: "Principal Engineer", bio: "Builds the pipeline that turns tokens into shipped code." },
+      { id: "sofia-marchetti", name: "Sofia Marchetti", role: "Brand Designer", bio: "Shapes how Fasla looks and sounds." },
+      { id: "mei-tanaka", name: "Mei Tanaka", role: "Customer Success Lead", bio: "Makes sure every customer gets an answer that sticks." },
     ],
   },
   ar: {
     eyebrow: "في الغرفة",
     heading: "الفريق الذي ستعمل معه فعلًا",
     people: [
-      { id: "omar-nasser", name: "عمر ناصر", role: "رئيس المنتج" },
-      { id: "grace-okafor", name: "غرايس أوكافور", role: "مهندسة رئيسية" },
-      { id: "sofia-marchetti", name: "صوفيا ماركيتي", role: "مصمِّمة هوية" },
-      { id: "mei-tanaka", name: "ماي تاناكا", role: "قائدة نجاح العملاء" },
+      { id: "omar-nasser", name: "عمر ناصر", role: "رئيس المنتج", bio: "يحدد اتجاه المنتج ويحرص على صدق كل إصدار." },
+      { id: "grace-okafor", name: "غرايس أوكافور", role: "مهندسة رئيسية", bio: "تبني المسار الذي يحوّل الرموز التصميمية إلى كود منشور." },
+      { id: "sofia-marchetti", name: "صوفيا ماركيتي", role: "مصمِّمة هوية", bio: "تصوغ هوية فاصلة البصرية." },
+      { id: "mei-tanaka", name: "ماي تاناكا", role: "قائدة نجاح العملاء", bio: "تحرص على أن يحصل كل عميل على جواب يلبّي حاجته." },
     ],
   },
 }
@@ -119,8 +119,7 @@ export function TeamOverlayPortraitCards({ locale = "en", eyebrow, heading, peop
                 {/* Rests 8px below the card's edge so raising it never leaves a gap under the scrim. */}
                 <div
                   className={cn(
-                    "absolute inset-x-0 -bottom-2 px-5 pb-7 pt-5 text-foreground-inverse dark:text-foreground",
-                    "bg-background-inverse/[0.55] dark:bg-background/[0.55]",
+                    "absolute inset-x-0 -bottom-2 bg-background-inverse/[0.55] px-5 pb-7 pt-5 text-foreground-inverse",
                     "motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out",
                     BAR
                   )}
