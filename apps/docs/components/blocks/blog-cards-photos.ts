@@ -56,6 +56,14 @@ const PHOTOS: Record<string, number[]> = {
   "related-posts-strip": [16, 13, 14],
 }
 
+/** Journal Bento's two sculptures, which are artwork from Figma, not Unsplash photos. */
+const ARTWORK: Record<string, { file: string; alt: Alt }[]> = {
+  "journal-bento": [
+    { file: "journal-bento-sculpture-1", alt: { en: "A lilac glass disc over three sheets of lined paper", ar: "قرص زجاجي بنفسجي فوق ثلاث أوراق مسطّرة" } },
+    { file: "journal-bento-sculpture-2", alt: { en: "A cube of interlocking indigo, amber and cream parts", ar: "مكعب من قطع متداخلة بالنيلي والعنبر والكريمي" } },
+  ],
+}
+
 const photo = (number: number, locale: Locale): BlogCardsDemoPhoto => ({
   src: `/images/blog-cards/photo-${String(number).padStart(2, "0")}.webp`,
   alt: ALTS[number - 1][locale],
@@ -63,11 +71,13 @@ const photo = (number: number, locale: Locale): BlogCardsDemoPhoto => ({
 
 /** A Type's demo photos in the block's slot order, alt text in `locale`. */
 export function blogCardsPhotos(type: string, locale: Locale): BlogCardsDemoPhoto[] {
+  const art = ARTWORK[type]
+  if (art) return art.map((item) => ({ src: `/images/blog-cards/${item.file}.webp`, alt: item.alt[locale] }))
   return (PHOTOS[type] ?? []).map((number) => photo(number, locale))
 }
 
 /** Every Type that has demo photos, by its name without `blog-cards-`. */
-export const BLOG_CARDS_PHOTO_TYPES = Object.keys(PHOTOS)
+export const BLOG_CARDS_PHOTO_TYPES = [...Object.keys(PHOTOS), ...Object.keys(ARTWORK)]
 
 /** The number of photo files, for the test that every one is used and credited. */
 export const BLOG_CARDS_PHOTO_COUNT = ALTS.length
@@ -77,7 +87,14 @@ export const BLOG_CARDS_PHOTO_COUNT = ALTS.length
  * post carries its own image), or one photo on a named object of the copy.
  * A Type is added here when its block is built.
  */
-const PHOTO_PROP: Record<string, { list: string; key: string } | { object: string; key: string }> = {}
+const PHOTO_PROP: Record<string, { list: string; key: string } | { object: string; key: string }> = {
+  "classic-3-up-grid": { list: "posts", key: "image" },
+  "featured-two-up": { list: "posts", key: "image" },
+  "compact-4-up-thumb-grid": { list: "posts", key: "image" },
+  "bento-editorial-grid": { list: "photoTiles", key: "image" },
+  "overlay-photo-trio": { list: "posts", key: "image" },
+  "journal-bento": { list: "features", key: "image" },
+}
 
 type BlockCopy = Record<Locale, object>
 

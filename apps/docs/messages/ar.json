@@ -3437,7 +3437,14 @@
         "alongside": "إلى جانب المقال",
         "browse": "التصفح والتصفية"
       },
-      "types": {}
+      "types": {
+        "blog-cards-classic-3-up-grid": "شبكة كلاسيكية بثلاث بطاقات",
+        "blog-cards-featured-two-up": "مقال مميز ومقالان",
+        "blog-cards-compact-4-up-thumb-grid": "شبكة مدمجة بأربع صور مصغّرة",
+        "blog-cards-bento-editorial-grid": "شبكة تحريرية بنمط بينتو",
+        "blog-cards-overlay-photo-trio": "ثلاث صور بنص فوقها",
+        "blog-cards-journal-bento": "بينتو اليوميات"
+      }
     }
   },
   "copyCommand": {

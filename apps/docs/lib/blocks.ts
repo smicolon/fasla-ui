@@ -379,7 +379,14 @@ export const TEAM_TYPES: BlockType<TeamFamily>[] = [
 ]
 
 /** Blog Cards' 21 Types in Figma's order, added a family at a time. */
-export const BLOG_CARDS_TYPES: BlockType<BlogCardsFamily>[] = []
+export const BLOG_CARDS_TYPES: BlockType<BlogCardsFamily>[] = [
+  { slug: "blog-cards-classic-3-up-grid", family: "grids" },
+  { slug: "blog-cards-featured-two-up", family: "grids" },
+  { slug: "blog-cards-compact-4-up-thumb-grid", family: "grids" },
+  { slug: "blog-cards-bento-editorial-grid", family: "grids", inverse: true },
+  { slug: "blog-cards-overlay-photo-trio", family: "grids", inverse: true },
+  { slug: "blog-cards-journal-bento", family: "grids", inverse: true },
+]
 
 export const ALL_BLOCK_TYPES: BlockType[] = [
   ...FAQ_TYPES,

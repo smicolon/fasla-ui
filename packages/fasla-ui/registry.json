@@ -6114,6 +6114,148 @@
         "careers",
         "marketing"
       ]
+    },
+    {
+      "name": "blog-cards-classic-3-up-grid",
+      "type": "registry:block",
+      "title": "Blog Cards: Classic 3-Up Grid",
+      "description": "A heading with an action button over three article cards: a cover, a category badge, the read time, a title, a summary and the author.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "avatar",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-classic-3-up-grid/BlogCardsClassic3UpGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-classic-3-up-grid.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
+    },
+    {
+      "name": "blog-cards-featured-two-up",
+      "type": "registry:block",
+      "title": "Blog Cards: Featured + Two-Up",
+      "description": "A heading on a muted band over one large featured article and two smaller ones beside it, each with a cover, a category badge and an author.",
+      "dependencies": [],
+      "registryDependencies": [
+        "badge",
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-featured-two-up/BlogCardsFeaturedTwoUp.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-featured-two-up.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
+    },
+    {
+      "name": "blog-cards-compact-4-up-thumb-grid",
+      "type": "registry:block",
+      "title": "Blog Cards: Compact 4-Up Thumb Grid",
+      "description": "A heading with a ghost button over a grid of small article cards: a thumbnail, the category, a title, the read time and the date.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-compact-4-up-thumb-grid/BlogCardsCompact4UpThumbGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-compact-4-up-thumb-grid.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
+    },
+    {
+      "name": "blog-cards-bento-editorial-grid",
+      "type": "registry:block",
+      "title": "Blog Cards: Bento Editorial Grid",
+      "description": "A heading over a bento of two photo tiles, a pull quote, an article tile, a statistic and a subscribe tile with a full-width button.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-bento-editorial-grid/BlogCardsBentoEditorialGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-bento-editorial-grid.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
+    },
+    {
+      "name": "blog-cards-overlay-photo-trio",
+      "type": "registry:block",
+      "title": "Blog Cards: Overlay Photo Trio",
+      "description": "Three tall photo cards with the category, title and summary in white on a dark scrim along the bottom edge.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-overlay-photo-trio/BlogCardsOverlayPhotoTrio.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-overlay-photo-trio.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
+    },
+    {
+      "name": "blog-cards-journal-bento",
+      "type": "registry:block",
+      "title": "Blog Cards: Journal Bento",
+      "description": "A centred heading over six tinted tiles: two features with artwork and four short stories, each with a topic, a title, a summary and a read action.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-journal-bento/BlogCardsJournalBento.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-journal-bento.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
     }
   ]
 }

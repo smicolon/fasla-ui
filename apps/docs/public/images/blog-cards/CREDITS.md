@@ -22,3 +22,13 @@ The photographer names are as given by the designer. The "Unsplash photo" column
 | `photo-14.webp` | `photo-1634023233766` | Amandine BATAILLE |
 | `photo-15.webp` | `photo-1671485927315` | Simona D'Auria |
 | `photo-16.webp` | `photo-1759434192768` | Jonny Gios |
+
+## Journal Bento's sculptures
+
+| File | Type | Slot | Notes |
+|---|---|---|---|
+| `journal-bento-sculpture-1.webp` | journal-bento | Research feature tile | A lilac glass disc over three sheets of lined paper, on a transparent background |
+| `journal-bento-sculpture-2.webp` | journal-bento | Product craft feature tile | A cube of interlocking indigo, amber and cream parts, on a transparent background |
+
+These two are not Unsplash photos. They are the artwork Figma's Journal Bento places on its two feature tiles, exported from that file at three times their size. Figma does not record where they came from, so no creator or source link is given.
+

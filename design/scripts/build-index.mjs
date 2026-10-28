@@ -247,6 +247,13 @@ export const CODE_MAP = {
       "no-open-roles-empty-state", "role-detail-panel", "role-detail-page",
     ].map((type) => [`careers-${type}`, null])
   ),
+  // Blocks: each Blog Cards item is one Type of the block set Blog Cards (46368:243914), not an atom.
+  ...Object.fromEntries(
+    [
+      "classic-3-up-grid", "featured-two-up", "compact-4-up-thumb-grid", "bento-editorial-grid", "overlay-photo-trio",
+      "journal-bento",
+    ].map((type) => [`blog-cards-${type}`, null])
+  ),
 }
 
 const FAMILY_MIN = 10

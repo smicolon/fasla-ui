@@ -7,13 +7,14 @@ import { authExample } from "@/components/blocks/authentications-examples"
 import { aboutPhotoProps } from "@/components/blocks/about-photos"
 import { careersPhotoProps } from "@/components/blocks/careers-photos"
 import { teamPhotoProps } from "@/components/blocks/team-photos"
+import { blogCardsPhotoProps } from "@/components/blocks/blog-cards-photos"
 import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
 import { NavbarStage, navbarExample } from "@/components/blocks/navbar-examples"
 import { heroPhotoProps } from "@/components/blocks/hero-photos"
 
 /**
  * Every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar,
- * Pricing, Hero, About and Careers Type by registry name, each loaded on its
+ * Pricing, Hero, About, Careers and Blog Cards Type by registry name, each loaded on its
  * own so a preview frame downloads only the block it shows.
  */
 /** Each block has its own props; a frame passes only the locale and demo props. */
@@ -145,6 +146,17 @@ type TeamCopy = Record<Locale, object>
 const withTeamPhotos = (Block: AnyBlock, type: string, copy: TeamCopy) =>
   function TeamPreview(props: { locale: Locale }) {
     return <Block {...teamPhotoProps(type, props.locale, copy)} {...props} />
+  }
+
+/**
+ * A Blog Cards Type with its demo photos, from public/images/blog-cards/:
+ * added to each item of the block's own copy list. Types without photos
+ * render as they are.
+ */
+type BlogCardsCopy = Record<Locale, object>
+const withBlogCardsPhotos = (Block: AnyBlock, type: string, copy: BlogCardsCopy) =>
+  function BlogCardsPreview(props: { locale: Locale }) {
+    return <Block {...blogCardsPhotoProps(type, props.locale, copy)} {...props} />
   }
 
 export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
@@ -698,6 +710,24 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   ),
   "team-grid-backdrop-roster": dynamic(() =>
     import("@fasla-ui/blocks/team-grid-backdrop-roster/TeamGridBackdropRoster").then((m) => withTeamPhotos(m.TeamGridBackdropRoster, "grid-backdrop-roster", m.teamGridBackdropRosterCopy))
+  ),
+  "blog-cards-classic-3-up-grid": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-classic-3-up-grid/BlogCardsClassic3UpGrid").then((m) => withBlogCardsPhotos(m.BlogCardsClassic3UpGrid, "classic-3-up-grid", m.blogCardsClassic3UpGridCopy))
+  ),
+  "blog-cards-featured-two-up": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-featured-two-up/BlogCardsFeaturedTwoUp").then((m) => withBlogCardsPhotos(m.BlogCardsFeaturedTwoUp, "featured-two-up", m.blogCardsFeaturedTwoUpCopy))
+  ),
+  "blog-cards-compact-4-up-thumb-grid": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-compact-4-up-thumb-grid/BlogCardsCompact4UpThumbGrid").then((m) => withBlogCardsPhotos(m.BlogCardsCompact4UpThumbGrid, "compact-4-up-thumb-grid", m.blogCardsCompact4UpThumbGridCopy))
+  ),
+  "blog-cards-bento-editorial-grid": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-bento-editorial-grid/BlogCardsBentoEditorialGrid").then((m) => withBlogCardsPhotos(m.BlogCardsBentoEditorialGrid, "bento-editorial-grid", m.blogCardsBentoEditorialGridCopy))
+  ),
+  "blog-cards-overlay-photo-trio": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-overlay-photo-trio/BlogCardsOverlayPhotoTrio").then((m) => withBlogCardsPhotos(m.BlogCardsOverlayPhotoTrio, "overlay-photo-trio", m.blogCardsOverlayPhotoTrioCopy))
+  ),
+  "blog-cards-journal-bento": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-journal-bento/BlogCardsJournalBento").then((m) => withBlogCardsPhotos(m.BlogCardsJournalBento, "journal-bento", m.blogCardsJournalBentoCopy))
   ),
 }
 
