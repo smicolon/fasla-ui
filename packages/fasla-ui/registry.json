@@ -4429,6 +4429,665 @@
         "pricing",
         "marketing"
       ]
+    },
+    {
+      "name": "hero-editorial-arch",
+      "type": "registry:block",
+      "title": "Hero: Editorial Arch",
+      "description": "A magazine-style studio hero: a three-line headline, one portrait under an arch, four figures and four short promises; pass your own portrait.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-editorial-arch/HeroEditorialArch.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-editorial-arch.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-photo-constellation",
+      "type": "registry:block",
+      "title": "Hero: Photo Constellation",
+      "description": "A centred headline on a dark band, ringed by a scatter of fourteen photo tiles, some dimmed; pass your own photos.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-photo-constellation/HeroPhotoConstellation.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-photo-constellation.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-arc-gallery",
+      "type": "registry:block",
+      "title": "Hero: Arc Gallery",
+      "description": "A centred headline under a rainbow of up to eleven turned photo cards, with one button and three features; pass your own photos.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-arc-gallery/HeroArcGallery.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-arc-gallery.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-inline-image-headline",
+      "type": "registry:block",
+      "title": "Hero: Inline Image Headline",
+      "description": "A centred headline with a pill photo and dark pill word set inside it, soft chips, and tilted photo cards along the foot; pass your own photos.",
+      "dependencies": [],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-inline-image-headline/HeroInlineImageHeadline.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-inline-image-headline.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-bento-split",
+      "type": "registry:block",
+      "title": "Hero: Bento Split",
+      "description": "A main pitch card with a wide photo beside an accent card with a rising chart and an inverse sign-up card; pass your own photo and faces.",
+      "dependencies": [],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-bento-split/HeroBentoSplit.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-bento-split.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-framed-full-bleed",
+      "type": "registry:block",
+      "title": "Hero: Framed Full-Bleed",
+      "description": "One large photo in a rounded frame with the pitch laid over it and a frosted proof card; pass your own photo and faces.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-framed-full-bleed/HeroFramedFullBleed.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-framed-full-bleed.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-annotated-object",
+      "type": "registry:block",
+      "title": "Hero: Annotated Object",
+      "description": "A centred headline over a circular object photo in a dashed orbit, with leader-lined annotations, a live card and edge rulers; pass your own photos.",
+      "dependencies": [],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-annotated-object/HeroAnnotatedObject.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-annotated-object.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-editorial-triptych",
+      "type": "registry:block",
+      "title": "Hero: Editorial Triptych",
+      "description": "A three-panel studio hero: copy and a figure with faces, a tall centre photo, and a small gallery with closing words; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-editorial-triptych/HeroEditorialTriptych.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-editorial-triptych.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-colour-stage",
+      "type": "registry:block",
+      "title": "Hero: Colour Stage",
+      "description": "A centred launch hero on a gridded colour stage: a pill link, headline, two actions, text wordmarks and product windows rising from the foot; no photos needed.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-colour-stage/HeroColourStage.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-colour-stage.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-twin-panels",
+      "type": "registry:block",
+      "title": "Hero: Twin Panels",
+      "description": "A pair of offer panels, each a cluster of rounded photo tiles above a two-line title, paragraph and round plus link; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/hero-twin-panels/HeroTwinPanels.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-twin-panels.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-split-band-headline",
+      "type": "registry:block",
+      "title": "Hero: Split Band Headline",
+      "description": "A split band, part colour and part photo, with an inset photo and a huge word across the split, above a badge, headline and paragraph; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-split-band-headline/HeroSplitBandHeadline.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-split-band-headline.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-textured-dark",
+      "type": "registry:block",
+      "title": "Hero: Textured Dark",
+      "description": "A dark texture photo band behind a two-tone headline, a watch-the-tour link and a release sticker, over a tab row and a product window; pass your own photo.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-textured-dark/HeroTexturedDark.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-textured-dark.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-component-pattern",
+      "type": "registry:block",
+      "title": "Hero: Component Pattern",
+      "description": "A centred pitch card over a decorative wall of Fasla atoms (buttons, avatars and status badges) on a muted ground; no photos needed.",
+      "dependencies": [],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-component-pattern/HeroComponentPattern.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-component-pattern.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-curved-media-rail",
+      "type": "registry:block",
+      "title": "Hero: Curved Media Rail",
+      "description": "A centred headline over a rail of tall rounded media cards that bows outward at both ends, with one button; pass your own photos.",
+      "dependencies": [],
+      "registryDependencies": [
+        "badge",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-curved-media-rail/HeroCurvedMediaRail.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-curved-media-rail.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-framed-studio-card",
+      "type": "registry:block",
+      "title": "Hero: Framed Studio Card",
+      "description": "A framed studio card with a client testimonial, two calls to action, a photo and a strip of client wordmarks; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-framed-studio-card/HeroFramedStudioCard.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-framed-studio-card.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-orbit-track",
+      "type": "registry:block",
+      "title": "Hero: Orbit Track",
+      "description": "A studio intro on an inverse band, with frosted figure cards beside a racetrack of nine ringed photo avatars around a caption; pass your own photos.",
+      "dependencies": [],
+      "registryDependencies": [
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-orbit-track/HeroOrbitTrack.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-orbit-track.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-floating-integrations",
+      "type": "registry:block",
+      "title": "Hero: Floating Integrations",
+      "description": "A centred proposition on a soft glow, ringed by tilted integration tiles and product cards, with a customer wordmark strip; no photos needed.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-floating-integrations/HeroFloatingIntegrations.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-floating-integrations.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-shape-grid",
+      "type": "registry:block",
+      "title": "Hero: Shape Grid",
+      "description": "A modular playground hero: copy beside a grid of geometric shape tiles in chart colours with one photo at its heart; pass your own photo.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-shape-grid/HeroShapeGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-shape-grid.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-wave-band",
+      "type": "registry:block",
+      "title": "Hero: Wave Band",
+      "description": "An open-source product pitch over two green sleeves meeting at a handshake, with tilted captions and a wordmark trust strip; pass your own photo.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-wave-band/HeroWaveBand.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-wave-band.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-studio-mosaic",
+      "type": "registry:block",
+      "title": "Hero: Studio Mosaic",
+      "description": "A studio introduction beside a staggered mosaic of six project tiles, three photos and three designed tiles, with a work index; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-studio-mosaic/HeroStudioMosaic.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-studio-mosaic.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-illustration-split",
+      "type": "registry:block",
+      "title": "Hero: Illustration Split",
+      "description": "A playful split hero: a bold three-line headline, two buttons, a large line drawing beside them and a visit note; pass your own illustration.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-illustration-split/HeroIllustrationSplit.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-illustration-split.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-masked-type-reveal",
+      "type": "registry:block",
+      "title": "Hero: Masked Type Reveal",
+      "description": "A huge two-line word with a photo sweeping into its letters, a film-still card with a play link, and one button; pass your own photos.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-masked-type-reveal/HeroMaskedTypeReveal.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-masked-type-reveal.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-velocity-marquee",
+      "type": "registry:block",
+      "title": "Hero: Velocity Marquee",
+      "description": "A studio hero in moving type: three huge tilted rows of words scroll in opposite directions under the headline, with a pause button; no photos needed.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-velocity-marquee/HeroVelocityMarquee.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-velocity-marquee.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-duo-card",
+      "type": "registry:block",
+      "title": "Hero: Duo Card",
+      "description": "A pitch card in the primary colour beside a portrait card carrying a customer quote panel; pass your own photo.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-duo-card/HeroDuoCard.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-duo-card.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-video-spotlight",
+      "type": "registry:block",
+      "title": "Hero: Video Spotlight",
+      "description": "A centred headline over a large film card that plays with native controls; pass your own video and poster.",
+      "dependencies": [],
+      "registryDependencies": [
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-video-spotlight/HeroVideoSpotlight.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-video-spotlight.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-brand-color-block",
+      "type": "registry:block",
+      "title": "Hero: Brand Color-Block",
+      "description": "A brand hero with a giant wordmark, a coloured pitch panel and a portrait ringed by tilted stickers; pass your own photo.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-brand-color-block/HeroBrandColorBlock.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-brand-color-block.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-scramble-decode",
+      "type": "registry:block",
+      "title": "Hero: Scramble Decode",
+      "description": "A dark type-led hero whose headline decodes from scrambled glyphs once in view, beside a still glyph field and decode meter; no photos needed.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-scramble-decode/HeroScrambleDecode.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-scramble-decode.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-split-flap-counters",
+      "type": "registry:block",
+      "title": "Hero: Split-Flap Counters",
+      "description": "A centred band with an eyebrow, headline, three split-flap counters that flip once into view, and two buttons; no photos needed.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-split-flap-counters/HeroSplitFlapCounters.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-split-flap-counters.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
+    },
+    {
+      "name": "hero-video-in-type",
+      "type": "registry:block",
+      "title": "Hero: Video-in-Type",
+      "description": "A film launch with footage playing inside a huge two-line word, a working playback bar and two buttons; pass your own video and poster.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/hero-video-in-type/HeroVideoInType.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/hero-video-in-type.tsx"
+        }
+      ],
+      "categories": [
+        "hero",
+        "marketing"
+      ]
     }
   ]
 }
