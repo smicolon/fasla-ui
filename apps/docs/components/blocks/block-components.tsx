@@ -5,6 +5,7 @@ import dynamic from "next/dynamic"
 
 import { authExample } from "@/components/blocks/authentications-examples"
 import { aboutPhotoProps } from "@/components/blocks/about-photos"
+import { teamPhotoProps } from "@/components/blocks/team-photos"
 import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
 import { NavbarStage, navbarExample } from "@/components/blocks/navbar-examples"
 import { heroPhotoProps } from "@/components/blocks/hero-photos"
@@ -123,6 +124,17 @@ type AboutCopy = Record<Locale, object>
 const withAboutPhotos = (Block: AnyBlock, type: string, copy: AboutCopy) =>
   function AboutPreview(props: { locale: Locale }) {
     return <Block {...aboutPhotoProps(type, props.locale, copy)} {...props} />
+  }
+
+/**
+ * A Team Type with its demo photos, from public/blocks/team/: each person in
+ * the block's own copy gets one, by their `id`. The two cut-out Types take the
+ * transparent files.
+ */
+type TeamCopy = Record<Locale, object>
+const withTeamPhotos = (Block: AnyBlock, type: string, copy: TeamCopy) =>
+  function TeamPreview(props: { locale: Locale }) {
+    return <Block {...teamPhotoProps(type, props.locale, copy)} {...props} />
   }
 
 export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
@@ -601,6 +613,48 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   ),
   "about-numbered-rows": dynamic(() =>
     import("@fasla-ui/blocks/about-numbered-rows/AboutNumberedRows").then((m) => withAboutPhotos(m.AboutNumberedRows, "numbered-rows", m.aboutNumberedRowsCopy))
+  ),
+  "team-leadership-grid": dynamic(() =>
+    import("@fasla-ui/blocks/team-leadership-grid/TeamLeadershipGrid").then((m) => withTeamPhotos(m.TeamLeadershipGrid, "leadership-grid", m.teamLeadershipGridCopy))
+  ),
+  "team-portrait-wall": dynamic(() =>
+    import("@fasla-ui/blocks/team-portrait-wall/TeamPortraitWall").then((m) => withTeamPhotos(m.TeamPortraitWall, "portrait-wall", m.teamPortraitWallCopy))
+  ),
+  "team-compact-directory-rows": dynamic(() =>
+    import("@fasla-ui/blocks/team-compact-directory-rows/TeamCompactDirectoryRows").then((m) => withTeamPhotos(m.TeamCompactDirectoryRows, "compact-directory-rows", m.teamCompactDirectoryRowsCopy))
+  ),
+  "team-split-intro-member-rail": dynamic(() =>
+    import("@fasla-ui/blocks/team-split-intro-member-rail/TeamSplitIntroMemberRail").then((m) => withTeamPhotos(m.TeamSplitIntroMemberRail, "split-intro-member-rail", m.teamSplitIntroMemberRailCopy))
+  ),
+  "team-founder-spotlight": dynamic(() =>
+    import("@fasla-ui/blocks/team-founder-spotlight/TeamFounderSpotlight").then((m) => withTeamPhotos(m.TeamFounderSpotlight, "founder-spotlight", m.teamFounderSpotlightCopy))
+  ),
+  "team-member-carousel": dynamic(() =>
+    import("@fasla-ui/blocks/team-member-carousel/TeamMemberCarousel").then((m) => withTeamPhotos(m.TeamMemberCarousel, "member-carousel", m.teamMemberCarouselCopy))
+  ),
+  "team-department-tabs-directory": dynamic(() =>
+    import("@fasla-ui/blocks/team-department-tabs-directory/TeamDepartmentTabsDirectory").then((m) => withTeamPhotos(m.TeamDepartmentTabsDirectory, "department-tabs-directory", m.teamDepartmentTabsDirectoryCopy))
+  ),
+  "team-member-table": dynamic(() =>
+    import("@fasla-ui/blocks/team-member-table/TeamMemberTable").then((m) => withTeamPhotos(m.TeamMemberTable, "member-table", m.teamMemberTableCopy))
+  ),
+  "team-meta-profile-cards": dynamic(() =>
+    import("@fasla-ui/blocks/team-meta-profile-cards/TeamMetaProfileCards").then((m) => withTeamPhotos(m.TeamMetaProfileCards, "meta-profile-cards", m.teamMetaProfileCardsCopy))
+  ),
+  "team-we-re-hiring-cta": dynamic(() =>
+    import("@fasla-ui/blocks/team-we-re-hiring-cta/TeamWeReHiringCta").then((m) => withTeamPhotos(m.TeamWeReHiringCta, "we-re-hiring-cta", m.teamWeReHiringCtaCopy))
+  ),
+  "team-hairline-grid": dynamic(() =>
+    import("@fasla-ui/blocks/team-hairline-grid/TeamHairlineGrid").then((m) => withTeamPhotos(m.TeamHairlineGrid, "hairline-grid", m.teamHairlineGridCopy))
+  ),
+  "team-overlay-portrait-cards": dynamic(() =>
+    import("@fasla-ui/blocks/team-overlay-portrait-cards/TeamOverlayPortraitCards").then((m) => withTeamPhotos(m.TeamOverlayPortraitCards, "overlay-portrait-cards", m.teamOverlayPortraitCardsCopy))
+  ),
+  "team-annotated-portrait-lineup": dynamic(() =>
+    import("@fasla-ui/blocks/team-annotated-portrait-lineup/TeamAnnotatedPortraitLineup").then((m) => withTeamPhotos(m.TeamAnnotatedPortraitLineup, "annotated-portrait-lineup", m.teamAnnotatedPortraitLineupCopy))
+  ),
+  "team-grid-backdrop-roster": dynamic(() =>
+    import("@fasla-ui/blocks/team-grid-backdrop-roster/TeamGridBackdropRoster").then((m) => withTeamPhotos(m.TeamGridBackdropRoster, "grid-backdrop-roster", m.teamGridBackdropRosterCopy))
   ),
 }
 
