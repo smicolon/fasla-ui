@@ -32,6 +32,25 @@ const ROSTER: Record<string, Alt> = {
   "chloe-dubois": { en: "A woman with long wavy auburn hair in a grey checked blazer", ar: "امرأة بشعر كستنائي طويل مموّج في سترة رمادية مربعات" },
 }
 
+/**
+ * Where each portrait is anchored when a box crops it, as CSS `object-position`
+ * (50% across, then the percentage down). Worked out from where each face sits in
+ * the photo, so the whole face and some headroom stay in every box the Team blocks
+ * use. A person who is not listed sits close enough to the blocks' own default (50% 20%).
+ */
+const FOCUS: Record<string, string> = {
+  "chloe-dubois": "50% 30%",
+  "clara-weiss": "50% 50%",
+  "elena-novak": "50% 30%",
+  "hana-kobayashi": "50% 7%",
+  "karim-haddad": "50% 10%",
+  "layla-mansour": "50% 34%",
+  "marcus-boateng": "50% 1%",
+  "rami-aziz": "50% 41%",
+  "tomas-vidal": "50% 26%",
+  "yara-khalil": "50% 36%",
+}
+
 /** The Lineup's cut-outs are cropped to the figure: their size in pixels, for the column width. */
 const LINEUP: Record<string, { width: number; height: number }> = {
   omar: { width: 596, height: 825 },
@@ -41,7 +60,7 @@ const LINEUP: Record<string, { width: number; height: number }> = {
   chloe: { width: 602, height: 923 },
 }
 
-export type TeamDemoPhoto = { src: string; alt: string; width?: number; height?: number }
+export type TeamDemoPhoto = { src: string; alt: string; width?: number; height?: number; position?: string }
 
 const first = (id: string) => id.split("-")[0]
 
@@ -54,7 +73,7 @@ export function teamPhoto(type: string, id: string, locale: Locale): TeamDemoPho
     return size ? { src: `/blocks/team/lineup-${first(id)}.webp`, alt, ...size } : undefined
   }
   if (type === "grid-backdrop-roster") return { src: `/blocks/team/roster-${first(id)}.webp`, alt }
-  return { src: `/blocks/team/portrait-${id}.webp`, alt }
+  return { src: `/blocks/team/portrait-${id}.webp`, alt, ...(FOCUS[id] ? { position: FOCUS[id] } : {}) }
 }
 
 type Person = Record<string, unknown> & { id?: string }

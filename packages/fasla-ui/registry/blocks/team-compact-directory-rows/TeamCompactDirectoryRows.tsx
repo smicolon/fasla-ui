@@ -6,7 +6,7 @@ import { cn } from "../../../src/lib/utils"
 import { Avatar } from "../../ui/avatar/avatar"
 import { buttonVariants } from "../../ui/button/button"
 import { SocialIcon } from "../../ui/social-icons/social-icons"
-import { Reveal, TeamHeader, TeamRule, TeamSection, type TeamLocale, type TeamPerson } from "../team/team"
+import { Reveal, TeamHeader, TeamRule, TeamSection, type TeamLocale, type TeamPerson, teamAvatarFocus } from "../team/team"
 
 /*
  * Figma: `Team` (46368:243916), Type=Compact Directory Rows.
@@ -141,7 +141,13 @@ export function TeamCompactDirectoryRows({
                 <div className="flex min-w-0 items-center gap-3">
                   {/* The name beside it names the person, so the photo is not read out twice. */}
                   <span aria-hidden className="shrink-0">
-                    <Avatar radius="rounded" className="size-10" src={person.photo?.src} name={typeof person.name === "string" ? person.name : ""} />
+                    <Avatar
+                      radius="rounded"
+                      className={cn("size-10", teamAvatarFocus(person.photo).className)}
+                      style={teamAvatarFocus(person.photo).style}
+                      src={person.photo?.src}
+                      name={typeof person.name === "string" ? person.name : ""}
+                    />
                   </span>
                   <div className="flex min-w-0 flex-col">
                     <span className="text-base font-medium text-foreground">{person.name}</span>

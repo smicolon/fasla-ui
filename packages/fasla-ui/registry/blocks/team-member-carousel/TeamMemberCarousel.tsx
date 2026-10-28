@@ -130,7 +130,7 @@ function MemberCard({ person }: { person: TeamMemberCarouselPerson }) {
         </div>
         <TeamLinkArrow className="mt-0.5 size-[18px] text-muted-foreground" />
       </div>
-      <TeamPortrait person={person} className="aspect-[248/300] w-full rounded-lg" imageClassName="object-top" />
+      <TeamPortrait person={person} className="aspect-[248/300] w-full rounded-lg" />
     </Tag>
   )
 }

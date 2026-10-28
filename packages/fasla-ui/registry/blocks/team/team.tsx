@@ -28,7 +28,17 @@ export type TeamLocale = "en" | "ar"
 export interface TeamPhoto {
   src: string
   alt: string
+  /**
+   * Where the photo is anchored when its box crops it, as CSS `object-position`
+   * ("50% 20%"). Without one, a portrait is anchored 50% across and 20% down, so
+   * the head and its headroom stay in a box that is wider than the photo. Set it
+   * for a face that sits lower or higher than that.
+   */
+  position?: string
 }
+
+/** The default focal point of a portrait: centred across, 20% down. */
+export const TEAM_FOCUS = "50% 20%"
 
 /** The two lines every Type gives a person. */
 export interface TeamPerson {
@@ -264,7 +274,15 @@ export function TeamPortrait({ person, className, imageClassName, ...props }: Te
     <div className={cn("relative overflow-hidden bg-muted", className)} {...props}>
       {person.photo ? (
         // eslint-disable-next-line @next/next/no-img-element -- a registry block can't assume next/image
-        <img src={person.photo.src} alt={person.photo.alt} loading="lazy" decoding="async" draggable={false} className={cn("size-full object-cover", imageClassName)} />
+        <img
+          src={person.photo.src}
+          alt={person.photo.alt}
+          loading="lazy"
+          decoding="async"
+          draggable={false}
+          style={{ objectPosition: person.photo.position ?? TEAM_FOCUS }}
+          className={cn("size-full object-cover", imageClassName)}
+        />
       ) : (
         <span aria-hidden className="absolute inset-0 flex items-center justify-center text-lg font-medium text-muted-foreground">
           {initialsOf(person.name)}
@@ -272,6 +290,18 @@ export function TeamPortrait({ person, className, imageClassName, ...props }: Te
       )}
     </div>
   )
+}
+
+/**
+ * For an Avatar that shows a person's photo: the classes and style that anchor
+ * its image at the photo's focal point, since the Avatar crops to its centre.
+ * Spread both onto the Avatar.
+ */
+export function teamAvatarFocus(photo?: TeamPhoto) {
+  return {
+    className: "[&_img]:[object-position:var(--team-focus)]",
+    style: { "--team-focus": photo?.position ?? TEAM_FOCUS } as React.CSSProperties,
+  }
 }
 
 /** A hairline between two groups. Not the Separator component, which Fasla has not built yet. */

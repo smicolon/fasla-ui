@@ -113,7 +113,7 @@ export function TeamFounderSpotlight({ locale = "en", eyebrow, heading, feature,
             <TeamPortrait
               person={main}
               className="size-full min-h-[260px]"
-              imageClassName="object-top motion-safe:transition-transform motion-safe:duration-[600ms] motion-safe:ease-out motion-safe:group-data-[reveal=pending]/team:scale-[1.04]"
+              imageClassName="motion-safe:transition-transform motion-safe:duration-[600ms] motion-safe:ease-out motion-safe:group-data-[reveal=pending]/team:scale-[1.04]"
             />
           </Reveal>
           <div className="flex min-w-0 flex-1 flex-col gap-6 p-10">
@@ -146,7 +146,7 @@ export function TeamFounderSpotlight({ locale = "en", eyebrow, heading, feature,
                   "[@container(min-width:64rem)]:flex-row [@container(min-width:64rem)]:items-center [@container(min-width:64rem)]:gap-4 [@container(min-width:64rem)]:![--reveal-x:16px] [@container(min-width:64rem)]:![--reveal-y:0px]"
                 )}
               >
-                <TeamPortrait person={person} className="size-[76px] shrink-0 rounded-md" imageClassName="object-top" />
+                <TeamPortrait person={person} className="size-[76px] shrink-0 rounded-md" />
                 <div className="flex min-w-0 flex-col gap-1">
                   <span className="text-base font-medium text-foreground">{person.name}</span>
                   <span className="text-sm text-muted-foreground">{person.role}</span>

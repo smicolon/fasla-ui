@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react"
 import { cn } from "../../../src/lib/utils"
 import { Avatar } from "../../ui/avatar/avatar"
 import { buttonVariants } from "../../ui/button/button"
-import { Reveal, TeamRule, TeamSection, type TeamLocale, type TeamPerson } from "../team/team"
+import { Reveal, TeamRule, TeamSection, type TeamLocale, type TeamPerson, teamAvatarFocus } from "../team/team"
 
 /*
  * Figma: `Team` (46368:243916), Type=We're Hiring CTA (named We're Hiring CTA
@@ -119,7 +119,8 @@ export function TeamWeReHiringCta({
                   <Avatar
                     radius="rounded"
                     border
-                    className="size-10 [@container(min-width:40rem)]:size-11"
+                    className={cn("size-10 [@container(min-width:40rem)]:size-11", teamAvatarFocus(person.photo).className)}
+                    style={teamAvatarFocus(person.photo).style}
                     src={person.photo?.src}
                     name={typeof person.name === "string" ? person.name : ""}
                   />

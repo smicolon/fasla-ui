@@ -4,7 +4,7 @@ import * as React from "react"
 import { cn } from "../../../src/lib/utils"
 import { Avatar } from "../../ui/avatar/avatar"
 import { Badge } from "../../ui/badge/badge"
-import { REVEAL, TeamHeader, TeamLinkArrow, TeamSection, type TeamLocale, type TeamPerson } from "../team/team"
+import { REVEAL, TeamHeader, TeamLinkArrow, TeamSection, type TeamLocale, type TeamPerson, teamAvatarFocus } from "../team/team"
 
 /*
  * Figma: `Team` (46368:243916), Type=Team Table (named Member Table here: code
@@ -142,7 +142,8 @@ export function TeamMemberTable({ locale = "en", eyebrow, heading, columns, link
                       <span aria-hidden className="shrink-0">
                         <Avatar
                           radius="rounded"
-                          className="size-9 motion-safe:transition-transform motion-safe:duration-200 group-hover/row:motion-safe:scale-[1.08] group-focus-within/row:motion-safe:scale-[1.08]"
+                          className={cn("size-9 motion-safe:transition-transform motion-safe:duration-200 group-hover/row:motion-safe:scale-[1.08] group-focus-within/row:motion-safe:scale-[1.08]", teamAvatarFocus(row.photo).className)}
+                          style={teamAvatarFocus(row.photo).style}
                           src={row.photo?.src}
                           name={typeof row.name === "string" ? row.name : ""}
                         />
