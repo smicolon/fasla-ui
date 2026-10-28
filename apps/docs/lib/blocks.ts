@@ -246,7 +246,7 @@ export const HERO_TYPES: BlockType<HeroFamily>[] = [
   { slug: "hero-studio-mosaic", family: "cards" },
   { slug: "hero-illustration-split", family: "split" },
   { slug: "hero-masked-type-reveal", family: "type-led", inverse: true },
-  { slug: "hero-velocity-marquee", family: "type-led" },
+  { slug: "hero-velocity-marquee", family: "type-led", inverse: true },
   { slug: "hero-duo-card", family: "cards" },
   { slug: "hero-video-spotlight", family: "photo-led", inverse: true },
   { slug: "hero-brand-color-block", family: "type-led" },

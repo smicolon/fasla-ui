@@ -337,14 +337,14 @@ export const DuoCardWithoutPhotos: StoryObj<typeof HeroDuoCard> = {
 
 export const VideoSpotlight: StoryObj<typeof HeroVideoSpotlight> = {
   name: "Video Spotlight",
-  argTypes: heroArgTypes(HeroVideoSpotlight, heroVideoSpotlightCopy),
+  argTypes: heroArgTypes(HeroVideoSpotlight, heroVideoSpotlightCopy, ["playLabel"]),
   render: (args, context) => <HeroVideoSpotlight locale={localeOf(context)} {...photoPropsOf("video-spotlight", context)} {...args} />,
 }
 
 export const VideoSpotlightWithoutPhotos: StoryObj<typeof HeroVideoSpotlight> = {
   name: "Video Spotlight: Without Photos",
   tags: ["!dev", "!autodocs"],
-  argTypes: heroArgTypes(HeroVideoSpotlight, heroVideoSpotlightCopy),
+  argTypes: heroArgTypes(HeroVideoSpotlight, heroVideoSpotlightCopy, ["playLabel"]),
   render: (args, context) => <HeroVideoSpotlight locale={localeOf(context)} {...args} />,
 }
 
@@ -363,7 +363,7 @@ export const BrandColorBlockWithoutPhotos: StoryObj<typeof HeroBrandColorBlock> 
 
 export const ScrambleDecode: StoryObj<typeof HeroScrambleDecode> = {
   name: "Scramble Decode",
-  argTypes: heroArgTypes(HeroScrambleDecode, heroScrambleDecodeCopy),
+  argTypes: heroArgTypes(HeroScrambleDecode, heroScrambleDecodeCopy, ["decodingLabel"]),
   render: (args, context) => <HeroScrambleDecode locale={localeOf(context)} {...photoPropsOf("scramble-decode", context)} {...args} />,
 }
 
@@ -375,13 +375,13 @@ export const SplitFlapCounters: StoryObj<typeof HeroSplitFlapCounters> = {
 
 export const VideoInType: StoryObj<typeof HeroVideoInType> = {
   name: "Video-in-Type",
-  argTypes: heroArgTypes(HeroVideoInType, heroVideoInTypeCopy),
+  argTypes: heroArgTypes(HeroVideoInType, heroVideoInTypeCopy, ["controlsLabel", "pauseLabel", "playLabel"]),
   render: (args, context) => <HeroVideoInType locale={localeOf(context)} {...photoPropsOf("video-in-type", context)} {...args} />,
 }
 
 export const VideoInTypeWithoutPhotos: StoryObj<typeof HeroVideoInType> = {
   name: "Video-in-Type: Without Photos",
   tags: ["!dev", "!autodocs"],
-  argTypes: heroArgTypes(HeroVideoInType, heroVideoInTypeCopy),
+  argTypes: heroArgTypes(HeroVideoInType, heroVideoInTypeCopy, ["controlsLabel", "pauseLabel", "playLabel"]),
   render: (args, context) => <HeroVideoInType locale={localeOf(context)} {...args} />,
 }

@@ -4947,7 +4947,8 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "button"
+        "button",
+        "theme-inverse"
       ],
       "files": [
         {

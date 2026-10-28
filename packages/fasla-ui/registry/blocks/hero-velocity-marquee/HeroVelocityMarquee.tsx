@@ -12,8 +12,8 @@ import { Button, buttonVariants } from "../../ui/button/button"
  * paragraph, then a stage of three huge rows of words running across the
  * block at slight angles. The first two tilt toward each other and cross on
  * purpose; the second is in `info`, the third in `foreground` at a quarter
- * strength. A dark pill under the stage names the speed, as static copy, and
- * a button sits at the end of that row.
+ * strength. A pill on the inverse surface under the stage names the speed,
+ * as static copy, and a button sits at the end of that row.
  *
  * The rows scroll on their own, as the designer decided: the first and third
  * toward the start of the line, the second toward its end, at one em a
@@ -80,12 +80,16 @@ export interface HeroVelocityMarqueeCopy {
   playLabel: string
 }
 
-/** Figma's copy, English and Arabic. */
+/**
+ * Figma's copy, English and Arabic, but for the description. Figma's says the
+ * type leans as you scroll faster and settles as you slow down; the rows here
+ * run at one speed, so the description says what the studio does instead.
+ */
 const COPY: Record<"en" | "ar", HeroVelocityMarqueeCopy> = {
   en: {
     eyebrow: "NORTHFIELD STUDIO",
     headline: "We make brands move",
-    description: "Scroll faster and the type leans into it. Slow down and it settles.",
+    description: "Identity, motion and film for brands that never stand still.",
     rows: [
       ["Identity", "Motion", "Product"],
       ["Strategy", "Type", "Sound"],
@@ -105,7 +109,7 @@ const COPY: Record<"en" | "ar", HeroVelocityMarqueeCopy> = {
   ar: {
     eyebrow: "استوديو شمال",
     headline: "نمنح العلامات حركتها",
-    description: "مرّر أسرع فيميل الخط معك، وتمهّل فيستقر.",
+    description: "هوية وحركة وأفلام لعلامات لا تعرف السكون.",
     rows: [
       ["الهوية", "الحركة", "المنتج"],
       ["الاستراتيجية", "الخط", "الصوت"],
@@ -352,7 +356,7 @@ export function HeroVelocityMarquee({
           )}
         >
           <div className="flex items-center gap-2">
-            <p className="whitespace-pre rounded-full bg-foreground px-3 py-1.5 text-xs font-medium text-background">
+            <p className="whitespace-pre rounded-full bg-background-inverse px-3 py-1.5 text-xs font-medium text-foreground-inverse">
               {velocity ?? copy.velocity}
             </p>
             {reduced ? null : (

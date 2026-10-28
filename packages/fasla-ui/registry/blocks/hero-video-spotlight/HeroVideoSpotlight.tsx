@@ -43,6 +43,12 @@ export interface HeroVideoSpotlightVideo {
   src: string
   /** The file's media type, such as "video/webm". Lets the browser skip a format it cannot play. */
   type?: string
+  /**
+   * The video's CORS mode. Set it when the captions come from another origin:
+   * a browser loads a cross-origin caption track only when the video asks
+   * for CORS, and the video's own server then has to allow it too.
+   */
+  crossOrigin?: "anonymous" | "use-credentials"
 }
 
 export interface HeroVideoSpotlightPoster {
@@ -52,7 +58,7 @@ export interface HeroVideoSpotlightPoster {
 }
 
 export interface HeroVideoSpotlightCaptions {
-  /** A WebVTT file. From another origin it needs CORS headers. */
+  /** A WebVTT file. From another origin it needs CORS headers, and the video's `crossOrigin` set. */
   src: string
   /** The captions' language, such as "en" or "ar". */
   srcLang: string
@@ -202,6 +208,7 @@ export function HeroVideoSpotlight({
             <video
               key={video.src}
               ref={videoRef}
+              crossOrigin={video.crossOrigin}
               preload="metadata"
               playsInline
               controls={started}

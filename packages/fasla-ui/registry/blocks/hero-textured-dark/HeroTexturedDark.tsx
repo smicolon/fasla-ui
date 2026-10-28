@@ -209,11 +209,19 @@ export function HeroTexturedDark({
     <section
       aria-labelledby={headingId}
       className={cn(
-        "[container-type:inline-size] relative isolate overflow-hidden bg-background-inverse dark:bg-background [@container(min-width:90rem)]:bg-background",
+        "[container-type:inline-size] relative isolate overflow-hidden",
         className
       )}
       {...props}
     >
+      {/*
+       * The section's own colour, on a layer: the band's colour on Mobile and
+       * Tablet, where it runs on under the window, and the page's on Desktop,
+       * below the band. A container query sizes against the container's
+       * ancestors, never the container itself, so the Desktop switch cannot
+       * sit on the section.
+       */}
+      <div aria-hidden className="absolute inset-0 -z-10 bg-background-inverse dark:bg-background [@container(min-width:90rem)]:bg-background" />
       {/*
        * The section's colour fills the whole width; its content does not.
        * From Tablet up to Desktop the content keeps Figma's Tablet width,

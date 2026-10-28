@@ -172,12 +172,17 @@ export function HeroDuoCard({
           </div>
         </div>
 
-        <div className="relative h-[400px] overflow-hidden rounded-xl bg-muted [@container(min-width:48rem)]:h-[460px] [@container(min-width:90rem)]:h-auto [@container(min-width:90rem)]:min-w-0 [@container(min-width:90rem)]:flex-1">
+        {/*
+           * The portrait card is Figma's height at least (400 on Mobile, 460 on
+           * Tablet, the row's on Desktop), and grows with a longer quote or
+           * larger text, so the panel never runs off its top.
+           */}
+        <div className="relative flex min-h-[400px] flex-col justify-end overflow-hidden rounded-xl bg-muted p-4 [@container(min-width:48rem)]:min-h-[460px] [@container(min-width:90rem)]:min-h-0 [@container(min-width:90rem)]:min-w-0 [@container(min-width:90rem)]:flex-1 [@container(min-width:90rem)]:p-6">
           {photo ? (
             <img src={photo.src} alt={photo.alt} decoding="async" className="absolute inset-0 size-full object-cover" />
           ) : null}
           {words ? (
-            <figure className="absolute inset-x-4 bottom-4 flex flex-col gap-3 rounded-lg bg-background p-5 shadow-md [@container(min-width:90rem)]:inset-x-6 [@container(min-width:90rem)]:bottom-6">
+            <figure className="relative flex flex-col gap-3 rounded-lg bg-background p-5 shadow-md">
               <blockquote className="text-pretty text-sm text-foreground">
                 <p>{words}</p>
               </blockquote>
