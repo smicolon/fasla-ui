@@ -3260,6 +3260,50 @@
         "pricing-plan-picker-summary": "Plan Picker + Summary"
       }
     },
+    "heroBlocks": {
+      "lead": "{count, plural, one {One hero} other {{n} heroes}} for the top of a landing page: split layouts, photo-led openers, cards and patterns, and type-led heroes, some of them moving.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "filterLabel": "Filter by family",
+      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
+      "families": {
+        "all": "All",
+        "split": "Split layouts",
+        "photo-led": "Photo-led",
+        "cards": "Cards and patterns",
+        "type-led": "Type-led"
+      },
+      "types": {
+        "hero-editorial-arch": "Editorial Arch",
+        "hero-photo-constellation": "Photo Constellation",
+        "hero-arc-gallery": "Arc Gallery",
+        "hero-inline-image-headline": "Inline Image Headline",
+        "hero-bento-split": "Bento Split",
+        "hero-framed-full-bleed": "Framed Full-Bleed",
+        "hero-annotated-object": "Annotated Object",
+        "hero-editorial-triptych": "Editorial Triptych",
+        "hero-colour-stage": "Colour Stage",
+        "hero-twin-panels": "Twin Panels",
+        "hero-split-band-headline": "Split Band Headline",
+        "hero-textured-dark": "Textured Dark",
+        "hero-component-pattern": "Component Pattern",
+        "hero-curved-media-rail": "Curved Media Rail",
+        "hero-framed-studio-card": "Framed Studio Card",
+        "hero-orbit-track": "Orbit Track",
+        "hero-floating-integrations": "Floating Integrations",
+        "hero-shape-grid": "Shape Grid",
+        "hero-wave-band": "Wave Band",
+        "hero-studio-mosaic": "Studio Mosaic",
+        "hero-illustration-split": "Illustration Split",
+        "hero-masked-type-reveal": "Masked Type Reveal",
+        "hero-velocity-marquee": "Velocity Marquee",
+        "hero-duo-card": "Duo Card",
+        "hero-video-spotlight": "Video Spotlight",
+        "hero-brand-color-block": "Brand Color-Block",
+        "hero-scramble-decode": "Scramble Decode",
+        "hero-split-flap-counters": "Split-Flap Counters",
+        "hero-video-in-type": "Video-in-Type"
+      }
+    },
     "blockCard": {
       "fullScreen": "Open full screen",
       "newTab": "(opens in a new tab)",

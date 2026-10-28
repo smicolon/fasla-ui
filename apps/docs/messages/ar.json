@@ -3260,6 +3260,50 @@
         "pricing-plan-picker-summary": "اختيار الخطة مع ملخص الطلب"
       }
     },
+    "heroBlocks": {
+      "lead": "{count, plural, one {قسم افتتاحي واحد} two {قسمان افتتاحيان} few {{n} أقسام افتتاحية} many {{n} قسمًا افتتاحيًا} other {{n} قسم افتتاحي}} لأعلى صفحة الهبوط: تخطيطات مقسّمة، وافتتاحيات تتصدّرها الصور، وبطاقات وأنماط، وأقسام تتصدّرها الكتابة، وبعضها متحرك.",
+      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
+      "filterLabel": "التصفية حسب العائلة",
+      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
+      "families": {
+        "all": "الكل",
+        "split": "تخطيطات مقسّمة",
+        "photo-led": "تتصدّرها الصور",
+        "cards": "بطاقات وأنماط",
+        "type-led": "تتصدّرها الكتابة"
+      },
+      "types": {
+        "hero-editorial-arch": "قوس تحريري",
+        "hero-photo-constellation": "كوكبة الصور",
+        "hero-arc-gallery": "معرض على قوس",
+        "hero-inline-image-headline": "عنوان بصورة مدمجة",
+        "hero-bento-split": "بينتو مقسوم",
+        "hero-framed-full-bleed": "صورة كاملة في إطار",
+        "hero-annotated-object": "عنصر مشروح",
+        "hero-editorial-triptych": "ثلاثية تحريرية",
+        "hero-colour-stage": "منصة لونية",
+        "hero-twin-panels": "لوحتان متجاورتان",
+        "hero-split-band-headline": "شريط منقسم",
+        "hero-textured-dark": "داكن بنقشة",
+        "hero-component-pattern": "نمط المكوّنات",
+        "hero-curved-media-rail": "شريط وسائط منحني",
+        "hero-framed-studio-card": "بطاقة استوديو مؤطرة",
+        "hero-orbit-track": "مسار مداري",
+        "hero-floating-integrations": "تكاملات عائمة",
+        "hero-shape-grid": "شبكة الأشكال",
+        "hero-wave-band": "شريط موجي",
+        "hero-studio-mosaic": "فسيفساء الاستوديو",
+        "hero-illustration-split": "تقسيم برسم توضيحي",
+        "hero-masked-type-reveal": "كشف عبر الحروف",
+        "hero-velocity-marquee": "شريط السرعة",
+        "hero-duo-card": "بطاقتان متجاورتان",
+        "hero-video-spotlight": "فيلم في الواجهة",
+        "hero-brand-color-block": "كتل ألوان العلامة",
+        "hero-scramble-decode": "فك التشفير",
+        "hero-split-flap-counters": "عدادات الألواح القلّابة",
+        "hero-video-in-type": "فيديو داخل النص"
+      }
+    },
     "blockCard": {
       "fullScreen": "فتح بملء الشاشة",
       "newTab": "(يُفتح في علامة تبويب جديدة)",

@@ -229,6 +229,21 @@ export const routes = [
     },
   },
   {
+    kind: "block",
+    category: "Blocks",
+    path: "/docs/blocks/hero/",
+    title: "Hero Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Twenty-nine landing-page heroes, from split layouts and photo-led openers to card grids and moving type, video and counters, responsive and mirrored for Arabic.",
+    h1: "Hero",
+    ar: {
+      title: "كتل الأقسام الافتتاحية لمشاريع React | فاصلة",
+      description:
+        "تسعة وعشرون قسمًا افتتاحيًا لصفحات الهبوط، من التخطيطات المقسّمة والافتتاحيات المصوّرة إلى شبكات البطاقات والكتابة المتحركة والفيديو والعدّادات، متجاوبة ومعكوسة للعربية.",
+      h1: "القسم الافتتاحي (Hero)",
+    },
+  },
+  {
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/button/",
