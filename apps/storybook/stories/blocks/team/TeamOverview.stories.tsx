@@ -89,7 +89,9 @@ interface OverviewArgs {
 const meta: Meta<OverviewArgs> = {
   title: "Blocks/Team Overview",
   parameters: { layout: "fullscreen", viewport: { viewports: teamViewports } },
-  tags: ["autodocs"],
+  // Hidden from the sidebar and the Docs pages, as the other block families have no overview.
+  // To show it again, change this line to `tags: ["autodocs"]`.
+  tags: ["!dev", "!autodocs"],
   args: { type: Object.keys(TYPES)[0] },
   argTypes: {
     type: { control: "select", options: Object.keys(TYPES), description: "The Type shown in every frame." },
