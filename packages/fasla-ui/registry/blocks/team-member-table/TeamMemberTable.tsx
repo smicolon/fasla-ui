@@ -132,7 +132,7 @@ export function TeamMemberTable({ locale = "en", eyebrow, heading, columns, link
                   style={{ "--reveal-i": index, "--reveal-y": "8px" } as React.CSSProperties}
                   className={cn(
                     REVEAL,
-                    "group/row flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border p-4 first:border-t-0",
+                    "group/row flex flex-wrap items-center gap-x-3 gap-y-2 border-t border-border px-5 py-4 first:border-t-0",
                     "motion-safe:transition-[opacity,transform,background-color]",
                     `[@container(min-width:40rem)]:table-row [@container(min-width:40rem)]:p-0 [@container(min-width:40rem)]:first:border-t hover:[@container(min-width:40rem)]:bg-muted focus-within:[@container(min-width:40rem)]:bg-muted`
                   )}
@@ -152,19 +152,20 @@ export function TeamMemberTable({ locale = "en", eyebrow, heading, columns, link
                     </div>
                   </td>
                   <td className={cn(CELL, "w-full text-sm text-muted-foreground", `[@container(min-width:40rem)]:w-auto`)}>{row.role}</td>
-                  <td className={cn(CELL, "w-auto")}>
+                  <td className={cn(CELL, "flex w-auto items-center")}>
                     <Badge variant="solid" tone="secondary" size="sm" radius="rounded">
                       {row.team}
                     </Badge>
                   </td>
                   <td className={cn(CELL, "flex-1 text-sm text-muted-foreground", `[@container(min-width:40rem)]:hidden`, `[@container(min-width:64rem)]:table-cell`)}>{row.location}</td>
-                  <td className={cn(CELL, "w-auto text-end")}>
+                  <td className={cn(CELL, "flex w-auto items-center justify-end text-end")}>
                     <a
                       href={row.href ?? "#"}
                       aria-label={typeof row.name === "string" ? `${link}: ${row.name}` : link}
-                      className="inline-flex rounded-sm text-foreground [outline:none] focus-visible:ring-2 focus-visible:ring-ring"
+                      className="inline-flex rounded-sm text-muted-foreground [outline:none] focus-visible:ring-2 focus-visible:ring-ring"
                     >
                       <TeamLinkArrow
+                        strokeWidth={1.5}
                         className="[--team-nudge:0.25rem] rtl:[--team-nudge:-0.25rem] motion-safe:transition-transform motion-safe:duration-200 group-hover/row:motion-safe:translate-x-[var(--team-nudge)] group-focus-within/row:motion-safe:translate-x-[var(--team-nudge)]"
                       />
                     </a>
