@@ -40,6 +40,14 @@ export const isDivider = (name) => name.trim() === "" || /^-+$/.test(name.trim()
  *  Settled by Yasmin on 2026-10-16; deliberately different from the atom index rule. */
 export const READY = (status) => status === "🟢"
 
+/** Pages that sit inside a section's range but are not block pages: they hold no component set at
+ *  all, so the shape check would stop the build on them. Listed by id and left out of the scope, the
+ *  capture and the fingerprint. Never add a page here without asking the designer. */
+export const EXCLUDED_FROM_BLOCKS = [
+  // Settled by Yasmin on 2026-10-28: Footer 🔸 holds no component set, so it is not a block page.
+  { page: "✦  🟢 Y | Footer 🔸", id: "4108:1020" },
+]
+
 /** Component sets on a block page that are neither the family set nor a helper part.
  *  Each was settled by a designer; a new one stops the build until someone decides. */
 export const EXTRA_SETS = {
@@ -60,6 +68,8 @@ export const CODE_PREFIX = { "42359:9029": "faq-", "42556:548": "error-state-", 
  *  word. Yasmin, 2026-10-28: Team Carousel -> team-member-carousel, Team Table -> team-member-table,
  *  Hairline Team Grid -> team-hairline-grid. A Type not listed here maps to `${prefix}${slug(type)}`. */
 export const CODE_NAMES = {
+  // Pricing shipped in code (#87) as pricing-tiers; its Figma Type is still named "Pricing Tiers".
+  "46332:2894": { "Pricing Tiers": "tiers" },
   "46368:243916": {
     "Team Carousel": "member-carousel",
     "Team Table": "member-table",
@@ -89,6 +99,7 @@ export function deriveScope(pageList) {
         if (s.endsAt && ids.includes(s.endsAt.id)) break
         continue
       }
+      if (EXCLUDED_FROM_BLOCKS.some((x) => x.id === pageList[i][0])) continue
       ids.push(pageList[i][0])
     }
     if (s.endsAt && ids[ids.length - 1] !== s.endsAt.id) {
@@ -263,6 +274,7 @@ export function build(capture, { registry } = {}) {
       scope: {
         rule: "every page after each section header, up to the next header, skipping divider pages (a blank or \"---\" name); the E-commerce section must end on Gift Cards",
         onDisagreement: "the build throws and names the pages; it never guesses",
+        excludedPages: EXCLUDED_FROM_BLOCKS,
         sections: SECTIONS.map((s) => ({ key: s.key, title: s.title, header: s.header, headerUrl: link(s.header), ...(s.endsAt ? { endsAt: s.endsAt } : {}) })),
         shape: "every page in scope must hold exactly one component set with Type × Breakpoint × Direction; helper sets (no Type, no Breakpoint) are recorded as parts; any other set stops the build unless it is listed in EXTRA_SETS",
       },
