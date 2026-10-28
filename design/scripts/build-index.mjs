@@ -215,6 +215,10 @@ export const CODE_MAP = {
   ...Object.fromEntries(
     ["tiers", "two-plan-compare", "plan-spotlight", "comparison-matrix", "plan-picker-summary"].map((type) => [`pricing-${type}`, null])
   ),
+  // Blocks: each Hero item is one Type of the block set Hero (46552:249264), not an atom.
+  ...Object.fromEntries(
+    ["editorial-arch", "photo-constellation", "arc-gallery", "inline-image-headline", "bento-split", "framed-full-bleed", "annotated-object", "editorial-triptych", "colour-stage", "twin-panels", "split-band-headline", "textured-dark", "component-pattern", "curved-media-rail", "framed-studio-card", "orbit-track", "floating-integrations", "shape-grid", "wave-band", "studio-mosaic", "illustration-split", "masked-type-reveal", "velocity-marquee", "duo-card", "video-spotlight", "brand-color-block", "scramble-decode", "split-flap-counters", "video-in-type"].map((type) => [`hero-${type}`, null])
+  ),
   // Blocks: each About item is one Type of the block set About (46368:243915), not an atom.
   ...Object.fromEntries(
     [

@@ -3,7 +3,8 @@
  * Figma's order. Names and family labels are in the message catalogues
  * (docs.faqBlocks, docs.errorStateBlocks, docs.logoCloudBlocks,
  * docs.authenticationsBlocks, docs.galleryBlocks, docs.navbarBlocks,
- * docs.pricingBlocks, docs.aboutBlocks); the slug is the registry item's name.
+ * docs.pricingBlocks, docs.heroBlocks, docs.aboutBlocks); the slug is the
+ * registry item's name.
  */
 
 export type FaqFamily = "lists" | "layouts" | "navigation" | "support"
@@ -65,6 +66,17 @@ export type PricingFamily = "compare" | "choose"
 export const PRICING_FAMILIES: PricingFamily[] = ["compare", "choose"]
 
 /**
+ * Hero's groups: the split layouts, whose copy shares the block with a
+ * portrait, a column of cards or a set of photos; the photo-led ones, where
+ * photos frame or fill the whole block; the card and pattern layouts, built
+ * from tiles, cards or a wall of components; the type-led ones, where the
+ * headline itself is the picture.
+ */
+export type HeroFamily = "split" | "photo-led" | "cards" | "type-led"
+
+export const HERO_FAMILIES: HeroFamily[] = ["split", "photo-led", "cards", "type-led"]
+
+/**
  * About's three groups: the statements and heroes that open the page, the
  * story and values told in rows, cards and letters, and the culture and
  * numbers in bentos, masonry and figures.
@@ -73,7 +85,7 @@ export type AboutFamily = "statements" | "story" | "culture"
 
 export const ABOUT_FAMILIES: AboutFamily[] = ["statements", "story", "culture"]
 
-export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | AboutFamily> = {
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
   family: Family
@@ -220,6 +232,39 @@ export const GALLERY_TYPES: BlockType<GalleryFamily>[] = [
   { slug: "gallery-photo-spotlight", family: "viewers" },
 ]
 
+/** The Hero Types, in Figma's order. */
+export const HERO_TYPES: BlockType<HeroFamily>[] = [
+  { slug: "hero-editorial-arch", family: "split" },
+  { slug: "hero-photo-constellation", family: "photo-led", inverse: true },
+  { slug: "hero-arc-gallery", family: "photo-led" },
+  { slug: "hero-inline-image-headline", family: "type-led", inverse: true },
+  { slug: "hero-bento-split", family: "split", inverse: true },
+  { slug: "hero-framed-full-bleed", family: "photo-led", inverse: true },
+  { slug: "hero-annotated-object", family: "photo-led" },
+  { slug: "hero-editorial-triptych", family: "photo-led" },
+  { slug: "hero-colour-stage", family: "type-led", inverse: true },
+  { slug: "hero-twin-panels", family: "cards" },
+  { slug: "hero-split-band-headline", family: "split", inverse: true },
+  { slug: "hero-textured-dark", family: "photo-led", inverse: true },
+  { slug: "hero-component-pattern", family: "cards" },
+  { slug: "hero-curved-media-rail", family: "photo-led" },
+  { slug: "hero-framed-studio-card", family: "split" },
+  { slug: "hero-orbit-track", family: "photo-led", inverse: true },
+  { slug: "hero-floating-integrations", family: "cards" },
+  { slug: "hero-shape-grid", family: "cards" },
+  { slug: "hero-wave-band", family: "photo-led" },
+  { slug: "hero-studio-mosaic", family: "cards" },
+  { slug: "hero-illustration-split", family: "split" },
+  { slug: "hero-masked-type-reveal", family: "type-led", inverse: true },
+  { slug: "hero-velocity-marquee", family: "type-led", inverse: true },
+  { slug: "hero-duo-card", family: "cards" },
+  { slug: "hero-video-spotlight", family: "photo-led", inverse: true },
+  { slug: "hero-brand-color-block", family: "type-led" },
+  { slug: "hero-scramble-decode", family: "type-led" },
+  { slug: "hero-split-flap-counters", family: "type-led" },
+  { slug: "hero-video-in-type", family: "type-led" },
+]
+
 /** Every block a preview page renders, across the families. */
 export const NAVBAR_TYPES: BlockType<NavbarFamily>[] = [
   { slug: "navbar-default", family: "site" },
@@ -279,6 +324,7 @@ export const ALL_BLOCK_TYPES: BlockType[] = [
   ...GALLERY_TYPES,
   ...NAVBAR_TYPES,
   ...PRICING_TYPES,
+  ...HERO_TYPES,
   ...ABOUT_TYPES,
 ]
 

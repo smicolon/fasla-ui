@@ -7,11 +7,12 @@ import { authExample } from "@/components/blocks/authentications-examples"
 import { aboutPhotoProps } from "@/components/blocks/about-photos"
 import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
 import { NavbarStage, navbarExample } from "@/components/blocks/navbar-examples"
+import { heroPhotoProps } from "@/components/blocks/hero-photos"
 
 /**
- * Every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar, Pricing and About Type
- * by registry name, each loaded on its own so a preview frame downloads only
- * the block it shows.
+ * Every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar,
+ * Pricing, Hero and About Type by registry name, each loaded on its own so a
+ * preview frame downloads only the block it shows.
  */
 /** Each block has its own props; a frame passes only the locale and demo props. */
 type AnyBlock = React.ComponentType<any>
@@ -105,6 +106,12 @@ const withNavbarExample = (Block: AnyBlock, slug: string) =>
         <Block {...navbarExample(slug)} {...props} />
       </NavbarStage>
     )
+  }
+
+/** A Hero Type with its demo photos and faces, from public/images/hero/. */
+const withHeroPhotos = (Block: AnyBlock, type: string) =>
+  function HeroPreview(props: { locale: Locale }) {
+    return <Block {...heroPhotoProps(type, props.locale)} {...props} />
   }
 
 /**
@@ -450,6 +457,93 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   ),
   "pricing-plan-picker-summary": dynamic(() =>
     import("@fasla-ui/blocks/pricing-plan-picker-summary/PricingPlanPickerSummary").then((m) => m.PricingPlanPickerSummary)
+  ),
+  "hero-editorial-arch": dynamic(() =>
+    import("@fasla-ui/blocks/hero-editorial-arch/HeroEditorialArch").then((m) => withHeroPhotos(m.HeroEditorialArch, "editorial-arch"))
+  ),
+  "hero-photo-constellation": dynamic(() =>
+    import("@fasla-ui/blocks/hero-photo-constellation/HeroPhotoConstellation").then((m) => withHeroPhotos(m.HeroPhotoConstellation, "photo-constellation"))
+  ),
+  "hero-arc-gallery": dynamic(() =>
+    import("@fasla-ui/blocks/hero-arc-gallery/HeroArcGallery").then((m) => withHeroPhotos(m.HeroArcGallery, "arc-gallery"))
+  ),
+  "hero-inline-image-headline": dynamic(() =>
+    import("@fasla-ui/blocks/hero-inline-image-headline/HeroInlineImageHeadline").then((m) => withHeroPhotos(m.HeroInlineImageHeadline, "inline-image-headline"))
+  ),
+  "hero-bento-split": dynamic(() =>
+    import("@fasla-ui/blocks/hero-bento-split/HeroBentoSplit").then((m) => withHeroPhotos(m.HeroBentoSplit, "bento-split"))
+  ),
+  "hero-framed-full-bleed": dynamic(() =>
+    import("@fasla-ui/blocks/hero-framed-full-bleed/HeroFramedFullBleed").then((m) => withHeroPhotos(m.HeroFramedFullBleed, "framed-full-bleed"))
+  ),
+  "hero-annotated-object": dynamic(() =>
+    import("@fasla-ui/blocks/hero-annotated-object/HeroAnnotatedObject").then((m) => withHeroPhotos(m.HeroAnnotatedObject, "annotated-object"))
+  ),
+  "hero-editorial-triptych": dynamic(() =>
+    import("@fasla-ui/blocks/hero-editorial-triptych/HeroEditorialTriptych").then((m) => withHeroPhotos(m.HeroEditorialTriptych, "editorial-triptych"))
+  ),
+  "hero-colour-stage": dynamic(() =>
+    import("@fasla-ui/blocks/hero-colour-stage/HeroColourStage").then((m) => withHeroPhotos(m.HeroColourStage, "colour-stage"))
+  ),
+  "hero-twin-panels": dynamic(() =>
+    import("@fasla-ui/blocks/hero-twin-panels/HeroTwinPanels").then((m) => withHeroPhotos(m.HeroTwinPanels, "twin-panels"))
+  ),
+  "hero-split-band-headline": dynamic(() =>
+    import("@fasla-ui/blocks/hero-split-band-headline/HeroSplitBandHeadline").then((m) => withHeroPhotos(m.HeroSplitBandHeadline, "split-band-headline"))
+  ),
+  "hero-textured-dark": dynamic(() =>
+    import("@fasla-ui/blocks/hero-textured-dark/HeroTexturedDark").then((m) => withHeroPhotos(m.HeroTexturedDark, "textured-dark"))
+  ),
+  "hero-component-pattern": dynamic(() =>
+    import("@fasla-ui/blocks/hero-component-pattern/HeroComponentPattern").then((m) => withHeroPhotos(m.HeroComponentPattern, "component-pattern"))
+  ),
+  "hero-curved-media-rail": dynamic(() =>
+    import("@fasla-ui/blocks/hero-curved-media-rail/HeroCurvedMediaRail").then((m) => withHeroPhotos(m.HeroCurvedMediaRail, "curved-media-rail"))
+  ),
+  "hero-framed-studio-card": dynamic(() =>
+    import("@fasla-ui/blocks/hero-framed-studio-card/HeroFramedStudioCard").then((m) => withHeroPhotos(m.HeroFramedStudioCard, "framed-studio-card"))
+  ),
+  "hero-orbit-track": dynamic(() =>
+    import("@fasla-ui/blocks/hero-orbit-track/HeroOrbitTrack").then((m) => withHeroPhotos(m.HeroOrbitTrack, "orbit-track"))
+  ),
+  "hero-floating-integrations": dynamic(() =>
+    import("@fasla-ui/blocks/hero-floating-integrations/HeroFloatingIntegrations").then((m) => withHeroPhotos(m.HeroFloatingIntegrations, "floating-integrations"))
+  ),
+  "hero-shape-grid": dynamic(() =>
+    import("@fasla-ui/blocks/hero-shape-grid/HeroShapeGrid").then((m) => withHeroPhotos(m.HeroShapeGrid, "shape-grid"))
+  ),
+  "hero-wave-band": dynamic(() =>
+    import("@fasla-ui/blocks/hero-wave-band/HeroWaveBand").then((m) => withHeroPhotos(m.HeroWaveBand, "wave-band"))
+  ),
+  "hero-studio-mosaic": dynamic(() =>
+    import("@fasla-ui/blocks/hero-studio-mosaic/HeroStudioMosaic").then((m) => withHeroPhotos(m.HeroStudioMosaic, "studio-mosaic"))
+  ),
+  "hero-illustration-split": dynamic(() =>
+    import("@fasla-ui/blocks/hero-illustration-split/HeroIllustrationSplit").then((m) => withHeroPhotos(m.HeroIllustrationSplit, "illustration-split"))
+  ),
+  "hero-masked-type-reveal": dynamic(() =>
+    import("@fasla-ui/blocks/hero-masked-type-reveal/HeroMaskedTypeReveal").then((m) => withHeroPhotos(m.HeroMaskedTypeReveal, "masked-type-reveal"))
+  ),
+  "hero-velocity-marquee": dynamic(() =>
+    import("@fasla-ui/blocks/hero-velocity-marquee/HeroVelocityMarquee").then((m) => withHeroPhotos(m.HeroVelocityMarquee, "velocity-marquee"))
+  ),
+  "hero-duo-card": dynamic(() =>
+    import("@fasla-ui/blocks/hero-duo-card/HeroDuoCard").then((m) => withHeroPhotos(m.HeroDuoCard, "duo-card"))
+  ),
+  "hero-video-spotlight": dynamic(() =>
+    import("@fasla-ui/blocks/hero-video-spotlight/HeroVideoSpotlight").then((m) => withHeroPhotos(m.HeroVideoSpotlight, "video-spotlight"))
+  ),
+  "hero-brand-color-block": dynamic(() =>
+    import("@fasla-ui/blocks/hero-brand-color-block/HeroBrandColorBlock").then((m) => withHeroPhotos(m.HeroBrandColorBlock, "brand-color-block"))
+  ),
+  "hero-scramble-decode": dynamic(() =>
+    import("@fasla-ui/blocks/hero-scramble-decode/HeroScrambleDecode").then((m) => withHeroPhotos(m.HeroScrambleDecode, "scramble-decode"))
+  ),
+  "hero-split-flap-counters": dynamic(() =>
+    import("@fasla-ui/blocks/hero-split-flap-counters/HeroSplitFlapCounters").then((m) => withHeroPhotos(m.HeroSplitFlapCounters, "split-flap-counters"))
+  ),
+  "hero-video-in-type": dynamic(() =>
+    import("@fasla-ui/blocks/hero-video-in-type/HeroVideoInType").then((m) => withHeroPhotos(m.HeroVideoInType, "video-in-type"))
   ),
   "about-mission-statement-hero": dynamic(() =>
     import("@fasla-ui/blocks/about-mission-statement-hero/AboutMissionStatementHero").then((m) => withAboutPhotos(m.AboutMissionStatementHero, "mission-statement-hero", m.aboutMissionStatementHeroCopy))
