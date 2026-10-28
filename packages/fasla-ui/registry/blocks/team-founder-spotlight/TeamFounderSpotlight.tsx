@@ -104,7 +104,7 @@ export function TeamFounderSpotlight({ locale = "en", eyebrow, heading, feature,
     <TeamSection labelledBy={headingId} className={className} contentClassName="gap-16" {...props}>
       <TeamHeader headingId={headingId} eyebrow={eyebrow === undefined ? copy.eyebrow : eyebrow} heading={heading ?? copy.heading} />
       <div className="grid w-full grid-cols-1 gap-6 [@container(min-width:40rem)]:gap-8 [@container(min-width:64rem)]:grid-cols-[minmax(0,760fr)_minmax(0,488fr)]">
-        <article className="flex flex-col overflow-hidden rounded-xl border border-border bg-card [@container(min-width:40rem)]:flex-row">
+        <article className="flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-md [@container(min-width:40rem)]:flex-row">
           {/* The portrait fades in while it settles from 1.04; the box clips the scale. */}
           <Reveal
             y={0}
