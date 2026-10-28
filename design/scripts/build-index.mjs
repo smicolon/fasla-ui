@@ -215,6 +215,15 @@ export const CODE_MAP = {
   ...Object.fromEntries(
     ["tiers", "two-plan-compare", "plan-spotlight", "comparison-matrix", "plan-picker-summary"].map((type) => [`pricing-${type}`, null])
   ),
+  // Blocks: each About item is one Type of the block set About (46368:243915), not an atom.
+  ...Object.fromEntries(
+    [
+      "mission-statement-hero", "collage-hero", "statement-band", "values-spotlight", "values-connector-list",
+      "approach-stack-cards", "story-snapshots", "bento", "culture-masonry", "impact-stats-band", "story-photos",
+      "split-panel", "letter-card", "values-focus", "spotlight", "headline-photos", "type-stack", "color-bento",
+      "numbered-rows",
+    ].map((type) => [`about-${type}`, null])
+  ),
 }
 
 const FAMILY_MIN = 10

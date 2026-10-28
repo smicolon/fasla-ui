@@ -3260,6 +3260,39 @@
         "pricing-plan-picker-summary": "Plan Picker + Summary"
       }
     },
+    "aboutBlocks": {
+      "lead": "Sections that introduce a company: statements and photo heroes, its story and values, and its culture and figures.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "filterLabel": "Filter by family",
+      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
+      "families": {
+        "all": "All",
+        "statements": "Statements and heroes",
+        "story": "Story and values",
+        "culture": "Culture and numbers"
+      },
+      "types": {
+        "about-mission-statement-hero": "Mission Statement Hero",
+        "about-collage-hero": "Collage Hero",
+        "about-statement-band": "Statement Band",
+        "about-values-spotlight": "Values Spotlight",
+        "about-values-connector-list": "Values Connector List",
+        "about-approach-stack-cards": "Approach Stack Cards",
+        "about-story-snapshots": "Story & Snapshots",
+        "about-bento": "Bento",
+        "about-culture-masonry": "Culture Masonry",
+        "about-impact-stats-band": "Impact Stats Band",
+        "about-story-photos": "Story Photos",
+        "about-split-panel": "Split Panel",
+        "about-letter-card": "Letter Card",
+        "about-values-focus": "Values Focus",
+        "about-spotlight": "Spotlight",
+        "about-headline-photos": "Headline Photos",
+        "about-type-stack": "Type Stack",
+        "about-color-bento": "Color Bento",
+        "about-numbered-rows": "Numbered Rows"
+      }
+    },
     "blockCard": {
       "fullScreen": "Open full screen",
       "newTab": "(opens in a new tab)",

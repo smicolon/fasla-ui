@@ -229,6 +229,21 @@ export const routes = [
     },
   },
   {
+    kind: "block",
+    category: "Blocks",
+    path: "/docs/blocks/about/",
+    title: "About Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Sections that introduce a company: statements and photo heroes, stories and values, letters, culture walls and figures, responsive and mirrored for Arabic.",
+    h1: "About",
+    ar: {
+      title: "كتل من نحن لمشاريع React | فاصلة",
+      description:
+        "أقسام تعرّف بالشركة: بيانات وواجهات بالصور، وقصص وقيم، ورسائل، وجدران للثقافة وأرقام، متجاوبة ومعكوسة للعربية.",
+      h1: "من نحن (About)",
+    },
+  },
+  {
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/button/",

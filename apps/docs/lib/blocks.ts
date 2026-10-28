@@ -3,7 +3,7 @@
  * Figma's order. Names and family labels are in the message catalogues
  * (docs.faqBlocks, docs.errorStateBlocks, docs.logoCloudBlocks,
  * docs.authenticationsBlocks, docs.galleryBlocks, docs.navbarBlocks,
- * docs.pricingBlocks); the slug is the registry item's name.
+ * docs.pricingBlocks, docs.aboutBlocks); the slug is the registry item's name.
  */
 
 export type FaqFamily = "lists" | "layouts" | "navigation" | "support"
@@ -64,7 +64,16 @@ export type PricingFamily = "compare" | "choose"
 
 export const PRICING_FAMILIES: PricingFamily[] = ["compare", "choose"]
 
-export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily> = {
+/**
+ * About's three groups: the statements and heroes that open the page, the
+ * story and values told in rows, cards and letters, and the culture and
+ * numbers in bentos, masonry and figures.
+ */
+export type AboutFamily = "statements" | "story" | "culture"
+
+export const ABOUT_FAMILIES: AboutFamily[] = ["statements", "story", "culture"]
+
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | AboutFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
   family: Family
@@ -240,6 +249,28 @@ export const PRICING_TYPES: BlockType<PricingFamily>[] = [
   { slug: "pricing-plan-picker-summary", family: "choose" },
 ]
 
+export const ABOUT_TYPES: BlockType<AboutFamily>[] = [
+  { slug: "about-mission-statement-hero", family: "statements" },
+  { slug: "about-collage-hero", family: "statements" },
+  { slug: "about-statement-band", family: "statements" },
+  { slug: "about-values-spotlight", family: "story" },
+  { slug: "about-values-connector-list", family: "story" },
+  { slug: "about-approach-stack-cards", family: "story" },
+  { slug: "about-story-snapshots", family: "story" },
+  { slug: "about-bento", family: "culture" },
+  { slug: "about-culture-masonry", family: "culture" },
+  { slug: "about-impact-stats-band", family: "culture" },
+  { slug: "about-story-photos", family: "story" },
+  { slug: "about-split-panel", family: "statements", inverse: true },
+  { slug: "about-letter-card", family: "story" },
+  { slug: "about-values-focus", family: "story" },
+  { slug: "about-spotlight", family: "statements", inverse: true },
+  { slug: "about-headline-photos", family: "statements" },
+  { slug: "about-type-stack", family: "statements" },
+  { slug: "about-color-bento", family: "culture" },
+  { slug: "about-numbered-rows", family: "story", inverse: true },
+]
+
 export const ALL_BLOCK_TYPES: BlockType[] = [
   ...FAQ_TYPES,
   ...ERROR_STATE_TYPES,
@@ -248,6 +279,7 @@ export const ALL_BLOCK_TYPES: BlockType[] = [
   ...GALLERY_TYPES,
   ...NAVBAR_TYPES,
   ...PRICING_TYPES,
+  ...ABOUT_TYPES,
 ]
 
 /** Figma's three breakpoints, the widths a preview frame renders at. */

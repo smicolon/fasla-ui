@@ -226,6 +226,14 @@ export function galleryPhotos(type: string, locale: Locale): GalleryDemoPhoto[] 
   }))
 }
 
+/**
+ * One Gallery photo by its file, `<type>-<file>.webp`, with its alt text in
+ * `locale`: for other blocks' demos that reuse it (About).
+ */
+export function galleryPhotoFile(type: string, file: number, locale: Locale): GalleryDemoPhoto {
+  return { src: `/images/gallery/${type}-${file}.webp`, alt: ALTS[type]?.[file - 1]?.[locale] ?? "" }
+}
+
 /** Every Gallery Type that has demo photos, by its name without `gallery-`. */
 export const GALLERY_PHOTO_TYPES = Object.keys(ALTS)
 

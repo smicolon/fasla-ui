@@ -4429,6 +4429,407 @@
         "pricing",
         "marketing"
       ]
+    },
+    {
+      "name": "about-mission-statement-hero",
+      "type": "registry:block",
+      "title": "About: Mission Statement Hero",
+      "description": "A centred mission statement whose headline carries three small photo chips between its words, with a supporting line and two buttons.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/about-mission-statement-hero/AboutMissionStatementHero.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-mission-statement-hero.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-collage-hero",
+      "type": "registry:block",
+      "title": "About: Collage Hero",
+      "description": "A centred team intro with two buttons over a fanned collage of five tilted photo cards.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/about-collage-hero/AboutCollageHero.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-collage-hero.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-statement-band",
+      "type": "registry:block",
+      "title": "About: Statement Band",
+      "description": "A full-width band carrying one big centred statement under an eyebrow, with small tilted photos pinned around its edges.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/about-statement-band/AboutStatementBand.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-statement-band.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-values-spotlight",
+      "type": "registry:block",
+      "title": "About: Values Spotlight",
+      "description": "A framed photo with plus-tick corners beside a list of three values, one highlighted as it reaches the middle of the screen.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/about-values-spotlight/AboutValuesSpotlight.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-values-spotlight.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-values-connector-list",
+      "type": "registry:block",
+      "title": "About: Values Connector List",
+      "description": "A column of value names joined by a hand-drawn line to the description of the one in focus.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/about-values-connector-list/AboutValuesConnectorList.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-values-connector-list.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-approach-stack-cards",
+      "type": "registry:block",
+      "title": "About: Approach Stack Cards",
+      "description": "Three numbered cards for a company's story, approach and philosophy, beside a tall photo and a rail of social links.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "social-icons"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/about-approach-stack-cards/AboutApproachStackCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-approach-stack-cards.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-story-snapshots",
+      "type": "registry:block",
+      "title": "About: Story & Snapshots",
+      "description": "A founder's letter over four tilted polaroids with captions and dates; selecting one brings it to the front and straightens it.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/about-story-snapshots/AboutStorySnapshots.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-story-snapshots.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-bento",
+      "type": "registry:block",
+      "title": "About: Bento",
+      "description": "A bento of five tiles: a statement with a hiring line, three counting figures, the team's capabilities as tags, a culture photo and a rated testimonial.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "avatar"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/about-bento/AboutBento.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-bento.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-culture-masonry",
+      "type": "registry:block",
+      "title": "About: Culture Masonry",
+      "description": "An intro with a button beside a two-column masonry of culture photos, some captioned with a title and a line.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/about-culture-masonry/AboutCultureMasonry.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-culture-masonry.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-impact-stats-band",
+      "type": "registry:block",
+      "title": "About: Impact Stats Band",
+      "description": "A full-bleed photo strip over a band with three counting stats, the mission heading, a paragraph and a button.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/about-impact-stats-band/AboutImpactStatsBand.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-impact-stats-band.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-story-photos",
+      "type": "registry:block",
+      "title": "About: Story Photos",
+      "description": "A short company story in a centred column over a row of three captioned snapshot cards, the outer two tilted.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/about-story-photos/AboutStoryPhotos.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-story-photos.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-split-panel",
+      "type": "registry:block",
+      "title": "About: Split Panel",
+      "description": "A rounded card with a tall photo beside a story panel: three tags and a headline with one emphasised word at the top, a lead sentence and a short paragraph at the foot.",
+      "dependencies": [],
+      "registryDependencies": [
+        "badge",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/about-split-panel/AboutSplitPanel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-split-panel.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-letter-card",
+      "type": "registry:block",
+      "title": "About: Letter Card",
+      "description": "A founder's letter on a tilted sheet, with a drawn signature, a contact button and social links beside a portrait.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "social-icons"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/about-letter-card/AboutLetterCard.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-letter-card.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-values-focus",
+      "type": "registry:block",
+      "title": "About: Values Focus",
+      "description": "A framed square photo with corner marks beside three values, each a pill label over a statement, the one in focus at full contrast.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/about-values-focus/AboutValuesFocus.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-values-focus.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-spotlight",
+      "type": "registry:block",
+      "title": "About: Spotlight",
+      "description": "A hanging lamp throws a cone of light over a short heading, a paragraph and a row of section links, with a huge closing word cut off by the bottom edge.",
+      "dependencies": [],
+      "registryDependencies": [
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/about-spotlight/AboutSpotlight.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-spotlight.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-headline-photos",
+      "type": "registry:block",
+      "title": "About: Headline Photos",
+      "description": "A big headline with three highlighted phrases over a row of five tall photos set at staggered heights.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/about-headline-photos/AboutHeadlinePhotos.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-headline-photos.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-type-stack",
+      "type": "registry:block",
+      "title": "About: Type Stack",
+      "description": "A three-line statement in very large type, ruled apart by hairlines, with a short intro beside the second line and a greeting and counter beneath.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/about-type-stack/AboutTypeStack.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-type-stack.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-color-bento",
+      "type": "registry:block",
+      "title": "About: Color Bento",
+      "description": "Soft-tinted tiles for the studio intro, a belief with supporting text and the mission, with a row of three geometric shapes.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/about-color-bento/AboutColorBento.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-color-bento.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
+    },
+    {
+      "name": "about-numbered-rows",
+      "type": "registry:block",
+      "title": "About: Numbered Rows",
+      "description": "A large founding statement over three numbered principles, each a title, a short description and a counter under a hairline, on an inverted surface.",
+      "dependencies": [],
+      "registryDependencies": [
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/about-numbered-rows/AboutNumberedRows.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/about-numbered-rows.tsx"
+        }
+      ],
+      "categories": [
+        "about",
+        "marketing"
+      ]
     }
   ]
 }
