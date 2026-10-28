@@ -149,7 +149,7 @@ export function TeamGridBackdropRoster({
         className="relative gap-8"
         headingClassName={cn(
           "text-balance [@container(min-width:64rem)]:text-5xl",
-          "max-w-full [@container(min-width:40rem)]:max-w-[25rem]",
+          "mx-auto max-w-full [@container(min-width:40rem)]:max-w-[25rem]",
           locale === "ar" ? "[@container(min-width:64rem)]:max-w-[40rem]" : "[@container(min-width:64rem)]:max-w-[30rem]"
         )}
       >

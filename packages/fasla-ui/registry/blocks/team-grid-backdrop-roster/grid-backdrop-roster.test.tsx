@@ -61,4 +61,12 @@ describe("Team Grid Backdrop Roster", () => {
     render(<TeamGridBackdropRoster people={[]} />)
     expect(screen.queryByRole("list")).toBeNull()
   })
+
+  it("centres its capped heading in its box, so it sits on the buttons' axis in both directions", () => {
+    for (const locale of ["en", "ar"] as const) {
+      const { container, unmount } = render(<TeamGridBackdropRoster locale={locale} />)
+      expect(container.querySelector("h2")?.className).toContain("mx-auto")
+      unmount()
+    }
+  })
 })
