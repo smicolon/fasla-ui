@@ -23,9 +23,11 @@ const REPO = resolve(DESIGN, "..")
 
 /* ── Scope ─────────────────────────────────────────────────────────────────────────
  * Exactly the pages under two section headers, in page order. A section runs from the page
- * after its header to the next header or divider page (a blank or "---" name), so a page added
- * inside a section is picked up on its own. The E-commerce section must end on Gift Cards: if a
- * page ever appears after it, the build stops and names it rather than quietly taking it in.
+ * after its header to the next header. Divider pages (a blank or "---" name) inside it are only
+ * visual separators: they are skipped, not an end (Yasmin, 2026-10-28), so a page added inside a
+ * section is picked up on its own. The E-commerce section must end on Gift Cards, and there it
+ * does stop at the first divider after that page: if a page ever appears between Gift Cards and
+ * that divider, the build stops and names it rather than quietly taking it in.
  * Headers and the end page are anchored by node id, because page names drift. */
 export const SECTIONS = [
   { key: "marketing", title: "Marketing UI Components", header: "40935:41137" },
@@ -50,7 +52,20 @@ export const EXTRA_SETS = {
 /** Family set id -> registry name prefix. Each Type maps to `${prefix}${slug(type)}`; the
  *  builder fails if a derived name is missing from the registry or a registry item with the
  *  prefix is left unclaimed. Hand-maintained: add a family when its blocks ship in code. */
-export const CODE_PREFIX = { "42359:9029": "faq-", "42556:548": "error-state-", "42806:232717": "logo-cloud-", "42586:4669": "auth-", "42478:479": "gallery-", "4103:4910": "navbar-", "46368:243915": "about-" }
+export const CODE_PREFIX = { "42359:9029": "faq-", "42556:548": "error-state-", "42806:232717": "logo-cloud-", "42586:4669": "auth-", "42478:479": "gallery-", "4103:4910": "navbar-", "46368:243915": "about-", "46332:2894": "pricing-", "46368:243916": "team-" }
+
+/** Family set id -> { Figma Type name -> registry name after the prefix }, for the few Types whose code
+ *  name differs from `slug(type)`. Our rule is that a Type's name never carries the block name; three
+ *  Team Types still do in Figma (approved frames and docs, so Figma keeps them), and code drops the
+ *  word. Yasmin, 2026-10-28: Team Carousel -> team-member-carousel, Team Table -> team-member-table,
+ *  Hairline Team Grid -> team-hairline-grid. A Type not listed here maps to `${prefix}${slug(type)}`. */
+export const CODE_NAMES = {
+  "46368:243916": {
+    "Team Carousel": "member-carousel",
+    "Team Table": "member-table",
+    "Hairline Team Grid": "hairline-grid",
+  },
+}
 
 export const OWNERS = { Y: { name: "Yasmin", active: true }, H: { name: "Haneen", active: false }, "Y/H": { name: "Yasmin and Haneen", active: true } }
 
@@ -69,7 +84,13 @@ export function deriveScope(pageList) {
     let i = pageList.findIndex(([id]) => id === s.header)
     if (i < 0) throw new Error(`section header ${s.header} (${s.title}) is not in the file`)
     const ids = []
-    for (i++; i < pageList.length && !isHeader(pageList[i][1]) && !isDivider(pageList[i][1]); i++) ids.push(pageList[i][0])
+    for (i++; i < pageList.length && !isHeader(pageList[i][1]); i++) {
+      if (isDivider(pageList[i][1])) {
+        if (s.endsAt && ids.includes(s.endsAt.id)) break
+        continue
+      }
+      ids.push(pageList[i][0])
+    }
     if (s.endsAt && ids[ids.length - 1] !== s.endsAt.id) {
       const at = ids.indexOf(s.endsAt.id)
       const extra = at < 0 ? ids : ids.slice(at + 1)
@@ -147,7 +168,7 @@ export function build(capture, { registry } = {}) {
     const blocks = set.types.map(([name, variants, nodeId]) => {
       let code = null
       if (prefix) {
-        code = prefix + slug(name)
+        code = prefix + (CODE_NAMES[set.id]?.[name] ?? slug(name))
         if (registryNames && !registryNames.includes(code)) throw new Error(`${set.name} / ${name}: derived registry name "${code}" is not in registry.json`)
         claimed.add(code)
       }
@@ -240,7 +261,7 @@ export function build(capture, { registry } = {}) {
       measured: process.env.INDEX_MEASURED || new Date().toISOString().slice(0, 10),
       generatedBy: ".agents/skills/figma-index (read-only use_figma page walk, target: blocks) → design/scripts/build-blocks-index.mjs",
       scope: {
-        rule: "every page after each section header, up to the next header or divider page (a blank or \"---\" name); the E-commerce section must end on Gift Cards",
+        rule: "every page after each section header, up to the next header, skipping divider pages (a blank or \"---\" name); the E-commerce section must end on Gift Cards",
         onDisagreement: "the build throws and names the pages; it never guesses",
         sections: SECTIONS.map((s) => ({ key: s.key, title: s.title, header: s.header, headerUrl: link(s.header), ...(s.endsAt ? { endsAt: s.endsAt } : {}) })),
         shape: "every page in scope must hold exactly one component set with Type × Breakpoint × Direction; helper sets (no Type, no Breakpoint) are recorded as parts; any other set stops the build unless it is listed in EXTRA_SETS",
