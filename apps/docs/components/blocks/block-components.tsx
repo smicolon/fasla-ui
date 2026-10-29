@@ -5,6 +5,7 @@ import dynamic from "next/dynamic"
 
 import { authExample } from "@/components/blocks/authentications-examples"
 import { aboutPhotoProps } from "@/components/blocks/about-photos"
+import { careersPhotoProps } from "@/components/blocks/careers-photos"
 import { teamPhotoProps } from "@/components/blocks/team-photos"
 import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
 import { NavbarStage, navbarExample } from "@/components/blocks/navbar-examples"
@@ -12,8 +13,8 @@ import { heroPhotoProps } from "@/components/blocks/hero-photos"
 
 /**
  * Every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar,
- * Pricing, Hero and About Type by registry name, each loaded on its own so a
- * preview frame downloads only the block it shows.
+ * Pricing, Hero, About and Careers Type by registry name, each loaded on its
+ * own so a preview frame downloads only the block it shows.
  */
 /** Each block has its own props; a frame passes only the locale and demo props. */
 type AnyBlock = React.ComponentType<any>
@@ -124,6 +125,15 @@ type AboutCopy = Record<Locale, object>
 const withAboutPhotos = (Block: AnyBlock, type: string, copy: AboutCopy) =>
   function AboutPreview(props: { locale: Locale }) {
     return <Block {...aboutPhotoProps(type, props.locale, copy)} {...props} />
+  }
+
+/**
+ * A Careers Type with its demo photo, from public/images/careers/ or the Hero
+ * photos. Types without a photo render as they are.
+ */
+const withCareersPhotos = (Block: AnyBlock, type: string) =>
+  function CareersPreview(props: { locale: Locale }) {
+    return <Block {...careersPhotoProps(type, props.locale)} {...props} />
   }
 
 /**
@@ -613,6 +623,39 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   ),
   "about-numbered-rows": dynamic(() =>
     import("@fasla-ui/blocks/about-numbered-rows/AboutNumberedRows").then((m) => withAboutPhotos(m.AboutNumberedRows, "numbered-rows", m.aboutNumberedRowsCopy))
+  ),
+  "careers-open-roles-hairline-list": dynamic(() =>
+    import("@fasla-ui/blocks/careers-open-roles-hairline-list/CareersOpenRolesHairlineList").then((m) => withCareersPhotos(m.CareersOpenRolesHairlineList, "open-roles-hairline-list"))
+  ),
+  "careers-role-cards-grid": dynamic(() =>
+    import("@fasla-ui/blocks/careers-role-cards-grid/CareersRoleCardsGrid").then((m) => withCareersPhotos(m.CareersRoleCardsGrid, "role-cards-grid"))
+  ),
+  "careers-roles-by-department": dynamic(() =>
+    import("@fasla-ui/blocks/careers-roles-by-department/CareersRolesByDepartment").then((m) => withCareersPhotos(m.CareersRolesByDepartment, "roles-by-department"))
+  ),
+  "careers-open-vacancies-table": dynamic(() =>
+    import("@fasla-ui/blocks/careers-open-vacancies-table/CareersOpenVacanciesTable").then((m) => withCareersPhotos(m.CareersOpenVacanciesTable, "open-vacancies-table"))
+  ),
+  "careers-roles-list-accordion-expanded": dynamic(() =>
+    import("@fasla-ui/blocks/careers-roles-list-accordion-expanded/CareersRolesListAccordionExpanded").then((m) => withCareersPhotos(m.CareersRolesListAccordionExpanded, "roles-list-accordion-expanded"))
+  ),
+  "careers-about-card-role-list": dynamic(() =>
+    import("@fasla-ui/blocks/careers-about-card-role-list/CareersAboutCardRoleList").then((m) => withCareersPhotos(m.CareersAboutCardRoleList, "about-card-role-list"))
+  ),
+  "careers-featured-role-spotlight": dynamic(() =>
+    import("@fasla-ui/blocks/careers-featured-role-spotlight/CareersFeaturedRoleSpotlight").then((m) => withCareersPhotos(m.CareersFeaturedRoleSpotlight, "featured-role-spotlight"))
+  ),
+  "careers-perks-benefits": dynamic(() =>
+    import("@fasla-ui/blocks/careers-perks-benefits/CareersPerksBenefits").then((m) => withCareersPhotos(m.CareersPerksBenefits, "perks-benefits"))
+  ),
+  "careers-no-open-roles-empty-state": dynamic(() =>
+    import("@fasla-ui/blocks/careers-no-open-roles-empty-state/CareersNoOpenRolesEmptyState").then((m) => withCareersPhotos(m.CareersNoOpenRolesEmptyState, "no-open-roles-empty-state"))
+  ),
+  "careers-role-detail-panel": dynamic(() =>
+    import("@fasla-ui/blocks/careers-role-detail-panel/CareersRoleDetailPanel").then((m) => withCareersPhotos(m.CareersRoleDetailPanel, "role-detail-panel"))
+  ),
+  "careers-role-detail-page": dynamic(() =>
+    import("@fasla-ui/blocks/careers-role-detail-page/CareersRoleDetailPage").then((m) => withCareersPhotos(m.CareersRoleDetailPage, "role-detail-page"))
   ),
   "team-leadership-grid": dynamic(() =>
     import("@fasla-ui/blocks/team-leadership-grid/TeamLeadershipGrid").then((m) => withTeamPhotos(m.TeamLeadershipGrid, "leadership-grid", m.teamLeadershipGridCopy))
