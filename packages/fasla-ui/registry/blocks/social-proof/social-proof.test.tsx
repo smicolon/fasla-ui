@@ -267,7 +267,7 @@ describe("Proof Bento", () => {
     vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {})
     const { container } = render(<SocialProofProofBento videoSrc="/film.mp4" />)
     expect(container.querySelector("video")).toBeNull()
-    expect(screen.getByText((_, el) => el?.tagName === "P" && el.textContent === "Watch Rashed's story · 2:14")).toBeTruthy()
+    expect(screen.getByText((_, el) => el?.tagName === "P" && el.textContent === "Watch the story · 2:14")).toBeTruthy()
     fireEvent.click(screen.getByRole("button", { name: "Play" }))
     expect(container.querySelector("video")).toBeTruthy()
     fireEvent.click(screen.getByRole("button", { name: "Close video" }))

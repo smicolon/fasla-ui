@@ -53,7 +53,7 @@ export interface SocialProofProofBentoCopy {
   rating: { value: string; label: React.ReactNode }
   /** The card tile. Its quote is up to 154 characters in English, 136 in Arabic. */
   quote: { quote: React.ReactNode; author: SocialProofPerson }
-  /** The pill on the video tile: a name and a duration, one line, about 30 characters in English and 24 in Arabic. */
+  /** The pill on the video tile: a short title and a duration, one line, about 30 characters in English and 24 in Arabic. */
   videoLabel: React.ReactNode
   /** The key in `photos` for the video tile's poster. */
   posterId: string
@@ -72,7 +72,7 @@ const COPY: Record<SocialProofLocale, SocialProofProofBentoCopy> = {
     stat: { value: "6×", label: "faster brand theming since switching", company: "COBALT SYSTEMS" },
     rating: { value: "4.9", label: "Average across 812 verified reviews" },
     quote: { quote: "“Zero regressions in the migration quarter. QA signed off early.”", author: p("khalid-saad", "Khalid Saad", "Frontend Lead, Atlas Freight") },
-    videoLabel: "Watch Rashed's story · 2:14",
+    videoLabel: "Watch the story · 2:14",
     posterId: "proof-bento-video",
   },
   ar: {
@@ -85,7 +85,7 @@ const COPY: Record<SocialProofLocale, SocialProofProofBentoCopy> = {
     stat: { value: "6×", label: "أسرع في تطبيق سمات العلامة منذ الانتقال", company: "كوبالت سيستمز" },
     rating: { value: "4.9", label: "متوسط 812 تقييمًا موثّقًا" },
     quote: { quote: "«لا تراجعات في ربع الانتقال، ووافق فريق الجودة مبكرًا.»", author: p("khalid-saad", "خالد سعد", "قائد الواجهات الأمامية، أطلس فريت") },
-    videoLabel: "شاهد قصة راشد، 2:14",
+    videoLabel: "شاهد القصة، 2:14",
     posterId: "proof-bento-video",
   },
 }
