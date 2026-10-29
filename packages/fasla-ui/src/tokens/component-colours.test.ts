@@ -36,7 +36,7 @@ const allowed = new Set(tokenNames(loadSources().mode))
 // and the accordion panel's measured height — Textarea's resize grip,
 // whose strokes are `currentColor`, and the Gallery and Hero blocks' own
 // positions (the compare divider, the masonry's grid areas, the arc's cards).
-const OWN = /^(tw-|radix-|beam-|glow-|shimmer-|spotlight-|text-reveal|leading-|font-|radius|border-radius|sw-|available-(width|height)$|anchor-(width|height)$|accordion-panel-height$|collapsible-panel-height$|textarea-grip-|gallery-|hero-)/
+const OWN = /^(tw-|radix-|beam-|glow-|shimmer-|spotlight-|text-reveal|leading-|font-|radius|border-radius|sw-|available-(width|height)$|anchor-(width|height)$|accordion-panel-height$|collapsible-panel-height$|textarea-grip-|gallery-|hero-|team-)/
 
 describe("component colours", () => {
   it("use no Tailwind palette colours", () => {

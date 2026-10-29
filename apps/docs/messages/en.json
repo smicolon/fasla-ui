@@ -3370,6 +3370,34 @@
       "inverseTitle": "CSS for blocks on an inverted surface",
       "inverseBody": "Both <code>add</code> commands also add the inverse tokens’ mapping that a block on an inverted surface needs. Installing one by hand on Tailwind 4, add these three lines to your stylesheet’s <code>@theme inline</code> block:",
       "inverseMore": "On Tailwind 3, the fallbacks, and setting your own colours: see <link>Inverse tokens</link>."
+    },
+    "teamBlocks": {
+      "lead": "{count, plural, one {One team section} other {{n} team sections}}: grids and walls of portraits, directories and tables, and spotlights that put a founder, a rail of members or an open role up front.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "filterLabel": "Filter by family",
+      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
+      "families": {
+        "all": "All",
+        "grids-and-walls": "Grids and walls",
+        "directories": "Directories",
+        "spotlights": "Spotlights"
+      },
+      "types": {
+        "team-leadership-grid": "Leadership Grid",
+        "team-portrait-wall": "Portrait Wall",
+        "team-compact-directory-rows": "Compact Directory Rows",
+        "team-split-intro-member-rail": "Split Intro + Member Rail",
+        "team-founder-spotlight": "Founder Spotlight",
+        "team-member-carousel": "Member Carousel",
+        "team-department-tabs-directory": "Department Tabs Directory",
+        "team-member-table": "Member Table",
+        "team-meta-profile-cards": "Meta Profile Cards",
+        "team-we-re-hiring-cta": "We're Hiring CTA",
+        "team-hairline-grid": "Hairline Grid",
+        "team-overlay-portrait-cards": "Overlay Portrait Cards",
+        "team-annotated-portrait-lineup": "Annotated Portrait Lineup",
+        "team-grid-backdrop-roster": "Grid Backdrop Roster"
+      }
     }
   },
   "copyCommand": {
