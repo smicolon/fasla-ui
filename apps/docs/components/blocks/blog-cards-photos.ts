@@ -101,6 +101,9 @@ const PHOTO_PROP: Record<string, { list: string; key: string } | { object: strin
   "dark-editorial-feature": { list: "more", key: "image" },
   "magazine-cover-story": { object: "story", key: "image" },
   "pull-quote-feature": { list: "related", key: "image" },
+  "newsletter-latest": { list: "latest", key: "image" },
+  "author-spotlight": { list: "posts", key: "image" },
+  "related-posts-strip": { list: "posts", key: "image" },
 }
 
 type BlockCopy = Record<Locale, object>

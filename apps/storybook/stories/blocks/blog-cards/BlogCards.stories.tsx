@@ -14,6 +14,9 @@ import { BlogCardsLeadRankedPicks, blogCardsLeadRankedPicksCopy } from "../../..
 import { BlogCardsDarkEditorialFeature, blogCardsDarkEditorialFeatureCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-dark-editorial-feature/BlogCardsDarkEditorialFeature"
 import { BlogCardsMagazineCoverStory, blogCardsMagazineCoverStoryCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-magazine-cover-story/BlogCardsMagazineCoverStory"
 import { BlogCardsPullQuoteFeature, blogCardsPullQuoteFeatureCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-pull-quote-feature/BlogCardsPullQuoteFeature"
+import { BlogCardsNewsletterLatest, blogCardsNewsletterLatestCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-newsletter-latest/BlogCardsNewsletterLatest"
+import { BlogCardsAuthorSpotlight, blogCardsAuthorSpotlightCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-author-spotlight/BlogCardsAuthorSpotlight"
+import { BlogCardsRelatedPostsStrip, blogCardsRelatedPostsStripCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-related-posts-strip/BlogCardsRelatedPostsStrip"
 import { blogCardsArgTypes, blogCardsViewports, emptyPropsOf, localeOf, photoPropsOf } from "./blog-cards-story-kit"
 
 /**
@@ -336,4 +339,64 @@ export const PullQuoteFeatureEmpty: StoryObj<typeof BlogCardsPullQuoteFeature> =
   tags: ["!dev", "!autodocs"],
   argTypes: blogCardsArgTypes(BlogCardsPullQuoteFeature, blogCardsPullQuoteFeatureCopy, [], ["emptyLabel"]),
   render: (args, context) => <BlogCardsPullQuoteFeature locale={localeOf(context)} {...emptyPropsOf(blogCardsPullQuoteFeatureCopy)} panel={null} {...args} />,
+}
+
+export const NewsletterLatest: StoryObj<typeof BlogCardsNewsletterLatest> = {
+  name: "Newsletter + Latest",
+  argTypes: blogCardsArgTypes(BlogCardsNewsletterLatest, blogCardsNewsletterLatestCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsNewsletterLatest locale={localeOf(context)} {...photoPropsOf("newsletter-latest", context, blogCardsNewsletterLatestCopy)} {...args} />,
+}
+
+export const NewsletterLatestWithoutPhotos: StoryObj<typeof BlogCardsNewsletterLatest> = {
+  name: "Newsletter + Latest: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsNewsletterLatest, blogCardsNewsletterLatestCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsNewsletterLatest locale={localeOf(context)} {...args} />,
+}
+
+export const NewsletterLatestEmpty: StoryObj<typeof BlogCardsNewsletterLatest> = {
+  name: "Newsletter + Latest: Empty",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsNewsletterLatest, blogCardsNewsletterLatestCopy, [], ["emptyLabel"]),
+  render: (args, context) => <BlogCardsNewsletterLatest locale={localeOf(context)} {...emptyPropsOf(blogCardsNewsletterLatestCopy)} {...args} />,
+}
+
+export const AuthorSpotlight: StoryObj<typeof BlogCardsAuthorSpotlight> = {
+  name: "Author Spotlight",
+  argTypes: blogCardsArgTypes(BlogCardsAuthorSpotlight, blogCardsAuthorSpotlightCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsAuthorSpotlight locale={localeOf(context)} {...photoPropsOf("author-spotlight", context, blogCardsAuthorSpotlightCopy)} {...args} />,
+}
+
+export const AuthorSpotlightWithoutPhotos: StoryObj<typeof BlogCardsAuthorSpotlight> = {
+  name: "Author Spotlight: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsAuthorSpotlight, blogCardsAuthorSpotlightCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsAuthorSpotlight locale={localeOf(context)} {...args} />,
+}
+
+export const AuthorSpotlightEmpty: StoryObj<typeof BlogCardsAuthorSpotlight> = {
+  name: "Author Spotlight: Empty",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsAuthorSpotlight, blogCardsAuthorSpotlightCopy, [], ["emptyLabel"]),
+  render: (args, context) => <BlogCardsAuthorSpotlight locale={localeOf(context)} {...emptyPropsOf(blogCardsAuthorSpotlightCopy)} author={null} {...args} />,
+}
+
+export const RelatedPostsStrip: StoryObj<typeof BlogCardsRelatedPostsStrip> = {
+  name: "Related Posts Strip",
+  argTypes: blogCardsArgTypes(BlogCardsRelatedPostsStrip, blogCardsRelatedPostsStripCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsRelatedPostsStrip locale={localeOf(context)} {...photoPropsOf("related-posts-strip", context, blogCardsRelatedPostsStripCopy)} {...args} />,
+}
+
+export const RelatedPostsStripWithoutPhotos: StoryObj<typeof BlogCardsRelatedPostsStrip> = {
+  name: "Related Posts Strip: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsRelatedPostsStrip, blogCardsRelatedPostsStripCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsRelatedPostsStrip locale={localeOf(context)} {...args} />,
+}
+
+export const RelatedPostsStripEmpty: StoryObj<typeof BlogCardsRelatedPostsStrip> = {
+  name: "Related Posts Strip: Empty",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsRelatedPostsStrip, blogCardsRelatedPostsStripCopy, [], ["emptyLabel"]),
+  render: (args, context) => <BlogCardsRelatedPostsStrip locale={localeOf(context)} {...emptyPropsOf(blogCardsRelatedPostsStripCopy)} {...args} />,
 }

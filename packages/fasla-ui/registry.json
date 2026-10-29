@@ -6460,6 +6460,80 @@
         "blog-cards",
         "marketing"
       ]
+    },
+    {
+      "name": "blog-cards-newsletter-latest",
+      "type": "registry:block",
+      "title": "Blog Cards: Newsletter + Latest",
+      "description": "A subscribe panel painted with the inverse tokens, with an email field and a button that submits nowhere, beside a labelled list of the latest posts with thumbnails.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-newsletter-latest/BlogCardsNewsletterLatest.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-newsletter-latest.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
+    },
+    {
+      "name": "blog-cards-author-spotlight",
+      "type": "registry:block",
+      "title": "Blog Cards: Author Spotlight",
+      "description": "An author card with a portrait slot, role, bio, social marks and three figures, beside the author's posts as ruled rows with thumbnails and a ghost all-posts button.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "social-icons"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-author-spotlight/BlogCardsAuthorSpotlight.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-author-spotlight.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
+    },
+    {
+      "name": "blog-cards-related-posts-strip",
+      "type": "registry:block",
+      "title": "Blog Cards: Related Posts Strip",
+      "description": "A ruled header with an eyebrow, a title and a back button, over three bordered cards with a cover, a category, a title and the author.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-related-posts-strip/BlogCardsRelatedPostsStrip.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-related-posts-strip.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
     }
   ]
 }

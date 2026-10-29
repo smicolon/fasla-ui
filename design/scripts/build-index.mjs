@@ -253,6 +253,7 @@ export const CODE_MAP = {
       "classic-3-up-grid", "featured-two-up", "compact-4-up-thumb-grid", "bento-editorial-grid", "overlay-photo-trio",
       "journal-bento", "left-thumb-row-cards", "hairline-text-index", "numbered-reading-list", "latest-popular-split",
       "split-feature", "lead-ranked-picks", "dark-editorial-feature", "magazine-cover-story", "pull-quote-feature",
+      "newsletter-latest", "author-spotlight", "related-posts-strip",
     ].map((type) => [`blog-cards-${type}`, null])
   ),
 }

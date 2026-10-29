@@ -3439,20 +3439,23 @@
       },
       "types": {
         "blog-cards-classic-3-up-grid": "شبكة كلاسيكية بثلاث بطاقات",
-        "blog-cards-featured-two-up": "مقال مميز ومقالان",
+        "blog-cards-featured-two-up": "شبكة مقال مميز ومقالين",
         "blog-cards-compact-4-up-thumb-grid": "شبكة مدمجة بأربع صور مصغّرة",
         "blog-cards-bento-editorial-grid": "شبكة تحريرية بنمط بينتو",
-        "blog-cards-overlay-photo-trio": "ثلاث صور بنص فوقها",
-        "blog-cards-journal-bento": "بينتو اليوميات",
-        "blog-cards-left-thumb-row-cards": "بطاقات صفوف بصورة جانبية",
+        "blog-cards-overlay-photo-trio": "شبكة ثلاث صور بنص فوقها",
+        "blog-cards-journal-bento": "شبكة بينتو اليوميات",
+        "blog-cards-left-thumb-row-cards": "قائمة بطاقات بصورة جانبية",
         "blog-cards-hairline-text-index": "فهرس نصي بخطوط رفيعة",
         "blog-cards-numbered-reading-list": "قائمة قراءة مرقّمة",
-        "blog-cards-latest-popular-split": "الأحدث والأكثر قراءة",
+        "blog-cards-latest-popular-split": "قائمة الأحدث والأكثر قراءة",
         "blog-cards-split-feature": "مقال مميز بتخطيط منقسم",
         "blog-cards-lead-ranked-picks": "مقال رئيسي واختيارات مرتبة",
         "blog-cards-dark-editorial-feature": "مقال تحريري داكن",
-        "blog-cards-magazine-cover-story": "قصة غلاف المجلة",
-        "blog-cards-pull-quote-feature": "مقال باقتباس بارز"
+        "blog-cards-magazine-cover-story": "مقال غلاف المجلة",
+        "blog-cards-pull-quote-feature": "مقال باقتباس بارز",
+        "blog-cards-newsletter-latest": "نشرة بريدية مع الأحدث",
+        "blog-cards-author-spotlight": "بطاقة الكاتب ومقالاته",
+        "blog-cards-related-posts-strip": "شريط مقالات ذات صلة"
       }
     }
   },

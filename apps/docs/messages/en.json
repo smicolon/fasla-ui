@@ -3452,7 +3452,10 @@
         "blog-cards-lead-ranked-picks": "Lead + Ranked Picks",
         "blog-cards-dark-editorial-feature": "Dark Editorial Feature",
         "blog-cards-magazine-cover-story": "Magazine Cover Story",
-        "blog-cards-pull-quote-feature": "Pull-Quote Feature"
+        "blog-cards-pull-quote-feature": "Pull-Quote Feature",
+        "blog-cards-newsletter-latest": "Newsletter + Latest",
+        "blog-cards-author-spotlight": "Author Spotlight",
+        "blog-cards-related-posts-strip": "Related Posts Strip"
       }
     }
   },
