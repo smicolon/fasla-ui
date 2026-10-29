@@ -134,6 +134,17 @@ const ROW =
   "group/row flex items-center gap-4 border-b py-4 transition-opacity duration-[120ms] motion-reduce:transition-none [outline:none] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring active:[@container(max-width:39.99rem)]:opacity-[0.92]"
 const THUMB_HOVER =
   "group-hover/row:[@container(min-width:40rem)]:motion-safe:scale-[1.06] group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:scale-[1.06]"
+/*
+ * The field sits on the inverse panel, which is white in dark mode, while the
+ * Input atom paints itself with mode tokens: a 5% white fill and a 20% white
+ * border (invisible on white), a `muted-foreground` placeholder (#d4d4d4, about
+ * 1.5:1) and `foreground` text (near-white). In dark mode the field reads the
+ * inverse tokens instead, so its edge, placeholder and text are visible
+ * (`muted-foreground-inverse` is 4.7:1 on the panel). Light mode is the atom's
+ * own, as Figma draws it.
+ */
+const FIELD =
+  "min-w-0 flex-1 dark:[&_[data-slot=input-box]]:border-muted-foreground-inverse dark:[&_[data-slot=input-box]]:bg-transparent dark:[&_[data-slot=input]]:text-foreground-inverse dark:[&_[data-slot=input]]:placeholder:text-muted-foreground-inverse"
 const TITLE_HOVER =
   "group-hover/row:[@container(min-width:40rem)]:text-info group-focus-visible/row:[@container(min-width:40rem)]:text-info"
 
@@ -198,7 +209,7 @@ export function BlogCardsNewsletterLatest({
               autoComplete="email"
               aria-label={form.placeholder}
               placeholder={form.placeholder}
-              className="min-w-0 flex-1"
+              className={FIELD}
             />
             <Button type="submit" variant="secondary" size="md" className="w-full [@container(min-width:40rem)]:w-auto">
               {form.submitLabel}

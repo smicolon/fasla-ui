@@ -72,6 +72,14 @@ describe("Newsletter + Latest", () => {
     expect(quiet.defaultPrevented).toBe(true)
   })
 
+  it("reads the inverse tokens in dark mode so the field's edge, text and placeholder show on the white panel", () => {
+    const { container } = render(<BlogCardsNewsletterLatest />)
+    const className = container.querySelector("[data-slot='input-field']")?.getAttribute("class") ?? ""
+    expect(className).toContain("dark:[&_[data-slot=input-box]]:border-muted-foreground-inverse")
+    expect(className).toContain("dark:[&_[data-slot=input]]:placeholder:text-muted-foreground-inverse")
+    expect(className).toContain("dark:[&_[data-slot=input]]:text-foreground-inverse")
+  })
+
   it("is painted with the inverse tokens on the panel", () => {
     const { container } = render(<BlogCardsNewsletterLatest />)
     const html = container.innerHTML
