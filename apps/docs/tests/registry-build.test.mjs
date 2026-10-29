@@ -137,3 +137,20 @@ describe("Registry build — dependency links stay on ui.smicolon.com", () => {
     }
   })
 })
+
+describe("Registry build — Team blocks that paint with the inverse tokens", () => {
+  test("list theme-inverse, so a fresh install gets the mapping and the caption and section colours render", () => {
+    // `team` itself only paints inverse when a block passes `inverse`; the blocks that do must install the mapping.
+    const missing = registry.items
+      .filter((item) => item.name.startsWith("team-"))
+      .filter((item) =>
+        item.files.some((file) => {
+          const source = readFileSync(path.join(pkg, file.path), "utf8")
+          return /<Team(?:Section|Header)\b[^>]*\binverse\b/s.test(source) || /\b(?:bg|text|border)-[a-z-]*-inverse\b/.test(source)
+        })
+      )
+      .filter((item) => !(item.registryDependencies ?? []).includes("theme-inverse"))
+      .map((item) => item.name)
+    expect(missing).toEqual([])
+  })
+})

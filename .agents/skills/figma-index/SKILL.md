@@ -178,10 +178,11 @@ block (Type) linked to its Desktop/LTR variant, with status, owner, docs, code a
 Builder: `design/scripts/build-blocks-index.mjs` (imports the shared legend and page-name parsing
 from `build-index.mjs`). Test: `packages/fasla-ui/src/design-index/index-blocks.test.ts`.
 
-**Scope rule.** Every page after `🟡 Marketing UI Components ↴` (`40935:41137`) and after
-`🟡 E-commerce UI Components ↴` (`43164:51148`), up to the next header (a name ending in `↴`) or
-divider page (blank or `---`). The E-commerce section must end on `Gift Cards` (`43164:52345`).
-The builder re-derives the scope from the page list, checks the capture against it, and throws if
+**Scope rule.** Every page (except `EXCLUDED_FROM_BLOCKS`: `Footer 🔸`, `4108:1020`, which holds no component set — Yasmin, 2026-10-28) after `🟡 Marketing UI Components ↴` (`40935:41137`) and after
+`🟡 E-commerce UI Components ↴` (`43164:51148`), up to the next header (a name ending in `↴`).
+Divider pages (blank or `---`) inside a section are visual separators and are skipped, not an end
+(Yasmin, 2026-10-28). The E-commerce section must end on `Gift Cards` (`43164:52345`) and stops at
+the first divider after it. The builder re-derives the scope from the page list, checks the capture against it, and throws if
 a page appears after Gift Cards — ask the designer, do not move the anchor on your own.
 
 **Ready** = the page's status emoji is 🟢, nothing else (Yasmin, 2026-10-16). There is no ✅
@@ -202,13 +203,20 @@ comes back in that shape the build names it and stops.
 ```js
 const FROM = 0, TO = 6
 const HEADERS = ['40935:41137', '43164:51148']
+const SKIP = ['4108:1020']                          // EXCLUDED_FROM_BLOCKS in design/scripts/build-blocks-index.mjs: Footer 🔸, no component set
+const END = '43164:52345'                            // Gift Cards: the E-commerce section stops at the first divider after it
 const isHeader = n => n.trim().endsWith('↴')
 const isDivider = n => n.trim() === '' || /^-+$/.test(n.trim())
 const all = figma.root.children
 const scope = []
 for (const h of HEADERS) {
   let i = all.findIndex(p => p.id === h) + 1
-  while (i < all.length && !isHeader(all[i].name) && !isDivider(all[i].name)) scope.push({ header: h, page: all[i++] })
+  while (i < all.length && !isHeader(all[i].name)) {
+    const p = all[i++]
+    if (isDivider(p.name)) { if (scope.some(x => x.page.id === END)) break; continue }
+    if (SKIP.indexOf(p.id) !== -1) continue
+    scope.push({ header: h, page: p })
+  }
 }
 const out = []
 for (const { header, page: p } of scope.slice(FROM, TO)) {
@@ -260,12 +268,14 @@ input; its notes are appended to the matching block row.
 
 ```js
 const HEADERS = ['40935:41137', '43164:51148']
+const SKIP = ['4108:1020']                          // EXCLUDED_FROM_BLOCKS in design/scripts/build-blocks-index.mjs: Footer 🔸, no component set
+const END = '43164:52345'                            // Gift Cards: the E-commerce section stops at the first divider after it
 const EXTRA = ['44907:354325']                       // EXTRA_SETS in design/scripts/build-blocks-index.mjs
 const isHeader = n => n.trim().endsWith('↴')
 const isDivider = n => n.trim() === '' || /^-+$/.test(n.trim())
 const all = figma.root.children
 const scope = []
-for (const h of HEADERS) { let i = all.findIndex(p => p.id === h) + 1; while (i < all.length && !isHeader(all[i].name) && !isDivider(all[i].name)) scope.push(all[i++]) }
+for (const h of HEADERS) { let i = all.findIndex(p => p.id === h) + 1; while (i < all.length && !isHeader(all[i].name)) { const p = all[i++]; if (isDivider(p.name)) { if (scope.some(x => x.id === END)) break; continue } if (SKIP.indexOf(p.id) !== -1) continue; scope.push(p) } }
 const sets = [], types = [], docs = []
 for (const p of scope) {
   await p.loadAsync()
