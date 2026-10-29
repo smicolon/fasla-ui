@@ -97,3 +97,14 @@ describe("Compact 4-Up Thumb Grid header", () => {
     expect(button?.getAttribute("class")).not.toContain("w-full")
   })
 })
+
+describe("Overlay Photo Trio titles", () => {
+  it("keeps the three card titles short enough for one line at the side-by-side card widths (363px, 300px)", () => {
+    const titles = (locale: "en" | "ar") => blogCardsOverlayPhotoTrioCopy[locale].posts.map((post) => post.title)
+    expect(titles("en")).toEqual(["Mirroring is not flipping", "Motion, with restraint", "Specimens are for arguing"])
+    expect(titles("ar")[1]).toBe("رموز الحركة وضبط النفس")
+    for (const locale of ["en", "ar"] as const) {
+      for (const title of titles(locale)) expect(String(title).length, String(title)).toBeLessThanOrEqual(28)
+    }
+  })
+})

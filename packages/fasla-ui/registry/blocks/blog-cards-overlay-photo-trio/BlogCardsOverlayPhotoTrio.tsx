@@ -86,7 +86,7 @@ const COPY: Record<"en" | "ar", BlogCardsOverlayPhotoTrioCopy> = {
       {
         category: "Foundations",
         readTime: "5 min",
-        title: "Motion tokens: duration, easing, restraint",
+        title: "Motion, with restraint",
         summary:
           "Three durations and two curves cover almost everything. Everything else is a special case that needs a reason.",
         href: "#",
@@ -94,7 +94,7 @@ const COPY: Record<"en" | "ar", BlogCardsOverlayPhotoTrioCopy> = {
       {
         category: "Typography",
         readTime: "7 min",
-        title: "Type specimens are for arguing with",
+        title: "Specimens are for arguing",
         summary: "A specimen that only flatters the typeface is useless. Build the one that shows where it fails.",
         href: "#",
       },
@@ -116,7 +116,7 @@ const COPY: Record<"en" | "ar", BlogCardsOverlayPhotoTrioCopy> = {
       {
         category: "الأساسيات",
         readTime: "5 دقائق",
-        title: "رموز الحركة: المدة والتسارع وضبط النفس",
+        title: "رموز الحركة وضبط النفس",
         summary: "ثلاث مدد ومنحنيان يغطيان كل شيء تقريبًا. وما عدا ذلك حالة خاصة تحتاج مبررًا.",
         href: "#",
       },
