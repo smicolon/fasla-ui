@@ -28,11 +28,13 @@ import { atLength, localeOf, photos, socialProofArgTypes, socialProofViewports }
  * Social Proof: the Types of the Figma set, one block each, in four groups.
  * Grids & walls show many voices at once: three cards, staggered columns,
  * benefit cards, a giant quote pair, a cropped wall, posts from X and app
- * store reviews. Spotlights give one quote the stage: under a wordmark, on
+ * store reviews. Staggered Columns floats gently and Vertical Column Wall
+ * drifts on its own while they are in view, pausing on hover and focus and
+ * standing still with reduced motion. Spotlights give one quote the stage: under a wordmark, on
  * the inverse band, in corner brackets, with highlighted phrases, beside a
  * tinted portrait, over a photograph, and beside an arch. Carousels and
  * selectors let the reader step through quotes and stories or pick a person,
- * a part of the team or an audience; nothing moves on its own. Stories
+ * a part of the team or an audience; they move only when the reader acts. Stories
  * back a quote with a figure or a film: stat cards paged by dots, two video
  * cards, a case-study pair and a bento; a film plays only when its button is
  * pressed. Viewport,
