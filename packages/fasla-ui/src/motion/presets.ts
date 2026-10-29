@@ -51,6 +51,19 @@ export function useMotionPresets() {
       transition: { duration: durations.base, ease: easing.standard },
     }),
 
+    /**
+     * A story or panel changing sideways: the outgoing one leaves 24px toward
+     * the start of the swap and the incoming one arrives from the other side
+     * (`initial.x`), fading. Flip the sign of `x` for a right-to-left page.
+     * The exit is fast (120ms), the entrance base (180ms).
+     */
+    slideX: safe({
+      initial: { opacity: 0, x: 24 },
+      animate: { opacity: 1, x: 0 },
+      exit: { opacity: 0, x: -24, transition: { duration: durations.fast, ease: easing.standard } },
+      transition: { duration: durations.base, ease: easing.standard },
+    }),
+
     modalScale: safe({
       initial: { opacity: 0, scale: 0.98 },
       animate: { opacity: 1, scale: 1 },

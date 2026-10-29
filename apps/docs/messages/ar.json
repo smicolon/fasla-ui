@@ -3396,6 +3396,44 @@
       "inverseBody": "يضيف كلا الأمرين <code>add</code> ربط الرموز المعكوسة الذي تحتاجه الكتلة ذات السطح المعكوس. وإذا ثبّتّ إحداها يدويًا في Tailwind 4، فأضف هذه الأسطر الثلاثة إلى كتلة <code>@theme inline</code> في ملف الأنماط:",
       "inverseMore": "راجع <link>الرموز المعكوسة</link> لطريقة الإضافة في Tailwind 3، ولشرح القيم البديلة وضبط ألوانك أنت."
     },
+    "socialProofBlocks": {
+      "lead": "أقسام يتحدث فيها العملاء عن المنتج: شبكات الاقتباسات وجدرانها، والاقتباسات البارزة، والشرائح التي يتنقل بينها القارئ أو يختار منها، والقصص التي يدعمها رقم.",
+      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
+      "filterLabel": "التصفية حسب العائلة",
+      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
+      "families": {
+        "all": "الكل",
+        "grids": "الشبكات والجدران",
+        "spotlights": "الاقتباسات البارزة",
+        "carousels": "الشرائح والاختيار",
+        "stories": "القصص والأرقام"
+      },
+      "types": {
+        "social-proof-classic-trio-grid": "شبكة ثلاثية كلاسيكية",
+        "social-proof-staggered-columns": "أعمدة متدرّجة",
+        "social-proof-benefit-title-cards": "بطاقات بعناوين الفوائد",
+        "social-proof-giant-quote-duo": "اقتباسان كبيران",
+        "social-proof-vertical-column-wall": "جدار من الأعمدة",
+        "social-proof-tweet-wall": "جدار التغريدات",
+        "social-proof-app-review-row": "صف تقييمات التطبيقات",
+        "social-proof-centered-logo-spotlight": "اقتباس بارز بشعار في الوسط",
+        "social-proof-dark-editorial-split": "تقسيم تحريري داكن",
+        "social-proof-bracket-framed-quote": "اقتباس بين أقواس الزوايا",
+        "social-proof-highlighted-phrase-spotlight": "اقتباس بارز بعبارات مميّزة",
+        "social-proof-tinted-panel-portrait": "صورة شخصية على لوحة ملوّنة",
+        "social-proof-overlay-photo-quote": "اقتباس فوق صورة",
+        "social-proof-arch-portrait-quote": "اقتباس بصورة مقوّسة",
+        "social-proof-spotlight-carousel": "عارض الاقتباسات البارزة",
+        "social-proof-avatar-selector-row": "صف اختيار الصور الشخصية",
+        "social-proof-progress-carousel": "عارض بشريط تقدّم",
+        "social-proof-persona-pillars": "أعمدة الأدوار",
+        "social-proof-workplace-portrait-stories": "قصص بصور فرق العمل",
+        "social-proof-stat-story-cards": "بطاقات قصص بالأرقام",
+        "social-proof-video-story-cards": "بطاقات قصص بالفيديو",
+        "social-proof-case-study-row": "صف دراسات الحالة",
+        "social-proof-proof-bento": "بنتو الإثبات"
+      }
+    },
     "teamBlocks": {
       "lead": "{count, plural, one {قسم فريق واحد} two {قسما فريق} few {{n} أقسام للفريق} many {{n} قسمًا للفريق} other {{n} قسم للفريق}}: شبكات وجدران للصور، وأدلة وجداول، وإبرازات تضع مؤسسًا أو شريطًا من الأعضاء أو وظيفة مفتوحة في الواجهة.",
       "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
