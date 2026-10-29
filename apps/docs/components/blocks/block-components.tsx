@@ -656,6 +656,7 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   ),
   "careers-role-detail-page": dynamic(() =>
     import("@fasla-ui/blocks/careers-role-detail-page/CareersRoleDetailPage").then((m) => withCareersPhotos(m.CareersRoleDetailPage, "role-detail-page"))
+  ),
   "team-leadership-grid": dynamic(() =>
     import("@fasla-ui/blocks/team-leadership-grid/TeamLeadershipGrid").then((m) => withTeamPhotos(m.TeamLeadershipGrid, "leadership-grid", m.teamLeadershipGridCopy))
   ),
