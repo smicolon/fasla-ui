@@ -6,11 +6,14 @@ import { buttonVariants } from "../../ui/button/button"
 /*
  * Figma: `Blog Cards` (46368:243914), Type=Compact 4-Up Thumb Grid.
  *
- * A heading with a ghost "Browse all" button at its end, a hairline, and
- * a grid of small article cards. A card is a thumbnail over a body: the
+ * A heading with a ghost "Browse all" button at its end, on one row at every
+ * width, a hairline, and a grid of small article cards, 32px apart. A card is a thumbnail over a body: the
  * category in small capitals, a title of up to two lines, and a row with a
  * clock, the read time and the date. There is no summary and no author. The
  * whole card is the link, named by its title.
+ *
+ * The button is the Button atom's `xs` (26px) on Mobile and `sm` (32px) from
+ * Tablet up, and the heading is 24px on Mobile and 30px above it.
  *
  * Desktop (Figma 1440) lays four cards in a row, thumbnails 302 by 170.
  * Tablet (768) makes a grid of two columns, thumbnails 348 by 196. Mobile
@@ -179,8 +182,8 @@ export function BlogCardsCompact4UpThumbGrid({
       )}
       {...props}
     >
-      <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-12">
-        <div className="flex flex-col gap-3 [@container(min-width:40rem)]:flex-row [@container(min-width:40rem)]:items-center [@container(min-width:40rem)]:justify-between [@container(min-width:40rem)]:gap-8">
+      <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-8">
+        <div className="flex items-center justify-between gap-3 [@container(min-width:40rem)]:gap-8">
           <h2
             id={headingId}
             className="min-w-0 text-2xl font-semibold text-foreground [@container(min-width:40rem)]:text-3xl"
@@ -191,8 +194,8 @@ export function BlogCardsCompact4UpThumbGrid({
             <a
               href={button.href}
               className={cn(
-                buttonVariants({ variant: "ghost", size: "sm" }),
-                "w-full shrink-0 [@container(min-width:40rem)]:w-auto"
+                buttonVariants({ variant: "ghost", size: "xs" }),
+                "shrink-0 [@container(min-width:40rem)]:h-8 [@container(min-width:40rem)]:px-3 [@container(min-width:40rem)]:text-sm"
               )}
             >
               {button.label}

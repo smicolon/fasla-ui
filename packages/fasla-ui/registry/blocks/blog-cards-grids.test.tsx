@@ -81,3 +81,19 @@ describe("the covers", () => {
     container.querySelectorAll('[data-slot="avatar"]').forEach((avatar) => expect(avatar.getAttribute("aria-hidden")).toBe("true"))
   })
 })
+
+describe("Compact 4-Up Thumb Grid header", () => {
+  it.each(["en", "ar"] as const)("keeps the heading and the Browse all button on one row, 32px above the rule, in %s", (locale) => {
+    const { container } = render(<BlogCardsCompact4UpThumbGrid locale={locale} />)
+    const header = container.querySelector("h2")?.parentElement
+    const button = header?.querySelector("a")
+    expect(header?.getAttribute("class")).toMatch(/\bflex\b/)
+    expect(header?.getAttribute("class")).not.toContain("flex-col")
+    expect(header?.getAttribute("class")).toContain("justify-between")
+    expect(header?.parentElement?.getAttribute("class")).toContain("gap-8")
+    // xs (26px) on Mobile, sm (32px) from Tablet up
+    expect(button?.getAttribute("class")).toContain("h-[1.625rem]")
+    expect(button?.getAttribute("class")).toContain("[@container(min-width:40rem)]:h-8")
+    expect(button?.getAttribute("class")).not.toContain("w-full")
+  })
+})
