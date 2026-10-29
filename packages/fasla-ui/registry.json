@@ -5826,6 +5826,294 @@
         "team",
         "marketing"
       ]
+    },
+    {
+      "name": "careers",
+      "type": "registry:block",
+      "title": "Careers",
+      "description": "The parts every Careers block is built from: the section and its 1248px column, the left-aligned header, a role's place, commitment and pay, the New badge, a role's button, the hairline, and the helpers that filter and count roles.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/careers/careers.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/careers.tsx"
+        }
+      ],
+      "categories": [
+        "careers",
+        "marketing"
+      ]
+    },
+    {
+      "name": "careers-open-roles-hairline-list",
+      "type": "registry:block",
+      "title": "Careers: Open Roles — Hairline List",
+      "description": "Team chips that filter a list of roles ruled by hairlines, each row with its place, pay and a View role button.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "careers"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/careers-open-roles-hairline-list/CareersOpenRolesHairlineList.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/careers-open-roles-hairline-list.tsx"
+        }
+      ],
+      "categories": [
+        "careers",
+        "marketing"
+      ]
+    },
+    {
+      "name": "careers-role-cards-grid",
+      "type": "registry:block",
+      "title": "Careers: Role Cards Grid",
+      "description": "A search field and three selects over a grid of role cards, each with a bookmark, its facts and a ghost View role button.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "select",
+        "careers"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/careers-role-cards-grid/CareersRoleCardsGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/careers-role-cards-grid.tsx"
+        }
+      ],
+      "categories": [
+        "careers",
+        "marketing"
+      ]
+    },
+    {
+      "name": "careers-roles-by-department",
+      "type": "registry:block",
+      "title": "Careers: Roles by Department",
+      "description": "One group per team: its name, count of open roles and a line on what it does, beside that team's roles with an Apply button.",
+      "dependencies": [],
+      "registryDependencies": [
+        "careers"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/careers-roles-by-department/CareersRolesByDepartment.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/careers-roles-by-department.tsx"
+        }
+      ],
+      "categories": [
+        "careers",
+        "marketing"
+      ]
+    },
+    {
+      "name": "careers-open-vacancies-table",
+      "type": "registry:block",
+      "title": "Careers: Open Vacancies Table",
+      "description": "A table of every vacancy with a plus that opens the row, and a numbered pager; a card per vacancy on phones.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "pagination",
+        "careers"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/careers-open-vacancies-table/CareersOpenVacanciesTable.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/careers-open-vacancies-table.tsx"
+        }
+      ],
+      "categories": [
+        "careers",
+        "marketing"
+      ]
+    },
+    {
+      "name": "careers-roles-list-accordion-expanded",
+      "type": "registry:block",
+      "title": "Careers: Roles List — Accordion Expanded",
+      "description": "Roles as an accordion: the open row shows the role's facts, an Apply now button and what the job is, beside one another.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion",
+        "careers"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/careers-roles-list-accordion-expanded/CareersRolesListAccordionExpanded.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/careers-roles-list-accordion-expanded.tsx"
+        }
+      ],
+      "categories": [
+        "careers",
+        "marketing"
+      ]
+    },
+    {
+      "name": "careers-about-card-role-list",
+      "type": "registry:block",
+      "title": "Careers: About Card + Role List",
+      "description": "An About us card with a photo and a play button beside a list of roles, each with its place, pay, experience and an Apply Now button.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "careers"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/careers-about-card-role-list/CareersAboutCardRoleList.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/careers-about-card-role-list.tsx"
+        }
+      ],
+      "categories": [
+        "careers",
+        "marketing"
+      ]
+    },
+    {
+      "name": "careers-featured-role-spotlight",
+      "type": "registry:block",
+      "title": "Careers: Featured Role Spotlight",
+      "description": "One role given the room: its title, team and summary, four fact tiles, Apply and Share buttons beside a photo, and the team's other roles as linked cards.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "careers"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/careers-featured-role-spotlight/CareersFeaturedRoleSpotlight.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/careers-featured-role-spotlight.tsx"
+        }
+      ],
+      "categories": [
+        "careers",
+        "marketing"
+      ]
+    },
+    {
+      "name": "careers-perks-benefits",
+      "type": "registry:block",
+      "title": "Careers: Perks & Benefits",
+      "description": "A photo beside six perks, each a mark, a title and a line, with a note and a See open roles button underneath.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "careers"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/careers-perks-benefits/CareersPerksBenefits.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/careers-perks-benefits.tsx"
+        }
+      ],
+      "categories": [
+        "careers",
+        "marketing"
+      ]
+    },
+    {
+      "name": "careers-no-open-roles-empty-state",
+      "type": "registry:block",
+      "title": "Careers: No Open Roles — Empty State",
+      "description": "What a careers page says with no roles: an email form that checks and sends the address, topic chips, a photo, and two cards for a speculative application and following the team.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "input",
+        "careers"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/careers-no-open-roles-empty-state/CareersNoOpenRolesEmptyState.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/careers-no-open-roles-empty-state.tsx"
+        }
+      ],
+      "categories": [
+        "careers",
+        "marketing"
+      ]
+    },
+    {
+      "name": "careers-role-detail-panel",
+      "type": "registry:block",
+      "title": "Careers: Role Detail Panel",
+      "description": "The content of a role's panel, drawn inline: a header with badges, title and facts, a scrolling body, and an Apply now and Save footer. Put it inside Sheet to slide it in.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "careers"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/careers-role-detail-panel/CareersRoleDetailPanel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/careers-role-detail-panel.tsx"
+        }
+      ],
+      "categories": [
+        "careers",
+        "marketing"
+      ]
+    },
+    {
+      "name": "careers-role-detail-page",
+      "type": "registry:block",
+      "title": "Careers: Role Detail Page",
+      "description": "A role as a page: breadcrumb, photo banner, title and actions, the full posting, and a card with the role's facts, Apply now, Save and Share.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "breadcrumb",
+        "button",
+        "careers"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/careers-role-detail-page/CareersRoleDetailPage.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/careers-role-detail-page.tsx"
+        }
+      ],
+      "categories": [
+        "careers",
+        "marketing"
+      ]
     }
   ]
 }

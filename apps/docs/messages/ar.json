@@ -3337,6 +3337,31 @@
         "about-numbered-rows": "الصفوف المرقّمة"
       }
     },
+    "careersBlocks": {
+      "lead": "أقسام لصفحة الوظائف: الوظائف المتاحة في قوائم وبطاقات وفرق وجداول ومطويات، مع التصفية والتنقل بين الصفحات.",
+      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
+      "filterLabel": "التصفية حسب العائلة",
+      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
+      "families": {
+        "all": "الكل",
+        "lists": "تصفّح الوظائف",
+        "highlights": "إبراز وحالات",
+        "details": "تفاصيل الوظيفة"
+      },
+      "types": {
+        "careers-open-roles-hairline-list": "قائمة وظائف بخط رفيع",
+        "careers-role-cards-grid": "شبكة بطاقات الوظائف",
+        "careers-roles-by-department": "الوظائف حسب الفريق",
+        "careers-open-vacancies-table": "جدول الوظائف الشاغرة",
+        "careers-roles-list-accordion-expanded": "قائمة الوظائف المتوسّعة",
+        "careers-about-card-role-list": "بطاقة التعريف وقائمة الوظائف",
+        "careers-featured-role-spotlight": "الوظيفة المميزة",
+        "careers-perks-benefits": "المزايا",
+        "careers-no-open-roles-empty-state": "لا توجد وظائف مفتوحة",
+        "careers-role-detail-panel": "لوحة تفاصيل الوظيفة",
+        "careers-role-detail-page": "صفحة تفاصيل الوظيفة"
+      }
+    },
     "blockCard": {
       "fullScreen": "فتح بملء الشاشة",
       "newTab": "(يُفتح في علامة تبويب جديدة)",
