@@ -200,6 +200,16 @@ describe("Search + Chips + Results", () => {
     expect(screen.getByRole("searchbox")).toBe(field)
   })
 
+  it("gives each chip a 44px hit area while the chip keeps its Badge size", () => {
+    render(<BlogCardsSearchChipsResults />)
+    for (const chip of within(screen.getByRole("group", { name: "Topics" })).getAllByRole("button")) {
+      expect(chip.className).toContain("after:h-11")
+      expect(chip.className).toContain("after:w-[max(100%,2.75rem)]")
+      expect(chip.className).toContain("relative")
+      expect(chip.className).toContain("min-h-[1.375rem]")
+    }
+  })
+
   it("applies a chip at once, narrowing with the text, and swaps with the cross-fade", () => {
     const { container } = render(<BlogCardsSearchChipsResults />)
     fireEvent.click(screen.getByRole("button", { name: "RTL & Arabic" }))

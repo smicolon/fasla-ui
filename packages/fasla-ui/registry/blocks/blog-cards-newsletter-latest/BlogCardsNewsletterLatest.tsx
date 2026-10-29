@@ -230,7 +230,7 @@ export function BlogCardsNewsletterLatest({
             {link ? (
               <a
                 href={link.href}
-                className="shrink-0 text-xs font-medium text-info [outline:none] hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+                className="relative shrink-0 text-xs font-medium text-info [outline:none] hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring after:absolute after:left-1/2 after:top-1/2 after:h-11 after:w-[max(100%,2.75rem)] after:-translate-x-1/2 after:-translate-y-1/2 after:content-['']"
               >
                 {link.label}
               </a>

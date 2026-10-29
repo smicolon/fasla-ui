@@ -222,8 +222,9 @@ const canAnimate = () =>
 const fill = (template: string, values: Record<string, number>) =>
   template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? ""))
 
+/** `relative` and a 44px hit area drawn by a pseudo-element, centred on the chip: the chip keeps its size. */
 const CHIP =
-  "cursor-pointer transition-colors duration-150 motion-reduce:transition-none [outline:none] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+  "relative after:absolute after:left-1/2 after:top-1/2 after:h-11 after:w-[max(100%,2.75rem)] after:-translate-x-1/2 after:-translate-y-1/2 after:content-[''] cursor-pointer transition-colors duration-150 motion-reduce:transition-none [outline:none] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
 
 export interface BlogCardsSearchChipsResultsProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "title">,

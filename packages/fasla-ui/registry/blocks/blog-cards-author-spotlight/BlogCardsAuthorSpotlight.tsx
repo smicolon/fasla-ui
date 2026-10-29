@@ -191,8 +191,9 @@ const THUMB_HOVER =
   "group-hover/row:[@container(min-width:40rem)]:motion-safe:scale-[1.05] group-focus-visible/row:[@container(min-width:40rem)]:motion-safe:scale-[1.05]"
 const TITLE_HOVER =
   "group-hover/row:[@container(min-width:40rem)]:text-info group-focus-visible/row:[@container(min-width:40rem)]:text-info"
+/** `relative` and a 44px hit area drawn by a pseudo-element, centred on the mark: the mark keeps its 20px. */
 const SOCIAL =
-  "text-foreground [outline:none] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
+  "relative after:absolute after:left-1/2 after:top-1/2 after:h-11 after:w-[max(100%,2.75rem)] after:-translate-x-1/2 after:-translate-y-1/2 after:content-[''] text-foreground [outline:none] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
 
 export interface BlogCardsAuthorSpotlightProps
   extends Omit<React.HTMLAttributes<HTMLElement>, "title">,

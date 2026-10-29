@@ -87,6 +87,15 @@ describe("Newsletter + Latest", () => {
     expect(className).toContain("dark:[&_[data-slot=input]]:text-foreground-inverse")
   })
 
+  it("gives the small links a 44px hit area without changing their size", () => {
+    const { container } = render(<BlogCardsNewsletterLatest />)
+    const viewAll = screen.getByRole("link", { name: "View all" })
+    expect(viewAll.className).toContain("after:h-11")
+    expect(viewAll.className).toContain("after:w-[max(100%,2.75rem)]")
+    expect(viewAll.className).toContain("relative")
+    expect(container.querySelectorAll("a[aria-labelledby]")).toHaveLength(4)
+  })
+
   it("is painted with the inverse tokens on the panel", () => {
     const { container } = render(<BlogCardsNewsletterLatest />)
     const html = container.innerHTML
@@ -112,6 +121,16 @@ describe("Author Spotlight", () => {
     const marks = container.querySelectorAll("svg[data-platform]")
     expect(Array.from(marks).map((svg) => svg.getAttribute("data-platform"))).toEqual(["linkedin", "x", "github"])
     marks.forEach((svg) => expect(svg.getAttribute("aria-hidden")).toBe("true"))
+  })
+
+  it("gives each social mark a 44px hit area while the mark stays 20px", () => {
+    render(<BlogCardsAuthorSpotlight />)
+    for (const label of ["LinkedIn", "X", "GitHub"]) {
+      const link = screen.getByRole("link", { name: label })
+      expect(link.className).toContain("after:h-11")
+      expect(link.className).toContain("after:w-[max(100%,2.75rem)]")
+      expect(link.querySelector("svg")?.getAttribute("class")).toContain("size-5")
+    }
   })
 
   it("lists three figures, each a value over its label", () => {
