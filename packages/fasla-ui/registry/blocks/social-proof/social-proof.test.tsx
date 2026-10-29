@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest"
 import { act, fireEvent, render, screen } from "@testing-library/react"
-import { Isolated, SocialProofStars, toColumns } from "./social-proof"
+import { Isolated, SocialProofStars, WALL_DRIFT_SPEED, driftDuration, toColumns } from "./social-proof"
 import { SocialProofClassicTrioGrid } from "../social-proof-classic-trio-grid/SocialProofClassicTrioGrid"
 import { SocialProofVerticalColumnWall } from "../social-proof-vertical-column-wall/SocialProofVerticalColumnWall"
 import { SocialProofTweetWall } from "../social-proof-tweet-wall/SocialProofTweetWall"
@@ -277,7 +277,7 @@ describe("Proof Bento", () => {
 })
 
 /** Stubs the browser APIs the moving blocks use, and records what they were asked to do. */
-function stubMotion({ reduced = false, width = 1300 }: { reduced?: boolean; width?: number } = {}) {
+function stubMotion({ reduced = false, width = 1300, height = 400 }: { reduced?: boolean; width?: number; height?: number } = {}) {
   const calls: { keyframes: Keyframe[]; options: KeyframeAnimationOptions; play: ReturnType<typeof vi.fn>; pause: ReturnType<typeof vi.fn>; cancel: ReturnType<typeof vi.fn> }[] = []
   const animate = vi.fn(function (keyframes: Keyframe[], options: KeyframeAnimationOptions) {
     const call = { keyframes, options, play: vi.fn(), pause: vi.fn(), cancel: vi.fn() }
@@ -297,7 +297,8 @@ function stubMotion({ reduced = false, width = 1300 }: { reduced?: boolean; widt
       disconnect() {}
     }
   )
-  vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockReturnValue({ width, height: 100, x: 0, y: 0, top: 0, left: 0, right: width, bottom: 100, toJSON: () => ({}) } as DOMRect)
+  // jsdom lays nothing out: every element is `width` wide, and every column's first copy `height` tall.
+  vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockReturnValue({ width, height, x: 0, y: 0, top: 0, left: 0, right: width, bottom: height, toJSON: () => ({}) } as DOMRect)
   return {
     calls,
     intersect: (visible: boolean) => act(() => intersect(visible)),
@@ -358,11 +359,13 @@ describe("Vertical Column Wall drifts", () => {
     const { container } = render(<SocialProofVerticalColumnWall />)
     // The first pass runs before the width is measured, with one column; the last three are the real ones.
     const drift = motion.calls.filter((call) => call.options.iterations === Infinity).slice(-3)
+    // One copy is 400px tall in this stub and the gap is 20, so a loop is 420px of travel.
     expect(drift.map((call) => [call.options.duration, call.options.direction])).toEqual([
-      [45000, "normal"],
-      [52000, "reverse"],
-      [48000, "normal"],
+      [(420 / WALL_DRIFT_SPEED.outer) * 1000, "normal"],
+      [(420 / WALL_DRIFT_SPEED.middle) * 1000, "reverse"],
+      [(420 / WALL_DRIFT_SPEED.outer) * 1000, "normal"],
     ])
+    expect(drift.every((call) => (call.keyframes[1] as { transform: string }).transform === "translateY(-420px)")).toBe(true)
     expect(drift.every((call) => call.options.easing === "linear")).toBe(true)
     expect(drift.every((call) => call.pause.mock.calls.length > 0 && call.play.mock.calls.length === 0)).toBe(true)
     motion.intersect(true)
@@ -380,16 +383,16 @@ describe("Vertical Column Wall drifts", () => {
     motion.restore()
   })
 
-  it("holds every card twice, the repeat hidden from assistive technology and out of the Tab order", () => {
+  it("holds every card three times, the repeats hidden from assistive technology and out of the Tab order", () => {
     const motion = stubMotion()
     const { container } = render(<SocialProofVerticalColumnWall />)
     const lists = [...container.querySelectorAll("[data-drift] > ul")]
-    expect(lists).toHaveLength(6)
+    expect(lists).toHaveLength(9)
     const repeats = lists.filter((list) => list.getAttribute("aria-hidden") === "true")
-    expect(repeats).toHaveLength(3)
+    expect(repeats).toHaveLength(6)
     expect(repeats.every((list) => list.hasAttribute("inert"))).toBe(true)
     expect(container.querySelectorAll("[data-reveal]")).toHaveLength(12)
-    expect(screen.getAllByText("“Rolled out across four product lines in one sprint.”")).toHaveLength(2)
+    expect(screen.getAllByText("“Rolled out across four product lines in one sprint.”")).toHaveLength(3)
     motion.restore()
   })
 
@@ -402,36 +405,30 @@ describe("Vertical Column Wall drifts", () => {
   })
 })
 
-describe("Staggered Columns float", () => {
-  it("floats three columns alternately by 14px, and two by 8px", () => {
-    const motion = stubMotion({ width: 1300 })
-    const { unmount } = render(<SocialProofStaggeredColumns />)
-    const wide = motion.calls.filter((call) => call.options.iterations === Infinity)
-    expect(wide.map((call) => [call.keyframes.map((k) => k.transform), call.options.direction])).toEqual([
-      [["translateY(-14px)", "translateY(14px)"], "alternate"],
-      [["translateY(-14px)", "translateY(14px)"], "alternate-reverse"],
-      [["translateY(-14px)", "translateY(14px)"], "alternate"],
-    ])
-    expect(wide.every((call) => call.options.easing === "ease-in-out" && call.options.duration === 4500)).toBe(true)
-    unmount()
-    motion.restore()
-    const tablet = stubMotion({ width: 700 })
-    render(<SocialProofStaggeredColumns />)
-    const two = tablet.calls.filter((call) => call.options.iterations === Infinity)
-    expect(two).toHaveLength(2)
-    expect(two[0]!.keyframes.map((k) => k.transform)).toEqual(["translateY(-8px)", "translateY(8px)"])
-    tablet.restore()
+describe("Reading speeds", () => {
+  it("keeps the wall's middle column slower than its outer ones, near 40px per second", () => {
+    expect(WALL_DRIFT_SPEED.middle).toBeLessThan(WALL_DRIFT_SPEED.outer)
+    expect(WALL_DRIFT_SPEED.outer).toBeGreaterThanOrEqual(40)
+    expect(WALL_DRIFT_SPEED.outer).toBeLessThanOrEqual(45)
+    expect(WALL_DRIFT_SPEED.middle).toBeGreaterThanOrEqual(36)
   })
 
-  it("stays still on phones and with reduced motion, and pauses while not in view", () => {
-    const phone = stubMotion({ width: 330 })
-    const first = render(<SocialProofStaggeredColumns />)
-    expect(phone.calls.filter((call) => call.options.iterations === Infinity)).toHaveLength(0)
-    first.unmount()
-    phone.restore()
-    const reduced = stubMotion({ reduced: true })
-    render(<SocialProofStaggeredColumns />)
-    expect(reduced.calls.filter((call) => call.options.iterations === Infinity)).toHaveLength(0)
-    reduced.restore()
+  it("turns a distance and a speed into a duration", () => {
+    expect(driftDuration(400, 40)).toBe(10000)
+    expect(driftDuration(420, 42)).toBe(10000)
+  })
+
+  it("gives different loop heights the same speed", () => {
+    const short = stubMotion({ height: 200 })
+    const a = render(<SocialProofVerticalColumnWall />)
+    const shortCall = short.calls.filter((call) => call.options.iterations === Infinity).slice(-3)[0]!
+    a.unmount()
+    short.restore()
+    const tall = stubMotion({ height: 800 })
+    render(<SocialProofVerticalColumnWall />)
+    const tallCall = tall.calls.filter((call) => call.options.iterations === Infinity).slice(-3)[0]!
+    expect((220 / (shortCall.options.duration as number)) * 1000).toBeCloseTo(WALL_DRIFT_SPEED.outer, 5)
+    expect((820 / (tallCall.options.duration as number)) * 1000).toBeCloseTo(WALL_DRIFT_SPEED.outer, 5)
+    tall.restore()
   })
 })

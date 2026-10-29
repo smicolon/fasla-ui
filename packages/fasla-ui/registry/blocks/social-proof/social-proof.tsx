@@ -647,13 +647,31 @@ export function useVideoPlayback(src: string | undefined, locale: SocialProofLoc
  * slow loop.
  */
 
+/*
+ * Reading speeds, in px per second. A column's loop lasts its distance (one
+ * copy's height plus the gap) divided by its speed, so every variant reads at
+ * the same pace whatever its card heights. Tune the drift here.
+ */
+
+/** Vertical Column Wall: the outer columns, and the middle one a little slower so the parallax stays. */
+export const WALL_DRIFT_SPEED = { outer: 42, middle: 38 }
+
+/** Staggered Columns: every column, up or down. */
+export const STAGGERED_DRIFT_SPEED = 40
+
+/** How long a loop of `distance` px takes at `speed` px per second, in ms. */
+export function driftDuration(distance: number, speed: number) {
+  return (distance / speed) * 1000
+}
+
 /**
  * Runs the animations `make` builds for `root`, only while it is in view and
  * not hovered or holding focus. `make` is called again when the root's width
- * changes, since the distances depend on the cards' heights. The animations
- * are cancelled on unmount and when reduced motion is turned on.
+ * changes, or the size of anything `watch` selects, since the distances depend
+ * on the cards' heights (which change as fonts and photos load). The
+ * animations are cancelled on unmount and when reduced motion is turned on.
  */
-export function useDrift<T extends HTMLElement>(make: (root: T) => Animation[], deps: React.DependencyList) {
+export function useDrift<T extends HTMLElement>(make: (root: T) => Animation[], deps: React.DependencyList, watch = "[data-drift] > :first-child") {
   const ref = React.useRef<T>(null)
   React.useEffect(() => {
     const root = ref.current
@@ -679,18 +697,21 @@ export function useDrift<T extends HTMLElement>(make: (root: T) => Animation[], 
     })
     intersection.observe(root)
     let frame = 0
-    let width = root.getBoundingClientRect().width
+    const watched = () => Array.from(root.querySelectorAll<HTMLElement>(watch))
+    const measure = () => [root, ...watched()].map((el) => Math.round(el.getBoundingClientRect().height) + "x" + Math.round(el.getBoundingClientRect().width)).join()
+    let size = measure()
     const resize =
       typeof ResizeObserver === "undefined"
         ? null
-        : new ResizeObserver((entries) => {
-            const next = entries[0]?.contentRect.width ?? width
-            if (Math.abs(next - width) < 1) return
-            width = next
+        : new ResizeObserver(() => {
+            const next = measure()
+            if (next === size) return
+            size = next
             cancelAnimationFrame(frame)
             frame = requestAnimationFrame(start)
           })
     resize?.observe(root)
+    watched().forEach((el) => resize?.observe(el))
     const enter = () => ((hovered = true), sync())
     const leave = () => ((hovered = false), sync())
     const focusIn = () => ((focused = true), sync())

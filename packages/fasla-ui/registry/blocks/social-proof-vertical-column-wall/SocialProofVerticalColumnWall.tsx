@@ -8,6 +8,8 @@ import {
   SocialProofQuote,
   SocialProofSection,
   SocialProofStars,
+  WALL_DRIFT_SPEED,
+  driftDuration,
   toColumns,
   useCanDrift,
   useColumnCount,
@@ -30,9 +32,11 @@ import {
  * Motion (Figma's ⚡ Motion note): the columns drift vertically on their own
  * and loop without a seam: the outer columns climb and the middle one falls
  * (on Tablet the first column climbs and the second falls; on phones the one
- * column climbs), each loop about 45, 52 and 48 seconds, linear. Every column
- * holds its cards twice, the repeat hidden from assistive technology and out
- * of the Tab order, so the wrap is invisible. It runs only while the wall is
+ * column climbs), linear, at a reading speed rather than a fixed time: about
+ * 42px per second for the outer columns and 38 for the middle one
+ * (`WALL_DRIFT_SPEED`), so a loop lasts its distance over that speed. Every
+ * column holds its cards again, twice, below its own, the repeats hidden from
+ * assistive technology and out of the Tab order, so the wrap is invisible. It runs only while the wall is
  * in the viewport, pauses while the pointer is over it or focus is inside it,
  * and stands still with reduced motion. The first time the wall enters the
  * viewport the cards also fade in once, 60ms apart (fadeIn with the stagger
@@ -112,10 +116,14 @@ export interface SocialProofVerticalColumnWallProps
   photos?: SocialProofPhotos
 }
 
-/** A loop's length in seconds, per column, by how many columns there are: 45, 52 and 48 on Desktop. */
-const LOOP_SECONDS: Record<number, number[]> = { 1: [48], 2: [45, 52], 3: [45, 52, 48] }
 /** The gap between a column's cards, `gap-5`, which the loop's distance includes. */
 const CARD_GAP = 20
+/**
+ * Copies of its cards a column holds after its own. One is not enough: a
+ * raised column (up to 110px) is shorter than the stage plus the raise, so at
+ * the end of a loop its bottom edge would run dry.
+ */
+const REPEATS = 2
 
 export function SocialProofVerticalColumnWall({
   locale = "en",
@@ -139,14 +147,16 @@ export function SocialProofVerticalColumnWall({
         const first = column.firstElementChild as HTMLElement | null
         if (!first || typeof column.animate !== "function") return []
         // One copy's height and the gap before the repeat: moving that far puts the repeat where the first copy began.
-        const distance = first.offsetHeight + CARD_GAP
+        // Measured, not `offsetHeight`, which rounds: a fraction of a pixel would show as a jump at the wrap.
+        const distance = first.getBoundingClientRect().height + CARD_GAP
+        // The middle column (the second of two or three) runs the other way, a little slower.
+        const middle = columnCount > 1 && columnIndex === 1
         return [
           column.animate([{ transform: "translateY(0)" }, { transform: `translateY(${-distance}px)` }], {
-            duration: (LOOP_SECONDS[columnCount]?.[columnIndex] ?? 48) * 1000,
+            duration: driftDuration(distance, middle ? WALL_DRIFT_SPEED.middle : WALL_DRIFT_SPEED.outer),
             iterations: Infinity,
             easing: "linear",
-            // The middle column (the second of two or three) runs the other way.
-            direction: columnCount > 1 && columnIndex === 1 ? "reverse" : "normal",
+            direction: middle ? "reverse" : "normal",
           }),
         ]
       }),
@@ -171,9 +181,9 @@ export function SocialProofVerticalColumnWall({
           <div ref={stageRef} className="flex h-[520px] w-full gap-6 overflow-hidden [@container(min-width:40rem)]:h-[560px]">
             {columns.map((column, columnIndex) => (
               <div key={columnIndex} data-drift="" className={cn("flex min-w-0 flex-1 flex-col gap-5", RAISE[columns.length]?.[columnIndex])}>
-                {[false, ...(canDrift ? [true] : [])].map((repeat) => (
+                {[false, ...(canDrift ? Array.from({ length: REPEATS }, () => true) : [])].map((repeat, copy) => (
                   <ul
-                    key={String(repeat)}
+                    key={copy}
                     // The repeat is only there for the loop: hidden from assistive technology and out of the Tab order.
                     aria-hidden={repeat || undefined}
                     ref={repeat ? (el) => el?.setAttribute("inert", "") : undefined}
