@@ -30,6 +30,9 @@ import {
  * the text, the button, and each role over its full-width Apply Now. In
  * Arabic the card sits on the right and each Apply Now at the left edge.
  *
+ * The photo is cropped as Figma crops it: the full width, starting 7% down
+ * the image, which is `object-position: 50% 15%` and keeps the head in frame.
+ *
  * The play button calls `onPlay`; the block draws no video of its own, and
  * does not autoplay anything.
  *
@@ -169,7 +172,7 @@ export function CareersAboutCardRoleList({
           </div>
           <p className="text-sm text-muted-foreground [@container(min-width:40rem)]:col-start-2 [@container(min-width:64rem)]:col-start-1">{cardBody ?? copy.cardBody}</p>
           <div className="relative order-first aspect-[3/2] w-full overflow-hidden rounded-xl bg-background [@container(min-width:40rem)]:col-start-1 [@container(min-width:40rem)]:row-span-3 [@container(min-width:40rem)]:row-start-1 [@container(min-width:40rem)]:aspect-auto [@container(min-width:40rem)]:h-44 [@container(min-width:64rem)]:order-none [@container(min-width:64rem)]:row-auto [@container(min-width:64rem)]:row-span-1 [@container(min-width:64rem)]:aspect-[3/2] [@container(min-width:64rem)]:h-auto">
-            {photo ? <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" className="absolute inset-0 size-full object-cover" /> : null}
+            {photo ? <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" className="absolute inset-0 size-full object-cover object-[50%_15%]" /> : null}
             <Button
               type="button"
               variant="default"
