@@ -665,6 +665,9 @@ export function useDrift<T extends HTMLElement>(make: (root: T) => Animation[], 
     const sync = () => animations.forEach((animation) => (visible && !hovered && !focused ? animation.play() : animation.pause()))
     const start = () => {
       animations.forEach((animation) => animation.cancel())
+      animations = []
+      // A resize after reduced motion was turned on must not bring the drift back.
+      if (prefersReducedMotion()) return
       animations = make(root)
       animations.forEach((animation) => animation.pause())
       sync()
