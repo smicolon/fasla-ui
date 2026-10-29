@@ -39,13 +39,3 @@ const ALWAYS_HIDDEN = ["set", "index", "label", "networkLabel"]
  */
 export const socialProofArgTypes = (component: unknown, copy?: BlockCopy, hide: string[] = []): ArgTypes =>
   blockArgTypes(component, copy, { hide: [...ALWAYS_HIDDEN, ...hide] })
-
-/**
- * A string of exactly `length` characters cut from `text` repeated, for the
- * stories that fill every slot to its content limit.
- */
-export const atLength = (text: string, length: number) => {
-  let out = text
-  while (out.length < length) out += " " + text
-  return out.slice(0, length).trimEnd().padEnd(length, ".")
-}
