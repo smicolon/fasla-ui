@@ -3396,6 +3396,44 @@
       "inverseBody": "Both <code>add</code> commands also add the inverse tokens’ mapping that a block on an inverted surface needs. Installing one by hand on Tailwind 4, add these three lines to your stylesheet’s <code>@theme inline</code> block:",
       "inverseMore": "On Tailwind 3, the fallbacks, and setting your own colours: see <link>Inverse tokens</link>."
     },
+    "socialProofBlocks": {
+      "lead": "Sections where customers speak for the product: quote grids and walls, spotlights, carousels and selectors, and stories backed by a figure.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "filterLabel": "Filter by family",
+      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
+      "families": {
+        "all": "All",
+        "grids": "Grids & walls",
+        "spotlights": "Spotlights",
+        "carousels": "Carousels & selectors",
+        "stories": "Stories & numbers"
+      },
+      "types": {
+        "social-proof-classic-trio-grid": "Classic Trio Grid",
+        "social-proof-staggered-columns": "Staggered Columns",
+        "social-proof-benefit-title-cards": "Benefit-Title Cards",
+        "social-proof-giant-quote-duo": "Giant Quote Duo",
+        "social-proof-vertical-column-wall": "Vertical Column Wall",
+        "social-proof-tweet-wall": "Tweet Wall",
+        "social-proof-app-review-row": "App Review Row",
+        "social-proof-centered-logo-spotlight": "Centered Logo Spotlight",
+        "social-proof-dark-editorial-split": "Dark Editorial Split",
+        "social-proof-bracket-framed-quote": "Bracket-Framed Quote",
+        "social-proof-highlighted-phrase-spotlight": "Highlighted-Phrase Spotlight",
+        "social-proof-tinted-panel-portrait": "Tinted-Panel Portrait",
+        "social-proof-overlay-photo-quote": "Overlay Photo Quote",
+        "social-proof-arch-portrait-quote": "Arch Portrait Quote",
+        "social-proof-spotlight-carousel": "Spotlight Carousel",
+        "social-proof-avatar-selector-row": "Avatar-Selector Row",
+        "social-proof-progress-carousel": "Progress Carousel",
+        "social-proof-persona-pillars": "Persona Pillars",
+        "social-proof-workplace-portrait-stories": "Workplace Portrait Stories",
+        "social-proof-stat-story-cards": "Stat-Story Cards",
+        "social-proof-video-story-cards": "Video Story Cards",
+        "social-proof-case-study-row": "Case-Study Row",
+        "social-proof-proof-bento": "Proof Bento"
+      }
+    },
     "teamBlocks": {
       "lead": "{count, plural, one {One team section} other {{n} team sections}}: grids and walls of portraits, directories and tables, and spotlights that put a founder, a rail of members or an open role up front.",
       "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
