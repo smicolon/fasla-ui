@@ -9,6 +9,7 @@ import {
   SocialProofSection,
   toColumns,
   useColumnCount,
+  useDrift,
   type SocialProofLocale,
   type SocialProofPerson,
   type SocialProofPhotos,
@@ -23,6 +24,14 @@ import {
  * 56px lower; Tablet two columns of three, the second set lower, the cards
  * dealt into them in turn; phones one column. Each column is its own stack,
  * so a longer quote pushes down only the cards under it.
+ *
+ * Motion (Figma's ⚡ Motion note): the columns float gently and alternately,
+ * the first up while the second is down and the third up, about 14px each
+ * way on Desktop and 8px on Tablet, ease-in-out, one cycle in about 9 seconds.
+ * The resting stagger (the middle column 56px lower) is the middle of the
+ * float. It runs only while the block is in the viewport, pauses while the
+ * pointer is over it or focus is inside it, and stands still with reduced
+ * motion. Phones stack one column, which stays still.
  */
 
 export interface SocialProofStaggeredColumnsItem {
@@ -112,6 +121,9 @@ export interface SocialProofStaggeredColumnsProps
   photos?: SocialProofPhotos
 }
 
+/** How far a column floats each way, in px, by how many columns there are. One column stays still. */
+const AMPLITUDE: Record<number, number> = { 1: 0, 2: 8, 3: 14 }
+
 export function SocialProofStaggeredColumns({
   locale = "en",
   heading,
@@ -127,6 +139,25 @@ export function SocialProofStaggeredColumns({
   const line = description === undefined ? copy.description : description
   const [gridRef, columnCount] = useColumnCount<HTMLDivElement>()
   const columns = toColumns(list.map((item, index) => ({ item, index })), columnCount)
+  const floatRef = useDrift<HTMLDivElement>(
+    (root) => {
+      const amplitude = AMPLITUDE[columnCount] ?? 0
+      if (!amplitude) return []
+      return Array.from(root.querySelectorAll<HTMLElement>("[data-float]")).flatMap((column, columnIndex) =>
+        typeof column.animate === "function"
+          ? [
+              column.animate([{ transform: `translateY(${-amplitude}px)` }, { transform: `translateY(${amplitude}px)` }], {
+                duration: 4500,
+                iterations: Infinity,
+                direction: columnIndex % 2 === 0 ? "alternate" : "alternate-reverse",
+                easing: "ease-in-out",
+              }),
+            ]
+          : []
+      )
+    },
+    [columnCount]
+  )
 
   return (
     <SocialProofSection labelledBy={headingId} className={className} contentClassName="gap-12" {...props}>
@@ -140,19 +171,21 @@ export function SocialProofStaggeredColumns({
           </p>
         ) : null}
       </header>
-      <div ref={gridRef} className="flex w-full items-start gap-6">
-        {columns.map((column, columnIndex) => (
-          <ul key={columnIndex} className={cn("flex min-w-0 flex-1 flex-col gap-6", columnIndex === 1 && "pt-14")}>
-            {column.map(({ item, index }) => (
-              <li key={index} className="rounded-xl bg-secondary p-8">
-                <figure className="m-0 flex flex-col gap-5">
-                  <SocialProofAuthor person={item.author} photos={photos} />
-                  <SocialProofQuote quote={item.quote} className="text-base text-foreground" />
-                </figure>
-              </li>
-            ))}
-          </ul>
-        ))}
+      <div ref={floatRef} className="w-full">
+        <div ref={gridRef} className="flex w-full items-start gap-6">
+          {columns.map((column, columnIndex) => (
+            <ul key={columnIndex} data-float="" className={cn("flex min-w-0 flex-1 flex-col gap-6", columnIndex === 1 && "pt-14")}>
+              {column.map(({ item, index }) => (
+                <li key={index} className="rounded-xl bg-secondary p-8">
+                  <figure className="m-0 flex flex-col gap-5">
+                    <SocialProofAuthor person={item.author} photos={photos} />
+                    <SocialProofQuote quote={item.quote} className="text-base text-foreground" />
+                  </figure>
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
       </div>
     </SocialProofSection>
   )

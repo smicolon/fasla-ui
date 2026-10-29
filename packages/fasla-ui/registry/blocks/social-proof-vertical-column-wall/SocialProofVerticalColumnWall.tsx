@@ -9,7 +9,9 @@ import {
   SocialProofSection,
   SocialProofStars,
   toColumns,
+  useCanDrift,
   useColumnCount,
+  useDrift,
   useRevealOnce,
   type SocialProofLocale,
   type SocialProofPerson,
@@ -25,10 +27,18 @@ import {
  * raised 70, 20 and 110px; Tablet two columns of six, the cards dealt into
  * them in turn; phones one column in a 520px stage, which shows the first few.
  *
- * Motion (Figma's ⚡ Motion note): a still frame. The first time the wall
- * enters the viewport the cards fade in once, 60ms apart (fadeIn with the
- * stagger preset, 180ms each), and then stay still: no scrolling columns, no
- * loop. With reduced motion they fade in together, opacity only, in 120ms.
+ * Motion (Figma's ⚡ Motion note): the columns drift vertically on their own
+ * and loop without a seam: the outer columns climb and the middle one falls
+ * (on Tablet the first column climbs and the second falls; on phones the one
+ * column climbs), each loop about 45, 52 and 48 seconds, linear. Every column
+ * holds its cards twice, the repeat hidden from assistive technology and out
+ * of the Tab order, so the wrap is invisible. It runs only while the wall is
+ * in the viewport, pauses while the pointer is over it or focus is inside it,
+ * and stands still with reduced motion. The first time the wall enters the
+ * viewport the cards also fade in once, 60ms apart (fadeIn with the stagger
+ * preset, 180ms each); with reduced motion they fade in together, opacity
+ * only, in 120ms. The stage still crops the cards at its top and bottom edge.
+ * In RTL the column order mirrors and the vertical directions do not change.
  */
 
 export interface SocialProofVerticalColumnWallItem {
@@ -102,6 +112,11 @@ export interface SocialProofVerticalColumnWallProps
   photos?: SocialProofPhotos
 }
 
+/** A loop's length in seconds, per column, by how many columns there are: 45, 52 and 48 on Desktop. */
+const LOOP_SECONDS: Record<number, number[]> = { 1: [48], 2: [45, 52], 3: [45, 52, 48] }
+/** The gap between a column's cards, `gap-5`, which the loop's distance includes. */
+const CARD_GAP = 20
+
 export function SocialProofVerticalColumnWall({
   locale = "en",
   heading,
@@ -117,6 +132,26 @@ export function SocialProofVerticalColumnWall({
   const [stageRef, columnCount] = useColumnCount<HTMLDivElement>()
   const revealRef = useRevealOnce<HTMLDivElement>()
   const columns = toColumns(list.map((item, index) => ({ item, index })), columnCount)
+  const canDrift = useCanDrift()
+  const driftRef = useDrift<HTMLDivElement>(
+    (root) =>
+      Array.from(root.querySelectorAll<HTMLElement>("[data-drift]")).flatMap((column, columnIndex) => {
+        const first = column.firstElementChild as HTMLElement | null
+        if (!first || typeof column.animate !== "function") return []
+        // One copy's height and the gap before the repeat: moving that far puts the repeat where the first copy began.
+        const distance = first.offsetHeight + CARD_GAP
+        return [
+          column.animate([{ transform: "translateY(0)" }, { transform: `translateY(${-distance}px)` }], {
+            duration: (LOOP_SECONDS[columnCount]?.[columnIndex] ?? 48) * 1000,
+            iterations: Infinity,
+            easing: "linear",
+            // The middle column (the second of two or three) runs the other way.
+            direction: columnCount > 1 && columnIndex === 1 ? "reverse" : "normal",
+          }),
+        ]
+      }),
+    [columnCount, canDrift]
+  )
 
   return (
     <SocialProofSection
@@ -131,25 +166,37 @@ export function SocialProofVerticalColumnWall({
         description={description === undefined ? copy.description : description}
         className="gap-3"
       />
-      <div ref={revealRef} className="w-full">
-        <div ref={stageRef} className="flex h-[520px] w-full gap-6 overflow-hidden [@container(min-width:40rem)]:h-[560px]">
-          {columns.map((column, columnIndex) => (
-            <ul key={columnIndex} className={cn("flex min-w-0 flex-1 flex-col gap-5", RAISE[columns.length]?.[columnIndex])}>
-              {column.map(({ item, index }) => (
-                <li
-                  key={index}
-                  data-reveal=""
-                  className="rounded-lg bg-card p-5 ring-1 ring-inset ring-border forced-colors:border"
-                >
-                  <figure className="m-0 flex flex-col gap-3">
-                    <SocialProofStars locale={locale} />
-                    <SocialProofQuote quote={item.quote} className="text-sm text-foreground" />
-                    <SocialProofAuthor person={item.author} photos={photos} gap="2.5" avatarClassName="size-7" />
-                  </figure>
-                </li>
-              ))}
-            </ul>
-          ))}
+      <div ref={driftRef} className="w-full">
+        <div ref={revealRef} className="w-full">
+          <div ref={stageRef} className="flex h-[520px] w-full gap-6 overflow-hidden [@container(min-width:40rem)]:h-[560px]">
+            {columns.map((column, columnIndex) => (
+              <div key={columnIndex} data-drift="" className={cn("flex min-w-0 flex-1 flex-col gap-5", RAISE[columns.length]?.[columnIndex])}>
+                {[false, ...(canDrift ? [true] : [])].map((repeat) => (
+                  <ul
+                    key={String(repeat)}
+                    // The repeat is only there for the loop: hidden from assistive technology and out of the Tab order.
+                    aria-hidden={repeat || undefined}
+                    ref={repeat ? (el) => el?.setAttribute("inert", "") : undefined}
+                    className="m-0 flex list-none flex-col gap-5 p-0"
+                  >
+                    {column.map(({ item, index }) => (
+                      <li
+                        key={index}
+                        {...(repeat ? {} : { "data-reveal": "" })}
+                        className="rounded-lg bg-card p-5 ring-1 ring-inset ring-border forced-colors:border"
+                      >
+                        <figure className="m-0 flex flex-col gap-3">
+                          <SocialProofStars locale={locale} />
+                          <SocialProofQuote quote={item.quote} className="text-sm text-foreground" />
+                          <SocialProofAuthor person={item.author} photos={photos} gap="2.5" avatarClassName="size-7" />
+                        </figure>
+                      </li>
+                    ))}
+                  </ul>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </SocialProofSection>

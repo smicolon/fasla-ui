@@ -15,6 +15,8 @@ export {
   stepKeys,
   useRevealOnce,
   useStepper,
+  useDrift,
+  useCanDrift,
   useVideoPlayback,
   useSwipeStep,
   type SocialProofAuthorProps,

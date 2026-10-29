@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest"
-import { fireEvent, render, screen } from "@testing-library/react"
+import { act, fireEvent, render, screen } from "@testing-library/react"
 import { Isolated, SocialProofStars, toColumns } from "./social-proof"
 import { SocialProofClassicTrioGrid } from "../social-proof-classic-trio-grid/SocialProofClassicTrioGrid"
 import { SocialProofVerticalColumnWall } from "../social-proof-vertical-column-wall/SocialProofVerticalColumnWall"
@@ -16,6 +16,7 @@ import { SocialProofWorkplacePortraitStories } from "../social-proof-workplace-p
 import { SocialProofStatStoryCards } from "../social-proof-stat-story-cards/SocialProofStatStoryCards"
 import { SocialProofVideoStoryCards, socialProofVideoStoryCardsCopy } from "../social-proof-video-story-cards/SocialProofVideoStoryCards"
 import { SocialProofCaseStudyRow } from "../social-proof-case-study-row/SocialProofCaseStudyRow"
+import { SocialProofStaggeredColumns } from "../social-proof-staggered-columns/SocialProofStaggeredColumns"
 import { SocialProofProofBento } from "../social-proof-proof-bento/SocialProofProofBento"
 
 describe("Isolated", () => {
@@ -230,6 +231,7 @@ describe("Stat-Story Cards", () => {
 describe("Video Story Cards", () => {
   it("shows posters only until play is pressed, then plays that story and can close it", () => {
     const play = vi.spyOn(HTMLMediaElement.prototype, "play").mockImplementation(() => Promise.resolve())
+    vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {})
     const items = socialProofVideoStoryCardsCopy.en.items.map((item) => ({ ...item, videoSrc: "/film.mp4" }))
     const { container } = render(<SocialProofVideoStoryCards items={items} />)
     expect(container.querySelector("video")).toBeNull()
@@ -262,6 +264,7 @@ describe("Case-Study Row", () => {
 describe("Proof Bento", () => {
   it("plays the video tile only when its button is pressed, and closes it", () => {
     const play = vi.spyOn(HTMLMediaElement.prototype, "play").mockImplementation(() => Promise.resolve())
+    vi.spyOn(HTMLMediaElement.prototype, "pause").mockImplementation(() => {})
     const { container } = render(<SocialProofProofBento videoSrc="/film.mp4" />)
     expect(container.querySelector("video")).toBeNull()
     expect(screen.getByText((_, el) => el?.tagName === "P" && el.textContent === "Watch Rashed's story · 2:14")).toBeTruthy()
@@ -270,5 +273,124 @@ describe("Proof Bento", () => {
     fireEvent.click(screen.getByRole("button", { name: "Close video" }))
     expect(container.querySelector("video")).toBeNull()
     play.mockRestore()
+  })
+})
+
+/** Stubs the browser APIs the moving blocks use, and records what they were asked to do. */
+function stubMotion({ reduced = false, width = 1300 }: { reduced?: boolean; width?: number } = {}) {
+  const calls: { keyframes: Keyframe[]; options: KeyframeAnimationOptions; play: ReturnType<typeof vi.fn>; pause: ReturnType<typeof vi.fn>; cancel: ReturnType<typeof vi.fn> }[] = []
+  const animate = vi.fn(function (keyframes: Keyframe[], options: KeyframeAnimationOptions) {
+    const call = { keyframes, options, play: vi.fn(), pause: vi.fn(), cancel: vi.fn() }
+    calls.push(call)
+    return { ...call, finished: Promise.resolve() } as unknown as Animation
+  })
+  Object.defineProperty(HTMLElement.prototype, "animate", { value: animate, configurable: true, writable: true })
+  vi.stubGlobal("matchMedia", (query: string) => ({ matches: reduced && query.includes("reduce"), addEventListener: () => {}, removeEventListener: () => {} }))
+  let intersect: (visible: boolean) => void = () => {}
+  vi.stubGlobal(
+    "IntersectionObserver",
+    class {
+      constructor(callback: (entries: { isIntersecting: boolean }[]) => void) {
+        intersect = (visible) => callback([{ isIntersecting: visible }])
+      }
+      observe() {}
+      disconnect() {}
+    }
+  )
+  vi.spyOn(HTMLElement.prototype, "getBoundingClientRect").mockReturnValue({ width, height: 100, x: 0, y: 0, top: 0, left: 0, right: width, bottom: 100, toJSON: () => ({}) } as DOMRect)
+  return {
+    calls,
+    intersect: (visible: boolean) => act(() => intersect(visible)),
+    restore: () => {
+      delete (HTMLElement.prototype as { animate?: unknown }).animate
+      vi.unstubAllGlobals()
+      vi.restoreAllMocks()
+    },
+  }
+}
+
+const translateXs = (calls: { keyframes: Keyframe[] }[]) => calls.map((call) => String(call.keyframes.map((k) => k.transform).find((x) => x && x !== "none") ?? "none"))
+
+describe("Vertical Column Wall drifts", () => {
+  it("drifts three columns, the middle one the other way, only while in view, and pauses on hover and focus", () => {
+    const motion = stubMotion()
+    const { container } = render(<SocialProofVerticalColumnWall />)
+    // The first pass runs before the width is measured, with one column; the last three are the real ones.
+    const drift = motion.calls.filter((call) => call.options.iterations === Infinity).slice(-3)
+    expect(drift.map((call) => [call.options.duration, call.options.direction])).toEqual([
+      [45000, "normal"],
+      [52000, "reverse"],
+      [48000, "normal"],
+    ])
+    expect(drift.every((call) => call.options.easing === "linear")).toBe(true)
+    expect(drift.every((call) => call.pause.mock.calls.length > 0 && call.play.mock.calls.length === 0)).toBe(true)
+    motion.intersect(true)
+    expect(drift.every((call) => call.play.mock.calls.length > 0)).toBe(true)
+    const root = container.querySelector("[data-drift]")!.parentElement!.parentElement!.parentElement!
+    const playsBefore = drift[0]!.play.mock.calls.length
+    fireEvent.pointerEnter(root)
+    expect(drift[0]!.pause.mock.calls.length).toBeGreaterThan(1)
+    fireEvent.pointerLeave(root)
+    expect(drift[0]!.play.mock.calls.length).toBeGreaterThan(playsBefore)
+    const pausesBefore = drift[0]!.pause.mock.calls.length
+    fireEvent.focusIn(root)
+    expect(drift[0]!.pause.mock.calls.length).toBeGreaterThan(pausesBefore)
+    motion.intersect(false)
+    motion.restore()
+  })
+
+  it("holds every card twice, the repeat hidden from assistive technology and out of the Tab order", () => {
+    const motion = stubMotion()
+    const { container } = render(<SocialProofVerticalColumnWall />)
+    const lists = [...container.querySelectorAll("[data-drift] > ul")]
+    expect(lists).toHaveLength(6)
+    const repeats = lists.filter((list) => list.getAttribute("aria-hidden") === "true")
+    expect(repeats).toHaveLength(3)
+    expect(repeats.every((list) => list.hasAttribute("inert"))).toBe(true)
+    expect(container.querySelectorAll("[data-reveal]")).toHaveLength(12)
+    expect(screen.getAllByText("“Rolled out across four product lines in one sprint.”")).toHaveLength(2)
+    motion.restore()
+  })
+
+  it("stands still with reduced motion: no repeat, no drift", () => {
+    const motion = stubMotion({ reduced: true })
+    const { container } = render(<SocialProofVerticalColumnWall />)
+    expect(container.querySelectorAll("[aria-hidden=true][inert]")).toHaveLength(0)
+    expect(motion.calls.filter((call) => call.options.iterations === Infinity)).toHaveLength(0)
+    motion.restore()
+  })
+})
+
+describe("Staggered Columns float", () => {
+  it("floats three columns alternately by 14px, and two by 8px", () => {
+    const motion = stubMotion({ width: 1300 })
+    const { unmount } = render(<SocialProofStaggeredColumns />)
+    const wide = motion.calls.filter((call) => call.options.iterations === Infinity)
+    expect(wide.map((call) => [call.keyframes.map((k) => k.transform), call.options.direction])).toEqual([
+      [["translateY(-14px)", "translateY(14px)"], "alternate"],
+      [["translateY(-14px)", "translateY(14px)"], "alternate-reverse"],
+      [["translateY(-14px)", "translateY(14px)"], "alternate"],
+    ])
+    expect(wide.every((call) => call.options.easing === "ease-in-out" && call.options.duration === 4500)).toBe(true)
+    unmount()
+    motion.restore()
+    const tablet = stubMotion({ width: 700 })
+    render(<SocialProofStaggeredColumns />)
+    const two = tablet.calls.filter((call) => call.options.iterations === Infinity)
+    expect(two).toHaveLength(2)
+    expect(two[0]!.keyframes.map((k) => k.transform)).toEqual(["translateY(-8px)", "translateY(8px)"])
+    tablet.restore()
+  })
+
+  it("stays still on phones and with reduced motion, and pauses while not in view", () => {
+    const phone = stubMotion({ width: 330 })
+    const first = render(<SocialProofStaggeredColumns />)
+    expect(phone.calls.filter((call) => call.options.iterations === Infinity)).toHaveLength(0)
+    first.unmount()
+    phone.restore()
+    const reduced = stubMotion({ reduced: true })
+    render(<SocialProofStaggeredColumns />)
+    expect(reduced.calls.filter((call) => call.options.iterations === Infinity)).toHaveLength(0)
+    reduced.restore()
   })
 })

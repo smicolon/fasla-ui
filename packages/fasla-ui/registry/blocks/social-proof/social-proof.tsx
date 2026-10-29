@@ -418,15 +418,22 @@ function prefersReducedMotion() {
  * element marked `data-step-item="slide"` or `"fade"` picks its own. With
  * reduced motion every element fades in together in 120ms.
  */
-export function playEntrance(nodes: HTMLElement[], { slide = false, stagger = true }: { slide?: boolean; stagger?: boolean } = {}) {
+export function playEntrance(
+  nodes: HTMLElement[],
+  { slide = false, stagger = true, fromX }: { slide?: boolean; stagger?: boolean; fromX?: number } = {}
+) {
   const reduced = prefersReducedMotion()
   return nodes
     .filter((node) => typeof node.animate === "function")
     .map((node, index) =>
       node.animate(
-        reduced || !(node.dataset.stepItem === "slide" || (slide && node.dataset.stepItem !== "fade"))
+        reduced
           ? [{ opacity: 0 }, { opacity: 1 }]
-          : [{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }],
+          : fromX !== undefined
+            ? [{ opacity: 0, transform: `translateX(${fromX}px)` }, { opacity: 1, transform: "none" }]
+            : !(node.dataset.stepItem === "slide" || (slide && node.dataset.stepItem !== "fade"))
+              ? [{ opacity: 0 }, { opacity: 1 }]
+              : [{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "none" }],
         {
           duration: reduced ? FAST_MS : BASE_MS,
           delay: reduced || !stagger ? 0 : index * STAGGER_MS,
@@ -437,14 +444,28 @@ export function playEntrance(nodes: HTMLElement[], { slide = false, stagger = tr
     )
 }
 
-/** Fades the elements out together, 180ms (120ms with reduced motion), and resolves when they are gone. */
-export function playExit(nodes: HTMLElement[]) {
+/**
+ * Fades the elements out together, 180ms (120ms with reduced motion), and
+ * resolves when they are gone. With `toX` they also move that many pixels
+ * sideways, in 120ms: the horizontal swap's exit.
+ */
+export function playExit(nodes: HTMLElement[], { toX }: { toX?: number } = {}) {
   const reduced = prefersReducedMotion()
   const animations = nodes
     .filter((node) => typeof node.animate === "function")
-    .map((node) => node.animate([{ opacity: 1 }, { opacity: 0 }], { duration: reduced ? FAST_MS : BASE_MS, easing: STANDARD, fill: "forwards" }))
+    .map((node) =>
+      node.animate(
+        !reduced && toX !== undefined
+          ? [{ opacity: 1, transform: "none" }, { opacity: 0, transform: `translateX(${toX}px)` }]
+          : [{ opacity: 1 }, { opacity: 0 }],
+        { duration: reduced || toX !== undefined ? FAST_MS : BASE_MS, easing: STANDARD, fill: "forwards" }
+      )
+    )
   return Promise.all(animations.map((animation) => animation.finished.catch(() => undefined)))
 }
+
+/** How far a horizontal swap moves, in px: the `slideX` preset's 24. */
+const SLIDE_X = 24
 
 /**
  * State for content the reader steps through or picks from: a set of
@@ -461,6 +482,7 @@ export function useStepper<T extends HTMLElement>({
   slide = true,
   stagger = false,
   exit = true,
+  axis = "y",
 }: {
   count: number
   index?: number
@@ -469,8 +491,15 @@ export function useStepper<T extends HTMLElement>({
   slide?: boolean
   stagger?: boolean
   exit?: boolean
+  /**
+   * `"x"` swaps sideways (the `slideX` preset): every item leaves toward the
+   * start of the swap and the new ones arrive from the other side, mirrored on
+   * a right-to-left page. Going forward is toward the reading direction's end.
+   */
+  axis?: "x" | "y"
 }) {
   const ref = React.useRef<T>(null)
+  const step = React.useRef(1)
   const [own, setOwn] = React.useState(defaultIndex)
   const index = Math.min(Math.max(controlled ?? own, 0), Math.max(count - 1, 0))
   const changed = React.useRef(false)
@@ -478,8 +507,8 @@ export function useStepper<T extends HTMLElement>({
   useIsomorphicLayoutEffect(() => {
     if (!changed.current) return
     changed.current = false
-    playEntrance(items(), { slide, stagger })
-  }, [index, slide, stagger])
+    playEntrance(items(), { slide, stagger, fromX: axis === "x" ? step.current * SLIDE_X : undefined })
+  }, [index, slide, stagger, axis])
   const go = React.useCallback(
     (next: number) => {
       if (next < 0 || next >= count || next === index) return
@@ -488,10 +517,12 @@ export function useStepper<T extends HTMLElement>({
         setOwn(next)
         onIndexChange?.(next)
       }
-      if (exit) playExit(items()).then(swap)
+      // +1 when the new item comes in from the end side: right in LTR, left in RTL.
+      step.current = (next > index ? 1 : -1) * (isRtl(ref.current) ? -1 : 1)
+      if (exit) playExit(items(), { toX: axis === "x" ? -step.current * SLIDE_X : undefined }).then(swap)
       else swap()
     },
-    [count, index, onIndexChange, exit]
+    [count, index, onIndexChange, exit, axis]
   )
   return { ref, index, go }
 }
@@ -534,7 +565,8 @@ export function toColumns<T>(items: T[], count: number): T[][] {
  * Plays the entrance once, the first time the element enters the viewport:
  * its `[data-reveal]` children fade in one after another (fadeIn with the
  * stagger preset), then stay. Vertical Column Wall's reveal is the only
- * entrance in Social Proof; the other blocks are still unless the reader acts.
+ * entrance in Social Proof. Besides it, only the two column Types move on
+ * their own (`useDrift`); everything else moves when the reader acts.
  */
 export function useRevealOnce<T extends HTMLElement>() {
   const ref = React.useRef<T>(null)
@@ -602,4 +634,96 @@ export function useVideoPlayback(src: string | undefined, locale: SocialProofLoc
     }
   }, [started])
   return { videoRef, playRef, started, play, stop, labels: VIDEO_LABELS[locale], available: Boolean(src) }
+}
+
+/*
+ * Drift: the two column Types move on their own while they are in view, as
+ * the home page's wall of love does. It is the only motion in Social Proof
+ * that no one asked for, so it is held back wherever it could cost someone:
+ * it runs only while the block is in the viewport, pauses while the pointer
+ * is over it or focus is inside it, and does not run at all with reduced
+ * motion (a still frame). There is no pause button: hover and focus are the
+ * pause, and the block has nothing in it to read that moves faster than a
+ * slow loop.
+ */
+
+/**
+ * Runs the animations `make` builds for `root`, only while it is in view and
+ * not hovered or holding focus. `make` is called again when the root's width
+ * changes, since the distances depend on the cards' heights. The animations
+ * are cancelled on unmount and when reduced motion is turned on.
+ */
+export function useDrift<T extends HTMLElement>(make: (root: T) => Animation[], deps: React.DependencyList) {
+  const ref = React.useRef<T>(null)
+  React.useEffect(() => {
+    const root = ref.current
+    if (!root || typeof IntersectionObserver === "undefined" || prefersReducedMotion()) return
+    let animations: Animation[] = []
+    let visible = false
+    let hovered = false
+    let focused = false
+    const sync = () => animations.forEach((animation) => (visible && !hovered && !focused ? animation.play() : animation.pause()))
+    const start = () => {
+      animations.forEach((animation) => animation.cancel())
+      animations = make(root)
+      animations.forEach((animation) => animation.pause())
+      sync()
+    }
+    start()
+    const intersection = new IntersectionObserver((entries) => {
+      visible = entries.some((entry) => entry.isIntersecting)
+      sync()
+    })
+    intersection.observe(root)
+    let frame = 0
+    let width = root.getBoundingClientRect().width
+    const resize =
+      typeof ResizeObserver === "undefined"
+        ? null
+        : new ResizeObserver((entries) => {
+            const next = entries[0]?.contentRect.width ?? width
+            if (Math.abs(next - width) < 1) return
+            width = next
+            cancelAnimationFrame(frame)
+            frame = requestAnimationFrame(start)
+          })
+    resize?.observe(root)
+    const enter = () => ((hovered = true), sync())
+    const leave = () => ((hovered = false), sync())
+    const focusIn = () => ((focused = true), sync())
+    const focusOut = (event: FocusEvent) => {
+      focused = root.contains(event.relatedTarget as Node | null)
+      sync()
+    }
+    root.addEventListener("pointerenter", enter)
+    root.addEventListener("pointerleave", leave)
+    root.addEventListener("focusin", focusIn)
+    root.addEventListener("focusout", focusOut)
+    const reduce = typeof window.matchMedia === "function" ? window.matchMedia("(prefers-reduced-motion: reduce)") : null
+    const stopForReduced = () => {
+      if (reduce?.matches) animations.forEach((animation) => animation.cancel())
+    }
+    reduce?.addEventListener?.("change", stopForReduced)
+    return () => {
+      cancelAnimationFrame(frame)
+      intersection.disconnect()
+      resize?.disconnect()
+      root.removeEventListener("pointerenter", enter)
+      root.removeEventListener("pointerleave", leave)
+      root.removeEventListener("focusin", focusIn)
+      root.removeEventListener("focusout", focusOut)
+      reduce?.removeEventListener?.("change", stopForReduced)
+      animations.forEach((animation) => animation.cancel())
+    }
+    // `make` is rebuilt every render; `deps` says when it would build something different.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, deps)
+  return ref
+}
+
+/** True once mounted without reduced motion: when a drifting block adds its looped repeat. */
+export function useCanDrift() {
+  const [can, setCan] = React.useState(false)
+  React.useEffect(() => setCan(!prefersReducedMotion()), [])
+  return can
 }
