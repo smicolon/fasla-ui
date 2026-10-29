@@ -4,7 +4,7 @@
  * (docs.faqBlocks, docs.errorStateBlocks, docs.logoCloudBlocks,
  * docs.authenticationsBlocks, docs.galleryBlocks, docs.navbarBlocks,
  * docs.pricingBlocks, docs.heroBlocks, docs.aboutBlocks, docs.teamBlocks,
- * docs.careersBlocks, docs.blogCardsBlocks); the slug is the registry item's name.
+ * docs.careersBlocks, docs.socialProofBlocks, docs.blogCardsBlocks); the slug is the registry item's name.
  */
 
 export type FaqFamily = "lists" | "layouts" | "navigation" | "support"
@@ -105,6 +105,16 @@ export type TeamFamily = "grids-and-walls" | "directories" | "spotlights"
 export const TEAM_FAMILIES: TeamFamily[] = ["grids-and-walls", "directories", "spotlights"]
 
 /**
+ * Social Proof's four groups: grids and walls that show many voices at once,
+ * spotlights that give one quote the stage, carousels and selectors the reader
+ * steps through or picks from, and stories that pair a quote with a figure or
+ * a video.
+ */
+export type SocialProofFamily = "grids" | "spotlights" | "carousels" | "stories"
+
+export const SOCIAL_PROOF_FAMILIES: SocialProofFamily[] = ["grids", "spotlights", "carousels", "stories"]
+
+/**
  * Blog Cards' five groups: the card grids that show several articles at once,
  * the features built around one lead article, the lists and indexes that
  * read as rows, the panels that sit beside a post (a newsletter, its author,
@@ -115,7 +125,7 @@ export type BlogCardsFamily = "grids" | "features" | "lists" | "alongside" | "br
 
 export const BLOG_CARDS_FAMILIES: BlogCardsFamily[] = ["grids", "features", "lists", "alongside", "browse"]
 
-export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | BlogCardsFamily> = {
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | SocialProofFamily | BlogCardsFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
   family: Family
@@ -378,6 +388,32 @@ export const TEAM_TYPES: BlockType<TeamFamily>[] = [
   { slug: "team-grid-backdrop-roster", family: "grids-and-walls" },
 ]
 
+export const SOCIAL_PROOF_TYPES: BlockType<SocialProofFamily>[] = [
+  { slug: "social-proof-classic-trio-grid", family: "grids" },
+  { slug: "social-proof-staggered-columns", family: "grids" },
+  { slug: "social-proof-benefit-title-cards", family: "grids" },
+  { slug: "social-proof-giant-quote-duo", family: "grids" },
+  { slug: "social-proof-vertical-column-wall", family: "grids" },
+  { slug: "social-proof-tweet-wall", family: "grids" },
+  { slug: "social-proof-app-review-row", family: "grids" },
+  { slug: "social-proof-centered-logo-spotlight", family: "spotlights" },
+  { slug: "social-proof-dark-editorial-split", family: "spotlights", inverse: true },
+  { slug: "social-proof-bracket-framed-quote", family: "spotlights" },
+  { slug: "social-proof-highlighted-phrase-spotlight", family: "spotlights" },
+  { slug: "social-proof-tinted-panel-portrait", family: "spotlights" },
+  { slug: "social-proof-overlay-photo-quote", family: "spotlights", inverse: true },
+  { slug: "social-proof-arch-portrait-quote", family: "spotlights" },
+  { slug: "social-proof-spotlight-carousel", family: "carousels" },
+  { slug: "social-proof-avatar-selector-row", family: "carousels" },
+  { slug: "social-proof-progress-carousel", family: "carousels" },
+  { slug: "social-proof-persona-pillars", family: "carousels" },
+  { slug: "social-proof-workplace-portrait-stories", family: "carousels" },
+  { slug: "social-proof-stat-story-cards", family: "stories" },
+  { slug: "social-proof-video-story-cards", family: "stories" },
+  { slug: "social-proof-case-study-row", family: "stories" },
+  { slug: "social-proof-proof-bento", family: "stories" },
+]
+
 /** Blog Cards' 21 Types in Figma's order, added a family at a time. */
 export const BLOG_CARDS_TYPES: BlockType<BlogCardsFamily>[] = [
   { slug: "blog-cards-classic-3-up-grid", family: "grids" },
@@ -415,6 +451,7 @@ export const ALL_BLOCK_TYPES: BlockType[] = [
   ...ABOUT_TYPES,
   ...CAREERS_TYPES,
   ...TEAM_TYPES,
+  ...SOCIAL_PROOF_TYPES,
   ...BLOG_CARDS_TYPES,
 ]
 

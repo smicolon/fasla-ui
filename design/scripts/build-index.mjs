@@ -247,6 +247,18 @@ export const CODE_MAP = {
       "no-open-roles-empty-state", "role-detail-panel", "role-detail-page",
     ].map((type) => [`careers-${type}`, null])
   ),
+  // Block: the parts every Social Proof block shares, from the block set Social Proof (46368:3361), not an atom.
+  "social-proof": null,
+  // Blocks: each Social Proof item is one Type of the block set Social Proof (46368:3361), not an atom.
+  ...Object.fromEntries(
+    [
+      "classic-trio-grid", "staggered-columns", "benefit-title-cards", "giant-quote-duo", "vertical-column-wall", "tweet-wall",
+      "app-review-row", "centered-logo-spotlight", "dark-editorial-split", "bracket-framed-quote",
+      "highlighted-phrase-spotlight", "tinted-panel-portrait", "overlay-photo-quote", "arch-portrait-quote",
+      "spotlight-carousel", "avatar-selector-row", "progress-carousel", "persona-pillars", "workplace-portrait-stories",
+      "stat-story-cards", "video-story-cards", "case-study-row", "proof-bento",
+    ].map((type) => [`social-proof-${type}`, null])
+  ),
   // Blocks: each Blog Cards item is one Type of the block set Blog Cards (46368:243914), not an atom.
   ...Object.fromEntries(
     [

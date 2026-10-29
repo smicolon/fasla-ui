@@ -44,8 +44,8 @@
       "variants": 4356,
       "withEnDoc": 26,
       "withArDoc": 24,
-      "blocksInCode": 179,
-      "familiesInCode": 9,
+      "blocksInCode": 202,
+      "familiesInCode": 10,
       "parts": 2,
       "extraSets": 1,
       "flagged": 28
@@ -2520,8 +2520,8 @@
         "duplicates": []
       },
       "code": {
-        "prefix": null,
-        "built": 0,
+        "prefix": "social-proof-",
+        "built": 23,
         "of": 23
       },
       "blocks": [
@@ -2530,161 +2530,161 @@
           "nodeId": "41212:171",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41212-171",
           "variants": 6,
-          "code": null
+          "code": "social-proof-classic-trio-grid"
         },
         {
           "name": "Staggered Columns",
           "nodeId": "41215:234",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41215-234",
           "variants": 6,
-          "code": null
+          "code": "social-proof-staggered-columns"
         },
         {
           "name": "Benefit-Title Cards",
           "nodeId": "41217:246",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41217-246",
           "variants": 6,
-          "code": null
+          "code": "social-proof-benefit-title-cards"
         },
         {
           "name": "Stat-Story Cards",
           "nodeId": "41223:283",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41223-283",
           "variants": 6,
-          "code": null
+          "code": "social-proof-stat-story-cards"
         },
         {
           "name": "Centered Logo Spotlight",
           "nodeId": "41226:291",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41226-291",
           "variants": 6,
-          "code": null
+          "code": "social-proof-centered-logo-spotlight"
         },
         {
           "name": "Dark Editorial Split",
           "nodeId": "41227:398",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41227-398",
           "variants": 6,
-          "code": null
+          "code": "social-proof-dark-editorial-split"
         },
         {
           "name": "Giant Quote Duo",
           "nodeId": "41229:295",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41229-295",
           "variants": 6,
-          "code": null
+          "code": "social-proof-giant-quote-duo"
         },
         {
           "name": "Bracket-Framed Quote",
           "nodeId": "41231:296",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41231-296",
           "variants": 6,
-          "code": null
+          "code": "social-proof-bracket-framed-quote"
         },
         {
           "name": "Highlighted-Phrase Spotlight",
           "nodeId": "41233:299",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41233-299",
           "variants": 6,
-          "code": null
+          "code": "social-proof-highlighted-phrase-spotlight"
         },
         {
           "name": "Spotlight Carousel",
           "nodeId": "41235:538",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41235-538",
           "variants": 6,
-          "code": null
+          "code": "social-proof-spotlight-carousel"
         },
         {
           "name": "Avatar-Selector Row",
           "nodeId": "41238:337",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41238-337",
           "variants": 6,
-          "code": null
+          "code": "social-proof-avatar-selector-row"
         },
         {
           "name": "Progress Carousel",
           "nodeId": "41240:346",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41240-346",
           "variants": 6,
-          "code": null
+          "code": "social-proof-progress-carousel"
         },
         {
           "name": "Persona Pillars",
           "nodeId": "41242:346",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41242-346",
           "variants": 6,
-          "code": null
+          "code": "social-proof-persona-pillars"
         },
         {
           "name": "Vertical Column Wall",
           "nodeId": "41253:448",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41253-448",
           "variants": 6,
-          "code": null
+          "code": "social-proof-vertical-column-wall"
         },
         {
           "name": "Tinted-Panel Portrait",
           "nodeId": "41256:479",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41256-479",
           "variants": 6,
-          "code": null
+          "code": "social-proof-tinted-panel-portrait"
         },
         {
           "name": "Overlay Photo Quote",
           "nodeId": "41257:479",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41257-479",
           "variants": 6,
-          "code": null
+          "code": "social-proof-overlay-photo-quote"
         },
         {
           "name": "Video Story Cards",
           "nodeId": "41259:484",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41259-484",
           "variants": 6,
-          "code": null
+          "code": "social-proof-video-story-cards"
         },
         {
           "name": "Arch Portrait Quote",
           "nodeId": "41260:484",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41260-484",
           "variants": 6,
-          "code": null
+          "code": "social-proof-arch-portrait-quote"
         },
         {
           "name": "Tweet Wall",
           "nodeId": "41262:520",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41262-520",
           "variants": 6,
-          "code": null
+          "code": "social-proof-tweet-wall"
         },
         {
           "name": "Case-Study Row",
           "nodeId": "41225:288",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41225-288",
           "variants": 6,
-          "code": null
+          "code": "social-proof-case-study-row"
         },
         {
           "name": "Proof Bento",
           "nodeId": "41218:263",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41218-263",
           "variants": 6,
-          "code": null
+          "code": "social-proof-proof-bento"
         },
         {
           "name": "App Review Row",
           "nodeId": "41264:140551",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41264-140551",
           "variants": 6,
-          "code": null
+          "code": "social-proof-app-review-row"
         },
         {
           "name": "Workplace Portrait Stories",
           "nodeId": "46610:250531",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46610-250531",
           "variants": 6,
-          "code": null
+          "code": "social-proof-workplace-portrait-stories"
         }
       ],
       "leftovers": [],

@@ -291,6 +291,21 @@ export const routes = [
   {
     kind: "block",
     category: "Blocks",
+    path: "/docs/blocks/social-proof/",
+    title: "Social Proof Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Testimonial sections, from quote grids and walls to spotlights, carousels and stories backed by a figure, responsive and mirrored for Arabic.",
+    h1: "Social Proof",
+    ar: {
+      title: "كتل آراء العملاء لمشاريع React | فاصلة",
+      description:
+        "أقسام لآراء العملاء، من شبكات الاقتباسات وجدرانها إلى الاقتباسات البارزة وعارضات الشرائح والقصص التي يدعمها رقم، متجاوبة ومعكوسة للعربية.",
+      h1: "آراء العملاء (Social Proof)",
+    },
+  },
+  {
+    kind: "block",
+    category: "Blocks",
     path: "/docs/blocks/blog-cards/",
     title: "Blog Cards Blocks for React and Tailwind CSS | Fasla",
     description:

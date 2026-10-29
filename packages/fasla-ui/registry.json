@@ -6116,6 +6116,550 @@
       ]
     },
     {
+      "name": "social-proof",
+      "type": "registry:block",
+      "title": "Social Proof",
+      "description": "The parts every Social Proof block is built from: the section and its centred header, the quote, the author line with its Avatar, five stars and the hairline (stand-ins for the Rating and Separator atoms), the previous and next arrows, and the motion helpers.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof/social-proof.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-classic-trio-grid",
+      "type": "registry:block",
+      "title": "Social Proof: Classic Trio Grid",
+      "description": "Three testimonial cards under a centred header, each with five stars, the quote and its author.",
+      "dependencies": [],
+      "registryDependencies": [
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-classic-trio-grid/SocialProofClassicTrioGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-classic-trio-grid.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-staggered-columns",
+      "type": "registry:block",
+      "title": "Social Proof: Staggered Columns",
+      "description": "Six quote cards in staggered columns, the author over each quote, under a header split across the row.",
+      "dependencies": [],
+      "registryDependencies": [
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-staggered-columns/SocialProofStaggeredColumns.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-staggered-columns.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-benefit-title-cards",
+      "type": "registry:block",
+      "title": "Social Proof: Benefit-Title Cards",
+      "description": "Three cards that lead with a benefit, an icon chip and a title, backed by a customer quote.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-benefit-title-cards/SocialProofBenefitTitleCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-benefit-title-cards.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-giant-quote-duo",
+      "type": "registry:block",
+      "title": "Social Proof: Giant Quote Duo",
+      "description": "Two large quotes side by side, one tinted and one solid, with a line and a link under them.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-giant-quote-duo/SocialProofGiantQuoteDuo.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-giant-quote-duo.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-vertical-column-wall",
+      "type": "registry:block",
+      "title": "Social Proof: Vertical Column Wall",
+      "description": "Twelve short quotes in offset columns inside a cropped stage, revealed once as the wall enters the view.",
+      "dependencies": [],
+      "registryDependencies": [
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-vertical-column-wall/SocialProofVerticalColumnWall.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-vertical-column-wall.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-tweet-wall",
+      "type": "registry:block",
+      "title": "Social Proof: Tweet Wall",
+      "description": "Six posts from X with their authors, mentions and counts, three to a row.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "social-icons",
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-tweet-wall/SocialProofTweetWall.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-tweet-wall.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-app-review-row",
+      "type": "registry:block",
+      "title": "Social Proof: App Review Row",
+      "description": "App store reviews three to a set, with previous and next arrows that page through further sets.",
+      "dependencies": [],
+      "registryDependencies": [
+        "social-icons",
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-app-review-row/SocialProofAppReviewRow.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-app-review-row.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-centered-logo-spotlight",
+      "type": "registry:block",
+      "title": "Social Proof: Centered Logo Spotlight",
+      "description": "One quote centred under the customer's wordmark, with the author's avatar, name and role beneath it.",
+      "dependencies": [],
+      "registryDependencies": [
+        "avatar",
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-centered-logo-spotlight/SocialProofCenteredLogoSpotlight.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-centered-logo-spotlight.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-dark-editorial-split",
+      "type": "registry:block",
+      "title": "Social Proof: Dark Editorial Split",
+      "description": "One quote on the inverse band beside a portrait of the author.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "theme-inverse",
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-dark-editorial-split/SocialProofDarkEditorialSplit.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-dark-editorial-split.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-bracket-framed-quote",
+      "type": "registry:block",
+      "title": "Social Proof: Bracket-Framed Quote",
+      "description": "One quote on a card framed by four corner brackets, with the customer, the author and a figure.",
+      "dependencies": [],
+      "registryDependencies": [
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-bracket-framed-quote/SocialProofBracketFramedQuote.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-bracket-framed-quote.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-highlighted-phrase-spotlight",
+      "type": "registry:block",
+      "title": "Social Proof: Highlighted-Phrase Spotlight",
+      "description": "One large centred quote with its key phrases highlighted, and the author on one line under it.",
+      "dependencies": [],
+      "registryDependencies": [
+        "avatar",
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-highlighted-phrase-spotlight/SocialProofHighlightedPhraseSpotlight.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-highlighted-phrase-spotlight.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-tinted-panel-portrait",
+      "type": "registry:block",
+      "title": "Social Proof: Tinted-Panel Portrait",
+      "description": "A portrait on a tinted panel beside the quote, the author and a link to the full story.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-tinted-panel-portrait/SocialProofTintedPanelPortrait.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-tinted-panel-portrait.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-overlay-photo-quote",
+      "type": "registry:block",
+      "title": "Social Proof: Overlay Photo Quote",
+      "description": "One quote over a full-bleed photograph under a dark scrim.",
+      "dependencies": [],
+      "registryDependencies": [
+        "theme-inverse",
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-overlay-photo-quote/SocialProofOverlayPhotoQuote.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-overlay-photo-quote.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-arch-portrait-quote",
+      "type": "registry:block",
+      "title": "Social Proof: Arch Portrait Quote",
+      "description": "A portrait in an arch with an outlined echo, beside a label, the quote and the author.",
+      "dependencies": [],
+      "registryDependencies": [
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-arch-portrait-quote/SocialProofArchPortraitQuote.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-arch-portrait-quote.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-spotlight-carousel",
+      "type": "registry:block",
+      "title": "Social Proof: Spotlight Carousel",
+      "description": "One quote at a time with its author, stepped by arrows, dots, the arrow keys and a swipe on phones.",
+      "dependencies": [],
+      "registryDependencies": [
+        "avatar",
+        "carousel",
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-spotlight-carousel/SocialProofSpotlightCarousel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-spotlight-carousel.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-avatar-selector-row",
+      "type": "registry:block",
+      "title": "Social Proof: Avatar-Selector Row",
+      "description": "A quote over a row of portrait tiles; selecting a portrait shows that person's quote.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-avatar-selector-row/SocialProofAvatarSelectorRow.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-avatar-selector-row.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-progress-carousel",
+      "type": "registry:block",
+      "title": "Social Proof: Progress Carousel",
+      "description": "One customer story at a time on a card, with arrows, a counter and a progress bar that steps with the reader.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "progress",
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-progress-carousel/SocialProofProgressCarousel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-progress-carousel.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-persona-pillars",
+      "type": "registry:block",
+      "title": "Social Proof: Persona Pillars",
+      "description": "Tall portrait pillars, one per part of the team; the selected pillar widens into a quote panel.",
+      "dependencies": [],
+      "registryDependencies": [
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-persona-pillars/SocialProofPersonaPillars.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-persona-pillars.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-workplace-portrait-stories",
+      "type": "registry:block",
+      "title": "Social Proof: Workplace Portrait Stories",
+      "description": "Portraits of four audiences; the selected one becomes the featured story with its quote and benefit.",
+      "dependencies": [],
+      "registryDependencies": [
+        "card",
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-workplace-portrait-stories/SocialProofWorkplacePortraitStories.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-workplace-portrait-stories.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-stat-story-cards",
+      "type": "registry:block",
+      "title": "Social Proof: Stat-Story Cards",
+      "description": "Three tinted story cards with a quote and a large figure each, paged in sets of three by dots.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "carousel",
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-stat-story-cards/SocialProofStatStoryCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-stat-story-cards.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-video-story-cards",
+      "type": "registry:block",
+      "title": "Social Proof: Video Story Cards",
+      "description": "Two video cards with a play button, a title and a quote; the story plays only when pressed.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-video-story-cards/SocialProofVideoStoryCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-video-story-cards.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-case-study-row",
+      "type": "registry:block",
+      "title": "Social Proof: Case-Study Row",
+      "description": "Two tinted case studies with a leaf-cut portrait, key figures, a quote and a link.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-case-study-row/SocialProofCaseStudyRow.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-case-study-row.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
+      "name": "social-proof-proof-bento",
+      "type": "registry:block",
+      "title": "Social Proof: Proof Bento",
+      "description": "A bento of a featured quote, a stat, a rating, a quote and a video tile.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "social-proof"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/social-proof-proof-bento/SocialProofProofBento.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/social-proof-proof-bento.tsx"
+        }
+      ],
+      "categories": [
+        "social-proof",
+        "marketing"
+      ]
+    },
+    {
       "name": "blog-cards-classic-3-up-grid",
       "type": "registry:block",
       "title": "Blog Cards: Classic 3-Up Grid",

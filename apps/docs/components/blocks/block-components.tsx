@@ -11,10 +11,11 @@ import { blogCardsPhotoProps } from "@/components/blocks/blog-cards-photos"
 import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
 import { NavbarStage, navbarExample } from "@/components/blocks/navbar-examples"
 import { heroPhotoProps } from "@/components/blocks/hero-photos"
+import { socialProofPhotos } from "@/components/blocks/social-proof-photos"
 
 /**
  * Every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar,
- * Pricing, Hero, About, Careers and Blog Cards Type by registry name, each loaded on its
+ * Pricing, Hero, About, Careers, Social Proof and Blog Cards Type by registry name, each loaded on its
  * own so a preview frame downloads only the block it shows.
  */
 /** Each block has its own props; a frame passes only the locale and demo props. */
@@ -146,6 +147,23 @@ type TeamCopy = Record<Locale, object>
 const withTeamPhotos = (Block: AnyBlock, type: string, copy: TeamCopy) =>
   function TeamPreview(props: { locale: Locale }) {
     return <Block {...teamPhotoProps(type, props.locale, copy)} {...props} />
+  }
+
+/**
+ * A Social Proof Type with its demo photos, from social-proof-photos.ts:
+ * every person and photo slot has one, so no preview shows initials.
+ */
+const withSocialProofPhotos = (Block: AnyBlock) =>
+  function SocialProofPreview(props: { locale: Locale }) {
+    return <Block photos={socialProofPhotos} {...props} />
+  }
+
+/** Social Proof's video Types play Hero's demo film when the reader presses play. */
+const SOCIAL_PROOF_FILM = { videoSrc: "/images/hero/office-film.mp4", videoType: "video/mp4" }
+const withSocialProofVideo = (Block: AnyBlock, items?: (copy: any) => object) =>
+  function SocialProofVideoPreview(props: { locale: Locale }) {
+    const extra = items ? items(props.locale) : SOCIAL_PROOF_FILM
+    return <Block photos={socialProofPhotos} {...extra} {...props} />
   }
 
 /**
@@ -710,6 +728,79 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   ),
   "team-grid-backdrop-roster": dynamic(() =>
     import("@fasla-ui/blocks/team-grid-backdrop-roster/TeamGridBackdropRoster").then((m) => withTeamPhotos(m.TeamGridBackdropRoster, "grid-backdrop-roster", m.teamGridBackdropRosterCopy))
+  ),
+  "social-proof-classic-trio-grid": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-classic-trio-grid/SocialProofClassicTrioGrid").then((m) => withSocialProofPhotos(m.SocialProofClassicTrioGrid))
+  ),
+  "social-proof-staggered-columns": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-staggered-columns/SocialProofStaggeredColumns").then((m) => withSocialProofPhotos(m.SocialProofStaggeredColumns))
+  ),
+  "social-proof-benefit-title-cards": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-benefit-title-cards/SocialProofBenefitTitleCards").then((m) => withSocialProofPhotos(m.SocialProofBenefitTitleCards))
+  ),
+  "social-proof-giant-quote-duo": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-giant-quote-duo/SocialProofGiantQuoteDuo").then((m) => withSocialProofPhotos(m.SocialProofGiantQuoteDuo))
+  ),
+  "social-proof-vertical-column-wall": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-vertical-column-wall/SocialProofVerticalColumnWall").then((m) => withSocialProofPhotos(m.SocialProofVerticalColumnWall))
+  ),
+  "social-proof-tweet-wall": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-tweet-wall/SocialProofTweetWall").then((m) => withSocialProofPhotos(m.SocialProofTweetWall))
+  ),
+  "social-proof-app-review-row": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-app-review-row/SocialProofAppReviewRow").then((m) => withSocialProofPhotos(m.SocialProofAppReviewRow))
+  ),
+  "social-proof-centered-logo-spotlight": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-centered-logo-spotlight/SocialProofCenteredLogoSpotlight").then((m) => withSocialProofPhotos(m.SocialProofCenteredLogoSpotlight))
+  ),
+  "social-proof-dark-editorial-split": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-dark-editorial-split/SocialProofDarkEditorialSplit").then((m) => withSocialProofPhotos(m.SocialProofDarkEditorialSplit))
+  ),
+  "social-proof-bracket-framed-quote": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-bracket-framed-quote/SocialProofBracketFramedQuote").then((m) => withSocialProofPhotos(m.SocialProofBracketFramedQuote))
+  ),
+  "social-proof-highlighted-phrase-spotlight": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-highlighted-phrase-spotlight/SocialProofHighlightedPhraseSpotlight").then((m) => withSocialProofPhotos(m.SocialProofHighlightedPhraseSpotlight))
+  ),
+  "social-proof-tinted-panel-portrait": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-tinted-panel-portrait/SocialProofTintedPanelPortrait").then((m) => withSocialProofPhotos(m.SocialProofTintedPanelPortrait))
+  ),
+  "social-proof-overlay-photo-quote": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-overlay-photo-quote/SocialProofOverlayPhotoQuote").then((m) => withSocialProofPhotos(m.SocialProofOverlayPhotoQuote))
+  ),
+  "social-proof-arch-portrait-quote": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-arch-portrait-quote/SocialProofArchPortraitQuote").then((m) => withSocialProofPhotos(m.SocialProofArchPortraitQuote))
+  ),
+  "social-proof-spotlight-carousel": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-spotlight-carousel/SocialProofSpotlightCarousel").then((m) => withSocialProofPhotos(m.SocialProofSpotlightCarousel))
+  ),
+  "social-proof-avatar-selector-row": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-avatar-selector-row/SocialProofAvatarSelectorRow").then((m) => withSocialProofPhotos(m.SocialProofAvatarSelectorRow))
+  ),
+  "social-proof-progress-carousel": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-progress-carousel/SocialProofProgressCarousel").then((m) => withSocialProofPhotos(m.SocialProofProgressCarousel))
+  ),
+  "social-proof-persona-pillars": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-persona-pillars/SocialProofPersonaPillars").then((m) => withSocialProofPhotos(m.SocialProofPersonaPillars))
+  ),
+  "social-proof-workplace-portrait-stories": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-workplace-portrait-stories/SocialProofWorkplacePortraitStories").then((m) => withSocialProofPhotos(m.SocialProofWorkplacePortraitStories))
+  ),
+  "social-proof-stat-story-cards": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-stat-story-cards/SocialProofStatStoryCards").then((m) => withSocialProofPhotos(m.SocialProofStatStoryCards))
+  ),
+  "social-proof-video-story-cards": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-video-story-cards/SocialProofVideoStoryCards").then((m) =>
+      withSocialProofVideo(m.SocialProofVideoStoryCards, (locale: Locale) => ({
+        items: m.socialProofVideoStoryCardsCopy[locale].items.map((item) => ({ ...item, ...SOCIAL_PROOF_FILM })),
+      }))
+    )
+  ),
+  "social-proof-case-study-row": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-case-study-row/SocialProofCaseStudyRow").then((m) => withSocialProofPhotos(m.SocialProofCaseStudyRow))
+  ),
+  "social-proof-proof-bento": dynamic(() =>
+    import("@fasla-ui/blocks/social-proof-proof-bento/SocialProofProofBento").then((m) => withSocialProofVideo(m.SocialProofProofBento))
   ),
   "blog-cards-split-feature": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-split-feature/BlogCardsSplitFeature").then((m) => withBlogCardsPhotos(m.BlogCardsSplitFeature, "split-feature", m.blogCardsSplitFeatureCopy))
