@@ -134,6 +134,9 @@ const withAboutPhotos = (Block: AnyBlock, type: string, copy: AboutCopy) =>
 const withCareersPhotos = (Block: AnyBlock, type: string) =>
   function CareersPreview(props: { locale: Locale }) {
     return <Block {...careersPhotoProps(type, props.locale)} {...props} />
+  }
+
+/**
  * A Team Type with its demo photos, from public/blocks/team/: each person in
  * the block's own copy gets one, by their `id`. The two cut-out Types take the
  * transparent files.
