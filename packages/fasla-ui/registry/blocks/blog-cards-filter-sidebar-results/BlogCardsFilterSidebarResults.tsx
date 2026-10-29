@@ -423,6 +423,7 @@ export function BlogCardsFilterSidebarResults({
   const topicList = topics ?? copy.topics
   const formatList = formats ?? copy.formats
   const plural = countLabel ?? copy.countLabel
+  const rules = React.useMemo(() => new Intl.PluralRules(locale), [locale])
 
   const [topic, setTopic] = React.useState<string | null>(defaultTopic)
   const [format, setFormat] = React.useState<string | null>(defaultFormat)
@@ -448,7 +449,7 @@ export function BlogCardsFilterSidebarResults({
   const label = (filters: BlogCardsFilterSidebarResultsFilter[], value: string) => filters.find((f) => f.value === value)?.label ?? value
   const activeTopic = topic !== null ? label(topicList, topic) : null
   const activeFormat = format !== null ? label(formatList, format) : null
-  const category = new Intl.PluralRules(locale).select(count)
+  const category = rules.select(count)
   const template = plural[category] ?? plural.other
   const [before = "", after = ""] = template.split("{count}")
   const counted = template.includes("{count}")

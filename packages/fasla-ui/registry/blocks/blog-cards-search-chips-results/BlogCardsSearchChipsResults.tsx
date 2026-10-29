@@ -266,7 +266,7 @@ export function BlogCardsSearchChipsResults({
   const list = posts ?? copy.posts
   const topicList = topics ?? copy.topics
   const field = placeholder ?? copy.placeholder
-  const rules = new Intl.PluralRules(locale)
+  const rules = React.useMemo(() => new Intl.PluralRules(locale), [locale])
   const pick = (plural: BlogCardsSearchChipsResultsPlural, n: number) => plural[rules.select(n)] ?? plural.other
 
   const topicLabel = (value: string) => topicList.find((t) => t.value === value)?.label ?? value
