@@ -113,6 +113,14 @@ describe("Dark Editorial Feature", () => {
     expect(container.querySelectorAll("a")).toHaveLength(5)
   })
 
+  it("truncates a long author name instead of letting it overflow", () => {
+    const post = { ...blogCardsDarkEditorialFeatureCopy.en.post!, author: "A very long author name that goes on and on and on and on" }
+    const { container } = render(<BlogCardsDarkEditorialFeature post={post} />)
+    const name = Array.from(container.querySelectorAll("span")).find((el) => el.textContent === post.author && el.className.includes("font-medium"))
+    expect(name?.className).toContain("truncate")
+    expect(name?.className).toContain("min-w-0")
+  })
+
   it("draws the title underline from the start edge in each direction", () => {
     const { container } = render(<BlogCardsDarkEditorialFeature />)
     const className = container.querySelector("h2 a")?.getAttribute("class") ?? ""

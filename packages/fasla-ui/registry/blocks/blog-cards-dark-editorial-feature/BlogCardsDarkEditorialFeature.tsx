@@ -209,7 +209,7 @@ export function BlogCardsDarkEditorialFeature({
                       aria-hidden="true"
                       className="size-9"
                     />
-                    <span className="text-sm font-medium text-foreground-inverse">{article.author}</span>
+                    <span className="min-w-0 max-w-[calc(100%-3rem)] truncate text-sm font-medium text-foreground-inverse">{article.author}</span>
                     <span
                       aria-hidden="true"
                       className="hidden size-[3px] rounded-full bg-muted-foreground-inverse [@container(min-width:40rem)]:block"
