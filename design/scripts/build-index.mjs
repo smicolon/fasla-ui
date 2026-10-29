@@ -215,6 +215,16 @@ export const CODE_MAP = {
   ...Object.fromEntries(
     ["tiers", "two-plan-compare", "plan-spotlight", "comparison-matrix", "plan-picker-summary"].map((type) => [`pricing-${type}`, null])
   ),
+  // Block: the parts every Team block shares, from the block set Team (46368:243916), not an atom.
+  team: null,
+  // Blocks: each Team item is one Type of the block set Team (46368:243916), not an atom.
+  ...Object.fromEntries(
+    [
+      "leadership-grid", "meta-profile-cards", "overlay-portrait-cards", "portrait-wall", "hairline-grid", "grid-backdrop-roster",
+      "annotated-portrait-lineup", "member-carousel", "founder-spotlight", "compact-directory-rows", "member-table", "we-re-hiring-cta",
+      "split-intro-member-rail", "department-tabs-directory",
+    ].map((type) => [`team-${type}`, null])
+  ),
   // Blocks: each Hero item is one Type of the block set Hero (46552:249264), not an atom.
   ...Object.fromEntries(
     ["editorial-arch", "photo-constellation", "arc-gallery", "inline-image-headline", "bento-split", "framed-full-bleed", "annotated-object", "editorial-triptych", "colour-stage", "twin-panels", "split-band-headline", "textured-dark", "component-pattern", "curved-media-rail", "framed-studio-card", "orbit-track", "floating-integrations", "shape-grid", "wave-band", "studio-mosaic", "illustration-split", "masked-type-reveal", "velocity-marquee", "duo-card", "video-spotlight", "brand-color-block", "scramble-decode", "split-flap-counters", "video-in-type"].map((type) => [`hero-${type}`, null])

@@ -3,8 +3,8 @@
  * Figma's order. Names and family labels are in the message catalogues
  * (docs.faqBlocks, docs.errorStateBlocks, docs.logoCloudBlocks,
  * docs.authenticationsBlocks, docs.galleryBlocks, docs.navbarBlocks,
- * docs.pricingBlocks, docs.heroBlocks, docs.aboutBlocks, docs.careersBlocks);
- * the slug is the registry item's name.
+ * docs.pricingBlocks, docs.heroBlocks, docs.aboutBlocks, docs.teamBlocks,
+ * docs.careersBlocks); the slug is the registry item's name.
  */
 
 export type FaqFamily = "lists" | "layouts" | "navigation" | "support"
@@ -94,7 +94,17 @@ export type CareersFamily = "lists" | "highlights" | "details"
 
 export const CAREERS_FAMILIES: CareersFamily[] = ["lists", "highlights", "details"]
 
-export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | CareersFamily> = {
+/**
+ * Team's three groups, from its Figma documentation: the grids and walls that
+ * set people side by side, the directories that list them (rows, a rail, tabs, a
+ * table), and the spotlights that put a founder, a carousel or an open role up
+ * front.
+ */
+export type TeamFamily = "grids-and-walls" | "directories" | "spotlights"
+
+export const TEAM_FAMILIES: TeamFamily[] = ["grids-and-walls", "directories", "spotlights"]
+
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
   family: Family
@@ -337,6 +347,22 @@ export const CAREERS_TYPES: BlockType<CareersFamily>[] = [
   { slug: "careers-no-open-roles-empty-state", family: "highlights" },
   { slug: "careers-role-detail-panel", family: "details" },
   { slug: "careers-role-detail-page", family: "details" },
+/** The 14 Types, in Figma's order. Three drop the block name Figma still carries: Team Carousel, Team Table and Hairline Team Grid. */
+export const TEAM_TYPES: BlockType<TeamFamily>[] = [
+  { slug: "team-leadership-grid", family: "grids-and-walls" },
+  { slug: "team-portrait-wall", family: "grids-and-walls" },
+  { slug: "team-compact-directory-rows", family: "directories" },
+  { slug: "team-split-intro-member-rail", family: "directories" },
+  { slug: "team-founder-spotlight", family: "spotlights" },
+  { slug: "team-member-carousel", family: "spotlights" },
+  { slug: "team-department-tabs-directory", family: "directories" },
+  { slug: "team-member-table", family: "directories" },
+  { slug: "team-meta-profile-cards", family: "grids-and-walls" },
+  { slug: "team-we-re-hiring-cta", family: "spotlights" },
+  { slug: "team-hairline-grid", family: "grids-and-walls", inverse: true },
+  { slug: "team-overlay-portrait-cards", family: "grids-and-walls", inverse: true },
+  { slug: "team-annotated-portrait-lineup", family: "grids-and-walls" },
+  { slug: "team-grid-backdrop-roster", family: "grids-and-walls" },
 ]
 
 export const ALL_BLOCK_TYPES: BlockType[] = [
@@ -350,6 +376,7 @@ export const ALL_BLOCK_TYPES: BlockType[] = [
   ...HERO_TYPES,
   ...ABOUT_TYPES,
   ...CAREERS_TYPES,
+  ...TEAM_TYPES,
 ]
 
 /** Figma's three breakpoints, the widths a preview frame renders at. */

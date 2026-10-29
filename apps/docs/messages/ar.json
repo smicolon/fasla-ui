@@ -3395,6 +3395,34 @@
       "inverseTitle": "CSS للكتل ذات السطح المعكوس",
       "inverseBody": "يضيف كلا الأمرين <code>add</code> ربط الرموز المعكوسة الذي تحتاجه الكتلة ذات السطح المعكوس. وإذا ثبّتّ إحداها يدويًا في Tailwind 4، فأضف هذه الأسطر الثلاثة إلى كتلة <code>@theme inline</code> في ملف الأنماط:",
       "inverseMore": "راجع <link>الرموز المعكوسة</link> لطريقة الإضافة في Tailwind 3، ولشرح القيم البديلة وضبط ألوانك أنت."
+    },
+    "teamBlocks": {
+      "lead": "{count, plural, one {قسم فريق واحد} two {قسما فريق} few {{n} أقسام للفريق} many {{n} قسمًا للفريق} other {{n} قسم للفريق}}: شبكات وجدران للصور، وأدلة وجداول، وإبرازات تضع مؤسسًا أو شريطًا من الأعضاء أو وظيفة مفتوحة في الواجهة.",
+      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
+      "filterLabel": "التصفية حسب العائلة",
+      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
+      "families": {
+        "all": "الكل",
+        "grids-and-walls": "شبكات وجدران",
+        "directories": "أدلة",
+        "spotlights": "إبرازات"
+      },
+      "types": {
+        "team-leadership-grid": "شبكة القيادة",
+        "team-portrait-wall": "جدار الصور",
+        "team-compact-directory-rows": "صفوف الدليل المدمجة",
+        "team-split-intro-member-rail": "مقدمة مع شريط الأعضاء",
+        "team-founder-spotlight": "إبراز المؤسسين",
+        "team-member-carousel": "عارض الأعضاء",
+        "team-department-tabs-directory": "دليل الأقسام بعلامات التبويب",
+        "team-member-table": "جدول الأعضاء",
+        "team-meta-profile-cards": "بطاقات الملفات التفصيلية",
+        "team-we-re-hiring-cta": "دعوة إلى التوظيف",
+        "team-hairline-grid": "شبكة بخطوط رفيعة",
+        "team-overlay-portrait-cards": "بطاقات صور بتسمية فوقها",
+        "team-annotated-portrait-lineup": "صف صور بأسهم توضيحية",
+        "team-grid-backdrop-roster": "شبكة على خلفية مربعات"
+      }
     }
   },
   "copyCommand": {

@@ -5492,6 +5492,342 @@
       ]
     },
     {
+      "name": "team",
+      "type": "registry:block",
+      "title": "Team",
+      "description": "The parts every Team block is built from: the section and its column, the header, a portrait that falls back to initials, a hairline, the link arrow and the one-time entrance reveal.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/team/team.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team.tsx"
+        }
+      ],
+      "categories": [
+        "team",
+        "marketing"
+      ]
+    },
+    {
+      "name": "team-leadership-grid",
+      "type": "registry:block",
+      "title": "Team: Leadership Grid",
+      "description": "A heading and three leadership portraits in a row, each with a name, a role and a line on what they run.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "team"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/team-leadership-grid/TeamLeadershipGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team-leadership-grid.tsx"
+        }
+      ],
+      "categories": [
+        "team",
+        "marketing"
+      ]
+    },
+    {
+      "name": "team-meta-profile-cards",
+      "type": "registry:block",
+      "title": "Team: Meta Profile Cards",
+      "description": "Portrait cards that each carry a row of small facts about the person, such as where they are based and when they joined.",
+      "dependencies": [],
+      "registryDependencies": [
+        "team"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/team-meta-profile-cards/TeamMetaProfileCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team-meta-profile-cards.tsx"
+        }
+      ],
+      "categories": [
+        "team",
+        "marketing"
+      ]
+    },
+    {
+      "name": "team-overlay-portrait-cards",
+      "type": "registry:block",
+      "title": "Team: Overlay Portrait Cards",
+      "description": "Full-bleed portrait cards with the name and role set over a scrim at the foot of the photo.",
+      "dependencies": [],
+      "registryDependencies": [
+        "theme-inverse",
+        "team"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/team-overlay-portrait-cards/TeamOverlayPortraitCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team-overlay-portrait-cards.tsx"
+        }
+      ],
+      "categories": [
+        "team",
+        "marketing"
+      ]
+    },
+    {
+      "name": "team-portrait-wall",
+      "type": "registry:block",
+      "title": "Team: Portrait Wall",
+      "description": "A dense wall of portraits under a headline that counts the people, with names and roles beneath each photo.",
+      "dependencies": [],
+      "registryDependencies": [
+        "team"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/team-portrait-wall/TeamPortraitWall.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team-portrait-wall.tsx"
+        }
+      ],
+      "categories": [
+        "team",
+        "marketing"
+      ]
+    },
+    {
+      "name": "team-hairline-grid",
+      "type": "registry:block",
+      "title": "Team: Hairline Team Grid",
+      "description": "An inverse-toned grid of people divided by hairlines, whose photos colour in on hover and focus.",
+      "dependencies": [],
+      "registryDependencies": [
+        "theme-inverse",
+        "team"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/team-hairline-grid/TeamHairlineGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team-hairline-grid.tsx"
+        }
+      ],
+      "categories": [
+        "team",
+        "marketing"
+      ]
+    },
+    {
+      "name": "team-grid-backdrop-roster",
+      "type": "registry:block",
+      "title": "Team: Grid Backdrop Roster",
+      "description": "Eight cut-out people on soft info tiles over a grid-paper backdrop, with two buttons under the headline.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "team"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/team-grid-backdrop-roster/TeamGridBackdropRoster.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team-grid-backdrop-roster.tsx"
+        }
+      ],
+      "categories": [
+        "team",
+        "marketing"
+      ]
+    },
+    {
+      "name": "team-annotated-portrait-lineup",
+      "type": "registry:block",
+      "title": "Team: Annotated Portrait Lineup",
+      "description": "Five cut-out people standing in a staggered line, each with a name, a role and a hand-drawn arrow.",
+      "dependencies": [],
+      "registryDependencies": [
+        "team"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/team-annotated-portrait-lineup/TeamAnnotatedPortraitLineup.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team-annotated-portrait-lineup.tsx"
+        }
+      ],
+      "categories": [
+        "team",
+        "marketing"
+      ]
+    },
+    {
+      "name": "team-member-carousel",
+      "type": "registry:block",
+      "title": "Team: Member Carousel",
+      "description": "A swipeable rail of member cards with previous and next buttons and position dots.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "carousel",
+        "team"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/team-member-carousel/TeamMemberCarousel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team-member-carousel.tsx"
+        }
+      ],
+      "categories": [
+        "team",
+        "marketing"
+      ]
+    },
+    {
+      "name": "team-founder-spotlight",
+      "type": "registry:block",
+      "title": "Team: Founder Spotlight",
+      "description": "One large feature portrait with a quote beside it, and three supporting people underneath.",
+      "dependencies": [],
+      "registryDependencies": [
+        "team"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/team-founder-spotlight/TeamFounderSpotlight.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team-founder-spotlight.tsx"
+        }
+      ],
+      "categories": [
+        "team",
+        "marketing"
+      ]
+    },
+    {
+      "name": "team-compact-directory-rows",
+      "type": "registry:block",
+      "title": "Team: Compact Directory Rows",
+      "description": "A hairline-divided directory of people, one row each, with mail and LinkedIn buttons that appear on hover.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "social-icons",
+        "team"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/team-compact-directory-rows/TeamCompactDirectoryRows.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team-compact-directory-rows.tsx"
+        }
+      ],
+      "categories": [
+        "team",
+        "marketing"
+      ]
+    },
+    {
+      "name": "team-member-table",
+      "type": "registry:block",
+      "title": "Team: Member Table",
+      "description": "A table of people with their role, team and city, collapsing to stacked rows on a phone.",
+      "dependencies": [],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "team"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/team-member-table/TeamMemberTable.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team-member-table.tsx"
+        }
+      ],
+      "categories": [
+        "team",
+        "marketing"
+      ]
+    },
+    {
+      "name": "team-we-re-hiring-cta",
+      "type": "registry:block",
+      "title": "Team: We're Hiring CTA",
+      "description": "A hiring call to action with a stack of team avatars, an action link and the open roles.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "team"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/team-we-re-hiring-cta/TeamWeReHiringCta.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team-we-re-hiring-cta.tsx"
+        }
+      ],
+      "categories": [
+        "team",
+        "marketing"
+      ]
+    },
+    {
+      "name": "team-split-intro-member-rail",
+      "type": "registry:block",
+      "title": "Team: Split Intro + Member Rail",
+      "description": "An introduction and figures on one side and a rail of member rows with locations on the other.",
+      "dependencies": [],
+      "registryDependencies": [
+        "team"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/team-split-intro-member-rail/TeamSplitIntroMemberRail.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team-split-intro-member-rail.tsx"
+        }
+      ],
+      "categories": [
+        "team",
+        "marketing"
+      ]
+    },
+    {
+      "name": "team-department-tabs-directory",
+      "type": "registry:block",
+      "title": "Team: Department Tabs Directory",
+      "description": "A directory filtered by department tabs, whose cards slide to their new places as the tab changes.",
+      "dependencies": [],
+      "registryDependencies": [
+        "badge",
+        "tabs",
+        "team"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/team-department-tabs-directory/TeamDepartmentTabsDirectory.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/team-department-tabs-directory.tsx"
+        }
+      ],
+      "categories": [
+        "team",
+        "marketing"
+      ]
+    },
+    {
       "name": "careers",
       "type": "registry:block",
       "title": "Careers",
