@@ -4,7 +4,9 @@ All photos are from [Unsplash](https://unsplash.com/?utm_source=fasla-ui&utm_med
 
 They are used in the docs site and Storybook examples only, and are **not shipped with the package**: Social Proof blocks take their photos as a `photos` prop. The Figma Social Proof set (`46368:3361`) places the same photos. Each person has one portrait, used wherever they appear; the Workplace Portrait Stories tiles reuse the portrait of the person shown.
 
-21 files, 1.0 MB. WebP, portraits 600×750, scenes 1200px wide.
+21 files, 1.1 MB. WebP, portraits 600×750, scenes 1200px wide.
+
+Three Progress Carousel photographers (Team Nocoloco, Yura Timoshenko, James Harrison) are credited by the names the project owner gave; their profile links are not listed because Unsplash's site could not be queried to confirm them.
 
 | File | Used for | Photo | Photographer |
 |---|---|---|---|
@@ -21,10 +23,10 @@ They are used in the docs site and Storybook examples only, and are **not shippe
 | `tariq-zaki.webp` | Portrait of Tariq Zaki | [2uqsukZ8Pzc](https://unsplash.com/photos/2uqsukZ8Pzc?utm_source=fasla-ui&utm_medium=referral) | [Ernest Flowers](https://unsplash.com/@ernestflowerss?utm_source=fasla-ui&utm_medium=referral) |
 | `yousef-amin.webp` | Portrait of Yousef Amin; Workplace Founders tile | [7YVZYZeITc8](https://unsplash.com/photos/7YVZYZeITc8?utm_source=fasla-ui&utm_medium=referral) | [Jurica Koletić](https://unsplash.com/@juricakoletic?utm_source=fasla-ui&utm_medium=referral) |
 | `ziad-karam.webp` | Portrait of Ziad Karam | [857QZOer6Ps](https://unsplash.com/photos/857QZOer6Ps?utm_source=fasla-ui&utm_medium=referral) | [Acesso DesignerFlix](https://unsplash.com/@designerflix?utm_source=fasla-ui&utm_medium=referral) |
-| `layered-beige-tiers.webp` | Progress Carousel, story 1 | [Yg8q1p4MTnQ](https://unsplash.com/photos/Yg8q1p4MTnQ?utm_source=fasla-ui&utm_medium=referral) | [Yoshi cgi](https://unsplash.com/@yoshicgi?utm_source=fasla-ui&utm_medium=referral) |
-| `pencil-blank-page.webp` | Progress Carousel, story 2 | [ab3IjF7CWB0](https://unsplash.com/photos/ab3IjF7CWB0?utm_source=fasla-ui&utm_medium=referral) | [MeSSrro](https://unsplash.com/@messrro?utm_source=fasla-ui&utm_medium=referral) |
-| `tablet-design-canvas.webp` | Progress Carousel, story 3 | [doTjbfxrmRw](https://unsplash.com/photos/doTjbfxrmRw?utm_source=fasla-ui&utm_medium=referral) | [Ernest Ojeh](https://unsplash.com/@namzo?utm_source=fasla-ui&utm_medium=referral) |
-| `laptop-bright-office.webp` | Progress Carousel, story 4 | [1eRS74C-alQ](https://unsplash.com/photos/1eRS74C-alQ?utm_source=fasla-ui&utm_medium=referral) | [Devin Pickell](https://unsplash.com/@nextiva?utm_source=fasla-ui&utm_medium=referral) |
+| `desk-monitor-tablet-phone.webp` | Progress Carousel, story 1 | [kaP9EcVeEc8](https://unsplash.com/photos/kaP9EcVeEc8?utm_source=fasla-ui&utm_medium=referral) | Team Nocoloco |
+| `two-men-meeting-table.webp` | Progress Carousel, story 2 | [JVSNOoCsU4k](https://unsplash.com/photos/JVSNOoCsU4k?utm_source=fasla-ui&utm_medium=referral) | Yura Timoshenko |
+| `colour-swatches-desk.webp` | Progress Carousel, story 3 | [8dgFq8Vbelo](https://unsplash.com/photos/8dgFq8Vbelo?utm_source=fasla-ui&utm_medium=referral) | [Andy Brown](https://unsplash.com/@basallt?utm_source=fasla-ui&utm_medium=referral) |
+| `laptop-code-cafe.webp` | Progress Carousel, story 4 | [UVMPVIRCF5w](https://unsplash.com/photos/UVMPVIRCF5w?utm_source=fasla-ui&utm_medium=referral) | James Harrison |
 | `minimal-white-desk.webp` | Video Story Cards poster (Rashed) | [nvzvOPQW0gc](https://unsplash.com/photos/nvzvOPQW0gc?utm_source=fasla-ui&utm_medium=referral) | [Bench Accounting](https://unsplash.com/@benchaccounting?utm_source=fasla-ui&utm_medium=referral) |
 | `window-desk-corner.webp` | Proof Bento video tile poster | [IA4mXpyGbB0](https://unsplash.com/photos/IA4mXpyGbB0?utm_source=fasla-ui&utm_medium=referral) | [Amihai Loven](https://unsplash.com/@amihailoven?utm_source=fasla-ui&utm_medium=referral) |
 | `dark-desk-monitor.webp` | Video Story Cards poster (Omar) | [TJjTEJt0iHA](https://unsplash.com/photos/TJjTEJt0iHA?utm_source=fasla-ui&utm_medium=referral) | [Dillon Shook](https://unsplash.com/@dillonjshook?utm_source=fasla-ui&utm_medium=referral) |
