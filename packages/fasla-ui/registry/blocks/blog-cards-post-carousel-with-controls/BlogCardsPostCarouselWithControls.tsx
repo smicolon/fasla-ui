@@ -20,7 +20,7 @@ import { Carousel, CarouselContent, CarouselDots, CarouselItem, useCarousel } fr
  * scroller, so touch, trackpad and the keyboard all work, and the direction
  * comes from the page's `dir`. A step is one card and its gap (344px), and the
  * card that shows only in part is the sign that there is more. The arrows stop at
- * the ends (they are disabled there) and the dots are buttons that jump to a view.
+ * the ends (they are `aria-disabled` there, and stay focusable) and the dots are buttons that jump to a view.
  * There is no autoplay: the track moves only when the reader drags, presses an
  * arrow or a dot, or uses the keys. Reduced motion jumps to the card at once.
  *
@@ -110,9 +110,16 @@ export const blogCardsPostCarouselWithControlsCopy = COPY
 /** The arrows draw `arrow-left` and `arrow-right`; the nearest `dir` mirrors them, so Next points left in Arabic. */
 const ICON = "[&:dir(rtl)]:-scale-x-100"
 
-/** Figma's pair: an outline back arrow and a solid forward one. They stop, disabled, at the ends. */
+/**
+ * Figma's pair: an outline back arrow and a solid forward one. At the ends an
+ * arrow is `aria-disabled`, not `disabled`: it looks disabled (the Button's own
+ * `aria-disabled` styles) and a press does nothing, but it stays focusable, so
+ * keyboard focus is not thrown out of the controls when the last card is reached.
+ */
 function Controls({ previousLabel, nextLabel }: { previousLabel: string; nextLabel: string }) {
   const { activeIndex, lastIndex, scrollTo } = useCarousel()
+  const atStart = activeIndex <= 0
+  const atEnd = activeIndex >= lastIndex
   return (
     <div className="flex shrink-0 gap-2">
       <Button
@@ -120,8 +127,10 @@ function Controls({ previousLabel, nextLabel }: { previousLabel: string; nextLab
         size="icon-lg"
         radius="rounded"
         aria-label={previousLabel}
-        disabled={activeIndex <= 0}
-        onClick={() => scrollTo(activeIndex - 1)}
+        aria-disabled={atStart || undefined}
+        onClick={() => {
+          if (!atStart) scrollTo(activeIndex - 1)
+        }}
       >
         <ArrowLeftIcon aria-hidden="true" className={cn("size-4", ICON)} />
       </Button>
@@ -129,8 +138,10 @@ function Controls({ previousLabel, nextLabel }: { previousLabel: string; nextLab
         size="icon-lg"
         radius="rounded"
         aria-label={nextLabel}
-        disabled={activeIndex >= lastIndex}
-        onClick={() => scrollTo(activeIndex + 1)}
+        aria-disabled={atEnd || undefined}
+        onClick={() => {
+          if (!atEnd) scrollTo(activeIndex + 1)
+        }}
       >
         <ArrowRightIcon aria-hidden="true" className={cn("size-4", ICON)} />
       </Button>

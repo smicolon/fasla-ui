@@ -297,13 +297,30 @@ describe("Post Carousel with Controls", () => {
     expect(screen.getByRole("heading", { level: 2 }).textContent).toBe("Keep scrolling sideways")
   })
 
-  it("disables Previous at the start and Next at the end", () => {
+  it("marks Previous at the start and Next at the end aria-disabled, and keeps them focusable", () => {
     const { rerender } = render(<BlogCardsPostCarouselWithControls />)
-    expect((screen.getByRole("button", { name: "Previous posts" }) as HTMLButtonElement).disabled).toBe(true)
-    expect((screen.getByRole("button", { name: "Next posts" }) as HTMLButtonElement).disabled).toBe(false)
+    const state = (name: string) => screen.getByRole("button", { name })
+    expect(state("Previous posts").getAttribute("aria-disabled")).toBe("true")
+    expect((state("Previous posts") as HTMLButtonElement).disabled).toBe(false)
+    expect(state("Next posts").getAttribute("aria-disabled")).toBeNull()
     rerender(<BlogCardsPostCarouselWithControls key="end" defaultActiveIndex={4} />)
-    expect((screen.getByRole("button", { name: "Previous posts" }) as HTMLButtonElement).disabled).toBe(false)
-    expect((screen.getByRole("button", { name: "Next posts" }) as HTMLButtonElement).disabled).toBe(true)
+    expect(state("Previous posts").getAttribute("aria-disabled")).toBeNull()
+    expect(state("Next posts").getAttribute("aria-disabled")).toBe("true")
+    expect((state("Next posts") as HTMLButtonElement).disabled).toBe(false)
+  })
+
+  it("does nothing when a disabled arrow is pressed, and focus stays on it", () => {
+    render(<BlogCardsPostCarouselWithControls defaultActiveIndex={4} />)
+    const next = screen.getByRole("button", { name: "Next posts" })
+    next.focus()
+    scrolled = [] // the carousel jumps to the starting card once on mount
+    fireEvent.click(next)
+    fireEvent.keyDown(next, { key: "Enter" })
+    expect(scrolled).toHaveLength(0)
+    expect(document.activeElement).toBe(next)
+    const previous = screen.getByRole("button", { name: "Previous posts" })
+    fireEvent.click(previous)
+    expect(scrolled.length).toBeGreaterThan(0)
   })
 
   it("moves one card when Next is pressed, and a dot jumps to its card", () => {
