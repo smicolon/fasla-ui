@@ -347,6 +347,8 @@ export const CAREERS_TYPES: BlockType<CareersFamily>[] = [
   { slug: "careers-no-open-roles-empty-state", family: "highlights" },
   { slug: "careers-role-detail-panel", family: "details" },
   { slug: "careers-role-detail-page", family: "details" },
+]
+
 /** The 14 Types, in Figma's order. Three drop the block name Figma still carries: Team Carousel, Team Table and Hairline Team Grid. */
 export const TEAM_TYPES: BlockType<TeamFamily>[] = [
   { slug: "team-leadership-grid", family: "grids-and-walls" },

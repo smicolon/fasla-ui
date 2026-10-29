@@ -271,6 +271,11 @@ export const routes = [
       description:
         "أقسام لصفحة الوظائف: الوظائف المتاحة في قوائم وبطاقات وفرق وجداول ومطويات، مع التصفية والتنقل بين الصفحات، متجاوبة ومعكوسة للعربية.",
       h1: "كتلة الوظائف (Careers)",
+    },
+  },
+  {
+    kind: "block",
+    category: "Blocks",
     path: "/docs/blocks/team/",
     title: "Team Blocks for React and Tailwind CSS | Fasla",
     description:
