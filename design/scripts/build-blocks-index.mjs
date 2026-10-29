@@ -60,7 +60,7 @@ export const EXTRA_SETS = {
 /** Family set id -> registry name prefix. Each Type maps to `${prefix}${slug(type)}`; the
  *  builder fails if a derived name is missing from the registry or a registry item with the
  *  prefix is left unclaimed. Hand-maintained: add a family when its blocks ship in code. */
-export const CODE_PREFIX = { "42359:9029": "faq-", "42556:548": "error-state-", "42806:232717": "logo-cloud-", "42586:4669": "auth-", "42478:479": "gallery-", "4103:4910": "navbar-", "46368:243915": "about-", "46332:2894": "pricing-", "46368:243916": "team-" }
+export const CODE_PREFIX = { "42359:9029": "faq-", "42556:548": "error-state-", "42806:232717": "logo-cloud-", "42586:4669": "auth-", "42478:479": "gallery-", "4103:4910": "navbar-", "46368:243915": "about-", "46332:2894": "pricing-", "46368:243916": "team-", "46368:3361": "social-proof-" }
 
 /** Family set id -> { Figma Type name -> registry name after the prefix }, for the few Types whose code
  *  name differs from `slug(type)`. Our rule is that a Type's name never carries the block name; three
