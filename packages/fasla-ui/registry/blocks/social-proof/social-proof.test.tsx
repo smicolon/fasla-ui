@@ -1,6 +1,6 @@
 import { describe, it, expect, vi } from "vitest"
 import { act, fireEvent, render, screen } from "@testing-library/react"
-import { Isolated, SocialProofStars, WALL_DRIFT_SPEED, driftDuration, toColumns } from "./social-proof"
+import { Isolated, SocialProofStars, STAGGERED_DRIFT_SPEED, WALL_DRIFT_SPEED, driftDuration, toColumns } from "./social-proof"
 import { SocialProofClassicTrioGrid } from "../social-proof-classic-trio-grid/SocialProofClassicTrioGrid"
 import { SocialProofVerticalColumnWall } from "../social-proof-vertical-column-wall/SocialProofVerticalColumnWall"
 import { SocialProofTweetWall } from "../social-proof-tweet-wall/SocialProofTweetWall"
@@ -411,6 +411,7 @@ describe("Reading speeds", () => {
     expect(WALL_DRIFT_SPEED.outer).toBeGreaterThanOrEqual(40)
     expect(WALL_DRIFT_SPEED.outer).toBeLessThanOrEqual(45)
     expect(WALL_DRIFT_SPEED.middle).toBeGreaterThanOrEqual(36)
+    expect(STAGGERED_DRIFT_SPEED).toBe(40)
   })
 
   it("turns a distance and a speed into a duration", () => {
@@ -430,5 +431,74 @@ describe("Reading speeds", () => {
     expect((220 / (shortCall.options.duration as number)) * 1000).toBeCloseTo(WALL_DRIFT_SPEED.outer, 5)
     expect((820 / (tallCall.options.duration as number)) * 1000).toBeCloseTo(WALL_DRIFT_SPEED.outer, 5)
     tall.restore()
+  })
+})
+
+describe("Staggered Columns drift", () => {
+  it("drifts three columns one way each, up then down then up, at one speed, and two the same", () => {
+    const motion = stubMotion({ width: 1300 })
+    const { unmount } = render(<SocialProofStaggeredColumns />)
+    // The first pass runs before the width is measured, with one column; the last three are the real ones.
+    const wide = motion.calls.filter((call) => call.options.iterations === Infinity).slice(-3)
+    // One copy is 400px tall in this stub and the gap is 24: 424px of travel.
+    expect(wide.map((call) => [call.keyframes.map((k) => k.transform), call.options.direction])).toEqual([
+      [["translateY(0)", "translateY(-424px)"], "normal"],
+      [["translateY(0)", "translateY(-424px)"], "reverse"],
+      [["translateY(0)", "translateY(-424px)"], "normal"],
+    ])
+    expect(wide.every((call) => call.options.easing === "linear" && call.options.duration === (424 / STAGGERED_DRIFT_SPEED) * 1000)).toBe(true)
+    unmount()
+    motion.restore()
+    const tablet = stubMotion({ width: 700 })
+    render(<SocialProofStaggeredColumns />)
+    const two = tablet.calls.filter((call) => call.options.iterations === Infinity).slice(-2)
+    expect(two.map((call) => call.options.direction)).toEqual(["normal", "reverse"])
+    expect(two.every((call) => call.options.duration === (424 / STAGGERED_DRIFT_SPEED) * 1000)).toBe(true)
+    tablet.restore()
+  })
+
+  it("keeps the resting stagger as a margin and holds every card twice, the repeat hidden and inert", () => {
+    const motion = stubMotion({ width: 1300 })
+    const { container } = render(<SocialProofStaggeredColumns />)
+    const columns = [...container.querySelectorAll("[data-drift]")]
+    expect(columns).toHaveLength(3)
+    expect(columns.map((column) => column.parentElement!.classList.contains("mt-14"))).toEqual([false, true, false])
+    const repeats = container.querySelectorAll("[data-drift] > ul[aria-hidden=true]")
+    expect(repeats).toHaveLength(3)
+    expect([...repeats].every((list) => list.hasAttribute("inert"))).toBe(true)
+    expect(screen.getAllByText(/theming engine paid for itself/)).toHaveLength(2)
+    motion.restore()
+  })
+
+  it("only runs while in view, and pauses on hover and while focus is inside", () => {
+    const motion = stubMotion({ width: 1300 })
+    const { container } = render(<SocialProofStaggeredColumns />)
+    const drift = motion.calls.filter((call) => call.options.iterations === Infinity).slice(-3)
+    expect(drift.every((call) => call.play.mock.calls.length === 0)).toBe(true)
+    motion.intersect(true)
+    expect(drift.every((call) => call.play.mock.calls.length > 0)).toBe(true)
+    const root = container.querySelector("[data-drift]")!.parentElement!.parentElement!.parentElement!
+    const plays = drift[0]!.play.mock.calls.length
+    fireEvent.pointerEnter(root)
+    const pauses = drift[0]!.pause.mock.calls.length
+    fireEvent.pointerLeave(root)
+    expect(drift[0]!.play.mock.calls.length).toBeGreaterThan(plays)
+    fireEvent.focusIn(root)
+    expect(drift[0]!.pause.mock.calls.length).toBeGreaterThan(pauses)
+    motion.restore()
+  })
+
+  it("stays still on phones and with reduced motion, with no repeats", () => {
+    const phone = stubMotion({ width: 330 })
+    const first = render(<SocialProofStaggeredColumns />)
+    expect(phone.calls.filter((call) => call.options.iterations === Infinity)).toHaveLength(0)
+    expect(first.container.querySelectorAll("[aria-hidden=true][inert]")).toHaveLength(0)
+    first.unmount()
+    phone.restore()
+    const reduced = stubMotion({ reduced: true })
+    const second = render(<SocialProofStaggeredColumns />)
+    expect(reduced.calls.filter((call) => call.options.iterations === Infinity)).toHaveLength(0)
+    expect(second.container.querySelectorAll("[aria-hidden=true][inert]")).toHaveLength(0)
+    reduced.restore()
   })
 })

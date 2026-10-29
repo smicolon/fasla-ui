@@ -7,7 +7,10 @@ import {
   SocialProofAuthor,
   SocialProofQuote,
   SocialProofSection,
+  STAGGERED_DRIFT_SPEED,
+  driftDuration,
   toColumns,
+  useCanDrift,
   useColumnCount,
   useDrift,
   type SocialProofLocale,
@@ -25,13 +28,18 @@ import {
  * dealt into them in turn; phones one column. Each column is its own stack,
  * so a longer quote pushes down only the cards under it.
  *
- * Motion (Figma's ⚡ Motion note): the columns float gently and alternately,
- * the first up while the second is down and the third up, about 14px each
- * way on Desktop and 8px on Tablet, ease-in-out, one cycle in about 9 seconds.
- * The resting stagger (the middle column 56px lower) is the middle of the
- * float. It runs only while the block is in the viewport, pauses while the
- * pointer is over it or focus is inside it, and stands still with reduced
- * motion. Phones stack one column, which stays still.
+ * Motion (Figma's ⚡ Motion note): the columns drift continuously one way,
+ * alternating by column: the first up, the second down, the third up, linear,
+ * at about 40px per second (`STAGGERED_DRIFT_SPEED`) and looping without a
+ * seam. Each column is its own window, as Figma's column frames are: it clips
+ * what drifts past its top and bottom, and holds its cards again below (the
+ * repeat, hidden from assistive technology and out of the Tab order) so the
+ * wrap is invisible. At the start of a loop the layout is the resting one,
+ * the middle column 56px lower. It
+ * runs only while the block is in the viewport, pauses while the pointer is
+ * over it or focus is inside it, and stands still with reduced motion. Tablet
+ * drifts the same way; phones stack one column, which stays still. In RTL the
+ * column order mirrors and the vertical directions do not change.
  */
 
 export interface SocialProofStaggeredColumnsItem {
@@ -121,8 +129,8 @@ export interface SocialProofStaggeredColumnsProps
   photos?: SocialProofPhotos
 }
 
-/** How far a column floats each way, in px, by how many columns there are. One column stays still. */
-const AMPLITUDE: Record<number, number> = { 1: 0, 2: 8, 3: 14 }
+/** The gap between a column's cards, `gap-6`, which the loop's distance includes. */
+const CARD_GAP = 24
 
 export function SocialProofStaggeredColumns({
   locale = "en",
@@ -139,24 +147,28 @@ export function SocialProofStaggeredColumns({
   const line = description === undefined ? copy.description : description
   const [gridRef, columnCount] = useColumnCount<HTMLDivElement>()
   const columns = toColumns(list.map((item, index) => ({ item, index })), columnCount)
-  const floatRef = useDrift<HTMLDivElement>(
+  const canDrift = useCanDrift() && columnCount > 1
+  const driftRef = useDrift<HTMLDivElement>(
     (root) => {
-      const amplitude = AMPLITUDE[columnCount] ?? 0
-      if (!amplitude) return []
-      return Array.from(root.querySelectorAll<HTMLElement>("[data-float]")).flatMap((column, columnIndex) =>
-        typeof column.animate === "function"
-          ? [
-              column.animate([{ transform: `translateY(${-amplitude}px)` }, { transform: `translateY(${amplitude}px)` }], {
-                duration: 4500,
-                iterations: Infinity,
-                direction: columnIndex % 2 === 0 ? "alternate" : "alternate-reverse",
-                easing: "ease-in-out",
-              }),
-            ]
-          : []
-      )
+      if (columnCount < 2) return []
+      return Array.from(root.querySelectorAll<HTMLElement>("[data-drift]")).flatMap((column, columnIndex) => {
+        const first = column.firstElementChild as HTMLElement | null
+        if (!first || typeof column.animate !== "function") return []
+        // One copy's height and the gap before the repeat: moving that far puts the repeat where the first copy began.
+        // Measured, not `offsetHeight`, which rounds: a fraction of a pixel would show as a jump at the wrap.
+        const distance = first.getBoundingClientRect().height + CARD_GAP
+        return [
+          column.animate([{ transform: "translateY(0)" }, { transform: `translateY(${-distance}px)` }], {
+            duration: driftDuration(distance, STAGGERED_DRIFT_SPEED),
+            iterations: Infinity,
+            easing: "linear",
+            // The first, third... columns climb; the second, fourth... fall. Same in RTL.
+            direction: columnIndex % 2 === 0 ? "normal" : "reverse",
+          }),
+        ]
+      })
     },
-    [columnCount]
+    [columnCount, canDrift]
   )
 
   return (
@@ -171,20 +183,37 @@ export function SocialProofStaggeredColumns({
           </p>
         ) : null}
       </header>
-      <div ref={floatRef} className="w-full">
+      <div ref={driftRef} className="w-full">
         <div ref={gridRef} className="flex w-full items-start gap-6">
-          {columns.map((column, columnIndex) => (
-            <ul key={columnIndex} data-float="" className={cn("flex min-w-0 flex-1 flex-col gap-6", columnIndex === 1 && "pt-14")}>
-              {column.map(({ item, index }) => (
-                <li key={index} className="rounded-xl bg-secondary p-8">
-                  <figure className="m-0 flex flex-col gap-5">
-                    <SocialProofAuthor person={item.author} photos={photos} />
-                    <SocialProofQuote quote={item.quote} className="text-base text-foreground" />
-                  </figure>
-                </li>
-              ))}
-            </ul>
-          ))}
+          {columns.map((column, columnIndex) => {
+            const cards = column.map(({ item, index }) => (
+              <li key={index} className="rounded-xl bg-secondary p-8">
+                <figure className="m-0 flex flex-col gap-5">
+                  <SocialProofAuthor person={item.author} photos={photos} />
+                  <SocialProofQuote quote={item.quote} className="text-base text-foreground" />
+                </figure>
+              </li>
+            ))
+            return (
+              // Each column is its own window, as Figma's column frames are: it clips what drifts past its top and bottom.
+              // The stagger is its margin, so it stays out of the loop's distance.
+              <div key={columnIndex} className={cn("min-w-0 flex-1 overflow-hidden", columnIndex === 1 && "mt-14")}>
+                <div data-drift="" className="relative">
+                  <ul className="m-0 flex list-none flex-col gap-6 p-0">{cards}</ul>
+                  {canDrift ? (
+                    <ul
+                      // The repeat is only there for the loop: hidden from assistive technology and out of the Tab order.
+                      aria-hidden="true"
+                      ref={(el) => el?.setAttribute("inert", "")}
+                      className="absolute inset-x-0 top-full m-0 mt-6 flex list-none flex-col gap-6 p-0"
+                    >
+                      {cards}
+                    </ul>
+                  ) : null}
+                </div>
+              </div>
+            )
+          })}
         </div>
       </div>
     </SocialProofSection>
