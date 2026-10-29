@@ -254,6 +254,7 @@ export const CODE_MAP = {
       "journal-bento", "left-thumb-row-cards", "hairline-text-index", "numbered-reading-list", "latest-popular-split",
       "split-feature", "lead-ranked-picks", "dark-editorial-feature", "magazine-cover-story", "pull-quote-feature",
       "newsletter-latest", "author-spotlight", "related-posts-strip",
+      "filter-sidebar-results", "search-chips-results", "post-carousel-with-controls",
     ].map((type) => [`blog-cards-${type}`, null])
   ),
 }

@@ -104,14 +104,18 @@ const PHOTO_PROP: Record<string, { list: string; key: string } | { object: strin
   "newsletter-latest": { list: "latest", key: "image" },
   "author-spotlight": { list: "posts", key: "image" },
   "related-posts-strip": { list: "posts", key: "image" },
+  "filter-sidebar-results": { list: "posts", key: "image" },
+  "search-chips-results": { list: "posts", key: "image" },
+  "post-carousel-with-controls": { list: "posts", key: "image" },
 }
 
 type BlockCopy = Record<Locale, object>
 
 /**
  * The props that put a Type's demo photos into its block: the block's own
- * copy list with a photo added to each item, in slot order. `copy` is the
- * block's exported copy.
+ * copy list with a photo added to each item, in slot order, starting over
+ * when the list is longer than the Type's photos. `copy` is the block's
+ * exported copy.
  */
 export function blogCardsPhotoProps(type: string, locale: Locale, copy?: BlockCopy): Record<string, unknown> {
   const photos = blogCardsPhotos(type, locale)
@@ -120,7 +124,7 @@ export function blogCardsPhotoProps(type: string, locale: Locale, copy?: BlockCo
   const source = (copy?.[locale] as Record<string, unknown> | undefined) ?? {}
   if ("list" in prop) {
     const items = (source[prop.list] as object[] | undefined) ?? []
-    return { [prop.list]: items.map((item, index) => ({ ...item, [prop.key]: photos[index] })) }
+    return { [prop.list]: items.map((item, index) => ({ ...item, [prop.key]: photos[index % photos.length] })) }
   }
   return { [prop.object]: { ...(source[prop.object] as object | undefined), [prop.key]: photos[0] } }
 }

@@ -6534,6 +6534,75 @@
         "blog-cards",
         "marketing"
       ]
+    },
+    {
+      "name": "blog-cards-filter-sidebar-results",
+      "type": "registry:block",
+      "title": "Blog Cards: Filter Sidebar + Results",
+      "description": "An archive with a rail of two filter groups and the results beside it: pressed filter rows with counts, a Filtered by line, and result rows that collapse and expand in 220ms while the count rolls.",
+      "dependencies": [],
+      "registryDependencies": [
+        "badge"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-filter-sidebar-results/BlogCardsFilterSidebarResults.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-filter-sidebar-results.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
+    },
+    {
+      "name": "blog-cards-search-chips-results",
+      "type": "registry:block",
+      "title": "Blog Cards: Search + Chips + Results",
+      "description": "A search page: a debounced search field with the Input atom, pressable topic chips wearing the Badge's classes, a live count line and a grid of result cards that cross-fade.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-search-chips-results/BlogCardsSearchChipsResults.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-search-chips-results.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
+    },
+    {
+      "name": "blog-cards-post-carousel-with-controls",
+      "type": "registry:block",
+      "title": "Blog Cards: Post Carousel with Controls",
+      "description": "A header with outline and solid arrow buttons over a scroll-snap row of post cards on the Carousel atom, with dots; no autoplay, arrows disabled at the ends.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "carousel"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/blog-cards-post-carousel-with-controls/BlogCardsPostCarouselWithControls.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/blog-cards-post-carousel-with-controls.tsx"
+        }
+      ],
+      "categories": [
+        "blog-cards",
+        "marketing"
+      ]
     }
   ]
 }

@@ -3427,6 +3427,7 @@
     "blogCardsBlocks": {
       "lead": "Sections that show articles to readers: card grids and features, lists and indexes, the panels that sit beside a post, and the controls for browsing.",
       "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "railNote": "In Filter Sidebar + Results the filter rail does not stick to the top of the screen at 1024px and wider: no variant draws a sticky rail, so it scrolls with the page.",
       "filterLabel": "Filter by family",
       "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
       "families": {
@@ -3455,7 +3456,10 @@
         "blog-cards-pull-quote-feature": "Pull-Quote Feature",
         "blog-cards-newsletter-latest": "Newsletter + Latest",
         "blog-cards-author-spotlight": "Author Spotlight",
-        "blog-cards-related-posts-strip": "Related Posts Strip"
+        "blog-cards-related-posts-strip": "Related Posts Strip",
+        "blog-cards-filter-sidebar-results": "Filter Sidebar + Results",
+        "blog-cards-search-chips-results": "Search + Chips + Results",
+        "blog-cards-post-carousel-with-controls": "Post Carousel with Controls"
       }
     }
   },

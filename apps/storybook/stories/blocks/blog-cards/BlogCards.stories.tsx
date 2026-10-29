@@ -17,6 +17,9 @@ import { BlogCardsPullQuoteFeature, blogCardsPullQuoteFeatureCopy } from "../../
 import { BlogCardsNewsletterLatest, blogCardsNewsletterLatestCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-newsletter-latest/BlogCardsNewsletterLatest"
 import { BlogCardsAuthorSpotlight, blogCardsAuthorSpotlightCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-author-spotlight/BlogCardsAuthorSpotlight"
 import { BlogCardsRelatedPostsStrip, blogCardsRelatedPostsStripCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-related-posts-strip/BlogCardsRelatedPostsStrip"
+import { BlogCardsFilterSidebarResults, blogCardsFilterSidebarResultsCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-filter-sidebar-results/BlogCardsFilterSidebarResults"
+import { BlogCardsSearchChipsResults, blogCardsSearchChipsResultsCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-search-chips-results/BlogCardsSearchChipsResults"
+import { BlogCardsPostCarouselWithControls, blogCardsPostCarouselWithControlsCopy } from "../../../../../packages/fasla-ui/registry/blocks/blog-cards-post-carousel-with-controls/BlogCardsPostCarouselWithControls"
 import { blogCardsArgTypes, blogCardsViewports, emptyPropsOf, localeOf, photoPropsOf } from "./blog-cards-story-kit"
 
 /**
@@ -399,4 +402,64 @@ export const RelatedPostsStripEmpty: StoryObj<typeof BlogCardsRelatedPostsStrip>
   tags: ["!dev", "!autodocs"],
   argTypes: blogCardsArgTypes(BlogCardsRelatedPostsStrip, blogCardsRelatedPostsStripCopy, [], ["emptyLabel"]),
   render: (args, context) => <BlogCardsRelatedPostsStrip locale={localeOf(context)} {...emptyPropsOf(blogCardsRelatedPostsStripCopy)} {...args} />,
+}
+
+export const FilterSidebarResults: StoryObj<typeof BlogCardsFilterSidebarResults> = {
+  name: "Filter Sidebar + Results",
+  argTypes: blogCardsArgTypes(BlogCardsFilterSidebarResults, blogCardsFilterSidebarResultsCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsFilterSidebarResults locale={localeOf(context)} {...photoPropsOf("filter-sidebar-results", context, blogCardsFilterSidebarResultsCopy)} {...args} />,
+}
+
+export const FilterSidebarResultsWithoutPhotos: StoryObj<typeof BlogCardsFilterSidebarResults> = {
+  name: "Filter Sidebar + Results: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsFilterSidebarResults, blogCardsFilterSidebarResultsCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsFilterSidebarResults locale={localeOf(context)} {...args} />,
+}
+
+export const FilterSidebarResultsEmpty: StoryObj<typeof BlogCardsFilterSidebarResults> = {
+  name: "Filter Sidebar + Results: Empty",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsFilterSidebarResults, blogCardsFilterSidebarResultsCopy, [], ["emptyLabel"]),
+  render: (args, context) => <BlogCardsFilterSidebarResults locale={localeOf(context)} {...emptyPropsOf(blogCardsFilterSidebarResultsCopy)} {...args} />,
+}
+
+export const SearchChipsResults: StoryObj<typeof BlogCardsSearchChipsResults> = {
+  name: "Search + Chips + Results",
+  argTypes: blogCardsArgTypes(BlogCardsSearchChipsResults, blogCardsSearchChipsResultsCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsSearchChipsResults locale={localeOf(context)} {...photoPropsOf("search-chips-results", context, blogCardsSearchChipsResultsCopy)} {...args} />,
+}
+
+export const SearchChipsResultsWithoutPhotos: StoryObj<typeof BlogCardsSearchChipsResults> = {
+  name: "Search + Chips + Results: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsSearchChipsResults, blogCardsSearchChipsResultsCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsSearchChipsResults locale={localeOf(context)} {...args} />,
+}
+
+export const SearchChipsResultsEmpty: StoryObj<typeof BlogCardsSearchChipsResults> = {
+  name: "Search + Chips + Results: Empty",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsSearchChipsResults, blogCardsSearchChipsResultsCopy, [], ["emptyLabel"]),
+  render: (args, context) => <BlogCardsSearchChipsResults locale={localeOf(context)} {...emptyPropsOf(blogCardsSearchChipsResultsCopy)} {...args} />,
+}
+
+export const PostCarouselWithControls: StoryObj<typeof BlogCardsPostCarouselWithControls> = {
+  name: "Post Carousel with Controls",
+  argTypes: blogCardsArgTypes(BlogCardsPostCarouselWithControls, blogCardsPostCarouselWithControlsCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsPostCarouselWithControls locale={localeOf(context)} {...photoPropsOf("post-carousel-with-controls", context, blogCardsPostCarouselWithControlsCopy)} {...args} />,
+}
+
+export const PostCarouselWithControlsWithoutPhotos: StoryObj<typeof BlogCardsPostCarouselWithControls> = {
+  name: "Post Carousel with Controls: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsPostCarouselWithControls, blogCardsPostCarouselWithControlsCopy, ["emptyLabel"]),
+  render: (args, context) => <BlogCardsPostCarouselWithControls locale={localeOf(context)} {...args} />,
+}
+
+export const PostCarouselWithControlsEmpty: StoryObj<typeof BlogCardsPostCarouselWithControls> = {
+  name: "Post Carousel with Controls: Empty",
+  tags: ["!dev", "!autodocs"],
+  argTypes: blogCardsArgTypes(BlogCardsPostCarouselWithControls, blogCardsPostCarouselWithControlsCopy, [], ["emptyLabel"]),
+  render: (args, context) => <BlogCardsPostCarouselWithControls locale={localeOf(context)} {...emptyPropsOf(blogCardsPostCarouselWithControlsCopy)} {...args} />,
 }

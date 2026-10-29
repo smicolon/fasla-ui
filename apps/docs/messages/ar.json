@@ -3427,6 +3427,7 @@
     "blogCardsBlocks": {
       "lead": "أقسام تعرض المقالات للقرّاء: شبكات البطاقات والمقالات المميزة، والقوائم والفهارس، واللوحات التي ترافق المقال، وأدوات التصفح.",
       "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
+      "railNote": "في «أرشيف بمرشّحات جانبية» لا يلتصق شريط المرشّحات بأعلى الشاشة عند عرض 1024px فأكثر، فلا نسخة ترسم شريطًا لاصقًا، ويتمرر الشريط مع الصفحة.",
       "filterLabel": "التصفية حسب العائلة",
       "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
       "families": {
@@ -3455,7 +3456,10 @@
         "blog-cards-pull-quote-feature": "مقال باقتباس بارز",
         "blog-cards-newsletter-latest": "نشرة بريدية مع الأحدث",
         "blog-cards-author-spotlight": "بطاقة الكاتب ومقالاته",
-        "blog-cards-related-posts-strip": "شريط مقالات ذات صلة"
+        "blog-cards-related-posts-strip": "شريط مقالات ذات صلة",
+        "blog-cards-filter-sidebar-results": "أرشيف بمرشّحات جانبية",
+        "blog-cards-search-chips-results": "بحث بشرائح المواضيع",
+        "blog-cards-post-carousel-with-controls": "شريط مقالات بأزرار تحكم"
       }
     }
   },

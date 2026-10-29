@@ -735,6 +735,15 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "blog-cards-related-posts-strip": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-related-posts-strip/BlogCardsRelatedPostsStrip").then((m) => withBlogCardsPhotos(m.BlogCardsRelatedPostsStrip, "related-posts-strip", m.blogCardsRelatedPostsStripCopy))
   ),
+  "blog-cards-filter-sidebar-results": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-filter-sidebar-results/BlogCardsFilterSidebarResults").then((m) => withBlogCardsPhotos(m.BlogCardsFilterSidebarResults, "filter-sidebar-results", m.blogCardsFilterSidebarResultsCopy))
+  ),
+  "blog-cards-search-chips-results": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-search-chips-results/BlogCardsSearchChipsResults").then((m) => withBlogCardsPhotos(m.BlogCardsSearchChipsResults, "search-chips-results", m.blogCardsSearchChipsResultsCopy))
+  ),
+  "blog-cards-post-carousel-with-controls": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-post-carousel-with-controls/BlogCardsPostCarouselWithControls").then((m) => withBlogCardsPhotos(m.BlogCardsPostCarouselWithControls, "post-carousel-with-controls", m.blogCardsPostCarouselWithControlsCopy))
+  ),
   "blog-cards-left-thumb-row-cards": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-left-thumb-row-cards/BlogCardsLeftThumbRowCards").then((m) => withBlogCardsPhotos(m.BlogCardsLeftThumbRowCards, "left-thumb-row-cards", m.blogCardsLeftThumbRowCardsCopy))
   ),
