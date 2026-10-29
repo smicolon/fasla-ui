@@ -8,9 +8,9 @@ const docsRoot = path.resolve(import.meta.dir, "..")
 const componentsRoot = path.join(docsRoot, "app/[locale]/docs/components")
 
 describe("Blocks section", () => {
-  test("has a page for every block family route, and lists every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar, Pricing, Hero, About, Careers, Team and Social Proof item in the registry", async () => {
+  test("has a page for every block family route, and lists every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar, Pricing, Hero, About, Careers, Team, Social Proof and Blog Cards item in the registry", async () => {
     const { blockRoutes } = await import("../lib/seo-routes")
-    const { FAQ_TYPES, ERROR_STATE_TYPES, LOGO_CLOUD_TYPES, AUTHENTICATIONS_TYPES, GALLERY_TYPES, NAVBAR_TYPES, PRICING_TYPES, HERO_TYPES, ABOUT_TYPES, CAREERS_TYPES, TEAM_TYPES, SOCIAL_PROOF_TYPES } = await import(
+    const { FAQ_TYPES, ERROR_STATE_TYPES, LOGO_CLOUD_TYPES, AUTHENTICATIONS_TYPES, GALLERY_TYPES, NAVBAR_TYPES, PRICING_TYPES, HERO_TYPES, ABOUT_TYPES, CAREERS_TYPES, TEAM_TYPES, SOCIAL_PROOF_TYPES, BLOG_CARDS_TYPES } = await import(
       "../lib/blocks"
     )
     const blocksRoot = path.join(docsRoot, "app/[locale]/docs/blocks")
@@ -49,6 +49,8 @@ describe("Blocks section", () => {
     expect(TEAM_TYPES.map((type) => type.slug).sort()).toEqual(teamItems.sort())
     const socialProofItems = registry.items.filter((item) => item.name.startsWith("social-proof-")).map((item) => item.name)
     expect(SOCIAL_PROOF_TYPES.map((type) => type.slug).sort()).toEqual(socialProofItems.sort())
+    const blogCardsItems = registry.items.filter((item) => item.name.startsWith("blog-cards-")).map((item) => item.name)
+    expect(BLOG_CARDS_TYPES.map((type) => type.slug).sort()).toEqual(blogCardsItems.sort())
   })
 
   test("marks exactly the blocks that depend on theme-inverse as inverse", async () => {

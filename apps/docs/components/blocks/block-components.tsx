@@ -7,6 +7,7 @@ import { authExample } from "@/components/blocks/authentications-examples"
 import { aboutPhotoProps } from "@/components/blocks/about-photos"
 import { careersPhotoProps } from "@/components/blocks/careers-photos"
 import { teamPhotoProps } from "@/components/blocks/team-photos"
+import { blogCardsPhotoProps } from "@/components/blocks/blog-cards-photos"
 import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
 import { NavbarStage, navbarExample } from "@/components/blocks/navbar-examples"
 import { heroPhotoProps } from "@/components/blocks/hero-photos"
@@ -14,7 +15,7 @@ import { socialProofPhotos } from "@/components/blocks/social-proof-photos"
 
 /**
  * Every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar,
- * Pricing, Hero, About, Careers and Social Proof Type by registry name, each loaded on its
+ * Pricing, Hero, About, Careers, Social Proof and Blog Cards Type by registry name, each loaded on its
  * own so a preview frame downloads only the block it shows.
  */
 /** Each block has its own props; a frame passes only the locale and demo props. */
@@ -163,6 +164,17 @@ const withSocialProofVideo = (Block: AnyBlock, items?: (copy: any) => object) =>
   function SocialProofVideoPreview(props: { locale: Locale }) {
     const extra = items ? items(props.locale) : SOCIAL_PROOF_FILM
     return <Block photos={socialProofPhotos} {...extra} {...props} />
+  }
+
+/**
+ * A Blog Cards Type with its demo photos, from public/images/blog-cards/:
+ * added to each item of the block's own copy list. Types without photos
+ * render as they are.
+ */
+type BlogCardsCopy = Record<Locale, object>
+const withBlogCardsPhotos = (Block: AnyBlock, type: string, copy: BlogCardsCopy) =>
+  function BlogCardsPreview(props: { locale: Locale }) {
+    return <Block {...blogCardsPhotoProps(type, props.locale, copy)} {...props} />
   }
 
 export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
@@ -789,6 +801,69 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   ),
   "social-proof-proof-bento": dynamic(() =>
     import("@fasla-ui/blocks/social-proof-proof-bento/SocialProofProofBento").then((m) => withSocialProofVideo(m.SocialProofProofBento))
+  ),
+  "blog-cards-split-feature": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-split-feature/BlogCardsSplitFeature").then((m) => withBlogCardsPhotos(m.BlogCardsSplitFeature, "split-feature", m.blogCardsSplitFeatureCopy))
+  ),
+  "blog-cards-lead-ranked-picks": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-lead-ranked-picks/BlogCardsLeadRankedPicks").then((m) => withBlogCardsPhotos(m.BlogCardsLeadRankedPicks, "lead-ranked-picks", m.blogCardsLeadRankedPicksCopy))
+  ),
+  "blog-cards-dark-editorial-feature": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-dark-editorial-feature/BlogCardsDarkEditorialFeature").then((m) => withBlogCardsPhotos(m.BlogCardsDarkEditorialFeature, "dark-editorial-feature", m.blogCardsDarkEditorialFeatureCopy))
+  ),
+  "blog-cards-magazine-cover-story": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-magazine-cover-story/BlogCardsMagazineCoverStory").then((m) => withBlogCardsPhotos(m.BlogCardsMagazineCoverStory, "magazine-cover-story", m.blogCardsMagazineCoverStoryCopy))
+  ),
+  "blog-cards-pull-quote-feature": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-pull-quote-feature/BlogCardsPullQuoteFeature").then((m) => withBlogCardsPhotos(m.BlogCardsPullQuoteFeature, "pull-quote-feature", m.blogCardsPullQuoteFeatureCopy))
+  ),
+  "blog-cards-newsletter-latest": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-newsletter-latest/BlogCardsNewsletterLatest").then((m) => withBlogCardsPhotos(m.BlogCardsNewsletterLatest, "newsletter-latest", m.blogCardsNewsletterLatestCopy))
+  ),
+  "blog-cards-author-spotlight": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-author-spotlight/BlogCardsAuthorSpotlight").then((m) => withBlogCardsPhotos(m.BlogCardsAuthorSpotlight, "author-spotlight", m.blogCardsAuthorSpotlightCopy))
+  ),
+  "blog-cards-related-posts-strip": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-related-posts-strip/BlogCardsRelatedPostsStrip").then((m) => withBlogCardsPhotos(m.BlogCardsRelatedPostsStrip, "related-posts-strip", m.blogCardsRelatedPostsStripCopy))
+  ),
+  "blog-cards-filter-sidebar-results": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-filter-sidebar-results/BlogCardsFilterSidebarResults").then((m) => withBlogCardsPhotos(m.BlogCardsFilterSidebarResults, "filter-sidebar-results", m.blogCardsFilterSidebarResultsCopy))
+  ),
+  "blog-cards-search-chips-results": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-search-chips-results/BlogCardsSearchChipsResults").then((m) => withBlogCardsPhotos(m.BlogCardsSearchChipsResults, "search-chips-results", m.blogCardsSearchChipsResultsCopy))
+  ),
+  "blog-cards-post-carousel-with-controls": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-post-carousel-with-controls/BlogCardsPostCarouselWithControls").then((m) => withBlogCardsPhotos(m.BlogCardsPostCarouselWithControls, "post-carousel-with-controls", m.blogCardsPostCarouselWithControlsCopy))
+  ),
+  "blog-cards-left-thumb-row-cards": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-left-thumb-row-cards/BlogCardsLeftThumbRowCards").then((m) => withBlogCardsPhotos(m.BlogCardsLeftThumbRowCards, "left-thumb-row-cards", m.blogCardsLeftThumbRowCardsCopy))
+  ),
+  "blog-cards-hairline-text-index": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-hairline-text-index/BlogCardsHairlineTextIndex").then((m) => withBlogCardsPhotos(m.BlogCardsHairlineTextIndex, "hairline-text-index", m.blogCardsHairlineTextIndexCopy))
+  ),
+  "blog-cards-numbered-reading-list": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-numbered-reading-list/BlogCardsNumberedReadingList").then((m) => withBlogCardsPhotos(m.BlogCardsNumberedReadingList, "numbered-reading-list", m.blogCardsNumberedReadingListCopy))
+  ),
+  "blog-cards-latest-popular-split": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-latest-popular-split/BlogCardsLatestPopularSplit").then((m) => withBlogCardsPhotos(m.BlogCardsLatestPopularSplit, "latest-popular-split", m.blogCardsLatestPopularSplitCopy))
+  ),
+  "blog-cards-classic-3-up-grid": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-classic-3-up-grid/BlogCardsClassic3UpGrid").then((m) => withBlogCardsPhotos(m.BlogCardsClassic3UpGrid, "classic-3-up-grid", m.blogCardsClassic3UpGridCopy))
+  ),
+  "blog-cards-featured-two-up": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-featured-two-up/BlogCardsFeaturedTwoUp").then((m) => withBlogCardsPhotos(m.BlogCardsFeaturedTwoUp, "featured-two-up", m.blogCardsFeaturedTwoUpCopy))
+  ),
+  "blog-cards-compact-4-up-thumb-grid": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-compact-4-up-thumb-grid/BlogCardsCompact4UpThumbGrid").then((m) => withBlogCardsPhotos(m.BlogCardsCompact4UpThumbGrid, "compact-4-up-thumb-grid", m.blogCardsCompact4UpThumbGridCopy))
+  ),
+  "blog-cards-bento-editorial-grid": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-bento-editorial-grid/BlogCardsBentoEditorialGrid").then((m) => withBlogCardsPhotos(m.BlogCardsBentoEditorialGrid, "bento-editorial-grid", m.blogCardsBentoEditorialGridCopy))
+  ),
+  "blog-cards-overlay-photo-trio": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-overlay-photo-trio/BlogCardsOverlayPhotoTrio").then((m) => withBlogCardsPhotos(m.BlogCardsOverlayPhotoTrio, "overlay-photo-trio", m.blogCardsOverlayPhotoTrioCopy))
+  ),
+  "blog-cards-journal-bento": dynamic(() =>
+    import("@fasla-ui/blocks/blog-cards-journal-bento/BlogCardsJournalBento").then((m) => withBlogCardsPhotos(m.BlogCardsJournalBento, "journal-bento", m.blogCardsJournalBentoCopy))
   ),
 }
 

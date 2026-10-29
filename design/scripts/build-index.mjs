@@ -259,6 +259,16 @@ export const CODE_MAP = {
       "stat-story-cards", "video-story-cards", "case-study-row", "proof-bento",
     ].map((type) => [`social-proof-${type}`, null])
   ),
+  // Blocks: each Blog Cards item is one Type of the block set Blog Cards (46368:243914), not an atom.
+  ...Object.fromEntries(
+    [
+      "classic-3-up-grid", "featured-two-up", "compact-4-up-thumb-grid", "bento-editorial-grid", "overlay-photo-trio",
+      "journal-bento", "left-thumb-row-cards", "hairline-text-index", "numbered-reading-list", "latest-popular-split",
+      "split-feature", "lead-ranked-picks", "dark-editorial-feature", "magazine-cover-story", "pull-quote-feature",
+      "newsletter-latest", "author-spotlight", "related-posts-strip",
+      "filter-sidebar-results", "search-chips-results", "post-carousel-with-controls",
+    ].map((type) => [`blog-cards-${type}`, null])
+  ),
 }
 
 const FAMILY_MIN = 10

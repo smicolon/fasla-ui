@@ -3461,6 +3461,44 @@
         "team-annotated-portrait-lineup": "Annotated Portrait Lineup",
         "team-grid-backdrop-roster": "Grid Backdrop Roster"
       }
+    },
+    "blogCardsBlocks": {
+      "lead": "Sections that show articles to readers: card grids and features, lists and indexes, the panels that sit beside a post, and the controls for browsing.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "railNote": "In Filter Sidebar + Results the filter rail does not stick to the top of the screen at 1024px and wider: no variant draws a sticky rail, so it scrolls with the page.",
+      "filterLabel": "Filter by family",
+      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
+      "families": {
+        "all": "All",
+        "grids": "Card grids",
+        "features": "Features",
+        "lists": "Lists and indexes",
+        "alongside": "Alongside a post",
+        "browse": "Browse and filter"
+      },
+      "types": {
+        "blog-cards-classic-3-up-grid": "Classic 3-Up Grid",
+        "blog-cards-featured-two-up": "Featured + Two-Up",
+        "blog-cards-compact-4-up-thumb-grid": "Compact 4-Up Thumb Grid",
+        "blog-cards-bento-editorial-grid": "Bento Editorial Grid",
+        "blog-cards-overlay-photo-trio": "Overlay Photo Trio",
+        "blog-cards-journal-bento": "Journal Bento",
+        "blog-cards-left-thumb-row-cards": "Left-Thumb Row Cards",
+        "blog-cards-hairline-text-index": "Hairline Text Index",
+        "blog-cards-numbered-reading-list": "Numbered Reading List",
+        "blog-cards-latest-popular-split": "Latest / Popular Split",
+        "blog-cards-split-feature": "Split Feature",
+        "blog-cards-lead-ranked-picks": "Lead + Ranked Picks",
+        "blog-cards-dark-editorial-feature": "Dark Editorial Feature",
+        "blog-cards-magazine-cover-story": "Magazine Cover Story",
+        "blog-cards-pull-quote-feature": "Pull-Quote Feature",
+        "blog-cards-newsletter-latest": "Newsletter + Latest",
+        "blog-cards-author-spotlight": "Author Spotlight",
+        "blog-cards-related-posts-strip": "Related Posts Strip",
+        "blog-cards-filter-sidebar-results": "Filter Sidebar + Results",
+        "blog-cards-search-chips-results": "Search + Chips + Results",
+        "blog-cards-post-carousel-with-controls": "Post Carousel with Controls"
+      }
     }
   },
   "copyCommand": {

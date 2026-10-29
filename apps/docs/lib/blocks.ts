@@ -4,7 +4,7 @@
  * (docs.faqBlocks, docs.errorStateBlocks, docs.logoCloudBlocks,
  * docs.authenticationsBlocks, docs.galleryBlocks, docs.navbarBlocks,
  * docs.pricingBlocks, docs.heroBlocks, docs.aboutBlocks, docs.teamBlocks,
- * docs.careersBlocks, docs.socialProofBlocks); the slug is the registry item's name.
+ * docs.careersBlocks, docs.socialProofBlocks, docs.blogCardsBlocks); the slug is the registry item's name.
  */
 
 export type FaqFamily = "lists" | "layouts" | "navigation" | "support"
@@ -114,7 +114,18 @@ export type SocialProofFamily = "grids" | "spotlights" | "carousels" | "stories"
 
 export const SOCIAL_PROOF_FAMILIES: SocialProofFamily[] = ["grids", "spotlights", "carousels", "stories"]
 
-export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | SocialProofFamily> = {
+/**
+ * Blog Cards' five groups: the card grids that show several articles at once,
+ * the features built around one lead article, the lists and indexes that
+ * read as rows, the panels that sit beside a post (a newsletter, its author,
+ * related articles), and the three that help a reader browse (a filter, a
+ * search, a carousel).
+ */
+export type BlogCardsFamily = "grids" | "features" | "lists" | "alongside" | "browse"
+
+export const BLOG_CARDS_FAMILIES: BlogCardsFamily[] = ["grids", "features", "lists", "alongside", "browse"]
+
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | SocialProofFamily | BlogCardsFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
   family: Family
@@ -403,6 +414,31 @@ export const SOCIAL_PROOF_TYPES: BlockType<SocialProofFamily>[] = [
   { slug: "social-proof-proof-bento", family: "stories" },
 ]
 
+/** Blog Cards' 21 Types in Figma's order, added a family at a time. */
+export const BLOG_CARDS_TYPES: BlockType<BlogCardsFamily>[] = [
+  { slug: "blog-cards-classic-3-up-grid", family: "grids" },
+  { slug: "blog-cards-featured-two-up", family: "grids" },
+  { slug: "blog-cards-compact-4-up-thumb-grid", family: "grids" },
+  { slug: "blog-cards-bento-editorial-grid", family: "grids", inverse: true },
+  { slug: "blog-cards-split-feature", family: "features" },
+  { slug: "blog-cards-lead-ranked-picks", family: "features" },
+  { slug: "blog-cards-overlay-photo-trio", family: "grids", inverse: true },
+  { slug: "blog-cards-dark-editorial-feature", family: "features", inverse: true },
+  { slug: "blog-cards-left-thumb-row-cards", family: "lists" },
+  { slug: "blog-cards-hairline-text-index", family: "lists" },
+  { slug: "blog-cards-numbered-reading-list", family: "lists" },
+  { slug: "blog-cards-magazine-cover-story", family: "features" },
+  { slug: "blog-cards-pull-quote-feature", family: "features" },
+  { slug: "blog-cards-filter-sidebar-results", family: "browse" },
+  { slug: "blog-cards-search-chips-results", family: "browse" },
+  { slug: "blog-cards-post-carousel-with-controls", family: "browse" },
+  { slug: "blog-cards-newsletter-latest", family: "alongside", inverse: true },
+  { slug: "blog-cards-latest-popular-split", family: "lists" },
+  { slug: "blog-cards-author-spotlight", family: "alongside" },
+  { slug: "blog-cards-related-posts-strip", family: "alongside" },
+  { slug: "blog-cards-journal-bento", family: "grids", inverse: true },
+]
+
 export const ALL_BLOCK_TYPES: BlockType[] = [
   ...FAQ_TYPES,
   ...ERROR_STATE_TYPES,
@@ -416,6 +452,7 @@ export const ALL_BLOCK_TYPES: BlockType[] = [
   ...CAREERS_TYPES,
   ...TEAM_TYPES,
   ...SOCIAL_PROOF_TYPES,
+  ...BLOG_CARDS_TYPES,
 ]
 
 /** Figma's three breakpoints, the widths a preview frame renders at. */
