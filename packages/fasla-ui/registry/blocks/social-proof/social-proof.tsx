@@ -698,7 +698,13 @@ export function useDrift<T extends HTMLElement>(make: (root: T) => Animation[], 
     intersection.observe(root)
     let frame = 0
     const watched = () => Array.from(root.querySelectorAll<HTMLElement>(watch))
-    const measure = () => [root, ...watched()].map((el) => Math.round(el.getBoundingClientRect().height) + "x" + Math.round(el.getBoundingClientRect().width)).join()
+    const measure = () =>
+      [root, ...watched()]
+        .map((el) => {
+          const box = el.getBoundingClientRect()
+          return `${Math.round(box.height)}x${Math.round(box.width)}`
+        })
+        .join()
     let size = measure()
     const resize =
       typeof ResizeObserver === "undefined"
