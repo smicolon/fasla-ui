@@ -31,10 +31,10 @@ const people = {
 export const socialProofPhotos: Partial<Record<string, string>> = {
   ...people,
   // Progress Carousel: one workplace photograph per story.
-  "progress-carousel-1": `${dir}/skylight-patterned-walls.webp`,
-  "progress-carousel-2": `${dir}/bright-hall-plants.webp`,
-  "progress-carousel-3": `${dir}/green-lounge-chair.webp`,
-  "progress-carousel-4": `${dir}/white-warehouse-racks.webp`,
+  "progress-carousel-1": `${dir}/layered-beige-tiers.webp`,
+  "progress-carousel-2": `${dir}/pencil-blank-page.webp`,
+  "progress-carousel-3": `${dir}/tablet-design-canvas.webp`,
+  "progress-carousel-4": `${dir}/laptop-bright-office.webp`,
   // Overlay Photo Quote's full-bleed photograph.
   "overlay-photo-quote": `${dir}/gallery-tree-courtyard.webp`,
   // Workplace Portrait Stories: each audience tile shows a person from the set, as Figma does.
