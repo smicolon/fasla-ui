@@ -52,7 +52,7 @@ describe.each(ALONGSIDE)("$name", ({ Block, copy, links, empty }) => {
 describe("Newsletter + Latest", () => {
   it("has an email field and a submit button, and no error or success state", () => {
     const { container } = render(<BlogCardsNewsletterLatest />)
-    const input = screen.getByRole("textbox", { name: "you@company.com" })
+    const input = screen.getByRole("textbox", { name: "Email address" })
     expect(input.getAttribute("type")).toBe("email")
     expect(screen.getByRole("button", { name: "Subscribe" }).getAttribute("type")).toBe("submit")
     expect(container.querySelector("[role='alert'], [role='status'], [aria-invalid='true']")).toBeNull()
@@ -70,6 +70,13 @@ describe("Newsletter + Latest", () => {
     const { container: other } = render(<BlogCardsNewsletterLatest />)
     fireEvent(other.querySelector("form")!, quiet)
     expect(quiet.defaultPrevented).toBe(true)
+  })
+
+  it("names the field by its own label, not its placeholder, in both languages", () => {
+    const { rerender } = render(<BlogCardsNewsletterLatest />)
+    expect(screen.getByRole("textbox", { name: "Email address" }).getAttribute("placeholder")).toBe("you@company.com")
+    rerender(<BlogCardsNewsletterLatest locale="ar" />)
+    expect(screen.getByRole("textbox", { name: "البريد الإلكتروني" })).toBeTruthy()
   })
 
   it("reads the inverse tokens in dark mode so the field's edge, text and placeholder show on the white panel", () => {

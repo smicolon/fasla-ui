@@ -46,8 +46,10 @@ export interface BlogCardsNewsletterLatestPanel {
   title: React.ReactNode
   /** The note under the title. */
   note: React.ReactNode
-  /** The email field's placeholder, which is also its accessible name. */
+  /** The email field's placeholder. */
   placeholder: string
+  /** The email field's accessible name. The field shows no label, as in Figma. Falls back to the default copy's. */
+  emailLabel?: string
   /** The button's label. */
   submitLabel: React.ReactNode
   /** The small print under the form. Hidden when empty. */
@@ -89,6 +91,7 @@ const COPY: Record<"en" | "ar", BlogCardsNewsletterLatestCopy> = {
       title: "The Fasla dispatch",
       note: "One email a month: new posts, what changed in the system, and the decisions behind it. No product news.",
       placeholder: "you@company.com",
+      emailLabel: "Email address",
       submitLabel: "Subscribe",
       smallPrint: "2,140 designers and engineers already read it. Unsubscribe any time.",
     },
@@ -107,6 +110,7 @@ const COPY: Record<"en" | "ar", BlogCardsNewsletterLatestCopy> = {
       title: "نشرة فاصلة",
       note: "بريد واحد في الشهر: مقالات جديدة، وما تغيّر في النظام، والقرارات وراء ذلك. بلا أخبار منتجات.",
       placeholder: "you@company.com",
+      emailLabel: "البريد الإلكتروني",
       submitLabel: "اشترك",
       smallPrint: "2,140 مصمماً ومهندساً يقرؤونها بالفعل. ألغِ الاشتراك متى شئت.",
     },
@@ -207,7 +211,7 @@ export function BlogCardsNewsletterLatest({
               name="email"
               size="md"
               autoComplete="email"
-              aria-label={form.placeholder}
+              aria-label={form.emailLabel ?? copy.panel.emailLabel}
               placeholder={form.placeholder}
               className={FIELD}
             />
