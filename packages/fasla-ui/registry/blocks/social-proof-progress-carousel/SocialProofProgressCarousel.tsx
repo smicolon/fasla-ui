@@ -27,17 +27,20 @@ import {
  * the copy on phones). Under the card, the counter (01 / 04) and the Progress
  * bar.
  *
- * Motion (Figma's ⚡ Motion note): the arrows step through four stories, one
- * at a time. Manual only: no autoplay, no timer, and paging stops at the first
- * and last story, so previous is disabled on the first. On change the
- * outgoing story fades out, the new copy slides up 10px with a fade (slideUp,
- * 180ms) and the photo crossfades (fadeIn, 180ms); on phones the photo comes
- * first and the copy 60ms after it (stagger). The counter and the bar show
- * the position: the bar moves in 25% steps, one per story, only when you
- * navigate; it never fills over time. The arrow keys move between stories; on
- * phones, swiping the copy also steps. Reduced motion: opacity only, 120ms.
- * In RTL the bar fills from the right and the left arrow goes to the next
- * story.
+ * Motion (Figma's ⚡ Motion note): the arrows step through four stories, one at
+ * a time. Manual only: no autoplay, no timer, and paging stops at the first and
+ * last story, so previous is disabled on the first and next on the last. On
+ * change the whole story panel, photo and copy, slides sideways (the `slideX`
+ * preset): the outgoing story fades and leaves 24px in 120ms, the new one
+ * fades in from the other side in 180ms. Going forward the new story arrives
+ * from the end side, so from the right in LTR; in RTL it is mirrored, from the
+ * left, and previous is the opposite. On phones the photo comes first and the
+ * copy 60ms after it (stagger). The counter and the bar show the position: the
+ * bar moves in 25% steps, one per story, only when you navigate; it never
+ * fills over time. The arrow keys move between stories; on phones, swiping the
+ * copy also steps (toward the right is next in RTL). Reduced motion: opacity
+ * only, 120ms. In RTL the bar fills from the right and the left arrow goes to
+ * the next story.
  *
  * Figma shows the first story. The other three are quotes the same people
  * give elsewhere in the set: Fahad Salem's from Bracket-Framed Quote, Adel
@@ -171,7 +174,7 @@ export function SocialProofProgressCarousel({
   const headingId = React.useId()
   const storyId = React.useId()
   const [sizeRef, columns] = useColumnCount<HTMLDivElement>(2)
-  const { ref, index, go } = useStepper<HTMLDivElement>({ count: list.length, index: indexProp, onIndexChange, stagger: columns === 1 })
+  const { ref, index, go } = useStepper<HTMLDivElement>({ count: list.length, index: indexProp, onIndexChange, stagger: columns === 1, axis: "x" })
   const swipe = useSwipeStep((delta) => go(index + delta))
   const story = list[index]
   if (!story) return null

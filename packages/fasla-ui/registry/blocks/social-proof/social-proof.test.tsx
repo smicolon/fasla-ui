@@ -311,6 +311,47 @@ function stubMotion({ reduced = false, width = 1300 }: { reduced?: boolean; widt
 
 const translateXs = (calls: { keyframes: Keyframe[] }[]) => calls.map((call) => String(call.keyframes.map((k) => k.transform).find((x) => x && x !== "none") ?? "none"))
 
+describe("Progress Carousel slides sideways", () => {
+  it("slides the next story in from the right in LTR, and the old one out to the left", async () => {
+    const motion = stubMotion()
+    render(<SocialProofProgressCarousel />)
+    fireEvent.click(screen.getByRole("button", { name: "Next" }))
+    await screen.findByText("ARVENNA BANK")
+    const moves = translateXs(motion.calls)
+    expect(moves[0]).toBe("translateX(-24px)")
+    expect(moves.at(-1)).toBe("translateX(24px)")
+    fireEvent.click(screen.getByRole("button", { name: "Previous" }))
+    await screen.findByText("BEACON ANALYTICS")
+    expect(translateXs(motion.calls).slice(-3).includes("translateX(-24px)")).toBe(true)
+    motion.restore()
+  })
+
+  it("mirrors it in RTL: next comes in from the left and the old story leaves to the right", async () => {
+    const motion = stubMotion()
+    render(
+      <div dir="rtl">
+        <SocialProofProgressCarousel locale="ar" />
+      </div>
+    )
+    fireEvent.click(screen.getByRole("button", { name: "التالي" }))
+    await screen.findByText("بنك أرفينا")
+    const moves = translateXs(motion.calls)
+    expect(moves[0]).toBe("translateX(24px)")
+    expect(moves.at(-1)).toBe("translateX(-24px)")
+    motion.restore()
+  })
+
+  it("uses opacity only with reduced motion", async () => {
+    const motion = stubMotion({ reduced: true })
+    render(<SocialProofProgressCarousel />)
+    fireEvent.click(screen.getByRole("button", { name: "Next" }))
+    await screen.findByText("ARVENNA BANK")
+    expect(translateXs(motion.calls).every((x) => x === "none")).toBe(true)
+    expect(motion.calls.every((call) => call.options.duration === 120)).toBe(true)
+    motion.restore()
+  })
+})
+
 describe("Vertical Column Wall drifts", () => {
   it("drifts three columns, the middle one the other way, only while in view, and pauses on hover and focus", () => {
     const motion = stubMotion()
