@@ -8,7 +8,7 @@ They are used in the docs site and Storybook examples only, and are **not shippe
 
 | File | Used for | Photo | Photographer |
 |---|---|---|---|
-| `adel-qasim.webp` | Portrait of Adel Qasim | [NbtKkyOHpbo](https://unsplash.com/photos/NbtKkyOHpbo?utm_source=fasla-ui&utm_medium=referral) | [Kazi Mizan](https://unsplash.com/@kaziminmizan?utm_source=fasla-ui&utm_medium=referral) |
+| `adel-qasim.webp` | Portrait of Adel Qasim | [xUqGNqFrbqw](https://unsplash.com/photos/xUqGNqFrbqw?utm_source=fasla-ui&utm_medium=referral) | [Ofspace LLC](https://unsplash.com/@ofspace?utm_source=fasla-ui&utm_medium=referral) |
 | `bader-al-ghamdi.webp` | Portrait of Bader Al-Ghamdi | [dZQR7xy_Kic](https://unsplash.com/photos/dZQR7xy_Kic?utm_source=fasla-ui&utm_medium=referral) | [Md Ishak Rahman](https://unsplash.com/@mdishakrahman?utm_source=fasla-ui&utm_medium=referral) |
 | `fahad-salem.webp` | Portrait of Fahad Salem | [0OczC2-oFsA](https://unsplash.com/photos/0OczC2-oFsA?utm_source=fasla-ui&utm_medium=referral) | [tekimax](https://unsplash.com/@tekimax?utm_source=fasla-ui&utm_medium=referral) |
 | `hamad-al-mutairi.webp` | Portrait of Hamad Al-Mutairi; Workplace Design leads tile | [_gDoyVv5F4c](https://unsplash.com/photos/_gDoyVv5F4c?utm_source=fasla-ui&utm_medium=referral) | [Vicky Hladynets](https://unsplash.com/@vhladynets?utm_source=fasla-ui&utm_medium=referral) |
