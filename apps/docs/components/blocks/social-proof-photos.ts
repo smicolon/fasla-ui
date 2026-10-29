@@ -36,7 +36,7 @@ export const socialProofPhotos: Partial<Record<string, string>> = {
   "progress-carousel-3": `${dir}/tablet-design-canvas.webp`,
   "progress-carousel-4": `${dir}/laptop-bright-office.webp`,
   // Overlay Photo Quote's full-bleed photograph.
-  "overlay-photo-quote": `${dir}/gallery-tree-courtyard.webp`,
+  "overlay-photo-quote": `${dir}/rainy-warehouse-yard.webp`,
   // Workplace Portrait Stories: each audience tile shows a person from the set, as Figma does.
   "workplace-founders": people["yousef-amin"],
   "workplace-engineers": people["hani-jaber"],
@@ -45,4 +45,6 @@ export const socialProofPhotos: Partial<Record<string, string>> = {
   // Video Story Cards' posters, for when the stories family ships.
   "video-story-rashed": `${dir}/minimal-white-desk.webp`,
   "video-story-omar": `${dir}/dark-desk-monitor.webp`,
+  // Proof Bento's video tile has its own poster, so it does not repeat Rashed's.
+  "proof-bento-video": `${dir}/window-desk-corner.webp`,
 }

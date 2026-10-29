@@ -73,7 +73,7 @@ const COPY: Record<SocialProofLocale, SocialProofProofBentoCopy> = {
     rating: { value: "4.9", label: "Average across 812 verified reviews" },
     quote: { quote: "“Zero regressions in the migration quarter. QA signed off early.”", author: p("khalid-saad", "Khalid Saad", "Frontend Lead, Atlas Freight") },
     videoLabel: "Watch Rashed's story · 2:14",
-    posterId: "video-story-rashed",
+    posterId: "proof-bento-video",
   },
   ar: {
     heading: "كل أشكال الإثبات في نظرة واحدة",
@@ -86,7 +86,7 @@ const COPY: Record<SocialProofLocale, SocialProofProofBentoCopy> = {
     rating: { value: "4.9", label: "متوسط 812 تقييمًا موثّقًا" },
     quote: { quote: "«لا تراجعات في ربع الانتقال، ووافق فريق الجودة مبكرًا.»", author: p("khalid-saad", "خالد سعد", "قائد الواجهات الأمامية، أطلس فريت") },
     videoLabel: "شاهد قصة راشد، 2:14",
-    posterId: "video-story-rashed",
+    posterId: "proof-bento-video",
   },
 }
 

@@ -4,7 +4,7 @@ All photos are from [Unsplash](https://unsplash.com/?utm_source=fasla-ui&utm_med
 
 They are used in the docs site and Storybook examples only, and are **not shipped with the package**: Social Proof blocks take their photos as a `photos` prop. The Figma Social Proof set (`46368:3361`) places the same photos. Each person has one portrait, used wherever they appear; the Workplace Portrait Stories tiles reuse the portrait of the person shown.
 
-20 files, 0.9 MB. WebP, portraits 600×750, scenes 1200px wide.
+21 files, 1.0 MB. WebP, portraits 600×750, scenes 1200px wide.
 
 | File | Used for | Photo | Photographer |
 |---|---|---|---|
@@ -25,6 +25,7 @@ They are used in the docs site and Storybook examples only, and are **not shippe
 | `pencil-blank-page.webp` | Progress Carousel, story 2 | [ab3IjF7CWB0](https://unsplash.com/photos/ab3IjF7CWB0?utm_source=fasla-ui&utm_medium=referral) | [MeSSrro](https://unsplash.com/@messrro?utm_source=fasla-ui&utm_medium=referral) |
 | `tablet-design-canvas.webp` | Progress Carousel, story 3 | [doTjbfxrmRw](https://unsplash.com/photos/doTjbfxrmRw?utm_source=fasla-ui&utm_medium=referral) | [Ernest Ojeh](https://unsplash.com/@namzo?utm_source=fasla-ui&utm_medium=referral) |
 | `laptop-bright-office.webp` | Progress Carousel, story 4 | [1eRS74C-alQ](https://unsplash.com/photos/1eRS74C-alQ?utm_source=fasla-ui&utm_medium=referral) | [Devin Pickell](https://unsplash.com/@nextiva?utm_source=fasla-ui&utm_medium=referral) |
-| `minimal-white-desk.webp` | Video Story Cards poster (Rashed), Proof Bento video tile | [nvzvOPQW0gc](https://unsplash.com/photos/nvzvOPQW0gc?utm_source=fasla-ui&utm_medium=referral) | [Bench Accounting](https://unsplash.com/@benchaccounting?utm_source=fasla-ui&utm_medium=referral) |
+| `minimal-white-desk.webp` | Video Story Cards poster (Rashed) | [nvzvOPQW0gc](https://unsplash.com/photos/nvzvOPQW0gc?utm_source=fasla-ui&utm_medium=referral) | [Bench Accounting](https://unsplash.com/@benchaccounting?utm_source=fasla-ui&utm_medium=referral) |
+| `window-desk-corner.webp` | Proof Bento video tile poster | [IA4mXpyGbB0](https://unsplash.com/photos/IA4mXpyGbB0?utm_source=fasla-ui&utm_medium=referral) | [Amihai Loven](https://unsplash.com/@amihailoven?utm_source=fasla-ui&utm_medium=referral) |
 | `dark-desk-monitor.webp` | Video Story Cards poster (Omar) | [TJjTEJt0iHA](https://unsplash.com/photos/TJjTEJt0iHA?utm_source=fasla-ui&utm_medium=referral) | [Dillon Shook](https://unsplash.com/@dillonjshook?utm_source=fasla-ui&utm_medium=referral) |
-| `gallery-tree-courtyard.webp` | Overlay Photo Quote, the full-bleed photo | [ZXi_RdPSF3A](https://unsplash.com/photos/ZXi_RdPSF3A?utm_source=fasla-ui&utm_medium=referral) | [Ye Sichen](https://unsplash.com/@stellaye?utm_source=fasla-ui&utm_medium=referral) |
+| `rainy-warehouse-yard.webp` | Overlay Photo Quote, the full-bleed photo | [vwK1lkWzaRU](https://unsplash.com/photos/vwK1lkWzaRU?utm_source=fasla-ui&utm_medium=referral) | [Sergej *****](https://unsplash.com/@skstrannik?utm_source=fasla-ui&utm_medium=referral) |
