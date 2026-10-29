@@ -3337,6 +3337,31 @@
         "about-numbered-rows": "Numbered Rows"
       }
     },
+    "careersBlocks": {
+      "lead": "Sections for a careers page: the open roles in lists, cards, teams, tables and accordions, with filtering and paging.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "filterLabel": "Filter by family",
+      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
+      "families": {
+        "all": "All",
+        "lists": "Browse roles",
+        "highlights": "Highlights and states",
+        "details": "Role details"
+      },
+      "types": {
+        "careers-open-roles-hairline-list": "Open Roles — Hairline List",
+        "careers-role-cards-grid": "Role Cards Grid",
+        "careers-roles-by-department": "Roles by Department",
+        "careers-open-vacancies-table": "Open Vacancies Table",
+        "careers-roles-list-accordion-expanded": "Roles List — Accordion Expanded",
+        "careers-about-card-role-list": "About Card + Role List",
+        "careers-featured-role-spotlight": "Featured Role Spotlight",
+        "careers-perks-benefits": "Perks & Benefits",
+        "careers-no-open-roles-empty-state": "No Open Roles — Empty State",
+        "careers-role-detail-panel": "Role Detail Panel",
+        "careers-role-detail-page": "Role Detail Page"
+      }
+    },
     "blockCard": {
       "fullScreen": "Open full screen",
       "newTab": "(opens in a new tab)",

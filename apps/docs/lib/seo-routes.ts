@@ -259,6 +259,21 @@ export const routes = [
     },
   },
   {
+    kind: "block",
+    category: "Blocks",
+    path: "/docs/blocks/careers/",
+    title: "Careers Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Sections for a careers page: open roles as lists, cards, teams, tables and accordions, with filtering and paging, responsive and mirrored for Arabic.",
+    h1: "Careers",
+    ar: {
+      title: "كتل الوظائف لمشاريع React | فاصلة",
+      description:
+        "أقسام لصفحة الوظائف: الوظائف المتاحة في قوائم وبطاقات وفرق وجداول ومطويات، مع التصفية والتنقل بين الصفحات، متجاوبة ومعكوسة للعربية.",
+      h1: "كتلة الوظائف (Careers)",
+    },
+  },
+  {
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/button/",

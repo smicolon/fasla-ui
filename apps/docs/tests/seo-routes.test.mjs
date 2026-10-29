@@ -8,9 +8,9 @@ const docsRoot = path.resolve(import.meta.dir, "..")
 const componentsRoot = path.join(docsRoot, "app/[locale]/docs/components")
 
 describe("Blocks section", () => {
-  test("has a page for every block family route, and lists every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar, Pricing, Hero and About item in the registry", async () => {
+  test("has a page for every block family route, and lists every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar, Pricing, Hero, About and Careers item in the registry", async () => {
     const { blockRoutes } = await import("../lib/seo-routes")
-    const { FAQ_TYPES, ERROR_STATE_TYPES, LOGO_CLOUD_TYPES, AUTHENTICATIONS_TYPES, GALLERY_TYPES, NAVBAR_TYPES, PRICING_TYPES, HERO_TYPES, ABOUT_TYPES } = await import(
+    const { FAQ_TYPES, ERROR_STATE_TYPES, LOGO_CLOUD_TYPES, AUTHENTICATIONS_TYPES, GALLERY_TYPES, NAVBAR_TYPES, PRICING_TYPES, HERO_TYPES, ABOUT_TYPES, CAREERS_TYPES } = await import(
       "../lib/blocks"
     )
     const blocksRoot = path.join(docsRoot, "app/[locale]/docs/blocks")
@@ -41,6 +41,9 @@ describe("Blocks section", () => {
     expect(HERO_TYPES.map((type) => type.slug).sort()).toEqual(heroItems.sort())
     const aboutItems = registry.items.filter((item) => item.name.startsWith("about-")).map((item) => item.name)
     expect(ABOUT_TYPES.map((type) => type.slug).sort()).toEqual(aboutItems.sort())
+    // `careers` itself is the parts every Careers block shares, not a Type.
+    const careersItems = registry.items.filter((item) => item.name.startsWith("careers-")).map((item) => item.name)
+    expect(CAREERS_TYPES.map((type) => type.slug).sort()).toEqual(careersItems.sort())
   })
 
   test("marks exactly the blocks that depend on theme-inverse as inverse", async () => {

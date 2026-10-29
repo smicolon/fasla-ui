@@ -228,6 +228,15 @@ export const CODE_MAP = {
       "numbered-rows",
     ].map((type) => [`about-${type}`, null])
   ),
+  // Blocks: each Careers item is one Type of the block set Careers (46378:5405), not an atom.
+  careers: null,
+  ...Object.fromEntries(
+    [
+      "open-roles-hairline-list", "role-cards-grid", "roles-by-department", "open-vacancies-table",
+      "roles-list-accordion-expanded", "about-card-role-list", "featured-role-spotlight", "perks-benefits",
+      "no-open-roles-empty-state", "role-detail-panel", "role-detail-page",
+    ].map((type) => [`careers-${type}`, null])
+  ),
 }
 
 const FAMILY_MIN = 10

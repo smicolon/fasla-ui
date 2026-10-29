@@ -3,8 +3,8 @@
  * Figma's order. Names and family labels are in the message catalogues
  * (docs.faqBlocks, docs.errorStateBlocks, docs.logoCloudBlocks,
  * docs.authenticationsBlocks, docs.galleryBlocks, docs.navbarBlocks,
- * docs.pricingBlocks, docs.heroBlocks, docs.aboutBlocks); the slug is the
- * registry item's name.
+ * docs.pricingBlocks, docs.heroBlocks, docs.aboutBlocks, docs.careersBlocks);
+ * the slug is the registry item's name.
  */
 
 export type FaqFamily = "lists" | "layouts" | "navigation" | "support"
@@ -85,7 +85,16 @@ export type AboutFamily = "statements" | "story" | "culture"
 
 export const ABOUT_FAMILIES: AboutFamily[] = ["statements", "story", "culture"]
 
-export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily> = {
+/**
+ * Careers' groups: the lists a reader browses roles in, the highlights and
+ * states around them, and the role itself. A group appears here once a Type of
+ * it is built.
+ */
+export type CareersFamily = "lists" | "highlights" | "details"
+
+export const CAREERS_FAMILIES: CareersFamily[] = ["lists", "highlights", "details"]
+
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | CareersFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
   family: Family
@@ -316,6 +325,20 @@ export const ABOUT_TYPES: BlockType<AboutFamily>[] = [
   { slug: "about-numbered-rows", family: "story", inverse: true },
 ]
 
+export const CAREERS_TYPES: BlockType<CareersFamily>[] = [
+  { slug: "careers-open-roles-hairline-list", family: "lists" },
+  { slug: "careers-role-cards-grid", family: "lists" },
+  { slug: "careers-roles-by-department", family: "lists" },
+  { slug: "careers-open-vacancies-table", family: "lists" },
+  { slug: "careers-roles-list-accordion-expanded", family: "lists" },
+  { slug: "careers-about-card-role-list", family: "lists" },
+  { slug: "careers-featured-role-spotlight", family: "highlights" },
+  { slug: "careers-perks-benefits", family: "highlights" },
+  { slug: "careers-no-open-roles-empty-state", family: "highlights" },
+  { slug: "careers-role-detail-panel", family: "details" },
+  { slug: "careers-role-detail-page", family: "details" },
+]
+
 export const ALL_BLOCK_TYPES: BlockType[] = [
   ...FAQ_TYPES,
   ...ERROR_STATE_TYPES,
@@ -326,6 +349,7 @@ export const ALL_BLOCK_TYPES: BlockType[] = [
   ...PRICING_TYPES,
   ...HERO_TYPES,
   ...ABOUT_TYPES,
+  ...CAREERS_TYPES,
 ]
 
 /** Figma's three breakpoints, the widths a preview frame renders at. */
