@@ -319,6 +319,21 @@ export const routes = [
     },
   },
   {
+    kind: "block",
+    category: "Blocks",
+    path: "/docs/blocks/video-call/",
+    title: "Video Call Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Sections for a video-call product: the controls dock, live captions and reactions, built from the same parts and responsive, mirrored for Arabic.",
+    h1: "Video Call",
+    ar: {
+      title: "كتل المكالمات المرئية لمشاريع React | فاصلة",
+      description:
+        "أقسام لمنتج المكالمات المرئية: شريط عناصر التحكم والتسميات المباشرة والتفاعلات، مبنية من أجزاء مشتركة ومتجاوبة ومعكوسة للعربية.",
+      h1: "المكالمات المرئية (Video Call)",
+    },
+  },
+  {
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/button/",

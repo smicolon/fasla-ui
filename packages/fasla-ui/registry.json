@@ -7147,6 +7147,82 @@
         "blog-cards",
         "marketing"
       ]
+    },
+    {
+      "name": "video-call",
+      "type": "registry:block",
+      "title": "Video Call",
+      "description": "The parts every Video Call block is built from: the section and its 1248px column, the heading, the stage bar, the participant tile, the controls dock with a Leave that has to be held, and stand-ins for the toast, star rating and separator.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "dropdown-menu",
+        "tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call/video-call.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-call-controls-dock",
+      "type": "registry:block",
+      "title": "Video Call: Call Controls Dock",
+      "description": "One card showing the dock at three densities: compact round buttons, labelled buttons and a states row with the mic and camera off. Every control works; Leave must be held.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "tooltip",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-call-controls-dock/VideoCallCallControlsDock.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-call-controls-dock.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-captions-reactions",
+      "type": "registry:block",
+      "title": "Video Call: Captions & Reactions",
+      "description": "A call stage with live captions in a two-line window, a raise-hand chip, a column of reactions that float up when picked, a reaction picker and the controls dock, on an inverted caption bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "video-call",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-captions-reactions/VideoCallCaptionsReactions.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-captions-reactions.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
     }
   ]
 }

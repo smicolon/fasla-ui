@@ -8,6 +8,7 @@ import { aboutPhotoProps } from "@/components/blocks/about-photos"
 import { careersPhotoProps } from "@/components/blocks/careers-photos"
 import { teamPhotoProps } from "@/components/blocks/team-photos"
 import { blogCardsPhotoProps } from "@/components/blocks/blog-cards-photos"
+import { videoCallPhotoProps } from "@/components/blocks/video-call-photos"
 import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
 import { NavbarStage, navbarExample } from "@/components/blocks/navbar-examples"
 import { heroPhotoProps } from "@/components/blocks/hero-photos"
@@ -136,6 +137,15 @@ const withAboutPhotos = (Block: AnyBlock, type: string, copy: AboutCopy) =>
 const withCareersPhotos = (Block: AnyBlock, type: string) =>
   function CareersPreview(props: { locale: Locale }) {
     return <Block {...careersPhotoProps(type, props.locale)} {...props} />
+  }
+
+/**
+ * A Video Call Type with its demo photo, a still the repo already has. Types
+ * without a photo render as they are.
+ */
+const withVideoCallPhotos = (Block: AnyBlock, type: string) =>
+  function VideoCallPreview(props: { locale: Locale }) {
+    return <Block {...videoCallPhotoProps(type, props.locale)} {...props} />
   }
 
 /**
@@ -834,6 +844,12 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   ),
   "blog-cards-post-carousel-with-controls": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-post-carousel-with-controls/BlogCardsPostCarouselWithControls").then((m) => withBlogCardsPhotos(m.BlogCardsPostCarouselWithControls, "post-carousel-with-controls", m.blogCardsPostCarouselWithControlsCopy))
+  ),
+  "video-call-call-controls-dock": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-call-controls-dock/VideoCallCallControlsDock").then((m) => withVideoCallPhotos(m.VideoCallCallControlsDock, "call-controls-dock"))
+  ),
+  "video-call-captions-reactions": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-captions-reactions/VideoCallCaptionsReactions").then((m) => withVideoCallPhotos(m.VideoCallCaptionsReactions, "captions-reactions"))
   ),
   "blog-cards-left-thumb-row-cards": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-left-thumb-row-cards/BlogCardsLeftThumbRowCards").then((m) => withBlogCardsPhotos(m.BlogCardsLeftThumbRowCards, "left-thumb-row-cards", m.blogCardsLeftThumbRowCardsCopy))

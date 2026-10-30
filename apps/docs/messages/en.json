@@ -3499,6 +3499,20 @@
         "blog-cards-search-chips-results": "Search + Chips + Results",
         "blog-cards-post-carousel-with-controls": "Post Carousel with Controls"
       }
+    },
+    "videoCallBlocks": {
+      "lead": "Sections for a video-call product: the controls on a call, and the live captions and reactions that sit on its stage.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "filterLabel": "Filter by family",
+      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
+      "families": {
+        "all": "All",
+        "layers": "Call layers"
+      },
+      "types": {
+        "video-call-call-controls-dock": "Call Controls Dock",
+        "video-call-captions-reactions": "Captions & Reactions"
+      }
     }
   },
   "copyCommand": {

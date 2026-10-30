@@ -95,6 +95,16 @@ export type CareersFamily = "lists" | "highlights" | "details"
 export const CAREERS_FAMILIES: CareersFamily[] = ["lists", "highlights", "details"]
 
 /**
+ * Video Call's groups, as Figma's page orders them: the layers on a call (the
+ * dock, captions and reactions), the call stages, the screens before the call,
+ * the ones around it, and the marketing hero. A group appears here once a Type
+ * of it is built.
+ */
+export type VideoCallFamily = "layers"
+
+export const VIDEO_CALL_FAMILIES: VideoCallFamily[] = ["layers"]
+
+/**
  * Team's three groups, from its Figma documentation: the grids and walls that
  * set people side by side, the directories that list them (rows, a rail, tabs, a
  * table), and the spotlights that put a founder, a carousel or an open role up
@@ -125,7 +135,7 @@ export type BlogCardsFamily = "grids" | "features" | "lists" | "alongside" | "br
 
 export const BLOG_CARDS_FAMILIES: BlogCardsFamily[] = ["grids", "features", "lists", "alongside", "browse"]
 
-export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | SocialProofFamily | BlogCardsFamily> = {
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | SocialProofFamily | BlogCardsFamily | VideoCallFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
   family: Family
@@ -370,6 +380,12 @@ export const CAREERS_TYPES: BlockType<CareersFamily>[] = [
   { slug: "careers-role-detail-page", family: "details" },
 ]
 
+/** The Video Call Types built so far, in Figma's order. */
+export const VIDEO_CALL_TYPES: BlockType<VideoCallFamily>[] = [
+  { slug: "video-call-call-controls-dock", family: "layers" },
+  { slug: "video-call-captions-reactions", family: "layers", inverse: true },
+]
+
 /** The 14 Types, in Figma's order. Three drop the block name Figma still carries: Team Carousel, Team Table and Hairline Team Grid. */
 export const TEAM_TYPES: BlockType<TeamFamily>[] = [
   { slug: "team-leadership-grid", family: "grids-and-walls" },
@@ -453,6 +469,7 @@ export const ALL_BLOCK_TYPES: BlockType[] = [
   ...TEAM_TYPES,
   ...SOCIAL_PROOF_TYPES,
   ...BLOG_CARDS_TYPES,
+  ...VIDEO_CALL_TYPES,
 ]
 
 /** Figma's three breakpoints, the widths a preview frame renders at. */
