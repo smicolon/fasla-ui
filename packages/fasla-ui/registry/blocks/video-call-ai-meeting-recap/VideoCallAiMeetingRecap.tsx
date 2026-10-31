@@ -417,7 +417,7 @@ export function VideoCallAiMeetingRecap({
               <Pin aria-hidden className="size-4 text-muted-foreground" />
               <h3 className={cardTitle}>{copy.momentsTitle}</h3>
             </div>
-            <ul className="-mx-1 flex gap-2 overflow-x-auto px-1 pb-1 [@container(min-width:40rem)]:mx-0 [@container(min-width:40rem)]:flex-col [@container(min-width:40rem)]:gap-3 [@container(min-width:40rem)]:overflow-visible [@container(min-width:40rem)]:p-0">
+            <ul className="-mx-6 flex gap-2 overflow-x-auto px-6 pb-1 [@container(min-width:40rem)]:mx-0 [@container(min-width:40rem)]:flex-col [@container(min-width:40rem)]:gap-3 [@container(min-width:40rem)]:overflow-visible [@container(min-width:40rem)]:p-0">
               {copy.moments.map((entry) => (
                 <li key={entry.id} className="shrink-0 [@container(min-width:40rem)]:shrink">
                   <button

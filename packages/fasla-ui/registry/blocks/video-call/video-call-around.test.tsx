@@ -365,6 +365,14 @@ describe("AI Meeting Recap", () => {
     expect(calls.filter((call) => JSON.stringify(call.keyframes).includes("0.3"))).toHaveLength(1)
   })
 
+  it("lets the phone's chip row run to the card edge, so no chip is cut inside the card's padding", () => {
+    const { container } = render(<VideoCallAiMeetingRecap />)
+    const row = [...container.querySelectorAll("ul")].find((list) => list.className.includes("overflow-x-auto"))!
+    // The card pads 24px (p-6); the row bleeds by the same 24px and pads itself back, in either direction.
+    expect(row).toHaveClass("-mx-6", "px-6")
+    expect(row.closest("div[class*='p-6']")).not.toBeNull()
+  })
+
   it("starts on a chosen moment when asked", () => {
     render(<VideoCallAiMeetingRecap defaultMomentId="demo" />)
     expect(screen.getAllByText("22:05")).toHaveLength(2)
