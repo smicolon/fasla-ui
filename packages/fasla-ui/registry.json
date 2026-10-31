@@ -7147,6 +7147,390 @@
         "blog-cards",
         "marketing"
       ]
+    },
+    {
+      "name": "video-call",
+      "type": "registry:block",
+      "title": "Video Call",
+      "description": "The parts every Video Call block is built from: the section and its 1248px column, the heading, the stage bar, the participant tile, the controls dock with a Leave that has to be held, the call stage and its dock, the side panel, and stand-ins for the toast, star rating and separator.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "dropdown-menu",
+        "input",
+        "tabs",
+        "tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call/video-call.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-grid-gallery-call",
+      "type": "registry:block",
+      "title": "Video Call: Grid Gallery Call",
+      "description": "A call stage with a grid of participant tiles: three across on Desktop, two on Tablet, one at a time with dots on a phone. Tiles slide when people join or leave, the speaking ring follows the speaker, and REC pulses.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "carousel",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-grid-gallery-call/VideoCallGridGalleryCall.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-grid-gallery-call.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-speaker-filmstrip",
+      "type": "registry:block",
+      "title": "Video Call: Speaker & Filmstrip",
+      "description": "A call stage with one big speaker tile and a strip of everyone else. The speaker swaps with a cross-dissolve, the strip scrolls the new speaker into view, and pinning holds a person on the big tile.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-speaker-filmstrip/VideoCallSpeakerFilmstrip.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-speaker-filmstrip.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-screen-share-stage",
+      "type": "registry:block",
+      "title": "Video Call: Screen Share Stage",
+      "description": "A call stage while someone presents: a bar with Stop presenting, a shared slide that wipes in and out, a presenter rail and the controls dock. The slide keeps the direction of what was captured.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-screen-share-stage/VideoCallScreenShareStage.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-screen-share-stage.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-call-with-side-panel",
+      "type": "registry:block",
+      "title": "Video Call: Call With Side Panel",
+      "description": "A call stage beside a panel with Participants and Chat tabs, a people search and Invite. The panel pushes the stage when it opens, and is a bottom sheet with a handle on a phone.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-call-with-side-panel/VideoCallCallWithSidePanel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-call-with-side-panel.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-call-controls-dock",
+      "type": "registry:block",
+      "title": "Video Call: Call Controls Dock",
+      "description": "One card showing the dock at three densities: compact round buttons, labelled buttons and a states row with the mic and camera off. Every control works; Leave must be held.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "tooltip",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-call-controls-dock/VideoCallCallControlsDock.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-call-controls-dock.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-captions-reactions",
+      "type": "registry:block",
+      "title": "Video Call: Captions & Reactions",
+      "description": "A call stage with live captions in a two-line window, a raise-hand chip, a column of reactions that float up when picked, a reaction picker and the controls dock, on an inverted caption bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "video-call",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-captions-reactions/VideoCallCaptionsReactions.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-captions-reactions.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-pre-join-lobby",
+      "type": "registry:block",
+      "title": "Video Call: Pre-Join Lobby",
+      "description": "The lobby before a call: your camera still with a pill of mic, camera and settings controls, the meeting's name and meta, three device pickers, Join now and Test speakers. Join waits, with a spinner, for the first camera frame.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "select",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-pre-join-lobby/VideoCallPreJoinLobby.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-pre-join-lobby.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-waiting-room-knock",
+      "type": "registry:block",
+      "title": "Video Call: Waiting Room & Knock",
+      "description": "The waiting room from both sides: the guest's card with a breathing lock and their own preview, and the host's card with each knock, Deny and Admit, Admit everyone and Keep locked. Rows grow in and collapse away.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-waiting-room-knock/VideoCallWaitingRoomKnock.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-waiting-room-knock.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-incoming-call",
+      "type": "registry:block",
+      "title": "Video Call: Incoming Call",
+      "description": "Three cards for a call that is not live yet: incoming with Decline, Join and Reply, calling with counting dots and Cancel, and missed with a playable voice note, Call back and Message.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-incoming-call/VideoCallIncomingCall.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-incoming-call.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-join-link-dial-in",
+      "type": "registry:block",
+      "title": "Video Call: Join Link & Dial-in",
+      "description": "A room's link with Copy link that confirms in place, four ways to share it, dial-in numbers with a PIN, and an access card with the QR code, who can join and Manage room settings. The QR folds behind Show QR on a phone.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-join-link-dial-in/VideoCallJoinLinkDialIn.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-join-link-dial-in.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-call-ended-summary",
+      "type": "registry:block",
+      "title": "Video Call: Call Ended Summary",
+      "description": "The card after a call: a green check beside Call ended, four stat tiles that count up, the recording row with Watch and Share, and a feedback card with a five-star rating, issue chips, who joined, Send feedback and Rejoin the room.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-call-ended-summary/VideoCallCallEndedSummary.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-call-ended-summary.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-upcoming-meetings",
+      "type": "registry:block",
+      "title": "Video Call: Upcoming Meetings",
+      "description": "Today's meetings as rows with a time, an accent bar, the title and meta, the people on it, Join and More. The meeting happening now has a pulsing ring and a Join now. Joining collapses the row.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-upcoming-meetings/VideoCallUpcomingMeetings.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-upcoming-meetings.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-ai-meeting-recap",
+      "type": "registry:block",
+      "title": "Video Call: AI Meeting Recap",
+      "description": "A meeting's AI recap: an Overview that can reveal word by word, action items with checkboxes and owners, the recording's still with a time, and Key moments that seek the player. Share recap confirms with a toast.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "checkbox",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-ai-meeting-recap/VideoCallAiMeetingRecap.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-ai-meeting-recap.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-hero-call-mockup",
+      "type": "registry:block",
+      "title": "Video Call: Hero — Call Mockup",
+      "description": "A marketing hero for a call product: a tag, the headline, a line, two buttons and a line of proof beside a still mockup of a call with a bar, three tiles and a dock. The mockup is decorative and enters in sequence; Start and Tour call back.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-hero-call-mockup/VideoCallHeroCallMockup.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-hero-call-mockup.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
     }
   ]
 }

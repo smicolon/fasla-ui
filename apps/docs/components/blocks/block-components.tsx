@@ -8,6 +8,7 @@ import { aboutPhotoProps } from "@/components/blocks/about-photos"
 import { careersPhotoProps } from "@/components/blocks/careers-photos"
 import { teamPhotoProps } from "@/components/blocks/team-photos"
 import { blogCardsPhotoProps } from "@/components/blocks/blog-cards-photos"
+import { videoCallPhotoProps } from "@/components/blocks/video-call-photos"
 import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
 import { NavbarStage, navbarExample } from "@/components/blocks/navbar-examples"
 import { heroPhotoProps } from "@/components/blocks/hero-photos"
@@ -136,6 +137,15 @@ const withAboutPhotos = (Block: AnyBlock, type: string, copy: AboutCopy) =>
 const withCareersPhotos = (Block: AnyBlock, type: string) =>
   function CareersPreview(props: { locale: Locale }) {
     return <Block {...careersPhotoProps(type, props.locale)} {...props} />
+  }
+
+/**
+ * A Video Call Type with its demo photo, a still the repo already has. Types
+ * without a photo render as they are.
+ */
+const withVideoCallPhotos = (Block: AnyBlock, type: string) =>
+  function VideoCallPreview(props: { locale: Locale }) {
+    return <Block {...videoCallPhotoProps(type, props.locale)} {...props} />
   }
 
 /**
@@ -834,6 +844,48 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   ),
   "blog-cards-post-carousel-with-controls": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-post-carousel-with-controls/BlogCardsPostCarouselWithControls").then((m) => withBlogCardsPhotos(m.BlogCardsPostCarouselWithControls, "post-carousel-with-controls", m.blogCardsPostCarouselWithControlsCopy))
+  ),
+  "video-call-grid-gallery-call": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-grid-gallery-call/VideoCallGridGalleryCall").then((m) => withVideoCallPhotos(m.VideoCallGridGalleryCall, "grid-gallery-call"))
+  ),
+  "video-call-speaker-filmstrip": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-speaker-filmstrip/VideoCallSpeakerFilmstrip").then((m) => withVideoCallPhotos(m.VideoCallSpeakerFilmstrip, "speaker-filmstrip"))
+  ),
+  "video-call-screen-share-stage": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-screen-share-stage/VideoCallScreenShareStage").then((m) => withVideoCallPhotos(m.VideoCallScreenShareStage, "screen-share-stage"))
+  ),
+  "video-call-call-with-side-panel": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-call-with-side-panel/VideoCallCallWithSidePanel").then((m) => withVideoCallPhotos(m.VideoCallCallWithSidePanel, "call-with-side-panel"))
+  ),
+  "video-call-pre-join-lobby": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-pre-join-lobby/VideoCallPreJoinLobby").then((m) => withVideoCallPhotos(m.VideoCallPreJoinLobby, "pre-join-lobby"))
+  ),
+  "video-call-waiting-room-knock": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-waiting-room-knock/VideoCallWaitingRoomKnock").then((m) => withVideoCallPhotos(m.VideoCallWaitingRoomKnock, "waiting-room-knock"))
+  ),
+  "video-call-incoming-call": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-incoming-call/VideoCallIncomingCall").then((m) => withVideoCallPhotos(m.VideoCallIncomingCall, "incoming-call"))
+  ),
+  "video-call-join-link-dial-in": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-join-link-dial-in/VideoCallJoinLinkDialIn").then((m) => withVideoCallPhotos(m.VideoCallJoinLinkDialIn, "join-link-dial-in"))
+  ),
+  "video-call-call-controls-dock": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-call-controls-dock/VideoCallCallControlsDock").then((m) => withVideoCallPhotos(m.VideoCallCallControlsDock, "call-controls-dock"))
+  ),
+  "video-call-captions-reactions": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-captions-reactions/VideoCallCaptionsReactions").then((m) => withVideoCallPhotos(m.VideoCallCaptionsReactions, "captions-reactions"))
+  ),
+  "video-call-call-ended-summary": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-call-ended-summary/VideoCallCallEndedSummary").then((m) => withVideoCallPhotos(m.VideoCallCallEndedSummary, "call-ended-summary"))
+  ),
+  "video-call-upcoming-meetings": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-upcoming-meetings/VideoCallUpcomingMeetings").then((m) => withVideoCallPhotos(m.VideoCallUpcomingMeetings, "upcoming-meetings"))
+  ),
+  "video-call-ai-meeting-recap": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-ai-meeting-recap/VideoCallAiMeetingRecap").then((m) => withVideoCallPhotos(m.VideoCallAiMeetingRecap, "ai-meeting-recap"))
+  ),
+  "video-call-hero-call-mockup": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-hero-call-mockup/VideoCallHeroCallMockup").then((m) => withVideoCallPhotos(m.VideoCallHeroCallMockup, "hero-call-mockup"))
   ),
   "blog-cards-left-thumb-row-cards": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-left-thumb-row-cards/BlogCardsLeftThumbRowCards").then((m) => withBlogCardsPhotos(m.BlogCardsLeftThumbRowCards, "left-thumb-row-cards", m.blogCardsLeftThumbRowCardsCopy))
