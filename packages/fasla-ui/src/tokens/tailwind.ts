@@ -100,6 +100,11 @@ export const tailwindSemanticColors = {
     "color-mix(in oklab, theme(colors.background) 75%, theme(colors.foreground))"
   ),
 
+  // Fixed black and white: Figma's `colors/base` primitives, the same in Light
+  // and Dark. For a surface that must not flip, such as a phone's body.
+  "base-black": c("base-black"),
+  "base-white": c("base-white"),
+
   // Charts
   "chart-1": c("chart-1"),
   "chart-2": c("chart-2"),
