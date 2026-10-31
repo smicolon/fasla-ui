@@ -259,14 +259,19 @@ export interface StarRowProps extends Omit<React.HTMLAttributes<HTMLDivElement>,
   label: string
   /** Names star `n`: `Rate 3 of 5`. */
   starLabel?: (n: number, count: number) => string
+  /** The star's drawn size in pixels: Figma's rating row is 28, the stand-in's default 20. */
+  starSize?: number
+  /** The gap between one star's fill and the next while hovering: 60ms, and 40 on a phone. */
+  cascadeMs?: number
 }
 
 /**
- * Five toggle stars. Hovering fills every star up to the pointer, on a 60ms
- * cascade; choosing one keeps it. The row is a plain flex row, so it fills from
- * the start in either direction. A stand-in for the Rating atom.
+ * Five toggle stars. The chosen ones are drawn in `warning` outline, the rest
+ * pale, as Figma draws them; hovering fills every star up to the pointer, on a
+ * 60ms cascade, and choosing one keeps it. The row is a plain flex row, so it
+ * fills from the start in either direction. A stand-in for the Rating atom.
  */
-export function StarRow({ value, defaultValue = 0, onValueChange, count = 5, label, starLabel, className, ...props }: StarRowProps) {
+export function StarRow({ value, defaultValue = 0, onValueChange, count = 5, label, starLabel, starSize = 20, cascadeMs = 60, className, ...props }: StarRowProps) {
   const [own, setOwn] = React.useState(defaultValue)
   const [hover, setHover] = React.useState<number | null>(null)
   const current = value ?? own
@@ -297,10 +302,13 @@ export function StarRow({ value, defaultValue = 0, onValueChange, count = 5, lab
               const dir = getComputedStyle(event.currentTarget).direction === "rtl" ? -1 : 1
               choose(Math.min(count, Math.max(1, (current || 1) + step * dir)))
             }}
-            style={{ transitionDelay: hover !== null ? `${index * 60}ms` : undefined }}
-            className="inline-flex size-6 items-center justify-center rounded-sm text-warning outline-none transition-[color] duration-150 focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none"
+            style={{ transitionDelay: hover !== null ? `${index * cascadeMs}ms` : undefined, width: starSize + 4, height: starSize + 4 }}
+            className={cn(
+              "inline-flex items-center justify-center rounded-sm outline-none transition-[color] duration-150 focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none",
+              filled ? "text-warning" : "text-border"
+            )}
           >
-            <Star size={20} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className={filled ? "fill-current" : "fill-transparent"} />
+            <Star size={starSize} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className={cn("transition-[fill] duration-150 motion-reduce:transition-none", filled && hover !== null ? "fill-current" : "fill-transparent")} />
           </button>
         )
       })}

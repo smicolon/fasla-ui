@@ -37,10 +37,13 @@ describe("Video Call demo photos", () => {
   })
 
   test("hand the people to the call-stage, waiting-room and incoming-call Types as `photos`, the lobby its camera still as `photo`, and nothing to the rest", () => {
-    for (const type of ["grid-gallery-call", "speaker-filmstrip", "screen-share-stage", "call-with-side-panel", "waiting-room-knock", "incoming-call"]) {
+    for (const type of ["grid-gallery-call", "speaker-filmstrip", "screen-share-stage", "call-with-side-panel", "waiting-room-knock", "incoming-call", "call-ended-summary", "upcoming-meetings", "ai-meeting-recap"]) {
       expect(videoCallPhotoProps(type, "en")).toHaveProperty("photos")
     }
     expect(videoCallPhotoProps("pre-join-lobby", "en")).toHaveProperty("photo")
+    expect(videoCallPhotoProps("call-ended-summary", "en")).toHaveProperty("photo")
+    expect(videoCallPhotoProps("ai-meeting-recap", "en")).toHaveProperty("photo")
+    expect(videoCallPhotoProps("upcoming-meetings", "en")).not.toHaveProperty("photo")
     expect(videoCallPhotoProps("join-link-dial-in", "en")).toEqual({})
     expect(videoCallPhotoProps("call-controls-dock", "en")).toEqual({})
   })

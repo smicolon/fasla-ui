@@ -7426,6 +7426,85 @@
         "video-call",
         "marketing"
       ]
+    },
+    {
+      "name": "video-call-call-ended-summary",
+      "type": "registry:block",
+      "title": "Video Call: Call Ended Summary",
+      "description": "The card after a call: a green check beside Call ended, four stat tiles that count up, the recording row with Watch and Share, and a feedback card with a five-star rating, issue chips, who joined, Send feedback and Rejoin the room.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-call-ended-summary/VideoCallCallEndedSummary.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-call-ended-summary.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-upcoming-meetings",
+      "type": "registry:block",
+      "title": "Video Call: Upcoming Meetings",
+      "description": "Today's meetings as rows with a time, an accent bar, the title and meta, the people on it, Join and More. The meeting happening now has a pulsing ring and a Join now. Joining collapses the row.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-upcoming-meetings/VideoCallUpcomingMeetings.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-upcoming-meetings.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-ai-meeting-recap",
+      "type": "registry:block",
+      "title": "Video Call: AI Meeting Recap",
+      "description": "A meeting's AI recap: an Overview that can reveal word by word, action items with checkboxes and owners, the recording's still with a time, and Key moments that seek the player. Share recap confirms with a toast.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "checkbox",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-ai-meeting-recap/VideoCallAiMeetingRecap.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-ai-meeting-recap.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
     }
   ]
 }

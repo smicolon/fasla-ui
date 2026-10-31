@@ -4,6 +4,9 @@ import { VideoCallCallWithSidePanel, videoCallCallWithSidePanelCopy } from "../.
 import { VideoCallGridGalleryCall, videoCallGridGalleryCallCopy } from "../../../../../packages/fasla-ui/registry/blocks/video-call-grid-gallery-call/VideoCallGridGalleryCall"
 import { VideoCallScreenShareStage, videoCallScreenShareStageCopy } from "../../../../../packages/fasla-ui/registry/blocks/video-call-screen-share-stage/VideoCallScreenShareStage"
 import { VideoCallSpeakerFilmstrip, videoCallSpeakerFilmstripCopy } from "../../../../../packages/fasla-ui/registry/blocks/video-call-speaker-filmstrip/VideoCallSpeakerFilmstrip"
+import { VideoCallAiMeetingRecap, videoCallAiMeetingRecapCopy } from "../../../../../packages/fasla-ui/registry/blocks/video-call-ai-meeting-recap/VideoCallAiMeetingRecap"
+import { VideoCallCallEndedSummary, videoCallCallEndedSummaryCopy } from "../../../../../packages/fasla-ui/registry/blocks/video-call-call-ended-summary/VideoCallCallEndedSummary"
+import { VideoCallUpcomingMeetings, videoCallUpcomingMeetingsCopy } from "../../../../../packages/fasla-ui/registry/blocks/video-call-upcoming-meetings/VideoCallUpcomingMeetings"
 import { VideoCallCallControlsDock, videoCallCallControlsDockCopy } from "../../../../../packages/fasla-ui/registry/blocks/video-call-call-controls-dock/VideoCallCallControlsDock"
 import { VideoCallCaptionsReactions, videoCallCaptionsReactionsCopy } from "../../../../../packages/fasla-ui/registry/blocks/video-call-captions-reactions/VideoCallCaptionsReactions"
 import { VideoCallIncomingCall, videoCallIncomingCallCopy } from "../../../../../packages/fasla-ui/registry/blocks/video-call-incoming-call/VideoCallIncomingCall"
@@ -25,7 +28,11 @@ import { LONG, localeOf, photoPropsOf, videoCallArgTypes, videoCallViewports } f
  * pickers choose a device, Join waits for the camera), the waiting room (Admit
  * and Deny collapse a row, Admit everyone clears the list), an incoming call
  * (Join, Decline, Cancel and the voice note's play button) and the join link
- * (Copy link confirms in place, the QR folds away on a phone). Mic, camera, hand and
+ * (Copy link confirms in place, the QR folds away on a phone). Around the call:
+ * the summary after it ends (the stars rate it, the chips mark what stood out,
+ * the numbers count up), the meetings coming up (the live row pulses, Join
+ * collapses a row) and the AI recap (the overview can reveal word by word, the
+ * action items check off, a key moment scrubs the player). Mic, camera, hand and
  * captions toggle, the More menu opens, a reaction floats up when picked, and
  * Leave has to be held for 400ms (from the keyboard, pressed twice). Viewport,
  * direction and theme come from the toolbar.
@@ -487,6 +494,172 @@ export const JoinLinkDialInLongText: StoryObj<typeof VideoCallJoinLinkDialIn> = 
         locale={locale}
         title={LONG_BEFORE[locale].room}
         numbers={[{ ...base.numbers[0]!, country: LONG_BEFORE[locale].country }, ...base.numbers.slice(1)]}
+        {...args}
+      />
+    )
+  },
+}
+
+/** The longest lines the around-the-call Types' content limits allow, in each language, for the Long text stories. */
+const LONG_AROUND = {
+  en: {
+    subtitle: "Design sync — weekly planning and launch review · Today, 10:00 – 10:47",
+    stat: "1.2 GB · ready to watch now",
+    chip: "Dropped out twice",
+    title: "Client review — Q3 launch and the pricing change",
+    meta: "External guests · Waiting room on · Recording on",
+    task: "Handle the camera-blocked edge case in the browser SDK and Safari",
+    moment: "Question — do we need dial-in for KSA and the UAE?",
+  },
+  ar: {
+    subtitle: "مزامنة التصميم الأسبوعية ومراجعة الإطلاق، اليوم من 10:00 إلى 10:47",
+    stat: "1.2 غيغابايت، جاهز للمشاهدة الآن",
+    chip: "انقطع مرتين",
+    title: "مراجعة العميل لإطلاق الربع الثالث وتغيير الأسعار",
+    meta: "ضيوف خارجيون، غرفة الانتظار مفعّلة، التسجيل مفعّل",
+    task: "معالجة حالة حجب الكاميرا في SDK المتصفح وفي Safari",
+    moment: "سؤال: هل نحتاج اتصالًا هاتفيًا للسعودية والإمارات؟",
+  },
+} as const
+
+export const CallEndedSummary: StoryObj<typeof VideoCallCallEndedSummary> = {
+  name: "Call Ended Summary",
+  argTypes: videoCallArgTypes(VideoCallCallEndedSummary, videoCallCallEndedSummaryCopy, ["photo", "photos", "stats", "chips", "people", "countUp"]),
+  render: (args, context) => <VideoCallCallEndedSummary locale={localeOf(context)} {...photoPropsOf("call-ended-summary", context)} {...args} />,
+}
+
+export const CallEndedSummaryRated: StoryObj<typeof VideoCallCallEndedSummary> = {
+  name: "Call Ended Summary: Rated",
+  tags: ["!dev", "!autodocs"],
+  argTypes: videoCallArgTypes(VideoCallCallEndedSummary, videoCallCallEndedSummaryCopy, ["photo", "photos", "stats", "chips", "people", "countUp"], ["defaultRating", "defaultIssues"]),
+  render: (args, context) => <VideoCallCallEndedSummary locale={localeOf(context)} {...photoPropsOf("call-ended-summary", context)} defaultRating={5} defaultIssues={["audio", "video"]} {...args} />,
+}
+
+export const CallEndedSummaryStatic: StoryObj<typeof VideoCallCallEndedSummary> = {
+  name: "Call Ended Summary: Without first-paint motion",
+  tags: ["!dev", "!autodocs"],
+  argTypes: videoCallArgTypes(VideoCallCallEndedSummary, videoCallCallEndedSummaryCopy, ["photo", "photos", "stats", "chips", "people"], ["countUp"]),
+  render: (args, context) => <VideoCallCallEndedSummary locale={localeOf(context)} {...photoPropsOf("call-ended-summary", context)} countUp={false} {...args} />,
+}
+
+export const CallEndedSummaryLongText: StoryObj<typeof VideoCallCallEndedSummary> = {
+  name: "Call Ended Summary: Long text",
+  tags: ["!dev", "!autodocs"],
+  argTypes: videoCallArgTypes(VideoCallCallEndedSummary, videoCallCallEndedSummaryCopy, ["photo", "photos", "stats", "chips", "people", "countUp"]),
+  render: (args, context) => {
+    const locale = localeOf(context)
+    const base = videoCallCallEndedSummaryCopy[locale]
+    return (
+      <VideoCallCallEndedSummary
+        locale={locale}
+        {...photoPropsOf("call-ended-summary", context)}
+        subtitle={LONG_AROUND[locale].subtitle}
+        stats={base.stats.map((stat) => (stat.id === "recording" ? { ...stat, value: LONG_AROUND[locale].stat } : stat))}
+        chips={[...base.chips.slice(0, 4), { id: "lag", label: LONG_AROUND[locale].chip }]}
+        {...args}
+      />
+    )
+  },
+}
+
+export const UpcomingMeetings: StoryObj<typeof VideoCallUpcomingMeetings> = {
+  name: "Upcoming Meetings",
+  argTypes: videoCallArgTypes(VideoCallUpcomingMeetings, videoCallUpcomingMeetingsCopy, ["photo", "photos", "meetings", "joiningId"]),
+  render: (args, context) => <VideoCallUpcomingMeetings locale={localeOf(context)} {...photoPropsOf("upcoming-meetings", context)} {...args} />,
+}
+
+export const UpcomingMeetingsJoining: StoryObj<typeof VideoCallUpcomingMeetings> = {
+  name: "Upcoming Meetings: Joining",
+  tags: ["!dev", "!autodocs"],
+  argTypes: videoCallArgTypes(VideoCallUpcomingMeetings, videoCallUpcomingMeetingsCopy, ["photo", "photos", "meetings"], ["joiningId"]),
+  render: (args, context) => <VideoCallUpcomingMeetings locale={localeOf(context)} {...photoPropsOf("upcoming-meetings", context)} joiningId="client-review" {...args} />,
+}
+
+export const UpcomingMeetingsNothingLive: StoryObj<typeof VideoCallUpcomingMeetings> = {
+  name: "Upcoming Meetings: Nothing live",
+  tags: ["!dev", "!autodocs"],
+  argTypes: videoCallArgTypes(VideoCallUpcomingMeetings, videoCallUpcomingMeetingsCopy, ["photo", "photos", "meetings", "joiningId"]),
+  render: (args, context) => {
+    const locale = localeOf(context)
+    return (
+      <VideoCallUpcomingMeetings
+        locale={locale}
+        {...photoPropsOf("upcoming-meetings", context)}
+        meetings={videoCallUpcomingMeetingsCopy[locale].meetings.map((meeting) => ({ ...meeting, live: false }))}
+        {...args}
+      />
+    )
+  },
+}
+
+export const UpcomingMeetingsLongText: StoryObj<typeof VideoCallUpcomingMeetings> = {
+  name: "Upcoming Meetings: Long text",
+  tags: ["!dev", "!autodocs"],
+  argTypes: videoCallArgTypes(VideoCallUpcomingMeetings, videoCallUpcomingMeetingsCopy, ["photo", "photos", "meetings", "joiningId"]),
+  render: (args, context) => {
+    const locale = localeOf(context)
+    const base = videoCallUpcomingMeetingsCopy[locale]
+    return (
+      <VideoCallUpcomingMeetings
+        locale={locale}
+        {...photoPropsOf("upcoming-meetings", context)}
+        meetings={base.meetings.map((meeting, index) => (index === 1 ? { ...meeting, title: LONG_AROUND[locale].title, meta: LONG_AROUND[locale].meta } : meeting))}
+        {...args}
+      />
+    )
+  },
+}
+
+export const AiMeetingRecap: StoryObj<typeof VideoCallAiMeetingRecap> = {
+  name: "AI Meeting Recap",
+  argTypes: videoCallArgTypes(VideoCallAiMeetingRecap, videoCallAiMeetingRecapCopy, ["photo", "photos", "actions", "moments", "defaultMomentId", "reveal"]),
+  render: (args, context) => <VideoCallAiMeetingRecap locale={localeOf(context)} {...photoPropsOf("ai-meeting-recap", context)} {...args} />,
+}
+
+export const AiMeetingRecapFirstGenerate: StoryObj<typeof VideoCallAiMeetingRecap> = {
+  name: "AI Meeting Recap: First generate",
+  tags: ["!dev", "!autodocs"],
+  argTypes: videoCallArgTypes(VideoCallAiMeetingRecap, videoCallAiMeetingRecapCopy, ["photo", "photos", "actions", "moments", "defaultMomentId"], ["reveal"]),
+  render: (args, context) => <VideoCallAiMeetingRecap locale={localeOf(context)} {...photoPropsOf("ai-meeting-recap", context)} reveal {...args} />,
+}
+
+export const AiMeetingRecapMomentChosen: StoryObj<typeof VideoCallAiMeetingRecap> = {
+  name: "AI Meeting Recap: Moment chosen",
+  tags: ["!dev", "!autodocs"],
+  argTypes: videoCallArgTypes(VideoCallAiMeetingRecap, videoCallAiMeetingRecapCopy, ["photo", "photos", "actions", "moments", "reveal"], ["defaultMomentId"]),
+  render: (args, context) => <VideoCallAiMeetingRecap locale={localeOf(context)} {...photoPropsOf("ai-meeting-recap", context)} defaultMomentId="risk" {...args} />,
+}
+
+export const AiMeetingRecapAllDone: StoryObj<typeof VideoCallAiMeetingRecap> = {
+  name: "AI Meeting Recap: Every item done",
+  tags: ["!dev", "!autodocs"],
+  argTypes: videoCallArgTypes(VideoCallAiMeetingRecap, videoCallAiMeetingRecapCopy, ["photo", "photos", "actions", "moments", "defaultMomentId", "reveal"]),
+  render: (args, context) => {
+    const locale = localeOf(context)
+    return (
+      <VideoCallAiMeetingRecap
+        locale={locale}
+        {...photoPropsOf("ai-meeting-recap", context)}
+        actions={videoCallAiMeetingRecapCopy[locale].actions.map((action) => ({ ...action, done: true }))}
+        {...args}
+      />
+    )
+  },
+}
+
+export const AiMeetingRecapLongText: StoryObj<typeof VideoCallAiMeetingRecap> = {
+  name: "AI Meeting Recap: Long text",
+  tags: ["!dev", "!autodocs"],
+  argTypes: videoCallArgTypes(VideoCallAiMeetingRecap, videoCallAiMeetingRecapCopy, ["photo", "photos", "actions", "moments", "defaultMomentId", "reveal"]),
+  render: (args, context) => {
+    const locale = localeOf(context)
+    const base = videoCallAiMeetingRecapCopy[locale]
+    return (
+      <VideoCallAiMeetingRecap
+        locale={locale}
+        {...photoPropsOf("ai-meeting-recap", context)}
+        actions={base.actions.map((action, index) => (index === 1 ? { ...action, task: LONG_AROUND[locale].task } : action))}
+        moments={base.moments.map((moment, index) => (index === 3 ? { ...moment, text: LONG_AROUND[locale].moment } : moment))}
         {...args}
       />
     )

@@ -3501,7 +3501,7 @@
       }
     },
     "videoCallBlocks": {
-      "lead": "Sections for a video-call product: the screens before a call (the lobby, the waiting room, an incoming call, the join link), the call stages with a grid, a speaker, a shared screen or a side panel, the controls on a call, and the live captions and reactions that sit on its stage.",
+      "lead": "Sections for a video-call product: the screens before a call (the lobby, the waiting room, an incoming call, the join link), the call stages with a grid, a speaker, a shared screen or a side panel, the controls on a call, the live captions and reactions that sit on its stage, and what surrounds it afterwards: the summary, the meetings coming up and the AI recap.",
       "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
       "filterLabel": "Filter by family",
       "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
@@ -3509,7 +3509,8 @@
         "all": "All",
         "before": "Before the call",
         "stages": "Call stages",
-        "layers": "Call layers"
+        "layers": "Call layers",
+        "around": "Around the call"
       },
       "types": {
         "video-call-pre-join-lobby": "Pre-Join Lobby",
@@ -3520,8 +3521,11 @@
         "video-call-call-controls-dock": "Call Controls Dock",
         "video-call-waiting-room-knock": "Waiting Room & Knock",
         "video-call-incoming-call": "Incoming Call",
+        "video-call-call-ended-summary": "Call Ended Summary",
         "video-call-captions-reactions": "Captions & Reactions",
-        "video-call-join-link-dial-in": "Join Link & Dial-in"
+        "video-call-join-link-dial-in": "Join Link & Dial-in",
+        "video-call-upcoming-meetings": "Upcoming Meetings",
+        "video-call-ai-meeting-recap": "AI Meeting Recap"
       }
     }
   },

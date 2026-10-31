@@ -875,6 +875,15 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "video-call-captions-reactions": dynamic(() =>
     import("@fasla-ui/blocks/video-call-captions-reactions/VideoCallCaptionsReactions").then((m) => withVideoCallPhotos(m.VideoCallCaptionsReactions, "captions-reactions"))
   ),
+  "video-call-call-ended-summary": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-call-ended-summary/VideoCallCallEndedSummary").then((m) => withVideoCallPhotos(m.VideoCallCallEndedSummary, "call-ended-summary"))
+  ),
+  "video-call-upcoming-meetings": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-upcoming-meetings/VideoCallUpcomingMeetings").then((m) => withVideoCallPhotos(m.VideoCallUpcomingMeetings, "upcoming-meetings"))
+  ),
+  "video-call-ai-meeting-recap": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-ai-meeting-recap/VideoCallAiMeetingRecap").then((m) => withVideoCallPhotos(m.VideoCallAiMeetingRecap, "ai-meeting-recap"))
+  ),
   "blog-cards-left-thumb-row-cards": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-left-thumb-row-cards/BlogCardsLeftThumbRowCards").then((m) => withBlogCardsPhotos(m.BlogCardsLeftThumbRowCards, "left-thumb-row-cards", m.blogCardsLeftThumbRowCardsCopy))
   ),

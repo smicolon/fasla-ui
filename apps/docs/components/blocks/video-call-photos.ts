@@ -32,6 +32,28 @@ const PHOTOS: Record<string, { src: string; alt: Alt }> = {
 }
 
 /**
+ * The recordings' stills, for the two Types that show one. Calm scenes the repo
+ * already has, not people: the corridor under the Call Ended Summary's recording
+ * row, the table of colleagues under the recap's player.
+ */
+const RECORDINGS: Record<string, { src: string; alt: Alt }> = {
+  "call-ended-summary": {
+    src: "/images/hero/office-corridor.webp",
+    alt: {
+      en: "A long office corridor with a slatted ceiling, glass partitions and dark kitchen units",
+      ar: "ممر مكتب طويل بسقف مشقوق وحواجز زجاجية ووحدات مطبخ داكنة",
+    },
+  },
+  "ai-meeting-recap": {
+    src: "/images/hero/team-laptops-table.webp",
+    alt: {
+      en: "Colleagues working on laptops around a wooden table",
+      ar: "زملاء يعملون على حواسيب محمولة حول طاولة خشبية",
+    },
+  },
+}
+
+/**
  * The people on the call stages, by participant `id`. Every file is an ordinary
  * portrait the repo already has (the Team and Social Proof ones), cropped by
  * the tile to a camera's frame. Salma and Hala have none: their camera is off,
@@ -50,7 +72,17 @@ const PEOPLE: Record<string, { src: string; alt: Alt }> = {
 }
 
 /** The Types that show people, which take `photos` by person `id`: the call stages, the waiting room's guests and the callers. */
-const STAGE_TYPES = ["grid-gallery-call", "speaker-filmstrip", "screen-share-stage", "call-with-side-panel", "waiting-room-knock", "incoming-call"]
+const STAGE_TYPES = [
+  "grid-gallery-call",
+  "speaker-filmstrip",
+  "screen-share-stage",
+  "call-with-side-panel",
+  "waiting-room-knock",
+  "incoming-call",
+  "call-ended-summary",
+  "upcoming-meetings",
+  "ai-meeting-recap",
+]
 
 /** The people's photos with alt text in `locale`, by participant `id`. */
 export function videoCallPeople(locale: Locale): Record<string, VideoCallDemoPhoto> {
@@ -58,17 +90,19 @@ export function videoCallPeople(locale: Locale): Record<string, VideoCallDemoPho
 }
 
 /** Every Video Call Type that has a demo photo, by its name without `video-call-`. */
-export const VIDEO_CALL_PHOTO_TYPES = Object.keys(PHOTOS)
+export const VIDEO_CALL_PHOTO_TYPES = [...Object.keys(PHOTOS), ...Object.keys(RECORDINGS)]
 
 /** A Video Call Type's demo photo with its alt text in `locale`, or nothing. */
 export function videoCallPhoto(type: string, locale: Locale): VideoCallDemoPhoto | undefined {
-  const photo = PHOTOS[type]
+  const photo = PHOTOS[type] ?? RECORDINGS[type]
   return photo ? { src: photo.src, alt: photo.alt[locale] } : undefined
 }
 
 /** The props that put a Type's demo photo into its block: its `photo`. Types without one get none. */
 export function videoCallPhotoProps(type: string, locale: Locale): Record<string, unknown> {
-  if (STAGE_TYPES.includes(type)) return { photos: videoCallPeople(locale) }
+  const props: Record<string, unknown> = {}
+  if (STAGE_TYPES.includes(type)) props.photos = videoCallPeople(locale)
   const photo = videoCallPhoto(type, locale)
-  return photo ? { photo } : {}
+  if (photo) props.photo = photo
+  return props
 }
