@@ -361,11 +361,11 @@ export function VideoCallCallEndedSummary({
             </div>
           </div>
 
-          <div ref={stats} className="grid grid-cols-2 gap-4 [@container(min-width:64rem)]:grid-cols-4">
+          <div ref={stats} className="grid grid-cols-2 gap-2 [@container(min-width:40rem)]:gap-4 [@container(min-width:64rem)]:grid-cols-4">
             {copy.stats.map((stat, index) => {
               const Icon = STAT_ICONS[stat.icon]
               return (
-                <div key={stat.id} data-stat="" className="flex min-w-0 flex-col gap-2 rounded-[0.625rem] bg-muted p-4">
+                <div key={stat.id} data-stat="" className="flex min-w-0 flex-col gap-2 rounded-[0.625rem] bg-muted p-3 [@container(min-width:40rem)]:p-4">
                   <Icon aria-hidden className="size-[18px] text-muted-foreground" />
                   <span className="text-xs text-muted-foreground">{stat.label}</span>
                   <span className="text-base font-semibold text-balance text-foreground">
