@@ -884,6 +884,9 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "video-call-ai-meeting-recap": dynamic(() =>
     import("@fasla-ui/blocks/video-call-ai-meeting-recap/VideoCallAiMeetingRecap").then((m) => withVideoCallPhotos(m.VideoCallAiMeetingRecap, "ai-meeting-recap"))
   ),
+  "video-call-hero-call-mockup": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-hero-call-mockup/VideoCallHeroCallMockup").then((m) => withVideoCallPhotos(m.VideoCallHeroCallMockup, "hero-call-mockup"))
+  ),
   "blog-cards-left-thumb-row-cards": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-left-thumb-row-cards/BlogCardsLeftThumbRowCards").then((m) => withBlogCardsPhotos(m.BlogCardsLeftThumbRowCards, "left-thumb-row-cards", m.blogCardsLeftThumbRowCardsCopy))
   ),

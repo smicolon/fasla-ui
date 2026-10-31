@@ -100,9 +100,9 @@ export const CAREERS_FAMILIES: CareersFamily[] = ["lists", "highlights", "detail
  * the ones around it, and the marketing hero. A group appears here once a Type
  * of it is built.
  */
-export type VideoCallFamily = "before" | "stages" | "layers" | "around"
+export type VideoCallFamily = "before" | "stages" | "layers" | "around" | "marketing"
 
-export const VIDEO_CALL_FAMILIES: VideoCallFamily[] = ["before", "stages", "layers", "around"]
+export const VIDEO_CALL_FAMILIES: VideoCallFamily[] = ["before", "stages", "layers", "around", "marketing"]
 
 /**
  * Team's three groups, from its Figma documentation: the grids and walls that
@@ -395,6 +395,7 @@ export const VIDEO_CALL_TYPES: BlockType<VideoCallFamily>[] = [
   { slug: "video-call-join-link-dial-in", family: "before" },
   { slug: "video-call-upcoming-meetings", family: "around" },
   { slug: "video-call-ai-meeting-recap", family: "around" },
+  { slug: "video-call-hero-call-mockup", family: "marketing" },
 ]
 
 

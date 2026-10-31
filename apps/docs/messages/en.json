@@ -3501,7 +3501,7 @@
       }
     },
     "videoCallBlocks": {
-      "lead": "Sections for a video-call product: the screens before a call (the lobby, the waiting room, an incoming call, the join link), the call stages with a grid, a speaker, a shared screen or a side panel, the controls on a call, the live captions and reactions that sit on its stage, and what surrounds it afterwards: the summary, the meetings coming up and the AI recap.",
+      "lead": "Sections for a video-call product: the screens before a call (the lobby, the waiting room, an incoming call, the join link), the call stages with a grid, a speaker, a shared screen or a side panel, the controls on a call, the live captions and reactions that sit on its stage, and what surrounds it afterwards: the summary, the meetings coming up and the AI recap, and a marketing hero that shows the product.",
       "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
       "filterLabel": "Filter by family",
       "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
@@ -3510,7 +3510,8 @@
         "before": "Before the call",
         "stages": "Call stages",
         "layers": "Call layers",
-        "around": "Around the call"
+        "around": "Around the call",
+        "marketing": "Marketing"
       },
       "types": {
         "video-call-pre-join-lobby": "Pre-Join Lobby",
@@ -3525,7 +3526,8 @@
         "video-call-captions-reactions": "Captions & Reactions",
         "video-call-join-link-dial-in": "Join Link & Dial-in",
         "video-call-upcoming-meetings": "Upcoming Meetings",
-        "video-call-ai-meeting-recap": "AI Meeting Recap"
+        "video-call-ai-meeting-recap": "AI Meeting Recap",
+        "video-call-hero-call-mockup": "Hero — Call Mockup"
       }
     }
   },

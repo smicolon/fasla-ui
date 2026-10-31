@@ -7505,6 +7505,32 @@
         "video-call",
         "marketing"
       ]
+    },
+    {
+      "name": "video-call-hero-call-mockup",
+      "type": "registry:block",
+      "title": "Video Call: Hero — Call Mockup",
+      "description": "A marketing hero for a call product: a tag, the headline, a line, two buttons and a line of proof beside a still mockup of a call with a bar, three tiles and a dock. The mockup is decorative and enters in sequence; Start and Tour call back.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-hero-call-mockup/VideoCallHeroCallMockup.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-hero-call-mockup.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
     }
   ]
 }

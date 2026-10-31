@@ -52,8 +52,8 @@ const ARABIC = /[؀-ۿ]/
 /** Whether a string has no Arabic letters. */
 export const isLatin = (text: React.ReactNode) => typeof text === "string" && !ARABIC.test(text)
 
-/** A run of Latin letters, figures and the marks that join them: `Fasla`, `⌘ D`, `fasla.to/room`, `+44 20 7946 0212`. */
-const LATIN_RUN = /([A-Za-z0-9⌘][A-Za-z0-9⌘ .:@/+'’&_–-]*[A-Za-z0-9⌘]|[A-Za-z0-9⌘])/
+/** A run of Latin letters, figures and the marks that join them: `Fasla`, `⌘ D`, `fasla.to/room`, `+44 20 7946 0212`, `2,100` (a comma only between digits, so `Karim, Mona` still splits). */
+const LATIN_RUN = /([A-Za-z0-9⌘](?:[A-Za-z0-9⌘ .:@/+'’&_–-]|,(?=\d))*[A-Za-z0-9⌘]|[A-Za-z0-9⌘])/
 
 /** One Latin run kept whole and left-to-right inside any sentence, as Figma's LRI…PDI marks do. */
 export function Latin({ children, className }: { children: React.ReactNode; className?: string }) {

@@ -82,6 +82,7 @@ const STAGE_TYPES = [
   "call-ended-summary",
   "upcoming-meetings",
   "ai-meeting-recap",
+  "hero-call-mockup",
 ]
 
 /** The people's photos with alt text in `locale`, by participant `id`. */

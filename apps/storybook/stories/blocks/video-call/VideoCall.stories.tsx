@@ -9,6 +9,7 @@ import { VideoCallCallEndedSummary, videoCallCallEndedSummaryCopy } from "../../
 import { VideoCallUpcomingMeetings, videoCallUpcomingMeetingsCopy } from "../../../../../packages/fasla-ui/registry/blocks/video-call-upcoming-meetings/VideoCallUpcomingMeetings"
 import { VideoCallCallControlsDock, videoCallCallControlsDockCopy } from "../../../../../packages/fasla-ui/registry/blocks/video-call-call-controls-dock/VideoCallCallControlsDock"
 import { VideoCallCaptionsReactions, videoCallCaptionsReactionsCopy } from "../../../../../packages/fasla-ui/registry/blocks/video-call-captions-reactions/VideoCallCaptionsReactions"
+import { VideoCallHeroCallMockup, videoCallHeroCallMockupCopy } from "../../../../../packages/fasla-ui/registry/blocks/video-call-hero-call-mockup/VideoCallHeroCallMockup"
 import { VideoCallIncomingCall, videoCallIncomingCallCopy } from "../../../../../packages/fasla-ui/registry/blocks/video-call-incoming-call/VideoCallIncomingCall"
 import { VideoCallJoinLinkDialIn, videoCallJoinLinkDialInCopy } from "../../../../../packages/fasla-ui/registry/blocks/video-call-join-link-dial-in/VideoCallJoinLinkDialIn"
 import { VideoCallPreJoinLobby, videoCallPreJoinLobbyCopy } from "../../../../../packages/fasla-ui/registry/blocks/video-call-pre-join-lobby/VideoCallPreJoinLobby"
@@ -32,7 +33,9 @@ import { LONG, localeOf, photoPropsOf, videoCallArgTypes, videoCallViewports } f
  * the summary after it ends (the stars rate it, the chips mark what stood out,
  * the numbers count up), the meetings coming up (the live row pulses, Join
  * collapses a row) and the AI recap (the overview can reveal word by word, the
- * action items check off, a key moment scrubs the player). Mic, camera, hand and
+ * action items check off, a key moment scrubs the player). Last, the marketing
+ * hero: copy that rises in turn, then a still mockup of a call that lands and
+ * settles. Mic, camera, hand and
  * captions toggle, the More menu opens, a reaction floats up when picked, and
  * Leave has to be held for 400ms (from the keyboard, pressed twice). Viewport,
  * direction and theme come from the toolbar.
@@ -664,4 +667,39 @@ export const AiMeetingRecapLongText: StoryObj<typeof VideoCallAiMeetingRecap> = 
       />
     )
   },
+}
+
+const LONG_HERO = {
+  en: {
+    heading: "Calls that start right on time",
+    description: "Fasla runs in the browser, remembers every device choice, and hands you the recap before anyone has left the room, every time.",
+  },
+  ar: {
+    heading: "اجتماعات تبدأ في وقتها بلا تأخير",
+    description: "تعمل فاصلة في المتصفح، وتتذكر كل اختيار للأجهزة، وتمنحك الملخّص قبل أن يخرج أحد من الغرفة، في كل مرة تجتمع فيها.",
+  },
+} as const
+
+export const HeroCallMockup: StoryObj<typeof VideoCallHeroCallMockup> = {
+  name: "Hero — Call Mockup",
+  argTypes: videoCallArgTypes(VideoCallHeroCallMockup, videoCallHeroCallMockupCopy, ["photo", "photos", "people", "tiles"]),
+  render: (args, context) => <VideoCallHeroCallMockup locale={localeOf(context)} {...photoPropsOf("hero-call-mockup", context)} {...args} />,
+}
+
+export const HeroCallMockupLongText: StoryObj<typeof VideoCallHeroCallMockup> = {
+  name: "Hero — Call Mockup: Long text",
+  tags: ["!dev", "!autodocs"],
+  argTypes: videoCallArgTypes(VideoCallHeroCallMockup, videoCallHeroCallMockupCopy, ["photo", "photos", "people", "tiles"]),
+  render: (args, context) => {
+    const locale = localeOf(context)
+    return <VideoCallHeroCallMockup locale={locale} {...photoPropsOf("hero-call-mockup", context)} heading={LONG_HERO[locale].heading} description={LONG_HERO[locale].description} {...args} />
+  },
+}
+
+export const HeroCallMockupPhone: StoryObj<typeof VideoCallHeroCallMockup> = {
+  name: "Hero — Call Mockup: Phone (two tiles, three controls)",
+  tags: ["!dev", "!autodocs"],
+  parameters: { viewport: { defaultViewport: "mobile" } },
+  argTypes: videoCallArgTypes(VideoCallHeroCallMockup, videoCallHeroCallMockupCopy, ["photo", "photos", "people", "tiles"]),
+  render: (args, context) => <VideoCallHeroCallMockup locale={localeOf(context)} {...photoPropsOf("hero-call-mockup", context)} {...args} />,
 }
