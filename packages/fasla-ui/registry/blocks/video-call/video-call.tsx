@@ -659,7 +659,7 @@ export function LeaveButton({
       ref={buttonRef}
       type="button"
       variant="destructive"
-      size={!alwaysLabelled && tier === "mobile" ? "icon-lg" : "lg"}
+      size={!alwaysLabelled && measured && tier === "mobile" ? "icon-lg" : "lg"}
       radius={radius}
       aria-label={armed ? confirmLabel : label}
       data-control="leave"
@@ -688,7 +688,8 @@ export function LeaveButton({
         }
       }}
       // An icon-only phone button and a labelled Tablet one are different atom sizes: wait for the first reading before showing either.
-      className={cn("relative overflow-hidden", !alwaysLabelled && !measured && "invisible", className)}
+      // Until measured the button is the labelled `lg`; its box is narrowed with the container query so the room it reserves is already the phone's 40px or Tablet's labelled width.
+      className={cn("relative overflow-hidden", !alwaysLabelled && !measured && "invisible [@container(max-width:39.99rem)]:w-10 [@container(max-width:39.99rem)]:px-0", className)}
     >
       <span ref={fill} aria-hidden className="pointer-events-none absolute inset-y-0 start-0 w-0 bg-destructive-foreground opacity-20" />
       <PhoneOff aria-hidden className="relative" />
