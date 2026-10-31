@@ -2,8 +2,8 @@
  * The Video Call blocks' demo photos, for the docs previews and the Storybook
  * stories. No block ships with photos: a block takes a `photo` prop. Video Call
  * brings no photo files of its own; every still is one the repo already has
- * (the Team portraits, here), so there is nothing to credit beyond their own
- * CREDITS.md.
+ * (the Team and Social Proof portraits, here), so there is nothing to credit
+ * beyond their own CREDITS.md. The call stages take `photos`, one per person.
  */
 
 type Locale = "en" | "ar"
@@ -23,6 +23,32 @@ const PHOTOS: Record<string, { src: string; alt: Alt }> = {
   },
 }
 
+/**
+ * The people on the call stages, by participant `id`. Every file is an ordinary
+ * portrait the repo already has (the Team and Social Proof ones), cropped by
+ * the tile to a camera's frame. Salma and Hala have none: their camera is off,
+ * as in Figma, and a tile shows their initials.
+ */
+const PEOPLE: Record<string, { src: string; alt: Alt }> = {
+  karim: { src: "/blocks/team/portrait-tomas-vidal.webp", alt: { en: "A smiling man in a white t-shirt against a plain light backdrop", ar: "رجل مبتسم يرتدي قميصًا أبيض أمام خلفية فاتحة بسيطة" } },
+  mona: { src: "/blocks/team/portrait-layla-mansour.webp", alt: { en: "A smiling woman with short curly hair in a striped blazer against a pale wall", ar: "امرأة مبتسمة بشعر قصير مجعّد وسترة مخططة أمام جدار فاتح" } },
+  omar: { src: "/images/social-proof/hamad-al-mutairi.webp", alt: { en: "A smiling man in a light blue t-shirt against a white wall", ar: "رجل مبتسم يرتدي قميصًا أزرق فاتحًا أمام جدار أبيض" } },
+  tariq: { src: "/images/social-proof/hani-jaber.webp", alt: { en: "A man with a beard and round glasses in a grey sweater", ar: "رجل بلحية ونظارة مستديرة يرتدي سترة رمادية" } },
+  yasmin: { src: "/blocks/team/portrait-mei-tanaka.webp", alt: { en: "A woman in a black blazer smiling against a brick wall", ar: "امرأة ترتدي سترة سوداء تبتسم أمام جدار من الطوب" } },
+  adam: { src: "/blocks/team/portrait-rami-aziz.webp", alt: { en: "A smiling man with a short beard in a navy sweater against a grey backdrop", ar: "رجل مبتسم بلحية قصيرة يرتدي سترة كحلية أمام خلفية رمادية" } },
+  nour: { src: "/blocks/team/portrait-elena-novak.webp", alt: { en: "A smiling woman with red hair in a black top", ar: "امرأة مبتسمة بشعر أحمر ترتدي قميصًا أسود" } },
+  bilal: { src: "/blocks/team/portrait-omar-nasser.webp", alt: { en: "A man in a dark suit and tie against a dark backdrop", ar: "رجل يرتدي بدلة داكنة ورابطة عنق أمام خلفية داكنة" } },
+  layla: { src: "/blocks/team/portrait-sofia-marchetti.webp", alt: { en: "A woman with long hair in a grey blazer against an orange wall", ar: "امرأة بشعر طويل وسترة رمادية أمام جدار برتقالي" } },
+}
+
+/** The Types that show people, which take `photos` by participant `id`. */
+const STAGE_TYPES = ["grid-gallery-call", "speaker-filmstrip", "screen-share-stage", "call-with-side-panel"]
+
+/** The people's photos with alt text in `locale`, by participant `id`. */
+export function videoCallPeople(locale: Locale): Record<string, VideoCallDemoPhoto> {
+  return Object.fromEntries(Object.entries(PEOPLE).map(([id, photo]) => [id, { src: photo.src, alt: photo.alt[locale] }]))
+}
+
 /** Every Video Call Type that has a demo photo, by its name without `video-call-`. */
 export const VIDEO_CALL_PHOTO_TYPES = Object.keys(PHOTOS)
 
@@ -34,6 +60,7 @@ export function videoCallPhoto(type: string, locale: Locale): VideoCallDemoPhoto
 
 /** The props that put a Type's demo photo into its block: its `photo`. Types without one get none. */
 export function videoCallPhotoProps(type: string, locale: Locale): Record<string, unknown> {
+  if (STAGE_TYPES.includes(type)) return { photos: videoCallPeople(locale) }
   const photo = videoCallPhoto(type, locale)
   return photo ? { photo } : {}
 }

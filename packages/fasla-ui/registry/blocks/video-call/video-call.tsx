@@ -1,10 +1,13 @@
 "use client"
 
 import * as React from "react"
-import { Mic, MicOff, PhoneOff, Pin, Star } from "lucide-react"
+import { Ellipsis, Hand, MessageSquare, Mic, MicOff, PhoneOff, Pin, ScreenShare, Search, Smile, Star, UserPlus, Video, VideoOff, X } from "lucide-react"
 import { cn } from "../../../src/lib/utils"
 import { Badge } from "../../ui/badge/badge"
+import { Avatar } from "../../ui/avatar/avatar"
 import { Button } from "../../ui/button/button"
+import { Input } from "../../ui/input/input"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../ui/tabs/tabs"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "../../ui/dropdown-menu/dropdown-menu"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip/tooltip"
 
@@ -167,7 +170,7 @@ export interface VideoCallSectionProps extends React.HTMLAttributes<HTMLElement>
  */
 export function VideoCallSection({ labelledBy, className, contentClassName, gap = "lg", children, ...props }: VideoCallSectionProps) {
   return (
-    <section aria-labelledby={labelledBy} className={cn("[container-type:inline-size] bg-background p-8 md:p-16 lg:p-24", className)} {...props}>
+    <section aria-labelledby={labelledBy} data-video-call="" className={cn("[container-type:inline-size] bg-background p-8 md:p-16 lg:p-24", className)} {...props}>
       <div className={cn("mx-auto flex w-full max-w-[1248px] flex-col", gap === "lg" ? "gap-12" : "gap-4", contentClassName)}>{children}</div>
     </section>
   )
@@ -308,6 +311,8 @@ export function StarRow({ value, defaultValue = 0, onValueChange, count = 5, lab
 /* ────────────────────────────── Stage bar ────────────────────────────── */
 
 export interface StageBarProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
+  /** Something before the name: the REC badge. */
+  leading?: React.ReactNode
   /** The meeting's name. */
   title: React.ReactNode
   /** The elapsed time, `24:18`, set in `muted-foreground` beside the name. */
@@ -319,10 +324,11 @@ export interface StageBarProps extends Omit<React.HTMLAttributes<HTMLDivElement>
 }
 
 /** Figma's Stage Bar: the meeting name and its live state at the start, the view controls at the end, wrapping to a second row on phones. */
-export function StageBar({ title, time, state, actions, className, ...props }: StageBarProps) {
+export function StageBar({ leading, title, time, state, actions, className, ...props }: StageBarProps) {
   return (
     <div className={cn("flex w-full flex-wrap items-center justify-between gap-x-4 gap-y-2", className)} {...props}>
       <div className="flex min-w-0 flex-wrap items-center gap-x-3 gap-y-1">
+        {leading}
         <p className="min-w-0 truncate text-sm font-semibold text-foreground">{title}</p>
         {time ? <p className="text-sm text-muted-foreground tabular-nums">{time}</p> : null}
         {state}
@@ -355,7 +361,7 @@ export interface ParticipantTileProps extends Omit<React.HTMLAttributes<HTMLDivE
   chip?: "start" | "end" | "none"
   /** Extra classes for the name chip, such as one that hides it on phones. */
   chipClassName?: string
-  /** Whether the tile is pinned. Pinned tiles keep the pin on show. */
+  /** Whether the tile is pinned. A pinned tile keeps the pin on show; an unpinned one shows it on hover or focus, and always on a touch screen. */
   pinned?: boolean
   /** Called when the pin is pressed; without it the tile has no pin. */
   onPinnedChange?: (pinned: boolean) => void
@@ -388,7 +394,7 @@ export function ParticipantTile({
     <div
       data-speaking={speaking ? "" : undefined}
       className={cn(
-        "relative isolate overflow-hidden rounded-lg bg-muted ring-2 ring-inset ring-transparent transition-shadow duration-100 motion-reduce:transition-none",
+        "group/tile relative isolate overflow-hidden rounded-lg bg-muted ring-2 ring-inset ring-transparent transition-shadow duration-100 motion-reduce:transition-none",
         speaking && "ring-border",
         className
       )}
@@ -397,7 +403,7 @@ export function ParticipantTile({
       {photo ? (
         <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" className="absolute inset-0 -z-10 size-full object-cover object-[50%_42%]" />
       ) : initials ? (
-        <span aria-hidden className="absolute inset-0 -z-10 flex items-center justify-center text-3xl font-semibold text-foreground">
+        <span aria-hidden className="absolute inset-0 -z-10 flex items-center justify-center pb-6 text-2xl font-semibold text-foreground [@container(min-width:40rem)]:text-3xl">
           {initials}
         </span>
       ) : null}
@@ -409,7 +415,10 @@ export function ParticipantTile({
           aria-label={pinLabel ?? `Pin ${name}`}
           aria-pressed={pinned}
           onClick={() => onPinnedChange(!pinned)}
-          className={cn("absolute start-3 top-3 transition-transform duration-100 motion-reduce:transition-none", pinned && "rotate-[15deg]")}
+          className={cn(
+            "absolute start-3 top-3 transition-[transform,opacity] duration-100 motion-reduce:transition-none",
+            pinned ? "rotate-[15deg]" : "opacity-0 focus-visible:opacity-100 group-focus-within/tile:opacity-100 group-hover/tile:opacity-100 [@media(pointer:coarse)]:opacity-100"
+          )}
         >
           <Pin aria-hidden />
         </Button>
@@ -461,10 +470,11 @@ export interface DockControl {
   menu?: { id: string; label: string }[]
 }
 
-export type DockSize = "md" | "lg" | "xl"
+export type DockSize = "md" | "stage" | "lg" | "xl"
 
 const DOCK_SIZE: Record<DockSize, string> = {
   md: "size-9",
+  stage: "size-9 [@container(min-width:40rem)]:size-11",
   lg: "size-11",
   xl: "size-11 [@container(min-width:40rem)]:size-12",
 }
@@ -473,7 +483,7 @@ export interface ControlsDockProps extends Omit<React.HTMLAttributes<HTMLDivElem
   controls: DockControl[]
   /** `compact` is the round buttons alone; `labelled` stacks a short caption under each. */
   density?: "compact" | "labelled"
-  /** The control size: 36px, 44px, or 44px on phones and 48px from Tablet. */
+  /** The control size: 36px; `stage`, 36px on phones and 44px from Tablet; 44px; or 44px on phones and 48px from Tablet. */
   size?: DockSize
   /** Names the Leave button and is its text: "Leave". */
   leaveLabel: string
@@ -755,5 +765,483 @@ export function ControlsDock({
       </div>
       <VideoCallToast message={toast.message} className="absolute inset-x-0 bottom-full mx-auto mb-2 w-fit max-w-full" />
     </div>
+  )
+}
+
+/* ═══════════════════════════ Call stages ═══════════════════════════
+ * What the four call-stage Types share: the stage card, the people on it, the
+ * stage dock's controls, the container tier a script can read, the FLIP that
+ * moves tiles when people come and go, and the side panel.
+ */
+
+/** Fills `{name}`-style holes in a copy string. */
+export const fillTemplate = (template: string, values: Record<string, string | number>) =>
+  template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? ""))
+
+/** A person on a call stage. Their photo comes from the block's `photos`, by `id`. */
+export interface VideoCallParticipant {
+  /** Keys the person, and picks their photo. */
+  id: string
+  /** The name on the chip: `Karim Nasser`. */
+  name: string
+  /** The short form a phone or a strip shows: `Adam F.`. */
+  shortName?: string
+  /** One or two letters for a camera that is off. A person with no photo and no initials shows a plain `muted` tile. */
+  initials?: string
+  /** Shows the mic-off mark on their chip. */
+  muted?: boolean
+}
+
+/** The photos a stage shows, by participant `id`. A person without one shows their initials. */
+export type VideoCallPhotos = Record<string, VideoCallPhoto>
+
+/**
+ * Figma's Call Stage: a `card` surface, 16px radius, 1px `border`, 16px apart
+ * inside. A phone's stage hugs its tiles, 4px at the sides.
+ */
+export function CallStage({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
+  return (
+    <div
+      data-call-stage=""
+      className={cn("flex w-full flex-col gap-4 rounded-2xl border border-border bg-card px-1 py-4 [@container(min-width:40rem)]:p-4", className)}
+      {...props}
+    />
+  )
+}
+
+/* ───────────────────────────── Stage dock ───────────────────────────── */
+
+export interface StageDockCopy {
+  /** Names the dock. */
+  label: string
+  mic: { label: string; pressedLabel: string; tip: string }
+  video: { label: string; pressedLabel: string }
+  share: string
+  chat: string
+  reactions: string
+  hand: { label: string; pressedLabel: string }
+  more: string
+  menu: { id: string; label: string }[]
+  /** Leave's label, and its two lines of help. */
+  leave: string
+  leaveConfirm: string
+  leaveHint: string
+}
+
+/** The dock every call stage carries, English and Arabic. */
+export const STAGE_DOCK_COPY: Record<VideoCallLocale, StageDockCopy> = {
+  en: {
+    label: "Call controls",
+    mic: { label: "Mute", pressedLabel: "Unmute", tip: "You're muted. Press ⌘ D to talk" },
+    video: { label: "Stop video", pressedLabel: "Start video" },
+    share: "Share screen",
+    chat: "Chat",
+    reactions: "Reactions",
+    hand: { label: "Raise hand", pressedLabel: "Lower hand" },
+    more: "More",
+    menu: [
+      { id: "settings", label: "Settings" },
+      { id: "report", label: "Report a problem" },
+    ],
+    leave: "Leave",
+    leaveConfirm: "Press again to leave",
+    leaveHint: "Hold to leave",
+  },
+  ar: {
+    label: "عناصر التحكم في المكالمة",
+    mic: { label: "كتم", pressedLabel: "إلغاء الكتم", tip: "الميكروفون مكتوم. اضغط ⌘ D للتحدث" },
+    video: { label: "إيقاف الفيديو", pressedLabel: "تشغيل الفيديو" },
+    share: "مشاركة الشاشة",
+    chat: "الدردشة",
+    reactions: "التفاعلات",
+    hand: { label: "رفع اليد", pressedLabel: "خفض اليد" },
+    more: "المزيد",
+    menu: [
+      { id: "settings", label: "الإعدادات" },
+      { id: "report", label: "الإبلاغ عن مشكلة" },
+    ],
+    leave: "خروج",
+    leaveConfirm: "اضغط مرة أخرى للخروج",
+    leaveHint: "اضغط مطولًا للخروج",
+  },
+}
+
+/**
+ * The seven controls of a call stage's dock, in Figma's order: mic, camera,
+ * share, chat, reactions, hand and More. A phone keeps five: share and
+ * reactions drop out. `chat: "toggle"` makes Chat a toggle that keeps its own
+ * pressed state, for a stage whose chat opens a panel.
+ */
+export function stageDockControls(d: StageDockCopy, { chat = "button" }: { chat?: "button" | "toggle" } = {}): DockControl[] {
+  return [
+    { id: "mic", icon: Mic, pressedIcon: MicOff, label: d.mic.label, pressedLabel: d.mic.pressedLabel, pressedTip: d.mic.tip, toggle: true },
+    { id: "video", icon: Video, pressedIcon: VideoOff, label: d.video.label, pressedLabel: d.video.pressedLabel, toggle: true },
+    { id: "screen-share", icon: ScreenShare, label: d.share, hideOnPhone: true },
+    { id: "chat", icon: MessageSquare, label: d.chat, kind: "on", toggle: chat === "toggle" },
+    { id: "reactions", icon: Smile, label: d.reactions, hideOnPhone: true },
+    { id: "hand", icon: Hand, label: d.hand.label, pressedLabel: d.hand.pressedLabel, kind: "on", toggle: true },
+    { id: "more", icon: Ellipsis, label: d.more, menu: d.menu },
+  ]
+}
+
+/* ───────────────────── Container tier, FLIP and debounce ───────────────────── */
+
+export type ContainerTier = "mobile" | "tablet" | "desktop"
+
+/**
+ * Which of Figma's three breakpoints the block's own width is at, the same
+ * 640px and 1024px of content the container queries use. A script reads this
+ * where a class can't act: which way a wipe runs, which axis a panel opens on.
+ */
+export function containerTier(node: Element | null): ContainerTier {
+  const root = node?.closest<HTMLElement>("[data-video-call]")
+  if (!root || typeof getComputedStyle !== "function") return "mobile"
+  const style = getComputedStyle(root)
+  const width = root.clientWidth - (parseFloat(style.paddingInlineStart) || 0) - (parseFloat(style.paddingInlineEnd) || 0)
+  return width >= 1024 ? "desktop" : width >= 640 ? "tablet" : "mobile"
+}
+
+/** The tier of the section a node is in, kept up to date as the section resizes. */
+export function useContainerTier<T extends HTMLElement>() {
+  const ref = React.useRef<T>(null)
+  const [tier, setTier] = React.useState<ContainerTier>("mobile")
+  useIsomorphicLayoutEffect(() => {
+    const node = ref.current
+    if (!node) return
+    const read = () => setTier(containerTier(node))
+    read()
+    const root = node.closest("[data-video-call]")
+    if (!root || typeof ResizeObserver === "undefined") return
+    const observer = new ResizeObserver(read)
+    observer.observe(root)
+    return () => observer.disconnect()
+  }, [])
+  return [ref, tier] as const
+}
+
+/**
+ * FLIP for a list: every child marked `data-flip="<id>"` slides from where it
+ * was to where it is, over 260ms ease-out, whenever `key` changes, so the
+ * tiles that stay travel instead of jumping when someone joins or leaves. A
+ * tile that is new fades in. Reduced motion skips it. It measures, so it works
+ * in either direction.
+ */
+export function useFlip<T extends HTMLElement>(key: string, duration = 260) {
+  const ref = React.useRef<T>(null)
+  const rects = React.useRef(new Map<string, DOMRect>())
+  const last = React.useRef<string | undefined>(undefined)
+  useIsomorphicLayoutEffect(() => {
+    const node = ref.current
+    if (!node) return
+    const items = Array.from(node.querySelectorAll<HTMLElement>("[data-flip]"))
+    const next = new Map<string, DOMRect>()
+    for (const el of items) next.set(el.dataset.flip!, el.getBoundingClientRect())
+    if (last.current !== undefined && last.current !== key && !prefersReducedMotion()) {
+      for (const el of items) {
+        if (typeof el.animate !== "function") continue
+        const before = rects.current.get(el.dataset.flip!)
+        const after = next.get(el.dataset.flip!)!
+        if (!before) {
+          el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: BASE_MS, easing: STANDARD })
+          continue
+        }
+        const dx = before.left - after.left
+        const dy = before.top - after.top
+        if (Math.abs(dx) < 1 && Math.abs(dy) < 1) continue
+        el.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: "none" }], { duration, easing: "ease-out" })
+      }
+    }
+    rects.current = next
+    last.current = key
+  }, [key, duration])
+  return ref
+}
+
+/** A value that follows `value` after it has held still for `ms`: the active-speaker ring never strobes between two voices. */
+export function useDebouncedValue<T>(value: T, ms: number): T {
+  const [held, setHeld] = React.useState(value)
+  React.useEffect(() => {
+    if (Object.is(value, held)) return
+    const timer = setTimeout(() => setHeld(value), ms)
+    return () => clearTimeout(timer)
+  }, [value, ms, held])
+  return held
+}
+
+/* ───────────────────────────── Side panel ───────────────────────────── */
+
+export interface SidePanelPerson {
+  id: string
+  name: string
+  /** Their role: Host, Guest. */
+  role?: string
+  photo?: VideoCallPhoto
+  initials?: string
+  /** Shows the mic as off, in `destructive`. */
+  muted?: boolean
+}
+
+export interface SidePanelMessage {
+  id: string
+  author: string
+  text: string
+}
+
+export interface SidePanelCopy {
+  /** The panel's heading, and its name. */
+  title: string
+  /** Names the close button. */
+  close: string
+  /** Names the tab list. */
+  tabsLabel: string
+  participants: string
+  chat: string
+  /** Names the search field and is its placeholder. */
+  search: string
+  /** The line above the list; `{count}` is filled in. */
+  inCall: string
+  /** What the list says when the search finds no one. */
+  noResults: string
+  /** What the Chat tab says with no messages. */
+  noMessages: string
+  /** Names the Chat tab's dot. */
+  unread: string
+  invite: string
+  /** Names a person's menu button; `{name}` is filled in. */
+  more: string
+  /** Names the mic mark of someone who is muted. */
+  muted: string
+  /** Names the handle that resizes the sheet on a phone. */
+  handle: string
+}
+
+export type SidePanelSnap = "60" | "92"
+
+export interface SidePanelProps extends Omit<React.HTMLAttributes<HTMLElement>, "title" | "onChange"> {
+  copy: SidePanelCopy
+  people: SidePanelPerson[]
+  /** The Chat tab's messages. */
+  messages?: SidePanelMessage[]
+  /** Puts the dot on the Chat tab, scaling in from nothing, until the Chat tab is opened. */
+  unread?: boolean
+  /** The open tab, when you control it. */
+  tab?: "participants" | "chat"
+  defaultTab?: "participants" | "chat"
+  onTabChange?: (tab: "participants" | "chat") => void
+  /** Makes the panel a bottom sheet on a phone: a handle on top, and a height of 60% that a drag or a press steps to 92%. From Tablet it is a plain card. */
+  sheet?: boolean
+  /** The sheet's height step, when you control it. */
+  snap?: SidePanelSnap
+  defaultSnap?: SidePanelSnap
+  onSnapChange?: (snap: SidePanelSnap) => void
+  /** Called when the close button is pressed; without it the panel has none. */
+  onClose?: () => void
+  /** Called when Invite is pressed. */
+  onInvite?: () => void
+  /** Called with a person's id when their menu button is pressed. */
+  onPersonMenu?: (id: string) => void
+}
+
+function useControlled<T>(value: T | undefined, initial: T, onChange?: (next: T) => void) {
+  const [own, setOwn] = React.useState(initial)
+  const current = value ?? own
+  const set = (next: T) => {
+    if (value === undefined) setOwn(next)
+    onChange?.(next)
+  }
+  return [current, set] as const
+}
+
+/** The sheet's grab handle: a press steps between the two heights, and a drag up or down of 24px picks one. */
+function SheetHandle({ label, snap, onSnap }: { label: string; snap: SidePanelSnap; onSnap: (snap: SidePanelSnap) => void }) {
+  const start = React.useRef<number | null>(null)
+  const dragged = React.useRef(false)
+  return (
+    <button
+      type="button"
+      aria-label={label}
+      aria-expanded={snap === "92"}
+      onPointerDown={(event) => {
+        start.current = event.clientY
+        dragged.current = false
+      }}
+      onPointerUp={(event) => {
+        if (start.current === null) return
+        const dy = event.clientY - start.current
+        start.current = null
+        if (Math.abs(dy) >= 24) {
+          dragged.current = true
+          onSnap(dy < 0 ? "92" : "60")
+        }
+      }}
+      onPointerCancel={() => (start.current = null)}
+      onClick={() => {
+        if (dragged.current) {
+          dragged.current = false
+          return
+        }
+        onSnap(snap === "92" ? "60" : "92")
+      }}
+      className="-mt-2 flex h-6 w-full shrink-0 items-center justify-center rounded-md outline-none [touch-action:none] focus-visible:ring-2 focus-visible:ring-ring [@container(min-width:40rem)]:hidden"
+    >
+      <span aria-hidden className="h-1 w-9 rounded-full bg-muted-foreground" />
+    </button>
+  )
+}
+
+/** A person's row. A row that arrives after the first render grows in over 180ms, height and opacity together. */
+function PersonRow({ person, copy, isNew, onMenu }: { person: SidePanelPerson; copy: SidePanelCopy; isNew: boolean; onMenu?: (id: string) => void }) {
+  const ref = React.useRef<HTMLLIElement>(null)
+  useIsomorphicLayoutEffect(() => {
+    const node = ref.current
+    if (!isNew || !node || typeof node.animate !== "function") return
+    const height = node.offsetHeight
+    node.animate(prefersReducedMotion() ? [{ opacity: 0 }, { opacity: 1 }] : [{ height: "0px", opacity: 0, overflow: "hidden" }, { height: `${height}px`, opacity: 1, overflow: "hidden" }], {
+      duration: BASE_MS,
+      easing: STANDARD,
+    })
+  }, [])
+  const Mark = person.muted ? MicOff : Mic
+  return (
+    <li ref={ref} data-person={person.id} className="flex items-center gap-3 rounded-lg p-2">
+      <Avatar size="32" radius="standard" variant={person.photo ? "image" : "initials"} src={person.photo?.src} name={person.name} />
+      <div className="flex min-w-0 flex-1 flex-col">
+        <span className="truncate text-sm font-medium text-foreground">
+          <Figures>{person.name}</Figures>
+        </span>
+        {person.role ? <span className="truncate text-xs text-muted-foreground">{person.role}</span> : null}
+      </div>
+      <Mark aria-hidden className={cn("size-4 shrink-0", person.muted ? "text-destructive" : "text-muted-foreground")} />
+      {person.muted ? <span className="sr-only">{copy.muted}</span> : null}
+      <Button type="button" variant="ghost" tone="secondary" size="icon-xs" aria-label={fillTemplate(copy.more, { name: person.name })} onClick={() => onMenu?.(person.id)}>
+        <Ellipsis aria-hidden />
+      </Button>
+    </li>
+  )
+}
+
+/**
+ * Figma's side panel: a heading with a close button, a Participants / Chat
+ * tab pair, a people search and the list, and Invite at the foot. The search
+ * filters for real; the tabs cross-fade their content in 120ms; the Chat tab's
+ * dot scales in from 0; a row that arrives grows in. As a sheet on a phone it
+ * is 60% tall with a handle that steps it to 92%. A card, 360px wide beside the
+ * stage on Desktop and full width below it from Tablet.
+ */
+export function SidePanel({
+  copy,
+  people,
+  messages = [],
+  unread = false,
+  tab,
+  defaultTab = "participants",
+  onTabChange,
+  sheet = false,
+  snap,
+  defaultSnap = "60",
+  onSnapChange,
+  onClose,
+  onInvite,
+  onPersonMenu,
+  className,
+  ...props
+}: SidePanelProps) {
+  const [current, setTab] = useControlled(tab, defaultTab, onTabChange)
+  const [size, setSize] = useControlled(snap, defaultSnap, onSnapChange)
+  const [query, setQuery] = React.useState("")
+  const content = React.useRef<HTMLDivElement>(null)
+  const dot = React.useRef<HTMLSpanElement>(null)
+  const seen = React.useRef<Set<string> | null>(null)
+  const firstTab = React.useRef(true)
+  const shown = people.filter((person) => person.name.toLowerCase().includes(query.trim().toLowerCase()))
+  const fresh = new Set(seen.current ? people.filter((person) => !seen.current!.has(person.id)).map((person) => person.id) : [])
+  React.useEffect(() => {
+    seen.current = new Set(people.map((person) => person.id))
+  })
+  React.useEffect(() => {
+    if (firstTab.current) {
+      firstTab.current = false
+      return
+    }
+    if (content.current) playEntrance([content.current], { rise: 0, stagger: false })
+  }, [current])
+  React.useEffect(() => {
+    const node = dot.current
+    if (!unread || !node || typeof node.animate !== "function") return
+    node.animate(prefersReducedMotion() ? [{ opacity: 0 }, { opacity: 1 }] : [{ transform: "scale(0)" }, { transform: "scale(1)" }], { duration: BASE_MS, easing: STANDARD })
+  }, [unread, current])
+
+  return (
+    <aside
+      aria-label={copy.title}
+      data-side-panel=""
+      data-snap={sheet ? size : undefined}
+      className={cn(
+        "flex min-h-0 w-full flex-col gap-4 rounded-2xl border border-border bg-card p-5",
+        sheet && "h-[468px] transition-[height] duration-200 motion-reduce:transition-none data-[snap=92]:h-[600px] [@container(min-width:40rem)]:h-auto",
+        className
+      )}
+      {...props}
+    >
+      {sheet ? <SheetHandle label={copy.handle} snap={size} onSnap={setSize} /> : null}
+      <div className="flex items-center justify-between gap-3">
+        <h3 className="text-base font-semibold text-foreground">{copy.title}</h3>
+        {onClose ? (
+          <Button type="button" variant="ghost" tone="secondary" size="icon-xs" aria-label={copy.close} onClick={onClose}>
+            <X aria-hidden />
+          </Button>
+        ) : null}
+      </div>
+      <Tabs value={current} onValueChange={(value) => setTab(value as "participants" | "chat")} className="flex min-h-0 flex-1 flex-col gap-4">
+        <TabsList variant="bordered" aria-label={copy.tabsLabel}>
+          <TabsTrigger value="participants">{copy.participants}</TabsTrigger>
+          <TabsTrigger value="chat">
+            <span className="relative">
+              {copy.chat}
+              {unread && current !== "chat" ? <span ref={dot} role="img" aria-label={copy.unread} className="absolute -top-1 -end-2 size-2 rounded-full bg-destructive" /> : null}
+            </span>
+          </TabsTrigger>
+        </TabsList>
+        <div ref={content} className="flex min-h-0 flex-1 flex-col gap-4">
+          <TabsContent value="participants" className="flex min-h-0 flex-1 flex-col gap-4">
+            <Input size="lg" aria-label={copy.search} placeholder={copy.search} startIcon={<Search aria-hidden />} value={query} onChange={(event) => setQuery(event.target.value)} />
+            <div className="flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto [@container(min-width:40rem)]:max-h-[22rem]">
+              <p className="text-xs font-medium text-muted-foreground">
+                <Figures>{fillTemplate(copy.inCall, { count: people.length })}</Figures>
+              </p>
+              {shown.length ? (
+                <ul className="flex flex-col gap-1">
+                  {shown.map((person) => (
+                    <PersonRow key={person.id} person={person} copy={copy} isNew={fresh.has(person.id)} onMenu={onPersonMenu} />
+                  ))}
+                </ul>
+              ) : (
+                <p role="status" className="py-4 text-sm text-muted-foreground">{copy.noResults}</p>
+              )}
+            </div>
+          </TabsContent>
+          <TabsContent value="chat" className="flex min-h-0 flex-1 flex-col gap-3 overflow-y-auto">
+            {messages.length ? (
+              messages.map((message) => (
+                <p key={message.id} className="flex flex-col gap-0.5 text-sm">
+                  <span className="font-semibold text-foreground">
+                    <Figures>{message.author}</Figures>
+                  </span>
+                  <span className="text-muted-foreground">
+                    <Figures>{message.text}</Figures>
+                  </span>
+                </p>
+              ))
+            ) : (
+              <p className="py-4 text-sm text-muted-foreground">{copy.noMessages}</p>
+            )}
+          </TabsContent>
+        </div>
+      </Tabs>
+      <Button type="button" size="lg" className="w-full" onClick={onInvite}>
+        <UserPlus aria-hidden />
+        {copy.invite}
+      </Button>
+    </aside>
   )
 }

@@ -36,6 +36,11 @@ export const LONG = {
     speaker: "Adam Farouk-Al-Mansouri",
     caption: "— so the short version is we ship the lobby first, then the recording pipeline, and the rest waits for the next cycle.",
     reply: "Agreed. I'll take the lobby states and the device permission states, and Mona takes the rest of the list.",
+    meeting: "Design sync — weekly planning and launch",
+    person: "Yasmin Haddad-Mansouri (you)",
+    slide: "Q3 activation funnel and plan",
+    panelTitle: "In this meeting, everyone invited",
+    role: "Co-host and note taker",
   },
   ar: {
     heading: "كل شيء في متناول إبهامك على كل مقاس شاشة تطلقه",
@@ -44,6 +49,11 @@ export const LONG = {
     speaker: "آدم فاروق المنصوري",
     caption: "باختصار، نطلق غرفة الانتظار أولاً، ثم مسار التسجيل، وبقية القائمة تنتظر الدورة التالية بعد أن نراجع نتائج الأسبوع.",
     reply: "موافقة. سأتولى حالات غرفة الانتظار وحالات أذونات الأجهزة، وتتولى منى بقية القائمة كاملة.",
+    meeting: "مزامنة التصميم الأسبوعية وخطة الإطلاق",
+    person: "ياسمين حداد المنصوري (أنت)",
+    slide: "مسار التنشيط وخطة الربع الثالث",
+    panelTitle: "في هذا الاجتماع، كل المدعوين",
+    role: "منظّم مشارك وكاتب المحضر",
   },
 } as const
 

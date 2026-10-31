@@ -845,6 +845,18 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "blog-cards-post-carousel-with-controls": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-post-carousel-with-controls/BlogCardsPostCarouselWithControls").then((m) => withBlogCardsPhotos(m.BlogCardsPostCarouselWithControls, "post-carousel-with-controls", m.blogCardsPostCarouselWithControlsCopy))
   ),
+  "video-call-grid-gallery-call": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-grid-gallery-call/VideoCallGridGalleryCall").then((m) => withVideoCallPhotos(m.VideoCallGridGalleryCall, "grid-gallery-call"))
+  ),
+  "video-call-speaker-filmstrip": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-speaker-filmstrip/VideoCallSpeakerFilmstrip").then((m) => withVideoCallPhotos(m.VideoCallSpeakerFilmstrip, "speaker-filmstrip"))
+  ),
+  "video-call-screen-share-stage": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-screen-share-stage/VideoCallScreenShareStage").then((m) => withVideoCallPhotos(m.VideoCallScreenShareStage, "screen-share-stage"))
+  ),
+  "video-call-call-with-side-panel": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-call-with-side-panel/VideoCallCallWithSidePanel").then((m) => withVideoCallPhotos(m.VideoCallCallWithSidePanel, "call-with-side-panel"))
+  ),
   "video-call-call-controls-dock": dynamic(() =>
     import("@fasla-ui/blocks/video-call-call-controls-dock/VideoCallCallControlsDock").then((m) => withVideoCallPhotos(m.VideoCallCallControlsDock, "call-controls-dock"))
   ),
