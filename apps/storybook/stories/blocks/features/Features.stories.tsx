@@ -204,14 +204,14 @@ export const PhotoFeatureChipsEmpty: StoryObj<typeof FeaturesPhotoFeatureChips> 
 
 export const MediaRail: StoryObj<typeof FeaturesMediaRail> = {
   name: "Media Rail",
-  argTypes: featuresArgTypes(FeaturesMediaRail, featuresMediaRailCopy, []),
+  argTypes: featuresArgTypes(FeaturesMediaRail, featuresMediaRailCopy, ["railLabel"]),
   render: (args, context) => <FeaturesMediaRail locale={localeOf(context)} {...photoPropsOf("media-rail", context, featuresMediaRailCopy)} {...args} />,
 }
 
 export const MediaRailEmpty: StoryObj<typeof FeaturesMediaRail> = {
   name: "Media Rail: Without photos",
   tags: ["!dev", "!autodocs"],
-  argTypes: featuresArgTypes(FeaturesMediaRail, featuresMediaRailCopy, []),
+  argTypes: featuresArgTypes(FeaturesMediaRail, featuresMediaRailCopy, ["railLabel"]),
   render: (args, context) => <FeaturesMediaRail locale={localeOf(context)}  {...args} />,
 }
 
@@ -269,53 +269,53 @@ export const NotchedPhotoColumnsEmpty: StoryObj<typeof FeaturesNotchedPhotoColum
 
 export const PerforatedPhotoStrip: StoryObj<typeof FeaturesPerforatedPhotoStrip> = {
   name: "Perforated Photo Strip",
-  argTypes: featuresArgTypes(FeaturesPerforatedPhotoStrip, featuresPerforatedPhotoStripCopy, []),
+  argTypes: featuresArgTypes(FeaturesPerforatedPhotoStrip, featuresPerforatedPhotoStripCopy, ["stripLabel"]),
   render: (args, context) => <FeaturesPerforatedPhotoStrip locale={localeOf(context)} {...photoPropsOf("perforated-photo-strip", context, featuresPerforatedPhotoStripCopy)} {...args} />,
 }
 
 export const PerforatedPhotoStripEmpty: StoryObj<typeof FeaturesPerforatedPhotoStrip> = {
   name: "Perforated Photo Strip: Without photos",
   tags: ["!dev", "!autodocs"],
-  argTypes: featuresArgTypes(FeaturesPerforatedPhotoStrip, featuresPerforatedPhotoStripCopy, []),
+  argTypes: featuresArgTypes(FeaturesPerforatedPhotoStrip, featuresPerforatedPhotoStripCopy, ["stripLabel"]),
   render: (args, context) => <FeaturesPerforatedPhotoStrip locale={localeOf(context)}  {...args} />,
 }
 
 export const PortraitPhotoCardsLinkRow: StoryObj<typeof FeaturesPortraitPhotoCardsLinkRow> = {
   name: "Portrait Photo Cards + Link Row",
-  argTypes: featuresArgTypes(FeaturesPortraitPhotoCardsLinkRow, featuresPortraitPhotoCardsLinkRowCopy, []),
+  argTypes: featuresArgTypes(FeaturesPortraitPhotoCardsLinkRow, featuresPortraitPhotoCardsLinkRowCopy, ["railLabel"]),
   render: (args, context) => <FeaturesPortraitPhotoCardsLinkRow locale={localeOf(context)} {...photoPropsOf("portrait-photo-cards-link-row", context, featuresPortraitPhotoCardsLinkRowCopy)} {...args} />,
 }
 
 export const PortraitPhotoCardsLinkRowEmpty: StoryObj<typeof FeaturesPortraitPhotoCardsLinkRow> = {
   name: "Portrait Photo Cards + Link Row: Without photos",
   tags: ["!dev", "!autodocs"],
-  argTypes: featuresArgTypes(FeaturesPortraitPhotoCardsLinkRow, featuresPortraitPhotoCardsLinkRowCopy, []),
+  argTypes: featuresArgTypes(FeaturesPortraitPhotoCardsLinkRow, featuresPortraitPhotoCardsLinkRowCopy, ["railLabel"]),
   render: (args, context) => <FeaturesPortraitPhotoCardsLinkRow locale={localeOf(context)}  {...args} />,
 }
 
 export const PhotoCarousel: StoryObj<typeof FeaturesPhotoCarousel> = {
   name: "Photo Carousel",
-  argTypes: featuresArgTypes(FeaturesPhotoCarousel, featuresPhotoCarouselCopy, []),
+  argTypes: featuresArgTypes(FeaturesPhotoCarousel, featuresPhotoCarouselCopy, ["index", "previousLabel", "nextLabel", "carouselLabel"]),
   render: (args, context) => <FeaturesPhotoCarousel locale={localeOf(context)} {...photoPropsOf("photo-carousel", context, featuresPhotoCarouselCopy)} {...args} />,
 }
 
 export const PhotoCarouselEmpty: StoryObj<typeof FeaturesPhotoCarousel> = {
   name: "Photo Carousel: Without photos",
   tags: ["!dev", "!autodocs"],
-  argTypes: featuresArgTypes(FeaturesPhotoCarousel, featuresPhotoCarouselCopy, []),
+  argTypes: featuresArgTypes(FeaturesPhotoCarousel, featuresPhotoCarouselCopy, ["index", "previousLabel", "nextLabel", "carouselLabel"]),
   render: (args, context) => <FeaturesPhotoCarousel locale={localeOf(context)}  {...args} />,
 }
 
 export const PhotoTabsPanel: StoryObj<typeof FeaturesPhotoTabsPanel> = {
   name: "Photo Tabs Panel",
-  argTypes: featuresArgTypes(FeaturesPhotoTabsPanel, featuresPhotoTabsPanelCopy, []),
+  argTypes: featuresArgTypes(FeaturesPhotoTabsPanel, featuresPhotoTabsPanelCopy, ["value"]),
   render: (args, context) => <FeaturesPhotoTabsPanel locale={localeOf(context)} {...photoPropsOf("photo-tabs-panel", context, featuresPhotoTabsPanelCopy)} {...args} />,
 }
 
 export const PhotoTabsPanelEmpty: StoryObj<typeof FeaturesPhotoTabsPanel> = {
   name: "Photo Tabs Panel: Without photos",
   tags: ["!dev", "!autodocs"],
-  argTypes: featuresArgTypes(FeaturesPhotoTabsPanel, featuresPhotoTabsPanelCopy, []),
+  argTypes: featuresArgTypes(FeaturesPhotoTabsPanel, featuresPhotoTabsPanelCopy, ["value"]),
   render: (args, context) => <FeaturesPhotoTabsPanel locale={localeOf(context)}  {...args} />,
 }
 
@@ -346,14 +346,14 @@ export const ComparePanelsChatAnswer: StoryObj<typeof FeaturesComparePanelsChatA
 
 export const NumberedStepsFloatingCards: StoryObj<typeof FeaturesNumberedStepsFloatingCards> = {
   name: "Numbered Steps + Floating Cards",
-  argTypes: featuresArgTypes(FeaturesNumberedStepsFloatingCards, featuresNumberedStepsFloatingCardsCopy, []),
+  argTypes: featuresArgTypes(FeaturesNumberedStepsFloatingCards, featuresNumberedStepsFloatingCardsCopy, ["value"]),
   render: (args, context) => <FeaturesNumberedStepsFloatingCards locale={localeOf(context)} {...photoPropsOf("numbered-steps-floating-cards", context, featuresNumberedStepsFloatingCardsCopy)} {...args} />,
 }
 
 export const NumberedStepsFloatingCardsEmpty: StoryObj<typeof FeaturesNumberedStepsFloatingCards> = {
   name: "Numbered Steps + Floating Cards: Without photos",
   tags: ["!dev", "!autodocs"],
-  argTypes: featuresArgTypes(FeaturesNumberedStepsFloatingCards, featuresNumberedStepsFloatingCardsCopy, []),
+  argTypes: featuresArgTypes(FeaturesNumberedStepsFloatingCards, featuresNumberedStepsFloatingCardsCopy, ["value"]),
   render: (args, context) => <FeaturesNumberedStepsFloatingCards locale={localeOf(context)}  {...args} />,
 }
 
@@ -365,14 +365,14 @@ export const SolidColourCards: StoryObj<typeof FeaturesSolidColourCards> = {
 
 export const IconTitledPreviewRail: StoryObj<typeof FeaturesIconTitledPreviewRail> = {
   name: "Icon-Titled Preview Rail",
-  argTypes: featuresArgTypes(FeaturesIconTitledPreviewRail, featuresIconTitledPreviewRailCopy, []),
+  argTypes: featuresArgTypes(FeaturesIconTitledPreviewRail, featuresIconTitledPreviewRailCopy, ["railLabel"]),
   render: (args, context) => <FeaturesIconTitledPreviewRail locale={localeOf(context)} {...photoPropsOf("icon-titled-preview-rail", context, featuresIconTitledPreviewRailCopy)} {...args} />,
 }
 
 export const IconTitledPreviewRailEmpty: StoryObj<typeof FeaturesIconTitledPreviewRail> = {
   name: "Icon-Titled Preview Rail: Without photos",
   tags: ["!dev", "!autodocs"],
-  argTypes: featuresArgTypes(FeaturesIconTitledPreviewRail, featuresIconTitledPreviewRailCopy, []),
+  argTypes: featuresArgTypes(FeaturesIconTitledPreviewRail, featuresIconTitledPreviewRailCopy, ["railLabel"]),
   render: (args, context) => <FeaturesIconTitledPreviewRail locale={localeOf(context)}  {...args} />,
 }
 
@@ -384,13 +384,13 @@ export const TintedProductBento: StoryObj<typeof FeaturesTintedProductBento> = {
 
 export const ShowcaseCardPair: StoryObj<typeof FeaturesShowcaseCardPair> = {
   name: "Showcase Card Pair",
-  argTypes: featuresArgTypes(FeaturesShowcaseCardPair, featuresShowcaseCardPairCopy, []),
+  argTypes: featuresArgTypes(FeaturesShowcaseCardPair, featuresShowcaseCardPairCopy, ["applyLabel"]),
   render: (args, context) => <FeaturesShowcaseCardPair locale={localeOf(context)} {...photoPropsOf("showcase-card-pair", context, featuresShowcaseCardPairCopy)} {...args} />,
 }
 
 export const ShowcaseCardPairEmpty: StoryObj<typeof FeaturesShowcaseCardPair> = {
   name: "Showcase Card Pair: Without photos",
   tags: ["!dev", "!autodocs"],
-  argTypes: featuresArgTypes(FeaturesShowcaseCardPair, featuresShowcaseCardPairCopy, []),
+  argTypes: featuresArgTypes(FeaturesShowcaseCardPair, featuresShowcaseCardPairCopy, ["applyLabel"]),
   render: (args, context) => <FeaturesShowcaseCardPair locale={localeOf(context)}  {...args} />,
 }
