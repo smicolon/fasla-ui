@@ -107,6 +107,15 @@ describe("isLatin, Latin and Figures", () => {
     expect(english.container).toHaveTextContent("Press ⌘ D to talk")
   })
 
+  it("keeps a time range whole and left-to-right inside an Arabic sentence", () => {
+    // Measured in Chrome (RTL): 10:00 sits left of the dash and 10:45 right of it, 3px each side. One isolate is what makes that so.
+    const { container } = render(<Figures>{"اليوم، 10:00 – 10:45"}</Figures>)
+    expect([...container.querySelectorAll("bdi")].map((bdi) => bdi.textContent)).toEqual(["10:00 – 10:45"])
+    expect(container.querySelector("bdi")).toHaveAttribute("dir", "ltr")
+    const split = render(<Figures>{"اليوم من 10:00 إلى 10:47"}</Figures>)
+    expect([...split.container.querySelectorAll("bdi")].map((bdi) => bdi.textContent)).toEqual(["10:00", "10:47"])
+  })
+
   it("passes anything that is not a string through", () => {
     const { container } = render(<Figures>{<b>x</b>}</Figures>)
     expect(container.querySelector("b")).toBeInTheDocument()
