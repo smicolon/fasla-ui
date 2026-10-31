@@ -275,8 +275,10 @@ export function VideoCallCaptionsReactions({
   ...props
 }: VideoCallCaptionsReactionsProps) {
   const copy = COPY[locale]
-  const [sectionRef, tier] = useContainerTier<HTMLElement>()
+  const [sectionRef, tier, measured] = useContainerTier<HTMLElement>()
   const reactionSize = tier === "mobile" ? "icon-md" : "icon-lg"
+  // The reactions are a different atom size on a phone and from Tablet: wait for the first reading (see useContainerTier).
+  const waiting = !measured
   const d = dock ?? copy.dock
   const labels = reactionLabels ?? copy.reactionLabels
   const lines = (captions ?? copy.captions).slice(-2)
@@ -385,7 +387,7 @@ export function VideoCallCaptionsReactions({
           <div className="absolute inset-x-1 bottom-1 flex flex-col items-center gap-3 [@container(min-width:40rem)]:contents">
             <ul
               aria-label={pickerLabel ?? copy.pickerLabel}
-              className="flex justify-center gap-3 [@container(min-width:40rem)]:absolute [@container(min-width:40rem)]:end-3 [@container(min-width:40rem)]:top-3 [@container(min-width:40rem)]:flex-col [@container(min-width:64rem)]:end-6 [@container(min-width:64rem)]:top-6"
+              className={cn("flex justify-center gap-3 [@container(min-width:40rem)]:absolute [@container(min-width:40rem)]:end-3 [@container(min-width:40rem)]:top-3 [@container(min-width:40rem)]:flex-col [@container(min-width:64rem)]:end-6 [@container(min-width:64rem)]:top-6", waiting && "invisible")}
             >
               {reactions.map((id, index) => {
                 const Icon = REACTION_ICON[id]
@@ -427,7 +429,7 @@ export function VideoCallCaptionsReactions({
 
         <div className="flex flex-col items-center gap-3">
           {pickerOpen ? (
-            <div role="group" aria-label={pickerLabel ?? copy.pickerLabel} className="flex items-center gap-2 rounded-full bg-muted px-3 py-2">
+            <div role="group" aria-label={pickerLabel ?? copy.pickerLabel} className={cn("flex items-center gap-2 rounded-full bg-muted px-3 py-2", waiting && "invisible")}>
               {REACTION_IDS.map((id) => {
                 const Icon = REACTION_ICON[id]
                 return (

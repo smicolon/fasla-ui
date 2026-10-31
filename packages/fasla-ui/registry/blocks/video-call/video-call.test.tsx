@@ -2,6 +2,7 @@ import * as React from "react"
 import { readFileSync } from "node:fs"
 import { dirname, resolve } from "node:path"
 import { fileURLToPath } from "node:url"
+import { renderToString } from "react-dom/server"
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
 import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react"
 import { Mic, MicOff, Video, VideoOff, Ellipsis, Hand } from "lucide-react"
@@ -321,6 +322,25 @@ describe("ControlsDock", () => {
     phone.unmount()
     dockIn(800, { size: "lg", phoneSize: "md" })
     expect(document.querySelector("[data-control=mic]")).toHaveClass("size-10")
+  })
+
+  // The opening tag that carries `marker`, whatever order React wrote its attributes in.
+  const openingTag = (html: string, marker: string) => html.match(new RegExp(`<[^<>]*${marker}[^<>]*>`))?.[0] ?? ""
+
+  it("never paints the wrong size first: server HTML waits for the first reading, the client has it before paint", () => {
+    const props = { label: "Call controls", controls: CONTROLS, leaveLabel: "Leave", leaveConfirmLabel: "Press again to leave", leaveHint: "Hold to leave" }
+    // Server-rendered markup is painted before React hydrates, so a dock whose size follows the tier and an icon-only Leave hide until measured.
+    const serverTiered = renderToString(<ControlsDock {...props} size="lg" phoneSize="md" />)
+    expect(openingTag(serverTiered, 'role="group"')).toMatch(/class="[^"]*\binvisible\b/)
+    expect(openingTag(serverTiered, 'data-control="leave"')).toMatch(/class="[^"]*\binvisible\b/)
+    // A dock with one size at every tier, and an always-labelled Leave, have nothing to wait for.
+    const serverFlat = renderToString(<ControlsDock {...props} size="lg" leaveLabelled />)
+    expect(openingTag(serverFlat, 'role="group"')).not.toMatch(/\binvisible\b/)
+    expect(openingTag(serverFlat, 'data-control="leave"')).not.toMatch(/\binvisible\b/)
+    // On the client the layout effect reads the width before the browser paints, so by the time render returns nothing is hidden.
+    dockIn(360, { size: "lg", phoneSize: "md" })
+    expect(screen.getByRole("group", { name: "Call controls" })).not.toHaveClass("invisible")
+    expect(document.querySelector("[data-control=leave]")).not.toHaveClass("invisible")
   })
 
   it("makes Leave the icon-only Icon Button on phones and the labelled Button from Tablet", () => {

@@ -629,7 +629,7 @@ export function LeaveButton({
   className?: string
 }) {
   const [armed, setArmed] = React.useState(false)
-  const [buttonRef, tier] = useContainerTier<HTMLButtonElement>()
+  const [buttonRef, tier, measured] = useContainerTier<HTMLButtonElement>()
   const fill = React.useRef<HTMLSpanElement>(null)
   const timer = React.useRef<ReturnType<typeof setTimeout>>(undefined)
   const armTimer = React.useRef<ReturnType<typeof setTimeout>>(undefined)
@@ -687,7 +687,8 @@ export function LeaveButton({
           armTimer.current = setTimeout(() => setArmed(false), 3000)
         }
       }}
-      className={cn("relative overflow-hidden", className)}
+      // An icon-only phone button and a labelled Tablet one are different atom sizes: wait for the first reading before showing either.
+      className={cn("relative overflow-hidden", !alwaysLabelled && !measured && "invisible", className)}
     >
       <span ref={fill} aria-hidden className="pointer-events-none absolute inset-y-0 start-0 w-0 bg-destructive-foreground opacity-20" />
       <PhoneOff aria-hidden className="relative" />
@@ -728,12 +729,14 @@ export function ControlsDock({
   const [pressed, setPressed] = React.useState<Record<string, boolean>>(() => Object.fromEntries(controls.map((c) => [c.id, Boolean(c.defaultPressed)])))
   const canHover = useCanHover()
   const toast = useVideoCallToast()
-  const [dockRef, tier] = useContainerTier<HTMLDivElement>()
+  const [dockRef, tier, measured] = useContainerTier<HTMLDivElement>()
   const buttonSize = tier === "mobile" ? (phoneSize ?? size) : size
+  // Only a dock whose size changes with the tier waits for its first reading.
+  const waiting = !measured && phoneSize !== undefined && phoneSize !== size
   const isPressed = (c: DockControl) => pressed[c.id] ?? Boolean(c.defaultPressed)
   return (
     <div ref={dockRef} className={cn("relative", className)} {...props}>
-      <div role="group" aria-label={label} className={cn("flex items-start justify-center", density === "labelled" ? "gap-2 [@container(min-width:40rem)]:gap-5" : "gap-2")}>
+      <div role="group" aria-label={label} className={cn("flex items-start justify-center", density === "labelled" ? "gap-2 [@container(min-width:40rem)]:gap-5" : "gap-2", waiting && "invisible")}>
         {controls.map((control) => {
           const on = isPressed(control)
           const button = (
@@ -919,14 +922,25 @@ export function containerTier(node: Element | null): ContainerTier {
   return width >= 1024 ? "desktop" : width >= 640 ? "tablet" : "mobile"
 }
 
-/** The tier of the section a node is in, kept up to date as the section resizes. */
+/**
+ * The tier of the section a node is in, kept up to date as the section resizes.
+ * The third value is `false` until the first reading: the layout effect sets
+ * it before the browser paints, so on the client nothing wrong is ever drawn,
+ * but server-rendered HTML is painted before React hydrates. A part whose atom
+ * size depends on the tier hides itself until then (`invisible`), so a reader
+ * on Tablet never sees the phone size flash first.
+ */
 export function useContainerTier<T extends HTMLElement>() {
   const ref = React.useRef<T>(null)
   const [tier, setTier] = React.useState<ContainerTier>("mobile")
+  const [measured, setMeasured] = React.useState(false)
   useIsomorphicLayoutEffect(() => {
     const node = ref.current
     if (!node) return
-    const read = () => setTier(containerTier(node))
+    const read = () => {
+      setTier(containerTier(node))
+      setMeasured(true)
+    }
     read()
     const root = node.closest("[data-video-call]")
     if (!root || typeof ResizeObserver === "undefined") return
@@ -934,7 +948,7 @@ export function useContainerTier<T extends HTMLElement>() {
     observer.observe(root)
     return () => observer.disconnect()
   }, [])
-  return [ref, tier] as const
+  return [ref, tier, measured] as const
 }
 
 /**
