@@ -269,6 +269,15 @@ export const CODE_MAP = {
       "filter-sidebar-results", "search-chips-results", "post-carousel-with-controls",
     ].map((type) => [`blog-cards-${type}`, null])
   ),
+  // Block: the parts every Features block shares, from the block set Features (42367:57765), not an atom.
+  features: null,
+  // Blocks: each Features item is one Type of the block set Features (42367:57765), not an atom.
+  ...Object.fromEntries(
+    [
+      "icon-card-grid", "compact-icon-index", "numbered-feature-rows", "feature-checklist-columns",
+      "colour-block-cards", "stat-feature-band",
+    ].map((type) => [`features-${type}`, null])
+  ),
 }
 
 const FAMILY_MIN = 10

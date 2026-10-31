@@ -319,6 +319,21 @@ export const routes = [
     },
   },
   {
+    kind: "block",
+    category: "Blocks",
+    path: "/docs/blocks/features/",
+    title: "Features Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Twenty-nine features sections, from icon cards, numbered rows and checklists to photo-led layouts, carousels, tabs, accordions and product-in-use mock-ups, responsive and mirrored for Arabic.",
+    h1: "Features",
+    ar: {
+      title: "كتل المزايا لمشاريع React | فاصلة",
+      description:
+        "تسعة وعشرون قسمًا للمزايا: بطاقات الأيقونات والصفوف المرقّمة وقوائم التحقق، وتخطيطات تقودها الصور، وعارض وتبويبات وأكورديون، ونماذج المنتج أثناء الاستخدام، متجاوبة ومعكوسة للعربية.",
+      h1: "كتلة المزايا (Features)",
+    },
+  },
+  {
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/button/",

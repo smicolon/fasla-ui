@@ -4,7 +4,7 @@
  * (docs.faqBlocks, docs.errorStateBlocks, docs.logoCloudBlocks,
  * docs.authenticationsBlocks, docs.galleryBlocks, docs.navbarBlocks,
  * docs.pricingBlocks, docs.heroBlocks, docs.aboutBlocks, docs.teamBlocks,
- * docs.careersBlocks, docs.socialProofBlocks, docs.blogCardsBlocks); the slug is the registry item's name.
+ * docs.careersBlocks, docs.socialProofBlocks, docs.blogCardsBlocks, docs.featuresBlocks); the slug is the registry item's name.
  */
 
 export type FaqFamily = "lists" | "layouts" | "navigation" | "support"
@@ -125,7 +125,17 @@ export type BlogCardsFamily = "grids" | "features" | "lists" | "alongside" | "br
 
 export const BLOG_CARDS_FAMILIES: BlogCardsFamily[] = ["grids", "features", "lists", "alongside", "browse"]
 
-export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | SocialProofFamily | BlogCardsFamily> = {
+/**
+ * Features' four groups, from its Figma documentation: the layouts built from
+ * icons, numbers and checklists, the thirteen led by photos, the four the
+ * visitor operates (a carousel, tabs, an accordion, expanding cards), and the
+ * six that show the product in use.
+ */
+export type FeaturesFamily = "icons-numbers" | "photo-led" | "interactive" | "product-in-use"
+
+export const FEATURES_FAMILIES: FeaturesFamily[] = ["icons-numbers", "photo-led", "interactive", "product-in-use"]
+
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | SocialProofFamily | BlogCardsFamily | FeaturesFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
   family: Family
@@ -439,6 +449,15 @@ export const BLOG_CARDS_TYPES: BlockType<BlogCardsFamily>[] = [
   { slug: "blog-cards-journal-bento", family: "grids", inverse: true },
 ]
 
+export const FEATURES_TYPES: BlockType<FeaturesFamily>[] = [
+  { slug: "features-icon-card-grid", family: "icons-numbers" },
+  { slug: "features-compact-icon-index", family: "icons-numbers" },
+  { slug: "features-numbered-feature-rows", family: "icons-numbers", inverse: true },
+  { slug: "features-feature-checklist-columns", family: "icons-numbers" },
+  { slug: "features-colour-block-cards", family: "icons-numbers", inverse: true },
+  { slug: "features-stat-feature-band", family: "icons-numbers" },
+]
+
 export const ALL_BLOCK_TYPES: BlockType[] = [
   ...FAQ_TYPES,
   ...ERROR_STATE_TYPES,
@@ -453,6 +472,7 @@ export const ALL_BLOCK_TYPES: BlockType[] = [
   ...TEAM_TYPES,
   ...SOCIAL_PROOF_TYPES,
   ...BLOG_CARDS_TYPES,
+  ...FEATURES_TYPES,
 ]
 
 /** Figma's three breakpoints, the widths a preview frame renders at. */

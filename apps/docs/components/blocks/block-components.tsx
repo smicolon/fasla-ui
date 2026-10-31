@@ -865,6 +865,24 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "blog-cards-journal-bento": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-journal-bento/BlogCardsJournalBento").then((m) => withBlogCardsPhotos(m.BlogCardsJournalBento, "journal-bento", m.blogCardsJournalBentoCopy))
   ),
+  "features-icon-card-grid": dynamic(() =>
+    import("@fasla-ui/blocks/features-icon-card-grid/FeaturesIconCardGrid").then((m) => m.FeaturesIconCardGrid)
+  ),
+  "features-compact-icon-index": dynamic(() =>
+    import("@fasla-ui/blocks/features-compact-icon-index/FeaturesCompactIconIndex").then((m) => m.FeaturesCompactIconIndex)
+  ),
+  "features-numbered-feature-rows": dynamic(() =>
+    import("@fasla-ui/blocks/features-numbered-feature-rows/FeaturesNumberedFeatureRows").then((m) => m.FeaturesNumberedFeatureRows)
+  ),
+  "features-feature-checklist-columns": dynamic(() =>
+    import("@fasla-ui/blocks/features-feature-checklist-columns/FeaturesFeatureChecklistColumns").then((m) => m.FeaturesFeatureChecklistColumns)
+  ),
+  "features-colour-block-cards": dynamic(() =>
+    import("@fasla-ui/blocks/features-colour-block-cards/FeaturesColourBlockCards").then((m) => m.FeaturesColourBlockCards)
+  ),
+  "features-stat-feature-band": dynamic(() =>
+    import("@fasla-ui/blocks/features-stat-feature-band/FeaturesStatFeatureBand").then((m) => m.FeaturesStatFeatureBand)
+  ),
 }
 
 /** Settles after a moment, so a form shows its pending state before its result. */

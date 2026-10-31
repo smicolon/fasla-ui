@@ -7147,6 +7147,162 @@
         "blog-cards",
         "marketing"
       ]
+    },
+    {
+      "name": "features",
+      "type": "registry:block",
+      "title": "Features",
+      "description": "The parts every Features block is built from: the section and its 1248px column, the left-aligned header with its eyebrow, the figures helper that keeps numbers in order inside Arabic, and the hairline.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/features/features.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-icon-card-grid",
+      "type": "registry:block",
+      "title": "Features: Icon Card Grid",
+      "description": "A heading and a line over six bordered cards, each with an icon chip, a title and a line, three across on desktop.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-icon-card-grid/FeaturesIconCardGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-icon-card-grid.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-compact-icon-index",
+      "type": "registry:block",
+      "title": "Features: Compact Icon Index",
+      "description": "A heading with a note beside it, a hairline, then sixteen small items, each an icon, a title and a short line, four across on desktop.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-compact-icon-index/FeaturesCompactIconIndex.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-compact-icon-index.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-numbered-feature-rows",
+      "type": "registry:block",
+      "title": "Features: Numbered Feature Rows",
+      "description": "A dark band painted with the inverse tokens: a heading over four numbered features, side by side with a rule between them on desktop.",
+      "dependencies": [],
+      "registryDependencies": [
+        "features",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-numbered-feature-rows/FeaturesNumberedFeatureRows.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-numbered-feature-rows.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-feature-checklist-columns",
+      "type": "registry:block",
+      "title": "Features: Feature Checklist Columns",
+      "description": "A heading with a Compare plans button, over three ruled columns of six checked items.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-feature-checklist-columns/FeaturesFeatureChecklistColumns.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-feature-checklist-columns.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-colour-block-cards",
+      "type": "registry:block",
+      "title": "Features: Colour Block Cards",
+      "description": "A heading over four solid cards in the chart colours and the primary colour, each with an icon, a title and a line.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "features",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-colour-block-cards/FeaturesColourBlockCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-colour-block-cards.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-stat-feature-band",
+      "type": "registry:block",
+      "title": "Features: Stat Feature Band",
+      "description": "A rounded band with a heading and a note, over four large figures, each with a label and a line.",
+      "dependencies": [],
+      "registryDependencies": [
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-stat-feature-band/FeaturesStatFeatureBand.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-stat-feature-band.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
     }
   ]
 }
