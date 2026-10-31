@@ -22,8 +22,8 @@ import {
  * above a dock whose mic and camera are off. Each ends in Leave, the one
  * destructive button.
  *
- * Desktop and Tablet set 48px controls and a labelled Leave. Mobile trims the
- * compact and states rows to five controls with an icon-only 44px Leave and
+ * Desktop and Tablet set 40px controls and a labelled Leave. Mobile trims the
+ * compact and states rows to five controls with an icon-only Leave and
  * the labelled row to three controls plus a labelled Leave; the trim is by the
  * block's own width, so a docs preview narrower than the window trims too. In
  * Arabic the whole dock mirrors, so Leave stays on the side the eye leaves from.
@@ -183,9 +183,9 @@ export function VideoCallCallControlsDock({
       <VideoCallHeading headingId={headingId} eyebrow={eyebrow ?? copy.eyebrow} heading={heading ?? copy.heading} description={description ?? copy.description} />
 
       <div className="flex flex-col items-center gap-8 rounded-2xl border border-border bg-card p-4 [@container(min-width:40rem)]:p-10">
-        <ControlsDock label={labels.compact} size="xl" density="compact" controls={[mic, video, share, chatCompact, reactions, hand, captions, more]} {...leaveProps} />
+        <ControlsDock label={labels.compact} size="lg" density="compact" controls={[mic, video, share, chatCompact, reactions, hand, captions, more]} {...leaveProps} />
         <VideoCallSeparator />
-        <ControlsDock label={labels.labelled} size="xl" density="labelled" leaveRadius="standard" leaveLabelled controls={[mic, video, share, chat, people, record, more]} {...leaveProps} />
+        <ControlsDock label={labels.labelled} size="lg" density="labelled" leaveRadius="standard" leaveLabelled controls={[mic, video, share, chat, people, record, more]} {...leaveProps} />
         <VideoCallSeparator />
         <div className="flex flex-col items-center gap-4">
           <div role="tooltip" className={tooltipVariants({ variant: "primary", radius: "standard" })}>
@@ -193,7 +193,7 @@ export function VideoCallCallControlsDock({
           </div>
           <ControlsDock
             label={labels.states}
-            size="xl"
+            size="lg"
             density="compact"
             controls={[{ ...mic, defaultPressed: true }, { ...video, defaultPressed: true }, share, hand, captions, more]}
             {...leaveProps}

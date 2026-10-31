@@ -478,21 +478,17 @@ export interface DockControl {
   menu?: { id: string; label: string }[]
 }
 
-export type DockSize = "md" | "stage" | "lg" | "xl"
-
-const DOCK_SIZE: Record<DockSize, string> = {
-  md: "size-9",
-  stage: "size-9 [@container(min-width:40rem)]:size-11",
-  lg: "size-11",
-  xl: "size-11 [@container(min-width:40rem)]:size-12",
-}
+/** The dock's controls are the Icon Button atom's own sizes: `md` (36px) or `lg` (40px). */
+export type DockSize = "md" | "lg"
 
 export interface ControlsDockProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   controls: DockControl[]
   /** `compact` is the round buttons alone; `labelled` stacks a short caption under each. */
   density?: "compact" | "labelled"
-  /** The control size: 36px; `stage`, 36px on phones and 44px from Tablet; 44px; or 44px on phones and 48px from Tablet. */
+  /** The control size from Tablet up: the Icon Button's `md` (36px) or `lg` (40px). */
   size?: DockSize
+  /** The control size on phones. Defaults to `size`; a stage dock sets `md` here and keeps `lg` from Tablet. */
+  phoneSize?: DockSize
   /** Names the Leave button and is its text: "Leave". */
   leaveLabel: string
   /** What the Leave button says while it waits for the second press: "Press again to leave". */
@@ -546,7 +542,7 @@ function DockButton({ control, size, pressed, canHover, onPress, onMenuAction, o
   const button = (
     <Button
       type="button"
-      size="icon-lg"
+      size={size === "md" ? "icon-md" : "icon-lg"}
       radius="rounded"
       tone={tone}
       aria-label={name}
@@ -556,7 +552,7 @@ function DockButton({ control, size, pressed, canHover, onPress, onMenuAction, o
         onPress()
         if (!canHover) onHint(tip)
       }}
-      className={cn(DOCK_SIZE[size], "transition-[transform,background-color] duration-150 motion-reduce:transition-none", canHover && "hover:motion-safe:scale-[1.06]", "active:motion-safe:scale-[0.96]")}
+      className={cn("transition-[transform,background-color] duration-150 motion-reduce:transition-none", canHover && "hover:motion-safe:scale-[1.06]", "active:motion-safe:scale-[0.96]")}
     >
       <span className="grid size-4 place-items-center" aria-hidden>
         <Icon className={cn("col-start-1 row-start-1 transition-opacity duration-100 motion-reduce:transition-none", PressedIcon && pressed && "opacity-0")} />
@@ -571,11 +567,11 @@ function DockButton({ control, size, pressed, canHover, onPress, onMenuAction, o
           render={
             <Button
               type="button"
-              size="icon-lg"
+              size={size === "md" ? "icon-md" : "icon-lg"}
               radius="rounded"
               aria-label={name}
               data-control={control.id}
-              className={cn(DOCK_SIZE[size], "transition-[transform,background-color] duration-150 motion-reduce:transition-none hover:motion-safe:scale-[1.06] active:motion-safe:scale-[0.96]")}
+              className={cn("transition-[transform,background-color] duration-150 motion-reduce:transition-none hover:motion-safe:scale-[1.06] active:motion-safe:scale-[0.96]")}
             />
           }
         >
@@ -607,8 +603,8 @@ function DockButton({ control, size, pressed, canHover, onPress, onMenuAction, o
  * `onLeave` is called, with a fill that grows across the button; a quick click
  * only shows the hint. From the keyboard a hold is unreliable, so the first
  * press arms the button ("Press again to leave") and a second press within
- * three seconds leaves. On phones it is an icon-only 44px button, from Tablet
- * a labelled 40px one.
+ * three seconds leaves. On phones it is the Icon Button's `icon-lg` (40px),
+ * icon-only; from Tablet the Button's labelled `lg` (40px).
  */
 export function LeaveButton({
   label,
@@ -626,13 +622,14 @@ export function LeaveButton({
   hint: string
   holdMs?: number
   radius?: "rounded" | "standard"
-  /** Keeps the label on phones too, as Figma's labelled dock does; otherwise a phone gets an icon-only 44px button. */
+  /** Keeps the label on phones too, as Figma's labelled dock does; otherwise a phone gets an icon-only button. */
   alwaysLabelled?: boolean
   onLeave?: () => void
   onHint?: (text: string) => void
   className?: string
 }) {
   const [armed, setArmed] = React.useState(false)
+  const [buttonRef, tier] = useContainerTier<HTMLButtonElement>()
   const fill = React.useRef<HTMLSpanElement>(null)
   const timer = React.useRef<ReturnType<typeof setTimeout>>(undefined)
   const armTimer = React.useRef<ReturnType<typeof setTimeout>>(undefined)
@@ -659,9 +656,10 @@ export function LeaveButton({
 
   return (
     <Button
+      ref={buttonRef}
       type="button"
       variant="destructive"
-      size="lg"
+      size={!alwaysLabelled && tier === "mobile" ? "icon-lg" : "lg"}
       radius={radius}
       aria-label={armed ? confirmLabel : label}
       data-control="leave"
@@ -689,11 +687,7 @@ export function LeaveButton({
           armTimer.current = setTimeout(() => setArmed(false), 3000)
         }
       }}
-      className={cn(
-        "relative overflow-hidden",
-        alwaysLabelled ? "h-10 w-auto px-6" : "size-11 px-0 [@container(min-width:40rem)]:h-10 [@container(min-width:40rem)]:w-auto [@container(min-width:40rem)]:px-6",
-        className
-      )}
+      className={cn("relative overflow-hidden", className)}
     >
       <span ref={fill} aria-hidden className="pointer-events-none absolute inset-y-0 start-0 w-0 bg-destructive-foreground opacity-20" />
       <PhoneOff aria-hidden className="relative" />
@@ -716,6 +710,7 @@ export function ControlsDock({
   controls,
   density = "compact",
   size = "lg",
+  phoneSize,
   leaveLabel,
   leaveConfirmLabel,
   leaveHint,
@@ -733,16 +728,18 @@ export function ControlsDock({
   const [pressed, setPressed] = React.useState<Record<string, boolean>>(() => Object.fromEntries(controls.map((c) => [c.id, Boolean(c.defaultPressed)])))
   const canHover = useCanHover()
   const toast = useVideoCallToast()
+  const [dockRef, tier] = useContainerTier<HTMLDivElement>()
+  const buttonSize = tier === "mobile" ? (phoneSize ?? size) : size
   const isPressed = (c: DockControl) => pressed[c.id] ?? Boolean(c.defaultPressed)
   return (
-    <div className={cn("relative", className)} {...props}>
+    <div ref={dockRef} className={cn("relative", className)} {...props}>
       <div role="group" aria-label={label} className={cn("flex items-start justify-center", density === "labelled" ? "gap-2 [@container(min-width:40rem)]:gap-5" : "gap-2")}>
         {controls.map((control) => {
           const on = isPressed(control)
           const button = (
             <DockButton
               control={control}
-              size={size}
+              size={buttonSize}
               pressed={on}
               canHover={canHover}
               onHint={toast.show}

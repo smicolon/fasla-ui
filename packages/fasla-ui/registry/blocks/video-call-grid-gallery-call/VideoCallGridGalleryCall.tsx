@@ -36,7 +36,7 @@ import {
  * shows three of them one at a time in a row that snaps, with Carousel dots
  * under it (in Arabic the first tile is on the right and the row scrolls the
  * other way). A phone's stage bar drops REC and wraps its buttons to a second
- * line, and the dock keeps five controls with an icon-only 44px Leave.
+ * line, and the dock keeps five controls with an icon-only Leave.
  *
  * The tiles live in one list, so when someone joins or leaves the ones that
  * stay slide to their new place (a hand-written FLIP over 260ms, ease-out)
@@ -291,7 +291,7 @@ export function VideoCallGridGalleryCall({
         <ControlsDock
           className="pt-2 pb-1"
           label={d.label}
-          size="stage"
+          size="lg" phoneSize="md"
           controls={stageDockControls(d)}
           leaveLabel={d.leave}
           leaveConfirmLabel={d.leaveConfirm}

@@ -35,7 +35,7 @@ import {
  * Arabic, on the left); Tablet puts it under the speaker as a row; a phone
  * keeps three thumbnails and a shorter meeting name, and the stage bar keeps
  * only the connection badge. The dock keeps five controls with an icon-only
- * 44px Leave on a phone.
+ * Leave on a phone.
  *
  * When the dominant speaker changes (`speakerId`) the big tile cross-dissolves
  * over 200ms while the outgoing thumbnail scales 0.96 to 1 back into the strip,
@@ -282,7 +282,7 @@ export function VideoCallSpeakerFilmstrip({
         <ControlsDock
           className="pt-2 pb-1"
           label={d.label}
-          size="stage"
+          size="lg"
           controls={stageDockControls(d)}
           leaveLabel={d.leave}
           leaveConfirmLabel={d.leaveConfirm}

@@ -41,7 +41,7 @@ import {
  * Desktop puts the surface beside a 240px rail of tiles; Tablet puts the rail
  * under the surface as a strip; a phone keeps a fixed 300px band with the slide
  * header and two stats stacked (no third stat, no chart), two thumbnails in
- * the rail and a 44px icon-only Leave.
+ * the rail and an icon-only Leave.
  *
  * Starting a share wipes the surface in from the rail's side with a clip-path
  * inset over 200ms (bottom-up when the rail is a strip under it; a straight
@@ -358,7 +358,7 @@ export function VideoCallScreenShareStage({
         <ControlsDock
           className="pt-2 pb-1"
           label={d.label}
-          size="stage"
+          size="lg" phoneSize="md"
           controls={stageDockControls(d)}
           leaveLabel={d.leave}
           leaveConfirmLabel={d.leaveConfirm}

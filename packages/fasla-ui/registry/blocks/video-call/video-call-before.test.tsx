@@ -87,6 +87,26 @@ describe("the copy", () => {
   })
 })
 
+describe("Button sizes", () => {
+  it("never sizes a button by hand: every one is an atom size", () => {
+    for (const Block of [VideoCallPreJoinLobby, VideoCallWaitingRoomKnock, VideoCallIncomingCall, VideoCallJoinLinkDialIn]) {
+      const view = render(<Block />)
+      for (const button of view.container.querySelectorAll("button")) expect(button.className).not.toMatch(/(^|\s)(size|h|w)-(11|12|14)(\s|$)/)
+      view.unmount()
+    }
+  })
+
+  it("draws Incoming Call's round actions and the guest's mic and camera at the Icon Button's lg", () => {
+    const incoming = render(<VideoCallIncomingCall />)
+    const rounds = incoming.container.querySelectorAll("button.rounded-full.size-10")
+    expect(rounds.length).toBeGreaterThanOrEqual(2)
+    incoming.unmount()
+    render(<VideoCallWaitingRoomKnock />)
+    const guest = screen.getByRole("group", { name: videoCallWaitingRoomKnockCopy.en.selfPreview })
+    expect(guest.querySelectorAll("button.size-10")).toHaveLength(2)
+  })
+})
+
 describe("Pre-Join Lobby", () => {
   it("names the meeting, shows the three pickers, and keeps the pill in physical order in Arabic too", () => {
     for (const [locale, dir] of [["en", "ltr"], ["ar", "rtl"]] as const) {

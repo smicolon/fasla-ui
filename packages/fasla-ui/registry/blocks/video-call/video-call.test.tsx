@@ -268,22 +268,73 @@ function dock(props: Partial<React.ComponentProps<typeof ControlsDock>> = {}) {
   return render(<ControlsDock label="Call controls" controls={CONTROLS} leaveLabel="Leave" leaveConfirmLabel="Press again to leave" leaveHint="Hold to leave" {...props} />)
 }
 
+/** Makes a `[data-video-call]` section read as `width` px wide, as the tier hook measures it. */
+function atWidth(width: number) {
+  const proto = HTMLElement.prototype
+  const descriptor = Object.getOwnPropertyDescriptor(proto, "clientWidth")
+  Object.defineProperty(proto, "clientWidth", { configurable: true, get: () => width })
+  return () => {
+    if (descriptor) Object.defineProperty(proto, "clientWidth", descriptor)
+    else delete (proto as unknown as { clientWidth?: unknown }).clientWidth
+  }
+}
+
+function dockIn(width: number, props: Partial<React.ComponentProps<typeof ControlsDock>> = {}) {
+  const restore = atWidth(width)
+  const view = render(
+    <section data-video-call="">
+      <ControlsDock label="Call controls" controls={CONTROLS} leaveLabel="Leave" leaveConfirmLabel="Press again to leave" leaveHint="Hold to leave" {...props} />
+    </section>
+  )
+  restore()
+  return view
+}
+
 describe("ControlsDock", () => {
   it("is a labelled group of Icon Buttons with Leave last, so Leave is the end in either direction", () => {
     dock()
     const toolbar = screen.getByRole("group", { name: "Call controls" })
     const buttons = within(toolbar).getAllByRole("button")
     expect(buttons.map((b) => b.getAttribute("data-control"))).toEqual(["mic", "video", "hand", "more", "leave"])
-    expect(buttons[0]).toHaveClass("bg-primary", "rounded-full", "size-11")
+    expect(buttons[0]).toHaveClass("bg-primary", "rounded-full", "size-10")
     expect(buttons[4]).toHaveClass("bg-destructive")
   })
 
-  it("makes Leave an icon-only 44px button on phones and a labelled 40px one from Tablet", () => {
-    dock()
-    const leave = document.querySelector("[data-control=leave]")!
-    expect(leave).toHaveClass("size-11", "[@container(min-width:40rem)]:h-10", "[@container(min-width:40rem)]:w-auto")
-    expect(leave).toHaveAccessibleName("Leave")
-    expect(leave.querySelector("span.hidden")).toHaveTextContent("Leave")
+  it("sizes every control with the Icon Button's own size and no custom size class", () => {
+    dockIn(1280)
+    for (const button of document.querySelectorAll("[data-control]")) {
+      expect(button.className).not.toMatch(/size-(11|12|14)\b/)
+    }
+    expect(document.querySelector("[data-control=mic]")).toHaveClass("size-10")
+    expect(document.querySelector("[data-control=more]")).toHaveClass("size-10")
+  })
+
+  it("takes md (36px) or lg (40px) for the controls, from the atom", () => {
+    dockIn(1280, { size: "md" })
+    expect(document.querySelector("[data-control=mic]")).toHaveClass("size-9")
+    expect(document.querySelector("[data-control=more]")).toHaveClass("size-9")
+  })
+
+  it("uses phoneSize below Tablet and size from Tablet", () => {
+    const phone = dockIn(360, { size: "lg", phoneSize: "md" })
+    expect(document.querySelector("[data-control=mic]")).toHaveClass("size-9")
+    phone.unmount()
+    dockIn(800, { size: "lg", phoneSize: "md" })
+    expect(document.querySelector("[data-control=mic]")).toHaveClass("size-10")
+  })
+
+  it("makes Leave the icon-only Icon Button on phones and the labelled Button from Tablet", () => {
+    const phone = dockIn(360)
+    const small = document.querySelector("[data-control=leave]")!
+    expect(small).toHaveClass("size-10")
+    expect(small.className).not.toMatch(/size-11|px-0/)
+    expect(small).toHaveAccessibleName("Leave")
+    expect(small.querySelector("span.hidden")).toHaveTextContent("Leave")
+    phone.unmount()
+    dockIn(800)
+    const wide = document.querySelector("[data-control=leave]")!
+    expect(wide).toHaveClass("h-10", "px-6")
+    expect(wide).not.toHaveClass("size-10")
   })
 
   it("trims the controls marked hideOnPhone from the phone layout only", () => {
@@ -410,7 +461,7 @@ describe("ControlsDock", () => {
     rerender(<ControlsDock label="c" controls={CONTROLS} leaveLabel="Leave" leaveConfirmLabel="again" leaveHint="Hold" leaveLabelled />)
     const leave = document.querySelector("[data-control=leave]")!
     expect(leave).toHaveClass("h-10", "px-6")
-    expect(leave).not.toHaveClass("size-11")
+    expect(leave).not.toHaveClass("size-10")
     expect(leave.querySelector("span.hidden")).toBeNull()
   })
 
@@ -588,6 +639,23 @@ describe("Captions & Reactions", () => {
     expect(onReact).toHaveBeenCalledTimes(10)
     expect(document.querySelectorAll("[data-reaction-drift]")).toHaveLength(8)
     restore()
+  })
+
+  it("sizes the picker and the stage reactions with the Icon Button's md on phones and lg from Tablet", () => {
+    const phone = atWidth(360)
+    const small = render(<VideoCallCaptionsReactions />)
+    phone()
+    const picker = screen.getByRole("group", { name: "Send a reaction" })
+    expect(picker.querySelectorAll("button.size-9")).toHaveLength(picker.querySelectorAll("button").length)
+    expect(document.querySelector("ul [role=img]")).toHaveClass("size-9")
+    small.unmount()
+    const tablet = atWidth(800)
+    render(<VideoCallCaptionsReactions />)
+    tablet()
+    const wide = screen.getByRole("group", { name: "Send a reaction" })
+    expect(wide.querySelectorAll("button.size-10")).toHaveLength(wide.querySelectorAll("button").length)
+    expect(document.querySelector("ul [role=img]")).toHaveClass("size-10")
+    for (const node of document.querySelectorAll("button, [role=img]")) expect(node.className).not.toMatch(/size-(11|12|14)\b/)
   })
 
   it("drifts a reaction 120 to 180px on a wave over 2.4s, and only fades it under reduced motion", () => {

@@ -277,7 +277,7 @@ export function VideoCallWaitingRoomKnock({
               aria-label={micOn ? copy.mic.label : copy.mic.offLabel}
               aria-pressed={!micOn}
               onClick={() => toggle("mic")}
-              className="size-12 transition-colors duration-[160ms] motion-reduce:transition-none"
+              className="transition-colors duration-[160ms] motion-reduce:transition-none"
             >
               {micOn ? <Mic aria-hidden /> : <MicOff aria-hidden />}
             </Button>
@@ -289,7 +289,7 @@ export function VideoCallWaitingRoomKnock({
               aria-label={cameraOn ? copy.camera.label : copy.camera.offLabel}
               aria-pressed={!cameraOn}
               onClick={() => toggle("camera")}
-              className="size-12 transition-colors duration-[160ms] motion-reduce:transition-none"
+              className="transition-colors duration-[160ms] motion-reduce:transition-none"
             >
               {cameraOn ? <Video aria-hidden /> : <VideoOff aria-hidden />}
             </Button>

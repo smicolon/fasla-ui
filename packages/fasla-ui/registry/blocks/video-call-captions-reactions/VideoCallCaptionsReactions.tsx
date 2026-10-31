@@ -14,6 +14,7 @@ import {
   STANDARD,
   playEntrance,
   prefersReducedMotion,
+  useContainerTier,
   type DockControl,
   type VideoCallLocale,
   type VideoCallPhoto,
@@ -32,7 +33,7 @@ import {
  * full width on Mobile, where each line stacks the speaker over the text, the
  * speaker chip is left out (the captions name them) and the reactions become a
  * centred row above the bar. The dock drops to five controls with an icon-only
- * 44px Leave. In Arabic everything mirrors: the bar and the hand chip sit on
+ * Leave. In Arabic everything mirrors: the bar and the hand chip sit on
  * the right, the reactions on the left.
  *
  * The caption bar is a fixed two-line window and never scrolls: when a line
@@ -274,6 +275,8 @@ export function VideoCallCaptionsReactions({
   ...props
 }: VideoCallCaptionsReactionsProps) {
   const copy = COPY[locale]
+  const [sectionRef, tier] = useContainerTier<HTMLElement>()
+  const reactionSize = tier === "mobile" ? "icon-md" : "icon-lg"
   const d = dock ?? copy.dock
   const labels = reactionLabels ?? copy.reactionLabels
   const lines = (captions ?? copy.captions).slice(-2)
@@ -348,7 +351,7 @@ export function VideoCallCaptionsReactions({
   }
 
   return (
-    <section aria-label={captionsTitle ?? copy.captionsTitle} className={cn("[container-type:inline-size] bg-background p-8 md:p-16 lg:p-24", className)} {...props}>
+    <section ref={sectionRef} data-video-call="" aria-label={captionsTitle ?? copy.captionsTitle} className={cn("[container-type:inline-size] bg-background p-8 md:p-16 lg:p-24", className)} {...props}>
       <div className="mx-auto flex w-full max-w-[1248px] flex-col gap-4 rounded-2xl border border-border bg-card p-4">
         <ParticipantTile
           name={speaker ?? copy.speaker}
@@ -391,7 +394,7 @@ export function VideoCallCaptionsReactions({
                     <span
                       role="img"
                       aria-label={labels[id]}
-                      className={buttonVariants({ size: "icon-lg", radius: "rounded", tone: id === "heart" ? "destructive" : "primary", className: "size-9 [@container(min-width:40rem)]:size-11" })}
+                      className={buttonVariants({ size: reactionSize, radius: "rounded", tone: id === "heart" ? "destructive" : "primary" })}
                     >
                       <Icon aria-hidden />
                     </span>
@@ -428,7 +431,7 @@ export function VideoCallCaptionsReactions({
               {REACTION_IDS.map((id) => {
                 const Icon = REACTION_ICON[id]
                 return (
-                  <Button key={id} type="button" size="icon-lg" radius="rounded" aria-label={labels[id]} data-reaction={id} onClick={() => react(id)} className="size-9 [@container(min-width:40rem)]:size-10">
+                  <Button key={id} type="button" size={reactionSize} radius="rounded" aria-label={labels[id]} data-reaction={id} onClick={() => react(id)}>
                     <Icon aria-hidden />
                   </Button>
                 )

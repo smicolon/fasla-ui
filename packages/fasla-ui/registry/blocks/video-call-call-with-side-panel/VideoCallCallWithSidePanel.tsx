@@ -40,7 +40,7 @@ import {
  * Arabic); Tablet puts it under the stage at full width; a phone shows it as a
  * bottom sheet, 60% tall with a handle that a press or a drag steps to 92%. A
  * phone's strip has three thumbnails and its dock five controls with an
- * icon-only 44px Leave.
+ * icon-only Leave.
  *
  * The panel pushes the stage rather than covering it: it opens by growing its
  * width over 240ms, so the stage narrows inside the same tween and no video is
@@ -313,7 +313,7 @@ export function VideoCallCallWithSidePanel({
           <ControlsDock
             className="pt-2 pb-1"
             label={d.label}
-            size="stage"
+            size="lg" phoneSize="md"
             controls={stageDockControls(d)}
             leaveLabel={d.leave}
             leaveConfirmLabel={d.leaveConfirm}

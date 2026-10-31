@@ -111,6 +111,45 @@ describe("shared parts", () => {
   })
 })
 
+describe("Dock sizes in the call stages", () => {
+  const atWidth = (width: number) => {
+    const proto = HTMLElement.prototype
+    const descriptor = Object.getOwnPropertyDescriptor(proto, "clientWidth")
+    Object.defineProperty(proto, "clientWidth", { configurable: true, get: () => width })
+    return () => {
+      if (descriptor) Object.defineProperty(proto, "clientWidth", descriptor)
+      else delete (proto as unknown as { clientWidth?: unknown }).clientWidth
+    }
+  }
+  const mic = () => document.querySelector("[data-control=mic]")!
+
+  it("sets the Grid, Share and Side Panel docks at md on phones and lg from Tablet", () => {
+    for (const Block of [VideoCallGridGalleryCall, VideoCallScreenShareStage, VideoCallCallWithSidePanel]) {
+      const phone = atWidth(360)
+      const small = render(<Block />)
+      phone()
+      expect(mic()).toHaveClass("size-9")
+      small.unmount()
+      const tablet = atWidth(800)
+      const wide = render(<Block />)
+      tablet()
+      expect(mic()).toHaveClass("size-10")
+      wide.unmount()
+    }
+  })
+
+  it("keeps the Speaker dock at lg on every breakpoint, and no stage button has a hand-sized class", () => {
+    for (const width of [360, 800]) {
+      const restore = atWidth(width)
+      const view = render(<VideoCallSpeakerFilmstrip />)
+      restore()
+      expect(mic()).toHaveClass("size-10")
+      for (const button of view.container.querySelectorAll("button")) expect(button.className).not.toMatch(/(^|\s)(size|h|w)-(11|12|14)(\s|$)/)
+      view.unmount()
+    }
+  })
+})
+
 describe("Grid Gallery Call", () => {
   it("shows the six people, a Leave, and three pager dots for the phone", () => {
     const { container } = render(<VideoCallGridGalleryCall />)

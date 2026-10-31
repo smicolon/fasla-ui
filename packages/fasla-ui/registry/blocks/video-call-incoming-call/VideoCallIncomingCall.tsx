@@ -271,7 +271,7 @@ function Rings() {
 function RoundAction({ label, tone, onClick, children }: { label: string; tone: "primary" | "destructive"; onClick?: () => void; children: React.ReactNode }) {
   return (
     <div className="flex flex-col items-center gap-2">
-      <Button type="button" tone={tone} size="icon-lg" radius="rounded" aria-label={label} onClick={onClick} className="size-14">
+      <Button type="button" tone={tone} size="icon-lg" radius="rounded" aria-label={label} onClick={onClick}>
         {children}
       </Button>
       <span aria-hidden className="text-xs text-muted-foreground">
