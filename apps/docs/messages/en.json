@@ -3499,30 +3499,6 @@
         "blog-cards-search-chips-results": "Search + Chips + Results",
         "blog-cards-post-carousel-with-controls": "Post Carousel with Controls"
       }
-    }
-  },
-  "copyCommand": {
-    "copy": "Copy {command} to clipboard",
-    "copied": "Copied to clipboard",
-    "status": "Copied"
-  },
-  "notFound": {
-    "title": "Page not found",
-    "description": "This page may have moved, or it never existed.",
-    "home": "Back to the home page",
-    "docs": "Browse the docs"
-  },
-  "landing": {
-    "nav": {
-      "home": "Fasla home",
-      "label": "Main",
-      "docs": "Docs",
-      "components": "Components",
-      "blocks": "Blocks",
-      "github": "GitHub",
-      "lang": "العربية",
-      "langLabel": "Switch to Arabic",
-      "theme": "Toggle dark theme"
     },
     "featuresBlocks": {
       "lead": "Twenty-nine sections that set out what a product does: icon cards, numbered rows and checklists, layouts led by photos, panels the visitor operates, and the product in use.",
@@ -3567,6 +3543,30 @@
         "features-tinted-product-bento": "Tinted Product Bento",
         "features-showcase-card-pair": "Showcase Card Pair"
       }
+    }
+  },
+  "copyCommand": {
+    "copy": "Copy {command} to clipboard",
+    "copied": "Copied to clipboard",
+    "status": "Copied"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "This page may have moved, or it never existed.",
+    "home": "Back to the home page",
+    "docs": "Browse the docs"
+  },
+  "landing": {
+    "nav": {
+      "home": "Fasla home",
+      "label": "Main",
+      "docs": "Docs",
+      "components": "Components",
+      "blocks": "Blocks",
+      "github": "GitHub",
+      "lang": "العربية",
+      "langLabel": "Switch to Arabic",
+      "theme": "Toggle dark theme"
     },
     "cta": {
       "start": "Get started"
