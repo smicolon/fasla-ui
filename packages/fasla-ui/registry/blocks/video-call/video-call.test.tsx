@@ -248,6 +248,15 @@ describe("StageBar and ParticipantTile", () => {
     expect(screen.getByTestId("tile")).not.toHaveAttribute("data-speaking")
   })
 
+  it("lifts a phone tile's initials clear of the name chip, and hands the Tablet size back to the larger tile", () => {
+    // Measured in Chrome at 360px: a 72px tile has 34px above its chip, and Arabic initials at text-2xl ran under it.
+    render(<ParticipantTile name="Hala Mansour" initials="HM" />)
+    const initials = screen.getByText("HM")
+    expect(initials).toHaveClass("pb-10", "text-xl", "leading-none")
+    expect(initials.className).toContain("[@container(min-width:40rem)]:pb-6")
+    expect(initials.className).toContain("[@container(min-width:40rem)]:text-3xl")
+  })
+
   it("puts the name chip on the start or the end, or leaves it out", () => {
     const { rerender } = render(<ParticipantTile name="A" chip="end" />)
     expect(screen.getByText("A").closest("[class*=absolute]")?.className).toContain("end-3")

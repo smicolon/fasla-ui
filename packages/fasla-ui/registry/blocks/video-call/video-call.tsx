@@ -411,7 +411,7 @@ export function ParticipantTile({
       {photo ? (
         <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" className="absolute inset-0 -z-10 size-full object-cover object-[50%_42%]" />
       ) : initials ? (
-        <span aria-hidden className="absolute inset-0 -z-10 flex items-center justify-center pb-6 text-2xl font-semibold text-foreground [@container(min-width:40rem)]:text-3xl">
+        <span aria-hidden className="absolute inset-0 -z-10 flex items-center justify-center pb-10 text-xl leading-none font-semibold text-foreground [@container(min-width:40rem)]:pb-6 [@container(min-width:40rem)]:text-3xl">
           {initials}
         </span>
       ) : null}
