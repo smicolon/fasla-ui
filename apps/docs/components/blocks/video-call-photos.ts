@@ -13,6 +13,14 @@ export type VideoCallDemoPhoto = { src: string; alt: string }
 
 /** A Type's photo, by the Type's name without `video-call-`. */
 const PHOTOS: Record<string, { src: string; alt: Alt }> = {
+  // Pre-Join Lobby: your own camera still.
+  "pre-join-lobby": {
+    src: "/images/social-proof/hamad-al-mutairi.webp",
+    alt: {
+      en: "A smiling man in a light blue t-shirt against a white wall",
+      ar: "رجل مبتسم يرتدي قميصًا أزرق فاتحًا أمام جدار أبيض",
+    },
+  },
   // Captions & Reactions: the speaker's camera still.
   "captions-reactions": {
     src: "/blocks/team/portrait-karim-haddad.webp",
@@ -41,8 +49,8 @@ const PEOPLE: Record<string, { src: string; alt: Alt }> = {
   layla: { src: "/blocks/team/portrait-sofia-marchetti.webp", alt: { en: "A woman with long hair in a grey blazer against an orange wall", ar: "امرأة بشعر طويل وسترة رمادية أمام جدار برتقالي" } },
 }
 
-/** The Types that show people, which take `photos` by participant `id`. */
-const STAGE_TYPES = ["grid-gallery-call", "speaker-filmstrip", "screen-share-stage", "call-with-side-panel"]
+/** The Types that show people, which take `photos` by person `id`: the call stages, the waiting room's guests and the callers. */
+const STAGE_TYPES = ["grid-gallery-call", "speaker-filmstrip", "screen-share-stage", "call-with-side-panel", "waiting-room-knock", "incoming-call"]
 
 /** The people's photos with alt text in `locale`, by participant `id`. */
 export function videoCallPeople(locale: Locale): Record<string, VideoCallDemoPhoto> {

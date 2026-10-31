@@ -7326,6 +7326,106 @@
         "video-call",
         "marketing"
       ]
+    },
+    {
+      "name": "video-call-pre-join-lobby",
+      "type": "registry:block",
+      "title": "Video Call: Pre-Join Lobby",
+      "description": "The lobby before a call: your camera still with a pill of mic, camera and settings controls, the meeting's name and meta, three device pickers, Join now and Test speakers. Join waits, with a spinner, for the first camera frame.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "select",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-pre-join-lobby/VideoCallPreJoinLobby.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-pre-join-lobby.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-waiting-room-knock",
+      "type": "registry:block",
+      "title": "Video Call: Waiting Room & Knock",
+      "description": "The waiting room from both sides: the guest's card with a breathing lock and their own preview, and the host's card with each knock, Deny and Admit, Admit everyone and Keep locked. Rows grow in and collapse away.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-waiting-room-knock/VideoCallWaitingRoomKnock.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-waiting-room-knock.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-incoming-call",
+      "type": "registry:block",
+      "title": "Video Call: Incoming Call",
+      "description": "Three cards for a call that is not live yet: incoming with Decline, Join and Reply, calling with counting dots and Cancel, and missed with a playable voice note, Call back and Message.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-incoming-call/VideoCallIncomingCall.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-incoming-call.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-join-link-dial-in",
+      "type": "registry:block",
+      "title": "Video Call: Join Link & Dial-in",
+      "description": "A room's link with Copy link that confirms in place, four ways to share it, dial-in numbers with a PIN, and an access card with the QR code, who can join and Manage room settings. The QR folds behind Show QR on a phone.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-join-link-dial-in/VideoCallJoinLinkDialIn.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-join-link-dial-in.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
     }
   ]
 }

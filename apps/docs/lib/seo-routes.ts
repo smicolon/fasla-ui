@@ -324,12 +324,12 @@ export const routes = [
     path: "/docs/blocks/video-call/",
     title: "Video Call Blocks for React and Tailwind CSS | Fasla",
     description:
-      "Sections for a video-call product: call stages with a grid, a speaker, a shared screen or a side panel, the controls dock, live captions and reactions, built from the same parts and responsive, mirrored for Arabic.",
+      "Sections for a video-call product: the lobby, waiting room, incoming call and join link, call stages with a grid, a speaker, a shared screen or a side panel, the controls dock, live captions and reactions, built from the same parts and responsive, mirrored for Arabic.",
     h1: "Video Call",
     ar: {
       title: "كتل المكالمات المرئية لمشاريع React | فاصلة",
       description:
-        "أقسام لمنتج المكالمات المرئية: مراحل المكالمة بالشبكة أو المتحدث أو الشاشة المشتركة أو اللوحة الجانبية، وشريط عناصر التحكم والتسميات المباشرة والتفاعلات، مبنية من أجزاء مشتركة ومتجاوبة ومعكوسة للعربية.",
+        "أقسام لمنتج المكالمات المرئية: ردهة الانضمام وغرفة الانتظار والمكالمة الواردة ورابط الانضمام، ومراحل المكالمة بالشبكة أو المتحدث أو الشاشة المشتركة أو اللوحة الجانبية، وشريط عناصر التحكم والتسميات المباشرة والتفاعلات، مبنية من أجزاء مشتركة ومتجاوبة ومعكوسة للعربية.",
       h1: "المكالمات المرئية (Video Call)",
     },
   },

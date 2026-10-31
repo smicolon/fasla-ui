@@ -778,6 +778,19 @@ export function ControlsDock({
 export const fillTemplate = (template: string, values: Record<string, string | number>) =>
   template.replace(/\{(\w+)\}/g, (_, key: string) => String(values[key] ?? ""))
 
+/** The surface of a card in Figma's Video Call set: `card`, a 1px `border`, a 16px radius. */
+export const VIDEO_CALL_CARD = "rounded-2xl border border-border bg-card"
+
+/** The copy props a caller passed, so they win over the defaults. `keys` are the copy's own keys. */
+export function passedCopy(keys: readonly string[], props: Record<string, unknown>) {
+  return Object.fromEntries(Object.entries(props).filter(([key, value]) => keys.includes(key) && value !== undefined))
+}
+
+/** The props that are not copy, for the element the block renders. */
+export function restOf<T extends Record<string, unknown>>(keys: readonly string[], props: T) {
+  return Object.fromEntries(Object.entries(props).filter(([key]) => !keys.includes(key))) as Partial<T>
+}
+
 /** A person on a call stage. Their photo comes from the block's `photos`, by `id`. */
 export interface VideoCallParticipant {
   /** Keys the person, and picks their photo. */

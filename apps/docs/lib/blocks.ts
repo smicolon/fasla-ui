@@ -100,9 +100,9 @@ export const CAREERS_FAMILIES: CareersFamily[] = ["lists", "highlights", "detail
  * the ones around it, and the marketing hero. A group appears here once a Type
  * of it is built.
  */
-export type VideoCallFamily = "stages" | "layers"
+export type VideoCallFamily = "before" | "stages" | "layers"
 
-export const VIDEO_CALL_FAMILIES: VideoCallFamily[] = ["stages", "layers"]
+export const VIDEO_CALL_FAMILIES: VideoCallFamily[] = ["before", "stages", "layers"]
 
 /**
  * Team's three groups, from its Figma documentation: the grids and walls that
@@ -382,13 +382,18 @@ export const CAREERS_TYPES: BlockType<CareersFamily>[] = [
 
 /** The Video Call Types built so far, in Figma's order. */
 export const VIDEO_CALL_TYPES: BlockType<VideoCallFamily>[] = [
+  { slug: "video-call-pre-join-lobby", family: "before" },
   { slug: "video-call-grid-gallery-call", family: "stages" },
   { slug: "video-call-speaker-filmstrip", family: "stages" },
   { slug: "video-call-screen-share-stage", family: "stages" },
   { slug: "video-call-call-with-side-panel", family: "stages" },
   { slug: "video-call-call-controls-dock", family: "layers" },
+  { slug: "video-call-waiting-room-knock", family: "before" },
+  { slug: "video-call-incoming-call", family: "before" },
   { slug: "video-call-captions-reactions", family: "layers", inverse: true },
+  { slug: "video-call-join-link-dial-in", family: "before" },
 ]
+
 
 /** The 14 Types, in Figma's order. Three drop the block name Figma still carries: Team Carousel, Team Table and Hairline Team Grid. */
 export const TEAM_TYPES: BlockType<TeamFamily>[] = [

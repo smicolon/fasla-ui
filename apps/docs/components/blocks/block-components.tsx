@@ -857,6 +857,18 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "video-call-call-with-side-panel": dynamic(() =>
     import("@fasla-ui/blocks/video-call-call-with-side-panel/VideoCallCallWithSidePanel").then((m) => withVideoCallPhotos(m.VideoCallCallWithSidePanel, "call-with-side-panel"))
   ),
+  "video-call-pre-join-lobby": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-pre-join-lobby/VideoCallPreJoinLobby").then((m) => withVideoCallPhotos(m.VideoCallPreJoinLobby, "pre-join-lobby"))
+  ),
+  "video-call-waiting-room-knock": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-waiting-room-knock/VideoCallWaitingRoomKnock").then((m) => withVideoCallPhotos(m.VideoCallWaitingRoomKnock, "waiting-room-knock"))
+  ),
+  "video-call-incoming-call": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-incoming-call/VideoCallIncomingCall").then((m) => withVideoCallPhotos(m.VideoCallIncomingCall, "incoming-call"))
+  ),
+  "video-call-join-link-dial-in": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-join-link-dial-in/VideoCallJoinLinkDialIn").then((m) => withVideoCallPhotos(m.VideoCallJoinLinkDialIn, "join-link-dial-in"))
+  ),
   "video-call-call-controls-dock": dynamic(() =>
     import("@fasla-ui/blocks/video-call-call-controls-dock/VideoCallCallControlsDock").then((m) => withVideoCallPhotos(m.VideoCallCallControlsDock, "call-controls-dock"))
   ),
