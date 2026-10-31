@@ -56,6 +56,10 @@
     --foreground-inverse: #ffffff;
     --muted-foreground-inverse: #d4d4d4;
 
+    /* Fixed black and white: Figma's colors/base primitives, the same in both modes */
+    --base-black: #000000;
+    --base-white: #ffffff;
+
     /* Charts */
     --chart-1: #ea580c;
     --chart-2: #0d9488;
@@ -170,6 +174,10 @@
     --background-inverse: #ffffff;
     --foreground-inverse: #0a0a0a;
     --muted-foreground-inverse: #737373;
+
+    /* Fixed black and white: Figma's colors/base primitives, the same in both modes */
+    --base-black: #000000;
+    --base-white: #ffffff;
 
     /* Charts */
     --chart-1: #c2410c;

@@ -7147,6 +7147,589 @@
         "blog-cards",
         "marketing"
       ]
+    },
+    {
+      "name": "how-it-works",
+      "type": "registry:block",
+      "title": "How it Works",
+      "description": "The parts every How it Works block is built from: the section and its 1248px column, the eyebrow, the hairline, a glow, a run that keeps its order in Arabic, and the helpers that play a block's motion once when it comes into view.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works/how-it-works.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-six-card-grid",
+      "type": "registry:block",
+      "title": "How it Works: Six-Card Grid",
+      "description": "A centred heading over six cards, each a drawn picture above a title and a line: a plan, a sync, a shared list, a hub, a search and a swap.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "how-it-works"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-six-card-grid/HowItWorksSixCardGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-six-card-grid.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-column-panels",
+      "type": "registry:block",
+      "title": "How it Works: Column Panels",
+      "description": "An eyebrow, a heading and an introduction over three panels divided by hairlines, each a step badge, a title, a line and a drawn picture.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "how-it-works"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-column-panels/HowItWorksColumnPanels.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-column-panels.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-numbered-instruction-panels",
+      "type": "registry:block",
+      "title": "How it Works: Numbered Instruction Panels",
+      "description": "A badge, a heading and a line over three numbered panels, each a drawn picture of one step with a caption beneath it.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "how-it-works"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-numbered-instruction-panels/HowItWorksNumberedInstructionPanels.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-numbered-instruction-panels.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-numbered-editorial-rows",
+      "type": "registry:block",
+      "title": "How it Works: Numbered Editorial Rows",
+      "description": "A left-aligned header over a list of rows between hairlines, each a light numeral, a title and a line.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "how-it-works"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-numbered-editorial-rows/HowItWorksNumberedEditorialRows.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-numbered-editorial-rows.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-split-feature-band",
+      "type": "registry:block",
+      "title": "How it Works: Split Feature Band",
+      "description": "Two rounded bands, each a badge, a two-line headline, a line and two buttons beside a picture on soft glows.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "how-it-works",
+        "progress"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-split-feature-band/HowItWorksSplitFeatureBand.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-split-feature-band.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-rounded-cards-device-crop",
+      "type": "registry:block",
+      "title": "How it Works: Rounded Cards + Device Crop",
+      "description": "A header over three rounded cards, each a numbered step above a phone cropped by the card's edge, with a footer of chips.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "how-it-works",
+        "switch"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-rounded-cards-device-crop/HowItWorksRoundedCardsDeviceCrop.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-rounded-cards-device-crop.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-numbered-photo-steps",
+      "type": "registry:block",
+      "title": "How it Works: Numbered Photo Steps",
+      "description": "A header over four step cards, each a photo with a number badge, a title and a line, four across on Desktop and two by two on Tablet.",
+      "dependencies": [],
+      "registryDependencies": [
+        "badge",
+        "how-it-works"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-numbered-photo-steps/HowItWorksNumberedPhotoSteps.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-numbered-photo-steps.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-split-photo-step-list",
+      "type": "registry:block",
+      "title": "How it Works: Split Photo + Step List",
+      "description": "A full-height photo beside a heading and four steps between hairlines; the active step fills its number and the photo cross-fades to it.",
+      "dependencies": [],
+      "registryDependencies": [
+        "how-it-works"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-split-photo-step-list/HowItWorksSplitPhotoStepList.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-split-photo-step-list.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-full-bleed-step-panel",
+      "type": "registry:block",
+      "title": "How it Works: Full-Bleed Step Panel",
+      "description": "One wide panel that shows a step at a time, with a numeral, a title, a paragraph, ticked points and two buttons beside a photo, moved by dots and arrow keys.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "how-it-works"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-full-bleed-step-panel/HowItWorksFullBleedStepPanel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-full-bleed-step-panel.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-overlay-numeral-cards",
+      "type": "registry:block",
+      "title": "How it Works: Overlay Numeral Cards",
+      "description": "Four photo cards with a large numeral, a title and a line over a dark scrim that stays the same in Light and Dark.",
+      "dependencies": [],
+      "registryDependencies": [
+        "how-it-works"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-overlay-numeral-cards/HowItWorksOverlayNumeralCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-overlay-numeral-cards.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-diagonal-photo-collage",
+      "type": "registry:block",
+      "title": "How it Works: Diagonal Photo Collage",
+      "description": "Three tilted photos fanned beside a heading and three numbered habits, flattened to an untilted pair on Tablet and one photo on Mobile.",
+      "dependencies": [],
+      "registryDependencies": [
+        "how-it-works"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-diagonal-photo-collage/HowItWorksDiagonalPhotoCollage.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-diagonal-photo-collage.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-photo-bento-steps",
+      "type": "registry:block",
+      "title": "How it Works: Photo Bento Steps",
+      "description": "One large photo card for the long first step beside three small cards for the quick steps that follow.",
+      "dependencies": [],
+      "registryDependencies": [
+        "how-it-works"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-photo-bento-steps/HowItWorksPhotoBentoSteps.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-photo-bento-steps.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-fanned-dissolve-cards",
+      "type": "registry:block",
+      "title": "How it Works: Fanned Dissolve Cards",
+      "description": "Three tall cards on the inverted surface, each a drawn scene on soft glows that dissolves into its number and title with a row of pixels, the middle one tilted.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "how-it-works",
+        "progress",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-fanned-dissolve-cards/HowItWorksFannedDissolveCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-fanned-dissolve-cards.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-stacked-media-text",
+      "type": "registry:block",
+      "title": "How it Works: Stacked Media + Text",
+      "description": "A teal block with a download button and three cards, each a window on soft glows (switches, a presence list, a gauge) over its number, title and line.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "how-it-works",
+        "switch"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-stacked-media-text/HowItWorksStackedMediaText.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-stacked-media-text.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-photo-rail-progress",
+      "type": "registry:block",
+      "title": "How it Works: Photo Rail + Progress",
+      "description": "A header with arrows over a rail of four photo cards that scrolls and snaps, with a progress bar and a counter that follow the rail.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "carousel",
+        "how-it-works",
+        "progress"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-photo-rail-progress/HowItWorksPhotoRailProgress.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-photo-rail-progress.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-tall-visual-rail",
+      "type": "registry:block",
+      "title": "How it Works: Tall Visual Rail",
+      "description": "A rail of four tall cards, each a drawn picture of its step that plays once when it comes into view, with a Learn more button and dots.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "carousel",
+        "how-it-works",
+        "progress",
+        "switch"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-tall-visual-rail/HowItWorksTallVisualRail.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-tall-visual-rail.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-step-tabs-photo-panel",
+      "type": "registry:block",
+      "title": "How it Works: Step Tabs + Photo Panel",
+      "description": "Tabs for four steps over one bordered card of copy, ticked points and a photo, with the panel changing as the tab does.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "how-it-works",
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-step-tabs-photo-panel/HowItWorksStepTabsPhotoPanel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-step-tabs-photo-panel.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-accordion-steps",
+      "type": "registry:block",
+      "title": "How it Works: Accordion Steps",
+      "description": "Five steps in the Accordion, one open at a time, beside a photo that changes with the open step.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion",
+        "how-it-works"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-accordion-steps/HowItWorksAccordionSteps.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-accordion-steps.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-orbital-process",
+      "type": "registry:block",
+      "title": "How it Works: Orbital Process",
+      "description": "Three steps around a round photo: the active one in a pill on the ring, the others as satellites you press to swap, and a list on Mobile.",
+      "dependencies": [],
+      "registryDependencies": [
+        "how-it-works"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-orbital-process/HowItWorksOrbitalProcess.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-orbital-process.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-center-spine-timeline",
+      "type": "registry:block",
+      "title": "How it Works: Center Spine Timeline",
+      "description": "Four weeks along a centre spine, copy on one side and a photo on the other, alternating; the spine draws once and each node pops as it reaches it, and on Tablet and Mobile it moves to a rail at the start.",
+      "dependencies": [],
+      "registryDependencies": [
+        "how-it-works"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-center-spine-timeline/HowItWorksCenterSpineTimeline.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-center-spine-timeline.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-vertical-timeline-card",
+      "type": "registry:block",
+      "title": "How it Works: Vertical Timeline Card",
+      "description": "A bordered card with the Steps atom set vertically (done, done, current, upcoming) and a link at the foot, beside a photo that stacks under it on Tablet and drops on Mobile.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "how-it-works",
+        "steps"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-vertical-timeline-card/HowItWorksVerticalTimelineCard.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-vertical-timeline-card.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-contained-timeline",
+      "type": "registry:block",
+      "title": "How it Works: Contained Timeline",
+      "description": "Four steps on a track inside a bordered container, the lines drawing in and the current step's dot pulsing twice, with a note and two buttons in the footer.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "how-it-works"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-contained-timeline/HowItWorksContainedTimeline.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-contained-timeline.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-phase-line",
+      "type": "registry:block",
+      "title": "How it Works: Phase Line",
+      "description": "Four phases along a line, each with a square marker in its own colour, a label, a title and a line; the first line fills and the markers pop in turn.",
+      "dependencies": [],
+      "registryDependencies": [
+        "how-it-works"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-phase-line/HowItWorksPhaseLine.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-phase-line.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
+    },
+    {
+      "name": "how-it-works-pill-timeline",
+      "type": "registry:block",
+      "title": "How it Works: Pill Timeline",
+      "description": "Three stages on one line, each a soft Badge over a prompt pill with a send button and a caption; the line draws through the pills and the send button lifts on hover.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "how-it-works"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/how-it-works-pill-timeline/HowItWorksPillTimeline.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/how-it-works-pill-timeline.tsx"
+        }
+      ],
+      "categories": [
+        "how-it-works",
+        "marketing"
+      ]
     }
   ]
 }

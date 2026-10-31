@@ -276,6 +276,21 @@ export const routes = [
   {
     kind: "block",
     category: "Blocks",
+    path: "/docs/blocks/how-it-works/",
+    title: "How it Works Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Sections that explain a process: steps told with photos, cards and collages, and grids and panels with a drawn picture of each step, responsive and mirrored for Arabic.",
+    h1: "How it Works",
+    ar: {
+      title: "كتل كيف يعمل لمشاريع React | فاصلة",
+      description:
+        "أقسام تشرح خطوات العمل: خطوات مروية بالصور والبطاقات والكولاج، وشبكات وألواح برسم لكل خطوة، متجاوبة ومعكوسة للعربية.",
+      h1: "كتلة كيف يعمل",
+    },
+  },
+  {
+    kind: "block",
+    category: "Blocks",
     path: "/docs/blocks/team/",
     title: "Team Blocks for React and Tailwind CSS | Fasla",
     description:

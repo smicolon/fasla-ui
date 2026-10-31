@@ -5,8 +5,8 @@
     "collectionId": "VariableCollectionId:82:3",
     "modes": { "light": "⚪️ Light", "dark": "🌑 Dark" },
     "measured": "2026-10-13",
-    "count": 54,
-    "note": "Snapshot of the 41 theme/* variables in the ☾ Mode collection, plus twelve opacity/* Soft tints (`soft-*`): the six `/10` tints Badge Soft and Soft Button's Enabled are filled with, and the `/20` and `/30` steps of primary, secondary and destructive that Soft Button uses for Hover and Clicked, aliases resolved to primitives. `backdrop-overlay` is `custom/backdrop-overlay`, the overlay behind Alert Dialog (VariableID:3734:45929, read 2026-10-15): one #3c3a40 at 60% in Light and 80% in Dark, not an alias. `radius` holds the ☾ Mode radii components bind that no Tailwind class gives in both apps — `border radius/xs` and `border radius/md` (Avatar Standard), `border radius/sm` (Badge Standard); they are mode-independent, so only the light block declares them. Figma is the source of truth; this file is the committed record of what it said when the two apps were last synced to it. `light`/`dark` are the exact CSS values both apps must declare — tokens/mode.test.ts asserts that. `via` records the alias chain, so a future drift diff shows whether a value changed or was re-aliased. Pin the collection id when re-reading: 41 of these names also exist in 🌈 Themes with a single mode, and a name-only lookup silently returns that copy. Resolve every alias hop in the same mode as the token: `custom/black` and `custom/white` are themselves ☾ Mode variables that swap in Dark (`custom/black` is white there), so resolving an intermediate hop in its default mode gives the Light value — that is how `destructive-foreground` dark was once recorded as #000000."
+    "count": 56,
+    "note": "Snapshot of the 41 theme/* variables in the ☾ Mode collection, plus twelve opacity/* Soft tints (`soft-*`): the six `/10` tints Badge Soft and Soft Button's Enabled are filled with, and the `/20` and `/30` steps of primary, secondary and destructive that Soft Button uses for Hover and Clicked, aliases resolved to primitives. `backdrop-overlay` is `custom/backdrop-overlay`, the overlay behind Alert Dialog (VariableID:3734:45929, read 2026-10-15): one #3c3a40 at 60% in Light and 80% in Dark, not an alias. `radius` holds the ☾ Mode radii components bind that no Tailwind class gives in both apps — `border radius/xs` and `border radius/md` (Avatar Standard), `border radius/sm` (Badge Standard); they are mode-independent, so only the light block declares them. Figma is the source of truth; this file is the committed record of what it said when the two apps were last synced to it. `light`/`dark` are the exact CSS values both apps must declare — tokens/mode.test.ts asserts that. `via` records the alias chain, so a future drift diff shows whether a value changed or was re-aliased. Pin the collection id when re-reading: 41 of these names also exist in 🌈 Themes with a single mode, and a name-only lookup silently returns that copy. Resolve every alias hop in the same mode as the token: `custom/black` and `custom/white` are themselves ☾ Mode variables that swap in Dark (`custom/black` is white there), so resolving an intermediate hop in its default mode gives the Light value — that is how `destructive-foreground` dark was once recorded as #000000. `base-black` and `base-white` are the exception to the ☾ Mode rule: they are the 💨 Tailwind primitives `colors/base/black` (#000000) and `colors/base/white` (#ffffff), carried here so a surface that must not flip in Dark (How it Works' phone) has a token, and unlike `custom/black` they are the same in both modes (added 2026-10-31)."
   },
   "tokens": {
     "background": {
@@ -157,6 +157,16 @@
         "light": "theme/muted-foreground-dark → colors/neutral/300",
         "dark": "colors/neutral/500"
       }
+    },
+    "base-black": {
+      "light": "#000000",
+      "dark": "#000000",
+      "via": { "light": "colors/base/black", "dark": "colors/base/black" }
+    },
+    "base-white": {
+      "light": "#ffffff",
+      "dark": "#ffffff",
+      "via": { "light": "colors/base/white", "dark": "colors/base/white" }
     },
     "chart-1": {
       "light": "#ea580c",

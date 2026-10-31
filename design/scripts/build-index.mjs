@@ -247,6 +247,18 @@ export const CODE_MAP = {
       "no-open-roles-empty-state", "role-detail-panel", "role-detail-page",
     ].map((type) => [`careers-${type}`, null])
   ),
+  // Blocks: each How it Works item is one Type of the block set How it Works (42334:294272), not an atom.
+  "how-it-works": null,
+  ...Object.fromEntries(
+    [
+      "six-card-grid", "column-panels", "numbered-instruction-panels", "numbered-editorial-rows",
+      "split-feature-band", "rounded-cards-device-crop",
+      "numbered-photo-steps", "split-photo-step-list", "full-bleed-step-panel", "overlay-numeral-cards",
+      "diagonal-photo-collage", "photo-bento-steps", "fanned-dissolve-cards", "stacked-media-text",
+      "photo-rail-progress", "tall-visual-rail", "step-tabs-photo-panel", "accordion-steps", "orbital-process",
+      "center-spine-timeline", "vertical-timeline-card", "contained-timeline", "phase-line", "pill-timeline",
+    ].map((type) => [`how-it-works-${type}`, null])
+  ),
   // Block: the parts every Social Proof block shares, from the block set Social Proof (46368:3361), not an atom.
   "social-proof": null,
   // Blocks: each Social Proof item is one Type of the block set Social Proof (46368:3361), not an atom.

@@ -6,6 +6,7 @@ import dynamic from "next/dynamic"
 import { authExample } from "@/components/blocks/authentications-examples"
 import { aboutPhotoProps } from "@/components/blocks/about-photos"
 import { careersPhotoProps } from "@/components/blocks/careers-photos"
+import { howItWorksPhotoProps } from "@/components/blocks/how-it-works-photos"
 import { teamPhotoProps } from "@/components/blocks/team-photos"
 import { blogCardsPhotoProps } from "@/components/blocks/blog-cards-photos"
 import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
@@ -15,7 +16,7 @@ import { socialProofPhotos } from "@/components/blocks/social-proof-photos"
 
 /**
  * Every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar,
- * Pricing, Hero, About, Careers, Social Proof and Blog Cards Type by registry name, each loaded on its
+ * Pricing, Hero, About, Careers, How it Works, Social Proof and Blog Cards Type by registry name, each loaded on its
  * own so a preview frame downloads only the block it shows.
  */
 /** Each block has its own props; a frame passes only the locale and demo props. */
@@ -127,6 +128,15 @@ type AboutCopy = Record<Locale, object>
 const withAboutPhotos = (Block: AnyBlock, type: string, copy: AboutCopy) =>
   function AboutPreview(props: { locale: Locale }) {
     return <Block {...aboutPhotoProps(type, props.locale, copy)} {...props} />
+  }
+
+/**
+ * A How it Works Type with its demo photos, from public/images/how-it-works/.
+ * Types without photos render as they are.
+ */
+const withHowItWorksPhotos = (Block: AnyBlock, type: string) =>
+  function HowItWorksPreview(props: { locale: Locale }) {
+    return <Block {...howItWorksPhotoProps(type, props.locale)} {...props} />
   }
 
 /**
@@ -686,6 +696,72 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   ),
   "careers-role-detail-page": dynamic(() =>
     import("@fasla-ui/blocks/careers-role-detail-page/CareersRoleDetailPage").then((m) => withCareersPhotos(m.CareersRoleDetailPage, "role-detail-page"))
+  ),
+  "how-it-works-center-spine-timeline": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-center-spine-timeline/HowItWorksCenterSpineTimeline").then((m) => withHowItWorksPhotos(m.HowItWorksCenterSpineTimeline, "center-spine-timeline"))
+  ),
+  "how-it-works-vertical-timeline-card": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-vertical-timeline-card/HowItWorksVerticalTimelineCard").then((m) => withHowItWorksPhotos(m.HowItWorksVerticalTimelineCard, "vertical-timeline-card"))
+  ),
+  "how-it-works-contained-timeline": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-contained-timeline/HowItWorksContainedTimeline").then((m) => m.HowItWorksContainedTimeline)
+  ),
+  "how-it-works-phase-line": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-phase-line/HowItWorksPhaseLine").then((m) => m.HowItWorksPhaseLine)
+  ),
+  "how-it-works-pill-timeline": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-pill-timeline/HowItWorksPillTimeline").then((m) => m.HowItWorksPillTimeline)
+  ),
+  "how-it-works-numbered-photo-steps": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-numbered-photo-steps/HowItWorksNumberedPhotoSteps").then((m) => withHowItWorksPhotos(m.HowItWorksNumberedPhotoSteps, "numbered-photo-steps"))
+  ),
+  "how-it-works-split-photo-step-list": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-split-photo-step-list/HowItWorksSplitPhotoStepList").then((m) => withHowItWorksPhotos(m.HowItWorksSplitPhotoStepList, "split-photo-step-list"))
+  ),
+  "how-it-works-full-bleed-step-panel": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-full-bleed-step-panel/HowItWorksFullBleedStepPanel").then((m) => withHowItWorksPhotos(m.HowItWorksFullBleedStepPanel, "full-bleed-step-panel"))
+  ),
+  "how-it-works-overlay-numeral-cards": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-overlay-numeral-cards/HowItWorksOverlayNumeralCards").then((m) => withHowItWorksPhotos(m.HowItWorksOverlayNumeralCards, "overlay-numeral-cards"))
+  ),
+  "how-it-works-diagonal-photo-collage": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-diagonal-photo-collage/HowItWorksDiagonalPhotoCollage").then((m) => withHowItWorksPhotos(m.HowItWorksDiagonalPhotoCollage, "diagonal-photo-collage"))
+  ),
+  "how-it-works-photo-bento-steps": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-photo-bento-steps/HowItWorksPhotoBentoSteps").then((m) => withHowItWorksPhotos(m.HowItWorksPhotoBentoSteps, "photo-bento-steps"))
+  ),
+  "how-it-works-fanned-dissolve-cards": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-fanned-dissolve-cards/HowItWorksFannedDissolveCards").then((m) => withHowItWorksPhotos(m.HowItWorksFannedDissolveCards, "fanned-dissolve-cards"))
+  ),
+  "how-it-works-stacked-media-text": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-stacked-media-text/HowItWorksStackedMediaText").then((m) => withHowItWorksPhotos(m.HowItWorksStackedMediaText, "stacked-media-text"))
+  ),
+  "how-it-works-photo-rail-progress": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-photo-rail-progress/HowItWorksPhotoRailProgress").then((m) => withHowItWorksPhotos(m.HowItWorksPhotoRailProgress, "photo-rail-progress"))
+  ),
+  "how-it-works-tall-visual-rail": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-tall-visual-rail/HowItWorksTallVisualRail").then((m) => m.HowItWorksTallVisualRail)
+  ),
+  "how-it-works-step-tabs-photo-panel": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-step-tabs-photo-panel/HowItWorksStepTabsPhotoPanel").then((m) => withHowItWorksPhotos(m.HowItWorksStepTabsPhotoPanel, "step-tabs-photo-panel"))
+  ),
+  "how-it-works-accordion-steps": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-accordion-steps/HowItWorksAccordionSteps").then((m) => withHowItWorksPhotos(m.HowItWorksAccordionSteps, "accordion-steps"))
+  ),
+  "how-it-works-orbital-process": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-orbital-process/HowItWorksOrbitalProcess").then((m) => withHowItWorksPhotos(m.HowItWorksOrbitalProcess, "orbital-process"))
+  ),
+  "how-it-works-six-card-grid": dynamic(() => import("@fasla-ui/blocks/how-it-works-six-card-grid/HowItWorksSixCardGrid").then((m) => m.HowItWorksSixCardGrid)),
+  "how-it-works-column-panels": dynamic(() => import("@fasla-ui/blocks/how-it-works-column-panels/HowItWorksColumnPanels").then((m) => m.HowItWorksColumnPanels)),
+  "how-it-works-numbered-instruction-panels": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-numbered-instruction-panels/HowItWorksNumberedInstructionPanels").then((m) => m.HowItWorksNumberedInstructionPanels)
+  ),
+  "how-it-works-numbered-editorial-rows": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-numbered-editorial-rows/HowItWorksNumberedEditorialRows").then((m) => m.HowItWorksNumberedEditorialRows)
+  ),
+  "how-it-works-split-feature-band": dynamic(() => import("@fasla-ui/blocks/how-it-works-split-feature-band/HowItWorksSplitFeatureBand").then((m) => m.HowItWorksSplitFeatureBand)),
+  "how-it-works-rounded-cards-device-crop": dynamic(() =>
+    import("@fasla-ui/blocks/how-it-works-rounded-cards-device-crop/HowItWorksRoundedCardsDeviceCrop").then((m) => m.HowItWorksRoundedCardsDeviceCrop)
   ),
   "team-leadership-grid": dynamic(() =>
     import("@fasla-ui/blocks/team-leadership-grid/TeamLeadershipGrid").then((m) => withTeamPhotos(m.TeamLeadershipGrid, "leadership-grid", m.teamLeadershipGridCopy))

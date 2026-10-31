@@ -3362,6 +3362,45 @@
         "careers-role-detail-page": "Role Detail Page"
       }
     },
+    "howItWorksBlocks": {
+      "lead": "Sections that explain a process: timelines and phases, steps told with photos and cards, rails, tabs and accordions you move through, and grids and panels with a drawn picture of each step.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "filterLabel": "Filter by family",
+      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
+      "families": {
+        "all": "All",
+        "timelines": "Timelines and phases",
+        "visual-steps": "Visual steps",
+        "interactive": "Sliding and interactive",
+        "grids": "Grids and panels"
+      },
+      "types": {
+        "how-it-works-center-spine-timeline": "Center Spine Timeline",
+        "how-it-works-vertical-timeline-card": "Vertical Timeline Card",
+        "how-it-works-contained-timeline": "Contained Timeline",
+        "how-it-works-phase-line": "Phase Line",
+        "how-it-works-pill-timeline": "Pill Timeline",
+        "how-it-works-numbered-photo-steps": "Numbered Photo Steps",
+        "how-it-works-split-photo-step-list": "Split Photo + Step List",
+        "how-it-works-full-bleed-step-panel": "Full-Bleed Step Panel",
+        "how-it-works-overlay-numeral-cards": "Overlay Numeral Cards",
+        "how-it-works-diagonal-photo-collage": "Diagonal Photo Collage",
+        "how-it-works-photo-bento-steps": "Photo Bento Steps",
+        "how-it-works-fanned-dissolve-cards": "Fanned Dissolve Cards",
+        "how-it-works-stacked-media-text": "Stacked Media + Text",
+        "how-it-works-photo-rail-progress": "Photo Rail + Progress",
+        "how-it-works-tall-visual-rail": "Tall Visual Rail",
+        "how-it-works-step-tabs-photo-panel": "Step Tabs + Photo Panel",
+        "how-it-works-accordion-steps": "Accordion Steps",
+        "how-it-works-orbital-process": "Orbital Process",
+        "how-it-works-six-card-grid": "Six-Card Grid",
+        "how-it-works-column-panels": "Column Panels",
+        "how-it-works-numbered-instruction-panels": "Numbered Instruction Panels",
+        "how-it-works-numbered-editorial-rows": "Numbered Editorial Rows",
+        "how-it-works-split-feature-band": "Split Feature Band",
+        "how-it-works-rounded-cards-device-crop": "Rounded Cards + Device Crop"
+      }
+    },
     "blockCard": {
       "fullScreen": "Open full screen",
       "newTab": "(opens in a new tab)",
