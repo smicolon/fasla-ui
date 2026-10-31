@@ -33,6 +33,7 @@ const ALTS: Record<string, Alt> = {
   "gallery/mosaic-statement-tile-2": { en: "A wooden table with chairs and a pendant lamp in a bright room", ar: "طاولة خشبية وكراسٍ ومصباح معلّق في غرفة مضيئة" },
   "gallery/mosaic-statement-tile-6": { en: "A long wooden meeting table in a room with large windows", ar: "طاولة اجتماعات خشبية طويلة في غرفة ذات نوافذ كبيرة" },
   "gallery/photo-bento-5": { en: "Sheets of paper with architectural plans", ar: "أوراق عليها مخططات معمارية" },
+  "gallery/timeline-gallery-1": { en: "A desk with an orange chair by a window in a warm room", ar: "مكتب وكرسي برتقالي بجانب نافذة في غرفة دافئة" },
   "gallery/timeline-gallery-10": { en: "A grey armchair beside a small table with a plant", ar: "كرسي بذراعين رمادي بجانب طاولة صغيرة عليها نبتة" },
   "gallery/timeline-gallery-6": { en: "An office with a long table by tall windows and potted palms", ar: "مكتب فيه طاولة طويلة بجانب نوافذ عالية ونخيل في أصص" },
   "gallery/timeline-gallery-8": { en: "A white desk with a monitor on a patterned rug", ar: "مكتب أبيض عليه شاشة فوق سجادة مزخرفة" },
@@ -67,6 +68,9 @@ const PHOTOS: Record<string, string[]> = {
   "notched-photo-columns": ["gallery/photo-bento-5", "gallery/timeline-gallery-10", "hero/laptop-code-desk"],
   "perforated-photo-strip": ["blog-cards/photo-06", "hero/ceramic-mug-still-life", "hero/brick-modular-housing", "blog-cards/photo-15", "hero/balanced-sculpture", "hero/living-room-gallery-wall", "about/statement-band-2", "blog-cards/photo-09", "hero/pleated-floor-lamp", "hero/loft-living-room-dusk"],
   "portrait-photo-cards-link-row": ["blog-cards/photo-13", "blog-cards/photo-16", "blog-cards/photo-14", "blog-cards/photo-04"],
+  "photo-carousel": ["hero/team-laptops-table", "gallery/mosaic-statement-tile-6", "gallery/horizontal-scroll-rail-5", "gallery/timeline-gallery-8"],
+  "photo-tabs-panel": ["hero/developer-workstation", "gallery/horizontal-scroll-rail-5", "gallery/timeline-gallery-6", "gallery/photo-bento-5"],
+  "accordion-photo": ["gallery/timeline-gallery-1"],
 }
 
 const photo = (file: string, locale: Locale): FeaturesDemoPhoto => ({
@@ -105,6 +109,9 @@ const PHOTO_PROP: Record<string, PhotoProp> = {
   "notched-photo-columns": { kind: "list", list: "columns", key: "image" },
   "perforated-photo-strip": { kind: "photos" },
   "portrait-photo-cards-link-row": { kind: "list", list: "cards", key: "image" },
+  "photo-carousel": { kind: "list", list: "slides", key: "image" },
+  "photo-tabs-panel": { kind: "list", list: "tabs", key: "image" },
+  "accordion-photo": { kind: "photo" },
 }
 
 type BlockCopy = Record<Locale, object>

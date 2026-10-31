@@ -18,6 +18,10 @@ import { FeaturesPhotoCollage, featuresPhotoCollageCopy } from "../../../../../p
 import { FeaturesNotchedPhotoColumns, featuresNotchedPhotoColumnsCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-notched-photo-columns/FeaturesNotchedPhotoColumns"
 import { FeaturesPerforatedPhotoStrip, featuresPerforatedPhotoStripCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-perforated-photo-strip/FeaturesPerforatedPhotoStrip"
 import { FeaturesPortraitPhotoCardsLinkRow, featuresPortraitPhotoCardsLinkRowCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-portrait-photo-cards-link-row/FeaturesPortraitPhotoCardsLinkRow"
+import { FeaturesPhotoCarousel, featuresPhotoCarouselCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-photo-carousel/FeaturesPhotoCarousel"
+import { FeaturesPhotoTabsPanel, featuresPhotoTabsPanelCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-photo-tabs-panel/FeaturesPhotoTabsPanel"
+import { FeaturesAccordionPhoto, featuresAccordionPhotoCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-accordion-photo/FeaturesAccordionPhoto"
+import { FeaturesExpandingStepCards, featuresExpandingStepCardsCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-expanding-step-cards/FeaturesExpandingStepCards"
 import { featuresArgTypes, featuresViewports, localeOf, photoPropsOf } from "./features-story-kit"
 
 /**
@@ -281,4 +285,49 @@ export const PortraitPhotoCardsLinkRowEmpty: StoryObj<typeof FeaturesPortraitPho
   tags: ["!dev", "!autodocs"],
   argTypes: featuresArgTypes(FeaturesPortraitPhotoCardsLinkRow, featuresPortraitPhotoCardsLinkRowCopy, []),
   render: (args, context) => <FeaturesPortraitPhotoCardsLinkRow locale={localeOf(context)}  {...args} />,
+}
+
+export const PhotoCarousel: StoryObj<typeof FeaturesPhotoCarousel> = {
+  name: "Photo Carousel",
+  argTypes: featuresArgTypes(FeaturesPhotoCarousel, featuresPhotoCarouselCopy, []),
+  render: (args, context) => <FeaturesPhotoCarousel locale={localeOf(context)} {...photoPropsOf("photo-carousel", context, featuresPhotoCarouselCopy)} {...args} />,
+}
+
+export const PhotoCarouselEmpty: StoryObj<typeof FeaturesPhotoCarousel> = {
+  name: "Photo Carousel: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesPhotoCarousel, featuresPhotoCarouselCopy, []),
+  render: (args, context) => <FeaturesPhotoCarousel locale={localeOf(context)}  {...args} />,
+}
+
+export const PhotoTabsPanel: StoryObj<typeof FeaturesPhotoTabsPanel> = {
+  name: "Photo Tabs Panel",
+  argTypes: featuresArgTypes(FeaturesPhotoTabsPanel, featuresPhotoTabsPanelCopy, []),
+  render: (args, context) => <FeaturesPhotoTabsPanel locale={localeOf(context)} {...photoPropsOf("photo-tabs-panel", context, featuresPhotoTabsPanelCopy)} {...args} />,
+}
+
+export const PhotoTabsPanelEmpty: StoryObj<typeof FeaturesPhotoTabsPanel> = {
+  name: "Photo Tabs Panel: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesPhotoTabsPanel, featuresPhotoTabsPanelCopy, []),
+  render: (args, context) => <FeaturesPhotoTabsPanel locale={localeOf(context)}  {...args} />,
+}
+
+export const AccordionPhoto: StoryObj<typeof FeaturesAccordionPhoto> = {
+  name: "Accordion + Photo",
+  argTypes: featuresArgTypes(FeaturesAccordionPhoto, featuresAccordionPhotoCopy, []),
+  render: (args, context) => <FeaturesAccordionPhoto locale={localeOf(context)} {...photoPropsOf("accordion-photo", context, featuresAccordionPhotoCopy)} {...args} />,
+}
+
+export const AccordionPhotoEmpty: StoryObj<typeof FeaturesAccordionPhoto> = {
+  name: "Accordion + Photo: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesAccordionPhoto, featuresAccordionPhotoCopy, []),
+  render: (args, context) => <FeaturesAccordionPhoto locale={localeOf(context)}  {...args} />,
+}
+
+export const ExpandingStepCards: StoryObj<typeof FeaturesExpandingStepCards> = {
+  name: "Expanding Step Cards",
+  argTypes: featuresArgTypes(FeaturesExpandingStepCards, featuresExpandingStepCardsCopy, []),
+  render: (args, context) => <FeaturesExpandingStepCards locale={localeOf(context)} {...args} />,
 }

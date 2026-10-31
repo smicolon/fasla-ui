@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test"
-import { existsSync, readdirSync, readFileSync } from "node:fs"
+import { existsSync, readFileSync } from "node:fs"
 import path from "node:path"
 import { FEATURES_PHOTO_FILES, FEATURES_PHOTO_TYPES, featuresPhotos } from "../components/blocks/features-photos"
 
@@ -13,7 +13,7 @@ const credits = readFileSync(path.join(images, "features/CREDITS.md"), "utf8")
 // is listed against its slot in features/CREDITS.md.
 describe("Features demo photos", () => {
   test("add no image files to public/images/features/", () => {
-    const files = readdirSync(path.join(images, "features"))
+    const files = readdirSyncSafe(path.join(images, "features"))
     expect(files.filter((file) => /\.(webp|png|jpe?g|svg)$/.test(file))).toEqual([])
   })
 
@@ -52,3 +52,8 @@ describe("Features demo photos", () => {
     }
   })
 })
+
+function readdirSyncSafe(dir) {
+  const { readdirSync } = require("node:fs")
+  return readdirSync(dir)
+}

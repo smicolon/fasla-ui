@@ -278,7 +278,8 @@ export const CODE_MAP = {
       "colour-block-cards", "stat-feature-band", "split-photo-icon-list", "photo-bento", "dark-photo-panel",
       "overlay-caption-cards", "feature-list-thumbnails", "photo-feature-chips", "media-rail",
       "full-bleed-photo-banner", "editorial-photo-split", "photo-collage", "notched-photo-columns",
-      "perforated-photo-strip", "portrait-photo-cards-link-row",
+      "perforated-photo-strip", "portrait-photo-cards-link-row", "photo-carousel", "photo-tabs-panel",
+      "accordion-photo", "expanding-step-cards",
     ].map((type) => [`features-${type}`, null])
   ),
 }

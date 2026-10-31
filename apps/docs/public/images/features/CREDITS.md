@@ -59,3 +59,12 @@ Perforated Photo Strip uses seven Hero and Blog Cards photos.
 | Portrait Photo Cards + Link Row | 2 | `blog-cards/photo-16.webp` | Bare trees reflected in a misty lake |
 | Portrait Photo Cards + Link Row | 3 | `blog-cards/photo-14.webp` | A still lake with mist and dark trees |
 | Portrait Photo Cards + Link Row | 4 | `blog-cards/photo-04.webp` | Wooden partitions on a checkered carpet beside a glass wall |
+| Photo Carousel | 1 | `hero/team-laptops-table.webp` | People working together on laptops around a wooden table, seen from above |
+| Photo Carousel | 2 | `gallery/mosaic-statement-tile-6.webp` | A long wooden meeting table in a room with large windows |
+| Photo Carousel | 3 | `gallery/horizontal-scroll-rail-5.webp` | A grid of yellow sticky notes on a grey wall |
+| Photo Carousel | 4 | `gallery/timeline-gallery-8.webp` | A white desk with a monitor on a patterned rug |
+| Photo Tabs Panel | 1 | `hero/developer-workstation.webp` | A laptop showing code on a white desk beside a monitor and a lamp |
+| Photo Tabs Panel | 2 | `gallery/horizontal-scroll-rail-5.webp` | A grid of yellow sticky notes on a grey wall |
+| Photo Tabs Panel | 3 | `gallery/timeline-gallery-6.webp` | An office with a long table by tall windows and potted palms |
+| Photo Tabs Panel | 4 | `gallery/photo-bento-5.webp` | Sheets of paper with architectural plans |
+| Accordion + Photo | 1 | `gallery/timeline-gallery-1.webp` | A desk with an orange chair by a window in a warm room |

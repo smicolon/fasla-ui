@@ -934,6 +934,18 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "features-portrait-photo-cards-link-row": dynamic(() =>
     import("@fasla-ui/blocks/features-portrait-photo-cards-link-row/FeaturesPortraitPhotoCardsLinkRow").then((m) => withFeaturesPhotos(m.FeaturesPortraitPhotoCardsLinkRow, "portrait-photo-cards-link-row", m.featuresPortraitPhotoCardsLinkRowCopy))
   ),
+  "features-photo-carousel": dynamic(() =>
+    import("@fasla-ui/blocks/features-photo-carousel/FeaturesPhotoCarousel").then((m) => withFeaturesPhotos(m.FeaturesPhotoCarousel, "photo-carousel", m.featuresPhotoCarouselCopy))
+  ),
+  "features-photo-tabs-panel": dynamic(() =>
+    import("@fasla-ui/blocks/features-photo-tabs-panel/FeaturesPhotoTabsPanel").then((m) => withFeaturesPhotos(m.FeaturesPhotoTabsPanel, "photo-tabs-panel", m.featuresPhotoTabsPanelCopy))
+  ),
+  "features-accordion-photo": dynamic(() =>
+    import("@fasla-ui/blocks/features-accordion-photo/FeaturesAccordionPhoto").then((m) => withFeaturesPhotos(m.FeaturesAccordionPhoto, "accordion-photo", m.featuresAccordionPhotoCopy))
+  ),
+  "features-expanding-step-cards": dynamic(() =>
+    import("@fasla-ui/blocks/features-expanding-step-cards/FeaturesExpandingStepCards").then((m) => m.FeaturesExpandingStepCards)
+  ),
 }
 
 /** Settles after a moment, so a form shows its pending state before its result. */

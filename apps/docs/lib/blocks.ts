@@ -469,6 +469,10 @@ export const FEATURES_TYPES: BlockType<FeaturesFamily>[] = [
   { slug: "features-notched-photo-columns", family: "photo-led", inverse: true },
   { slug: "features-perforated-photo-strip", family: "photo-led" },
   { slug: "features-portrait-photo-cards-link-row", family: "photo-led", inverse: true },
+  { slug: "features-photo-carousel", family: "interactive" },
+  { slug: "features-photo-tabs-panel", family: "interactive" },
+  { slug: "features-accordion-photo", family: "interactive" },
+  { slug: "features-expanding-step-cards", family: "interactive" },
 ]
 
 export const ALL_BLOCK_TYPES: BlockType[] = [

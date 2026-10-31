@@ -7600,6 +7600,106 @@
         "features",
         "marketing"
       ]
+    },
+    {
+      "name": "features-photo-carousel",
+      "type": "registry:block",
+      "title": "Features: Photo Carousel",
+      "description": "A heading with previous and next buttons over one photo-and-panel slide at a time, with a counter badge and dots.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "carousel",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-photo-carousel/FeaturesPhotoCarousel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-photo-carousel.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-photo-tabs-panel",
+      "type": "registry:block",
+      "title": "Features: Photo Tabs Panel",
+      "description": "A centred heading over four boxed tabs, each showing a title, a line, three checked bullets and a photo.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "tabs",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-photo-tabs-panel/FeaturesPhotoTabsPanel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-photo-tabs-panel.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-accordion-photo",
+      "type": "registry:block",
+      "title": "Features: Accordion + Photo",
+      "description": "A heading over an accordion of five questions with plus and minus marks, beside a tall photo.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-accordion-photo/FeaturesAccordionPhoto.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-accordion-photo.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-expanding-step-cards",
+      "type": "registry:block",
+      "title": "Features: Expanding Step Cards",
+      "description": "A centred heading and button over four cards, a featured Plan card with steps and a message, and three product mock-ups.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "progress",
+        "skeleton",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-expanding-step-cards/FeaturesExpandingStepCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-expanding-step-cards.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
     }
   ]
 }
