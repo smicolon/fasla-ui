@@ -7700,6 +7700,162 @@
         "features",
         "marketing"
       ]
+    },
+    {
+      "name": "features-compare-panels-chat-answer",
+      "type": "registry:block",
+      "title": "Features: Compare Panels + Chat Answer",
+      "description": "A two-tone heading over a Static map panel beside a live Fasla panel, joined to a chat answer with source chips that open a file card.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-compare-panels-chat-answer/FeaturesComparePanelsChatAnswer.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-compare-panels-chat-answer.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-numbered-steps-floating-cards",
+      "type": "registry:block",
+      "title": "Features: Numbered Steps + Floating Cards",
+      "description": "Three numbered steps, one open at a time, beside a blurred photo with a question and file cards that change with the step.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "features",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-numbered-steps-floating-cards/FeaturesNumberedStepsFloatingCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-numbered-steps-floating-cards.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-solid-colour-cards",
+      "type": "registry:block",
+      "title": "Features: Solid Colour Cards",
+      "description": "A heading beside a workflow card, over four solid cards each with a product mock-up built from the Badge, Switch, Avatar and Progress atoms.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "progress",
+        "switch",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-solid-colour-cards/FeaturesSolidColourCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-solid-colour-cards.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-icon-titled-preview-rail",
+      "type": "registry:block",
+      "title": "Features: Icon-Titled Preview Rail",
+      "description": "A heading over a snapping rail of five tinted previews, each a titled product mock-up with a caption.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "skeleton",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-icon-titled-preview-rail/FeaturesIconTitledPreviewRail.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-icon-titled-preview-rail.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-tinted-product-bento",
+      "type": "registry:block",
+      "title": "Features: Tinted Product Bento",
+      "description": "A heading over three stacked product cards, beside a wide info panel and two half-width warning and success panels with buttons.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "fasla-logo",
+        "progress",
+        "switch",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-tinted-product-bento/FeaturesTintedProductBento.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-tinted-product-bento.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-showcase-card-pair",
+      "type": "registry:block",
+      "title": "Features: Showcase Card Pair",
+      "description": "A centred heading over two showcase stages, a photo with an edit prompt and a photo with a selection box, each captioned.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "features",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-showcase-card-pair/FeaturesShowcaseCardPair.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-showcase-card-pair.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
     }
   ]
 }

@@ -68,3 +68,8 @@ Perforated Photo Strip uses seven Hero and Blog Cards photos.
 | Photo Tabs Panel | 3 | `gallery/timeline-gallery-6.webp` | An office with a long table by tall windows and potted palms |
 | Photo Tabs Panel | 4 | `gallery/photo-bento-5.webp` | Sheets of paper with architectural plans |
 | Accordion + Photo | 1 | `gallery/timeline-gallery-1.webp` | A desk with an orange chair by a window in a warm room |
+| Numbered Steps + Floating Cards | 1 | `gallery/mosaic-statement-tile-6.webp` | A long wooden meeting table in a room with large windows |
+| Numbered Steps + Floating Cards | 2 | `hero/businesswoman-window-portrait.webp` | A smiling woman in a grey blazer seated by a tall window |
+| Icon-Titled Preview Rail | 1 | `hero/woman-white-collar-portrait.webp` | A woman with short hair in a patterned top and a white collar |
+| Showcase Card Pair | 1 | `about/statement-band-2.webp` | A bright lounge with white chairs, a floor lamp and a glass partition |
+| Showcase Card Pair | 2 | `hero/office-corridor.webp` | A long office corridor with a slatted ceiling and dark kitchen units |

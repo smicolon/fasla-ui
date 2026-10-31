@@ -279,7 +279,8 @@ export const CODE_MAP = {
       "overlay-caption-cards", "feature-list-thumbnails", "photo-feature-chips", "media-rail",
       "full-bleed-photo-banner", "editorial-photo-split", "photo-collage", "notched-photo-columns",
       "perforated-photo-strip", "portrait-photo-cards-link-row", "photo-carousel", "photo-tabs-panel",
-      "accordion-photo", "expanding-step-cards",
+      "accordion-photo", "expanding-step-cards", "compare-panels-chat-answer", "numbered-steps-floating-cards",
+      "solid-colour-cards", "icon-titled-preview-rail", "tinted-product-bento", "showcase-card-pair",
     ].map((type) => [`features-${type}`, null])
   ),
 }

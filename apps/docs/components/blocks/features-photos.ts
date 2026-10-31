@@ -51,6 +51,7 @@ const ALTS: Record<string, Alt> = {
   "hero/office-corridor": { en: "A long office corridor with a slatted ceiling and dark kitchen units", ar: "ممر مكتبي طويل بسقف مشقوق ووحدات مطبخ داكنة" },
   "hero/pleated-floor-lamp": { en: "A brass floor lamp with a pleated white shade on a grey wall", ar: "مصباح أرضي نحاسي بغطاء أبيض مطوي أمام جدار رمادي" },
   "hero/team-laptops-table": { en: "People working together on laptops around a wooden table, seen from above", ar: "أشخاص يعملون معًا على حواسيبهم المحمولة حول طاولة خشبية، من الأعلى" },
+  "hero/woman-white-collar-portrait": { en: "A woman with short hair in a patterned top and a white collar", ar: "امرأة بشعر قصير ترتدي قميصًا مزخرفًا بياقة بيضاء" },
 }
 
 /** Each Type's photos in slot order, by its name without `features-`. */
@@ -71,6 +72,9 @@ const PHOTOS: Record<string, string[]> = {
   "photo-carousel": ["hero/team-laptops-table", "gallery/mosaic-statement-tile-6", "gallery/horizontal-scroll-rail-5", "gallery/timeline-gallery-8"],
   "photo-tabs-panel": ["hero/developer-workstation", "gallery/horizontal-scroll-rail-5", "gallery/timeline-gallery-6", "gallery/photo-bento-5"],
   "accordion-photo": ["gallery/timeline-gallery-1"],
+  "numbered-steps-floating-cards": ["gallery/mosaic-statement-tile-6", "hero/businesswoman-window-portrait"],
+  "icon-titled-preview-rail": ["hero/woman-white-collar-portrait"],
+  "showcase-card-pair": ["about/statement-band-2", "hero/office-corridor"],
 }
 
 const photo = (file: string, locale: Locale): FeaturesDemoPhoto => ({
@@ -90,11 +94,12 @@ export const FEATURES_PHOTO_TYPES = Object.keys(PHOTOS)
 export const FEATURES_PHOTO_FILES = Object.keys(ALTS)
 
 /**
- * How each Type takes its photos: as one `photo`, as a `photos` array, or as
+ * How each Type takes its photos: as one `photo`, as a `photos` array, as named
+ * props (a background and an avatar), or as
  * one photo on each item of a list in the block's own copy (a card carries its
  * own image). A Type is added here when its block is built.
  */
-type PhotoProp = { kind: "photo" } | { kind: "photos" } | { kind: "list"; list: string; key: string }
+type PhotoProp = { kind: "photo" } | { kind: "photos" } | { kind: "named"; props: string[] } | { kind: "list"; list: string; key: string }
 const PHOTO_PROP: Record<string, PhotoProp> = {
   "split-photo-icon-list": { kind: "photo" },
   "photo-bento": { kind: "photos" },
@@ -112,6 +117,9 @@ const PHOTO_PROP: Record<string, PhotoProp> = {
   "photo-carousel": { kind: "list", list: "slides", key: "image" },
   "photo-tabs-panel": { kind: "list", list: "tabs", key: "image" },
   "accordion-photo": { kind: "photo" },
+  "numbered-steps-floating-cards": { kind: "named", props: ["photo", "avatar"] },
+  "icon-titled-preview-rail": { kind: "named", props: ["contactPhoto"] },
+  "showcase-card-pair": { kind: "photos" },
 }
 
 type BlockCopy = Record<Locale, object>
@@ -127,6 +135,7 @@ export function featuresPhotoProps(type: string, locale: Locale, copy?: BlockCop
   if (!prop || photos.length === 0) return {}
   if (prop.kind === "photo") return { photo: photos[0] }
   if (prop.kind === "photos") return { photos }
+  if (prop.kind === "named") return Object.fromEntries(prop.props.map((name, index) => [name, photos[index]]).filter(([, found]) => found))
   const source = (copy?.[locale] as Record<string, unknown> | undefined) ?? {}
   const items = (source[prop.list] as object[] | undefined) ?? []
   return { [prop.list]: items.map((item, index) => ({ ...item, [prop.key]: photos[index % photos.length] })) }

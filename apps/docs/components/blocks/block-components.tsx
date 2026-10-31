@@ -946,6 +946,24 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "features-expanding-step-cards": dynamic(() =>
     import("@fasla-ui/blocks/features-expanding-step-cards/FeaturesExpandingStepCards").then((m) => m.FeaturesExpandingStepCards)
   ),
+  "features-compare-panels-chat-answer": dynamic(() =>
+    import("@fasla-ui/blocks/features-compare-panels-chat-answer/FeaturesComparePanelsChatAnswer").then((m) => m.FeaturesComparePanelsChatAnswer)
+  ),
+  "features-numbered-steps-floating-cards": dynamic(() =>
+    import("@fasla-ui/blocks/features-numbered-steps-floating-cards/FeaturesNumberedStepsFloatingCards").then((m) => withFeaturesPhotos(m.FeaturesNumberedStepsFloatingCards, "numbered-steps-floating-cards", m.featuresNumberedStepsFloatingCardsCopy))
+  ),
+  "features-solid-colour-cards": dynamic(() =>
+    import("@fasla-ui/blocks/features-solid-colour-cards/FeaturesSolidColourCards").then((m) => m.FeaturesSolidColourCards)
+  ),
+  "features-icon-titled-preview-rail": dynamic(() =>
+    import("@fasla-ui/blocks/features-icon-titled-preview-rail/FeaturesIconTitledPreviewRail").then((m) => withFeaturesPhotos(m.FeaturesIconTitledPreviewRail, "icon-titled-preview-rail", m.featuresIconTitledPreviewRailCopy))
+  ),
+  "features-tinted-product-bento": dynamic(() =>
+    import("@fasla-ui/blocks/features-tinted-product-bento/FeaturesTintedProductBento").then((m) => m.FeaturesTintedProductBento)
+  ),
+  "features-showcase-card-pair": dynamic(() =>
+    import("@fasla-ui/blocks/features-showcase-card-pair/FeaturesShowcaseCardPair").then((m) => withFeaturesPhotos(m.FeaturesShowcaseCardPair, "showcase-card-pair", m.featuresShowcaseCardPairCopy))
+  ),
 }
 
 /** Settles after a moment, so a form shows its pending state before its result. */

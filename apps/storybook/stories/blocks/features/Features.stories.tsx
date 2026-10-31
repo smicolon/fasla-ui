@@ -22,6 +22,12 @@ import { FeaturesPhotoCarousel, featuresPhotoCarouselCopy } from "../../../../..
 import { FeaturesPhotoTabsPanel, featuresPhotoTabsPanelCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-photo-tabs-panel/FeaturesPhotoTabsPanel"
 import { FeaturesAccordionPhoto, featuresAccordionPhotoCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-accordion-photo/FeaturesAccordionPhoto"
 import { FeaturesExpandingStepCards, featuresExpandingStepCardsCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-expanding-step-cards/FeaturesExpandingStepCards"
+import { FeaturesComparePanelsChatAnswer, featuresComparePanelsChatAnswerCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-compare-panels-chat-answer/FeaturesComparePanelsChatAnswer"
+import { FeaturesNumberedStepsFloatingCards, featuresNumberedStepsFloatingCardsCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-numbered-steps-floating-cards/FeaturesNumberedStepsFloatingCards"
+import { FeaturesSolidColourCards, featuresSolidColourCardsCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-solid-colour-cards/FeaturesSolidColourCards"
+import { FeaturesIconTitledPreviewRail, featuresIconTitledPreviewRailCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-icon-titled-preview-rail/FeaturesIconTitledPreviewRail"
+import { FeaturesTintedProductBento, featuresTintedProductBentoCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-tinted-product-bento/FeaturesTintedProductBento"
+import { FeaturesShowcaseCardPair, featuresShowcaseCardPairCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-showcase-card-pair/FeaturesShowcaseCardPair"
 import { featuresArgTypes, featuresViewports, localeOf, photoPropsOf } from "./features-story-kit"
 
 /**
@@ -330,4 +336,61 @@ export const ExpandingStepCards: StoryObj<typeof FeaturesExpandingStepCards> = {
   name: "Expanding Step Cards",
   argTypes: featuresArgTypes(FeaturesExpandingStepCards, featuresExpandingStepCardsCopy, []),
   render: (args, context) => <FeaturesExpandingStepCards locale={localeOf(context)} {...args} />,
+}
+
+export const ComparePanelsChatAnswer: StoryObj<typeof FeaturesComparePanelsChatAnswer> = {
+  name: "Compare Panels + Chat Answer",
+  argTypes: featuresArgTypes(FeaturesComparePanelsChatAnswer, featuresComparePanelsChatAnswerCopy, []),
+  render: (args, context) => <FeaturesComparePanelsChatAnswer locale={localeOf(context)} {...args} />,
+}
+
+export const NumberedStepsFloatingCards: StoryObj<typeof FeaturesNumberedStepsFloatingCards> = {
+  name: "Numbered Steps + Floating Cards",
+  argTypes: featuresArgTypes(FeaturesNumberedStepsFloatingCards, featuresNumberedStepsFloatingCardsCopy, []),
+  render: (args, context) => <FeaturesNumberedStepsFloatingCards locale={localeOf(context)} {...photoPropsOf("numbered-steps-floating-cards", context, featuresNumberedStepsFloatingCardsCopy)} {...args} />,
+}
+
+export const NumberedStepsFloatingCardsEmpty: StoryObj<typeof FeaturesNumberedStepsFloatingCards> = {
+  name: "Numbered Steps + Floating Cards: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesNumberedStepsFloatingCards, featuresNumberedStepsFloatingCardsCopy, []),
+  render: (args, context) => <FeaturesNumberedStepsFloatingCards locale={localeOf(context)}  {...args} />,
+}
+
+export const SolidColourCards: StoryObj<typeof FeaturesSolidColourCards> = {
+  name: "Solid Colour Cards",
+  argTypes: featuresArgTypes(FeaturesSolidColourCards, featuresSolidColourCardsCopy, []),
+  render: (args, context) => <FeaturesSolidColourCards locale={localeOf(context)} {...args} />,
+}
+
+export const IconTitledPreviewRail: StoryObj<typeof FeaturesIconTitledPreviewRail> = {
+  name: "Icon-Titled Preview Rail",
+  argTypes: featuresArgTypes(FeaturesIconTitledPreviewRail, featuresIconTitledPreviewRailCopy, []),
+  render: (args, context) => <FeaturesIconTitledPreviewRail locale={localeOf(context)} {...photoPropsOf("icon-titled-preview-rail", context, featuresIconTitledPreviewRailCopy)} {...args} />,
+}
+
+export const IconTitledPreviewRailEmpty: StoryObj<typeof FeaturesIconTitledPreviewRail> = {
+  name: "Icon-Titled Preview Rail: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesIconTitledPreviewRail, featuresIconTitledPreviewRailCopy, []),
+  render: (args, context) => <FeaturesIconTitledPreviewRail locale={localeOf(context)}  {...args} />,
+}
+
+export const TintedProductBento: StoryObj<typeof FeaturesTintedProductBento> = {
+  name: "Tinted Product Bento",
+  argTypes: featuresArgTypes(FeaturesTintedProductBento, featuresTintedProductBentoCopy, []),
+  render: (args, context) => <FeaturesTintedProductBento locale={localeOf(context)} {...args} />,
+}
+
+export const ShowcaseCardPair: StoryObj<typeof FeaturesShowcaseCardPair> = {
+  name: "Showcase Card Pair",
+  argTypes: featuresArgTypes(FeaturesShowcaseCardPair, featuresShowcaseCardPairCopy, []),
+  render: (args, context) => <FeaturesShowcaseCardPair locale={localeOf(context)} {...photoPropsOf("showcase-card-pair", context, featuresShowcaseCardPairCopy)} {...args} />,
+}
+
+export const ShowcaseCardPairEmpty: StoryObj<typeof FeaturesShowcaseCardPair> = {
+  name: "Showcase Card Pair: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesShowcaseCardPair, featuresShowcaseCardPairCopy, []),
+  render: (args, context) => <FeaturesShowcaseCardPair locale={localeOf(context)}  {...args} />,
 }

@@ -172,7 +172,7 @@ export function FeaturesPerforatedPhotoStrip({ locale = "en", eyebrow, heading, 
           setDragging(false)
         }}
         className={cn(
-          "-mx-8 flex gap-5 overflow-x-auto overscroll-x-contain px-8 py-2 [scrollbar-width:none] [touch-action:pan-x_pan-y] [&::-webkit-scrollbar]:hidden [@container(min-width:48rem)]:-mx-16 [@container(min-width:48rem)]:px-16 [@container(min-width:72rem)]:-mx-24 [@container(min-width:72rem)]:px-24",
+          "-mx-8 flex scroll-px-8 gap-5 overflow-x-auto overscroll-x-contain px-8 py-2 [scrollbar-width:none] [touch-action:pan-x_pan-y] [&::-webkit-scrollbar]:hidden [@container(min-width:48rem)]:-mx-16 [@container(min-width:48rem)]:scroll-px-16 [@container(min-width:48rem)]:px-16 [@container(min-width:72rem)]:-mx-24 [@container(min-width:72rem)]:scroll-px-24 [@container(min-width:72rem)]:px-24",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
           dragging ? "cursor-grabbing select-none" : "cursor-grab snap-x snap-mandatory"
         )}

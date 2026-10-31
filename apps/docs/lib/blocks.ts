@@ -473,6 +473,12 @@ export const FEATURES_TYPES: BlockType<FeaturesFamily>[] = [
   { slug: "features-photo-tabs-panel", family: "interactive" },
   { slug: "features-accordion-photo", family: "interactive" },
   { slug: "features-expanding-step-cards", family: "interactive" },
+  { slug: "features-compare-panels-chat-answer", family: "product-in-use" },
+  { slug: "features-numbered-steps-floating-cards", family: "product-in-use", inverse: true },
+  { slug: "features-solid-colour-cards", family: "product-in-use" },
+  { slug: "features-icon-titled-preview-rail", family: "product-in-use" },
+  { slug: "features-tinted-product-bento", family: "product-in-use" },
+  { slug: "features-showcase-card-pair", family: "product-in-use", inverse: true },
 ]
 
 export const ALL_BLOCK_TYPES: BlockType[] = [
