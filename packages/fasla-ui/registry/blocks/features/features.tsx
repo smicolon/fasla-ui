@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { ImageIcon } from "lucide-react"
 import { cn } from "../../../src/lib/utils"
 
 /*
@@ -61,13 +62,20 @@ export interface FeaturesPhotoSlotProps extends React.HTMLAttributes<HTMLDivElem
 
 /**
  * A photo slot: a `muted` box that the photo fills edge to edge, cropped to
- * fit. Without a photo the box stays, so a block keeps its shape. Anything
- * passed as children draws over the photo.
+ * fit. Without a photo the box stays, so a block keeps its shape, and a faint
+ * image mark says the slot is empty on purpose (`data-empty`). Anything passed
+ * as children draws over the photo.
  */
 export function FeaturesPhotoSlot({ photo, imageClassName, className, children, ...props }: FeaturesPhotoSlotProps) {
   return (
-    <div className={cn("relative overflow-hidden bg-muted", className)} {...props}>
-      {photo ? <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" className={cn("absolute inset-0 size-full object-cover", imageClassName)} /> : null}
+    <div data-empty={photo ? undefined : ""} className={cn("relative overflow-hidden bg-muted", className)} {...props}>
+      {photo ? (
+        <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" className={cn("absolute inset-0 size-full object-cover", imageClassName)} />
+      ) : (
+        <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center text-muted-foreground/40">
+          <ImageIcon size={24} strokeWidth={1.5} absoluteStrokeWidth />
+        </span>
+      )}
       {children}
     </div>
   )

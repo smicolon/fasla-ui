@@ -7153,7 +7153,9 @@
       "type": "registry:block",
       "title": "Features",
       "description": "The parts every Features block is built from: the section and its 1248px column, the left-aligned header with its eyebrow, the figures helper that keeps numbers in order inside Arabic, and the hairline.",
-      "dependencies": [],
+      "dependencies": [
+        "lucide-react"
+      ],
       "registryDependencies": [],
       "files": [
         {
