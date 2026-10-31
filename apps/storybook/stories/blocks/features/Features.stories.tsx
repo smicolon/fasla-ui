@@ -5,7 +5,20 @@ import { FeaturesNumberedFeatureRows, featuresNumberedFeatureRowsCopy } from "..
 import { FeaturesFeatureChecklistColumns, featuresFeatureChecklistColumnsCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-feature-checklist-columns/FeaturesFeatureChecklistColumns"
 import { FeaturesColourBlockCards, featuresColourBlockCardsCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-colour-block-cards/FeaturesColourBlockCards"
 import { FeaturesStatFeatureBand, featuresStatFeatureBandCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-stat-feature-band/FeaturesStatFeatureBand"
-import { featuresArgTypes, featuresViewports, localeOf } from "./features-story-kit"
+import { FeaturesSplitPhotoIconList, featuresSplitPhotoIconListCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-split-photo-icon-list/FeaturesSplitPhotoIconList"
+import { FeaturesPhotoBento, featuresPhotoBentoCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-photo-bento/FeaturesPhotoBento"
+import { FeaturesDarkPhotoPanel, featuresDarkPhotoPanelCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-dark-photo-panel/FeaturesDarkPhotoPanel"
+import { FeaturesOverlayCaptionCards, featuresOverlayCaptionCardsCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-overlay-caption-cards/FeaturesOverlayCaptionCards"
+import { FeaturesFeatureListThumbnails, featuresFeatureListThumbnailsCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-feature-list-thumbnails/FeaturesFeatureListThumbnails"
+import { FeaturesPhotoFeatureChips, featuresPhotoFeatureChipsCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-photo-feature-chips/FeaturesPhotoFeatureChips"
+import { FeaturesMediaRail, featuresMediaRailCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-media-rail/FeaturesMediaRail"
+import { FeaturesFullBleedPhotoBanner, featuresFullBleedPhotoBannerCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-full-bleed-photo-banner/FeaturesFullBleedPhotoBanner"
+import { FeaturesEditorialPhotoSplit, featuresEditorialPhotoSplitCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-editorial-photo-split/FeaturesEditorialPhotoSplit"
+import { FeaturesPhotoCollage, featuresPhotoCollageCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-photo-collage/FeaturesPhotoCollage"
+import { FeaturesNotchedPhotoColumns, featuresNotchedPhotoColumnsCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-notched-photo-columns/FeaturesNotchedPhotoColumns"
+import { FeaturesPerforatedPhotoStrip, featuresPerforatedPhotoStripCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-perforated-photo-strip/FeaturesPerforatedPhotoStrip"
+import { FeaturesPortraitPhotoCardsLinkRow, featuresPortraitPhotoCardsLinkRowCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-portrait-photo-cards-link-row/FeaturesPortraitPhotoCardsLinkRow"
+import { featuresArgTypes, featuresViewports, localeOf, photoPropsOf } from "./features-story-kit"
 
 /**
  * Features: the Types of the Figma set, one block each, in the order of its
@@ -99,4 +112,173 @@ export const StatFeatureBandEmpty: StoryObj<typeof FeaturesStatFeatureBand> = {
   tags: ["!dev", "!autodocs"],
   argTypes: featuresArgTypes(FeaturesStatFeatureBand, featuresStatFeatureBandCopy, []),
   render: (args, context) => <FeaturesStatFeatureBand locale={localeOf(context)} stats={[]} {...args} />,
+}
+
+export const SplitPhotoIconList: StoryObj<typeof FeaturesSplitPhotoIconList> = {
+  name: "Split Photo + Icon List",
+  argTypes: featuresArgTypes(FeaturesSplitPhotoIconList, featuresSplitPhotoIconListCopy, []),
+  render: (args, context) => <FeaturesSplitPhotoIconList locale={localeOf(context)} {...photoPropsOf("split-photo-icon-list", context, featuresSplitPhotoIconListCopy)} {...args} />,
+}
+
+export const SplitPhotoIconListEmpty: StoryObj<typeof FeaturesSplitPhotoIconList> = {
+  name: "Split Photo + Icon List: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesSplitPhotoIconList, featuresSplitPhotoIconListCopy, []),
+  render: (args, context) => <FeaturesSplitPhotoIconList locale={localeOf(context)}  {...args} />,
+}
+
+export const PhotoBento: StoryObj<typeof FeaturesPhotoBento> = {
+  name: "Photo Bento",
+  argTypes: featuresArgTypes(FeaturesPhotoBento, featuresPhotoBentoCopy, []),
+  render: (args, context) => <FeaturesPhotoBento locale={localeOf(context)} {...photoPropsOf("photo-bento", context, featuresPhotoBentoCopy)} {...args} />,
+}
+
+export const PhotoBentoEmpty: StoryObj<typeof FeaturesPhotoBento> = {
+  name: "Photo Bento: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesPhotoBento, featuresPhotoBentoCopy, []),
+  render: (args, context) => <FeaturesPhotoBento locale={localeOf(context)}  {...args} />,
+}
+
+export const DarkPhotoPanel: StoryObj<typeof FeaturesDarkPhotoPanel> = {
+  name: "Dark Photo Panel",
+  argTypes: featuresArgTypes(FeaturesDarkPhotoPanel, featuresDarkPhotoPanelCopy, []),
+  render: (args, context) => <FeaturesDarkPhotoPanel locale={localeOf(context)} {...photoPropsOf("dark-photo-panel", context, featuresDarkPhotoPanelCopy)} {...args} />,
+}
+
+export const DarkPhotoPanelEmpty: StoryObj<typeof FeaturesDarkPhotoPanel> = {
+  name: "Dark Photo Panel: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesDarkPhotoPanel, featuresDarkPhotoPanelCopy, []),
+  render: (args, context) => <FeaturesDarkPhotoPanel locale={localeOf(context)}  {...args} />,
+}
+
+export const OverlayCaptionCards: StoryObj<typeof FeaturesOverlayCaptionCards> = {
+  name: "Overlay Caption Cards",
+  argTypes: featuresArgTypes(FeaturesOverlayCaptionCards, featuresOverlayCaptionCardsCopy, []),
+  render: (args, context) => <FeaturesOverlayCaptionCards locale={localeOf(context)} {...photoPropsOf("overlay-caption-cards", context, featuresOverlayCaptionCardsCopy)} {...args} />,
+}
+
+export const OverlayCaptionCardsEmpty: StoryObj<typeof FeaturesOverlayCaptionCards> = {
+  name: "Overlay Caption Cards: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesOverlayCaptionCards, featuresOverlayCaptionCardsCopy, []),
+  render: (args, context) => <FeaturesOverlayCaptionCards locale={localeOf(context)}  {...args} />,
+}
+
+export const FeatureListThumbnails: StoryObj<typeof FeaturesFeatureListThumbnails> = {
+  name: "Feature List + Thumbnails",
+  argTypes: featuresArgTypes(FeaturesFeatureListThumbnails, featuresFeatureListThumbnailsCopy, []),
+  render: (args, context) => <FeaturesFeatureListThumbnails locale={localeOf(context)} {...photoPropsOf("feature-list-thumbnails", context, featuresFeatureListThumbnailsCopy)} {...args} />,
+}
+
+export const FeatureListThumbnailsEmpty: StoryObj<typeof FeaturesFeatureListThumbnails> = {
+  name: "Feature List + Thumbnails: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesFeatureListThumbnails, featuresFeatureListThumbnailsCopy, []),
+  render: (args, context) => <FeaturesFeatureListThumbnails locale={localeOf(context)}  {...args} />,
+}
+
+export const PhotoFeatureChips: StoryObj<typeof FeaturesPhotoFeatureChips> = {
+  name: "Photo + Feature Chips",
+  argTypes: featuresArgTypes(FeaturesPhotoFeatureChips, featuresPhotoFeatureChipsCopy, []),
+  render: (args, context) => <FeaturesPhotoFeatureChips locale={localeOf(context)} {...photoPropsOf("photo-feature-chips", context, featuresPhotoFeatureChipsCopy)} {...args} />,
+}
+
+export const PhotoFeatureChipsEmpty: StoryObj<typeof FeaturesPhotoFeatureChips> = {
+  name: "Photo + Feature Chips: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesPhotoFeatureChips, featuresPhotoFeatureChipsCopy, []),
+  render: (args, context) => <FeaturesPhotoFeatureChips locale={localeOf(context)}  {...args} />,
+}
+
+export const MediaRail: StoryObj<typeof FeaturesMediaRail> = {
+  name: "Media Rail",
+  argTypes: featuresArgTypes(FeaturesMediaRail, featuresMediaRailCopy, []),
+  render: (args, context) => <FeaturesMediaRail locale={localeOf(context)} {...photoPropsOf("media-rail", context, featuresMediaRailCopy)} {...args} />,
+}
+
+export const MediaRailEmpty: StoryObj<typeof FeaturesMediaRail> = {
+  name: "Media Rail: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesMediaRail, featuresMediaRailCopy, []),
+  render: (args, context) => <FeaturesMediaRail locale={localeOf(context)}  {...args} />,
+}
+
+export const FullBleedPhotoBanner: StoryObj<typeof FeaturesFullBleedPhotoBanner> = {
+  name: "Full-Bleed Photo Banner",
+  argTypes: featuresArgTypes(FeaturesFullBleedPhotoBanner, featuresFullBleedPhotoBannerCopy, []),
+  render: (args, context) => <FeaturesFullBleedPhotoBanner locale={localeOf(context)} {...photoPropsOf("full-bleed-photo-banner", context, featuresFullBleedPhotoBannerCopy)} {...args} />,
+}
+
+export const FullBleedPhotoBannerEmpty: StoryObj<typeof FeaturesFullBleedPhotoBanner> = {
+  name: "Full-Bleed Photo Banner: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesFullBleedPhotoBanner, featuresFullBleedPhotoBannerCopy, []),
+  render: (args, context) => <FeaturesFullBleedPhotoBanner locale={localeOf(context)}  {...args} />,
+}
+
+export const EditorialPhotoSplit: StoryObj<typeof FeaturesEditorialPhotoSplit> = {
+  name: "Editorial Photo Split",
+  argTypes: featuresArgTypes(FeaturesEditorialPhotoSplit, featuresEditorialPhotoSplitCopy, []),
+  render: (args, context) => <FeaturesEditorialPhotoSplit locale={localeOf(context)} {...photoPropsOf("editorial-photo-split", context, featuresEditorialPhotoSplitCopy)} {...args} />,
+}
+
+export const EditorialPhotoSplitEmpty: StoryObj<typeof FeaturesEditorialPhotoSplit> = {
+  name: "Editorial Photo Split: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesEditorialPhotoSplit, featuresEditorialPhotoSplitCopy, []),
+  render: (args, context) => <FeaturesEditorialPhotoSplit locale={localeOf(context)}  {...args} />,
+}
+
+export const PhotoCollage: StoryObj<typeof FeaturesPhotoCollage> = {
+  name: "Photo Collage",
+  argTypes: featuresArgTypes(FeaturesPhotoCollage, featuresPhotoCollageCopy, []),
+  render: (args, context) => <FeaturesPhotoCollage locale={localeOf(context)} {...photoPropsOf("photo-collage", context, featuresPhotoCollageCopy)} {...args} />,
+}
+
+export const PhotoCollageEmpty: StoryObj<typeof FeaturesPhotoCollage> = {
+  name: "Photo Collage: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesPhotoCollage, featuresPhotoCollageCopy, []),
+  render: (args, context) => <FeaturesPhotoCollage locale={localeOf(context)}  {...args} />,
+}
+
+export const NotchedPhotoColumns: StoryObj<typeof FeaturesNotchedPhotoColumns> = {
+  name: "Notched Photo Columns",
+  argTypes: featuresArgTypes(FeaturesNotchedPhotoColumns, featuresNotchedPhotoColumnsCopy, []),
+  render: (args, context) => <FeaturesNotchedPhotoColumns locale={localeOf(context)} {...photoPropsOf("notched-photo-columns", context, featuresNotchedPhotoColumnsCopy)} {...args} />,
+}
+
+export const NotchedPhotoColumnsEmpty: StoryObj<typeof FeaturesNotchedPhotoColumns> = {
+  name: "Notched Photo Columns: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesNotchedPhotoColumns, featuresNotchedPhotoColumnsCopy, []),
+  render: (args, context) => <FeaturesNotchedPhotoColumns locale={localeOf(context)}  {...args} />,
+}
+
+export const PerforatedPhotoStrip: StoryObj<typeof FeaturesPerforatedPhotoStrip> = {
+  name: "Perforated Photo Strip",
+  argTypes: featuresArgTypes(FeaturesPerforatedPhotoStrip, featuresPerforatedPhotoStripCopy, []),
+  render: (args, context) => <FeaturesPerforatedPhotoStrip locale={localeOf(context)} {...photoPropsOf("perforated-photo-strip", context, featuresPerforatedPhotoStripCopy)} {...args} />,
+}
+
+export const PerforatedPhotoStripEmpty: StoryObj<typeof FeaturesPerforatedPhotoStrip> = {
+  name: "Perforated Photo Strip: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesPerforatedPhotoStrip, featuresPerforatedPhotoStripCopy, []),
+  render: (args, context) => <FeaturesPerforatedPhotoStrip locale={localeOf(context)}  {...args} />,
+}
+
+export const PortraitPhotoCardsLinkRow: StoryObj<typeof FeaturesPortraitPhotoCardsLinkRow> = {
+  name: "Portrait Photo Cards + Link Row",
+  argTypes: featuresArgTypes(FeaturesPortraitPhotoCardsLinkRow, featuresPortraitPhotoCardsLinkRowCopy, []),
+  render: (args, context) => <FeaturesPortraitPhotoCardsLinkRow locale={localeOf(context)} {...photoPropsOf("portrait-photo-cards-link-row", context, featuresPortraitPhotoCardsLinkRowCopy)} {...args} />,
+}
+
+export const PortraitPhotoCardsLinkRowEmpty: StoryObj<typeof FeaturesPortraitPhotoCardsLinkRow> = {
+  name: "Portrait Photo Cards + Link Row: Without photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: featuresArgTypes(FeaturesPortraitPhotoCardsLinkRow, featuresPortraitPhotoCardsLinkRowCopy, []),
+  render: (args, context) => <FeaturesPortraitPhotoCardsLinkRow locale={localeOf(context)}  {...args} />,
 }

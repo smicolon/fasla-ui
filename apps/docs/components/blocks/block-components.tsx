@@ -8,6 +8,7 @@ import { aboutPhotoProps } from "@/components/blocks/about-photos"
 import { careersPhotoProps } from "@/components/blocks/careers-photos"
 import { teamPhotoProps } from "@/components/blocks/team-photos"
 import { blogCardsPhotoProps } from "@/components/blocks/blog-cards-photos"
+import { featuresPhotoProps } from "@/components/blocks/features-photos"
 import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
 import { NavbarStage, navbarExample } from "@/components/blocks/navbar-examples"
 import { heroPhotoProps } from "@/components/blocks/hero-photos"
@@ -175,6 +176,17 @@ type BlogCardsCopy = Record<Locale, object>
 const withBlogCardsPhotos = (Block: AnyBlock, type: string, copy: BlogCardsCopy) =>
   function BlogCardsPreview(props: { locale: Locale }) {
     return <Block {...blogCardsPhotoProps(type, props.locale, copy)} {...props} />
+  }
+
+/**
+ * A Features Type with its demo photos, from features-photos.ts: committed
+ * photos from the Hero, Blog Cards, Gallery and About sets, added to the
+ * block's own copy by slot. Types without photos render as they are.
+ */
+type FeaturesCopy = Record<Locale, object>
+const withFeaturesPhotos = (Block: AnyBlock, type: string, copy: FeaturesCopy) =>
+  function FeaturesPreview(props: { locale: Locale }) {
+    return <Block {...featuresPhotoProps(type, props.locale, copy)} {...props} />
   }
 
 export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
@@ -882,6 +894,45 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   ),
   "features-stat-feature-band": dynamic(() =>
     import("@fasla-ui/blocks/features-stat-feature-band/FeaturesStatFeatureBand").then((m) => m.FeaturesStatFeatureBand)
+  ),
+  "features-split-photo-icon-list": dynamic(() =>
+    import("@fasla-ui/blocks/features-split-photo-icon-list/FeaturesSplitPhotoIconList").then((m) => withFeaturesPhotos(m.FeaturesSplitPhotoIconList, "split-photo-icon-list", m.featuresSplitPhotoIconListCopy))
+  ),
+  "features-photo-bento": dynamic(() =>
+    import("@fasla-ui/blocks/features-photo-bento/FeaturesPhotoBento").then((m) => withFeaturesPhotos(m.FeaturesPhotoBento, "photo-bento", m.featuresPhotoBentoCopy))
+  ),
+  "features-dark-photo-panel": dynamic(() =>
+    import("@fasla-ui/blocks/features-dark-photo-panel/FeaturesDarkPhotoPanel").then((m) => withFeaturesPhotos(m.FeaturesDarkPhotoPanel, "dark-photo-panel", m.featuresDarkPhotoPanelCopy))
+  ),
+  "features-overlay-caption-cards": dynamic(() =>
+    import("@fasla-ui/blocks/features-overlay-caption-cards/FeaturesOverlayCaptionCards").then((m) => withFeaturesPhotos(m.FeaturesOverlayCaptionCards, "overlay-caption-cards", m.featuresOverlayCaptionCardsCopy))
+  ),
+  "features-feature-list-thumbnails": dynamic(() =>
+    import("@fasla-ui/blocks/features-feature-list-thumbnails/FeaturesFeatureListThumbnails").then((m) => withFeaturesPhotos(m.FeaturesFeatureListThumbnails, "feature-list-thumbnails", m.featuresFeatureListThumbnailsCopy))
+  ),
+  "features-photo-feature-chips": dynamic(() =>
+    import("@fasla-ui/blocks/features-photo-feature-chips/FeaturesPhotoFeatureChips").then((m) => withFeaturesPhotos(m.FeaturesPhotoFeatureChips, "photo-feature-chips", m.featuresPhotoFeatureChipsCopy))
+  ),
+  "features-media-rail": dynamic(() =>
+    import("@fasla-ui/blocks/features-media-rail/FeaturesMediaRail").then((m) => withFeaturesPhotos(m.FeaturesMediaRail, "media-rail", m.featuresMediaRailCopy))
+  ),
+  "features-full-bleed-photo-banner": dynamic(() =>
+    import("@fasla-ui/blocks/features-full-bleed-photo-banner/FeaturesFullBleedPhotoBanner").then((m) => withFeaturesPhotos(m.FeaturesFullBleedPhotoBanner, "full-bleed-photo-banner", m.featuresFullBleedPhotoBannerCopy))
+  ),
+  "features-editorial-photo-split": dynamic(() =>
+    import("@fasla-ui/blocks/features-editorial-photo-split/FeaturesEditorialPhotoSplit").then((m) => withFeaturesPhotos(m.FeaturesEditorialPhotoSplit, "editorial-photo-split", m.featuresEditorialPhotoSplitCopy))
+  ),
+  "features-photo-collage": dynamic(() =>
+    import("@fasla-ui/blocks/features-photo-collage/FeaturesPhotoCollage").then((m) => withFeaturesPhotos(m.FeaturesPhotoCollage, "photo-collage", m.featuresPhotoCollageCopy))
+  ),
+  "features-notched-photo-columns": dynamic(() =>
+    import("@fasla-ui/blocks/features-notched-photo-columns/FeaturesNotchedPhotoColumns").then((m) => withFeaturesPhotos(m.FeaturesNotchedPhotoColumns, "notched-photo-columns", m.featuresNotchedPhotoColumnsCopy))
+  ),
+  "features-perforated-photo-strip": dynamic(() =>
+    import("@fasla-ui/blocks/features-perforated-photo-strip/FeaturesPerforatedPhotoStrip").then((m) => withFeaturesPhotos(m.FeaturesPerforatedPhotoStrip, "perforated-photo-strip", m.featuresPerforatedPhotoStripCopy))
+  ),
+  "features-portrait-photo-cards-link-row": dynamic(() =>
+    import("@fasla-ui/blocks/features-portrait-photo-cards-link-row/FeaturesPortraitPhotoCardsLinkRow").then((m) => withFeaturesPhotos(m.FeaturesPortraitPhotoCardsLinkRow, "portrait-photo-cards-link-row", m.featuresPortraitPhotoCardsLinkRowCopy))
   ),
 }
 

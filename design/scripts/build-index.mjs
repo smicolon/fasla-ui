@@ -275,7 +275,10 @@ export const CODE_MAP = {
   ...Object.fromEntries(
     [
       "icon-card-grid", "compact-icon-index", "numbered-feature-rows", "feature-checklist-columns",
-      "colour-block-cards", "stat-feature-band",
+      "colour-block-cards", "stat-feature-band", "split-photo-icon-list", "photo-bento", "dark-photo-panel",
+      "overlay-caption-cards", "feature-list-thumbnails", "photo-feature-chips", "media-rail",
+      "full-bleed-photo-banner", "editorial-photo-split", "photo-collage", "notched-photo-columns",
+      "perforated-photo-strip", "portrait-photo-cards-link-row",
     ].map((type) => [`features-${type}`, null])
   ),
 }

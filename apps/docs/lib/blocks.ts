@@ -456,6 +456,19 @@ export const FEATURES_TYPES: BlockType<FeaturesFamily>[] = [
   { slug: "features-feature-checklist-columns", family: "icons-numbers" },
   { slug: "features-colour-block-cards", family: "icons-numbers", inverse: true },
   { slug: "features-stat-feature-band", family: "icons-numbers" },
+  { slug: "features-split-photo-icon-list", family: "photo-led" },
+  { slug: "features-photo-bento", family: "photo-led" },
+  { slug: "features-dark-photo-panel", family: "photo-led", inverse: true },
+  { slug: "features-overlay-caption-cards", family: "photo-led", inverse: true },
+  { slug: "features-feature-list-thumbnails", family: "photo-led" },
+  { slug: "features-photo-feature-chips", family: "photo-led" },
+  { slug: "features-media-rail", family: "photo-led" },
+  { slug: "features-full-bleed-photo-banner", family: "photo-led" },
+  { slug: "features-editorial-photo-split", family: "photo-led" },
+  { slug: "features-photo-collage", family: "photo-led" },
+  { slug: "features-notched-photo-columns", family: "photo-led", inverse: true },
+  { slug: "features-perforated-photo-strip", family: "photo-led" },
+  { slug: "features-portrait-photo-cards-link-row", family: "photo-led", inverse: true },
 ]
 
 export const ALL_BLOCK_TYPES: BlockType[] = [

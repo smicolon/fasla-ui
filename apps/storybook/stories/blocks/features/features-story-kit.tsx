@@ -1,5 +1,6 @@
 import type { ArgTypes } from "@storybook/react"
 import { blockArgTypes, type BlockCopy } from "../block-arg-types"
+import { featuresPhotoProps } from "../../../../docs/components/blocks/features-photos"
 
 /**
  * For Features.stories.tsx, beside it. The blocks bring their own English and
@@ -18,6 +19,9 @@ type StoryContext = { globals: { direction?: string } }
 
 /** The block's copy language, from the Direction toolbar. */
 export const localeOf = (context: StoryContext): "en" | "ar" => (context.globals.direction === "rtl" ? "ar" : "en")
+
+/** The props that give a Type its demo photos, described in the toolbar's language. */
+export const photoPropsOf = (type: string, context: StoryContext, copy?: BlockCopy) => featuresPhotoProps(type, localeOf(context), copy)
 
 /**
  * Controls for one block's story: the shared rules in `../block-arg-types`,

@@ -46,6 +46,33 @@ export function Figures({ children }: { children: React.ReactNode }) {
   )
 }
 
+export interface FeaturesPhoto {
+  src: string
+  /** Describes the photo. Pass "" for a purely decorative one. */
+  alt: string
+}
+
+export interface FeaturesPhotoSlotProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** The photo. A `muted` placeholder shows without it. */
+  photo?: FeaturesPhoto
+  /** Classes for the image itself, such as a hover scale. */
+  imageClassName?: string
+}
+
+/**
+ * A photo slot: a `muted` box that the photo fills edge to edge, cropped to
+ * fit. Without a photo the box stays, so a block keeps its shape. Anything
+ * passed as children draws over the photo.
+ */
+export function FeaturesPhotoSlot({ photo, imageClassName, className, children, ...props }: FeaturesPhotoSlotProps) {
+  return (
+    <div className={cn("relative overflow-hidden bg-muted", className)} {...props}>
+      {photo ? <img src={photo.src} alt={photo.alt} loading="lazy" decoding="async" className={cn("absolute inset-0 size-full object-cover", imageClassName)} /> : null}
+      {children}
+    </div>
+  )
+}
+
 export interface FeaturesSectionProps extends React.HTMLAttributes<HTMLElement> {
   /** The id of the heading that names the section. */
   labelledBy?: string
@@ -53,6 +80,8 @@ export interface FeaturesSectionProps extends React.HTMLAttributes<HTMLElement> 
   contentClassName?: string
   /** The space between the header and what follows: 64px (`lg`), 48px (`md`) or 32px (`sm`), as Figma sets each Type. */
   gap?: "lg" | "md" | "sm"
+  /** Without the 32 / 64 / 96px padding, for a Type that runs a photo to the section's edge. */
+  flush?: boolean
 }
 
 /**
@@ -60,10 +89,10 @@ export interface FeaturesSectionProps extends React.HTMLAttributes<HTMLElement> 
  * `className`), padding 32 on phones, 64 on Tablet and 96 on Desktop, and a
  * 1248px column.
  */
-export function FeaturesSection({ labelledBy, className, contentClassName, gap = "lg", children, ...props }: FeaturesSectionProps) {
+export function FeaturesSection({ labelledBy, className, contentClassName, gap = "lg", flush = false, children, ...props }: FeaturesSectionProps) {
   return (
     <section aria-labelledby={labelledBy} className={cn("[container-type:inline-size] bg-background text-foreground", className)} {...props}>
-      <div className="p-8 [@container(min-width:48rem)]:p-16 [@container(min-width:72rem)]:p-24">
+      <div className={flush ? undefined : "p-8 [@container(min-width:48rem)]:p-16 [@container(min-width:72rem)]:p-24"}>
         <div
           className={cn(
             "mx-auto flex w-full max-w-[1248px] flex-col",
