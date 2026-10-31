@@ -304,18 +304,23 @@ describe("Screen Share Stage", () => {
     restore()
   })
 
-  it("keeps the slide in the direction of what was captured, whatever the page's", () => {
-    const { container, rerender } = render(
-      <div dir="rtl">
-        <VideoCallScreenShareStage locale="en" />
-      </div>
+  it("keeps the slide in the direction of what was captured, whatever the page's", async () => {
+    // The dock's More menu (Base UI) settles its own state after a render; await it so the update is inside act.
+    const { container, rerender } = await act(async () =>
+      render(
+        <div dir="rtl">
+          <VideoCallScreenShareStage locale="en" />
+        </div>
+      )
     )
     expect(container.querySelector("[data-shared-surface]")).toHaveAttribute("dir", "ltr")
-    rerender(
-      <div dir="ltr">
-        <VideoCallScreenShareStage locale="ar" />
-      </div>
-    )
+    await act(async () => {
+      rerender(
+        <div dir="ltr">
+          <VideoCallScreenShareStage locale="ar" />
+        </div>
+      )
+    })
     expect(container.querySelector("[data-shared-surface]")).toHaveAttribute("dir", "rtl")
   })
 
