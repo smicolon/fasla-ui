@@ -293,7 +293,7 @@ export function VideoCallUpcomingMeetings({
                   <Figures>{meeting.title}</Figures>
                 </p>
                 {meeting.live ? (
-                  <Badge variant="solid" tone="destructive" size="lg" radius="rounded" icon={<span data-dot="" className="inline-flex"><CircleDot /></span>}>
+                  <Badge variant="solid" tone="destructive" size="lg" radius="rounded" icon={<span data-dot="" className="inline-flex size-3 items-center justify-center [&>svg]:size-3"><CircleDot /></span>}>
                     {copy.liveLabel}
                   </Badge>
                 ) : null}
