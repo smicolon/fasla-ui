@@ -75,7 +75,7 @@ const COPY: Record<FooterLocale, FooterSupportContactCopy> = {
     channelsLabel: "Contact channels",
     copyright: "© 2026 Fasla. All rights reserved.",
     legal: ["Privacy", "Terms", "Cookies", "Status"].map((label) => ({ label, href: "#" })),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
   },
   ar: {
     title: "كيف نساعدك؟",
@@ -90,7 +90,7 @@ const COPY: Record<FooterLocale, FooterSupportContactCopy> = {
     channelsLabel: "قنوات التواصل",
     copyright: "© 2026 فاصلة. جميع الحقوق محفوظة.",
     legal: ["الخصوصية", "الشروط", "ملفات تعريف الارتباط", "الحالة"].map((label) => ({ label, href: "#" })),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
   },
 }
 

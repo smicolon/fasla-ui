@@ -104,7 +104,7 @@ const COPY: Record<FooterLocale, FooterAccordionSitemapCopy> = {
     ],
     copyright: FOOTER_COMMON.en.copyright,
     legal: links("Privacy", "Terms", "Cookies", "Licenses"),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
   },
   ar: {
     tagline: "التوثيق وخريطة المنتج",
@@ -153,7 +153,7 @@ const COPY: Record<FooterLocale, FooterAccordionSitemapCopy> = {
     ],
     copyright: FOOTER_COMMON.ar.copyright,
     legal: links("الخصوصية", "الشروط", "ملفات تعريف الارتباط", "التراخيص"),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
   },
 }
 

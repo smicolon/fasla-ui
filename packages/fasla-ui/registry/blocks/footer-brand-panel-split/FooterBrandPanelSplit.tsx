@@ -64,7 +64,7 @@ const COPY: Record<FooterLocale, FooterBrandPanelSplitCopy> = {
     ],
     copyright: FOOTER_COMMON.en.copyright,
     legal: links(["Privacy", "Terms", "Cookies", "Accessibility"]),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
   },
   ar: {
     headline: "ابنِه مرة واحدة. أطلقه بلغتين.",
@@ -78,7 +78,7 @@ const COPY: Record<FooterLocale, FooterBrandPanelSplitCopy> = {
     ],
     copyright: FOOTER_COMMON.ar.copyright,
     legal: links(["الخصوصية", "الشروط", "ملفات تعريف الارتباط", "إمكانية الوصول"]),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
   },
 }
 

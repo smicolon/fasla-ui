@@ -55,7 +55,7 @@ const COPY: Record<FooterLocale, FooterFourColumnDirectoryCopy> = (["en", "ar"] 
         { label: common.terms, href: "#" },
         { label: common.cookies, href: "#" },
       ],
-      legalLabel: locale === "en" ? "Legal" : "قانوني",
+      legalLabel: locale === "en" ? "Legal links" : "روابط قانونية",
     }
     return acc
   },

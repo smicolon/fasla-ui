@@ -70,7 +70,7 @@ const COPY: Record<FooterLocale, FooterBigQuestionCtaCopy> = {
     navLabel: "Footer",
     copyright: FOOTER_COMMON.en.copyright,
     legal: links("Privacy", "Terms", "Cookies", "Accessibility"),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
   },
   ar: {
     headline: "مستعدّ ليبدو إصدارك القادم أمرًا محتومًا؟",
@@ -81,7 +81,7 @@ const COPY: Record<FooterLocale, FooterBigQuestionCtaCopy> = {
     navLabel: "التذييل",
     copyright: FOOTER_COMMON.ar.copyright,
     legal: links("الخصوصية", "الشروط", "ملفات تعريف الارتباط", "إمكانية الوصول"),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
   },
 }
 

@@ -88,7 +88,7 @@ const COPY: Record<FooterLocale, FooterCommunityEventsCopy> = {
     ],
     copyright: "© 2026 Fasla. All rights reserved.",
     legal: ["Privacy", "Terms", "Code of conduct"].map((label) => ({ label, href: "#" })),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
   },
   ar: {
     eventsLabel: "قريبًا",
@@ -106,7 +106,7 @@ const COPY: Record<FooterLocale, FooterCommunityEventsCopy> = {
     ],
     copyright: "© 2026 فاصلة. جميع الحقوق محفوظة.",
     legal: ["الخصوصية", "الشروط", "مدونة السلوك"].map((label) => ({ label, href: "#" })),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
   },
 }
 

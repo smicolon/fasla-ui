@@ -269,7 +269,12 @@ export function FooterRule({ inverse = false, className }: { inverse?: boolean; 
 
 /** The Fasla mark, the lockup in the page's script, in `foreground` (or the inverse token on a dark band). */
 export function FooterLogo({ inverse = false, className, title = "" }: { inverse?: boolean; className?: string; title?: string }) {
-  return <FaslaLogo className={cn("h-8 w-auto shrink-0", inverse && "text-foreground-inverse", className)} title={title} />
+  // The span keeps the mark at the start of a column that stretches its children, and shrinks to it in a centred one.
+  return (
+    <span className="inline-flex shrink-0">
+      <FaslaLogo className={cn("h-8 w-auto shrink-0", inverse && "text-foreground-inverse", className)} title={title} />
+    </span>
+  )
 }
 
 /** The logo with a blurb under it, then whatever follows (the social row): Figma's brand block. */

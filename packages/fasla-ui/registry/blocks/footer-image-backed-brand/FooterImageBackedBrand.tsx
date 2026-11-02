@@ -20,7 +20,9 @@ import {
  * Figma: `Footer` (46380:22515), Type=Image-Backed Brand.
  *
  * An inverse band over a photo. A scrim in `background-inverse` sits between
- * the photo and the text, so the text is always `foreground-inverse` on a dark
+ * the photo and the text, so the text is always `foreground-inverse` (the sentence
+ * and the legal line too, not `muted-foreground-inverse`: in dark mode the scrim is light and
+ * the muted token would not read on it) on a dark
  * (or, in dark mode, light) ground. Centred: the logo, a 3XL Light headline and
  * a Base line, a wrapping row of eight links, five social marks at 22px, a
  * hairline, and the legal bar with four links.
@@ -65,7 +67,7 @@ const COPY: Record<FooterLocale, FooterImageBackedBrandCopy> = {
     navLabel: "Footer",
     copyright: "© 2026 Fasla. All rights reserved.",
     legal: links(["Privacy", "Terms", "Cookies", "Accessibility"]),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
   },
   ar: {
     headline: "صمّم مرة واحدة. أطلق في كل اتجاه.",
@@ -74,7 +76,7 @@ const COPY: Record<FooterLocale, FooterImageBackedBrandCopy> = {
     navLabel: "التذييل",
     copyright: "© 2026 فاصلة. جميع الحقوق محفوظة.",
     legal: links(["الخصوصية", "الشروط", "ملفات تعريف الارتباط", "إمكانية الوصول"]),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
   },
 }
 
@@ -203,7 +205,7 @@ export function FooterImageBackedBrand({
           {headline ?? copy.headline}
         </h2>
         {line ? (
-          <p data-reveal="" className="text-base text-muted-foreground-inverse">
+          <p data-reveal="" className="text-base text-foreground-inverse">
             {line}
           </p>
         ) : null}
@@ -238,7 +240,7 @@ export function FooterImageBackedBrand({
       ) : null}
       <div data-reveal="" className="flex flex-col gap-5 [@container(min-width:40rem)]:gap-8 [@container(min-width:64rem)]:gap-10">
         <FooterRule inverse />
-        <FooterLegalBar inverse copyright={<Digits text={copyright ?? copy.copyright} />} links={legal ?? copy.legal} label={legalLabel ?? copy.legalLabel} />
+        <FooterLegalBar inverse className="[&_a]:text-foreground-inverse" copyright={<span className="text-foreground-inverse"><Digits text={copyright ?? copy.copyright} /></span>} links={legal ?? copy.legal} label={legalLabel ?? copy.legalLabel} />
       </div>
     </FooterSection>
   )

@@ -78,7 +78,7 @@ const COPY: Record<FooterLocale, FooterProductFamilySwitcherCopy> = {
     company: ["About", "Careers", "Customers", "Partners", "Press", "Contact"].map((label) => ({ label, href: "#" })),
     copyright: "© 2026 Fasla. All rights reserved.",
     legal: ["Privacy", "Terms", "Cookies", "Accessibility"].map((label) => ({ label, href: "#" })),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
   },
   ar: {
     title: "نظام واحد. منتجات متعددة.",
@@ -96,7 +96,7 @@ const COPY: Record<FooterLocale, FooterProductFamilySwitcherCopy> = {
     company: ["من نحن", "الوظائف", "العملاء", "الشركاء", "الصحافة", "اتصل بنا"].map((label) => ({ label, href: "#" })),
     copyright: "© 2026 فاصلة. جميع الحقوق محفوظة.",
     legal: ["الخصوصية", "الشروط", "ملفات تعريف الارتباط", "إمكانية الوصول"].map((label) => ({ label, href: "#" })),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
   },
 }
 

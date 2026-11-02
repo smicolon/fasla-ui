@@ -79,7 +79,7 @@ const COPY: Record<FooterLocale, FooterTwoTierDoormatCopy> = {
     ],
     copyright: FOOTER_COMMON.en.copyright,
     legal: links("Privacy", "Terms", "Cookies"),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
   },
   ar: {
     columns: [
@@ -97,7 +97,7 @@ const COPY: Record<FooterLocale, FooterTwoTierDoormatCopy> = {
     ],
     copyright: FOOTER_COMMON.ar.copyright,
     legal: links("الخصوصية", "الشروط", "ملفات تعريف الارتباط"),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
   },
 }
 

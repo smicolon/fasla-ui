@@ -97,7 +97,7 @@ const COPY: Record<FooterLocale, FooterMultiRegionCopy> = {
     cardsLabel: "Regions",
     copyright: "© 2026 Fasla. Prices shown in EUR.",
     legal: ["Privacy", "Terms", "Regional terms", "Cookies"].map((label) => ({ label, href: "#" })),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
   },
   ar: {
     title: "اختر منطقتك",
@@ -128,7 +128,7 @@ const COPY: Record<FooterLocale, FooterMultiRegionCopy> = {
     cardsLabel: "المناطق",
     copyright: "© 2026 فاصلة. الأسعار معروضة باليورو.",
     legal: ["الخصوصية", "الشروط", "الشروط الإقليمية", "ملفات تعريف الارتباط"].map((label) => ({ label, href: "#" })),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
   },
 }
 

@@ -78,7 +78,7 @@ const COPY: Record<FooterLocale, FooterFloatingDemoCardCopy> = {
     ],
     copyright: FOOTER_COMMON.en.copyright,
     legal: links(FOOTER_COMMON.en.privacy, FOOTER_COMMON.en.terms, FOOTER_COMMON.en.cookies),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
   },
   ar: {
     title: "شاهد فاصلة على منتجك أنت.",
@@ -94,7 +94,7 @@ const COPY: Record<FooterLocale, FooterFloatingDemoCardCopy> = {
     ],
     copyright: FOOTER_COMMON.ar.copyright,
     legal: links(FOOTER_COMMON.ar.privacy, FOOTER_COMMON.ar.terms, FOOTER_COMMON.ar.cookies),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
   },
 }
 

@@ -81,7 +81,7 @@ const COPY: Record<FooterLocale, FooterTrustComplianceCopy> = {
     paymentsLabel: "Accepted payments",
     copyright: "© 2026 Fasla. All rights reserved.",
     legal: ["Privacy", "Terms", "Data terms", "Subprocessors", "Security", "Responsible disclosure"].map((label) => ({ label, href: "#" })),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
   },
   ar: {
     title: "مبني ليجتاز مراجعتك الأمنية.",
@@ -100,7 +100,7 @@ const COPY: Record<FooterLocale, FooterTrustComplianceCopy> = {
     paymentsLabel: "وسائل الدفع المقبولة",
     copyright: "© 2026 فاصلة. جميع الحقوق محفوظة.",
     legal: ["الخصوصية", "الشروط", "شروط البيانات", "المعالجون الفرعيون", "الأمان", "الإفصاح المسؤول"].map((label) => ({ label, href: "#" })),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
   },
 }
 

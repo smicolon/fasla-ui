@@ -73,7 +73,7 @@ const COPY: Record<FooterLocale, FooterLocalBusinessCopy> = {
     email: "you@company.com",
     copyright: "© 2026 Fasla Studio. All rights reserved.",
     legal: ["Privacy", "Terms", "Accessibility"].map((label) => ({ label, href: "#" })),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
     socialLabel: "Social",
   },
   ar: {
@@ -91,7 +91,7 @@ const COPY: Record<FooterLocale, FooterLocalBusinessCopy> = {
     email: "you@company.com",
     copyright: "© 2026 استوديو فاصلة. جميع الحقوق محفوظة.",
     legal: ["الخصوصية", "الشروط", "إمكانية الوصول"].map((label) => ({ label, href: "#" })),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
     socialLabel: "التواصل الاجتماعي",
   },
 }

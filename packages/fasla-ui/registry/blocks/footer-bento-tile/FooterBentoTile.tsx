@@ -83,7 +83,7 @@ const COPY: Record<FooterLocale, FooterBentoTileCopy> = {
     social: { title: "Follow along", sub: "Weekly component teardowns and RTL tips." },
     copyright: FOOTER_COMMON.en.copyright,
     legal: links(["Privacy", "Terms", "Cookies", "Accessibility"]),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
   },
   ar: {
     blurb: "مكوّنات ورموز وأنماط تتصرف بالطريقة نفسها في الاتجاهين.",
@@ -97,7 +97,7 @@ const COPY: Record<FooterLocale, FooterBentoTileCopy> = {
     social: { title: "تابعنا", sub: "تحليلات أسبوعية للمكوّنات ونصائح RTL." },
     copyright: FOOTER_COMMON.ar.copyright,
     legal: links(["الخصوصية", "الشروط", "ملفات تعريف الارتباط", "إمكانية الوصول"]),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
   },
 }
 

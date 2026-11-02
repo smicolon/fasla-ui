@@ -86,7 +86,7 @@ const COPY: Record<FooterLocale, FooterNewsletterSplitCopy> = {
     ],
     copyright: FOOTER_COMMON.en.copyright,
     legal: links("Privacy", "Terms", "Cookies"),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
   },
   ar: {
     headline: "كل إصدار، في بريدك.",
@@ -105,7 +105,7 @@ const COPY: Record<FooterLocale, FooterNewsletterSplitCopy> = {
     ],
     copyright: FOOTER_COMMON.ar.copyright,
     legal: links("الخصوصية", "الشروط", "ملفات تعريف الارتباط"),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
   },
 }
 

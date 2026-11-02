@@ -106,7 +106,7 @@ const COPY: Record<FooterLocale, FooterEcommerceMegaCopy> = {
     payments: ["VISA", "Mastercard", "Amex", "PayPal", "Apple Pay", "Klarna"],
     copyright: "© 2026 Fasla. All rights reserved.",
     legal: ["Privacy", "Terms", "Cookies", "Accessibility"].map((label) => ({ label, href: "#" })),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
     form: {
       placeholder: "you@company.com",
       emailLabel: "Email address",
@@ -144,7 +144,7 @@ const COPY: Record<FooterLocale, FooterEcommerceMegaCopy> = {
     payments: ["VISA", "Mastercard", "Amex", "PayPal", "Apple Pay", "Klarna"],
     copyright: "© 2026 فاصلة. جميع الحقوق محفوظة.",
     legal: ["الخصوصية", "الشروط", "ملفات تعريف الارتباط", "إمكانية الوصول"].map((label) => ({ label, href: "#" })),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
     form: {
       placeholder: "you@company.com",
       emailLabel: "البريد الإلكتروني",

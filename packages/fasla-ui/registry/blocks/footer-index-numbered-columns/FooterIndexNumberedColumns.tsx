@@ -71,7 +71,7 @@ const COPY: Record<FooterLocale, FooterIndexNumberedColumnsCopy> = {
     ],
     copyright: "© 2026 Fasla",
     legal: links("Privacy", "Terms", "Cookies"),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
     backToTop: "Back to top",
   },
   ar: {
@@ -85,7 +85,7 @@ const COPY: Record<FooterLocale, FooterIndexNumberedColumnsCopy> = {
     ],
     copyright: "© 2026 فاصلة",
     legal: links("الخصوصية", "الشروط", "ملفات تعريف الارتباط"),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
     backToTop: "العودة إلى الأعلى",
   },
 }

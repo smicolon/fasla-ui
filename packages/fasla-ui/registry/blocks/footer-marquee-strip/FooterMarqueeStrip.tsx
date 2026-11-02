@@ -51,7 +51,7 @@ const COPY: Record<FooterLocale, FooterMarqueeStripCopy> = {
     navLabel: "Footer",
     copyright: "© 2026 Fasla. All rights reserved.",
     legal: links(["Privacy", "Terms", "Cookies", "Accessibility"]),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
   },
   ar: {
     phrase: "ثنائية اللغة افتراضيًا",
@@ -59,7 +59,7 @@ const COPY: Record<FooterLocale, FooterMarqueeStripCopy> = {
     navLabel: "التذييل",
     copyright: "© 2026 فاصلة. جميع الحقوق محفوظة.",
     legal: links(["الخصوصية", "الشروط", "ملفات تعريف الارتباط", "إمكانية الوصول"]),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
   },
 }
 

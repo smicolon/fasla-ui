@@ -82,7 +82,7 @@ const COPY: Record<FooterLocale, FooterCareersCultureCopy> = {
     caption: "Studio days in Example City and Sample Town — the rest of the week is yours.",
     copyright: "© 2026 Fasla. All rights reserved.",
     legal: ["Privacy", "Terms", "Equal opportunity"].map((label) => ({ label, href: "#" })),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
   },
   ar: {
     title: "نحن نوظّف: وظائف شاغرة",
@@ -98,7 +98,7 @@ const COPY: Record<FooterLocale, FooterCareersCultureCopy> = {
     caption: "أيام استوديو في مدينة المثال وبلدة النموذج، وبقية الأسبوع لك.",
     copyright: "© 2026 فاصلة. جميع الحقوق محفوظة.",
     legal: ["الخصوصية", "الشروط", "تكافؤ الفرص"].map((label) => ({ label, href: "#" })),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
   },
 }
 

@@ -65,7 +65,7 @@ const COPY: Record<FooterLocale, FooterBigTypeLinkStackCopy> = {
     hours: { title: "Working hours", lines: ["Monday – Friday", "09:00 – 18:00 CET"] },
     copyright: "© 2026 Fasla. All rights reserved.",
     legal: links(["Privacy", "Terms", "Cookies", "Accessibility"]),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
   },
   ar: {
     rows: links(["المنتج", "التوثيق", "الأسعار", "الشركة", "اتصل بنا"]),
@@ -75,7 +75,7 @@ const COPY: Record<FooterLocale, FooterBigTypeLinkStackCopy> = {
     hours: { title: "ساعات العمل", lines: ["الاثنين – الجمعة", "09:00 – 18:00 CET"] },
     copyright: "© 2026 فاصلة. جميع الحقوق محفوظة.",
     legal: links(["الخصوصية", "الشروط", "ملفات تعريف الارتباط", "إمكانية الوصول"]),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
   },
 }
 

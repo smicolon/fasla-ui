@@ -31,13 +31,13 @@ const COPY: Record<FooterLocale, FooterSplitHairlineMicroCopy> = {
   en: {
     copyright: "© 2026 Fasla. All rights reserved.",
     legal: ["Privacy", "Terms", "Cookies"].map((label) => ({ label, href: "#" })),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
     socialLabel: "Social",
   },
   ar: {
     copyright: "© 2026 فاصلة. جميع الحقوق محفوظة.",
     legal: ["الخصوصية", "الشروط", "ملفات تعريف الارتباط"].map((label) => ({ label, href: "#" })),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
     socialLabel: "التواصل الاجتماعي",
   },
 }

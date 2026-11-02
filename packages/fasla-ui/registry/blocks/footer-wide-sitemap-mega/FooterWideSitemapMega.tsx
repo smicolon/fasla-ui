@@ -85,7 +85,7 @@ const COPY: Record<FooterLocale, FooterWideSitemapMegaCopy> = {
     status: "System status",
     copyright: "© 2026 Fasla",
     legal: links("Privacy", "Terms", "Cookies", "Sitemap"),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
   },
   ar: {
     tagline: "نظام تصميم للمنتجات ثنائية اللغة",
@@ -114,7 +114,7 @@ const COPY: Record<FooterLocale, FooterWideSitemapMegaCopy> = {
     status: "حالة النظام",
     copyright: "© 2026 فاصلة",
     legal: links("الخصوصية", "الشروط", "ملفات تعريف الارتباط", "خريطة الموقع"),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
   },
 }
 

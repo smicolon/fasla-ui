@@ -38,7 +38,7 @@ const COPY: Record<FooterLocale, FooterTwoRowCompactCopy> = {
     navLabel: "Footer",
     copyright: "© 2026 Fasla. All rights reserved.",
     legal: ["Privacy", "Terms", "Cookies", "Accessibility", "Sitemap"].map((label) => ({ label, href: "#" })),
-    legalLabel: "Legal",
+    legalLabel: "Legal links",
     socialLabel: "Social",
   },
   ar: {
@@ -46,7 +46,7 @@ const COPY: Record<FooterLocale, FooterTwoRowCompactCopy> = {
     navLabel: "التذييل",
     copyright: "© 2026 فاصلة. جميع الحقوق محفوظة.",
     legal: ["الخصوصية", "الشروط", "ملفات تعريف الارتباط", "إمكانية الوصول", "خريطة الموقع"].map((label) => ({ label, href: "#" })),
-    legalLabel: "قانوني",
+    legalLabel: "روابط قانونية",
     socialLabel: "التواصل الاجتماعي",
   },
 }
