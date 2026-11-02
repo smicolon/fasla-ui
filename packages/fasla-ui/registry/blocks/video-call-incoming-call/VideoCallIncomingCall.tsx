@@ -71,13 +71,13 @@ export interface VideoCallIncomingCallCopy {
 const COPY: Record<VideoCallLocale, VideoCallIncomingCallCopy> = {
   en: {
     label: "Calls",
-    incoming: { tag: "Incoming · ringing", id: "mona", name: "Mona Darwish", detail: "Fasla video call · Design sync", decline: "Decline", join: "Join", reply: "Reply with a message" },
+    incoming: { tag: "Incoming · ringing", id: "mazen", name: "Mazen Darwish", detail: "Fasla video call · Design sync", decline: "Decline", join: "Join", reply: "Reply with a message" },
     calling: { tag: "Calling · connecting", id: "karim", name: "Karim Nasser", detail: "Ringing on 2 devices · 00:08", cancel: "Cancel", audioOnly: "Switch to audio only" },
     missed: { tag: "Missed · 14 min ago", id: "tariq", name: "Tariq Aziz", detail: "Left a voice note · 0:24", callBack: "Call back", message: "Message", play: "Play voice note", pause: "Pause voice note" },
   },
   ar: {
     label: "المكالمات",
-    incoming: { tag: "مكالمة واردة، يرنّ", id: "mona", name: "منى درويش", detail: "مكالمة فيديو فاصلة، مزامنة التصميم", decline: "رفض", join: "انضمام", reply: "الرد برسالة" },
+    incoming: { tag: "مكالمة واردة، يرنّ", id: "mazen", name: "مازن درويش", detail: "مكالمة فيديو فاصلة، مزامنة التصميم", decline: "رفض", join: "انضمام", reply: "الرد برسالة" },
     calling: { tag: "يتم الاتصال، جارٍ الربط", id: "karim", name: "كريم ناصر", detail: "يرنّ على جهازين، 00:08", cancel: "إلغاء", audioOnly: "التحويل إلى الصوت فقط" },
     missed: { tag: "مكالمة فائتة، قبل 14 دقيقة", id: "tariq", name: "طارق عزيز", detail: "ترك رسالة صوتية، 0:24", callBack: "إعادة الاتصال", message: "رسالة", play: "تشغيل الرسالة الصوتية", pause: "إيقاف الرسالة الصوتية" },
   },
@@ -88,7 +88,7 @@ const COPY_KEYS = Object.keys(COPY.en)
 export interface VideoCallIncomingCallProps extends React.HTMLAttributes<HTMLElement>, Partial<VideoCallIncomingCallCopy> {
   /** Which language the default copy is in. The page's `dir` sets the direction. */
   locale?: VideoCallLocale
-  /** The callers' photos, by `id` (`mona`, `karim`, `tariq`). A caller without one shows a plain `muted` portrait. */
+  /** The callers' photos, by `id` (`mazen`, `karim`, `tariq`). A caller without one shows a plain `muted` portrait. */
   photos?: VideoCallPhotos
   /** Which cards to show, in order. A phone's real call shows one. */
   show?: VideoCallCallState[]

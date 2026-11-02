@@ -118,13 +118,13 @@ const COPY: Record<VideoCallLocale, VideoCallAiMeetingRecapCopy> = {
     transcript: "Open transcript",
     overviewTitle: "Overview",
     overview:
-      "The team locked the pre-join lobby as the first shippable surface. Recording and transcript work moves to the following sprint so the lobby can go out on its own. Mona takes the lobby states, Adam owns the device-permission edge cases, and the encryption copy goes to legal before Friday.",
+      "The team locked the pre-join lobby as the first shippable surface. Recording and transcript work moves to the following sprint so the lobby can go out on its own. Mazen takes the lobby states, Adam owns the device-permission edge cases, and the encryption copy goes to legal before Friday.",
     actionsTitle: "Action items",
     assigned: "3 of 5 assigned",
     actions: [
-      { id: "states", task: "Design the four lobby states incl. permission denied", owner: { id: "mona", name: "Mona Darwish" }, due: "due Fri 13 Mar", done: true },
+      { id: "states", task: "Design the four lobby states incl. permission denied", owner: { id: "mazen", name: "Mazen Darwish" }, due: "due Fri 13 Mar", done: true },
       { id: "sdk", task: "Handle the camera-blocked edge case in the browser SDK", owner: { id: "adam", name: "Adam Farouk" }, due: "due Mon 16 Mar" },
-      { id: "legal", task: "Send the encryption wording to legal for sign-off", owner: { id: "nour", name: "Nour Khalil" }, due: "due Thu 12 Mar" },
+      { id: "legal", task: "Send the encryption wording to legal for sign-off", owner: { id: "nabil", name: "Nabil Khalil" }, due: "due Thu 12 Mar" },
       { id: "ksa", task: "Confirm the dial-in numbers for KSA", owner: { id: "tariq", name: "Tariq Aziz" }, due: "due Next week" },
     ],
     dueJoin: "·",
@@ -151,13 +151,13 @@ const COPY: Record<VideoCallLocale, VideoCallAiMeetingRecapCopy> = {
     transcript: "فتح النص",
     overviewTitle: "نظرة عامة",
     overview:
-      "اتفق الفريق على أن تكون غرفة الانتظار أول واجهة قابلة للإطلاق. ينتقل عمل التسجيل والنص إلى السبرنت التالي حتى تُطلق غرفة الانتظار وحدها. تتولى منى حالات غرفة الانتظار، ويتولى آدم حالات صلاحيات الأجهزة، ويُحال نص التشفير إلى القسم القانوني قبل الجمعة.",
+      "اتفق الفريق على أن تكون غرفة الانتظار أول واجهة قابلة للإطلاق. ينتقل عمل التسجيل والنص إلى السبرنت التالي حتى تُطلق غرفة الانتظار وحدها. يتولى مازن حالات غرفة الانتظار، ويتولى آدم حالات صلاحيات الأجهزة، ويُحال نص التشفير إلى القسم القانوني قبل الجمعة.",
     actionsTitle: "بنود العمل",
     assigned: "3 من 5 مُعيّنة",
     actions: [
-      { id: "states", task: "تصميم حالات غرفة الانتظار الأربع، بما فيها رفض الصلاحية", owner: { id: "mona", name: "منى درويش" }, due: "تستحق الجمعة 13 مارس", done: true },
+      { id: "states", task: "تصميم حالات غرفة الانتظار الأربع، بما فيها رفض الصلاحية", owner: { id: "mazen", name: "مازن درويش" }, due: "تستحق الجمعة 13 مارس", done: true },
       { id: "sdk", task: "معالجة حالة حجب الكاميرا في SDK المتصفح", owner: { id: "adam", name: "آدم فاروق" }, due: "تستحق الاثنين 16 مارس" },
-      { id: "legal", task: "إرسال نص التشفير إلى القسم القانوني للموافقة", owner: { id: "nour", name: "نور خليل" }, due: "تستحق الخميس 12 مارس" },
+      { id: "legal", task: "إرسال نص التشفير إلى القسم القانوني للموافقة", owner: { id: "nabil", name: "نبيل خليل" }, due: "تستحق الخميس 12 مارس" },
       { id: "ksa", task: "تأكيد أرقام الاتصال للسعودية", owner: { id: "tariq", name: "طارق عزيز" }, due: "تستحق الأسبوع القادم" },
     ],
     dueJoin: "،",

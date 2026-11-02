@@ -130,7 +130,7 @@ describe("Hero — Call Mockup", () => {
   })
 
   it("shows a still on each tile and a face in the proof only when given photos, with initials otherwise", () => {
-    const photos = { mona: { src: "/m.webp", alt: "Mona" }, adam: { src: "/a.webp", alt: "Adam" } }
+    const photos = { mazen: { src: "/m.webp", alt: "Mazen" }, adam: { src: "/a.webp", alt: "Adam" } }
     const { container, rerender } = render(<VideoCallHeroCallMockup photos={photos} />)
     const srcs = Array.from(container.querySelectorAll("[data-hero-tile] img")).map((img) => img.getAttribute("src"))
     expect(srcs).toEqual(["/m.webp", "/a.webp"])
@@ -214,7 +214,7 @@ describe("Hero — Call Mockup", () => {
     expect(screen.getByRole("button", { name: "ابدأ غرفة مجانية" })).toBeInTheDocument()
     const proof = screen.getByText(/فريق انتقلوا هذا العام/)
     expect(proof.querySelectorAll("bdi[dir='ltr']").length).toBeGreaterThanOrEqual(2)
-    expect(container.querySelector("[data-hero-mock]")).toHaveTextContent("منى")
+    expect(container.querySelector("[data-hero-mock]")).toHaveTextContent("مازن")
     expect(container.querySelector("[data-hero-mock]")).toHaveTextContent("تسجيل")
     expect(container.querySelector("[data-hero-mock]")).toHaveTextContent("خروج")
   })

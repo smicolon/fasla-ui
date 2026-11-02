@@ -90,11 +90,11 @@ const COPY: Record<VideoCallLocale, VideoCallGridGalleryCallCopy> = {
     tileLabel: "Show tile {n} of {total}",
     participants: [
       { id: "karim", name: "Karim Nasser" },
-      { id: "mona", name: "Mona Darwish" },
+      { id: "mazen", name: "Mazen Darwish" },
       { id: "omar", name: "Omar Youssef" },
-      { id: "salma", name: "Salma Rahal", initials: "SR" },
+      { id: "salim", name: "Salim Rahal", initials: "SR" },
       { id: "tariq", name: "Tariq Aziz" },
-      { id: "yasmin", name: "Yasmin Haddad (you)" },
+      { id: "yassin", name: "Yassin Haddad (you)" },
     ],
     dock: STAGE_DOCK_COPY.en,
   },
@@ -109,11 +109,11 @@ const COPY: Record<VideoCallLocale, VideoCallGridGalleryCallCopy> = {
     tileLabel: "عرض البلاطة {n} من {total}",
     participants: [
       { id: "karim", name: "كريم ناصر" },
-      { id: "mona", name: "منى درويش" },
+      { id: "mazen", name: "مازن درويش" },
       { id: "omar", name: "عمر يوسف" },
-      { id: "salma", name: "سلمى رحال", initials: "س ر" },
+      { id: "salim", name: "سليم رحال", initials: "س ر" },
       { id: "tariq", name: "طارق عزيز" },
-      { id: "yasmin", name: "ياسمين حداد (أنت)" },
+      { id: "yassin", name: "ياسين حداد (أنت)" },
     ],
     dock: STAGE_DOCK_COPY.ar,
   },
@@ -128,7 +128,7 @@ export interface VideoCallGridGalleryCallProps extends Omit<React.HTMLAttributes
   speakingId?: string
   /** Shows REC. */
   recording?: boolean
-  /** The `id`s of the tiles that can be pinned. Defaults to your own tile, `yasmin`. */
+  /** The `id`s of the tiles that can be pinned. Defaults to your own tile, `yassin`. */
   pinnableIds?: string[]
   /** Called with the tile's `id` when it is pinned, or `null` when it is unpinned. */
   onPinnedChange?: (id: string | null) => void
@@ -173,7 +173,7 @@ export function VideoCallGridGalleryCall({
   photos,
   speakingId = "karim",
   recording = true,
-  pinnableIds = ["yasmin"],
+  pinnableIds = ["yassin"],
   onPinnedChange,
   onViewChange,
   onFullscreen,

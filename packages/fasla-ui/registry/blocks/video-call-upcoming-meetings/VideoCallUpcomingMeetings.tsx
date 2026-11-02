@@ -94,10 +94,10 @@ const COPY: Record<VideoCallLocale, VideoCallUpcomingMeetingsCopy> = {
     newMeeting: "New meeting",
     openCalendar: "Open calendar",
     meetings: [
-      { id: "design-sync", time: "10:00", duration: "45 min", title: "Design sync — weekly", meta: "Recurring · Recording on", live: true, people: ["mona", "karim", "layla", "yasmin"], more: 2 },
-      { id: "client-review", time: "11:30", duration: "30 min", title: "Client review — Q3 launch", meta: "External guests · Waiting room on", people: ["adam", "nour"] },
+      { id: "design-sync", time: "10:00", duration: "45 min", title: "Design sync — weekly", meta: "Recurring · Recording on", live: true, people: ["mazen", "karim", "laith", "yassin"], more: 2 },
+      { id: "client-review", time: "11:30", duration: "30 min", title: "Client review — Q3 launch", meta: "External guests · Waiting room on", people: ["adam", "nabil"] },
       { id: "onboarding", time: "14:00", duration: "60 min", title: "Onboarding walkthrough", meta: "Guest link · No recording", people: ["bilal", "omar", "tariq"] },
-      { id: "one-to-one", time: "16:15", duration: "20 min", title: "1:1 with Mona", meta: "Private · Notes shared after", people: ["mona"] },
+      { id: "one-to-one", time: "16:15", duration: "20 min", title: "1:1 with Mazen", meta: "Private · Notes shared after", people: ["mazen"] },
     ],
     joinNow: "Join now",
     join: "Join",
@@ -111,10 +111,10 @@ const COPY: Record<VideoCallLocale, VideoCallUpcomingMeetingsCopy> = {
     newMeeting: "اجتماع جديد",
     openCalendar: "فتح التقويم",
     meetings: [
-      { id: "design-sync", time: "10:00", duration: "45 دقيقة", title: "مزامنة التصميم الأسبوعية", meta: "متكرر، التسجيل مفعّل", live: true, people: ["mona", "karim", "layla", "yasmin"], more: 2 },
-      { id: "client-review", time: "11:30", duration: "30 دقيقة", title: "مراجعة العميل لإطلاق الربع الثالث", meta: "ضيوف خارجيون، غرفة الانتظار مفعّلة", people: ["adam", "nour"] },
+      { id: "design-sync", time: "10:00", duration: "45 دقيقة", title: "مزامنة التصميم الأسبوعية", meta: "متكرر، التسجيل مفعّل", live: true, people: ["mazen", "karim", "laith", "yassin"], more: 2 },
+      { id: "client-review", time: "11:30", duration: "30 دقيقة", title: "مراجعة العميل لإطلاق الربع الثالث", meta: "ضيوف خارجيون، غرفة الانتظار مفعّلة", people: ["adam", "nabil"] },
       { id: "onboarding", time: "14:00", duration: "60 دقيقة", title: "جولة التهيئة", meta: "رابط ضيف، بدون تسجيل", people: ["bilal", "omar", "tariq"] },
-      { id: "one-to-one", time: "16:15", duration: "20 دقيقة", title: "اجتماع فردي مع منى", meta: "خاص، تُشارك الملاحظات لاحقًا", people: ["mona"] },
+      { id: "one-to-one", time: "16:15", duration: "20 دقيقة", title: "اجتماع فردي مع مازن", meta: "خاص، تُشارك الملاحظات لاحقًا", people: ["mazen"] },
     ],
     joinNow: "انضم الآن",
     join: "انضمام",
@@ -128,8 +128,8 @@ const COPY_KEYS = Object.keys(COPY.en)
 
 /** Names for the people on a meeting, for the avatars' accessible names. */
 const PERSON_NAMES: Record<VideoCallLocale, Record<string, string>> = {
-  en: { mona: "Mona Darwish", karim: "Karim Nasser", layla: "Layla Hassan", yasmin: "Yasmin Haddad", adam: "Adam Farouk", nour: "Nour Khalil", bilal: "Bilal Sultan", omar: "Omar Youssef", tariq: "Tariq Aziz" },
-  ar: { mona: "منى درويش", karim: "كريم ناصر", layla: "ليلى حسن", yasmin: "ياسمين حداد", adam: "آدم فاروق", nour: "نور خليل", bilal: "بلال سلطان", omar: "عمر يوسف", tariq: "طارق عزيز" },
+  en: { mazen: "Mazen Darwish", karim: "Karim Nasser", laith: "Laith Hassan", yassin: "Yassin Haddad", adam: "Adam Farouk", nabil: "Nabil Khalil", bilal: "Bilal Sultan", omar: "Omar Youssef", tariq: "Tariq Aziz" },
+  ar: { mazen: "مازن درويش", karim: "كريم ناصر", laith: "ليث حسن", yassin: "ياسين حداد", adam: "آدم فاروق", nabil: "نبيل خليل", bilal: "بلال سلطان", omar: "عمر يوسف", tariq: "طارق عزيز" },
 }
 
 export interface VideoCallUpcomingMeetingsProps

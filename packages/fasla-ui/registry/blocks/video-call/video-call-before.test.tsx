@@ -190,9 +190,9 @@ describe("Waiting Room & Knock", () => {
   it("admits one guest: calls back, collapses the row, and updates the count", () => {
     const onAdmit = vi.fn()
     render(<VideoCallWaitingRoomKnock onAdmit={onAdmit} />)
-    fireEvent.click(screen.getByRole("button", { name: "Admit Nour Khalil" }))
-    expect(onAdmit).toHaveBeenCalledWith("nour")
-    expect(screen.queryByText("Nour Khalil")).toBeNull()
+    fireEvent.click(screen.getByRole("button", { name: "Admit Nabil Khalil" }))
+    expect(onAdmit).toHaveBeenCalledWith("nabil")
+    expect(screen.queryByText("Nabil Khalil")).toBeNull()
     expect(screen.getByText("2 people are waiting")).toBeInTheDocument()
   })
 
@@ -203,7 +203,7 @@ describe("Waiting Room & Knock", () => {
     fireEvent.click(screen.getByRole("button", { name: "Deny Tariq Aziz" }))
     expect(onDeny).toHaveBeenCalledWith("tariq")
     fireEvent.click(screen.getByRole("button", { name: "Admit everyone" }))
-    expect(onAdmitAll).toHaveBeenCalledWith(["nour", "hala"])
+    expect(onAdmitAll).toHaveBeenCalledWith(["nabil", "hani"])
     expect(screen.queryAllByRole("listitem")).toHaveLength(0)
     expect(screen.getByRole("status")).toHaveTextContent("No one is waiting.")
     expect(screen.queryByRole("button", { name: "Admit everyone" })).toBeNull()
@@ -227,7 +227,7 @@ describe("Waiting Room & Knock", () => {
 
   it("replaces its rows when a new list is passed, and isolates an email inside Arabic text", () => {
     const { rerender, container } = render(<VideoCallWaitingRoomKnock locale="ar" />)
-    expect(container.querySelector('bdi[dir="ltr"]')?.textContent).toContain("nour@fasla.design")
+    expect(container.querySelector('bdi[dir="ltr"]')?.textContent).toContain("nabil@fasla.design")
     rerender(<VideoCallWaitingRoomKnock locale="ar" knocks={[]} />)
     expect(screen.getByRole("status")).toHaveTextContent(videoCallWaitingRoomKnockCopy.ar.empty)
   })
@@ -259,7 +259,7 @@ describe("Incoming Call", () => {
   it("shows the three cards, and Decline on the start side with Join on the end side in the DOM order", () => {
     render(<VideoCallIncomingCall />)
     expect(screen.getAllByRole("article")).toHaveLength(3)
-    const incoming = screen.getByRole("article", { name: "Mona Darwish" })
+    const incoming = screen.getByRole("article", { name: "Mazen Darwish" })
     const names = within(incoming).getAllByRole("button").map((button) => button.getAttribute("aria-label") ?? button.textContent)
     expect(names.slice(0, 2)).toEqual(["Decline", "Join"])
   })
@@ -342,8 +342,8 @@ describe("Incoming Call", () => {
   })
 
   it("shows a photo when given one, by caller", () => {
-    render(<VideoCallIncomingCall photos={{ mona: { src: "/m.webp", alt: "Mona" } }} />)
-    expect(screen.getByAltText("Mona")).toHaveAttribute("src", "/m.webp")
+    render(<VideoCallIncomingCall photos={{ mazen: { src: "/m.webp", alt: "Mazen" } }} />)
+    expect(screen.getByAltText("Mazen")).toHaveAttribute("src", "/m.webp")
   })
 })
 
@@ -353,7 +353,7 @@ describe("Join Link & Dial-in", () => {
     const onCopy = vi.fn()
     render(<VideoCallJoinLinkDialIn onCopy={onCopy} />)
     fireEvent.click(screen.getByRole("button", { name: "Copy link" }))
-    expect(onCopy).toHaveBeenCalledWith("fasla.to/yasmin-haddad")
+    expect(onCopy).toHaveBeenCalledWith("fasla.to/yassin-haddad")
     expect(screen.getByRole("button", { name: "Copied" })).toBeInTheDocument()
     act(() => {
       vi.advanceTimersByTime(1599)
@@ -370,7 +370,7 @@ describe("Join Link & Dial-in", () => {
     Object.defineProperty(navigator, "clipboard", { value: { writeText }, configurable: true })
     render(<VideoCallJoinLinkDialIn />)
     fireEvent.click(screen.getByRole("button", { name: "Copy link" }))
-    expect(writeText).toHaveBeenCalledWith("fasla.to/yasmin-haddad")
+    expect(writeText).toHaveBeenCalledWith("fasla.to/yassin-haddad")
   })
 
   it("calls back for each share and for Manage room settings", () => {
@@ -407,7 +407,7 @@ describe("Join Link & Dial-in", () => {
     for (const entry of copy.numbers) expect(screen.getByText(entry.country)).toBeInTheDocument()
     for (const setting of copy.settings) expect(screen.getByText(setting.label)).toBeInTheDocument()
     const bdi = Array.from(container.querySelectorAll('bdi[dir="ltr"]')).map((node) => node.textContent)
-    expect(bdi).toContain("fasla.to/yasmin-haddad")
+    expect(bdi).toContain("fasla.to/yassin-haddad")
     expect(bdi).toContain("+971 4 555 0198")
   })
 

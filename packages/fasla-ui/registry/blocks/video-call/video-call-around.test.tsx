@@ -187,7 +187,7 @@ describe("Call Ended Summary", () => {
   it("shows the still and the people's photos only when given them, with initials otherwise", () => {
     const { rerender } = render(<VideoCallCallEndedSummary />)
     expect(screen.queryByAltText("A hall")).toBeNull()
-    rerender(<VideoCallCallEndedSummary photo={{ src: "/hall.webp", alt: "A hall" }} photos={{ mona: { src: "/m.webp", alt: "Mona" } }} />)
+    rerender(<VideoCallCallEndedSummary photo={{ src: "/hall.webp", alt: "A hall" }} photos={{ mazen: { src: "/m.webp", alt: "Mazen" } }} />)
     expect(screen.getByAltText("A hall")).toHaveAttribute("src", "/hall.webp")
   })
 
@@ -257,7 +257,7 @@ describe("Upcoming Meetings", () => {
   it("names each row's More button after its meeting and calls back", () => {
     const onMore = vi.fn()
     render(<VideoCallUpcomingMeetings onMore={onMore} />)
-    fireEvent.click(screen.getByRole("button", { name: "More options for 1:1 with Mona" }))
+    fireEvent.click(screen.getByRole("button", { name: "More options for 1:1 with Mazen" }))
     expect(onMore).toHaveBeenCalledWith("one-to-one")
   })
 
@@ -274,7 +274,7 @@ describe("Upcoming Meetings", () => {
   it("keeps clock times left to right in Arabic and shows an avatar for every person on a meeting", () => {
     const { container } = render(
       <div dir="rtl">
-        <VideoCallUpcomingMeetings locale="ar" photos={{ mona: { src: "/m.webp", alt: "Mona" } }} />
+        <VideoCallUpcomingMeetings locale="ar" photos={{ mazen: { src: "/m.webp", alt: "Mazen" } }} />
       </div>
     )
     expect(screen.getByRole("heading", { level: 2 }).textContent).toContain("12 مارس")
@@ -412,7 +412,7 @@ describe("AI Meeting Recap", () => {
       </div>
     )
     expect(screen.getByRole("heading", { level: 2, name: "مزامنة التصميم الأسبوعية" })).toBeInTheDocument()
-    expect(container.textContent).toContain("منى درويش")
+    expect(container.textContent).toContain("مازن درويش")
     expect(container.textContent).not.toContain("·")
     expect(Array.from(container.querySelectorAll("bdi[dir='ltr']")).map((node) => node.textContent)).toContain("04:12")
     expect(screen.getByAltText("تسجيل")).toHaveAttribute("src", "/r.webp")

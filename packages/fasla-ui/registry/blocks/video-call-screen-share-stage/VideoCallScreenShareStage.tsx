@@ -114,8 +114,8 @@ const COPY: Record<VideoCallLocale, VideoCallScreenShareStageCopy> = {
     ],
     participants: [
       { id: "karim", name: "Karim (presenting)" },
-      { id: "mona", name: "Mona Darwish" },
-      { id: "salma", name: "Salma Rahal", initials: "SR" },
+      { id: "mazen", name: "Mazen Darwish" },
+      { id: "salim", name: "Salim Rahal", initials: "SR" },
     ],
     dock: STAGE_DOCK_COPY.en,
   },
@@ -136,8 +136,8 @@ const COPY: Record<VideoCallLocale, VideoCallScreenShareStageCopy> = {
     ],
     participants: [
       { id: "karim", name: "كريم (يشارك)" },
-      { id: "mona", name: "منى درويش" },
-      { id: "salma", name: "سلمى رحال", initials: "س ر" },
+      { id: "mazen", name: "مازن درويش" },
+      { id: "salim", name: "سليم رحال", initials: "س ر" },
     ],
     dock: STAGE_DOCK_COPY.ar,
   },

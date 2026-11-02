@@ -135,7 +135,7 @@ const COPY: Record<VideoCallLocale, VideoCallCallEndedSummaryCopy> = {
     ],
     chipsLabel: "What stood out",
     people: [
-      { id: "mona", name: "Mona Darwish" },
+      { id: "mazen", name: "Mazen Darwish" },
       { id: "karim", name: "Karim Nasser" },
       { id: "omar", name: "Omar Youssef" },
       { id: "tariq", name: "Tariq Aziz" },
@@ -170,7 +170,7 @@ const COPY: Record<VideoCallLocale, VideoCallCallEndedSummaryCopy> = {
     ],
     chipsLabel: "ما لفت انتباهك",
     people: [
-      { id: "mona", name: "منى درويش" },
+      { id: "mazen", name: "مازن درويش" },
       { id: "karim", name: "كريم ناصر" },
       { id: "omar", name: "عمر يوسف" },
       { id: "tariq", name: "طارق عزيز" },

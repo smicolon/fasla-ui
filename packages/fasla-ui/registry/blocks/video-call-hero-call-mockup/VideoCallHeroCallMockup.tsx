@@ -55,7 +55,7 @@ import {
 export interface VideoCallHeroTile {
   /** Keys the tile, and picks its photo from `photos`. */
   id: string
-  /** The name on the chip: `Mona`. */
+  /** The name on the chip: `Mazen`. */
   name: string
 }
 
@@ -97,14 +97,14 @@ const COPY: Record<VideoCallLocale, VideoCallHeroCallMockupCopy> = {
     tour: "Watch a 2-min tour",
     proof: "4.9 from 2,100 teams that switched this year",
     ratingLabel: "Rated 4.9 out of 5",
-    people: ["mona", "karim", "nour", "tariq", "layla"],
+    people: ["mazen", "karim", "nabil", "tariq", "laith"],
     mockupTitle: "Design sync",
     rec: "REC",
     count: "3",
     tiles: [
-      { id: "mona", name: "Mona" },
+      { id: "mazen", name: "Mazen" },
       { id: "adam", name: "Adam" },
-      { id: "nour", name: "Nour" },
+      { id: "nabil", name: "Nabil" },
     ],
     controls: ["Mute", "Camera", "Share screen", "Chat", "Raise hand"],
     leave: "Leave",
@@ -117,14 +117,14 @@ const COPY: Record<VideoCallLocale, VideoCallHeroCallMockupCopy> = {
     tour: "شاهد جولة بدقيقتين",
     proof: "4.9 من 2,100 فريق انتقلوا هذا العام",
     ratingLabel: "تقييم 4.9 من 5",
-    people: ["mona", "karim", "nour", "tariq", "layla"],
+    people: ["mazen", "karim", "nabil", "tariq", "laith"],
     mockupTitle: "مزامنة التصميم",
     rec: "تسجيل",
     count: "3",
     tiles: [
-      { id: "mona", name: "منى" },
+      { id: "mazen", name: "مازن" },
       { id: "adam", name: "آدم" },
-      { id: "nour", name: "نور" },
+      { id: "nabil", name: "نبيل" },
     ],
     controls: ["كتم", "الكاميرا", "مشاركة الشاشة", "الدردشة", "رفع اليد"],
     leave: "خروج",
@@ -135,8 +135,8 @@ const COPY_KEYS = Object.keys(COPY.en)
 
 /** Names for the faces in the proof, for the avatars' accessible names. */
 const PERSON_NAMES: Record<VideoCallLocale, Record<string, string>> = {
-  en: { mona: "Mona Darwish", karim: "Karim Nasser", nour: "Nour Khalil", tariq: "Tariq Aziz", layla: "Layla Hassan" },
-  ar: { mona: "منى درويش", karim: "كريم ناصر", nour: "نور خليل", tariq: "طارق عزيز", layla: "ليلى حسن" },
+  en: { mazen: "Mazen Darwish", karim: "Karim Nasser", nabil: "Nabil Khalil", tariq: "Tariq Aziz", laith: "Laith Hassan" },
+  ar: { mazen: "مازن درويش", karim: "كريم ناصر", nabil: "نبيل خليل", tariq: "طارق عزيز", laith: "ليث حسن" },
 }
 
 export interface VideoCallHeroCallMockupProps

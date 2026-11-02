@@ -249,19 +249,19 @@ describe("StageBar and ParticipantTile", () => {
   })
 
   it("names a tile on its chip, shows the mic-off mark when muted, and draws the speaking ring", () => {
-    const { rerender } = render(<ParticipantTile name="Mona Darwish" photo={{ src: "/m.webp", alt: "Mona" }} speaking data-testid="tile" />)
-    expect(screen.getByAltText("Mona")).toHaveAttribute("src", "/m.webp")
-    expect(screen.getByText("Mona Darwish")).toBeInTheDocument()
+    const { rerender } = render(<ParticipantTile name="Mazen Darwish" photo={{ src: "/m.webp", alt: "Mazen" }} speaking data-testid="tile" />)
+    expect(screen.getByAltText("Mazen")).toHaveAttribute("src", "/m.webp")
+    expect(screen.getByText("Mazen Darwish")).toBeInTheDocument()
     expect(screen.getByTestId("tile")).toHaveAttribute("data-speaking")
     expect(screen.getByTestId("tile").className).toContain("ring-border")
-    rerender(<ParticipantTile name="Mona Darwish" initials="MD" muted data-testid="tile" />)
+    rerender(<ParticipantTile name="Mazen Darwish" initials="MD" muted data-testid="tile" />)
     expect(screen.getByText("MD")).toBeInTheDocument()
     expect(screen.getByTestId("tile")).not.toHaveAttribute("data-speaking")
   })
 
   it("lifts a phone tile's initials clear of the name chip, and hands the Tablet size back to the larger tile", () => {
     // Measured in Chrome at 360px: a 72px tile has 34px above its chip, and Arabic initials at text-2xl ran under it.
-    render(<ParticipantTile name="Hala Mansour" initials="HM" />)
+    render(<ParticipantTile name="Hani Mansour" initials="HM" />)
     const initials = screen.getByText("HM")
     expect(initials).toHaveClass("pb-10", "text-xl", "leading-none")
     expect(initials.className).toContain("[@container(min-width:40rem)]:pb-6")
@@ -269,10 +269,10 @@ describe("StageBar and ParticipantTile", () => {
   })
 
   it("crops a photo around its own focal point, and keeps the tile's default without one", () => {
-    const { rerender } = render(<ParticipantTile name="Mona" photo={{ src: "/m.webp", alt: "Mona", position: "50% 43%" }} />)
-    expect(screen.getByRole("img", { name: "Mona" })).toHaveStyle({ objectPosition: "50% 43%" })
-    rerender(<ParticipantTile name="Mona" photo={{ src: "/m.webp", alt: "Mona" }} />)
-    expect(screen.getByRole("img", { name: "Mona" }).style.objectPosition).toBe("")
+    const { rerender } = render(<ParticipantTile name="Mazen" photo={{ src: "/m.webp", alt: "Mazen", position: "50% 43%" }} />)
+    expect(screen.getByRole("img", { name: "Mazen" })).toHaveStyle({ objectPosition: "50% 43%" })
+    rerender(<ParticipantTile name="Mazen" photo={{ src: "/m.webp", alt: "Mazen" }} />)
+    expect(screen.getByRole("img", { name: "Mazen" }).style.objectPosition).toBe("")
   })
 
   it("puts the name chip on the start or the end, or leaves it out", () => {
@@ -625,7 +625,7 @@ describe("Captions & Reactions", () => {
   it("shows the speaker, the raise-hand chip, the two caption lines and the picker, in English", () => {
     render(<VideoCallCaptionsReactions photo={{ src: "/k.webp", alt: "Adam" }} />)
     expect(screen.getByAltText("Adam")).toHaveAttribute("src", "/k.webp")
-    expect(screen.getAllByText("Nour Khalil raised a hand · 2 in queue")).toHaveLength(1)
+    expect(screen.getAllByText("Nabil Khalil raised a hand · 2 in queue")).toHaveLength(1)
     expect(screen.getByText("Live captions · English")).toBeInTheDocument()
     expect(screen.getByText("Agreed. I'll take the lobby states.")).toBeInTheDocument()
     expect(screen.getByRole("group", { name: "Send a reaction" })).toBeInTheDocument()
@@ -700,7 +700,7 @@ describe("Captions & Reactions", () => {
 
   it("gives the phone a short chip and leaves the speaker chip to Tablet and up", () => {
     render(<VideoCallCaptionsReactions />)
-    expect(screen.getByText("Nour K. · 2 in queue")).toHaveClass("[@container(min-width:40rem)]:hidden")
+    expect(screen.getByText("Nabil K. · 2 in queue")).toHaveClass("[@container(min-width:40rem)]:hidden")
     const chip = document.querySelector("[class*='bottom-5'][class*='absolute']")!
     expect(chip).toHaveTextContent("Adam Farouk")
     expect(chip).toHaveClass("hidden", "[@container(min-width:40rem)]:inline-flex")
@@ -776,14 +776,14 @@ describe("Captions & Reactions", () => {
   it("speaks Arabic with the names in Arabic, no dashes or middle dots in the prose and Western digits", () => {
     render(<div dir="rtl"><VideoCallCaptionsReactions locale="ar" /></div>)
     expect(screen.getByText("التسميات المباشرة بالإنجليزية")).toBeInTheDocument()
-    expect(screen.getByText("منى درويش")).toBeInTheDocument()
+    expect(screen.getByText("مازن درويش")).toBeInTheDocument()
     const arabic = strings(videoCallCaptionsReactionsCopy.ar).join(" ")
     expect(arabic).not.toMatch(/—|·|\(|[A-Za-z]{3,}/)
     expect(arabic).not.toMatch(/[٠-٩]/)
     const figures = [...document.querySelectorAll("bdi")].filter((bdi) => bdi.textContent === "2")
     expect(figures.length).toBeGreaterThan(0)
     for (const figure of figures) expect(figure).toHaveAttribute("dir", "ltr")
-    expect(figures.map((figure) => figure.parentElement?.textContent)).toContain("نور خليل رفعت يدها، 2 في الانتظار")
+    expect(figures.map((figure) => figure.parentElement?.textContent)).toContain("نبيل خليل رفع يده، 2 في الانتظار")
   })
 
   it("does not ask for a camera or draw a video element", () => {

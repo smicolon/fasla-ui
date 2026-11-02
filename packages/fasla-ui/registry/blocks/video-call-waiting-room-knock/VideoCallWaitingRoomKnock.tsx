@@ -53,7 +53,7 @@ export interface VideoCallKnock {
   id: string
   /** Their name. */
   name: string
-  /** How they were invited, such as `nour@fasla.design · invited`. */
+  /** How they were invited, such as `nabil@fasla.design · invited`. */
   detail: string
   /** Letters for a guest with no photo. */
   initials?: string
@@ -115,8 +115,8 @@ const COPY: Record<VideoCallLocale, VideoCallWaitingRoomKnockCopy> = {
     keepLocked: "Keep locked",
     note: "External guests are always held in the waiting room, even with the link.",
     knocks: [
-      { id: "nour", name: "Nour Khalil", detail: "nour@fasla.design · invited" },
-      { id: "hala", name: "Hala Mansour", detail: "Guest link · not signed in", initials: "HM" },
+      { id: "nabil", name: "Nabil Khalil", detail: "nabil@fasla.design · invited" },
+      { id: "hani", name: "Hani Mansour", detail: "Guest link · not signed in", initials: "HM" },
       { id: "tariq", name: "Tariq Aziz", detail: "tariq@northwind.co · external" },
     ],
   },
@@ -139,8 +139,8 @@ const COPY: Record<VideoCallLocale, VideoCallWaitingRoomKnockCopy> = {
     keepLocked: "إبقاء القفل",
     note: "يُحتجز الضيوف الخارجيون دائمًا في غرفة الانتظار، حتى مع وجود الرابط.",
     knocks: [
-      { id: "nour", name: "نور خليل", detail: "nour@fasla.design، مدعوّ" },
-      { id: "hala", name: "هالة منصور", detail: "رابط ضيف، غير مسجّل", initials: "ه م" },
+      { id: "nabil", name: "نبيل خليل", detail: "nabil@fasla.design، مدعوّ" },
+      { id: "hani", name: "هاني منصور", detail: "رابط ضيف، غير مسجّل", initials: "ه م" },
       { id: "tariq", name: "طارق عزيز", detail: "tariq@northwind.co، خارجي" },
     ],
   },
@@ -151,7 +151,7 @@ const COPY_KEYS = Object.keys(COPY.en)
 export interface VideoCallWaitingRoomKnockProps extends React.HTMLAttributes<HTMLElement>, Partial<VideoCallWaitingRoomKnockCopy> {
   /** Which language the default copy is in. The page's `dir` sets the direction. */
   locale?: VideoCallLocale
-  /** The photos, by `id`: the guests', and `yasmin` for the guest's own preview. A guest without one shows initials. */
+  /** The photos, by `id`: the guests', and `yassin` for the guest's own preview. A guest without one shows initials. */
   photos?: VideoCallPhotos
   /** Called with the guest's id when Admit is pressed. */
   onAdmit?: (id: string) => void
@@ -259,7 +259,7 @@ export function VideoCallWaitingRoomKnock({
             aria-hidden
             className="absolute end-3 top-3 h-[58px] w-24 overflow-hidden rounded-lg bg-muted [@container(min-width:40rem)]:end-6 [@container(min-width:40rem)]:top-6 [@container(min-width:40rem)]:h-24 [@container(min-width:40rem)]:w-40"
           >
-            {photos?.yasmin ? <img src={photos.yasmin.src} alt="" loading="lazy" decoding="async" style={photos.yasmin.position ? { objectPosition: photos.yasmin.position } : undefined} className="size-full object-cover object-[50%_35%]" /> : null}
+            {photos?.yassin ? <img src={photos.yassin.src} alt="" loading="lazy" decoding="async" style={photos.yassin.position ? { objectPosition: photos.yassin.position } : undefined} className="size-full object-cover object-[50%_35%]" /> : null}
           </div>
           <div ref={lock} className={cn("flex size-[72px] items-center justify-center rounded-full text-primary", TINT)}>
             <LockKeyhole aria-hidden className="size-7" />

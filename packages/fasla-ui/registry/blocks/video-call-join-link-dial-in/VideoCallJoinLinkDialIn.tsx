@@ -98,7 +98,7 @@ const COPY: Record<VideoCallLocale, VideoCallJoinLinkDialInCopy> = {
   en: {
     title: "Your personal room is always on",
     subtitle: "Share one link. Nobody installs anything.",
-    link: "fasla.to/yasmin-haddad",
+    link: "fasla.to/yassin-haddad",
     copy: "Copy link",
     copied: "Copied",
     shares: ["Email invite", "Add to calendar", "Invite by name", "More ways"],
@@ -125,7 +125,7 @@ const COPY: Record<VideoCallLocale, VideoCallJoinLinkDialInCopy> = {
   ar: {
     title: "غرفتك الشخصية مفتوحة دائمًا",
     subtitle: "شارك رابطًا واحدًا. لا حاجة لتثبيت أي شيء.",
-    link: "fasla.to/yasmin-haddad",
+    link: "fasla.to/yassin-haddad",
     copy: "نسخ الرابط",
     copied: "تم النسخ",
     shares: ["دعوة بالبريد", "إضافة إلى التقويم", "دعوة بالاسم", "طرق أخرى"],

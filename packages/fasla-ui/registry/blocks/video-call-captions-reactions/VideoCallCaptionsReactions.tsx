@@ -72,9 +72,9 @@ export interface VideoCallCaption {
 }
 
 export interface VideoCallHandQueue {
-  /** Who raised a hand, in full: `Nour Khalil`. */
+  /** Who raised a hand, in full: `Nabil Khalil`. */
   name: string
-  /** The short form phones show: `Nour K.`. */
+  /** The short form phones show: `Nabil K.`. */
   shortName: string
   /** How many are waiting. */
   count: number
@@ -120,7 +120,7 @@ const COPY: Record<VideoCallLocale, VideoCallCaptionsReactionsCopy> = {
     captionsTitle: "Live captions · English",
     captions: [
       { id: "c1", speaker: "Adam Farouk", text: "— so the short version is we ship the lobby first, then the recording pipeline." },
-      { id: "c2", speaker: "Mona Darwish", text: "Agreed. I'll take the lobby states." },
+      { id: "c2", speaker: "Mazen Darwish", text: "Agreed. I'll take the lobby states." },
     ],
     speaker: "Adam Farouk",
     handQueueFull: "{name} raised a hand · {count} in queue",
@@ -150,10 +150,10 @@ const COPY: Record<VideoCallLocale, VideoCallCaptionsReactionsCopy> = {
     captionsTitle: "التسميات المباشرة بالإنجليزية",
     captions: [
       { id: "c1", speaker: "آدم فاروق", text: "باختصار، نطلق غرفة الانتظار أولاً، ثم مسار التسجيل." },
-      { id: "c2", speaker: "منى درويش", text: "موافقة. سأتولى حالات غرفة الانتظار." },
+      { id: "c2", speaker: "مازن درويش", text: "موافق. سأتولى حالات غرفة الانتظار." },
     ],
     speaker: "آدم فاروق",
-    handQueueFull: "{name} رفعت يدها، {count} في الانتظار",
+    handQueueFull: "{name} رفع يده، {count} في الانتظار",
     handQueueShort: "{name}، {count} في الانتظار",
     reactionLabels: { "thumbs-up": "إعجاب", heart: "قلب", celebrate: "احتفال", smile: "ابتسامة", hand: "يد مرفوعة" },
     pickerLabel: "أرسل تفاعلًا",
@@ -180,8 +180,8 @@ const COPY: Record<VideoCallLocale, VideoCallCaptionsReactionsCopy> = {
 
 /** The hand-queue people Figma shows, in each language. */
 const HAND: Record<VideoCallLocale, VideoCallHandQueue> = {
-  en: { name: "Nour Khalil", shortName: "Nour K.", count: 2 },
-  ar: { name: "نور خليل", shortName: "نور خ.", count: 2 },
+  en: { name: "Nabil Khalil", shortName: "Nabil K.", count: 2 },
+  ar: { name: "نبيل خليل", shortName: "نبيل خ.", count: 2 },
 }
 
 const MAX_FLOATING = 8

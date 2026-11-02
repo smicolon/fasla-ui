@@ -154,7 +154,7 @@ describe("Grid Gallery Call", () => {
   it("shows the six people, a Leave, and three pager dots for the phone", () => {
     const { container } = render(<VideoCallGridGalleryCall />)
     expect(screen.getByText("Karim Nasser")).toBeInTheDocument()
-    expect(screen.getByText("Yasmin Haddad (you)")).toBeInTheDocument()
+    expect(screen.getByText("Yassin Haddad (you)")).toBeInTheDocument()
     expect(container.querySelectorAll("[data-flip]")).toHaveLength(6)
     expect(container.querySelectorAll('[data-slot="carousel-dot"]')).toHaveLength(3)
     expect(screen.getByRole("button", { name: "Leave" })).toBeInTheDocument()
@@ -172,20 +172,20 @@ describe("Grid Gallery Call", () => {
     const { container, rerender } = render(<VideoCallGridGalleryCall speakingId="karim" />)
     const ring = () => [...container.querySelectorAll("[data-flip]")].filter((tile) => tile.hasAttribute("data-speaking")).map((tile) => tile.getAttribute("data-flip"))
     expect(ring()).toEqual(["karim"])
-    rerender(<VideoCallGridGalleryCall speakingId="mona" />)
+    rerender(<VideoCallGridGalleryCall speakingId="mazen" />)
     expect(ring()).toEqual(["karim"])
     act(() => void vi.advanceTimersByTime(401))
-    expect(ring()).toEqual(["mona"])
+    expect(ring()).toEqual(["mazen"])
   })
 
   it("pins your own tile and says so, and offers no pin on the others", () => {
     const onPinnedChange = vi.fn()
     render(<VideoCallGridGalleryCall onPinnedChange={onPinnedChange} />)
     expect(screen.getAllByRole("button", { name: /^Pin /i })).toHaveLength(1)
-    fireEvent.click(screen.getByRole("button", { name: "Pin Yasmin Haddad (you)" }))
-    expect(onPinnedChange).toHaveBeenLastCalledWith("yasmin")
-    expect(screen.getByRole("button", { name: "Pin Yasmin Haddad (you)" })).toHaveAttribute("aria-pressed", "true")
-    fireEvent.click(screen.getByRole("button", { name: "Pin Yasmin Haddad (you)" }))
+    fireEvent.click(screen.getByRole("button", { name: "Pin Yassin Haddad (you)" }))
+    expect(onPinnedChange).toHaveBeenLastCalledWith("yassin")
+    expect(screen.getByRole("button", { name: "Pin Yassin Haddad (you)" })).toHaveAttribute("aria-pressed", "true")
+    fireEvent.click(screen.getByRole("button", { name: "Pin Yassin Haddad (you)" }))
     expect(onPinnedChange).toHaveBeenLastCalledWith(null)
   })
 
@@ -231,26 +231,26 @@ describe("Speaker & Filmstrip", () => {
   it("makes a pressed thumbnail the speaker, and says so", () => {
     const onSpeakerChange = vi.fn()
     const { container } = render(<VideoCallSpeakerFilmstrip onSpeakerChange={onSpeakerChange} />)
-    fireEvent.click(screen.getByRole("button", { name: "Make Nour Khalil the speaker" }))
-    expect(onSpeakerChange).toHaveBeenCalledWith("nour")
-    expect(screen.getByText("Nour Khalil — speaking")).toBeInTheDocument()
+    fireEvent.click(screen.getByRole("button", { name: "Make Nabil Khalil the speaker" }))
+    expect(onSpeakerChange).toHaveBeenCalledWith("nabil")
+    expect(screen.getByText("Nabil Khalil — speaking")).toBeInTheDocument()
     expect(container.querySelector('[data-thumb="adam"]')).not.toBeNull()
   })
 
   it("swaps to a new speaker from outside, unless someone is pinned", () => {
     const { rerender } = render(<VideoCallSpeakerFilmstrip speakerId="adam" />)
-    rerender(<VideoCallSpeakerFilmstrip speakerId="nour" />)
-    expect(screen.getByText("Nour Khalil — speaking")).toBeInTheDocument()
-    fireEvent.click(screen.getByRole("button", { name: "Pin Nour Khalil" }))
+    rerender(<VideoCallSpeakerFilmstrip speakerId="nabil" />)
+    expect(screen.getByText("Nabil Khalil — speaking")).toBeInTheDocument()
+    fireEvent.click(screen.getByRole("button", { name: "Pin Nabil Khalil" }))
     rerender(<VideoCallSpeakerFilmstrip speakerId="bilal" />)
-    expect(screen.getByText("Nour Khalil — speaking")).toBeInTheDocument()
-    fireEvent.click(screen.getByRole("button", { name: "Pin Nour Khalil" }))
+    expect(screen.getByText("Nabil Khalil — speaking")).toBeInTheDocument()
+    fireEvent.click(screen.getByRole("button", { name: "Pin Nabil Khalil" }))
     expect(screen.getByText("Bilal Sultan — speaking")).toBeInTheDocument()
   })
 
   it("starts pinned with `defaultPinnedId` and reports a release", () => {
     const onPinnedChange = vi.fn()
-    render(<VideoCallSpeakerFilmstrip defaultPinnedId="adam" speakerId="nour" onPinnedChange={onPinnedChange} />)
+    render(<VideoCallSpeakerFilmstrip defaultPinnedId="adam" speakerId="nabil" onPinnedChange={onPinnedChange} />)
     expect(screen.getByText("Adam Farouk — speaking")).toBeInTheDocument()
     expect(screen.getByRole("button", { name: "Pin Adam Farouk" })).toHaveAttribute("aria-pressed", "true")
     fireEvent.click(screen.getByRole("button", { name: "Pin Adam Farouk" }))
@@ -261,7 +261,7 @@ describe("Speaker & Filmstrip", () => {
     const { calls, restore } = stubAnimate()
     const { rerender } = render(<VideoCallSpeakerFilmstrip speakerId="adam" />)
     calls.length = 0
-    rerender(<VideoCallSpeakerFilmstrip speakerId="nour" />)
+    rerender(<VideoCallSpeakerFilmstrip speakerId="nabil" />)
     expect(calls.some((call) => call.options.duration === 200 && JSON.stringify(call.keyframes) === JSON.stringify([{ opacity: 0 }, { opacity: 1 }]))).toBe(true)
     restore()
   })
@@ -350,7 +350,7 @@ describe("Call With Side Panel", () => {
 
   it("shows the stage, the panel with its six people, and an Invite", () => {
     const { container } = render(<VideoCallCallWithSidePanel />)
-    expect(screen.getByText("Layla Hassan — speaking")).toBeInTheDocument()
+    expect(screen.getByText("Laith Hassan — speaking")).toBeInTheDocument()
     expect(container.querySelectorAll("[data-person]")).toHaveLength(6)
     expect(screen.getByText("IN THE CALL · 6")).toBeInTheDocument()
     expect(screen.getByRole("button", { name: "Invite others" })).toBeInTheDocument()
@@ -436,14 +436,14 @@ describe("Call With Side Panel", () => {
 
   it("names a muted person's mic for a screen reader", () => {
     const { container } = render(<VideoCallCallWithSidePanel />)
-    expect(within(container.querySelector('[data-person="nour"]') as HTMLElement).getByText("Muted")).toBeInTheDocument()
+    expect(within(container.querySelector('[data-person="nabil"]') as HTMLElement).getByText("Muted")).toBeInTheDocument()
   })
 
   it("speaks Arabic, with no Latin names", () => {
     render(<VideoCallCallWithSidePanel locale="ar" />)
-    expect(screen.getByText("ليلى حسن، تتحدث")).toBeInTheDocument()
+    expect(screen.getByText("ليث حسن، يتحدث")).toBeInTheDocument()
     expect(screen.getByRole("button", { name: "دعوة آخرين" })).toBeInTheDocument()
-    expect(screen.queryByText("Layla Hassan — speaking")).not.toBeInTheDocument()
+    expect(screen.queryByText("Laith Hassan — speaking")).not.toBeInTheDocument()
   })
 
   it("grows a new person's row in", () => {

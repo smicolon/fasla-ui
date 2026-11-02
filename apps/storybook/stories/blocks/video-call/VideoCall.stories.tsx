@@ -100,7 +100,7 @@ export const GridGalleryCallLongText: StoryObj<typeof VideoCallGridGalleryCall> 
         locale={locale}
         {...photoPropsOf("grid-gallery-call", context)}
         title={LONG[locale].meeting}
-        participants={base.map((person) => (person.id === "yasmin" ? { ...person, name: LONG[locale].person } : person))}
+        participants={base.map((person) => (person.id === "yassin" ? { ...person, name: LONG[locale].person } : person))}
         {...args}
       />
     )
@@ -132,7 +132,7 @@ export const SpeakerFilmstripLongText: StoryObj<typeof VideoCallSpeakerFilmstrip
         locale={locale}
         {...photoPropsOf("speaker-filmstrip", context)}
         title={LONG[locale].meeting}
-        participants={base.map((person) => (person.id === "yasmin" ? { ...person, name: LONG[locale].person } : person))}
+        participants={base.map((person) => (person.id === "yassin" ? { ...person, name: LONG[locale].person } : person))}
         {...args}
       />
     )
@@ -208,7 +208,7 @@ export const CallWithSidePanelLongText: StoryObj<typeof VideoCallCallWithSidePan
         locale={locale}
         {...photoPropsOf("call-with-side-panel", context)}
         title={LONG[locale].meeting}
-        people={base.people.map((person) => (person.id === "yasmin" ? { ...person, name: LONG[locale].person, role: LONG[locale].role } : person))}
+        people={base.people.map((person) => (person.id === "yassin" ? { ...person, name: LONG[locale].person, role: LONG[locale].role } : person))}
         panel={{ ...base.panel, title: LONG[locale].panelTitle }}
         {...args}
       />
