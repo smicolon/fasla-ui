@@ -7,7 +7,7 @@ import { Avatar } from "../../ui/avatar/avatar"
 import { Badge } from "../../ui/badge/badge"
 import { Button, buttonVariants } from "../../ui/button/button"
 import { Progress } from "../../ui/progress/progress"
-import { Skeleton } from "../../ui/skeleton/skeleton"
+import { SkeletonText } from "../../ui/skeleton/skeleton"
 import { FeaturesSection, type FeaturesLocale } from "../features/features"
 
 /*
@@ -21,6 +21,11 @@ import { FeaturesSection, type FeaturesLocale } from "../features/features"
  * a message from an assistant over an `info` wash. The other three show a
  * Briefing, a Recording (a Progress at 40%) and a Follow-up checklist on a
  * neutral wash, using the Badge, Avatar, Progress and Skeleton atoms.
+ *
+ * The first, Plan, has its message card flush with the bottom edge; the
+ * three static cards centre their mock-up in a `foreground/5` wash with
+ * 16px top corners (Figma's `opacity/neutral/10` has no token yet), and the
+ * marks in the tiles take their tone's colour.
  *
  * Desktop sets the four across. Tablet gives Plan and Next steps a full row
  * and sets Ready and Record side by side. Mobile stacks all four. Plan stays
@@ -63,9 +68,16 @@ export interface FeaturesExpandingStepCardsCopy {
 const STEP_ICONS = [Sparkles, Hourglass, CreditCard]
 
 const TILE_TONE = {
-  success: "bg-success/30",
+  success: "bg-soft-success-30",
   info: "bg-info/30",
-  warning: "bg-warning/30",
+  warning: "bg-soft-warning-30",
+} as const
+
+/** The mark in a tile is painted in the tone's own colour, as Figma binds it. */
+const ICON_TONE = {
+  success: "text-success",
+  info: "text-info",
+  warning: "text-warning",
 } as const
 
 /** Figma's copy, English and Arabic. */
@@ -134,10 +146,10 @@ const BODY = "text-sm text-muted-foreground"
 /** A small mock-up card sitting on a wash, as the three static cards show. */
 function MockCard({ tone, icon: Icon, label, children }: { tone: keyof typeof TILE_TONE; icon: React.ElementType; label: string; children: React.ReactNode }) {
   return (
-    <div className="flex w-full flex-col gap-2 rounded-2xl bg-card p-4 text-card-foreground shadow-sm">
+    <div className="flex w-full flex-col gap-2 rounded-2xl bg-card p-4 text-card-foreground">
       <div className="flex items-center gap-2">
         <span className={cn("flex size-7 items-center justify-center rounded-[10px]", TILE_TONE[tone])}>
-          <Icon size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
+          <Icon size={14} strokeWidth={1.5} aria-hidden className={ICON_TONE[tone]} />
         </span>
         <span className="text-sm font-semibold text-card-foreground">{label}</span>
       </div>
@@ -158,12 +170,12 @@ export function FeaturesExpandingStepCards({ locale = "en", heading, description
   const buttonClass = "w-full [@container(min-width:48rem)]:w-auto"
 
   return (
-    <FeaturesSection labelledBy={headingId} className={cn("bg-muted", className)} {...props}>
+    <FeaturesSection labelledBy={headingId} contentClassName="gap-10 [@container(min-width:48rem)]:gap-12" className={cn("bg-muted", className)} {...props}>
       <header className="mx-auto flex w-full max-w-[760px] flex-col items-center gap-5 text-center">
-        <h2 id={headingId} className="text-3xl font-medium text-foreground [@container(min-width:72rem)]:text-4xl">
+        <h2 id={headingId} className="max-w-[290px] text-3xl font-medium text-foreground [@container(min-width:48rem)]:max-w-none [@container(min-width:48rem)]:leading-[44px] [@container(min-width:48rem)]:rtl:leading-[60px] [@container(min-width:72rem)]:text-4xl">
           {heading ?? copy.heading}
         </h2>
-        <p className="max-w-[560px] text-base text-muted-foreground">{description ?? copy.description}</p>
+        <p className="text-base text-muted-foreground [@container(min-width:72rem)]:max-w-[560px]">{description ?? copy.description}</p>
         {startHref ? (
           <a href={startHref} className={buttonVariants({ variant: "default", size: "lg", className: buttonClass })}>
             {label}
@@ -189,7 +201,7 @@ export function FeaturesExpandingStepCards({ locale = "en", heading, description
                   {position > 0 ? <span aria-hidden="true" className="ms-3.5 h-2.5 w-px bg-border" /> : null}
                   <div className="flex items-center gap-3">
                     <span className={cn("flex size-7 shrink-0 items-center justify-center rounded-[10px]", TILE_TONE[step.tone])}>
-                      <Icon size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
+                      <Icon size={14} strokeWidth={1.5} aria-hidden className={ICON_TONE[step.tone]} />
                     </span>
                     <span className={cn(BODY, "min-w-0")}>{step.label}</span>
                   </div>
@@ -197,11 +209,11 @@ export function FeaturesExpandingStepCards({ locale = "en", heading, description
               )
             })}
           </ol>
-          <div className="mt-auto flex min-h-[200px] flex-col bg-info/20 px-6 pt-6 [@container(min-width:72rem)]:min-h-0 [@container(min-width:72rem)]:flex-1">
-            <div className="flex flex-col gap-3 rounded-2xl bg-card p-4 text-card-foreground shadow-md">
+          <div className="flex flex-col justify-end bg-soft-info bg-gradient-to-b from-soft-info to-soft-info px-4 pt-4 [@container(min-width:48rem)]:px-6 [@container(min-width:48rem)]:pt-6 [@container(min-width:72rem)]:min-h-0 [@container(min-width:72rem)]:flex-1">
+            <div className="flex flex-col gap-3 rounded-t-2xl bg-card p-4 text-card-foreground shadow-lg">
               <div className="flex items-center gap-3">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-success/30">
-                  <Sparkles size={18} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-soft-success-30">
+                  <Sparkles size={20} strokeWidth={1.5} aria-hidden className="text-success" />
                 </span>
                 <div className="flex min-w-0 flex-col">
                   <span className="text-sm font-semibold text-card-foreground">{planCopy.message.sender}</span>
@@ -209,7 +221,7 @@ export function FeaturesExpandingStepCards({ locale = "en", heading, description
                 </div>
               </div>
               <p className="text-sm text-card-foreground">{planCopy.message.text}</p>
-              <div className="flex flex-wrap gap-2 rounded-lg bg-info/10 p-2">
+              <div className="flex flex-wrap gap-2 rounded-lg bg-soft-info p-2">
                 {planCopy.message.times.map((time) => (
                   <Button key={time} type="button" variant="soft" size="xs" tabIndex={-1}>
                     <bdi dir="ltr">{time}</bdi>
@@ -225,7 +237,7 @@ export function FeaturesExpandingStepCards({ locale = "en", heading, description
             <h3 className={TITLE}>{readyCopy.title}</h3>
             <p className={BODY}>{readyCopy.description}</p>
           </div>
-          <div className="mt-auto flex min-h-[200px] flex-col justify-start bg-foreground/10 p-4 [@container(min-width:72rem)]:min-h-0 [@container(min-width:72rem)]:flex-1">
+          <div className="flex flex-col justify-center rounded-t-[16px] bg-foreground/5 p-4 [@container(min-width:72rem)]:min-h-0 [@container(min-width:72rem)]:flex-1">
             <MockCard tone="info" icon={NotebookText} label={readyCopy.label}>
               <Badge variant="soft" tone="info" size="sm" radius="standard" className="self-start">
                 {readyCopy.badge}
@@ -234,10 +246,7 @@ export function FeaturesExpandingStepCards({ locale = "en", heading, description
                 <Avatar variant="initials" name={attendee} size="24" radius="rounded" />
                 <span className="text-xs text-card-foreground">{attendee}</span>
               </div>
-              <div className="flex flex-col gap-4 pt-1" aria-hidden="true">
-                <Skeleton className="h-3 w-full" />
-                <Skeleton className="h-3 w-full" />
-              </div>
+              <SkeletonText lines={2} />
             </MockCard>
           </div>
         </section>
@@ -247,7 +256,7 @@ export function FeaturesExpandingStepCards({ locale = "en", heading, description
             <h3 className={TITLE}>{recordCopy.title}</h3>
             <p className={BODY}>{recordCopy.description}</p>
           </div>
-          <div className="mt-auto flex min-h-[160px] flex-col justify-start bg-foreground/10 p-4 [@container(min-width:72rem)]:min-h-0 [@container(min-width:72rem)]:flex-1">
+          <div className="flex flex-col justify-center rounded-t-[16px] bg-foreground/5 p-4 [@container(min-width:72rem)]:min-h-0 [@container(min-width:72rem)]:flex-1">
             <MockCard tone="info" icon={Mic} label={recordCopy.label}>
               <Badge variant="soft" tone="info" size="sm" radius="standard" className="self-start">
                 {recordCopy.badge}
@@ -263,7 +272,7 @@ export function FeaturesExpandingStepCards({ locale = "en", heading, description
             <h3 className={TITLE}>{nextCopy.title}</h3>
             <p className={BODY}>{nextCopy.description}</p>
           </div>
-          <div className="mt-auto flex min-h-[168px] flex-col justify-start bg-foreground/10 p-4 [@container(min-width:72rem)]:min-h-0 [@container(min-width:72rem)]:flex-1">
+          <div className="flex flex-col justify-center rounded-t-[16px] bg-foreground/5 p-4 [@container(min-width:72rem)]:min-h-0 [@container(min-width:72rem)]:flex-1">
             <MockCard tone="success" icon={Send} label={nextCopy.label}>
               <Badge variant="soft" tone="success" size="sm" radius="standard" className="self-start">
                 {nextCopy.badge}
@@ -271,7 +280,7 @@ export function FeaturesExpandingStepCards({ locale = "en", heading, description
               <ul role="list" className="flex flex-col gap-2">
                 {nextCopy.items.map((item) => (
                   <li key={item} className="flex items-center gap-2 text-xs text-card-foreground">
-                    <CircleCheck size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className="shrink-0" />
+                    <CircleCheck size={14} strokeWidth={1.5} aria-hidden className="shrink-0 text-success" />
                     {item}
                   </li>
                 ))}
