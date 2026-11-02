@@ -149,7 +149,7 @@ async function writeClipboard(text: string) {
 /** The copy action both controls share: `copied` is true for 1.6s after a copy that worked. */
 function useCopyEmail(email: string, onCopy?: (email: string) => void) {
   const [copied, setCopied] = React.useState(false)
-  const timer = React.useRef<ReturnType<typeof setTimeout>>()
+  const timer = React.useRef<ReturnType<typeof setTimeout> | undefined>(undefined)
   React.useEffect(() => () => clearTimeout(timer.current), [])
   const copy = React.useCallback(async () => {
     if (!(await writeClipboard(email))) return

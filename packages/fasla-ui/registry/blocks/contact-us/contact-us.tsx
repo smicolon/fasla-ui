@@ -641,7 +641,7 @@ export interface ContactUsFormState {
   /** True while sending, or when the block is disabled. */
   disabled: boolean
   messages: ContactUsFormMessages
-  formRef: React.RefObject<HTMLFormElement>
+  formRef: React.MutableRefObject<HTMLFormElement | null>
   setValue: (name: string, value: ContactUsValue) => void
   submit: (event: React.FormEvent) => void
   reset: () => void
@@ -666,7 +666,7 @@ export function useContactUsForm({ fields, messages, onSubmit, disabled = false,
   const [values, setValues] = React.useState<ContactUsValues>(initial.current)
   const [errors, setErrors] = React.useState<Record<string, string>>({})
   const [status, setStatus] = React.useState<ContactUsStatus>("idle")
-  const formRef = React.useRef<HTMLFormElement>(null)
+  const formRef = React.useRef<HTMLFormElement | null>(null)
   const focusFirst = React.useRef(false)
   const alive = React.useRef(true)
   React.useEffect(() => {
@@ -680,7 +680,8 @@ export function useContactUsForm({ fields, messages, onSubmit, disabled = false,
     setValues((current) => ({ ...current, [name]: value }))
     setErrors((current) => {
       if (!(name in current)) return current
-      const { [name]: _removed, ...rest } = current
+      const rest = { ...current }
+      delete rest[name]
       return rest
     })
     setStatus((current) => (current === "error" ? "idle" : current))
