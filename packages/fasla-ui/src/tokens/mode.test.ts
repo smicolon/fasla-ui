@@ -165,6 +165,14 @@ describe("Figma ☾ Mode snapshot", () => {
     }
   })
 
+  it("keeps the unfilled Rating star's amber at 20%, the same in both modes", () => {
+    // Figma opacity/warning/20: theme/warning (#d97706) at 20%. It is not the
+    // /10 soft-warning tint, whose amber is a different colour (227 146 25).
+    expect(tok("soft-warning-20").light).toBe("rgb(217 119 6 / 20%)")
+    expect(tok("soft-warning-20").dark).toBe("rgb(217 119 6 / 20%)")
+    expect(tok("warning").light.toLowerCase()).toBe("#d97706")
+  })
+
   it("keeps the modal overlay translucent, and denser in Dark", () => {
     // Figma custom/backdrop-overlay: one colour, #3c3a40, at 60% and 80%.
     expect(tok("backdrop-overlay").light).toBe("rgb(60 58 64 / 60%)")
