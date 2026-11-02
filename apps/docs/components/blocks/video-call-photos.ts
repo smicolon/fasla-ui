@@ -26,8 +26,8 @@ const FOCAL: Record<string, string> = {
   "/images/social-proof/khalid-saad.webp": "50% 37%",
   "/blocks/team/portrait-rami-aziz.webp": "50% 32%",
   "/images/social-proof/bader-al-ghamdi.webp": "50% 40%",
-  "/images/social-proof/sami-naji.webp": "50% 18%",
-  "/images/social-proof/rashed-al-amri.webp": "50% 44%",
+  "/images/social-proof/sami-naji.webp": "50% 22%",
+  "/images/social-proof/rashed-al-amri.webp": "50% 60%",
   "/blocks/team/portrait-marcus-boateng.webp": "50% 10%",
   "/images/video-call/cafe-bar-man.webp": "50% 36%",
   "/images/video-call/thumbs-up-camera.webp": "50% 50%",
@@ -83,11 +83,11 @@ const RECORDINGS: Record<string, { src: string; alt: Alt }> = {
  * as in Figma, and a tile shows their initials.
  */
 const PEOPLE: Record<string, { src: string; alt: Alt }> = {
-  karim: { src: "/images/social-proof/sami-naji.webp", alt: { en: "A smiling man in a white shirt with his arms crossed against a dark backdrop", ar: "رجل مبتسم يرتدي قميصًا أبيض ويشبك ذراعيه أمام خلفية داكنة" } },
+  karim: { src: "/images/social-proof/rashed-al-amri.webp", alt: { en: "A young man with short dark hair in an olive shirt against a grey backdrop", ar: "شاب بشعر أسود قصير وقميص بلون الزيتون أمام خلفية رمادية" } },
   mazen: { src: "/images/social-proof/khalid-saad.webp", alt: { en: "A man with short fair hair in a grey shirt against a light backdrop", ar: "رجل بشعر أشقر قصير يرتدي قميصًا رماديًا أمام خلفية فاتحة" } },
-  omar: { src: "/images/social-proof/rashed-al-amri.webp", alt: { en: "A young man with short dark hair in an olive shirt against a grey backdrop", ar: "شاب بشعر أسود قصير وقميص بلون الزيتون أمام خلفية رمادية" } },
+  omar: { src: "/images/social-proof/adel-qasim.webp", alt: { en: "A smiling man with a short beard in a light blue shirt, arms crossed, against a teal backdrop", ar: "رجل مبتسم بلحية قصيرة يرتدي قميصًا أزرق فاتحًا ويشبك ذراعيه أمام خلفية بترولية" } },
   tariq: { src: "/blocks/team/portrait-marcus-boateng.webp", alt: { en: "A smiling man in glasses and a black sweater against a white backdrop", ar: "رجل مبتسم يرتدي نظارة وسترة سوداء أمام خلفية بيضاء" } },
-  yassin: { src: "/images/social-proof/adel-qasim.webp", alt: { en: "A smiling man with a short beard in a light blue shirt, arms crossed, against a teal backdrop", ar: "رجل مبتسم بلحية قصيرة يرتدي قميصًا أزرق فاتحًا ويشبك ذراعيه أمام خلفية بترولية" } },
+  yassin: { src: "/images/social-proof/sami-naji.webp", alt: { en: "A smiling man in a white shirt with his arms crossed against a dark backdrop", ar: "رجل مبتسم يرتدي قميصًا أبيض ويشبك ذراعيه أمام خلفية داكنة" } },
   adam: { src: "/images/video-call/cafe-bar-man.webp", alt: { en: "A man in a light blue blazer and white shirt at a restaurant bar", ar: "رجل يرتدي سترة زرقاء فاتحة وقميصًا أبيض عند بار مطعم" } },
   nabil: { src: "/blocks/team/portrait-rami-aziz.webp", alt: { en: "A smiling man with a short beard in a navy sweater against a grey backdrop", ar: "رجل مبتسم بلحية قصيرة يرتدي سترة كحلية أمام خلفية رمادية" } },
   bilal: { src: "/blocks/team/portrait-omar-nasser.webp", alt: { en: "A man in a dark suit and tie against a dark backdrop", ar: "رجل يرتدي بدلة داكنة ورابطة عنق أمام خلفية داكنة" } },
