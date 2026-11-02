@@ -79,11 +79,11 @@ export function FeaturesEditorialPhotoSplit({ locale = "en", eyebrow, heading, d
   const list = features ?? copy.features
 
   return (
-    <FeaturesSection labelledBy={headingId} className={className} {...props}>
-      <div className="flex flex-col gap-10 [@container(min-width:72rem)]:flex-row [@container(min-width:72rem)]:items-center [@container(min-width:72rem)]:gap-16">
+    <FeaturesSection labelledBy={headingId} contentClassName="gap-16" className={className} {...props}>
+      <div className="flex flex-col gap-10 [@container(min-width:72rem)]:flex-row [@container(min-width:72rem)]:items-end [@container(min-width:72rem)]:gap-16">
         <header className="flex min-w-0 flex-col items-start gap-6 [@container(min-width:72rem)]:flex-1">
           {(eyebrow ?? copy.eyebrow) ? <p className="text-xs font-medium tracking-wide text-primary rtl:tracking-normal">{eyebrow ?? copy.eyebrow}</p> : null}
-          <h2 id={headingId} className="text-2xl font-semibold text-foreground [@container(min-width:48rem)]:text-5xl [@container(min-width:72rem)]:text-6xl">
+          <h2 id={headingId} className="text-2xl [@container(max-width:47.99rem)]:leading-[44px] [@container(max-width:47.99rem)]:rtl:leading-[60px] font-semibold text-foreground [@container(min-width:48rem)]:text-5xl [@container(min-width:72rem)]:text-6xl">
             {heading ?? copy.heading}
           </h2>
           <p className="text-lg text-muted-foreground">{description ?? copy.description}</p>
@@ -91,12 +91,12 @@ export function FeaturesEditorialPhotoSplit({ locale = "en", eyebrow, heading, d
         <FeaturesPhotoSlot photo={photo} className="aspect-[296/335] w-full shrink-0 rounded-lg [@container(min-width:48rem)]:aspect-[640/723] [@container(min-width:72rem)]:aspect-[460/520] [@container(min-width:72rem)]:w-[460px] [@container(min-width:72rem)]:max-w-[38%]" />
       </div>
       {list.length > 0 ? (
-        <ol role="list" className="grid grid-cols-1 gap-6 [@container(min-width:48rem)]:grid-cols-2 [@container(min-width:48rem)]:gap-x-8 [@container(min-width:48rem)]:gap-y-10 [@container(min-width:72rem)]:grid-cols-3 [@container(min-width:72rem)]:gap-x-0">
+        <ol role="list" className="grid grid-cols-1 gap-6 [@container(min-width:48rem)]:grid-cols-2 [@container(min-width:48rem)]:gap-x-0 [@container(min-width:48rem)]:gap-y-8 [@container(min-width:72rem)]:grid-cols-3">
           {list.map((feature) => (
             <li
               key={feature.id}
               className={cn(
-                "flex min-w-0 flex-col gap-3 border-border",
+                "flex min-w-0 flex-col gap-3 border-border [@container(min-width:48rem)]:pe-10 [@container(min-width:48rem)]:even:ps-10 [@container(min-width:48rem)]:last:pe-0",
                 "[@container(min-width:72rem)]:px-10 [@container(min-width:72rem)]:first:ps-0 [@container(min-width:72rem)]:last:pe-0 [@container(min-width:72rem)]:[&:not(:first-child)]:border-s"
               )}
             >

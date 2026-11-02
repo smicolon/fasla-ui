@@ -155,8 +155,8 @@ export function FeaturesNotchedPhotoColumns({ locale = "en", heading, headingMut
   const list = columns ?? copy.columns
 
   return (
-    <FeaturesSection labelledBy={headingId} gap="md" className={className} {...props}>
-      <h2 id={headingId} className="max-w-[640px] text-2xl font-semibold text-foreground [@container(min-width:48rem)]:text-3xl [@container(min-width:72rem)]:text-4xl">
+    <FeaturesSection labelledBy={headingId} gap="md" contentClassName="[@container(min-width:48rem)]:gap-12" className={className} {...props}>
+      <h2 id={headingId} className="max-w-[640px] text-3xl font-medium leading-10 text-foreground [@container(min-width:48rem)]:leading-[44px] [@container(min-width:72rem)]:text-4xl [@container(min-width:72rem)]:leading-[44px]">
         {heading ?? copy.heading} <span className="text-muted-foreground">{headingMuted ?? copy.headingMuted}</span>
       </h2>
       {list.length > 0 ? (
@@ -169,23 +169,23 @@ export function FeaturesNotchedPhotoColumns({ locale = "en", heading, headingMut
                 imageClassName="motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03]"
               >
                 <div aria-hidden="true" className="absolute inset-0 bg-background-inverse/[0.35]" />
-                <p className="absolute start-6 top-6 flex items-center gap-2 text-sm text-foreground-inverse">
-                  <span className="rounded-sm border border-foreground-inverse px-1 text-xs leading-4">{column.number}</span>
+                <p className="absolute start-6 top-5 flex items-center gap-2 text-sm font-medium text-foreground-inverse">
+                  <span className="rounded-sm border border-foreground-inverse px-1 py-0.5 text-[10px] leading-[14px]">{column.number}</span>
                   {column.tag}
                 </p>
               </FeaturesPhotoSlot>
               <div className="flex flex-1 flex-col gap-3 p-6">
-                <h3 className="text-lg font-semibold text-foreground">
+                <h3 className="text-lg font-medium text-foreground">
                   {column.title[0]}
                   <br />
                   {column.title[1]}
                 </h3>
                 <p className="text-sm text-muted-foreground">{column.description}</p>
-                <ul role="list" className="mt-auto flex flex-wrap gap-2 pt-1">
+                <ul role="list" className="mt-auto flex flex-wrap gap-2">
                   {column.chips.map((chip) => {
                     const Icon = chip.icon
                     return (
-                      <li key={chip.id}>
+                      <li key={chip.id} className="flex">
                         <Badge variant="outline" tone="primary" size="sm" radius="standard" icon={<Icon strokeWidth={1.5} />}>
                           {chip.label}
                         </Badge>

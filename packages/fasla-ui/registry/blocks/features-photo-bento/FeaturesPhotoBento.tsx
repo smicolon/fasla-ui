@@ -93,7 +93,7 @@ export interface FeaturesPhotoBentoProps extends Omit<React.HTMLAttributes<HTMLE
 function PhotoCard({ photo, text, className }: { photo?: FeaturesPhoto; text: FeaturesBentoText; className?: string }) {
   return (
     <li className={cn("group flex min-w-0 flex-col overflow-hidden rounded-lg border border-border bg-card text-card-foreground", className)}>
-      <FeaturesPhotoSlot photo={photo} className="h-56 shrink-0 [@container(min-width:72rem)]:h-[260px]" imageClassName="motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03]" />
+      <FeaturesPhotoSlot photo={photo} className="aspect-[1.547] shrink-0 [@container(min-width:72rem)]:aspect-auto [@container(min-width:72rem)]:h-[260px]" imageClassName="motion-safe:transition-transform motion-safe:duration-300 motion-safe:group-hover:scale-[1.03]" />
       <div className="flex flex-col gap-1.5 p-6">
         <h3 className="text-lg font-semibold text-card-foreground">{text.title}</h3>
         <p className="text-sm text-muted-foreground">{text.description}</p>
@@ -122,14 +122,14 @@ export function FeaturesPhotoBento({ locale = "en", eyebrow, heading, tour, plan
           </Button>
         )}
       </div>
-      <ul role="list" className="grid grid-cols-1 gap-6 [@container(min-width:48rem)]:grid-cols-2 [@container(min-width:72rem)]:grid-cols-[464fr_272fr_464fr]">
-        <PhotoCard photo={photos?.[0]} text={planning ?? copy.planning} className="[@container(min-width:72rem)]:col-span-2" />
-        <li className="flex min-w-0 flex-col justify-between gap-6 rounded-lg bg-secondary p-6 text-secondary-foreground [@container(min-width:72rem)]:col-start-3">
+      <ul role="list" className="grid grid-cols-1 gap-6 [@container(min-width:48rem)]:flex [@container(min-width:48rem)]:flex-wrap [@container(min-width:72rem)]:grid [@container(min-width:72rem)]:grid-cols-[464fr_272fr_464fr]">
+        <PhotoCard photo={photos?.[0]} text={planning ?? copy.planning} className="[@container(min-width:48rem)]:w-[calc((100%-24px)*285/616)] [@container(min-width:72rem)]:w-auto [@container(min-width:72rem)]:col-span-2" />
+        <li className="flex min-w-0 flex-col justify-between gap-0 [@container(min-width:48rem)]:gap-4 rounded-lg bg-secondary p-6 text-secondary-foreground [@container(min-width:48rem)]:w-[calc((100%-24px)*331/616)] [@container(min-width:72rem)]:w-auto [@container(min-width:72rem)]:col-start-3">
           <span className="flex size-10 items-center justify-center rounded-md bg-card text-card-foreground">
             <Zap size={18} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
           </span>
           <div className="flex flex-col gap-1.5">
-            <p className="text-5xl font-semibold text-secondary-foreground">
+            <p className="text-3xl font-semibold [@container(min-width:72rem)]:text-5xl text-secondary-foreground">
               <Figures>{(stat ?? copy.stat).figure}</Figures>
             </p>
             <p className="text-base font-medium text-secondary-foreground">{(stat ?? copy.stat).label}</p>
@@ -138,7 +138,7 @@ export function FeaturesPhotoBento({ locale = "en", eyebrow, heading, tour, plan
             </p>
           </div>
         </li>
-        <li className="flex min-w-0 flex-col justify-between gap-6 rounded-lg border border-border bg-card p-6 text-card-foreground [@container(min-width:72rem)]:col-start-1">
+        <li className="flex min-w-0 flex-col justify-between gap-0 [@container(min-width:48rem)]:gap-4 rounded-lg border border-border bg-card p-6 text-card-foreground [@container(min-width:48rem)]:w-[calc((100%-24px)*332/616)] [@container(min-width:72rem)]:w-auto [@container(min-width:72rem)]:col-start-1">
           <span className="flex size-10 items-center justify-center rounded-md bg-secondary text-secondary-foreground">
             <Workflow size={18} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
           </span>
@@ -147,7 +147,7 @@ export function FeaturesPhotoBento({ locale = "en", eyebrow, heading, tour, plan
             <p className="text-sm text-muted-foreground">{(rules ?? copy.rules).description}</p>
           </div>
         </li>
-        <PhotoCard photo={photos?.[1]} text={reporting ?? copy.reporting} className="[@container(min-width:72rem)]:col-span-2" />
+        <PhotoCard photo={photos?.[1]} text={reporting ?? copy.reporting} className="[@container(min-width:48rem)]:w-[calc((100%-24px)*284/616)] [@container(min-width:72rem)]:w-auto [@container(min-width:72rem)]:col-span-2" />
       </ul>
     </FeaturesSection>
   )

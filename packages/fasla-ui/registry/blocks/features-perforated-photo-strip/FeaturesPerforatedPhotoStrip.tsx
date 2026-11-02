@@ -117,13 +117,22 @@ export function FeaturesPerforatedPhotoStrip({ locale = "en", eyebrow, heading, 
   const drag = React.useRef<{ x: number; left: number } | null>(null)
   const [dragging, setDragging] = React.useState(false)
 
+  // Figma draws the strip already scrolled: the first stamp sits off the leading edge.
+  React.useLayoutEffect(() => {
+    const node = strip.current
+    if (!node) return
+    const steps = node.clientWidth >= 768 ? 1 : 4
+    const sign = getComputedStyle(node).direction === "rtl" ? -1 : 1
+    node.scrollLeft = sign * steps * STEP
+  }, [])
+
   const scrollBySteps = (steps: number) => {
     const reduced = typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
     strip.current?.scrollBy({ left: steps * STEP, behavior: reduced ? "auto" : "smooth" })
   }
 
   return (
-    <FeaturesSection labelledBy={headingId} className={cn("bg-muted", className)} {...props}>
+    <FeaturesSection labelledBy={headingId} className={cn("bg-muted", className)} contentClassName="gap-10 [@container(min-width:48rem)]:gap-12" {...props}>
       <header className="mx-auto flex w-full max-w-[800px] flex-col items-center gap-4 text-center">
         <p className="inline-flex items-center gap-2 text-sm text-foreground">
           <Globe size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
@@ -132,7 +141,7 @@ export function FeaturesPerforatedPhotoStrip({ locale = "en", eyebrow, heading, 
         <h2 id={headingId} className="max-w-[760px] text-3xl font-semibold text-foreground [@container(min-width:48rem)]:text-5xl">
           {heading ?? copy.heading}
         </h2>
-        <p className="text-base text-muted-foreground">{description ?? copy.description}</p>
+        <p className="text-base text-foreground">{description ?? copy.description}</p>
       </header>
 
       <ul
@@ -172,7 +181,7 @@ export function FeaturesPerforatedPhotoStrip({ locale = "en", eyebrow, heading, 
           setDragging(false)
         }}
         className={cn(
-          "-mx-8 flex scroll-px-8 gap-5 overflow-x-auto overscroll-x-contain px-8 py-2 [scrollbar-width:none] [touch-action:pan-x_pan-y] [&::-webkit-scrollbar]:hidden [@container(min-width:48rem)]:-mx-16 [@container(min-width:48rem)]:scroll-px-16 [@container(min-width:48rem)]:px-16 [@container(min-width:72rem)]:-mx-24 [@container(min-width:72rem)]:scroll-px-24 [@container(min-width:72rem)]:px-24",
+          "-mx-8 -my-1 flex ps-[106px] pe-[106px] scroll-ps-[106px] gap-5 overflow-x-auto overscroll-x-contain py-1 [scrollbar-width:none] [touch-action:pan-x_pan-y] [&::-webkit-scrollbar]:hidden [@container(min-width:48rem)]:-mx-16 [@container(min-width:48rem)]:ps-[62px] [@container(min-width:48rem)]:pe-[62px] [@container(min-width:48rem)]:scroll-ps-[62px] [@container(min-width:72rem)]:-mx-24 [@container(min-width:72rem)]:ps-[94px] [@container(min-width:72rem)]:pe-[94px] [@container(min-width:72rem)]:scroll-ps-[94px]",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
           dragging ? "cursor-grabbing select-none" : "cursor-grab snap-x snap-mandatory"
         )}
@@ -193,7 +202,7 @@ export function FeaturesPerforatedPhotoStrip({ locale = "en", eyebrow, heading, 
           {list.map((column) => (
             <li key={column.id} className="flex min-w-0 flex-col gap-3 text-center">
               <h3 className="text-lg font-semibold text-foreground">{column.title}</h3>
-              <p className="text-sm text-muted-foreground">{column.description}</p>
+              <p className="text-sm text-foreground">{column.description}</p>
             </li>
           ))}
         </ul>

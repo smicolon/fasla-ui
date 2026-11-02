@@ -79,7 +79,7 @@ export function FeaturesFullBleedPhotoBanner({ locale = "en", eyebrow, heading, 
   const list = features ?? copy.features
 
   return (
-    <FeaturesSection labelledBy={headingId} flush contentClassName="max-w-none gap-0" className={className} {...props}>
+    <FeaturesSection labelledBy={headingId} flush contentClassName="max-w-none gap-0 [@container(min-width:48rem)]:gap-0" className={className} {...props}>
       <FeaturesPhotoSlot photo={photo} className="h-60 w-full [@container(min-width:48rem)]:h-80 [@container(min-width:72rem)]:h-[460px]" />
       <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-12 px-8 pb-8 pt-6 [@container(min-width:48rem)]:px-16 [@container(min-width:48rem)]:pb-16 [@container(min-width:48rem)]:pt-10 [@container(min-width:72rem)]:px-24 [@container(min-width:72rem)]:pb-24 [@container(min-width:72rem)]:pt-16">
         <FeaturesHeader

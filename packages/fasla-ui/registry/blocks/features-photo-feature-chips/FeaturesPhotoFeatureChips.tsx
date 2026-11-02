@@ -104,7 +104,7 @@ export function FeaturesPhotoFeatureChips({ locale = "en", eyebrow, heading, des
               {list.map((chip) => {
                 const Icon = chip.icon
                 return (
-                  <li key={chip.id} className="inline-flex items-center gap-2 rounded-full border border-border bg-card py-2 pe-4 ps-3 text-sm text-card-foreground">
+                  <li key={chip.id} className="inline-flex items-center gap-2 rounded-full border border-border bg-card py-2 pe-4 ps-3 text-sm font-medium text-card-foreground">
                     {Icon ? <Icon size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className="shrink-0" /> : null}
                     <span>{chip.label}</span>
                   </li>

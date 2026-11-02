@@ -14,8 +14,8 @@ import { FeaturesHeader, FeaturesSection, type FeaturesLocale, type FeaturesPhot
  * holding an 18px Lucide mark, a 16px title and a 14px line.
  *
  * The panel pads 80px on Desktop, 48px on Tablet and 24px on Mobile. The
- * features sit three across on Desktop, two across on Tablet and stacked on
- * Mobile. Without a photo the panel is plain `background-inverse`.
+ * features sit three across on Desktop and stacked on Tablet (300px wide)
+ * and Mobile. Without a photo the panel is plain `background-inverse`.
  *
  * Content limits: a feature's title up to 28 characters and its line up to
  * 90. The other limits are in the block's documentation page.
@@ -86,18 +86,18 @@ export function FeaturesDarkPhotoPanel({ locale = "en", eyebrow, heading, descri
         <div aria-hidden="true" className="absolute inset-0 -z-10 bg-background-inverse/[0.72]" />
         <FeaturesHeader headingId={headingId} eyebrow={eyebrow ?? copy.eyebrow} heading={heading ?? copy.heading} description={description ?? copy.description} inverse maxWidth={640} />
         {list.length > 0 ? (
-          <ul role="list" className="grid grid-cols-1 gap-10 [@container(min-width:48rem)]:grid-cols-2 [@container(min-width:72rem)]:grid-cols-3">
+          <ul role="list" className="grid grid-cols-1 gap-10 [@container(min-width:72rem)]:grid-cols-3">
             {list.map((feature) => {
               const Icon = feature.icon
               return (
-                <li key={feature.id} className="flex min-w-0 flex-col items-start gap-3">
+                <li key={feature.id} className="flex min-w-0 flex-col items-start gap-3 [@container(min-width:48rem)]:max-w-[300px] [@container(min-width:72rem)]:max-w-none">
                   {Icon ? (
                     <span className="flex size-10 items-center justify-center rounded-md bg-foreground-inverse text-background-inverse">
                       <Icon size={18} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
                     </span>
                   ) : null}
                   <h3 className="text-base font-semibold text-foreground-inverse">{feature.title}</h3>
-                  <p className="-mt-1 text-sm text-muted-foreground-inverse">{feature.description}</p>
+                  <p className="text-sm text-muted-foreground-inverse">{feature.description}</p>
                 </li>
               )
             })}
