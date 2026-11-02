@@ -89,6 +89,7 @@ export const tailwindSemanticColors = {
     "success-30": c("soft-success-30"),
     warning: c("soft-warning"),
     "warning-5": c("soft-warning-5"),
+    "warning-20": c("soft-warning-20"),
     "warning-30": c("soft-warning-30"),
     destructive: c("soft-destructive"),
     "destructive-20": c("soft-destructive-20"),
