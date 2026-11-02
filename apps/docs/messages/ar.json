@@ -3500,6 +3500,44 @@
         "blog-cards-post-carousel-with-controls": "عارض مقالات بأزرار تحكم"
       }
     },
+    "contactUsBlocks": {
+      "lead": "أقسام تتيح للزائر أن يصل إلى فريقك: نماذج تقوم على الكتابة، ونماذج بجانب صورة، ومواقع وأوقات، وقنوات أخرى للتواصل.",
+      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
+      "filterLabel": "التصفية حسب العائلة",
+      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
+      "families": {
+        "all": "الكل",
+        "forms": "نماذج التواصل",
+        "photo-forms": "نماذج مع صور",
+        "places": "المواقع والأوقات",
+        "channels": "قنوات التواصل"
+      },
+      "types": {
+        "contact-us-classic-centered": "Classic Centered",
+        "contact-us-dark-statement": "Dark Statement",
+        "contact-us-oversized-wordmark": "Oversized Wordmark",
+        "contact-us-editorial-statement": "Editorial Statement",
+        "contact-us-ruled-split-form": "Ruled Split Form",
+        "contact-us-grand-headline-form": "Grand Headline Form",
+        "contact-us-pitch-and-inquiry": "Pitch & Inquiry",
+        "contact-us-form-contact-methods": "Form + Contact Methods",
+        "contact-us-split-photo-dark": "Split Photo Dark",
+        "contact-us-photo-and-dark-panel": "Photo & Dark Panel",
+        "contact-us-editorial-and-address-card": "Editorial & Address Card",
+        "contact-us-map-split": "Map Split",
+        "contact-us-office-cards": "Office Cards",
+        "contact-us-hq-feature": "HQ Feature",
+        "contact-us-global-offices-table": "Global Offices Table",
+        "contact-us-hours-and-availability": "Hours and Availability",
+        "contact-us-named-owners": "Named Owners",
+        "contact-us-book-a-call": "Book a Call",
+        "contact-us-form-with-faq": "Form with FAQ",
+        "contact-us-bento-grid": "Bento Grid",
+        "contact-us-social-rail": "Social Rail",
+        "contact-us-newsletter-combo": "Newsletter Combo",
+        "contact-us-support-channels": "Support Channels"
+      }
+    },
     "featuresBlocks": {
       "lead": "تسعة وعشرون قسمًا تعرض ما يفعله المنتج: بطاقات الأيقونات والصفوف المرقّمة وقوائم التحقق، وتخطيطات تقودها الصور، ولوحات يتفاعل معها الزائر، والمنتج أثناء الاستخدام.",
       "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",

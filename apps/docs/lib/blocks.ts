@@ -4,7 +4,7 @@
  * (docs.faqBlocks, docs.errorStateBlocks, docs.logoCloudBlocks,
  * docs.authenticationsBlocks, docs.galleryBlocks, docs.navbarBlocks,
  * docs.pricingBlocks, docs.heroBlocks, docs.aboutBlocks, docs.teamBlocks,
- * docs.careersBlocks, docs.socialProofBlocks, docs.blogCardsBlocks, docs.featuresBlocks); the slug is the registry item's name.
+ * docs.careersBlocks, docs.socialProofBlocks, docs.blogCardsBlocks, docs.featuresBlocks, docs.contactUsBlocks); the slug is the registry item's name.
  */
 
 export type FaqFamily = "lists" | "layouts" | "navigation" | "support"
@@ -135,7 +135,18 @@ export type FeaturesFamily = "icons-numbers" | "photo-led" | "interactive" | "pr
 
 export const FEATURES_FAMILIES: FeaturesFamily[] = ["icons-numbers", "photo-led", "interactive", "product-in-use"]
 
-export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | SocialProofFamily | BlogCardsFamily | FeaturesFamily> = {
+/**
+ * Contact Us' four groups, from its Figma documentation: the forms that carry
+ * the page with type alone, the forms set beside a photo, the places and
+ * hours that say where and when to find the team, and the channels that offer
+ * another way in (people, a booking, an FAQ, social links, support). A group
+ * appears here once a Type of it is built.
+ */
+export type ContactUsFamily = "forms" | "photo-forms" | "places" | "channels"
+
+export const CONTACT_US_FAMILIES: ContactUsFamily[] = ["forms", "photo-forms", "places", "channels"]
+
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | SocialProofFamily | BlogCardsFamily | ContactUsFamily | FeaturesFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
   family: Family
@@ -481,6 +492,33 @@ export const FEATURES_TYPES: BlockType<FeaturesFamily>[] = [
   { slug: "features-showcase-card-pair", family: "product-in-use", inverse: true },
 ]
 
+/** Contact Us' 23 Types in Figma's order, added a family at a time. */
+export const CONTACT_US_TYPES: BlockType<ContactUsFamily>[] = [
+  { slug: "contact-us-classic-centered", family: "forms" },
+  { slug: "contact-us-dark-statement", family: "forms" },
+  { slug: "contact-us-oversized-wordmark", family: "forms" },
+  { slug: "contact-us-editorial-statement", family: "forms" },
+  { slug: "contact-us-ruled-split-form", family: "forms" },
+  { slug: "contact-us-grand-headline-form", family: "forms" },
+  { slug: "contact-us-pitch-and-inquiry", family: "forms" },
+  { slug: "contact-us-form-contact-methods", family: "photo-forms" },
+  { slug: "contact-us-split-photo-dark", family: "photo-forms" },
+  { slug: "contact-us-photo-and-dark-panel", family: "photo-forms" },
+  { slug: "contact-us-editorial-and-address-card", family: "photo-forms" },
+  { slug: "contact-us-map-split", family: "places" },
+  { slug: "contact-us-office-cards", family: "places" },
+  { slug: "contact-us-hq-feature", family: "places" },
+  { slug: "contact-us-global-offices-table", family: "places" },
+  { slug: "contact-us-hours-and-availability", family: "places" },
+  { slug: "contact-us-named-owners", family: "channels" },
+  { slug: "contact-us-book-a-call", family: "channels" },
+  { slug: "contact-us-form-with-faq", family: "channels" },
+  { slug: "contact-us-bento-grid", family: "channels" },
+  { slug: "contact-us-social-rail", family: "channels" },
+  { slug: "contact-us-newsletter-combo", family: "channels" },
+  { slug: "contact-us-support-channels", family: "channels" },
+]
+
 export const ALL_BLOCK_TYPES: BlockType[] = [
   ...FAQ_TYPES,
   ...ERROR_STATE_TYPES,
@@ -496,6 +534,7 @@ export const ALL_BLOCK_TYPES: BlockType[] = [
   ...SOCIAL_PROOF_TYPES,
   ...BLOG_CARDS_TYPES,
   ...FEATURES_TYPES,
+  ...CONTACT_US_TYPES,
 ]
 
 /** Figma's three breakpoints, the widths a preview frame renders at. */
