@@ -28,7 +28,7 @@ const PHOTOS: Record<string, Record<string, { src: string; alt: Alt }>> = {
     team2: photo("/images/footer/careers-team-long-table.webp", "Colleagues at a long wooden table seen from above", "زملاء حول طاولة خشبية طويلة من الأعلى"),
   },
   "local-business": {
-    map: photo("/images/footer/local-business-aerial.webp", "An aerial view of a snowy street, parked cars and a red roof", "منظر جوي لشارع مغطى بالثلج وسيارات متوقفة وسقف أحمر"),
+    map: photo("/images/footer/local-business-street.webp", "A red-brick building with tall plane trees on a sunny street", "مبنى من الطوب الأحمر وأشجار الدلب العالية في شارع مشمس"),
   },
 }
 
