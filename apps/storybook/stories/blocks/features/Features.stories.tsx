@@ -7,8 +7,6 @@ import { FeaturesColourBlockCards, featuresColourBlockCardsCopy } from "../../..
 import { FeaturesStatFeatureBand, featuresStatFeatureBandCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-stat-feature-band/FeaturesStatFeatureBand"
 import { FeaturesSplitPhotoIconList, featuresSplitPhotoIconListCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-split-photo-icon-list/FeaturesSplitPhotoIconList"
 import { FeaturesPhotoBento, featuresPhotoBentoCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-photo-bento/FeaturesPhotoBento"
-import { FeaturesDarkPhotoPanel, featuresDarkPhotoPanelCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-dark-photo-panel/FeaturesDarkPhotoPanel"
-import { FeaturesOverlayCaptionCards, featuresOverlayCaptionCardsCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-overlay-caption-cards/FeaturesOverlayCaptionCards"
 import { FeaturesFeatureListThumbnails, featuresFeatureListThumbnailsCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-feature-list-thumbnails/FeaturesFeatureListThumbnails"
 import { FeaturesPhotoFeatureChips, featuresPhotoFeatureChipsCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-photo-feature-chips/FeaturesPhotoFeatureChips"
 import { FeaturesMediaRail, featuresMediaRailCopy } from "../../../../../packages/fasla-ui/registry/blocks/features-media-rail/FeaturesMediaRail"
@@ -148,32 +146,6 @@ export const PhotoBentoEmpty: StoryObj<typeof FeaturesPhotoBento> = {
   tags: ["!dev", "!autodocs"],
   argTypes: featuresArgTypes(FeaturesPhotoBento, featuresPhotoBentoCopy, []),
   render: (args, context) => <FeaturesPhotoBento locale={localeOf(context)}  {...args} />,
-}
-
-export const DarkPhotoPanel: StoryObj<typeof FeaturesDarkPhotoPanel> = {
-  name: "Dark Photo Panel",
-  argTypes: featuresArgTypes(FeaturesDarkPhotoPanel, featuresDarkPhotoPanelCopy, []),
-  render: (args, context) => <FeaturesDarkPhotoPanel locale={localeOf(context)} {...photoPropsOf("dark-photo-panel", context, featuresDarkPhotoPanelCopy)} {...args} />,
-}
-
-export const DarkPhotoPanelEmpty: StoryObj<typeof FeaturesDarkPhotoPanel> = {
-  name: "Dark Photo Panel: Without photos",
-  tags: ["!dev", "!autodocs"],
-  argTypes: featuresArgTypes(FeaturesDarkPhotoPanel, featuresDarkPhotoPanelCopy, []),
-  render: (args, context) => <FeaturesDarkPhotoPanel locale={localeOf(context)}  {...args} />,
-}
-
-export const OverlayCaptionCards: StoryObj<typeof FeaturesOverlayCaptionCards> = {
-  name: "Overlay Caption Cards",
-  argTypes: featuresArgTypes(FeaturesOverlayCaptionCards, featuresOverlayCaptionCardsCopy, []),
-  render: (args, context) => <FeaturesOverlayCaptionCards locale={localeOf(context)} {...photoPropsOf("overlay-caption-cards", context, featuresOverlayCaptionCardsCopy)} {...args} />,
-}
-
-export const OverlayCaptionCardsEmpty: StoryObj<typeof FeaturesOverlayCaptionCards> = {
-  name: "Overlay Caption Cards: Without photos",
-  tags: ["!dev", "!autodocs"],
-  argTypes: featuresArgTypes(FeaturesOverlayCaptionCards, featuresOverlayCaptionCardsCopy, []),
-  render: (args, context) => <FeaturesOverlayCaptionCards locale={localeOf(context)}  {...args} />,
 }
 
 export const FeatureListThumbnails: StoryObj<typeof FeaturesFeatureListThumbnails> = {

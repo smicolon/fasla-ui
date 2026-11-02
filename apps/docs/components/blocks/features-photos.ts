@@ -2,7 +2,7 @@
  * The Features block's demo photos, for the docs previews and the Storybook
  * stories. No block ships with photos. These are exactly the photos Figma's
  * Features set shows, slot for slot: 15 are files already committed for the
- * Hero, Blog Cards and About blocks, and 25 are in public/images/features/
+ * Hero, Blog Cards and About blocks, and 23 are in public/images/features/
  * (credits and Figma image hashes in its CREDITS.md). Each is the same image
  * as the one in Figma, checked by the SHA-1 of Figma's original and by pixel
  * comparison.
@@ -32,7 +32,6 @@ const ALTS: Record<string, Alt> = {
   "features/boardroom-with-long-table": { en: "A spacious boardroom with a long table and chairs", ar: "قاعة اجتماعات واسعة فيها طاولة طويلة وكراسٍ" },
   "features/collaborative-meeting-seated": { en: "People seated on chairs in a collaborative meeting", ar: "أشخاص جالسون على كراسٍ في اجتماع تعاوني" },
   "features/collaborative-meeting-table": { en: "People talking beside a table in a collaborative meeting", ar: "أشخاص يتحدثون بجانب طاولة في اجتماع تعاوني" },
-  "features/colleagues-around-table": { en: "Colleagues seated around a table in a meeting room", ar: "زملاء جالسون حول طاولة في غرفة اجتماعات" },
   "features/colleagues-at-whiteboard": { en: "Two colleagues talking at a whiteboard", ar: "زميلان يتحدثان عند لوح أبيض" },
   "features/coworkers-laptop-design-review": { en: "Four coworkers smiling around a laptop at a table in a design office", ar: "أربعة زملاء يبتسمون حول حاسوب محمول على طاولة في مكتب تصميم" },
   "features/hands-on-laptop-analytics": { en: "Hands typing on a laptop that shows charts, with glasses beside it", ar: "أيدٍ تكتب على حاسوب محمول يعرض رسومًا بيانية، وبجانبه نظارة" },
@@ -42,7 +41,6 @@ const ALTS: Record<string, Alt> = {
   "features/macbook-beside-mouse": { en: "An Apple MacBook beside a computer mouse on a table", ar: "حاسوب ماك بوك بجانب فأرة حاسوب على طاولة" },
   "features/men-around-office-tables": { en: "Three men seated at tables in an office", ar: "ثلاثة رجال جالسون إلى طاولات في مكتب" },
   "features/office-hallway-glass-walls": { en: "A long office hallway with glass walls and concrete columns", ar: "ممر مكتبي طويل بجدران زجاجية وأعمدة خرسانية" },
-  "features/open-office-collaboration": { en: "Three people working together in a dim open-plan office", ar: "ثلاثة أشخاص يعملون معًا في مكتب مفتوح خافت الإضاءة" },
   "features/pastel-folders-stack": { en: "A stack of pastel folders in peach, blue and orange on a soft pink background", ar: "كومة من المجلدات بألوان الخوخ والأزرق والبرتقالي على خلفية وردية ناعمة" },
   "features/person-working-on-wooden-desk": { en: "A person working on a laptop at a wooden desk", ar: "شخص يعمل على حاسوب محمول عند مكتب خشبي" },
   "features/pink-chairs-in-workspace": { en: "Modern chairs with pink and grey fabric around small tables in a workspace", ar: "كراسٍ عصرية بقماش وردي ورمادي حول طاولات صغيرة في مساحة عمل" },
@@ -67,8 +65,6 @@ const ALTS: Record<string, Alt> = {
 const PHOTOS: Record<string, string[]> = {
   "split-photo-icon-list": ["features/coworkers-laptop-design-review"],
   "photo-bento": ["features/team-whiteboard-meeting", "features/hands-on-laptop-analytics"],
-  "dark-photo-panel": ["features/open-office-collaboration"],
-  "overlay-caption-cards": ["features/colleagues-around-table", "features/whiteboard-discussion", "features/presenter-laptops-room"],
   "feature-list-thumbnails": ["features/laptop-analytics-report", "features/laptop-line-graph", "features/colleagues-at-whiteboard", "features/two-men-at-computer"],
   "photo-feature-chips": ["features/three-men-laughing-at-laptop"],
   "media-rail": ["features/team-around-meeting-table", "features/stock-chart-on-laptop", "hero/laptop-code-desk", "about/statement-band-2"],
@@ -112,8 +108,6 @@ type PhotoProp = { kind: "photo" } | { kind: "photos" } | { kind: "named"; props
 const PHOTO_PROP: Record<string, PhotoProp> = {
   "split-photo-icon-list": { kind: "photo" },
   "photo-bento": { kind: "photos" },
-  "dark-photo-panel": { kind: "photo" },
-  "overlay-caption-cards": { kind: "list", list: "cards", key: "image" },
   "feature-list-thumbnails": { kind: "list", list: "rows", key: "image" },
   "photo-feature-chips": { kind: "photo" },
   "media-rail": { kind: "list", list: "tiles", key: "image" },

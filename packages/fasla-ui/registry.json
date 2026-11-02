@@ -7926,52 +7926,6 @@
       ]
     },
     {
-      "name": "features-dark-photo-panel",
-      "type": "registry:block",
-      "title": "Features: Dark Photo Panel",
-      "description": "A rounded panel with a dimmed photo behind a heading and three features, painted with the inverse tokens.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "features",
-        "theme-inverse"
-      ],
-      "files": [
-        {
-          "path": "registry/blocks/features-dark-photo-panel/FeaturesDarkPhotoPanel.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/features-dark-photo-panel.tsx"
-        }
-      ],
-      "categories": [
-        "features",
-        "marketing"
-      ]
-    },
-    {
-      "name": "features-overlay-caption-cards",
-      "type": "registry:block",
-      "title": "Features: Overlay Caption Cards",
-      "description": "A heading over three tall photo cards, each with a dark scrim and its title and line along the bottom.",
-      "dependencies": [],
-      "registryDependencies": [
-        "features",
-        "theme-inverse"
-      ],
-      "files": [
-        {
-          "path": "registry/blocks/features-overlay-caption-cards/FeaturesOverlayCaptionCards.tsx",
-          "type": "registry:block",
-          "target": "components/blocks/features-overlay-caption-cards.tsx"
-        }
-      ],
-      "categories": [
-        "features",
-        "marketing"
-      ]
-    },
-    {
       "name": "features-feature-list-thumbnails",
       "type": "registry:block",
       "title": "Features: Feature List + Thumbnails",

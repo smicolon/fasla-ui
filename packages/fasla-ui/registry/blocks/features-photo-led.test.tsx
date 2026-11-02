@@ -2,8 +2,6 @@ import { describe, expect, it } from "vitest"
 import { render, screen } from "@testing-library/react"
 import { FeaturesSplitPhotoIconList, featuresSplitPhotoIconListCopy } from "./features-split-photo-icon-list"
 import { FeaturesPhotoBento, featuresPhotoBentoCopy } from "./features-photo-bento"
-import { FeaturesDarkPhotoPanel, featuresDarkPhotoPanelCopy } from "./features-dark-photo-panel"
-import { FeaturesOverlayCaptionCards, featuresOverlayCaptionCardsCopy } from "./features-overlay-caption-cards"
 import { FeaturesFeatureListThumbnails, featuresFeatureListThumbnailsCopy } from "./features-feature-list-thumbnails"
 import { FeaturesPhotoFeatureChips, featuresPhotoFeatureChipsCopy } from "./features-photo-feature-chips"
 import { FeaturesMediaRail, featuresMediaRailCopy } from "./features-media-rail"
@@ -26,8 +24,6 @@ const photo = (name: string) => ({ src: `/images/${name}.webp`, alt: name })
 const TYPES: { name: string; Block: Block; copy: { en: object; ar: object }; withPhotos: Record<string, unknown>; slots: number }[] = [
   { name: "Split Photo + Icon List", Block: FeaturesSplitPhotoIconList as Block, copy: featuresSplitPhotoIconListCopy, withPhotos: { photo: photo("a") }, slots: 1 },
   { name: "Photo Bento", Block: FeaturesPhotoBento as Block, copy: featuresPhotoBentoCopy, withPhotos: { photos: [photo("a"), photo("b")] }, slots: 2 },
-  { name: "Dark Photo Panel", Block: FeaturesDarkPhotoPanel as Block, copy: featuresDarkPhotoPanelCopy, withPhotos: { photo: photo("a") }, slots: 1 },
-  { name: "Overlay Caption Cards", Block: FeaturesOverlayCaptionCards as Block, copy: featuresOverlayCaptionCardsCopy, withPhotos: {}, slots: 0 },
   { name: "Feature List + Thumbnails", Block: FeaturesFeatureListThumbnails as Block, copy: featuresFeatureListThumbnailsCopy, withPhotos: {}, slots: 0 },
   { name: "Photo + Feature Chips", Block: FeaturesPhotoFeatureChips as Block, copy: featuresPhotoFeatureChipsCopy, withPhotos: { photo: photo("a") }, slots: 1 },
   { name: "Media Rail", Block: FeaturesMediaRail as Block, copy: featuresMediaRailCopy, withPhotos: {}, slots: 0 },
@@ -98,8 +94,6 @@ describe.each(TYPES)("$name", ({ Block, copy, withPhotos, slots }) => {
 describe("the list Types take a photo on each item", () => {
   it("shows it on every card, row, tile and column", () => {
     const image = photo("x")
-    const cards = (copy: { en: { cards: object[] } }) => copy.en.cards.map((card) => ({ ...card, image }))
-    expect(render(<FeaturesOverlayCaptionCards cards={cards(featuresOverlayCaptionCardsCopy as never) as never} />).container.querySelectorAll("img")).toHaveLength(3)
     expect(render(<FeaturesFeatureListThumbnails rows={featuresFeatureListThumbnailsCopy.en.rows.map((row) => ({ ...row, image }))} />).container.querySelectorAll("img")).toHaveLength(4)
     expect(render(<FeaturesMediaRail tiles={featuresMediaRailCopy.en.tiles.map((tile) => ({ ...tile, image }))} />).container.querySelectorAll("img")).toHaveLength(4)
     expect(render(<FeaturesNotchedPhotoColumns columns={featuresNotchedPhotoColumnsCopy.en.columns.map((column) => ({ ...column, image }))} />).container.querySelectorAll("img")).toHaveLength(3)
@@ -162,10 +156,8 @@ describe("Photo Collage", () => {
   })
 })
 
-describe("Overlay Caption Cards, Dark Photo Panel and Portrait cards", () => {
+describe("Portrait cards", () => {
   it("paint with the inverse tokens, so they read over a photo or without one", () => {
-    expect(render(<FeaturesOverlayCaptionCards />).container.querySelector("li")?.className).toContain("bg-background-inverse")
-    expect(render(<FeaturesDarkPhotoPanel />).container.innerHTML).toContain("bg-background-inverse")
     expect(render(<FeaturesPortraitPhotoCardsLinkRow />).container.innerHTML).toContain("text-foreground-inverse")
   })
 })

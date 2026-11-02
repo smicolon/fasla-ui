@@ -911,12 +911,6 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "features-photo-bento": dynamic(() =>
     import("@fasla-ui/blocks/features-photo-bento/FeaturesPhotoBento").then((m) => withFeaturesPhotos(m.FeaturesPhotoBento, "photo-bento", m.featuresPhotoBentoCopy))
   ),
-  "features-dark-photo-panel": dynamic(() =>
-    import("@fasla-ui/blocks/features-dark-photo-panel/FeaturesDarkPhotoPanel").then((m) => withFeaturesPhotos(m.FeaturesDarkPhotoPanel, "dark-photo-panel", m.featuresDarkPhotoPanelCopy))
-  ),
-  "features-overlay-caption-cards": dynamic(() =>
-    import("@fasla-ui/blocks/features-overlay-caption-cards/FeaturesOverlayCaptionCards").then((m) => withFeaturesPhotos(m.FeaturesOverlayCaptionCards, "overlay-caption-cards", m.featuresOverlayCaptionCardsCopy))
-  ),
   "features-feature-list-thumbnails": dynamic(() =>
     import("@fasla-ui/blocks/features-feature-list-thumbnails/FeaturesFeatureListThumbnails").then((m) => withFeaturesPhotos(m.FeaturesFeatureListThumbnails, "feature-list-thumbnails", m.featuresFeatureListThumbnailsCopy))
   ),

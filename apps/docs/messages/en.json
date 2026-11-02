@@ -3539,7 +3539,7 @@
       }
     },
     "featuresBlocks": {
-      "lead": "Twenty-nine sections that set out what a product does: icon cards, numbered rows and checklists, layouts led by photos, panels the visitor operates, and the product in use.",
+      "lead": "Twenty-seven sections that set out what a product does: icon cards, numbered rows and checklists, layouts led by photos, panels the visitor operates, and the product in use.",
       "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
       "filterLabel": "Filter by family",
       "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
@@ -3559,8 +3559,6 @@
         "features-stat-feature-band": "Stat Feature Band",
         "features-split-photo-icon-list": "Split Photo + Icon List",
         "features-photo-bento": "Photo Bento",
-        "features-dark-photo-panel": "Dark Photo Panel",
-        "features-overlay-caption-cards": "Overlay Caption Cards",
         "features-feature-list-thumbnails": "Feature List + Thumbnails",
         "features-photo-feature-chips": "Photo + Feature Chips",
         "features-media-rail": "Media Rail",

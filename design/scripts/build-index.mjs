@@ -275,8 +275,8 @@ export const CODE_MAP = {
   ...Object.fromEntries(
     [
       "icon-card-grid", "compact-icon-index", "numbered-feature-rows", "feature-checklist-columns",
-      "colour-block-cards", "stat-feature-band", "split-photo-icon-list", "photo-bento", "dark-photo-panel",
-      "overlay-caption-cards", "feature-list-thumbnails", "photo-feature-chips", "media-rail",
+      "colour-block-cards", "stat-feature-band", "split-photo-icon-list", "photo-bento",
+      "feature-list-thumbnails", "photo-feature-chips", "media-rail",
       "full-bleed-photo-banner", "editorial-photo-split", "photo-collage", "notched-photo-columns",
       "perforated-photo-strip", "portrait-photo-cards-link-row", "photo-carousel", "photo-tabs-panel",
       "accordion-photo", "expanding-step-cards", "compare-panels-chat-answer", "numbered-steps-floating-cards",

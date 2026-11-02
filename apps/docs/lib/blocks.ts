@@ -127,7 +127,7 @@ export const BLOG_CARDS_FAMILIES: BlogCardsFamily[] = ["grids", "features", "lis
 
 /**
  * Features' four groups, from its Figma documentation: the layouts built from
- * icons, numbers and checklists, the thirteen led by photos, the four the
+ * icons, numbers and checklists, the eleven led by photos, the four the
  * visitor operates (a carousel, tabs, an accordion, expanding cards), and the
  * six that show the product in use.
  */
@@ -469,8 +469,6 @@ export const FEATURES_TYPES: BlockType<FeaturesFamily>[] = [
   { slug: "features-stat-feature-band", family: "icons-numbers" },
   { slug: "features-split-photo-icon-list", family: "photo-led" },
   { slug: "features-photo-bento", family: "photo-led" },
-  { slug: "features-dark-photo-panel", family: "photo-led", inverse: true },
-  { slug: "features-overlay-caption-cards", family: "photo-led", inverse: true },
   { slug: "features-feature-list-thumbnails", family: "photo-led" },
   { slug: "features-photo-feature-chips", family: "photo-led" },
   { slug: "features-media-rail", family: "photo-led" },
