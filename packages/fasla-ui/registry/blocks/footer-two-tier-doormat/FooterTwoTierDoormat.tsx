@@ -115,7 +115,7 @@ const ICONS = { "map-pin": MapPinIcon, mail: MailIcon, "life-buoy": LifeBuoyIcon
 function FooterContactCard({ contact, locale }: { contact: FooterContact; locale: FooterLocale }) {
   const Icon = ICONS[contact.icon]
   return (
-    <div className="flex h-full flex-col gap-2 rounded-lg border border-border bg-card p-4 text-card-foreground shadow-xs [@container(min-width:40rem)]:gap-3 [@container(min-width:40rem)]:p-5 [@container(min-width:64rem)]:p-6">
+    <div className="flex h-full w-full min-w-0 flex-col gap-2 rounded-lg border border-border bg-card p-4 text-card-foreground shadow-xs [@container(min-width:40rem)]:gap-3 [@container(min-width:40rem)]:p-5 [@container(min-width:64rem)]:p-6">
       <span aria-hidden="true" className="flex size-8 shrink-0 items-center justify-center rounded-md bg-secondary">
         <Icon className="size-4" strokeWidth={1.5} />
       </span>
@@ -197,9 +197,9 @@ export function FooterTwoTierDoormat({ locale = "en", columns, contacts, copyrig
       ) : null}
       {cols.length && cards.length ? <FooterRule /> : null}
       {cards.length ? (
-        <ul className="grid grid-cols-1 gap-4 [@container(min-width:40rem)]:grid-cols-2 [@container(min-width:64rem)]:grid-cols-4">
+        <ul className="grid grid-cols-[minmax(0,1fr)] gap-4 [@container(min-width:40rem)]:grid-cols-[repeat(2,minmax(0,1fr))] [@container(min-width:64rem)]:grid-cols-[repeat(4,minmax(0,1fr))]">
           {cards.map((contact) => (
-            <li key={contact.title} className="flex">
+            <li key={contact.title} className="flex min-w-0">
               <FooterContactCard contact={contact} locale={locale} />
             </li>
           ))}

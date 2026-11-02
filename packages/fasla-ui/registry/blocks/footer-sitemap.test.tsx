@@ -283,6 +283,19 @@ describe("Two-Tier Doormat", () => {
     expect(cards.map((heading) => heading.textContent)).toEqual(["Head office", "Talk to sales", "Product support", "Press & partnerships"])
   })
 
+  it.each(["en", "ar"] as const)("gives the four contact cards equal columns and the full width of each, in %s", (locale) => {
+    const { container } = render(<FooterTwoTierDoormat locale={locale} />)
+    const list = Array.from(container.querySelectorAll("ul")).find((ul) => ul.querySelector("h3"))!
+    // minmax(0, 1fr): a long line cannot widen one column. jsdom has no layout, so the classes are the contract.
+    expect(list.className).toContain("grid-cols-[minmax(0,1fr)]")
+    expect(list.className).toContain("[@container(min-width:40rem)]:grid-cols-[repeat(2,minmax(0,1fr))]")
+    expect(list.className).toContain("[@container(min-width:64rem)]:grid-cols-[repeat(4,minmax(0,1fr))]")
+    list.querySelectorAll("li").forEach((item) => {
+      expect(item.className).toContain("min-w-0")
+      expect(item.querySelector("h3")!.parentElement!.className).toContain("w-full")
+    })
+  })
+
   it("keeps digits, emails and times in their own direction inside Arabic lines", () => {
     const { container } = render(<FooterTwoTierDoormat locale="ar" />)
     const bidi = Array.from(container.querySelectorAll("bdi")).map((el) => el.textContent)
