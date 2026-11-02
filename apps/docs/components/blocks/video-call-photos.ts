@@ -23,7 +23,7 @@ export type VideoCallDemoPhoto = { src: string; alt: string; position?: string }
  */
 const FOCAL: Record<string, string> = {
   "/images/social-proof/adel-qasim.webp": "50% 30%",
-  "/images/social-proof/khalid-saad.webp": "50% 38%",
+  "/images/social-proof/khalid-saad.webp": "50% 37%",
   "/blocks/team/portrait-rami-aziz.webp": "50% 32%",
   "/images/social-proof/bader-al-ghamdi.webp": "50% 40%",
   "/images/social-proof/sami-naji.webp": "50% 18%",
