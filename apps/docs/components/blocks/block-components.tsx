@@ -910,6 +910,10 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "footer-trust-compliance": dynamic(() => import("@fasla-ui/blocks/footer-trust-compliance/FooterTrustCompliance").then((m) => m.FooterTrustCompliance)),
   "footer-ecommerce-mega": dynamic(() => import("@fasla-ui/blocks/footer-ecommerce-mega/FooterEcommerceMega").then((m) => m.FooterEcommerceMega)),
   "footer-service-promise-band": dynamic(() => import("@fasla-ui/blocks/footer-service-promise-band/FooterServicePromiseBand").then((m) => m.FooterServicePromiseBand)),
+  "footer-careers-culture": dynamic(() =>
+    import("@fasla-ui/blocks/footer-careers-culture/FooterCareersCulture").then((m) => withFooterPhotos(m.FooterCareersCulture, "careers-culture", m.footerCareersCultureCopy))
+  ),
+  "footer-community-events": dynamic(() => import("@fasla-ui/blocks/footer-community-events/FooterCommunityEvents").then((m) => m.FooterCommunityEvents)),
   // footer:end
 }
 

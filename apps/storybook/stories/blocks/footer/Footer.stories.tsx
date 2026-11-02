@@ -26,6 +26,8 @@ import { FooterLegalFirstSlim, footerLegalFirstSlimCopy } from "../../../../../p
 import { FooterTrustCompliance, footerTrustComplianceCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-trust-compliance/FooterTrustCompliance"
 import { FooterEcommerceMega, footerEcommerceMegaCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-ecommerce-mega/FooterEcommerceMega"
 import { FooterServicePromiseBand, footerServicePromiseBandCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-service-promise-band/FooterServicePromiseBand"
+import { FooterCareersCulture, footerCareersCultureCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-careers-culture/FooterCareersCulture"
+import { FooterCommunityEvents, footerCommunityEventsCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-community-events/FooterCommunityEvents"
 import { footerArgTypes, footerViewports, localeOf, photoPropsOf } from "./footer-story-kit"
 
 /**
@@ -252,4 +254,23 @@ export const ServicePromiseBand: StoryObj<typeof FooterServicePromiseBand> = {
   name: "Service Promise Band",
   argTypes: footerArgTypes(FooterServicePromiseBand, footerServicePromiseBandCopy),
   render: (args, context) => <FooterServicePromiseBand locale={localeOf(context)} {...photoPropsOf("service-promise-band", context, footerServicePromiseBandCopy)} {...args} />,
+}
+
+export const CareersCulture: StoryObj<typeof FooterCareersCulture> = {
+  name: "Careers & Culture",
+  argTypes: footerArgTypes(FooterCareersCulture, footerCareersCultureCopy),
+  render: (args, context) => <FooterCareersCulture locale={localeOf(context)} {...photoPropsOf("careers-culture", context, footerCareersCultureCopy)} {...args} />,
+}
+
+export const CareersCultureWithoutPhotos: StoryObj<typeof FooterCareersCulture> = {
+  name: "Careers & Culture: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: footerArgTypes(FooterCareersCulture, footerCareersCultureCopy),
+  render: (args, context) => <FooterCareersCulture locale={localeOf(context)} {...args} />,
+}
+
+export const CommunityEvents: StoryObj<typeof FooterCommunityEvents> = {
+  name: "Community & Events",
+  argTypes: footerArgTypes(FooterCommunityEvents, footerCommunityEventsCopy),
+  render: (args, context) => <FooterCommunityEvents locale={localeOf(context)} {...photoPropsOf("community-events", context, footerCommunityEventsCopy)} {...args} />,
 }

@@ -3514,7 +3514,8 @@
         "bars": "Minimal bars",
         "contact": "Contact & support",
         "legal": "Legal & trust",
-        "commerce": "Commerce"
+        "commerce": "Commerce",
+        "community": "Community & careers"
       },
       "types": {
         "footer-four-column-directory": "Four-Column Directory",
@@ -3543,7 +3544,9 @@
         "footer-legal-first-slim": "Legal-First Slim",
         "footer-trust-compliance": "Trust & Compliance",
         "footer-ecommerce-mega": "Ecommerce Mega",
-        "footer-service-promise-band": "Service Promise Band"
+        "footer-service-promise-band": "Service Promise Band",
+        "footer-careers-culture": "Careers & Culture",
+        "footer-community-events": "Community & Events"
       }
     }
   },

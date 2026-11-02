@@ -7808,6 +7808,56 @@
           "target": "components/blocks/footer-service-promise-band.tsx"
         }
       ]
+    },
+    {
+      "name": "footer-careers-culture",
+      "type": "registry:block",
+      "title": "Footer: Careers & Culture",
+      "description": "Open-role rows beside a cluster of team photos, with the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-careers-culture/FooterCareersCulture.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-careers-culture.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-community-events",
+      "type": "registry:block",
+      "title": "Footer: Community & Events",
+      "description": "Upcoming events with register buttons beside community channel cards.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-community-events/FooterCommunityEvents.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-community-events.tsx"
+        }
+      ]
     }
   ]
 }

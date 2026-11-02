@@ -280,7 +280,8 @@ export const CODE_MAP = {
       "cta-band-columns", "newsletter-split", "floating-demo-card", "big-question-cta",
       "single-line-bar", "split-hairline-micro", "two-row-compact", "inline-preferences",
       "contact-first", "support-contact", "local-business", "legal-first-slim",
-      "trust-compliance", "ecommerce-mega", "service-promise-band",
+      "trust-compliance", "ecommerce-mega", "service-promise-band", "careers-culture",
+      "community-events",
     ].map((type) => [`footer-${type}`, null])
   ),
 }

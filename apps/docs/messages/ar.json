@@ -3514,7 +3514,8 @@
         "bars": "أشرطة مصغّرة",
         "contact": "التواصل والدعم",
         "legal": "القانون والثقة",
-        "commerce": "التجارة"
+        "commerce": "التجارة",
+        "community": "المجتمع والوظائف"
       },
       "types": {
         "footer-four-column-directory": "دليل بأربعة أعمدة",
@@ -3543,7 +3544,9 @@
         "footer-legal-first-slim": "شريط قانوني أولًا",
         "footer-trust-compliance": "الثقة والامتثال",
         "footer-ecommerce-mega": "تذييل المتجر الواسع",
-        "footer-service-promise-band": "شريط وعود الخدمة"
+        "footer-service-promise-band": "شريط وعود الخدمة",
+        "footer-careers-culture": "الوظائف والثقافة",
+        "footer-community-events": "المجتمع والفعاليات"
       }
     }
   },
