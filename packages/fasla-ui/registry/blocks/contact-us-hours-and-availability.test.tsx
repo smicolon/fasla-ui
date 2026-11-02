@@ -46,6 +46,18 @@ describe("Hours and Availability", () => {
     expect(text).toContain("Replies by 10:00 tomorrow")
   })
 
+  it("keeps the big clock left to right and aligns it to the start of the line in an RTL page", () => {
+    const { container } = render(
+      <div dir="rtl">
+        <ContactUsHoursAndAvailability locale="ar" now={NOW} />
+      </div>
+    )
+    const clock = container.querySelector("bdi[dir=ltr].tabular-nums")!
+    expect(clock.textContent).toBe("14:20")
+    // The digits are isolated left to right; the block itself sits on the right, with the lines around it.
+    expect(clock.className).toContain("rtl:text-right")
+  })
+
   it("in Arabic: the comma, Western digits, the label", () => {
     const { container } = render(<ContactUsHoursAndAvailability locale="ar" now={NOW} />)
     const text = container.textContent ?? ""

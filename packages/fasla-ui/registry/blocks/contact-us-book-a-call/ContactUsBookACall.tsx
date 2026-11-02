@@ -296,7 +296,7 @@ export function ContactUsBookACall({ locale = "en", onBook, defaultDayId, defaul
         <div data-reveal="rise" className="flex shrink-0 flex-col gap-6 bg-muted p-8 [@container(min-width:64rem)]:w-[23.75rem]">
           <div className="flex items-center gap-3">
             <span aria-hidden className="inline-flex shrink-0">
-              <Avatar variant="initials" radius="rounded" size="32" name={letters} />
+              <Avatar variant="initials" radius="rounded" size="32" border name={letters} />
             </span>
             <div className="flex min-w-0 flex-col">
               <p className="text-base font-medium text-foreground rtl:leading-7">{copy.hostName}</p>

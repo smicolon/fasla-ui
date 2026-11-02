@@ -256,7 +256,7 @@ export function ContactUsNamedOwners({ locale = "en", ...given }: ContactUsNamed
                   </span>
                   <span className="flex min-w-0 flex-col">
                     <span className="truncate text-base font-medium text-foreground rtl:leading-7">{owner.name}</span>
-                    <bdi dir="ltr" className="truncate text-start text-sm text-muted-foreground rtl:leading-6 group-hover/owner:underline">
+                    <bdi dir="ltr" className="truncate text-start text-sm text-muted-foreground rtl:text-right rtl:leading-6 group-hover/owner:underline">
                       {owner.email}
                     </bdi>
                   </span>

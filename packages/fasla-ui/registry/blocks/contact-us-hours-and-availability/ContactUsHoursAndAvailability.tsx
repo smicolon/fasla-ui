@@ -264,7 +264,7 @@ function Clock({ time, zone }: { time: string; zone: string }) {
     } else whole.current?.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 150, easing: ease })
   }, [time, zone])
   return (
-    <bdi dir="ltr" className="block font-semibold tabular-nums text-foreground">
+    <bdi dir="ltr" className="block font-semibold tabular-nums text-foreground rtl:text-right">
       <span ref={whole} className="inline-block">
         {hour}
         <span ref={minuteNode} className="inline-block">
