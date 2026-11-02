@@ -74,6 +74,14 @@ describe("Video Call demo photos", () => {
     expect(credits).toContain("BKqjDo3r4UA")
   })
 
+  test("every person in the call is a man: no alt text describes a woman", () => {
+    for (const locale of ["en", "ar"]) {
+      for (const [id, photo] of Object.entries(videoCallPeople(locale))) {
+        expect(photo.alt, `${id} (${locale})`).not.toMatch(/\bwoman\b|\bwomen\b|\bher\b|امرأة|سيدة/i)
+      }
+    }
+  })
+
   test("the recordings' stills are left centred", () => {
     expect(videoCallPhoto("call-ended-summary", "en").position).toBeUndefined()
     expect(videoCallPhoto("ai-meeting-recap", "en").position).toBeUndefined()

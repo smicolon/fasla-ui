@@ -22,16 +22,16 @@ export type VideoCallDemoPhoto = { src: string; alt: string; position?: string }
  * blocks draw (360, 768 and 1280 wide), with some chest where the tile allows.
  */
 const FOCAL: Record<string, string> = {
+  "/images/social-proof/adel-qasim.webp": "50% 30%",
+  "/images/social-proof/khalid-saad.webp": "50% 38%",
+  "/blocks/team/portrait-rami-aziz.webp": "50% 32%",
+  "/images/social-proof/bader-al-ghamdi.webp": "50% 40%",
   "/images/social-proof/sami-naji.webp": "50% 18%",
-  "/blocks/team/portrait-chloe-dubois.webp": "50% 14%",
   "/images/social-proof/rashed-al-amri.webp": "50% 44%",
   "/blocks/team/portrait-marcus-boateng.webp": "50% 10%",
-  "/blocks/team/portrait-grace-okafor.webp": "50% 26%",
   "/images/video-call/cafe-bar-man.webp": "50% 36%",
   "/images/video-call/thumbs-up-camera.webp": "50% 50%",
-  "/blocks/team/portrait-elena-novak.webp": "50% 16%",
   "/blocks/team/portrait-omar-nasser.webp": "50% 38%",
-  "/blocks/team/portrait-sofia-marchetti.webp": "50% 25%",
 }
 
 /** A Type's photo, by the Type's name without `video-call-`. */
@@ -79,19 +79,19 @@ const RECORDINGS: Record<string, { src: string; alt: Alt }> = {
 /**
  * The people on the call stages, by participant `id`. Every file is an ordinary
  * portrait the repo already has (the Team and Social Proof ones), cropped by
- * the tile to a camera's frame. Salma and Hala have none: their camera is off,
+ * the tile to a camera's frame. Salim and Hani have none: their camera is off,
  * as in Figma, and a tile shows their initials.
  */
 const PEOPLE: Record<string, { src: string; alt: Alt }> = {
   karim: { src: "/images/social-proof/sami-naji.webp", alt: { en: "A smiling man in a white shirt with his arms crossed against a dark backdrop", ar: "رجل مبتسم يرتدي قميصًا أبيض ويشبك ذراعيه أمام خلفية داكنة" } },
-  mona: { src: "/blocks/team/portrait-chloe-dubois.webp", alt: { en: "A woman with long wavy brown hair in a grey check blazer, arms crossed, against a white wall", ar: "امرأة بشعر بني طويل مموّج وسترة رمادية مربعات تشبك ذراعيها أمام جدار أبيض" } },
+  mazen: { src: "/images/social-proof/adel-qasim.webp", alt: { en: "A smiling man with a short beard in a light blue shirt, arms crossed, against a teal backdrop", ar: "رجل مبتسم بلحية قصيرة يرتدي قميصًا أزرق فاتحًا ويشبك ذراعيه أمام خلفية بترولية" } },
   omar: { src: "/images/social-proof/rashed-al-amri.webp", alt: { en: "A young man with short dark hair in an olive shirt against a grey backdrop", ar: "شاب بشعر أسود قصير وقميص بلون الزيتون أمام خلفية رمادية" } },
   tariq: { src: "/blocks/team/portrait-marcus-boateng.webp", alt: { en: "A smiling man in glasses and a black sweater against a white backdrop", ar: "رجل مبتسم يرتدي نظارة وسترة سوداء أمام خلفية بيضاء" } },
-  yasmin: { src: "/blocks/team/portrait-grace-okafor.webp", alt: { en: "A smiling woman with long braids in a black top beside a sunlit window", ar: "امرأة مبتسمة بضفائر طويلة وقميص أسود بجانب نافذة مشمسة" } },
+  yassin: { src: "/images/social-proof/khalid-saad.webp", alt: { en: "A man with short fair hair in a grey shirt against a light backdrop", ar: "رجل بشعر أشقر قصير يرتدي قميصًا رماديًا أمام خلفية فاتحة" } },
   adam: { src: "/images/video-call/cafe-bar-man.webp", alt: { en: "A man in a light blue blazer and white shirt at a restaurant bar", ar: "رجل يرتدي سترة زرقاء فاتحة وقميصًا أبيض عند بار مطعم" } },
-  nour: { src: "/blocks/team/portrait-elena-novak.webp", alt: { en: "A smiling woman with red hair in a black top", ar: "امرأة مبتسمة بشعر أحمر ترتدي قميصًا أسود" } },
+  nabil: { src: "/blocks/team/portrait-rami-aziz.webp", alt: { en: "A smiling man with a short beard in a navy sweater against a grey backdrop", ar: "رجل مبتسم بلحية قصيرة يرتدي سترة كحلية أمام خلفية رمادية" } },
   bilal: { src: "/blocks/team/portrait-omar-nasser.webp", alt: { en: "A man in a dark suit and tie against a dark backdrop", ar: "رجل يرتدي بدلة داكنة ورابطة عنق أمام خلفية داكنة" } },
-  layla: { src: "/blocks/team/portrait-sofia-marchetti.webp", alt: { en: "A woman with long hair in a grey blazer against an orange wall", ar: "امرأة بشعر طويل وسترة رمادية أمام جدار برتقالي" } },
+  laith: { src: "/images/social-proof/bader-al-ghamdi.webp", alt: { en: "An older man with glasses in a grey blazer beside a plant", ar: "رجل أكبر سنًا بنظارة يرتدي سترة رمادية بجانب نبتة" } },
 }
 
 /** The Types that show people, which take `photos` by person `id`: the call stages, the waiting room's guests and the callers. */
