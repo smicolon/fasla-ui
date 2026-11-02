@@ -259,6 +259,12 @@ export const CODE_MAP = {
       "stat-story-cards", "video-story-cards", "case-study-row", "proof-bento",
     ].map((type) => [`social-proof-${type}`, null])
   ),
+  // Block: the parts every Video Call block shares, from the block set Video Call (42869:1033), not an atom.
+  "video-call": null,
+  // Blocks: each Video Call item is one Type of the block set Video Call (42869:1033), not an atom.
+  ...Object.fromEntries(
+    ["pre-join-lobby", "grid-gallery-call", "speaker-filmstrip", "screen-share-stage", "call-with-side-panel", "call-controls-dock", "waiting-room-knock", "incoming-call", "captions-reactions", "join-link-dial-in", "call-ended-summary", "upcoming-meetings", "ai-meeting-recap", "hero-call-mockup"].map((type) => [`video-call-${type}`, null])
+  ),
   // Blocks: each Blog Cards item is one Type of the block set Blog Cards (46368:243914), not an atom.
   ...Object.fromEntries(
     [
