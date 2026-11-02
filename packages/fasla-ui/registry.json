@@ -7290,6 +7290,102 @@
           "target": "components/blocks/footer-index-numbered-columns.tsx"
         }
       ]
+    },
+    {
+      "name": "footer-cta-band-columns",
+      "type": "registry:block",
+      "title": "Footer: CTA Band + Columns",
+      "description": "A dark call-to-action band with two buttons over the link columns and the legal bar.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "fasla-logo",
+        "footer",
+        "social-icons",
+        "theme-inverse"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-cta-band-columns/FooterCtaBandColumns.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-cta-band-columns.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-newsletter-split",
+      "type": "registry:block",
+      "title": "Footer: Newsletter Split",
+      "description": "A newsletter form beside the link grid, with sending, sent, error and invalid states.",
+      "dependencies": [],
+      "registryDependencies": [
+        "fasla-logo",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-newsletter-split/FooterNewsletterSplit.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-newsletter-split.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-floating-demo-card",
+      "type": "registry:block",
+      "title": "Footer: Floating Demo Card",
+      "description": "A card with a line of copy and two actions straddling the page edge above the directory.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "fasla-logo",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-floating-demo-card/FooterFloatingDemoCard.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-floating-demo-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-big-question-cta",
+      "type": "registry:block",
+      "title": "Footer: Big-Question CTA",
+      "description": "A large question as the headline with two buttons, then the links and the legal bar.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "fasla-logo",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-big-question-cta/FooterBigQuestionCta.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-big-question-cta.tsx"
+        }
+      ]
     }
   ]
 }

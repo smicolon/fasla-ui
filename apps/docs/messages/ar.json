@@ -3508,14 +3508,19 @@
       "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
       "families": {
         "all": "الكل",
-        "sitemap": "خريطة الموقع والأدلة"
+        "sitemap": "خريطة الموقع والأدلة",
+        "cta": "الدعوة إلى الإجراء والاشتراك"
       },
       "types": {
         "footer-four-column-directory": "دليل بأربعة أعمدة",
         "footer-wide-sitemap-mega": "خريطة موقع واسعة",
         "footer-accordion-sitemap": "خريطة موقع قابلة للطي",
         "footer-two-tier-doormat": "خريطة موقع بطبقتين",
-        "footer-index-numbered-columns": "أعمدة مرقّمة"
+        "footer-index-numbered-columns": "أعمدة مرقّمة",
+        "footer-cta-band-columns": "شريط دعوة مع أعمدة",
+        "footer-newsletter-split": "نشرة بريدية مع روابط",
+        "footer-floating-demo-card": "بطاقة عرض عائمة",
+        "footer-big-question-cta": "دعوة بسؤال كبير"
       }
     }
   },

@@ -882,6 +882,10 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "footer-accordion-sitemap": dynamic(() => import("@fasla-ui/blocks/footer-accordion-sitemap/FooterAccordionSitemap").then((m) => m.FooterAccordionSitemap)),
   "footer-two-tier-doormat": dynamic(() => import("@fasla-ui/blocks/footer-two-tier-doormat/FooterTwoTierDoormat").then((m) => m.FooterTwoTierDoormat)),
   "footer-index-numbered-columns": dynamic(() => import("@fasla-ui/blocks/footer-index-numbered-columns/FooterIndexNumberedColumns").then((m) => m.FooterIndexNumberedColumns)),
+  "footer-cta-band-columns": dynamic(() => import("@fasla-ui/blocks/footer-cta-band-columns/FooterCtaBandColumns").then((m) => m.FooterCtaBandColumns)),
+  "footer-newsletter-split": dynamic(() => import("@fasla-ui/blocks/footer-newsletter-split/FooterNewsletterSplit").then((m) => m.FooterNewsletterSplit)),
+  "footer-floating-demo-card": dynamic(() => import("@fasla-ui/blocks/footer-floating-demo-card/FooterFloatingDemoCard").then((m) => m.FooterFloatingDemoCard)),
+  "footer-big-question-cta": dynamic(() => import("@fasla-ui/blocks/footer-big-question-cta/FooterBigQuestionCta").then((m) => m.FooterBigQuestionCta)),
   // footer:end
 }
 

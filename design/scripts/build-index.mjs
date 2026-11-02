@@ -275,7 +275,8 @@ export const CODE_MAP = {
   ...Object.fromEntries(
     [
       "four-column-directory", "wide-sitemap-mega", "accordion-sitemap", "two-tier-doormat",
-      "index-numbered-columns",
+      "index-numbered-columns", "cta-band-columns", "newsletter-split", "floating-demo-card",
+      "big-question-cta",
     ].map((type) => [`footer-${type}`, null])
   ),
 }

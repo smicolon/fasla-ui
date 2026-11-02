@@ -4,6 +4,10 @@ import { FooterWideSitemapMega, footerWideSitemapMegaCopy } from "../../../../..
 import { FooterAccordionSitemap, footerAccordionSitemapCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-accordion-sitemap/FooterAccordionSitemap"
 import { FooterTwoTierDoormat, footerTwoTierDoormatCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-two-tier-doormat/FooterTwoTierDoormat"
 import { FooterIndexNumberedColumns, footerIndexNumberedColumnsCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-index-numbered-columns/FooterIndexNumberedColumns"
+import { FooterCtaBandColumns, footerCtaBandColumnsCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-cta-band-columns/FooterCtaBandColumns"
+import { FooterNewsletterSplit, footerNewsletterSplitCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-newsletter-split/FooterNewsletterSplit"
+import { FooterFloatingDemoCard, footerFloatingDemoCardCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-floating-demo-card/FooterFloatingDemoCard"
+import { FooterBigQuestionCta, footerBigQuestionCtaCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-big-question-cta/FooterBigQuestionCta"
 import { footerArgTypes, footerViewports, localeOf, photoPropsOf } from "./footer-story-kit"
 
 /**
@@ -56,4 +60,49 @@ export const IndexNumberedColumns: StoryObj<typeof FooterIndexNumberedColumns> =
   name: "Index-Numbered Columns",
   argTypes: footerArgTypes(FooterIndexNumberedColumns, footerIndexNumberedColumnsCopy),
   render: (args, context) => <FooterIndexNumberedColumns locale={localeOf(context)} {...photoPropsOf("index-numbered-columns", context, footerIndexNumberedColumnsCopy)} {...args} />,
+}
+
+export const CtaBandColumns: StoryObj<typeof FooterCtaBandColumns> = {
+  name: "CTA Band + Columns",
+  argTypes: footerArgTypes(FooterCtaBandColumns, footerCtaBandColumnsCopy),
+  render: (args, context) => <FooterCtaBandColumns locale={localeOf(context)} {...photoPropsOf("cta-band-columns", context, footerCtaBandColumnsCopy)} {...args} />,
+}
+
+export const NewsletterSplit: StoryObj<typeof FooterNewsletterSplit> = {
+  name: "Newsletter Split",
+  argTypes: footerArgTypes(FooterNewsletterSplit, footerNewsletterSplitCopy),
+  render: (args, context) => <FooterNewsletterSplit locale={localeOf(context)} {...photoPropsOf("newsletter-split", context, footerNewsletterSplitCopy)} {...args} />,
+}
+
+export const NewsletterSplitLoading: StoryObj<typeof FooterNewsletterSplit> = {
+  name: "Newsletter Split: Loading",
+  tags: ["!dev", "!autodocs"],
+  argTypes: footerArgTypes(FooterNewsletterSplit, footerNewsletterSplitCopy),
+  render: (args, context) => <FooterNewsletterSplit locale={localeOf(context)} status="loading" {...args} />,
+}
+
+export const NewsletterSplitSent: StoryObj<typeof FooterNewsletterSplit> = {
+  name: "Newsletter Split: Sent",
+  tags: ["!dev", "!autodocs"],
+  argTypes: footerArgTypes(FooterNewsletterSplit, footerNewsletterSplitCopy),
+  render: (args, context) => <FooterNewsletterSplit locale={localeOf(context)} status="sent" {...args} />,
+}
+
+export const NewsletterSplitError: StoryObj<typeof FooterNewsletterSplit> = {
+  name: "Newsletter Split: Error",
+  tags: ["!dev", "!autodocs"],
+  argTypes: footerArgTypes(FooterNewsletterSplit, footerNewsletterSplitCopy),
+  render: (args, context) => <FooterNewsletterSplit locale={localeOf(context)} status="error" {...args} />,
+}
+
+export const FloatingDemoCard: StoryObj<typeof FooterFloatingDemoCard> = {
+  name: "Floating Demo Card",
+  argTypes: footerArgTypes(FooterFloatingDemoCard, footerFloatingDemoCardCopy),
+  render: (args, context) => <FooterFloatingDemoCard locale={localeOf(context)} {...photoPropsOf("floating-demo-card", context, footerFloatingDemoCardCopy)} {...args} />,
+}
+
+export const BigQuestionCta: StoryObj<typeof FooterBigQuestionCta> = {
+  name: "Big-Question CTA",
+  argTypes: footerArgTypes(FooterBigQuestionCta, footerBigQuestionCtaCopy),
+  render: (args, context) => <FooterBigQuestionCta locale={localeOf(context)} {...photoPropsOf("big-question-cta", context, footerBigQuestionCtaCopy)} {...args} />,
 }

@@ -3508,14 +3508,19 @@
       "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
       "families": {
         "all": "All",
-        "sitemap": "Sitemap & directory"
+        "sitemap": "Sitemap & directory",
+        "cta": "Call to action & sign-up"
       },
       "types": {
         "footer-four-column-directory": "Four-Column Directory",
         "footer-wide-sitemap-mega": "Wide Sitemap Mega",
         "footer-accordion-sitemap": "Accordion Sitemap",
         "footer-two-tier-doormat": "Two-Tier Doormat",
-        "footer-index-numbered-columns": "Index-Numbered Columns"
+        "footer-index-numbered-columns": "Index-Numbered Columns",
+        "footer-cta-band-columns": "CTA Band + Columns",
+        "footer-newsletter-split": "Newsletter Split",
+        "footer-floating-demo-card": "Floating Demo Card",
+        "footer-big-question-cta": "Big-Question CTA"
       }
     }
   },
