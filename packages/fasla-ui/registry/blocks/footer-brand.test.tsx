@@ -284,6 +284,22 @@ describe("Image-Backed Brand", () => {
     expect(container.querySelector("img")!.getAttribute("loading")).toBe("lazy")
   })
 
+  it("lays the photo and the scrim over the whole band, outside the 1280px column and its padding", () => {
+    const { container } = render(<FooterImageBackedBrand />)
+    const band = container.querySelector("footer")!
+    // Direct children of the footer, so inset-0 means the band's own edges: no bars above or below, none at the sides.
+    expect(photo(container).parentElement).toBe(band)
+    expect(scrim(container).parentElement).toBe(band)
+    expect(photo(container).className).toContain("inset-x-0")
+    expect(scrim(container).className).toContain("inset-0")
+    expect(band.className).toContain("overflow-hidden")
+  })
+
+  it("draws the hairline at Figma's .18", () => {
+    const { container } = render(<FooterImageBackedBrand />)
+    expect(container.querySelector('[role="presentation"]')!.className).toContain("opacity-[.18]")
+  })
+
   it("lays the scrim as its own layer in background-inverse at .62, under the text", () => {
     const { container } = render(<FooterImageBackedBrand />)
     const layer = scrim(container)

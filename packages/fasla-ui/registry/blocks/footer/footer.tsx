@@ -231,6 +231,8 @@ export interface FooterSectionProps extends React.HTMLAttributes<HTMLElement> {
   inverse?: boolean
   /** Classes for the 1280px column inside the padding. */
   contentClassName?: string
+  /** Layers that fill the whole band behind the column (a photo and its scrim), outside the 1280px column and the padding. */
+  behind?: React.ReactNode
 }
 
 /**
@@ -239,7 +241,7 @@ export interface FooterSectionProps extends React.HTMLAttributes<HTMLElement> {
  * Vertical padding is the Type's own (`className`).
  */
 export const FooterSection = React.forwardRef<HTMLElement, FooterSectionProps>(function FooterSection(
-  { labelledBy, inverse = false, className, contentClassName, children, ...props },
+  { labelledBy, inverse = false, className, contentClassName, behind, children, ...props },
   ref
 ) {
   return (
@@ -254,6 +256,7 @@ export const FooterSection = React.forwardRef<HTMLElement, FooterSectionProps>(f
       )}
       {...props}
     >
+      {behind}
       <div className={cn("mx-auto flex w-full max-w-[1280px] flex-col", contentClassName)}>{children}</div>
     </footer>
   )

@@ -185,11 +185,9 @@ export function FooterImageBackedBrand({
     <FooterSection
       ref={rootRef}
       inverse
-      className={cn("relative isolate overflow-hidden py-8 md:py-16 lg:pb-10 lg:pt-20", className)}
-      contentClassName="relative z-10 gap-5 [@container(min-width:40rem)]:gap-8 [@container(min-width:64rem)]:gap-10"
-      {...props}
-    >
-      {/* The photo is taller than the band by the parallax range, so it never shows an edge. */}
+      behind={
+        <>
+          {/* The layers fill the whole band, not the 1280px column. The photo is taller than the band by the parallax range, so it never shows an edge. */}
       <div ref={photoRef} aria-hidden="true" data-photo="" className="pointer-events-none absolute inset-x-0 -inset-y-2 -z-20 bg-muted [@container(min-width:40rem)]:-inset-y-4 [@container(min-width:64rem)]:-inset-y-6">
         {background ? (
           // eslint-disable-next-line @next/next/no-img-element
@@ -197,6 +195,12 @@ export function FooterImageBackedBrand({
         ) : null}
       </div>
       <div ref={scrimRef} aria-hidden="true" data-scrim="" className="pointer-events-none absolute inset-0 -z-10 bg-background-inverse opacity-[.62]" />
+        </>
+      }
+      className={cn("relative isolate overflow-hidden py-8 md:py-16 lg:pb-10 lg:pt-20", className)}
+      contentClassName="relative z-10 gap-5 [@container(min-width:40rem)]:gap-8 [@container(min-width:64rem)]:gap-10"
+      {...props}
+    >
       <div className="flex flex-col items-center gap-3 text-center [@container(min-width:40rem)]:gap-4 [@container(min-width:64rem)]:gap-5">
         <div data-reveal="">
           <FooterLogo inverse className="h-9" />
@@ -239,7 +243,7 @@ export function FooterImageBackedBrand({
         </ul>
       ) : null}
       <div data-reveal="" className="flex flex-col gap-5 [@container(min-width:40rem)]:gap-8 [@container(min-width:64rem)]:gap-10">
-        <FooterRule inverse />
+        <FooterRule inverse className="opacity-[.18]" />
         <FooterLegalBar inverse className="[&_a]:text-foreground-inverse" copyright={<span className="text-foreground-inverse"><Digits text={copyright ?? copy.copyright} /></span>} links={legal ?? copy.legal} label={legalLabel ?? copy.legalLabel} />
       </div>
     </FooterSection>
