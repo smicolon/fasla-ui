@@ -14,7 +14,8 @@ import hidden from "../../../../apps/storybook/stories/blocks/footer/footer-hidd
 // so a prop that is only hidden at one breakpoint cannot be told apart here;
 // the browser pass over the running Storybook covers that and the non-text controls.
 
-const modules = import.meta.glob("./footer-*/Footer*.tsx", { eager: true }) as Record<string, Record<string, unknown>>
+// Vite's glob import, which the package's tsconfig does not type.
+const modules = (import.meta as unknown as { glob: (pattern: string, options: { eager: true }) => Record<string, Record<string, unknown>> }).glob("./footer-*/Footer*.tsx", { eager: true })
 
 const TYPED = "ZQ مرحبا"
 /** The messages blockArgTypes already drops from every table: they show only once the visitor acts. */
