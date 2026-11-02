@@ -19,7 +19,7 @@ const modules = (import.meta as unknown as { glob: (pattern: string, options: { 
 
 const TYPED = "ZQ مرحبا"
 /** The messages blockArgTypes already drops from every table: they show only once the visitor acts. */
-const BY_RULE = new Set(["pendingLabel", "retryingLabel", "success", "error", "emailError", "retryError", "requestError", "sendError", "thanks", "copiedLabel", "cancelled", "redirecting", "empty"])
+const BY_RULE = new Set(["pendingLabel", "retryingLabel", "success", "error", "emailError", "retryError", "requestError", "sendError", "requiredError", "consentError", "againLabel", "thanks", "copiedLabel", "cancelled", "redirecting", "empty"])
 const hiddenByStory = hidden as Record<string, string[]>
 
 /** Stories beyond the one-per-Type: the newsletter's forced states, with the prop the story sets. */
