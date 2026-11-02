@@ -544,6 +544,7 @@ describe("Bento Tile", () => {
     fireEvent.submit(input.closest("form")!)
     expect(onSubscribe).toHaveBeenCalledWith("me@company.com")
     await act(async () => resolve())
+    await act(async () => { await new Promise((resolve) => setTimeout(resolve, 200)) }) // the spinner holds for 150ms
     expect(screen.getByRole("status", { name: "" }).textContent).toBe("Thanks. Check your inbox to confirm.")
   })
 
@@ -554,6 +555,7 @@ describe("Bento Tile", () => {
     await act(async () => {
       fireEvent.submit(input.closest("form")!)
     })
+    await act(async () => { await new Promise((resolve) => setTimeout(resolve, 200)) }) // the spinner holds for 150ms
     expect(screen.getByRole("alert").textContent).toBe("That didn't go through. Try again in a moment.")
   })
 

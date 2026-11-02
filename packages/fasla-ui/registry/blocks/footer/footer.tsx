@@ -450,6 +450,9 @@ const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
  * (160ms). Reduced motion swaps the layers at once. The browser's own submit
  * is cancelled: `onSubscribe` receives the address and the page does the rest.
  */
+/** The least time the sending state shows (Figma's chip: 150ms). */
+const SPINNER_MIN_MS = 150
+
 export function FooterNewsletterForm({
   placeholder,
   emailLabel,
@@ -484,10 +487,14 @@ export function FooterNewsletterForm({
     }
     setInvalid(false)
     setState("loading")
+    // The spinner shows for at least the chip's 150ms, so a quick reply (or a quick failure) does not flash it for a frame.
+    const minimum = new Promise((resolve) => setTimeout(resolve, SPINNER_MIN_MS))
     try {
       await onSubscribe?.(email)
+      await minimum
       setState("sent")
     } catch {
+      await minimum
       setState("error")
     }
   }
@@ -502,7 +509,8 @@ export function FooterNewsletterForm({
         {...(sent ? { inert: "" as unknown as boolean } : {})}
         className={cn(
           "col-start-1 row-start-1 flex flex-col gap-2 transition-opacity duration-200 ease-out motion-reduce:transition-none",
-          !stacked && "[@container(min-width:40rem)]:flex-row [@container(min-width:40rem)]:items-start",
+          // flex-wrap: the message line is basis-full, so it takes its own row under the field and button instead of squeezing the field to nothing.
+          !stacked && "[@container(min-width:40rem)]:flex-row [@container(min-width:40rem)]:flex-wrap [@container(min-width:40rem)]:items-start",
           sent && "pointer-events-none opacity-0"
         )}
       >

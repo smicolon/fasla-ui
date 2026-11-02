@@ -133,6 +133,15 @@ describe("FooterNewsletterForm", () => {
     expect(screen.getByLabelText("Email address").getAttribute("aria-invalid")).toBe("true")
   })
 
+  it("lets the row wrap, so the message line sits under the field and button and does not squeeze the field to nothing", () => {
+    // Found in a real browser: the message is basis-full, and without flex-wrap it shared the row and the field went to 0px wide.
+    const { container } = render(<FooterNewsletterForm {...copy} />)
+    const form = container.querySelector("form")!
+    expect(form.className).toContain("[@container(min-width:40rem)]:flex-row")
+    expect(form.className).toContain("[@container(min-width:40rem)]:flex-wrap")
+    expect(screen.getByRole("alert", { hidden: true }).className).toContain("[@container(min-width:40rem)]:basis-full")
+  })
+
   it("shows the spinner and disables the field while sending, then the one-line confirmation", async () => {
     let finish!: () => void
     const onSubscribe = vi.fn(() => new Promise<void>((resolve) => (finish = resolve)))
@@ -142,6 +151,7 @@ describe("FooterNewsletterForm", () => {
     expect(onSubscribe).toHaveBeenCalledWith("ada@example.com")
     expect((screen.getByLabelText("Email address") as HTMLInputElement).disabled).toBe(true)
     await act(async () => finish())
+    await act(async () => { await new Promise((resolve) => setTimeout(resolve, 200)) }) // the spinner holds for 150ms
     const status = screen.getByRole("status")
     expect(status.textContent).toBe("Thanks. Check your inbox to confirm.")
     expect(status.className).toContain("opacity-100")
@@ -160,8 +170,10 @@ describe("FooterNewsletterForm", () => {
     render(<FooterNewsletterForm {...copy} onSubscribe={onSubscribe} />)
     type("ada@example.com")
     await act(async () => submit())
+    await act(async () => { await new Promise((resolve) => setTimeout(resolve, 200)) }) // the spinner holds for 150ms
     expect(screen.getByRole("alert").textContent).toBe("That didn't go through. Try again in a moment.")
     await act(async () => submit())
+    await act(async () => { await new Promise((resolve) => setTimeout(resolve, 200)) }) // the spinner holds for 150ms
     expect(screen.getByRole("status").textContent).toBe("Thanks. Check your inbox to confirm.")
   })
 

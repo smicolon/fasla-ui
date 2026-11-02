@@ -260,6 +260,7 @@ describe("Newsletter Split", () => {
     expect(field().disabled).toBe(true)
     expect(button.hasAttribute("disabled")).toBe(true)
     await act(async () => finish())
+    await act(async () => { await new Promise((resolve) => setTimeout(resolve, 200)) }) // the spinner holds for 150ms
     expect(screen.getByRole("status").textContent).toBe("Thanks. Check your inbox to confirm.")
     expect(input.closest("form")?.hasAttribute("inert")).toBe(true)
   })
@@ -271,6 +272,7 @@ describe("Newsletter Split", () => {
     await act(async () => {
       fireEvent.click(subscribe())
     })
+    await act(async () => { await new Promise((resolve) => setTimeout(resolve, 200)) }) // the spinner holds for 150ms
     expect(screen.getByRole("alert").textContent).toBe("That didn't go through. Try again in a moment.")
     expect(field().getAttribute("aria-invalid")).toBe("true")
     expect(field().disabled).toBe(false)

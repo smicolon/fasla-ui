@@ -128,6 +128,7 @@ describe("Ecommerce Mega: the band form", () => {
     expect((screen.getByRole("button", { name: /Sign up/ }) as HTMLButtonElement).disabled).toBe(true)
     expect(screen.queryByText(copy.form.sent)).toBeNull()
     await act(async () => resolve())
+    await act(async () => { await new Promise((resolve) => setTimeout(resolve, 200)) }) // the spinner holds for 150ms
     expect(screen.getByRole("status").textContent).toBe(copy.form.sent)
     // the form stays in the DOM, faded and inert, so the band keeps its height
     expect(container.querySelector("form")?.className).toContain("opacity-0")
@@ -140,6 +141,7 @@ describe("Ecommerce Mega: the band form", () => {
     await act(async () => {
       fireEvent.click(screen.getByRole("button", { name: "Sign up" }))
     })
+    await act(async () => { await new Promise((resolve) => setTimeout(resolve, 200)) }) // the spinner holds for 150ms
     expect(screen.getByRole("alert").textContent).toBe(copy.form.error)
   })
 
