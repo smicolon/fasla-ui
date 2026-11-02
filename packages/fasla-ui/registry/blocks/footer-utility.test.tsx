@@ -358,6 +358,10 @@ describe.each(["en", "ar"] as const)("Product Family Switcher (%s)", (locale) =>
     const compare = screen.getByRole("link", { name: copy.compare.label })
     expect(hasClass(compare, "h-8")).toBe(true)
     expect(hasClass(compare, "bg-primary")).toBe(false)
+    // At the start edge of the title at its own width, at every breakpoint: no stretching, no centring.
+    expect(hasClass(compare, "w-full")).toBe(false)
+    expect(compare.parentElement!.className).toContain("items-start")
+    expect(compare.parentElement!.className).not.toContain("justify-between")
     expect(["LinkedIn", "X", "GitHub", "YouTube"].every((name) => container.querySelector(`a[aria-label="${name}"]`))).toBe(true)
   })
 
