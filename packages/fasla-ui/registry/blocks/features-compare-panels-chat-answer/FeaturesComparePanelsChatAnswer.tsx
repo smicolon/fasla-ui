@@ -17,7 +17,8 @@ import { FeaturesRule, FeaturesSection, Figures, type FeaturesLocale } from "../
  * button, a 99% mark and files that read JUST NOW. A hairline joins them to
  * a chat module on a neutral wash: a breadcrumb, the user's question, an
  * answer with a Sources row of five chips, and a file card, then a closing
- * line.
+ * line. At Mobile the file ages (JAN 2026, JUST NOW, 3S AGO…) are left out,
+ * as Figma's Mobile leaves them out.
  *
  * Each source chip is a button wearing the Badge classes. Pressing one opens
  * that source's file card under the chips (the chip's `aria-expanded` says
@@ -72,7 +73,7 @@ export interface FeaturesComparePanelsChatAnswerCopy {
 
 const FILE_ICONS = [ChartLine, FileCode, BookOpen, File, File]
 const SOURCE_ICONS = { billing: Receipt, chat: MessageSquare, notes: NotebookText, mail: Mail, files: Folder } as const
-const FADE = ["opacity-100", "opacity-100", "opacity-90", "opacity-50", "opacity-30"]
+const FADE = ["opacity-100", "opacity-100", "opacity-100", "opacity-[0.55]", "opacity-25"]
 
 /** Figma's copy, English and Arabic. */
 const COPY: Record<FeaturesLocale, FeaturesComparePanelsChatAnswerCopy> = {
@@ -187,15 +188,17 @@ export interface FeaturesComparePanelsChatAnswerProps extends Omit<React.HTMLAtt
   defaultSource?: FeaturesComparePanelsChatAnswerSource["id"]
 }
 
-function FileRow({ file, index, live }: { file: FeaturesComparePanelFile; index: number; live: boolean }) {
+function FileRow({ file, index }: { file: FeaturesComparePanelFile; index: number }) {
   const Icon = FILE_ICONS[index % FILE_ICONS.length]!
   return (
-    <li className={cn("flex items-center gap-2 text-xs text-card-foreground", FADE[index] ?? "opacity-30")}>
-      <Icon size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className="shrink-0 text-muted-foreground" />
-      <span className="min-w-0 truncate" dir="ltr">
-        {file.name}
+    <li className={cn("flex items-center", FADE[index] ?? "opacity-25")}>
+      <span className="flex min-w-0 items-center gap-2 rounded-lg border border-border bg-card px-2 py-1 text-sm text-foreground">
+        <Icon size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className="shrink-0 text-muted-foreground" />
+        <span className="min-w-0 truncate" dir="ltr">
+          {file.name}
+        </span>
       </span>
-      <span className={cn("shrink-0 rounded-sm px-1 text-xs font-medium uppercase", live ? "bg-success/10 text-success" : "bg-muted text-muted-foreground")}>{file.age}</span>
+      <span className="hidden shrink-0 ps-0 text-xxs font-medium uppercase text-muted-foreground [@container(min-width:48rem)]:inline">{file.age}</span>
     </li>
   )
 }
@@ -211,53 +214,53 @@ export function FeaturesComparePanelsChatAnswer({ locale = "en", heading, headin
   const cardId = React.useId()
 
   return (
-    <FeaturesSection labelledBy={headingId} gap="md" className={className} {...props}>
+    <FeaturesSection labelledBy={headingId} gap="md" className={className} contentClassName="[@container(min-width:48rem)]:gap-12" {...props}>
       <header className="flex flex-col items-start gap-4">
-        <h2 id={headingId} className="max-w-[700px] text-2xl font-semibold text-foreground [@container(min-width:48rem)]:text-3xl [@container(min-width:72rem)]:text-4xl">
+        <h2 id={headingId} className="max-w-[700px] text-3xl font-medium text-foreground [@container(min-width:48rem)]:leading-[44px] [@container(min-width:48rem)]:rtl:leading-[60px] [@container(min-width:72rem)]:text-4xl">
           {heading ?? copy.heading} <span className="text-muted-foreground">{headingMuted ?? copy.headingMuted}</span>
         </h2>
         <p className="max-w-[600px] text-sm text-muted-foreground">{description ?? copy.description}</p>
       </header>
 
-      <div className="flex flex-col gap-3 rounded-lg border border-border p-3 [@container(min-width:72rem)]:flex-row">
+      <div className="flex flex-col gap-3 border border-border p-3 [@container(min-width:72rem)]:flex-row">
         {[
           { key: "static", panel: panelA, live: false },
           { key: "live", panel: panelB, live: true },
         ].map(({ key, panel, live }) => (
-          <section key={key} className={cn("flex min-w-0 flex-1 flex-col gap-2 rounded-md p-4 [@container(min-width:48rem)]:p-6", live ? "bg-info/20" : "bg-muted")}>
+          <section key={key} className={cn("flex min-w-0 flex-1 flex-col gap-2 p-4 [@container(min-width:48rem)]:p-6", live ? "bg-info/20" : "bg-muted")}>
             <div className="flex items-center gap-2">
-              <Badge variant="outline" tone="secondary" size="sm" radius="standard" icon={live ? <Sparkles strokeWidth={1.5} /> : undefined}>
+              <Badge variant="outline" tone="primary" size="sm" radius="standard" icon={live ? <Sparkles strokeWidth={1.5} /> : undefined}>
                 {panel.badge}
               </Badge>
               <Badge variant="soft" tone={live ? "success" : "destructive"} size="sm" radius="standard">
                 {panel.status}
               </Badge>
             </div>
-            <h3 className="text-xl font-semibold text-foreground">{panel.title}</h3>
+            <h3 className="text-xl font-medium text-foreground">{panel.title}</h3>
             <p className="text-sm text-muted-foreground">{panel.description}</p>
-            <div className="relative flex justify-center pt-6 [@container(min-width:48rem)]:pt-8">
-              <div className={cn("w-full max-w-[400px] rounded-3xl p-3", live ? "bg-info/30" : "bg-foreground/10")}>
-                <div className="flex flex-col gap-3 rounded-2xl bg-card p-4 text-card-foreground shadow-sm">
-                  <p className="flex items-center gap-2 text-base text-card-foreground">
+            <div className="relative flex flex-1 items-center justify-center pt-6 [@container(min-width:48rem)]:pt-8 [@container(min-width:72rem)]:h-[360px] [@container(min-width:72rem)]:flex-none">
+              <div className={cn("h-fit w-full max-w-[392px] rounded-3xl p-2 [@container(min-width:48rem)]:p-4", live ? "bg-info/10" : "bg-foreground/10")}>
+                <div className="flex flex-col gap-4 rounded-2xl bg-card p-3 text-card-foreground [@container(min-width:48rem)]:p-6">
+                  <p className="flex items-center gap-2 whitespace-nowrap text-lg text-foreground">
                     {panel.label}
-                    <span className={cn("rounded-md px-2 py-0.5 text-base", live ? "bg-info/30 font-semibold" : "border border-dashed border-muted-foreground text-muted-foreground")}>
+                    <span className={cn("rounded-[10px] px-3 py-1 text-xl font-medium", live ? "bg-info/30 text-foreground" : "border border-dashed border-muted-foreground text-muted-foreground")}>
                       <Figures>{panel.figure}</Figures>
                     </span>
                   </p>
-                  <ul role="list" className="flex flex-col gap-2.5">
+                  <ul role="list" className="flex flex-col gap-3">
                     {panel.files.map((file, index) => (
-                      <FileRow key={file.name} file={file} index={index} live={live} />
+                      <FileRow key={file.name} file={file} index={index} />
                     ))}
                   </ul>
                 </div>
               </div>
               {live ? (
                 <>
-                  <span aria-hidden="true" className="absolute end-4 top-0 flex size-10 items-center justify-center rounded-lg bg-card text-card-foreground shadow-md">
-                    <Sparkles size={18} strokeWidth={1.5} absoluteStrokeWidth />
+                  <span aria-hidden="true" className="absolute end-0 top-[-2px] flex size-16 items-center justify-center rounded-xl bg-card text-foreground shadow-md [@container(min-width:48rem)]:start-[calc(50%+110px)] [@container(min-width:48rem)]:end-auto [@container(min-width:48rem)]:top-[-4px]">
+                    <Sparkles size={28} strokeWidth={1.5} absoluteStrokeWidth />
                   </span>
-                  <span aria-hidden="true" className="absolute end-0 top-14 flex size-9 items-center justify-center rounded-lg bg-card text-info shadow-md">
-                    <Link2 size={16} strokeWidth={1.5} absoluteStrokeWidth />
+                  <span aria-hidden="true" className="absolute start-[calc(50%+220px)] top-[60px] hidden size-12 items-center justify-center rounded-[10px] bg-card text-info shadow-md [@container(min-width:48rem)]:flex">
+                    <Link2 size={22} strokeWidth={1.5} absoluteStrokeWidth />
                   </span>
                 </>
               ) : null}
@@ -270,23 +273,23 @@ export function FeaturesComparePanelsChatAnswer({ locale = "en", heading, headin
         <FeaturesRule className="h-10 w-px" />
       </div>
 
-      <div className="flex flex-col gap-8 rounded-lg bg-foreground/10 px-4 pt-4 [@container(min-width:48rem)]:px-10 [@container(min-width:48rem)]:pt-10">
-        <div className="flex flex-col gap-6 rounded-t-2xl bg-card p-4 text-card-foreground [@container(min-width:48rem)]:gap-8 [@container(min-width:48rem)]:p-8">
-          <p className="flex items-center gap-2 text-xs text-muted-foreground">
-            <MessageSquare size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
+      <div className="flex flex-col overflow-hidden bg-foreground/10 px-4 pt-4 [@container(min-width:48rem)]:px-10 [@container(min-width:48rem)]:pt-10 [@container(min-width:72rem)]:min-h-[470px]">
+        <div className="flex flex-1 flex-col gap-6 rounded-t-xl bg-card p-4 text-card-foreground [@container(min-width:48rem)]:gap-8 [@container(min-width:48rem)]:p-8">
+          <p className="flex items-center gap-2 whitespace-nowrap text-sm text-muted-foreground">
+            <MessageSquare size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
             {chatCopy.breadcrumb[0]}
-            <ArrowRight size={12} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className="[&:dir(rtl)]:-scale-x-100" />
+            <ArrowRight size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className="[&:dir(rtl)]:-scale-x-100" />
             {chatCopy.breadcrumb[1]}
           </p>
-          <p className="max-w-[330px] self-start rounded-2xl bg-muted px-5 py-3 text-sm text-foreground">{chatCopy.question}</p>
+          <p className="max-w-full self-start rounded-xl bg-muted px-5 py-3 text-sm text-foreground">{chatCopy.question}</p>
           <div className="flex items-start gap-3">
-            <span className="flex size-7 shrink-0 items-center justify-center rounded-lg bg-foreground text-background">
-              <Sparkles size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-[10px] bg-primary text-primary-foreground">
+              <Sparkles size={18} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
             </span>
             <div className="flex min-w-0 flex-1 flex-col gap-3">
-              <p className="max-w-[560px] text-sm text-foreground">{chatCopy.answer}</p>
+              <p className="max-w-[560px] text-sm font-medium text-foreground">{chatCopy.answer}</p>
+              <span className="text-xs text-muted-foreground">{chatCopy.sourcesLabel}</span>
               <div className="flex flex-wrap items-center gap-2">
-                <span className="text-xs text-muted-foreground">{chatCopy.sourcesLabel}</span>
                 {chatCopy.sources.map((source) => {
                   const Icon = SOURCE_ICONS[source.id]
                   const active = source.id === open
@@ -298,9 +301,8 @@ export function FeaturesComparePanelsChatAnswer({ locale = "en", heading, headin
                       aria-controls={active ? cardId : undefined}
                       onClick={() => setOpen(source.id)}
                       className={cn(
-                        badgeVariants({ variant: "outline", tone: "secondary", size: "sm", radius: "standard" }),
-                        "cursor-pointer gap-1 hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                        active && "bg-secondary"
+                        badgeVariants({ variant: "soft", tone: "secondary", size: "md", radius: "standard" }),
+                        "cursor-pointer hover:ring-1 hover:ring-inset hover:ring-border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                       )}
                     >
                       <Icon size={12} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
@@ -310,16 +312,20 @@ export function FeaturesComparePanelsChatAnswer({ locale = "en", heading, headin
                 })}
               </div>
               {openSource ? (
-                <div id={cardId} className="flex w-full max-w-[280px] flex-col gap-2 rounded-lg border border-border bg-card p-3 text-card-foreground shadow-md">
-                  <p className="flex items-center gap-2 text-xs text-card-foreground" dir="ltr">
-                    <File size={12} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className="shrink-0" />
-                    <span className="min-w-0 truncate">{openSource.file.name}</span>
+                <div id={cardId} className="flex w-full flex-col gap-2 rounded-[10px] border border-border bg-card p-3 text-card-foreground shadow-md [@container(min-width:72rem)]:w-[300px]">
+                  <p className="flex items-center gap-2 text-xs font-medium text-foreground" dir="ltr">
+                    <File size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className="shrink-0" />
+                    <span className="min-w-0 break-all">{openSource.file.name}</span>
                   </p>
-                  <dl className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-1 text-xs text-muted-foreground">
-                    <dt>{chatCopy.writtenByLabel}</dt>
-                    <dd className="text-end font-medium text-card-foreground">{openSource.file.writtenBy}</dd>
-                    <dt>{chatCopy.whenLabel}</dt>
-                    <dd className="text-end font-medium text-card-foreground">{openSource.file.when}</dd>
+                  <dl className="flex flex-col gap-2 text-xxs font-medium text-muted-foreground">
+                    <div className="flex items-start justify-between gap-4">
+                      <dt>{chatCopy.writtenByLabel}</dt>
+                      <dd className="text-foreground">{openSource.file.writtenBy}</dd>
+                    </div>
+                    <div className="flex items-start justify-between gap-4">
+                      <dt>{chatCopy.whenLabel}</dt>
+                      <dd className="text-foreground">{openSource.file.when}</dd>
+                    </div>
                   </dl>
                 </div>
               ) : null}
@@ -328,7 +334,7 @@ export function FeaturesComparePanelsChatAnswer({ locale = "en", heading, headin
         </div>
       </div>
 
-      <p className="text-lg text-foreground">{closing ?? copy.closing}</p>
+      <p className="text-lg font-medium text-foreground">{closing ?? copy.closing}</p>
     </FeaturesSection>
   )
 }

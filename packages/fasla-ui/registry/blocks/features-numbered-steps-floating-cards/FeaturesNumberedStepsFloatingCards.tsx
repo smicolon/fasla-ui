@@ -33,8 +33,10 @@ import { FeaturesRule, FeaturesSection, type FeaturesLocale, type FeaturesPhoto 
 export interface FeaturesStepFile {
   /** The file's name, which stays Latin. */
   name: string
-  /** The line under it, such as "3 touchpoints". */
+  /** The line under it, such as "3 touchpoints", or the time when `version` is set. */
   meta: string
+  /** A version tag such as "v112". Figma draws it as its own text node, a dot, then the time in `meta`. */
+  version?: string
   /** `chart` and `database` set the mark; the tile's tint follows. */
   kind: "chart" | "database"
 }
@@ -86,7 +88,7 @@ const COPY: Record<FeaturesLocale, FeaturesNumberedStepsFloatingCardsCopy> = {
         question: "Where does the pipeline stand this week?",
         files: [
           { name: "/pipeline/q3-forecast.md", meta: "updated just now", kind: "chart" },
-          { name: "/crm/open-deals.table", meta: "v208 · 2 min ago", kind: "database" },
+          { name: "/crm/open-deals.table", version: "v208", meta: "2 min ago", kind: "database" },
         ],
       },
       {
@@ -98,7 +100,7 @@ const COPY: Record<FeaturesLocale, FeaturesNumberedStepsFloatingCardsCopy> = {
         question: "Should we shift more budget behind this?",
         files: [
           { name: "/playbooks/handoff-checklist.md", meta: "3 touchpoints", kind: "chart" },
-          { name: "/campaigns/regional-rollup.table", meta: "v112 · 4 min ago", kind: "database" },
+          { name: "/campaigns/regional-rollup.table", version: "v112", meta: "4 min ago", kind: "database" },
         ],
       },
       {
@@ -110,7 +112,7 @@ const COPY: Record<FeaturesLocale, FeaturesNumberedStepsFloatingCardsCopy> = {
         question: "Why did we change the pricing last quarter?",
         files: [
           { name: "/decisions/pricing-change.md", meta: "signed off 12 Mar", kind: "chart" },
-          { name: "/meetings/q3-review.notes", meta: "v31 · 1 week ago", kind: "database" },
+          { name: "/meetings/q3-review.notes", version: "v31", meta: "1 week ago", kind: "database" },
         ],
       },
     ],
@@ -130,7 +132,7 @@ const COPY: Record<FeaturesLocale, FeaturesNumberedStepsFloatingCardsCopy> = {
         question: "أين وصل خط المبيعات هذا الأسبوع؟",
         files: [
           { name: "/pipeline/q3-forecast.md", meta: "حُدّث الآن", kind: "chart" },
-          { name: "/crm/open-deals.table", meta: "v208، قبل دقيقتين", kind: "database" },
+          { name: "/crm/open-deals.table", version: "v208", meta: "قبل دقيقتين", kind: "database" },
         ],
       },
       {
@@ -142,7 +144,7 @@ const COPY: Record<FeaturesLocale, FeaturesNumberedStepsFloatingCardsCopy> = {
         question: "هل ننقل ميزانية أكبر لدعم هذا؟",
         files: [
           { name: "/playbooks/handoff-checklist.md", meta: "3 نقاط تواصل", kind: "chart" },
-          { name: "/campaigns/regional-rollup.table", meta: "v112، قبل 4 دقائق", kind: "database" },
+          { name: "/campaigns/regional-rollup.table", version: "v112", meta: "قبل 4 دقائق", kind: "database" },
         ],
       },
       {
@@ -154,7 +156,7 @@ const COPY: Record<FeaturesLocale, FeaturesNumberedStepsFloatingCardsCopy> = {
         question: "لماذا غيّرنا التسعير في الربع الماضي؟",
         files: [
           { name: "/decisions/pricing-change.md", meta: "اعتُمد في 12 مارس", kind: "chart" },
-          { name: "/meetings/q3-review.notes", meta: "v31، قبل أسبوع", kind: "database" },
+          { name: "/meetings/q3-review.notes", version: "v31", meta: "قبل أسبوع", kind: "database" },
         ],
       },
     ],
@@ -207,7 +209,7 @@ export function FeaturesNumberedStepsFloatingCards({
     <FeaturesSection labelledBy={headingId} gap="md" className={className} {...props}>
       <header className="flex flex-col items-start gap-4">
         {(eyebrow ?? copy.eyebrow) ? <p className="text-xs font-medium tracking-wide text-muted-foreground rtl:tracking-normal">{eyebrow ?? copy.eyebrow}</p> : null}
-        <h2 id={headingId} className="max-w-[760px] text-2xl font-semibold text-foreground [@container(min-width:48rem)]:text-3xl [@container(min-width:72rem)]:text-4xl">
+        <h2 id={headingId} className="max-w-[760px] text-3xl font-semibold text-foreground [@container(min-width:72rem)]:text-4xl">
           {heading ?? copy.heading} <span className="text-muted-foreground">{headingMuted ?? copy.headingMuted}</span>
         </h2>
         <p className="max-w-[620px] text-base text-muted-foreground">{description ?? copy.description}</p>
@@ -221,7 +223,7 @@ export function FeaturesNumberedStepsFloatingCards({
               const open = step.id === openId
               return (
                 <React.Fragment key={step.id}>
-                  <div className="flex flex-col gap-4 py-5">
+                  <div className={cn("flex flex-col gap-4 py-5", open && "[@container(min-width:72rem)]:flex-1")}>
                     <h3 className="text-xl font-medium [@container(min-width:48rem)]:text-2xl">
                       <button
                         type="button"
@@ -234,7 +236,7 @@ export function FeaturesNumberedStepsFloatingCards({
                           open ? "text-foreground" : "text-muted-foreground hover:text-foreground"
                         )}
                       >
-                        <span className="w-8 shrink-0 text-base font-normal [@container(min-width:48rem)]:text-xl">{step.number}</span>
+                        <span className={open ? "font-medium" : "font-normal"}>{step.number}</span>
                         <span>{step.title}</span>
                       </button>
                     </h3>
@@ -243,9 +245,9 @@ export function FeaturesNumberedStepsFloatingCards({
                       role="region"
                       aria-labelledby={`${baseId}-${step.id}-trigger`}
                       hidden={!open}
-                      className={cn("flex-wrap items-center gap-3 ps-12 text-base text-foreground", open ? "flex" : "hidden")}
+                      className={cn("flex-wrap items-center gap-3 text-base text-foreground [@container(min-width:48rem)]:text-xl", open ? "flex" : "hidden")}
                     >
-                      <Badge variant="soft" tone="destructive" size="sm" radius="standard">
+                      <Badge variant="soft" tone="destructive" size="md" radius="standard">
                         {step.badge}
                       </Badge>
                       <span>{step.detail}</span>
@@ -258,40 +260,46 @@ export function FeaturesNumberedStepsFloatingCards({
           </div>
 
           <div className="relative isolate flex min-h-[400px] min-w-0 flex-1 items-center justify-center overflow-hidden bg-background-inverse p-4 [@container(min-width:48rem)]:min-h-[440px] [@container(min-width:72rem)]:min-h-[480px]">
-            {photo ? <img src={photo.src} alt="" loading="lazy" decoding="async" className="absolute inset-0 -z-20 size-full scale-110 object-cover blur-md" /> : null}
-            <div aria-hidden="true" className="absolute inset-0 -z-10 bg-background-inverse/50" />
-            <p className="absolute start-4 top-4 rounded-sm border border-foreground-inverse px-1 text-xs leading-4 text-foreground-inverse">
+            {photo ? <img src={photo.src} alt="" loading="lazy" decoding="async" className="absolute inset-0 -z-20 size-full scale-110 object-cover blur-[6px]" /> : null}
+            <div aria-hidden="true" className="absolute inset-0 -z-10 bg-background-inverse/25" />
+            <p className="absolute start-4 top-4 rounded-sm border border-foreground-inverse px-1 py-0.5 text-[10px] font-medium leading-[14px] text-foreground-inverse">
               {list.find((step) => step.id === openId)?.number}
             </p>
-            <div className="grid w-full max-w-[440px] justify-items-center">
+            <div className="grid w-full max-w-[440px] grid-cols-[minmax(0,1fr)] justify-items-center">
               {list.map((step) => (
                 <div
                   key={step.id}
                   aria-hidden={step.id === openId ? undefined : true}
                   className={cn(
-                    "col-start-1 row-start-1 flex w-full flex-col items-center motion-safe:transition-opacity motion-safe:duration-200",
+                    "col-start-1 row-start-1 flex w-full flex-col items-center gap-4 motion-safe:transition-opacity motion-safe:duration-200",
                     step.id === openId ? "opacity-100" : "pointer-events-none opacity-0"
                   )}
                 >
-                  <div className="flex max-w-full items-center gap-2 rounded-full border border-foreground-inverse bg-background-inverse/20 p-1 pe-4 text-sm text-foreground-inverse">
+                  <div className="flex max-w-full items-center gap-2 rounded-full border border-foreground-inverse p-1 pe-4 text-sm font-medium text-foreground-inverse">
                     <Avatar variant={avatar ? "image" : "icon"} src={avatar?.src} size="32" radius="rounded" />
                     <span className="min-w-0">{step.question}</span>
                   </div>
                   <span aria-hidden="true" className="h-7 w-px bg-foreground-inverse" />
-                  <ul role="list" className="flex w-full flex-col">
+                  <ul role="list" className="flex w-full flex-col gap-4">
                     {step.files.map((file) => {
                       const Icon = file.kind === "chart" ? ChartLine : Database
                       return (
-                        <li key={file.name} className="flex items-center gap-3 bg-card px-0 text-card-foreground first:border-b first:border-border">
-                          <span className={cn("flex size-[3.5rem] shrink-0 items-center justify-center", file.kind === "chart" ? "bg-success/30" : "bg-info/30")}>
-                            <Icon size={18} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
+                        <li key={file.name} className="flex items-center bg-card text-card-foreground">
+                          <span className={cn("flex size-[4.5rem] shrink-0 items-center justify-center", file.kind === "chart" ? "bg-success/20 text-success" : "bg-info/20 text-info")}>
+                            <Icon size={28} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
                           </span>
-                          <span className="flex min-w-0 flex-col py-2 pe-3">
-                            <span className="truncate text-xs font-medium" dir="ltr">
+                          <span className="flex min-w-0 flex-col gap-1 p-4 py-3">
+                            <span className="break-all text-sm font-medium" dir="ltr">
                               {file.name}
                             </span>
                             <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
                               <FolderOpen size={12} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
+                              {file.version ? (
+                                <>
+                                  <span dir="ltr">{file.version}</span>
+                                  <span aria-hidden="true" className="size-1.5 rounded-full bg-success" />
+                                </>
+                              ) : null}
                               {file.meta}
                             </span>
                           </span>

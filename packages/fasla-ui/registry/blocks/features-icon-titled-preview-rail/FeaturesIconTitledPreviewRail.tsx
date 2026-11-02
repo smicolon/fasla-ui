@@ -5,14 +5,14 @@ import { ChartBar, Clock, CreditCard, Mail, Mic, Phone, Receipt, Share, Sparkles
 import { cn } from "../../../src/lib/utils"
 import { Avatar } from "../../ui/avatar/avatar"
 import { Badge } from "../../ui/badge/badge"
-import { Skeleton } from "../../ui/skeleton/skeleton"
-import { FeaturesHeader, FeaturesSection, type FeaturesLocale, type FeaturesPhoto } from "../features/features"
+import { Skeleton, SkeletonText } from "../../ui/skeleton/skeleton"
+import { FeaturesSection, type FeaturesLocale, type FeaturesPhoto } from "../features/features"
 
 /*
  * Figma: `Features` (42367:57765), Type=Icon-Titled Preview Rail.
  *
  * A header (an eyebrow and a 48px heading, 820px wide) over a rail of five
- * items, each a title led by a 28px tinted mark, a 330 × 300 wash holding a
+ * items, each a title led by a 36px tinted mark, a 330 × 300 wash holding a
  * mock-up of one part of the product, and a caption whose first words are
  * heavier. The washes are `info`, `success`, `warning`, `success` and `info`
  * at 20%. The mock-ups use the Badge, Avatar and Skeleton atoms: a message
@@ -57,6 +57,7 @@ export interface FeaturesIconTitledPreviewRailCopy {
 const MARKS = { assistant: Sparkles, notes: NotebookText, contacts: Users, payments: Wallet, insights: ChartBar } as const
 const TINTS = { assistant: "info", notes: "success", contacts: "warning", payments: "success", insights: "info" } as const
 const WASH = { info: "bg-info/20", success: "bg-success/20", warning: "bg-warning/20" } as const
+const MARK_TEXT = { info: "text-info", success: "text-success", warning: "text-warning" } as const
 const TILE = { info: "bg-info/30", success: "bg-success/30", warning: "bg-warning/30" } as const
 
 /** Figma's copy, English and Arabic. */
@@ -157,39 +158,38 @@ export function FeaturesIconTitledPreviewRail({
   }
 
   const preview = (id: FeaturesRailItem["id"]) => {
-    const card = "flex flex-col gap-3 rounded-2xl bg-card p-4 text-card-foreground shadow-md"
+    const card = "flex w-full flex-col gap-3 rounded-[14px] bg-card p-4 text-foreground"
     if (id === "assistant")
       return (
-        <div className="flex flex-col items-start gap-3">
-          <p className="rounded-2xl bg-card px-4 py-3 text-sm text-card-foreground shadow-sm">{a.message}</p>
-          <Badge variant="soft" tone="success" size="sm" radius="standard">
+        <>
+          <div className={card}>
+            <p className="text-sm">{a.message}</p>
+          </div>
+          <Badge variant="soft" tone="success" size="lg" radius="standard">
             {a.badge}
           </Badge>
-        </div>
+        </>
       )
     if (id === "notes")
       return (
-        <div className="flex flex-col items-center gap-3">
-          <Badge variant="solid" tone="warning" size="sm" radius="standard" icon={<Mic strokeWidth={1.5} />}>
+        <>
+          <Badge variant="solid" tone="info" size="lg" radius="standard" icon={<Mic strokeWidth={1.5} />}>
             {n.record}
           </Badge>
-          <div className={cn(card, "w-full")}>
-            <div className="flex items-center justify-between text-sm font-semibold">
-              {n.title}
-              <Share size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className="text-muted-foreground" />
+          <div className={card}>
+            <div className="flex items-center justify-between">
+              <span className="text-lg font-medium">{n.title}</span>
+              <Share size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className="shrink-0 text-muted-foreground" />
             </div>
-            <p className="text-xs text-muted-foreground">{n.recap}</p>
-            <div className="flex flex-col gap-3" aria-hidden="true">
-              <Skeleton className="h-3 w-full" />
-              <Skeleton className="h-3 w-4/5" />
-            </div>
+            <p className="text-sm font-medium">{n.recap}</p>
+            <SkeletonText />
           </div>
-        </div>
+        </>
       )
     if (id === "contacts")
       return (
-        <div className="flex flex-col items-center gap-3">
-          <div className={cn(card, "w-full")}>
+        <>
+          <div className={card}>
             <div className="flex items-center gap-3">
               <Avatar variant={contactPhoto ? "image" : "icon"} src={contactPhoto?.src} size="32" radius="rounded" />
               <div className="flex min-w-0 flex-col">
@@ -198,32 +198,35 @@ export function FeaturesIconTitledPreviewRail({
               </div>
             </div>
             {[Mail, Phone, Clock].map((Icon, index) => (
-              <div key={index} className="flex items-center gap-2" aria-hidden="true">
+              <div key={index} className="flex h-6 items-center gap-2" aria-hidden="true">
                 <Icon size={14} strokeWidth={1.5} absoluteStrokeWidth className="shrink-0 text-muted-foreground" />
-                <Skeleton className="h-2.5 flex-1" />
+                <div className="flex h-6 w-[126px] flex-col items-center justify-center gap-[9.6px]">
+                  <Skeleton className="h-2.5 w-full rounded-[2.4px]" />
+                  <Skeleton className="h-2.5 w-full rounded-[2.4px]" />
+                </div>
               </div>
             ))}
             <p className="text-xs text-muted-foreground">{c.last}</p>
           </div>
-          <Badge variant="solid" tone="warning" size="sm" radius="standard" icon={<User strokeWidth={1.5} />}>
+          <Badge variant="solid" tone="warning" size="lg" radius="standard" icon={<User strokeWidth={1.5} />}>
             {c.follow}
           </Badge>
-        </div>
+        </>
       )
     if (id === "payments")
       return (
-        <div className="flex flex-col items-center gap-3">
-          <Badge variant="solid" tone="success" size="sm" radius="standard" icon={<CreditCard strokeWidth={1.5} />}>
+        <>
+          <Badge variant="solid" tone="success" size="lg" radius="standard" icon={<CreditCard strokeWidth={1.5} />}>
             {p.collect}
           </Badge>
-          <ul role="list" className="flex w-full flex-col gap-2">
+          <ul role="list" className="flex w-full flex-col gap-3">
             {p.packages.map((pkg, index) => (
-              <li key={pkg.name} className={cn("flex items-center gap-3 rounded-lg bg-card p-3 text-card-foreground shadow-sm", index === 2 && "opacity-60")}>
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-md bg-success/30">
-                  <Receipt size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
+              <li key={pkg.name} className={cn(card, "flex-row items-center p-3", index === 1 && "opacity-80", index === 2 && "opacity-40")}>
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-neutral/10">
+                  <Receipt size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className="text-muted-foreground" />
                 </span>
                 <span className="flex min-w-0 flex-col">
-                  <span className="truncate text-xs font-semibold">{pkg.name}</span>
+                  <span className="text-sm font-medium">{pkg.name}</span>
                   <span className="text-xs text-muted-foreground">
                     <bdi dir="ltr">{pkg.detail}</bdi>
                   </span>
@@ -231,22 +234,24 @@ export function FeaturesIconTitledPreviewRail({
               </li>
             ))}
           </ul>
-        </div>
+        </>
       )
     return (
-      <div className={cn(card, "w-full")}>
-        <p className="text-sm font-semibold">{i.title}</p>
-        <div className="flex flex-col gap-3" aria-hidden="true">
-          <Skeleton className="h-16 w-full" />
-          <Skeleton className="h-3 w-3/5" />
-        </div>
+      <div className={card}>
+        <p className="text-sm font-medium">{i.title}</p>
+        <SkeletonText />
       </div>
     )
   }
 
   return (
-    <FeaturesSection labelledBy={headingId} gap="md" className={className} {...props}>
-      <FeaturesHeader headingId={headingId} eyebrow={eyebrow ?? copy.eyebrow} heading={heading ?? copy.heading} maxWidth={820} />
+    <FeaturesSection labelledBy={headingId} gap="md" contentClassName="[@container(min-width:48rem)]:gap-12" className={className} {...props}>
+      <header className="mx-auto flex w-full max-w-[820px] min-w-0 flex-col items-center gap-4 text-center">
+        <p className="text-xs font-medium text-foreground">{eyebrow ?? copy.eyebrow}</p>
+        <h2 id={headingId} className="text-3xl font-medium text-foreground ltr:leading-10 [@container(min-width:48rem)]:ltr:leading-[2.75rem] [@container(min-width:72rem)]:text-5xl [@container(min-width:72rem)]:ltr:leading-[3.625rem] [@container(min-width:48rem)]:rtl:leading-[3.75rem] [@container(min-width:72rem)]:rtl:leading-[4.5rem]">
+          {heading ?? copy.heading}
+        </h2>
+      </header>
       {list.length > 0 ? (
         <ul
           ref={rail}
@@ -276,7 +281,7 @@ export function FeaturesIconTitledPreviewRail({
           onPointerCancel={stop}
           onLostPointerCapture={stop}
           className={cn(
-            "-mx-8 flex scroll-px-8 gap-5 overflow-x-auto overscroll-x-contain px-8 pb-2 pt-1 [scrollbar-width:none] [touch-action:pan-x_pan-y] [&::-webkit-scrollbar]:hidden [@container(min-width:48rem)]:-mx-16 [@container(min-width:48rem)]:scroll-px-16 [@container(min-width:48rem)]:gap-6 [@container(min-width:48rem)]:px-16 [@container(min-width:72rem)]:-mx-24 [@container(min-width:72rem)]:scroll-px-24 [@container(min-width:72rem)]:gap-8 [@container(min-width:72rem)]:px-24",
+            "-mx-8 flex scroll-px-8 gap-5 overflow-x-auto overscroll-x-contain px-8 pb-2 pt-1 -mb-2 -mt-1 [scrollbar-width:none] [touch-action:pan-x_pan-y] [&::-webkit-scrollbar]:hidden [@container(min-width:48rem)]:-mx-16 [@container(min-width:48rem)]:scroll-px-16 [@container(min-width:48rem)]:gap-6 [@container(min-width:48rem)]:px-16 [@container(min-width:72rem)]:-mx-24 [@container(min-width:72rem)]:scroll-px-24 [@container(min-width:72rem)]:gap-8 [@container(min-width:72rem)]:px-24",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
             dragging ? "cursor-grabbing select-none" : "cursor-grab snap-x snap-mandatory"
           )}
@@ -289,14 +294,14 @@ export function FeaturesIconTitledPreviewRail({
                 key={item.id}
                 className="flex w-[272px] shrink-0 snap-start flex-col gap-6 motion-safe:transition-transform motion-safe:duration-200 hover:motion-safe:-translate-y-0.5 [@container(min-width:48rem)]:w-[300px] [@container(min-width:72rem)]:w-[330px]"
               >
-                <h3 className="flex items-center gap-2.5 text-base font-semibold text-foreground">
-                  <span className={cn("flex size-7 items-center justify-center rounded-md", TILE[tint])}>
-                    <Icon size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
+                <h3 className="flex items-center gap-3 text-xl font-medium text-foreground">
+                  <span className={cn("flex size-9 items-center justify-center rounded-[10px]", TILE[tint])}>
+                    <Icon size={18} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className={MARK_TEXT[tint]} />
                   </span>
                   {item.title}
                 </h3>
-                <div className={cn("flex min-h-[300px] flex-col justify-center rounded-lg p-6", WASH[tint])}>{preview(item.id)}</div>
-                <p className="text-sm text-muted-foreground">
+                <div className={cn("flex h-[330px] flex-col items-center justify-center gap-3 rounded-2xl p-6 [@container(min-width:48rem)]:h-[300px]", WASH[tint])}>{preview(item.id)}</div>
+                <p className="text-base text-muted-foreground">
                   <span className="font-semibold text-foreground">{item.lead}</span>
                   {item.rest}
                 </p>

@@ -8,7 +8,7 @@ import { Button, buttonVariants } from "../../ui/button/button"
 import { FaslaLogo } from "../../ui/fasla-logo/fasla-logo"
 import { Progress } from "../../ui/progress/progress"
 import { Switch } from "../../ui/switch/switch"
-import { FeaturesSection, Figures, type FeaturesLocale } from "../features/features"
+import { FeaturesSection, type FeaturesLocale } from "../features/features"
 
 /*
  * Figma: `Features` (42367:57765), Type=Tinted Product Bento.
@@ -58,6 +58,7 @@ export interface FeaturesTintedProductBentoCopy {
   panels: FeaturesTintedPanel[]
 }
 
+const BTN = "w-full [@container(min-width:48rem)]:w-auto"
 const TINT = { workflows: "bg-info/10", "on-demand": "bg-warning/10", dedicated: "bg-success/10" } as const
 
 /** Figma's copy, English and Arabic. */
@@ -150,17 +151,17 @@ export function FeaturesTintedProductBento({ locale = "en", heading, plan, build
   const sc = scale ?? copy.scale
   const [wide, ...small] = list
 
-  const panel = (item: FeaturesTintedPanel, className?: string) => (
-    <section key={item.id} aria-label={String(item.title)} className={cn("flex min-w-0 flex-col items-start gap-4 rounded-xl p-6 [@container(min-width:48rem)]:p-8", TINT[item.id], className)}>
-      <p className="flex items-center gap-3 text-xs font-medium tracking-wide text-muted-foreground rtl:tracking-normal">
-        <FaslaLogo variant="lockup" title="" className="h-5 w-auto" />
+  const panel = (item: FeaturesTintedPanel, wideTitle = false) => (
+    <section key={item.id} aria-label={String(item.title)} className={cn("flex min-w-0 flex-col items-start gap-4 rounded-xl p-8", TINT[item.id])}>
+      <p className="flex items-center gap-3 text-sm font-semibold tracking-wide text-muted-foreground rtl:tracking-normal">
+        <FaslaLogo variant="lockup" title="" className="h-7 w-auto" />
         {item.tag}
       </p>
-      <h3 className="text-2xl font-semibold text-foreground">{item.title}</h3>
+      <h3 className={cn("text-2xl font-semibold text-foreground", wideTitle && "[@container(min-width:48rem)]:text-3xl")}>{item.title}</h3>
       <p className="text-sm text-foreground">{item.description}</p>
-      <div className="flex flex-col gap-1.5 text-sm text-foreground">
+      <div className="flex flex-col gap-4 text-sm text-foreground">
         <p>{item.useLabel}</p>
-        <ul role="list" className="flex flex-col gap-1">
+        <ul role="list" className="flex flex-col">
           {item.bullets.map((bullet) => (
             <li key={bullet} className="flex gap-2">
               <span aria-hidden="true">•</span>
@@ -170,11 +171,11 @@ export function FeaturesTintedProductBento({ locale = "en", heading, plan, build
         </ul>
       </div>
       {item.href ? (
-        <a href={item.href} className={buttonVariants({ variant: "default", size: "md", className: "mt-auto" })}>
+        <a href={item.href} className={buttonVariants({ variant: "default", size: "md", className: BTN })}>
           {item.action}
         </a>
       ) : (
-        <Button type="button" variant="default" size="md" onClick={() => onExplore?.(item.id)} className="mt-auto">
+        <Button type="button" variant="default" size="md" onClick={() => onExplore?.(item.id)} className={BTN}>
           {item.action}
         </Button>
       )}
@@ -188,7 +189,7 @@ export function FeaturesTintedProductBento({ locale = "en", heading, plan, build
           <h2 id={headingId} className="text-2xl font-semibold text-foreground [@container(min-width:48rem)]:text-5xl">
             {heading ?? copy.heading}
           </h2>
-          <div className="flex flex-col gap-3 rounded-xl bg-foreground/10 p-6">
+          <div className="flex flex-col justify-center gap-3 rounded-xl bg-foreground/10 p-6 [@container(min-width:72rem)]:h-[360px]">
             <div className="flex flex-col gap-2 rounded-xl bg-card p-4 text-card-foreground">
               <div className="flex items-center gap-2">
                 <span className="flex size-7 items-center justify-center rounded-md bg-info/30">
@@ -212,7 +213,7 @@ export function FeaturesTintedProductBento({ locale = "en", heading, plan, build
                 </Badge>
               </div>
               <div className="flex items-center gap-2 text-xs">
-                <Figures>{bu.percent}</Figures>
+                <span>{bu.percent}</span>
                 <Progress value={bu.value} size="md" showPercentage={false} aria-label={bu.title} className="flex-1" />
               </div>
             </div>
@@ -235,7 +236,7 @@ export function FeaturesTintedProductBento({ locale = "en", heading, plan, build
         </div>
         {wide ? (
           <div className="flex min-w-0 flex-col gap-5 [@container(min-width:72rem)]:flex-1">
-            {panel(wide)}
+            {panel(wide, true)}
             {small.length > 0 ? <div className="grid grid-cols-1 gap-5 [@container(min-width:48rem)]:grid-cols-2">{small.map((item) => panel(item))}</div> : null}
           </div>
         ) : null}

@@ -6,7 +6,8 @@ import { Avatar } from "../../ui/avatar/avatar"
 import { Badge } from "../../ui/badge/badge"
 import { Progress } from "../../ui/progress/progress"
 import { Switch } from "../../ui/switch/switch"
-import { FeaturesSection, Figures, type FeaturesLocale } from "../features/features"
+import { cn } from "../../../src/lib/utils"
+import { FeaturesSection, type FeaturesLocale } from "../features/features"
 
 /*
  * Figma: `Features` (42367:57765), Type=Solid Colour Cards.
@@ -110,8 +111,10 @@ export interface FeaturesSolidColourCardsProps extends Omit<React.HTMLAttributes
   locale?: FeaturesLocale
 }
 
-const CARD = "flex flex-col gap-8 rounded-2xl bg-chart-3 p-8 text-primary-foreground motion-safe:transition-transform motion-safe:duration-200 hover:motion-safe:-translate-y-1"
-const WASH = "flex min-h-[130px] flex-1 flex-col justify-center gap-2 rounded-xl bg-primary-foreground/20 p-3"
+const CARD = "flex flex-col gap-8 rounded-xl bg-chart-3 p-8 text-primary-foreground motion-safe:transition-transform motion-safe:duration-200 hover:motion-safe:-translate-y-1 [@container(min-width:72rem)]:min-h-[400px] [@container(min-width:72rem)]:justify-between [@container(min-width:72rem)]:gap-0"
+const WASH = "flex flex-col justify-center gap-2 rounded-[10px] bg-primary-foreground/20 p-3"
+const WASH_GAP = "gap-3"
+const CONTROL = "flex items-center gap-2 rounded-[10px] bg-card p-2 text-xs text-card-foreground"
 
 export function FeaturesSolidColourCards({ locale = "en", eyebrow, heading, description, cards, workflow, protectedMock, trustedMock, infraMock, setupMock, className, ...props }: FeaturesSolidColourCardsProps) {
   const copy = COPY[locale]
@@ -127,18 +130,22 @@ export function FeaturesSolidColourCards({ locale = "en", eyebrow, heading, desc
     if (id === "secure")
       return (
         <div className={WASH}>
-          <Badge variant="soft" tone="success" size="sm" radius="rounded" icon={<ShieldCheck strokeWidth={1.5} />} className="self-center">
+          <Badge variant="soft" tone="success" size="md" radius="standard" icon={<ShieldCheck strokeWidth={1.5} />} className="self-center">
             {prot.badge}
           </Badge>
-          <ul role="list" className="flex flex-col gap-1.5 rounded-lg bg-card p-2 text-card-foreground">
-            <li className="flex items-center gap-2 text-xs">
-              <Lock size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
-              <span className="flex-1">{prot.rules}</span>
+          <ul role="list" className="flex flex-col gap-2">
+            <li className={cn(CONTROL, "justify-between")}>
+              <span className="flex items-center gap-2">
+                <Lock size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
+                <span>{prot.rules}</span>
+              </span>
               <Switch size="sm" defaultChecked aria-label={prot.rules} />
             </li>
-            <li className="flex items-center gap-2 text-xs">
-              <Eye size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
-              <span className="flex-1">{prot.monitoring}</span>
+            <li className={cn(CONTROL, "justify-between")}>
+              <span className="flex items-center gap-2">
+                <Eye size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden />
+                <span>{prot.monitoring}</span>
+              </span>
               <Switch size="sm" defaultChecked aria-label={prot.monitoring} />
             </li>
           </ul>
@@ -146,37 +153,41 @@ export function FeaturesSolidColourCards({ locale = "en", eyebrow, heading, desc
       )
     if (id === "built")
       return (
-        <div className={WASH}>
-          <div className="flex justify-center rounded-lg bg-card p-2 text-card-foreground">
-            <div className="flex -space-x-1 rtl:space-x-reverse" aria-hidden="true">
-              {trust.names.map((name, index) => (
-                <Avatar key={index} variant="initials" name={name} size="32" radius="rounded" border />
-              ))}
-            </div>
+        <div className={cn(WASH, WASH_GAP)}>
+          <div className="flex justify-center gap-1 rounded-[10px] bg-card p-2 text-card-foreground" aria-hidden="true">
+            {trust.names.map((name, index) => (
+              <Avatar key={index} variant="initials" name={name} size="32" radius="rounded" border />
+            ))}
           </div>
-          <Badge variant="outline" tone="secondary" size="sm" radius="standard" icon={<Star strokeWidth={1.5} />} className="self-center bg-card">
+          <Badge variant="soft" tone="secondary" size="md" radius="standard" icon={<Star strokeWidth={1.5} />} className="self-center">
             {trust.badge}
           </Badge>
         </div>
       )
     if (id === "agnostic")
       return (
-        <div className={WASH}>
-          <div className="flex justify-center gap-2" aria-hidden="true">
-            {[Database, Workflow, Layers].map((Icon, index) => (
-              <span key={index} className="flex size-10 items-center justify-center rounded-lg bg-card text-card-foreground">
-                <Icon size={18} strokeWidth={1.5} absoluteStrokeWidth />
-              </span>
-            ))}
+        <div className={cn(WASH, WASH_GAP)}>
+          <div className="flex items-center justify-center gap-1" aria-hidden="true">
+            <span className="flex size-9 items-center justify-center rounded-[10px] bg-card text-card-foreground">
+              <Database size={18} strokeWidth={1.5} absoluteStrokeWidth />
+            </span>
+            <span className="h-px w-3.5 bg-primary-foreground/20" />
+            <span className="flex size-11 items-center justify-center rounded-xl bg-primary-foreground text-chart-3">
+              <Workflow size={22} strokeWidth={1.5} absoluteStrokeWidth />
+            </span>
+            <span className="h-px w-3.5 bg-primary-foreground/20" />
+            <span className="flex size-9 items-center justify-center rounded-[10px] bg-card text-card-foreground">
+              <Layers size={18} strokeWidth={1.5} absoluteStrokeWidth />
+            </span>
           </div>
-          <Badge variant="outline" tone="secondary" size="sm" radius="standard" icon={<Server strokeWidth={1.5} />} className="self-center bg-card">
+          <Badge variant="soft" tone="secondary" size="md" radius="standard" icon={<Server strokeWidth={1.5} />} className="self-center">
             {infra.badge}
           </Badge>
         </div>
       )
     return (
       <div className={WASH}>
-        <div className="flex flex-col gap-2 rounded-lg bg-card p-2 text-card-foreground">
+        <div className="flex flex-col gap-2 rounded-[10px] bg-card p-3 text-card-foreground">
           <div className="flex items-center gap-2 text-xs">
             <Zap size={14} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className="text-warning" />
             <span className="flex-1">{setup.label}</span>
@@ -185,7 +196,7 @@ export function FeaturesSolidColourCards({ locale = "en", eyebrow, heading, desc
             </Badge>
           </div>
           <div className="flex items-center gap-2 text-xs">
-            <Figures>{setup.percent}</Figures>
+            <span>{setup.percent}</span>
             <Progress value={setup.value} size="md" showPercentage={false} aria-label={setup.label} className="flex-1" />
           </div>
         </div>
@@ -195,15 +206,15 @@ export function FeaturesSolidColourCards({ locale = "en", eyebrow, heading, desc
 
   return (
     <FeaturesSection labelledBy={headingId} gap="md" className={className} {...props}>
-      <div className="flex flex-col gap-8 [@container(min-width:72rem)]:flex-row [@container(min-width:72rem)]:items-start [@container(min-width:72rem)]:justify-between [@container(min-width:72rem)]:gap-0">
-        <div className="flex min-w-0 flex-col items-start gap-5 [@container(min-width:72rem)]:max-w-[700px]">
+      <div className="flex flex-col gap-8 [@container(min-width:72rem)]:flex-row [@container(min-width:72rem)]:justify-between [@container(min-width:72rem)]:gap-0">
+        <div className="flex min-w-0 flex-col items-start gap-5 [@container(min-width:72rem)]:max-w-[700px] [@container(min-width:72rem)]:self-start">
           {(eyebrow ?? copy.eyebrow) ? <p className="text-xs font-medium tracking-wide text-chart-3 rtl:tracking-normal">{eyebrow ?? copy.eyebrow}</p> : null}
-          <h2 id={headingId} className="text-3xl font-semibold text-chart-3 [@container(min-width:48rem)]:text-5xl">
+          <h2 id={headingId} className="text-3xl font-medium text-chart-3 [@container(min-width:48rem)]:text-5xl">
             {heading ?? copy.heading}
           </h2>
           <p className="max-w-[560px] text-lg text-chart-3">{description ?? copy.description}</p>
         </div>
-        <div className="flex w-full flex-col gap-3 rounded-2xl bg-info/10 p-6 [@container(min-width:72rem)]:w-[340px] [@container(min-width:72rem)]:shrink-0" aria-hidden="true">
+        <div className="flex h-[260px] w-full flex-col justify-center gap-3 rounded-xl bg-info/10 p-6 [@container(min-width:48rem)]:h-[300px] [@container(min-width:72rem)]:w-[340px] [@container(min-width:72rem)]:shrink-0" aria-hidden="true">
           <div className="flex flex-col gap-3 rounded-2xl bg-card p-4 text-card-foreground shadow-md">
             <div className="flex items-center gap-3">
               <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-info/30">
@@ -214,11 +225,11 @@ export function FeaturesSolidColourCards({ locale = "en", eyebrow, heading, desc
                 <span className="text-xs text-muted-foreground">{wf.progress}</span>
               </div>
             </div>
-            <Progress value={75} size="sm" showPercentage={false} aria-label={wf.title} />
-            <ul role="list" className="flex flex-col gap-2">
+            <Progress value={75} size="md" showPercentage={false} aria-label={wf.title} />
+            <ul role="list" className="flex flex-col gap-3">
               {wf.steps.map((step) => (
                 <li key={step.label} className="flex items-center gap-2 text-xs">
-                  <Avatar variant="initials" name={step.name} size="24" radius="standard" />
+                  <Avatar variant="initials" name={step.name} size="24" radius="rounded" />
                   <span className="flex-1">{step.label}</span>
                   <Badge variant="soft" tone={step.tone} size="sm" radius="standard">
                     {step.status}
