@@ -100,7 +100,8 @@ export function FeaturesPhotoCollage({ locale = "en", captionTitle, captionDescr
   )
 
   return (
-    <FeaturesSection labelledBy={headingId} gap="md" className={className} {...props}>
+    <FeaturesSection labelledBy={headingId} gap="md" contentClassName="gap-12" className={className} {...props}>
+      <div className="contents [@container(min-width:72rem)]:relative [@container(min-width:72rem)]:block">
       <div className="relative rounded-2xl bg-secondary p-4 [@container(min-width:72rem)]:aspect-[1248/520] [@container(min-width:72rem)]:p-0">
         <div className="grid grid-cols-1 gap-4 [@container(min-width:48rem)]:grid-cols-2 [@container(min-width:72rem)]:block">
           {SCATTER.map((spot, index) => (
@@ -116,7 +117,8 @@ export function FeaturesPhotoCollage({ locale = "en", captionTitle, captionDescr
             />
           ))}
         </div>
-        <div className="mt-4 [@container(min-width:72rem)]:absolute [@container(min-width:72rem)]:left-[33.17%] [@container(min-width:72rem)]:top-[57.7%] [@container(min-width:72rem)]:z-10 [@container(min-width:72rem)]:mt-0 [@container(min-width:72rem)]:w-[33.65%]">
+      </div>
+        <div className="[@container(min-width:72rem)]:absolute [@container(min-width:72rem)]:left-[33.17%] [@container(min-width:72rem)]:top-[57.7%] [@container(min-width:72rem)]:z-10 [@container(min-width:72rem)]:w-[33.65%]">
           {caption}
         </div>
       </div>

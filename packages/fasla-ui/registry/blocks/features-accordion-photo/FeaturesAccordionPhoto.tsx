@@ -129,7 +129,7 @@ export function FeaturesAccordionPhoto({ locale = "en", eyebrow, heading, items,
             <Accordion indicator="plus" multiple={multiple} defaultValue={defaultValue ?? [list[0]!.id]} className="w-full">
               {list.map((item) => (
                 <AccordionItem key={item.id} value={item.id}>
-                  <AccordionTrigger className="text-base">{item.question}</AccordionTrigger>
+                  <AccordionTrigger>{item.question}</AccordionTrigger>
                   <AccordionContent>{item.answer}</AccordionContent>
                 </AccordionItem>
               ))}

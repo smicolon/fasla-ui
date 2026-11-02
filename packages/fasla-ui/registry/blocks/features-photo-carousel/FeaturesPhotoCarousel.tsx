@@ -181,7 +181,7 @@ export function FeaturesPhotoCarousel({
   )
 
   return (
-    <FeaturesSection labelledBy={headingId} gap="md" className={className} {...props}>
+    <FeaturesSection labelledBy={headingId} gap="md" contentClassName="gap-12" className={className} {...props}>
       <div className="flex flex-col gap-4 [@container(min-width:72rem)]:flex-row [@container(min-width:72rem)]:items-end [@container(min-width:72rem)]:justify-between [@container(min-width:72rem)]:gap-16">
         <FeaturesHeader headingId={headingId} eyebrow={eyebrow ?? copy.eyebrow} heading={heading ?? copy.heading} className="flex-1" />
         <div className="flex shrink-0 gap-2">
@@ -195,7 +195,7 @@ export function FeaturesPhotoCarousel({
       </div>
 
       {count > 0 ? (
-        <div role="group" aria-roledescription="carousel" aria-label={carouselLabel ?? copy.carouselLabel} className="flex flex-col items-center gap-6">
+        <div role="group" aria-roledescription="carousel" aria-label={carouselLabel ?? copy.carouselLabel} className="flex flex-col items-center gap-12">
           <div aria-live="polite" className="grid w-full overflow-hidden rounded-lg border border-border">
             {list.map((slide, position) => {
               const active = position === index
@@ -217,7 +217,7 @@ export function FeaturesPhotoCarousel({
                     <Badge variant="solid" tone="primary" size="sm" radius="rounded">
                       <bdi dir="ltr">{`${String(position + 1).padStart(2, "0")} / ${String(count).padStart(2, "0")}`}</bdi>
                     </Badge>
-                    <h3 className="text-2xl font-semibold text-secondary-foreground [@container(min-width:48rem)]:text-3xl">{slide.title}</h3>
+                    <h3 className="text-2xl leading-8 font-semibold text-secondary-foreground [@container(min-width:48rem)]:text-3xl [@container(min-width:48rem)]:leading-10">{slide.title}</h3>
                     <p className="text-base text-muted-foreground">{slide.description}</p>
                     {slide.href ? (
                       <a href={slide.href} className={linkClass} tabIndex={active ? undefined : -1}>
