@@ -276,11 +276,11 @@ describe("Photo Bento Steps", () => {
 })
 
 describe("Fanned Dissolve Cards", () => {
-  it("is on the inverse surface, with three cards and a row of pixel squares along each scene's foot", () => {
+  it("is on the inverse surface, with three cards and no pixel row", () => {
     const { container } = render(<HowItWorksFannedDissolveCards />)
     expect(container.querySelector("section")?.className).toContain("bg-background-inverse")
     expect(container.querySelectorAll("ol > li")).toHaveLength(3)
-    expect(container.querySelectorAll('[data-reveal="pixel"]').length).toBeGreaterThanOrEqual(12)
+    expect(container.querySelector('[data-reveal="pixel"]')).toBeNull()
   })
 
   it("tilts only the middle card, and only from Desktop", () => {
@@ -320,5 +320,15 @@ describe("Stacked Media + Text", () => {
     const { container } = render(<HowItWorksStackedMediaText locale="ar" actionHref="/app" />)
     expect(container.querySelector('[dir="ltr"] [data-reveal="count"]')?.textContent).toBe("76")
     expect(screen.getByRole("link", { name: "نزّل التطبيق" }).getAttribute("href")).toBe("/app")
+  })
+})
+
+describe("Full-Bleed Step Panel numeral", () => {
+  it("sets Full-Bleed Step Panel's numeral in the text's own direction, so it starts where the text starts in Arabic too", () => {
+    const { container } = render(<HowItWorksFullBleedStepPanel locale="ar" />)
+    const numeral = container.querySelector("[class*='text-7xl']")
+    expect(numeral).toBeTruthy()
+    expect(numeral?.hasAttribute("dir")).toBe(false)
+    expect(numeral?.querySelector("bdi")?.getAttribute("dir")).toBe("ltr")
   })
 })

@@ -22,10 +22,8 @@ import {
  * A block on the inverted surface (`background-inverse`, with `foreground-inverse`
  * text): a soft badge, the heading and a line, then three cards 500px tall. A
  * card is a 300px scene on soft blurred glows, in theme tokens, above its number
- * and title. The scene's lower edge dissolves into the card with a row of
- * square pixels, so the picture seems to melt into the text. The scenes are
- * drawn here and hidden from screen readers: a place field, a route result with
- * a bar, and a list of trips with their status.
+ * and title. The scenes are drawn here and hidden from screen readers: a place
+ * field, a route result with a bar, and a list of trips with their status.
  *
  * Desktop sets the cards three across with the middle one tilted -3°. Tablet and
  * Mobile stack one card per row with no tilt, since a tilted card overflows a
@@ -33,10 +31,9 @@ import {
  * the card still leans toward the start of reading.
  *
  * Motion plays once, when the block comes into view: the cards start stacked a
- * little low and small and fan out to their places, 120ms apart; the pixel
- * squares scale in with delays between 0 and 400ms, so the picture seems to
- * dissolve; the place field types its text, the route bar fills to 20%, and the
- * trip rows slide in 60ms apart. Hovering the row straightens the tilted card and
+ * little low and small and fan out to their places, 120ms apart; the place
+ * field types its text, the route bar fills to 20%, and the trip rows slide in
+ * 60ms apart. Hovering the row straightens the tilted card and
  * lifts all three 4px. Under reduced motion the block is its finished state.
  *
  * Content limits: the heading up to 52 characters, the line up to 70. A card's
@@ -124,27 +121,6 @@ const GLOWS = [
   { x: 157, y: 77, w: 353, h: 283, strength: 0.5 },
   { x: -59, y: 155, w: 275, h: 220, strength: 0.4 },
 ] as const
-/**
- * Where a card's pixel squares start along the scene's foot, from the start
- * edge: Figma's first square for each card, then one every 96px. The row
- * runs the card's width: three squares on Mobile, four on Desktop, seven on
- * Tablet, where the card is one wide column. `SHOWN_FROM` says which
- * squares each width shows.
- */
-const PIXEL_START = [0, 17, 10]
-const PIXEL_COUNT = 7
-const SHOWN_FROM = [
-  "",
-  "",
-  "",
-  "hidden [@container(min-width:40rem)]:block",
-  "hidden [@container(min-width:40rem)]:block [@container(min-width:64rem)]:hidden",
-  "hidden [@container(min-width:40rem)]:block [@container(min-width:64rem)]:hidden",
-  "hidden [@container(min-width:40rem)]:block [@container(min-width:64rem)]:hidden",
-]
-/** A fixed spread of delays between 0 and 400ms, so the dissolve is irregular but the same every time. */
-const DISSOLVE = [180, 40, 320, 400, 110, 260, 20, 360, 90, 300]
-
 export interface HowItWorksFannedDissolveCardsProps extends Omit<React.HTMLAttributes<HTMLElement>, "title">, Partial<HowItWorksFannedDissolveCardsCopy> {
   /** Which language the default copy is in. The page's `dir` sets the direction. */
   locale?: HowItWorksLocale
@@ -164,9 +140,6 @@ export function HowItWorksFannedDissolveCards({ locale = "en", badge, heading, d
       const rest = getComputedStyle(card).transform
       const end = rest && rest !== "none" ? rest : "none"
       started.push(enter(card, [{ opacity: 0, transform: "translateY(24px) scale(0.96)" }, { opacity: 1, transform: end }], { duration: 520, delay, easing: "cubic-bezier(0.16, 1, 0.3, 1)" }))
-      Array.from(card.querySelectorAll<HTMLElement>('[data-reveal="pixel"]')).forEach((pixel, i) =>
-        started.push(enter(pixel, [{ transform: "scale(0)" }, { transform: "scale(1)" }], { duration: 200, delay: delay + 300 + (DISSOLVE[(index * 5 + i) % DISSOLVE.length] ?? 0) }))
-      )
       Array.from(card.querySelectorAll<HTMLElement>('[data-reveal="row"]')).forEach((row, i) =>
         started.push(enter(row, [{ opacity: 0, transform: "translateX(-12px)" }, { opacity: 1, transform: "none" }], { duration: 300, delay: delay + 500 + i * 60 }))
       )
@@ -259,10 +232,6 @@ export function HowItWorksFannedDissolveCards({ locale = "en", badge, heading, d
                   ))}
                 </div>
               ) : null}
-
-              {Array.from({ length: PIXEL_COUNT }, (_, i) => (
-                <span key={i} data-reveal="pixel" className={`absolute bottom-0 size-6 bg-foreground ${SHOWN_FROM[i]}`} style={{ insetInlineStart: (PIXEL_START[index] ?? 0) + i * 96 }} />
-              ))}
             </div>
             <div className="flex flex-1 flex-col justify-end gap-3 p-6">
               <span className="text-xs text-muted-foreground-inverse">

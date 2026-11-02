@@ -7,6 +7,7 @@ import { Button, buttonVariants } from "../../ui/button/button"
 import {
   EASE_OUT,
   HowItWorksEyebrow,
+  HowItWorksLtr,
   HowItWorksImage,
   HowItWorksSection,
   prefersReducedMotion,
@@ -271,8 +272,8 @@ export function HowItWorksFullBleedStepPanel({
       <div className="flex flex-col gap-8 rounded-[14px] bg-muted p-6 [@container(min-width:40rem)]:p-8 [@container(min-width:64rem)]:flex-row [@container(min-width:64rem)]:items-center [@container(min-width:64rem)]:gap-12 [@container(min-width:64rem)]:p-12">
         <div ref={copyRef} className="flex min-w-0 flex-1 flex-col gap-5" aria-live="polite">
           <span className="block overflow-hidden">
-            <span ref={numeralRef} className="block text-4xl font-semibold leading-none text-foreground [@container(min-width:40rem)]:text-5xl [@container(min-width:64rem)]:text-7xl" dir="ltr">
-              {String(active + 1).padStart(2, "0")}
+            <span ref={numeralRef} className="block text-4xl font-semibold leading-none text-foreground [@container(min-width:40rem)]:text-5xl [@container(min-width:64rem)]:text-7xl">
+              <HowItWorksLtr>{String(active + 1).padStart(2, "0")}</HowItWorksLtr>
             </span>
           </span>
           <HowItWorksEyebrow>{step?.meta}</HowItWorksEyebrow>

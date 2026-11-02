@@ -30,7 +30,21 @@ describe("How it Works demo photos", () => {
     }
   })
 
-  test("credit each file", () => {
-    for (const file of ownFiles) expect(credits, file).toContain(`\`${file}\``)
+  test("credit each file, with its Unsplash photo link and its photographer", () => {
+    const rows = credits.split("\n").filter((line) => line.startsWith("| `"))
+    for (const file of ownFiles) {
+      const row = rows.find((line) => line.startsWith(`| \`${file}\``))
+      expect(row, file).toBeDefined()
+      expect(row, file).toMatch(/\]\(https:\/\/unsplash\.com\/photos\/[^)]+\)/)
+      expect(row, file).toMatch(/\]\(https:\/\/unsplash\.com\/@[^)]+\)/)
+    }
+    expect(rows.length).toBe(ownFiles.length)
+  })
+
+  test("never repeat a photo inside one Type", () => {
+    for (const type of HOW_IT_WORKS_PHOTO_TYPES) {
+      const files = howItWorksPhotos(type, "en").map((photo) => photo.src)
+      expect(new Set(files).size, type).toBe(files.length)
+    }
   })
 })

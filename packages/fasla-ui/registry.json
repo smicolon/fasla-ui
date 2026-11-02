@@ -7448,7 +7448,7 @@
       "name": "how-it-works-fanned-dissolve-cards",
       "type": "registry:block",
       "title": "How it Works: Fanned Dissolve Cards",
-      "description": "Three tall cards on the inverted surface, each a drawn scene on soft glows that dissolves into its number and title with a row of pixels, the middle one tilted.",
+      "description": "Three tall cards on the inverted surface, each a drawn scene on soft glows above its number and title, the middle one tilted.",
       "dependencies": [
         "lucide-react"
       ],
