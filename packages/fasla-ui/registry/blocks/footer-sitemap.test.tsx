@@ -287,6 +287,8 @@ describe("Two-Tier Doormat", () => {
     const { container } = render(<FooterTwoTierDoormat locale={locale} />)
     const list = Array.from(container.querySelectorAll("ul")).find((ul) => ul.querySelector("h3"))!
     // minmax(0, 1fr): a long line cannot widen one column. jsdom has no layout, so the classes are the contract.
+    // auto-rows-fr: every row is as tall as the tallest card, so the four cards match in height, 2 x 2 and stacked too.
+    expect(list.className).toContain("auto-rows-fr")
     expect(list.className).toContain("grid-cols-[minmax(0,1fr)]")
     expect(list.className).toContain("[@container(min-width:40rem)]:grid-cols-[repeat(2,minmax(0,1fr))]")
     expect(list.className).toContain("[@container(min-width:64rem)]:grid-cols-[repeat(4,minmax(0,1fr))]")

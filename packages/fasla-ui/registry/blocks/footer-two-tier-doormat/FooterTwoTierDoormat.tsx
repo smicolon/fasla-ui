@@ -197,7 +197,7 @@ export function FooterTwoTierDoormat({ locale = "en", columns, contacts, copyrig
       ) : null}
       {cols.length && cards.length ? <FooterRule /> : null}
       {cards.length ? (
-        <ul className="grid grid-cols-[minmax(0,1fr)] gap-4 [@container(min-width:40rem)]:grid-cols-[repeat(2,minmax(0,1fr))] [@container(min-width:64rem)]:grid-cols-[repeat(4,minmax(0,1fr))]">
+        <ul className="grid auto-rows-fr grid-cols-[minmax(0,1fr)] gap-4 [@container(min-width:40rem)]:grid-cols-[repeat(2,minmax(0,1fr))] [@container(min-width:64rem)]:grid-cols-[repeat(4,minmax(0,1fr))]">
           {cards.map((contact) => (
             <li key={contact.title} className="flex min-w-0">
               <FooterContactCard contact={contact} locale={locale} />
