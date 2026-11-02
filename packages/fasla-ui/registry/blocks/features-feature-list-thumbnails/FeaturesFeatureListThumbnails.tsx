@@ -13,8 +13,8 @@ import { FeaturesHeader, FeaturesPhotoSlot, FeaturesRule, FeaturesSection, type 
  * the reading direction on hover.
  *
  * Desktop sets the thumbnail, the text and the link on one line. Tablet
- * shrinks the thumbnail to 180 × 119 and sets the link under the text (Figma's
- * Tablet leaves the link out; it stays here so every row keeps its action).
+ * shrinks the thumbnail to 180 × 119 and leaves the link out, as Figma's
+ * Tablet does. Mobile and Desktop show it.
  * Mobile stacks the full-width thumbnail, the text and the link.
  *
  * Content limits: a row's title up to 28 characters and its line up to 130.
@@ -108,7 +108,7 @@ export function FeaturesFeatureListThumbnails({ locale = "en", eyebrow, heading,
                   <h3 className="text-xl font-semibold text-foreground">{row.title}</h3>
                   <p className="text-sm text-muted-foreground">{row.description}</p>
                 </div>
-                <div className="self-start [@container(min-width:48rem)]:col-start-2 [@container(min-width:48rem)]:row-start-2 [@container(min-width:72rem)]:col-start-3 [@container(min-width:72rem)]:row-start-1 [@container(min-width:72rem)]:self-center">
+                <div className="self-start [@container(min-width:48rem)_and_(max-width:71.99rem)]:hidden [@container(min-width:48rem)]:col-start-2 [@container(min-width:48rem)]:row-start-2 [@container(min-width:72rem)]:col-start-3 [@container(min-width:72rem)]:row-start-1 [@container(min-width:72rem)]:self-center">
                   {row.href ? (
                     <a href={row.href} className={linkClass}>
                       {label}
