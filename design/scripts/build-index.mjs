@@ -295,6 +295,22 @@ export const CODE_MAP = {
       "named-owners", "book-a-call", "form-with-faq", "bento-grid", "social-rail", "newsletter-combo", "support-channels",
     ].map((type) => [`contact-us-${type}`, null])
   ),
+  // Block: the parts every Footer block shares, from the block set Footer (46380:22515), not an atom.
+  footer: null,
+  // Blocks: each Footer item is one Type of the block set Footer (46380:22515), not an atom.
+  ...Object.fromEntries(
+    [
+      "four-column-directory", "wide-sitemap-mega", "accordion-sitemap", "two-tier-doormat",
+      "index-numbered-columns", "brand-panel-split", "giant-wordmark", "image-backed-brand",
+      "centered-brand-minimal", "marquee-strip", "big-type-link-stack", "bento-tile",
+      "cta-band-columns", "newsletter-split", "floating-demo-card", "big-question-cta",
+      "single-line-bar", "split-hairline-micro", "two-row-compact", "inline-preferences",
+      "contact-first", "support-contact", "local-business", "legal-first-slim",
+      "trust-compliance", "ecommerce-mega", "service-promise-band", "careers-culture",
+      "community-events", "dashboard-slim-bar", "docs-page", "multi-region",
+      "product-family-switcher",
+    ].map((type) => [`footer-${type}`, null])
+  ),
 }
 
 const FAMILY_MIN = 10

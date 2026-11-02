@@ -1,0 +1,177 @@
+{
+  "accordion-sitemap": [
+    "legalLabel"
+  ],
+  "bento-tile": [
+    "legalLabel"
+  ],
+  "big-question-cta": [
+    "navLabel",
+    "legalLabel"
+  ],
+  "big-type-link-stack": [
+    "navLabel",
+    "legalLabel"
+  ],
+  "brand-panel-split": [
+    "legalLabel"
+  ],
+  "careers-culture": [
+    "rolesLabel",
+    "legalLabel"
+  ],
+  "careers-culture-without-photos": [
+    "rolesLabel",
+    "legalLabel"
+  ],
+  "centered-brand-minimal": [
+    "navLabel"
+  ],
+  "community-events": [
+    "legalLabel"
+  ],
+  "contact-first": [
+    "legalLabel",
+    "socialLabel",
+    "officesLabel"
+  ],
+  "contact-first-without-photos": [
+    "legalLabel",
+    "socialLabel",
+    "officesLabel"
+  ],
+  "cta-band-columns": [
+    "legalLabel"
+  ],
+  "dashboard-slim-bar": [
+    "helpLabel",
+    "releaseLabel",
+    "helpLinksLabel"
+  ],
+  "docs-page": [
+    "pagerLabel",
+    "contributorsLabel",
+    "linksLabel"
+  ],
+  "ecommerce-mega": [
+    "legalLabel",
+    "regionLabel",
+    "paymentLabel",
+    "currencyLabel"
+  ],
+  "floating-demo-card": [
+    "legalLabel"
+  ],
+  "four-column-directory": [
+    "legalLabel"
+  ],
+  "giant-wordmark": [
+    "legalLabel"
+  ],
+  "image-backed-brand": [
+    "navLabel",
+    "legalLabel"
+  ],
+  "image-backed-brand-without-photos": [
+    "navLabel",
+    "legalLabel"
+  ],
+  "index-numbered-columns": [
+    "legalLabel"
+  ],
+  "inline-preferences": [
+    "navLabel",
+    "languageLabel"
+  ],
+  "legal-first-slim": [
+    "policiesLabel",
+    "badgesLabel",
+    "socialLabel"
+  ],
+  "local-business": [
+    "legalLabel",
+    "socialLabel"
+  ],
+  "local-business-without-photos": [
+    "legalLabel",
+    "socialLabel"
+  ],
+  "marquee-strip": [
+    "navLabel",
+    "legalLabel"
+  ],
+  "multi-region": [
+    "regionLabel",
+    "languageLabel",
+    "currencyLabel",
+    "cardsLabel",
+    "legalLabel"
+  ],
+  "newsletter-split": [
+    "emailLabel",
+    "sentMessage",
+    "errorMessage",
+    "invalidMessage",
+    "legalLabel"
+  ],
+  "newsletter-split-error": [
+    "emailLabel",
+    "sentMessage",
+    "invalidMessage",
+    "legalLabel"
+  ],
+  "newsletter-split-loading": [
+    "emailLabel",
+    "sentMessage",
+    "errorMessage",
+    "invalidMessage",
+    "legalLabel"
+  ],
+  "newsletter-split-sent": [
+    "emailLabel",
+    "errorMessage",
+    "invalidMessage",
+    "legalLabel"
+  ],
+  "product-family-switcher": [
+    "productsLabel",
+    "companyLabel",
+    "legalLabel"
+  ],
+  "service-promise-band": [
+    "promisesLabel",
+    "legalLabel",
+    "paymentLabel"
+  ],
+  "single-line-bar": [
+    "navLabel",
+    "socialLabel"
+  ],
+  "split-hairline-micro": [
+    "legalLabel",
+    "socialLabel"
+  ],
+  "support-contact": [
+    "topicsLabel",
+    "channelsLabel",
+    "legalLabel"
+  ],
+  "trust-compliance": [
+    "certificationsLabel",
+    "paymentsLabel",
+    "legalLabel"
+  ],
+  "two-row-compact": [
+    "navLabel",
+    "legalLabel",
+    "socialLabel"
+  ],
+  "two-tier-doormat": [
+    "legalLabel"
+  ],
+  "wide-sitemap-mega": [
+    "languageLabel",
+    "regionLabel",
+    "legalLabel"
+  ]
+}
