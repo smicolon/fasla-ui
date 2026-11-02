@@ -146,6 +146,16 @@ describe("Figma ☾ Mode snapshot", () => {
     }
   )
 
+  it("holds the Contact Us tints exactly as Figma draws them", () => {
+    // opacity/warning/30 is on #d97706; warning/5 and /10 are on #e39219.
+    for (const mode of ["light", "dark"] as const) {
+      expect(tok("soft-warning-5")[mode]).toBe("rgb(227 146 25 / 5%)")
+      expect(tok("soft-warning-30")[mode]).toBe("rgb(217 119 6 / 30%)")
+      expect(tok("soft-success-20")[mode]).toBe("rgb(22 163 74 / 20%)")
+      expect(tok("soft-success-30")[mode]).toBe(tok("soft-success")[mode].replace("/ 10%)", "/ 30%)"))
+    }
+  })
+
   it("keeps the modal overlay translucent, and denser in Dark", () => {
     // Figma custom/backdrop-overlay: one colour, #3c3a40, at 60% and 80%.
     expect(tok("backdrop-overlay").light).toBe("rgb(60 58 64 / 60%)")

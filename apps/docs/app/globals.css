@@ -89,6 +89,12 @@
     --soft-destructive-20: rgb(224 52 52 / 20%);
     --soft-destructive-30: rgb(224 52 52 / 30%);
 
+    /* Soft tints the Contact Us blocks use — Figma opacity/warning/5, opacity/warning/30, opacity/success/20 and opacity/success/30, exactly as Figma draws them (warning/30 is on #d97706, warning/5 on #e39219) */
+    --soft-warning-5: rgb(227 146 25 / 5%);
+    --soft-warning-30: rgb(217 119 6 / 30%);
+    --soft-success-20: rgb(22 163 74 / 20%);
+    --soft-success-30: rgb(22 163 74 / 30%);
+
     /* Overlay behind a modal — Figma custom/backdrop-overlay, the Alert Dialog backdrop */
     --backdrop-overlay: rgb(60 58 64 / 60%);
 
@@ -203,6 +209,12 @@
     --soft-secondary-30: rgb(163 163 163 / 30%);
     --soft-destructive-20: rgb(224 52 52 / 20%);
     --soft-destructive-30: rgb(224 52 52 / 30%);
+
+    /* Soft tints the Contact Us blocks use — Figma opacity/warning/5, opacity/warning/30, opacity/success/20 and opacity/success/30, exactly as Figma draws them (warning/30 is on #d97706, warning/5 on #e39219) */
+    --soft-warning-5: rgb(227 146 25 / 5%);
+    --soft-warning-30: rgb(217 119 6 / 30%);
+    --soft-success-20: rgb(22 163 74 / 20%);
+    --soft-success-30: rgb(22 163 74 / 30%);
 
     /* Overlay behind a modal — Figma custom/backdrop-overlay, the Alert Dialog backdrop */
     --backdrop-overlay: rgb(60 58 64 / 80%);
