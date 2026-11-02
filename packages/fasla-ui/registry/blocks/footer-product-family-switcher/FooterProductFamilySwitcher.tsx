@@ -22,10 +22,11 @@ import {
  * arrow), a hairline, a company row (the logo with six links, and four social
  * marks) and the legal bar (the copyright and four legal links).
  *
- * At every width the button sits under the line, at the start edge of the title
- * (left in English, right in Arabic) and at its own width, not centred or
- * stretched. Desktop (Figma 1440): the tiles four across, 16px apart. Tablet
- * (768): the tiles are 2 x 2; the company row stacks the logo and links over the marks.
+ * Desktop (Figma 1440, container 1024 and up): the title and line at the start
+ * of a row and the button at the opposite end, centred on it; the tiles four
+ * across, 16px apart. Tablet (768) and Mobile: the button sits under the line
+ * at the start edge of the title (left in English, right in Arabic) and at its
+ * own width, not centred or stretched. Tablet: the tiles are 2 x 2; the company row stacks the logo and links over the marks.
  * Mobile (360): the tiles are one across; the links wrap under the logo.
  *
  * Each tile is one link named by its product. Product names are kept as Figma
@@ -164,7 +165,7 @@ export function FooterProductFamilySwitcher({
       contentClassName="gap-5 [@container(min-width:40rem)]:gap-8 [@container(min-width:64rem)]:gap-10"
       {...props}
     >
-      <div className="flex flex-col items-start gap-5">
+      <div className="flex flex-col items-start gap-5 [@container(min-width:64rem)]:flex-row [@container(min-width:64rem)]:items-center [@container(min-width:64rem)]:justify-between [@container(min-width:64rem)]:gap-10">
         <div className="flex min-w-0 flex-col gap-2 [@container(min-width:64rem)]:max-w-[620px]">
           <h2 className="text-xl font-semibold text-foreground">{heading}</h2>
           {line ? <p className="text-sm text-muted-foreground">{line}</p> : null}

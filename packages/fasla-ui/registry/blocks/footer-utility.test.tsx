@@ -361,7 +361,10 @@ describe.each(["en", "ar"] as const)("Product Family Switcher (%s)", (locale) =>
     // At the start edge of the title at its own width, at every breakpoint: no stretching, no centring.
     expect(hasClass(compare, "w-full")).toBe(false)
     expect(compare.parentElement!.className).toContain("items-start")
-    expect(compare.parentElement!.className).not.toContain("justify-between")
+    // From the Desktop container width (64rem) the row is Figma's: title at the start, button at the opposite end.
+    expect(compare.parentElement!.className).toContain("[@container(min-width:64rem)]:flex-row")
+    expect(compare.parentElement!.className).toContain("[@container(min-width:64rem)]:justify-between")
+    expect(compare.parentElement!.className).toContain("[@container(min-width:64rem)]:items-center")
     expect(["LinkedIn", "X", "GitHub", "YouTube"].every((name) => container.querySelector(`a[aria-label="${name}"]`))).toBe(true)
   })
 
