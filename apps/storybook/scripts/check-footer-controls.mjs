@@ -1,9 +1,12 @@
+// Browser pass over the running Storybook (bun run storybook): for every Footer story, sets each control in the table to a new value
+// and checks the preview changed. Needs playwright-core and Chrome (CHROME=path). The jsdom half is
+// packages/fasla-ui/registry/blocks/footer-controls.test.tsx.
 import { chromium } from "playwright-core"
 import fs from "fs"
 const base = "http://localhost:6006"
 const idx = await (await fetch(base + "/index.json")).json()
 const ids = Object.values(idx.entries).filter(e => e.type === "story" && e.id.startsWith("blocks-footer--")).map(e => e.id)
-const b = await chromium.launch({ executablePath: process.env.CHROME ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" })
+const b = await chromium.launch({ executablePath: process.env.CHROME ?? process.env.CHROME ?? "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" })
 const p = await b.newPage({ viewport: { width: 1440, height: 900 } })
 const out = []
 const only = process.argv[2]
