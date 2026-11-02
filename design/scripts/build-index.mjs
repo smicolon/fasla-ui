@@ -269,6 +269,20 @@ export const CODE_MAP = {
       "filter-sidebar-results", "search-chips-results", "post-carousel-with-controls",
     ].map((type) => [`blog-cards-${type}`, null])
   ),
+  // Block: the parts every Features block shares, from the block set Features (42367:57765), not an atom.
+  features: null,
+  // Blocks: each Features item is one Type of the block set Features (42367:57765), not an atom.
+  ...Object.fromEntries(
+    [
+      "icon-card-grid", "compact-icon-index", "numbered-feature-rows", "feature-checklist-columns",
+      "colour-block-cards", "stat-feature-band", "split-photo-icon-list", "photo-bento",
+      "feature-list-thumbnails", "photo-feature-chips", "media-rail",
+      "full-bleed-photo-banner", "editorial-photo-split", "photo-collage", "notched-photo-columns",
+      "perforated-photo-strip", "portrait-photo-cards-link-row", "photo-carousel", "photo-tabs-panel",
+      "accordion-photo", "expanding-step-cards", "compare-panels-chat-answer", "numbered-steps-floating-cards",
+      "solid-colour-cards", "icon-titled-preview-rail", "tinted-product-bento", "showcase-card-pair",
+    ].map((type) => [`features-${type}`, null])
+  ),
   // Block: the parts every Contact Us block shares, from the block set Contact Us (42334:293941), not an atom.
   "contact-us": null,
   // Blocks: each Contact Us item is one Type of the block set Contact Us (42334:293941), not an atom. Added a family at a time.

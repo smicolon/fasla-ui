@@ -3538,6 +3538,48 @@
         "contact-us-support-channels": "Support Channels"
       }
     },
+    "featuresBlocks": {
+      "lead": "سبعة وعشرون قسمًا تعرض ما يفعله المنتج: بطاقات الأيقونات والصفوف المرقّمة وقوائم التحقق، وتخطيطات تقودها الصور، ولوحات يتفاعل معها الزائر، والمنتج أثناء الاستخدام.",
+      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
+      "filterLabel": "التصفية حسب العائلة",
+      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
+      "families": {
+        "all": "الكل",
+        "icons-numbers": "تخطيطات الأيقونات والأرقام وقوائم التحقق",
+        "photo-led": "تخطيطات تقودها الصورة",
+        "interactive": "تخطيطات يتفاعل معها الزائر",
+        "product-in-use": "تخطيطات تعرض المنتج أثناء الاستخدام"
+      },
+      "types": {
+        "features-icon-card-grid": "شبكة بطاقات الأيقونات",
+        "features-compact-icon-index": "فهرس أيقونات مدمج",
+        "features-numbered-feature-rows": "صفوف مزايا مرقّمة",
+        "features-feature-checklist-columns": "أعمدة قوائم التحقق",
+        "features-colour-block-cards": "بطاقات بكتل لونية",
+        "features-stat-feature-band": "شريط مزايا بالأرقام",
+        "features-split-photo-icon-list": "صورة وقائمة أيقونات",
+        "features-photo-bento": "بينتو الصور",
+        "features-feature-list-thumbnails": "قائمة مزايا بصور مصغّرة",
+        "features-photo-feature-chips": "صورة ووسوم المزايا",
+        "features-media-rail": "شريط صور أفقي",
+        "features-full-bleed-photo-banner": "لافتة صورة بعرض الصفحة",
+        "features-editorial-photo-split": "تقسيم تحريري بالصورة",
+        "features-photo-collage": "كولاج صور",
+        "features-notched-photo-columns": "أعمدة صور بحافة مشطوفة",
+        "features-perforated-photo-strip": "شريط صور بحواف مثقّبة",
+        "features-portrait-photo-cards-link-row": "بطاقات صور طولية ورابط",
+        "features-photo-carousel": "عارض صور",
+        "features-photo-tabs-panel": "لوحة صور بعلامات تبويب",
+        "features-accordion-photo": "أكورديون وصورة",
+        "features-expanding-step-cards": "بطاقات خطوات تتوسّع",
+        "features-compare-panels-chat-answer": "لوحتا مقارنة وإجابة محادثة",
+        "features-numbered-steps-floating-cards": "خطوات مرقّمة وبطاقات عائمة",
+        "features-solid-colour-cards": "بطاقات بلون واحد",
+        "features-icon-titled-preview-rail": "شريط معاينات بعناوين أيقونية",
+        "features-tinted-product-bento": "بينتو منتجات بألوان خفيفة",
+        "features-showcase-card-pair": "بطاقتا عرض"
+      }
+    },
     "footerBlocks": {
       "lead": "أقسام تُغلق الصفحة: خرائط الموقع، وتذييلات العلامة، وأشرطة الدعوة، والأشرطة المصغّرة، وتخطيطات التواصل والدعم، والقانون والثقة، والتجارة، والمجتمع والوظائف، وتذييلات التطبيقات.",
       "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
