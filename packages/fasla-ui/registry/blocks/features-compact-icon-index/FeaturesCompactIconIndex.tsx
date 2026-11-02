@@ -103,7 +103,7 @@ export function FeaturesCompactIconIndex({ locale = "en", eyebrow, heading, note
   const list = items ?? copy.items
 
   return (
-    <FeaturesSection labelledBy={headingId} gap="md" className={className} {...props}>
+    <FeaturesSection labelledBy={headingId} gap="md" contentClassName="gap-12" className={className} {...props}>
       <div className="flex flex-col gap-3 [@container(min-width:72rem)]:flex-row [@container(min-width:72rem)]:items-end [@container(min-width:72rem)]:justify-between [@container(min-width:72rem)]:gap-16">
         <FeaturesHeader headingId={headingId} eyebrow={eyebrow ?? copy.eyebrow} heading={heading ?? copy.heading} className="flex-1" />
         <p className="text-sm text-muted-foreground [@container(min-width:72rem)]:max-w-[22.5rem]">{note ?? copy.note}</p>
@@ -116,7 +116,7 @@ export function FeaturesCompactIconIndex({ locale = "en", eyebrow, heading, note
             return (
               <li key={item.id} className="flex min-w-0 flex-col gap-2">
                 <div className="flex items-center gap-2.5 text-sm font-medium text-foreground">
-                  {Icon ? <Icon size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className="shrink-0" /> : null}
+                  {Icon ? <Icon size={18} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className="shrink-0 [@container(min-width:72rem)]:size-4" /> : null}
                   <p className="min-w-0 text-sm font-medium">{item.title}</p>
                 </div>
                 <p className="text-xs text-muted-foreground">{item.description}</p>
