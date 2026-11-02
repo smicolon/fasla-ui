@@ -71,13 +71,9 @@ function dotPosition(size: Size, radius: Radius) {
   return radius === "standard" && size !== "12" ? "-bottom-0.5 -end-0.5" : "bottom-0 end-0"
 }
 
-const ARABIC = /[؀-ۿ]/
-/** U+200C keeps two Arabic initials in their separate forms rather than joined. */
-const ZWNJ = "‌"
-
 /**
  * Up to two initials — the first letters of the first and last words — or one
- * at size 12, as Figma shows. Latin is upper-cased; Arabic has no case.
+ * at size 12, as Figma shows. Latin is upper-cased; Arabic has no case and two initials join, as Figma draws them.
  */
 function initialsFrom(name: string, count: 1 | 2) {
   const words = name.trim().split(/\s+/).filter(Boolean)
@@ -85,8 +81,7 @@ function initialsFrom(name: string, count: 1 | 2) {
   const first = Array.from(words[0]!)[0]!
   const last = words.length > 1 ? Array.from(words[words.length - 1]!)[0]! : ""
   const letters = count === 1 || !last ? [first] : [first, last]
-  const joined = letters.join(letters.some((l) => ARABIC.test(l)) ? ZWNJ : "")
-  return joined.toLocaleUpperCase()
+  return letters.join("").toLocaleUpperCase()
 }
 
 type Size = "32" | "24" | "12"
