@@ -7147,6 +7147,577 @@
         "blog-cards",
         "marketing"
       ]
+    },
+    {
+      "name": "contact-us",
+      "type": "registry:block",
+      "title": "Contact Us",
+      "description": "The parts every Contact Us block is built from: the section and its 1248px column, the header, the hairline, the form with its fields, its checks and its three outcomes, the single-choice chips, the file field, the social links and the entrance helper.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "checkbox",
+        "input",
+        "select",
+        "social-icons",
+        "textarea"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us/contact-us.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-classic-centered",
+      "type": "registry:block",
+      "title": "Contact Us: Classic Centered",
+      "description": "A centred header over a bordered card: first and last name, work email, a topic select, the message and a privacy checkbox, with a reply promise beside the Send message button and the email address underneath.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "contact-us"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-classic-centered/ContactUsClassicCentered.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-classic-centered.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-dark-statement",
+      "type": "registry:block",
+      "title": "Contact Us: Dark Statement",
+      "description": "A headline, a paragraph, three facts and social marks beside a form with names, email, company, the project and a privacy checkbox, on the page's own ground.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "contact-us"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-dark-statement/ContactUsDarkStatement.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-dark-statement.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-oversized-wordmark",
+      "type": "registry:block",
+      "title": "Contact Us: Oversized Wordmark",
+      "description": "The word Contact set at 9XL over a hairline, then an invitation with the direct details beside an eight-field form.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "contact-us"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-oversized-wordmark/ContactUsOversizedWordmark.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-oversized-wordmark.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-editorial-statement",
+      "type": "registry:block",
+      "title": "Contact Us: Editorial Statement",
+      "description": "A muted band: a rail of address and social details beside a large light statement and a form with no drawn labels.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "contact-us"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-editorial-statement/ContactUsEditorialStatement.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-editorial-statement.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-ruled-split-form",
+      "type": "registry:block",
+      "title": "Contact Us: Ruled Split Form",
+      "description": "Two columns divided by a vertical rule: the heading, contact rows and social marks beside a form with a message counter.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "contact-us"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-ruled-split-form/ContactUsRuledSplitForm.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-ruled-split-form.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-grand-headline-form",
+      "type": "registry:block",
+      "title": "Contact Us: Grand Headline Form",
+      "description": "A capitalised headline over a bordered form, on a page of faint 72px grid lines.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "contact-us"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-grand-headline-form/ContactUsGrandHeadlineForm.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-grand-headline-form.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-pitch-and-inquiry",
+      "type": "registry:block",
+      "title": "Contact Us: Pitch & Inquiry",
+      "description": "A tinted pitch with three promises and a Book a free call button beside an inquiry form with Service and Budget chips.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "contact-us"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-pitch-and-inquiry/ContactUsPitchAndInquiry.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-pitch-and-inquiry.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-form-contact-methods",
+      "type": "registry:block",
+      "title": "Contact Us: Form + Contact Methods",
+      "description": "A heading with a Plan a visit badge and an intro, a muted form card of two-up fields and a pair of Reserve and arrow buttons beside a photo, and three contact methods (call, working hours, write) underneath.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "contact-us"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-form-contact-methods/ContactUsFormContactMethods.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-form-contact-methods.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-split-photo-dark",
+      "type": "registry:block",
+      "title": "Contact Us: Split Photo Dark",
+      "description": "A form side with a Book a demo heading, five pill fields, a Request demo button, a privacy note and the Fasla logo, beside a full-height photo that settles into place.",
+      "dependencies": [],
+      "registryDependencies": [
+        "contact-us",
+        "fasla-logo"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-split-photo-dark/ContactUsSplitPhotoDark.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-split-photo-dark.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-photo-and-dark-panel",
+      "type": "registry:block",
+      "title": "Contact Us: Photo & Dark Panel",
+      "description": "A photo and a panel in a chart-4 frame: a heading, first and last name, email, optional phone, a subject, a message and a full-width Submit button, the panel sliding in from the photo's side.",
+      "dependencies": [],
+      "registryDependencies": [
+        "contact-us"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-photo-and-dark-panel/ContactUsPhotoAndDarkPanel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-photo-and-dark-panel.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-editorial-and-address-card",
+      "type": "registry:block",
+      "title": "Contact Us: Editorial & Address Card",
+      "description": "A soft-success section holding a form card with a bold headline, a name, mail and message form, a terms checkbox and a Send button, beside a photo over an address and mail info card.",
+      "dependencies": [],
+      "registryDependencies": [
+        "badge",
+        "contact-us"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-editorial-and-address-card/ContactUsEditorialAndAddressCard.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-editorial-and-address-card.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-map-split",
+      "type": "registry:block",
+      "title": "Contact Us: Map Split",
+      "description": "A photo slot with a pin card on top, beside the address rows, a Get directions link and an Email the studio link.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "contact-us"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-map-split/ContactUsMapSplit.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-map-split.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-office-cards",
+      "type": "registry:block",
+      "title": "Contact Us: Office Cards",
+      "description": "Three office cards, each with a photo, city, badge, address, phone and a Directions link.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "contact-us"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-office-cards/ContactUsOfficeCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-office-cards.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-hq-feature",
+      "type": "registry:block",
+      "title": "Contact Us: HQ Feature",
+      "description": "A photo beside the headquarters details: opening hours, a live open or closed line, Get directions and Book a visit.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "contact-us"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-hq-feature/ContactUsHqFeature.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-hq-feature.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-global-offices-table",
+      "type": "registry:block",
+      "title": "Contact Us: Global Offices Table",
+      "description": "A table of five offices with phone, live local time and hours, and a Download press kit link.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "contact-us"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-global-offices-table/ContactUsGlobalOfficesTable.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-global-offices-table.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-hours-and-availability",
+      "type": "registry:block",
+      "title": "Contact Us: Hours and Availability",
+      "description": "A week of opening hours with today highlighted, a closure notice, and a dark Right now card with a live clock and a time zone picker.",
+      "dependencies": [],
+      "registryDependencies": [
+        "alert",
+        "badge",
+        "contact-us",
+        "select"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-hours-and-availability/ContactUsHoursAndAvailability.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-hours-and-availability.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-named-owners",
+      "type": "registry:block",
+      "title": "Contact Us: Named Owners",
+      "description": "A directory of named owners with their emails, where to find and call the studio, and a dark form card.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "contact-us"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-named-owners/ContactUsNamedOwners.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-named-owners.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-book-a-call",
+      "type": "registry:block",
+      "title": "Contact Us: Book a Call",
+      "description": "A booking card: the host and call summary, day tabs, a grid of time slots and a confirm bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "contact-us",
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-book-a-call/ContactUsBookACall.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-book-a-call.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-form-with-faq",
+      "type": "registry:block",
+      "title": "Contact Us: Form with FAQ",
+      "description": "A contact form beside a sticky FAQ sidebar whose rows open, with a nudge toward the matching answer.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "contact-us"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-form-with-faq/ContactUsFormWithFaq.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-form-with-faq.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-bento-grid",
+      "type": "registry:block",
+      "title": "Contact Us: Bento Grid",
+      "description": "A bento grid: a message form, a median reply time, the studio, social links and a hiring tile.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "contact-us",
+        "social-icons"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-bento-grid/ContactUsBentoGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-bento-grid.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-social-rail",
+      "type": "registry:block",
+      "title": "Contact Us: Social Rail",
+      "description": "The studio email as a copy button over a grid of eight social links and a postal address.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "contact-us",
+        "social-icons"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-social-rail/ContactUsSocialRail.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-social-rail.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-newsletter-combo",
+      "type": "registry:block",
+      "title": "Contact Us: Newsletter Combo",
+      "description": "A dark newsletter subscribe panel beside a contact form panel.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "contact-us",
+        "input"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-newsletter-combo/ContactUsNewsletterCombo.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-newsletter-combo.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
+    },
+    {
+      "name": "contact-us-support-channels",
+      "type": "registry:block",
+      "title": "Contact Us: Support Channels",
+      "description": "Chat, email and voicemail support cards on a warm ground, with a fastest response badge.",
+      "dependencies": [],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "contact-us"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/contact-us-support-channels/ContactUsSupportChannels.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/contact-us-support-channels.tsx"
+        }
+      ],
+      "categories": [
+        "contact-us",
+        "marketing"
+      ]
     }
   ]
 }
