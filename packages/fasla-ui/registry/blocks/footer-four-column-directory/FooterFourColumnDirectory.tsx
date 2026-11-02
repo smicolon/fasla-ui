@@ -88,7 +88,7 @@ export function FooterFourColumnDirectory({
   const copy = COPY[locale]
   const text = blurb ?? copy.blurb
   return (
-    <FooterSection className={cn("py-8 md:py-16 lg:pb-10 lg:pt-20", className)} contentClassName="gap-6 [@container(min-width:40rem)]:gap-8 [@container(min-width:64rem)]:gap-12" {...props}>
+    <FooterSection className={cn("border-t border-border py-8 md:py-16 lg:pb-10 lg:pt-20", className)} contentClassName="gap-6 [@container(min-width:40rem)]:gap-8 [@container(min-width:64rem)]:gap-12" {...props}>
       <div className="grid grid-cols-2 gap-x-4 gap-y-8 [@container(min-width:40rem)]:grid-cols-4 [@container(min-width:40rem)]:gap-x-6 [@container(min-width:40rem)]:gap-y-10 [@container(min-width:64rem)]:grid-cols-[320px_repeat(4,minmax(0,1fr))] [@container(min-width:64rem)]:gap-x-14">
         <FooterBrand blurb={text} className="col-span-2 [@container(min-width:40rem)]:col-span-4 [@container(min-width:64rem)]:col-span-1">
           {socials.length ? <FooterSocial platforms={socials} /> : null}
