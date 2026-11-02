@@ -283,6 +283,15 @@ describe("Fanned Dissolve Cards", () => {
     expect(container.querySelector('[data-reveal="pixel"]')).toBeNull()
   })
 
+  it("pins each of the three scenes to Light, and nothing else: the section and the card text follow the mode", () => {
+    const { container } = render(<HowItWorksFannedDissolveCards />)
+    const pinned = [...container.querySelectorAll(".light")]
+    expect(pinned).toHaveLength(3)
+    expect(pinned.every((node) => node.getAttribute("data-pinned") === "light" && node.getAttribute("aria-hidden") === "true")).toBe(true)
+    expect(container.querySelector("section")?.classList.contains("light")).toBe(false)
+    expect(container.querySelector("section")?.className).toContain("bg-background-inverse")
+  })
+
   it("tilts only the middle card, and only from Desktop", () => {
     const { container } = render(<HowItWorksFannedDissolveCards />)
     const cards = [...container.querySelectorAll("ol > li")].map((node) => node.getAttribute("class") ?? "")
@@ -299,6 +308,14 @@ describe("Fanned Dissolve Cards", () => {
 })
 
 describe("Stacked Media + Text", () => {
+  it("pins each of the three pictures to Light, and nothing else", () => {
+    const { container } = render(<HowItWorksStackedMediaText />)
+    const pinned = [...container.querySelectorAll(".light")]
+    expect(pinned).toHaveLength(3)
+    expect(pinned.every((node) => node.getAttribute("data-pinned") === "light" && node.getAttribute("aria-hidden") === "true")).toBe(true)
+    expect(container.querySelector("section")?.classList.contains("light")).toBe(false)
+  })
+
   it("has three cards, and the quiet-hours switches at their finished state", () => {
     const { container } = render(<HowItWorksStackedMediaText />)
     expect(container.querySelectorAll("ol > li")).toHaveLength(3)

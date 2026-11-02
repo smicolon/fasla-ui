@@ -25,6 +25,11 @@ import {
  * and title. The scenes are drawn here and hidden from screen readers: a place
  * field, a route result with a bar, and a list of trips with their status.
  *
+ * Each scene is pinned to Light, as Figma pins its Scene frames: it carries the
+ * `light` class, so the glows, the field and the floating cards inside it use
+ * the Light colours whether the page is Light or Dark. Nothing else is pinned;
+ * the section and the card text follow the mode.
+ *
  * Desktop sets the cards three across with the middle one tilted -3°. Tablet and
  * Mobile stack one card per row with no tilt, since a tilted card overflows a
  * narrow column. The page's `dir` mirrors the order and turns the tilt to +3°, so
@@ -176,7 +181,7 @@ export function HowItWorksFannedDissolveCards({ locale = "en", badge, heading, d
               index === 1 ? "[@container(min-width:64rem)]:-rotate-3 [@container(min-width:64rem)]:[&:dir(rtl)]:rotate-3 [@container(min-width:64rem)]:group-hover/cards:rotate-0" : ""
             }`}
           >
-            <div aria-hidden="true" className="relative flex h-[300px] shrink-0 items-center justify-center overflow-hidden bg-accent">
+            <div aria-hidden="true" data-pinned="light" className="light relative flex text-foreground h-[300px] shrink-0 items-center justify-center overflow-hidden bg-accent">
               {GLOWS.map((glow, g) => (
                 <HowItWorksGlow
                   key={g}

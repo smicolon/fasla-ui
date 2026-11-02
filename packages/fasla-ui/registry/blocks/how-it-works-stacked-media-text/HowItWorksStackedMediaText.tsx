@@ -30,6 +30,9 @@ import {
  * panel with its number, title and line, in `background`. The pictures show a
  * window sitting on the picture's foot: quiet-hours switches, a list of who is
  * around, and a focus gauge. They are drawn here and hidden from screen readers.
+ * Each picture is pinned to Light, as Figma pins its Media frames: it carries the
+ * `light` class, so what is drawn inside it uses the Light colours in Light and
+ * in Dark. Nothing else is pinned; the block and the panels follow the mode.
  *
  * Desktop sets the cards three across and the button beside the heading. Tablet
  * and Mobile stack the button under the heading and the cards in one column; a
@@ -210,7 +213,7 @@ export function HowItWorksStackedMediaText({ locale = "en", badge, heading, acti
       <ol className="group/cards grid grid-cols-1 items-start gap-6 [@container(min-width:64rem)]:grid-cols-3">
         {cards.map((card, index) => (
           <li key={index} data-reveal="card" className="flex min-w-0 flex-col transition-transform duration-200 hover:-translate-y-1 motion-reduce:transition-none hover:motion-reduce:translate-y-0">
-            <div aria-hidden="true" className="pointer-events-none relative flex h-[300px] overflow-hidden rounded-3xl bg-accent">
+            <div aria-hidden="true" data-pinned="light" className="light pointer-events-none relative flex text-foreground h-[300px] overflow-hidden rounded-3xl bg-accent">
               {GLOWS.map((glow, g) => (
                 <HowItWorksGlow
                   key={g}

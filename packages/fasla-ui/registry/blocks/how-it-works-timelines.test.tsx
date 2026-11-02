@@ -221,10 +221,38 @@ describe("Pill Timeline", () => {
     expect(container.querySelectorAll('[data-reveal="line"]')).toHaveLength(3)
   })
 
+  it("keeps 12px of connector line on each side of every pill on Tablet (16px on Desktop), so pills never touch", () => {
+    const { container } = render(<HowItWorksPillTimeline />)
+    const tracks = [...container.querySelectorAll('[data-reveal="line"]')].map((line) => line.parentElement!)
+    expect(tracks).toHaveLength(3)
+    for (const track of tracks) {
+      expect(track.className).toContain("[@container(min-width:40rem)]:px-3")
+      expect(track.className).toContain("[@container(min-width:64rem)]:px-4")
+    }
+    // The columns have no gap of their own at Tablet and up: the space between pills is these two paddings.
+    expect(container.querySelector("ol")?.className).toContain("[@container(min-width:40rem)]:gap-0")
+  })
+
+  it("tightens the pill on Tablet (12px on the icon side, 6px on the button side) and never wraps its two words", () => {
+    render(<HowItWorksPillTimeline />)
+    const pill = screen.getByRole("button", { name: "Ask: Check water" })
+    expect(pill.className).toContain("[@container(min-width:40rem)]:ps-3")
+    expect(pill.className).toContain("[@container(min-width:40rem)]:pe-1.5")
+    expect(screen.getByText("Check water").className).toContain("whitespace-nowrap")
+  })
+
+  it("has two-word prompts in both languages, with the Arabic send labels following them", () => {
+    const en = howItWorksPillTimelineCopy.en.stages.map((stage) => stage.prompt)
+    const ar = howItWorksPillTimelineCopy.ar.stages.map((stage) => stage.prompt)
+    expect(en).toEqual(["Check water", "Check sunlight", "Plan tomorrow"])
+    expect(ar).toEqual(["تفقّد السقي", "تفقّد الضوء", "خطّط لغدك"])
+    for (const prompt of [...en, ...ar]) expect(prompt.split(" ")).toHaveLength(2)
+  })
+
   it("tells the page which pill was pressed, and names each send button by its prompt", () => {
     const onStageSelect = vi.fn()
     render(<HowItWorksPillTimeline onStageSelect={onStageSelect} />)
-    const pill = screen.getByRole("button", { name: "Ask: Is it too sunny here?" })
+    const pill = screen.getByRole("button", { name: "Ask: Check sunlight" })
     fireEvent.click(pill)
     expect(onStageSelect).toHaveBeenCalledWith(1)
   })

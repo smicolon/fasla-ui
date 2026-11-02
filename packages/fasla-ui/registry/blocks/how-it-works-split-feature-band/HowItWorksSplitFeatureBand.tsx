@@ -25,6 +25,11 @@ import { HOW_IT_WORKS_ICON, enter, HowItWorksFigures, HowItWorksGlow, HowItWorks
  * `dir` mirrors each band: the picture to the left and the dot travelling
  * right to left.
  *
+ * Each band's picture is pinned to Light, as Figma pins its Media frames: it
+ * carries the `light` class, so the glows and the cards inside it use the Light
+ * colours in Light and in Dark. Nothing else is pinned; the band behind the
+ * copy and the picture's surround follow the mode.
+ *
  * Motion plays once, when the block comes into view. First band: the progress
  * bar fills to 65% (700ms), the three sources pop 80ms apart and the result
  * line rises 8px as the cursor glides to it. Second band: a dot travels the
@@ -131,7 +136,8 @@ function Band({ tone, glows, copy, children }: { tone: string; glows: [HowItWork
       <div className="flex flex-col gap-4 p-3 [@container(min-width:64rem)]:w-1/2 [@container(min-width:64rem)]:p-0">{copy}</div>
       <div
         aria-hidden="true"
-        className="relative flex h-[300px] w-full items-center justify-center overflow-hidden rounded-3xl bg-accent [@container(min-width:40rem)]:h-[360px] [@container(min-width:64rem)]:h-[440px] [@container(min-width:64rem)]:w-1/2"
+        data-pinned="light"
+        className="light relative flex text-foreground h-[300px] w-full items-center justify-center overflow-hidden rounded-3xl bg-accent [@container(min-width:40rem)]:h-[360px] [@container(min-width:64rem)]:h-[440px] [@container(min-width:64rem)]:w-1/2"
       >
         {GLOWS.map((glow, index) => (
           <HowItWorksGlow

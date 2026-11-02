@@ -216,6 +216,16 @@ describe("Split Feature Band", () => {
     expect(container.querySelector("section")?.getAttribute("aria-label")).toBe("How it works")
   })
 
+  it("pins each picture to Light, and nothing else: the `light` class is on the two pictures only", () => {
+    const { container } = render(<HowItWorksSplitFeatureBand />)
+    const pinned = [...container.querySelectorAll(".light")]
+    expect(pinned).toHaveLength(2)
+    expect(pinned.every((node) => node.getAttribute("data-pinned") === "light" && node.getAttribute("aria-hidden") === "true")).toBe(true)
+    expect(container.querySelector("section")?.classList.contains("light")).toBe(false)
+    // The band behind the copy follows the mode.
+    expect(pinned.every((node) => !node.parentElement?.classList.contains("light"))).toBe(true)
+  })
+
   it("draws the glows from theme tokens", () => {
     const { container } = render(<HowItWorksSplitFeatureBand />)
     const glows = [...container.querySelectorAll('[data-reveal="glow"]')]

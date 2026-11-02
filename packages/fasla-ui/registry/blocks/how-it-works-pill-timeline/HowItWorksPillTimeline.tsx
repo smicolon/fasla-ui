@@ -15,10 +15,12 @@ import { enter, HowItWorksSection, revealTargets, useRevealOnEnter, type HowItWo
  * a round send button in `accent`.
  *
  * Desktop and Tablet keep three columns. Mobile stacks the stages, each with its
- * own line running edge to edge behind its pill. On Tablet the columns are about
- * 210px, narrower than Figma's pills, which overlap there; the code lets a pill
- * shrink to its column and wrap its prompt over two lines instead. The page's `dir`
- * mirrors it: the morning stage is at the right in Arabic, the icon sits at the
+ * own line running edge to edge behind its pill. A pill's text is two words and
+ * never wraps. On Tablet the pill is tightened as in Figma: 8px between its icon,
+ * text and send button, 12px of padding on the icon side and 6px on the button
+ * side, and 12px of connector line on each side, so two pills are 24px apart with
+ * the line between them and never touch. Desktop has 16px of line on each side.
+ * The page's `dir` mirrors it: the morning stage is at the right in Arabic, the icon sits at the
  * pill's right and the send button at its left. The send arrow points up and is
  * not mirrored.
  *
@@ -29,7 +31,7 @@ import { enter, HowItWorksSection, revealTargets, useRevealOnEnter, type HowItWo
  * to 0.96 on press. Under reduced motion the block is its finished state.
  *
  * Content limits: the heading up to 32 characters, the line up to 70. A stage's
- * badge up to 12 characters, its prompt up to 24 and its caption up to 80. Three
+ * badge up to 12 characters, its prompt two words on one line, up to 16, and its caption up to 80. Three
  * stages in Figma; two to four work.
  */
 
@@ -64,8 +66,8 @@ const COPY: Record<HowItWorksLocale, HowItWorksPillTimelineCopy> = {
     heading: "Looks after you all day",
     description: "Small check-ins from sunrise to sunset, tuned to your space.",
     stages: [
-      { id: "morning", badge: "Morning", tone: "warning", prompt: "What needs water?", caption: "Start the day knowing which plants need attention first." },
-      { id: "midday", badge: "Midday", tone: "info", prompt: "Is it too sunny here?", caption: "Get quick advice when the light or the heat changes." },
+      { id: "morning", badge: "Morning", tone: "warning", prompt: "Check water", caption: "Start the day knowing which plants need attention first." },
+      { id: "midday", badge: "Midday", tone: "info", prompt: "Check sunlight", caption: "Get quick advice when the light or the heat changes." },
       { id: "evening", badge: "Evening", tone: "success", prompt: "Plan tomorrow", caption: "Wrap up the day and set a simple plan for the next one." },
     ],
     sendLabel: "Ask: {prompt}",
@@ -74,8 +76,8 @@ const COPY: Record<HowItWorksLocale, HowItWorksPillTimelineCopy> = {
     heading: "يرافقك طوال اليوم",
     description: "متابعات قصيرة من الشروق إلى الغروب، مصمّمة لمساحتك.",
     stages: [
-      { id: "morning", badge: "الصباح", tone: "warning", prompt: "ما الذي يحتاج إلى سقي؟", caption: "ابدأ يومك وأنت تعرف أي النباتات تحتاج إلى عناية أولًا." },
-      { id: "midday", badge: "الظهيرة", tone: "info", prompt: "هل المكان مشمس أكثر من اللازم؟", caption: "احصل على نصيحة سريعة عند تغيّر الضوء أو الحرارة." },
+      { id: "morning", badge: "الصباح", tone: "warning", prompt: "تفقّد السقي", caption: "ابدأ يومك وأنت تعرف أي النباتات تحتاج إلى عناية أولًا." },
+      { id: "midday", badge: "الظهيرة", tone: "info", prompt: "تفقّد الضوء", caption: "احصل على نصيحة سريعة عند تغيّر الضوء أو الحرارة." },
       { id: "evening", badge: "المساء", tone: "success", prompt: "خطّط لغدك", caption: "أنهِ يومك وضع خطة بسيطة لليوم التالي." },
     ],
     sendLabel: "اسأل: {prompt}",
@@ -143,17 +145,17 @@ export function HowItWorksPillTimeline({ locale = "en", heading, description, st
                 {stage.badge}
               </Badge>
             </div>
-            <div className="relative flex w-full items-center justify-center">
+            <div className="relative flex w-full items-center justify-center [@container(min-width:40rem)]:px-3 [@container(min-width:64rem)]:px-4">
               <span aria-hidden="true" data-reveal="line" className="absolute inset-x-0 top-1/2 h-px origin-left bg-border [&:dir(rtl)]:origin-right" />
               <button
                 type="button"
                 data-reveal="pill"
                 aria-label={nameSend.replace("{prompt}", stage.prompt)}
                 onClick={() => onStageSelect?.(index)}
-                className="group relative z-10 inline-flex max-w-full min-w-0 items-center gap-2 rounded-full border border-border bg-card py-2 ps-4 pe-2 text-sm font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background [@container(min-width:64rem)]:gap-4"
+                className="group relative z-10 inline-flex max-w-full min-w-0 items-center gap-2 rounded-full border border-border bg-card py-2 ps-4 pe-2 text-sm font-medium [@container(min-width:40rem)]:ps-3 [@container(min-width:40rem)]:pe-1.5 [@container(min-width:64rem)]:ps-4 [@container(min-width:64rem)]:pe-2 text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background [@container(min-width:64rem)]:gap-4"
               >
                 {stage.icon ?? DEFAULT_ICONS[index % DEFAULT_ICONS.length]}
-                <span className="min-w-0 text-start">{stage.prompt}</span>
+                <span className="min-w-0 whitespace-nowrap text-start">{stage.prompt}</span>
                 <span
                   aria-hidden="true"
                   className="flex size-8 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground transition-[transform,background-color,color] duration-[140ms] group-hover:-translate-y-0.5 group-hover:bg-primary group-hover:text-primary-foreground group-focus-visible:-translate-y-0.5 group-focus-visible:bg-primary group-focus-visible:text-primary-foreground group-active:scale-[0.96] motion-reduce:transition-none motion-reduce:group-hover:translate-y-0 motion-reduce:group-focus-visible:translate-y-0 motion-reduce:group-active:scale-100"
