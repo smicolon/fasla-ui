@@ -97,7 +97,7 @@ export function FeaturesDarkPhotoPanel({ locale = "en", eyebrow, heading, descri
                     </span>
                   ) : null}
                   <h3 className="text-base font-semibold text-foreground-inverse">{feature.title}</h3>
-                  <p className="text-sm text-muted-foreground-inverse">{feature.description}</p>
+                  <p className="text-sm text-foreground-inverse">{feature.description}</p>
                 </li>
               )
             })}

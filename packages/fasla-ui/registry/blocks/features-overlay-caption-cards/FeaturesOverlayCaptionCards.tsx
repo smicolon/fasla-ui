@@ -93,7 +93,7 @@ export function FeaturesOverlayCaptionCards({ locale = "en", eyebrow, heading, c
               ) : null}
               <div aria-hidden="true" className="absolute inset-0 -z-10 bg-background-inverse/50" />
               <h3 className="text-xl font-semibold text-foreground-inverse">{card.title}</h3>
-              <p className="text-sm text-muted-foreground-inverse">{card.description}</p>
+              <p className="text-sm text-foreground-inverse">{card.description}</p>
             </li>
           ))}
         </ul>
