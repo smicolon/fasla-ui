@@ -7641,6 +7641,79 @@
           "target": "components/blocks/footer-inline-preferences.tsx"
         }
       ]
+    },
+    {
+      "name": "footer-contact-first",
+      "type": "registry:block",
+      "title": "Footer: Contact-First",
+      "description": "A large email link and two offices with photos and addresses, over the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-contact-first/FooterContactFirst.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-contact-first.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-support-contact",
+      "type": "registry:block",
+      "title": "Footer: Support & Contact",
+      "description": "A help search field, topic links and three contact channel cards.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "footer",
+        "input"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-support-contact/FooterSupportContact.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-support-contact.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-local-business",
+      "type": "registry:block",
+      "title": "Footer: Local Business",
+      "description": "Opening hours and an address with two buttons beside a map photo.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-local-business/FooterLocalBusiness.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-local-business.tsx"
+        }
+      ]
     }
   ]
 }

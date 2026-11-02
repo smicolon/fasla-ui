@@ -3511,7 +3511,8 @@
         "sitemap": "Sitemap & directory",
         "brand": "Brand-led",
         "cta": "Call to action & sign-up",
-        "bars": "Minimal bars"
+        "bars": "Minimal bars",
+        "contact": "Contact & support"
       },
       "types": {
         "footer-four-column-directory": "Four-Column Directory",
@@ -3533,7 +3534,10 @@
         "footer-single-line-bar": "Single-Line Bar",
         "footer-split-hairline-micro": "Split Hairline Micro",
         "footer-two-row-compact": "Two-Row Compact",
-        "footer-inline-preferences": "Inline + Preferences"
+        "footer-inline-preferences": "Inline + Preferences",
+        "footer-contact-first": "Contact-First",
+        "footer-support-contact": "Support & Contact",
+        "footer-local-business": "Local Business"
       }
     }
   },

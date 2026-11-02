@@ -899,6 +899,13 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "footer-split-hairline-micro": dynamic(() => import("@fasla-ui/blocks/footer-split-hairline-micro/FooterSplitHairlineMicro").then((m) => m.FooterSplitHairlineMicro)),
   "footer-two-row-compact": dynamic(() => import("@fasla-ui/blocks/footer-two-row-compact/FooterTwoRowCompact").then((m) => m.FooterTwoRowCompact)),
   "footer-inline-preferences": dynamic(() => import("@fasla-ui/blocks/footer-inline-preferences/FooterInlinePreferences").then((m) => m.FooterInlinePreferences)),
+  "footer-contact-first": dynamic(() =>
+    import("@fasla-ui/blocks/footer-contact-first/FooterContactFirst").then((m) => withFooterPhotos(m.FooterContactFirst, "contact-first", m.footerContactFirstCopy))
+  ),
+  "footer-support-contact": dynamic(() => import("@fasla-ui/blocks/footer-support-contact/FooterSupportContact").then((m) => m.FooterSupportContact)),
+  "footer-local-business": dynamic(() =>
+    import("@fasla-ui/blocks/footer-local-business/FooterLocalBusiness").then((m) => withFooterPhotos(m.FooterLocalBusiness, "local-business", m.footerLocalBusinessCopy))
+  ),
   // footer:end
 }
 

@@ -19,6 +19,9 @@ import { FooterSingleLineBar, footerSingleLineBarCopy } from "../../../../../pac
 import { FooterSplitHairlineMicro, footerSplitHairlineMicroCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-split-hairline-micro/FooterSplitHairlineMicro"
 import { FooterTwoRowCompact, footerTwoRowCompactCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-two-row-compact/FooterTwoRowCompact"
 import { FooterInlinePreferences, footerInlinePreferencesCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-inline-preferences/FooterInlinePreferences"
+import { FooterContactFirst, footerContactFirstCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-contact-first/FooterContactFirst"
+import { FooterSupportContact, footerSupportContactCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-support-contact/FooterSupportContact"
+import { FooterLocalBusiness, footerLocalBusinessCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-local-business/FooterLocalBusiness"
 import { footerArgTypes, footerViewports, localeOf, photoPropsOf } from "./footer-story-kit"
 
 /**
@@ -189,4 +192,36 @@ export const InlinePreferences: StoryObj<typeof FooterInlinePreferences> = {
   name: "Inline + Preferences",
   argTypes: footerArgTypes(FooterInlinePreferences, footerInlinePreferencesCopy),
   render: (args, context) => <FooterInlinePreferences locale={localeOf(context)} {...photoPropsOf("inline-preferences", context, footerInlinePreferencesCopy)} {...args} />,
+}
+
+export const ContactFirst: StoryObj<typeof FooterContactFirst> = {
+  name: "Contact-First",
+  argTypes: footerArgTypes(FooterContactFirst, footerContactFirstCopy),
+  render: (args, context) => <FooterContactFirst locale={localeOf(context)} {...photoPropsOf("contact-first", context, footerContactFirstCopy)} {...args} />,
+}
+
+export const ContactFirstWithoutPhotos: StoryObj<typeof FooterContactFirst> = {
+  name: "Contact-First: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: footerArgTypes(FooterContactFirst, footerContactFirstCopy),
+  render: (args, context) => <FooterContactFirst locale={localeOf(context)} {...args} />,
+}
+
+export const SupportContact: StoryObj<typeof FooterSupportContact> = {
+  name: "Support & Contact",
+  argTypes: footerArgTypes(FooterSupportContact, footerSupportContactCopy),
+  render: (args, context) => <FooterSupportContact locale={localeOf(context)} {...photoPropsOf("support-contact", context, footerSupportContactCopy)} {...args} />,
+}
+
+export const LocalBusiness: StoryObj<typeof FooterLocalBusiness> = {
+  name: "Local Business",
+  argTypes: footerArgTypes(FooterLocalBusiness, footerLocalBusinessCopy),
+  render: (args, context) => <FooterLocalBusiness locale={localeOf(context)} {...photoPropsOf("local-business", context, footerLocalBusinessCopy)} {...args} />,
+}
+
+export const LocalBusinessWithoutPhotos: StoryObj<typeof FooterLocalBusiness> = {
+  name: "Local Business: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: footerArgTypes(FooterLocalBusiness, footerLocalBusinessCopy),
+  render: (args, context) => <FooterLocalBusiness locale={localeOf(context)} {...args} />,
 }

@@ -3511,7 +3511,8 @@
         "sitemap": "خريطة الموقع والأدلة",
         "brand": "قائمة على العلامة",
         "cta": "الدعوة إلى الإجراء والاشتراك",
-        "bars": "أشرطة مصغّرة"
+        "bars": "أشرطة مصغّرة",
+        "contact": "التواصل والدعم"
       },
       "types": {
         "footer-four-column-directory": "دليل بأربعة أعمدة",
@@ -3533,7 +3534,10 @@
         "footer-single-line-bar": "شريط بسطر واحد",
         "footer-split-hairline-micro": "شريط مصغّر بخط رفيع",
         "footer-two-row-compact": "شريط مدمج بصفين",
-        "footer-inline-preferences": "شريط مع التفضيلات"
+        "footer-inline-preferences": "شريط مع التفضيلات",
+        "footer-contact-first": "التواصل أولًا",
+        "footer-support-contact": "الدعم والتواصل",
+        "footer-local-business": "نشاط تجاري محلي"
       }
     }
   },

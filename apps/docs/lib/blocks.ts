@@ -130,9 +130,9 @@ export const BLOG_CARDS_FAMILIES: BlogCardsFamily[] = ["grids", "features", "lis
  * and sign-up bands, the minimal bars, the contact and support layouts, legal and trust,
  * commerce, community and careers, and the utility and product footers.
  */
-export type FooterFamily = "sitemap" | "brand" | "cta" | "bars"
+export type FooterFamily = "sitemap" | "brand" | "cta" | "bars" | "contact"
 
-export const FOOTER_FAMILIES: FooterFamily[] = ["sitemap", "brand", "cta", "bars"]
+export const FOOTER_FAMILIES: FooterFamily[] = ["sitemap", "brand", "cta", "bars", "contact"]
 
 export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | SocialProofFamily | BlogCardsFamily | FooterFamily> = {
   /** The registry item, and the file it installs to. */
@@ -470,6 +470,9 @@ export const FOOTER_TYPES: BlockType<FooterFamily>[] = [
   { slug: "footer-split-hairline-micro", family: "bars" },
   { slug: "footer-two-row-compact", family: "bars" },
   { slug: "footer-inline-preferences", family: "bars" },
+  { slug: "footer-contact-first", family: "contact" },
+  { slug: "footer-support-contact", family: "contact" },
+  { slug: "footer-local-business", family: "contact" },
 ]
 
 export const ALL_BLOCK_TYPES: BlockType[] = [

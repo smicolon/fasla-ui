@@ -279,6 +279,7 @@ export const CODE_MAP = {
       "centered-brand-minimal", "marquee-strip", "big-type-link-stack", "bento-tile",
       "cta-band-columns", "newsletter-split", "floating-demo-card", "big-question-cta",
       "single-line-bar", "split-hairline-micro", "two-row-compact", "inline-preferences",
+      "contact-first", "support-contact", "local-business",
     ].map((type) => [`footer-${type}`, null])
   ),
 }
