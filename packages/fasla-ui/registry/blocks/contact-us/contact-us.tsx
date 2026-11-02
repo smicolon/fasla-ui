@@ -6,6 +6,7 @@ import { cn } from "../../../src/lib/utils"
 import { badgeVariants } from "../../ui/badge/badge"
 import { Button, type ButtonProps } from "../../ui/button/button"
 import { Checkbox } from "../../ui/checkbox/checkbox"
+import { DatePicker } from "../../ui/date-picker/date-picker"
 import { Input } from "../../ui/input/input"
 import { Select } from "../../ui/select/select"
 import { SOCIAL_PLATFORM_NAMES, SocialIcon, type SocialPlatform } from "../../ui/social-icons/social-icons"
@@ -552,7 +553,7 @@ export interface ContactUsOption {
 export interface ContactUsFieldDef {
   /** The key in `onSubmit`'s values. */
   name: string
-  kind: "text" | "email" | "tel" | "select" | "textarea" | "checkbox"
+  kind: "text" | "email" | "tel" | "date" | "select" | "textarea" | "checkbox"
   /** The label, as Figma writes it. A required field gets no asterisk: the atom shows the word `requiredLabel` at the end of its label row. */
   label: string
   /** Keeps the label for assistive technology but draws none, as Editorial Statement's fields do. */
@@ -566,7 +567,7 @@ export interface ContactUsFieldDef {
   size?: "sm" | "md" | "lg"
   /** Corner shape of a text field or select: Figma's 8px `standard` (the default), or a `rounded` pill. */
   radius?: "standard" | "rounded"
-  /** An icon after a text field's value, such as Form + Contact Methods' calendar. Sized to 16px by the atom. */
+  /** An icon after a text field's value. Sized to 16px by the atom. */
   endIcon?: React.ReactNode
   /** Classes for the field group, such as the min height Figma gives a Textarea. */
   groupClassName?: string
@@ -808,6 +809,21 @@ export function ContactUsSubmit({ children, ...props }: Omit<ButtonProps, "type"
 export const CONTACT_US_TEXTAREA_88 = "min-h-[88px]"
 export const CONTACT_US_TEXTAREA_104 = "min-h-[104px]"
 
+/**
+ * A phone field. Browsers give `type=tel` a left-to-right direction of its own,
+ * so in an Arabic page its value and placeholder would sit on the left while
+ * every other field's sit on the right. The direction stays left-to-right, so
+ * "+971 50 123 4567" never reverses, and only the alignment follows the page.
+ */
+const TEL_ALIGN = "rtl:[&_[data-slot=input]]:text-right"
+
+/** A date field keeps its value as `yyyy-mm-dd`, the same text a native date input sends. */
+const isoDate = (date: Date) => `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`
+const parseIsoDate = (text: string): Date | null => {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(text)
+  return match ? new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3])) : null
+}
+
 /** One field of the form, drawn with the atom its `kind` names. */
 export function ContactUsField({ field, className, reveal }: { field: ContactUsFieldDef; className?: string; reveal?: boolean }) {
   const form = useFormContext()
@@ -893,6 +909,23 @@ export function ContactUsField({ field, className, reveal }: { field: ContactUsF
       </div>
     )
 
+  if (field.kind === "date")
+    return (
+      <div {...wrap}>
+        <DatePicker
+          size={field.size ?? "md"}
+          label={label}
+          labelEnd={requiredWord}
+          placeholder={field.placeholder}
+          disabled={form.disabled}
+          value={parseIsoDate(text)}
+          onValueChange={(next) => form.setValue(field.name, next ? isoDate(next) : "")}
+          description={error ? <span className="text-destructive">{error}</span> : undefined}
+          aria-label={field.hideLabel ? field.label : undefined}
+        />
+      </div>
+    )
+
   return (
     <div {...wrap}>
       <Input
@@ -903,6 +936,7 @@ export function ContactUsField({ field, className, reveal }: { field: ContactUsF
         endIcon={field.endIcon}
         label={label}
         labelEnd={requiredWord}
+        className={cn(field.kind === "tel" && TEL_ALIGN, field.groupClassName)}
         placeholder={field.placeholder}
         autoComplete={field.autoComplete}
         disabled={form.disabled}

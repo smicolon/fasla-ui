@@ -7152,7 +7152,7 @@
       "name": "contact-us",
       "type": "registry:block",
       "title": "Contact Us",
-      "description": "The parts every Contact Us block is built from: the section and its 1248px column, the header, the hairline, the form with its fields, its checks and its three outcomes, the single-choice chips, the file field, the social links and the entrance helper.",
+      "description": "The parts every Contact Us block is built from: the section and its 1248px column, the header, the hairline, the form with its fields, its checks and its three outcomes, the single-choice chips, the social links and the entrance helper.",
       "dependencies": [
         "lucide-react"
       ],
@@ -7160,6 +7160,7 @@
         "badge",
         "button",
         "checkbox",
+        "date-picker",
         "input",
         "select",
         "social-icons",

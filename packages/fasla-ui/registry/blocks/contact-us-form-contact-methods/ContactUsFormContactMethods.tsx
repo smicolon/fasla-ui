@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Calendar, Clock, Mail, Phone } from "lucide-react"
+import { Clock, Mail, Phone } from "lucide-react"
 import { Badge } from "../../ui/badge/badge"
 import {
   CONTACT_US_TEXTAREA_88,
@@ -40,7 +40,9 @@ import {
  * The form is real. It calls `onSubmit(values)` with fullName, email, phone,
  * meetingType, date, teamSize and message. The email is the one required
  * field and shows the word "Required" on its label row, with no asterisk.
- * The date is a text field with a calendar mark, as Figma draws it.
+ * The date is the Date Picker atom: a click or tap on the field, or Enter or Space
+ * on it, opens a calendar; Escape closes it. The chosen day shows in the page's
+ * language and `onSubmit` gets it as `yyyy-mm-dd`.
  *
  * Motion: the three methods rise 12px and fade, 80ms apart, once, when the
  * row is in view. The form and the photo never move. The primary button lifts 2px
@@ -182,7 +184,7 @@ export function ContactUsFormContactMethods({ locale = "en", ...given }: Contact
     email: { name: "email", kind: "email", label: copy.email, placeholder: copy.emailPlaceholder, autoComplete: "email", required: true },
     phone: { name: "phone", kind: "tel", label: copy.phone, placeholder: copy.phonePlaceholder, autoComplete: "tel" },
     meetingType: { name: "meetingType", kind: "select", label: copy.meetingType, placeholder: copy.meetingTypePlaceholder, options: copy.meetingTypes.map((item) => ({ value: item, label: item })) },
-    date: { name: "date", kind: "text", label: copy.date, placeholder: copy.datePlaceholder, endIcon: <Calendar aria-hidden /> },
+    date: { name: "date", kind: "date", label: copy.date, placeholder: copy.datePlaceholder },
     teamSize: { name: "teamSize", kind: "text", label: copy.teamSize, placeholder: copy.teamSizePlaceholder },
     message: { name: "message", kind: "textarea", label: copy.message, placeholder: copy.messagePlaceholder, groupClassName: CONTACT_US_TEXTAREA_88 },
   } satisfies Record<string, ContactUsFieldDef>
