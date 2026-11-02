@@ -7762,6 +7762,52 @@
           "target": "components/blocks/footer-trust-compliance.tsx"
         }
       ]
+    },
+    {
+      "name": "footer-ecommerce-mega",
+      "type": "registry:block",
+      "title": "Footer: Ecommerce Mega",
+      "description": "A sign-up band, four link columns, region and currency selects, payment pills and social marks.",
+      "dependencies": [],
+      "registryDependencies": [
+        "footer",
+        "select",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-ecommerce-mega/FooterEcommerceMega.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-ecommerce-mega.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-service-promise-band",
+      "type": "registry:block",
+      "title": "Footer: Service Promise Band",
+      "description": "A band of service promises over the contact details and the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "footer"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-service-promise-band/FooterServicePromiseBand.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-service-promise-band.tsx"
+        }
+      ]
     }
   ]
 }

@@ -3513,7 +3513,8 @@
         "cta": "الدعوة إلى الإجراء والاشتراك",
         "bars": "أشرطة مصغّرة",
         "contact": "التواصل والدعم",
-        "legal": "القانون والثقة"
+        "legal": "القانون والثقة",
+        "commerce": "التجارة"
       },
       "types": {
         "footer-four-column-directory": "دليل بأربعة أعمدة",
@@ -3540,7 +3541,9 @@
         "footer-support-contact": "الدعم والتواصل",
         "footer-local-business": "نشاط تجاري محلي",
         "footer-legal-first-slim": "شريط قانوني أولًا",
-        "footer-trust-compliance": "الثقة والامتثال"
+        "footer-trust-compliance": "الثقة والامتثال",
+        "footer-ecommerce-mega": "تذييل المتجر الواسع",
+        "footer-service-promise-band": "شريط وعود الخدمة"
       }
     }
   },

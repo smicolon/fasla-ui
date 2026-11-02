@@ -908,6 +908,8 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   ),
   "footer-legal-first-slim": dynamic(() => import("@fasla-ui/blocks/footer-legal-first-slim/FooterLegalFirstSlim").then((m) => m.FooterLegalFirstSlim)),
   "footer-trust-compliance": dynamic(() => import("@fasla-ui/blocks/footer-trust-compliance/FooterTrustCompliance").then((m) => m.FooterTrustCompliance)),
+  "footer-ecommerce-mega": dynamic(() => import("@fasla-ui/blocks/footer-ecommerce-mega/FooterEcommerceMega").then((m) => m.FooterEcommerceMega)),
+  "footer-service-promise-band": dynamic(() => import("@fasla-ui/blocks/footer-service-promise-band/FooterServicePromiseBand").then((m) => m.FooterServicePromiseBand)),
   // footer:end
 }
 

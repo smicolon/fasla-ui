@@ -3513,7 +3513,8 @@
         "cta": "Call to action & sign-up",
         "bars": "Minimal bars",
         "contact": "Contact & support",
-        "legal": "Legal & trust"
+        "legal": "Legal & trust",
+        "commerce": "Commerce"
       },
       "types": {
         "footer-four-column-directory": "Four-Column Directory",
@@ -3540,7 +3541,9 @@
         "footer-support-contact": "Support & Contact",
         "footer-local-business": "Local Business",
         "footer-legal-first-slim": "Legal-First Slim",
-        "footer-trust-compliance": "Trust & Compliance"
+        "footer-trust-compliance": "Trust & Compliance",
+        "footer-ecommerce-mega": "Ecommerce Mega",
+        "footer-service-promise-band": "Service Promise Band"
       }
     }
   },

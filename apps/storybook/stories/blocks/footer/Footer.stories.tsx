@@ -24,6 +24,8 @@ import { FooterSupportContact, footerSupportContactCopy } from "../../../../../p
 import { FooterLocalBusiness, footerLocalBusinessCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-local-business/FooterLocalBusiness"
 import { FooterLegalFirstSlim, footerLegalFirstSlimCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-legal-first-slim/FooterLegalFirstSlim"
 import { FooterTrustCompliance, footerTrustComplianceCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-trust-compliance/FooterTrustCompliance"
+import { FooterEcommerceMega, footerEcommerceMegaCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-ecommerce-mega/FooterEcommerceMega"
+import { FooterServicePromiseBand, footerServicePromiseBandCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-service-promise-band/FooterServicePromiseBand"
 import { footerArgTypes, footerViewports, localeOf, photoPropsOf } from "./footer-story-kit"
 
 /**
@@ -238,4 +240,16 @@ export const TrustCompliance: StoryObj<typeof FooterTrustCompliance> = {
   name: "Trust & Compliance",
   argTypes: footerArgTypes(FooterTrustCompliance, footerTrustComplianceCopy),
   render: (args, context) => <FooterTrustCompliance locale={localeOf(context)} {...photoPropsOf("trust-compliance", context, footerTrustComplianceCopy)} {...args} />,
+}
+
+export const EcommerceMega: StoryObj<typeof FooterEcommerceMega> = {
+  name: "Ecommerce Mega",
+  argTypes: footerArgTypes(FooterEcommerceMega, footerEcommerceMegaCopy),
+  render: (args, context) => <FooterEcommerceMega locale={localeOf(context)} {...photoPropsOf("ecommerce-mega", context, footerEcommerceMegaCopy)} {...args} />,
+}
+
+export const ServicePromiseBand: StoryObj<typeof FooterServicePromiseBand> = {
+  name: "Service Promise Band",
+  argTypes: footerArgTypes(FooterServicePromiseBand, footerServicePromiseBandCopy),
+  render: (args, context) => <FooterServicePromiseBand locale={localeOf(context)} {...photoPropsOf("service-promise-band", context, footerServicePromiseBandCopy)} {...args} />,
 }
