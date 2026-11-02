@@ -9,6 +9,7 @@ import { careersPhotoProps } from "@/components/blocks/careers-photos"
 import { CONTACT_US_NOW, CONTACT_US_TABLE_NOW, contactUsPhotoProps } from "@/components/blocks/contact-us-photos"
 import { teamPhotoProps } from "@/components/blocks/team-photos"
 import { blogCardsPhotoProps } from "@/components/blocks/blog-cards-photos"
+import { featuresPhotoProps } from "@/components/blocks/features-photos"
 import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
 import { NavbarStage, navbarExample } from "@/components/blocks/navbar-examples"
 import { heroPhotoProps } from "@/components/blocks/hero-photos"
@@ -185,6 +186,17 @@ type BlogCardsCopy = Record<Locale, object>
 const withBlogCardsPhotos = (Block: AnyBlock, type: string, copy: BlogCardsCopy) =>
   function BlogCardsPreview(props: { locale: Locale }) {
     return <Block {...blogCardsPhotoProps(type, props.locale, copy)} {...props} />
+  }
+
+/**
+ * A Features Type with its demo photos, from features-photos.ts: committed
+ * photos from the Hero, Blog Cards, Gallery and About sets, added to the
+ * block's own copy by slot. Types without photos render as they are.
+ */
+type FeaturesCopy = Record<Locale, object>
+const withFeaturesPhotos = (Block: AnyBlock, type: string, copy: FeaturesCopy) =>
+  function FeaturesPreview(props: { locale: Locale }) {
+    return <Block {...featuresPhotoProps(type, props.locale, copy)} {...props} />
   }
 
 export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
@@ -874,6 +886,87 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   ),
   "blog-cards-journal-bento": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-journal-bento/BlogCardsJournalBento").then((m) => withBlogCardsPhotos(m.BlogCardsJournalBento, "journal-bento", m.blogCardsJournalBentoCopy))
+  ),
+  "features-icon-card-grid": dynamic(() =>
+    import("@fasla-ui/blocks/features-icon-card-grid/FeaturesIconCardGrid").then((m) => m.FeaturesIconCardGrid)
+  ),
+  "features-compact-icon-index": dynamic(() =>
+    import("@fasla-ui/blocks/features-compact-icon-index/FeaturesCompactIconIndex").then((m) => m.FeaturesCompactIconIndex)
+  ),
+  "features-numbered-feature-rows": dynamic(() =>
+    import("@fasla-ui/blocks/features-numbered-feature-rows/FeaturesNumberedFeatureRows").then((m) => m.FeaturesNumberedFeatureRows)
+  ),
+  "features-feature-checklist-columns": dynamic(() =>
+    import("@fasla-ui/blocks/features-feature-checklist-columns/FeaturesFeatureChecklistColumns").then((m) => m.FeaturesFeatureChecklistColumns)
+  ),
+  "features-colour-block-cards": dynamic(() =>
+    import("@fasla-ui/blocks/features-colour-block-cards/FeaturesColourBlockCards").then((m) => m.FeaturesColourBlockCards)
+  ),
+  "features-stat-feature-band": dynamic(() =>
+    import("@fasla-ui/blocks/features-stat-feature-band/FeaturesStatFeatureBand").then((m) => m.FeaturesStatFeatureBand)
+  ),
+  "features-split-photo-icon-list": dynamic(() =>
+    import("@fasla-ui/blocks/features-split-photo-icon-list/FeaturesSplitPhotoIconList").then((m) => withFeaturesPhotos(m.FeaturesSplitPhotoIconList, "split-photo-icon-list", m.featuresSplitPhotoIconListCopy))
+  ),
+  "features-photo-bento": dynamic(() =>
+    import("@fasla-ui/blocks/features-photo-bento/FeaturesPhotoBento").then((m) => withFeaturesPhotos(m.FeaturesPhotoBento, "photo-bento", m.featuresPhotoBentoCopy))
+  ),
+  "features-feature-list-thumbnails": dynamic(() =>
+    import("@fasla-ui/blocks/features-feature-list-thumbnails/FeaturesFeatureListThumbnails").then((m) => withFeaturesPhotos(m.FeaturesFeatureListThumbnails, "feature-list-thumbnails", m.featuresFeatureListThumbnailsCopy))
+  ),
+  "features-photo-feature-chips": dynamic(() =>
+    import("@fasla-ui/blocks/features-photo-feature-chips/FeaturesPhotoFeatureChips").then((m) => withFeaturesPhotos(m.FeaturesPhotoFeatureChips, "photo-feature-chips", m.featuresPhotoFeatureChipsCopy))
+  ),
+  "features-media-rail": dynamic(() =>
+    import("@fasla-ui/blocks/features-media-rail/FeaturesMediaRail").then((m) => withFeaturesPhotos(m.FeaturesMediaRail, "media-rail", m.featuresMediaRailCopy))
+  ),
+  "features-full-bleed-photo-banner": dynamic(() =>
+    import("@fasla-ui/blocks/features-full-bleed-photo-banner/FeaturesFullBleedPhotoBanner").then((m) => withFeaturesPhotos(m.FeaturesFullBleedPhotoBanner, "full-bleed-photo-banner", m.featuresFullBleedPhotoBannerCopy))
+  ),
+  "features-editorial-photo-split": dynamic(() =>
+    import("@fasla-ui/blocks/features-editorial-photo-split/FeaturesEditorialPhotoSplit").then((m) => withFeaturesPhotos(m.FeaturesEditorialPhotoSplit, "editorial-photo-split", m.featuresEditorialPhotoSplitCopy))
+  ),
+  "features-photo-collage": dynamic(() =>
+    import("@fasla-ui/blocks/features-photo-collage/FeaturesPhotoCollage").then((m) => withFeaturesPhotos(m.FeaturesPhotoCollage, "photo-collage", m.featuresPhotoCollageCopy))
+  ),
+  "features-notched-photo-columns": dynamic(() =>
+    import("@fasla-ui/blocks/features-notched-photo-columns/FeaturesNotchedPhotoColumns").then((m) => withFeaturesPhotos(m.FeaturesNotchedPhotoColumns, "notched-photo-columns", m.featuresNotchedPhotoColumnsCopy))
+  ),
+  "features-perforated-photo-strip": dynamic(() =>
+    import("@fasla-ui/blocks/features-perforated-photo-strip/FeaturesPerforatedPhotoStrip").then((m) => withFeaturesPhotos(m.FeaturesPerforatedPhotoStrip, "perforated-photo-strip", m.featuresPerforatedPhotoStripCopy))
+  ),
+  "features-portrait-photo-cards-link-row": dynamic(() =>
+    import("@fasla-ui/blocks/features-portrait-photo-cards-link-row/FeaturesPortraitPhotoCardsLinkRow").then((m) => withFeaturesPhotos(m.FeaturesPortraitPhotoCardsLinkRow, "portrait-photo-cards-link-row", m.featuresPortraitPhotoCardsLinkRowCopy))
+  ),
+  "features-photo-carousel": dynamic(() =>
+    import("@fasla-ui/blocks/features-photo-carousel/FeaturesPhotoCarousel").then((m) => withFeaturesPhotos(m.FeaturesPhotoCarousel, "photo-carousel", m.featuresPhotoCarouselCopy))
+  ),
+  "features-photo-tabs-panel": dynamic(() =>
+    import("@fasla-ui/blocks/features-photo-tabs-panel/FeaturesPhotoTabsPanel").then((m) => withFeaturesPhotos(m.FeaturesPhotoTabsPanel, "photo-tabs-panel", m.featuresPhotoTabsPanelCopy))
+  ),
+  "features-accordion-photo": dynamic(() =>
+    import("@fasla-ui/blocks/features-accordion-photo/FeaturesAccordionPhoto").then((m) => withFeaturesPhotos(m.FeaturesAccordionPhoto, "accordion-photo", m.featuresAccordionPhotoCopy))
+  ),
+  "features-expanding-step-cards": dynamic(() =>
+    import("@fasla-ui/blocks/features-expanding-step-cards/FeaturesExpandingStepCards").then((m) => m.FeaturesExpandingStepCards)
+  ),
+  "features-compare-panels-chat-answer": dynamic(() =>
+    import("@fasla-ui/blocks/features-compare-panels-chat-answer/FeaturesComparePanelsChatAnswer").then((m) => m.FeaturesComparePanelsChatAnswer)
+  ),
+  "features-numbered-steps-floating-cards": dynamic(() =>
+    import("@fasla-ui/blocks/features-numbered-steps-floating-cards/FeaturesNumberedStepsFloatingCards").then((m) => withFeaturesPhotos(m.FeaturesNumberedStepsFloatingCards, "numbered-steps-floating-cards", m.featuresNumberedStepsFloatingCardsCopy))
+  ),
+  "features-solid-colour-cards": dynamic(() =>
+    import("@fasla-ui/blocks/features-solid-colour-cards/FeaturesSolidColourCards").then((m) => m.FeaturesSolidColourCards)
+  ),
+  "features-icon-titled-preview-rail": dynamic(() =>
+    import("@fasla-ui/blocks/features-icon-titled-preview-rail/FeaturesIconTitledPreviewRail").then((m) => withFeaturesPhotos(m.FeaturesIconTitledPreviewRail, "icon-titled-preview-rail", m.featuresIconTitledPreviewRailCopy))
+  ),
+  "features-tinted-product-bento": dynamic(() =>
+    import("@fasla-ui/blocks/features-tinted-product-bento/FeaturesTintedProductBento").then((m) => m.FeaturesTintedProductBento)
+  ),
+  "features-showcase-card-pair": dynamic(() =>
+    import("@fasla-ui/blocks/features-showcase-card-pair/FeaturesShowcaseCardPair").then((m) => withFeaturesPhotos(m.FeaturesShowcaseCardPair, "showcase-card-pair", m.featuresShowcaseCardPairCopy))
   ),
   "contact-us-classic-centered": dynamic(() =>
     import("@fasla-ui/blocks/contact-us-classic-centered/ContactUsClassicCentered").then((m) => m.ContactUsClassicCentered)

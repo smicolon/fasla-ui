@@ -4,7 +4,7 @@
  * (docs.faqBlocks, docs.errorStateBlocks, docs.logoCloudBlocks,
  * docs.authenticationsBlocks, docs.galleryBlocks, docs.navbarBlocks,
  * docs.pricingBlocks, docs.heroBlocks, docs.aboutBlocks, docs.teamBlocks,
- * docs.careersBlocks, docs.socialProofBlocks, docs.blogCardsBlocks, docs.contactUsBlocks); the slug is the registry item's name.
+ * docs.careersBlocks, docs.socialProofBlocks, docs.blogCardsBlocks, docs.featuresBlocks, docs.contactUsBlocks); the slug is the registry item's name.
  */
 
 export type FaqFamily = "lists" | "layouts" | "navigation" | "support"
@@ -126,6 +126,16 @@ export type BlogCardsFamily = "grids" | "features" | "lists" | "alongside" | "br
 export const BLOG_CARDS_FAMILIES: BlogCardsFamily[] = ["grids", "features", "lists", "alongside", "browse"]
 
 /**
+ * Features' four groups, from its Figma documentation: the layouts built from
+ * icons, numbers and checklists, the eleven led by photos, the four the
+ * visitor operates (a carousel, tabs, an accordion, expanding cards), and the
+ * six that show the product in use.
+ */
+export type FeaturesFamily = "icons-numbers" | "photo-led" | "interactive" | "product-in-use"
+
+export const FEATURES_FAMILIES: FeaturesFamily[] = ["icons-numbers", "photo-led", "interactive", "product-in-use"]
+
+/**
  * Contact Us' four groups, from its Figma documentation: the forms that carry
  * the page with type alone, the forms set beside a photo, the places and
  * hours that say where and when to find the team, and the channels that offer
@@ -136,7 +146,7 @@ export type ContactUsFamily = "forms" | "photo-forms" | "places" | "channels"
 
 export const CONTACT_US_FAMILIES: ContactUsFamily[] = ["forms", "photo-forms", "places", "channels"]
 
-export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | SocialProofFamily | BlogCardsFamily | ContactUsFamily> = {
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | SocialProofFamily | BlogCardsFamily | ContactUsFamily | FeaturesFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
   family: Family
@@ -450,6 +460,36 @@ export const BLOG_CARDS_TYPES: BlockType<BlogCardsFamily>[] = [
   { slug: "blog-cards-journal-bento", family: "grids", inverse: true },
 ]
 
+export const FEATURES_TYPES: BlockType<FeaturesFamily>[] = [
+  { slug: "features-icon-card-grid", family: "icons-numbers" },
+  { slug: "features-compact-icon-index", family: "icons-numbers" },
+  { slug: "features-numbered-feature-rows", family: "icons-numbers", inverse: true },
+  { slug: "features-feature-checklist-columns", family: "icons-numbers" },
+  { slug: "features-colour-block-cards", family: "icons-numbers", inverse: true },
+  { slug: "features-stat-feature-band", family: "icons-numbers" },
+  { slug: "features-split-photo-icon-list", family: "photo-led" },
+  { slug: "features-photo-bento", family: "photo-led" },
+  { slug: "features-feature-list-thumbnails", family: "photo-led" },
+  { slug: "features-photo-feature-chips", family: "photo-led" },
+  { slug: "features-media-rail", family: "photo-led" },
+  { slug: "features-full-bleed-photo-banner", family: "photo-led" },
+  { slug: "features-editorial-photo-split", family: "photo-led" },
+  { slug: "features-photo-collage", family: "photo-led" },
+  { slug: "features-notched-photo-columns", family: "photo-led", inverse: true },
+  { slug: "features-perforated-photo-strip", family: "photo-led" },
+  { slug: "features-portrait-photo-cards-link-row", family: "photo-led", inverse: true },
+  { slug: "features-photo-carousel", family: "interactive" },
+  { slug: "features-photo-tabs-panel", family: "interactive" },
+  { slug: "features-accordion-photo", family: "interactive" },
+  { slug: "features-expanding-step-cards", family: "interactive" },
+  { slug: "features-compare-panels-chat-answer", family: "product-in-use" },
+  { slug: "features-numbered-steps-floating-cards", family: "product-in-use", inverse: true },
+  { slug: "features-solid-colour-cards", family: "product-in-use" },
+  { slug: "features-icon-titled-preview-rail", family: "product-in-use" },
+  { slug: "features-tinted-product-bento", family: "product-in-use" },
+  { slug: "features-showcase-card-pair", family: "product-in-use", inverse: true },
+]
+
 /** Contact Us' 23 Types in Figma's order, added a family at a time. */
 export const CONTACT_US_TYPES: BlockType<ContactUsFamily>[] = [
   { slug: "contact-us-classic-centered", family: "forms" },
@@ -491,6 +531,7 @@ export const ALL_BLOCK_TYPES: BlockType[] = [
   ...TEAM_TYPES,
   ...SOCIAL_PROOF_TYPES,
   ...BLOG_CARDS_TYPES,
+  ...FEATURES_TYPES,
   ...CONTACT_US_TYPES,
 ]
 

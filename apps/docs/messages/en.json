@@ -3537,6 +3537,48 @@
         "contact-us-newsletter-combo": "Newsletter Combo",
         "contact-us-support-channels": "Support Channels"
       }
+    },
+    "featuresBlocks": {
+      "lead": "Twenty-seven sections that set out what a product does: icon cards, numbered rows and checklists, layouts led by photos, panels the visitor operates, and the product in use.",
+      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
+      "filterLabel": "Filter by family",
+      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
+      "families": {
+        "all": "All",
+        "icons-numbers": "Icons, numbers and checklists",
+        "photo-led": "Photo-led layouts",
+        "interactive": "Layouts the visitor operates",
+        "product-in-use": "Product in use"
+      },
+      "types": {
+        "features-icon-card-grid": "Icon Card Grid",
+        "features-compact-icon-index": "Compact Icon Index",
+        "features-numbered-feature-rows": "Numbered Feature Rows",
+        "features-feature-checklist-columns": "Feature Checklist Columns",
+        "features-colour-block-cards": "Colour Block Cards",
+        "features-stat-feature-band": "Stat Feature Band",
+        "features-split-photo-icon-list": "Split Photo + Icon List",
+        "features-photo-bento": "Photo Bento",
+        "features-feature-list-thumbnails": "Feature List + Thumbnails",
+        "features-photo-feature-chips": "Photo + Feature Chips",
+        "features-media-rail": "Media Rail",
+        "features-full-bleed-photo-banner": "Full-Bleed Photo Banner",
+        "features-editorial-photo-split": "Editorial Photo Split",
+        "features-photo-collage": "Photo Collage",
+        "features-notched-photo-columns": "Notched Photo Columns",
+        "features-perforated-photo-strip": "Perforated Photo Strip",
+        "features-portrait-photo-cards-link-row": "Portrait Photo Cards + Link Row",
+        "features-photo-carousel": "Photo Carousel",
+        "features-photo-tabs-panel": "Photo Tabs Panel",
+        "features-accordion-photo": "Accordion + Photo",
+        "features-expanding-step-cards": "Expanding Step Cards",
+        "features-compare-panels-chat-answer": "Compare Panels + Chat Answer",
+        "features-numbered-steps-floating-cards": "Numbered Steps + Floating Cards",
+        "features-solid-colour-cards": "Solid Colour Cards",
+        "features-icon-titled-preview-rail": "Icon-Titled Preview Rail",
+        "features-tinted-product-bento": "Tinted Product Bento",
+        "features-showcase-card-pair": "Showcase Card Pair"
+      }
     }
   },
   "copyCommand": {

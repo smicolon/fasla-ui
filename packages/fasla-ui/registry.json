@@ -7719,6 +7719,671 @@
         "contact-us",
         "marketing"
       ]
+    },
+    {
+      "name": "features",
+      "type": "registry:block",
+      "title": "Features",
+      "description": "The parts every Features block is built from: the section and its 1248px column, the left-aligned header with its eyebrow, the figures helper that keeps numbers in order inside Arabic, and the hairline.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/blocks/features/features.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-icon-card-grid",
+      "type": "registry:block",
+      "title": "Features: Icon Card Grid",
+      "description": "A heading and a line over six bordered cards, each with an icon chip, a title and a line, three across on desktop.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-icon-card-grid/FeaturesIconCardGrid.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-icon-card-grid.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-compact-icon-index",
+      "type": "registry:block",
+      "title": "Features: Compact Icon Index",
+      "description": "A heading with a note beside it, a hairline, then sixteen small items, each an icon, a title and a short line, four across on desktop.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-compact-icon-index/FeaturesCompactIconIndex.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-compact-icon-index.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-numbered-feature-rows",
+      "type": "registry:block",
+      "title": "Features: Numbered Feature Rows",
+      "description": "A dark band painted with the inverse tokens: a heading over four numbered features, side by side with a rule between them on desktop.",
+      "dependencies": [],
+      "registryDependencies": [
+        "features",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-numbered-feature-rows/FeaturesNumberedFeatureRows.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-numbered-feature-rows.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-feature-checklist-columns",
+      "type": "registry:block",
+      "title": "Features: Feature Checklist Columns",
+      "description": "A heading with a Compare plans button, over three ruled columns of six checked items.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-feature-checklist-columns/FeaturesFeatureChecklistColumns.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-feature-checklist-columns.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-colour-block-cards",
+      "type": "registry:block",
+      "title": "Features: Colour Block Cards",
+      "description": "A heading over four solid cards in the chart colours and the primary colour, each with an icon, a title and a line.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "features",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-colour-block-cards/FeaturesColourBlockCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-colour-block-cards.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-stat-feature-band",
+      "type": "registry:block",
+      "title": "Features: Stat Feature Band",
+      "description": "A rounded band with a heading and a note, over four large figures, each with a label and a line.",
+      "dependencies": [],
+      "registryDependencies": [
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-stat-feature-band/FeaturesStatFeatureBand.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-stat-feature-band.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-split-photo-icon-list",
+      "type": "registry:block",
+      "title": "Features: Split Photo + Icon List",
+      "description": "Copy beside a square photo: a heading and a line over three items, each an icon chip, a title and a line.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-split-photo-icon-list/FeaturesSplitPhotoIconList.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-split-photo-icon-list.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-photo-bento",
+      "type": "registry:block",
+      "title": "Features: Photo Bento",
+      "description": "A heading with an outline button over a bento of two photo cards, a statistic card and a copy card.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-photo-bento/FeaturesPhotoBento.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-photo-bento.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-feature-list-thumbnails",
+      "type": "registry:block",
+      "title": "Features: Feature List + Thumbnails",
+      "description": "A heading over four rows divided by hairlines, each a thumbnail, a title, a line and a Learn more link.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-feature-list-thumbnails/FeaturesFeatureListThumbnails.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-feature-list-thumbnails.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-photo-feature-chips",
+      "type": "registry:block",
+      "title": "Features: Photo + Feature Chips",
+      "description": "A photo beside a heading and a line over twelve pill chips, each an icon and a label.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-photo-feature-chips/FeaturesPhotoFeatureChips.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-photo-feature-chips.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-media-rail",
+      "type": "registry:block",
+      "title": "Features: Media Rail",
+      "description": "A heading with a note over four tall photo tiles with a title and a line, a sideways rail on mobile.",
+      "dependencies": [],
+      "registryDependencies": [
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-media-rail/FeaturesMediaRail.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-media-rail.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-full-bleed-photo-banner",
+      "type": "registry:block",
+      "title": "Features: Full-Bleed Photo Banner",
+      "description": "A photo across the full width of the section over a centred heading and three features.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-full-bleed-photo-banner/FeaturesFullBleedPhotoBanner.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-full-bleed-photo-banner.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-editorial-photo-split",
+      "type": "registry:block",
+      "title": "Features: Editorial Photo Split",
+      "description": "A very large heading and line beside a tall photo, over three numbered features divided by rules.",
+      "dependencies": [],
+      "registryDependencies": [
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-editorial-photo-split/FeaturesEditorialPhotoSplit.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-editorial-photo-split.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-photo-collage",
+      "type": "registry:block",
+      "title": "Features: Photo Collage",
+      "description": "A rounded board of seven photos at slight angles with a caption card over it, and three short columns.",
+      "dependencies": [],
+      "registryDependencies": [
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-photo-collage/FeaturesPhotoCollage.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-photo-collage.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-notched-photo-columns",
+      "type": "registry:block",
+      "title": "Features: Notched Photo Columns",
+      "description": "A two-tone heading over three framed columns, each a dimmed photo with a cut corner and a numbered tag, a title, a line and Badges.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "features",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-notched-photo-columns/FeaturesNotchedPhotoColumns.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-notched-photo-columns.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-perforated-photo-strip",
+      "type": "registry:block",
+      "title": "Features: Perforated Photo Strip",
+      "description": "A centred heading over a draggable strip of ten postage-stamp photos with scalloped edges, and three columns.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-perforated-photo-strip/FeaturesPerforatedPhotoStrip.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-perforated-photo-strip.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-portrait-photo-cards-link-row",
+      "type": "registry:block",
+      "title": "Features: Portrait Photo Cards + Link Row",
+      "description": "A heading and description, an Explore link and four tall photo cards with two-line titles, a rail on mobile.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "features",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-portrait-photo-cards-link-row/FeaturesPortraitPhotoCardsLinkRow.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-portrait-photo-cards-link-row.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-photo-carousel",
+      "type": "registry:block",
+      "title": "Features: Photo Carousel",
+      "description": "A heading with previous and next buttons over one photo-and-panel slide at a time, with a counter badge and dots.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "carousel",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-photo-carousel/FeaturesPhotoCarousel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-photo-carousel.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-photo-tabs-panel",
+      "type": "registry:block",
+      "title": "Features: Photo Tabs Panel",
+      "description": "A centred heading over four boxed tabs, each showing a title, a line, three checked bullets and a photo.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "tabs",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-photo-tabs-panel/FeaturesPhotoTabsPanel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-photo-tabs-panel.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-accordion-photo",
+      "type": "registry:block",
+      "title": "Features: Accordion + Photo",
+      "description": "A heading over an accordion of five questions with plus and minus marks, beside a tall photo.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-accordion-photo/FeaturesAccordionPhoto.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-accordion-photo.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-expanding-step-cards",
+      "type": "registry:block",
+      "title": "Features: Expanding Step Cards",
+      "description": "A centred heading and button over four cards, a featured Plan card with steps and a message, and three product mock-ups.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "progress",
+        "skeleton",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-expanding-step-cards/FeaturesExpandingStepCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-expanding-step-cards.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-compare-panels-chat-answer",
+      "type": "registry:block",
+      "title": "Features: Compare Panels + Chat Answer",
+      "description": "A two-tone heading over a Static map panel beside a live Fasla panel, joined to a chat answer with source chips that open a file card.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-compare-panels-chat-answer/FeaturesComparePanelsChatAnswer.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-compare-panels-chat-answer.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-numbered-steps-floating-cards",
+      "type": "registry:block",
+      "title": "Features: Numbered Steps + Floating Cards",
+      "description": "Three numbered steps, one open at a time, beside a blurred photo with a question and file cards that change with the step.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "features",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-numbered-steps-floating-cards/FeaturesNumberedStepsFloatingCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-numbered-steps-floating-cards.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-solid-colour-cards",
+      "type": "registry:block",
+      "title": "Features: Solid Colour Cards",
+      "description": "A heading beside a workflow card, over four solid cards each with a product mock-up built from the Badge, Switch, Avatar and Progress atoms.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "progress",
+        "switch",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-solid-colour-cards/FeaturesSolidColourCards.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-solid-colour-cards.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-icon-titled-preview-rail",
+      "type": "registry:block",
+      "title": "Features: Icon-Titled Preview Rail",
+      "description": "A heading over a snapping rail of five tinted previews, each a titled product mock-up with a caption.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "skeleton",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-icon-titled-preview-rail/FeaturesIconTitledPreviewRail.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-icon-titled-preview-rail.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-tinted-product-bento",
+      "type": "registry:block",
+      "title": "Features: Tinted Product Bento",
+      "description": "A heading over three stacked product cards, beside a wide info panel and two half-width warning and success panels with buttons.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "fasla-logo",
+        "progress",
+        "switch",
+        "features"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-tinted-product-bento/FeaturesTintedProductBento.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-tinted-product-bento.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
+    },
+    {
+      "name": "features-showcase-card-pair",
+      "type": "registry:block",
+      "title": "Features: Showcase Card Pair",
+      "description": "A centred heading over two showcase stages, a photo with an edit prompt and a photo with a selection box, each captioned.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "features",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/features-showcase-card-pair/FeaturesShowcaseCardPair.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/features-showcase-card-pair.tsx"
+        }
+      ],
+      "categories": [
+        "features",
+        "marketing"
+      ]
     }
   ]
 }
