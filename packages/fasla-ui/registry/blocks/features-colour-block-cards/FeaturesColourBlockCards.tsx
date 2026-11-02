@@ -87,14 +87,14 @@ export function FeaturesColourBlockCards({ locale = "en", heading, description, 
   const list = cards ?? copy.cards
 
   return (
-    <FeaturesSection labelledBy={headingId} className={className} {...props}>
+    <FeaturesSection labelledBy={headingId} contentClassName="gap-16" className={className} {...props}>
       <FeaturesHeader headingId={headingId} heading={heading ?? copy.heading} description={description ?? copy.description} maxWidth={700} />
       {list.length > 0 ? (
         <ul role="list" className="grid grid-cols-1 gap-5 [@container(min-width:48rem)]:grid-cols-2 [@container(min-width:72rem)]:grid-cols-4">
           {list.map((card) => {
             const Icon = card.icon
             return (
-              <li key={card.id} className={cn("flex flex-col items-start gap-5 rounded-lg p-6", TONES[card.tone])}>
+              <li key={card.id} className={cn("flex h-[13.75rem] flex-col items-start justify-between gap-5 rounded-lg p-6 [@container(min-width:48rem)]:h-[16.25rem] [@container(min-width:72rem)]:h-[18.75rem]", TONES[card.tone])}>
                 {Icon ? <Icon size={28} strokeWidth={1.5} absoluteStrokeWidth aria-hidden /> : null}
                 <div className="flex flex-col gap-2">
                   <h3 className="text-lg font-semibold">{card.title}</h3>

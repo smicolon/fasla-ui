@@ -77,14 +77,14 @@ export function FeaturesNumberedFeatureRows({ locale = "en", eyebrow, heading, f
     <FeaturesSection labelledBy={headingId} className={cn("bg-background-inverse text-foreground-inverse", className)} {...props}>
       <FeaturesHeader headingId={headingId} eyebrow={eyebrow ?? copy.eyebrow} heading={heading ?? copy.heading} inverse />
       {list.length > 0 ? (
-        <ol role="list" className="grid grid-cols-1 [@container(min-width:48rem)]:grid-cols-2 [@container(min-width:48rem)]:gap-x-10 [@container(min-width:72rem)]:grid-cols-4 [@container(min-width:72rem)]:gap-x-0">
+        <ol role="list" className="grid grid-cols-1 [@container(min-width:48rem)]:grid-cols-2 [@container(min-width:48rem)]:gap-10 [@container(min-width:72rem)]:grid-cols-4 [@container(min-width:72rem)]:gap-0">
           {list.map((feature) => (
             <li
               key={feature.id}
               className={cn(
                 "flex min-w-0 flex-col gap-4 border-foreground-inverse/20 py-6 first:pt-0 [&:not(:first-child)]:border-t",
-                "[@container(min-width:48rem)]:gap-10 [@container(min-width:48rem)]:py-8 [@container(min-width:48rem)]:first:pt-8 [@container(min-width:48rem)]:[&:not(:first-child)]:border-t-0 [@container(min-width:48rem)]:even:border-s [@container(min-width:48rem)]:even:ps-8",
-                "[@container(min-width:72rem)]:[&:not(:first-child)]:border-s [@container(min-width:72rem)]:[&:not(:first-child)]:ps-8 [@container(min-width:72rem)]:pe-8"
+                "[@container(min-width:48rem)]:gap-10 [@container(min-width:48rem)]:py-0 [@container(min-width:48rem)]:first:pt-0 [@container(min-width:48rem)]:[&:not(:first-child)]:border-t-0 [@container(min-width:48rem)]:even:border-s [@container(min-width:48rem)]:even:ps-8",
+                "[@container(min-width:72rem)]:py-8 [@container(min-width:72rem)]:first:pt-8 [@container(min-width:72rem)]:[&:not(:first-child)]:border-s [@container(min-width:72rem)]:[&:not(:first-child)]:ps-8 [@container(min-width:72rem)]:pe-8"
               )}
             >
               <p className="text-sm text-muted-foreground-inverse">{feature.number}</p>

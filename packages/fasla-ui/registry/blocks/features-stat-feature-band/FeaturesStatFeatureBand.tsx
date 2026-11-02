@@ -90,10 +90,10 @@ export function FeaturesStatFeatureBand({ locale = "en", eyebrow, heading, note,
           <p className="text-sm text-muted-foreground [@container(min-width:72rem)]:max-w-[17.5rem]">{note ?? copy.note}</p>
         </div>
         {list.length > 0 ? (
-          <ul role="list" className="grid grid-cols-1 gap-x-10 gap-y-10 [@container(min-width:48rem)]:grid-cols-2 [@container(min-width:48rem)]:gap-y-12 [@container(min-width:72rem)]:grid-cols-4 [@container(min-width:72rem)]:gap-x-12">
+          <ul role="list" className="grid grid-cols-1 gap-x-10 gap-y-10 [@container(min-width:72rem)]:grid-cols-4 [@container(min-width:72rem)]:gap-x-12">
             {list.map((stat) => (
-              <li key={stat.id} className="flex min-w-0 flex-col gap-2">
-                <p className="text-3xl font-semibold text-secondary-foreground [@container(min-width:72rem)]:text-5xl">
+              <li key={stat.id} className="flex min-w-0 flex-col gap-2 [@container(min-width:48rem)]:max-w-[18.5rem] [@container(min-width:72rem)]:max-w-none">
+                <p className="text-3xl font-semibold leading-[2.75rem] text-secondary-foreground rtl:leading-[3.125rem] [@container(min-width:48rem)]:rtl:leading-[3.75rem] [@container(min-width:72rem)]:text-5xl [@container(min-width:72rem)]:leading-[3.625rem] [@container(min-width:72rem)]:rtl:leading-[4.5rem]">
                   <Figures>{stat.figure}</Figures>
                 </p>
                 <p className="text-base font-medium text-secondary-foreground">{stat.label}</p>
