@@ -8,9 +8,9 @@ const docsRoot = path.resolve(import.meta.dir, "..")
 const componentsRoot = path.join(docsRoot, "app/[locale]/docs/components")
 
 describe("Blocks section", () => {
-  test("has a page for every block family route, and lists every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar, Pricing, Hero, About, Careers, Team, Social Proof, Blog Cards and Footer item in the registry", async () => {
+  test("has a page for every block family route, and lists every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar, Pricing, Hero, About, Careers, Team, Social Proof, Blog Cards, Contact Us and Footer item in the registry", async () => {
     const { blockRoutes } = await import("../lib/seo-routes")
-    const { FAQ_TYPES, ERROR_STATE_TYPES, LOGO_CLOUD_TYPES, AUTHENTICATIONS_TYPES, GALLERY_TYPES, NAVBAR_TYPES, PRICING_TYPES, HERO_TYPES, ABOUT_TYPES, CAREERS_TYPES, TEAM_TYPES, SOCIAL_PROOF_TYPES, BLOG_CARDS_TYPES, FOOTER_TYPES } = await import(
+    const { FAQ_TYPES, ERROR_STATE_TYPES, LOGO_CLOUD_TYPES, AUTHENTICATIONS_TYPES, GALLERY_TYPES, NAVBAR_TYPES, PRICING_TYPES, HERO_TYPES, ABOUT_TYPES, CAREERS_TYPES, TEAM_TYPES, SOCIAL_PROOF_TYPES, BLOG_CARDS_TYPES, CONTACT_US_TYPES, FOOTER_TYPES } = await import(
       "../lib/blocks"
     )
     const blocksRoot = path.join(docsRoot, "app/[locale]/docs/blocks")
@@ -51,6 +51,9 @@ describe("Blocks section", () => {
     expect(SOCIAL_PROOF_TYPES.map((type) => type.slug).sort()).toEqual(socialProofItems.sort())
     const blogCardsItems = registry.items.filter((item) => item.name.startsWith("blog-cards-")).map((item) => item.name)
     expect(BLOG_CARDS_TYPES.map((type) => type.slug).sort()).toEqual(blogCardsItems.sort())
+    // `contact-us` itself is the parts every Contact Us block shares, not a Type.
+    const contactUsItems = registry.items.filter((item) => item.name.startsWith("contact-us-")).map((item) => item.name)
+    expect(CONTACT_US_TYPES.map((type) => type.slug).sort()).toEqual(contactUsItems.sort())
     const footerItems = registry.items.filter((item) => item.name.startsWith("footer-")).map((item) => item.name)
     expect(FOOTER_TYPES.map((type) => type.slug).sort()).toEqual(footerItems.sort())
   })
