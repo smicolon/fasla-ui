@@ -36,7 +36,6 @@ export default function FooterBlocksPage() {
             ),
           })}
         </p>
-        <p className="text-sm text-muted-foreground">{t("railNote")}</p>
       </div>
 
       <div role="group" aria-label={t("filterLabel")} className="flex flex-wrap gap-2">

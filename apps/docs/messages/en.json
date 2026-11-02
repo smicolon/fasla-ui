@@ -3503,7 +3503,6 @@
     "footerBlocks": {
       "lead": "Sections that close a page: sitemaps, brand-led footers, call-to-action bands, minimal bars, contact and support layouts, legal and trust, commerce, community and careers, and app footers.",
       "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "railNote": "In Dashboard Slim Bar the search shortcut is left out at tablet width, and the documentation, support and feedback links are left out on phones, as Figma draws it.",
       "filterLabel": "Filter by family",
       "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
       "families": {
