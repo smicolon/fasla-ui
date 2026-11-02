@@ -204,15 +204,16 @@ export function FooterLocalBusiness({
               </ul>
             </div>
           ) : null}
-          <div className="flex w-fit flex-col gap-2 [@container(min-width:40rem)]:w-auto [@container(min-width:40rem)]:flex-row [@container(min-width:40rem)]:gap-3">
+          <div className="flex w-fit max-w-full flex-col gap-2 [@container(min-width:40rem)]:w-auto [@container(min-width:40rem)]:flex-row [@container(min-width:40rem)]:gap-3">
             <a href={directionsHref ?? copy.directionsHref} className={buttonVariants({ variant: "default", size: "md" })}>
                 <MapPinIcon aria-hidden="true" />
                 {directionsLabel ?? copy.directionsLabel}
               </a>
             {mail ? (
-              <a href={`mailto:${mail}`} className={buttonVariants({ variant: "outline", size: "md" })}>
+              <a href={`mailto:${mail}`} className={buttonVariants({ variant: "outline", size: "md", className: "min-w-0 max-w-full" })}>
                   <MailIcon aria-hidden="true" />
-                  <bdi dir="ltr">{mail}</bdi>
+                  {/* A long address shortens with an ellipsis inside the button instead of pushing the page sideways. */}
+                  <bdi dir="ltr" className="min-w-0 truncate">{mail}</bdi>
                 </a>
             ) : null}
           </div>

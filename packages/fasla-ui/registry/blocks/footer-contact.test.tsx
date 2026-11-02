@@ -236,6 +236,15 @@ describe("Support & Contact", () => {
 })
 
 describe("Local Business", () => {
+  it("shortens a long email inside its button instead of pushing the page sideways", () => {
+    // Found at the 40-character documented limit on a 360px phone: the email button was 351px wide in a 328px column.
+    render(<FooterLocalBusiness email="a-really-long-address-at-the-limit@example.com" />)
+    const link = screen.getByRole("link", { name: /a-really-long-address/ })
+    expect(link.className).toContain("max-w-full")
+    expect(link.className).toContain("min-w-0")
+    expect(link.querySelector("bdi")!.className).toContain("truncate")
+  })
+
   it("shows the map photo when given and the muted ground when not", () => {
     const { container, rerender } = render(<FooterLocalBusiness />)
     expect(container.querySelectorAll("img")).toHaveLength(0)
