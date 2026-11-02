@@ -250,8 +250,8 @@ describe("Avatar", () => {
       expect(shown({ name: "Vera Brandt", size: "12" })).toBe("V")
     })
 
-    it("keeps two Arabic initials in their separate forms", () => {
-      expect(shown({ name: "ليلى حسن" })).toBe("ل‌ح")
+    it("joins two Arabic initials, as Figma draws them", () => {
+      expect(shown({ name: "ليلى حسن" })).toBe("لح")
     })
 
     it("hides the letters and names the fallback with `name`", () => {

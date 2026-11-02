@@ -156,6 +156,15 @@ describe("Figma ☾ Mode snapshot", () => {
     }
   })
 
+  it("holds the Features tints exactly as Figma draws them", () => {
+    // opacity/neutral/10 is slate #474857; opacity/info/20 and /30 are on #0284c7, as opacity/info/10 is.
+    for (const mode of ["light", "dark"] as const) {
+      expect(tok("soft-neutral")[mode]).toBe("rgb(71 72 87 / 10%)")
+      expect(tok("soft-info-20")[mode]).toBe(tok("soft-info")[mode].replace("/ 10%)", "/ 20%)"))
+      expect(tok("soft-info-30")[mode]).toBe(tok("soft-info")[mode].replace("/ 10%)", "/ 30%)"))
+    }
+  })
+
   it("keeps the modal overlay translucent, and denser in Dark", () => {
     // Figma custom/backdrop-overlay: one colour, #3c3a40, at 60% and 80%.
     expect(tok("backdrop-overlay").light).toBe("rgb(60 58 64 / 60%)")
