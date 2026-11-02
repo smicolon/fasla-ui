@@ -281,6 +281,18 @@ export const CODE_MAP = {
       "filter-sidebar-results", "search-chips-results", "post-carousel-with-controls",
     ].map((type) => [`blog-cards-${type}`, null])
   ),
+  // Block: the parts every Contact Us block shares, from the block set Contact Us (42334:293941), not an atom.
+  "contact-us": null,
+  // Blocks: each Contact Us item is one Type of the block set Contact Us (42334:293941), not an atom. Added a family at a time.
+  ...Object.fromEntries(
+    [
+      "classic-centered", "dark-statement", "oversized-wordmark", "editorial-statement", "ruled-split-form",
+      "grand-headline-form", "pitch-and-inquiry",
+      "form-contact-methods", "split-photo-dark", "photo-and-dark-panel", "editorial-and-address-card",
+      "map-split", "office-cards", "hq-feature", "global-offices-table", "hours-and-availability",
+      "named-owners", "book-a-call", "form-with-faq", "bento-grid", "social-rail", "newsletter-combo", "support-channels",
+    ].map((type) => [`contact-us-${type}`, null])
+  ),
 }
 
 const FAMILY_MIN = 10

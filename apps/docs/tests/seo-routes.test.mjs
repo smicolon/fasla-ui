@@ -8,9 +8,9 @@ const docsRoot = path.resolve(import.meta.dir, "..")
 const componentsRoot = path.join(docsRoot, "app/[locale]/docs/components")
 
 describe("Blocks section", () => {
-  test("has a page for every block family route, and lists every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar, Pricing, Hero, About, Careers, Team, Social Proof and Blog Cards item in the registry", async () => {
+  test("has a page for every block family route, and lists every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar, Pricing, Hero, About, Careers, Team, Social Proof, Blog Cards and Contact Us item in the registry", async () => {
     const { blockRoutes } = await import("../lib/seo-routes")
-    const { FAQ_TYPES, ERROR_STATE_TYPES, LOGO_CLOUD_TYPES, AUTHENTICATIONS_TYPES, GALLERY_TYPES, NAVBAR_TYPES, PRICING_TYPES, HERO_TYPES, ABOUT_TYPES, CAREERS_TYPES, HOW_IT_WORKS_TYPES, TEAM_TYPES, SOCIAL_PROOF_TYPES, BLOG_CARDS_TYPES } = await import(
+    const { FAQ_TYPES, ERROR_STATE_TYPES, LOGO_CLOUD_TYPES, AUTHENTICATIONS_TYPES, GALLERY_TYPES, NAVBAR_TYPES, PRICING_TYPES, HERO_TYPES, ABOUT_TYPES, CAREERS_TYPES, HOW_IT_WORKS_TYPES, TEAM_TYPES, SOCIAL_PROOF_TYPES, BLOG_CARDS_TYPES, CONTACT_US_TYPES } = await import(
       "../lib/blocks"
     )
     const blocksRoot = path.join(docsRoot, "app/[locale]/docs/blocks")
@@ -54,6 +54,9 @@ describe("Blocks section", () => {
     // `how-it-works` itself is the parts every How it Works block shares, not a Type.
     const howItWorksItems = registry.items.filter((item) => item.name.startsWith("how-it-works-")).map((item) => item.name)
     expect(HOW_IT_WORKS_TYPES.map((type) => type.slug).sort()).toEqual(howItWorksItems.sort())
+    // `contact-us` itself is the parts every Contact Us block shares, not a Type.
+    const contactUsItems = registry.items.filter((item) => item.name.startsWith("contact-us-")).map((item) => item.name)
+    expect(CONTACT_US_TYPES.map((type) => type.slug).sort()).toEqual(contactUsItems.sort())
   })
 
   test("marks exactly the blocks that depend on theme-inverse as inverse", async () => {

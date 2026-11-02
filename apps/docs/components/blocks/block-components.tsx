@@ -7,6 +7,7 @@ import { authExample } from "@/components/blocks/authentications-examples"
 import { aboutPhotoProps } from "@/components/blocks/about-photos"
 import { careersPhotoProps } from "@/components/blocks/careers-photos"
 import { howItWorksPhotoProps } from "@/components/blocks/how-it-works-photos"
+import { CONTACT_US_NOW, CONTACT_US_TABLE_NOW, contactUsPhotoProps } from "@/components/blocks/contact-us-photos"
 import { teamPhotoProps } from "@/components/blocks/team-photos"
 import { blogCardsPhotoProps } from "@/components/blocks/blog-cards-photos"
 import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
@@ -16,7 +17,7 @@ import { socialProofPhotos } from "@/components/blocks/social-proof-photos"
 
 /**
  * Every FAQ, Error State, Logo Cloud, Authentications, Gallery, Navbar,
- * Pricing, Hero, About, Careers, How it Works, Social Proof and Blog Cards Type by registry name, each loaded on its
+ * Pricing, Hero, About, Careers, How it Works, Social Proof, Blog Cards and Contact Us Type by registry name, each loaded on its
  * own so a preview frame downloads only the block it shows.
  */
 /** Each block has its own props; a frame passes only the locale and demo props. */
@@ -146,6 +147,15 @@ const withHowItWorksPhotos = (Block: AnyBlock, type: string) =>
 const withCareersPhotos = (Block: AnyBlock, type: string) =>
   function CareersPreview(props: { locale: Locale }) {
     return <Block {...careersPhotoProps(type, props.locale)} {...props} />
+  }
+
+/**
+ * A Contact Us Type with its demo photo, from public/images/contact-us/.
+ * Types without a photo render as they are.
+ */
+const withContactUsPhotos = (Block: AnyBlock, type: string) =>
+  function ContactUsPreview(props: { locale: Locale }) {
+    return <Block {...contactUsPhotoProps(type, props.locale)} {...props} />
   }
 
 /**
@@ -941,6 +951,75 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "blog-cards-journal-bento": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-journal-bento/BlogCardsJournalBento").then((m) => withBlogCardsPhotos(m.BlogCardsJournalBento, "journal-bento", m.blogCardsJournalBentoCopy))
   ),
+  "contact-us-classic-centered": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-classic-centered/ContactUsClassicCentered").then((m) => m.ContactUsClassicCentered)
+  ),
+  "contact-us-dark-statement": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-dark-statement/ContactUsDarkStatement").then((m) => m.ContactUsDarkStatement)
+  ),
+  "contact-us-oversized-wordmark": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-oversized-wordmark/ContactUsOversizedWordmark").then((m) => m.ContactUsOversizedWordmark)
+  ),
+  "contact-us-editorial-statement": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-editorial-statement/ContactUsEditorialStatement").then((m) => m.ContactUsEditorialStatement)
+  ),
+  "contact-us-ruled-split-form": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-ruled-split-form/ContactUsRuledSplitForm").then((m) => m.ContactUsRuledSplitForm)
+  ),
+  "contact-us-grand-headline-form": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-grand-headline-form/ContactUsGrandHeadlineForm").then((m) => m.ContactUsGrandHeadlineForm)
+  ),
+  "contact-us-pitch-and-inquiry": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-pitch-and-inquiry/ContactUsPitchAndInquiry").then((m) => m.ContactUsPitchAndInquiry)
+  ),
+  "contact-us-form-contact-methods": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-form-contact-methods/ContactUsFormContactMethods").then((m) => withContactUsPhotos(m.ContactUsFormContactMethods, "form-contact-methods"))
+  ),
+  "contact-us-split-photo-dark": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-split-photo-dark/ContactUsSplitPhotoDark").then((m) => withContactUsPhotos(m.ContactUsSplitPhotoDark, "split-photo-dark"))
+  ),
+  "contact-us-photo-and-dark-panel": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-photo-and-dark-panel/ContactUsPhotoAndDarkPanel").then((m) => withContactUsPhotos(m.ContactUsPhotoAndDarkPanel, "photo-and-dark-panel"))
+  ),
+  "contact-us-editorial-and-address-card": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-editorial-and-address-card/ContactUsEditorialAndAddressCard").then((m) => withContactUsPhotos(m.ContactUsEditorialAndAddressCard, "editorial-and-address-card"))
+  ),
+  "contact-us-map-split": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-map-split/ContactUsMapSplit").then((m) => withContactUsPhotos(m.ContactUsMapSplit, "map-split"))
+  ),
+  "contact-us-office-cards": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-office-cards/ContactUsOfficeCards").then((m) => withContactUsPhotos(m.ContactUsOfficeCards, "office-cards"))
+  ),
+  "contact-us-hq-feature": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-hq-feature/ContactUsHqFeature").then((m) => withContactUsPhotos(m.ContactUsHqFeature, "hq-feature"))
+  ),
+  "contact-us-global-offices-table": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-global-offices-table/ContactUsGlobalOfficesTable").then((m) => withContactUsPhotos(m.ContactUsGlobalOfficesTable, "global-offices-table"))
+  ),
+  "contact-us-hours-and-availability": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-hours-and-availability/ContactUsHoursAndAvailability").then((m) => withContactUsPhotos(m.ContactUsHoursAndAvailability, "hours-and-availability"))
+  ),
+  "contact-us-named-owners": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-named-owners/ContactUsNamedOwners").then((m) => withContactUsPhotos(m.ContactUsNamedOwners, "named-owners"))
+  ),
+  "contact-us-book-a-call": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-book-a-call/ContactUsBookACall").then((m) => withContactUsPhotos(m.ContactUsBookACall, "book-a-call"))
+  ),
+  "contact-us-form-with-faq": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-form-with-faq/ContactUsFormWithFaq").then((m) => withContactUsPhotos(m.ContactUsFormWithFaq, "form-with-faq"))
+  ),
+  "contact-us-bento-grid": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-bento-grid/ContactUsBentoGrid").then((m) => withContactUsPhotos(m.ContactUsBentoGrid, "bento-grid"))
+  ),
+  "contact-us-social-rail": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-social-rail/ContactUsSocialRail").then((m) => withContactUsPhotos(m.ContactUsSocialRail, "social-rail"))
+  ),
+  "contact-us-newsletter-combo": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-newsletter-combo/ContactUsNewsletterCombo").then((m) => withContactUsPhotos(m.ContactUsNewsletterCombo, "newsletter-combo"))
+  ),
+  "contact-us-support-channels": dynamic(() =>
+    import("@fasla-ui/blocks/contact-us-support-channels/ContactUsSupportChannels").then((m) => withContactUsPhotos(m.ContactUsSupportChannels, "support-channels"))
+  ),
 }
 
 /** Settles after a moment, so a form shows its pending state before its result. */
@@ -1042,6 +1121,34 @@ export function blockDemoProps(slug: string, locale: Locale): Record<string, unk
     // The frame stays on the preview at zero instead of leaving for the homepage.
     case "error-state-countdown-redirect":
       return { onRedirect: () => {} }
+    // Contact Us: a form's send settles after a moment, so a preview shows the
+    // button's pending state and then the thank-you panel.
+    case "contact-us-classic-centered":
+    case "contact-us-dark-statement":
+    case "contact-us-oversized-wordmark":
+    case "contact-us-editorial-statement":
+    case "contact-us-ruled-split-form":
+    case "contact-us-grand-headline-form":
+    case "contact-us-pitch-and-inquiry":
+    case "contact-us-form-contact-methods":
+    case "contact-us-split-photo-dark":
+    case "contact-us-photo-and-dark-panel":
+    case "contact-us-editorial-and-address-card":
+    case "contact-us-named-owners":
+    case "contact-us-form-with-faq":
+    case "contact-us-bento-grid":
+      return { onSubmit: settleSoon }
+    case "contact-us-newsletter-combo":
+      return { onSubmit: settleSoon, onSubscribe: settleSoon }
+    case "contact-us-book-a-call":
+      return { onBook: settleSoon }
+    // The live clocks are frozen at Figma's moment: Tuesday 10 March 2026, 14:20 in Dubai.
+    // The Global Offices Table uses a date when London is on summer time, as its frame is.
+    case "contact-us-hours-and-availability":
+    case "contact-us-hq-feature":
+      return { now: CONTACT_US_NOW }
+    case "contact-us-global-offices-table":
+      return { now: CONTACT_US_TABLE_NOW }
     default:
       // Authentications: every action that would reach a server settles after a
       // moment, so the buttons show their pending state and what follows.
