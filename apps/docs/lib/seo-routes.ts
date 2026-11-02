@@ -319,6 +319,21 @@ export const routes = [
     },
   },
   {
+    kind: "block",
+    category: "Blocks",
+    path: "/docs/blocks/contact-us/",
+    title: "Contact Us Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Contact sections: forms set in type, forms beside a photo, places and hours, and other ways to reach the team, with client-side checks, responsive and mirrored for Arabic.",
+    h1: "Contact Us",
+    ar: {
+      title: "كتل التواصل لمشاريع React | فاصلة",
+      description:
+        "أقسام للتواصل: نماذج تقوم على الكتابة وحدها، ونماذج بجانب صورة، ومواقع وأوقات، وطرق أخرى للوصول إلى الفريق، مع تحقق من الحقول، متجاوبة ومعكوسة للعربية.",
+      h1: "كتلة التواصل (Contact Us)",
+    },
+  },
+  {
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/button/",
