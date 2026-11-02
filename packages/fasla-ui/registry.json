@@ -7147,6 +7147,149 @@
         "blog-cards",
         "marketing"
       ]
+    },
+    {
+      "name": "footer",
+      "type": "registry:block",
+      "title": "Footer",
+      "description": "The parts every Footer block is built from: the section and its 1280px column, the hairline, the brand block, the social row, a link column, the legal bar, the newsletter form with its sent, error and invalid states, and the entrance and reduced-motion hooks.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "fasla-logo",
+        "input",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer/footer.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-four-column-directory",
+      "type": "registry:block",
+      "title": "Footer: Four-Column Directory",
+      "description": "The brand block with five social marks beside four link columns, a hairline and the legal bar.",
+      "dependencies": [],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-four-column-directory/FooterFourColumnDirectory.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-four-column-directory.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-wide-sitemap-mega",
+      "type": "registry:block",
+      "title": "Footer: Wide Sitemap Mega",
+      "description": "A wide sitemap of up to six link columns with language and region pickers, a status line and the legal bar.",
+      "dependencies": [],
+      "registryDependencies": [
+        "fasla-logo",
+        "footer",
+        "select",
+        "status-indicator"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-wide-sitemap-mega/FooterWideSitemapMega.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-wide-sitemap-mega.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-accordion-sitemap",
+      "type": "registry:block",
+      "title": "Footer: Accordion Sitemap",
+      "description": "Collapsible sitemap groups, one open at a time, under the brand and its social marks.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion",
+        "fasla-logo",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-accordion-sitemap/FooterAccordionSitemap.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-accordion-sitemap.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-two-tier-doormat",
+      "type": "registry:block",
+      "title": "Footer: Two-Tier Doormat",
+      "description": "Two tiers: a contact strip above the link columns, then the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "fasla-logo",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-two-tier-doormat/FooterTwoTierDoormat.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-two-tier-doormat.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-index-numbered-columns",
+      "type": "registry:block",
+      "title": "Footer: Index-Numbered Columns",
+      "description": "Numbered link columns drawn with hairlines, a back-to-top link and the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "fasla-logo",
+        "footer"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-index-numbered-columns/FooterIndexNumberedColumns.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-index-numbered-columns.tsx"
+        }
+      ]
     }
   ]
 }

@@ -4,7 +4,7 @@
  * (docs.faqBlocks, docs.errorStateBlocks, docs.logoCloudBlocks,
  * docs.authenticationsBlocks, docs.galleryBlocks, docs.navbarBlocks,
  * docs.pricingBlocks, docs.heroBlocks, docs.aboutBlocks, docs.teamBlocks,
- * docs.careersBlocks, docs.socialProofBlocks, docs.blogCardsBlocks); the slug is the registry item's name.
+ * docs.careersBlocks, docs.socialProofBlocks, docs.blogCardsBlocks, docs.footerBlocks); the slug is the registry item's name.
  */
 
 export type FaqFamily = "lists" | "layouts" | "navigation" | "support"
@@ -125,7 +125,16 @@ export type BlogCardsFamily = "grids" | "features" | "lists" | "alongside" | "br
 
 export const BLOG_CARDS_FAMILIES: BlogCardsFamily[] = ["grids", "features", "lists", "alongside", "browse"]
 
-export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | SocialProofFamily | BlogCardsFamily> = {
+/**
+ * Footer's nine groups: sitemaps and directories, the brand-led footers, the call-to-action
+ * and sign-up bands, the minimal bars, the contact and support layouts, legal and trust,
+ * commerce, community and careers, and the utility and product footers.
+ */
+export type FooterFamily = "sitemap"
+
+export const FOOTER_FAMILIES: FooterFamily[] = ["sitemap"]
+
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | SocialProofFamily | BlogCardsFamily | FooterFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
   family: Family
@@ -439,6 +448,15 @@ export const BLOG_CARDS_TYPES: BlockType<BlogCardsFamily>[] = [
   { slug: "blog-cards-journal-bento", family: "grids", inverse: true },
 ]
 
+/** Footer's 33 Types in Figma's order, added a family at a time. */
+export const FOOTER_TYPES: BlockType<FooterFamily>[] = [
+  { slug: "footer-four-column-directory", family: "sitemap" },
+  { slug: "footer-wide-sitemap-mega", family: "sitemap" },
+  { slug: "footer-accordion-sitemap", family: "sitemap" },
+  { slug: "footer-two-tier-doormat", family: "sitemap" },
+  { slug: "footer-index-numbered-columns", family: "sitemap" },
+]
+
 export const ALL_BLOCK_TYPES: BlockType[] = [
   ...FAQ_TYPES,
   ...ERROR_STATE_TYPES,
@@ -453,6 +471,7 @@ export const ALL_BLOCK_TYPES: BlockType[] = [
   ...TEAM_TYPES,
   ...SOCIAL_PROOF_TYPES,
   ...BLOG_CARDS_TYPES,
+  ...FOOTER_TYPES,
 ]
 
 /** Figma's three breakpoints, the widths a preview frame renders at. */

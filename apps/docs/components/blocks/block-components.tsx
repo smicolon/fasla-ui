@@ -8,6 +8,7 @@ import { aboutPhotoProps } from "@/components/blocks/about-photos"
 import { careersPhotoProps } from "@/components/blocks/careers-photos"
 import { teamPhotoProps } from "@/components/blocks/team-photos"
 import { blogCardsPhotoProps } from "@/components/blocks/blog-cards-photos"
+import { footerPhotoProps } from "@/components/blocks/footer-photos"
 import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
 import { NavbarStage, navbarExample } from "@/components/blocks/navbar-examples"
 import { heroPhotoProps } from "@/components/blocks/hero-photos"
@@ -175,6 +176,16 @@ type BlogCardsCopy = Record<Locale, object>
 const withBlogCardsPhotos = (Block: AnyBlock, type: string, copy: BlogCardsCopy) =>
   function BlogCardsPreview(props: { locale: Locale }) {
     return <Block {...blogCardsPhotoProps(type, props.locale, copy)} {...props} />
+  }
+
+/**
+ * A Footer Type with its demo photos, from public/images/footer/: the Types
+ * that take photos get theirs as the props their block names. The rest render as they are.
+ */
+type FooterCopy = Record<Locale, object>
+const withFooterPhotos = (Block: AnyBlock, type: string, copy: FooterCopy) =>
+  function FooterPreview(props: { locale: Locale }) {
+    return <Block {...footerPhotoProps(type, props.locale, copy)} {...props} />
   }
 
 export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
@@ -865,6 +876,13 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "blog-cards-journal-bento": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-journal-bento/BlogCardsJournalBento").then((m) => withBlogCardsPhotos(m.BlogCardsJournalBento, "journal-bento", m.blogCardsJournalBentoCopy))
   ),
+  // footer:begin
+  "footer-four-column-directory": dynamic(() => import("@fasla-ui/blocks/footer-four-column-directory/FooterFourColumnDirectory").then((m) => m.FooterFourColumnDirectory)),
+  "footer-wide-sitemap-mega": dynamic(() => import("@fasla-ui/blocks/footer-wide-sitemap-mega/FooterWideSitemapMega").then((m) => m.FooterWideSitemapMega)),
+  "footer-accordion-sitemap": dynamic(() => import("@fasla-ui/blocks/footer-accordion-sitemap/FooterAccordionSitemap").then((m) => m.FooterAccordionSitemap)),
+  "footer-two-tier-doormat": dynamic(() => import("@fasla-ui/blocks/footer-two-tier-doormat/FooterTwoTierDoormat").then((m) => m.FooterTwoTierDoormat)),
+  "footer-index-numbered-columns": dynamic(() => import("@fasla-ui/blocks/footer-index-numbered-columns/FooterIndexNumberedColumns").then((m) => m.FooterIndexNumberedColumns)),
+  // footer:end
 }
 
 /** Settles after a moment, so a form shows its pending state before its result. */

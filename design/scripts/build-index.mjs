@@ -269,6 +269,15 @@ export const CODE_MAP = {
       "filter-sidebar-results", "search-chips-results", "post-carousel-with-controls",
     ].map((type) => [`blog-cards-${type}`, null])
   ),
+  // Block: the parts every Footer block shares, from the block set Footer (46380:22515), not an atom.
+  footer: null,
+  // Blocks: each Footer item is one Type of the block set Footer (46380:22515), not an atom.
+  ...Object.fromEntries(
+    [
+      "four-column-directory", "wide-sitemap-mega", "accordion-sitemap", "two-tier-doormat",
+      "index-numbered-columns",
+    ].map((type) => [`footer-${type}`, null])
+  ),
 }
 
 const FAMILY_MIN = 10

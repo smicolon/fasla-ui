@@ -319,6 +319,21 @@ export const routes = [
     },
   },
   {
+    kind: "block",
+    category: "Blocks",
+    path: "/docs/blocks/footer/",
+    title: "Footer Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Sections that close a page: sitemaps, brand-led footers, call-to-action bands, minimal bars, contact layouts and app footers, responsive and mirrored for Arabic.",
+    h1: "Footer",
+    ar: {
+      title: "كتل التذييل لمشاريع React | فاصلة",
+      description:
+        "أقسام تُغلق الصفحة: خرائط الموقع، وتذييلات العلامة، وأشرطة الدعوة، وتخطيطات التواصل، وتذييلات التطبيقات، متجاوبة ومعكوسة للعربية.",
+      h1: "التذييل (Footer)",
+    },
+  },
+  {
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/button/",
