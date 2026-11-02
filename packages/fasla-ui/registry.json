@@ -7292,6 +7292,172 @@
       ]
     },
     {
+      "name": "footer-brand-panel-split",
+      "type": "registry:block",
+      "title": "Footer: Brand Panel Split",
+      "description": "A brand panel with a contact line beside the link columns, then the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-brand-panel-split/FooterBrandPanelSplit.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-brand-panel-split.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-giant-wordmark",
+      "type": "registry:block",
+      "title": "Footer: Giant Wordmark",
+      "description": "A dark band with the link columns and a wordmark scaled to the full width of the block.",
+      "dependencies": [],
+      "registryDependencies": [
+        "fasla-logo",
+        "footer",
+        "social-icons",
+        "theme-inverse"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-giant-wordmark/FooterGiantWordmark.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-giant-wordmark.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-image-backed-brand",
+      "type": "registry:block",
+      "title": "Footer: Image-Backed Brand",
+      "description": "The brand, navigation links and social marks over a full-bleed photo and a dark scrim.",
+      "dependencies": [],
+      "registryDependencies": [
+        "footer",
+        "social-icons",
+        "theme-inverse"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-image-backed-brand/FooterImageBackedBrand.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-image-backed-brand.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-centered-brand-minimal",
+      "type": "registry:block",
+      "title": "Footer: Centered Brand Minimal",
+      "description": "A centred logo, one line of links, social marks and the copyright.",
+      "dependencies": [],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-centered-brand-minimal/FooterCenteredBrandMinimal.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-centered-brand-minimal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-marquee-strip",
+      "type": "registry:block",
+      "title": "Footer: Marquee Strip",
+      "description": "A looping strip of phrases above a navigation row and the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-marquee-strip/FooterMarqueeStrip.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-marquee-strip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-big-type-link-stack",
+      "type": "registry:block",
+      "title": "Footer: Big-Type Link Stack",
+      "description": "Five large links stacked with arrows beside a column of details, then the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-big-type-link-stack/FooterBigTypeLinkStack.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-big-type-link-stack.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-bento-tile",
+      "type": "registry:block",
+      "title": "Footer: Bento Tile",
+      "description": "A bento of tiles: a sign-up form, status, contact links and link columns, then the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "footer",
+        "social-icons",
+        "status-indicator"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-bento-tile/FooterBentoTile.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-bento-tile.tsx"
+        }
+      ]
+    },
+    {
       "name": "footer-cta-band-columns",
       "type": "registry:block",
       "title": "Footer: CTA Band + Columns",

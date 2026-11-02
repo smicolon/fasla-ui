@@ -882,6 +882,15 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "footer-accordion-sitemap": dynamic(() => import("@fasla-ui/blocks/footer-accordion-sitemap/FooterAccordionSitemap").then((m) => m.FooterAccordionSitemap)),
   "footer-two-tier-doormat": dynamic(() => import("@fasla-ui/blocks/footer-two-tier-doormat/FooterTwoTierDoormat").then((m) => m.FooterTwoTierDoormat)),
   "footer-index-numbered-columns": dynamic(() => import("@fasla-ui/blocks/footer-index-numbered-columns/FooterIndexNumberedColumns").then((m) => m.FooterIndexNumberedColumns)),
+  "footer-brand-panel-split": dynamic(() => import("@fasla-ui/blocks/footer-brand-panel-split/FooterBrandPanelSplit").then((m) => m.FooterBrandPanelSplit)),
+  "footer-giant-wordmark": dynamic(() => import("@fasla-ui/blocks/footer-giant-wordmark/FooterGiantWordmark").then((m) => m.FooterGiantWordmark)),
+  "footer-image-backed-brand": dynamic(() =>
+    import("@fasla-ui/blocks/footer-image-backed-brand/FooterImageBackedBrand").then((m) => withFooterPhotos(m.FooterImageBackedBrand, "image-backed-brand", m.footerImageBackedBrandCopy))
+  ),
+  "footer-centered-brand-minimal": dynamic(() => import("@fasla-ui/blocks/footer-centered-brand-minimal/FooterCenteredBrandMinimal").then((m) => m.FooterCenteredBrandMinimal)),
+  "footer-marquee-strip": dynamic(() => import("@fasla-ui/blocks/footer-marquee-strip/FooterMarqueeStrip").then((m) => m.FooterMarqueeStrip)),
+  "footer-big-type-link-stack": dynamic(() => import("@fasla-ui/blocks/footer-big-type-link-stack/FooterBigTypeLinkStack").then((m) => m.FooterBigTypeLinkStack)),
+  "footer-bento-tile": dynamic(() => import("@fasla-ui/blocks/footer-bento-tile/FooterBentoTile").then((m) => m.FooterBentoTile)),
   "footer-cta-band-columns": dynamic(() => import("@fasla-ui/blocks/footer-cta-band-columns/FooterCtaBandColumns").then((m) => m.FooterCtaBandColumns)),
   "footer-newsletter-split": dynamic(() => import("@fasla-ui/blocks/footer-newsletter-split/FooterNewsletterSplit").then((m) => m.FooterNewsletterSplit)),
   "footer-floating-demo-card": dynamic(() => import("@fasla-ui/blocks/footer-floating-demo-card/FooterFloatingDemoCard").then((m) => m.FooterFloatingDemoCard)),

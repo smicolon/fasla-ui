@@ -3509,6 +3509,7 @@
       "families": {
         "all": "All",
         "sitemap": "Sitemap & directory",
+        "brand": "Brand-led",
         "cta": "Call to action & sign-up"
       },
       "types": {
@@ -3517,6 +3518,13 @@
         "footer-accordion-sitemap": "Accordion Sitemap",
         "footer-two-tier-doormat": "Two-Tier Doormat",
         "footer-index-numbered-columns": "Index-Numbered Columns",
+        "footer-brand-panel-split": "Brand Panel Split",
+        "footer-giant-wordmark": "Giant Wordmark",
+        "footer-image-backed-brand": "Image-Backed Brand",
+        "footer-centered-brand-minimal": "Centered Brand Minimal",
+        "footer-marquee-strip": "Marquee Strip",
+        "footer-big-type-link-stack": "Big-Type Link Stack",
+        "footer-bento-tile": "Bento Tile",
         "footer-cta-band-columns": "CTA Band + Columns",
         "footer-newsletter-split": "Newsletter Split",
         "footer-floating-demo-card": "Floating Demo Card",

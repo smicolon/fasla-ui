@@ -4,6 +4,13 @@ import { FooterWideSitemapMega, footerWideSitemapMegaCopy } from "../../../../..
 import { FooterAccordionSitemap, footerAccordionSitemapCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-accordion-sitemap/FooterAccordionSitemap"
 import { FooterTwoTierDoormat, footerTwoTierDoormatCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-two-tier-doormat/FooterTwoTierDoormat"
 import { FooterIndexNumberedColumns, footerIndexNumberedColumnsCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-index-numbered-columns/FooterIndexNumberedColumns"
+import { FooterBrandPanelSplit, footerBrandPanelSplitCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-brand-panel-split/FooterBrandPanelSplit"
+import { FooterGiantWordmark, footerGiantWordmarkCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-giant-wordmark/FooterGiantWordmark"
+import { FooterImageBackedBrand, footerImageBackedBrandCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-image-backed-brand/FooterImageBackedBrand"
+import { FooterCenteredBrandMinimal, footerCenteredBrandMinimalCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-centered-brand-minimal/FooterCenteredBrandMinimal"
+import { FooterMarqueeStrip, footerMarqueeStripCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-marquee-strip/FooterMarqueeStrip"
+import { FooterBigTypeLinkStack, footerBigTypeLinkStackCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-big-type-link-stack/FooterBigTypeLinkStack"
+import { FooterBentoTile, footerBentoTileCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-bento-tile/FooterBentoTile"
 import { FooterCtaBandColumns, footerCtaBandColumnsCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-cta-band-columns/FooterCtaBandColumns"
 import { FooterNewsletterSplit, footerNewsletterSplitCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-newsletter-split/FooterNewsletterSplit"
 import { FooterFloatingDemoCard, footerFloatingDemoCardCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-floating-demo-card/FooterFloatingDemoCard"
@@ -60,6 +67,55 @@ export const IndexNumberedColumns: StoryObj<typeof FooterIndexNumberedColumns> =
   name: "Index-Numbered Columns",
   argTypes: footerArgTypes(FooterIndexNumberedColumns, footerIndexNumberedColumnsCopy),
   render: (args, context) => <FooterIndexNumberedColumns locale={localeOf(context)} {...photoPropsOf("index-numbered-columns", context, footerIndexNumberedColumnsCopy)} {...args} />,
+}
+
+export const BrandPanelSplit: StoryObj<typeof FooterBrandPanelSplit> = {
+  name: "Brand Panel Split",
+  argTypes: footerArgTypes(FooterBrandPanelSplit, footerBrandPanelSplitCopy),
+  render: (args, context) => <FooterBrandPanelSplit locale={localeOf(context)} {...photoPropsOf("brand-panel-split", context, footerBrandPanelSplitCopy)} {...args} />,
+}
+
+export const GiantWordmark: StoryObj<typeof FooterGiantWordmark> = {
+  name: "Giant Wordmark",
+  argTypes: footerArgTypes(FooterGiantWordmark, footerGiantWordmarkCopy),
+  render: (args, context) => <FooterGiantWordmark locale={localeOf(context)} {...photoPropsOf("giant-wordmark", context, footerGiantWordmarkCopy)} {...args} />,
+}
+
+export const ImageBackedBrand: StoryObj<typeof FooterImageBackedBrand> = {
+  name: "Image-Backed Brand",
+  argTypes: footerArgTypes(FooterImageBackedBrand, footerImageBackedBrandCopy),
+  render: (args, context) => <FooterImageBackedBrand locale={localeOf(context)} {...photoPropsOf("image-backed-brand", context, footerImageBackedBrandCopy)} {...args} />,
+}
+
+export const ImageBackedBrandWithoutPhotos: StoryObj<typeof FooterImageBackedBrand> = {
+  name: "Image-Backed Brand: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: footerArgTypes(FooterImageBackedBrand, footerImageBackedBrandCopy),
+  render: (args, context) => <FooterImageBackedBrand locale={localeOf(context)} {...args} />,
+}
+
+export const CenteredBrandMinimal: StoryObj<typeof FooterCenteredBrandMinimal> = {
+  name: "Centered Brand Minimal",
+  argTypes: footerArgTypes(FooterCenteredBrandMinimal, footerCenteredBrandMinimalCopy),
+  render: (args, context) => <FooterCenteredBrandMinimal locale={localeOf(context)} {...photoPropsOf("centered-brand-minimal", context, footerCenteredBrandMinimalCopy)} {...args} />,
+}
+
+export const MarqueeStrip: StoryObj<typeof FooterMarqueeStrip> = {
+  name: "Marquee Strip",
+  argTypes: footerArgTypes(FooterMarqueeStrip, footerMarqueeStripCopy),
+  render: (args, context) => <FooterMarqueeStrip locale={localeOf(context)} {...photoPropsOf("marquee-strip", context, footerMarqueeStripCopy)} {...args} />,
+}
+
+export const BigTypeLinkStack: StoryObj<typeof FooterBigTypeLinkStack> = {
+  name: "Big-Type Link Stack",
+  argTypes: footerArgTypes(FooterBigTypeLinkStack, footerBigTypeLinkStackCopy),
+  render: (args, context) => <FooterBigTypeLinkStack locale={localeOf(context)} {...photoPropsOf("big-type-link-stack", context, footerBigTypeLinkStackCopy)} {...args} />,
+}
+
+export const BentoTile: StoryObj<typeof FooterBentoTile> = {
+  name: "Bento Tile",
+  argTypes: footerArgTypes(FooterBentoTile, footerBentoTileCopy),
+  render: (args, context) => <FooterBentoTile locale={localeOf(context)} {...photoPropsOf("bento-tile", context, footerBentoTileCopy)} {...args} />,
 }
 
 export const CtaBandColumns: StoryObj<typeof FooterCtaBandColumns> = {

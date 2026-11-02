@@ -130,9 +130,9 @@ export const BLOG_CARDS_FAMILIES: BlogCardsFamily[] = ["grids", "features", "lis
  * and sign-up bands, the minimal bars, the contact and support layouts, legal and trust,
  * commerce, community and careers, and the utility and product footers.
  */
-export type FooterFamily = "sitemap" | "cta"
+export type FooterFamily = "sitemap" | "brand" | "cta"
 
-export const FOOTER_FAMILIES: FooterFamily[] = ["sitemap", "cta"]
+export const FOOTER_FAMILIES: FooterFamily[] = ["sitemap", "brand", "cta"]
 
 export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | SocialProofFamily | BlogCardsFamily | FooterFamily> = {
   /** The registry item, and the file it installs to. */
@@ -455,6 +455,13 @@ export const FOOTER_TYPES: BlockType<FooterFamily>[] = [
   { slug: "footer-accordion-sitemap", family: "sitemap" },
   { slug: "footer-two-tier-doormat", family: "sitemap" },
   { slug: "footer-index-numbered-columns", family: "sitemap" },
+  { slug: "footer-brand-panel-split", family: "brand" },
+  { slug: "footer-giant-wordmark", family: "brand", inverse: true },
+  { slug: "footer-image-backed-brand", family: "brand", inverse: true },
+  { slug: "footer-centered-brand-minimal", family: "brand" },
+  { slug: "footer-marquee-strip", family: "brand" },
+  { slug: "footer-big-type-link-stack", family: "brand" },
+  { slug: "footer-bento-tile", family: "brand" },
   { slug: "footer-cta-band-columns", family: "cta", inverse: true },
   { slug: "footer-newsletter-split", family: "cta" },
   { slug: "footer-floating-demo-card", family: "cta" },
