@@ -3510,7 +3510,8 @@
         "all": "All",
         "sitemap": "Sitemap & directory",
         "brand": "Brand-led",
-        "cta": "Call to action & sign-up"
+        "cta": "Call to action & sign-up",
+        "bars": "Minimal bars"
       },
       "types": {
         "footer-four-column-directory": "Four-Column Directory",
@@ -3528,7 +3529,11 @@
         "footer-cta-band-columns": "CTA Band + Columns",
         "footer-newsletter-split": "Newsletter Split",
         "footer-floating-demo-card": "Floating Demo Card",
-        "footer-big-question-cta": "Big-Question CTA"
+        "footer-big-question-cta": "Big-Question CTA",
+        "footer-single-line-bar": "Single-Line Bar",
+        "footer-split-hairline-micro": "Split Hairline Micro",
+        "footer-two-row-compact": "Two-Row Compact",
+        "footer-inline-preferences": "Inline + Preferences"
       }
     }
   },

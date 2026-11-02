@@ -15,6 +15,10 @@ import { FooterCtaBandColumns, footerCtaBandColumnsCopy } from "../../../../../p
 import { FooterNewsletterSplit, footerNewsletterSplitCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-newsletter-split/FooterNewsletterSplit"
 import { FooterFloatingDemoCard, footerFloatingDemoCardCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-floating-demo-card/FooterFloatingDemoCard"
 import { FooterBigQuestionCta, footerBigQuestionCtaCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-big-question-cta/FooterBigQuestionCta"
+import { FooterSingleLineBar, footerSingleLineBarCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-single-line-bar/FooterSingleLineBar"
+import { FooterSplitHairlineMicro, footerSplitHairlineMicroCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-split-hairline-micro/FooterSplitHairlineMicro"
+import { FooterTwoRowCompact, footerTwoRowCompactCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-two-row-compact/FooterTwoRowCompact"
+import { FooterInlinePreferences, footerInlinePreferencesCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-inline-preferences/FooterInlinePreferences"
 import { footerArgTypes, footerViewports, localeOf, photoPropsOf } from "./footer-story-kit"
 
 /**
@@ -161,4 +165,28 @@ export const BigQuestionCta: StoryObj<typeof FooterBigQuestionCta> = {
   name: "Big-Question CTA",
   argTypes: footerArgTypes(FooterBigQuestionCta, footerBigQuestionCtaCopy),
   render: (args, context) => <FooterBigQuestionCta locale={localeOf(context)} {...photoPropsOf("big-question-cta", context, footerBigQuestionCtaCopy)} {...args} />,
+}
+
+export const SingleLineBar: StoryObj<typeof FooterSingleLineBar> = {
+  name: "Single-Line Bar",
+  argTypes: footerArgTypes(FooterSingleLineBar, footerSingleLineBarCopy),
+  render: (args, context) => <FooterSingleLineBar locale={localeOf(context)} {...photoPropsOf("single-line-bar", context, footerSingleLineBarCopy)} {...args} />,
+}
+
+export const SplitHairlineMicro: StoryObj<typeof FooterSplitHairlineMicro> = {
+  name: "Split Hairline Micro",
+  argTypes: footerArgTypes(FooterSplitHairlineMicro, footerSplitHairlineMicroCopy),
+  render: (args, context) => <FooterSplitHairlineMicro locale={localeOf(context)} {...photoPropsOf("split-hairline-micro", context, footerSplitHairlineMicroCopy)} {...args} />,
+}
+
+export const TwoRowCompact: StoryObj<typeof FooterTwoRowCompact> = {
+  name: "Two-Row Compact",
+  argTypes: footerArgTypes(FooterTwoRowCompact, footerTwoRowCompactCopy),
+  render: (args, context) => <FooterTwoRowCompact locale={localeOf(context)} {...photoPropsOf("two-row-compact", context, footerTwoRowCompactCopy)} {...args} />,
+}
+
+export const InlinePreferences: StoryObj<typeof FooterInlinePreferences> = {
+  name: "Inline + Preferences",
+  argTypes: footerArgTypes(FooterInlinePreferences, footerInlinePreferencesCopy),
+  render: (args, context) => <FooterInlinePreferences locale={localeOf(context)} {...photoPropsOf("inline-preferences", context, footerInlinePreferencesCopy)} {...args} />,
 }

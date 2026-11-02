@@ -3510,7 +3510,8 @@
         "all": "الكل",
         "sitemap": "خريطة الموقع والأدلة",
         "brand": "قائمة على العلامة",
-        "cta": "الدعوة إلى الإجراء والاشتراك"
+        "cta": "الدعوة إلى الإجراء والاشتراك",
+        "bars": "أشرطة مصغّرة"
       },
       "types": {
         "footer-four-column-directory": "دليل بأربعة أعمدة",
@@ -3528,7 +3529,11 @@
         "footer-cta-band-columns": "شريط دعوة مع أعمدة",
         "footer-newsletter-split": "نشرة بريدية مع روابط",
         "footer-floating-demo-card": "بطاقة عرض عائمة",
-        "footer-big-question-cta": "دعوة بسؤال كبير"
+        "footer-big-question-cta": "دعوة بسؤال كبير",
+        "footer-single-line-bar": "شريط بسطر واحد",
+        "footer-split-hairline-micro": "شريط مصغّر بخط رفيع",
+        "footer-two-row-compact": "شريط مدمج بصفين",
+        "footer-inline-preferences": "شريط مع التفضيلات"
       }
     }
   },

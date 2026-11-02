@@ -7552,6 +7552,95 @@
           "target": "components/blocks/footer-big-question-cta.tsx"
         }
       ]
+    },
+    {
+      "name": "footer-single-line-bar",
+      "type": "registry:block",
+      "title": "Footer: Single-Line Bar",
+      "description": "One line: the logo, the copyright and the social marks.",
+      "dependencies": [],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-single-line-bar/FooterSingleLineBar.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-single-line-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-split-hairline-micro",
+      "type": "registry:block",
+      "title": "Footer: Split Hairline Micro",
+      "description": "A thin hairline bar with the copyright at one end and the social marks at the other.",
+      "dependencies": [],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-split-hairline-micro/FooterSplitHairlineMicro.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-split-hairline-micro.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-two-row-compact",
+      "type": "registry:block",
+      "title": "Footer: Two-Row Compact",
+      "description": "Two compact rows: the brand and its links, then the copyright and the social marks.",
+      "dependencies": [],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-two-row-compact/FooterTwoRowCompact.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-two-row-compact.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-inline-preferences",
+      "type": "registry:block",
+      "title": "Footer: Inline + Preferences",
+      "description": "One row of links with a theme switch and a language select.",
+      "dependencies": [],
+      "registryDependencies": [
+        "footer",
+        "select",
+        "switch"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-inline-preferences/FooterInlinePreferences.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-inline-preferences.tsx"
+        }
+      ]
     }
   ]
 }
