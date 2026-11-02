@@ -23,8 +23,8 @@ import { FeaturesSection, type FeaturesLocale } from "../features/features"
  * neutral wash, using the Badge, Avatar, Progress and Skeleton atoms.
  *
  * The first, Plan, has its message card flush with the bottom edge; the
- * three static cards centre their mock-up in a `foreground/5` wash with
- * 16px top corners (Figma's `opacity/neutral/10` has no token yet), and the
+ * three static cards centre their mock-up in a `soft-neutral` wash with
+ * 16px top corners, and the
  * marks in the tiles take their tone's colour.
  *
  * Desktop sets the four across. Tablet gives Plan and Next steps a full row
@@ -69,7 +69,7 @@ const STEP_ICONS = [Sparkles, Hourglass, CreditCard]
 
 const TILE_TONE = {
   success: "bg-soft-success-30",
-  info: "bg-info/30",
+  info: "bg-soft-info-30",
   warning: "bg-soft-warning-30",
 } as const
 
@@ -209,7 +209,7 @@ export function FeaturesExpandingStepCards({ locale = "en", heading, description
               )
             })}
           </ol>
-          <div className="flex flex-col justify-end bg-soft-info bg-gradient-to-b from-soft-info to-soft-info px-4 pt-4 [@container(min-width:48rem)]:px-6 [@container(min-width:48rem)]:pt-6 [@container(min-width:72rem)]:min-h-0 [@container(min-width:72rem)]:flex-1">
+          <div className="flex flex-col justify-end bg-soft-info-20 px-4 pt-4 [@container(min-width:48rem)]:px-6 [@container(min-width:48rem)]:pt-6 [@container(min-width:72rem)]:min-h-0 [@container(min-width:72rem)]:flex-1">
             <div className="flex flex-col gap-3 rounded-t-2xl bg-card p-4 text-card-foreground shadow-lg">
               <div className="flex items-center gap-3">
                 <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-soft-success-30">
@@ -237,7 +237,7 @@ export function FeaturesExpandingStepCards({ locale = "en", heading, description
             <h3 className={TITLE}>{readyCopy.title}</h3>
             <p className={BODY}>{readyCopy.description}</p>
           </div>
-          <div className="flex flex-col justify-center rounded-t-[16px] bg-foreground/5 p-4 [@container(min-width:72rem)]:min-h-0 [@container(min-width:72rem)]:flex-1">
+          <div className="flex flex-col justify-center rounded-t-[16px] bg-soft-neutral p-4 [@container(min-width:72rem)]:min-h-0 [@container(min-width:72rem)]:flex-1">
             <MockCard tone="info" icon={NotebookText} label={readyCopy.label}>
               <Badge variant="soft" tone="info" size="sm" radius="standard" className="self-start">
                 {readyCopy.badge}
@@ -256,7 +256,7 @@ export function FeaturesExpandingStepCards({ locale = "en", heading, description
             <h3 className={TITLE}>{recordCopy.title}</h3>
             <p className={BODY}>{recordCopy.description}</p>
           </div>
-          <div className="flex flex-col justify-center rounded-t-[16px] bg-foreground/5 p-4 [@container(min-width:72rem)]:min-h-0 [@container(min-width:72rem)]:flex-1">
+          <div className="flex flex-col justify-center rounded-t-[16px] bg-soft-neutral p-4 [@container(min-width:72rem)]:min-h-0 [@container(min-width:72rem)]:flex-1">
             <MockCard tone="info" icon={Mic} label={recordCopy.label}>
               <Badge variant="soft" tone="info" size="sm" radius="standard" className="self-start">
                 {recordCopy.badge}
@@ -272,7 +272,7 @@ export function FeaturesExpandingStepCards({ locale = "en", heading, description
             <h3 className={TITLE}>{nextCopy.title}</h3>
             <p className={BODY}>{nextCopy.description}</p>
           </div>
-          <div className="flex flex-col justify-center rounded-t-[16px] bg-foreground/5 p-4 [@container(min-width:72rem)]:min-h-0 [@container(min-width:72rem)]:flex-1">
+          <div className="flex flex-col justify-center rounded-t-[16px] bg-soft-neutral p-4 [@container(min-width:72rem)]:min-h-0 [@container(min-width:72rem)]:flex-1">
             <MockCard tone="success" icon={Send} label={nextCopy.label}>
               <Badge variant="soft" tone="success" size="sm" radius="standard" className="self-start">
                 {nextCopy.badge}

@@ -222,7 +222,7 @@ export function FeaturesIconTitledPreviewRail({
           <ul role="list" className="flex w-full flex-col gap-3">
             {p.packages.map((pkg, index) => (
               <li key={pkg.name} className={cn(card, "flex-row items-center p-3", index === 1 && "opacity-80", index === 2 && "opacity-40")}>
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-neutral/10">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-soft-neutral">
                   <Receipt size={16} strokeWidth={1.5} absoluteStrokeWidth aria-hidden className="text-muted-foreground" />
                 </span>
                 <span className="flex min-w-0 flex-col">
