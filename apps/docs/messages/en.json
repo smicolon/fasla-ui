@@ -3512,7 +3512,8 @@
         "brand": "Brand-led",
         "cta": "Call to action & sign-up",
         "bars": "Minimal bars",
-        "contact": "Contact & support"
+        "contact": "Contact & support",
+        "legal": "Legal & trust"
       },
       "types": {
         "footer-four-column-directory": "Four-Column Directory",
@@ -3537,7 +3538,9 @@
         "footer-inline-preferences": "Inline + Preferences",
         "footer-contact-first": "Contact-First",
         "footer-support-contact": "Support & Contact",
-        "footer-local-business": "Local Business"
+        "footer-local-business": "Local Business",
+        "footer-legal-first-slim": "Legal-First Slim",
+        "footer-trust-compliance": "Trust & Compliance"
       }
     }
   },

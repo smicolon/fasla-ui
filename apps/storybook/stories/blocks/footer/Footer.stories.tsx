@@ -22,6 +22,8 @@ import { FooterInlinePreferences, footerInlinePreferencesCopy } from "../../../.
 import { FooterContactFirst, footerContactFirstCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-contact-first/FooterContactFirst"
 import { FooterSupportContact, footerSupportContactCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-support-contact/FooterSupportContact"
 import { FooterLocalBusiness, footerLocalBusinessCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-local-business/FooterLocalBusiness"
+import { FooterLegalFirstSlim, footerLegalFirstSlimCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-legal-first-slim/FooterLegalFirstSlim"
+import { FooterTrustCompliance, footerTrustComplianceCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-trust-compliance/FooterTrustCompliance"
 import { footerArgTypes, footerViewports, localeOf, photoPropsOf } from "./footer-story-kit"
 
 /**
@@ -224,4 +226,16 @@ export const LocalBusinessWithoutPhotos: StoryObj<typeof FooterLocalBusiness> = 
   tags: ["!dev", "!autodocs"],
   argTypes: footerArgTypes(FooterLocalBusiness, footerLocalBusinessCopy),
   render: (args, context) => <FooterLocalBusiness locale={localeOf(context)} {...args} />,
+}
+
+export const LegalFirstSlim: StoryObj<typeof FooterLegalFirstSlim> = {
+  name: "Legal-First Slim",
+  argTypes: footerArgTypes(FooterLegalFirstSlim, footerLegalFirstSlimCopy),
+  render: (args, context) => <FooterLegalFirstSlim locale={localeOf(context)} {...photoPropsOf("legal-first-slim", context, footerLegalFirstSlimCopy)} {...args} />,
+}
+
+export const TrustCompliance: StoryObj<typeof FooterTrustCompliance> = {
+  name: "Trust & Compliance",
+  argTypes: footerArgTypes(FooterTrustCompliance, footerTrustComplianceCopy),
+  render: (args, context) => <FooterTrustCompliance locale={localeOf(context)} {...photoPropsOf("trust-compliance", context, footerTrustComplianceCopy)} {...args} />,
 }

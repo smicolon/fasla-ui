@@ -906,6 +906,8 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "footer-local-business": dynamic(() =>
     import("@fasla-ui/blocks/footer-local-business/FooterLocalBusiness").then((m) => withFooterPhotos(m.FooterLocalBusiness, "local-business", m.footerLocalBusinessCopy))
   ),
+  "footer-legal-first-slim": dynamic(() => import("@fasla-ui/blocks/footer-legal-first-slim/FooterLegalFirstSlim").then((m) => m.FooterLegalFirstSlim)),
+  "footer-trust-compliance": dynamic(() => import("@fasla-ui/blocks/footer-trust-compliance/FooterTrustCompliance").then((m) => m.FooterTrustCompliance)),
   // footer:end
 }
 

@@ -3512,7 +3512,8 @@
         "brand": "قائمة على العلامة",
         "cta": "الدعوة إلى الإجراء والاشتراك",
         "bars": "أشرطة مصغّرة",
-        "contact": "التواصل والدعم"
+        "contact": "التواصل والدعم",
+        "legal": "القانون والثقة"
       },
       "types": {
         "footer-four-column-directory": "دليل بأربعة أعمدة",
@@ -3537,7 +3538,9 @@
         "footer-inline-preferences": "شريط مع التفضيلات",
         "footer-contact-first": "التواصل أولًا",
         "footer-support-contact": "الدعم والتواصل",
-        "footer-local-business": "نشاط تجاري محلي"
+        "footer-local-business": "نشاط تجاري محلي",
+        "footer-legal-first-slim": "شريط قانوني أولًا",
+        "footer-trust-compliance": "الثقة والامتثال"
       }
     }
   },

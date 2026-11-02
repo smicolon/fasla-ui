@@ -7714,6 +7714,54 @@
           "target": "components/blocks/footer-local-business.tsx"
         }
       ]
+    },
+    {
+      "name": "footer-legal-first-slim",
+      "type": "registry:block",
+      "title": "Footer: Legal-First Slim",
+      "description": "A slim footer that leads with the legal entity line and four badges.",
+      "dependencies": [],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-legal-first-slim/FooterLegalFirstSlim.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-legal-first-slim.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-trust-compliance",
+      "type": "registry:block",
+      "title": "Footer: Trust & Compliance",
+      "description": "Certification cards and a trust-centre button over the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "footer"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-trust-compliance/FooterTrustCompliance.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-trust-compliance.tsx"
+        }
+      ]
     }
   ]
 }
