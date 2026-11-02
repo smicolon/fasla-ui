@@ -99,6 +99,11 @@
     --soft-success-20: rgb(22 163 74 / 20%);
     --soft-success-30: rgb(22 163 74 / 30%);
 
+    /* Soft tints the Features blocks use — Figma opacity/neutral/10, opacity/info/20 and opacity/info/30, exactly as Figma draws them, the same in Light and Dark */
+    --soft-neutral: rgb(71 72 87 / 10%);
+    --soft-info-20: rgb(2 132 199 / 20%);
+    --soft-info-30: rgb(2 132 199 / 30%);
+
     /* Overlay behind a modal — Figma custom/backdrop-overlay, the Alert Dialog backdrop */
     --backdrop-overlay: rgb(60 58 64 / 60%);
 
@@ -201,6 +206,11 @@
     --soft-warning-30: rgb(217 119 6 / 30%);
     --soft-success-20: rgb(22 163 74 / 20%);
     --soft-success-30: rgb(22 163 74 / 30%);
+
+    /* Soft tints the Features blocks use — Figma opacity/neutral/10, opacity/info/20 and opacity/info/30, exactly as Figma draws them, the same in Light and Dark */
+    --soft-neutral: rgb(71 72 87 / 10%);
+    --soft-info-20: rgb(2 132 199 / 20%);
+    --soft-info-30: rgb(2 132 199 / 30%);
 
     /* Overlay behind a modal — Figma custom/backdrop-overlay, the Alert Dialog backdrop */
     --backdrop-overlay: rgb(60 58 64 / 80%);

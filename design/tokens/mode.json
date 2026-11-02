@@ -5,8 +5,8 @@
     "collectionId": "VariableCollectionId:82:3",
     "modes": { "light": "⚪️ Light", "dark": "🌑 Dark" },
     "measured": "2026-10-13",
-    "count": 60,
-    "note": "Snapshot of the 41 theme/* variables in the ☾ Mode collection, plus sixteen opacity/* Soft tints (`soft-*`): the six `/10` tints Badge Soft and Soft Button's Enabled are filled with, the `/20` and `/30` steps of primary, secondary and destructive that Soft Button uses for Hover and Clicked, and four the Contact Us blocks use (`soft-warning-5`, `soft-warning-30`, `soft-success-30`, added 2026-10-29, and `soft-success-20`, added 2026-10-31 and read live from ☾ Mode: `opacity/success/20` is an alias of the 🌈 Themes variable, rgb(22 163 74) at 20%, the same in Light and Dark; Figma draws `opacity/warning/30` on #d97706 where the other warning tints use #e39219, and the code tint matches Figma exactly; read 2026-10-30), aliases resolved to primitives. `backdrop-overlay` is `custom/backdrop-overlay`, the overlay behind Alert Dialog (VariableID:3734:45929, read 2026-10-15): one #3c3a40 at 60% in Light and 80% in Dark, not an alias. `radius` holds the ☾ Mode radii components bind that no Tailwind class gives in both apps — `border radius/xs` and `border radius/md` (Avatar Standard), `border radius/sm` (Badge Standard); they are mode-independent, so only the light block declares them. Figma is the source of truth; this file is the committed record of what it said when the two apps were last synced to it. `light`/`dark` are the exact CSS values both apps must declare — tokens/mode.test.ts asserts that. `via` records the alias chain, so a future drift diff shows whether a value changed or was re-aliased. Pin the collection id when re-reading: 41 of these names also exist in 🌈 Themes with a single mode, and a name-only lookup silently returns that copy. Resolve every alias hop in the same mode as the token: `custom/black` and `custom/white` are themselves ☾ Mode variables that swap in Dark (`custom/black` is white there), so resolving an intermediate hop in its default mode gives the Light value — that is how `destructive-foreground` dark was once recorded as #000000. `base-black` and `base-white` are the exception to the ☾ Mode rule: they are the 💨 Tailwind primitives `colors/base/black` (#000000) and `colors/base/white` (#ffffff), carried here so a surface that must not flip in Dark (How it Works' phone) has a token, and unlike `custom/black` they are the same in both modes (added 2026-10-31)."
+    "count": 63,
+    "note": "Snapshot of the 41 theme/* variables in the ☾ Mode collection, plus nineteen opacity/* Soft tints (`soft-*`): the six `/10` tints Badge Soft and Soft Button's Enabled are filled with, the `/20` and `/30` steps of primary, secondary and destructive that Soft Button uses for Hover and Clicked, and four the Contact Us blocks use (`soft-warning-5`, `soft-warning-30`, `soft-success-30`, added 2026-10-29, and `soft-success-20`, added 2026-10-31 and read live from ☾ Mode: `opacity/success/20` is an alias of the 🌈 Themes variable, rgb(22 163 74) at 20%, the same in Light and Dark; Figma draws `opacity/warning/30` on #d97706 where the other warning tints use #e39219, and the code tint matches Figma exactly; read 2026-10-30), and three the Features blocks use (`soft-neutral`, `soft-info-20` and `soft-info-30`, added 2026-11-02 and read live from ☾ Mode: each is an alias of the 🌈 Themes variable of the same name, `opacity/neutral/10` rgb(71 72 87) at 10% and `opacity/info/20` and `/30` rgb(2 132 199) at 20% and 30%, the same in Light and Dark), aliases resolved to primitives. `backdrop-overlay` is `custom/backdrop-overlay`, the overlay behind Alert Dialog (VariableID:3734:45929, read 2026-10-15): one #3c3a40 at 60% in Light and 80% in Dark, not an alias. `radius` holds the ☾ Mode radii components bind that no Tailwind class gives in both apps — `border radius/xs` and `border radius/md` (Avatar Standard), `border radius/sm` (Badge Standard); they are mode-independent, so only the light block declares them. Figma is the source of truth; this file is the committed record of what it said when the two apps were last synced to it. `light`/`dark` are the exact CSS values both apps must declare — tokens/mode.test.ts asserts that. `via` records the alias chain, so a future drift diff shows whether a value changed or was re-aliased. Pin the collection id when re-reading: 41 of these names also exist in 🌈 Themes with a single mode, and a name-only lookup silently returns that copy. Resolve every alias hop in the same mode as the token: `custom/black` and `custom/white` are themselves ☾ Mode variables that swap in Dark (`custom/black` is white there), so resolving an intermediate hop in its default mode gives the Light value — that is how `destructive-foreground` dark was once recorded as #000000. `base-black` and `base-white` are the exception to the ☾ Mode rule: they are the 💨 Tailwind primitives `colors/base/black` (#000000) and `colors/base/white` (#ffffff), carried here so a surface that must not flip in Dark (How it Works' phone) has a token, and unlike `custom/black` they are the same in both modes (added 2026-10-31)."
   },
   "tokens": {
     "background": {
@@ -362,6 +362,30 @@
       "via": {
         "light": "opacity/success/30 → opacity/success/30 (raw)",
         "dark": "opacity/success/30 → opacity/success/30 (raw)"
+      }
+    },
+    "soft-neutral": {
+      "light": "rgb(71 72 87 / 10%)",
+      "dark": "rgb(71 72 87 / 10%)",
+      "via": {
+        "light": "opacity/neutral/10 → opacity/neutral/10 (raw)",
+        "dark": "opacity/neutral/10 → opacity/neutral/10 (raw)"
+      }
+    },
+    "soft-info-20": {
+      "light": "rgb(2 132 199 / 20%)",
+      "dark": "rgb(2 132 199 / 20%)",
+      "via": {
+        "light": "opacity/info/20 → opacity/info/20 (raw)",
+        "dark": "opacity/info/20 → opacity/info/20 (raw)"
+      }
+    },
+    "soft-info-30": {
+      "light": "rgb(2 132 199 / 30%)",
+      "dark": "rgb(2 132 199 / 30%)",
+      "via": {
+        "light": "opacity/info/30 → opacity/info/30 (raw)",
+        "dark": "opacity/info/30 → opacity/info/30 (raw)"
       }
     },
     "backdrop-overlay": {
