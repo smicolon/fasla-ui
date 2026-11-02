@@ -130,9 +130,9 @@ export const BLOG_CARDS_FAMILIES: BlogCardsFamily[] = ["grids", "features", "lis
  * and sign-up bands, the minimal bars, the contact and support layouts, legal and trust,
  * commerce, community and careers, and the utility and product footers.
  */
-export type FooterFamily = "sitemap" | "brand" | "cta" | "bars" | "contact" | "legal" | "commerce" | "community"
+export type FooterFamily = "sitemap" | "brand" | "cta" | "bars" | "contact" | "legal" | "commerce" | "community" | "utility"
 
-export const FOOTER_FAMILIES: FooterFamily[] = ["sitemap", "brand", "cta", "bars", "contact", "legal", "commerce", "community"]
+export const FOOTER_FAMILIES: FooterFamily[] = ["sitemap", "brand", "cta", "bars", "contact", "legal", "commerce", "community", "utility"]
 
 export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | SocialProofFamily | BlogCardsFamily | FooterFamily> = {
   /** The registry item, and the file it installs to. */
@@ -479,6 +479,10 @@ export const FOOTER_TYPES: BlockType<FooterFamily>[] = [
   { slug: "footer-service-promise-band", family: "commerce" },
   { slug: "footer-careers-culture", family: "community" },
   { slug: "footer-community-events", family: "community" },
+  { slug: "footer-dashboard-slim-bar", family: "utility" },
+  { slug: "footer-docs-page", family: "utility" },
+  { slug: "footer-multi-region", family: "utility" },
+  { slug: "footer-product-family-switcher", family: "utility" },
 ]
 
 export const ALL_BLOCK_TYPES: BlockType[] = [

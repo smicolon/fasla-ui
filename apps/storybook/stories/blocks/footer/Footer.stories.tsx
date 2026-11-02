@@ -28,6 +28,10 @@ import { FooterEcommerceMega, footerEcommerceMegaCopy } from "../../../../../pac
 import { FooterServicePromiseBand, footerServicePromiseBandCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-service-promise-band/FooterServicePromiseBand"
 import { FooterCareersCulture, footerCareersCultureCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-careers-culture/FooterCareersCulture"
 import { FooterCommunityEvents, footerCommunityEventsCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-community-events/FooterCommunityEvents"
+import { FooterDashboardSlimBar, footerDashboardSlimBarCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-dashboard-slim-bar/FooterDashboardSlimBar"
+import { FooterDocsPage, footerDocsPageCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-docs-page/FooterDocsPage"
+import { FooterMultiRegion, footerMultiRegionCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-multi-region/FooterMultiRegion"
+import { FooterProductFamilySwitcher, footerProductFamilySwitcherCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-product-family-switcher/FooterProductFamilySwitcher"
 import { footerArgTypes, footerViewports, localeOf, photoPropsOf } from "./footer-story-kit"
 
 /**
@@ -273,4 +277,28 @@ export const CommunityEvents: StoryObj<typeof FooterCommunityEvents> = {
   name: "Community & Events",
   argTypes: footerArgTypes(FooterCommunityEvents, footerCommunityEventsCopy),
   render: (args, context) => <FooterCommunityEvents locale={localeOf(context)} {...photoPropsOf("community-events", context, footerCommunityEventsCopy)} {...args} />,
+}
+
+export const DashboardSlimBar: StoryObj<typeof FooterDashboardSlimBar> = {
+  name: "Dashboard Slim Bar",
+  argTypes: footerArgTypes(FooterDashboardSlimBar, footerDashboardSlimBarCopy),
+  render: (args, context) => <FooterDashboardSlimBar locale={localeOf(context)} {...photoPropsOf("dashboard-slim-bar", context, footerDashboardSlimBarCopy)} {...args} />,
+}
+
+export const DocsPage: StoryObj<typeof FooterDocsPage> = {
+  name: "Docs Page",
+  argTypes: footerArgTypes(FooterDocsPage, footerDocsPageCopy),
+  render: (args, context) => <FooterDocsPage locale={localeOf(context)} {...photoPropsOf("docs-page", context, footerDocsPageCopy)} {...args} />,
+}
+
+export const MultiRegion: StoryObj<typeof FooterMultiRegion> = {
+  name: "Multi-Region",
+  argTypes: footerArgTypes(FooterMultiRegion, footerMultiRegionCopy),
+  render: (args, context) => <FooterMultiRegion locale={localeOf(context)} {...photoPropsOf("multi-region", context, footerMultiRegionCopy)} {...args} />,
+}
+
+export const ProductFamilySwitcher: StoryObj<typeof FooterProductFamilySwitcher> = {
+  name: "Product Family Switcher",
+  argTypes: footerArgTypes(FooterProductFamilySwitcher, footerProductFamilySwitcherCopy),
+  render: (args, context) => <FooterProductFamilySwitcher locale={localeOf(context)} {...photoPropsOf("product-family-switcher", context, footerProductFamilySwitcherCopy)} {...args} />,
 }

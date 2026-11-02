@@ -281,7 +281,8 @@ export const CODE_MAP = {
       "single-line-bar", "split-hairline-micro", "two-row-compact", "inline-preferences",
       "contact-first", "support-contact", "local-business", "legal-first-slim",
       "trust-compliance", "ecommerce-mega", "service-promise-band", "careers-culture",
-      "community-events",
+      "community-events", "dashboard-slim-bar", "docs-page", "multi-region",
+      "product-family-switcher",
     ].map((type) => [`footer-${type}`, null])
   ),
 }

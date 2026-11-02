@@ -3515,7 +3515,8 @@
         "contact": "Contact & support",
         "legal": "Legal & trust",
         "commerce": "Commerce",
-        "community": "Community & careers"
+        "community": "Community & careers",
+        "utility": "Utility & product"
       },
       "types": {
         "footer-four-column-directory": "Four-Column Directory",
@@ -3546,7 +3547,11 @@
         "footer-ecommerce-mega": "Ecommerce Mega",
         "footer-service-promise-band": "Service Promise Band",
         "footer-careers-culture": "Careers & Culture",
-        "footer-community-events": "Community & Events"
+        "footer-community-events": "Community & Events",
+        "footer-dashboard-slim-bar": "Dashboard Slim Bar",
+        "footer-docs-page": "Docs Page",
+        "footer-multi-region": "Multi-Region",
+        "footer-product-family-switcher": "Product Family Switcher"
       }
     }
   },

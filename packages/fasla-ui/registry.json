@@ -7858,6 +7858,106 @@
           "target": "components/blocks/footer-community-events.tsx"
         }
       ]
+    },
+    {
+      "name": "footer-dashboard-slim-bar",
+      "type": "registry:block",
+      "title": "Footer: Dashboard Slim Bar",
+      "description": "A slim app status bar: status, release links, a search shortcut, help links and a utility button.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "footer",
+        "status-indicator"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-dashboard-slim-bar/FooterDashboardSlimBar.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-dashboard-slim-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-docs-page",
+      "type": "registry:block",
+      "title": "Footer: Docs Page",
+      "description": "A helpful vote, an edit link, previous and next cards and the page's contributors.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-docs-page/FooterDocsPage.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-docs-page.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-multi-region",
+      "type": "registry:block",
+      "title": "Footer: Multi-Region",
+      "description": "Six region cards with language, region and currency selects.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "footer",
+        "select"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-multi-region/FooterMultiRegion.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-multi-region.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-product-family-switcher",
+      "type": "registry:block",
+      "title": "Footer: Product Family Switcher",
+      "description": "Product tiles with an Explore link each and a compare-products button.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-product-family-switcher/FooterProductFamilySwitcher.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-product-family-switcher.tsx"
+        }
+      ]
     }
   ]
 }

@@ -3515,7 +3515,8 @@
         "contact": "التواصل والدعم",
         "legal": "القانون والثقة",
         "commerce": "التجارة",
-        "community": "المجتمع والوظائف"
+        "community": "المجتمع والوظائف",
+        "utility": "الأدوات والمنتج"
       },
       "types": {
         "footer-four-column-directory": "دليل بأربعة أعمدة",
@@ -3546,7 +3547,11 @@
         "footer-ecommerce-mega": "تذييل المتجر الواسع",
         "footer-service-promise-band": "شريط وعود الخدمة",
         "footer-careers-culture": "الوظائف والثقافة",
-        "footer-community-events": "المجتمع والفعاليات"
+        "footer-community-events": "المجتمع والفعاليات",
+        "footer-dashboard-slim-bar": "شريط لوحة التحكم المصغّر",
+        "footer-docs-page": "تذييل صفحة توثيق",
+        "footer-multi-region": "مناطق متعددة",
+        "footer-product-family-switcher": "مبدّل عائلة المنتجات"
       }
     }
   },

@@ -914,6 +914,10 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
     import("@fasla-ui/blocks/footer-careers-culture/FooterCareersCulture").then((m) => withFooterPhotos(m.FooterCareersCulture, "careers-culture", m.footerCareersCultureCopy))
   ),
   "footer-community-events": dynamic(() => import("@fasla-ui/blocks/footer-community-events/FooterCommunityEvents").then((m) => m.FooterCommunityEvents)),
+  "footer-dashboard-slim-bar": dynamic(() => import("@fasla-ui/blocks/footer-dashboard-slim-bar/FooterDashboardSlimBar").then((m) => m.FooterDashboardSlimBar)),
+  "footer-docs-page": dynamic(() => import("@fasla-ui/blocks/footer-docs-page/FooterDocsPage").then((m) => m.FooterDocsPage)),
+  "footer-multi-region": dynamic(() => import("@fasla-ui/blocks/footer-multi-region/FooterMultiRegion").then((m) => m.FooterMultiRegion)),
+  "footer-product-family-switcher": dynamic(() => import("@fasla-ui/blocks/footer-product-family-switcher/FooterProductFamilySwitcher").then((m) => m.FooterProductFamilySwitcher)),
   // footer:end
 }
 
