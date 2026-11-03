@@ -150,6 +150,25 @@ describe("Column Panels", () => {
     expect(screen.getByText("1 · Gather")).toBeTruthy()
     expect(screen.getByText(howItWorksColumnPanelsCopy.en.intro as string)).toBeTruthy()
   })
+
+  it.each(["en", "ar"] as const)("sets each summary figure in a box that follows the page, with only its digits isolated (%s)", (locale) => {
+    const { container } = render(<HowItWorksColumnPanels locale={locale} />)
+    const figures = [...container.querySelectorAll<HTMLElement>('[data-figure="metric"]')]
+    expect(figures).toHaveLength(3)
+    for (const figure of figures) {
+      // The box carries no direction of its own and aligns to the start, so it sits right in Arabic and left in English.
+      expect(figure.hasAttribute("dir")).toBe(false)
+      expect(figure.className).toContain("text-start")
+      expect(figure.className).toContain("block")
+      // The digits keep their order inside one left-to-right isolate, which is the only child and never the flex item itself.
+      expect(figure.children).toHaveLength(1)
+      const isolate = figure.firstElementChild as HTMLElement
+      expect(isolate.tagName).toBe("BDI")
+      expect(isolate.getAttribute("dir")).toBe("ltr")
+    }
+    // The order of "98%" is intact in the isolate.
+    expect(figures.map((figure) => figure.textContent)).toContain("98%")
+  })
 })
 
 describe("Numbered Instruction Panels", () => {

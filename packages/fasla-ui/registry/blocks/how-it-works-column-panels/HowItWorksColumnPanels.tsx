@@ -267,7 +267,10 @@ export function HowItWorksColumnPanels({ locale = "en", eyebrow, heading, intro,
             <div className="grid grid-cols-3 gap-2">
               {s.metrics.map((metric, index) => (
                 <div key={index} className="flex min-w-0 flex-col rounded-md bg-muted p-1.5 [@container(min-width:40rem)]:p-2">
-                  <HowItWorksLtr className="text-xl font-medium text-foreground">{metric.value}</HowItWorksLtr>
+                  {/* The figure's box follows the page (start = right in Arabic); only its digits are isolated. */}
+                  <span data-figure="metric" className="block text-start text-xl font-medium text-foreground">
+                    <HowItWorksLtr>{metric.value}</HowItWorksLtr>
+                  </span>
                   <span className="break-words text-xs text-muted-foreground">{metric.label}</span>
                 </div>
               ))}
