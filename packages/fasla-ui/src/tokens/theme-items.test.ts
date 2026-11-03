@@ -78,6 +78,18 @@ describe("theme (Fasla's colours)", () => {
     expect(dark["--foreground"]).toBe(theme.cssVars!.dark!.foreground)
   })
 
+  it("has a .light scope: every token at its Light value, for one element on a Dark page", () => {
+    const rule = theme.css![".light"] as Record<string, string>
+    expect(Object.keys(rule)).toEqual(tokenNames(mode).map((name) => `--${name}`))
+    for (const name of tokenNames(mode)) expect(rule[`--${name}`], name).toBe(mode.tokens[name]!.light)
+    // The theme's Light palette itself, restated for the scope.
+    expect(rule["--background"]).toBe(theme.cssVars!.light!.background)
+    // It is not a .dark rule: nothing in it is a Dark value that differs from Light.
+    for (const name of tokenNames(mode)) {
+      if (mode.tokens[name]!.light !== mode.tokens[name]!.dark) expect(rule[`--${name}`], name).not.toBe(mode.tokens[name]!.dark)
+    }
+  })
+
   it("brings the base theme with it, and leaves Geist to be added beside it", () => {
     // A dependency would import Geist from next/font/google on Next.js 14 too,
     // which has none there, and the build would fail.
@@ -108,6 +120,14 @@ describe("theme-base", () => {
     }
     const declared = Object.keys(light).filter((key) => !key.startsWith("--leading-"))
     expect(declared).toEqual(extras.map((name) => `--${name}`))
+  })
+
+  it("re-declares its tokens at Light under :where(.light), after :where(.dark), so a .light element on a Dark page gets them", () => {
+    const layer = base.css!["@layer base"] as Record<string, Record<string, string>>
+    const keys = Object.keys(layer)
+    expect(keys.indexOf(":where(.light)")).toBeGreaterThan(keys.indexOf(":where(.dark)"))
+    for (const name of extras) expect(layer[":where(.light)"]![`--${name}`], name).toBe(mode.tokens[name]!.light)
+    expect(Object.keys(layer[":where(.light)"]!)).toEqual(extras.map((name) => `--${name}`))
   })
 
   it("paints the page in the theme's colours, under :where() so a project's own body rule wins", () => {

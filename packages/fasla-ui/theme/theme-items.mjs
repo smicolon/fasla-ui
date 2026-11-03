@@ -226,6 +226,18 @@ function pageColourRules(value) {
 }
 
 /**
+ * `.light`: every token at its Light value, for one element. It pins a picture
+ * to Light inside a Dark page, as Figma pins a frame to its Light mode: the
+ * glows, windows and cards drawn in a How it Works picture read their colours
+ * from these variables, so under `.light` they are Light whatever the page is.
+ * Unlayered like `.dark`, and on the element itself, so it wins over a `.dark`
+ * further up. Only the elements that carry the class are affected.
+ */
+function lightScopeRule(all, value) {
+  return Object.fromEntries(all.map((name) => [`--${name}`, value(name, "light")]))
+}
+
+/**
  * The default border colour, for a bare `border`. Tailwind 4's preflight sets
  * `border: 0 solid`, so without this every Card and DataTable border is drawn
  * in currentColor: near-black, near-white in dark mode. Tailwind 3's preflight
@@ -311,6 +323,9 @@ export function buildThemeItems({ registryUrl, sources = loadSources() }) {
           ...leadingVars(typography, "en"),
         },
         ":where(.dark)": Object.fromEntries(extras.map((name) => [`--${name}`, value(name, "dark")])),
+        // After .dark, so a .light element inside a .dark page gets the light
+        // values of these tokens too; the theme item brings the rest.
+        ":where(.light)": Object.fromEntries(extras.map((name) => [`--${name}`, value(name, "light")])),
         '[dir="rtl"]': leadingVars(typography, "ar"),
         // The page in the theme's colours. The Next.js templates do this
         // themselves; a Vite app's stylesheet doesn't, and its page stayed
@@ -338,7 +353,7 @@ export function buildThemeItems({ registryUrl, sources = loadSources() }) {
     title: "Fasla theme: colours",
     description: "Fasla's full light and dark palette and radius, on top of the base theme. Replaces your project's colours.",
     registryDependencies: [itemUrl(registryUrl, "theme-base")],
-    css: { body: { "font-family": LATIN_FONT, ...SMOOTHING }, ...pageColourRules(value) },
+    css: { body: { "font-family": LATIN_FONT, ...SMOOTHING }, ...pageColourRules(value), ".light": lightScopeRule(all, value) },
     cssVars: {
       theme: radius,
       light: Object.fromEntries(all.map((name) => [name, value(name, "light")])),
