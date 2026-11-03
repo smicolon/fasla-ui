@@ -24,15 +24,20 @@ import {
 /*
  * Figma: `How it Works` (42334:294272), Type=Stacked Media + Text.
  *
- * A bold teal block (`chart-2`): a soft badge and the heading, with a download
- * button and a note at the far end of the row, then three cards. A card stacks a
- * 300px picture on soft blurred glows, in theme tokens, over a rounded `chart-3`
- * panel with its number, title and line, in `background`. The pictures show a
- * window sitting on the picture's foot: quiet-hours switches, a list of who is
- * around, and a focus gauge. They are drawn here and hidden from screen readers.
+ * A block on `background`: a soft badge and the heading, with a download button
+ * and a note at the far end of the row, then three cards. A card stacks a 300px
+ * picture on soft blurred glows, in theme tokens, over a rounded `chart-3` panel
+ * with its number, title and line, in `background`. The pictures show a window
+ * sitting on the picture's foot, and a cursor on the first: quiet-hours
+ * switches, a list of who is around, and a focus gauge. They are drawn here and
+ * hidden from screen readers.
+ *
  * Each picture is pinned to Light, as Figma pins its Media frames: it carries the
- * `light` class, so what is drawn inside it uses the Light colours in Light and
- * in Dark. Nothing else is pinned; the block and the panels follow the mode.
+ * `light` class, so the glows, the window and the cursor inside it use the Light
+ * colours on a Light or a Dark page. Nothing else is pinned: the page, the
+ * heading, the button, the note and the panels follow the mode (the `chart-3`
+ * panels turn cyan in Dark, as in Figma). The glows use a 28px blur, which is
+ * what Figma's 64px layer blur renders as.
  *
  * Desktop sets the cards three across and the button beside the heading. Tablet
  * and Mobile stack the button under the heading and the cards in one column; a
@@ -134,9 +139,9 @@ const GLOW_SETS: [HowItWorksGlowTone, HowItWorksGlowTone, HowItWorksGlowTone][] 
 ]
 /** The glows in a 400 × 300 picture: Figma's three, as left, top, width, height and strength. */
 const GLOWS = [
-  { x: 0, y: 0, w: 342, h: 274, strength: 0.49 },
-  { x: 152, y: 75, w: 342, h: 274, strength: 0.47 },
-  { x: -57, y: 150, w: 266, h: 213, strength: 0.38 },
+  { x: 0, y: 0, w: 342, h: 274, strength: 0.495 },
+  { x: 152, y: 75, w: 342, h: 274, strength: 0.4675 },
+  { x: -57, y: 150, w: 266, h: 213, strength: 0.385 },
 ] as const
 const SWITCHES_ON = [true, true, false]
 
@@ -192,33 +197,34 @@ export function HowItWorksStackedMediaText({ locale = "en", badge, heading, acti
       {label}
     </Button>
   )
-  const window_ = "relative z-10 mx-4 flex [@container(min-width:40rem)]:mx-8 flex-col gap-2 self-end rounded-t-[10px] bg-card p-4 text-foreground"
+  const window_ = "relative z-10 mx-8 flex flex-col gap-2 self-end rounded-t-[10px] bg-card p-4 text-foreground"
   return (
-    <HowItWorksSection ref={rootRef} labelledBy={headingId} className={`bg-chart-2 ${className ?? ""}`} {...props}>
-      <header className="flex w-full flex-col gap-6 [@container(min-width:64rem)]:flex-row [@container(min-width:64rem)]:items-start [@container(min-width:64rem)]:justify-between [@container(min-width:64rem)]:gap-24">
+    <HowItWorksSection ref={rootRef} labelledBy={headingId} className={className} {...props}>
+      <header className="flex w-full flex-col gap-6 [@container(min-width:64rem)]:flex-row [@container(min-width:64rem)]:items-end [@container(min-width:64rem)]:justify-between [@container(min-width:64rem)]:gap-24">
         <div className="flex flex-col items-start gap-3">
           <Badge variant="soft" tone="info" size="md" radius="rounded">
             {badge ?? copy.badge}
           </Badge>
-          <h2 id={headingId} className="text-3xl font-medium text-background [@container(min-width:40rem)]:text-4xl [@container(min-width:64rem)]:text-5xl">
+          <h2 id={headingId} className="text-3xl font-medium text-foreground [@container(min-width:64rem)]:text-5xl">
             {heading ?? copy.heading}
           </h2>
         </div>
         <div className="flex shrink-0 flex-col items-start gap-2 [@container(min-width:64rem)]:items-end">
           {button}
-          <p className="text-xs text-background">{note ?? copy.note}</p>
+          <p className="text-xs text-muted-foreground">{note ?? copy.note}</p>
         </div>
       </header>
 
-      <ol className="group/cards grid grid-cols-1 items-start gap-6 [@container(min-width:64rem)]:grid-cols-3">
+      <ol className="group/cards grid grid-cols-1 items-start gap-6 [@container(min-width:64rem)]:grid-cols-3 [@container(min-width:64rem)]:pt-6">
         {cards.map((card, index) => (
           <li key={index} data-reveal="card" className="flex min-w-0 flex-col transition-transform duration-200 hover:-translate-y-1 motion-reduce:transition-none hover:motion-reduce:translate-y-0">
-            <div aria-hidden="true" data-pinned="light" className="light pointer-events-none relative flex text-foreground h-[300px] overflow-hidden rounded-3xl bg-accent">
+            <div aria-hidden="true" data-pinned="light" className="light pointer-events-none relative flex h-[300px] overflow-hidden rounded-3xl bg-accent text-foreground">
               {GLOWS.map((glow, g) => (
                 <HowItWorksGlow
                   key={g}
                   tone={GLOW_SETS[index]?.[g] ?? "chart-1"}
                   strength={glow.strength}
+                  blur={28}
                   data-reveal="glow"
                   style={{ insetInlineStart: glow.x, top: glow.y, width: glow.w, height: glow.h, opacity: glow.strength }}
                 />
@@ -231,12 +237,11 @@ export function HowItWorksStackedMediaText({ locale = "en", badge, heading, acti
                     {words.quiet.title}
                   </div>
                   {words.quiet.options.map((option, row) => (
-                    <div key={row} className="flex items-center justify-between gap-3 rounded-lg bg-muted px-3 py-2 text-xs">
+                    <div key={row} className="flex min-h-[34px] items-center justify-between gap-3 rounded-lg bg-muted px-3 py-2 text-xs">
                       <span className="min-w-0">{option}</span>
-                      <Switch size="sm" checked={switches[row]} onChange={() => {}} tabIndex={-1} aria-label={option} />
+                      <Switch size="sm" className="-my-px" checked={switches[row]} onChange={() => {}} tabIndex={-1} aria-label={option} />
                     </div>
                   ))}
-                  <MousePointer2 data-reveal="cursor" size={28} {...HOW_IT_WORKS_ICON} className="absolute -bottom-1 end-6 fill-background text-foreground" />
                 </div>
               ) : null}
               {index === 1 ? (
@@ -246,7 +251,7 @@ export function HowItWorksStackedMediaText({ locale = "en", badge, heading, acti
                       <Avatar variant="initials" size="24" radius="rounded" border name={person.name} />
                       <div className="flex min-w-0 flex-1 flex-col gap-1">
                         <span className="text-xs font-medium">{person.name}</span>
-                        <span className="h-[5px] w-36 max-w-full rounded-full bg-border" />
+                        <span className="h-[5px] w-[140px] max-w-full rounded-full bg-border" />
                       </div>
                       <Badge variant="soft" tone={person.tone} size="sm" radius="rounded">
                         {person.status}
@@ -254,6 +259,9 @@ export function HowItWorksStackedMediaText({ locale = "en", badge, heading, acti
                     </div>
                   ))}
                 </div>
+              ) : null}
+              {index === 0 ? (
+                <MousePointer2 data-reveal="cursor" size={28} {...HOW_IT_WORKS_ICON} className="absolute end-[62px] top-[190px] z-20 fill-background text-foreground [@container(min-width:64rem)]:end-[72px]" />
               ) : null}
               {index === 2 ? (
                 <div className={`${window_} min-w-0 flex-1`}>
@@ -268,7 +276,7 @@ export function HowItWorksStackedMediaText({ locale = "en", badge, heading, acti
                       <path d="M 9 100 A 91 91 0 0 1 191 100" pathLength={100} className="stroke-muted" />
                       <path data-reveal="arc" d="M 9 100 A 91 91 0 0 1 191 100" pathLength={100} strokeDasharray="76 100" className="stroke-success" />
                     </svg>
-                    <span className="absolute inset-x-0 bottom-0 flex justify-center text-2xl font-medium">
+                    <span className="absolute inset-x-0 bottom-5 flex justify-center text-2xl font-medium">
                       <HowItWorksLtr>
                         <span data-reveal="count">{words.gauge.value}</span>%
                       </HowItWorksLtr>

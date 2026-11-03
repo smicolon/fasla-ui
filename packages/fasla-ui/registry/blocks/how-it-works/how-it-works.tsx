@@ -161,6 +161,8 @@ export interface HowItWorksGlowProps extends React.HTMLAttributes<HTMLSpanElemen
   tone: HowItWorksGlowTone
   /** How solid the shape is, 0 to 1. Figma sets 0.4 to 0.55. */
   strength?: number
+  /** The blur radius in px. 32 by default; Stacked Media + Text sets 28, which matches Figma's render of its pictures. */
+  blur?: number
 }
 
 /**
@@ -170,8 +172,15 @@ export interface HowItWorksGlowProps extends React.HTMLAttributes<HTMLSpanElemen
  * classes inside a box that clips (`overflow-hidden`). It carries no meaning,
  * so it is hidden from screen readers.
  */
-export function HowItWorksGlow({ tone, strength = 0.5, className, style, ...props }: HowItWorksGlowProps) {
-  return <span aria-hidden="true" className={cn("pointer-events-none absolute rounded-[50%] blur-[32px]", GLOW_TONES[tone], className)} style={{ opacity: strength, ...style }} {...props} />
+export function HowItWorksGlow({ tone, strength = 0.5, blur, className, style, ...props }: HowItWorksGlowProps) {
+  return (
+    <span
+      aria-hidden="true"
+      className={cn("pointer-events-none absolute rounded-[50%]", blur === undefined && "blur-[32px]", GLOW_TONES[tone], className)}
+      style={{ opacity: strength, ...(blur === undefined ? null : { filter: `blur(${blur}px)` }), ...style }}
+      {...props}
+    />
+  )
 }
 
 /**

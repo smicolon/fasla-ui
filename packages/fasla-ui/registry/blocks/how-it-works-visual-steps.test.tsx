@@ -308,12 +308,29 @@ describe("Fanned Dissolve Cards", () => {
 })
 
 describe("Stacked Media + Text", () => {
-  it("pins each of the three pictures to Light, and nothing else", () => {
+  it("pins each of the three pictures to Light, and nothing else: the section follows the mode", () => {
     const { container } = render(<HowItWorksStackedMediaText />)
     const pinned = [...container.querySelectorAll(".light")]
     expect(pinned).toHaveLength(3)
     expect(pinned.every((node) => node.getAttribute("data-pinned") === "light" && node.getAttribute("aria-hidden") === "true")).toBe(true)
+    expect(pinned.every((node) => node.className.includes("text-foreground"))).toBe(true)
     expect(container.querySelector("section")?.classList.contains("light")).toBe(false)
+    expect(container.querySelector("section")?.hasAttribute("data-pinned")).toBe(false)
+  })
+
+  it("sets the heading, the note and the pictures from Figma: foreground heading, 30px on Tablet, the cursor on the first picture only", () => {
+    const { container } = render(<HowItWorksStackedMediaText />)
+    const h2 = container.querySelector("h2")!
+    expect(h2.className).toContain("text-foreground")
+    expect(h2.className).toContain("text-3xl")
+    expect(h2.className).toContain("[@container(min-width:64rem)]:text-5xl")
+    expect(h2.className).not.toContain("[@container(min-width:40rem)]:text-4xl")
+    const cursors = container.querySelectorAll('[data-reveal="cursor"]')
+    expect(cursors).toHaveLength(1)
+    expect(cursors[0]!.getAttribute("class")).toContain("top-[190px]")
+    expect(cursors[0]!.getAttribute("class")).toContain("end-[62px]")
+    expect(cursors[0]!.closest("li")).toBe(container.querySelector("ol > li"))
+    expect(container.querySelector("ol")?.className).toContain("[@container(min-width:64rem)]:pt-6")
   })
 
   it("has three cards, and the quiet-hours switches at their finished state", () => {
