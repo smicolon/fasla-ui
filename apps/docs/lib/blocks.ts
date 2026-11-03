@@ -4,7 +4,7 @@
  * (docs.faqBlocks, docs.errorStateBlocks, docs.logoCloudBlocks,
  * docs.authenticationsBlocks, docs.galleryBlocks, docs.navbarBlocks,
  * docs.pricingBlocks, docs.heroBlocks, docs.aboutBlocks, docs.teamBlocks,
- * docs.careersBlocks, docs.howItWorksBlocks, docs.socialProofBlocks, docs.blogCardsBlocks, docs.featuresBlocks, docs.contactUsBlocks); the slug is the registry item's name.
+ * docs.careersBlocks, docs.howItWorksBlocks, docs.socialProofBlocks, docs.blogCardsBlocks, docs.featuresBlocks, docs.contactUsBlocks, docs.footerBlocks); the slug is the registry item's name.
  */
 
 export type FaqFamily = "lists" | "layouts" | "navigation" | "support"
@@ -105,6 +105,16 @@ export type HowItWorksFamily = "timelines" | "visual-steps" | "interactive" | "g
 export const HOW_IT_WORKS_FAMILIES: HowItWorksFamily[] = ["timelines", "visual-steps", "interactive", "grids"]
 
 /**
+ * Video Call's groups, as Figma's page orders them: the layers on a call (the
+ * dock, captions and reactions), the call stages, the screens before the call,
+ * the ones around it, and the marketing hero. A group appears here once a Type
+ * of it is built.
+ */
+export type VideoCallFamily = "before" | "stages" | "layers" | "around" | "marketing"
+
+export const VIDEO_CALL_FAMILIES: VideoCallFamily[] = ["before", "stages", "layers", "around", "marketing"]
+
+/**
  * Team's three groups, from its Figma documentation: the grids and walls that
  * set people side by side, the directories that list them (rows, a rail, tabs, a
  * table), and the spotlights that put a founder, a carousel or an open role up
@@ -156,7 +166,16 @@ export type ContactUsFamily = "forms" | "photo-forms" | "places" | "channels"
 
 export const CONTACT_US_FAMILIES: ContactUsFamily[] = ["forms", "photo-forms", "places", "channels"]
 
-export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | HowItWorksFamily | SocialProofFamily | BlogCardsFamily | ContactUsFamily | FeaturesFamily> = {
+/**
+ * Footer's nine groups: sitemaps and directories, the brand-led footers, the call-to-action
+ * and sign-up bands, the minimal bars, the contact and support layouts, legal and trust,
+ * commerce, community and careers, and the utility and product footers.
+ */
+export type FooterFamily = "sitemap" | "brand" | "cta" | "bars" | "contact" | "legal" | "commerce" | "community" | "utility"
+
+export const FOOTER_FAMILIES: FooterFamily[] = ["sitemap", "brand", "cta", "bars", "contact", "legal", "commerce", "community", "utility"]
+
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | HowItWorksFamily | SocialProofFamily | BlogCardsFamily | ContactUsFamily | FeaturesFamily | FooterFamily | VideoCallFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
   family: Family
@@ -429,6 +448,24 @@ export const HOW_IT_WORKS_TYPES: BlockType<HowItWorksFamily>[] = [
   { slug: "how-it-works-rounded-cards-device-crop", family: "grids" },
 ]
 
+/** The Video Call Types built so far, in Figma's order. */
+export const VIDEO_CALL_TYPES: BlockType<VideoCallFamily>[] = [
+  { slug: "video-call-pre-join-lobby", family: "before" },
+  { slug: "video-call-grid-gallery-call", family: "stages" },
+  { slug: "video-call-speaker-filmstrip", family: "stages" },
+  { slug: "video-call-screen-share-stage", family: "stages" },
+  { slug: "video-call-call-with-side-panel", family: "stages" },
+  { slug: "video-call-call-controls-dock", family: "layers" },
+  { slug: "video-call-waiting-room-knock", family: "before" },
+  { slug: "video-call-incoming-call", family: "before" },
+  { slug: "video-call-call-ended-summary", family: "around" },
+  { slug: "video-call-captions-reactions", family: "layers", inverse: true },
+  { slug: "video-call-join-link-dial-in", family: "before" },
+  { slug: "video-call-upcoming-meetings", family: "around" },
+  { slug: "video-call-ai-meeting-recap", family: "around" },
+  { slug: "video-call-hero-call-mockup", family: "marketing" },
+]
+
 /** The 14 Types, in Figma's order. Three drop the block name Figma still carries: Team Carousel, Team Table and Hairline Team Grid. */
 export const TEAM_TYPES: BlockType<TeamFamily>[] = [
   { slug: "team-leadership-grid", family: "grids-and-walls" },
@@ -555,6 +592,43 @@ export const CONTACT_US_TYPES: BlockType<ContactUsFamily>[] = [
   { slug: "contact-us-support-channels", family: "channels" },
 ]
 
+/** Footer's 33 Types in Figma's order, added a family at a time. */
+export const FOOTER_TYPES: BlockType<FooterFamily>[] = [
+  { slug: "footer-four-column-directory", family: "sitemap" },
+  { slug: "footer-wide-sitemap-mega", family: "sitemap" },
+  { slug: "footer-accordion-sitemap", family: "sitemap" },
+  { slug: "footer-two-tier-doormat", family: "sitemap" },
+  { slug: "footer-index-numbered-columns", family: "sitemap" },
+  { slug: "footer-brand-panel-split", family: "brand" },
+  { slug: "footer-giant-wordmark", family: "brand", inverse: true },
+  { slug: "footer-image-backed-brand", family: "brand", inverse: true },
+  { slug: "footer-centered-brand-minimal", family: "brand" },
+  { slug: "footer-marquee-strip", family: "brand" },
+  { slug: "footer-big-type-link-stack", family: "brand" },
+  { slug: "footer-bento-tile", family: "brand" },
+  { slug: "footer-cta-band-columns", family: "cta", inverse: true },
+  { slug: "footer-newsletter-split", family: "cta" },
+  { slug: "footer-floating-demo-card", family: "cta" },
+  { slug: "footer-big-question-cta", family: "cta" },
+  { slug: "footer-single-line-bar", family: "bars" },
+  { slug: "footer-split-hairline-micro", family: "bars" },
+  { slug: "footer-two-row-compact", family: "bars" },
+  { slug: "footer-inline-preferences", family: "bars" },
+  { slug: "footer-contact-first", family: "contact" },
+  { slug: "footer-support-contact", family: "contact" },
+  { slug: "footer-local-business", family: "contact" },
+  { slug: "footer-legal-first-slim", family: "legal" },
+  { slug: "footer-trust-compliance", family: "legal" },
+  { slug: "footer-ecommerce-mega", family: "commerce" },
+  { slug: "footer-service-promise-band", family: "commerce" },
+  { slug: "footer-careers-culture", family: "community" },
+  { slug: "footer-community-events", family: "community" },
+  { slug: "footer-dashboard-slim-bar", family: "utility" },
+  { slug: "footer-docs-page", family: "utility" },
+  { slug: "footer-multi-region", family: "utility" },
+  { slug: "footer-product-family-switcher", family: "utility" },
+]
+
 export const ALL_BLOCK_TYPES: BlockType[] = [
   ...FAQ_TYPES,
   ...ERROR_STATE_TYPES,
@@ -572,6 +646,8 @@ export const ALL_BLOCK_TYPES: BlockType[] = [
   ...BLOG_CARDS_TYPES,
   ...FEATURES_TYPES,
   ...CONTACT_US_TYPES,
+  ...FOOTER_TYPES,
+  ...VIDEO_CALL_TYPES,
 ]
 
 /** Figma's three breakpoints, the widths a preview frame renders at. */

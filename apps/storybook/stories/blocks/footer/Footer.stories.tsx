@@ -1,0 +1,304 @@
+import type { Meta, StoryObj } from "@storybook/react"
+import { FooterFourColumnDirectory, footerFourColumnDirectoryCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-four-column-directory/FooterFourColumnDirectory"
+import { FooterWideSitemapMega, footerWideSitemapMegaCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-wide-sitemap-mega/FooterWideSitemapMega"
+import { FooterAccordionSitemap, footerAccordionSitemapCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-accordion-sitemap/FooterAccordionSitemap"
+import { FooterTwoTierDoormat, footerTwoTierDoormatCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-two-tier-doormat/FooterTwoTierDoormat"
+import { FooterIndexNumberedColumns, footerIndexNumberedColumnsCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-index-numbered-columns/FooterIndexNumberedColumns"
+import { FooterBrandPanelSplit, footerBrandPanelSplitCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-brand-panel-split/FooterBrandPanelSplit"
+import { FooterGiantWordmark, footerGiantWordmarkCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-giant-wordmark/FooterGiantWordmark"
+import { FooterImageBackedBrand, footerImageBackedBrandCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-image-backed-brand/FooterImageBackedBrand"
+import { FooterCenteredBrandMinimal, footerCenteredBrandMinimalCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-centered-brand-minimal/FooterCenteredBrandMinimal"
+import { FooterMarqueeStrip, footerMarqueeStripCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-marquee-strip/FooterMarqueeStrip"
+import { FooterBigTypeLinkStack, footerBigTypeLinkStackCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-big-type-link-stack/FooterBigTypeLinkStack"
+import { FooterBentoTile, footerBentoTileCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-bento-tile/FooterBentoTile"
+import { FooterCtaBandColumns, footerCtaBandColumnsCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-cta-band-columns/FooterCtaBandColumns"
+import { FooterNewsletterSplit, footerNewsletterSplitCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-newsletter-split/FooterNewsletterSplit"
+import { FooterFloatingDemoCard, footerFloatingDemoCardCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-floating-demo-card/FooterFloatingDemoCard"
+import { FooterBigQuestionCta, footerBigQuestionCtaCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-big-question-cta/FooterBigQuestionCta"
+import { FooterSingleLineBar, footerSingleLineBarCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-single-line-bar/FooterSingleLineBar"
+import { FooterSplitHairlineMicro, footerSplitHairlineMicroCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-split-hairline-micro/FooterSplitHairlineMicro"
+import { FooterTwoRowCompact, footerTwoRowCompactCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-two-row-compact/FooterTwoRowCompact"
+import { FooterInlinePreferences, footerInlinePreferencesCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-inline-preferences/FooterInlinePreferences"
+import { FooterContactFirst, footerContactFirstCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-contact-first/FooterContactFirst"
+import { FooterSupportContact, footerSupportContactCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-support-contact/FooterSupportContact"
+import { FooterLocalBusiness, footerLocalBusinessCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-local-business/FooterLocalBusiness"
+import { FooterLegalFirstSlim, footerLegalFirstSlimCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-legal-first-slim/FooterLegalFirstSlim"
+import { FooterTrustCompliance, footerTrustComplianceCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-trust-compliance/FooterTrustCompliance"
+import { FooterEcommerceMega, footerEcommerceMegaCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-ecommerce-mega/FooterEcommerceMega"
+import { FooterServicePromiseBand, footerServicePromiseBandCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-service-promise-band/FooterServicePromiseBand"
+import { FooterCareersCulture, footerCareersCultureCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-careers-culture/FooterCareersCulture"
+import { FooterCommunityEvents, footerCommunityEventsCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-community-events/FooterCommunityEvents"
+import { FooterDashboardSlimBar, footerDashboardSlimBarCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-dashboard-slim-bar/FooterDashboardSlimBar"
+import { FooterDocsPage, footerDocsPageCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-docs-page/FooterDocsPage"
+import { FooterMultiRegion, footerMultiRegionCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-multi-region/FooterMultiRegion"
+import { FooterProductFamilySwitcher, footerProductFamilySwitcherCopy } from "../../../../../packages/fasla-ui/registry/blocks/footer-product-family-switcher/FooterProductFamilySwitcher"
+import { footerArgTypes, footerViewports, localeOf, photoPropsOf } from "./footer-story-kit"
+
+/**
+ * Footer: the Types of the Figma set, one block each, from sitemaps and
+ * brand-led footers to call-to-action bands, minimal bars, contact layouts and
+ * app footers. The photos are the docs site's demo set, described in the
+ * toolbar's language. Viewport, direction and theme come from the toolbar.
+ */
+
+/*
+ * The sidebar and the Docs page list the Figma Types only. A Type's extra
+ * states, without photos (the `muted` placeholders) and the sign-up form's
+ * loading, sent and error states, are tagged `!dev` and `!autodocs`: hidden
+ * from both, but still built, so tests and visual checks reach them by id.
+ * The tags are written out on each story, as the indexer reads them statically.
+ */
+const meta: Meta = {
+  title: "Blocks/Footer",
+  parameters: { layout: "fullscreen", viewport: { viewports: footerViewports } },
+  tags: ["autodocs"],
+}
+
+export default meta
+
+export const FourColumnDirectory: StoryObj<typeof FooterFourColumnDirectory> = {
+  name: "Four-Column Directory",
+  argTypes: footerArgTypes(FooterFourColumnDirectory, footerFourColumnDirectoryCopy, ["legalLabel"]),
+  render: (args, context) => <FooterFourColumnDirectory locale={localeOf(context)} {...photoPropsOf("four-column-directory", context, footerFourColumnDirectoryCopy)} {...args} />,
+}
+
+export const WideSitemapMega: StoryObj<typeof FooterWideSitemapMega> = {
+  name: "Wide Sitemap Mega",
+  argTypes: footerArgTypes(FooterWideSitemapMega, footerWideSitemapMegaCopy, ["languageLabel", "regionLabel", "legalLabel"]),
+  render: (args, context) => <FooterWideSitemapMega locale={localeOf(context)} {...photoPropsOf("wide-sitemap-mega", context, footerWideSitemapMegaCopy)} {...args} />,
+}
+
+export const AccordionSitemap: StoryObj<typeof FooterAccordionSitemap> = {
+  name: "Accordion Sitemap",
+  argTypes: footerArgTypes(FooterAccordionSitemap, footerAccordionSitemapCopy, ["legalLabel"]),
+  render: (args, context) => <FooterAccordionSitemap locale={localeOf(context)} {...photoPropsOf("accordion-sitemap", context, footerAccordionSitemapCopy)} {...args} />,
+}
+
+export const TwoTierDoormat: StoryObj<typeof FooterTwoTierDoormat> = {
+  name: "Two-Tier Doormat",
+  argTypes: footerArgTypes(FooterTwoTierDoormat, footerTwoTierDoormatCopy, ["legalLabel"]),
+  render: (args, context) => <FooterTwoTierDoormat locale={localeOf(context)} {...photoPropsOf("two-tier-doormat", context, footerTwoTierDoormatCopy)} {...args} />,
+}
+
+export const IndexNumberedColumns: StoryObj<typeof FooterIndexNumberedColumns> = {
+  name: "Index-Numbered Columns",
+  argTypes: footerArgTypes(FooterIndexNumberedColumns, footerIndexNumberedColumnsCopy, ["legalLabel"]),
+  render: (args, context) => <FooterIndexNumberedColumns locale={localeOf(context)} {...photoPropsOf("index-numbered-columns", context, footerIndexNumberedColumnsCopy)} {...args} />,
+}
+
+export const BrandPanelSplit: StoryObj<typeof FooterBrandPanelSplit> = {
+  name: "Brand Panel Split",
+  argTypes: footerArgTypes(FooterBrandPanelSplit, footerBrandPanelSplitCopy, ["legalLabel"]),
+  render: (args, context) => <FooterBrandPanelSplit locale={localeOf(context)} {...photoPropsOf("brand-panel-split", context, footerBrandPanelSplitCopy)} {...args} />,
+}
+
+export const GiantWordmark: StoryObj<typeof FooterGiantWordmark> = {
+  name: "Giant Wordmark",
+  argTypes: footerArgTypes(FooterGiantWordmark, footerGiantWordmarkCopy, ["legalLabel"]),
+  render: (args, context) => <FooterGiantWordmark locale={localeOf(context)} {...photoPropsOf("giant-wordmark", context, footerGiantWordmarkCopy)} {...args} />,
+}
+
+export const ImageBackedBrand: StoryObj<typeof FooterImageBackedBrand> = {
+  name: "Image-Backed Brand",
+  argTypes: footerArgTypes(FooterImageBackedBrand, footerImageBackedBrandCopy, ["navLabel", "legalLabel"]),
+  render: (args, context) => <FooterImageBackedBrand locale={localeOf(context)} {...photoPropsOf("image-backed-brand", context, footerImageBackedBrandCopy)} {...args} />,
+}
+
+export const ImageBackedBrandWithoutPhotos: StoryObj<typeof FooterImageBackedBrand> = {
+  name: "Image-Backed Brand: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: footerArgTypes(FooterImageBackedBrand, footerImageBackedBrandCopy, ["navLabel", "legalLabel"]),
+  render: (args, context) => <FooterImageBackedBrand locale={localeOf(context)} {...args} />,
+}
+
+export const CenteredBrandMinimal: StoryObj<typeof FooterCenteredBrandMinimal> = {
+  name: "Centered Brand Minimal",
+  argTypes: footerArgTypes(FooterCenteredBrandMinimal, footerCenteredBrandMinimalCopy, ["navLabel"]),
+  render: (args, context) => <FooterCenteredBrandMinimal locale={localeOf(context)} {...photoPropsOf("centered-brand-minimal", context, footerCenteredBrandMinimalCopy)} {...args} />,
+}
+
+export const MarqueeStrip: StoryObj<typeof FooterMarqueeStrip> = {
+  name: "Marquee Strip",
+  argTypes: footerArgTypes(FooterMarqueeStrip, footerMarqueeStripCopy, ["navLabel", "legalLabel"]),
+  render: (args, context) => <FooterMarqueeStrip locale={localeOf(context)} {...photoPropsOf("marquee-strip", context, footerMarqueeStripCopy)} {...args} />,
+}
+
+export const BigTypeLinkStack: StoryObj<typeof FooterBigTypeLinkStack> = {
+  name: "Big-Type Link Stack",
+  argTypes: footerArgTypes(FooterBigTypeLinkStack, footerBigTypeLinkStackCopy, ["navLabel", "legalLabel"]),
+  render: (args, context) => <FooterBigTypeLinkStack locale={localeOf(context)} {...photoPropsOf("big-type-link-stack", context, footerBigTypeLinkStackCopy)} {...args} />,
+}
+
+export const BentoTile: StoryObj<typeof FooterBentoTile> = {
+  name: "Bento Tile",
+  argTypes: footerArgTypes(FooterBentoTile, footerBentoTileCopy, ["legalLabel"]),
+  render: (args, context) => <FooterBentoTile locale={localeOf(context)} {...photoPropsOf("bento-tile", context, footerBentoTileCopy)} {...args} />,
+}
+
+export const CtaBandColumns: StoryObj<typeof FooterCtaBandColumns> = {
+  name: "CTA Band + Columns",
+  argTypes: footerArgTypes(FooterCtaBandColumns, footerCtaBandColumnsCopy, ["legalLabel"]),
+  render: (args, context) => <FooterCtaBandColumns locale={localeOf(context)} {...photoPropsOf("cta-band-columns", context, footerCtaBandColumnsCopy)} {...args} />,
+}
+
+export const NewsletterSplit: StoryObj<typeof FooterNewsletterSplit> = {
+  name: "Newsletter Split",
+  argTypes: footerArgTypes(FooterNewsletterSplit, footerNewsletterSplitCopy, ["emailLabel", "sentMessage", "errorMessage", "invalidMessage", "legalLabel"]),
+  render: (args, context) => <FooterNewsletterSplit locale={localeOf(context)} {...photoPropsOf("newsletter-split", context, footerNewsletterSplitCopy)} {...args} />,
+}
+
+export const NewsletterSplitLoading: StoryObj<typeof FooterNewsletterSplit> = {
+  name: "Newsletter Split: Loading",
+  tags: ["!dev", "!autodocs"],
+  argTypes: footerArgTypes(FooterNewsletterSplit, footerNewsletterSplitCopy, ["emailLabel", "sentMessage", "errorMessage", "invalidMessage", "legalLabel"]),
+  render: (args, context) => <FooterNewsletterSplit locale={localeOf(context)} status="loading" {...args} />,
+}
+
+export const NewsletterSplitSent: StoryObj<typeof FooterNewsletterSplit> = {
+  name: "Newsletter Split: Sent",
+  tags: ["!dev", "!autodocs"],
+  argTypes: footerArgTypes(FooterNewsletterSplit, footerNewsletterSplitCopy, ["emailLabel", "errorMessage", "invalidMessage", "legalLabel"]),
+  render: (args, context) => <FooterNewsletterSplit locale={localeOf(context)} status="sent" {...args} />,
+}
+
+export const NewsletterSplitError: StoryObj<typeof FooterNewsletterSplit> = {
+  name: "Newsletter Split: Error",
+  tags: ["!dev", "!autodocs"],
+  argTypes: footerArgTypes(FooterNewsletterSplit, footerNewsletterSplitCopy, ["emailLabel", "sentMessage", "invalidMessage", "legalLabel"]),
+  render: (args, context) => <FooterNewsletterSplit locale={localeOf(context)} status="error" {...args} />,
+}
+
+export const FloatingDemoCard: StoryObj<typeof FooterFloatingDemoCard> = {
+  name: "Floating Demo Card",
+  argTypes: footerArgTypes(FooterFloatingDemoCard, footerFloatingDemoCardCopy, ["legalLabel"]),
+  render: (args, context) => <FooterFloatingDemoCard locale={localeOf(context)} {...photoPropsOf("floating-demo-card", context, footerFloatingDemoCardCopy)} {...args} />,
+}
+
+export const BigQuestionCta: StoryObj<typeof FooterBigQuestionCta> = {
+  name: "Big-Question CTA",
+  argTypes: footerArgTypes(FooterBigQuestionCta, footerBigQuestionCtaCopy, ["navLabel", "legalLabel"]),
+  render: (args, context) => <FooterBigQuestionCta locale={localeOf(context)} {...photoPropsOf("big-question-cta", context, footerBigQuestionCtaCopy)} {...args} />,
+}
+
+export const SingleLineBar: StoryObj<typeof FooterSingleLineBar> = {
+  name: "Single-Line Bar",
+  argTypes: footerArgTypes(FooterSingleLineBar, footerSingleLineBarCopy, ["navLabel", "socialLabel"]),
+  render: (args, context) => <FooterSingleLineBar locale={localeOf(context)} {...photoPropsOf("single-line-bar", context, footerSingleLineBarCopy)} {...args} />,
+}
+
+export const SplitHairlineMicro: StoryObj<typeof FooterSplitHairlineMicro> = {
+  name: "Split Hairline Micro",
+  argTypes: footerArgTypes(FooterSplitHairlineMicro, footerSplitHairlineMicroCopy, ["legalLabel", "socialLabel"]),
+  render: (args, context) => <FooterSplitHairlineMicro locale={localeOf(context)} {...photoPropsOf("split-hairline-micro", context, footerSplitHairlineMicroCopy)} {...args} />,
+}
+
+export const TwoRowCompact: StoryObj<typeof FooterTwoRowCompact> = {
+  name: "Two-Row Compact",
+  argTypes: footerArgTypes(FooterTwoRowCompact, footerTwoRowCompactCopy, ["navLabel", "legalLabel", "socialLabel"]),
+  render: (args, context) => <FooterTwoRowCompact locale={localeOf(context)} {...photoPropsOf("two-row-compact", context, footerTwoRowCompactCopy)} {...args} />,
+}
+
+export const InlinePreferences: StoryObj<typeof FooterInlinePreferences> = {
+  name: "Inline + Preferences",
+  argTypes: footerArgTypes(FooterInlinePreferences, footerInlinePreferencesCopy, ["navLabel", "languageLabel"]),
+  render: (args, context) => <FooterInlinePreferences locale={localeOf(context)} {...photoPropsOf("inline-preferences", context, footerInlinePreferencesCopy)} {...args} />,
+}
+
+export const ContactFirst: StoryObj<typeof FooterContactFirst> = {
+  name: "Contact-First",
+  argTypes: footerArgTypes(FooterContactFirst, footerContactFirstCopy, ["legalLabel", "socialLabel", "officesLabel"]),
+  render: (args, context) => <FooterContactFirst locale={localeOf(context)} {...photoPropsOf("contact-first", context, footerContactFirstCopy)} {...args} />,
+}
+
+export const ContactFirstWithoutPhotos: StoryObj<typeof FooterContactFirst> = {
+  name: "Contact-First: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: footerArgTypes(FooterContactFirst, footerContactFirstCopy, ["legalLabel", "socialLabel", "officesLabel"]),
+  render: (args, context) => <FooterContactFirst locale={localeOf(context)} {...args} />,
+}
+
+export const SupportContact: StoryObj<typeof FooterSupportContact> = {
+  name: "Support & Contact",
+  argTypes: footerArgTypes(FooterSupportContact, footerSupportContactCopy, ["topicsLabel", "channelsLabel", "legalLabel"]),
+  render: (args, context) => <FooterSupportContact locale={localeOf(context)} {...photoPropsOf("support-contact", context, footerSupportContactCopy)} {...args} />,
+}
+
+export const LocalBusiness: StoryObj<typeof FooterLocalBusiness> = {
+  name: "Local Business",
+  argTypes: footerArgTypes(FooterLocalBusiness, footerLocalBusinessCopy, ["legalLabel", "socialLabel"]),
+  render: (args, context) => <FooterLocalBusiness locale={localeOf(context)} {...photoPropsOf("local-business", context, footerLocalBusinessCopy)} {...args} />,
+}
+
+export const LocalBusinessWithoutPhotos: StoryObj<typeof FooterLocalBusiness> = {
+  name: "Local Business: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: footerArgTypes(FooterLocalBusiness, footerLocalBusinessCopy, ["legalLabel", "socialLabel"]),
+  render: (args, context) => <FooterLocalBusiness locale={localeOf(context)} {...args} />,
+}
+
+export const LegalFirstSlim: StoryObj<typeof FooterLegalFirstSlim> = {
+  name: "Legal-First Slim",
+  argTypes: footerArgTypes(FooterLegalFirstSlim, footerLegalFirstSlimCopy, ["policiesLabel", "badgesLabel", "socialLabel"]),
+  render: (args, context) => <FooterLegalFirstSlim locale={localeOf(context)} {...photoPropsOf("legal-first-slim", context, footerLegalFirstSlimCopy)} {...args} />,
+}
+
+export const TrustCompliance: StoryObj<typeof FooterTrustCompliance> = {
+  name: "Trust & Compliance",
+  argTypes: footerArgTypes(FooterTrustCompliance, footerTrustComplianceCopy, ["certificationsLabel", "paymentsLabel", "legalLabel"]),
+  render: (args, context) => <FooterTrustCompliance locale={localeOf(context)} {...photoPropsOf("trust-compliance", context, footerTrustComplianceCopy)} {...args} />,
+}
+
+export const EcommerceMega: StoryObj<typeof FooterEcommerceMega> = {
+  name: "Ecommerce Mega",
+  argTypes: footerArgTypes(FooterEcommerceMega, footerEcommerceMegaCopy, ["legalLabel", "regionLabel", "paymentLabel", "currencyLabel"]),
+  render: (args, context) => <FooterEcommerceMega locale={localeOf(context)} {...photoPropsOf("ecommerce-mega", context, footerEcommerceMegaCopy)} {...args} />,
+}
+
+export const ServicePromiseBand: StoryObj<typeof FooterServicePromiseBand> = {
+  name: "Service Promise Band",
+  argTypes: footerArgTypes(FooterServicePromiseBand, footerServicePromiseBandCopy, ["promisesLabel", "legalLabel", "paymentLabel"]),
+  render: (args, context) => <FooterServicePromiseBand locale={localeOf(context)} {...photoPropsOf("service-promise-band", context, footerServicePromiseBandCopy)} {...args} />,
+}
+
+export const CareersCulture: StoryObj<typeof FooterCareersCulture> = {
+  name: "Careers & Culture",
+  argTypes: footerArgTypes(FooterCareersCulture, footerCareersCultureCopy, ["rolesLabel", "legalLabel"]),
+  render: (args, context) => <FooterCareersCulture locale={localeOf(context)} {...photoPropsOf("careers-culture", context, footerCareersCultureCopy)} {...args} />,
+}
+
+export const CareersCultureWithoutPhotos: StoryObj<typeof FooterCareersCulture> = {
+  name: "Careers & Culture: Without Photos",
+  tags: ["!dev", "!autodocs"],
+  argTypes: footerArgTypes(FooterCareersCulture, footerCareersCultureCopy, ["rolesLabel", "legalLabel"]),
+  render: (args, context) => <FooterCareersCulture locale={localeOf(context)} {...args} />,
+}
+
+export const CommunityEvents: StoryObj<typeof FooterCommunityEvents> = {
+  name: "Community & Events",
+  argTypes: footerArgTypes(FooterCommunityEvents, footerCommunityEventsCopy, ["legalLabel"]),
+  render: (args, context) => <FooterCommunityEvents locale={localeOf(context)} {...photoPropsOf("community-events", context, footerCommunityEventsCopy)} {...args} />,
+}
+
+export const DashboardSlimBar: StoryObj<typeof FooterDashboardSlimBar> = {
+  name: "Dashboard Slim Bar",
+  argTypes: footerArgTypes(FooterDashboardSlimBar, footerDashboardSlimBarCopy, ["helpLabel", "releaseLabel", "helpLinksLabel"]),
+  render: (args, context) => <FooterDashboardSlimBar locale={localeOf(context)} {...photoPropsOf("dashboard-slim-bar", context, footerDashboardSlimBarCopy)} {...args} />,
+}
+
+export const DocsPage: StoryObj<typeof FooterDocsPage> = {
+  name: "Docs Page",
+  argTypes: footerArgTypes(FooterDocsPage, footerDocsPageCopy, ["pagerLabel", "contributorsLabel", "linksLabel"]),
+  render: (args, context) => <FooterDocsPage locale={localeOf(context)} {...photoPropsOf("docs-page", context, footerDocsPageCopy)} {...args} />,
+}
+
+export const MultiRegion: StoryObj<typeof FooterMultiRegion> = {
+  name: "Multi-Region",
+  argTypes: footerArgTypes(FooterMultiRegion, footerMultiRegionCopy, ["regionLabel", "languageLabel", "currencyLabel", "cardsLabel", "legalLabel"]),
+  render: (args, context) => <FooterMultiRegion locale={localeOf(context)} {...photoPropsOf("multi-region", context, footerMultiRegionCopy)} {...args} />,
+}
+
+export const ProductFamilySwitcher: StoryObj<typeof FooterProductFamilySwitcher> = {
+  name: "Product Family Switcher",
+  argTypes: footerArgTypes(FooterProductFamilySwitcher, footerProductFamilySwitcherCopy, ["productsLabel", "companyLabel", "legalLabel"]),
+  render: (args, context) => <FooterProductFamilySwitcher locale={localeOf(context)} {...photoPropsOf("product-family-switcher", context, footerProductFamilySwitcherCopy)} {...args} />,
+}

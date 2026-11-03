@@ -11,6 +11,8 @@ import { CONTACT_US_NOW, CONTACT_US_TABLE_NOW, contactUsPhotoProps } from "@/com
 import { teamPhotoProps } from "@/components/blocks/team-photos"
 import { blogCardsPhotoProps } from "@/components/blocks/blog-cards-photos"
 import { featuresPhotoProps } from "@/components/blocks/features-photos"
+import { footerPhotoProps } from "@/components/blocks/footer-photos"
+import { videoCallPhotoProps } from "@/components/blocks/video-call-photos"
 import { galleryPhotoProps } from "@/components/blocks/gallery-photos"
 import { NavbarStage, navbarExample } from "@/components/blocks/navbar-examples"
 import { heroPhotoProps } from "@/components/blocks/hero-photos"
@@ -160,6 +162,15 @@ const withContactUsPhotos = (Block: AnyBlock, type: string) =>
   }
 
 /**
+ * A Video Call Type with its demo photo, a still the repo already has. Types
+ * without a photo render as they are.
+ */
+const withVideoCallPhotos = (Block: AnyBlock, type: string) =>
+  function VideoCallPreview(props: { locale: Locale }) {
+    return <Block {...videoCallPhotoProps(type, props.locale)} {...props} />
+  }
+
+/**
  * A Team Type with its demo photos, from public/blocks/team/: each person in
  * the block's own copy gets one, by their `id`. The two cut-out Types take the
  * transparent files.
@@ -207,6 +218,16 @@ type FeaturesCopy = Record<Locale, object>
 const withFeaturesPhotos = (Block: AnyBlock, type: string, copy: FeaturesCopy) =>
   function FeaturesPreview(props: { locale: Locale }) {
     return <Block {...featuresPhotoProps(type, props.locale, copy)} {...props} />
+  }
+
+/**
+ * A Footer Type with its demo photos, from public/images/footer/: the Types
+ * that take photos get theirs as the props their block names. The rest render as they are.
+ */
+type FooterCopy = Record<Locale, object>
+const withFooterPhotos = (Block: AnyBlock, type: string, copy: FooterCopy) =>
+  function FooterPreview(props: { locale: Locale }) {
+    return <Block {...footerPhotoProps(type, props.locale, copy)} {...props} />
   }
 
 export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
@@ -933,6 +954,48 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "blog-cards-post-carousel-with-controls": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-post-carousel-with-controls/BlogCardsPostCarouselWithControls").then((m) => withBlogCardsPhotos(m.BlogCardsPostCarouselWithControls, "post-carousel-with-controls", m.blogCardsPostCarouselWithControlsCopy))
   ),
+  "video-call-grid-gallery-call": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-grid-gallery-call/VideoCallGridGalleryCall").then((m) => withVideoCallPhotos(m.VideoCallGridGalleryCall, "grid-gallery-call"))
+  ),
+  "video-call-speaker-filmstrip": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-speaker-filmstrip/VideoCallSpeakerFilmstrip").then((m) => withVideoCallPhotos(m.VideoCallSpeakerFilmstrip, "speaker-filmstrip"))
+  ),
+  "video-call-screen-share-stage": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-screen-share-stage/VideoCallScreenShareStage").then((m) => withVideoCallPhotos(m.VideoCallScreenShareStage, "screen-share-stage"))
+  ),
+  "video-call-call-with-side-panel": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-call-with-side-panel/VideoCallCallWithSidePanel").then((m) => withVideoCallPhotos(m.VideoCallCallWithSidePanel, "call-with-side-panel"))
+  ),
+  "video-call-pre-join-lobby": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-pre-join-lobby/VideoCallPreJoinLobby").then((m) => withVideoCallPhotos(m.VideoCallPreJoinLobby, "pre-join-lobby"))
+  ),
+  "video-call-waiting-room-knock": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-waiting-room-knock/VideoCallWaitingRoomKnock").then((m) => withVideoCallPhotos(m.VideoCallWaitingRoomKnock, "waiting-room-knock"))
+  ),
+  "video-call-incoming-call": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-incoming-call/VideoCallIncomingCall").then((m) => withVideoCallPhotos(m.VideoCallIncomingCall, "incoming-call"))
+  ),
+  "video-call-join-link-dial-in": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-join-link-dial-in/VideoCallJoinLinkDialIn").then((m) => withVideoCallPhotos(m.VideoCallJoinLinkDialIn, "join-link-dial-in"))
+  ),
+  "video-call-call-controls-dock": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-call-controls-dock/VideoCallCallControlsDock").then((m) => withVideoCallPhotos(m.VideoCallCallControlsDock, "call-controls-dock"))
+  ),
+  "video-call-captions-reactions": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-captions-reactions/VideoCallCaptionsReactions").then((m) => withVideoCallPhotos(m.VideoCallCaptionsReactions, "captions-reactions"))
+  ),
+  "video-call-call-ended-summary": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-call-ended-summary/VideoCallCallEndedSummary").then((m) => withVideoCallPhotos(m.VideoCallCallEndedSummary, "call-ended-summary"))
+  ),
+  "video-call-upcoming-meetings": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-upcoming-meetings/VideoCallUpcomingMeetings").then((m) => withVideoCallPhotos(m.VideoCallUpcomingMeetings, "upcoming-meetings"))
+  ),
+  "video-call-ai-meeting-recap": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-ai-meeting-recap/VideoCallAiMeetingRecap").then((m) => withVideoCallPhotos(m.VideoCallAiMeetingRecap, "ai-meeting-recap"))
+  ),
+  "video-call-hero-call-mockup": dynamic(() =>
+    import("@fasla-ui/blocks/video-call-hero-call-mockup/VideoCallHeroCallMockup").then((m) => withVideoCallPhotos(m.VideoCallHeroCallMockup, "hero-call-mockup"))
+  ),
   "blog-cards-left-thumb-row-cards": dynamic(() =>
     import("@fasla-ui/blocks/blog-cards-left-thumb-row-cards/BlogCardsLeftThumbRowCards").then((m) => withBlogCardsPhotos(m.BlogCardsLeftThumbRowCards, "left-thumb-row-cards", m.blogCardsLeftThumbRowCardsCopy))
   ),
@@ -1113,6 +1176,49 @@ export const BLOCK_COMPONENTS: Record<string, AnyBlock> = {
   "contact-us-support-channels": dynamic(() =>
     import("@fasla-ui/blocks/contact-us-support-channels/ContactUsSupportChannels").then((m) => withContactUsPhotos(m.ContactUsSupportChannels, "support-channels"))
   ),
+  // footer:begin
+  "footer-four-column-directory": dynamic(() => import("@fasla-ui/blocks/footer-four-column-directory/FooterFourColumnDirectory").then((m) => m.FooterFourColumnDirectory)),
+  "footer-wide-sitemap-mega": dynamic(() => import("@fasla-ui/blocks/footer-wide-sitemap-mega/FooterWideSitemapMega").then((m) => m.FooterWideSitemapMega)),
+  "footer-accordion-sitemap": dynamic(() => import("@fasla-ui/blocks/footer-accordion-sitemap/FooterAccordionSitemap").then((m) => m.FooterAccordionSitemap)),
+  "footer-two-tier-doormat": dynamic(() => import("@fasla-ui/blocks/footer-two-tier-doormat/FooterTwoTierDoormat").then((m) => m.FooterTwoTierDoormat)),
+  "footer-index-numbered-columns": dynamic(() => import("@fasla-ui/blocks/footer-index-numbered-columns/FooterIndexNumberedColumns").then((m) => m.FooterIndexNumberedColumns)),
+  "footer-brand-panel-split": dynamic(() => import("@fasla-ui/blocks/footer-brand-panel-split/FooterBrandPanelSplit").then((m) => m.FooterBrandPanelSplit)),
+  "footer-giant-wordmark": dynamic(() => import("@fasla-ui/blocks/footer-giant-wordmark/FooterGiantWordmark").then((m) => m.FooterGiantWordmark)),
+  "footer-image-backed-brand": dynamic(() =>
+    import("@fasla-ui/blocks/footer-image-backed-brand/FooterImageBackedBrand").then((m) => withFooterPhotos(m.FooterImageBackedBrand, "image-backed-brand", m.footerImageBackedBrandCopy))
+  ),
+  "footer-centered-brand-minimal": dynamic(() => import("@fasla-ui/blocks/footer-centered-brand-minimal/FooterCenteredBrandMinimal").then((m) => m.FooterCenteredBrandMinimal)),
+  "footer-marquee-strip": dynamic(() => import("@fasla-ui/blocks/footer-marquee-strip/FooterMarqueeStrip").then((m) => m.FooterMarqueeStrip)),
+  "footer-big-type-link-stack": dynamic(() => import("@fasla-ui/blocks/footer-big-type-link-stack/FooterBigTypeLinkStack").then((m) => m.FooterBigTypeLinkStack)),
+  "footer-bento-tile": dynamic(() => import("@fasla-ui/blocks/footer-bento-tile/FooterBentoTile").then((m) => m.FooterBentoTile)),
+  "footer-cta-band-columns": dynamic(() => import("@fasla-ui/blocks/footer-cta-band-columns/FooterCtaBandColumns").then((m) => m.FooterCtaBandColumns)),
+  "footer-newsletter-split": dynamic(() => import("@fasla-ui/blocks/footer-newsletter-split/FooterNewsletterSplit").then((m) => m.FooterNewsletterSplit)),
+  "footer-floating-demo-card": dynamic(() => import("@fasla-ui/blocks/footer-floating-demo-card/FooterFloatingDemoCard").then((m) => m.FooterFloatingDemoCard)),
+  "footer-big-question-cta": dynamic(() => import("@fasla-ui/blocks/footer-big-question-cta/FooterBigQuestionCta").then((m) => m.FooterBigQuestionCta)),
+  "footer-single-line-bar": dynamic(() => import("@fasla-ui/blocks/footer-single-line-bar/FooterSingleLineBar").then((m) => m.FooterSingleLineBar)),
+  "footer-split-hairline-micro": dynamic(() => import("@fasla-ui/blocks/footer-split-hairline-micro/FooterSplitHairlineMicro").then((m) => m.FooterSplitHairlineMicro)),
+  "footer-two-row-compact": dynamic(() => import("@fasla-ui/blocks/footer-two-row-compact/FooterTwoRowCompact").then((m) => m.FooterTwoRowCompact)),
+  "footer-inline-preferences": dynamic(() => import("@fasla-ui/blocks/footer-inline-preferences/FooterInlinePreferences").then((m) => m.FooterInlinePreferences)),
+  "footer-contact-first": dynamic(() =>
+    import("@fasla-ui/blocks/footer-contact-first/FooterContactFirst").then((m) => withFooterPhotos(m.FooterContactFirst, "contact-first", m.footerContactFirstCopy))
+  ),
+  "footer-support-contact": dynamic(() => import("@fasla-ui/blocks/footer-support-contact/FooterSupportContact").then((m) => m.FooterSupportContact)),
+  "footer-local-business": dynamic(() =>
+    import("@fasla-ui/blocks/footer-local-business/FooterLocalBusiness").then((m) => withFooterPhotos(m.FooterLocalBusiness, "local-business", m.footerLocalBusinessCopy))
+  ),
+  "footer-legal-first-slim": dynamic(() => import("@fasla-ui/blocks/footer-legal-first-slim/FooterLegalFirstSlim").then((m) => m.FooterLegalFirstSlim)),
+  "footer-trust-compliance": dynamic(() => import("@fasla-ui/blocks/footer-trust-compliance/FooterTrustCompliance").then((m) => m.FooterTrustCompliance)),
+  "footer-ecommerce-mega": dynamic(() => import("@fasla-ui/blocks/footer-ecommerce-mega/FooterEcommerceMega").then((m) => m.FooterEcommerceMega)),
+  "footer-service-promise-band": dynamic(() => import("@fasla-ui/blocks/footer-service-promise-band/FooterServicePromiseBand").then((m) => m.FooterServicePromiseBand)),
+  "footer-careers-culture": dynamic(() =>
+    import("@fasla-ui/blocks/footer-careers-culture/FooterCareersCulture").then((m) => withFooterPhotos(m.FooterCareersCulture, "careers-culture", m.footerCareersCultureCopy))
+  ),
+  "footer-community-events": dynamic(() => import("@fasla-ui/blocks/footer-community-events/FooterCommunityEvents").then((m) => m.FooterCommunityEvents)),
+  "footer-dashboard-slim-bar": dynamic(() => import("@fasla-ui/blocks/footer-dashboard-slim-bar/FooterDashboardSlimBar").then((m) => m.FooterDashboardSlimBar)),
+  "footer-docs-page": dynamic(() => import("@fasla-ui/blocks/footer-docs-page/FooterDocsPage").then((m) => m.FooterDocsPage)),
+  "footer-multi-region": dynamic(() => import("@fasla-ui/blocks/footer-multi-region/FooterMultiRegion").then((m) => m.FooterMultiRegion)),
+  "footer-product-family-switcher": dynamic(() => import("@fasla-ui/blocks/footer-product-family-switcher/FooterProductFamilySwitcher").then((m) => m.FooterProductFamilySwitcher)),
+  // footer:end
 }
 
 /** Settles after a moment, so a form shows its pending state before its result. */

@@ -364,6 +364,36 @@ export const routes = [
     },
   },
   {
+    kind: "block",
+    category: "Blocks",
+    path: "/docs/blocks/footer/",
+    title: "Footer Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Sections that close a page: sitemaps, brand-led footers, call-to-action bands, minimal bars, contact layouts and app footers, responsive and mirrored for Arabic.",
+    h1: "Footer",
+    ar: {
+      title: "كتل التذييل لمشاريع React | فاصلة",
+      description:
+        "أقسام تُغلق الصفحة: خرائط الموقع، وتذييلات العلامة، وأشرطة الدعوة، وتخطيطات التواصل، وتذييلات التطبيقات، متجاوبة ومعكوسة للعربية.",
+      h1: "التذييل (Footer)",
+    },
+  },
+  {
+    kind: "block",
+    category: "Blocks",
+    path: "/docs/blocks/video-call/",
+    title: "Video Call Blocks for React and Tailwind CSS | Fasla",
+    description:
+      "Sections for a video-call product: the lobby, waiting room, incoming call and join link, call stages with a grid, a speaker, a shared screen or a side panel, the controls dock, live captions and reactions, the call summary, upcoming meetings and the AI recap, built from the same parts and responsive, mirrored for Arabic.",
+    h1: "Video Call",
+    ar: {
+      title: "كتل المكالمات المرئية لمشاريع React | فاصلة",
+      description:
+        "أقسام لمنتج المكالمات المرئية: ردهة الانضمام وغرفة الانتظار والمكالمة الواردة ورابط الانضمام، ومراحل المكالمة بالشبكة أو المتحدث أو الشاشة المشتركة أو اللوحة الجانبية، وشريط عناصر التحكم والتسميات المباشرة والتفاعلات وملخّص المكالمة والاجتماعات القادمة وملخّص الذكاء الاصطناعي، مبنية من أجزاء مشتركة ومتجاوبة ومعكوسة للعربية.",
+      h1: "المكالمات المرئية (Video Call)",
+    },
+  },
+  {
     kind: "component",
     category: "UI Primitives",
     path: "/docs/components/button/",

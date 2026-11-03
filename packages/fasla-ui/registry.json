@@ -8386,6 +8386,1201 @@
       ]
     },
     {
+      "name": "footer",
+      "type": "registry:block",
+      "title": "Footer",
+      "description": "The parts every Footer block is built from: the section and its 1280px column, the hairline, the brand block, the social row, a link column, the legal bar, the newsletter form with its sent, error and invalid states, and the entrance and reduced-motion hooks.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "fasla-logo",
+        "input",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer/footer.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-four-column-directory",
+      "type": "registry:block",
+      "title": "Footer: Four-Column Directory",
+      "description": "The brand block with five social marks beside four link columns, a hairline and the legal bar.",
+      "dependencies": [],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-four-column-directory/FooterFourColumnDirectory.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-four-column-directory.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-wide-sitemap-mega",
+      "type": "registry:block",
+      "title": "Footer: Wide Sitemap Mega",
+      "description": "A wide sitemap of up to six link columns with language and region pickers, a status line and the legal bar.",
+      "dependencies": [],
+      "registryDependencies": [
+        "fasla-logo",
+        "footer",
+        "select",
+        "status-indicator"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-wide-sitemap-mega/FooterWideSitemapMega.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-wide-sitemap-mega.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-accordion-sitemap",
+      "type": "registry:block",
+      "title": "Footer: Accordion Sitemap",
+      "description": "Collapsible sitemap groups, one open at a time, under the brand and its social marks.",
+      "dependencies": [],
+      "registryDependencies": [
+        "accordion",
+        "fasla-logo",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-accordion-sitemap/FooterAccordionSitemap.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-accordion-sitemap.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-two-tier-doormat",
+      "type": "registry:block",
+      "title": "Footer: Two-Tier Doormat",
+      "description": "Two tiers: a contact strip above the link columns, then the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "fasla-logo",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-two-tier-doormat/FooterTwoTierDoormat.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-two-tier-doormat.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-index-numbered-columns",
+      "type": "registry:block",
+      "title": "Footer: Index-Numbered Columns",
+      "description": "Numbered link columns drawn with hairlines, a back-to-top link and the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "fasla-logo",
+        "footer"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-index-numbered-columns/FooterIndexNumberedColumns.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-index-numbered-columns.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-brand-panel-split",
+      "type": "registry:block",
+      "title": "Footer: Brand Panel Split",
+      "description": "A brand panel with a contact line beside the link columns, then the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-brand-panel-split/FooterBrandPanelSplit.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-brand-panel-split.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-giant-wordmark",
+      "type": "registry:block",
+      "title": "Footer: Giant Wordmark",
+      "description": "A dark band with the link columns and a wordmark scaled to the full width of the block.",
+      "dependencies": [],
+      "registryDependencies": [
+        "fasla-logo",
+        "footer",
+        "social-icons",
+        "theme-inverse"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-giant-wordmark/FooterGiantWordmark.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-giant-wordmark.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-image-backed-brand",
+      "type": "registry:block",
+      "title": "Footer: Image-Backed Brand",
+      "description": "The brand, navigation links and social marks over a full-bleed photo and a dark scrim.",
+      "dependencies": [],
+      "registryDependencies": [
+        "footer",
+        "social-icons",
+        "theme-inverse"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-image-backed-brand/FooterImageBackedBrand.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-image-backed-brand.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-centered-brand-minimal",
+      "type": "registry:block",
+      "title": "Footer: Centered Brand Minimal",
+      "description": "A centred logo, one line of links, social marks and the copyright.",
+      "dependencies": [],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-centered-brand-minimal/FooterCenteredBrandMinimal.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-centered-brand-minimal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-marquee-strip",
+      "type": "registry:block",
+      "title": "Footer: Marquee Strip",
+      "description": "A looping strip of phrases above a navigation row and the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-marquee-strip/FooterMarqueeStrip.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-marquee-strip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-big-type-link-stack",
+      "type": "registry:block",
+      "title": "Footer: Big-Type Link Stack",
+      "description": "Five large links stacked with arrows beside a column of details, then the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-big-type-link-stack/FooterBigTypeLinkStack.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-big-type-link-stack.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-bento-tile",
+      "type": "registry:block",
+      "title": "Footer: Bento Tile",
+      "description": "A bento of tiles: a sign-up form, status, contact links and link columns, then the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "footer",
+        "social-icons",
+        "status-indicator"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-bento-tile/FooterBentoTile.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-bento-tile.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-cta-band-columns",
+      "type": "registry:block",
+      "title": "Footer: CTA Band + Columns",
+      "description": "A dark call-to-action band with two buttons over the link columns and the legal bar.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "fasla-logo",
+        "footer",
+        "social-icons",
+        "theme-inverse"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-cta-band-columns/FooterCtaBandColumns.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-cta-band-columns.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-newsletter-split",
+      "type": "registry:block",
+      "title": "Footer: Newsletter Split",
+      "description": "A newsletter form beside the link grid, with sending, sent, error and invalid states.",
+      "dependencies": [],
+      "registryDependencies": [
+        "fasla-logo",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-newsletter-split/FooterNewsletterSplit.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-newsletter-split.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-floating-demo-card",
+      "type": "registry:block",
+      "title": "Footer: Floating Demo Card",
+      "description": "A card with a line of copy and two actions straddling the page edge above the directory.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "fasla-logo",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-floating-demo-card/FooterFloatingDemoCard.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-floating-demo-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-big-question-cta",
+      "type": "registry:block",
+      "title": "Footer: Big-Question CTA",
+      "description": "A large question as the headline with two buttons, then the links and the legal bar.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "fasla-logo",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-big-question-cta/FooterBigQuestionCta.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-big-question-cta.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-single-line-bar",
+      "type": "registry:block",
+      "title": "Footer: Single-Line Bar",
+      "description": "One line: the logo, the copyright and the social marks.",
+      "dependencies": [],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-single-line-bar/FooterSingleLineBar.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-single-line-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-split-hairline-micro",
+      "type": "registry:block",
+      "title": "Footer: Split Hairline Micro",
+      "description": "A thin hairline bar with the copyright at one end and the social marks at the other.",
+      "dependencies": [],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-split-hairline-micro/FooterSplitHairlineMicro.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-split-hairline-micro.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-two-row-compact",
+      "type": "registry:block",
+      "title": "Footer: Two-Row Compact",
+      "description": "Two compact rows: the brand and its links, then the copyright and the social marks.",
+      "dependencies": [],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-two-row-compact/FooterTwoRowCompact.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-two-row-compact.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-inline-preferences",
+      "type": "registry:block",
+      "title": "Footer: Inline + Preferences",
+      "description": "One row of links with a theme switch and a language select.",
+      "dependencies": [],
+      "registryDependencies": [
+        "footer",
+        "select",
+        "switch"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-inline-preferences/FooterInlinePreferences.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-inline-preferences.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-contact-first",
+      "type": "registry:block",
+      "title": "Footer: Contact-First",
+      "description": "A large email link and two offices with photos and addresses, over the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-contact-first/FooterContactFirst.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-contact-first.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-support-contact",
+      "type": "registry:block",
+      "title": "Footer: Support & Contact",
+      "description": "A help search field, topic links and three contact channel cards.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "footer",
+        "input"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-support-contact/FooterSupportContact.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-support-contact.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-local-business",
+      "type": "registry:block",
+      "title": "Footer: Local Business",
+      "description": "Opening hours and an address with two buttons beside a map photo.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-local-business/FooterLocalBusiness.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-local-business.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-legal-first-slim",
+      "type": "registry:block",
+      "title": "Footer: Legal-First Slim",
+      "description": "A slim footer that leads with the legal entity line and four badges.",
+      "dependencies": [],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-legal-first-slim/FooterLegalFirstSlim.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-legal-first-slim.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-trust-compliance",
+      "type": "registry:block",
+      "title": "Footer: Trust & Compliance",
+      "description": "Certification cards and a trust-centre button over the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "footer"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-trust-compliance/FooterTrustCompliance.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-trust-compliance.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-ecommerce-mega",
+      "type": "registry:block",
+      "title": "Footer: Ecommerce Mega",
+      "description": "A sign-up band, four link columns, region and currency selects, payment pills and social marks.",
+      "dependencies": [],
+      "registryDependencies": [
+        "footer",
+        "select",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-ecommerce-mega/FooterEcommerceMega.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-ecommerce-mega.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-service-promise-band",
+      "type": "registry:block",
+      "title": "Footer: Service Promise Band",
+      "description": "A band of service promises over the contact details and the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "footer"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-service-promise-band/FooterServicePromiseBand.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-service-promise-band.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-careers-culture",
+      "type": "registry:block",
+      "title": "Footer: Careers & Culture",
+      "description": "Open-role rows beside a cluster of team photos, with the legal bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-careers-culture/FooterCareersCulture.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-careers-culture.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-community-events",
+      "type": "registry:block",
+      "title": "Footer: Community & Events",
+      "description": "Upcoming events with register buttons beside community channel cards.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-community-events/FooterCommunityEvents.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-community-events.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-dashboard-slim-bar",
+      "type": "registry:block",
+      "title": "Footer: Dashboard Slim Bar",
+      "description": "A slim app status bar: status, release links, a search shortcut, help links and a utility button.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "footer",
+        "status-indicator"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-dashboard-slim-bar/FooterDashboardSlimBar.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-dashboard-slim-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-docs-page",
+      "type": "registry:block",
+      "title": "Footer: Docs Page",
+      "description": "A helpful vote, an edit link, previous and next cards and the page's contributors.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-docs-page/FooterDocsPage.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-docs-page.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-multi-region",
+      "type": "registry:block",
+      "title": "Footer: Multi-Region",
+      "description": "Six region cards with language, region and currency selects.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "footer",
+        "select"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-multi-region/FooterMultiRegion.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-multi-region.tsx"
+        }
+      ]
+    },
+    {
+      "name": "footer-product-family-switcher",
+      "type": "registry:block",
+      "title": "Footer: Product Family Switcher",
+      "description": "Product tiles with an Explore link each and a compare-products button.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "footer",
+        "social-icons"
+      ],
+      "categories": [
+        "footer",
+        "marketing"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/footer-product-family-switcher/FooterProductFamilySwitcher.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/footer-product-family-switcher.tsx"
+        }
+      ]
+    },
+    {
+      "name": "video-call",
+      "type": "registry:block",
+      "title": "Video Call",
+      "description": "The parts every Video Call block is built from: the section and its 1248px column, the heading, the stage bar, the participant tile, the controls dock with a Leave that has to be held, the call stage and its dock, the side panel, and stand-ins for the toast, star rating and separator.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "dropdown-menu",
+        "input",
+        "tabs",
+        "tooltip"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call/video-call.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-grid-gallery-call",
+      "type": "registry:block",
+      "title": "Video Call: Grid Gallery Call",
+      "description": "A call stage with a grid of participant tiles: three across on Desktop, two on Tablet, one at a time with dots on a phone. Tiles slide when people join or leave, the speaking ring follows the speaker, and REC pulses.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "carousel",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-grid-gallery-call/VideoCallGridGalleryCall.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-grid-gallery-call.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-speaker-filmstrip",
+      "type": "registry:block",
+      "title": "Video Call: Speaker & Filmstrip",
+      "description": "A call stage with one big speaker tile and a strip of everyone else. The speaker swaps with a cross-dissolve, the strip scrolls the new speaker into view, and pinning holds a person on the big tile.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-speaker-filmstrip/VideoCallSpeakerFilmstrip.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-speaker-filmstrip.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-screen-share-stage",
+      "type": "registry:block",
+      "title": "Video Call: Screen Share Stage",
+      "description": "A call stage while someone presents: a bar with Stop presenting, a shared slide that wipes in and out, a presenter rail and the controls dock. The slide keeps the direction of what was captured.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-screen-share-stage/VideoCallScreenShareStage.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-screen-share-stage.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-call-with-side-panel",
+      "type": "registry:block",
+      "title": "Video Call: Call With Side Panel",
+      "description": "A call stage beside a panel with Participants and Chat tabs, a people search and Invite. The panel pushes the stage when it opens, and is a bottom sheet with a handle on a phone.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-call-with-side-panel/VideoCallCallWithSidePanel.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-call-with-side-panel.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-call-controls-dock",
+      "type": "registry:block",
+      "title": "Video Call: Call Controls Dock",
+      "description": "One card showing the dock at three densities: compact round buttons, labelled buttons and a states row with the mic and camera off. Every control works; Leave must be held.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "tooltip",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-call-controls-dock/VideoCallCallControlsDock.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-call-controls-dock.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-captions-reactions",
+      "type": "registry:block",
+      "title": "Video Call: Captions & Reactions",
+      "description": "A call stage with live captions in a two-line window, a raise-hand chip, a column of reactions that float up when picked, a reaction picker and the controls dock, on an inverted caption bar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "video-call",
+        "theme-inverse"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-captions-reactions/VideoCallCaptionsReactions.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-captions-reactions.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-pre-join-lobby",
+      "type": "registry:block",
+      "title": "Video Call: Pre-Join Lobby",
+      "description": "The lobby before a call: your camera still with a pill of mic, camera and settings controls, the meeting's name and meta, three device pickers, Join now and Test speakers. Join waits, with a spinner, for the first camera frame.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "select",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-pre-join-lobby/VideoCallPreJoinLobby.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-pre-join-lobby.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-waiting-room-knock",
+      "type": "registry:block",
+      "title": "Video Call: Waiting Room & Knock",
+      "description": "The waiting room from both sides: the guest's card with a breathing lock and their own preview, and the host's card with each knock, Deny and Admit, Admit everyone and Keep locked. Rows grow in and collapse away.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-waiting-room-knock/VideoCallWaitingRoomKnock.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-waiting-room-knock.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-incoming-call",
+      "type": "registry:block",
+      "title": "Video Call: Incoming Call",
+      "description": "Three cards for a call that is not live yet: incoming with Decline, Join and Reply, calling with counting dots and Cancel, and missed with a playable voice note, Call back and Message.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-incoming-call/VideoCallIncomingCall.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-incoming-call.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-join-link-dial-in",
+      "type": "registry:block",
+      "title": "Video Call: Join Link & Dial-in",
+      "description": "A room's link with Copy link that confirms in place, four ways to share it, dial-in numbers with a PIN, and an access card with the QR code, who can join and Manage room settings. The QR folds behind Show QR on a phone.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-join-link-dial-in/VideoCallJoinLinkDialIn.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-join-link-dial-in.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-call-ended-summary",
+      "type": "registry:block",
+      "title": "Video Call: Call Ended Summary",
+      "description": "The card after a call: a green check beside Call ended, four stat tiles that count up, the recording row with Watch and Share, and a feedback card with a five-star rating, issue chips, who joined, Send feedback and Rejoin the room.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-call-ended-summary/VideoCallCallEndedSummary.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-call-ended-summary.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-upcoming-meetings",
+      "type": "registry:block",
+      "title": "Video Call: Upcoming Meetings",
+      "description": "Today's meetings as rows with a time, an accent bar, the title and meta, the people on it, Join and More. The meeting happening now has a pulsing ring and a Join now. Joining collapses the row.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-upcoming-meetings/VideoCallUpcomingMeetings.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-upcoming-meetings.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-ai-meeting-recap",
+      "type": "registry:block",
+      "title": "Video Call: AI Meeting Recap",
+      "description": "A meeting's AI recap: an Overview that can reveal word by word, action items with checkboxes and owners, the recording's still with a time, and Key moments that seek the player. Share recap confirms with a toast.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "checkbox",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-ai-meeting-recap/VideoCallAiMeetingRecap.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-ai-meeting-recap.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
+      "name": "video-call-hero-call-mockup",
+      "type": "registry:block",
+      "title": "Video Call: Hero — Call Mockup",
+      "description": "A marketing hero for a call product: a tag, the headline, a line, two buttons and a line of proof beside a still mockup of a call with a bar, three tiles and a dock. The mockup is decorative and enters in sequence; Start and Tour call back.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "video-call"
+      ],
+      "files": [
+        {
+          "path": "registry/blocks/video-call-hero-call-mockup/VideoCallHeroCallMockup.tsx",
+          "type": "registry:block",
+          "target": "components/blocks/video-call-hero-call-mockup.tsx"
+        }
+      ],
+      "categories": [
+        "video-call",
+        "marketing"
+      ]
+    },
+    {
       "name": "how-it-works",
       "type": "registry:block",
       "title": "How it Works",

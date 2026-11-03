@@ -3,7 +3,7 @@
     "source": "Figma · Fasla · yGEQmCZOvs7KptsYUdB0Xg",
     "fileKey": "yGEQmCZOvs7KptsYUdB0Xg",
     "target": "blocks",
-    "measured": "2026-10-28",
+    "measured": "2026-10-31",
     "generatedBy": ".agents/skills/figma-index (read-only use_figma page walk, target: blocks) → design/scripts/build-blocks-index.mjs",
     "scope": {
       "rule": "every page after each section header, up to the next header, skipping divider pages (a blank or \"---\" name); the E-commerce section must end on Gift Cards",
@@ -39,11 +39,11 @@
       "sections": 2,
       "families": 37,
       "readyFamilies": 20,
-      "blocks": 726,
+      "blocks": 724,
       "readyBlocks": 367,
-      "variants": 4356,
+      "variants": 4344,
       "withEnDoc": 26,
-      "withArDoc": 24,
+      "withArDoc": 25,
       "blocksInCode": 202,
       "familiesInCode": 10,
       "parts": 2,
@@ -128,7 +128,7 @@
         "42756:2305",
         "42510:68728"
       ],
-      "blocks": 567
+      "blocks": 565
     },
     {
       "key": "ecommerce",
@@ -4754,8 +4754,8 @@
       "family": "Footer",
       "page": {
         "id": "40935:42910",
-        "name": "✦  🟠 H | Footer - 36 Blocks",
-        "display": "Footer - 36 Blocks",
+        "name": "✦  🟠 H | Footer - 33 Blocks",
+        "display": "Footer - 33 Blocks",
         "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=40935-42910"
       },
       "status": "🟠",
@@ -4767,16 +4767,16 @@
         "active": false
       },
       "count": {
-        "inName": 36,
+        "inName": 33,
         "source": "suffix",
-        "counted": 35,
-        "matches": false
+        "counted": 33,
+        "matches": true
       },
       "set": {
         "id": "46380:22515",
         "name": "Footer",
         "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=46380-22515",
-        "variants": 210,
+        "variants": 198,
         "axes": {
           "Type": [
             "Four-Column Directory",
@@ -4788,15 +4788,12 @@
             "CTA Band + Columns",
             "Newsletter Split",
             "Floating Demo Card",
-            "App Download Footer",
             "Big-Question CTA",
             "Contact-First",
             "Giant Wordmark",
-            "Dark Inverse Mega",
             "Marquee Strip",
             "Big-Type Link Stack",
             "Image-Backed Brand",
-            "Bento Tile Footer",
             "Single-Line Bar",
             "Centered Brand Minimal",
             "Split Hairline Micro",
@@ -4804,7 +4801,6 @@
             "Legal-First Slim",
             "Inline + Preferences",
             "Dashboard Slim Bar",
-            "Docs Page Footer",
             "Multi-Region",
             "Support & Contact",
             "Trust & Compliance",
@@ -4813,7 +4809,9 @@
             "Careers & Culture",
             "Community & Events",
             "Local Business",
-            "Product Family Switcher"
+            "Product Family Switcher",
+            "Bento Tile",
+            "Docs Page"
           ],
           "Breakpoint": [
             "Desktop",
@@ -4841,43 +4839,21 @@
       "rtl": true,
       "docs": {
         "en": {
-          "id": "41961:2836",
-          "name": "Service / Documentation",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41961-2836"
+          "id": "47319:9304",
+          "name": "Footer — Fasla UI Block Documentation",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=47319-9304"
         },
-        "ar": null,
-        "duplicates": [
-          {
-            "id": "42086:3741",
-            "name": "Service / Documentation",
-            "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42086-3741"
-          },
-          {
-            "id": "42086:3979",
-            "name": "Service / Documentation",
-            "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42086-3979"
-          },
-          {
-            "id": "42153:170105",
-            "name": "Service / Documentation",
-            "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42153-170105"
-          },
-          {
-            "id": "42153:170382",
-            "name": "Service / Documentation",
-            "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42153-170382"
-          },
-          {
-            "id": "42153:170612",
-            "name": "Service / Documentation",
-            "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=42153-170612"
-          }
-        ]
+        "ar": {
+          "id": "47332:10977",
+          "name": "Footer — Fasla UI Block Documentation (AR)",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=47332-10977"
+        },
+        "duplicates": []
       },
       "code": {
         "prefix": null,
         "built": 0,
-        "of": 35
+        "of": 33
       },
       "blocks": [
         {
@@ -4944,13 +4920,6 @@
           "code": null
         },
         {
-          "name": "App Download Footer",
-          "nodeId": "41978:1547",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41978-1547",
-          "variants": 6,
-          "code": null
-        },
-        {
           "name": "Big-Question CTA",
           "nodeId": "41978:1548",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41978-1548",
@@ -4972,13 +4941,6 @@
           "code": null
         },
         {
-          "name": "Dark Inverse Mega",
-          "nodeId": "41978:1551",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41978-1551",
-          "variants": 6,
-          "code": null
-        },
-        {
           "name": "Marquee Strip",
           "nodeId": "41978:1552",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41978-1552",
@@ -4996,13 +4958,6 @@
           "name": "Image-Backed Brand",
           "nodeId": "41978:1554",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41978-1554",
-          "variants": 6,
-          "code": null
-        },
-        {
-          "name": "Bento Tile Footer",
-          "nodeId": "41978:1555",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41978-1555",
           "variants": 6,
           "code": null
         },
@@ -5052,13 +5007,6 @@
           "name": "Dashboard Slim Bar",
           "nodeId": "41980:1544",
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41980-1544",
-          "variants": 6,
-          "code": null
-        },
-        {
-          "name": "Docs Page Footer",
-          "nodeId": "41980:1545",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41980-1545",
           "variants": 6,
           "code": null
         },
@@ -5124,23 +5072,24 @@
           "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41980-1555",
           "variants": 6,
           "code": null
-        }
-      ],
-      "leftovers": [
+        },
         {
-          "id": "41896:7032",
-          "type": "TEXT",
-          "name": "__footerlib",
-          "where": "page",
-          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41896-7032"
+          "name": "Bento Tile",
+          "nodeId": "41978:1555",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41978-1555",
+          "variants": 6,
+          "code": null
+        },
+        {
+          "name": "Docs Page",
+          "nodeId": "41980:1545",
+          "url": "https://www.figma.com/design/yGEQmCZOvs7KptsYUdB0Xg/?node-id=41980-1545",
+          "variants": 6,
+          "code": null
         }
       ],
+      "leftovers": [],
       "flags": [
-        "no-ar-doc",
-        "duplicate-doc-frame",
-        "doc-name-mismatch: doc says \"Service /\", set is \"Footer\"",
-        "leftover-nodes: 1",
-        "count-mismatch: name says 36, Figma has 35",
         "owner-left: Haneen"
       ]
     },
