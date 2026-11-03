@@ -3362,6 +3362,45 @@
         "careers-role-detail-page": "صفحة تفاصيل الوظيفة"
       }
     },
+    "howItWorksBlocks": {
+      "lead": "أقسام تشرح خطوات العمل: خطوط زمنية ومراحل، وخطوات مروية بالصور والبطاقات، وشرائح وألسنة وقوائم قابلة للطي تتنقل بينها، وشبكات وألواح برسم لكل خطوة.",
+      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
+      "filterLabel": "التصفية حسب العائلة",
+      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
+      "families": {
+        "all": "الكل",
+        "timelines": "الخطوط الزمنية والمراحل",
+        "visual-steps": "خطوات مرئية",
+        "interactive": "شرائح وتفاعل",
+        "grids": "شبكات وألواح"
+      },
+      "types": {
+        "how-it-works-center-spine-timeline": "Center Spine Timeline",
+        "how-it-works-vertical-timeline-card": "Vertical Timeline Card",
+        "how-it-works-contained-timeline": "Contained Timeline",
+        "how-it-works-phase-line": "Phase Line",
+        "how-it-works-pill-timeline": "Pill Timeline",
+        "how-it-works-numbered-photo-steps": "Numbered Photo Steps",
+        "how-it-works-split-photo-step-list": "Split Photo + Step List",
+        "how-it-works-full-bleed-step-panel": "Full-Bleed Step Panel",
+        "how-it-works-overlay-numeral-cards": "Overlay Numeral Cards",
+        "how-it-works-diagonal-photo-collage": "Diagonal Photo Collage",
+        "how-it-works-photo-bento-steps": "Photo Bento Steps",
+        "how-it-works-fanned-dissolve-cards": "Fanned Dissolve Cards",
+        "how-it-works-stacked-media-text": "Stacked Media + Text",
+        "how-it-works-photo-rail-progress": "Photo Rail + Progress",
+        "how-it-works-tall-visual-rail": "Tall Visual Rail",
+        "how-it-works-step-tabs-photo-panel": "Step Tabs + Photo Panel",
+        "how-it-works-accordion-steps": "Accordion Steps",
+        "how-it-works-orbital-process": "Orbital Process",
+        "how-it-works-six-card-grid": "Six-Card Grid",
+        "how-it-works-column-panels": "Column Panels",
+        "how-it-works-numbered-instruction-panels": "Numbered Instruction Panels",
+        "how-it-works-numbered-editorial-rows": "Numbered Editorial Rows",
+        "how-it-works-split-feature-band": "Split Feature Band",
+        "how-it-works-rounded-cards-device-crop": "Rounded Cards + Device Crop"
+      }
+    },
     "blockCard": {
       "fullScreen": "فتح بملء الشاشة",
       "newTab": "(يُفتح في علامة تبويب جديدة)",

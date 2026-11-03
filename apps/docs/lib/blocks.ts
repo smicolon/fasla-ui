@@ -4,7 +4,7 @@
  * (docs.faqBlocks, docs.errorStateBlocks, docs.logoCloudBlocks,
  * docs.authenticationsBlocks, docs.galleryBlocks, docs.navbarBlocks,
  * docs.pricingBlocks, docs.heroBlocks, docs.aboutBlocks, docs.teamBlocks,
- * docs.careersBlocks, docs.socialProofBlocks, docs.blogCardsBlocks, docs.featuresBlocks, docs.contactUsBlocks, docs.footerBlocks); the slug is the registry item's name.
+ * docs.careersBlocks, docs.howItWorksBlocks, docs.socialProofBlocks, docs.blogCardsBlocks, docs.featuresBlocks, docs.contactUsBlocks, docs.footerBlocks); the slug is the registry item's name.
  */
 
 export type FaqFamily = "lists" | "layouts" | "navigation" | "support"
@@ -95,6 +95,16 @@ export type CareersFamily = "lists" | "highlights" | "details"
 export const CAREERS_FAMILIES: CareersFamily[] = ["lists", "highlights", "details"]
 
 /**
+ * How it Works' four groups, as its Figma Types fall into them: the timelines
+ * and phases, the steps told with photos and cards, the sliding and
+ * interactive ones, and the grids and panels. A group appears here once a Type
+ * of it is built.
+ */
+export type HowItWorksFamily = "timelines" | "visual-steps" | "interactive" | "grids"
+
+export const HOW_IT_WORKS_FAMILIES: HowItWorksFamily[] = ["timelines", "visual-steps", "interactive", "grids"]
+
+/**
  * Video Call's groups, as Figma's page orders them: the layers on a call (the
  * dock, captions and reactions), the call stages, the screens before the call,
  * the ones around it, and the marketing hero. A group appears here once a Type
@@ -165,7 +175,7 @@ export type FooterFamily = "sitemap" | "brand" | "cta" | "bars" | "contact" | "l
 
 export const FOOTER_FAMILIES: FooterFamily[] = ["sitemap", "brand", "cta", "bars", "contact", "legal", "commerce", "community", "utility"]
 
-export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | SocialProofFamily | BlogCardsFamily | ContactUsFamily | FeaturesFamily | FooterFamily | VideoCallFamily> = {
+export type BlockType<Family extends string = FaqFamily | ErrorStateFamily | LogoCloudFamily | AuthenticationsFamily | GalleryFamily | NavbarFamily | PricingFamily | HeroFamily | AboutFamily | TeamFamily | CareersFamily | HowItWorksFamily | SocialProofFamily | BlogCardsFamily | ContactUsFamily | FeaturesFamily | FooterFamily | VideoCallFamily> = {
   /** The registry item, and the file it installs to. */
   slug: string
   family: Family
@@ -410,6 +420,34 @@ export const CAREERS_TYPES: BlockType<CareersFamily>[] = [
   { slug: "careers-role-detail-page", family: "details" },
 ]
 
+/** The Types built so far, in Figma's order by group. */
+export const HOW_IT_WORKS_TYPES: BlockType<HowItWorksFamily>[] = [
+  { slug: "how-it-works-center-spine-timeline", family: "timelines" },
+  { slug: "how-it-works-vertical-timeline-card", family: "timelines" },
+  { slug: "how-it-works-contained-timeline", family: "timelines" },
+  { slug: "how-it-works-phase-line", family: "timelines" },
+  { slug: "how-it-works-pill-timeline", family: "timelines" },
+  { slug: "how-it-works-numbered-photo-steps", family: "visual-steps" },
+  { slug: "how-it-works-split-photo-step-list", family: "visual-steps" },
+  { slug: "how-it-works-full-bleed-step-panel", family: "visual-steps" },
+  { slug: "how-it-works-overlay-numeral-cards", family: "visual-steps" },
+  { slug: "how-it-works-diagonal-photo-collage", family: "visual-steps" },
+  { slug: "how-it-works-photo-bento-steps", family: "visual-steps" },
+  { slug: "how-it-works-fanned-dissolve-cards", family: "visual-steps", inverse: true },
+  { slug: "how-it-works-stacked-media-text", family: "visual-steps" },
+  { slug: "how-it-works-photo-rail-progress", family: "interactive" },
+  { slug: "how-it-works-tall-visual-rail", family: "interactive" },
+  { slug: "how-it-works-step-tabs-photo-panel", family: "interactive" },
+  { slug: "how-it-works-accordion-steps", family: "interactive" },
+  { slug: "how-it-works-orbital-process", family: "interactive" },
+  { slug: "how-it-works-six-card-grid", family: "grids" },
+  { slug: "how-it-works-column-panels", family: "grids" },
+  { slug: "how-it-works-numbered-instruction-panels", family: "grids" },
+  { slug: "how-it-works-numbered-editorial-rows", family: "grids" },
+  { slug: "how-it-works-split-feature-band", family: "grids" },
+  { slug: "how-it-works-rounded-cards-device-crop", family: "grids" },
+]
+
 /** The Video Call Types built so far, in Figma's order. */
 export const VIDEO_CALL_TYPES: BlockType<VideoCallFamily>[] = [
   { slug: "video-call-pre-join-lobby", family: "before" },
@@ -427,7 +465,6 @@ export const VIDEO_CALL_TYPES: BlockType<VideoCallFamily>[] = [
   { slug: "video-call-ai-meeting-recap", family: "around" },
   { slug: "video-call-hero-call-mockup", family: "marketing" },
 ]
-
 
 /** The 14 Types, in Figma's order. Three drop the block name Figma still carries: Team Carousel, Team Table and Hairline Team Grid. */
 export const TEAM_TYPES: BlockType<TeamFamily>[] = [
@@ -603,6 +640,7 @@ export const ALL_BLOCK_TYPES: BlockType[] = [
   ...HERO_TYPES,
   ...ABOUT_TYPES,
   ...CAREERS_TYPES,
+  ...HOW_IT_WORKS_TYPES,
   ...TEAM_TYPES,
   ...SOCIAL_PROOF_TYPES,
   ...BLOG_CARDS_TYPES,
