@@ -60,3 +60,9 @@ export {
   type MahaamPlansCopy,
   type MahaamPlansProps,
 } from "./mahaam-plans"
+export {
+  MahaamFaq,
+  mahaamFaqCopy,
+  type MahaamFaqCopy,
+  type MahaamFaqProps,
+} from "./mahaam-faq"

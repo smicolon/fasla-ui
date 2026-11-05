@@ -28,6 +28,13 @@ describe("Registry build — imports between components", () => {
     )
   })
 
+  test("points a template's import of a block at the block's flat file", () => {
+    const src = `import { FaqSplitSticky } from "../../blocks/faq-split-sticky/FaqSplitSticky"`
+    expect(rewriteComponentImports(src, "components/templates/mahaam-faq.tsx", targetOf)).toBe(
+      `import { FaqSplitSticky } from "../blocks/faq-split-sticky"`
+    )
+  })
+
   test("leaves anything that isn't a registry component alone", () => {
     const src = [
       `import { cn } from "../../../src/lib/utils"`,

@@ -10390,6 +10390,26 @@
       "categories": [
         "template"
       ]
+    },
+    {
+      "name": "mahaam-faq",
+      "type": "registry:block",
+      "title": "Mahaam: FAQ",
+      "description": "The Mahaam template's FAQ: the FAQ block's Split Sticky type with Mahaam's words, six questions that open one at a time.",
+      "dependencies": [],
+      "registryDependencies": [
+        "faq-split-sticky"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-faq.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-faq.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
     }
   ]
 }
