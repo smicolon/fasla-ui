@@ -187,7 +187,7 @@ export function FooterProductFamilySwitcher({
                   <a
                     href={product.href ?? "#"}
                     className={cn(
-                      "group/tile flex min-w-0 flex-1 flex-col justify-between gap-3 rounded-xl border border-border bg-card p-4 shadow-xs [@container(min-width:40rem)]:p-5 [@container(min-width:64rem)]:p-6",
+                      "group/tile flex min-w-0 flex-1 flex-col justify-between gap-3 rounded-xl border border-border bg-card p-4 shadow-sm [@container(min-width:40rem)]:p-5 [@container(min-width:64rem)]:p-6",
                       "transition-[border-color,transform,background-color] duration-[160ms] motion-reduce:transition-none",
                       "[outline:none] focus-visible:border-foreground focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring",
                       "hover:[@container(min-width:40rem)]:border-foreground hover:motion-safe:[@container(min-width:40rem)]:-translate-y-0.5",

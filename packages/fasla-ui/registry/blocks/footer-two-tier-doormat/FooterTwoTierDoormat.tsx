@@ -35,8 +35,9 @@ import {
  *
  * STAND-INS (temporary):
  *  - `FooterContactCard` is a plain card (`card` surface, 1px `border`, 10px
- *    radius, `shadow-xs`, as Figma draws it). The library's Card atom is
- *    14px-rounded with a heavier shadow, and a block does not restyle an atom.
+ *    radius, `shadow-sm`, which is Figma's `xs` on Tailwind 3). The library's
+ *    Card atom is 14px-rounded with a heavier shadow, and a block does not
+ *    restyle an atom.
  */
 
 export type FooterContactIcon = "map-pin" | "mail" | "life-buoy"
@@ -115,7 +116,7 @@ const ICONS = { "map-pin": MapPinIcon, mail: MailIcon, "life-buoy": LifeBuoyIcon
 function FooterContactCard({ contact, locale }: { contact: FooterContact; locale: FooterLocale }) {
   const Icon = ICONS[contact.icon]
   return (
-    <div className="flex h-full w-full min-w-0 flex-col gap-2 rounded-lg border border-border bg-card p-4 text-card-foreground shadow-xs [@container(min-width:40rem)]:gap-3 [@container(min-width:40rem)]:p-5 [@container(min-width:64rem)]:p-6">
+    <div className="flex h-full w-full min-w-0 flex-col gap-2 rounded-lg border border-border bg-card p-4 text-card-foreground shadow-sm [@container(min-width:40rem)]:gap-3 [@container(min-width:40rem)]:p-5 [@container(min-width:64rem)]:p-6">
       <span aria-hidden="true" className="flex size-8 shrink-0 items-center justify-center rounded-md bg-secondary">
         <Icon className="size-4" strokeWidth={1.5} />
       </span>
