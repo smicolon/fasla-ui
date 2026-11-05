@@ -11,4 +11,4 @@ These images are used in the docs site and Storybook examples of the Mahaam temp
 
 The three faces are the 32px round crops the Figma set shows (`Mahaam Template`, Avatar instances in the Hero), exported at 4× from the set so they match it exactly. The full portraits the HTML spec used for the Testimonials are added with that section.
 
-The Freepik licence for Noura and Khalid is still to be confirmed before shipping. The footer credit line the Figma set carries is "Photos of Noura and Khalid: Freepik."
+The Freepik photos are free to use with attribution: "Image by Freepik" for Noura and Khalid, and the footer credit line the Figma set carries, "Photos of Noura and Khalid: Freepik."

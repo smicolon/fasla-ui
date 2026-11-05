@@ -10177,7 +10177,7 @@
       ],
       "files": [
         {
-          "path": "registry/templates/mahaam/MahaamNavbar.tsx",
+          "path": "registry/templates/mahaam/mahaam-navbar.tsx",
           "type": "registry:block",
           "target": "components/templates/mahaam-navbar.tsx"
         }
@@ -10205,6 +10205,28 @@
       ]
     },
     {
+      "name": "mahaam-pause-button",
+      "type": "registry:block",
+      "title": "Mahaam: Pause button",
+      "description": "The Mahaam template's pause control: an outline icon button that shows Pause while a section plays and Play while it is paused.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-pause-button.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-pause-button.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
+    },
+    {
       "name": "mahaam-hero",
       "type": "registry:block",
       "title": "Mahaam: Hero",
@@ -10216,11 +10238,12 @@
         "avatar",
         "badge",
         "button",
-        "mahaam-motion"
+        "mahaam-motion",
+        "mahaam-pause-button"
       ],
       "files": [
         {
-          "path": "registry/templates/mahaam/MahaamHero.tsx",
+          "path": "registry/templates/mahaam/mahaam-hero.tsx",
           "type": "registry:block",
           "target": "components/templates/mahaam-hero.tsx"
         }

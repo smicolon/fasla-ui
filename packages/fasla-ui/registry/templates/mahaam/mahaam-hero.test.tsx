@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi, type Mock } from "vitest"
 import { act, cleanup, fireEvent, render, screen } from "@testing-library/react"
-import { MahaamHero, mahaamHeroCopy } from "./MahaamHero"
+import { MahaamHero, mahaamHeroCopy } from "./mahaam-hero"
 
 /*
  * The Hero plays and loops, which the repo's motion rules otherwise forbid
@@ -75,6 +75,48 @@ describe("Mahaam Hero: paused", () => {
       vi.advanceTimersByTime(60 * 200)
     })
     expect(screen.getByText(en.added(2))).toBeTruthy()
+  })
+})
+
+describe("Mahaam Hero: the pause button", () => {
+  it("is Pause while it plays and Play while it is paused, and pressing it stops and starts the loop", () => {
+    vi.useFakeTimers()
+    render(<MahaamHero />)
+    act(() => {
+      vi.advanceTimersByTime(60 * 20)
+    })
+    fireEvent.click(screen.getByRole("button", { name: "Pause animation" }))
+    expect(screen.getByRole("button", { name: "Play animation" })).toBeTruthy()
+    const frozen = screen.getByText(en.listening)
+    act(() => {
+      vi.advanceTimersByTime(60 * 200)
+    })
+    // It stopped where it stood, at frame 20: the voice note is still being typed.
+    expect(frozen.isConnected).toBe(true)
+    expect(screen.getByText(en.listening)).toBeTruthy()
+    fireEvent.click(screen.getByRole("button", { name: "Play animation" }))
+    act(() => {
+      vi.advanceTimersByTime(60 * 100)
+    })
+    expect(screen.getByText(en.added(3))).toBeTruthy()
+  })
+
+  it("starts as Play when it starts paused, and tells onPausedChange", () => {
+    const onPausedChange = vi.fn()
+    render(<MahaamHero defaultPaused frame={80} onPausedChange={onPausedChange} />)
+    fireEvent.click(screen.getByRole("button", { name: "Play animation" }))
+    expect(onPausedChange).toHaveBeenCalledWith(false)
+    expect(screen.getByRole("button", { name: "Pause animation" })).toBeTruthy()
+  })
+
+  it("is not drawn under reduced motion", () => {
+    render(<MahaamHero reducedMotion />)
+    expect(screen.queryByRole("button", { name: /animation/ })).toBeNull()
+  })
+
+  it("is named in Arabic in the Arabic locale", () => {
+    render(<MahaamHero locale="ar" />)
+    expect(screen.getByRole("button", { name: "إيقاف الحركة مؤقتًا" })).toBeTruthy()
   })
 })
 

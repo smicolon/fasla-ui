@@ -6,6 +6,7 @@ import { cn } from "../../../src/lib/utils"
 import { Avatar } from "../../ui/avatar/avatar"
 import { Badge } from "../../ui/badge/badge"
 import { buttonVariants } from "../../ui/button/button"
+import { MahaamPauseButton, usePausedState, type MahaamPauseButtonLabels } from "./mahaam-pause-button"
 import { PULSE_KEYFRAMES, useEntrance, useInView, useLoopAnimation, useLoopClock, usePageVisible, usePrefersReducedMotion } from "./mahaam-motion"
 
 /*
@@ -157,12 +158,22 @@ export interface MahaamHeroProps extends React.HTMLAttributes<HTMLElement>, Part
    * @default "#demo"
    */
   secondaryHref?: string
-  /** Freezes the section where it stands: the planner's frame and every animation. */
+  /**
+   * Whether the section is paused: the planner's frame and every animation
+   * stand still. Set it to control the pause button; leave it out and the
+   * button keeps its own state, which starts from `defaultPaused`.
+   */
   paused?: boolean
+  /** Whether an uncontrolled section starts paused. */
+  defaultPaused?: boolean
+  /** Called when the visitor presses the pause button. */
+  onPausedChange?: (paused: boolean) => void
+  /** The pause button's names, in place of `locale`'s. */
+  pauseLabels?: Partial<MahaamPauseButtonLabels>
   /**
    * The planner's frame, 0 to 200, where the loop starts, and where it holds
-   * while `paused` or under reduced motion. 170 is Figma's finished state.
-   * @default 170 while paused or reduced, 0 otherwise
+   * under reduced motion. 170 is Figma's finished state.
+   * @default 170 when it starts paused or under reduced motion, 0 otherwise
    */
   frame?: number
   /** Replaces the visitor's reduced-motion setting. For stories and tests. */
@@ -236,26 +247,17 @@ const TASK_BOX =
 const TASK_OFF = "[transform:translateY(calc(-70px_-_var(--top)))_scale(.92)] opacity-0"
 
 const BOX = {
-  design:
-    "[--top:94px] h-[88px] [&:dir(rtl)]:[--top:110px] [@container(min-width:48rem)]:[--top:60px] [@container(min-width:48rem)]:h-[54px] [@container(min-width:48rem)]:[&:dir(rtl)]:[--top:60px]",
-  teamSync: "[--top:368px] h-[27px] [&:dir(rtl)]:[--top:400px] [@container(min-width:48rem)]:[--top:232px] [@container(min-width:48rem)]:[&:dir(rtl)]:[--top:232px]",
-  call: "[--top:2px] h-[88px] [&:dir(rtl)]:h-[112px] [@container(min-width:48rem)]:h-[54px] [@container(min-width:48rem)]:[&:dir(rtl)]:h-[54px]",
-  lunch:
-    "[--top:278px] h-[88px] [&:dir(rtl)]:[--top:294px] [&:dir(rtl)]:h-[112px] [@container(min-width:48rem)]:[--top:176px] [@container(min-width:48rem)]:h-[54px] [@container(min-width:48rem)]:[&:dir(rtl)]:[--top:176px] [@container(min-width:48rem)]:[&:dir(rtl)]:h-[54px]",
+  design: "[--top:94px] h-[88px] [&:where(:dir(rtl))]:[--top:118px] [@container(min-width:48rem)]:[--top:60px] [@container(min-width:48rem)]:h-[54px]",
+  teamSync: "[--top:368px] h-[27px] [&:where(:dir(rtl))]:[--top:464px] [@container(min-width:48rem)]:[--top:232px]",
+  call: "[--top:2px] h-[88px] [&:where(:dir(rtl))]:h-[112px] [@container(min-width:48rem)]:h-[54px]",
+  lunch: "[--top:278px] h-[88px] [&:where(:dir(rtl))]:[--top:350px] [&:where(:dir(rtl))]:h-[112px] [@container(min-width:48rem)]:[--top:176px] [@container(min-width:48rem)]:h-[54px]",
   sanad:
-    "[--top:462px] h-[175px] [&:dir(rtl)]:[--top:494px] [@container(min-width:48rem)]:[--top:292px] [@container(min-width:48rem)]:h-[109px] [@container(min-width:48rem)]:items-start [@container(min-width:48rem)]:[&:dir(rtl)]:[--top:292px] [@container(min-width:48rem)]:[&:dir(rtl)]:h-[132px]",
+    "[--top:462px] h-[175px] [&:where(:dir(rtl))]:[--top:582px] [@container(min-width:48rem)]:[--top:292px] [@container(min-width:48rem)]:h-[109px] [@container(min-width:48rem)]:items-start [@container(min-width:48rem)]:[&:dir(rtl)]:h-[132px]",
 } as const
 
-/** One hour of the day: a hairline and its label. Figma spaces them 92px on Mobile (108 in two Arabic rows), 58 from Tablet. */
-const HOUR_ROWS = [
-  { label: "9:00", box: "h-[92px] [&:dir(rtl)]:h-[108px] [@container(min-width:48rem)]:h-[58px] [@container(min-width:48rem)]:[&:dir(rtl)]:h-[58px]" },
-  { label: "10:00", box: "h-[92px] [@container(min-width:48rem)]:h-[58px]" },
-  { label: "11:00", box: "h-[92px] [@container(min-width:48rem)]:h-[58px]" },
-  { label: "12:00", box: "h-[92px] [&:dir(rtl)]:h-[108px] [@container(min-width:48rem)]:h-[58px] [@container(min-width:48rem)]:[&:dir(rtl)]:h-[58px]" },
-  { label: "13:00", box: "h-[92px] [@container(min-width:48rem)]:h-[58px]" },
-  { label: "14:00", box: "h-[92px] [@container(min-width:48rem)]:h-[58px]" },
-  { label: "15:00", box: "h-[92px] [@container(min-width:48rem)]:h-[58px]" },
-]
+/** One hour of the day: a hairline and its label. Figma spaces them 92px on Mobile (116 in Arabic, where the first block is taller), 58 from Tablet. */
+const HOUR_ROW = "h-[92px] [&:where(:dir(rtl))]:h-[116px] [@container(min-width:48rem)]:h-[58px]"
+const HOUR_LABELS = ["9:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00"]
 
 function Planner({
   copy,
@@ -313,12 +315,12 @@ function Planner({
       </div>
 
       <div
-        className="relative h-[644px] [&:dir(rtl)]:h-[676px] [@container(min-width:48rem)]:h-[406px] [@container(min-width:48rem)]:[&:dir(rtl)]:h-[421px]"
+        className="relative h-[644px] [&:where(:dir(rtl))]:h-[764px] [@container(min-width:48rem)]:h-[406px] [@container(min-width:48rem)]:[&:dir(rtl)]:h-[421px]"
         style={{ "--now": Math.min(frame, 200) / 200 } as React.CSSProperties}
       >
-        {HOUR_ROWS.map((row) => (
-          <div key={row.label} className={cn("flex border-t border-border pt-1 text-xs text-muted-foreground", row.box)}>
-            <span className="w-12">{row.label}</span>
+        {HOUR_LABELS.map((label) => (
+          <div key={label} className={cn("flex border-t border-border pt-1 text-xs text-muted-foreground", HOUR_ROW)}>
+            <span className="w-12">{label}</span>
           </div>
         ))}
 
@@ -358,7 +360,7 @@ function Planner({
         </div>
 
         <div
-          className="absolute start-8 end-0 top-[212px] z-10 h-0.5 bg-foreground transition-transform duration-1000 ease-linear [transform:translateY(calc(var(--now)*20px))] motion-reduce:transition-none [&:dir(rtl)]:top-[228px] [@container(min-width:48rem)]:start-10 [@container(min-width:48rem)]:top-[133px] [@container(min-width:48rem)]:[&:dir(rtl)]:top-[133px]"
+          className="absolute start-8 end-0 top-[212px] z-10 h-0.5 bg-foreground transition-transform duration-1000 ease-linear [transform:translateY(calc(var(--now)*20px))] motion-reduce:transition-none [&:where(:dir(rtl))]:top-[267px] [@container(min-width:48rem)]:start-10 [@container(min-width:48rem)]:top-[133px]"
           aria-hidden="true"
         >
           <PulseDot enabled={waving} active={active} className="absolute -start-1 -top-[3px] size-2 rounded-full bg-foreground" />
@@ -391,7 +393,10 @@ export function MahaamHero({
   avatars = {},
   primaryHref = "#get-mahaam",
   secondaryHref = "#demo",
-  paused = false,
+  paused: pausedProp,
+  defaultPaused,
+  onPausedChange,
+  pauseLabels,
   frame: startFrame,
   reducedMotion,
   className,
@@ -402,21 +407,22 @@ export function MahaamHero({
   const reduced = usePrefersReducedMotion(reducedMotion)
   const inView = useInView(rootRef)
   const visible = usePageVisible()
-  // Frozen: asked to be, or under reduced motion. Out of sight it only waits.
+  const { paused, toggle } = usePausedState({ paused: pausedProp, defaultPaused, onPausedChange })
+  // Frozen: paused, or under reduced motion. Out of sight, or under the pointer, it only waits.
   const frozen = paused || reduced
-  // The planner also waits under the pointer, as the motion card says.
   const [hovered, setHovered] = React.useState(false)
   const active = !frozen && inView && visible && !hovered
   const hold = startFrame ?? FINAL_FRAME
   const [ready, setReady] = React.useState(false)
   React.useEffect(() => setReady(true), [])
-  // The server and the first render draw the held frame; a playing section starts from `frame` (0) once mounted.
-  const clock = useLoopClock({ length: LOOP_FRAMES, intervalMs: FRAME_MS, active, from: startFrame ?? 0 })
-  const frame = frozen || !ready ? hold : clock
+  // The server and the first render draw the held frame; once mounted the clock takes over from `frame`, and a pause stops it where it stands.
+  const clock = useLoopClock({ length: LOOP_FRAMES, intervalMs: FRAME_MS, active, from: startFrame ?? (paused ? FINAL_FRAME : 0) })
+  const frame = reduced || !ready ? hold : clock
 
   const plannerCopy = { ...copy.planner, ...planner }
   const headingId = React.useId()
-  const entrance = !frozen
+  // The copy fades up once, as the page loads; pausing later does not replay it.
+  const [entrance] = React.useState(() => !frozen)
   const eyebrowRef = React.useRef<HTMLDivElement>(null)
   const headingRef = React.useRef<HTMLHeadingElement>(null)
   const bodyRef = React.useRef<HTMLParagraphElement>(null)
@@ -450,11 +456,11 @@ export function MahaamHero({
                     <PulseDot enabled={!reduced} active={active} className="size-2 shrink-0 rounded-full bg-foreground" />
                     {eyebrow ?? copy.eyebrow}
                   </div>
-                  {/* Figma's Mobile sets the English heading in 4XL at 24px on its 44px line; Arabic uses 2XL. */}
+                  {/* On Mobile Figma sets the English heading in 4XL and the Arabic in 2XL. */}
                   <h1
                     ref={headingRef}
                     id={headingId}
-                    className="whitespace-pre-line text-2xl font-medium text-foreground [&:where(:dir(ltr))]:leading-[44px] [@container(min-width:48rem)]:text-6xl [@container(min-width:90rem)]:text-7xl"
+                    className="whitespace-pre-line text-4xl font-medium text-foreground [&:where(:dir(rtl))]:text-2xl [@container(min-width:48rem)]:text-6xl [@container(min-width:90rem)]:text-7xl"
                   >
                     {heading ?? copy.heading}
                   </h1>
@@ -490,9 +496,18 @@ export function MahaamHero({
             data-slot="mahaam-hero-scene"
             onPointerEnter={() => setHovered(true)}
             onPointerLeave={() => setHovered(false)}
-            className="relative flex min-h-[944px] items-start justify-center overflow-hidden rounded-3xl bg-muted px-3 py-6 [&:dir(rtl)]:min-h-[1002px] [@container(min-width:48rem)]:min-h-[644px] [@container(min-width:48rem)]:px-6 [@container(min-width:48rem)]:pb-6 [@container(min-width:48rem)]:pt-10 [@container(min-width:48rem)]:[&:dir(rtl)]:min-h-[644px] [@container(min-width:90rem)]:h-[680px] [@container(min-width:90rem)]:min-h-0 [@container(min-width:90rem)]:px-0 [@container(min-width:90rem)]:pt-[58px] [@container(min-width:90rem)]:[&:dir(rtl)]:min-h-0"
+            className="relative flex min-h-[976px] items-start justify-center overflow-hidden rounded-3xl bg-muted px-3 pb-6 pt-14 [@container(min-width:48rem)]:min-h-[660px] [@container(min-width:48rem)]:px-6 [@container(min-width:90rem)]:h-[680px] [@container(min-width:90rem)]:min-h-0 [@container(min-width:90rem)]:px-0 [@container(min-width:90rem)]:pt-[58px]"
           >
             {sceneSrc ? <img ref={zoomRef} src={sceneSrc} alt="" decoding="async" className="absolute inset-0 size-full object-cover [object-position:40%_50%]" /> : null}
+            {reduced ? null : (
+              <MahaamPauseButton
+                paused={paused}
+                locale={locale}
+                labels={pauseLabels}
+                onClick={toggle}
+                className="absolute end-4 top-3 z-20 [@container(min-width:90rem)]:top-4"
+              />
+            )}
             <Planner copy={plannerCopy} avatars={avatars} frame={frame} active={active} waving={!reduced} />
           </div>
         </div>

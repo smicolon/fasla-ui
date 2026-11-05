@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { MahaamNavbar } from "../../../../../packages/fasla-ui/registry/templates/mahaam/MahaamNavbar"
+import { MahaamNavbar } from "../../../../../packages/fasla-ui/registry/templates/mahaam/mahaam-navbar"
 import { localeOf, mahaamViewports, variant } from "./mahaam-story-kit"
 
 /**
