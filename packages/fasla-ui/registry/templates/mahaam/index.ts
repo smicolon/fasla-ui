@@ -40,3 +40,9 @@ export {
   type MahaamAskQuestion,
   type MahaamMemoryCard,
 } from "./mahaam-ask"
+export {
+  MahaamBanner,
+  mahaamBannerCopy,
+  type MahaamBannerCopy,
+  type MahaamBannerProps,
+} from "./mahaam-banner"

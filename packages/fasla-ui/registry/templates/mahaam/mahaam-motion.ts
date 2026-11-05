@@ -99,7 +99,7 @@ export function useLoopAnimation(
   ref: React.RefObject<HTMLElement | null>,
   keyframes: Keyframe[],
   options: KeyframeAnimationOptions,
-  { enabled, active }: { enabled: boolean; active: boolean }
+  { enabled, active, at }: { enabled: boolean; active: boolean; at?: number }
 ) {
   const animationRef = React.useRef<Animation | null>(null)
   const activeRef = React.useRef(active)
@@ -109,6 +109,7 @@ export function useLoopAnimation(
     const element = ref.current
     if (!element || !enabled || typeof element.animate !== "function") return
     const animation = element.animate(keyframes, options)
+    if (at !== undefined) animation.currentTime = at
     if (!activeRef.current) animation.pause()
     animationRef.current = animation
     return () => {

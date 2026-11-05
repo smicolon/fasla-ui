@@ -10320,6 +10320,28 @@
       "categories": [
         "template"
       ]
+    },
+    {
+      "name": "mahaam-banner",
+      "type": "registry:block",
+      "title": "Mahaam: Banner",
+      "description": "The Mahaam template's banner: an outlined panel with a voice icon, a line and two buttons, with rings that pulse out of its corner.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "mahaam-motion",
+        "mahaam-pause-button"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-banner.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-banner.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
     }
   ]
 }
