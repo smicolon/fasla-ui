@@ -14,6 +14,10 @@ export const mahaamDemoPhotos = {
     khalid: "/images/mahaam/avatar-khalid.webp",
     faisal: "/images/mahaam/avatar-faisal.webp",
   },
+  /** The ten flags on the Features card, by language. They are artwork, not photos, and not mirrored in Arabic. */
+  flags: Object.fromEntries(
+    ["arabic", "english", "french", "spanish", "hindi", "turkish", "japanese", "german", "indonesian", "portuguese"].map((key) => [key, `/images/mahaam/flags/${key}.svg`])
+  ),
 } as const
 
 /** The props the Hero takes its photos by. */
@@ -26,4 +30,5 @@ export const mahaamHeroPhotoProps = {
 export const mahaamPhotoProps = {
   sceneSrc: mahaamDemoPhotos.scene,
   avatars: mahaamDemoPhotos.avatars,
+  flags: mahaamDemoPhotos.flags,
 }

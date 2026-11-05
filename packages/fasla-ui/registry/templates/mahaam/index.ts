@@ -26,3 +26,9 @@ export {
   type MahaamLogoMarqueeCopy,
   type MahaamLogoMarqueeProps,
 } from "./mahaam-logo-marquee"
+export {
+  MahaamFeatures,
+  mahaamFeaturesCopy,
+  type MahaamFeaturesCopy,
+  type MahaamFeaturesProps,
+} from "./mahaam-features"

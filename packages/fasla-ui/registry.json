@@ -10272,6 +10272,31 @@
       "categories": [
         "template"
       ]
+    },
+    {
+      "name": "mahaam-features",
+      "type": "registry:block",
+      "title": "Mahaam: Features",
+      "description": "The Mahaam template's features: a heading over three cards whose windows play on their own (languages stacking, a hand-off, a recap), with a pause button.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "mahaam-motion",
+        "mahaam-pause-button"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-features.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-features.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
     }
   ]
 }
