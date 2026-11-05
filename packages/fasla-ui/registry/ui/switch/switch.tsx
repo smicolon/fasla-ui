@@ -72,8 +72,9 @@ const sizeClasses = {
  * `focus` is the focus-ring element (see below). Figma draws focus as a 1px
  * stroke in `ring` — inside the track for solid, replacing the outside stroke
  * for outline, where an *on* outline keeps its `primary` stroke — plus a 3px
- * halo. Figma's halo colour is a raw #a1a1aa at 50%; this uses the `ring`
- * token at 50%, which is the same grey in Light and follows the mode in Dark.
+ * halo. Figma's halo now uses the `shadow/ring` variable (Light #a3a3a3, Dark
+ * #737373, both at 50%), which equals the `ring` token at 50%. This uses that
+ * token at 50%, so the code and Figma agree, in Light and in Dark.
  */
 const variantClasses = {
   solid: {
