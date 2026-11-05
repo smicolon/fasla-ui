@@ -456,11 +456,11 @@ export function MahaamHero({
                     <PulseDot enabled={!reduced} active={active} className="size-2 shrink-0 rounded-full bg-foreground" />
                     {eyebrow ?? copy.eyebrow}
                   </div>
-                  {/* On Mobile Figma sets the English heading in 4XL and the Arabic in 2XL. */}
+                  {/* On Mobile both languages are 4XL, 36px. */}
                   <h1
                     ref={headingRef}
                     id={headingId}
-                    className="whitespace-pre-line text-4xl font-medium text-foreground [&:where(:dir(rtl))]:text-2xl [@container(min-width:48rem)]:text-6xl [@container(min-width:90rem)]:text-7xl"
+                    className="whitespace-pre-line text-4xl font-medium text-foreground [@container(min-width:48rem)]:text-6xl [@container(min-width:90rem)]:text-7xl"
                   >
                     {heading ?? copy.heading}
                   </h1>

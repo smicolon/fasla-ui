@@ -19,3 +19,10 @@ export {
   type MahaamPauseButtonLabels,
   type MahaamPauseButtonProps,
 } from "./mahaam-pause-button"
+export {
+  MahaamLogoMarquee,
+  mahaamLogoMarqueeCopy,
+  type MahaamLogo,
+  type MahaamLogoMarqueeCopy,
+  type MahaamLogoMarqueeProps,
+} from "./mahaam-logo-marquee"

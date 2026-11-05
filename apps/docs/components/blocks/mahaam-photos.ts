@@ -21,3 +21,9 @@ export const mahaamHeroPhotoProps = {
   sceneSrc: mahaamDemoPhotos.scene,
   avatars: mahaamDemoPhotos.avatars,
 }
+
+/** The props every section takes its photos by; sections take only the ones they use, so the rest are ignored. */
+export const mahaamPhotoProps = {
+  sceneSrc: mahaamDemoPhotos.scene,
+  avatars: mahaamDemoPhotos.avatars,
+}

@@ -10251,6 +10251,27 @@
       "categories": [
         "template"
       ]
+    },
+    {
+      "name": "mahaam-logo-marquee",
+      "type": "registry:block",
+      "title": "Mahaam: Logo marquee",
+      "description": "The Mahaam template's logo strip: a caption over ten invented logos that scroll in a seamless loop, with a pause button.",
+      "dependencies": [],
+      "registryDependencies": [
+        "mahaam-motion",
+        "mahaam-pause-button"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-logo-marquee.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-logo-marquee.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
     }
   ]
 }
