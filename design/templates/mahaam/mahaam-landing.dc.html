@@ -1,0 +1,691 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Mahaam v6</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;family=Geist:wght@400;500;600&amp;family=Cairo:wght@500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:#16161A}
+.pg{font-family:Geist,system-ui,sans-serif;color:#16161A;-webkit-font-smoothing:antialiased}
+.it{font-family:Newsreader,Georgia,serif;font-style:italic;font-weight:400;letter-spacing:-0.02em}
+.in{opacity:0;transform:translateY(16px);animation:in 1s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes in{to{opacity:1;transform:none}}
+.d1{animation-delay:.1s}.d2{animation-delay:.22s}.d3{animation-delay:.36s}.d4{animation-delay:.5s}
+.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:64px;align-items:center}
+.paint{animation:paint 32s ease-in-out infinite alternate}
+@keyframes paint{from{transform:scale(1.04)}to{transform:scale(1.14) translate(-2%,-1%)}}
+.glass{background:rgba(255,255,255,.78);backdrop-filter:blur(18px) saturate(1.2);-webkit-backdrop-filter:blur(18px) saturate(1.2);border:1px solid rgba(255,255,255,.7)}
+.recdot{animation:rec 1.3s ease-in-out infinite}
+@keyframes rec{0%,100%{box-shadow:0 0 0 0 rgba(228,0,23,.5)}60%{box-shadow:0 0 0 7px rgba(228,0,23,0)}}
+.bar{display:block;width:2.5px;border-radius:2px;background:#16161A;animation:wave .9s ease-in-out infinite}
+@keyframes wave{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+.quiet .bar{animation:none;transform:scaleY(.3)}
+.w4{opacity:0;transition:opacity .35s ease}
+.w4.on{opacity:1}
+.mk{background-image:linear-gradient(#FFE58A,#FFE58A);background-repeat:no-repeat;background-position:0 88%;background-size:0% 42%;transition:background-size .6s cubic-bezier(.6,0,.2,1),opacity .35s ease}
+.mk.lit{background-size:100% 42%}
+.task{opacity:0;transform:translateX(-36px) scale(.96);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+.task.on{opacity:1;transform:none}
+.chk{stroke-dasharray:18;stroke-dashoffset:18;transition:stroke-dashoffset .5s ease .35s}
+.task.on .chk{stroke-dashoffset:0}
+.chip{opacity:0;transform:translateY(-10px);transition:opacity .5s ease,transform .5s cubic-bezier(.2,.8,.2,1)}
+.chip.on{opacity:1;transform:none}
+.scene.fade .task,.scene.fade .chip,.scene.fade .w4{opacity:0;transition-duration:.6s}
+.serif{font-family:Newsreader,Georgia,serif;font-weight:400;letter-spacing:-0.025em}
+.caret{display:inline-block;width:1.5px;height:1.05em;background:#1C1C1E;vertical-align:-2px;margin-left:1px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.still .bar{animation:none;transform:scaleY(.3)}
+.shim{background:linear-gradient(90deg,#9A9AA0 0%,#1C1C1E 40%,#9A9AA0 80%);background-size:220% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:shim 1.2s linear infinite}
+@keyframes shim{from{background-position:220% 0}to{background-position:0 0}}
+.row{opacity:0;transform:translateY(10px);transition:opacity .6s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,.8,.2,1)}
+.row.on{opacity:1;transform:none}
+.tick{stroke-dasharray:18;stroke-dashoffset:18;transition:stroke-dashoffset .45s ease .3s}
+.row.on .tick{stroke-dashoffset:0}
+.grp{opacity:0;transition:opacity .5s ease}
+.grp.on{opacity:1}
+.seg{font:inherit;border:0;cursor:pointer;transition:background .25s ease,color .25s ease}
+.seg:focus-visible{outline:2px solid #16161A;outline-offset:3px}
+
+.mv{transition:top .9s cubic-bezier(.22,1,.36,1),left .9s cubic-bezier(.22,1,.36,1),opacity .6s ease,transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s ease}
+.lift{transform:rotate(-2.5deg) scale(1.04) !important;box-shadow:0 30px 50px -18px rgba(20,20,30,.35) !important;z-index:5}
+.blk{opacity:0;transform:scale(.92)}
+.blk.on{opacity:1;transform:none}
+.ty{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nowdot{animation:rec 1.6s ease-in-out infinite}
+
+.logo{color:#8E8E93;display:flex;align-items:center;justify-content:center;gap:8px;height:64px;transition:color .3s ease}
+.logo:hover{color:#16161A}
+.mq{display:flex;gap:64px;width:max-content;animation:mq 42s linear infinite}
+.mqwrap{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+.mqwrap:hover .mq{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.ar{font-family:Cairo,sans-serif}
+.frow{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:72px;align-items:center}
+.frow.flip > :first-child{order:2}
+.plate{position:relative;height:560px;border-radius:28px;overflow:hidden;background:#F3F1EC;display:flex;align-items:center;justify-content:center}
+.ptile{position:absolute;border-radius:22px;object-fit:cover;filter:saturate(.85)}
+.win5{position:relative;background:#FFFFFF;border-radius:16px;box-shadow:0 40px 80px -36px rgba(30,30,45,.45),0 0 0 1px rgba(22,22,26,.06);box-sizing:border-box}
+.f-in{opacity:0;transform:translateY(10px);transition:opacity .6s cubic-bezier(.2,.8,.2,1),transform .6s cubic-bezier(.2,.8,.2,1)}
+.f-in.on{opacity:1;transform:none}
+.hl{border-radius:4px;padding:0 2px;transition:background-color .6s ease}
+.slide{transition:left .9s cubic-bezier(.22,1,.36,1),top .9s cubic-bezier(.22,1,.36,1),width .9s cubic-bezier(.22,1,.36,1),height .9s cubic-bezier(.22,1,.36,1),background-color .6s ease,color .6s ease,box-shadow .6s ease}
+.cur{transition:left .7s cubic-bezier(.45,0,.2,1),top .7s cubic-bezier(.45,0,.2,1),transform .15s ease}
+.cur.press{transform:scale(.82)}
+.dd{opacity:0;transform:translateY(-6px) scale(.98);pointer-events:none;transition:opacity .25s ease,transform .25s ease}
+.dd.on{opacity:1;transform:none}
+.toast5{opacity:0;transform:translateY(16px);transition:opacity .5s ease,transform .6s cubic-bezier(.22,1,.36,1)}
+.toast5.on{opacity:1;transform:none}
+.sendbtn{transition:background-color .4s ease,color .4s ease,transform .2s ease}
+.pulse{animation:pls 1.4s ease-in-out infinite}
+@keyframes pls{0%,100%{box-shadow:0 0 0 0 rgba(22,22,26,.35)}60%{box-shadow:0 0 0 8px rgba(22,22,26,0)}}
+.fbul{list-style:none;margin:24px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.fbul li{display:flex;gap:12px;align-items:flex-start;font-size:16px;line-height:1.5;color:#2E2E33}
+@media (max-width:980px){.frow{grid-template-columns:minmax(0,1fr) !important;gap:32px !important}.frow.flip > :first-child{order:0}}
+@media (max-width:760px){.plate{height:420px}.plate .win5{transform:scale(.6)}}
+@media (prefers-reduced-motion:reduce){.mq{animation:none}.slide,.cur,.f-in,.dd,.toast5{transition:none}}
+
+.tri{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.fc{border-radius:28px;background:#F4F2ED;padding:12px;display:flex;flex-direction:column;transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s ease}
+.fc:hover{transform:translateY(-6px);box-shadow:0 30px 60px -36px rgba(30,30,45,.35)}
+.stagef{position:relative;height:500px;border-radius:20px;overflow:hidden;display:flex;align-items:center;justify-content:center;background-image:radial-gradient(rgba(22,22,26,.09) 1px,transparent 1.2px);background-size:16px 16px}
+.mini{position:relative;background:#FFFFFF;border-radius:14px;box-shadow:0 30px 60px -30px rgba(30,30,45,.45),0 0 0 1px rgba(22,22,26,.06);box-sizing:border-box}
+.lb{position:absolute;left:0;right:0;top:0;transition:transform .8s cubic-bezier(.22,1,.36,1),opacity .6s ease,filter .6s ease}
+.lb.p0{transform:translateY(96px) scale(1);opacity:1;z-index:3}
+.lb.p1{transform:translateY(48px) scale(.94);opacity:.55;filter:blur(.4px);z-index:2}
+.lb.p2{transform:translateY(8px) scale(.88);opacity:.22;filter:blur(1px);z-index:1}
+.lb.ph{transform:translateY(150px) scale(1.02);opacity:0;z-index:0}
+.lb.pz{transform:translateY(-20px) scale(.84);opacity:0;z-index:0}
+.swap{transition:opacity .35s ease}
+@media (max-width:980px){.tri{grid-template-columns:minmax(0,1fr) !important}}
+
+.mem{position:relative;height:780px;border-radius:32px;background:#F6F5F1;overflow:hidden;background-image:radial-gradient(rgba(22,22,26,.07) 1px,transparent 1.2px);background-size:18px 18px}
+.frag{position:absolute;width:212px;box-sizing:border-box;background:#FFFFFF;border-radius:14px;padding:12px 14px;box-shadow:0 10px 24px -18px rgba(20,20,30,.35),0 0 0 1px rgba(22,22,26,.06);transition:opacity .6s ease,filter .6s ease,transform .7s cubic-bezier(.22,1,.36,1),box-shadow .6s ease}
+.frag.dim{opacity:.38;filter:blur(1.2px) grayscale(.4);transform:scale(.96)}
+.frag.lit{opacity:1;transform:scale(1.04);box-shadow:0 24px 44px -20px rgba(20,20,30,.45),0 0 0 1.5px #16161A;z-index:3}
+.badge{position:absolute;top:-9px;right:-9px;width:22px;height:22px;border-radius:50%;background:#16161A;color:#FFFFFF;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;opacity:0;transform:scale(.5);transition:opacity .4s ease,transform .5s cubic-bezier(.34,1.56,.64,1)}
+.frag.lit .badge{opacity:1;transform:none}
+.fk{font-size:10px;color:#8E8E93;display:flex;align-items:center;gap:6px}
+.ft{margin-top:6px;font-size:13px;font-weight:600;line-height:1.3}
+.fd{margin-top:4px;font-size:11.5px;line-height:1.45;color:#55555A}
+.wl{display:flex;align-items:center;gap:2px;height:14px;margin-top:8px}
+.wl i{display:block;width:2px;border-radius:2px;background:#C9C8C4}
+.lnk{transition:stroke-dashoffset 1s cubic-bezier(.45,0,.2,1),opacity .4s ease}
+.askbox{position:absolute;left:50%;width:540px;margin-left:-270px;z-index:5}
+.cite{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;background:#16161A;color:#FFFFFF;font-size:10px;font-weight:600;vertical-align:1px;margin-left:3px}
+@media (max-width:980px){.mem{height:640px}.frag{display:none}.askbox{width:auto;left:16px;right:16px;margin-left:0}}
+
+.ask2{position:relative;height:440px;border-radius:28px;background:#F6F5F1;overflow:hidden}
+.mrow{position:absolute;left:0;display:flex;gap:14px;width:max-content}
+.mrow.r1{top:28px;animation:mL 60s linear infinite}
+.mrow.r2{bottom:28px;animation:mR 66s linear infinite}
+@keyframes mL{to{transform:translateX(-50%)}}
+@keyframes mR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.mc{width:250px;height:122px;box-sizing:border-box;background:#FFFFFF;border-radius:14px;padding:12px 14px;box-shadow:0 0 0 1px rgba(22,22,26,.06);transition:opacity .5s ease,box-shadow .5s ease,transform .5s ease;flex:none}
+.mc.dim{opacity:.4}
+.mc.lit{box-shadow:0 0 0 1.5px #16161A,0 18px 30px -18px rgba(20,20,30,.4);transform:translateY(-3px)}
+.mcfade{position:absolute;top:0;bottom:0;width:140px;z-index:2;pointer-events:none}
+.askc{position:absolute;left:50%;top:50%;width:520px;transform:translate(-50%,-50%);z-index:4;background:#FFFFFF;border-radius:18px;box-shadow:0 30px 60px -24px rgba(20,20,30,.4),0 0 0 1px rgba(22,22,26,.08);overflow:hidden}
+.ansx{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s cubic-bezier(.22,1,.36,1)}
+.ansx.open{grid-template-rows:1fr}
+.ansx > div{overflow:hidden}
+@media (max-width:760px){.askc{width:auto;left:16px;right:16px;transform:translateY(-50%)}}
+@media (prefers-reduced-motion:reduce){.mrow{animation:none}}
+
+.bnr{position:relative;overflow:hidden;border-radius:28px;background:transparent;border:1px solid #D9DFEA;padding:56px 64px;display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.ringx{position:absolute;right:-120px;top:50%;width:420px;height:420px;margin-top:-210px;border-radius:50%;border:1px solid rgba(40,70,140,.14);animation:ringx 5s ease-out infinite}
+.ringx.b{animation-delay:1.6s}.ringx.c{animation-delay:3.2s}
+@keyframes ringx{from{transform:scale(.35);opacity:1}to{transform:scale(1.25);opacity:0}}
+.tstage{position:relative;max-width:1000px;height:540px;margin:0 auto}
+.tcard{position:absolute;inset:0;border-radius:40px;padding:22px;box-sizing:border-box;display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:28px;transition:transform .9s cubic-bezier(.22,1,.36,1),opacity .7s ease;transform-origin:50% 100%}
+.tcard.p0{transform:none;opacity:1;z-index:3}
+.tcard.p1{transform:translate(-22px,30px) rotate(-3.5deg) scale(.96);opacity:1;z-index:2}
+.tcard.p2{transform:translate(22px,46px) rotate(3deg) scale(.92);opacity:1;z-index:1}
+.tcard.out{transform:translate(-115%,40px) rotate(-10deg);opacity:0;z-index:4}
+.tnav{font:inherit;width:44px;height:44px;border-radius:50%;border:1px solid #E0DFDB;background:#FFFFFF;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s ease}
+.tnav:hover{background:#F4F3F0}
+.tnav:focus-visible,.bill2:focus-visible,.qb2:focus-visible{outline:2px solid #16161A;outline-offset:3px}
+.tdot{width:8px;height:8px;border-radius:999px;background:#D4D3CF;transition:width .4s ease,background .4s ease}
+.tdot.on{width:26px;background:#16161A}
+.plans2{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.pl{border-radius:24px;padding:30px;display:flex;flex-direction:column;gap:20px;border:1px solid transparent;background:#F4F2ED}
+.bill2{font:inherit;border:0;cursor:pointer;border-radius:999px;padding:8px 16px;font-size:14px;font-weight:500;min-height:40px;transition:background .25s ease,color .25s ease}
+.pnum{display:inline-block;transition:opacity .25s ease,transform .35s cubic-bezier(.22,1,.36,1)}
+.faq2{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:64px;align-items:start}
+.qb2{font:inherit;color:inherit;background:transparent;border:0;cursor:pointer;width:100%;text-align:left;padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:24px;min-height:44px}
+.acc2{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.22,1,.36,1)}
+.acc2.open{grid-template-rows:1fr}
+.acc2 > div{overflow:hidden}
+.plus2{transition:transform .35s ease}.plus2.open{transform:rotate(45deg)}
+.foot2{display:grid;grid-template-columns:2fr repeat(4,minmax(0,1fr));gap:32px}
+.foot2 a{text-decoration:none;color:#45454B}.foot2 a:hover{color:#16161A}
+@media (max-width:980px){.tcard{grid-template-columns:minmax(0,1fr) !important}.tcard .tph{display:none}.tstage{height:460px}.plans2,.faq2,.foot2{grid-template-columns:minmax(0,1fr) !important;gap:24px !important}.bnr{padding:40px 28px}}
+@media (prefers-reduced-motion:reduce){.ringx{animation:none}.tcard{transition:none}}
+.btn:focus-visible{outline:2px solid #16161A;outline-offset:3px}
+@media (max-width:1060px){.hero{grid-template-columns:minmax(0,1fr) !important}}
+@media (max-width:760px){.h1{font-size:50px !important}.navlinks{display:none !important}.hpad{padding-left:20px !important;padding-right:20px !important}.scene{height:600px !important;padding:12px !important}}
+@media (prefers-reduced-motion:reduce){.paint,.recdot,.bar,.in{animation:none;opacity:1;transform:none}.task,.chip,.w4,.mk{transition:none}}
+</style>
+</helmet>
+<div class="pg" style="background: #FFFFFF; min-height: 100vh">
+
+<header class="hpad" style="max-width: 1440px; margin: 0 auto; padding: 20px 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px">
+<a href="#top" style="display: flex; align-items: center; gap: 10px; text-decoration: none">
+<svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><rect x="1" y="1" width="24" height="24" rx="8" fill="#16161A"></rect><path d="M8 13.5l3.2 3.2L18 9.8" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+<span style="font-size: 20px; font-weight: 600; letter-spacing: -0.02em">mahaam</span>
+</a>
+<nav class="navlinks" aria-label="Main" style="display: flex; gap: 34px; font-size: 15px; color: #45454B">
+<a href="#top" style="text-decoration: none; color: inherit">Product</a>
+<a href="#top" style="text-decoration: none; color: inherit">For teams</a>
+<a href="#top" style="text-decoration: none; color: inherit">Pricing</a>
+<a href="#top" style="text-decoration: none; color: inherit">Changelog</a>
+</nav>
+<div style="display: flex; gap: 6px; align-items: center">
+<a class="btn navlinks" href="#top" style="text-decoration: none; padding: 10px 16px; font-size: 15px; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center">Sign in</a>
+<a class="btn" href="#top" style="text-decoration: none; padding: 10px 18px; border-radius: 12px; background: #16161A; color: #FFFFFF; font-size: 15px; font-weight: 500; min-height: 44px; box-sizing: border-box; display: inline-flex; align-items: center">Get Mahaam</a>
+</div>
+</header>
+
+<section id="top" class="hpad" style="max-width: 1440px; margin: 0 auto; padding: 64px 48px 96px">
+<div class="hero">
+
+<div>
+<div class="in" style="display: inline-flex; align-items: center; gap: 10px; font-size: 14px; color: #45454B">
+<span class="recdot" style="width: 8px; height: 8px; border-radius: 50%; background: #E40017"></span>
+Voice-first task manager
+</div>
+<h1 class="h1 in d1" style="margin: 26px 0 0; font-size: 84px; line-height: 1; font-weight: 500; letter-spacing: -0.045em">Speak your day.<br>Mahaam <span class="it" style="font-size: 1.08em">sorts</span> the rest.</h1>
+<p class="in d2" style="margin: 30px 0 0; max-width: 470px; font-size: 19px; line-height: 1.6; color: #45454B">Ramble on your way in. By the time you sit down, every task has a date, an owner and a slot in your week.</p>
+<div class="in d3" style="margin-top: 36px; display: flex; align-items: center; gap: 22px; flex-wrap: wrap">
+<a class="btn" href="#top" style="text-decoration: none; background: #16161A; color: #FFFFFF; padding: 16px 26px; border-radius: 14px; font-size: 17px; font-weight: 500">Get Mahaam free</a>
+<a class="btn" href="#top" style="text-decoration: none; display: inline-flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 500; min-height: 44px">
+<span style="width: 36px; height: 36px; border-radius: 50%; border: 1px solid #DEDDDA; display: flex; align-items: center; justify-content: center"><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4l13 8-13 8z" fill="#16161A"></path></svg></span>
+Watch the 60-second demo
+</a>
+</div>
+<div class="in d4" style="margin-top: 44px; display: flex; align-items: center; gap: 14px">
+<div style="display: flex">
+<img src="./img/person-noura.webp" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 2px solid #FFFFFF">
+<img src="./img/person-khalid.webp" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 2px solid #FFFFFF; margin-left: -10px">
+<img src="./img/person-faisal.webp" alt="" style="width: 34px; height: 34px; border-radius: 50%; object-fit: cover; border: 2px solid #FFFFFF; margin-left: -10px">
+</div>
+<span style="font-size: 14px; line-height: 1.4; color: #45454B">Trusted by 40,000 people<br>who would rather talk than type</span>
+</div>
+</div>
+
+<div class="in d2">
+<div class="scene" style="position: relative; height: 680px; border-radius: 30px; overflow: hidden; background: #D6CFE0; display: flex; align-items: center; justify-content: center; padding: 24px; box-sizing: border-box">
+<img class="paint" src="./img/hero-signac-harbour.webp" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 40% 50%">
+<div style="position: relative; width: 600px; max-width: 100%; background: #FFFFFF; border-radius: 18px; box-shadow: 0 60px 120px -40px rgba(30,40,80,.55), 0 0 0 1px rgba(28,28,30,.05); padding: 22px 24px 18px; box-sizing: border-box">
+<div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 14px">
+<span class="serif" style="font-size: 30px; font-weight: 500">Thursday</span>
+<span style="font-size: 12px; color: #45454B; background: #F2F1EE; border-radius: 999px; padding: 4px 10px">{{newNote}}</span>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; background: #F6F5F2; border-radius: 12px; padding: 10px 12px">
+<span class="recdot" style="flex: none; width: 28px; height: 28px; border-radius: 50%; background: #E40017; display: flex; align-items: center; justify-content: center"><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3" fill="none" stroke="#FFFFFF" stroke-width="2.6"></rect><path d="M5 11a7 7 0 0 0 14 0" fill="none" stroke="#FFFFFF" stroke-width="2.6"></path></svg></span>
+<div class="{{waveCls}}" aria-hidden="true" style="flex: none; display: flex; align-items: center; gap: 2px; height: 16px"><sc-for list="{{bars}}" as="b" hint-placeholder-count="8"><span class="bar" style="height: {{b.h}}; animation-delay: {{b.d}}"></span></sc-for></div>
+<span class="ty" style="font-size: 14px; color: #2A2A30; flex: 1; min-width: 0">{{typed}}<span class="caret"></span></span>
+</div>
+<div style="position: relative; margin-top: 16px">
+<div style="height: 58px; border-top: 1px solid #EFEEEB; display: flex"><span style="width: 44px; font-size: 11px; color: #9A9AA0; padding-top: 4px">9:00</span></div><div style="height: 58px; border-top: 1px solid #EFEEEB; display: flex"><span style="width: 44px; font-size: 11px; color: #9A9AA0; padding-top: 4px">10:00</span></div><div style="height: 58px; border-top: 1px solid #EFEEEB; display: flex"><span style="width: 44px; font-size: 11px; color: #9A9AA0; padding-top: 4px">11:00</span></div><div style="height: 58px; border-top: 1px solid #EFEEEB; display: flex"><span style="width: 44px; font-size: 11px; color: #9A9AA0; padding-top: 4px">12:00</span></div><div style="height: 58px; border-top: 1px solid #EFEEEB; display: flex"><span style="width: 44px; font-size: 11px; color: #9A9AA0; padding-top: 4px">13:00</span></div><div style="height: 58px; border-top: 1px solid #EFEEEB; display: flex"><span style="width: 44px; font-size: 11px; color: #9A9AA0; padding-top: 4px">14:00</span></div><div style="height: 58px; border-top: 1px solid #EFEEEB; display: flex"><span style="width: 44px; font-size: 11px; color: #9A9AA0; padding-top: 4px">15:00</span></div>
+<div style="position: absolute; left: 48px; right: 0; top: 58px; height: 56px; border-radius: 10px; background: #F2F1EE; padding: 0 12px; box-sizing: border-box; display: flex; flex-direction: column; justify-content: center; gap: 2px; font-size: 13px; line-height: 1.25; color: #55555A"><span>Design review</span><span style="font-size: 11px; color: #8E8E93">10:00 to 11:00</span></div>
+<div style="position: absolute; left: 48px; right: 0; top: 232px; height: 27px; border-radius: 8px; background: #F2F1EE; padding: 0 12px; box-sizing: border-box; display: flex; align-items: center; font-size: 12px; line-height: 1; color: #55555A">Team sync</div>
+<sc-for list="{{blocks}}" as="e" hint-placeholder-count="3">
+<div class="mv {{e.cls}}" style="position: absolute; left: 48px; right: 0; top: {{e.top}}; height: {{e.h}}; border-radius: 10px; background: {{e.bg}}; color: {{e.fg}}; padding: 8px 12px; box-sizing: border-box; display: flex; gap: 12px; font-size: 13px; line-height: 1.3; box-shadow: 0 14px 30px -16px rgba(20,20,30,.4); overflow: hidden">
+<div style="flex: 1; min-width: 0; display: flex; flex-direction: column; justify-content: center; gap: 3px">
+<span style="font-weight: 600">{{e.title}}</span>
+<span style="display: flex; align-items: center; gap: 8px; font-size: 11px; opacity: .8; white-space: nowrap"><span>{{e.time}}</span><span style="width: 3px; height: 3px; border-radius: 50%; background: currentColor; opacity: .6"></span><span style="display: inline-flex; align-items: center; gap: 4px"><svg width="11" height="11" viewBox="0 0 24 24" aria-hidden="true"><path d="{{e.icon}}" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>{{e.meta}}</span></span>
+<sc-if value="{{e.hasSub}}" hint-placeholder-val="{{ false }}">
+<div style="margin-top: 3px; display: flex; flex-direction: column; gap: 2px; font-size: 11px">
+<sc-for list="{{e.subs}}" as="u" hint-placeholder-count="3"><span style="display: flex; align-items: center; gap: 6px; opacity: {{u.op}}; text-decoration: {{u.strike}}"><span style="width: 9px; height: 9px; border-radius: 3px; border: 1.2px solid currentColor; background: {{u.fill}}; flex: none"></span>{{u.t}}</span></sc-for>
+</div>
+</sc-if>
+</div>
+<div style="flex: none; display: flex; flex-direction: column; align-items: flex-end; justify-content: center; gap: 6px">
+<sc-if value="{{e.hasTag}}" hint-placeholder-val="{{ true }}"><span style="font-size: 11px; font-weight: 500; background: {{e.tagBg}}; border-radius: 5px; padding: 2px 7px; white-space: nowrap">{{e.tag}}</span></sc-if>
+<sc-if value="{{e.hasAv}}" hint-placeholder-val="{{ true }}"><img src="{{e.av}}" alt="" style="width: 22px; height: 22px; border-radius: 50%; object-fit: cover; border: 1.5px solid rgba(255,255,255,.9)"></sc-if>
+</div>
+</div>
+</sc-for>
+<div style="position: absolute; left: 40px; right: 0; top: {{nowTop}}; height: 0; border-top: 1.5px solid #E40017; transition: top 1s linear"><span class="nowdot" style="position: absolute; left: -4px; top: -5px; width: 8px; height: 8px; border-radius: 50%; background: #E40017"></span></div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</section>
+
+<section style="padding: 56px 0 0; text-align: center">
+<p style="margin: 0; font-size: 15px; color: #6B6B72">Loved by teams who talk more than they type</p>
+<div class="mqwrap" style="margin-top: 18px"><div class="mq"><div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20L12 4l8 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path></svg><span style="font-family: Geist, sans-serif; font-weight: 600; font-size: 21px; letter-spacing: -0.02em">Northwind</span></div><div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="currentColor"></circle><circle cx="15" cy="10" r="6" fill="#FFFFFF"></circle></svg><span style="font-family: Newsreader, serif; font-style: italic; font-size: 25px">Halcyon</span></div><div class="logo"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" fill="currentColor"></rect></svg><span style="font-family: Geist, sans-serif; font-weight: 600; font-size: 18px; letter-spacing: 0.22em">QAMAR</span></div><div class="logo"><span style="font-family: Geist, sans-serif; font-weight: 600; font-size: 25px; letter-spacing: -0.05em">basalt</span></div><div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M12 3v18" stroke="currentColor" stroke-width="2"></path></svg><span style="font-family: Geist, sans-serif; font-weight: 500; font-size: 21px">Meridian</span></div><div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-family: Geist, sans-serif; font-weight: 600; font-size: 22px">Sahm</span></div><div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z" fill="currentColor"></path></svg><span style="font-family: Newsreader, serif; font-weight: 500; font-size: 23px">Oasis Labs</span></div><div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15l9-9 9 9-9-3z" fill="currentColor"></path></svg><span style="font-family: Geist, sans-serif; font-weight: 500; font-size: 22px; letter-spacing: -0.02em">kestrel</span></div><div class="logo"><span style="font-family: Newsreader, serif; font-size: 25px; letter-spacing: -0.02em">Lumen&amp;Co</span></div><div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h16M7 18V9l5-4 5 4v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path></svg><span style="font-family: Geist, sans-serif; font-weight: 600; font-size: 19px; letter-spacing: 0.14em">ATLAS</span></div><div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20L12 4l8 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"></path></svg><span style="font-family: Geist, sans-serif; font-weight: 600; font-size: 21px; letter-spacing: -0.02em">Northwind</span></div><div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="currentColor"></circle><circle cx="15" cy="10" r="6" fill="#FFFFFF"></circle></svg><span style="font-family: Newsreader, serif; font-style: italic; font-size: 25px">Halcyon</span></div><div class="logo"><svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3" fill="currentColor"></rect></svg><span style="font-family: Geist, sans-serif; font-weight: 600; font-size: 18px; letter-spacing: 0.22em">QAMAR</span></div><div class="logo"><span style="font-family: Geist, sans-serif; font-weight: 600; font-size: 25px; letter-spacing: -0.05em">basalt</span></div><div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"></circle><path d="M12 3v18" stroke="currentColor" stroke-width="2"></path></svg><span style="font-family: Geist, sans-serif; font-weight: 500; font-size: 21px">Meridian</span></div><div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-family: Geist, sans-serif; font-weight: 600; font-size: 22px">Sahm</span></div><div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z" fill="currentColor"></path></svg><span style="font-family: Newsreader, serif; font-weight: 500; font-size: 23px">Oasis Labs</span></div><div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 15l9-9 9 9-9-3z" fill="currentColor"></path></svg><span style="font-family: Geist, sans-serif; font-weight: 500; font-size: 22px; letter-spacing: -0.02em">kestrel</span></div><div class="logo"><span style="font-family: Newsreader, serif; font-size: 25px; letter-spacing: -0.02em">Lumen&amp;Co</span></div><div class="logo"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 18h16M7 18V9l5-4 5 4v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path></svg><span style="font-family: Geist, sans-serif; font-weight: 600; font-size: 19px; letter-spacing: 0.14em">ATLAS</span></div></div></div>
+</section>
+
+<section class="hpad" style="max-width: 1280px; margin: 0 auto; padding: 200px 40px 220px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap">
+<h2 class="serif" style="margin: 0; max-width: 640px; font-size: 64px; font-weight: 400; line-height: 1.02; letter-spacing: -0.035em">From voice to done.</h2>
+<p style="margin: 0; max-width: 380px; font-size: 18px; line-height: 1.6; color: #4A4A50">Everything that happens after you stop talking, handled for you.</p>
+</div>
+<div class="tri" style="margin-top: 56px">
+<article class="fc">
+<div class="stagef" style="background-color: #EDEFF6">
+<div class="mini" style="width: 316px; padding: 16px 16px 18px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<span style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 500"><span style="width: 7px; height: 7px; border-radius: 50%; background: #E40017"></span>Listening</span>
+<span style="font-size: 11px; background: #16161A; color: #FFFFFF; border-radius: 999px; padding: 3px 9px">40+ languages</span>
+</div>
+<div style="position: relative; height: 176px; margin-top: 10px">
+<sc-for list="{{langs}}" as="l" hint-placeholder-count="10">
+<div class="lb {{l.cls}}">
+<div dir="{{l.dir}}" style="background: #F4F2ED; border-radius: 14px; padding: 12px 14px; font-size: 15px; line-height: 1.45; font-weight: 500; text-align: start">
+<div dir="ltr" style="display: flex; align-items: center; gap: 6px; font-size: 10px; color: #8E8E93; font-weight: 500; margin-bottom: 5px"><span aria-hidden="true" style="display: inline-block; width: 18px; height: 13px; border-radius: 3px; background: {{l.flag}}; box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); flex: none"></span>{{l.name}}</div>
+<span style="font-family: {{l.font}}">{{l.say}}</span>
+</div>
+</div>
+</sc-for>
+</div>
+<div style="display: flex; justify-content: center; margin: 4px 0 8px"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" fill="none" stroke="#B5B4B0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>
+<div style="border-radius: 12px; padding: 13px 14px; border: 1px solid #ECEBE8; display: flex; justify-content: space-between; align-items: center; gap: 10px">
+<span style="font-size: 14px; font-weight: 600">Call the supplier</span>
+<span class="swap" style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 500; color: #3B2FA0; background: #E7E3FF; border-radius: 999px; padding: 4px 9px 4px 6px; white-space: nowrap; opacity: {{langOp}}"><span aria-hidden="true" style="display: inline-block; width: 16px; height: 11px; border-radius: 2px; background: {{langFlag}}; box-shadow: inset 0 0 0 1px rgba(0,0,0,.12)"></span>Heard in {{langName}}</span>
+</div>
+</div>
+</div>
+<div style="padding: 22px 16px 18px">
+<div style="font-size: 13px; color: #6B6B72; font-weight: 500">Any language</div>
+<h3 class="serif" style="margin: 8px 0 0; font-size: 30px; font-weight: 400; line-height: 1.1; letter-spacing: -0.02em">Talk in any language</h3>
+<p style="margin: 12px 0 0; font-size: 16px; line-height: 1.6; color: #4A4A50">More than 40 languages, and you can switch mid-sentence. Every task comes out clean and in one place.</p>
+</div>
+</article>
+<article class="fc">
+<div class="stagef" style="background-color: #F5EEE4">
+<div class="mini" style="width: 316px; height: 336px; padding: 0">
+<div style="position: absolute; left: 18px; top: 18px; font-size: 11px; color: #8E8E93; display: flex; align-items: center; gap: 6px"><span style="width: 6px; height: 6px; border-radius: 50%; background: #E40017"></span>From Marketing sync</div>
+<div class="serif" style="position: absolute; left: 18px; right: 18px; top: 38px; font-size: 21px; font-weight: 500; line-height: 1.15">Check the campaign numbers</div>
+<div style="position: absolute; left: 18px; right: 18px; top: 72px; display: flex; font-size: 13px; align-items: center; height: 20px"><span style="width: 76px; color: #8E8E93">Due</span><span>Friday</span></div>
+<div style="position: absolute; left: 18px; right: 18px; top: 98px; display: flex; font-size: 13px; align-items: center; height: 20px"><span style="width: 76px; color: #8E8E93">Priority</span><span style="background: #FFF1C9; color: #5A4500; border-radius: 5px; padding: 1px 7px; font-size: 11px; margin-right: 5px">Medium</span></div><div style="position: absolute; left: 18px; right: 18px; top: 124px; display: flex; font-size: 13px; align-items: center; height: 20px"><span style="width: 76px; color: #8E8E93">Project</span><span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 8px; height: 8px; border-radius: 2px; background: #6D5BD0"></span>Q4 campaign</span></div><div style="position: absolute; left: 18px; right: 18px; top: 150px; display: flex; font-size: 13px; align-items: center; height: 20px"><span style="width: 76px; color: #8E8E93">Estimate</span><span>2 hours</span></div><div style="position: absolute; left: 18px; right: 18px; top: 176px; display: flex; font-size: 13px; align-items: center; height: 20px"><span style="width: 76px; color: #8E8E93">Labels</span><span style="background: #F2F1EE; color: #45454B; border-radius: 5px; padding: 1px 7px; font-size: 11px; margin-right: 5px">Finance</span><span style="background: #F2F1EE; color: #45454B; border-radius: 5px; padding: 1px 7px; font-size: 11px; margin-right: 5px">Marketing</span></div><div style="position: absolute; left: 18px; right: 18px; top: 202px; display: flex; font-size: 13px; align-items: center; height: 20px"><span style="width: 76px; color: #8E8E93">Reminder</span><span>Thursday, 16:00</span></div>
+<div style="position: absolute; left: 18px; top: 236px; font-size: 13px; color: #8E8E93; line-height: 32px">Assignee</div>
+<div style="position: absolute; left: 94px; right: 18px; top: 236px; height: 32px; display: flex; align-items: center; gap: 8px; border: 1px solid {{f3border}}; border-radius: 8px; padding: 0 9px; box-sizing: border-box; font-size: 13px; transition: border-color .3s ease">
+<sc-if value="{{f3assigned}}" hint-placeholder-val="{{ false }}"><img src="./img/person-khalid.webp" alt="" style="width: 18px; height: 18px; border-radius: 50%; object-fit: cover"><span style="font-weight: 500">Khalid Mansour</span></sc-if>
+<sc-if value="{{f3unassigned}}" hint-placeholder-val="{{ true }}"><span style="width: 18px; height: 18px; border-radius: 50%; border: 1px dashed #C9C8C4"></span><span style="color: #8E8E93">Unassigned</span></sc-if>
+</div>
+<div class="{{f3dd}}" style="position: absolute; left: 94px; right: 18px; top: 274px; background: #FFFFFF; border-radius: 10px; box-shadow: 0 20px 40px -16px rgba(0,0,0,.3), 0 0 0 1px rgba(22,22,26,.06); padding: 4px; z-index: 4; font-size: 13px">
+<div style="display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 8px; border-radius: 7px; background: {{f3hk}}; transition: background .2s ease"><img src="./img/person-khalid.webp" alt="" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover">Khalid Mansour</div>
+<div style="display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 8px"><img src="./img/person-noura.webp" alt="" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover">Noura Al-Harbi</div>
+<div style="display: flex; align-items: center; gap: 8px; height: 32px; padding: 0 8px"><img src="./img/person-faisal.webp" alt="" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover">Faisal Al-Otaibi</div>
+</div>
+<div style="position: absolute; left: 18px; right: 18px; bottom: 18px; padding-top: 12px; border-top: 1px solid #F0EFEC; font-size: 11px; color: #6B6B72"><span class="{{f3log}}">You assigned this to Khalid, just now</span></div>
+<svg class="cur {{f3press}}" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" style="position: absolute; left: {{f3x}}; top: {{f3y}}; z-index: 6; filter: drop-shadow(0 2px 3px rgba(0,0,0,.3))"><path d="M4 3l15 7.5-6.5 1.8L10 19z" fill="#16161A" stroke="#FFFFFF" stroke-width="1.5" stroke-linejoin="round"></path></svg>
+<div class="toast5 {{f3toast}}" style="position: absolute; left: 50%; margin-left: -110px; width: 220px; bottom: -50px; background: #16161A; color: #FFFFFF; border-radius: 12px; padding: 9px 12px; display: flex; align-items: center; gap: 9px; font-size: 12px; box-sizing: border-box; box-shadow: 0 24px 40px -18px rgba(0,0,0,.6); z-index: 7"><img src="./img/person-khalid.webp" alt="" style="width: 22px; height: 22px; border-radius: 50%; object-fit: cover"><span><strong style="font-weight: 600">Khalid</strong> accepted the task</span></div>
+</div>
+</div>
+<div style="padding: 22px 16px 18px">
+<div style="font-size: 13px; color: #6B6B72; font-weight: 500">Hand-offs</div>
+<h3 class="serif" style="margin: 8px 0 0; font-size: 30px; font-weight: 400; line-height: 1.1; letter-spacing: -0.02em">Hand it off in one tap</h3>
+<p style="margin: 12px 0 0; font-size: 16px; line-height: 1.6; color: #4A4A50">Every commitment from a call gets an owner. It lands in their list with the due date, project and context already attached.</p>
+</div>
+</article>
+<article class="fc">
+<div class="stagef" style="background-color: #EBF1EA">
+<div class="mini" style="width: 316px; padding: 18px 18px 16px">
+<div style="display: flex; justify-content: space-between; align-items: center">
+<span style="font-size: 11px; color: #8E8E93">Ready 4 seconds after the call</span>
+<span style="display: flex"><img src="./img/person-noura.webp" alt="" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover; border: 2px solid #FFFFFF"><img src="./img/person-khalid.webp" alt="" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover; border: 2px solid #FFFFFF; margin-left: -6px"><img src="./img/person-faisal.webp" alt="" style="width: 20px; height: 20px; border-radius: 50%; object-fit: cover; border: 2px solid #FFFFFF; margin-left: -6px"></span>
+</div>
+<div class="serif" style="font-size: 21px; font-weight: 500; margin-top: 6px">Marketing sync</div>
+<p style="margin: 6px 0 0; font-size: 12.5px; line-height: 1.55; color: #3A3A3F; min-height: 58px">{{f4sum}}</p>
+<div class="{{f4ah}}" style="margin-top: 8px; font-size: 11px; font-weight: 600; color: #6B6B72">Action items</div>
+<sc-for list="{{f4items}}" as="a" hint-placeholder-count="3">
+<div class="{{a.cls}}" style="display: flex; align-items: center; gap: 8px; padding: 5px 0; font-size: 12px">
+<img src="{{a.av}}" alt="" style="width: 18px; height: 18px; border-radius: 50%; object-fit: cover"><span style="flex: 1">{{a.t}}</span><span style="font-size: 10px; background: #F2F1EE; border-radius: 5px; padding: 2px 6px">{{a.d}}</span>
+</div>
+</sc-for>
+<div style="margin-top: 12px; display: flex; justify-content: flex-end">
+<span class="sendbtn {{f4pulse}}" style="display: inline-flex; align-items: center; border-radius: 9px; padding: 8px 12px; font-size: 12px; font-weight: 500; background: {{f4bg}}; color: {{f4fg}}">{{f4btn}}</span>
+</div>
+</div>
+</div>
+<div style="padding: 22px 16px 18px">
+<div style="font-size: 13px; color: #6B6B72; font-weight: 500">Recaps</div>
+<h3 class="serif" style="margin: 8px 0 0; font-size: 30px; font-weight: 400; line-height: 1.1; letter-spacing: -0.02em">Recaps that write themselves</h3>
+<p style="margin: 12px 0 0; font-size: 16px; line-height: 1.6; color: #4A4A50">Summary, decisions and action items with owners, ready seconds after you hang up. Send it to the team or a client as is.</p>
+</div>
+</article>
+</div>
+</section>
+
+<section class="hpad" style="max-width: 1280px; margin: 0 auto; padding: 0 40px 220px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin-bottom: 40px">
+<h2 class="serif" style="margin: 0; max-width: 560px; font-size: 52px; font-weight: 400; line-height: 1.04; letter-spacing: -0.03em">Ask anything you’ve ever said.</h2>
+<p style="margin: 0; max-width: 380px; font-size: 17px; line-height: 1.6; color: #4A4A50">Every note, call and task becomes memory you can search in plain words.</p>
+</div>
+<div class="ask2">
+<div class="mrow r1"><sc-for list="{{row1}}" as="c" hint-placeholder-count="12"><div class="mc {{c.cls}}">
+<div style="display: flex; justify-content: space-between; font-size: 10.5px; color: #8E8E93"><span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 6px; height: 6px; border-radius: 50%; background: {{c.dot}}"></span>{{c.kind}}</span><span>{{c.when}}</span></div>
+<div style="margin-top: 8px; font-size: 14px; font-weight: 600; line-height: 1.3">{{c.title}}</div>
+<div style="margin-top: 4px; font-size: 12px; line-height: 1.45; color: #55555A">{{c.body}}</div>
+</div></sc-for></div>
+<div class="mrow r2"><sc-for list="{{row2}}" as="c" hint-placeholder-count="12"><div class="mc {{c.cls}}">
+<div style="display: flex; justify-content: space-between; font-size: 10.5px; color: #8E8E93"><span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 6px; height: 6px; border-radius: 50%; background: {{c.dot}}"></span>{{c.kind}}</span><span>{{c.when}}</span></div>
+<div style="margin-top: 8px; font-size: 14px; font-weight: 600; line-height: 1.3">{{c.title}}</div>
+<div style="margin-top: 4px; font-size: 12px; line-height: 1.45; color: #55555A">{{c.body}}</div>
+</div></sc-for></div>
+<div class="mcfade" style="left: 0; background: linear-gradient(90deg, #F6F5F1, rgba(246,245,241,0))"></div>
+<div class="mcfade" style="right: 0; background: linear-gradient(270deg, #F6F5F1, rgba(246,245,241,0))"></div>
+<div class="askc">
+<div style="display: flex; align-items: center; gap: 12px; padding: 10px 10px 10px 18px">
+<svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" fill="#16161A"></path></svg>
+<span style="flex: 1; font-size: 16px; min-height: 1.5em">{{askQ}}<span class="caret"></span></span>
+<span class="{{askSearchCls}}" style="font-size: 11px; font-weight: 500; white-space: nowrap">{{askSearch}}</span>
+<span style="width: 34px; height: 34px; border-radius: 10px; background: #16161A; display: flex; align-items: center; justify-content: center; flex: none"><svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg></span>
+</div>
+<div class="{{askOpen}}"><div>
+<div style="padding: 4px 18px 16px; border-top: 1px solid #F0EFEC">
+<div style="padding-top: 12px; font-size: 14.5px; line-height: 1.6">{{askA}}</div>
+<div style="margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap">
+<sc-for list="{{askCites}}" as="ct" hint-placeholder-count="2"><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; background: #F4F3F0; border-radius: 999px; padding: 3px 9px 3px 4px"><span style="width: 16px; height: 16px; border-radius: 50%; background: #16161A; color: #FFFFFF; font-size: 9px; font-weight: 600; display: flex; align-items: center; justify-content: center">{{ct.n}}</span>{{ct.label}}</span></sc-for>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+</section>
+
+<section class="hpad" style="max-width: 1280px; margin: 0 auto; padding: 0 40px 220px">
+<div class="bnr">
+<span class="ringx" aria-hidden="true"></span><span class="ringx b" aria-hidden="true"></span><span class="ringx c" aria-hidden="true"></span>
+<div style="position: relative; display: flex; align-items: center; gap: 28px">
+<div aria-hidden="true" style="width: 72px; height: 72px; border-radius: 22px; background: #FFFFFF; display: flex; align-items: center; justify-content: center; gap: 3px; box-shadow: 0 14px 30px -18px rgba(40,70,140,.45); flex: none">
+<sc-for list="{{bars}}" as="b" hint-placeholder-count="8"><span class="bar" style="height: {{b.h}}; animation-delay: {{b.d}}"></span></sc-for>
+</div>
+<div>
+<h2 class="serif" style="margin: 0; font-size: 42px; font-weight: 400; line-height: 1.08; letter-spacing: -0.03em">Your next meeting starts soon.</h2>
+<p style="margin: 10px 0 0; font-size: 17px; line-height: 1.55; color: #4A4F5C">Set Mahaam up in two minutes, before it does.</p>
+</div>
+</div>
+<div style="position: relative; display: flex; gap: 10px; flex-wrap: wrap">
+<a class="btn" href="#top" style="text-decoration: none; background: #16161A; color: #FFFFFF; padding: 14px 24px; border-radius: 14px; font-size: 16px; font-weight: 500">Get Mahaam free</a>
+<a class="btn" href="#top" style="text-decoration: none; background: #FFFFFF; color: #16161A; padding: 14px 24px; border-radius: 14px; font-size: 16px; font-weight: 500; box-shadow: 0 0 0 1px rgba(22,22,26,.08)">Book a demo</a>
+</div>
+</div>
+</section>
+
+<section class="hpad" style="max-width: 1280px; margin: 0 auto; padding: 0 40px 220px">
+<h2 class="serif" style="margin: 0 auto; text-align: center; font-size: 80px; font-weight: 400; line-height: 1; letter-spacing: -0.04em">Loved by people<br><span class="it" style="font-family: Newsreader, Georgia, serif; font-style: italic">who talk for a living.</span></h2>
+<div class="tstage" style="margin-top: 72px">
+<sc-for list="{{tcards}}" as="tc" hint-placeholder-count="3">
+<figure class="tcard {{tc.cls}}" style="margin: 0; background: {{tc.bg}}; color: #1E1A14">
+<div style="padding: 26px 8px 18px 26px; display: flex; flex-direction: column; justify-content: space-between">
+<blockquote class="serif" style="margin: 0; font-size: 36px; line-height: 1.16; letter-spacing: -0.02em">“{{tc.q}}”</blockquote>
+<figcaption style="font-size: 17px; line-height: 1.4"><strong style="display: block; font-weight: 500">{{tc.name}}</strong><span style="opacity: .7">{{tc.role}}</span></figcaption>
+</div>
+<img class="tph" src="{{tc.img}}" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; border-radius: 26px">
+</figure>
+</sc-for>
+</div>
+<div style="margin-top: 72px; display: flex; justify-content: center; align-items: center; gap: 20px">
+<button class="tnav" type="button" aria-label="Previous testimonial" onClick="{{tPrev}}"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="#16161A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+<div style="display: flex; gap: 6px"><sc-for list="{{tdots}}" as="d" hint-placeholder-count="3"><span class="{{d.cls}}"></span></sc-for></div>
+<button class="tnav" type="button" aria-label="Next testimonial" onClick="{{tNext}}"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7" fill="none" stroke="#16161A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></button>
+</div>
+</section>
+
+<section class="hpad" style="max-width: 1280px; margin: 0 auto; padding: 0 40px 220px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap">
+<div>
+<h2 class="serif" style="margin: 0; font-size: 64px; font-weight: 400; line-height: 1.02; letter-spacing: -0.035em">Simple plans.<br><span style="font-style: italic">Start free.</span></h2>
+</div>
+<div role="group" aria-label="Billing period" style="display: flex; gap: 4px; background: #F4F3F0; border-radius: 999px; padding: 4px">
+<button class="bill2" type="button" aria-pressed="{{monthly}}" onClick="{{toMonthly}}" style="background: {{bm}}; color: #16161A">Monthly</button>
+<button class="bill2" type="button" aria-pressed="{{yearly}}" onClick="{{toYearly}}" style="background: {{by}}; color: #16161A">Yearly <span style="font-size: 12px; color: #2F8F5B; margin-left: 4px">Save 20%</span></button>
+</div>
+</div>
+<div class="plans2" style="margin-top: 48px">
+<div class="pl" style="">
+<div style="display: flex; justify-content: space-between; align-items: center; min-height: 26px"><span style="font-size: 17px; font-weight: 600">Free</span></div>
+<div style="display: flex; align-items: baseline; gap: 8px"><span class="serif pnum" style="font-size: 60px; line-height: 1; letter-spacing: -0.03em">$0</span><span style="font-size: 14px; color: #6B6B72">forever</span></div>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #6B6B72">For trying Mahaam on your own.</p>
+<a class="btn" href="#top" style="text-decoration: none; text-align: center; background: #16161A; color: #FFFFFF; padding: 13px 20px; border-radius: 12px; font-size: 15px; font-weight: 500">Get Mahaam free</a>
+<ul style="list-style: none; margin: 4px 0 0; padding: 18px 0 0; border-top: 1px solid rgba(22,22,26,.09); display: flex; flex-direction: column; gap: 11px; font-size: 15px"><li style="display: flex; gap: 10px"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 3px"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Unlimited voice notes</span></li><li style="display: flex; gap: 10px"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 3px"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Tasks with dates and owners</span></li><li style="display: flex; gap: 10px"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 3px"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>40+ languages</span></li><li style="display: flex; gap: 10px"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 3px"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>30 days of history</span></li></ul>
+</div><div class="pl" style="background: #16161A; color: #FFFFFF; border-color: #16161A">
+<div style="display: flex; justify-content: space-between; align-items: center; min-height: 26px"><span style="font-size: 17px; font-weight: 600">Pro</span><span style="font-size: 12px; background: rgba(255,255,255,.14); border-radius: 999px; padding: 4px 10px">Most popular</span></div>
+<div style="display: flex; align-items: baseline; gap: 8px"><span class="serif pnum" style="font-size: 60px; line-height: 1; letter-spacing: -0.03em">{{pPro}}</span><span style="font-size: 14px; color: rgba(255,255,255,.65)">{{pUnit}}</span></div>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: rgba(255,255,255,.65)">For people whose day runs on calls.</p>
+<a class="btn" href="#top" style="text-decoration: none; text-align: center; background: #FFFFFF; color: #16161A; padding: 13px 20px; border-radius: 12px; font-size: 15px; font-weight: 500">Start a 14-day trial</a>
+<ul style="list-style: none; margin: 4px 0 0; padding: 18px 0 0; border-top: 1px solid rgba(255,255,255,.14); display: flex; flex-direction: column; gap: 11px; font-size: 15px"><li style="display: flex; gap: 10px"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 3px"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Everything in Free</span></li><li style="display: flex; gap: 10px"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 3px"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Calendar scheduling</span></li><li style="display: flex; gap: 10px"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 3px"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Ask Mahaam about anything</span></li><li style="display: flex; gap: 10px"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 3px"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Recaps sent for you</span></li><li style="display: flex; gap: 10px"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 3px"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Full history</span></li></ul>
+</div><div class="pl" style="">
+<div style="display: flex; justify-content: space-between; align-items: center; min-height: 26px"><span style="font-size: 17px; font-weight: 600">Team</span></div>
+<div style="display: flex; align-items: baseline; gap: 8px"><span class="serif pnum" style="font-size: 60px; line-height: 1; letter-spacing: -0.03em">{{pTeam}}</span><span style="font-size: 14px; color: #6B6B72">{{pUnitTeam}}</span></div>
+<p style="margin: 0; font-size: 15px; line-height: 1.55; color: #6B6B72">For teams who share the work.</p>
+<a class="btn" href="#top" style="text-decoration: none; text-align: center; background: #16161A; color: #FFFFFF; padding: 13px 20px; border-radius: 12px; font-size: 15px; font-weight: 500">Talk to sales</a>
+<ul style="list-style: none; margin: 4px 0 0; padding: 18px 0 0; border-top: 1px solid rgba(22,22,26,.09); display: flex; flex-direction: column; gap: 11px; font-size: 15px"><li style="display: flex; gap: 10px"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 3px"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Everything in Pro</span></li><li style="display: flex; gap: 10px"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 3px"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Hand-offs and shared lists</span></li><li style="display: flex; gap: 10px"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 3px"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Team recaps and channels</span></li><li style="display: flex; gap: 10px"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" style="flex: none; margin-top: 3px"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Admin controls and SSO</span></li></ul>
+</div>
+</div>
+<p style="margin: 22px 0 0; font-size: 14px; color: #6B6B72; text-align: center">Prices are placeholders for this template.</p>
+</section>
+
+<section class="hpad" style="max-width: 1280px; margin: 0 auto; padding: 0 40px 220px">
+<div class="faq2">
+<div>
+<h2 class="serif" style="margin: 0; font-size: 56px; font-weight: 400; line-height: 1.04; letter-spacing: -0.03em">Questions,<br>answered.</h2>
+<p style="margin: 18px 0 0; font-size: 16px; line-height: 1.6; color: #4A4A50; max-width: 300px">Still curious? <a href="#top" style="color: #16161A; text-underline-offset: 3px">Talk to our team</a>.</p>
+</div>
+<div style="border-bottom: 1px solid #E8E7E4">
+<sc-for list="{{faqs}}" as="fq" hint-placeholder-count="6">
+<div style="border-top: 1px solid #E8E7E4">
+<button class="qb2" type="button" aria-expanded="{{fq.open}}" onClick="{{fq.toggle}}"><span style="font-size: 19px; font-weight: 500">{{fq.q}}</span><svg class="{{fq.plusCls}}" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" style="flex: none"><path d="M12 5v14M5 12h14" fill="none" stroke="#16161A" stroke-width="1.8" stroke-linecap="round"></path></svg></button>
+<div class="{{fq.cls}}"><div><p style="margin: 0; padding: 0 48px 22px 0; font-size: 16px; line-height: 1.65; color: #4A4A50">{{fq.a}}</p></div></div>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<footer style="border-top: 1px solid #EFEEEB; overflow: hidden">
+<div class="hpad" style="max-width: 1280px; margin: 0 auto; padding: 64px 40px 0">
+<div class="foot2">
+<div>
+<div style="display: flex; align-items: center; gap: 10px"><svg width="24" height="24" viewBox="0 0 26 26" aria-hidden="true"><rect x="1" y="1" width="24" height="24" rx="8" fill="#16161A"></rect><path d="M8 13.5l3.2 3.2L18 9.8" fill="none" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></svg><span style="font-size: 19px; font-weight: 600; letter-spacing: -0.02em">mahaam</span></div>
+<p style="margin: 16px 0 0; font-size: 14px; line-height: 1.6; color: #6B6B72; max-width: 260px">Speak your day. Mahaam sorts the rest.</p>
+<div style="margin-top: 20px; display: flex; gap: 8px; flex-wrap: wrap">
+<a class="btn" href="#top" style="text-decoration: none; font-size: 13px; border: 1px solid #E4E3E0; border-radius: 10px; padding: 8px 12px">App Store</a>
+<a class="btn" href="#top" style="text-decoration: none; font-size: 13px; border: 1px solid #E4E3E0; border-radius: 10px; padding: 8px 12px">Google Play</a>
+<a class="btn" href="#top" style="text-decoration: none; font-size: 13px; border: 1px solid #E4E3E0; border-radius: 10px; padding: 8px 12px">macOS</a>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px"><span style="color: #8E8E93">Product</span><a href="#top">Features</a><a href="#top">Pricing</a><a href="#top">Changelog</a><a href="#top">Download</a></div>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px"><span style="color: #8E8E93">Company</span><a href="#top">About</a><a href="#top">Careers</a><a href="#top">Blog</a><a href="#top">Contact</a></div>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px"><span style="color: #8E8E93">Resources</span><a href="#top">Help center</a><a href="#top">Guides</a><a href="#top">Security</a><a href="#top">Status</a></div>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px"><span style="color: #8E8E93">Legal</span><a href="#top">Privacy</a><a href="#top">Terms</a><a href="#top">Cookies</a></div>
+</div>
+<div style="margin-top: 56px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 12px; color: #8E8E93">
+<span>A Fasla template. Mahaam, its customers and reviews are fictional.</span>
+<span>Artwork, public domain: Paul Signac, The Harbour at Marseilles, State Hermitage Museum. Photo of Faisal: Christoph Aigner on Unsplash.</span>
+</div>
+</div>
+<div aria-hidden="true" class="serif" style="text-align: center; font-size: 300px; line-height: .78; letter-spacing: -0.06em; color: #F2F1EE; margin-top: 40px; user-select: none; white-space: nowrap">mahaam</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":6500}}'>
+class Component extends DCLogic {
+  componentDidMount() {
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) { this.setState({ t: 170, f: -1 }); return; }
+    this.setState({ t: 0 });
+    this.iv = setInterval(() => this.setState((s) => ({ t: (s.t || 0) >= 200 ? 0 : (s.t || 0) + 1 })), 60);
+    this.iv2 = setInterval(() => this.setState((s) => ({ f: ((s.f || 0) + 1) % 1000000 })), 100);
+  }
+  componentWillUnmount() { clearInterval(this.iv); clearInterval(this.iv2); }
+  renderVals() {
+    const s = this.state || {};
+    const t = s.t == null ? 170 : s.t;
+    const said = "Call the supplier at nine, lunch with Noura at twelve, then block two hours for the Sanad quote";
+    const T1 = Math.ceil(said.length / 1.6);
+    const typed = said.slice(0, Math.min(said.length, Math.floor(t * 1.6)));
+    const row = 58;
+    const data = [
+      { title: "Call the supplier", time: "9:00 to 10:00", start: 0, len: 1, bg: "#16161A", fg: "#FFFFFF", meta: "Phone call", icon: "M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2", tag: "Cups order", tagBg: "rgba(255,255,255,.16)", av: "./img/person-khalid.webp" },
+      { title: "Lunch with Noura", time: "12:00 to 13:00", start: 3, len: 1, bg: "#FFE9A8", fg: "#3A2E00", meta: "Café Qahwa", icon: "M12 21s-7-6.5-7-12a7 7 0 0 1 14 0c0 5.5-7 12-7 12zM12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5", tag: "Catch-up", tagBg: "rgba(58,46,0,.1)", av: "./img/person-noura.webp" },
+      { title: "Sanad quote", time: "14:00 to 16:00", start: 5, len: 1.95, bg: "#FDE3E6", fg: "#8A000E", meta: "Focus time", icon: "M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2", tag: "High", tagBg: "rgba(138,0,14,.1)", av: "./img/person-faisal.webp", subs: ["Pricing table", "Delivery timeline", "Send to Faisal for review"] }
+    ];
+    const at = [T1 + 6, T1 + 16, T1 + 26];
+    const fade = t >= 190;
+    const blocks = data.map((d, i) => {
+      const on = t >= at[i] && !fade;
+      const subDone = t >= at[i] + 16 ? 1 : 0;
+      const subs = (d.subs || []).map((u, j) => ({ t: u, op: j < subDone ? 0.6 : 1, strike: j < subDone ? "line-through" : "none", fill: j < subDone ? "currentColor" : "transparent" }));
+      return { title: d.title, time: d.time, bg: d.bg, fg: d.fg,
+        meta: d.meta, icon: d.icon, tag: d.tag, tagBg: d.tagBg, av: d.av || "",
+        hasTag: !!d.tag, hasAv: !!d.av, hasSub: subs.length > 0, subs,
+        top: on ? (d.start * row + 2) + "px" : "-70px",
+        h: (d.len * row - 4) + "px",
+        cls: on ? "blk on" : "blk" };
+    });
+
+    const fr = s.f == null || s.f < 0 ? -1 : s.f;
+    const ph = (len, still) => fr < 0 ? still : fr % len;
+    // languages
+    const L = [
+      ["Arabic", "ذكّرني أتصل بالمورّد بكرة الصبح", "rtl", "Cairo, sans-serif", "radial-gradient(circle, #C09300 0 9%, transparent 10%), linear-gradient(#CE1126 0 33.3%, #FFFFFF 33.3% 66.6%, #000000 66.6%)"],
+      ["English", "Remind me to call the supplier tomorrow morning", "ltr", "Geist, sans-serif", "linear-gradient(#C8102E,#C8102E) center/100% 18% no-repeat, linear-gradient(#C8102E,#C8102E) center/12% 100% no-repeat, linear-gradient(#FFFFFF,#FFFFFF) center/100% 34% no-repeat, linear-gradient(#FFFFFF,#FFFFFF) center/22% 100% no-repeat, linear-gradient(34deg, transparent 43%, #FFFFFF 43% 57%, transparent 57%), linear-gradient(-34deg, transparent 43%, #FFFFFF 43% 57%, transparent 57%), #012169"],
+      ["French", "Rappelle-moi d’appeler le fournisseur demain matin", "ltr", "Geist, sans-serif", "linear-gradient(90deg, #0055A4 0 33.3%, #FFFFFF 33.3% 66.6%, #EF4135 66.6%)"],
+      ["Spanish", "Recuérdame llamar al proveedor mañana por la mañana", "ltr", "Geist, sans-serif", "linear-gradient(#AA151B 0 25%, #F1BF00 25% 75%, #AA151B 75%)"],
+      ["Hindi", "मुझे कल सुबह सप्लायर को फ़ोन करना याद दिलाना", "ltr", "system-ui, sans-serif", "radial-gradient(circle, #06038D 0 11%, transparent 12%), linear-gradient(#FF9933 0 33.3%, #FFFFFF 33.3% 66.6%, #138808 66.6%)"],
+      ["Turkish", "Yarın sabah tedarikçiyi aramamı hatırlat", "ltr", "Geist, sans-serif", "radial-gradient(circle at 46% 50%, #E30A17 0 20%, transparent 21%), radial-gradient(circle at 38% 50%, #FFFFFF 0 26%, transparent 27%), #E30A17"],
+      ["Japanese", "明日の朝、仕入れ先に電話するのを思い出させて", "ltr", "system-ui, sans-serif", "radial-gradient(circle, #BC002D 0 28%, #FFFFFF 29%)"],
+      ["German", "Erinnere mich, morgen früh den Lieferanten anzurufen", "ltr", "Geist, sans-serif", "linear-gradient(#000000 0 33.3%, #DD0000 33.3% 66.6%, #FFCE00 66.6%)"],
+      ["Indonesian", "Ingatkan saya menelepon pemasok besok pagi", "ltr", "Geist, sans-serif", "linear-gradient(#CE1126 0 50%, #FFFFFF 50%)"],
+      ["Portuguese", "Lembra-me de ligar ao fornecedor amanhã de manhã", "ltr", "Geist, sans-serif", "radial-gradient(circle at 40% 50%, #FFE000 0 15%, transparent 16%), linear-gradient(90deg, #006600 0 40%, #FF0000 40%)"]
+    ];
+    const nL = L.length;
+    const cur = fr < 0 ? 0 : Math.floor(fr / 22) % nL;
+    const sub = fr < 0 ? 10 : fr % 22;
+    const langs = L.map(([name, say, dir, font, flag], k) => {
+      const rel = (cur - k + nL) % nL;
+      const cls = rel === 0 ? "p0" : rel === 1 ? "p1" : rel === 2 ? "p2" : rel === nL - 1 ? "ph" : "pz";
+      return { name, say, dir, font, flag, cls };
+    });
+
+    // ask section
+    const QS = [
+      { q: "What did I promise Sanad?", a: "Two things: the final quote by Thursday, and a first design draft on Sunday.", hits: [1, 3], labels: ["Sanad quote", "Call with Sanad"] },
+      { q: "Who is waiting on me?", a: "Noura needs the deck before Tuesday, and Khalid is still waiting on your budget reply.", hits: [5, 10, 2], labels: ["Message from Noura", "Reply to Khalid", "Marketing sync"] },
+      { q: "Which ideas did I have this week?", a: "A weekly digest for clients every Sunday, and a joint webinar with your partner in March.", hits: [4, 11], labels: ["Late idea", "Partner call"] }
+    ];
+    const AC = 120;
+    const ak = fr < 0 ? 0 : Math.floor(fr / AC) % QS.length;
+    const ap = fr < 0 ? 80 : fr % AC;
+    const QQ = QS[ak];
+    const qLen = QQ.q.length;
+    const typedEnd = Math.ceil(qLen / 2) + 4;
+    const searching = ap >= typedEnd && ap < typedEnd + 12;
+    const answered = ap >= typedEnd + 12 && ap < AC - 6;
+    const MEM = [
+      ["Voice note", "#E40017", "Mon, 08:40", "Walk to work", "Supplier call, the dentist, and Khalid’s budget reply."],
+      ["Task", "#16161A", "Due Thu", "Sanad quote, final version", "Pricing table and delivery timeline still open."],
+      ["Recap", "#6D5BD0", "Tue, 15:20", "Marketing sync", "Khalid checks the numbers by Friday. Noura owns the brief."],
+      ["Event", "#2F8F5B", "Wed, 13:00", "Call with Sanad", "They asked for a first design draft on Sunday."],
+      ["Voice note", "#E40017", "Thu, 22:14", "Late idea", "A weekly digest for clients, every Sunday morning."],
+      ["Message", "#C98A00", "Today", "Noura: can you send the deck?", "Before Tuesday’s review, if possible."],
+      ["Task", "#16161A", "Next week", "Book the studio", "For the campaign shoot in December."],
+      ["Recap", "#6D5BD0", "Sun, 11:00", "Hiring debrief", "Strong yes for the designer. Offer goes out Tuesday."],
+      ["Event", "#2F8F5B", "Thu, 10:00", "Design review", "Onboarding flow, now down to four steps."],
+      ["Voice note", "#E40017", "Yesterday", "Drive home", "Renew the office lease before the 15th."],
+      ["Task", "#16161A", "Waiting on you", "Reply to Khalid", "About the Q4 budget, before Friday."],
+      ["Recap", "#6D5BD0", "Wed, 14:00", "Partner call", "Shared roadmap in Q1, then a joint webinar in March."]
+    ];
+    const memCard = (i) => {
+      const [kind, dot, when, title, body] = MEM[i];
+      const hi = QQ.hits.indexOf(i);
+      return { kind, dot, when, title, body, cls: answered ? (hi >= 0 ? "lit" : "dim") : "" };
+    };
+    const r1 = [0, 1, 2, 3, 4, 5].map(memCard), r2 = [6, 7, 8, 9, 10, 11].map(memCard);
+
+    // testimonials
+    const TQ = [
+      { q: "I used to end every day with a notebook full of half-sentences. Now I talk on the drive home, and by morning every task has a date and an owner.", name: "Noura Al-Harbi", role: "Head of Operations, Qamar", img: "./img/person-noura.webp", bg: "#F2A65A" },
+      { q: "The first task app my whole team kept using after week two. Nobody types anything anymore, and nothing falls through.", name: "Khalid Mansour", role: "Founder, Basalt", img: "./img/person-khalid.webp", bg: "#B7CDA4" },
+      { q: "I switch between Arabic and English in the same sentence. Mahaam is the only tool that keeps up, and the recaps are actually useful.", name: "Faisal Al-Otaibi", role: "Product Lead, Meridian", img: "./img/person-faisal.webp", bg: "#C3BCF2" }
+    ];
+    const tOff = s.tOff || 0;
+    const tBase = fr < 0 ? 0 : Math.floor(fr / 65);
+    const ti = (((tBase + tOff) % 3) + 3) % 3;
+    const tcards = TQ.map((d, k) => {
+      const rel = (k - ti + 3) % 3;
+      return { ...d, cls: rel === 0 ? "p0" : rel === 1 ? "p1" : "p2" };
+    });
+    const faqData = [
+      { q: "Does Mahaam join my meetings?", a: "No. It listens through your own device, so no bot appears in the call and nobody needs to accept anything." },
+      { q: "Which languages does it understand?", a: "More than 40, including Arabic dialects. You can switch languages in the middle of a sentence." },
+      { q: "Where are my voice notes stored?", a: "Notes are private to you by default and encrypted at rest. You choose what to share and with whom." },
+      { q: "Does it work with my calendar?", a: "Yes. Connect Google or Outlook and Mahaam schedules tasks into real free time, never on top of a meeting." },
+      { q: "Can my team use it together?", a: "On the Team plan you can hand off tasks, share lists and send recaps to a channel." },
+      { q: "Can I try Pro before paying?", a: "Every new account gets 14 days of Pro, no card needed." }
+    ];
+    const fOpen = s.faq == null ? 0 : s.faq;
+    const faqs = faqData.map((f, k) => ({ ...f, open: k === fOpen, cls: k === fOpen ? "acc2 open" : "acc2", plusCls: k === fOpen ? "plus2 open" : "plus2", toggle: () => this.setState({ faq: fOpen === k ? -1 : k }) }));
+    const yearly = !!s.yearly;
+    // F3
+    const a3 = ph(100, 70);
+    const idle = { x: 270, y: 60 }, field = { x: 200, y: 246 }, khalid = { x: 160, y: 286 };
+    let c = idle;
+    if (a3 >= 10 && a3 < 26) c = field;
+    if (a3 >= 26 && a3 < 60) c = khalid;
+    if (a3 >= 60) c = idle;
+    const open = a3 >= 18 && a3 < 36;
+    const assigned = a3 >= 36 && a3 < 96;
+    // F4
+    const a4 = ph(130, 100);
+    const sum = "Smaller first cut of the campaign. Khalid checks the numbers by Friday; Noura owns the brief.";
+    const f4sum = sum.slice(0, Math.max(0, Math.min(sum.length, (a4 - 4) * 3)));
+    const items = [
+      { t: "Check the campaign numbers", d: "Fri", av: "./img/person-khalid.webp", at: 56 },
+      { t: "Write the creative brief", d: "Wed", av: "./img/person-noura.webp", at: 62 },
+      { t: "Book the studio", d: "Next week", av: "./img/person-faisal.webp", at: 68 }
+    ];
+    const sent = a4 >= 92 && a4 < 126;
+    const added = at.filter((x) => t >= x && !fade).length;
+    const bars = [7, 12, 15, 10, 14, 8, 12, 16].map((h, i) => ({ h: h + "px", d: (-i * 0.11).toFixed(2) + "s" }));
+    return {
+      typed, blocks, bars,
+      row1: r1.concat(r1), row2: r2.concat(r2), askOpen: answered ? "ansx open" : "ansx",
+      askQ: QQ.q.slice(0, Math.max(0, Math.min(qLen, ap * 2))),
+      askSearch: answered ? QQ.hits.length + " sources" : (searching ? "Searching" : ""),
+      askSearchCls: searching ? "shim" : (answered ? "f-in on" : "f-in"),
+      askA: QQ.a, askACls: answered ? "f-in on" : "f-in",
+      askCites: QQ.hits.map((h, j) => ({ n: String(j + 1), label: QQ.labels[j] })),
+      tcards, tdots: [0, 1, 2].map((k) => ({ cls: k === ti ? "tdot on" : "tdot" })),
+      tNext: () => this.setState((x) => ({ tOff: (x.tOff || 0) + 1 })),
+      tPrev: () => this.setState((x) => ({ tOff: (x.tOff || 0) - 1 })),
+      faqs, monthly: !yearly, yearly,
+      pPro: yearly ? "$10" : "$12", pTeam: yearly ? "$16" : "$20",
+      pUnit: yearly ? "a month, billed yearly" : "a month",
+      pUnitTeam: yearly ? "per user, billed yearly" : "per user a month",
+      bm: yearly ? "transparent" : "#FFFFFF", by: yearly ? "#FFFFFF" : "transparent",
+      toMonthly: () => this.setState({ yearly: false }), toYearly: () => this.setState({ yearly: true }),
+      langs, langName: L[cur][0], langFlag: L[cur][4], langOp: sub < 3 ? 0 : 1,
+      f3x: c.x + "px", f3y: c.y + "px", f3press: a3 >= 30 && a3 < 33 ? "press" : "",
+      f3dd: open ? "dd on" : "dd", f3hk: a3 >= 28 && open ? "#F2F1EE" : "transparent",
+      f3assigned: assigned, f3unassigned: !assigned, f3border: open ? "#16161A" : "#E4E3E0",
+      f3log: assigned ? "f-in on" : "f-in", f3toast: a3 >= 46 && a3 < 96 ? "on" : "",
+      f4sum, f4dec: a4 >= 46 && a4 < 126 ? "f-in on" : "f-in", f4ah: a4 >= 52 && a4 < 126 ? "f-in on" : "f-in",
+      f4items: items.map((it) => ({ ...it, cls: a4 >= it.at && a4 < 126 ? "f-in on" : "f-in" })),
+      f4bg: sent ? "#E6F4EA" : "#16161A", f4fg: sent ? "#1E6B34" : "#FFFFFF",
+      f4btn: sent ? "Sent to #marketing" : "Send to #marketing", f4pulse: a4 >= 76 && a4 < 92 ? "pulse" : "",
+      waveCls: t < T1 + 2 ? "" : "still",
+      newNote: added ? added + " added from your voice note" : "Listening",
+      nowTop: (2.3 * row + (t / 200) * 20).toFixed(1) + "px"
+    };
+  }
+}
+</script>
+</body>
+</html>
