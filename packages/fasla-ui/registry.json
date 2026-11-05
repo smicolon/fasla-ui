@@ -10185,6 +10185,49 @@
       "categories": [
         "template"
       ]
+    },
+    {
+      "name": "mahaam-motion",
+      "type": "registry:block",
+      "title": "Mahaam: Motion helper",
+      "description": "The Mahaam template's small motion helper: reduced-motion, in-view and page-visibility hooks, a loop clock, and looping animations that can be paused.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-motion.ts",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-motion.ts"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
+    },
+    {
+      "name": "mahaam-hero",
+      "type": "registry:block",
+      "title": "Mahaam: Hero",
+      "description": "The Mahaam template's hero: the copy beside a painting with a day planner on it, where a voice note types itself and three task blocks drop into their slots.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "mahaam-motion"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/MahaamHero.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-hero.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
     }
   ]
 }

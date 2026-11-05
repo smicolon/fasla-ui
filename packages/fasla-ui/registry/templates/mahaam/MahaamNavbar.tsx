@@ -15,8 +15,9 @@ import { Sheet, SheetContent, SheetFooter, SheetHeader, SheetTitle, SheetTrigger
  * Sign in leave the bar for a Sheet behind an outline Icon Button, and Get
  * Mahaam stays. The bar has no fill and no border.
  *
- * Mobile first: the base classes are Figma's Mobile (360), `md:` its Tablet
- * (768) and `lg:` its Desktop (1440). Direction is the page's `dir`: every
+ * Sized by the section's own width, as the other blocks are: Mobile is the base,
+ * `[@container(min-width:48rem)]:` is Figma's Tablet (768) and
+ * `[@container(min-width:90rem)]:` its Desktop (1440). Direction is the page's `dir`: every
  * side is a logical one, so the same markup is Figma's RTL variant. The check
  * in the mark is not mirrored; the Menu icon is symmetric.
  */
@@ -137,9 +138,9 @@ export function MahaamNavbar({
   }
 
   return (
-    // 32px side padding on Mobile, 64 on Tablet, 48 on Desktop (spacing/8, /16, /12); 20px above and below.
-    <header className={cn("px-8 py-5 md:px-16 lg:px-12", className)} {...props}>
-      <div className="mx-auto flex h-9 w-full max-w-[1344px] items-center justify-between">
+    <header className={cn("[container-type:inline-size]", className)} {...props}>
+      {/* 32px side padding on Mobile, 64 on Tablet, 48 on Desktop (spacing/8, /16, /12); the row is 36px between 20px above and below. */}
+      <div className="mx-auto flex h-[76px] w-full max-w-[1440px] items-center justify-between px-8 [@container(min-width:48rem)]:px-16 [@container(min-width:90rem)]:px-12">
         <a
           href={homeHref}
           className="flex items-center gap-2.5 rounded-[var(--radius-sm)] text-xl font-medium text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -148,8 +149,8 @@ export function MahaamNavbar({
           {brand ?? copy.brand}
         </a>
 
-        <nav aria-label={l.nav} className="hidden md:block">
-          <ul className="flex items-center gap-5 lg:gap-8">
+        <nav aria-label={l.nav} className="hidden [@container(min-width:48rem)]:block">
+          <ul className="flex items-center gap-5 [@container(min-width:90rem)]:gap-8">
             {items.map((link) => (
               <li key={link.href}>
                 <a
@@ -164,7 +165,7 @@ export function MahaamNavbar({
         </nav>
 
         <div className="flex items-center gap-1.5">
-          <a href={signInHref} className={buttonVariants({ variant: "ghost", tone: "primary", className: "hidden md:inline-flex" })}>
+          <a href={signInHref} className={buttonVariants({ variant: "ghost", tone: "primary", className: "hidden [@container(min-width:48rem)]:inline-flex" })}>
             {signIn ?? copy.signIn}
           </a>
           <a href={ctaHref} className={buttonVariants()}>
@@ -172,7 +173,7 @@ export function MahaamNavbar({
           </a>
           <Sheet open={isOpen} onOpenChange={setOpen}>
             <SheetTrigger
-              render={<Button type="button" variant="outline" tone="primary" size="icon-md" aria-label={l.openMenu} className="md:hidden" />}
+              render={<Button type="button" variant="outline" tone="primary" size="icon-md" aria-label={l.openMenu} className="[@container(min-width:48rem)]:hidden" />}
             >
               <Menu />
             </SheetTrigger>

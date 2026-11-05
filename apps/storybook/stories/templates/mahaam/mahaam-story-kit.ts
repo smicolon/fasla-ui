@@ -11,8 +11,8 @@ export const mahaamViewports = {
   mobile: { name: "Mobile (360)", styles: { width: "360px", height: "780px" }, type: "mobile" },
 } as const
 
-type Breakpoint = keyof typeof mahaamViewports
-type Direction = "ltr" | "rtl"
+export type Breakpoint = keyof typeof mahaamViewports
+export type Direction = "ltr" | "rtl"
 
 /** The language the Direction toolbar picks. */
 export const localeOf = (context: { globals: { direction?: string } }): "en" | "ar" =>
@@ -27,3 +27,8 @@ export const variant = (breakpoint: Breakpoint, direction: Direction) => ({
   globals: { direction },
   parameters: { viewport: { viewports: mahaamViewports, defaultViewport: breakpoint } },
 })
+
+export const BREAKPOINTS: Breakpoint[] = ["desktop", "tablet", "mobile"]
+export const DIRECTIONS: Direction[] = ["ltr", "rtl"]
+export const label = (breakpoint: Breakpoint, direction: Direction) =>
+  `${breakpoint[0].toUpperCase()}${breakpoint.slice(1)} · ${direction.toUpperCase()}`
