@@ -10297,6 +10297,29 @@
       "categories": [
         "template"
       ]
+    },
+    {
+      "name": "mahaam-ask",
+      "type": "registry:block",
+      "title": "Mahaam: Ask",
+      "description": "The Mahaam template's ask section: two rows of memory cards scrolling opposite ways, and an ask box that types a question and opens a sourced answer.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "mahaam-motion",
+        "mahaam-pause-button"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-ask.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-ask.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
     }
   ]
 }

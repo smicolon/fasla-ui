@@ -304,7 +304,7 @@ function Languages({ copy, flags, frame }: { copy: MahaamFeaturesCopy["languages
                 BUBBLE_POSITION[position]
               )}
             >
-              <div dir="ltr" className="mb-1 flex items-center gap-1.5 text-[10px] font-medium leading-3.5 text-muted-foreground">
+              <div dir="ltr" className="mb-1 flex items-center gap-1.5 text-xxs font-medium text-muted-foreground">
                 <Flag src={flags[item.key]} className="h-[13px] w-[18px] rounded-sm border border-border" />
                 {item.name}
               </div>

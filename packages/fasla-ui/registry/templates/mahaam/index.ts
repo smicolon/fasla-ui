@@ -32,3 +32,11 @@ export {
   type MahaamFeaturesCopy,
   type MahaamFeaturesProps,
 } from "./mahaam-features"
+export {
+  MahaamAsk,
+  mahaamAskCopy,
+  type MahaamAskCopy,
+  type MahaamAskProps,
+  type MahaamAskQuestion,
+  type MahaamMemoryCard,
+} from "./mahaam-ask"
