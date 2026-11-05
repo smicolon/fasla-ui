@@ -73,3 +73,4 @@ export {
   type MahaamFooterCopy,
   type MahaamFooterProps,
 } from "./mahaam-footer"
+export { MahaamTemplate, type MahaamTemplatePhotos, type MahaamTemplateProps } from "./mahaam-template"

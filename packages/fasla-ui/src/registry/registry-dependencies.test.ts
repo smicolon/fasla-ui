@@ -10,11 +10,19 @@ type Item = { name: string; registryDependencies?: string[]; files: { path: stri
 const registry: { items: Item[] } = JSON.parse(readFileSync(resolve(PKG, "registry.json"), "utf8"))
 const names = new Set(registry.items.map((i) => i.name))
 
-/** Registry components a file imports the way the source tree lays them out. */
+/**
+ * Registry components a file imports the way the source tree lays them out: a
+ * component beside its folder's name (`../button/button`), a block by its
+ * PascalCase file (`../../blocks/faq-split-sticky/FaqSplitSticky`), and a
+ * template's helper or section in the same folder (`./mahaam-motion`).
+ */
 function importedComponents(source: string) {
-  return [...source.matchAll(/from ["'](?:\.\.\/)+(?:(?:ui|blocks|effects|hooks)\/)?([a-z0-9-]+)\/([a-z0-9-]+)["']/g)]
-    .filter(([, folder, file]) => folder === file && names.has(file!))
-    .map(([, , file]) => file!)
+  const kebab = (name: string) => name.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase()
+  const up = [...source.matchAll(/from ["'](?:\.\.\/)+(?:(?:ui|blocks|effects|hooks)\/)?([a-z0-9-]+)\/([A-Za-z0-9-]+)["']/g)]
+    .filter(([, folder, file]) => folder === kebab(file!) && names.has(folder!))
+    .map(([, folder]) => folder!)
+  const beside = [...source.matchAll(/from ["']\.\/([a-z0-9-]+)["']/g)].filter(([, file]) => names.has(file!)).map(([, file]) => file!)
+  return [...up, ...beside]
 }
 
 describe("registry dependencies", () => {

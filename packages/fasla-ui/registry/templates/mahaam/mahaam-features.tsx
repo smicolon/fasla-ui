@@ -342,7 +342,7 @@ function Handoff({ copy, avatars, frame }: { copy: MahaamFeaturesCopy["handoff"]
   const f = copy.fields
   const v = copy.values
   const row = (index: number, label: string, children: React.ReactNode) => (
-    <div className="absolute start-[18px] end-[18px] flex h-6 items-center text-sm leading-5" style={{ top: `calc(var(--f0) + ${index} * var(--pitch))` }}>
+    <div className="absolute start-[18px] end-[18px] flex h-6 items-center text-sm leading-5" style={{ top: `calc(var(--mahaam-f0) + ${index} * var(--mahaam-pitch))` }}>
       <span className="w-[76px] shrink-0 whitespace-nowrap text-muted-foreground">{label}</span>
       {children}
     </div>
@@ -350,8 +350,8 @@ function Handoff({ copy, avatars, frame }: { copy: MahaamFeaturesCopy["handoff"]
   return (
     <div
       className={cn(
-        "relative h-[364px] w-[256px] rounded-[14px] border border-border bg-card [--f0:100px] [--pitch:26px] [--assignee:264px] [--toast:376px] [&:where(:dir(rtl))]:[--f0:76px] [&:where(:dir(rtl))]:[--pitch:31px]",
-        `[@container(min-width:48rem)]:h-[336px] [@container(min-width:48rem)]:w-[316px] [@container(min-width:48rem)]:[--f0:72px] [@container(min-width:48rem)]:[--pitch:26px] [@container(min-width:48rem)]:[--assignee:236px] [@container(min-width:48rem)]:[--toast:356px]`,
+        "relative h-[364px] w-[256px] rounded-[14px] border border-border bg-card [--mahaam-f0:100px] [--mahaam-pitch:26px] [--mahaam-assignee:264px] [--mahaam-toast:376px] [&:where(:dir(rtl))]:[--mahaam-f0:76px] [&:where(:dir(rtl))]:[--mahaam-pitch:31px]",
+        `[@container(min-width:48rem)]:h-[336px] [@container(min-width:48rem)]:w-[316px] [@container(min-width:48rem)]:[--mahaam-f0:72px] [@container(min-width:48rem)]:[--mahaam-pitch:26px] [@container(min-width:48rem)]:[--mahaam-assignee:236px] [@container(min-width:48rem)]:[--mahaam-toast:356px]`,
         WINDOW_SHADOW
       )}
     >
@@ -383,7 +383,7 @@ function Handoff({ copy, avatars, frame }: { copy: MahaamFeaturesCopy["handoff"]
         </span>
       )}
       {row(5, f.reminder, <span className="text-foreground">{v.reminder}</span>)}
-      <p className="absolute start-[18px] flex h-6 items-center text-sm text-muted-foreground" style={{ top: "calc(var(--assignee) + 6px)" }}>
+      <p className="absolute start-[18px] flex h-6 items-center text-sm text-muted-foreground" style={{ top: "calc(var(--mahaam-assignee) + 6px)" }}>
         {copy.assignee}
       </p>
       <div
@@ -392,7 +392,7 @@ function Handoff({ copy, avatars, frame }: { copy: MahaamFeaturesCopy["handoff"]
           `[@container(min-width:48rem)]:start-[94px]`,
           open ? "border-foreground" : "border-border"
         )}
-        style={{ top: "var(--assignee)" }}
+        style={{ top: "var(--mahaam-assignee)" }}
       >
         {assigned ? (
           <>
@@ -413,7 +413,7 @@ function Handoff({ copy, avatars, frame }: { copy: MahaamFeaturesCopy["handoff"]
           `[@container(min-width:48rem)]:start-[94px]`,
           open ? "opacity-100" : "pointer-events-none -translate-y-1.5 opacity-0"
         )}
-        style={{ top: "calc(var(--assignee) + 38px)" }}
+        style={{ top: "calc(var(--mahaam-assignee) + 38px)" }}
       >
         {[avatars.khalid, avatars.noura, avatars.faisal].map((src, index) => (
           <div key={index} className={cn("flex h-8 items-center gap-2 rounded-md px-2", index === 0 && frame >= 28 && open && "bg-muted")}>
@@ -422,10 +422,10 @@ function Handoff({ copy, avatars, frame }: { copy: MahaamFeaturesCopy["handoff"]
           </div>
         ))}
       </div>
-      <div className="absolute start-[18px] end-[18px] h-px bg-border" style={{ top: "calc(var(--assignee) + 54px)" }} />
+      <div className="absolute start-[18px] end-[18px] h-px bg-border" style={{ top: "calc(var(--mahaam-assignee) + 54px)" }} />
       <p
         className={cn("absolute start-[18px] text-xs text-muted-foreground transition-[opacity,transform] duration-[600ms] motion-reduce:transition-none", assigned ? "opacity-100" : "translate-y-2.5 opacity-0")}
-        style={{ top: "calc(var(--assignee) + 66px)" }}
+        style={{ top: "calc(var(--mahaam-assignee) + 66px)" }}
       >
         {copy.log}
       </p>
@@ -434,7 +434,7 @@ function Handoff({ copy, avatars, frame }: { copy: MahaamFeaturesCopy["handoff"]
           "absolute inset-x-0 mx-auto flex h-10 w-[220px] items-center gap-2 rounded-[14px] bg-background-inverse px-3 py-2 text-foreground-inverse shadow-[0_24px_40px_-18px_color-mix(in_srgb,var(--foreground)_40%,transparent)] transition-[opacity,transform] duration-500 motion-reduce:transition-none",
           toast ? "opacity-100" : "translate-y-4 opacity-0"
         )}
-        style={{ top: "var(--toast)" }}
+        style={{ top: "var(--mahaam-toast)" }}
       >
         <Avatar variant="image" size="24" radius="rounded" src={avatars.khalid} name="" />
         <span className="text-xs font-medium">{copy.toast}</span>

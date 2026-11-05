@@ -287,6 +287,11 @@ export const CODE_MAP = {
       "filter-sidebar-results", "search-chips-results", "post-carousel-with-controls",
     ].map((type) => [`blog-cards-${type}`, null])
   ),
+  // Template: the Mahaam template's sections and its helpers, from the component set Mahaam Template (47694:6712), not atoms.
+  ...Object.fromEntries(
+    ["navbar", "motion", "pause-button", "hero", "logo-marquee", "features", "ask", "banner", "testimonials", "plans", "faq", "footer"].map((part) => [`mahaam-${part}`, null])
+  ),
+  "template-mahaam": null,
   // Block: the parts every Features block shares, from the block set Features (42367:57765), not an atom.
   features: null,
   // Blocks: each Features item is one Type of the block set Features (42367:57765), not an atom.

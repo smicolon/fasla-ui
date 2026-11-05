@@ -10431,6 +10431,35 @@
       "categories": [
         "template"
       ]
+    },
+    {
+      "name": "template-mahaam",
+      "type": "registry:block",
+      "title": "Template: Mahaam",
+      "description": "Mahaam, a landing template for a fictional voice-first task assistant: ten sections, three breakpoints, English and Arabic, with the motion in the sections that tell the story.",
+      "dependencies": [],
+      "registryDependencies": [
+        "mahaam-navbar",
+        "mahaam-hero",
+        "mahaam-logo-marquee",
+        "mahaam-features",
+        "mahaam-ask",
+        "mahaam-banner",
+        "mahaam-testimonials",
+        "mahaam-plans",
+        "mahaam-faq",
+        "mahaam-footer"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-template.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-template.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
     }
   ]
 }

@@ -94,9 +94,9 @@ const TURN_MS = 6500
 const PLACE = {
   front: "left-0 top-0 z-[3] h-full w-full rotate-0",
   second:
-    "z-[2] h-[96%] w-[96%] rotate-[-3.5deg] [--x:-39px] [--y:51.7px] [&:where(:dir(rtl))]:rotate-[3.5deg] [&:where(:dir(rtl))]:[--x:31.3px] [&:where(:dir(rtl))]:[--y:26.7px] [@container(min-width:48rem)]:[--x:-30.8px] [@container(min-width:48rem)]:[--y:62.8px] [@container(min-width:48rem)]:[&:dir(rtl)]:[--x:57.5px] [@container(min-width:48rem)]:[&:dir(rtl)]:[--y:5.8px] [@container(min-width:90rem)]:[--x:-32.8px] [@container(min-width:90rem)]:[--y:81.9px] [@container(min-width:90rem)]:[&:dir(rtl)]:[--x:74.5px] [@container(min-width:90rem)]:[&:dir(rtl)]:[--y:-8.1px]",
+    "z-[2] h-[96%] w-[96%] rotate-[-3.5deg] [--mahaam-x:-39px] [--mahaam-y:51.7px] [&:where(:dir(rtl))]:rotate-[3.5deg] [&:where(:dir(rtl))]:[--mahaam-x:31.3px] [&:where(:dir(rtl))]:[--mahaam-y:26.7px] [@container(min-width:48rem)]:[--mahaam-x:-30.8px] [@container(min-width:48rem)]:[--mahaam-y:62.8px] [@container(min-width:48rem)]:[&:dir(rtl)]:[--mahaam-x:57.5px] [@container(min-width:48rem)]:[&:dir(rtl)]:[--mahaam-y:5.8px] [@container(min-width:90rem)]:[--mahaam-x:-32.8px] [@container(min-width:90rem)]:[--mahaam-y:81.9px] [@container(min-width:90rem)]:[&:dir(rtl)]:[--mahaam-x:74.5px] [@container(min-width:90rem)]:[&:dir(rtl)]:[--mahaam-y:-8.1px]",
   third:
-    "z-[1] h-[92%] w-[92%] rotate-[3deg] [--x:50.9px] [--y:69.6px] [&:where(:dir(rtl))]:rotate-[-3deg] [&:where(:dir(rtl))]:[--x:-26.9px] [&:where(:dir(rtl))]:[--y:69.6px] [@container(min-width:48rem)]:[--x:65.1px] [@container(min-width:48rem)]:[--y:59.6px] [@container(min-width:48rem)]:[&:dir(rtl)]:[--x:-13.1px] [@container(min-width:48rem)]:[&:dir(rtl)]:[--y:59.6px] [@container(min-width:90rem)]:[--x:88.6px] [@container(min-width:90rem)]:[--y:65.8px] [@container(min-width:90rem)]:[&:dir(rtl)]:[--x:-7.4px] [@container(min-width:90rem)]:[&:dir(rtl)]:[--y:65.8px]",
+    "z-[1] h-[92%] w-[92%] rotate-[3deg] [--mahaam-x:50.9px] [--mahaam-y:69.6px] [&:where(:dir(rtl))]:rotate-[-3deg] [&:where(:dir(rtl))]:[--mahaam-x:-26.9px] [&:where(:dir(rtl))]:[--mahaam-y:69.6px] [@container(min-width:48rem)]:[--mahaam-x:65.1px] [@container(min-width:48rem)]:[--mahaam-y:59.6px] [@container(min-width:48rem)]:[&:dir(rtl)]:[--mahaam-x:-13.1px] [@container(min-width:48rem)]:[&:dir(rtl)]:[--mahaam-y:59.6px] [@container(min-width:90rem)]:[--mahaam-x:88.6px] [@container(min-width:90rem)]:[--mahaam-y:65.8px] [@container(min-width:90rem)]:[&:dir(rtl)]:[--mahaam-x:-7.4px] [@container(min-width:90rem)]:[&:dir(rtl)]:[--mahaam-y:65.8px]",
 } as const
 
 /** Each card's own tint over the card colour. */
@@ -168,7 +168,7 @@ export function MahaamTestimonials({
                 aria-hidden={front ? undefined : true}
                 className={cn(
                   "absolute flex origin-top-left flex-col gap-4 overflow-hidden rounded-[32px] p-5 transition-[left,top,width,height,transform] duration-[900ms] ease-out motion-reduce:transition-none",
-                  "left-[var(--x)] top-[var(--y)] [@container(min-width:48rem)]:flex-row [@container(min-width:48rem)]:gap-7 [@container(min-width:48rem)]:p-6",
+                  "left-[var(--mahaam-x)] top-[var(--mahaam-y)] [@container(min-width:48rem)]:flex-row [@container(min-width:48rem)]:gap-7 [@container(min-width:48rem)]:p-6",
                   TINT[position % 3],
                   place
                 )}

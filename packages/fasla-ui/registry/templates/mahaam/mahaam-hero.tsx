@@ -241,18 +241,18 @@ function TagAndOwner({ tag, tone, src }: { tag: string; tone: "secondary" | "des
 
 /** The block's own box: Figma sets its top and height per variant, so they are written out per variant. */
 const TASK_BOX =
-  "absolute start-10 end-0 top-[var(--top)] flex flex-col justify-center gap-2 overflow-hidden rounded-[10px] px-3 py-1.5 transition-[transform,opacity] duration-[900ms] ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none [@container(min-width:48rem)]:start-12 [@container(min-width:48rem)]:flex-row [@container(min-width:48rem)]:items-center [@container(min-width:48rem)]:justify-start [@container(min-width:48rem)]:gap-3"
+  "absolute start-10 end-0 top-[var(--mahaam-top)] flex flex-col justify-center gap-2 overflow-hidden rounded-[10px] px-3 py-1.5 transition-[transform,opacity] duration-[900ms] ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none [@container(min-width:48rem)]:start-12 [@container(min-width:48rem)]:flex-row [@container(min-width:48rem)]:items-center [@container(min-width:48rem)]:justify-start [@container(min-width:48rem)]:gap-3"
 
 /** Where a block waits: 70px above the timeline, small and clear, as the motion card says. */
-const TASK_OFF = "[transform:translateY(calc(-70px_-_var(--top)))_scale(.92)] opacity-0"
+const TASK_OFF = "[transform:translateY(calc(-70px_-_var(--mahaam-top)))_scale(.92)] opacity-0"
 
 const BOX = {
-  design: "[--top:94px] h-[88px] [&:where(:dir(rtl))]:[--top:118px] [@container(min-width:48rem)]:[--top:60px] [@container(min-width:48rem)]:h-[54px]",
-  teamSync: "[--top:368px] h-[27px] [&:where(:dir(rtl))]:[--top:464px] [@container(min-width:48rem)]:[--top:232px]",
-  call: "[--top:2px] h-[88px] [&:where(:dir(rtl))]:h-[112px] [@container(min-width:48rem)]:h-[54px]",
-  lunch: "[--top:278px] h-[88px] [&:where(:dir(rtl))]:[--top:350px] [&:where(:dir(rtl))]:h-[112px] [@container(min-width:48rem)]:[--top:176px] [@container(min-width:48rem)]:h-[54px]",
+  design: "[--mahaam-top:94px] h-[88px] [&:where(:dir(rtl))]:[--mahaam-top:118px] [@container(min-width:48rem)]:[--mahaam-top:60px] [@container(min-width:48rem)]:h-[54px]",
+  teamSync: "[--mahaam-top:368px] h-[27px] [&:where(:dir(rtl))]:[--mahaam-top:464px] [@container(min-width:48rem)]:[--mahaam-top:232px]",
+  call: "[--mahaam-top:2px] h-[88px] [&:where(:dir(rtl))]:h-[112px] [@container(min-width:48rem)]:h-[54px]",
+  lunch: "[--mahaam-top:278px] h-[88px] [&:where(:dir(rtl))]:[--mahaam-top:350px] [&:where(:dir(rtl))]:h-[112px] [@container(min-width:48rem)]:[--mahaam-top:176px] [@container(min-width:48rem)]:h-[54px]",
   sanad:
-    "[--top:462px] h-[175px] [&:where(:dir(rtl))]:[--top:582px] [@container(min-width:48rem)]:[--top:292px] [@container(min-width:48rem)]:h-[109px] [@container(min-width:48rem)]:items-start [@container(min-width:48rem)]:[&:dir(rtl)]:h-[132px]",
+    "[--mahaam-top:462px] h-[175px] [&:where(:dir(rtl))]:[--mahaam-top:582px] [@container(min-width:48rem)]:[--mahaam-top:292px] [@container(min-width:48rem)]:h-[109px] [@container(min-width:48rem)]:items-start [@container(min-width:48rem)]:[&:dir(rtl)]:h-[132px]",
 } as const
 
 /** One hour of the day: a hairline and its label. Figma spaces them 92px on Mobile (116 in Arabic, where the first block is taller), 58 from Tablet. */
@@ -316,7 +316,7 @@ function Planner({
 
       <div
         className="relative h-[644px] [&:where(:dir(rtl))]:h-[764px] [@container(min-width:48rem)]:h-[406px] [@container(min-width:48rem)]:[&:dir(rtl)]:h-[421px]"
-        style={{ "--now": Math.min(frame, 200) / 200 } as React.CSSProperties}
+        style={{ "--mahaam-now": Math.min(frame, 200) / 200 } as React.CSSProperties}
       >
         {HOUR_LABELS.map((label) => (
           <div key={label} className={cn("flex border-t border-border pt-1 text-xs text-muted-foreground", HOUR_ROW)}>
@@ -360,7 +360,7 @@ function Planner({
         </div>
 
         <div
-          className="absolute start-8 end-0 top-[212px] z-10 h-0.5 bg-foreground transition-transform duration-1000 ease-linear [transform:translateY(calc(var(--now)*20px))] motion-reduce:transition-none [&:where(:dir(rtl))]:top-[267px] [@container(min-width:48rem)]:start-10 [@container(min-width:48rem)]:top-[133px]"
+          className="absolute start-8 end-0 top-[212px] z-10 h-0.5 bg-foreground transition-transform duration-1000 ease-linear [transform:translateY(calc(var(--mahaam-now)*20px))] motion-reduce:transition-none [&:where(:dir(rtl))]:top-[267px] [@container(min-width:48rem)]:start-10 [@container(min-width:48rem)]:top-[133px]"
           aria-hidden="true"
         >
           <PulseDot enabled={waving} active={active} className="absolute -start-1 -top-[3px] size-2 rounded-full bg-foreground" />
