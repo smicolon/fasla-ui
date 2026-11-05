@@ -98,6 +98,20 @@ function DocsNav() {
             </ul>
           </div>
         ))}
+
+        <div className="space-y-2">
+          <ul className="space-y-1">
+            <li>
+              <Link
+                href={p("/docs/templates/")}
+                aria-current={pathname.includes("/docs/templates") ? "page" : undefined}
+                className={linkClass(pathname.includes("/docs/templates"))}
+              >
+                {t("templates")}
+              </Link>
+            </li>
+          </ul>
+        </div>
       </nav>
 
       {/* Storybook is copied in at build time and sits outside the locale tree. */}
