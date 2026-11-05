@@ -10162,6 +10162,29 @@
         "how-it-works",
         "marketing"
       ]
+    },
+    {
+      "name": "mahaam-navbar",
+      "type": "registry:block",
+      "title": "Mahaam: Navbar",
+      "description": "The Mahaam template's navbar: wordmark, links and two actions, with a Sheet menu on Mobile.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "sheet"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/MahaamNavbar.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-navbar.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
     }
   ]
 }
