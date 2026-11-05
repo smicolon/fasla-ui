@@ -145,7 +145,7 @@ const COPY: Record<"en" | "ar", AboutBentoCopy> = {
 }
 
 /** A card tile: Figma's `card` fill, `border` stroke, `xl` radius and `xs` shadow. */
-const CARD = "rounded-xl border border-border bg-card p-8 shadow-xs"
+const CARD = "rounded-xl border border-border bg-card p-8 shadow-sm"
 /** The hover lift, on pointers that hover only. */
 const LIFT =
   "transition-[transform,box-shadow] duration-150 ease-out motion-reduce:transition-none hover:[@media(pointer:fine)]:-translate-y-1 hover:[@media(pointer:fine)]:shadow-md"

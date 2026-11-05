@@ -176,7 +176,7 @@ const SOCIAL: ContactUsBentoSocial[] = ["instagram", "linkedin", "x", "dribbble"
 /** The lift every tile takes on a pointer that hovers. */
 const LIFT =
   "transition-[transform,box-shadow] duration-[180ms] ease-[cubic-bezier(0.2,0,0,1)] hover:motion-safe:-translate-y-1 hover:motion-safe:shadow-md"
-const CARD_TILE = `rounded-[10px] border border-border bg-card shadow-xs ${LIFT}`
+const CARD_TILE = `rounded-[10px] border border-border bg-card shadow-sm ${LIFT}`
 const MUTED_TILE = `rounded-[10px] bg-muted ${LIFT}`
 
 const TITLE = "text-base font-semibold leading-6 rtl:leading-7 text-foreground"

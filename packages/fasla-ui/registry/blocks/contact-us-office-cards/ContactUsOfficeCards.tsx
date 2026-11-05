@@ -170,7 +170,7 @@ export function ContactUsOfficeCards({ locale = "en", ...given }: ContactUsOffic
               data-reveal="rise"
               data-reveal-delay={index * 80}
               className={cn(
-                "group/card flex min-w-0 flex-col overflow-hidden rounded-[10px] border border-border bg-card shadow-xs",
+                "group/card flex min-w-0 flex-col overflow-hidden rounded-[10px] border border-border bg-card shadow-sm",
                 "motion-safe:transition-[transform,box-shadow] motion-safe:duration-[260ms] motion-safe:ease-[cubic-bezier(0.2,0,0,1)]",
                 "hover:motion-safe:-translate-y-1 hover:motion-safe:shadow-md"
               )}

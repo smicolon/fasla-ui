@@ -203,7 +203,7 @@ describe("Support & Contact", () => {
       expect(hasVariants(mover.getAttribute("class") ?? "", "group-hover/card:motion-safe:[@container(min-width:40rem)]:translate-x-1")).toBe(true)
       expect(hasVariants(mover.getAttribute("class") ?? "", "group-hover/card:rtl:[@container(min-width:40rem)]:-translate-x-1")).toBe(true)
       const surface = card.firstElementChild as HTMLElement
-      expect(surface.className).toContain("shadow-xs")
+      expect(surface.className).toContain("shadow-sm")
       expect(hasVariants(surface.getAttribute("class") ?? "", "hover:shadow-md")).toBe(true)
       expect(hasVariants(surface.getAttribute("class") ?? "", "hover:-translate-y-0.5")).toBe(true)
       expect(surface.className).toContain("duration-[160ms]")

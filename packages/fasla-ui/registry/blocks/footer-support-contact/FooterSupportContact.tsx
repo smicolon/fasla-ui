@@ -170,7 +170,7 @@ export function FooterSupportContact({ locale = "en", title, placeholder, topics
             const Icon = ICONS[card.icon]
             return (
               <li key={`${card.title}-${card.href}`} className="flex">
-                <div className="group/card relative flex w-full flex-col justify-between gap-3 rounded-xl border border-border bg-card p-4 text-card-foreground shadow-xs transition-[box-shadow,transform] duration-[160ms] ease-out motion-reduce:transition-none motion-reduce:transform-none [@container(min-width:40rem)]:p-5 [@container(min-width:64rem)]:p-6 hover:[@container(min-width:40rem)]:shadow-md hover:motion-safe:[@container(min-width:40rem)]:-translate-y-0.5 active:shadow-md active:motion-safe:-translate-y-0.5">
+                <div className="group/card relative flex w-full flex-col justify-between gap-3 rounded-xl border border-border bg-card p-4 text-card-foreground shadow-sm transition-[box-shadow,transform] duration-[160ms] ease-out motion-reduce:transition-none motion-reduce:transform-none [@container(min-width:40rem)]:p-5 [@container(min-width:64rem)]:p-6 hover:[@container(min-width:40rem)]:shadow-md hover:motion-safe:[@container(min-width:40rem)]:-translate-y-0.5 active:shadow-md active:motion-safe:-translate-y-0.5">
                   <div className="flex flex-col gap-2 [@container(min-width:40rem)]:gap-3">
                     <span aria-hidden="true" className="flex size-9 items-center justify-center rounded-[var(--radius-md)] bg-secondary text-secondary-foreground">
                       <Icon className="size-[18px]" />

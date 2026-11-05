@@ -225,7 +225,8 @@ resolve to the same neutral. The system does not have a brand hue doing hierarch
 comes from weight, spacing, and inversion to `{colors.background-inverse}`. Designers arriving from a
 more colourful system consistently mis-read this — see [Known Gaps](#known-gaps).
 
-**Scale.** 5 variable collections / 983 variables · 148 text styles · 80 effect styles · 158 component
+**Scale.** 4 variable collections, 939 variables as of 5 Nov 2026 (Mode 139, Tailwind 475, Responsive 12,
+Themes 313) · 148 text styles · 81 effect styles · 158 component
 sets across the 44 atom pages (71 product atoms plus an 87-set low-fidelity wireframe library).
 
 ---
@@ -352,6 +353,9 @@ modal scrims, `custom/shadow` `#000000 a0.10 → a0.30`, `custom/black` and `cus
 
 `shadow/{default,primary,secondary,accent,destructive,success,warning,info}` supplies the shadow
 *colours* that the effect styles consume.
+
+`shadow/ring` `#a3a3a3 a0.50 → #737373 a0.50` is the colour the `shadow ring` effect style consumes. It is
+a static copy of `theme/ring` at 50% alpha, not an alias, so it does not follow a change to `theme/ring`.
 
 ---
 
@@ -500,23 +504,43 @@ wraps to its container. `HUG` is reserved for inline labels inside hug rows — 
 
 ## Elevation & Depth
 
-80 effect styles, organised as three families.
+81 effect styles, organised as three families.
 
 **Drop shadows** run a 7-step ramp — `2xs, xs, sm, md, lg, xl, 2xl` — repeated for each shadow colour
-(`default`, `primary`, `secondary`, `accent`, `Info`, `success`, `warning`, `error`). The geometry is
+(`default`, `primary`, `secondary`, `accent`, `info`, `success`, `warning`, `destructive`). The
+info and destructive colours were `Info` and `error` before the Figma rename, so they now match the
+`theme/info` and `theme/destructive` tokens. The geometry is
 the Tailwind elevation curve: `2xs` is a single 0-blur 1px offset hairline; `sm` and above are
 two-layer shadows pairing a tight contact shadow with a wider ambient one (`lg` = 6px blur at 4px
 offset spread −4, plus 15px blur at 10px offset spread −3); `2xl` is a single dramatic 50px blur at
 25px offset, spread −12.
 
-**Dark shadows** (`Dark/shadow/default/*`) are a reduced 6-step set that drops the second layer,
-because a two-layer shadow on a dark ground reads as smudge rather than lift.
+**Dark shadows** (`Dark/shadow/default/*`) now carry all 7 sizes, with the same two-layer values as
+Light. They used to be a reduced 6-step set without the second layer.
 
 **Blur** comes in two forms with the same 8-step scale (`none, sm, blur, md, lg, xl, 2xl, 3xl` =
 0/4/8/12/16/24/40/64): `Light/blur/*` is a background blur for glass surfaces, `Light/layer-blur/*` a
 layer blur for the element itself. `card-bg-blur` is a named 8px background blur for card glass.
 
 **`shadow ring`** is a 0-blur, 0-offset, 3px-spread shadow — the focus ring, used with `{colors.ring}`.
+
+**Figma size → code class (Tailwind 3).** This mapping describes Tailwind 3, which is what the docs site,
+Storybook and the registry components use. Tailwind 3 has no `shadow-2xs` or `shadow-xs`, and a consumer's
+config will not define them either, so registry atoms and blocks must not use those two classes. In code,
+Figma `xs` is written `shadow-sm` everywhere (atoms and blocks), because on Tailwind 3 `shadow-sm` has the
+same value as Figma `xs`. Figma `2xs` is not used in code.
+
+| Figma size | Code class on Tailwind 3 |
+| --- | --- |
+| `2xs` | not used in code |
+| `xs` | `shadow-sm` |
+| `sm` | `shadow` |
+| `md`, `lg`, `xl`, `2xl` | the same names |
+
+**Migration to Tailwind 4.** Tailwind 4 has its own built-in scale, where `shadow-2xs` and `shadow-xs` match
+Figma's `2xs` and `xs`, and `shadow-sm` is Figma's `sm`. When the repo moves to Tailwind 4, change
+`shadow-sm` (used as Figma `xs`) to `shadow-xs`, then `shadow` (used as Figma `sm`) to `shadow-sm`, in one
+pass. Do the first change before the second, or the two get mixed up.
 
 **Partial opacity does not composite reliably in this file's render paths.** A scrim frame over a photo
 can export fully opaque at `1` and invisible at `0.45`, in both the plugin export and the cloud render;
