@@ -16,7 +16,7 @@ const meta: Meta<typeof MahaamHero> = {
   parameters: {
     layout: "fullscreen",
     viewport: { viewports: mahaamViewports },
-    controls: { exclude: ["paused", "defaultPaused", "onPausedChange", "pauseLabels", "frame", "reducedMotion", "sceneSrc", "avatars", "primaryHref", "secondaryHref", "planner", "secondaryCta", "socialProof"] },
+    controls: { exclude: ["paused", "defaultPaused", "onPausedChange", "pauseLabels", "frame", "still", "reducedMotion", "sceneSrc", "avatars", "primaryHref", "secondaryHref", "planner", "secondaryCta", "socialProof"] },
   },
   tags: ["autodocs"],
   render: (args, context) => <MahaamHero locale={localeOf(context)} {...mahaamHeroPhotoProps} {...args} />,
@@ -25,13 +25,13 @@ export default meta
 
 type Story = StoryObj<typeof MahaamHero>
 
-/* Final: The finished frame, as Figma draws it: the voice note typed, the three blocks in their slots, the first sub-task ticked, nothing moving. The pause button shows Play; pressing it starts the loop from here. */
-export const FinalDesktopLtr: Story = { name: "Final · " + label("desktop", "ltr"), ...variant("desktop", "ltr"), args: { defaultPaused: true, frame: 170 } }
-export const FinalDesktopRtl: Story = { name: "Final · " + label("desktop", "rtl"), ...variant("desktop", "rtl"), args: { defaultPaused: true, frame: 170 } }
-export const FinalTabletLtr: Story = { name: "Final · " + label("tablet", "ltr"), ...variant("tablet", "ltr"), args: { defaultPaused: true, frame: 170 } }
-export const FinalTabletRtl: Story = { name: "Final · " + label("tablet", "rtl"), ...variant("tablet", "rtl"), args: { defaultPaused: true, frame: 170 } }
-export const FinalMobileLtr: Story = { name: "Final · " + label("mobile", "ltr"), ...variant("mobile", "ltr"), args: { defaultPaused: true, frame: 170 } }
-export const FinalMobileRtl: Story = { name: "Final · " + label("mobile", "rtl"), ...variant("mobile", "rtl"), args: { defaultPaused: true, frame: 170 } }
+/* Final: The finished frame, as Figma draws it: the voice note typed, the three blocks in their slots, the first sub-task ticked, nothing moving. The animation is held on this frame and the pause button shows Pause, as in Figma. */
+export const FinalDesktopLtr: Story = { name: "Final · " + label("desktop", "ltr"), ...variant("desktop", "ltr"), args: { still: true, frame: 170 } }
+export const FinalDesktopRtl: Story = { name: "Final · " + label("desktop", "rtl"), ...variant("desktop", "rtl"), args: { still: true, frame: 170 } }
+export const FinalTabletLtr: Story = { name: "Final · " + label("tablet", "ltr"), ...variant("tablet", "ltr"), args: { still: true, frame: 170 } }
+export const FinalTabletRtl: Story = { name: "Final · " + label("tablet", "rtl"), ...variant("tablet", "rtl"), args: { still: true, frame: 170 } }
+export const FinalMobileLtr: Story = { name: "Final · " + label("mobile", "ltr"), ...variant("mobile", "ltr"), args: { still: true, frame: 170 } }
+export const FinalMobileRtl: Story = { name: "Final · " + label("mobile", "rtl"), ...variant("mobile", "rtl"), args: { still: true, frame: 170 } }
 
 /* Playing: The loop on its own: 200 frames of 60ms, then it starts again. It plays only while the section is on screen. */
 export const PlayingDesktopLtr: Story = { name: "Playing · " + label("desktop", "ltr"), ...variant("desktop", "ltr"), args: {} }

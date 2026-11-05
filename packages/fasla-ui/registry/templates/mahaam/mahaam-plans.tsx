@@ -109,7 +109,7 @@ const COPY: Record<Locale, MahaamPlansCopy> = {
     },
     pro: {
       name: "الاحترافية",
-      unit: { monthly: "في الشهر", yearly: "في الشهر، تُحاسَب سنويًا" },
+      unit: { monthly: "في الشهر", yearly: "في الشهر، تُدفع سنويًا" },
       price: { monthly: "$12", yearly: "$10" },
       description: "لمن يمضي يومه في المكالمات.",
       cta: "ابدأ تجربة 14 يومًا",
@@ -117,7 +117,7 @@ const COPY: Record<Locale, MahaamPlansCopy> = {
     },
     team: {
       name: "الفرق",
-      unit: { monthly: "للمستخدم في الشهر", yearly: "للمستخدم في الشهر، تُحاسَب سنويًا" },
+      unit: { monthly: "للمستخدم في الشهر", yearly: "للمستخدم في الشهر، تُدفع سنويًا" },
       price: { monthly: "$20", yearly: "$16" },
       description: "للفرق التي تتقاسم العمل.",
       cta: "تحدّث إلى المبيعات",

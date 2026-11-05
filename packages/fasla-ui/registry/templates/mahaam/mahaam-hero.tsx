@@ -176,6 +176,11 @@ export interface MahaamHeroProps extends React.HTMLAttributes<HTMLElement>, Part
    * @default 170 when it starts paused or under reduced motion, 0 otherwise
    */
   frame?: number
+  /**
+   * Holds the planner on `frame` without changing the pause button, which still
+   * shows Pause. For stills of the finished state, as Figma draws it.
+   */
+  still?: boolean
   /** Replaces the visitor's reduced-motion setting. For stories and tests. */
   reducedMotion?: boolean
 }
@@ -398,6 +403,7 @@ export function MahaamHero({
   onPausedChange,
   pauseLabels,
   frame: startFrame,
+  still,
   reducedMotion,
   className,
   ...props
@@ -409,7 +415,7 @@ export function MahaamHero({
   const visible = usePageVisible()
   const { paused, toggle } = usePausedState({ paused: pausedProp, defaultPaused, onPausedChange })
   // Frozen: paused, or under reduced motion. Out of sight, or under the pointer, it only waits.
-  const frozen = paused || reduced
+  const frozen = paused || reduced || Boolean(still)
   const [hovered, setHovered] = React.useState(false)
   const active = !frozen && inView && visible && !hovered
   const hold = startFrame ?? FINAL_FRAME

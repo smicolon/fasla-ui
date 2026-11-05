@@ -173,7 +173,7 @@ const COPY: Record<Locale, MahaamFeaturesCopy> = {
       fields: { due: "موعد التسليم", priority: "الأولوية", project: "المشروع", estimate: "التقدير", labels: "التصنيفات", reminder: "التذكير" },
       values: { due: "الجمعة", priority: "متوسطة", project: "حملة الربع الرابع", estimate: "ساعتان", labels: ["المالية", "التسويق"], reminder: "الخميس، 16:00" },
       assignee: "المسؤول",
-      unassigned: "غير مُسنَد",
+      unassigned: "بلا مسؤول",
       people: ["خالد منصور", "نورة الحربي", "فيصل العتيبي"],
       log: "أسندتَ هذه المهمة إلى خالد قبل لحظات",
       toast: "قبل خالد المهمة",

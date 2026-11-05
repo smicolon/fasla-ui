@@ -3040,34 +3040,87 @@
     },
     "mahaamTemplate": {
       "title": "Mahaam",
-      "lead": "A landing page for a fictional voice-first task assistant. Ten sections, three breakpoints, English and Arabic, built once.",
-      "intro": "It follows the Mahaam Template set in the Fasla Figma file, six variants: Desktop 1440, Tablet 768 and Mobile 360, each in LTR and RTL. The code is built once and covers all six. Every section is sized by its own width, the page's dir mirrors it, and `locale` picks English or Arabic copy.",
-      "previewTitle": "Preview",
-      "breakpoint": { "desktop": "Desktop 1440", "tablet": "Tablet 768", "mobile": "Mobile 360" },
-      "openFull": "Open the whole page",
-      "installTitle": "Install",
-      "installLead": "One command adds the template and the sections it is made of. The photographs are props: the template ships none.",
+      "lead": "A landing page in ten sections, in English and Arabic, at three breakpoints.",
+      "intro": "Built once from the Mahaam Template set in Figma. It covers all six variants: three breakpoints, each in LTR and RTL.",
+      "allTemplates": "All templates",
       "sectionsTitle": "Sections",
-      "sectionsLead": "Each section is its own registry item, named mahaam-<section>, so you can take one without the rest.",
+      "sectionsLead": "Each section is its own registry item, so you can take one alone.",
+      "sectionsTable": {
+        "section": "Section",
+        "item": "Registry item",
+        "description": "What it is"
+      },
+      "sectionNames": {
+        "navbar": "Navbar",
+        "hero": "Hero",
+        "logo-marquee": "Logo marquee",
+        "features": "Features",
+        "ask": "Ask",
+        "banner": "Banner",
+        "testimonials": "Testimonials",
+        "plans": "Plans",
+        "faq": "FAQ",
+        "footer": "Footer"
+      },
       "sections": {
-        "navbar": "Navbar: wordmark, links and two actions, with a menu Sheet on Mobile.",
-        "hero": "Hero: the copy beside a painting with a day planner, where a voice note types itself and three tasks drop into their slots.",
-        "logo-marquee": "Logo marquee: ten invented logos scrolling in a seamless loop.",
-        "features": "Features: three cards whose windows play on their own: languages stacking, a hand-off, a recap.",
-        "ask": "Ask: two rows of memory cards scrolling opposite ways, and an ask box that answers with sources.",
-        "banner": "Banner: an outlined panel with rings that pulse out of its corner.",
-        "testimonials": "Testimonials: three tinted cards stacked like a hand that turns every 6.5 seconds.",
-        "plans": "Plans: a Monthly and Yearly switch over Free, Pro and Team.",
-        "faq": "FAQ: the FAQ block's Split Sticky type with Mahaam's words.",
-        "footer": "Footer: brand, store buttons, link columns, credits and a giant faint wordmark."
+        "navbar": "Wordmark, links and two actions; a menu Sheet on Mobile.",
+        "hero": "Copy beside a painting with a day planner that fills itself.",
+        "logo-marquee": "Ten invented logos in a seamless loop.",
+        "features": "Three cards with windows that play on their own.",
+        "ask": "Memory cards in two rows, and an ask box that answers with sources.",
+        "banner": "An outlined panel with pulsing rings.",
+        "testimonials": "Three tinted cards stacked like a hand.",
+        "plans": "A Monthly and Yearly switch over three plans.",
+        "faq": "The FAQ block's Split Sticky type.",
+        "footer": "Brand, store buttons, link columns and credits."
+      },
+      "propsTitle": "Props",
+      "propsLead": "On the template. Every section takes its own copy and props.",
+      "props": {
+        "locale": "The language of the default copy. The page's dir sets the direction.",
+        "photos": "The photographs, as props. None ship.",
+        "defaultPaused": "Starts every loop paused.",
+        "reducedMotion": "Replaces the visitor's setting, in Storybook and in tests."
       },
       "motionTitle": "Motion: a documented exception",
-      "motionLead": "Fasla's motion rules say everything animates from the presets and nothing plays or loops on its own. This template is the one exception, because its sections tell the product's story by playing it. The conditions:",
+      "motionLead": "The one exception to Fasla's motion rules: the sections play their story on their own. Its conditions:",
+      "motionTable": {
+        "condition": "Condition",
+        "behaviour": "Behaviour"
+      },
       "motion": {
-        "reduced": "Under prefers-reduced-motion: reduce nothing moves. Every section shows its finished frame, and no pause control is drawn.",
-        "visible": "A loop runs only while its section is on screen and the page is visible, and waits under the pointer.",
-        "pause": "Every section that loops has a pause control, an outline Icon Button that shows Pause while it plays and Play while it is paused (WCAG 2.2.2).",
-        "css": "The motion is the Web Animations API and a small timer, so the template needs no keyframes in your Tailwind config."
+        "reduced": {
+          "name": "Reduced motion",
+          "text": "Nothing moves. Each section shows its finished frame and draws no pause control."
+        },
+        "visible": {
+          "name": "On screen",
+          "text": "A loop runs only while its section is on screen and the page is visible, and waits under the pointer."
+        },
+        "pause": {
+          "name": "Pause control",
+          "text": "Every looping section has an outline Icon Button: Pause while it plays, Play while it is paused (WCAG 2.2.2)."
+        },
+        "css": {
+          "name": "Implementation",
+          "text": "The Web Animations API and a small timer, so no keyframes in your Tailwind config."
+        }
+      },
+      "tintsTitle": "Colour",
+      "tints": "Colours are tokens, with one exception.",
+      "tintsTable": {
+        "figma": "Figma",
+        "code": "In code"
+      },
+      "tintRows": {
+        "soft": {
+          "name": "opacity/destructive/10, warning/20, info/10, success/10, info/30, success/30",
+          "text": "The soft tokens, laid over the card."
+        },
+        "built": {
+          "name": "opacity/warning/40",
+          "text": "No token. Built from the warning colour at 40% over the card, on the Noura card."
+        }
       },
       "creditsTitle": "Credits",
       "creditsLead": "The template ships no photographs. The docs and Storybook use these, listed in public/images/mahaam/CREDITS.md.",
@@ -3076,9 +3129,7 @@
         "faisal": "Photo of Faisal: Christoph Aigner on Unsplash (Unsplash licence).",
         "freepik": "Photos of Noura and Khalid: Image by Freepik.",
         "footer": "The footer carries the same credits."
-      },
-      "tintsTitle": "Colour",
-      "tints": "Colours are tokens. Figma's opacity/destructive/10, warning/20, info/10, success/10, info/30 and success/30 are the soft tokens, laid over the card. One tint has no token: opacity/warning/40, on the Noura card, is built in the template from the warning colour at 40% over the card."
+      }
     },
     "faqBlocks": {
       "lead": "{count, plural, one {One FAQ section} other {{n} FAQ sections}}: question lists, layouts, search and topic navigation, and ways to reach support.",
