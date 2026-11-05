@@ -21,7 +21,8 @@ import { PULSE_KEYFRAMES, useEntrance, useInView, useLoopAnimation, useLoopClock
  * loops, which the repo's motion rules otherwise forbid. The loop is 200 frames
  * of 60ms. Under `prefers-reduced-motion: reduce`, or with `paused`, it holds
  * on the finished frame (170) or the frame you give, and the section shows
- * Figma's state. The pause control is not designed yet, so none is drawn.
+ * Figma's state. It also waits while the pointer is over the painting, and
+ * while it is off screen. The pause control is not designed yet, so none is drawn.
  *
  * Sized by the section's own width, not the window's: it is a query container.
  * Mobile is the base; `[@container(min-width:48rem)]:` is Figma's Tablet (768)
@@ -229,19 +230,20 @@ function TagAndOwner({ tag, tone, src }: { tag: string; tone: "secondary" | "des
 
 /** The block's own box: Figma sets its top and height per variant, so they are written out per variant. */
 const TASK_BOX =
-  "absolute start-10 end-0 flex flex-col justify-center gap-2 overflow-hidden rounded-[10px] px-3 py-1.5 transition-[transform,opacity] duration-[900ms] ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none [@container(min-width:48rem)]:start-12 [@container(min-width:48rem)]:flex-row [@container(min-width:48rem)]:items-center [@container(min-width:48rem)]:justify-start [@container(min-width:48rem)]:gap-3"
+  "absolute start-10 end-0 top-[var(--top)] flex flex-col justify-center gap-2 overflow-hidden rounded-[10px] px-3 py-1.5 transition-[transform,opacity] duration-[900ms] ease-[cubic-bezier(.22,1,.36,1)] motion-reduce:transition-none [@container(min-width:48rem)]:start-12 [@container(min-width:48rem)]:flex-row [@container(min-width:48rem)]:items-center [@container(min-width:48rem)]:justify-start [@container(min-width:48rem)]:gap-3"
 
-const TASK_OFF = "-translate-y-24 scale-[.92] opacity-0"
+/** Where a block waits: 70px above the timeline, small and clear, as the motion card says. */
+const TASK_OFF = "[transform:translateY(calc(-70px_-_var(--top)))_scale(.92)] opacity-0"
 
 const BOX = {
   design:
-    "top-[94px] h-[88px] [&:dir(rtl)]:top-[110px] [@container(min-width:48rem)]:top-[60px] [@container(min-width:48rem)]:h-[54px] [@container(min-width:48rem)]:[&:dir(rtl)]:top-[60px]",
-  teamSync: "top-[368px] h-[27px] [&:dir(rtl)]:top-[400px] [@container(min-width:48rem)]:top-[232px] [@container(min-width:48rem)]:[&:dir(rtl)]:top-[232px]",
-  call: "top-[2px] h-[88px] [&:dir(rtl)]:h-[112px] [@container(min-width:48rem)]:h-[54px] [@container(min-width:48rem)]:[&:dir(rtl)]:h-[54px]",
+    "[--top:94px] h-[88px] [&:dir(rtl)]:[--top:110px] [@container(min-width:48rem)]:[--top:60px] [@container(min-width:48rem)]:h-[54px] [@container(min-width:48rem)]:[&:dir(rtl)]:[--top:60px]",
+  teamSync: "[--top:368px] h-[27px] [&:dir(rtl)]:[--top:400px] [@container(min-width:48rem)]:[--top:232px] [@container(min-width:48rem)]:[&:dir(rtl)]:[--top:232px]",
+  call: "[--top:2px] h-[88px] [&:dir(rtl)]:h-[112px] [@container(min-width:48rem)]:h-[54px] [@container(min-width:48rem)]:[&:dir(rtl)]:h-[54px]",
   lunch:
-    "top-[278px] h-[88px] [&:dir(rtl)]:top-[294px] [&:dir(rtl)]:h-[112px] [@container(min-width:48rem)]:top-[176px] [@container(min-width:48rem)]:h-[54px] [@container(min-width:48rem)]:[&:dir(rtl)]:top-[176px] [@container(min-width:48rem)]:[&:dir(rtl)]:h-[54px]",
+    "[--top:278px] h-[88px] [&:dir(rtl)]:[--top:294px] [&:dir(rtl)]:h-[112px] [@container(min-width:48rem)]:[--top:176px] [@container(min-width:48rem)]:h-[54px] [@container(min-width:48rem)]:[&:dir(rtl)]:[--top:176px] [@container(min-width:48rem)]:[&:dir(rtl)]:h-[54px]",
   sanad:
-    "top-[462px] h-[175px] [&:dir(rtl)]:top-[494px] [@container(min-width:48rem)]:top-[292px] [@container(min-width:48rem)]:h-[109px] [@container(min-width:48rem)]:items-start [@container(min-width:48rem)]:[&:dir(rtl)]:top-[292px] [@container(min-width:48rem)]:[&:dir(rtl)]:h-[132px]",
+    "[--top:462px] h-[175px] [&:dir(rtl)]:[--top:494px] [@container(min-width:48rem)]:[--top:292px] [@container(min-width:48rem)]:h-[109px] [@container(min-width:48rem)]:items-start [@container(min-width:48rem)]:[&:dir(rtl)]:[--top:292px] [@container(min-width:48rem)]:[&:dir(rtl)]:h-[132px]",
 } as const
 
 /** One hour of the day: a hairline and its label. Figma spaces them 92px on Mobile (108 in two Arabic rows), 58 from Tablet. */
@@ -402,7 +404,9 @@ export function MahaamHero({
   const visible = usePageVisible()
   // Frozen: asked to be, or under reduced motion. Out of sight it only waits.
   const frozen = paused || reduced
-  const active = !frozen && inView && visible
+  // The planner also waits under the pointer, as the motion card says.
+  const [hovered, setHovered] = React.useState(false)
+  const active = !frozen && inView && visible && !hovered
   const hold = startFrame ?? FINAL_FRAME
   const [ready, setReady] = React.useState(false)
   React.useEffect(() => setReady(true), [])
@@ -483,6 +487,9 @@ export function MahaamHero({
 
           <div
             ref={sceneRef}
+            data-slot="mahaam-hero-scene"
+            onPointerEnter={() => setHovered(true)}
+            onPointerLeave={() => setHovered(false)}
             className="relative flex min-h-[944px] items-start justify-center overflow-hidden rounded-3xl bg-muted px-3 py-6 [&:dir(rtl)]:min-h-[1002px] [@container(min-width:48rem)]:min-h-[644px] [@container(min-width:48rem)]:px-6 [@container(min-width:48rem)]:pb-6 [@container(min-width:48rem)]:pt-10 [@container(min-width:48rem)]:[&:dir(rtl)]:min-h-[644px] [@container(min-width:90rem)]:h-[680px] [@container(min-width:90rem)]:min-h-0 [@container(min-width:90rem)]:px-0 [@container(min-width:90rem)]:pt-[58px] [@container(min-width:90rem)]:[&:dir(rtl)]:min-h-0"
           >
             {sceneSrc ? <img ref={zoomRef} src={sceneSrc} alt="" decoding="async" className="absolute inset-0 size-full object-cover [object-position:40%_50%]" /> : null}

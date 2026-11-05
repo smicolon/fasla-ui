@@ -1,5 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from "vitest"
-import { act, cleanup, render, screen } from "@testing-library/react"
+import { afterEach, beforeEach, describe, expect, it, vi, type Mock } from "vitest"
+import { act, cleanup, fireEvent, render, screen } from "@testing-library/react"
 import { MahaamHero, mahaamHeroCopy } from "./MahaamHero"
 
 /*
@@ -9,7 +9,7 @@ import { MahaamHero, mahaamHeroCopy } from "./MahaamHero"
  * browser animates.
  */
 
-let animate: ReturnType<typeof vi.fn>
+let animate: Mock
 
 function setReducedMotion(reduced: boolean) {
   window.matchMedia = vi.fn((query: string) => ({
@@ -25,7 +25,7 @@ function setReducedMotion(reduced: boolean) {
 }
 
 beforeEach(() => {
-  animate = vi.fn(() => ({ pause: vi.fn(), play: vi.fn(), cancel: vi.fn() }))
+  animate = vi.fn(() => ({ pause: vi.fn(), play: vi.fn(), cancel: vi.fn() })) as Mock
   Element.prototype.animate = animate as unknown as Element["animate"]
   setReducedMotion(false)
 })
@@ -92,6 +92,25 @@ describe("Mahaam Hero: playing", () => {
       vi.advanceTimersByTime(60 * 105)
     })
     expect(screen.getByText(en.listening)).toBeTruthy()
+  })
+
+  it("waits while the pointer is over the painting, and goes on when it leaves", () => {
+    vi.useFakeTimers()
+    const { container } = render(<MahaamHero />)
+    const scene = container.querySelector('[data-slot="mahaam-hero-scene"]') as HTMLElement
+    act(() => {
+      vi.advanceTimersByTime(60 * 20)
+    })
+    fireEvent.pointerEnter(scene)
+    act(() => {
+      vi.advanceTimersByTime(60 * 200)
+    })
+    expect(screen.getByText(en.listening)).toBeTruthy()
+    fireEvent.pointerLeave(scene)
+    act(() => {
+      vi.advanceTimersByTime(60 * 100)
+    })
+    expect(screen.getByText(en.added(3))).toBeTruthy()
   })
 
   it("runs its animations, and stops them when paused", () => {
