@@ -53,3 +53,10 @@ export {
   type MahaamTestimonialsCopy,
   type MahaamTestimonialsProps,
 } from "./mahaam-testimonials"
+export {
+  MahaamPlans,
+  mahaamPlansCopy,
+  type MahaamPlan,
+  type MahaamPlansCopy,
+  type MahaamPlansProps,
+} from "./mahaam-plans"

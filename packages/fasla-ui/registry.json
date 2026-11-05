@@ -10366,6 +10366,30 @@
       "categories": [
         "template"
       ]
+    },
+    {
+      "name": "mahaam-plans",
+      "type": "registry:block",
+      "title": "Mahaam: Plans",
+      "description": "The Mahaam template's plans: a Monthly / Yearly switch over Free, Pro and Team, with Pro first on Tablet and Mobile.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-plans.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-plans.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
     }
   ]
 }
