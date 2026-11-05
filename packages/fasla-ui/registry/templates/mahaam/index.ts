@@ -46,3 +46,10 @@ export {
   type MahaamBannerCopy,
   type MahaamBannerProps,
 } from "./mahaam-banner"
+export {
+  MahaamTestimonials,
+  mahaamTestimonialsCopy,
+  type MahaamTestimonial,
+  type MahaamTestimonialsCopy,
+  type MahaamTestimonialsProps,
+} from "./mahaam-testimonials"

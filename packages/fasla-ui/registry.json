@@ -10342,6 +10342,30 @@
       "categories": [
         "template"
       ]
+    },
+    {
+      "name": "mahaam-testimonials",
+      "type": "registry:block",
+      "title": "Mahaam: Testimonials",
+      "description": "The Mahaam template's testimonials: three tinted cards stacked like a hand that turns every 6.5 seconds, with arrows, dots and a pause button.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "mahaam-motion",
+        "mahaam-pause-button"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-testimonials.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-testimonials.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
     }
   ]
 }
