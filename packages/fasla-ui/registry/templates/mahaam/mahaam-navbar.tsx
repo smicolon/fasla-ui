@@ -102,7 +102,7 @@ export interface MahaamNavbarProps extends React.HTMLAttributes<HTMLElement>, Pa
 }
 
 /** The mark: a 26px ink square, radius/lg 10, with a round-capped check in `background`. Not mirrored in RTL. */
-function MahaamMark() {
+export function MahaamMark() {
   return (
     <span aria-hidden="true" className="flex size-[26px] shrink-0 items-center justify-center rounded-[10px] bg-foreground">
       <svg width="10" height="8" viewBox="0 0 10 8" fill="none" className="overflow-visible">

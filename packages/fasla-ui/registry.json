@@ -10410,6 +10410,27 @@
       "categories": [
         "template"
       ]
+    },
+    {
+      "name": "mahaam-footer",
+      "type": "registry:block",
+      "title": "Mahaam: Footer",
+      "description": "The Mahaam template's footer: brand, store buttons and four link columns, the credits, and a giant faint wordmark.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "mahaam-navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-footer.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-footer.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
     }
   ]
 }

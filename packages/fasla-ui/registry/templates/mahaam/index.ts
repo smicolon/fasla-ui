@@ -66,3 +66,10 @@ export {
   type MahaamFaqCopy,
   type MahaamFaqProps,
 } from "./mahaam-faq"
+export {
+  MahaamFooter,
+  mahaamFooterCopy,
+  type MahaamFooterColumn,
+  type MahaamFooterCopy,
+  type MahaamFooterProps,
+} from "./mahaam-footer"
