@@ -20,9 +20,9 @@ export const mahaamDemoPhotos = {
     khalid: "/images/mahaam/portrait-khalid.webp",
     faisal: "/images/mahaam/portrait-faisal.webp",
   },
-  /** The ten flags on the Features card, by language. They are artwork, not photos, and not mirrored in Arabic. */
+  /** The nine flags on the Features card, by language (Arabic has a letter tile instead). They are artwork, not photos, and not mirrored in Arabic. */
   flags: Object.fromEntries(
-    ["arabic", "english", "french", "spanish", "hindi", "turkish", "japanese", "german", "indonesian", "portuguese"].map((key) => [key, `/images/mahaam/flags/${key}.svg`])
+    ["english", "french", "spanish", "hindi", "turkish", "japanese", "german", "indonesian", "portuguese"].map((key) => [key, `/images/mahaam/flags/${key}.svg`])
   ),
 } as const
 

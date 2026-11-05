@@ -28,6 +28,8 @@ import { useInView, useLoopClock, usePageVisible, usePrefersReducedMotion } from
  * Under `prefers-reduced-motion: reduce` they stay on Figma's still frames and
  * the button is not drawn.
  *
+ * Arabic has no country flag, so it gets a neutral tile with «ع», and the "Heard in" badge an initials Avatar.
+ *
  * The tints are the soft tokens Figma's opacity/info/10, warning/10 and
  * success/10 are, laid over the card. Flags are images and are not mirrored; the
  * Latin sentences keep their direction in Arabic.
@@ -159,7 +161,7 @@ const COPY: Record<Locale, MahaamFeaturesCopy> = {
       count: "أكثر من 40 لغة",
       listening: "جارٍ الاستماع",
       task: "الاتصال بالمورّد",
-      heardIn: (language) => `قيلت بـ${language}`,
+      heardIn: (language) => `قيلت ب${language}`,
       items: items("ar"),
     },
     handoff: {
@@ -224,6 +226,15 @@ const WINDOW_SHADOW = "shadow-[0_30px_60px_-30px_color-mix(in_srgb,var(--foregro
 
 function Flag({ src, className }: { src?: string; className?: string }) {
   return src ? <img src={src} alt="" aria-hidden="true" className={cn("shrink-0 object-cover", className)} /> : <span aria-hidden="true" className={cn("shrink-0 bg-muted", className)} />
+}
+
+/** Arabic has no country flag: a small neutral tile with its letter «ع», the size of a flag, in theme tokens. */
+function ArabicTile() {
+  return (
+    <span aria-hidden="true" className="flex h-[13px] w-[18px] shrink-0 items-center justify-center rounded-sm border border-border bg-card font-arabic text-xxs font-medium text-foreground">
+      ع
+    </span>
+  )
 }
 
 /** One card: a tinted stage, and the words beside or under it. */
@@ -305,7 +316,7 @@ function Languages({ copy, flags, frame }: { copy: MahaamFeaturesCopy["languages
               )}
             >
               <div dir="ltr" className="mb-1 flex items-center gap-1.5 text-xxs font-medium text-muted-foreground">
-                <Flag src={flags[item.key]} className="h-[13px] w-[18px] rounded-sm border border-border" />
+                {item.key === "arabic" ? <ArabicTile /> : <Flag src={flags[item.key]} className="h-[13px] w-[18px] rounded-sm border border-border" />}
                 {item.name}
               </div>
               <p dir={item.dir} className="text-start text-sm font-medium text-foreground">
@@ -319,7 +330,7 @@ function Languages({ copy, flags, frame }: { copy: MahaamFeaturesCopy["languages
       <div className="flex flex-col items-center gap-2 rounded-[10px] border border-border px-3.5 py-3 text-center [@container(min-width:48rem)]:flex-row [@container(min-width:48rem)]:justify-between [@container(min-width:48rem)]:gap-2.5 [@container(min-width:48rem)]:text-start">
         <span className="text-sm font-semibold text-foreground">{copy.task}</span>
         <Badge variant="soft" tone="info" size="sm" className={cn("transition-opacity duration-300 motion-reduce:transition-none", sub < 3 ? "opacity-0" : "opacity-100")}>
-          <Flag src={flags[front.key]} className="size-3 rounded-full" />
+          {front.key === "arabic" ? <Avatar variant="initials" size="12" radius="rounded" name="ع" /> : <Flag src={flags[front.key]} className="size-3 rounded-full" />}
           {copy.heardIn(front.name)}
         </Badge>
       </div>
@@ -343,14 +354,14 @@ function Handoff({ copy, avatars, frame }: { copy: MahaamFeaturesCopy["handoff"]
   const v = copy.values
   const row = (index: number, label: string, children: React.ReactNode) => (
     <div className="absolute start-[18px] end-[18px] flex h-6 items-center text-sm leading-5" style={{ top: `calc(var(--mahaam-f0) + ${index} * var(--mahaam-pitch))` }}>
-      <span className="w-[76px] shrink-0 whitespace-nowrap text-muted-foreground">{label}</span>
+      <span className="w-[76px] shrink-0 whitespace-nowrap text-muted-foreground [&:dir(rtl)]:w-[88px]">{label}</span>
       {children}
     </div>
   )
   return (
     <div
       className={cn(
-        "relative h-[364px] w-[256px] rounded-[14px] border border-border bg-card [--mahaam-f0:100px] [--mahaam-pitch:26px] [--mahaam-assignee:264px] [--mahaam-toast:376px] [&:where(:dir(rtl))]:[--mahaam-f0:76px] [&:where(:dir(rtl))]:[--mahaam-pitch:31px]",
+        "relative h-[364px] w-[256px] rounded-[14px] border border-border bg-card [--mahaam-f0:100px] [--mahaam-pitch:26px] [--mahaam-assignee:264px] [--mahaam-toast:376px] [&:where(:dir(rtl))]:[--mahaam-f0:76px]",
         `[@container(min-width:48rem)]:h-[336px] [@container(min-width:48rem)]:w-[316px] [@container(min-width:48rem)]:[--mahaam-f0:72px] [@container(min-width:48rem)]:[--mahaam-pitch:26px] [@container(min-width:48rem)]:[--mahaam-assignee:236px] [@container(min-width:48rem)]:[--mahaam-toast:356px]`,
         WINDOW_SHADOW
       )}
@@ -566,7 +577,7 @@ export function MahaamFeatures({
         <div className={cn("flex flex-col gap-4", `[@container(min-width:48rem)]:gap-5 [@container(min-width:90rem)]:flex-row`)}>
           <Card
             tint="from-soft-info to-soft-info"
-            stageClassName="h-[366px]"
+            stageClassName="h-[366px] [&:where(:dir(rtl))]:h-[378px]"
             hovered={hovered === "languages"}
             onHover={(on) => setHovered(on ? "languages" : null)}
             label={l.label}
@@ -588,7 +599,7 @@ export function MahaamFeatures({
           </Card>
           <Card
             tint="from-soft-success to-soft-success"
-            stageClassName="h-[352px]"
+            stageClassName="h-[352px] [&:where(:dir(rtl))]:h-[360px]"
             hovered={hovered === "recap"}
             onHover={(on) => setHovered(on ? "recap" : null)}
             label={r.label}
