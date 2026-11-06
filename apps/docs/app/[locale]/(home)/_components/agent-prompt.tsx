@@ -69,7 +69,7 @@ function CopyPromptButton({ status, onCopy, className }: { status: CopyStatus; o
 }
 
 /**
- * The hero's version: the button alone. A refused copy shows one line under
+ * The hero's version: the button alone, after a small "or". A refused copy shows one line under
  * it, out of flow so the hero does not move, pointing to the full prompt
  * under the CLI band, where the text can be selected.
  */
@@ -77,7 +77,9 @@ export function AgentPromptCompact({ className }: { className?: string }) {
   const t = useTranslations("landing.final.agent")
   const { status, copy } = useCopyPrompt()
   return (
-    <div className={`relative flex justify-center ${className ?? ""}`}>
+    <div className={`relative flex flex-col items-center ${className ?? ""}`}>
+      {/* A plain word between the two ways in, read in order; no role, no landmark. */}
+      <span className="bg-background px-2 pb-2 text-sm leading-5 text-muted-foreground rtl:leading-6">{t("or")}</span>
       <CopyPromptButton
         status={status}
         onCopy={copy}
