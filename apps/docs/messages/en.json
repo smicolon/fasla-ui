@@ -4779,6 +4779,8 @@
         "copy": "Copy prompt",
         "copied": "Copied",
         "failed": "Couldn't copy. Select the text and copy it.",
+        "failedHero": "Couldn't copy.",
+        "failedHeroLink": "Select the text here.",
         "show": "Show prompt",
         "hide": "Hide prompt",
         "region": "The prompt to copy"
