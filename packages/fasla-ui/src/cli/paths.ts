@@ -232,6 +232,32 @@ export function pathToAlias(input: string, root: string): string | undefined {
   return undefined
 }
 
+/**
+ * The components alias for a folder someone gave. The CLI puts primitives in
+ * a `ui` folder under it, so `src/components/ui` — the folder the files end
+ * up in — means `@/components`, not `@/components/ui` with `ui` appended a
+ * second time. A bare `ui` folder under the alias root has nothing above it
+ * to name, and is kept.
+ */
+export function componentsAliasFromPath(input: string, root: string): string | undefined {
+  const alias = pathToAlias(input, root)
+  if (alias === undefined) return undefined
+  const parent = alias.replace(/\/ui$/, "")
+  return parent !== alias && parent !== "@" ? parent : alias
+}
+
+/**
+ * The components alias a stored config means. Builds before this one wrote
+ * `components: "@/components/ui"` beside `ui: "@/components/ui/ui"` when asked
+ * for the `ui` folder: that pair is the loop's signature, and the parent is
+ * what was meant. Any other config is read as it is.
+ */
+export function effectiveComponentsAlias(aliases: { components?: string; ui?: string } | undefined): string {
+  const components = aliases?.components || "@/components"
+  const parent = components.replace(/\/ui$/, "")
+  return aliases?.ui === `${components}/ui` && parent !== components && parent !== "@" ? parent : components
+}
+
 /** Why `pathToAlias` gave no alias for `input`, to show before asking again. */
 export function outsideAliasMessage(input: string, root: string): string {
   return (
