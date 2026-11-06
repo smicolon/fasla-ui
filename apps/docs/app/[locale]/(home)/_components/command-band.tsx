@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useLocale, useTranslations } from "next-intl"
 import { Button } from "@fasla-ui/ui/button/button"
+import { AgentPrompt } from "./agent-prompt"
 import { ArrowEndIcon } from "./icons"
 import { installCommand, landingLinks } from "./links"
 
@@ -99,6 +100,7 @@ export function CommandBand() {
               </span>
             </div>
           </div>
+          <AgentPrompt />
         </div>
       </div>
     </section>

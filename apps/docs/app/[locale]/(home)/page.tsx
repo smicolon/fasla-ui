@@ -8,6 +8,7 @@ import { AnnotatedCard } from "./_components/annotated-card"
 import { ArabicWord } from "./_components/arabic-word"
 import { AtomsTable } from "./_components/atoms-table"
 import { BlocksGrid } from "./_components/blocks-grid"
+import { AgentPromptCompact } from "./_components/agent-prompt"
 import { CommandBand } from "./_components/command-band"
 import { FaqSection } from "./_components/faq-section"
 import { DirectionSwitch } from "./_components/direction-switch"
@@ -112,6 +113,7 @@ export default async function HomePage({
                 </Link>
               </Button>
             </div>
+            <AgentPromptCompact className="mt-3" />
           </div>
 
           <XrayStage label={t("hero.xray")} windowLabel={t("sanad.label")}>
