@@ -81,12 +81,15 @@ vi.mock("./pm", async (importOriginal) => {
 const themesApplied: { cwd: string; choice: string }[] = []
 const themeItemsApplied: { cwd: string; urls: string[] }[] = []
 let themeFails = false
+// What the shadcn CLI writes into the project when the theme installs.
+let themeWrites: ((cwd: string) => Promise<void>) | undefined
 vi.mock("./theme", async (importOriginal) => {
   const actual = await importOriginal<typeof import("./theme")>()
   return {
     ...actual,
     applyTheme: async (cwd: string, choice: string, _project?: unknown) => {
       themesApplied.push({ cwd, choice })
+      if (!themeFails) await themeWrites?.(cwd)
       return themeFails ? { ok: false, output: "ERR_SOME_SHADCN_FAILURE" } : { ok: true }
     },
     applyThemeItems: async (cwd: string, urls: string[]) => {
@@ -95,6 +98,10 @@ vi.mock("./theme", async (importOriginal) => {
     },
   }
 })
+
+// A terminal is there to answer, unless a test takes it away.
+let interactive = true
+vi.mock("./tty", () => ({ isInteractive: () => interactive }))
 
 const { createProgram } = await import("./program")
 const { installCnPackages, rangeStaysBelow3 } = await import("./commands/init")
@@ -108,9 +115,11 @@ beforeEach(() => {
   asked.length = 0
   prompted.length = 0
   registryDown = false
+  interactive = true
   themesApplied.length = 0
   themeItemsApplied.length = 0
   themeFails = false
+  themeWrites = undefined
   installs.length = 0
   installFails = false
   for (const key of Object.keys(overrides)) delete overrides[key]
@@ -422,6 +431,172 @@ describe("init", () => {
     const before = await tree(dir)
     await expect(run("init", "--yes", "--no-install", "--cwd", dir)).rejects.toThrow("process.exit(1)")
     expect(await tree(dir)).toEqual(before)
+  })
+})
+
+/** A create-next-app project with a src folder, as an agent finds it. */
+const srcApp = (extra: Record<string, string> = {}) =>
+  project({
+    "package.json": JSON.stringify({ dependencies: { next: "16.4.5", react: "19", clsx: "^2", "tailwind-merge": "^3" } }),
+    "tsconfig.json": JSON.stringify({ compilerOptions: { paths: { "@/*": ["./src/*"] } } }),
+    "src/app/globals.css": '@import "tailwindcss";\n:root { --background: #fff; --foreground: #171717; }\n',
+    "src/app/layout.tsx": 'const geistSans = Geist({ variable: "--font-geist-sans" })\nexport default function L() { return <html className={geistSans.variable} /> }\n',
+    ...extra,
+  })
+
+describe("init: the install folder", () => {
+  it("does not append ui again when the answer already ends in ui", async () => {
+    const dir = await srcApp()
+    overrides.componentsDir = "src/components/ui"
+    await run("init", "--no-install", "--theme", "brand", "--cwd", dir)
+    const config = await fs.readJson(path.join(dir, "components.json"))
+    expect(config.aliases.components).toBe("@/components")
+    expect(config.aliases.ui).toBe("@/components/ui")
+    await run("add", "button", "--yes", "--no-install", "--cwd", dir)
+    expect(await fs.pathExists(path.join(dir, "src/components/ui/button.tsx"))).toBe(true)
+    expect(await fs.pathExists(path.join(dir, "src/components/ui/ui"))).toBe(false)
+    expect(output()).toContain('from "@/components/ui/button"')
+    expect(output()).not.toContain("ui/ui")
+  })
+
+  it("--path takes the folder with or without the ui folder, and the prompt for it is not asked", async () => {
+    for (const given of ["src/components", "src/components/ui"]) {
+      const dir = await srcApp()
+      asked.length = 0
+      await run("init", "--no-install", "--theme", "brand", "--path", given, "--cwd", dir)
+      const config = await fs.readJson(path.join(dir, "components.json"))
+      expect([config.aliases.components, config.aliases.ui]).toEqual(["@/components", "@/components/ui"])
+      expect(asked.map((q) => q.name)).not.toContain("componentsDir")
+    }
+  })
+
+  it("refuses a --path outside the folder @/ points to, and writes nothing", async () => {
+    const dir = await srcApp()
+    await expect(run("init", "--yes", "--no-install", "--path", "lib/parts", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(output()).toContain("is not inside src/")
+    expect(await fs.pathExists(path.join(dir, "components.json"))).toBe(false)
+  })
+
+  it("adds into the parent folder when an earlier build wrote the loop, and says so", async () => {
+    const dir = await srcApp({
+      "components.json": JSON.stringify({
+        aliases: { components: "@/components/ui", utils: "@/lib/utils", ui: "@/components/ui/ui" },
+        tailwind: { css: "src/app/globals.css" },
+      }),
+    })
+    await run("add", "button", "--yes", "--no-install", "--cwd", dir)
+    expect(await fs.pathExists(path.join(dir, "src/components/ui/button.tsx"))).toBe(true)
+    expect(output()).toContain("Writing to @/components/ui instead")
+  })
+})
+
+describe("init: flags", () => {
+  it("--style sets the style in components.json without asking", async () => {
+    const dir = await srcApp()
+    await run("init", "--yes", "--no-install", "--style", "new-york", "--cwd", dir)
+    expect((await fs.readJson(path.join(dir, "components.json"))).style).toBe("new-york")
+  })
+
+  it("rejects a style that is not default or new-york", async () => {
+    const dir = await srcApp()
+    await expect(run("init", "--yes", "--style", "york", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(output()).toContain('--style is "default" or "new-york"')
+    expect(await fs.pathExists(path.join(dir, "components.json"))).toBe(false)
+  })
+
+  it("--yes alone takes the defaults and asks nothing", async () => {
+    const dir = await srcApp()
+    await run("init", "--yes", "--no-install", "--cwd", dir)
+    expect(asked).toEqual([])
+    const config = await fs.readJson(path.join(dir, "components.json"))
+    expect([config.style, config.aliases.components]).toEqual(["default", "@/components"])
+  })
+
+  it("with no terminal and no flags, exits at once and lists the flags to pass", async () => {
+    interactive = false
+    const dir = await srcApp()
+    await expect(run("init", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(asked).toEqual([])
+    const text = output()
+    expect(text).toContain("--path <dir>")
+    expect(text).toContain("--style <default|new-york>")
+    expect(text).toContain("--theme <fasla|brand>")
+    expect(text).toContain("--yes")
+    expect(await fs.pathExists(path.join(dir, "components.json"))).toBe(false)
+  })
+
+  it("with no terminal, names only the flag still missing", async () => {
+    interactive = false
+    const dir = await srcApp()
+    await expect(run("init", "--path", "src/components", "--theme", "brand", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(output()).toContain("--style <default|new-york>")
+    expect(output()).not.toContain("--path <dir>")
+  })
+
+  it("with no terminal, all three flags are enough: nothing is asked", async () => {
+    interactive = false
+    const dir = await srcApp()
+    await run("init", "--no-install", "--path", "src/components/ui", "--style", "new-york", "--theme", "brand", "--cwd", dir)
+    expect(asked).toEqual([])
+    const config = await fs.readJson(path.join(dir, "components.json"))
+    expect([config.style, config.aliases.components, config.aliases.ui]).toEqual(["new-york", "@/components", "@/components/ui"])
+  })
+
+  it("with no terminal and an existing components.json, asks for --yes rather than ask to overwrite", async () => {
+    interactive = false
+    const dir = await srcApp({ "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" } }) })
+    await expect(run("init", "--path", "src/components", "--style", "default", "--theme", "brand", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(output()).toContain("--yes")
+  })
+
+  it("add with no terminal and no --yes exits with the flag to pass, not a silent stop", async () => {
+    interactive = false
+    const dir = await srcApp({ "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" } }) })
+    await expect(run("add", "button", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(output()).toContain("Pass --yes")
+    expect(await fs.pathExists(path.join(dir, "src/components/ui/button.tsx"))).toBe(false)
+  })
+})
+
+describe("init: font variable and summary", () => {
+  const selfReferencing = async (cwd: string) => {
+    const file = path.join(cwd, "src/app/globals.css")
+    await fs.appendFile(file, "@theme inline {\n  --font-sans: var(--font-sans);\n  --font-mono: var(--font-geist-mono);\n}\n")
+  }
+
+  it("points --font-sans at the project's font variable when the theme leaves it looping", async () => {
+    const dir = await srcApp()
+    themeWrites = selfReferencing
+    await run("init", "--yes", "--theme", "fasla", "--cwd", dir)
+    const css = await fs.readFile(path.join(dir, "src/app/globals.css"), "utf8")
+    expect(css).toContain("--font-sans: var(--font-geist-sans);")
+    expect(css).not.toMatch(/--font-sans:\s*var\(--font-sans\)/)
+    expect(output()).toContain("--font-sans set to var(--font-geist-sans)")
+  })
+
+  it("falls back to a system stack when the layout loads no font", async () => {
+    const dir = await srcApp({ "src/app/layout.tsx": "export default function L() { return null }\n" })
+    themeWrites = selfReferencing
+    await run("init", "--yes", "--theme", "fasla", "--cwd", dir)
+    const css = await fs.readFile(path.join(dir, "src/app/globals.css"), "utf8")
+    expect(css).toContain("--font-sans: ui-sans-serif, system-ui, sans-serif;")
+  })
+
+  it("ends with a summary of the files it created or changed, and the next command", async () => {
+    const dir = await srcApp()
+    themeWrites = async (cwd) => {
+      await selfReferencing(cwd)
+      await fs.writeFile(path.join(cwd, "src/app/layout.tsx"), 'const c = Cairo({})\nexport default function L() { return <html className={cn("a")} /> }\n')
+    }
+    await run("init", "--yes", "--theme", "fasla", "--cwd", dir)
+    const text = output()
+    expect(text).toContain("What init did:")
+    expect(text).toMatch(/created\s+components\.json/)
+    expect(text).toMatch(/created\s+src\/lib\/utils\.ts/)
+    expect(text).toMatch(/changed\s+src\/app\/globals\.css/)
+    expect(text).toMatch(/changed\s+src\/app\/layout\.tsx — adds the Cairo font; the html className now goes through cn\(\)/)
+    expect(text).toContain("Components will be written to src/components/ui, imported as @/components/ui/<name>.")
+    expect(text).toContain("npx @smicolon/fasla-ui@latest add button --yes")
   })
 })
 
