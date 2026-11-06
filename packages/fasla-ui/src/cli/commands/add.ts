@@ -6,7 +6,9 @@ import fs from "fs-extra"
 import path from "path"
 import { DEFAULT_REGISTRY_URL, LEGACY_REGISTRY_URL, REGISTRY_URL, THEME_ITEMS, fetchRegistry, fetchComponent, getTargetDirectory, type RegistryFile, type RegistryItem } from "../registry.js"
 import { describeAdded, ownItemName, registryItemName, resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
-import { aliasToPath, checkDestination, installFile, resolveInsideProject } from "../paths.js"
+import { aliasToPath, checkDestination, effectiveComponentsAlias, installFile, resolveInsideProject } from "../paths.js"
+import { isInteractive } from "../tty.js"
+import { nonInteractiveAddMessage } from "../init-options.js"
 import { detectPackageManager } from "../pm.js"
 import { applyThemeItems, detectProjectStyle, themeItemsCommand } from "../theme.js"
 import { installComponentPackages, writeCnHelper } from "./init.js"
@@ -108,6 +110,11 @@ export function addCommand() {
 
       // Confirm
       if (!options.yes) {
+        // No terminal: a prompt would end the run without a word.
+        if (!isInteractive()) {
+          console.log(chalk.red(nonInteractiveAddMessage()))
+          process.exit(1)
+        }
         const { confirm } = await prompts({
           type: "confirm",
           name: "confirm",
@@ -129,7 +136,15 @@ export function addCommand() {
         config = repaired
         await safeOrExit(() => writeCnHelper(cwd, config.aliases?.utils ?? "@/lib/utils", aliasRoot.root))
       }
-      const componentsAlias: string = config.aliases?.components || "@/components"
+      const componentsAlias: string = effectiveComponentsAlias(config.aliases)
+      if (componentsAlias !== (config.aliases?.components || "@/components")) {
+        console.log(
+          chalk.yellow(
+            `components.json has components: "${config.aliases?.components}" and ui: "${config.aliases?.ui}", which puts files in a ui folder inside a ui folder. ` +
+              `Writing to ${componentsAlias}/ui instead; set "components" to "${componentsAlias}" in components.json to match.`
+          )
+        )
+      }
       const componentsDir = aliasToPath(componentsAlias, aliasRoot.root)
       await safeOrExit(() => resolveInsideProject(cwd, componentsDir))
 

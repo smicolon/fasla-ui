@@ -1,13 +1,17 @@
 import { Command } from "commander"
 import chalk from "chalk"
 import ora from "ora"
-import prompts from "prompts"
+import prompts, { type PromptObject } from "prompts"
 import fs from "fs-extra"
 import path from "path"
-import { aliasToPath, outsideAliasMessage, pathToAlias, resolveInsideProject, resolveWritableFile, writeFileIfAbsent, writeFileNoFollow } from "../paths.js"
+import { aliasToPath, componentsAliasFromPath, outsideAliasMessage, pathToAlias, resolveInsideProject, resolveWritableFile, writeFileIfAbsent, writeFileNoFollow } from "../paths.js"
 import { NAMESPACE, namespaceUrl } from "../registry.js"
 import { detectPackageManager, installedVersion, missingPackages, specName, type PackageManager, type Runner } from "../pm.js"
-import type { ComponentsConfig } from "../legacy.js"
+import { isLegacyConfig, type ComponentsConfig } from "../legacy.js"
+import { isInteractive } from "../tty.js"
+import { isStyleChoice, missingInitFlags, nonInteractiveInitMessage, STYLE_CHOICES } from "../init-options.js"
+import { findLayout, repairFontVariables, type FontFix } from "../fonts.js"
+import { describeChanges, snapshotFiles } from "../init-summary.js"
 import { aliasRootOrExit, installOrPrint, repairIfNeededOrExit, safeOrExit } from "./shared.js"
 import {
   applyTheme,
@@ -169,30 +173,63 @@ export function initCommand() {
   return new Command()
     .name("init")
     .description("Initialize fasla-ui in your project")
-    .option("-y, --yes", "Skip confirmation prompts")
+    .option("-y, --yes", "Accept every default and ask nothing")
+    .option("--path <dir>", "Where components go, e.g. src/components; the ui folder is added for you (src/components/ui works too)")
+    .option("--style <default|new-york>", "The shadcn style")
     .option("--no-install", "Don't install clsx, tailwind-merge or the theme; print the commands instead")
-    .option("--theme <choice>", 'The theme: "fasla" for Fasla\'s colours, "brand" to keep yours')
+    .option("--theme <fasla|brand>", 'The theme: "fasla" for Fasla\'s colours, "brand" to keep yours')
     .option("-c, --cwd <path>", "Working directory", process.cwd())
+    .addHelpText(
+      "after",
+      `
+Without a terminal (an agent, a CI job) init asks nothing: pass --yes, or all
+of --path, --style and --theme. Missing ones are listed and nothing is written.
+
+Examples:
+  npx @smicolon/fasla-ui@latest init --yes
+  npx @smicolon/fasla-ui@latest init --path src/components --style default --theme fasla`
+    )
     .action(async (options) => {
       const cwd = path.resolve(options.cwd)
       const yes = Boolean(options.yes)
+      const interactive = isInteractive()
+      // Nobody to answer: a question is never asked. Helpers that would ask
+      // stop with a message instead, as under --yes.
+      const unattended = yes || !interactive
+      if (options.style !== undefined && !isStyleChoice(options.style)) {
+        console.log(chalk.red(`Error: --style is ${STYLE_CHOICES.map((c) => `"${c}"`).join(" or ")}, not "${options.style}". Nothing was written.`))
+        process.exit(1)
+      }
       if (options.theme !== undefined && !THEME_CHOICES.some((c) => c.value === options.theme)) {
         console.log(chalk.red(`Error: --theme is "fasla" or "brand", not "${options.theme}". Nothing was written.`))
         process.exit(1)
       }
 
+      const configPath = path.join(cwd, "components.json")
+      const missing = missingInitFlags({
+        yes,
+        interactive,
+        path: options.path,
+        style: options.style,
+        theme: options.theme,
+        needsOverwriteAnswer: await keepsAskingAboutOverwrite(cwd, configPath),
+      })
+      if (missing.length > 0) {
+        console.log(chalk.red(nonInteractiveInitMessage(missing)))
+        process.exit(1)
+      }
+
       console.log(chalk.bold("\nInitializing fasla-ui...\n"))
 
-      const configPath = path.join(cwd, "components.json")
       const pm = await detectPackageManager(cwd)
       // `@/` is wherever the project's tsconfig points it, so the defaults,
       // the stored aliases and the files written all follow it. A --yes run
       // stops here, before anything is written, when "@/" is only a guess.
-      const aliasRoot = await aliasRootOrExit(cwd, yes, pm)
+      const aliasRoot = await aliasRootOrExit(cwd, unattended, pm)
 
       // A 0.3 config is broken, not a choice to keep: repairing it is the
       // default, as is finishing a repair an earlier run left unfinished.
-      let config: ComponentsConfig | undefined = await repairIfNeededOrExit(cwd, aliasRoot.root, yes)
+      let config: ComponentsConfig | undefined = await repairIfNeededOrExit(cwd, aliasRoot.root, unattended)
       if (!config && (await fs.pathExists(configPath))) {
         if (!yes) {
           const { overwrite } = await prompts({
@@ -209,9 +246,14 @@ export function initCommand() {
       }
 
       const style = await detectProjectStyle(cwd, aliasRoot.root)
-      if (!config) config = await askForConfig(cwd, aliasRoot.root, yes, style)
+      if (!config) config = await askForConfig(cwd, aliasRoot.root, unattended, style, { path: options.path, style: options.style })
       const aliases = config.aliases ?? {}
       const utilsAlias = aliases.utils ?? "@/lib/utils"
+      const css = typeof config.tailwind?.css === "string" ? config.tailwind.css : style.css
+      const layout = style.rsc ? await findLayout(cwd) : undefined
+      const utilsFile = `${aliasToPath(utilsAlias, aliasRoot.root)}.ts`
+      const tracked = ["components.json", utilsFile, css, "package.json", ...(layout ? [layout] : [])]
+      const before = await snapshotFiles(cwd, tracked)
 
       // Refuse before writing anything if a path would land outside the
       // project or write through a symlink. The cn helper is only written
@@ -241,14 +283,30 @@ export function initCommand() {
 
       if (!(await installCnPackages(cwd, pm, { enabled: options.install !== false, tailwindMajor: style.tailwindMajor }))) process.exit(1)
 
-      const css = typeof config.tailwind?.css === "string" ? config.tailwind.css : style.css
       const theme = { flag: options.theme, yes, install: options.install !== false, nextMajor: style.nextMajor }
-      if (!(await installTheme(cwd, css, theme))) process.exit(1)
+      const themeOk = await installTheme(cwd, css, theme)
+      // The theme item can leave a font variable pointing at itself.
+      const fontFixes: FontFix[] = options.install !== false && themeOk ? await repairFontVariables(cwd, css) : []
+      if (!themeOk) process.exit(1)
 
+      const after = await snapshotFiles(cwd, tracked)
+      const lines = describeChanges({
+        before,
+        after,
+        components: aliases.components ?? "@/components",
+        utilsAlias,
+        utils: utilsFile,
+        css,
+        layout,
+        fontFixes,
+        themeCommand: options.install === false ? "pending" : undefined,
+      })
       console.log(chalk.green("\nSuccess! fasla-ui has been initialized."))
-      console.log("\nYou can now add components:")
-      console.log(chalk.cyan("  npx @smicolon/fasla-ui@latest add button"))
-      console.log(chalk.cyan("  npx @smicolon/fasla-ui@latest add shimmer-button"))
+      console.log("\nWhat init did:")
+      for (const line of lines) console.log(`  ${line}`)
+      console.log(`\nComponents will be written to ${aliasToPath(aliases.ui ?? `${aliases.components}/ui`, aliasRoot.root)}, imported as ${aliases.ui}/<name>.`)
+      console.log("\nNext, add a component:")
+      console.log(chalk.cyan("  npx @smicolon/fasla-ui@latest add button --yes"))
     })
 }
 
@@ -311,35 +369,63 @@ export async function installTheme(
   return false
 }
 
-/** The config for a new project, from the prompts or, with `--yes`, the defaults. */
-async function askForConfig(cwd: string, aliasRoot: string, yes: boolean, project: ProjectStyle): Promise<ComponentsConfig> {
+/** Whether an existing components.json (not a 0.3 one, which is repaired) means an overwrite question. */
+async function keepsAskingAboutOverwrite(cwd: string, configPath: string): Promise<boolean> {
+  const config = await fs.readJson(configPath).catch(() => undefined)
+  if (config === undefined) return false
+  return !(await isLegacyConfig(cwd, config))
+}
+
+/**
+ * The config for a new project: each answer from its flag when given, else
+ * from the prompt, else — with `--yes`, or no terminal — the default.
+ */
+async function askForConfig(
+  cwd: string,
+  aliasRoot: string,
+  yes: boolean,
+  project: ProjectStyle,
+  flags: { path?: string; style?: string } = {}
+): Promise<ComponentsConfig> {
   const under = (p: string) => (aliasRoot ? `${aliasRoot}/${p}` : p)
 
   let componentsAlias = "@/components"
   let utilsAlias = "@/lib/utils"
-  let style = "default"
+  let style = flags.style ?? "default"
+
+  if (flags.path !== undefined) {
+    const alias = componentsAliasFromPath(flags.path, aliasRoot)
+    if (alias === undefined) {
+      console.log(chalk.red(`Error: --path ${outsideAliasMessage(flags.path, aliasRoot)} Nothing was written.`))
+      process.exit(1)
+    }
+    componentsAlias = alias
+  }
 
   if (!yes) {
     // An answer outside `@/`'s folder can't be imported through `@/`, so it
     // is explained and asked again rather than moved inside it.
     const insideAlias = (answer: string) =>
       pathToAlias(answer, aliasRoot) === undefined ? outsideAliasMessage(answer, aliasRoot) : true
-    const response = await prompts([
-      {
+    const questions: PromptObject[] = []
+    if (flags.path === undefined) {
+      questions.push({
         type: "text",
         name: "componentsDir",
         message: "Where should components be installed?",
         initial: under("components"),
         validate: insideAlias,
-      },
-      {
-        type: "text",
-        name: "utilsPath",
-        message: "Where is your utils file (cn)?",
-        initial: under("lib/utils"),
-        validate: insideAlias,
-      },
-      {
+      })
+    }
+    questions.push({
+      type: "text",
+      name: "utilsPath",
+      message: "Where is your utils file (cn)?",
+      initial: under("lib/utils"),
+      validate: insideAlias,
+    })
+    if (flags.style === undefined) {
+      questions.push({
         type: "select",
         name: "style",
         message: "Which style would you like to use?",
@@ -348,19 +434,21 @@ async function askForConfig(cwd: string, aliasRoot: string, yes: boolean, projec
           { title: "New York", value: "new-york" },
         ],
         initial: 0,
-      },
-    ])
+      })
+    }
+    const response = await prompts(questions)
 
-    const components = pathToAlias(response.componentsDir ?? "", aliasRoot)
+    // The folder may be given as the ui folder itself: components go in `ui` under it.
+    const components = flags.path === undefined ? componentsAliasFromPath(response.componentsDir ?? "", aliasRoot) : componentsAlias
     const utils = pathToAlias(response.utilsPath ?? "", aliasRoot)
     // Only a cancelled prompt gets here without an alias; validate saw the rest.
-    if (components === undefined || utils === undefined || response.style === undefined) {
+    if (components === undefined || utils === undefined || (flags.style === undefined && response.style === undefined)) {
       console.log(chalk.yellow("Cancelled."))
       process.exit(0)
     }
     componentsAlias = components
     utilsAlias = utils
-    style = response.style
+    style = flags.style ?? response.style
   }
 
   return {
