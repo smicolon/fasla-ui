@@ -638,3 +638,15 @@
   unicode-bidi: isolate;
   text-align: start;
 }
+
+/* Docs pages that hold a [data-docs-wide] element (the Templates pages) do not
+   reserve the empty "On this page" column: the content fills the container.
+   The container, the sidebar and the gap are the ones every docs page has. */
+@media (min-width: 1280px) {
+  [data-docs-grid]:has([data-docs-wide]) {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+  [data-docs-grid]:has([data-docs-wide]) > nav:last-child {
+    display: none;
+  }
+}

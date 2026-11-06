@@ -3040,8 +3040,7 @@
         "description": "A voice-first task manager landing page: ten sections, with motion built in.",
         "thumbs": {
           "hero": "The Mahaam Hero: a headline beside a painting with a day planner on it.",
-          "features": "The Mahaam Features: three cards on languages, hand-offs and recaps.",
-          "testimonials": "The Mahaam Testimonials: a stack of three cards, with Noura's portrait in front."
+          "features": "The Mahaam Features: three cards on languages, hand-offs and recaps."
         }
       }
     },
