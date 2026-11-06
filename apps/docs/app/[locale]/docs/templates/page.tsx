@@ -3,17 +3,7 @@
 import Link from "next/link"
 import { useLocale, useTranslations } from "next-intl"
 import { Button } from "@fasla-ui/ui/button/button"
-
-/** The templates the docs offer. Each card shows two sections of the real template, from its Desktop LTR final stories. */
-const TEMPLATES = [
-  {
-    slug: "mahaam",
-    thumbs: [
-      { key: "hero", src: "/images/templates/mahaam/hero.webp" },
-      { key: "features", src: "/images/templates/mahaam/features.webp" },
-    ],
-  },
-] as const
+import { templates, templateThumbs } from "@/lib/templates"
 
 /** The small tags: the technical names stay as they are, in either language. */
 const TAGS = ["LTR · RTL", "React", "Tailwind CSS"] as const
@@ -29,7 +19,7 @@ export default function TemplatesPage() {
       </div>
 
       <ul className="space-y-6">
-        {TEMPLATES.map((template) => (
+        {templates.map((template) => (
           <li key={template.slug} className="[container-type:inline-size]">
             <div className="flex flex-col gap-6 rounded-2xl border bg-card p-4 [@container(min-width:40rem)]:p-6">
               <div className="flex flex-col gap-4 [@container(min-width:40rem)]:flex-row [@container(min-width:40rem)]:items-end [@container(min-width:40rem)]:justify-between [@container(min-width:40rem)]:gap-8">
@@ -55,7 +45,7 @@ export default function TemplatesPage() {
               </div>
 
               <ul className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 [@container(min-width:32rem)]:mx-0 [@container(min-width:32rem)]:grid [@container(min-width:32rem)]:grid-cols-2 [@container(min-width:32rem)]:gap-4 [@container(min-width:32rem)]:overflow-visible [@container(min-width:32rem)]:px-0 [@container(min-width:32rem)]:pb-0">
-                {template.thumbs.map((thumb) => (
+                {(templateThumbs[template.slug] ?? []).map((thumb) => (
                   <li key={thumb.key} className="w-[78%] shrink-0 snap-center [@container(min-width:32rem)]:w-auto">
                     <img
                       src={thumb.src}

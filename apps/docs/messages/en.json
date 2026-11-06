@@ -97,6 +97,7 @@
       "introduction": "Introduction",
       "installation": "Installation",
       "templates": "Templates",
+      "allTemplates": "All templates",
       "playground": "Component Playground",
       "menu": "Docs menu",
       "lead": "App navigation that folds to icons: titled groups of links, sub-items under a parent, and the signed-in person at the foot. Expanded and collapsed, as in the Figma set, with an optional plan card.",

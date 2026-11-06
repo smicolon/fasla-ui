@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation"
 import { useLocale, useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 import { componentRouteGroups, routeText } from "@/lib/seo-routes"
+import { templates, templatesIndexPath } from "@/lib/templates"
 import type { Locale } from "@/i18n/routing"
 
 /** Category keys as they appear in seo-routes, mapped to message keys. */
@@ -46,6 +47,10 @@ function DocsNav() {
     (blocksGroup?.routes.some((route) => isActive(route.path)) ?? false)
   const groups = componentRouteGroups.filter((group) => (group.category === "Blocks") === inBlocks)
 
+  // Templates have their own section too, opened from the header: its sidebar
+  // lists the templates (from lib/templates.ts) instead of the components.
+  const inTemplates = /\/docs\/templates(\/|$)/.test(pathname)
+
   const gettingStarted = inBlocks
     ? [
         { title: t("introduction"), path: "/docs/blocks/" },
@@ -56,63 +61,75 @@ function DocsNav() {
         { title: t("installation"), path: "/docs/installation/" },
       ]
 
+  const templateLinks = [
+    { title: t("allTemplates"), path: templatesIndexPath },
+    ...templates.map(({ route }) => ({ title: routeText(route, locale).h1, path: route.path })),
+  ]
+
   return (
     <>
-      <nav className="space-y-6">
-        <div className="space-y-2">
-          <h4 className="text-sm font-semibold text-foreground">{t("gettingStarted")}</h4>
-          <ul className="space-y-1">
-            {gettingStarted.map((item) => (
-              <li key={item.path}>
-                <Link
-                  href={p(item.path)}
-                  aria-current={isActive(item.path) ? "page" : undefined}
-                  className={linkClass(isActive(item.path))}
-                >
-                  {item.title}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {groups.map((group) => (
-          <div key={group.category} className="space-y-2">
-            <h4 className="text-sm font-semibold text-foreground">
-              {categoryKeys[group.category] ? t(categoryKeys[group.category]) : group.category}
-            </h4>
+      {inTemplates ? (
+        <nav className="space-y-6">
+          <div className="space-y-2">
+            <h4 className="text-sm font-semibold text-foreground">{t("templates")}</h4>
             <ul className="space-y-1">
-              {group.routes.map((route) => (
-                <li key={route.path}>
-                  {/* Component names follow design/content/arabic-glossary.md:
-                      Arabic with the English in parentheses on /ar/. */}
+              {templateLinks.map((item) => (
+                <li key={item.path}>
                   <Link
-                    href={p(route.path)}
-                    aria-current={isActive(route.path) ? "page" : undefined}
-                    className={linkClass(isActive(route.path))}
+                    href={p(item.path)}
+                    aria-current={isActive(item.path) ? "page" : undefined}
+                    className={linkClass(isActive(item.path))}
                   >
-                    {routeText(route, locale).h1}
+                    {item.title}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
-        ))}
+        </nav>
+      ) : (
+        <nav className="space-y-6">
+          <div className="space-y-2">
+            <h4 className="text-sm font-semibold text-foreground">{t("gettingStarted")}</h4>
+            <ul className="space-y-1">
+              {gettingStarted.map((item) => (
+                <li key={item.path}>
+                  <Link
+                    href={p(item.path)}
+                    aria-current={isActive(item.path) ? "page" : undefined}
+                    className={linkClass(isActive(item.path))}
+                  >
+                    {item.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        <div className="space-y-2">
-          <ul className="space-y-1">
-            <li>
-              <Link
-                href={p("/docs/templates/")}
-                aria-current={pathname.includes("/docs/templates") ? "page" : undefined}
-                className={linkClass(pathname.includes("/docs/templates"))}
-              >
-                {t("templates")}
-              </Link>
-            </li>
-          </ul>
-        </div>
-      </nav>
+          {groups.map((group) => (
+            <div key={group.category} className="space-y-2">
+              <h4 className="text-sm font-semibold text-foreground">
+                {categoryKeys[group.category] ? t(categoryKeys[group.category]) : group.category}
+              </h4>
+              <ul className="space-y-1">
+                {group.routes.map((route) => (
+                  <li key={route.path}>
+                    {/* Component names follow design/content/arabic-glossary.md:
+                        Arabic with the English in parentheses on /ar/. */}
+                    <Link
+                      href={p(route.path)}
+                      aria-current={isActive(route.path) ? "page" : undefined}
+                      className={linkClass(isActive(route.path))}
+                    >
+                      {routeText(route, locale).h1}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </nav>
+      )}
 
       {/* Storybook is copied in at build time and sits outside the locale tree. */}
       <div className="mt-8 border-t border-border/40 pt-6">
