@@ -56,6 +56,8 @@ describe("Installation: Without questions block", () => {
     expect(t.cliFlagsBody).toContain("لا يطرح الأمر <code>init</code> أسئلة إلا إذا كان يعمل في طرفية (terminal) يتفاعل معها مستخدم.")
     expect(t.cliFlagsBody).toContain("أو مرّر الخيارات الثلاثة كلها: <code>--path</code>، <code>--style</code>، <code>--theme</code>.")
     expect(t.cliFlagsBody).toContain("وإذا غاب أيٌّ منها، يعرض الأمر <code>init</code> الخيارات الناقصة")
+    expect(t.cliFlagsBody).toContain("كما يفعل وكيل ذكاء اصطناعي أو مهمة تكامل مستمر")
+    expect(t.cliFlagsBody).not.toContain("وكيل برمجي")
     expect(t.cliFlagTheme).toContain("<code>--theme</code> هو طبقة المظهر")
     expect(t.cliFlagYes).toBe("<code>--yes</code> (<code>-y</code>) يقبل كل القيم الافتراضية ولا يطرح أي سؤال.")
     expect(t.cliFlagNoInstall).toBe("<code>--no-install</code> يطبع أوامر التثبيت بدلًا من تنفيذها.")
