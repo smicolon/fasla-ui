@@ -1,49 +1,24 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { MahaamPlans } from "../../../../../packages/fasla-ui/registry/templates/mahaam/mahaam-plans"
 import { label, localeOf, mahaamViewports, variant } from "./mahaam-story-kit"
-import { sectionDocs } from "./mahaam-docs"
 
 /**
- * Plans: A Monthly and Yearly switch over three plans: Free, Pro and Team, in that order on every breakpoint.
- *
- * Playground is the one story in the sidebar: the Direction, Theme, Viewport and Motion
- * toolbars set it. The Final, Playing, Paused and Reduced motion stories, per breakpoint and
- * direction, stay in the code under the same ids, hidden from the sidebar, for the pixel-diff
- * scripts and old links.
+ * The per-state stories of the Mahaam plans: Final, Playing, Paused and Reduced motion, per breakpoint
+ * and direction. They are tagged `!dev` and `!autodocs`, so the sidebar and the Docs page do not list
+ * them, but they stay under the same ids for the pixel-diff scripts and old links. The story people
+ * read is `Plans` in Mahaam.stories.tsx.
  */
 const meta: Meta<typeof MahaamPlans> = {
-  title: "Templates/Mahaam/Plans",
+  // The id keeps the story ids stable; the title keeps these out of the visible Templates / Mahaam page.
+  id: "templates-mahaam-plans",
+  title: "Templates/Mahaam States/Plans",
   component: MahaamPlans,
-  parameters: {
-    layout: "fullscreen",
-    viewport: { viewports: mahaamViewports },
-    controls: { include: ["heading", "popular", "footnote"] },
-    docs: {
-      page: sectionDocs({
-        what: "A Monthly and Yearly switch over three plans, Free, Pro and Team, in that order on every breakpoint.",
-        item: "mahaam-plans",
-        props: [
-        ["heading / footnote", "string", "The heading and the line under the plans."],
-        ["free / pro / team", "MahaamPlan", "Each plan's copy."],
-        ["popular", "string", "The badge on Pro."],
-        ["billing / defaultBilling", "\"monthly\" | \"yearly\"", "The switch, controlled or not. With `onBillingChange`."],
-        ],
-      }),
-    },
-  },
-  tags: ["autodocs"],
+  parameters: { layout: "fullscreen", viewport: { viewports: mahaamViewports } },
   render: (args, context) => <MahaamPlans locale={localeOf(context)} {...args} />,
 }
 export default meta
 
 type Story = StoryObj<typeof MahaamPlans>
-
-/* Playground: the section as the toolbars set it: Direction, Theme, Viewport and Motion. */
-export const Playground: Story = {
-  name: "Playground",
-  tags: ["dev", "autodocs"],
-  parameters: { viewport: { viewports: mahaamViewports, defaultViewport: "desktop" } },
-}
 
 export const FinalDesktopLtr: Story = { tags: ["!dev", "!autodocs"], name: "Final · " + label("desktop", "ltr"), ...variant("desktop", "ltr") }
 export const FinalDesktopRtl: Story = { tags: ["!dev", "!autodocs"], name: "Final · " + label("desktop", "rtl"), ...variant("desktop", "rtl") }

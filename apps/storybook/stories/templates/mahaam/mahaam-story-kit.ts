@@ -1,8 +1,15 @@
+import type { ArgTypes } from "@storybook/react"
+import { blockArgTypes, type BlockCopy } from "../../blocks/block-arg-types"
+
 /**
  * For the Mahaam template's stories, beside them. The sections bring their own
  * English and Arabic copy; a story picks the language from its Direction, as
  * the Figma set pairs LTR with English and RTL with Arabic.
  */
+
+/** Controls for a story: the rules the blocks use (`../../blocks/block-arg-types`), the same for every family. `hide` lists props that change nothing on screen. */
+export const mahaamArgTypes = (component: unknown, copy?: BlockCopy, hide: string[] = [], show: string[] = []): ArgTypes =>
+  blockArgTypes(component, copy, { hide, show })
 
 /**
  * The Motion toolbar item (drawn by .storybook/manager.tsx): Playing leaves the

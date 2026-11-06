@@ -2,40 +2,24 @@ import type { Meta, StoryObj } from "@storybook/react"
 import { MahaamTemplate } from "../../../../../packages/fasla-ui/registry/templates/mahaam/mahaam-template"
 import { mahaamPhotoProps } from "../../../../docs/components/blocks/mahaam-photos"
 import { label, localeOf, mahaamViewports, motionOf, variant } from "./mahaam-story-kit"
-import { overviewDocs } from "./mahaam-docs"
 
 /**
- * The whole Mahaam template.
- *
- * Playground is the one story in the sidebar: the Direction, Theme, Viewport and Motion toolbars set
- * it. The Final, Playing and Reduced motion stories, per breakpoint and direction, stay in the code
- * under the same ids, hidden from the sidebar, for the pixel-diff scripts and old links.
+ * The per-state stories of the Mahaam template: Final, Playing, Paused and Reduced motion, per breakpoint
+ * and direction. They are tagged `!dev` and `!autodocs`, so the sidebar and the Docs page do not list
+ * them, but they stay under the same ids for the pixel-diff scripts and old links. The story people
+ * read is `Template` in Mahaam.stories.tsx.
  */
 const meta: Meta<typeof MahaamTemplate> = {
-  // The id keeps the story links stable; the title puts the page first in the Mahaam group.
+  // The id keeps the story ids stable; the title keeps these out of the visible Templates / Mahaam page.
   id: "templates-mahaam-template",
-  title: "Templates/Mahaam/Overview",
+  title: "Templates/Mahaam States/Template",
   component: MahaamTemplate,
-  parameters: {
-    layout: "fullscreen",
-    viewport: { viewports: mahaamViewports },
-    // Nothing on the template changes the preview but the toolbars, so there is no Controls panel.
-    controls: { disable: true },
-    docs: { page: overviewDocs() },
-  },
-  tags: ["autodocs"],
+  parameters: { layout: "fullscreen", viewport: { viewports: mahaamViewports } },
   render: (args, context) => <MahaamTemplate locale={localeOf(context)} {...motionOf(context)} photos={mahaamPhotoProps} {...args} />,
 }
 export default meta
 
 type Story = StoryObj<typeof MahaamTemplate>
-
-/* Playground: the whole template as the toolbars set it: Direction, Theme, Viewport and Motion. */
-export const Playground: Story = {
-  name: "Playground",
-  tags: ["dev", "autodocs"],
-  parameters: { viewport: { viewports: mahaamViewports, defaultViewport: "desktop" } },
-}
 
 /* Final: Every section held on Figma's still frame. */
 export const FinalDesktopLtr: Story = { tags: ["!dev", "!autodocs"], name: "Final · " + label("desktop", "ltr"), ...variant("desktop", "ltr"), args: { still: true } }

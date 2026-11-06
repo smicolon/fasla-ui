@@ -2,52 +2,24 @@ import type { Meta, StoryObj } from "@storybook/react"
 import { MahaamHero } from "../../../../../packages/fasla-ui/registry/templates/mahaam/mahaam-hero"
 import { mahaamHeroPhotoProps } from "../../../../docs/components/blocks/mahaam-photos"
 import { label, localeOf, mahaamViewports, motionOf, variant } from "./mahaam-story-kit"
-import { MOTION_PROPS, sectionDocs } from "./mahaam-docs"
 
 /**
- * Hero: The copy beside a painting with a day planner on it, where a voice note types itself and three task blocks drop into their slots.
- *
- * Playground is the one story in the sidebar: the Direction, Theme, Viewport and Motion
- * toolbars set it. The Final, Playing, Paused and Reduced motion stories, per breakpoint and
- * direction, stay in the code under the same ids, hidden from the sidebar, for the pixel-diff
- * scripts and old links.
+ * The per-state stories of the Mahaam hero: Final, Playing, Paused and Reduced motion, per breakpoint
+ * and direction. They are tagged `!dev` and `!autodocs`, so the sidebar and the Docs page do not list
+ * them, but they stay under the same ids for the pixel-diff scripts and old links. The story people
+ * read is `Hero` in Mahaam.stories.tsx.
  */
 const meta: Meta<typeof MahaamHero> = {
-  title: "Templates/Mahaam/Hero",
+  // The id keeps the story ids stable; the title keeps these out of the visible Templates / Mahaam page.
+  id: "templates-mahaam-hero",
+  title: "Templates/Mahaam States/Hero",
   component: MahaamHero,
-  parameters: {
-    layout: "fullscreen",
-    viewport: { viewports: mahaamViewports },
-    controls: { include: ["eyebrow", "heading", "body", "primaryCta"] },
-    docs: {
-      page: sectionDocs({
-        what: "The copy beside a painting with a day planner on it, where a voice note types itself and three task blocks drop into their slots.",
-        item: "mahaam-hero",
-        props: [
-        ["eyebrow / heading / body", "string", "The copy."],
-        ["primaryCta / secondaryCta", "ReactNode", "The two buttons."],
-        ["socialProof", "ReactNode", "The line beside the three faces."],
-        ["planner", "object", "The planner's copy."],
-        ["sceneSrc / avatars", "string / object", "The painting and the faces. None ship."],
-        ["frame", "number", "The frame the loop starts on, 0 to 200. 170 is Figma's."],
-        ...MOTION_PROPS,
-        ],
-      }),
-    },
-  },
-  tags: ["autodocs"],
+  parameters: { layout: "fullscreen", viewport: { viewports: mahaamViewports } },
   render: (args, context) => <MahaamHero locale={localeOf(context)} {...motionOf(context)} {...mahaamHeroPhotoProps} {...args} />,
 }
 export default meta
 
 type Story = StoryObj<typeof MahaamHero>
-
-/* Playground: the section as the toolbars set it: Direction, Theme, Viewport and Motion. */
-export const Playground: Story = {
-  name: "Playground",
-  tags: ["dev", "autodocs"],
-  parameters: { viewport: { viewports: mahaamViewports, defaultViewport: "desktop" } },
-}
 
 /* Final: The finished frame, as Figma draws it: the voice note typed, the three blocks in their slots, the first sub-task ticked, nothing moving. The animation is held on this frame with `still`, as Figma draws it. */
 export const FinalDesktopLtr: Story = { tags: ["!dev", "!autodocs"], name: "Final · " + label("desktop", "ltr"), ...variant("desktop", "ltr"), args: { still: true, frame: 170 } }

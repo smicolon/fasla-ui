@@ -1,48 +1,24 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { MahaamNavbar } from "../../../../../packages/fasla-ui/registry/templates/mahaam/mahaam-navbar"
 import { localeOf, mahaamViewports, variant } from "./mahaam-story-kit"
-import { sectionDocs } from "./mahaam-docs"
 
 /**
- * Navbar: The brand, four links and two buttons. On Mobile the links move into a side menu.
- *
- * Playground is the one story in the sidebar: the Direction, Theme, Viewport and Motion
- * toolbars set it. The Final, Playing, Paused and Reduced motion stories, per breakpoint and
- * direction, stay in the code under the same ids, hidden from the sidebar, for the pixel-diff
- * scripts and old links.
+ * The per-state stories of the Mahaam navbar: Final, Playing, Paused and Reduced motion, per breakpoint
+ * and direction. They are tagged `!dev` and `!autodocs`, so the sidebar and the Docs page do not list
+ * them, but they stay under the same ids for the pixel-diff scripts and old links. The story people
+ * read is `Navbar` in Mahaam.stories.tsx.
  */
 const meta: Meta<typeof MahaamNavbar> = {
-  title: "Templates/Mahaam/Navbar",
+  // The id keeps the story ids stable; the title keeps these out of the visible Templates / Mahaam page.
+  id: "templates-mahaam-navbar",
+  title: "Templates/Mahaam States/Navbar",
   component: MahaamNavbar,
-  parameters: { layout: "fullscreen", viewport: { viewports: mahaamViewports }, controls: { include: ["brand", "signIn", "cta"] },
-    docs: {
-      page: sectionDocs({
-        what: "The brand, four links and two buttons; on Mobile the links move into a side menu.",
-        item: "mahaam-navbar",
-        props: [
-        ["brand", "string", "The wordmark."],
-        ["links", "MahaamNavbarLink[]", "The four links."],
-        ["signIn", "string", "The text button."],
-        ["cta", "string", "The solid button."],
-        ["labels", "object", "The menu button and sheet names."],
-        ["homeHref / signInHref / ctaHref", "string", "Where the logo and the two buttons go."],
-        ["menuOpen", "boolean", "Opens the Mobile menu. With `onMenuOpenChange`."],
-        ],
-      }),
-    }, },
-  tags: ["autodocs"],
+  parameters: { layout: "fullscreen", viewport: { viewports: mahaamViewports } },
   render: (args, context) => <MahaamNavbar locale={localeOf(context)} {...args} />,
 }
 export default meta
 
 type Story = StoryObj<typeof MahaamNavbar>
-
-/* Playground: the section as the toolbars set it: Direction, Theme, Viewport and Motion. */
-export const Playground: Story = {
-  name: "Playground",
-  tags: ["dev", "autodocs"],
-  parameters: { viewport: { viewports: mahaamViewports, defaultViewport: "desktop" } },
-}
 
 export const DesktopLtr: Story = { tags: ["!dev", "!autodocs"], name: "Desktop · LTR", ...variant("desktop", "ltr") }
 export const TabletLtr: Story = { tags: ["!dev", "!autodocs"], name: "Tablet · LTR", ...variant("tablet", "ltr") }

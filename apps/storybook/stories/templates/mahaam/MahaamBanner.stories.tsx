@@ -1,50 +1,24 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { MahaamBanner } from "../../../../../packages/fasla-ui/registry/templates/mahaam/mahaam-banner"
 import { label, localeOf, mahaamViewports, motionOf, variant } from "./mahaam-story-kit"
-import { MOTION_PROPS, sectionDocs } from "./mahaam-docs"
 
 /**
- * Banner: A bordered panel with a call to action and outline rings that pulse out from the waveform icon.
- *
- * Playground is the one story in the sidebar: the Direction, Theme, Viewport and Motion
- * toolbars set it. The Final, Playing, Paused and Reduced motion stories, per breakpoint and
- * direction, stay in the code under the same ids, hidden from the sidebar, for the pixel-diff
- * scripts and old links.
+ * The per-state stories of the Mahaam banner: Final, Playing, Paused and Reduced motion, per breakpoint
+ * and direction. They are tagged `!dev` and `!autodocs`, so the sidebar and the Docs page do not list
+ * them, but they stay under the same ids for the pixel-diff scripts and old links. The story people
+ * read is `Banner` in Mahaam.stories.tsx.
  */
 const meta: Meta<typeof MahaamBanner> = {
-  title: "Templates/Mahaam/Banner",
+  // The id keeps the story ids stable; the title keeps these out of the visible Templates / Mahaam page.
+  id: "templates-mahaam-banner",
+  title: "Templates/Mahaam States/Banner",
   component: MahaamBanner,
-  parameters: {
-    layout: "fullscreen",
-    viewport: { viewports: mahaamViewports },
-    controls: { include: ["heading", "body", "primary", "secondary"] },
-    docs: {
-      page: sectionDocs({
-        what: "A bordered panel with a call to action and outline rings that pulse out from the waveform icon.",
-        item: "mahaam-banner",
-        props: [
-        ["heading / body", "string", "The copy."],
-        ["primary / secondary", "string", "The two buttons."],
-        ["primaryHref / secondaryHref", "string", "Where they go."],
-        ["progress", "number", "Where in the 5-second ring loop it starts, 0 to 1."],
-        ...MOTION_PROPS,
-        ],
-      }),
-    },
-  },
-  tags: ["autodocs"],
+  parameters: { layout: "fullscreen", viewport: { viewports: mahaamViewports } },
   render: (args, context) => <MahaamBanner locale={localeOf(context)} {...motionOf(context)} {...args} />,
 }
 export default meta
 
 type Story = StoryObj<typeof MahaamBanner>
-
-/* Playground: the section as the toolbars set it: Direction, Theme, Viewport and Motion. */
-export const Playground: Story = {
-  name: "Playground",
-  tags: ["dev", "autodocs"],
-  parameters: { viewport: { viewports: mahaamViewports, defaultViewport: "desktop" } },
-}
 
 /* Final: The finished frame, as Figma draws it, held with `still`. */
 export const FinalDesktopLtr: Story = { tags: ["!dev", "!autodocs"], name: "Final · " + label("desktop", "ltr"), ...variant("desktop", "ltr"), args: { still: true } }

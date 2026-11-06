@@ -2,51 +2,24 @@ import type { Meta, StoryObj } from "@storybook/react"
 import { MahaamTestimonials } from "../../../../../packages/fasla-ui/registry/templates/mahaam/mahaam-testimonials"
 import { mahaamPhotoProps } from "../../../../docs/components/blocks/mahaam-photos"
 import { label, localeOf, mahaamViewports, motionOf, variant } from "./mahaam-story-kit"
-import { sectionDocs } from "./mahaam-docs"
 
 /**
- * Testimonials: Three tinted cards stacked like a hand of cards, with arrows and dots. It does not autoplay: the stack changes only on a click.
- *
- * Playground is the one story in the sidebar: the Direction, Theme, Viewport and Motion
- * toolbars set it. The Final, Playing, Paused and Reduced motion stories, per breakpoint and
- * direction, stay in the code under the same ids, hidden from the sidebar, for the pixel-diff
- * scripts and old links.
+ * The per-state stories of the Mahaam testimonials: Final, Playing, Paused and Reduced motion, per breakpoint
+ * and direction. They are tagged `!dev` and `!autodocs`, so the sidebar and the Docs page do not list
+ * them, but they stay under the same ids for the pixel-diff scripts and old links. The story people
+ * read is `Testimonials` in Mahaam.stories.tsx.
  */
 const meta: Meta<typeof MahaamTestimonials> = {
-  title: "Templates/Mahaam/Testimonials",
+  // The id keeps the story ids stable; the title keeps these out of the visible Templates / Mahaam page.
+  id: "templates-mahaam-testimonials",
+  title: "Templates/Mahaam States/Testimonials",
   component: MahaamTestimonials,
-  parameters: {
-    layout: "fullscreen",
-    viewport: { viewports: mahaamViewports },
-    controls: { include: ["heading", "index"] },
-    docs: {
-      page: sectionDocs({
-        what: "Three tinted cards stacked like a hand of cards. No autoplay: it changes only on the arrows and the dots, and the two back cards show only their colour.",
-        item: "mahaam-testimonials",
-        props: [
-        ["heading", "string", "The heading."],
-        ["items", "[Testimonial x 3]", "The three quotes."],
-        ["labels", "object", "The arrows, dots and region names."],
-        ["portraits", "object", "The three portraits. None ship."],
-        ["index", "number", "Which card is in front, 0 to 2."],
-        ["reducedMotion", "boolean", "Changes the stack with no move."],
-        ],
-      }),
-    },
-  },
-  tags: ["autodocs"],
+  parameters: { layout: "fullscreen", viewport: { viewports: mahaamViewports } },
   render: (args, context) => <MahaamTestimonials locale={localeOf(context)} reducedMotion={motionOf(context).reducedMotion} portraits={mahaamPhotoProps.portraits} {...args} />,
 }
 export default meta
 
 type Story = StoryObj<typeof MahaamTestimonials>
-
-/* Playground: the section as the toolbars set it: Direction, Theme, Viewport and Motion. */
-export const Playground: Story = {
-  name: "Playground",
-  tags: ["dev", "autodocs"],
-  parameters: { viewport: { viewports: mahaamViewports, defaultViewport: "desktop" } },
-}
 
 /* Final: The finished frame, as Figma draws it, held with `still`. */
 export const FinalDesktopLtr: Story = { tags: ["!dev", "!autodocs"], name: "Final · " + label("desktop", "ltr"), ...variant("desktop", "ltr"), args: {} }

@@ -1,49 +1,24 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { MahaamLogoMarquee } from "../../../../../packages/fasla-ui/registry/templates/mahaam/mahaam-logo-marquee"
 import { label, localeOf, mahaamViewports, motionOf, variant } from "./mahaam-story-kit"
-import { MOTION_PROPS, sectionDocs } from "./mahaam-docs"
 
 /**
- * Logo marquee: A caption over ten invented logos that scroll in a seamless 42-second loop.
- *
- * Playground is the one story in the sidebar: the Direction, Theme, Viewport and Motion
- * toolbars set it. The Final, Playing, Paused and Reduced motion stories, per breakpoint and
- * direction, stay in the code under the same ids, hidden from the sidebar, for the pixel-diff
- * scripts and old links.
+ * The per-state stories of the Mahaam logo marquee: Final, Playing, Paused and Reduced motion, per breakpoint
+ * and direction. They are tagged `!dev` and `!autodocs`, so the sidebar and the Docs page do not list
+ * them, but they stay under the same ids for the pixel-diff scripts and old links. The story people
+ * read is `Logo marquee` in Mahaam.stories.tsx.
  */
 const meta: Meta<typeof MahaamLogoMarquee> = {
-  title: "Templates/Mahaam/Logo marquee",
+  // The id keeps the story ids stable; the title keeps these out of the visible Templates / Mahaam page.
+  id: "templates-mahaam-logo-marquee",
+  title: "Templates/Mahaam States/Logo marquee",
   component: MahaamLogoMarquee,
-  parameters: {
-    layout: "fullscreen",
-    viewport: { viewports: mahaamViewports },
-    controls: { include: ["caption"] },
-    docs: {
-      page: sectionDocs({
-        what: "A caption over ten invented logos that scroll in a seamless 42-second loop.",
-        item: "mahaam-logo-marquee",
-        props: [
-        ["caption", "string", "The line over the strip."],
-        ["logos", "MahaamLogo[]", "The ten logos."],
-        ["progress", "number", "Where in the loop it starts, 0 to 1."],
-        ...MOTION_PROPS,
-        ],
-      }),
-    },
-  },
-  tags: ["autodocs"],
+  parameters: { layout: "fullscreen", viewport: { viewports: mahaamViewports } },
   render: (args, context) => <MahaamLogoMarquee locale={localeOf(context)} {...motionOf(context)} {...args} />,
 }
 export default meta
 
 type Story = StoryObj<typeof MahaamLogoMarquee>
-
-/* Playground: the section as the toolbars set it: Direction, Theme, Viewport and Motion. */
-export const Playground: Story = {
-  name: "Playground",
-  tags: ["dev", "autodocs"],
-  parameters: { viewport: { viewports: mahaamViewports, defaultViewport: "desktop" } },
-}
 
 /* Final: The finished frame, as Figma draws it, held with `still`. */
 export const FinalDesktopLtr: Story = { tags: ["!dev", "!autodocs"], name: "Final · " + label("desktop", "ltr"), ...variant("desktop", "ltr"), args: { still: true } }

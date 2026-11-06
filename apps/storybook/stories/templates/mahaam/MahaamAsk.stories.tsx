@@ -1,51 +1,24 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { MahaamAsk } from "../../../../../packages/fasla-ui/registry/templates/mahaam/mahaam-ask"
 import { label, localeOf, mahaamViewports, motionOf, variant } from "./mahaam-story-kit"
-import { MOTION_PROPS, sectionDocs } from "./mahaam-docs"
 
 /**
- * Ask: Two rows of memory cards scrolling opposite ways, with an ask box that types a question and answers it with its sources.
- *
- * Playground is the one story in the sidebar: the Direction, Theme, Viewport and Motion
- * toolbars set it. The Final, Playing, Paused and Reduced motion stories, per breakpoint and
- * direction, stay in the code under the same ids, hidden from the sidebar, for the pixel-diff
- * scripts and old links.
+ * The per-state stories of the Mahaam ask: Final, Playing, Paused and Reduced motion, per breakpoint
+ * and direction. They are tagged `!dev` and `!autodocs`, so the sidebar and the Docs page do not list
+ * them, but they stay under the same ids for the pixel-diff scripts and old links. The story people
+ * read is `Ask` in Mahaam.stories.tsx.
  */
 const meta: Meta<typeof MahaamAsk> = {
-  title: "Templates/Mahaam/Ask",
+  // The id keeps the story ids stable; the title keeps these out of the visible Templates / Mahaam page.
+  id: "templates-mahaam-ask",
+  title: "Templates/Mahaam States/Ask",
   component: MahaamAsk,
-  parameters: {
-    layout: "fullscreen",
-    viewport: { viewports: mahaamViewports },
-    controls: { include: ["heading", "subheading"] },
-    docs: {
-      page: sectionDocs({
-        what: "Two rows of memory cards scrolling opposite ways, with an ask box that types a question and answers it with sources.",
-        item: "mahaam-ask",
-        props: [
-        ["heading / subheading", "string", "The heading row."],
-        ["cards", "MahaamMemoryCard[]", "The memory cards."],
-        ["questions", "MahaamAskQuestion[]", "The three questions and answers."],
-        ["searching / sourceCount", "string / function", "The status line and the sources count."],
-        ["progress", "number", "Where in the 36-second loop it starts, 0 to 1."],
-        ...MOTION_PROPS,
-        ],
-      }),
-    },
-  },
-  tags: ["autodocs"],
+  parameters: { layout: "fullscreen", viewport: { viewports: mahaamViewports } },
   render: (args, context) => <MahaamAsk locale={localeOf(context)} {...motionOf(context)} {...args} />,
 }
 export default meta
 
 type Story = StoryObj<typeof MahaamAsk>
-
-/* Playground: the section as the toolbars set it: Direction, Theme, Viewport and Motion. */
-export const Playground: Story = {
-  name: "Playground",
-  tags: ["dev", "autodocs"],
-  parameters: { viewport: { viewports: mahaamViewports, defaultViewport: "desktop" } },
-}
 
 /* Final: The finished frame, as Figma draws it, held with `still`. */
 export const FinalDesktopLtr: Story = { tags: ["!dev", "!autodocs"], name: "Final · " + label("desktop", "ltr"), ...variant("desktop", "ltr"), args: { still: true } }

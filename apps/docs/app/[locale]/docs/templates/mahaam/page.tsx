@@ -19,12 +19,12 @@ const CREDITS = ["painting", "faisal", "freepik", "footer"] as const
 
 const previewUrl = (locale: string) => `/${locale}/templates-preview/mahaam/`
 
-/** A section's Playground page in Storybook, in the page's direction. */
+/** A section's story in Storybook, in the page's direction. */
 const sectionStoryUrl = (locale: string, section: string) =>
-  `/components/?path=/story/templates-mahaam-${section}--playground${locale === "ar" ? "&globals=direction:rtl" : ""}`
+  `/components/?path=/story/templates-mahaam--${section}${locale === "ar" ? "&globals=direction:rtl" : ""}`
 
-/** Storybook is copied into the site at /components, outside the locale tree. The whole-template Playground opens in the page's direction, on the final frame. */
-const storyUrl = (locale: string) => `/components/?path=/story/templates-mahaam-template--playground&globals=direction:${locale === "ar" ? "rtl" : "ltr"};motion:final`
+/** Storybook is copied into the site at /components, outside the locale tree. The whole-template story opens in the page's direction, on the final frame. */
+const storyUrl = (locale: string) => `/components/?path=/story/templates-mahaam--template&globals=direction:${locale === "ar" ? "rtl" : "ltr"};motion:final`
 
 /** A two-to-three column table in the same markup as the props table. */
 function DocTable({ head, rows }: { head: string[]; rows: React.ReactNode[][] }) {
