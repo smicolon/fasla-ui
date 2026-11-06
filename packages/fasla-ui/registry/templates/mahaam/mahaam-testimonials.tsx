@@ -4,24 +4,21 @@ import * as React from "react"
 import { ChevronLeft } from "lucide-react"
 import { cn } from "../../../src/lib/utils"
 import { Button } from "../../ui/button/button"
-import { MahaamPauseButton, usePausedState, type MahaamPauseButtonLabels } from "./mahaam-pause-button"
-import { useInView, usePageVisible, usePrefersReducedMotion } from "./mahaam-motion"
+import { usePrefersReducedMotion } from "./mahaam-motion"
 
 /*
  * Figma: `Mahaam Template` (47694:6712), the Testimonials section of each of its
  * six variants, and its motion card "Testimonials Stack".
  *
  * A centred heading over three colourful cards stacked like a hand of cards:
- * the front one flat, the second tilted one way and the third the other. Every
- * 6.5s the front card goes to the back and the next comes forward over 900ms.
- * Arrows and dots do the same by hand, and the active dot stretches from 8px to
- * 26px. Desktop and Tablet put the photo beside the quote; Mobile puts it above.
+ * the front one flat, the second tilted one way and the third the other. An
+ * arrow or dot click sends the front card to the back and brings the next
+ * forward over 900ms, and the active dot stretches from 8px to 26px. Desktop
+ * and Tablet put the photo beside the quote; Mobile puts it above.
  *
- * MOTION EXCEPTION (see `mahaam-motion.ts`): the cards turn on their own. They
- * wait under the pointer, while the section is off screen and while the page
- * is hidden, and the pause button, which sits before the arrows, stops them.
- * Under `prefers-reduced-motion: reduce` they stay on the first card and the
- * button is not drawn; the arrows and dots still work.
+ * No autoplay: the stack changes only on the arrows or the dots, so nothing
+ * here needs a pause control. Under `prefers-reduced-motion: reduce` the cards
+ * still change on a click, with no move between them.
  *
  * In Arabic the photo moves to the other side, the tilts and offsets mirror,
  * and the arrows swap places and chevrons, so the left one points left.
@@ -69,7 +66,7 @@ const COPY: Record<Locale, MahaamTestimonialsCopy> = {
       { quote: "«أول تطبيق مهام يواصل فريقي كله استخدامه بعد الأسبوع الثاني. لم يعد أحد يكتب شيئًا، ولا شيء يضيع.»", name: "خالد منصور", role: "مؤسس بازلت" },
       { quote: "«أنتقل بين العربية والإنجليزية في الجملة نفسها. مهام هو الأداة الوحيدة التي تواكبني، وملخصاته مفيدة فعلًا.»", name: "فيصل العتيبي", role: "قائد المنتج في ميريديان" },
     ],
-    labels: { previous: "الشهادة السابقة", next: "الشهادة التالية", dot: (p, t) => `الشهادة ${p} من ${t}`, region: "الشهادات" },
+    labels: { previous: "الرأي السابق", next: "الرأي التالي", dot: (p, t) => `الرأي ${p} من ${t}`, region: "آراء العملاء" },
   },
 }
 
@@ -78,19 +75,11 @@ export interface MahaamTestimonialsProps extends React.HTMLAttributes<HTMLElemen
   locale?: Locale
   /** The three portraits, as the people come forward: Noura, Khalid, Faisal. */
   portraits?: { noura?: string; khalid?: string; faisal?: string }
-  paused?: boolean
-  defaultPaused?: boolean
-  /** Holds the section on Figma's still frame without changing the pause button, which still shows Pause. For stills of the finished state. */
-  still?: boolean
-  onPausedChange?: (paused: boolean) => void
-  pauseLabels?: Partial<MahaamPauseButtonLabels>
   /** Which card is in front when it starts, 0 to 2. */
   index?: number
   /** Replaces the visitor's reduced-motion setting. For stories and tests. */
   reducedMotion?: boolean
 }
-
-const TURN_MS = 6500
 
 /** A card's place in the hand: its size, where its top-start corner sits and how it is tilted, per direction and size. */
 const PLACE = {
@@ -117,11 +106,6 @@ export function MahaamTestimonials({
   items,
   labels,
   portraits = {},
-  paused: pausedProp,
-  defaultPaused,
-  still,
-  onPausedChange,
-  pauseLabels,
   index: startIndex = 0,
   reducedMotion,
   className,
@@ -131,36 +115,20 @@ export function MahaamTestimonials({
   const list = items ?? copy.items
   const l = { ...copy.labels, ...labels }
   const faces = [portraits.noura, portraits.khalid, portraits.faisal]
-  const rootRef = React.useRef<HTMLElement>(null)
   const reduced = usePrefersReducedMotion(reducedMotion)
-  const inView = useInView(rootRef)
-  const visible = usePageVisible()
-  const { paused, toggle } = usePausedState({ paused: pausedProp, defaultPaused, onPausedChange })
-  const frozen = paused || Boolean(still)
-  const [hovered, setHovered] = React.useState(false)
   const [current, setCurrent] = React.useState(startIndex)
-  const active = !frozen && !reduced && inView && visible && !hovered
   const count = list.length
-
-  // Every 6.5s the next card comes forward; using the arrows or dots starts the count again.
-  React.useEffect(() => {
-    if (!active) return
-    const timer = window.setTimeout(() => setCurrent((value) => (value + 1) % count), TURN_MS)
-    return () => window.clearTimeout(timer)
-  }, [active, current, count])
 
   const go = (step: number) => setCurrent((value) => (value + step + count) % count)
   const text = heading ?? copy.heading
 
   return (
-    <section ref={rootRef} aria-label={l.region} className={cn("[container-type:inline-size]", className)} {...props}>
+    <section aria-label={l.region} className={cn("[container-type:inline-size]", className)} {...props}>
       <div className="mx-auto flex max-w-[1440px] flex-col items-center gap-12 px-8 pb-24 pt-8 [@container(min-width:48rem)]:gap-14 [@container(min-width:48rem)]:px-16 [@container(min-width:48rem)]:pb-36 [@container(min-width:48rem)]:pt-12 [@container(min-width:90rem)]:gap-16 [@container(min-width:90rem)]:px-28 [@container(min-width:90rem)]:pb-40 [@container(min-width:90rem)]:pt-16">
         <h2 className="whitespace-pre-line text-center text-3xl font-normal text-foreground [@container(min-width:48rem)]:text-5xl [@container(min-width:90rem)]:text-6xl">{text}</h2>
 
         <div
           className="relative h-[600px] w-full [@container(min-width:48rem)]:h-[480px] [@container(min-width:90rem)]:h-[540px] [@container(min-width:90rem)]:max-w-[1000px]"
-          onPointerEnter={() => setHovered(true)}
-          onPointerLeave={() => setHovered(false)}
         >
           {list.map((item, position) => {
             const rel = (position - current + count) % count
@@ -171,7 +139,7 @@ export function MahaamTestimonials({
                 key={item.name}
                 aria-hidden={front ? undefined : true}
                 className={cn(
-                  "absolute flex origin-top-left flex-col gap-4 overflow-hidden rounded-[32px] p-5 transition-[left,top,width,height,transform] duration-[900ms] ease-out motion-reduce:transition-none",
+                  "absolute flex origin-top-left flex-col gap-4 overflow-hidden rounded-[32px] p-5 transition-[left,top,width,height,transform] duration-[900ms] ease-out motion-reduce:transition-none", reduced && "transition-none",
                   "left-[var(--mahaam-x)] top-[var(--mahaam-y)] [@container(min-width:48rem)]:flex-row [@container(min-width:48rem)]:gap-7 [@container(min-width:48rem)]:p-6",
                   TINT[position % 3],
                   place
@@ -195,7 +163,6 @@ export function MahaamTestimonials({
         </div>
 
         <div className="flex items-center gap-5">
-          {reduced ? null : <MahaamPauseButton paused={paused} locale={locale} labels={pauseLabels} onClick={toggle} />}
           <Button type="button" variant="outline" tone="primary" size="icon-lg" radius="rounded" aria-label={l.previous} onClick={() => go(-1)}>
             <ChevronLeft aria-hidden="true" className="[&:dir(rtl)]:-scale-x-100" />
           </Button>
@@ -208,7 +175,7 @@ export function MahaamTestimonials({
                 aria-current={position === current ? "true" : undefined}
                 onClick={() => setCurrent(position)}
                 className={cn(
-                  "h-2 rounded-full transition-[width,background-color] duration-[400ms] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring motion-reduce:transition-none",
+                  "h-2 rounded-full transition-[width,background-color] duration-[400ms] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-ring motion-reduce:transition-none", reduced && "transition-none",
                   position === current ? "w-[26px] bg-foreground" : "w-2 bg-border"
                 )}
               />

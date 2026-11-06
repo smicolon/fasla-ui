@@ -6,7 +6,6 @@ import { cn } from "../../../src/lib/utils"
 import { Avatar } from "../../ui/avatar/avatar"
 import { Badge } from "../../ui/badge/badge"
 import { buttonVariants } from "../../ui/button/button"
-import { MahaamPauseButton, usePausedState, type MahaamPauseButtonLabels } from "./mahaam-pause-button"
 import { PULSE_KEYFRAMES, useEntrance, useInView, useLoopAnimation, useLoopClock, usePageVisible, usePrefersReducedMotion } from "./mahaam-motion"
 
 /*
@@ -23,7 +22,8 @@ import { PULSE_KEYFRAMES, useEntrance, useInView, useLoopAnimation, useLoopClock
  * of 60ms. Under `prefers-reduced-motion: reduce`, or with `paused`, it holds
  * on the finished frame (170) or the frame you give, and the section shows
  * Figma's state. It also waits while the pointer is over the painting, and
- * while it is off screen. The pause control is not designed yet, so none is drawn.
+ * while it is off screen. The section draws no pause button: a site places a
+ * `MahaamMotionToggle` and passes `paused`.
  *
  * Sized by the section's own width, not the window's: it is a query container.
  * Mobile is the base; `[@container(min-width:48rem)]:` is Figma's Tablet (768)
@@ -160,16 +160,12 @@ export interface MahaamHeroProps extends React.HTMLAttributes<HTMLElement>, Part
   secondaryHref?: string
   /**
    * Whether the section is paused: the planner's frame and every animation
-   * stand still. Set it to control the pause button; leave it out and the
-   * button keeps its own state, which starts from `defaultPaused`.
+   * stand still. A site wires it to a `MahaamMotionToggle`; left out, it starts
+   * from `defaultPaused`.
    */
   paused?: boolean
   /** Whether an uncontrolled section starts paused. */
   defaultPaused?: boolean
-  /** Called when the visitor presses the pause button. */
-  onPausedChange?: (paused: boolean) => void
-  /** The pause button's names, in place of `locale`'s. */
-  pauseLabels?: Partial<MahaamPauseButtonLabels>
   /**
    * The planner's frame, 0 to 200, where the loop starts, and where it holds
    * under reduced motion. 170 is Figma's finished state.
@@ -177,8 +173,8 @@ export interface MahaamHeroProps extends React.HTMLAttributes<HTMLElement>, Part
    */
   frame?: number
   /**
-   * Holds the planner on `frame` without changing the pause button, which still
-   * shows Pause. For stills of the finished state, as Figma draws it.
+   * Holds the planner on `frame`, whatever `paused` says. For stills of the
+   * finished state, as Figma draws it.
    */
   still?: boolean
   /** Replaces the visitor's reduced-motion setting. For stories and tests. */
@@ -400,8 +396,6 @@ export function MahaamHero({
   secondaryHref = "#demo",
   paused: pausedProp,
   defaultPaused,
-  onPausedChange,
-  pauseLabels,
   frame: startFrame,
   still,
   reducedMotion,
@@ -413,7 +407,7 @@ export function MahaamHero({
   const reduced = usePrefersReducedMotion(reducedMotion)
   const inView = useInView(rootRef)
   const visible = usePageVisible()
-  const { paused, toggle } = usePausedState({ paused: pausedProp, defaultPaused, onPausedChange })
+  const paused = pausedProp ?? defaultPaused ?? false
   // Frozen: paused, or under reduced motion. Out of sight, or under the pointer, it only waits.
   const frozen = paused || reduced || Boolean(still)
   const [hovered, setHovered] = React.useState(false)
@@ -502,18 +496,9 @@ export function MahaamHero({
             data-slot="mahaam-hero-scene"
             onPointerEnter={() => setHovered(true)}
             onPointerLeave={() => setHovered(false)}
-            className="relative flex min-h-[976px] items-start justify-center overflow-hidden rounded-3xl bg-muted px-3 pb-6 pt-14 [@container(min-width:48rem)]:min-h-[660px] [@container(min-width:48rem)]:px-6 [@container(min-width:90rem)]:h-[680px] [@container(min-width:90rem)]:min-h-0 [@container(min-width:90rem)]:px-0 [@container(min-width:90rem)]:pt-[58px]"
+            className="relative flex min-h-[944px] items-start justify-center overflow-hidden rounded-3xl bg-muted px-3 pb-6 pt-6 [@container(min-width:48rem)]:min-h-[644px] [@container(min-width:48rem)]:px-6 [@container(min-width:48rem)]:pt-10 [@container(min-width:90rem)]:h-[680px] [@container(min-width:90rem)]:min-h-0 [@container(min-width:90rem)]:px-0 [@container(min-width:90rem)]:pt-[58px]"
           >
             {sceneSrc ? <img ref={zoomRef} src={sceneSrc} alt="" decoding="async" className="absolute inset-0 size-full object-cover [object-position:40%_50%]" /> : null}
-            {reduced ? null : (
-              <MahaamPauseButton
-                paused={paused}
-                locale={locale}
-                labels={pauseLabels}
-                onClick={toggle}
-                className="absolute end-4 top-3 z-20 [@container(min-width:90rem)]:top-4"
-              />
-            )}
             <Planner copy={plannerCopy} avatars={avatars} frame={frame} active={active} waving={!reduced} />
           </div>
         </div>

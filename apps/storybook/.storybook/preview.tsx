@@ -77,10 +77,34 @@ const preview: Preview = {
     // Button and Icon Button lead the UI section; everything else keeps the
     // order of its files, which is alphabetical.
     options: {
-      storySort: { order: ["Blocks", "Effects", "UI", ["Button", "Icon Button"]] },
+      storySort: {
+        order: [
+          "Blocks",
+          "Effects",
+          "Templates",
+          ["Mahaam", ["Overview", "Navbar", "Hero", "Logo marquee", "Features", "Ask", "Banner", "Testimonials", "Plans", "FAQ", "Footer"]],
+          "UI",
+          ["Button", "Icon Button"],
+        ],
+      },
     },
   },
   globalTypes: {
+    // The Mahaam template draws no pause button, so reviewers pause it here: the
+    // same as a site's `MahaamMotionToggle`. Only the Mahaam stories read it.
+    motion: {
+      description: "Pauses the Mahaam template's motion",
+      defaultValue: "play",
+      toolbar: {
+        title: "Motion",
+        icon: "play",
+        items: [
+          { value: "play", title: "Motion: playing", icon: "play" },
+          { value: "paused", title: "Motion: paused", icon: "pause" },
+        ],
+        dynamicTitle: true,
+      },
+    },
     direction: {
       description: "Text direction — LTR sets Geist, RTL sets Cairo and the Arabic leading",
       defaultValue: "ltr",

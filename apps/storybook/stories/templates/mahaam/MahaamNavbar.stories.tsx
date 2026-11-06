@@ -3,14 +3,18 @@ import { MahaamNavbar } from "../../../../../packages/fasla-ui/registry/template
 import { localeOf, mahaamViewports, variant } from "./mahaam-story-kit"
 
 /**
- * The Navbar of the Mahaam template. One story per Figma variant of the set
- * (Breakpoint × Direction), so each has its own link; the viewport and
- * direction toolbars still change any of them.
+ * Navbar: The brand, four links and two buttons. On Mobile the links move into a side menu.
+ *
+ * States. MobileMenuOpen shows the open menu.
+ *
+ * Props. The controls change the copy and the language. The rest are in the docs page's Props table.
+ *
+ * Stories. One per state, breakpoint and direction, so each has its own link; the viewport and direction toolbars still change any of them.
  */
 const meta: Meta<typeof MahaamNavbar> = {
   title: "Templates/Mahaam/Navbar",
   component: MahaamNavbar,
-  parameters: { layout: "fullscreen", viewport: { viewports: mahaamViewports } },
+  parameters: { layout: "fullscreen", viewport: { viewports: mahaamViewports }, controls: { include: ["brand", "signIn", "cta", "locale", "className"] } },
   tags: ["autodocs"],
   render: (args, context) => <MahaamNavbar locale={localeOf(context)} {...args} />,
 }

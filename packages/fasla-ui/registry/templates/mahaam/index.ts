@@ -13,12 +13,11 @@ export {
   type MahaamHeroTask,
 } from "./mahaam-hero"
 export {
-  MahaamPauseButton,
-  mahaamPauseLabels,
-  usePausedState,
-  type MahaamPauseButtonLabels,
-  type MahaamPauseButtonProps,
-} from "./mahaam-pause-button"
+  MahaamMotionToggle,
+  mahaamMotionToggleLabels,
+  type MahaamMotionToggleLabels,
+  type MahaamMotionToggleProps,
+} from "./mahaam-motion-toggle"
 export {
   MahaamLogoMarquee,
   mahaamLogoMarqueeCopy,

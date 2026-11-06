@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { cn } from "../../../src/lib/utils"
-import { MahaamPauseButton, usePausedState, type MahaamPauseButtonLabels } from "./mahaam-pause-button"
 import { useInView, usePageVisible, usePrefersReducedMotion } from "./mahaam-motion"
 
 /*
@@ -18,8 +17,8 @@ import { useInView, usePageVisible, usePrefersReducedMotion } from "./mahaam-mot
  *
  * MOTION EXCEPTION (see `mahaam-motion.ts`): the strip scrolls on its own and
  * loops. It waits under the pointer, while it is off screen and while the page
- * is hidden, and the pause button stops it. Under `prefers-reduced-motion:
- * reduce` it stays on Figma's still frame and the button is not drawn.
+ * is hidden, and `paused` stops it. Under `prefers-reduced-motion: reduce` it
+ * stays on Figma's still frame.
  *
  * In Arabic the strip travels the other way. The logos and their wordmarks are
  * not mirrored.
@@ -146,16 +145,12 @@ const COPY: Record<Locale, MahaamLogoMarqueeCopy> = {
 export interface MahaamLogoMarqueeProps extends React.HTMLAttributes<HTMLElement>, Partial<MahaamLogoMarqueeCopy> {
   /** Which language the default copy is in. The page's `dir` sets the direction. */
   locale?: Locale
-  /** Whether the strip is paused. Set it to control the pause button; leave it out and the button keeps its own state. */
+  /** Whether the strip is paused. A site wires it to a `MahaamMotionToggle`. */
   paused?: boolean
   /** Whether an uncontrolled strip starts paused. */
   defaultPaused?: boolean
-  /** Holds the section on Figma's still frame without changing the pause button, which still shows Pause. For stills of the finished state. */
+  /** Holds the section on Figma's still frame, whatever `paused` says. For stills of the finished state. */
   still?: boolean
-  /** Called when the visitor presses the pause button. */
-  onPausedChange?: (paused: boolean) => void
-  /** The pause button's names, in place of `locale`'s. */
-  pauseLabels?: Partial<MahaamPauseButtonLabels>
   /** Where in the 42s loop the strip starts, 0 to 1. Figma's still frame is a few pixels in. */
   progress?: number
   /** Replaces the visitor's reduced-motion setting. For stories and tests. */
@@ -173,8 +168,6 @@ export function MahaamLogoMarquee({
   paused: pausedProp,
   defaultPaused,
   still,
-  onPausedChange,
-  pauseLabels,
   progress,
   reducedMotion,
   className,
@@ -192,7 +185,7 @@ export function MahaamLogoMarquee({
   const reduced = usePrefersReducedMotion(reducedMotion)
   const inView = useInView(rootRef)
   const visible = usePageVisible()
-  const { paused, toggle } = usePausedState({ paused: pausedProp, defaultPaused, onPausedChange })
+  const paused = pausedProp ?? defaultPaused ?? false
   const frozen = paused || Boolean(still)
   const [hovered, setHovered] = React.useState(false)
   const active = !frozen && !reduced && inView && visible && !hovered
@@ -284,15 +277,6 @@ export function MahaamLogoMarquee({
               </div>
             </div>
           </div>
-          {reduced ? null : (
-            <MahaamPauseButton
-              paused={paused}
-              locale={locale}
-              labels={pauseLabels}
-              onClick={toggle}
-              className="absolute end-0 top-4 z-10 [@container(min-width:90rem)]:end-28"
-            />
-          )}
         </div>
       </div>
     </section>

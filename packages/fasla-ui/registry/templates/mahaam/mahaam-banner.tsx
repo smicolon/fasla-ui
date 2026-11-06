@@ -3,7 +3,6 @@
 import * as React from "react"
 import { cn } from "../../../src/lib/utils"
 import { buttonVariants } from "../../ui/button/button"
-import { MahaamPauseButton, usePausedState, type MahaamPauseButtonLabels } from "./mahaam-pause-button"
 import { useInView, useLoopAnimation, usePageVisible, usePrefersReducedMotion } from "./mahaam-motion"
 
 /*
@@ -18,9 +17,9 @@ import { useInView, useLoopAnimation, usePageVisible, usePrefersReducedMotion } 
  *
  * MOTION EXCEPTION (see `mahaam-motion.ts`): the rings and the bars loop on
  * their own. They wait under the pointer, while the section is off screen and
- * while the page is hidden, and the pause button stops them. Under
+ * while the page is hidden, and `paused` stops them. Under
  * `prefers-reduced-motion: reduce` they stay on Figma's still frame (the rings
- * at full size, the bars at full height) and the button is not drawn.
+ * at full size, the bars at full height).
  *
  * In Arabic the rings start from the other corner and the icon moves to the
  * end of the line.
@@ -69,10 +68,8 @@ export interface MahaamBannerProps extends React.HTMLAttributes<HTMLElement>, Pa
   secondaryHref?: string
   paused?: boolean
   defaultPaused?: boolean
-  /** Holds the section on Figma's still frame without changing the pause button, which still shows Pause. For stills of the finished state. */
+  /** Holds the section on Figma's still frame, whatever `paused` says. For stills of the finished state. */
   still?: boolean
-  onPausedChange?: (paused: boolean) => void
-  pauseLabels?: Partial<MahaamPauseButtonLabels>
   /** Where in the 5s ring loop the rings start, 0 to 1. Without it they rest on Figma's still frame until they play. */
   progress?: number
   /** Replaces the visitor's reduced-motion setting. For stories and tests. */
@@ -112,8 +109,6 @@ export function MahaamBanner({
   paused: pausedProp,
   defaultPaused,
   still,
-  onPausedChange,
-  pauseLabels,
   progress,
   reducedMotion,
   className,
@@ -124,7 +119,7 @@ export function MahaamBanner({
   const reduced = usePrefersReducedMotion(reducedMotion)
   const inView = useInView(rootRef)
   const visible = usePageVisible()
-  const { paused, toggle } = usePausedState({ paused: pausedProp, defaultPaused, onPausedChange })
+  const paused = pausedProp ?? defaultPaused ?? false
   const frozen = paused || Boolean(still)
   const [hovered, setHovered] = React.useState(false)
   const active = !frozen && !reduced && inView && visible && !hovered
@@ -170,7 +165,6 @@ export function MahaamBanner({
               {secondary ?? copy.secondary}
             </a>
           </div>
-          {reduced ? null : <MahaamPauseButton paused={paused} locale={locale} labels={pauseLabels} onClick={toggle} className="absolute end-4 top-4 z-10" />}
         </div>
       </div>
     </section>

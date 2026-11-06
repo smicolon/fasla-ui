@@ -10205,10 +10205,10 @@
       ]
     },
     {
-      "name": "mahaam-pause-button",
+      "name": "mahaam-motion-toggle",
       "type": "registry:block",
-      "title": "Mahaam: Pause button",
-      "description": "The Mahaam template's pause control: an outline icon button that shows Pause while a section plays and Play while it is paused.",
+      "title": "Mahaam: Motion toggle",
+      "description": "The Mahaam template's motion toggle: an outline icon button a site places anywhere, that shows Pause while the page plays and Play while it is paused. The template draws no pause button itself.",
       "dependencies": [
         "lucide-react"
       ],
@@ -10217,9 +10217,9 @@
       ],
       "files": [
         {
-          "path": "registry/templates/mahaam/mahaam-pause-button.tsx",
+          "path": "registry/templates/mahaam/mahaam-motion-toggle.tsx",
           "type": "registry:block",
-          "target": "components/templates/mahaam-pause-button.tsx"
+          "target": "components/templates/mahaam-motion-toggle.tsx"
         }
       ],
       "categories": [
@@ -10238,8 +10238,7 @@
         "avatar",
         "badge",
         "button",
-        "mahaam-motion",
-        "mahaam-pause-button"
+        "mahaam-motion"
       ],
       "files": [
         {
@@ -10256,11 +10255,10 @@
       "name": "mahaam-logo-marquee",
       "type": "registry:block",
       "title": "Mahaam: Logo marquee",
-      "description": "The Mahaam template's logo strip: a caption over ten invented logos that scroll in a seamless loop, with a pause button.",
+      "description": "The Mahaam template's logo strip: a caption over ten invented logos that scroll in a seamless loop.",
       "dependencies": [],
       "registryDependencies": [
-        "mahaam-motion",
-        "mahaam-pause-button"
+        "mahaam-motion"
       ],
       "files": [
         {
@@ -10277,15 +10275,14 @@
       "name": "mahaam-features",
       "type": "registry:block",
       "title": "Mahaam: Features",
-      "description": "The Mahaam template's features: a heading over three cards whose windows play on their own (languages stacking, a hand-off, a recap), with a pause button.",
+      "description": "The Mahaam template's features: a heading over three cards whose windows play on their own (languages stacking, a hand-off, a recap).",
       "dependencies": [
         "lucide-react"
       ],
       "registryDependencies": [
         "avatar",
         "badge",
-        "mahaam-motion",
-        "mahaam-pause-button"
+        "mahaam-motion"
       ],
       "files": [
         {
@@ -10307,8 +10304,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "mahaam-motion",
-        "mahaam-pause-button"
+        "mahaam-motion"
       ],
       "files": [
         {
@@ -10329,8 +10325,7 @@
       "dependencies": [],
       "registryDependencies": [
         "button",
-        "mahaam-motion",
-        "mahaam-pause-button"
+        "mahaam-motion"
       ],
       "files": [
         {
@@ -10347,14 +10342,13 @@
       "name": "mahaam-testimonials",
       "type": "registry:block",
       "title": "Mahaam: Testimonials",
-      "description": "The Mahaam template's testimonials: three tinted cards stacked like a hand that turns every 6.5 seconds, with arrows, dots and a pause button.",
+      "description": "The Mahaam template's testimonials: three tinted cards stacked like a hand that turns on the arrows and the dots.",
       "dependencies": [
         "lucide-react"
       ],
       "registryDependencies": [
         "button",
-        "mahaam-motion",
-        "mahaam-pause-button"
+        "mahaam-motion"
       ],
       "files": [
         {
@@ -10371,7 +10365,7 @@
       "name": "mahaam-plans",
       "type": "registry:block",
       "title": "Mahaam: Plans",
-      "description": "The Mahaam template's plans: a Monthly / Yearly switch over Free, Pro and Team, with Pro first on Tablet and Mobile.",
+      "description": "The Mahaam template's plans: a Monthly / Yearly switch over Free, Pro and Team.",
       "dependencies": [
         "lucide-react"
       ],
@@ -10448,7 +10442,8 @@
         "mahaam-testimonials",
         "mahaam-plans",
         "mahaam-faq",
-        "mahaam-footer"
+        "mahaam-footer",
+        "mahaam-motion-toggle"
       ],
       "files": [
         {

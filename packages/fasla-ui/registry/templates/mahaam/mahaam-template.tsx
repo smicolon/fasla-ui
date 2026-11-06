@@ -13,6 +13,9 @@ import { MahaamNavbar } from "./mahaam-navbar"
 import { MahaamPlans } from "./mahaam-plans"
 import { MahaamTestimonials } from "./mahaam-testimonials"
 
+// Re-exported so installing the template brings the toggle a site must place (WCAG 2.2.2).
+export { MahaamMotionToggle } from "./mahaam-motion-toggle"
+
 /*
  * Mahaam: a Fasla landing template for a fictional voice-first task assistant.
  *
@@ -22,11 +25,13 @@ import { MahaamTestimonials } from "./mahaam-testimonials"
  * picks English or Arabic copy.
  *
  * MOTION EXCEPTION (see `mahaam-motion.ts`): the Hero, the logo strip, the
- * Features cards, the Ask rows, the Banner rings and the Testimonials cards play
- * on their own and loop, which the repo's motion rules otherwise forbid. Each has
- * a pause control; under `prefers-reduced-motion: reduce` they show their
- * finished frame and the controls are not drawn. `reducedMotion` replaces that
- * setting, and `defaultPaused` starts every section on its still frame.
+ * Features cards, the Ask rows and the Banner rings play on their own and loop,
+ * which the repo's motion rules otherwise forbid. The template draws no pause
+ * button, so the design stays as Figma draws it; a site that ships it must place
+ * a `MahaamMotionToggle` (WCAG 2.2.2) and pass the same `paused` here. Motion
+ * also stops under `prefers-reduced-motion: reduce`, under the pointer and while
+ * a section is off screen. `reducedMotion` replaces that setting, `defaultPaused`
+ * starts every section on its still frame and `still` holds it there.
  *
  * The sections take their photographs as props, so the template ships none:
  * pass `photos`.
@@ -50,16 +55,18 @@ export interface MahaamTemplateProps extends React.HTMLAttributes<HTMLDivElement
   locale?: Locale
   /** The photographs, since the template ships none. */
   photos?: MahaamTemplatePhotos
-  /** Starts every animated section paused, on Figma's still frame. */
+  /** Whether every animated section is paused, on the frame it stands on. Wire it to a `MahaamMotionToggle`. */
+  paused?: boolean
+  /** Starts every animated section paused, on Figma's still frame, when `paused` is left out. */
   defaultPaused?: boolean
-  /** Holds every animated section on Figma's still frame while the pause buttons keep showing Pause. For stills of the finished state. */
+  /** Holds every animated section on Figma's still frame, whatever `paused` says. For stills of the finished state. */
   still?: boolean
   /** Replaces the visitor's reduced-motion setting. For stories and tests. */
   reducedMotion?: boolean
 }
 
-export function MahaamTemplate({ locale = "en", photos = {}, defaultPaused, still, reducedMotion, className, ...props }: MahaamTemplateProps) {
-  const motion = { defaultPaused, still, reducedMotion }
+export function MahaamTemplate({ locale = "en", photos = {}, paused, defaultPaused, still, reducedMotion, className, ...props }: MahaamTemplateProps) {
+  const motion = { paused, defaultPaused, still, reducedMotion }
   return (
     <div className={cn("bg-background text-foreground", className)} {...props}>
       <MahaamNavbar locale={locale} />
@@ -74,7 +81,7 @@ export function MahaamTemplate({ locale = "en", photos = {}, defaultPaused, stil
         <MahaamAsk locale={locale} {...motion} />
         <MahaamBanner locale={locale} {...motion} />
         <div id="teams">
-          <MahaamTestimonials locale={locale} portraits={photos.portraits} {...motion} />
+          <MahaamTestimonials locale={locale} portraits={photos.portraits} reducedMotion={reducedMotion} />
         </div>
         <div id="pricing">
           <MahaamPlans locale={locale} />

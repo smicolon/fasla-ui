@@ -6,14 +6,20 @@ import { mahaamPhotoProps } from "@/components/blocks/mahaam-photos"
 import { PREVIEW_HEIGHT_MESSAGE } from "@/components/blocks/block-preview"
 
 const MahaamTemplate = dynamic(() => import("@fasla-ui/templates/mahaam/mahaam-template").then((m) => m.MahaamTemplate))
+const MahaamMotionToggle = dynamic(() => import("@fasla-ui/templates/mahaam/mahaam-motion-toggle").then((m) => m.MahaamMotionToggle))
 
 /**
  * The whole Mahaam template, full width, and nothing else, for the docs page's
  * frames and for the full-page link. The page's `dir` and the locale come from
  * the route; the viewport is the frame's.
+ *
+ * The template draws no pause button. A site that ships it places a
+ * `MahaamMotionToggle` (WCAG 2.2.2); here it is page chrome, fixed in the
+ * corner outside the template, so a reviewer can pause while looking.
  */
 export function MahaamTemplatePreview({ locale }: { locale: "en" | "ar" }) {
   const ref = React.useRef<HTMLElement>(null)
+  const [paused, setPaused] = React.useState(false)
   // In a docs frame, tell the page the template's height so the frame fits it.
   React.useEffect(() => {
     const node = ref.current
@@ -28,7 +34,10 @@ export function MahaamTemplatePreview({ locale }: { locale: "en" | "ar" }) {
 
   return (
     <main ref={ref} className="w-full">
-      <MahaamTemplate locale={locale} photos={mahaamPhotoProps} />
+      <MahaamTemplate locale={locale} paused={paused} photos={mahaamPhotoProps} />
+      <div className="fixed bottom-4 end-4 z-50 rounded-full shadow-md">
+        <MahaamMotionToggle paused={paused} onPausedChange={setPaused} locale={locale} />
+      </div>
     </main>
   )
 }

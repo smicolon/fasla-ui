@@ -3,7 +3,6 @@
 import * as React from "react"
 import { ArrowRight } from "lucide-react"
 import { cn } from "../../../src/lib/utils"
-import { MahaamPauseButton, usePausedState, type MahaamPauseButtonLabels } from "./mahaam-pause-button"
 import { useInView, useLoopClock, usePageVisible, usePrefersReducedMotion } from "./mahaam-motion"
 
 /*
@@ -19,8 +18,8 @@ import { useInView, useLoopClock, usePageVisible, usePrefersReducedMotion } from
  *
  * MOTION EXCEPTION (see `mahaam-motion.ts`): everything here plays on its own
  * and loops. It waits under the pointer, while it is off screen and while the
- * page is hidden, and the pause button stops it. Under `prefers-reduced-motion:
- * reduce` it stays on the answered frame of Figma and the button is not drawn.
+ * page is hidden, and `paused` stops it. Under `prefers-reduced-motion:
+ * reduce` it stays on the answered frame of Figma.
  *
  * In Arabic the rows travel the other way and the box mirrors, send arrow
  * included. On Mobile the "N sources" label moves from the question's row into
@@ -90,7 +89,7 @@ const COPY: Record<Locale, MahaamAskCopy> = {
     heading: "اسأل عن أي شيء قلته يومًا.",
     subheading: "كل ملاحظة ومكالمة ومهمة تصبح ذاكرة تبحث فيها بكلماتك العادية.",
     searching: "جارٍ البحث",
-    sourceCount: (count) => (count === 2 ? "مصدران" : `${count} مصادر`),
+    sourceCount: (count) => (count === 1 ? "مصدر واحد" : count === 2 ? "مصدران" : `${count} مصادر`),
     cards: [
       { kind: "ملاحظة صوتية", when: "الاثنين 08:40", title: "المشي إلى العمل", body: "مكالمة المورّد، وطبيب الأسنان، ورد خالد على الميزانية." },
       { kind: "مهمة", when: "التسليم الخميس", title: "عرض سند، النسخة النهائية", body: "جدول الأسعار وجدول التسليم لا يزالان مفتوحين." },
@@ -118,10 +117,8 @@ export interface MahaamAskProps extends React.HTMLAttributes<HTMLElement>, Parti
   locale?: Locale
   paused?: boolean
   defaultPaused?: boolean
-  /** Holds the section on Figma's still frame without changing the pause button, which still shows Pause. For stills of the finished state. */
+  /** Holds the section on Figma's still frame, whatever `paused` says. For stills of the finished state. */
   still?: boolean
-  onPausedChange?: (paused: boolean) => void
-  pauseLabels?: Partial<MahaamPauseButtonLabels>
   /** Where in the 36s loop the section starts, 0 to 1. Without it, from the beginning, or from Figma's answered frame when paused. */
   progress?: number
   /** Replaces the visitor's reduced-motion setting. For stories and tests. */
@@ -226,8 +223,6 @@ export function MahaamAsk({
   paused: pausedProp,
   defaultPaused,
   still,
-  onPausedChange,
-  pauseLabels,
   progress,
   reducedMotion,
   className,
@@ -238,7 +233,7 @@ export function MahaamAsk({
   const reduced = usePrefersReducedMotion(reducedMotion)
   const inView = useInView(rootRef)
   const visible = usePageVisible()
-  const { paused, toggle } = usePausedState({ paused: pausedProp, defaultPaused, onPausedChange })
+  const paused = pausedProp ?? defaultPaused ?? false
   const frozen = paused || Boolean(still)
   const [hovered, setHovered] = React.useState(false)
   const [ready, setReady] = React.useState(false)
@@ -292,7 +287,7 @@ export function MahaamAsk({
 
   return (
     <section ref={rootRef} className={cn("relative [container-type:inline-size]", className)} {...props}>
-      <div className="mx-auto flex max-w-[1440px] flex-col gap-6 px-8 pb-24 pt-12 [@container(min-width:48rem)]:gap-8 [@container(min-width:48rem)]:px-16 [@container(min-width:48rem)]:pb-36 [@container(min-width:48rem)]:pt-12 [@container(min-width:90rem)]:gap-10 [@container(min-width:90rem)]:px-28 [@container(min-width:90rem)]:pb-40 [@container(min-width:90rem)]:pt-16">
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-6 px-8 pb-24 pt-8 [@container(min-width:48rem)]:gap-8 [@container(min-width:48rem)]:px-16 [@container(min-width:48rem)]:pb-36 [@container(min-width:48rem)]:pt-12 [@container(min-width:90rem)]:gap-10 [@container(min-width:90rem)]:px-28 [@container(min-width:90rem)]:pb-40 [@container(min-width:90rem)]:pt-16">
         <div className="flex flex-col gap-4 [@container(min-width:90rem)]:flex-row [@container(min-width:90rem)]:items-end [@container(min-width:90rem)]:justify-between [@container(min-width:90rem)]:gap-8">
           <h2 className="text-3xl font-normal text-foreground [@container(min-width:48rem)]:text-5xl [@container(min-width:90rem)]:max-w-[560px]">{heading ?? copy.heading}</h2>
           <p className="text-base text-muted-foreground [@container(min-width:48rem)]:text-lg [@container(min-width:90rem)]:max-w-[380px]">{subheading ?? copy.subheading}</p>
@@ -343,15 +338,6 @@ export function MahaamAsk({
           </div>
         </div>
       </div>
-      {reduced ? null : (
-        <MahaamPauseButton
-          paused={paused}
-          locale={locale}
-          labels={pauseLabels}
-          onClick={toggle}
-          className="absolute end-8 top-0 z-10 [@container(min-width:48rem)]:end-16 [@container(min-width:48rem)]:top-0 [@container(min-width:90rem)]:end-28 [@container(min-width:90rem)]:top-4"
-        />
-      )}
     </section>
   )
 }

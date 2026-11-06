@@ -13,7 +13,7 @@ import { Tabs, TabsList, TabsTrigger } from "../../ui/tabs/tabs"
  *
  * A heading, a Monthly / Yearly switch and three plans: Free and Team on the
  * muted surface, Pro on the inverse one. Desktop sets them side by side, Free,
- * Pro, Team; Tablet and Mobile stack them, Pro first. Choosing Yearly changes
+ * Pro, Team; Tablet and Mobile stack them in the same order. Choosing Yearly changes
  * the Pro price from $12 to $10 and Team from $20 to $16, and the unit line to
  * "billed yearly"; Free stays $0.
  *
@@ -236,7 +236,7 @@ export function MahaamPlans({
             billing={billing}
             inverse
             badge={popular ?? copy.popular}
-            className="order-first [@container(min-width:90rem)]:order-none [@container(min-width:90rem)]:flex-1"
+            className="[@container(min-width:90rem)]:flex-1"
           />
           <PlanCard plan={{ ...copy.team, ...team }} billing={billing} className="[@container(min-width:90rem)]:flex-1" />
         </div>

@@ -7,16 +7,20 @@ import { useLocale, useTranslations } from "next-intl"
 import registry from "@fasla-ui/registry.json"
 import { BlockVariantCard } from "@/components/blocks/block-variant-card"
 import { PropsTable, type PropRow } from "@/components/props-table"
+import { inlineCode } from "@/components/inline-code"
 import { blockRequirements } from "@/lib/blocks"
 
 const items: { name: string; dependencies?: string[]; registryDependencies?: string[] }[] = registry.items
 
 const SECTIONS = ["navbar", "hero", "logo-marquee", "features", "ask", "banner", "testimonials", "plans", "faq", "footer"] as const
-const MOTION = ["reduced", "visible", "pause", "css"] as const
+const MOTION = ["reduced", "visible", "autoplay", "pause", "css"] as const
 const TINTS = ["soft", "built"] as const
 const CREDITS = ["painting", "faisal", "freepik", "footer"] as const
 
 const previewUrl = (locale: string) => `/${locale}/templates-preview/mahaam/`
+
+/** Storybook is copied into the site at /components, outside the locale tree. The whole-template story opens in the page's direction. */
+const storyUrl = (locale: string) => `/components/?path=/story/templates-mahaam-template--final-desktop-${locale === "ar" ? "rtl" : "ltr"}`
 
 /** A two-to-three column table in the same markup as the props table. */
 function DocTable({ head, rows }: { head: string[]; rows: React.ReactNode[][] }) {
@@ -55,9 +59,17 @@ export default function MahaamTemplatePage() {
   const props: PropRow[] = [
     { prop: "locale", type: '"en" | "ar"', fallback: '"en"', description: t("props.locale") },
     { prop: "photos", type: "MahaamTemplatePhotos", fallback: "", description: t("props.photos") },
-    { prop: "defaultPaused", type: "boolean", fallback: "false", description: t("props.defaultPaused") },
-    { prop: "still", type: "boolean", fallback: "false", description: t("props.still") },
+    { prop: "paused", type: "boolean", fallback: "", description: t.rich("props.paused", inlineCode) },
+    { prop: "defaultPaused", type: "boolean", fallback: "false", description: t.rich("props.defaultPaused", inlineCode) },
+    { prop: "still", type: "boolean", fallback: "false", description: t.rich("props.still", inlineCode) },
     { prop: "reducedMotion", type: "boolean", fallback: "", description: t("props.reducedMotion") },
+  ]
+
+  const toggleProps: PropRow[] = [
+    { prop: "paused", type: "boolean", fallback: "", description: t("toggleProps.paused") },
+    { prop: "onPausedChange", type: "(paused: boolean) => void", fallback: "", description: t("toggleProps.onPausedChange") },
+    { prop: "locale", type: '"en" | "ar"', fallback: '"en"', description: t("toggleProps.locale") },
+    { prop: "labels", type: "{ pause: string; play: string }", fallback: "", description: t("toggleProps.labels") },
   ]
 
   return (
@@ -70,6 +82,10 @@ export default function MahaamTemplatePage() {
           <Link href={`/${locale}/docs/templates/`} className="font-medium text-foreground underline underline-offset-4">
             {t("allTemplates")}
           </Link>
+          {" · "}
+          <a href={storyUrl(locale)} className="font-medium text-foreground underline underline-offset-4">
+            {t("storybook")}
+          </a>
         </p>
       </div>
 
@@ -109,7 +125,15 @@ export default function MahaamTemplatePage() {
           {t("motionTitle")}
         </h2>
         <p className="text-muted-foreground">{t("motionLead")}</p>
-        <DocTable head={[t("motionTable.condition"), t("motionTable.behaviour")]} rows={MOTION.map((key) => [t(`motion.${key}.name`), t(`motion.${key}.text`)])} />
+        <DocTable head={[t("motionTable.condition"), t("motionTable.behaviour")]} rows={MOTION.map((key) => [t(`motion.${key}.name`), t.rich(`motion.${key}.text`, inlineCode)])} />
+      </section>
+
+      <section className="space-y-4" aria-labelledby="mahaam-toggle">
+        <h2 id="mahaam-toggle" className="text-2xl font-semibold">
+          {t("toggleTitle")}
+        </h2>
+        <p className="text-muted-foreground">{t.rich("toggleLead", inlineCode)}</p>
+        <PropsTable rows={toggleProps} />
       </section>
 
       <section className="space-y-4" aria-labelledby="mahaam-tints">

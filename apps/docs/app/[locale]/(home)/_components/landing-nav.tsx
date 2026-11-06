@@ -46,6 +46,9 @@ export function LandingNav() {
           <Link href={landingLinks.blocks(locale)} className={navLink}>
             {t("blocks")}
           </Link>
+          <Link href={landingLinks.templates(locale)} className={navLink}>
+            {t("templates")}
+          </Link>
           <a href={landingLinks.github} className={navLink}>
             {t("github")}
           </a>

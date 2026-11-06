@@ -57,7 +57,7 @@ describe("Mahaam template pages", () => {
       const messages = JSON.parse(readFileSync(path.join(docsRoot, `messages/${locale}.json`), "utf8"))
       const page = messages.docs.mahaamTemplate
       expect(page.motionTitle, locale).toBeTruthy()
-      expect(Object.keys(page.motion).sort(), locale).toEqual(["css", "pause", "reduced", "visible"])
+      expect(Object.keys(page.motion).sort(), locale).toEqual(["autoplay", "css", "pause", "reduced", "visible"])
       expect(page.credits.freepik, locale).toContain("Freepik")
     }
   })

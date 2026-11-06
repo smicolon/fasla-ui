@@ -4,6 +4,13 @@
  * the Figma set pairs LTR with English and RTL with Arabic.
  */
 
+/**
+ * The Motion toolbar item: "paused" freezes the section (the `paused` prop),
+ * the same as a site's `MahaamMotionToggle`. Left on "play", it passes nothing,
+ * so a story's own `defaultPaused` still applies.
+ */
+export const pausedOf = (context: { globals: { motion?: string } }): boolean | undefined => (context.globals.motion === "paused" ? true : undefined)
+
 /** Figma's three breakpoints, as the viewport toolbar's choices. */
 export const mahaamViewports = {
   desktop: { name: "Desktop (1440)", styles: { width: "1440px", height: "900px" }, type: "desktop" },

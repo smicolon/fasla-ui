@@ -289,7 +289,7 @@ export const CODE_MAP = {
   ),
   // Template: the Mahaam template's sections and its helpers, from the component set Mahaam Template (47694:6712), not atoms.
   ...Object.fromEntries(
-    ["navbar", "motion", "pause-button", "hero", "logo-marquee", "features", "ask", "banner", "testimonials", "plans", "faq", "footer"].map((part) => [`mahaam-${part}`, null])
+    ["navbar", "motion", "motion-toggle", "hero", "logo-marquee", "features", "ask", "banner", "testimonials", "plans", "faq", "footer"].map((part) => [`mahaam-${part}`, null])
   ),
   "template-mahaam": null,
   // Block: the parts every Features block shares, from the block set Features (42367:57765), not an atom.

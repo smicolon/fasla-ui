@@ -71,7 +71,7 @@ const COPY: Record<Locale, MahaamNavbarCopy> = {
     ],
     signIn: "تسجيل الدخول",
     cta: "احصل على مهام",
-    labels: { nav: "الرئيسي", openMenu: "فتح القائمة", closeMenu: "إغلاق القائمة", menuTitle: "القائمة" },
+    labels: { nav: "التنقل الرئيسي", openMenu: "فتح القائمة", closeMenu: "إغلاق القائمة", menuTitle: "القائمة" },
   },
 }
 

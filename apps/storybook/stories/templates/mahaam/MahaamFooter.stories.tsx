@@ -3,9 +3,13 @@ import { MahaamFooter } from "../../../../../packages/fasla-ui/registry/template
 import { label, localeOf, mahaamViewports, variant } from "./mahaam-story-kit"
 
 /**
- * Footer of the Mahaam template. One story per breakpoint and direction, so
- * each has its own link; the viewport and direction toolbars still change any
- * of them. Nothing here loops, so there is no motion state.
+ * Footer: The brand with store buttons, three link columns, and the credits line.
+ *
+ * States. Final: Figma's footer. Nothing loops.
+ *
+ * Props. The controls change the copy and the language. The rest are in the docs page's Props table.
+ *
+ * Stories. One per state, breakpoint and direction, so each has its own link; the viewport and direction toolbars still change any of them.
  */
 const meta: Meta<typeof MahaamFooter> = {
   title: "Templates/Mahaam/Footer",
@@ -13,7 +17,7 @@ const meta: Meta<typeof MahaamFooter> = {
   parameters: {
     layout: "fullscreen",
     viewport: { viewports: mahaamViewports },
-    controls: { exclude: ["brand", "tagline", "stores", "columns", "note", "credits"] },
+    controls: { include: ["brand", "tagline", "note", "locale", "className"] },
   },
   tags: ["autodocs"],
   render: (args, context) => <MahaamFooter locale={localeOf(context)} {...args} />,

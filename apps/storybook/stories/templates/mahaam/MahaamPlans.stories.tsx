@@ -3,9 +3,13 @@ import { MahaamPlans } from "../../../../../packages/fasla-ui/registry/templates
 import { label, localeOf, mahaamViewports, variant } from "./mahaam-story-kit"
 
 /**
- * Plans of the Mahaam template. One story per breakpoint and direction, so
- * each has its own link; the viewport and direction toolbars still change any
- * of them. Nothing here loops, so there is no motion state.
+ * Plans: A Monthly and Yearly switch over three plans: Free, Pro and Team, in that order on every breakpoint.
+ *
+ * States. Final: Monthly prices. Yearly: the Yearly prices ($10 and $16) with «billed yearly» units. Nothing loops.
+ *
+ * Props. The controls change the copy and the language. The rest are in the docs page's Props table.
+ *
+ * Stories. One per state, breakpoint and direction, so each has its own link; the viewport and direction toolbars still change any of them.
  */
 const meta: Meta<typeof MahaamPlans> = {
   title: "Templates/Mahaam/Plans",
@@ -13,7 +17,7 @@ const meta: Meta<typeof MahaamPlans> = {
   parameters: {
     layout: "fullscreen",
     viewport: { viewports: mahaamViewports },
-    controls: { exclude: ["billing", "defaultBilling", "onBillingChange", "heading", "monthly", "yearly", "popular", "free", "pro", "team", "footnote", "switchLabel"] },
+    controls: { include: ["heading", "popular", "footnote", "locale", "className"] },
   },
   tags: ["autodocs"],
   render: (args, context) => <MahaamPlans locale={localeOf(context)} {...args} />,

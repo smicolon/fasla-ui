@@ -3,9 +3,13 @@ import { MahaamFaq } from "../../../../../packages/fasla-ui/registry/templates/m
 import { label, localeOf, mahaamViewports, variant } from "./mahaam-story-kit"
 
 /**
- * FAQ of the Mahaam template. One story per breakpoint and direction, so
- * each has its own link; the viewport and direction toolbars still change any
- * of them. Nothing here loops, so there is no motion state.
+ * FAQ: The Split Sticky FAQ: a heading and a link on one side, six questions on the other, the first one open.
+ *
+ * States. Final: the first question open. Nothing loops.
+ *
+ * Props. The controls change the copy and the language. The rest are in the docs page's Props table.
+ *
+ * Stories. One per state, breakpoint and direction, so each has its own link; the viewport and direction toolbars still change any of them.
  */
 const meta: Meta<typeof MahaamFaq> = {
   title: "Templates/Mahaam/FAQ",
@@ -13,7 +17,7 @@ const meta: Meta<typeof MahaamFaq> = {
   parameters: {
     layout: "fullscreen",
     viewport: { viewports: mahaamViewports },
-    controls: { exclude: ["ctaHref", "defaultValue", "eyebrow", "heading", "description", "cta", "items", "empty"] },
+    controls: { include: ["eyebrow", "heading", "description", "cta", "locale", "className"] },
   },
   tags: ["autodocs"],
   render: (args, context) => <MahaamFaq locale={localeOf(context)} {...args} />,

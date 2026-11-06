@@ -13,13 +13,18 @@ import * as React from "react"
  * and loops are allowed here, on these conditions:
  *
  *  - Under `prefers-reduced-motion: reduce` nothing moves. Each section shows
- *    its finished state, and the template shows no pause control, as there is
- *    nothing to pause.
+ *    its finished state.
  *  - A loop runs only while its section is on screen and the page is visible,
- *    so it costs nothing out of sight. Marquees and the stacked testimonial
- *    cards also stop under the pointer.
- *  - A loop can be stopped (WCAG 2.2.2): every section takes a `paused` prop,
- *    which freezes it where it stands.
+ *    so it costs nothing out of sight. The Hero, the marquee, the Features
+ *    cards, the Ask rows and the Banner rings also wait under the pointer.
+ *  - Every section takes a `paused` prop, which freezes it where it stands.
+ *
+ * KNOWN TRADE-OFF. The template ships without a visible pause button, so the
+ * design stays clean. Autoplaying motion longer than 5 seconds needs a way to
+ * stop it (WCAG 2.2.2, Level A), so a site that ships this template must place
+ * a `MahaamMotionToggle` (in its navbar or footer, for example) and pass the
+ * same `paused` to `MahaamTemplate`. The Testimonials stack does not autoplay:
+ * it changes only on its arrows and dots.
  *
  * The motion is the Web Animations API and a small timer, client only, so the
  * template needs no keyframes in your Tailwind config. The server renders the

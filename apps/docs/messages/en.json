@@ -14,7 +14,8 @@
     "toggleMenu": "Toggle menu",
     "toggleTheme": "Toggle theme",
     "switchLanguage": "Switch language",
-    "blocks": "Blocks"
+    "blocks": "Blocks",
+    "templates": "Templates"
   },
   "docs": {
     "avatar": {
@@ -3032,10 +3033,16 @@
     "templates": {
       "title": "Templates",
       "lead": "Whole pages built from Fasla blocks and components, in English and Arabic, at three breakpoints.",
-      "open": "Open the template",
+      "open": "View template",
+      "tags": "Template details",
       "mahaam": {
         "title": "Mahaam",
-        "description": "A landing page for a fictional voice-first task assistant: ten sections, and the product's story told in motion."
+        "description": "A voice-first task manager landing page: ten sections, with motion built in.",
+        "thumbs": {
+          "hero": "The Mahaam Hero: a headline beside a painting with a day planner on it.",
+          "features": "The Mahaam Features: three cards on languages, hand-offs and recaps.",
+          "testimonials": "The Mahaam Testimonials: a stack of three cards, with Noura's portrait in front."
+        }
       }
     },
     "mahaamTemplate": {
@@ -3079,8 +3086,9 @@
       "props": {
         "locale": "The language of the default copy. The page's dir sets the direction.",
         "photos": "The photographs, as props. None ship.",
-        "defaultPaused": "Starts every loop paused.",
-        "still": "Holds every section on its finished frame while the pause buttons keep showing Pause. For stills.",
+        "paused": "Whether every animated section is paused. Wire it to a <code>MahaamMotionToggle</code>.",
+        "defaultPaused": "Starts every section paused, when <code>paused</code> is left out.",
+        "still": "Holds every section on its finished frame, whatever <code>paused</code> says. For stills.",
         "reducedMotion": "Replaces the visitor's setting, in Storybook and in tests."
       },
       "motionTitle": "Motion: a documented exception",
@@ -3092,15 +3100,19 @@
       "motion": {
         "reduced": {
           "name": "Reduced motion",
-          "text": "Nothing moves. Each section shows its finished frame and draws no pause control."
+          "text": "Nothing moves. Each section shows its finished frame."
         },
         "visible": {
-          "name": "On screen",
+          "name": "On screen and under the pointer",
           "text": "A loop runs only while its section is on screen and the page is visible, and waits under the pointer."
         },
+        "autoplay": {
+          "name": "Testimonials",
+          "text": "No autoplay. The stack changes only on the arrows and the dots."
+        },
         "pause": {
-          "name": "Pause control",
-          "text": "Every looping section has an outline Icon Button: Pause while it plays, Play while it is paused (WCAG 2.2.2)."
+          "name": "No pause button",
+          "text": "The template ships without a visible pause button, so the design stays clean. Autoplay longer than 5 seconds needs a way to stop it (WCAG 2.2.2, Level A), so a site that ships it must place a <code>MahaamMotionToggle</code>, in its navbar or footer for example, and pass the same <code>paused</code> to <code>MahaamTemplate</code>."
         },
         "css": {
           "name": "Implementation",
@@ -3130,7 +3142,16 @@
         "faisal": "Photo of Faisal: Christoph Aigner on Unsplash (Unsplash licence).",
         "freepik": "Photos of Noura and Khalid: Image by Freepik.",
         "footer": "The footer carries the same credits."
-      }
+      },
+      "toggleTitle": "Motion toggle",
+      "toggleLead": "An outline Icon Button you place anywhere: Pause while the page plays, Play while it is paused. It sets <code>aria-pressed</code>.",
+      "toggleProps": {
+        "paused": "Whether the page is paused. The icon, the name and aria-pressed follow it.",
+        "onPausedChange": "Called with the new state when it is pressed.",
+        "locale": "The language of the default names.",
+        "labels": "The names, in place of the locale's."
+      },
+      "storybook": "Open in Storybook"
     },
     "faqBlocks": {
       "lead": "{count, plural, one {One FAQ section} other {{n} FAQ sections}}: question lists, layouts, search and topic navigation, and ways to reach support.",
@@ -3834,6 +3855,7 @@
       "docs": "Docs",
       "components": "Components",
       "blocks": "Blocks",
+      "templates": "Templates",
       "github": "GitHub",
       "lang": "العربية",
       "langLabel": "Switch to Arabic",

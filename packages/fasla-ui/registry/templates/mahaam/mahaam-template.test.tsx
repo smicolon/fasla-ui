@@ -4,7 +4,8 @@ import { MahaamTemplate } from "./mahaam-template"
 
 /*
  * The whole page: every section is there in both languages, and the motion
- * exception holds: six pause controls while it plays, none under reduced motion.
+ * exception holds: the page draws no pause button (a site places the toggle),
+ * and `paused` stops the sections.
  */
 
 function setReducedMotion(reduced: boolean) {
@@ -58,18 +59,15 @@ describe("MahaamTemplate", () => {
     }
   })
 
-  it("draws a pause control in each of the six animated sections", () => {
+  it("draws no pause button in any section", () => {
     render(<MahaamTemplate />)
-    expect(screen.getAllByRole("button", { name: "Pause animation" })).toHaveLength(6)
-  })
-
-  it("draws none under reduced motion", () => {
-    render(<MahaamTemplate reducedMotion />)
     expect(screen.queryAllByRole("button", { name: /animation/ })).toHaveLength(0)
   })
 
-  it("starts every section on its Play button when it starts paused", () => {
-    render(<MahaamTemplate defaultPaused />)
-    expect(screen.getAllByRole("button", { name: "Play animation" })).toHaveLength(6)
+  it("accepts `paused`, `defaultPaused` and `still` without drawing anything extra", () => {
+    const { rerender } = render(<MahaamTemplate paused />)
+    rerender(<MahaamTemplate defaultPaused />)
+    rerender(<MahaamTemplate still />)
+    expect(screen.queryAllByRole("button", { name: /animation/ })).toHaveLength(0)
   })
 })

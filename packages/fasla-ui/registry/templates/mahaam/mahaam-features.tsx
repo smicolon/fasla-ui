@@ -5,7 +5,6 @@ import { ArrowDown } from "lucide-react"
 import { cn } from "../../../src/lib/utils"
 import { Avatar } from "../../ui/avatar/avatar"
 import { Badge } from "../../ui/badge/badge"
-import { MahaamPauseButton, usePausedState, type MahaamPauseButtonLabels } from "./mahaam-pause-button"
 import { useInView, useLoopClock, usePageVisible, usePrefersReducedMotion } from "./mahaam-motion"
 
 /*
@@ -24,9 +23,8 @@ import { useInView, useLoopClock, usePageVisible, usePrefersReducedMotion } from
  *
  * MOTION EXCEPTION (see `mahaam-motion.ts`): the three windows play on their
  * own and loop. Each waits under the pointer (and the card lifts 6px), while it
- * is off screen and while the page is hidden. One pause button stops all three.
- * Under `prefers-reduced-motion: reduce` they stay on Figma's still frames and
- * the button is not drawn.
+ * is off screen and while the page is hidden. `paused` stops all three.
+ * Under `prefers-reduced-motion: reduce` they stay on Figma's still frames.
  *
  * Arabic has no country flag, so it gets a neutral tile with «ع», and the "Heard in" badge an initials Avatar.
  *
@@ -206,10 +204,8 @@ export interface MahaamFeaturesProps extends React.HTMLAttributes<HTMLElement>, 
   flags?: Partial<Record<(typeof LANGS)[number]["key"], string>>
   paused?: boolean
   defaultPaused?: boolean
-  /** Holds the section on Figma's still frame without changing the pause button, which still shows Pause. For stills of the finished state. */
+  /** Holds the section on Figma's still frame, whatever `paused` says. For stills of the finished state. */
   still?: boolean
-  onPausedChange?: (paused: boolean) => void
-  pauseLabels?: Partial<MahaamPauseButtonLabels>
   /** Where in each loop the cards start, 0 to 1. Without it they start from the beginning, or from Figma's still frame when paused. */
   progress?: number
   /** Replaces the visitor's reduced-motion setting. For stories and tests. */
@@ -331,8 +327,14 @@ function Languages({ copy, flags, frame }: { copy: MahaamFeaturesCopy["languages
       <ArrowDown aria-hidden="true" size={16} strokeWidth={2} className="mx-auto text-ring" />
       <div className="flex flex-col items-center gap-2 rounded-[10px] border border-border px-3.5 py-3 text-center [@container(min-width:48rem)]:flex-row [@container(min-width:48rem)]:justify-between [@container(min-width:48rem)]:gap-2.5 [@container(min-width:48rem)]:text-start">
         <span className="text-sm font-semibold text-foreground">{copy.task}</span>
-        <Badge variant="soft" tone="info" size="sm" className={cn("transition-opacity duration-300 motion-reduce:transition-none", sub < 3 ? "opacity-0" : "opacity-100")}>
-          {front.key === "arabic" ? <Avatar variant="initials" size="12" radius="rounded" name="ع" /> : <Flag src={flags[front.key]} className="size-3 rounded-full" />}
+        <Badge
+          variant="soft"
+          tone="info"
+          size="sm"
+          // The flag sits in the Badge's own slot, so it and the words share one line with the Badge's gap.
+          avatar={front.key === "arabic" ? <Avatar variant="initials" size="12" radius="rounded" name="ع" /> : <Flag src={flags[front.key]} className="size-3 rounded-full" />}
+          className={cn("gap-1 transition-opacity duration-300 motion-reduce:transition-none", sub < 3 ? "opacity-0" : "opacity-100")}
+        >
           {copy.heardIn(front.name)}
         </Badge>
       </div>
@@ -372,7 +374,8 @@ function Handoff({ copy, avatars, frame }: { copy: MahaamFeaturesCopy["handoff"]
         <span aria-hidden="true" className="size-1.5 rounded-full bg-foreground" />
         {copy.source}
       </p>
-      <p className="absolute start-[18px] end-[18px] top-9 text-xl font-medium text-foreground">{copy.task}</p>
+      {/* Figma hugs this title: 281px of text in a 280px field on Tablet and Desktop, so it stays on one line there and wraps on Mobile. */}
+      <p className="absolute start-[18px] end-[18px] top-9 text-xl font-medium text-foreground [@container(min-width:48rem)]:whitespace-nowrap">{copy.task}</p>
       {row(0, f.due, <span className="text-foreground">{v.due}</span>)}
       {row(1, f.priority, <Badge variant="soft" tone="warning" size="sm">{v.priority}</Badge>)}
       {row(
@@ -531,8 +534,6 @@ export function MahaamFeatures({
   paused: pausedProp,
   defaultPaused,
   still,
-  onPausedChange,
-  pauseLabels,
   progress,
   reducedMotion,
   className,
@@ -543,7 +544,7 @@ export function MahaamFeatures({
   const reduced = usePrefersReducedMotion(reducedMotion)
   const inView = useInView(rootRef)
   const visible = usePageVisible()
-  const { paused, toggle } = usePausedState({ paused: pausedProp, defaultPaused, onPausedChange })
+  const paused = pausedProp ?? defaultPaused ?? false
   const frozen = paused || Boolean(still)
   const [hovered, setHovered] = React.useState<null | "languages" | "handoff" | "recap">(null)
   const [ready, setReady] = React.useState(false)
@@ -614,15 +615,6 @@ export function MahaamFeatures({
           </Card>
         </div>
       </div>
-      {reduced ? null : (
-        <MahaamPauseButton
-          paused={paused}
-          locale={locale}
-          labels={pauseLabels}
-          onClick={toggle}
-          className="absolute end-8 top-16 z-10 [@container(min-width:48rem)]:end-16 [@container(min-width:48rem)]:top-[112px] [@container(min-width:90rem)]:end-28 [@container(min-width:90rem)]:top-40"
-        />
-      )}
     </section>
   )
 }
