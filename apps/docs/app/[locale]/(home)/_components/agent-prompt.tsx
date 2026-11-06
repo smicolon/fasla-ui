@@ -101,7 +101,7 @@ export function AgentPromptCompact({ className }: { className?: string }) {
 
 /**
  * Under the install command: a button that copies a ready-made prompt for an
- * AI coding agent, and the prompt itself in a read-only block, closed until
+ * coding agent, and the prompt itself in a read-only block, closed until
  * asked for, so a visitor can read what they copy.
  *
  * The page's text is the locale's; the prompt is English in both, so the block
