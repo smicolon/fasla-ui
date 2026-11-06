@@ -92,6 +92,23 @@ export default async function InstallationPage({
               <code className="text-green-400">npx @smicolon/fasla-ui@latest list</code>
             </pre>
           </div>
+
+          <div>
+            <p className="text-sm font-medium mb-2">{i("cliFlagsTitle")}</p>
+            <p className="text-sm text-muted-foreground mb-2">{i.rich("cliFlagsBody", rich)}</p>
+            <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground mb-4">
+              <li>{i.rich("cliFlagYes", rich)}</li>
+              <li>{i.rich("cliFlagPath", rich)}</li>
+              <li>{i.rich("cliFlagStyle", rich)}</li>
+              <li>{i.rich("cliFlagTheme", rich)}</li>
+              <li>{i.rich("cliFlagNoInstall", rich)}</li>
+            </ul>
+            <p className="text-sm text-muted-foreground mb-2">{i("cliFlagsExample")}</p>
+            <pre className="whitespace-pre-wrap break-words rounded-lg bg-terminal p-4" dir="ltr">
+              <code className="text-green-400">{"npx @smicolon/fasla-ui@latest init --yes\nnpx @smicolon/fasla-ui@latest init --path src/components --style default --theme fasla\nnpx @smicolon/fasla-ui@latest add button --yes"}</code>
+            </pre>
+            <p className="text-sm text-muted-foreground mt-2">{i.rich("cliFlagsEnd", rich)}</p>
+          </div>
         </div>
       </div>
 
