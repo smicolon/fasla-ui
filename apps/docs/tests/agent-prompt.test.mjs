@@ -8,12 +8,12 @@ const docsRoot = path.resolve(import.meta.dir, "..")
 const repoRoot = path.resolve(docsRoot, "../..")
 const read = (file) => readFileSync(path.join(repoRoot, file), "utf8")
 
-const commands = [...agentPrompt.matchAll(/`([^`]+)`/g)].map((m) => m[1])
+const commands = [...agentPrompt.matchAll(/`([^`]+)`/g)].map((m) => m[1]).filter((c) => c.startsWith("npx "))
 
 describe("The agent prompt", () => {
   test("holds the install command exactly as the landing page and the CLI print it", () => {
-    expect(commands).toContain(installCommand)
-    expect(read("packages/fasla-ui/src/cli/commands/init.ts")).toContain(`"  ${installCommand.replace(" init", " add button")}"`)
+    expect(commands.some((c) => c.startsWith(`${installCommand} `))).toBe(true)
+    expect(read("packages/fasla-ui/src/cli/commands/init.ts")).toContain(`"  ${installCommand.replace(" init", " add button --yes")}"`)
   })
 
   test("every command is one the CLI has, run with @latest", () => {
@@ -28,7 +28,49 @@ describe("The agent prompt", () => {
 
   test("every command appears as written on the installation page", () => {
     const page = read("apps/docs/app/[locale]/docs/installation/page.tsx")
-    for (const command of commands) expect(page, command).toContain(command)
+    const flagged = commands.filter((c) => / --/.test(c))
+    for (const command of commands.filter((c) => !flagged.includes(c))) expect(page.includes(command), command).toBe(true)
+    // The page's flag block shows init with each flag, and add with --yes; the prompt's theme is the reader's choice.
+    for (const command of flagged) {
+      const onPage = command.startsWith("npx @smicolon/fasla-ui@latest init")
+        ? "npx @smicolon/fasla-ui@latest init --yes"
+        : command
+      expect(page.includes(onPage), command).toBe(true)
+    }
+    expect(page.includes("init --path src/components --style default --theme fasla")).toBe(true)
+  })
+
+  test("the prompt runs init without prompts, with flags the CLI source and the page both have", () => {
+    const init = read("packages/fasla-ui/src/cli/commands/init.ts")
+    const add = read("packages/fasla-ui/src/cli/commands/add.ts")
+    const page = read("apps/docs/app/[locale]/docs/installation/page.tsx")
+    const initLine = commands.find((c) => c.includes(" init --yes"))
+    expect(initLine).toBe("npx @smicolon/fasla-ui@latest init --yes --path src/components --style default --theme <my choice>")
+    for (const flag of ["--yes", "--path", "--style", "--theme"]) {
+      expect(init, flag).toContain(`${flag}`)
+      expect(initLine, flag).toContain(flag)
+    }
+    expect(init).toContain('"-y, --yes"')
+    expect(init).toContain('--style <default|new-york>')
+    expect(init).toContain('--theme <fasla|brand>')
+    expect(init).toContain("--path <dir>")
+    expect(add).toContain('"-y, --yes"')
+    expect(commands).toContain("npx @smicolon/fasla-ui@latest add button --yes")
+    // The page documents the same flags and a pasteable block with them.
+    expect(page.includes("init --yes")).toBe(true)
+    expect(page.includes("--path src/components --style default --theme")).toBe(true)
+    expect(page.includes("add button --yes")).toBe(true)
+    // The prompt's promises are strings the CLI prints.
+    expect(init).toContain("What init did")
+    expect(add).toContain("Import them in your code")
+    expect(agentPrompt).toContain('"What init did"')
+  })
+
+  test("only the two documented themes, the two documented styles, no other flags", () => {
+    const flags = new Set(commands.flatMap((c) => c.match(/--[a-z-]+/g) ?? []))
+    expect([...flags].sort()).toEqual(["--path", "--style", "--theme", "--yes"])
+    expect(agentPrompt).toContain('"fasla"')
+    expect(agentPrompt).toContain('"brand"')
   })
 
   test("is open-source only: nothing about licences, premium blocks or plans", () => {
