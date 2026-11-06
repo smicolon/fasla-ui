@@ -54,19 +54,49 @@ describe("The agent prompt", () => {
 })
 
 describe("The Copy prompt messages", () => {
-  const keys = ["heading", "helper", "copy", "copied", "failed", "show", "hide", "region", "failedHero", "failedHeroLink"]
+  const keys = ["heading", "helper", "copy", "copied", "failed", "show", "hide", "region", "or", "failedHero", "failedHeroLink"]
   const get = (locale) => JSON.parse(read(`apps/docs/messages/${locale}.json`)).landing.final.agent
   test("exist in both languages with the agreed wording", () => {
     const en = get("en")
     const ar = get("ar")
     expect(Object.keys(en).sort()).toEqual([...keys].sort())
     expect(Object.keys(ar).sort()).toEqual([...keys].sort())
-    expect(en.copy).toBe("Copy prompt")
+    expect(en.copy).toBe("Copy agent prompt")
     expect(en.copied).toBe("Copied")
     expect(ar.copy).toBe("انسخ أمر الوكيل")
     expect(ar.failed).toBe("تعذّر النسخ. حدّد النص وانسخه.")
     expect(ar.heading).toBe("أو دع وكيلك ينفّذ ذلك")
     expect(ar.helper).toBe("الصق هذا الأمر في وكيل البرمجة لديك لتثبيت فاصلة.")
+  })
+})
+
+describe("The three copy controls' names", () => {
+  const msgs = (locale) => JSON.parse(readFileSync(path.join(docsRoot, `messages/${locale}.json`), "utf8"))
+  test("the agent labels and the Arabic command label are exactly as specified", () => {
+    expect(msgs("en").landing.final.agent.copy).toBe("Copy agent prompt")
+    expect(msgs("ar").landing.final.agent.copy).toBe("انسخ أمر الوكيل")
+    expect(msgs("ar").copyCommand.copy).toBe("انسخ أمر التثبيت {command} إلى الحافظة")
+    expect(msgs("en").copyCommand.copy).toBe("Copy {command} to clipboard")
+    expect(msgs("en").landing.final.agent.or).toBe("or")
+    expect(msgs("ar").landing.final.agent.or).toBe("أو")
+  })
+
+  test("the command button, the agent button and its copied state each have their own name, in both languages", () => {
+    for (const locale of ["en", "ar"]) {
+      const m = msgs(locale)
+      const names = [m.copyCommand.copy.replace("{command}", installCommand), m.landing.final.agent.copy, m.landing.final.agent.copied]
+      expect(new Set(names).size, locale).toBe(3)
+      // The two ways to copy do not share a leading phrase beyond the verb.
+      expect(names[0]).not.toContain(m.landing.final.agent.copy)
+      expect(names[1]).not.toContain(m.copyCommand.copied)
+    }
+  })
+
+  test("the separator word sits in the hero only; the section keeps its own heading", () => {
+    const component = readFileSync(path.join(docsRoot, "app/[locale]/(home)/_components/agent-prompt.tsx"), "utf8")
+    expect(component.match(/t\("or"\)/g)?.length).toBe(1)
+    expect(msgs("en").landing.final.agent.heading).toBe("Or let your agent do it")
+    expect(msgs("ar").landing.final.agent.heading).toBe("أو دع وكيلك ينفّذ ذلك")
   })
 })
 
