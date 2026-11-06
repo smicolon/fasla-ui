@@ -65,10 +65,10 @@ export function AgentPrompt() {
 
   return (
     <div className="mt-[clamp(32px,5vw,56px)] border-t border-border pt-[clamp(28px,4vw,44px)]">
-      <h3 className="text-[19px] font-semibold leading-snug tracking-[-0.01em] rtl:leading-[1.6]">{t("heading")}</h3>
+      <h3 className="text-balance text-[19px] font-semibold leading-snug tracking-[-0.01em] rtl:leading-[1.6]">{t("heading")}</h3>
       <p
         role="status"
-        className={`mt-2 max-w-[60ch] text-[17px] rtl:leading-[1.8] ${status === "failed" ? "text-destructive" : "text-[color:var(--l-fg-2)]"}`}
+        className={`mt-2 max-w-[60ch] text-pretty text-[17px] rtl:leading-[1.8] ${status === "failed" ? "font-medium text-foreground" : "text-[color:var(--l-fg-2)]"}`}
       >
         {status === "failed" ? t("failed") : t("helper")}
       </p>
@@ -113,7 +113,7 @@ export function AgentPrompt() {
         tabIndex={0}
         role="region"
         aria-label={t("region")}
-        className="mt-5 max-h-[min(24rem,60vh)] overflow-auto whitespace-pre-wrap break-words rounded-xl border border-border bg-background p-4 text-left font-mono text-[13px] leading-6 text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-muted"
+        className="mt-5 max-h-[min(24rem,60vh)] overflow-auto whitespace-pre-wrap break-words rounded-xl border border-border bg-background p-4 text-left font-mono text-[13px] leading-[1.65] text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-muted"
       >
         {agentPrompt}
       </pre>
