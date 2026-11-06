@@ -5,16 +5,21 @@ import { MahaamMotionToggle } from "./mahaam-motion-toggle"
 afterEach(cleanup)
 
 describe("MahaamMotionToggle", () => {
-  it("is Pause while the page plays, and not pressed", () => {
+  it("is Pause while the page plays", () => {
     render(<MahaamMotionToggle paused={false} />)
-    const button = screen.getByRole("button", { name: "Pause animation" })
-    expect(button.getAttribute("aria-pressed")).toBe("false")
+    expect(screen.getByRole("button", { name: "Pause animation" })).toBeTruthy()
   })
 
-  it("is Play while the page is paused, and pressed", () => {
+  it("is Play while the page is paused", () => {
     render(<MahaamMotionToggle paused />)
-    const button = screen.getByRole("button", { name: "Play animation" })
-    expect(button.getAttribute("aria-pressed")).toBe("true")
+    expect(screen.getByRole("button", { name: "Play animation" })).toBeTruthy()
+  })
+
+  it("sets no aria-pressed, so the changing name is the only announcement of the state", () => {
+    const { rerender } = render(<MahaamMotionToggle paused={false} />)
+    expect(screen.getByRole("button").hasAttribute("aria-pressed")).toBe(false)
+    rerender(<MahaamMotionToggle paused />)
+    expect(screen.getByRole("button").hasAttribute("aria-pressed")).toBe(false)
   })
 
   it("tells onPausedChange the new state", () => {

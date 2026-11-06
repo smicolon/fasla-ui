@@ -90,20 +90,12 @@ const preview: Preview = {
     },
   },
   globalTypes: {
-    // The Mahaam template draws no pause button, so reviewers pause it here: the
-    // same as a site's `MahaamMotionToggle`. Only the Mahaam stories read it.
+    // The Mahaam template draws no pause button, so reviewers set its motion here:
+    // Playing, Paused, Final frame or Reduced motion. The toolbar item is
+    // drawn by .storybook/manager.tsx, on the Templates / Mahaam stories only.
     motion: {
-      description: "Pauses the Mahaam template's motion",
-      defaultValue: "play",
-      toolbar: {
-        title: "Motion",
-        icon: "play",
-        items: [
-          { value: "play", title: "Motion: playing", icon: "play" },
-          { value: "paused", title: "Motion: paused", icon: "pause" },
-        ],
-        dynamicTitle: true,
-      },
+      description: "Sets the Mahaam template's motion",
+      defaultValue: "playing",
     },
     direction: {
       description: "Text direction — LTR sets Geist, RTL sets Cairo and the Arabic leading",

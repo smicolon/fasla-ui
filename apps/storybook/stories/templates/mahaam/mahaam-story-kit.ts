@@ -5,11 +5,25 @@
  */
 
 /**
- * The Motion toolbar item: "paused" freezes the section (the `paused` prop),
- * the same as a site's `MahaamMotionToggle`. Left on "play", it passes nothing,
- * so a story's own `defaultPaused` still applies.
+ * The Motion toolbar item (drawn by .storybook/manager.tsx): Playing leaves the
+ * section alone, Paused freezes it where it stands (the `paused` prop, as a
+ * site's `MahaamMotionToggle` would), Final frame holds Figma's still frame
+ * (`still`) and Reduced motion is what a visitor who asks for it sees. A story's
+ * own args win over it.
  */
-export const pausedOf = (context: { globals: { motion?: string } }): boolean | undefined => (context.globals.motion === "paused" ? true : undefined)
+export type MahaamMotion = { paused?: boolean; still?: boolean; reducedMotion?: boolean }
+export const motionOf = (context: { globals: { motion?: string } }): MahaamMotion => {
+  switch (context.globals.motion) {
+    case "paused":
+      return { paused: true }
+    case "final":
+      return { still: true }
+    case "reduced":
+      return { reducedMotion: true }
+    default:
+      return {}
+  }
+}
 
 /** Figma's three breakpoints, as the viewport toolbar's choices. */
 export const mahaamViewports = {

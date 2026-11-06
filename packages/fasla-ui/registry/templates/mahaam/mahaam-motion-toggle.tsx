@@ -16,9 +16,10 @@ import { Button } from "../../ui/button/button"
  * passes the same `paused` to `MahaamTemplate`. Autoplay longer than 5 seconds
  * needs a way to stop it (WCAG 2.2.2, Level A).
  *
- * The icon is Pause while the page plays and Play while it is paused, the name
- * says the same, and `aria-pressed` is true while it is paused. Neither icon is
- * mirrored in RTL.
+ * The icon is Pause while the page plays and Play while it is paused, and the
+ * name changes with it (the HeroVelocityMarquee pattern). It sets no
+ * `aria-pressed`: a changing name plus a pressed state would announce the state
+ * twice. Neither icon is mirrored in RTL.
  */
 
 type Locale = "en" | "ar"
@@ -37,7 +38,7 @@ export const mahaamMotionToggleLabels: Record<Locale, MahaamMotionToggleLabels> 
 }
 
 export interface MahaamMotionToggleProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, "children"> {
-  /** Whether the page is paused. The icon, the name and `aria-pressed` follow it. */
+  /** Whether the page is paused. The icon and the name follow it. */
   paused: boolean
   /** Called with the new state when the toggle is pressed. Set `paused` from it. */
   onPausedChange?: (paused: boolean) => void
@@ -57,7 +58,6 @@ export function MahaamMotionToggle({ paused, onPausedChange, locale = "en", labe
       size="icon-sm"
       radius="rounded"
       aria-label={paused ? names.play : names.pause}
-      aria-pressed={paused}
       className={cn("bg-background", className)}
       onClick={(event) => {
         onClick?.(event)

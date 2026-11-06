@@ -19,6 +19,10 @@ const CREDITS = ["painting", "faisal", "freepik", "footer"] as const
 
 const previewUrl = (locale: string) => `/${locale}/templates-preview/mahaam/`
 
+/** A section's Playground page in Storybook, in the page's direction. */
+const sectionStoryUrl = (locale: string, section: string) =>
+  `/components/?path=/story/templates-mahaam-${section}--playground${locale === "ar" ? "&globals=direction:rtl" : ""}`
+
 /** Storybook is copied into the site at /components, outside the locale tree. The whole-template story opens in the page's direction. */
 const storyUrl = (locale: string) => `/components/?path=/story/templates-mahaam-template--final-desktop-${locale === "ar" ? "rtl" : "ltr"}`
 
@@ -105,7 +109,9 @@ export default function MahaamTemplatePage() {
         <DocTable
           head={[t("sectionsTable.section"), t("sectionsTable.item"), t("sectionsTable.description")]}
           rows={SECTIONS.map((key) => [
-            t(`sectionNames.${key}`),
+            <a key="name" href={sectionStoryUrl(locale, key)} className="font-medium text-foreground underline underline-offset-4">
+              {t(`sectionNames.${key}`)}
+            </a>,
             <code key="item" className="whitespace-nowrap text-xs">{`mahaam-${key}`}</code>,
             t(`sections.${key}`),
           ])}

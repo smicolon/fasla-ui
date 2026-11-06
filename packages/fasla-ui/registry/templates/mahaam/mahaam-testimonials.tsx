@@ -134,10 +134,15 @@ export function MahaamTestimonials({
             const rel = (position - current + count) % count
             const place = rel === 0 ? PLACE.front : rel === 1 ? PLACE.second : PLACE.third
             const front = rel === 0
+            // The two back cards show only their colour: their photo and words are hidden, and come in as the card comes forward.
+            // They are also out of the reading order and the tab order (`inert`; React 18 has no typed prop for it).
+            const behind = front ? {} : ({ inert: "" } as Record<string, string>)
+            const content = cn("transition-opacity duration-[400ms] ease-out motion-reduce:transition-none", reduced && "transition-none", front ? "opacity-100 delay-300" : "opacity-0")
             return (
               <figure
                 key={item.name}
                 aria-hidden={front ? undefined : true}
+                {...behind}
                 className={cn(
                   "absolute flex origin-top-left flex-col gap-4 overflow-hidden rounded-[32px] p-5 transition-[left,top,width,height,transform] duration-[900ms] ease-out motion-reduce:transition-none", reduced && "transition-none",
                   "left-[var(--mahaam-x)] top-[var(--mahaam-y)] [@container(min-width:48rem)]:flex-row [@container(min-width:48rem)]:gap-7 [@container(min-width:48rem)]:p-6",
@@ -145,12 +150,12 @@ export function MahaamTestimonials({
                   place
                 )}
               >
-                <div className="order-first h-[200px] shrink-0 overflow-hidden rounded-2xl bg-muted [@container(min-width:48rem)]:order-last [@container(min-width:48rem)]:h-auto [@container(min-width:48rem)]:w-[240px] [@container(min-width:90rem)]:w-[400px]">
+                <div className={cn(content, "order-first h-[200px] shrink-0 overflow-hidden rounded-2xl bg-muted [@container(min-width:48rem)]:order-last [@container(min-width:48rem)]:h-auto [@container(min-width:48rem)]:w-[240px] [@container(min-width:90rem)]:w-[400px]")}>
                   {faces[position] ? (
                     <img src={faces[position]} alt="" decoding="async" className="size-full object-cover [object-position:50%_0%] [@container(min-width:48rem)]:[object-position:50%_50%]" />
                   ) : null}
                 </div>
-                <div className="flex min-w-0 flex-1 flex-col justify-between gap-2 px-2 pb-6 pt-0 [@container(min-width:48rem)]:gap-4 [@container(min-width:48rem)]:pb-5 [@container(min-width:48rem)]:pe-2 [@container(min-width:48rem)]:ps-6 [@container(min-width:48rem)]:pt-6">
+                <div className={cn(content, "flex min-w-0 flex-1 flex-col justify-between gap-2 px-2 pb-6 pt-0 [@container(min-width:48rem)]:gap-4 [@container(min-width:48rem)]:pb-5 [@container(min-width:48rem)]:pe-2 [@container(min-width:48rem)]:ps-6 [@container(min-width:48rem)]:pt-6")}>
                   <blockquote className="text-2xl text-foreground [@container(min-width:90rem)]:text-4xl">{item.quote}</blockquote>
                   <figcaption className="flex flex-col text-lg">
                     <span className="font-medium text-foreground">{item.name}</span>

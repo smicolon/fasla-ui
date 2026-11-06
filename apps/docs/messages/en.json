@@ -3144,9 +3144,9 @@
         "footer": "The footer carries the same credits."
       },
       "toggleTitle": "Motion toggle",
-      "toggleLead": "An outline Icon Button you place anywhere: Pause while the page plays, Play while it is paused. It sets <code>aria-pressed</code>.",
+      "toggleLead": "An outline Icon Button you place anywhere: Pause while the page plays, Play while it is paused, with the name changing to match. It sets no <code>aria-pressed</code>, so a screen reader announces the state once.",
       "toggleProps": {
-        "paused": "Whether the page is paused. The icon, the name and aria-pressed follow it.",
+        "paused": "Whether the page is paused. The icon and the name follow it.",
         "onPausedChange": "Called with the new state when it is pressed.",
         "locale": "The language of the default names.",
         "labels": "The names, in place of the locale's."
