@@ -35,7 +35,7 @@ const meta: Meta<typeof MahaamTestimonials> = {
     },
   },
   tags: ["autodocs"],
-  render: (args, context) => <MahaamTestimonials locale={localeOf(context)} reducedMotion={motionOf(context).reducedMotion} {...mahaamPhotoProps} {...args} />,
+  render: (args, context) => <MahaamTestimonials locale={localeOf(context)} reducedMotion={motionOf(context).reducedMotion} portraits={mahaamPhotoProps.portraits} {...args} />,
 }
 export default meta
 

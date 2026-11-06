@@ -34,7 +34,7 @@ const meta: Meta<typeof MahaamFeatures> = {
     },
   },
   tags: ["autodocs"],
-  render: (args, context) => <MahaamFeatures locale={localeOf(context)} {...motionOf(context)} {...mahaamPhotoProps} {...args} />,
+  render: (args, context) => <MahaamFeatures locale={localeOf(context)} {...motionOf(context)} avatars={mahaamPhotoProps.avatars} flags={mahaamPhotoProps.flags} {...args} />,
 }
 export default meta
 
