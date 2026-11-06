@@ -140,11 +140,19 @@ export const PULSE_KEYFRAMES: Keyframe[] = [
   { boxShadow: "0 0 0 0 color-mix(in srgb, var(--foreground) 0%, transparent)", offset: 1 },
 ]
 
-/** Slides an element in from below as the page loads, `in` in the spec. */
+/** `useLayoutEffect` where there is a DOM; `useEffect` on the server, where React 18 warns about the first. */
+const useIsomorphicLayoutEffect = typeof window === "undefined" ? React.useEffect : React.useLayoutEffect
+
+/**
+ * Slides an element in from below as the page loads, `in` in the spec. It reads
+ * the reduced-motion setting itself, as the page is when the effect runs: while
+ * hydrating, `usePrefersReducedMotion` still says false.
+ */
 export function useEntrance(ref: React.RefObject<HTMLElement | null>, delayMs: number, enabled: boolean) {
-  React.useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const element = ref.current
     if (!element || !enabled || typeof element.animate !== "function") return
+    if (typeof window.matchMedia === "function" && window.matchMedia(REDUCED_MOTION).matches) return
     const animation = element.animate(
       [
         { opacity: 0, transform: "translateY(16px)" },

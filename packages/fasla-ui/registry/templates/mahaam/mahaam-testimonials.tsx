@@ -128,6 +128,7 @@ export function MahaamTestimonials({
         <h2 className="whitespace-pre-line text-center text-3xl font-normal text-foreground [@container(min-width:48rem)]:text-5xl [@container(min-width:90rem)]:text-6xl">{text}</h2>
 
         <div
+          aria-live="polite"
           className="relative h-[600px] w-full [@container(min-width:48rem)]:h-[480px] [@container(min-width:90rem)]:h-[540px] [@container(min-width:90rem)]:max-w-[1000px]"
         >
           {list.map((item, position) => {
@@ -135,14 +136,15 @@ export function MahaamTestimonials({
             const place = rel === 0 ? PLACE.front : rel === 1 ? PLACE.second : PLACE.third
             const front = rel === 0
             // The two back cards show only their colour: their photo and words are hidden, and come in as the card comes forward.
-            // They are also out of the reading order and the tab order (`inert`; React 18 has no typed prop for it).
-            const behind = front ? {} : ({ inert: "" } as Record<string, string>)
+            // They are also out of the reading order and the tab order (`inert`, set on the element: React 18 and 19 treat the prop differently).
             const content = cn("transition-opacity duration-[400ms] ease-out motion-reduce:transition-none", reduced && "transition-none", front ? "opacity-100 delay-300" : "opacity-0")
             return (
               <figure
                 key={item.name}
                 aria-hidden={front ? undefined : true}
-                {...behind}
+                ref={(node) => {
+                  node?.toggleAttribute("inert", !front)
+                }}
                 className={cn(
                   "absolute flex origin-top-left flex-col gap-4 overflow-hidden rounded-[32px] p-5 transition-[left,top,width,height,transform] duration-[900ms] ease-out motion-reduce:transition-none", reduced && "transition-none",
                   "left-[var(--mahaam-x)] top-[var(--mahaam-y)] [@container(min-width:48rem)]:flex-row [@container(min-width:48rem)]:gap-7 [@container(min-width:48rem)]:p-6",

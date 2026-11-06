@@ -65,6 +65,8 @@ describe("Mahaam template pages", () => {
   test("the two Templates pages give the contents column back, and no other page does", () => {
     const css = readFileSync(path.join(docsRoot, "app/globals.css"), "utf8")
     expect(css).toContain("[data-docs-grid]:has([data-docs-wide])")
+    expect(css).toContain("> [data-docs-toc]")
+    expect(readFileSync(path.join(docsRoot, "components/docs-toc.tsx"), "utf8")).toContain("data-docs-toc")
     expect(readFileSync(path.join(docsRoot, "app/[locale]/docs/layout.tsx"), "utf8")).toContain("data-docs-grid")
     for (const file of ["app/[locale]/docs/templates/page.tsx", "app/[locale]/docs/templates/mahaam/page.tsx"]) {
       expect(readFileSync(path.join(docsRoot, file), "utf8"), file).toContain("data-docs-wide")

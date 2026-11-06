@@ -78,7 +78,7 @@ describe("Mahaam Hero: paused", () => {
   })
 })
 
-describe("Mahaam Hero: paused", () => {
+describe("Mahaam Hero: the pause prop", () => {
   it("draws no pause button of its own", () => {
     render(<MahaamHero />)
     expect(screen.queryByRole("button", { name: /animation/ })).toBeNull()
@@ -103,7 +103,7 @@ describe("Mahaam Hero: paused", () => {
     expect(screen.getByText(en.added(3))).toBeTruthy()
   })
 
-  it("holds the finished frame with `still`, and `defaultPaused` starts there", () => {
+  it("holds the finished frame with `still`", () => {
     vi.useFakeTimers()
     render(<MahaamHero still />)
     act(() => {

@@ -60,7 +60,7 @@ const COPY: Record<Locale, MahaamFooterCopy> = {
     tagline: "Speak your day. Mahaam sorts the rest.",
     stores: STORES,
     columns: [
-      { title: "Product", links: links(["Features", "Pricing", "Changelog", "Download"], ["#features", "#pricing", "#changelog", "#download"]) },
+      { title: "Product", links: links(["Features", "Pricing", "Changelog", "Download"], ["#product", "#pricing", "#changelog", "#download"]) },
       { title: "Company", links: links(["About", "Careers", "Blog", "Contact"], ["#about", "#careers", "#blog", "#contact"]) },
       { title: "Resources", links: links(["Help center", "Guides", "Security", "Status"], ["#help", "#guides", "#security", "#status"]) },
       { title: "Legal", links: links(["Privacy", "Terms", "Cookies"], ["#privacy", "#terms", "#cookies"]) },
@@ -74,12 +74,12 @@ const COPY: Record<Locale, MahaamFooterCopy> = {
     tagline: "تحدّث عن يومك، ومهام يرتّب الباقي.",
     stores: STORES,
     columns: [
-      { title: "المنتج", links: links(["الميزات", "الأسعار", "سجل التحديثات", "التنزيل"], ["#features", "#pricing", "#changelog", "#download"]) },
+      { title: "المنتج", links: links(["الميزات", "الأسعار", "سجل التحديثات", "التنزيل"], ["#product", "#pricing", "#changelog", "#download"]) },
       { title: "الشركة", links: links(["من نحن", "الوظائف", "المدونة", "تواصل معنا"], ["#about", "#careers", "#blog", "#contact"]) },
       { title: "المصادر", links: links(["مركز المساعدة", "الأدلة", "الأمان", "الحالة"], ["#help", "#guides", "#security", "#status"]) },
       { title: "قانوني", links: links(["الخصوصية", "الشروط", "ملفات الارتباط"], ["#privacy", "#terms", "#cookies"]) },
     ],
-    note: "قالب من فاصلة. مهام وعملاؤها ومراجعاتها خيالية.",
+    note: "قالب من فاصلة. مهام وعملاؤه ومراجعاته خيالية.",
     // The Latin name is isolated, so the full stop stays at the end of the line.
     credits: (
       <>

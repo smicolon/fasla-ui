@@ -18,7 +18,7 @@ const MahaamMotionToggle = dynamic(() => import("@fasla-ui/templates/mahaam/maha
  * corner outside the template, so a reviewer can pause while looking.
  */
 export function MahaamTemplatePreview({ locale }: { locale: "en" | "ar" }) {
-  const ref = React.useRef<HTMLElement>(null)
+  const ref = React.useRef<HTMLDivElement>(null)
   const [paused, setPaused] = React.useState(false)
   // In a docs frame, tell the page the template's height so the frame fits it.
   React.useEffect(() => {
@@ -33,11 +33,12 @@ export function MahaamTemplatePreview({ locale }: { locale: "en" | "ar" }) {
   }, [])
 
   return (
-    <main ref={ref} className="w-full">
-      <MahaamTemplate locale={locale} paused={paused} photos={mahaamPhotoProps} />
+    <div ref={ref} className="w-full">
+      {/* First in the page order, so a keyboard user reaches it before the template's links; fixed to the corner on screen. The template brings its own <main>. */}
       <div className="fixed bottom-4 end-4 z-50 rounded-full shadow-md">
         <MahaamMotionToggle paused={paused} onPausedChange={setPaused} locale={locale} />
       </div>
-    </main>
+      <MahaamTemplate locale={locale} paused={paused} photos={mahaamPhotoProps} />
+    </div>
   )
 }

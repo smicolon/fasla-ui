@@ -222,8 +222,8 @@ export function MahaamPlans({
       <div className="mx-auto flex max-w-[1440px] flex-col gap-8 px-8 pb-24 pt-8 [@container(min-width:48rem)]:gap-10 [@container(min-width:48rem)]:px-16 [@container(min-width:48rem)]:pb-36 [@container(min-width:48rem)]:pt-12 [@container(min-width:90rem)]:gap-12 [@container(min-width:90rem)]:px-28 [@container(min-width:90rem)]:pb-40 [@container(min-width:90rem)]:pt-16">
         <div className="flex flex-col items-start gap-6 [@container(min-width:90rem)]:flex-row [@container(min-width:90rem)]:items-center [@container(min-width:90rem)]:justify-between [@container(min-width:90rem)]:gap-8">
           <h2 className="whitespace-pre-line text-3xl font-normal text-foreground [@container(min-width:48rem)]:text-5xl [@container(min-width:90rem)]:text-6xl">{heading ?? copy.heading}</h2>
-          <Tabs value={billing} onValueChange={choose} className="w-auto" aria-label={switchLabel ?? copy.switchLabel}>
-            <TabsList variant="boxed" size="sm">
+          <Tabs value={billing} onValueChange={choose} className="w-auto">
+            <TabsList variant="boxed" size="sm" aria-label={switchLabel ?? copy.switchLabel}>
               <TabsTrigger value="monthly">{monthly ?? copy.monthly}</TabsTrigger>
               <TabsTrigger value="yearly">{yearly ?? copy.yearly}</TabsTrigger>
             </TabsList>

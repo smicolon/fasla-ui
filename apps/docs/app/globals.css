@@ -646,7 +646,7 @@
   [data-docs-grid]:has([data-docs-wide]) {
     grid-template-columns: 220px minmax(0, 1fr);
   }
-  [data-docs-grid]:has([data-docs-wide]) > nav:last-child {
+  [data-docs-grid]:has([data-docs-wide]) > [data-docs-toc] {
     display: none;
   }
 }

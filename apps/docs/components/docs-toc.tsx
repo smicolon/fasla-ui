@@ -147,7 +147,7 @@ export function DocsToc() {
   // prefers-reduced-motion, per globals.css), updates the URL hash and moves
   // the keyboard's focus start point to the section.
   return (
-    <nav aria-labelledby="docs-toc-title" className="sticky top-20 hidden max-h-[calc(100vh-5rem)] overflow-y-auto py-8 xl:block">
+    <nav data-docs-toc aria-labelledby="docs-toc-title" className="sticky top-20 hidden max-h-[calc(100vh-5rem)] overflow-y-auto py-8 xl:block">
       <h2 id="docs-toc-title" className="mb-3 text-sm font-semibold text-foreground">
         {t("onThisPage")}
       </h2>
