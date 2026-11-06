@@ -54,7 +54,7 @@ describe("The agent prompt", () => {
 })
 
 describe("The Copy prompt messages", () => {
-  const keys = ["heading", "helper", "copy", "copied", "failed", "show", "hide", "region"]
+  const keys = ["heading", "helper", "copy", "copied", "failed", "show", "hide", "region", "failedHero", "failedHeroLink"]
   const get = (locale) => JSON.parse(read(`apps/docs/messages/${locale}.json`)).landing.final.agent
   test("exist in both languages with the agreed wording", () => {
     const en = get("en")
@@ -63,9 +63,37 @@ describe("The Copy prompt messages", () => {
     expect(Object.keys(ar).sort()).toEqual([...keys].sort())
     expect(en.copy).toBe("Copy prompt")
     expect(en.copied).toBe("Copied")
-    expect(ar.copy).toBe("نسخ الأمر")
+    expect(ar.copy).toBe("انسخ أمر الوكيل")
     expect(ar.failed).toBe("تعذّر النسخ. حدّد النص وانسخه.")
     expect(ar.heading).toBe("أو دع وكيلك ينفّذ ذلك")
     expect(ar.helper).toBe("الصق هذا الأمر في وكيل البرمجة لديك لتثبيت فاصلة.")
+  })
+})
+
+describe("The hero's Copy prompt", () => {
+  const read2 = (file) => readFileSync(path.join(docsRoot, file), "utf8")
+  test("reuses the one component and the one prompt: no second copy of the text or the logic", () => {
+    const page = read2("app/[locale]/(home)/page.tsx")
+    expect(page).toContain("<AgentPromptCompact")
+    expect(page).not.toContain("agentPrompt")
+    expect(page).not.toContain("navigator.clipboard")
+    const component = read2("app/[locale]/(home)/_components/agent-prompt.tsx")
+    expect(component.match(/copyWithStatus\(agentPrompt/g)?.length).toBe(1)
+  })
+
+  test("its failure message links to the section's anchor, which exists", () => {
+    const component = read2("app/[locale]/(home)/_components/agent-prompt.tsx")
+    expect(component).toContain("href={`#${AGENT_PROMPT_ID}`}")
+    expect(component).toContain("id={AGENT_PROMPT_ID}")
+    expect(component).toContain('AGENT_PROMPT_ID = "agent-prompt"')
+  })
+
+  test("is told apart from the command's own copy button in both languages", () => {
+    for (const locale of ["en", "ar"]) {
+      const m = JSON.parse(readFileSync(path.join(docsRoot, `messages/${locale}.json`), "utf8"))
+      expect(m.landing.final.agent.copy).not.toBe(m.copyCommand.copied)
+      expect(m.copyCommand.copy).toContain("{command}")
+      expect(m.landing.final.agent.copy).not.toContain("{command}")
+    }
   })
 })
