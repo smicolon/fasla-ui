@@ -52,12 +52,14 @@ export interface MahaamTemplateProps extends React.HTMLAttributes<HTMLDivElement
   photos?: MahaamTemplatePhotos
   /** Starts every animated section paused, on Figma's still frame. */
   defaultPaused?: boolean
+  /** Holds every animated section on Figma's still frame while the pause buttons keep showing Pause. For stills of the finished state. */
+  still?: boolean
   /** Replaces the visitor's reduced-motion setting. For stories and tests. */
   reducedMotion?: boolean
 }
 
-export function MahaamTemplate({ locale = "en", photos = {}, defaultPaused, reducedMotion, className, ...props }: MahaamTemplateProps) {
-  const motion = { defaultPaused, reducedMotion }
+export function MahaamTemplate({ locale = "en", photos = {}, defaultPaused, still, reducedMotion, className, ...props }: MahaamTemplateProps) {
+  const motion = { defaultPaused, still, reducedMotion }
   return (
     <div className={cn("bg-background text-foreground", className)} {...props}>
       <MahaamNavbar locale={locale} />

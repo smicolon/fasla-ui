@@ -15,7 +15,7 @@ const meta: Meta<typeof MahaamTemplate> = {
   parameters: {
     layout: "fullscreen",
     viewport: { viewports: mahaamViewports },
-    controls: { exclude: ["photos", "defaultPaused", "reducedMotion"] },
+    controls: { exclude: ["photos", "defaultPaused", "still", "reducedMotion"] },
   },
   tags: ["autodocs"],
   render: (args, context) => <MahaamTemplate locale={localeOf(context)} photos={mahaamPhotoProps} {...args} />,
@@ -24,13 +24,13 @@ export default meta
 
 type Story = StoryObj<typeof MahaamTemplate>
 
-/* Final: Every section on Figma's still frame, held. Each pause button shows Play. */
-export const FinalDesktopLtr: Story = { name: "Final · " + label("desktop", "ltr"), ...variant("desktop", "ltr"), args: { defaultPaused: true } }
-export const FinalDesktopRtl: Story = { name: "Final · " + label("desktop", "rtl"), ...variant("desktop", "rtl"), args: { defaultPaused: true } }
-export const FinalTabletLtr: Story = { name: "Final · " + label("tablet", "ltr"), ...variant("tablet", "ltr"), args: { defaultPaused: true } }
-export const FinalTabletRtl: Story = { name: "Final · " + label("tablet", "rtl"), ...variant("tablet", "rtl"), args: { defaultPaused: true } }
-export const FinalMobileLtr: Story = { name: "Final · " + label("mobile", "ltr"), ...variant("mobile", "ltr"), args: { defaultPaused: true } }
-export const FinalMobileRtl: Story = { name: "Final · " + label("mobile", "rtl"), ...variant("mobile", "rtl"), args: { defaultPaused: true } }
+/* Final: Every section held on Figma's still frame. Each pause button shows Pause, as in Figma. */
+export const FinalDesktopLtr: Story = { name: "Final · " + label("desktop", "ltr"), ...variant("desktop", "ltr"), args: { still: true } }
+export const FinalDesktopRtl: Story = { name: "Final · " + label("desktop", "rtl"), ...variant("desktop", "rtl"), args: { still: true } }
+export const FinalTabletLtr: Story = { name: "Final · " + label("tablet", "ltr"), ...variant("tablet", "ltr"), args: { still: true } }
+export const FinalTabletRtl: Story = { name: "Final · " + label("tablet", "rtl"), ...variant("tablet", "rtl"), args: { still: true } }
+export const FinalMobileLtr: Story = { name: "Final · " + label("mobile", "ltr"), ...variant("mobile", "ltr"), args: { still: true } }
+export const FinalMobileRtl: Story = { name: "Final · " + label("mobile", "rtl"), ...variant("mobile", "rtl"), args: { still: true } }
 
 /* Playing: Every section playing on its own. */
 export const PlayingDesktopLtr: Story = { name: "Playing · " + label("desktop", "ltr"), ...variant("desktop", "ltr"), args: {} }

@@ -422,7 +422,7 @@ export function MahaamHero({
   const [ready, setReady] = React.useState(false)
   React.useEffect(() => setReady(true), [])
   // The server and the first render draw the held frame; once mounted the clock takes over from `frame`, and a pause stops it where it stands.
-  const clock = useLoopClock({ length: LOOP_FRAMES, intervalMs: FRAME_MS, active, from: startFrame ?? (paused ? FINAL_FRAME : 0) })
+  const clock = useLoopClock({ length: LOOP_FRAMES, intervalMs: FRAME_MS, active, from: startFrame ?? (frozen ? FINAL_FRAME : 0) })
   const frame = reduced || !ready ? hold : clock
 
   const plannerCopy = { ...copy.planner, ...planner }

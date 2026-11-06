@@ -80,6 +80,8 @@ export interface MahaamTestimonialsProps extends React.HTMLAttributes<HTMLElemen
   portraits?: { noura?: string; khalid?: string; faisal?: string }
   paused?: boolean
   defaultPaused?: boolean
+  /** Holds the section on Figma's still frame without changing the pause button, which still shows Pause. For stills of the finished state. */
+  still?: boolean
   onPausedChange?: (paused: boolean) => void
   pauseLabels?: Partial<MahaamPauseButtonLabels>
   /** Which card is in front when it starts, 0 to 2. */
@@ -117,6 +119,7 @@ export function MahaamTestimonials({
   portraits = {},
   paused: pausedProp,
   defaultPaused,
+  still,
   onPausedChange,
   pauseLabels,
   index: startIndex = 0,
@@ -133,9 +136,10 @@ export function MahaamTestimonials({
   const inView = useInView(rootRef)
   const visible = usePageVisible()
   const { paused, toggle } = usePausedState({ paused: pausedProp, defaultPaused, onPausedChange })
+  const frozen = paused || Boolean(still)
   const [hovered, setHovered] = React.useState(false)
   const [current, setCurrent] = React.useState(startIndex)
-  const active = !paused && !reduced && inView && visible && !hovered
+  const active = !frozen && !reduced && inView && visible && !hovered
   const count = list.length
 
   // Every 6.5s the next card comes forward; using the arrows or dots starts the count again.

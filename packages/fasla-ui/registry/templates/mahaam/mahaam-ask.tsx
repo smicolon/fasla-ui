@@ -118,6 +118,8 @@ export interface MahaamAskProps extends React.HTMLAttributes<HTMLElement>, Parti
   locale?: Locale
   paused?: boolean
   defaultPaused?: boolean
+  /** Holds the section on Figma's still frame without changing the pause button, which still shows Pause. For stills of the finished state. */
+  still?: boolean
   onPausedChange?: (paused: boolean) => void
   pauseLabels?: Partial<MahaamPauseButtonLabels>
   /** Where in the 36s loop the section starts, 0 to 1. Without it, from the beginning, or from Figma's answered frame when paused. */
@@ -223,6 +225,7 @@ export function MahaamAsk({
   questions,
   paused: pausedProp,
   defaultPaused,
+  still,
   onPausedChange,
   pauseLabels,
   progress,
@@ -236,10 +239,11 @@ export function MahaamAsk({
   const inView = useInView(rootRef)
   const visible = usePageVisible()
   const { paused, toggle } = usePausedState({ paused: pausedProp, defaultPaused, onPausedChange })
+  const frozen = paused || Boolean(still)
   const [hovered, setHovered] = React.useState(false)
   const [ready, setReady] = React.useState(false)
   React.useEffect(() => setReady(true), [])
-  const active = !paused && !reduced && inView && visible && !hovered
+  const active = !frozen && !reduced && inView && visible && !hovered
   const list = cards ?? copy.cards
   const qs = questions ?? copy.questions
   const count = sourceCount ?? copy.sourceCount

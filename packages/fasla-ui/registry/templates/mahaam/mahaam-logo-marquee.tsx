@@ -150,6 +150,8 @@ export interface MahaamLogoMarqueeProps extends React.HTMLAttributes<HTMLElement
   paused?: boolean
   /** Whether an uncontrolled strip starts paused. */
   defaultPaused?: boolean
+  /** Holds the section on Figma's still frame without changing the pause button, which still shows Pause. For stills of the finished state. */
+  still?: boolean
   /** Called when the visitor presses the pause button. */
   onPausedChange?: (paused: boolean) => void
   /** The pause button's names, in place of `locale`'s. */
@@ -170,6 +172,7 @@ export function MahaamLogoMarquee({
   logos,
   paused: pausedProp,
   defaultPaused,
+  still,
   onPausedChange,
   pauseLabels,
   progress,
@@ -190,8 +193,9 @@ export function MahaamLogoMarquee({
   const inView = useInView(rootRef)
   const visible = usePageVisible()
   const { paused, toggle } = usePausedState({ paused: pausedProp, defaultPaused, onPausedChange })
+  const frozen = paused || Boolean(still)
   const [hovered, setHovered] = React.useState(false)
-  const active = !paused && !reduced && inView && visible && !hovered
+  const active = !frozen && !reduced && inView && visible && !hovered
   const activeRef = React.useRef(active)
   activeRef.current = active
 

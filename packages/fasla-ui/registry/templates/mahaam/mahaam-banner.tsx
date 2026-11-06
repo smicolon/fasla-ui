@@ -69,6 +69,8 @@ export interface MahaamBannerProps extends React.HTMLAttributes<HTMLElement>, Pa
   secondaryHref?: string
   paused?: boolean
   defaultPaused?: boolean
+  /** Holds the section on Figma's still frame without changing the pause button, which still shows Pause. For stills of the finished state. */
+  still?: boolean
   onPausedChange?: (paused: boolean) => void
   pauseLabels?: Partial<MahaamPauseButtonLabels>
   /** Where in the 5s ring loop the rings start, 0 to 1. Without it they rest on Figma's still frame until they play. */
@@ -109,6 +111,7 @@ export function MahaamBanner({
   secondaryHref = "#demo",
   paused: pausedProp,
   defaultPaused,
+  still,
   onPausedChange,
   pauseLabels,
   progress,
@@ -122,8 +125,9 @@ export function MahaamBanner({
   const inView = useInView(rootRef)
   const visible = usePageVisible()
   const { paused, toggle } = usePausedState({ paused: pausedProp, defaultPaused, onPausedChange })
+  const frozen = paused || Boolean(still)
   const [hovered, setHovered] = React.useState(false)
-  const active = !paused && !reduced && inView && visible && !hovered
+  const active = !frozen && !reduced && inView && visible && !hovered
   // The rings rest on Figma's frame until they first play (or are given a place in the loop).
   const [started, setStarted] = React.useState(progress !== undefined)
   React.useEffect(() => {

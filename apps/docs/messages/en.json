@@ -3080,6 +3080,7 @@
         "locale": "The language of the default copy. The page's dir sets the direction.",
         "photos": "The photographs, as props. None ship.",
         "defaultPaused": "Starts every loop paused.",
+        "still": "Holds every section on its finished frame while the pause buttons keep showing Pause. For stills.",
         "reducedMotion": "Replaces the visitor's setting, in Storybook and in tests."
       },
       "motionTitle": "Motion: a documented exception",

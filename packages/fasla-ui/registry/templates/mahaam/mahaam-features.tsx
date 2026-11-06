@@ -206,6 +206,8 @@ export interface MahaamFeaturesProps extends React.HTMLAttributes<HTMLElement>, 
   flags?: Partial<Record<(typeof LANGS)[number]["key"], string>>
   paused?: boolean
   defaultPaused?: boolean
+  /** Holds the section on Figma's still frame without changing the pause button, which still shows Pause. For stills of the finished state. */
+  still?: boolean
   onPausedChange?: (paused: boolean) => void
   pauseLabels?: Partial<MahaamPauseButtonLabels>
   /** Where in each loop the cards start, 0 to 1. Without it they start from the beginning, or from Figma's still frame when paused. */
@@ -528,6 +530,7 @@ export function MahaamFeatures({
   flags = {},
   paused: pausedProp,
   defaultPaused,
+  still,
   onPausedChange,
   pauseLabels,
   progress,
@@ -541,12 +544,13 @@ export function MahaamFeatures({
   const inView = useInView(rootRef)
   const visible = usePageVisible()
   const { paused, toggle } = usePausedState({ paused: pausedProp, defaultPaused, onPausedChange })
+  const frozen = paused || Boolean(still)
   const [hovered, setHovered] = React.useState<null | "languages" | "handoff" | "recap">(null)
   const [ready, setReady] = React.useState(false)
   React.useEffect(() => setReady(true), [])
-  const running = !paused && !reduced && inView && visible
+  const running = !frozen && !reduced && inView && visible
 
-  const start = (frames: number, still: number) => (progress !== undefined ? Math.floor(progress * frames) : paused ? still : 0)
+  const start = (frames: number, still: number) => (progress !== undefined ? Math.floor(progress * frames) : frozen ? still : 0)
   const langClock = useLoopClock({ length: LANG_FRAMES * 10, intervalMs: FRAME_MS, active: running && hovered !== "languages", from: start(LANG_FRAMES * 10, STILL.lang) })
   const handoffClock = useLoopClock({ length: 100, intervalMs: FRAME_MS, active: running && hovered !== "handoff", from: start(100, STILL.handoff) })
   const recapClock = useLoopClock({ length: 130, intervalMs: FRAME_MS, active: running && hovered !== "recap", from: start(130, STILL.recap) })

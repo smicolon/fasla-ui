@@ -56,6 +56,7 @@ export default function MahaamTemplatePage() {
     { prop: "locale", type: '"en" | "ar"', fallback: '"en"', description: t("props.locale") },
     { prop: "photos", type: "MahaamTemplatePhotos", fallback: "", description: t("props.photos") },
     { prop: "defaultPaused", type: "boolean", fallback: "false", description: t("props.defaultPaused") },
+    { prop: "still", type: "boolean", fallback: "false", description: t("props.still") },
     { prop: "reducedMotion", type: "boolean", fallback: "", description: t("props.reducedMotion") },
   ]
 
