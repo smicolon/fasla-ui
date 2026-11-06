@@ -248,7 +248,7 @@ export function MahaamAsk({
   const qs = questions ?? copy.questions
   const count = sourceCount ?? copy.sourceCount
   const total = QUESTION_FRAMES * qs.length
-  const from = progress !== undefined ? Math.floor(progress * total) : paused ? STILL : 0
+  const from = progress !== undefined ? Math.floor(progress * total) : frozen ? STILL : 0
   const clock = useLoopClock({ length: total, intervalMs: FRAME_MS, active, from })
   const frame = reduced ? STILL : ready || progress !== undefined ? clock : STILL
 
