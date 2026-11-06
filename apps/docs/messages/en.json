@@ -14,7 +14,8 @@
     "toggleMenu": "Toggle menu",
     "toggleTheme": "Toggle theme",
     "switchLanguage": "Switch language",
-    "blocks": "Blocks"
+    "blocks": "Blocks",
+    "templates": "Templates"
   },
   "docs": {
     "avatar": {
@@ -95,6 +96,8 @@
       "effects": "Effects",
       "introduction": "Introduction",
       "installation": "Installation",
+      "templates": "Templates",
+      "allTemplates": "All templates",
       "playground": "Component Playground",
       "menu": "Docs menu",
       "lead": "App navigation that folds to icons: titled groups of links, sub-items under a parent, and the signed-in person at the foot. Expanded and collapsed, as in the Figma set, with an optional plan card.",
@@ -3028,6 +3031,128 @@
       "inverseMore": "Installing one by hand takes three lines of CSS: see <link>Installation</link>.",
       "familiesTitle": "Block families"
     },
+    "templates": {
+      "title": "Templates",
+      "lead": "Whole pages built from Fasla blocks and components, in English and Arabic, at three breakpoints.",
+      "open": "View template",
+      "tags": "Template details",
+      "mahaam": {
+        "title": "Mahaam",
+        "description": "A voice-first task manager landing page: ten sections, with motion built in.",
+        "thumbs": {
+          "hero": "The Mahaam Hero: a headline beside a painting with a day planner on it.",
+          "features": "The Mahaam Features: three cards on languages, hand-offs and recaps."
+        }
+      }
+    },
+    "mahaamTemplate": {
+      "title": "Mahaam",
+      "lead": "A landing page in ten sections, in English and Arabic, at three breakpoints.",
+      "intro": "Built once from the Mahaam Template set in Figma. It covers all six variants: three breakpoints, each in LTR and RTL.",
+      "allTemplates": "All templates",
+      "sectionsTitle": "Sections",
+      "sectionsLead": "Each section is its own registry item, so you can take one alone.",
+      "sectionsTable": {
+        "section": "Section",
+        "item": "Registry item",
+        "description": "What it is"
+      },
+      "sectionNames": {
+        "navbar": "Navbar",
+        "hero": "Hero",
+        "logo-marquee": "Logo marquee",
+        "features": "Features",
+        "ask": "Ask",
+        "banner": "Banner",
+        "testimonials": "Testimonials",
+        "plans": "Plans",
+        "faq": "FAQ",
+        "footer": "Footer"
+      },
+      "sections": {
+        "navbar": "Wordmark, links and two actions; a menu Sheet on Mobile.",
+        "hero": "Copy beside a painting with a day planner that fills itself.",
+        "logo-marquee": "Ten invented logos in a seamless loop.",
+        "features": "Three cards with windows that play on their own.",
+        "ask": "Memory cards in two rows, and an ask box that answers with sources.",
+        "banner": "An outlined panel with pulsing rings.",
+        "testimonials": "Three tinted cards stacked like a hand.",
+        "plans": "A Monthly and Yearly switch over three plans.",
+        "faq": "The FAQ block's Split Sticky type.",
+        "footer": "Brand, store buttons, link columns and credits."
+      },
+      "propsTitle": "Props",
+      "propsLead": "On the template. Every section takes its own copy and props.",
+      "props": {
+        "locale": "The language of the default copy. The page's dir sets the direction.",
+        "photos": "The photographs, as props. None ship.",
+        "paused": "Whether every animated section is paused. Wire it to a <code>MahaamMotionToggle</code>.",
+        "defaultPaused": "Starts every section paused, when <code>paused</code> is left out.",
+        "still": "Holds every section on its finished frame, whatever <code>paused</code> says. For stills.",
+        "reducedMotion": "Replaces the visitor's setting, in Storybook and in tests."
+      },
+      "motionTitle": "Motion: a documented exception",
+      "motionLead": "The one exception to Fasla's motion rules: the sections play their story on their own. Its conditions:",
+      "motionTable": {
+        "condition": "Condition",
+        "behaviour": "Behaviour"
+      },
+      "motion": {
+        "reduced": {
+          "name": "Reduced motion",
+          "text": "Nothing moves. Each section shows its finished frame."
+        },
+        "visible": {
+          "name": "On screen and under the pointer",
+          "text": "A loop runs only while its section is on screen and the page is visible, and waits under the pointer."
+        },
+        "autoplay": {
+          "name": "Testimonials",
+          "text": "No autoplay. The stack changes only on the arrows and the dots."
+        },
+        "pause": {
+          "name": "No pause button",
+          "text": "The template ships without a visible pause button, so the design stays clean. Autoplay longer than 5 seconds needs a way to stop it (WCAG 2.2.2, Level A), so a site that ships it must place a <code>MahaamMotionToggle</code>, in its navbar or footer for example, and pass the same <code>paused</code> to <code>MahaamTemplate</code>."
+        },
+        "css": {
+          "name": "Implementation",
+          "text": "The Web Animations API and a small timer, so no keyframes in your Tailwind config."
+        }
+      },
+      "tintsTitle": "Colour",
+      "tints": "Colours are tokens, with one exception.",
+      "tintsTable": {
+        "figma": "Figma",
+        "code": "In code"
+      },
+      "tintRows": {
+        "soft": {
+          "name": "opacity/destructive/10, warning/20, info/10, success/10, info/30, success/30",
+          "text": "The soft tokens, laid over the card."
+        },
+        "built": {
+          "name": "opacity/warning/40",
+          "text": "No token. Built from the warning colour at 40% over the card, on the Noura card."
+        }
+      },
+      "creditsTitle": "Credits",
+      "creditsLead": "The template ships no photographs. The docs and Storybook use these, listed in public/images/mahaam/CREDITS.md.",
+      "credits": {
+        "painting": "The Harbour at Marseilles, Paul Signac. Public domain (State Hermitage Museum).",
+        "faisal": "Photo of Faisal: Christoph Aigner on Unsplash (Unsplash licence).",
+        "freepik": "Photos of Noura and Khalid: Image by Freepik.",
+        "footer": "The footer carries the same credits."
+      },
+      "toggleTitle": "Motion toggle",
+      "toggleLead": "An outline Icon Button you place anywhere: Pause while the page plays, Play while it is paused, with the name changing to match. It sets no <code>aria-pressed</code>, so a screen reader announces the state once.",
+      "toggleProps": {
+        "paused": "Whether the page is paused. The icon and the name follow it.",
+        "onPausedChange": "Called with the new state when it is pressed.",
+        "locale": "The language of the default names.",
+        "labels": "The names, in place of the locale's."
+      },
+      "storybook": "Open in Storybook"
+    },
     "faqBlocks": {
       "lead": "{count, plural, one {One FAQ section} other {{n} FAQ sections}}: question lists, layouts, search and topic navigation, and ways to reach support.",
       "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
@@ -3730,6 +3855,7 @@
       "docs": "Docs",
       "components": "Components",
       "blocks": "Blocks",
+      "templates": "Templates",
       "github": "GitHub",
       "lang": "العربية",
       "langLabel": "Switch to Arabic",

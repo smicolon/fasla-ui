@@ -129,7 +129,7 @@ describe("SEO route catalog", () => {
   })
 
   test("wires every route to the shared metadata catalog", async () => {
-    const { blockRoutes, componentRoutes } = await import("../lib/seo-routes")
+    const { blockRoutes, componentRoutes, templateRoutes } = await import("../lib/seo-routes")
     const coreAdapters = [
       ["/", "app/[locale]/(home)/layout.tsx"],
       ["/docs/", "app/[locale]/docs/layout.tsx"],
@@ -137,6 +137,7 @@ describe("SEO route catalog", () => {
       ["/docs/blocks/", "app/[locale]/docs/blocks/layout.tsx"],
       ["/docs/blocks/installation/", "app/[locale]/docs/blocks/installation/layout.tsx"],
       ...blockRoutes.map((route) => [route.path, `app/[locale]/docs${route.path.slice("/docs".length)}layout.tsx`]),
+      ...templateRoutes.map((route) => [route.path, `app/[locale]/docs${route.path.slice("/docs".length)}layout.tsx`]),
     ]
 
     for (const [route, relativeFile] of coreAdapters) {
@@ -155,7 +156,7 @@ describe("SEO route catalog", () => {
   })
 
   test("keeps exactly one page-level H1 on every canonical docs route", async () => {
-    const { blockRoutes, componentRoutes } = await import("../lib/seo-routes")
+    const { blockRoutes, componentRoutes, templateRoutes } = await import("../lib/seo-routes")
     const pageFiles = [
       "app/[locale]/(home)/page.tsx",
       "app/[locale]/docs/page.tsx",
@@ -163,6 +164,7 @@ describe("SEO route catalog", () => {
       "app/[locale]/docs/blocks/page.tsx",
       "app/[locale]/docs/blocks/installation/page.tsx",
       ...blockRoutes.map((route) => `app/[locale]/docs${route.path.slice("/docs".length)}page.tsx`),
+      ...templateRoutes.map((route) => `app/[locale]/docs${route.path.slice("/docs".length)}page.tsx`),
       ...componentRoutes.map((route) => {
         const slug = route.path.split("/").at(-2)
         return `app/[locale]/docs/components/${slug}/page.tsx`

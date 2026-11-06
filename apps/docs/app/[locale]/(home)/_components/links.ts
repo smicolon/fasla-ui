@@ -5,9 +5,9 @@ const comingSoon = (locale: string) => `/${locale}/coming-soon/`
  * Every destination the landing page links to, in one place.
  *
  * `blocks` is the Blocks section of the docs, its introduction: the header,
- * the footer and the block catalogue's cards all lead there. `templates`,
- * `pro` and `team` go to the Coming soon page until there is a template
- * gallery and a checkout. `components` points at the first component page:
+ * the footer and the block catalogue's cards all lead there. `templates` is
+ * the Templates index. `pro` and `team` go to the Coming soon page until there
+ * is a checkout. `components` points at the first component page:
  * there is no components index yet.
  * Change them here and every link on the page follows.
  */
@@ -16,7 +16,7 @@ export const landingLinks = {
   components: (locale: string) => `/${locale}/docs/components/button/`,
   comingSoon,
   blocks: (locale: string) => `/${locale}/docs/blocks/`,
-  templates: comingSoon,
+  templates: (locale: string) => `/${locale}/docs/templates/`,
   pro: comingSoon,
   team: comingSoon,
   storybook: "https://fasla.smicolon.com/components/",

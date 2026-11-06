@@ -89,9 +89,11 @@ export async function fetchComponent(name: string): Promise<RegistryItem> {
 }
 
 /**
- * Get the target directory based on component type
+ * Get the target directory based on component type. A template (a block item
+ * with the `template` category) lands in `templates`, as its registry target says.
  */
-export function getTargetDirectory(type: string, baseDir: string): string {
+export function getTargetDirectory(type: string, baseDir: string, categories?: string[]): string {
+  if (categories?.includes("template") && (type === "registry:block" || type === "block")) return `${baseDir}/templates`
   const typeMap: Record<string, string> = {
     "registry:ui": "ui",
     "registry:block": "blocks",

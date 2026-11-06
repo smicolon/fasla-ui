@@ -26,7 +26,8 @@
       "@fasla-ui/*": ["../../packages/fasla-ui/*"],
       "@fasla-ui/ui/*": ["../../packages/fasla-ui/registry/ui/*"],
       "@fasla-ui/blocks/*": ["../../packages/fasla-ui/registry/blocks/*"],
-      "@fasla-ui/effects/*": ["../../packages/fasla-ui/registry/effects/*"]
+      "@fasla-ui/effects/*": ["../../packages/fasla-ui/registry/effects/*"],
+      "@fasla-ui/templates/*": ["../../packages/fasla-ui/registry/templates/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "**/*.mdx"],

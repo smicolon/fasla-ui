@@ -10162,6 +10162,299 @@
         "how-it-works",
         "marketing"
       ]
+    },
+    {
+      "name": "mahaam-navbar",
+      "type": "registry:block",
+      "title": "Mahaam: Navbar",
+      "description": "The Mahaam template's navbar: wordmark, links and two actions, with a Sheet menu on Mobile.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "sheet"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-navbar.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-navbar.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
+    },
+    {
+      "name": "mahaam-motion",
+      "type": "registry:block",
+      "title": "Mahaam: Motion helper",
+      "description": "The Mahaam template's small motion helper: reduced-motion, in-view and page-visibility hooks, a loop clock, and looping animations that can be paused.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-motion.ts",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-motion.ts"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
+    },
+    {
+      "name": "mahaam-motion-toggle",
+      "type": "registry:block",
+      "title": "Mahaam: Motion toggle",
+      "description": "The Mahaam template's motion toggle: an outline icon button a site places anywhere, that shows Pause while the page plays and Play while it is paused. The template draws no pause button itself.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-motion-toggle.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-motion-toggle.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
+    },
+    {
+      "name": "mahaam-hero",
+      "type": "registry:block",
+      "title": "Mahaam: Hero",
+      "description": "The Mahaam template's hero: the copy beside a painting with a day planner on it, where a voice note types itself and three task blocks drop into their slots.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "button",
+        "mahaam-motion"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-hero.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-hero.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
+    },
+    {
+      "name": "mahaam-logo-marquee",
+      "type": "registry:block",
+      "title": "Mahaam: Logo marquee",
+      "description": "The Mahaam template's logo strip: a caption over ten invented logos that scroll in a seamless loop.",
+      "dependencies": [],
+      "registryDependencies": [
+        "mahaam-motion"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-logo-marquee.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-logo-marquee.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
+    },
+    {
+      "name": "mahaam-features",
+      "type": "registry:block",
+      "title": "Mahaam: Features",
+      "description": "The Mahaam template's features: a heading over three cards whose windows play on their own (languages stacking, a hand-off, a recap).",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "avatar",
+        "badge",
+        "mahaam-motion"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-features.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-features.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
+    },
+    {
+      "name": "mahaam-ask",
+      "type": "registry:block",
+      "title": "Mahaam: Ask",
+      "description": "The Mahaam template's ask section: two rows of memory cards scrolling opposite ways, and an ask box that types a question and opens a sourced answer.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "mahaam-motion"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-ask.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-ask.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
+    },
+    {
+      "name": "mahaam-banner",
+      "type": "registry:block",
+      "title": "Mahaam: Banner",
+      "description": "The Mahaam template's banner: an outlined panel with a voice icon, a line and two buttons, with rings that pulse out of its corner.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "mahaam-motion"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-banner.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-banner.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
+    },
+    {
+      "name": "mahaam-testimonials",
+      "type": "registry:block",
+      "title": "Mahaam: Testimonials",
+      "description": "The Mahaam template's testimonials: three tinted cards stacked like a hand that turns on the arrows and the dots.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "button",
+        "mahaam-motion"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-testimonials.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-testimonials.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
+    },
+    {
+      "name": "mahaam-plans",
+      "type": "registry:block",
+      "title": "Mahaam: Plans",
+      "description": "The Mahaam template's plans: a Monthly / Yearly switch over Free, Pro and Team.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "badge",
+        "button",
+        "tabs"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-plans.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-plans.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
+    },
+    {
+      "name": "mahaam-faq",
+      "type": "registry:block",
+      "title": "Mahaam: FAQ",
+      "description": "The Mahaam template's FAQ: the FAQ block's Split Sticky type with Mahaam's words, six questions that open one at a time.",
+      "dependencies": [],
+      "registryDependencies": [
+        "faq-split-sticky"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-faq.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-faq.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
+    },
+    {
+      "name": "mahaam-footer",
+      "type": "registry:block",
+      "title": "Mahaam: Footer",
+      "description": "The Mahaam template's footer: brand, store buttons and four link columns, the credits, and a giant faint wordmark.",
+      "dependencies": [],
+      "registryDependencies": [
+        "button",
+        "mahaam-navbar"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-footer.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-footer.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
+    },
+    {
+      "name": "template-mahaam",
+      "type": "registry:block",
+      "title": "Template: Mahaam",
+      "description": "Mahaam, a landing template for a fictional voice-first task assistant: ten sections, three breakpoints, English and Arabic, with the motion in the sections that tell the story.",
+      "dependencies": [],
+      "registryDependencies": [
+        "mahaam-navbar",
+        "mahaam-hero",
+        "mahaam-logo-marquee",
+        "mahaam-features",
+        "mahaam-ask",
+        "mahaam-banner",
+        "mahaam-testimonials",
+        "mahaam-plans",
+        "mahaam-faq",
+        "mahaam-footer",
+        "mahaam-motion-toggle"
+      ],
+      "files": [
+        {
+          "path": "registry/templates/mahaam/mahaam-template.tsx",
+          "type": "registry:block",
+          "target": "components/templates/mahaam-template.tsx"
+        }
+      ],
+      "categories": [
+        "template"
+      ]
     }
   ]
 }

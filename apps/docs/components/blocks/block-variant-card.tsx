@@ -87,7 +87,7 @@ function Segmented<T extends string>({
  * the screen, and takes the block's height from the message the preview page
  * sends. The frame's page shares the site's storage, so it follows the theme.
  */
-function PreviewFrame({ slug, frameLocale, breakpoint, title }: { slug: string; frameLocale: string; breakpoint: Breakpoint; title: string }) {
+function PreviewFrame({ src, breakpoint, title }: { src: string; breakpoint: Breakpoint; title: string }) {
   const [nearRef, near] = useNearView<HTMLDivElement>()
   const [boxRef, available] = useWidth<HTMLDivElement>()
   const frameRef = React.useRef<HTMLIFrameElement>(null)
@@ -117,7 +117,7 @@ function PreviewFrame({ slug, frameLocale, breakpoint, title }: { slug: string; 
           {near && available > 0 ? (
             <iframe
               ref={frameRef}
-              src={previewPath(frameLocale, slug)}
+              src={src}
               title={title}
               loading="lazy"
               style={{ width, height, transform: `scale(${scale})`, transformOrigin: "0 0" }}
@@ -161,13 +161,19 @@ export function BlockVariantCard({
   name,
   components,
   packages,
+  previewUrl = previewPath,
+  file,
 }: {
-  type: BlockType
+  type: Pick<BlockType, "slug" | "inverse">
   name: string
   /** The Fasla components it uses, which `add` installs with it. */
   components: string[]
   /** The npm packages it imports itself. */
   packages: string[]
+  /** Where the preview page lives, for a locale; blocks use the shared blocks preview route. */
+  previewUrl?: (locale: string, slug: string) => string
+  /** The file the Manual tab names, where it differs from `components/blocks/<slug>.tsx`. */
+  file?: string
 }) {
   const t = useTranslations("docs.blockCard")
   const locale = useLocale()
@@ -185,7 +191,7 @@ export function BlockVariantCard({
           {name}
         </h2>
         <Link
-          href={previewPath(frameLocale, type.slug)}
+          href={previewUrl(frameLocale, type.slug)}
           target="_blank"
           rel="noreferrer"
           className="text-sm font-medium text-muted-foreground underline underline-offset-4 hover:text-foreground"
@@ -229,8 +235,7 @@ export function BlockVariantCard({
 
         <TabsContent value="preview" className="mt-4" data-toc-ignore>
           <PreviewFrame
-            slug={type.slug}
-            frameLocale={frameLocale}
+            src={previewUrl(frameLocale, type.slug)}
             breakpoint={breakpoint}
             title={t("frameTitle", { name, width: BREAKPOINTS[breakpoint] })}
           />
@@ -263,7 +268,7 @@ export function BlockVariantCard({
               </li>
             ) : null}
             <li className="space-y-2">
-              <p>{t.rich("manualSource", { ...inlineCode, file: `components/blocks/${type.slug}.tsx` })}</p>
+              <p>{t.rich("manualSource", { ...inlineCode, file: file ?? `components/blocks/${type.slug}.tsx` })}</p>
               {source ? <CodeBlock>{source}</CodeBlock> : <p>{source === null ? t("loading") : t("loadFailed")}</p>}
             </li>
             {type.inverse ? (

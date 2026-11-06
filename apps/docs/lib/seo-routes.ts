@@ -57,7 +57,18 @@ type BlockRoute = {
   ar?: { title: string; description: string; h1: string }
 }
 
-export type SeoRoute = CoreRoute | ComponentRoute | BlockRoute
+/** A template: a whole page built from blocks, under /docs/templates/. */
+type TemplateRoute = {
+  kind: "template"
+  path: "/docs/templates/" | `/docs/templates/${string}/`
+  title: string
+  description: string
+  h1: string
+  category: "Templates"
+  ar?: { title: string; description: string; h1: string }
+}
+
+export type SeoRoute = CoreRoute | ComponentRoute | BlockRoute | TemplateRoute
 
 export const routes = [
   {
@@ -1098,6 +1109,36 @@ export const routes = [
       h1: "بطاقة متوهجة (Glow Card)",
     },
   },
+  {
+    kind: "template",
+    category: "Templates",
+    path: "/docs/templates/",
+    title: "Fasla Templates: Whole Landing Pages for React",
+    description:
+      "Whole pages built from Fasla blocks and components, in English and Arabic, at three breakpoints, ready to copy into a React project.",
+    h1: "Templates",
+    ar: {
+      title: "قوالب فاصلة: صفحات هبوط كاملة لمشاريع React",
+      description:
+        "صفحات كاملة مبنية من كتل ومكوّنات فاصلة، بالعربية والإنجليزية، على ثلاثة أحجام شاشة، جاهزة للنسخ إلى مشروع React.",
+      h1: "القوالب",
+    },
+  },
+  {
+    kind: "template",
+    category: "Templates",
+    path: "/docs/templates/mahaam/",
+    title: "Mahaam Landing Template for React and Tailwind CSS | Fasla",
+    description:
+      "A landing page for a voice-first task assistant: ten sections, three breakpoints, English and Arabic, with the story told in motion.",
+    h1: "Mahaam",
+    ar: {
+      title: "قالب مهام لصفحات الهبوط في React مع Tailwind CSS | فاصلة",
+      description:
+        "صفحة هبوط لمساعد مهام يعمل بالصوت: عشرة أقسام وثلاثة أحجام شاشة وعربية وإنجليزية، وقصة المنتج مروية بالحركة.",
+      h1: "مهام",
+    },
+  },
 ] as const satisfies readonly SeoRoute[]
 
 export type RoutePath = (typeof routes)[number]["path"]
@@ -1110,6 +1151,11 @@ export const componentRoutes = routes.filter(
 /** The block family pages, under /docs/blocks/. */
 export const blockRoutes = routes.filter(
   (route): route is Extract<(typeof routes)[number], { kind: "block" }> => route.kind === "block"
+)
+
+/** The template pages, under /docs/templates/. */
+export const templateRoutes = routes.filter(
+  (route): route is Extract<(typeof routes)[number], { kind: "template" }> => route.kind === "template"
 )
 
 /**

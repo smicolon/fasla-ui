@@ -1,0 +1,47 @@
+import type { Meta, StoryObj } from "@storybook/react"
+import { MahaamTestimonials } from "../../../../../packages/fasla-ui/registry/templates/mahaam/mahaam-testimonials"
+import { mahaamPhotoProps } from "../../../../docs/components/blocks/mahaam-photos"
+import { label, localeOf, mahaamViewports, motionOf, variant } from "./mahaam-story-kit"
+
+/**
+ * The per-state stories of the Mahaam testimonials: Final, Playing, Paused and Reduced motion, per breakpoint
+ * and direction. They are tagged `!dev` and `!autodocs`, so the sidebar and the Docs page do not list
+ * them, but they stay under the same ids for the pixel-diff scripts and old links. The story people
+ * read is `Testimonials` in Mahaam.stories.tsx.
+ */
+const meta: Meta<typeof MahaamTestimonials> = {
+  // The id keeps the story ids stable; the title keeps these out of the visible Templates / Mahaam page.
+  id: "templates-mahaam-testimonials",
+  title: "Templates/Mahaam States/Testimonials",
+  component: MahaamTestimonials,
+  parameters: { layout: "fullscreen", viewport: { viewports: mahaamViewports } },
+  render: (args, context) => <MahaamTestimonials locale={localeOf(context)} reducedMotion={motionOf(context).reducedMotion} portraits={mahaamPhotoProps.portraits} {...args} />,
+}
+export default meta
+
+type Story = StoryObj<typeof MahaamTestimonials>
+
+/* Final: The finished frame, as Figma draws it, held with `still`. */
+export const FinalDesktopLtr: Story = { tags: ["!dev", "!autodocs"], name: "Final · " + label("desktop", "ltr"), ...variant("desktop", "ltr"), args: {} }
+export const FinalDesktopRtl: Story = { tags: ["!dev", "!autodocs"], name: "Final · " + label("desktop", "rtl"), ...variant("desktop", "rtl"), args: {} }
+export const FinalTabletLtr: Story = { tags: ["!dev", "!autodocs"], name: "Final · " + label("tablet", "ltr"), ...variant("tablet", "ltr"), args: {} }
+export const FinalTabletRtl: Story = { tags: ["!dev", "!autodocs"], name: "Final · " + label("tablet", "rtl"), ...variant("tablet", "rtl"), args: {} }
+export const FinalMobileLtr: Story = { tags: ["!dev", "!autodocs"], name: "Final · " + label("mobile", "ltr"), ...variant("mobile", "ltr"), args: {} }
+export const FinalMobileRtl: Story = { tags: ["!dev", "!autodocs"], name: "Final · " + label("mobile", "rtl"), ...variant("mobile", "rtl"), args: {} }
+
+/* Second card: The stack after one step, with the second card in front. */
+export const SecondCardDesktopLtr: Story = { tags: ["!dev", "!autodocs"], name: "SecondCard · " + label("desktop", "ltr"), ...variant("desktop", "ltr"), args: { index: 1 } }
+export const SecondCardDesktopRtl: Story = { tags: ["!dev", "!autodocs"], name: "SecondCard · " + label("desktop", "rtl"), ...variant("desktop", "rtl"), args: { index: 1 } }
+export const SecondCardTabletLtr: Story = { tags: ["!dev", "!autodocs"], name: "SecondCard · " + label("tablet", "ltr"), ...variant("tablet", "ltr"), args: { index: 1 } }
+export const SecondCardTabletRtl: Story = { tags: ["!dev", "!autodocs"], name: "SecondCard · " + label("tablet", "rtl"), ...variant("tablet", "rtl"), args: { index: 1 } }
+export const SecondCardMobileLtr: Story = { tags: ["!dev", "!autodocs"], name: "SecondCard · " + label("mobile", "ltr"), ...variant("mobile", "ltr"), args: { index: 1 } }
+export const SecondCardMobileRtl: Story = { tags: ["!dev", "!autodocs"], name: "SecondCard · " + label("mobile", "rtl"), ...variant("mobile", "rtl"), args: { index: 1 } }
+
+/* Reduced motion: The same stack; a click changes it with no move between the cards. */
+export const ReducedMotionDesktopLtr: Story = { tags: ["!dev", "!autodocs"], name: "Reduced motion · " + label("desktop", "ltr"), ...variant("desktop", "ltr"), args: { reducedMotion: true } }
+export const ReducedMotionDesktopRtl: Story = { tags: ["!dev", "!autodocs"], name: "Reduced motion · " + label("desktop", "rtl"), ...variant("desktop", "rtl"), args: { reducedMotion: true } }
+export const ReducedMotionTabletLtr: Story = { tags: ["!dev", "!autodocs"], name: "Reduced motion · " + label("tablet", "ltr"), ...variant("tablet", "ltr"), args: { reducedMotion: true } }
+export const ReducedMotionTabletRtl: Story = { tags: ["!dev", "!autodocs"], name: "Reduced motion · " + label("tablet", "rtl"), ...variant("tablet", "rtl"), args: { reducedMotion: true } }
+export const ReducedMotionMobileLtr: Story = { tags: ["!dev", "!autodocs"], name: "Reduced motion · " + label("mobile", "ltr"), ...variant("mobile", "ltr"), args: { reducedMotion: true } }
+export const ReducedMotionMobileRtl: Story = { tags: ["!dev", "!autodocs"], name: "Reduced motion · " + label("mobile", "rtl"), ...variant("mobile", "rtl"), args: { reducedMotion: true } }
+

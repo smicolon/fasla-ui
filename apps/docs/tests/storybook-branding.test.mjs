@@ -17,8 +17,8 @@ describe("Storybook product identity", () => {
         "<title>@storybook/core - Storybook</title>"
       )}</head></html>`
     )
-    const managerSource = existsSync(path.join(storybookRoot, ".storybook/manager.ts"))
-      ? readFileSync(path.join(storybookRoot, ".storybook/manager.ts"), "utf8")
+    const managerSource = existsSync(path.join(storybookRoot, ".storybook/manager.tsx"))
+      ? readFileSync(path.join(storybookRoot, ".storybook/manager.tsx"), "utf8")
       : ""
 
     expect(managerHtml.match(/<title>/g)?.length).toBe(1)

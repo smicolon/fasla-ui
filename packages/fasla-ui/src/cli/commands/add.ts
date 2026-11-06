@@ -190,11 +190,11 @@ export function addCommand() {
       // Where each registry component lands, for rewriting imports between them.
       const targetDirOf = (name: string) => {
         const item = registry.items.find((i) => i.name === name)
-        return item ? getTargetDirectory(item.type, baseDir) : undefined
+        return item ? getTargetDirectory(item.type, baseDir, item.categories) : undefined
       }
 
       const targetPathOf = (file: RegistryFile, component: RegistryItem) =>
-        path.join(getTargetDirectory(file.type || component.type, baseDir), path.basename(file.target || file.path))
+        path.join(getTargetDirectory(file.type || component.type, baseDir, component.categories), path.basename(file.target || file.path))
 
       // Check every destination before writing any, so a path that leads out of
       // the project, or a destination that is itself a symlink, stops the whole
@@ -350,7 +350,7 @@ export function addCommand() {
         console.log("\nImport them in your code:")
         for (const componentName of importable) {
           const item = registry.items.find((i) => i.name === componentName)
-          const importPath = `${getTargetDirectory(item?.type ?? "registry:ui", componentsAlias)}/${componentName}`
+          const importPath = `${getTargetDirectory(item?.type ?? "registry:ui", componentsAlias, item?.categories)}/${componentName}`
           console.log(chalk.cyan(`  import { ... } from "${importPath}"`))
         }
       }

@@ -70,11 +70,15 @@ export function rewriteUtilsImport(content) {
  * published JSON has to carry the right ones. Imports of anything that isn't a
  * registry component are left alone.
  */
+/** `FaqSplitSticky` → `faq-split-sticky`: a block's source file is named after its component. */
+const kebab = (name) => name.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase()
+
 export function rewriteComponentImports(content, fromTarget, targetOf) {
   return content.replace(
-    /from (["'])(?:\.\.\/)+(?:(?:ui|blocks|effects|hooks)\/)?([a-z0-9-]+)\/([a-z0-9-]+)\1/g,
+    /from (["'])(?:\.\.\/)+(?:(?:ui|blocks|effects|hooks)\/)?([a-z0-9-]+)\/([A-Za-z0-9-]+)\1/g,
     (match, quote, folder, file) => {
-      const toTarget = folder === file ? targetOf(file) : undefined
+      // A UI component's file is named like its folder; a block's is its component's name in PascalCase.
+      const toTarget = folder === kebab(file) ? targetOf(folder) : undefined
       if (!toTarget) return match
       const rel = path.posix.relative(path.posix.dirname(fromTarget), toTarget.replace(/\.tsx?$/, ""))
       return `from ${quote}${rel.startsWith(".") ? rel : `./${rel}`}${quote}`

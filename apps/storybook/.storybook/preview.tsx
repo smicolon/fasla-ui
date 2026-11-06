@@ -77,10 +77,26 @@ const preview: Preview = {
     // Button and Icon Button lead the UI section; everything else keeps the
     // order of its files, which is alphabetical.
     options: {
-      storySort: { order: ["Blocks", "Effects", "UI", ["Button", "Icon Button"]] },
+      storySort: {
+        order: [
+          "Blocks",
+          "Effects",
+          "Templates",
+          ["Mahaam", ["Navbar", "Hero", "Logo marquee", "Features", "Ask", "Banner", "Testimonials", "Plans", "FAQ", "Footer"]],
+          "UI",
+          ["Button", "Icon Button"],
+        ],
+      },
     },
   },
   globalTypes: {
+    // The Mahaam template draws no pause button, so reviewers set its motion here:
+    // Playing, Paused, Final frame or Reduced motion. The toolbar item is
+    // drawn by .storybook/manager.tsx, on the Templates / Mahaam stories only.
+    motion: {
+      description: "Sets the Mahaam template's motion",
+      defaultValue: "playing",
+    },
     direction: {
       description: "Text direction — LTR sets Geist, RTL sets Cairo and the Arabic leading",
       defaultValue: "ltr",

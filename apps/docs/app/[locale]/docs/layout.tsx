@@ -23,11 +23,13 @@ export default function DocsLayout({
   // direction: the sidebar is the start column (right in Arabic) and the table
   // of contents the end column (left in Arabic). As the screen narrows the
   // gutters shrink first, the contents hide below xl, the sidebar below lg.
+  // A page that holds a `data-docs-wide` element gives the contents column back
+  // to its content (globals.css): the Templates pages use it.
   return (
     <>
       <SiteHeader />
       <main className="site-container flex-1 pt-20">
-        <div className="items-start lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[220px_minmax(0,1fr)_200px]">
+        <div data-docs-grid className="items-start lg:grid lg:grid-cols-[220px_minmax(0,1fr)] lg:gap-10 xl:grid-cols-[220px_minmax(0,1fr)_200px]">
           <DocsSidebar />
           <div data-docs-content className="min-w-0 py-6 lg:py-8">
             {children}

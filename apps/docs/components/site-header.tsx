@@ -80,6 +80,12 @@ export function SiteHeader() {
             {t("blocks")}
           </Link>
           <Link
+            href={p("/docs/templates/")}
+            className="px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground rounded-full hover:bg-accent"
+          >
+            {t("templates")}
+          </Link>
+          <Link
             href="https://github.com/smicolon/fasla-ui"
             target="_blank"
             rel="noreferrer"
@@ -147,6 +153,13 @@ export function SiteHeader() {
               className="px-4 py-3 text-sm font-medium rounded-xl hover:bg-accent transition-colors"
             >
               {t("blocks")}
+            </Link>
+            <Link
+              href={p("/docs/templates/")}
+              onClick={() => setMobileMenuOpen(false)}
+              className="px-4 py-3 text-sm font-medium rounded-xl hover:bg-accent transition-colors"
+            >
+              {t("templates")}
             </Link>
             <Link
               href="https://github.com/smicolon/fasla-ui"
