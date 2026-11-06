@@ -4772,7 +4772,20 @@
       "notIncluded": "Not included"
     },
     "final": {
-      "lede": "One command sets up your project. Add components as you need them, and keep every line."
+      "lede": "One command sets up your project. Add components as you need them, and keep every line.",
+      "agent": {
+        "heading": "Or let your agent do it",
+        "helper": "Paste this prompt into your AI coding agent to set up Fasla.",
+        "copy": "Copy agent prompt",
+        "copied": "Copied",
+        "failed": "Couldn't copy. Select the text and copy it.",
+        "or": "or",
+        "failedHero": "Couldn't copy.",
+        "failedHeroLink": "Select the text here.",
+        "show": "Show prompt",
+        "hide": "Hide prompt",
+        "region": "The prompt to copy"
+      }
     },
     "soon": {
       "meta": "Coming soon | Fasla",
