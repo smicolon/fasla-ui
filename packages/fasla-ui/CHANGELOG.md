@@ -1,5 +1,12 @@
 # @smicolon/fasla-ui
 
+## [0.8.0](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.7.0...fasla-ui-v0.8.0) (2026-11-06)
+
+
+### Features
+
+* **cli:** add agent-friendly flags to init and add ([ae47d98](https://github.com/smicolon/fasla-ui/commit/ae47d98d46e6e367bd3309e2cd3cecc3d566d62c))
+
 ## [0.7.0](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.6.0...fasla-ui-v0.7.0) (2026-11-05)
 
 
