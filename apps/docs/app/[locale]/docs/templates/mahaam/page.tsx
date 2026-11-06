@@ -23,8 +23,8 @@ const previewUrl = (locale: string) => `/${locale}/templates-preview/mahaam/`
 const sectionStoryUrl = (locale: string, section: string) =>
   `/components/?path=/story/templates-mahaam--${section}${locale === "ar" ? "&globals=direction:rtl" : ""}`
 
-/** Storybook is copied into the site at /components, outside the locale tree. The whole-template story opens in the page's direction, on the final frame. */
-const storyUrl = (locale: string) => `/components/?path=/story/templates-mahaam--template&globals=direction:${locale === "ar" ? "rtl" : "ltr"};motion:final`
+/** Storybook is copied into the site at /components, outside the locale tree. The family's Docs entry opens in the page's direction. */
+const storyUrl = (locale: string) => `/components/?path=/docs/templates-mahaam--docs${locale === "ar" ? "&globals=direction:rtl" : ""}`
 
 /** A two-to-three column table in the same markup as the props table. */
 function DocTable({ head, rows }: { head: string[]; rows: React.ReactNode[][] }) {

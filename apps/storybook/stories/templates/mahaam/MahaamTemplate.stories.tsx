@@ -4,10 +4,10 @@ import { mahaamPhotoProps } from "../../../../docs/components/blocks/mahaam-phot
 import { label, localeOf, mahaamViewports, motionOf, variant } from "./mahaam-story-kit"
 
 /**
- * The per-state stories of the Mahaam template: Final, Playing, Paused and Reduced motion, per breakpoint
- * and direction. They are tagged `!dev` and `!autodocs`, so the sidebar and the Docs page do not list
- * them, but they stay under the same ids for the pixel-diff scripts and old links. The story people
- * read is `Template` in Mahaam.stories.tsx.
+ * The whole-page stories of the Mahaam template: Final, Playing and Reduced motion, per breakpoint and
+ * direction. They are tagged `!dev` and `!autodocs`, so the sidebar and the Docs page do not list them,
+ * but they stay under the same ids (`templates-mahaam-template--final-*` and the rest) for the pixel
+ * diffs against Figma and for old links. The sections are the visible stories, in Mahaam.stories.tsx.
  */
 const meta: Meta<typeof MahaamTemplate> = {
   // The id keeps the story ids stable; the title keeps these out of the visible Templates / Mahaam page.

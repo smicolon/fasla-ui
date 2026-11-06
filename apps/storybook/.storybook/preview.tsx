@@ -82,7 +82,7 @@ const preview: Preview = {
           "Blocks",
           "Effects",
           "Templates",
-          ["Mahaam", ["Overview", "Navbar", "Hero", "Logo marquee", "Features", "Ask", "Banner", "Testimonials", "Plans", "FAQ", "Footer"]],
+          ["Mahaam", ["Navbar", "Hero", "Logo marquee", "Features", "Ask", "Banner", "Testimonials", "Plans", "FAQ", "Footer"]],
           "UI",
           ["Button", "Icon Button"],
         ],

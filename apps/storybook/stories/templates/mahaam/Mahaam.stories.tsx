@@ -8,18 +8,18 @@ import { MahaamHero, mahaamHeroCopy } from "../../../../../packages/fasla-ui/reg
 import { MahaamLogoMarquee, mahaamLogoMarqueeCopy } from "../../../../../packages/fasla-ui/registry/templates/mahaam/mahaam-logo-marquee"
 import { MahaamNavbar, mahaamNavbarCopy } from "../../../../../packages/fasla-ui/registry/templates/mahaam/mahaam-navbar"
 import { MahaamPlans, mahaamPlansCopy } from "../../../../../packages/fasla-ui/registry/templates/mahaam/mahaam-plans"
-import { MahaamTemplate } from "../../../../../packages/fasla-ui/registry/templates/mahaam/mahaam-template"
 import { MahaamTestimonials, mahaamTestimonialsCopy } from "../../../../../packages/fasla-ui/registry/templates/mahaam/mahaam-testimonials"
 import { mahaamHeroPhotoProps, mahaamPhotoProps } from "../../../../docs/components/blocks/mahaam-photos"
 import { localeOf, mahaamArgTypes, mahaamViewports, motionOf } from "./mahaam-story-kit"
 
 /**
- * Mahaam: the landing template, whole and section by section: the template, then its ten sections.
+ * Mahaam: the landing template, one story per section (navbar, hero, logo marquee, features, ask, banner,
+ * testimonials, plans, FAQ, footer).
  * Viewport, direction and theme come from the toolbar, as on the blocks; Motion sets the loops, since
  * the template draws no pause button.
  */
 /*
- * The sidebar and the Docs page list the template and its ten sections only. The per-state stories
+ * The sidebar and the Docs page list the ten sections only. The per-state stories, whole-page ones included
  * (Final, Playing, Paused and Reduced motion, per breakpoint and direction) are in the Mahaam*.stories.tsx
  * files beside this one, tagged `!dev` and `!autodocs`: hidden from both, but still built under the same
  * ids, so the pixel-diff scripts and old links reach them. The tags are written out on each story, as the
@@ -35,12 +35,6 @@ export default meta
 
 /** Motion is the toolbar's, so the story's own motion props have no row. */
 const MOTION = ["paused", "still", "reducedMotion"]
-
-export const Template: StoryObj<typeof MahaamTemplate> = {
-  name: "Template",
-  argTypes: mahaamArgTypes(MahaamTemplate, undefined, MOTION),
-  render: (args, context) => <MahaamTemplate locale={localeOf(context)} {...motionOf(context)} photos={mahaamPhotoProps} {...args} />,
-}
 
 export const Navbar: StoryObj<typeof MahaamNavbar> = {
   name: "Navbar",
