@@ -31,6 +31,12 @@ export default async function InstallationPage({
   // Commands, file names and code stay Latin in both locales; the sentence
   // around them is the locale's.
   const rich = { code: (chunks: React.ReactNode) => <code>{chunks}</code> }
+  // The same pill as inlineCode, but a flag or a path never breaks across lines.
+  const flagCode = {
+    code: (chunks: React.ReactNode) => (
+      <code className="whitespace-nowrap rounded-md bg-muted px-1.5 py-0.5 text-[0.875em] font-medium text-foreground">{chunks}</code>
+    ),
+  }
 
   return (
     <div className="space-y-8">
@@ -94,20 +100,30 @@ export default async function InstallationPage({
           </div>
 
           <div>
-            <p className="text-sm font-medium mb-2">{i("cliFlagsTitle")}</p>
-            <p className="text-sm text-muted-foreground mb-2">{i.rich("cliFlagsBody", rich)}</p>
-            <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground mb-4">
-              <li>{i.rich("cliFlagYes", rich)}</li>
-              <li>{i.rich("cliFlagPath", rich)}</li>
-              <li>{i.rich("cliFlagStyle", rich)}</li>
-              <li>{i.rich("cliFlagTheme", rich)}</li>
-              <li>{i.rich("cliFlagNoInstall", rich)}</li>
+            {/* A real heading, so it is in "On this page" and can be linked. */}
+            <h3 id="without-questions" className="scroll-mt-24 text-xl font-semibold mb-2">
+              {i("cliFlagsTitle")}
+            </h3>
+            <p className="text-muted-foreground mb-2">{i.rich("cliFlagsBody", flagCode)}</p>
+            <ul className="list-disc list-inside space-y-1 text-muted-foreground mb-4">
+              <li>{i.rich("cliFlagYes", flagCode)}</li>
+              <li>{i.rich("cliFlagPath", flagCode)}</li>
+              <li>{i.rich("cliFlagStyle", flagCode)}</li>
+              <li>{i.rich("cliFlagTheme", flagCode)}</li>
+              <li>{i.rich("cliFlagNoInstall", flagCode)}</li>
             </ul>
-            <p className="text-sm text-muted-foreground mb-2">{i("cliFlagsExample")}</p>
-            <pre className="whitespace-pre-wrap break-words rounded-lg bg-terminal p-4" dir="ltr">
-              <code className="text-green-400">{"npx @smicolon/fasla-ui@latest init --yes\nnpx @smicolon/fasla-ui@latest init --path src/components --style default --theme fasla\nnpx @smicolon/fasla-ui@latest add button --yes"}</code>
+            <p className="text-sm font-medium mb-2">{i("cliFlagsExample")}</p>
+            {/* Scrolls sideways instead of wrapping, so a flag or a path is never
+                split across two lines. Focusable so a keyboard can scroll it,
+                as the package-manager tabs' panel is. */}
+            <pre
+              dir="ltr"
+              tabIndex={0}
+              className="overflow-x-auto whitespace-pre rounded-lg bg-terminal p-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-fasla-red"
+            >
+              <code className="font-mono text-sm text-green-400">{"npx @smicolon/fasla-ui@latest init --yes\nnpx @smicolon/fasla-ui@latest init --path src/components --style default --theme fasla\nnpx @smicolon/fasla-ui@latest add button --yes"}</code>
             </pre>
-            <p className="text-sm text-muted-foreground mt-2">{i.rich("cliFlagsEnd", rich)}</p>
+            <p className="text-muted-foreground mt-2">{i.rich("cliFlagsEnd", flagCode)}</p>
           </div>
         </div>
       </div>
