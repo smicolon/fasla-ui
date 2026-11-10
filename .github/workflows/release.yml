@@ -153,7 +153,7 @@ jobs:
         run: |
           set -euo pipefail
           shopt -s nullglob
-          files=(tarballs/*.tgz)
+          files=(./tarballs/*.tgz)
           [ "${#files[@]}" -gt 0 ] || { echo "::error::no tarballs to publish"; exit 1; }
           for f in "${files[@]}"; do
             echo "::group::publishing $f"
@@ -185,11 +185,24 @@ jobs:
         run: |
           set -euo pipefail
           shopt -s nullglob
-          files=(tarballs/*.tgz)
+          files=(./tarballs/*.tgz)
           [ "${#files[@]}" -gt 0 ] || { echo "::error::no tarballs to publish"; exit 1; }
           for f in "${files[@]}"; do
             echo "::group::dry run $f"
             tar -tzf "$f" | head -50
-            npm publish "$f" --access public --dry-run
+            # A dry run on a version npm already has fails with "You cannot
+            # publish over the previously published versions". That is the
+            # normal case on a manual run between releases, so it is reported
+            # as a notice, not a failure. Any other error still fails the run.
+            if ! out="$(npm publish "$f" --access public --dry-run 2>&1)"; then
+              printf '%s\n' "$out"
+              if printf '%s' "$out" | grep -q "previously published"; then
+                echo "::notice::$f is already on npm, so npm refused the dry run on that check only. The tarball itself packed and was read fine."
+              else
+                exit 1
+              fi
+            else
+              printf '%s\n' "$out"
+            fi
             echo "::endgroup::"
           done
