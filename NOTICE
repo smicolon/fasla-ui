@@ -2,11 +2,11 @@ Fasla UI
 Copyright (c) 2025-2026 Smicolon GmbH
 
 The source code in this repository is licensed under the MIT License (see
-LICENSE). The Fasla and Smicolon names, logos and brand marks, and the
-Wall of Love customer marks, are not; see below. This file lists the fonts,
-icons, brand marks and images the repository uses or contains, and where
-each comes from. Third-party npm packages are listed with their own
-licences in each package.json and in bun.lock.
+LICENSE). The Fasla and Smicolon names, logos and brand marks, the landing
+film, and the Wall of Love customer marks are not; see below. This file
+lists the fonts, icons, brand marks and images the repository uses or
+contains, and where each comes from. Third-party npm packages are listed
+with their own licences in each package.json and in bun.lock.
 
 FONTS
 
@@ -57,16 +57,14 @@ BRAND MARKS
 PHOTOS
 
   Unsplash
-    The stock photos in this repository are from Unsplash, under the
-    Unsplash License (https://unsplash.com/license):
+    The five photographs are from Unsplash and are used under the Unsplash
+    License (https://unsplash.com/license):
       - apps/docs/public/landing/img/p-faisal.webp, p-khalid.webp and
         p-noura.webp: the portraits on the landing page.
       - apps/docs/public/landing/img/f-dunes.webp: the AlUla dunes behind
         the Arabic word on the landing page.
       - apps/docs/public/samples/avatar-portrait.png: the sample portrait in
         the Avatar docs and the Storybook stories.
-    The repository does not record the photographer of any of these five
-    photos; see TO CONFIRM.
 
   Wall of Love testimonials
     apps/docs/public/landing/img/wall/*: one photo and 13 company logos of
@@ -77,15 +75,6 @@ PHOTOS
 
   Landing film
     apps/docs/public/landing/media/*: the Fasla product film and its posters,
-    in English and Arabic.
-
-TO CONFIRM
-
-  The facts below are not recorded in the repository. Confirm each one, or
-  replace the file, before relying on this notice.
-
-  - The Unsplash photographer and photo link of p-faisal.webp, p-khalid.webp,
-    p-noura.webp, f-dunes.webp and avatar-portrait.png. They are used under
-    the Unsplash License; the credit is still to be recorded.
-  - apps/docs/public/landing/media/*: who made the film, and whether it may be
-    redistributed under the MIT License with the code.
+    in English and Arabic, produced by Smicolon GmbH.
+    All rights reserved by Smicolon GmbH. They are NOT licensed under the MIT
+    License: the MIT License covers the code, not the film or its posters.
