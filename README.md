@@ -188,4 +188,4 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for contribution guidelines.
 
 ## License
 
-MIT - See [LICENSE](./LICENSE) for details.
+The code is MIT licensed: see [LICENSE](./LICENSE). The Fasla and Smicolon names, logos and brand marks are reserved by Smicolon GmbH and are not licensed under MIT; see [NOTICE](./NOTICE) for them and for the fonts, icons and photos.

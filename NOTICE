@@ -2,10 +2,11 @@ Fasla UI
 Copyright (c) 2025-2026 Smicolon GmbH
 
 The source code in this repository is licensed under the MIT License (see
-LICENSE). This file lists the fonts, icons, brand marks and images the
-repository uses or contains, and where each comes from. Third-party npm
-packages are listed with their own licences in each package.json and in
-bun.lock.
+LICENSE). The Fasla and Smicolon names, logos and brand marks, and the
+Wall of Love customer marks, are not; see below. This file lists the fonts,
+icons, brand marks and images the repository uses or contains, and where
+each comes from. Third-party npm packages are listed with their own
+licences in each package.json and in bun.lock.
 
 FONTS
 
@@ -45,10 +46,13 @@ ICONS
 
 BRAND MARKS
 
-  Fasla and Smicolon names and logos
+  Fasla and Smicolon names, logos and brand marks
     apps/docs/public/brand/*, packages/fasla-ui/registry/ui/fasla-logo/,
-    favicon.ico, smicolon-icon.png, Logo-dark.svg, Logo-light.svg.
-    Owned by Smicolon GmbH.
+    favicon.ico, smicolon-icon.png, Logo-dark.svg, Logo-light.svg, and the
+    Fasla and Smicolon names wherever they appear.
+    All rights reserved by Smicolon GmbH. They are NOT licensed under the MIT
+    License: the MIT License covers the code, not the names, logos or brand
+    marks, and does not permit using them to identify another product.
 
 PHOTOS
 
@@ -65,9 +69,11 @@ PHOTOS
     photos; see TO CONFIRM.
 
   Wall of Love testimonials
-    apps/docs/public/landing/img/wall/*: one photo and 13 company logos,
-    copied from the testimonials smicolon.com publishes. These are the
-    customers' own pictures, not stock photos.
+    apps/docs/public/landing/img/wall/*: one photo and 13 company logos of
+    Smicolon's own customers, as published with their testimonials on
+    smicolon.com. They are third-party customer marks and pictures, shown
+    with Smicolon's permission. They are NOT licensed under the MIT License;
+    each remains the property of its owner.
 
   Landing film
     apps/docs/public/landing/media/*: the Fasla product film and its posters,
@@ -79,11 +85,7 @@ TO CONFIRM
   replace the file, before relying on this notice.
 
   - The Unsplash photographer and photo link of p-faisal.webp, p-khalid.webp,
-    p-noura.webp, f-dunes.webp and avatar-portrait.png. Unsplash does not
-    require credit, but it is the only proof of the source.
-  - apps/docs/public/landing/img/wall/*: permission from each customer to show
-    their photo or logo in an open-source repository.
+    p-noura.webp, f-dunes.webp and avatar-portrait.png. They are used under
+    the Unsplash License; the credit is still to be recorded.
   - apps/docs/public/landing/media/*: who made the film, and whether it may be
     redistributed under the MIT License with the code.
-  - Whether the Fasla and Smicolon marks are licensed with the code under the
-    MIT License or reserved by Smicolon GmbH.

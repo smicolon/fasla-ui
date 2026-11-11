@@ -193,4 +193,4 @@ Visit [fasla.smicolon.com](https://fasla.smicolon.com) for full documentation, e
 
 ## License
 
-MIT - See [LICENSE](https://github.com/smicolon/fasla-ui/blob/main/LICENSE) for details.
+The code is MIT licensed: see [LICENSE](https://github.com/smicolon/fasla-ui/blob/main/LICENSE). The Fasla and Smicolon names, logos and brand marks are reserved by Smicolon GmbH and are not licensed under MIT; see [NOTICE](https://github.com/smicolon/fasla-ui/blob/main/NOTICE) for them and for the fonts, icons and photos.
