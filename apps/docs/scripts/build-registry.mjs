@@ -63,7 +63,7 @@ export function rewriteUtilsImport(content) {
 /**
  * Registry files import each other the way the source tree lays them out —
  * `../status-indicator/status-indicator` from `registry/ui/avatar/`, or
- * `../../ui/accordion/accordion` from a block in `registry/blocks/`. Every CLI
+ * `../../ui/accordion/accordion` from a file one folder deeper. Every CLI
  * writes each file to its `target`, so point the import at where that
  * component lands instead: `./status-indicator` beside `avatar.tsx`. Neither
  * the shadcn CLI nor @smicolon/cli 0.3.3 rewrites these imports, so the

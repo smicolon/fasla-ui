@@ -68,7 +68,7 @@ function UnionType({ value }: { value: string }) {
 
 /**
  * The one props table every component page uses: four columns, one short line
- * per description (design/content/arabic-writing-guide.md). Cells keep the
+ * per description. Cells keep the
  * page's direction, so on /ar every column aligns to the start (right); a code
  * value sits in an inline <code>, which globals.css isolates left to right
  * inside the RTL cell.

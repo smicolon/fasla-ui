@@ -66,7 +66,7 @@ type Story = StoryObj<StoryArgs>
 
 /**
  * Sample copy, per script: only the accessible names, since a slider shows no
- * text of its own. Written from design/content/, not translated.
+ * text of its own. Written in Modern Standard Arabic, not translated.
  */
 const COPY = {
   ltr: {

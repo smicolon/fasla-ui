@@ -82,8 +82,8 @@ type Story = StoryObj<StoryArgs>
 /**
  * Sample copy, per script: Figma's own trail, and its badge trail. `hidden`
  * and `hiddenSections` are the steps a collapsed trail's menu lists, and
- * `menu` names its trigger. The Arabic is Modern Standard Arabic, from
- * design/content/, and matches the docs page.
+ * `menu` names its trigger. The Arabic is Modern Standard Arabic
+ * and matches the docs page.
  */
 const COPY = {
   ltr: {

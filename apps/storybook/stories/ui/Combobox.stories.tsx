@@ -17,7 +17,7 @@ type Story = StoryObj<typeof Combobox>
 /**
  * Sample copy, per script: the same countries in both. Option values are the
  * same Latin identifiers in both; labels, placeholders and the component's own
- * text change. The Arabic follows design/content/.
+ * text change. The Arabic is Modern Standard Arabic.
  */
 const COPY = {
   ltr: {

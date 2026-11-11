@@ -31,7 +31,7 @@ type Story = StoryObj<typeof Progress>
  *
  * Only the accessible names change: a progress bar has no visible text of its
  * own besides the number, and the number stays in Latin digits in Arabic, as
- * Figma's RTL variants show it. The Arabic follows design/content/: a real
+ * Figma's RTL variants show it. The Arabic shows a real
  * situation (uploading a file), never a placeholder, and it matches the docs.
  */
 const COPY = {

@@ -14,7 +14,7 @@
     /* ── figma:theme:start · ⚪️ Light ──────────────────────────────────────
        The Figma "☾ Mode" variables — 41 theme/*, six Soft tints and, in
        light only, one radius — generated
-       from design/tokens/mode.json. Figma is the source of truth; do not
+       from packages/fasla-ui/theme/tokens/mode.json. Figma is the source of truth; do not
        hand-edit these. `bun run test` fails if they drift from the snapshot.
        Anything NOT from Figma belongs below the end marker and is
        never regenerated. */
@@ -145,7 +145,7 @@
     /* ── figma:theme:start · 🌑 Dark ──────────────────────────────────────
        The Figma "☾ Mode" variables — 41 theme/*, six Soft tints and, in
        light only, one radius — generated
-       from design/tokens/mode.json. Figma is the source of truth; do not
+       from packages/fasla-ui/theme/tokens/mode.json. Figma is the source of truth; do not
        hand-edit these. `bun run test` fails if they drift from the snapshot.
        Anything NOT from Figma belongs below the end marker and is
        never regenerated. */
@@ -541,7 +541,7 @@
 
 /* ============================================
    REDUCED MOTION
-   UI_STANDARDS: every animation must honour this. Global so a new animation
+   Every animation must honour this. Global so a new animation
    is covered the moment it is written, rather than opted in one at a time.
    ============================================ */
 
@@ -628,7 +628,7 @@
 
    Arabic letters never go inside a code span, and a و before a Latin word or
    code is followed by a space: flush against the word it reads as a Latin "g"
-   glued to it. Both are content rules (design/content/arabic-writing-guide.md),
+   glued to it. Both are content rules,
    enforced for the message files by tests/arabic-code-spans.test.mjs. */
 [dir="rtl"] code,
 [dir="rtl"] pre,

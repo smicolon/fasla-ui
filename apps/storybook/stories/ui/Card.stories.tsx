@@ -33,7 +33,7 @@ type Story = StoryObj<typeof meta>
 
 /**
  * Sample copy, per script: an order and its notifications, as on the docs page.
- * Only the rendered text changes; the Arabic follows design/content/. The form
+ * Only the rendered text changes; the Arabic is Modern Standard Arabic. The form
  * uses the library's own Input and Select, never hand-styled controls.
  */
 const COPY = {

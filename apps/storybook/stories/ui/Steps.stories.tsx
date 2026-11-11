@@ -85,7 +85,7 @@ export default meta
 type Story = StoryObj<StoryArgs>
 
 /**
- * Sample copy, per script: a checkout, written from design/content/, not
+ * Sample copy, per script: a checkout, written in Modern Standard Arabic, not
  * translated. Digits stay Western in Arabic.
  */
 const COPY = {

@@ -23,8 +23,8 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 /**
- * Sample copy, per script: the same store as the docs page. The Arabic follows
- * design/content/. The sheen sweeps in the reading direction, so switch the
+ * Sample copy, per script: the same store as the docs page. The Arabic is
+ * Modern Standard Arabic. The sheen sweeps in the reading direction, so switch the
  * toolbar to RTL to see it run right to left.
  */
 const COPY = {

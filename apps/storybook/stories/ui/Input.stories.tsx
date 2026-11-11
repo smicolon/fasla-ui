@@ -43,7 +43,7 @@ type Story = StoryObj<InputProps>
 /**
  * Sample copy, per script: a checkout and account form. Only the rendered
  * text changes — prop names stay English everywhere. The Arabic is written
- * from design/content/, not translated.
+ * in Modern Standard Arabic, not translated.
  */
 const COPY = {
   ltr: {

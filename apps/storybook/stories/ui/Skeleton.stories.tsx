@@ -28,7 +28,7 @@ type Story = StoryObj<typeof Skeleton>
  * skeleton. The skeleton itself has no text.
  *
  * Only the *rendered values* change — prop names stay English everywhere. The
- * Arabic follows design/content/: real situations, never placeholders.
+ * Arabic shows real situations, never placeholders.
  */
 const COPY = {
   ltr: {
@@ -71,7 +71,7 @@ const Head = ({ children }: { children: React.ReactNode }) => (
  *
  * Storybook lists a story's own args first in the controls table, so the
  * other rows are named here, unset, ahead of `className`: that keeps
- * `className` the last row (the agent instructions file, "Storybook controls table").
+ * `className` the last row.
  */
 export const Default: Story = {
   args: { variant: undefined, animate: undefined, className: "h-4 w-48" },

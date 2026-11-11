@@ -59,7 +59,7 @@ type Story = StoryObj<StoryArgs>
  * Sample copy, per script.
  *
  * Only the *rendered values* change — prop names stay English everywhere.
- * The Arabic follows design/content/: a real situation (a photo tour of a
+ * The Arabic shows a real situation (a photo tour of a
  * city guide), never a placeholder, and it matches the docs site.
  */
 const COPY = {

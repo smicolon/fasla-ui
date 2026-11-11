@@ -31,7 +31,7 @@ type Story = StoryObj<typeof Checkbox>
  *
  * Only the *rendered values* change — prop names stay English everywhere,
  * because they are code identifiers and the argTypes table documents the API,
- * not the sample. The Arabic follows design/content/: real situations, never a
+ * not the sample. The Arabic shows real situations, never a
  * placeholder, and it matches the docs site.
  *
  * The long strings deliberately avoid digits, colons and dashes: those are

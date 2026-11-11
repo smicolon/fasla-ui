@@ -84,7 +84,7 @@ type Story = StoryObj<StoryArgs>
 /**
  * Sample copy, per script: choosing where an order is delivered. Only the
  * rendered text changes — prop names stay English everywhere. The Arabic is
- * written from design/content/, not translated.
+ * written in Modern Standard Arabic, not translated.
  */
 const COPY = {
   ltr: {

@@ -132,7 +132,7 @@ export function andList(names: string[]) {
 /**
  * Registry files import each other the way the source tree lays them out —
  * `../status-indicator/status-indicator` from `registry/ui/avatar/`, or
- * `../../ui/accordion/accordion` from a block in `registry/blocks/`. `add`
+ * `../../ui/accordion/accordion` from a file one folder deeper. `add`
  * writes every file flat into its type's directory, so point each such import
  * at where that component actually lands. Imports of anything that isn't a
  * registry component are left alone.

@@ -49,7 +49,7 @@ const COPY = {
     longLabel: "Same-day courier delivery to a residential address",
     longDesc: "Unavailable in some areas, and subject to a surcharge at checkout",
   },
-  // Follows design/content/: a real situation (choosing a delivery option),
+  // A real situation (choosing a delivery option),
   // never a placeholder, and the story names stay English.
   rtl: {
     label: "شحن سريع",

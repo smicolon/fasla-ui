@@ -146,15 +146,20 @@ read from `locales`.
 
 ## Writing Arabic
 
-How the Arabic is written is not in this file. `design/content/` is canonical:
+The Arabic is written in Modern Standard Arabic, not translated word for word.
+The rules every Arabic string follows:
 
-| File | What it covers |
-| --- | --- |
-| `design/content/arabic-writing-guide.md` | Voice, headings, sentences, links, Latin names and direction, punctuation, spelling, and what is Arabic on the site versus Storybook. |
-| `design/content/arabic-glossary.md` | The one list of terms, component names included: on `/ar/` a component is named in Arabic with the English in parentheses, `زر الاختيار (Radio)`. |
+- On `/ar/` a component is named in Arabic with the English in parentheses,
+  `زر الاختيار (Radio)`. Each name is set once, in `apps/docs/lib/seo-routes.ts`.
+- Sample copy is a real situation, never a placeholder, and matches between the
+  docs site and Storybook.
+- Arabic letters never go inside a code span, and a و before a Latin word or
+  code is followed by a space. `tests/arabic-code-spans.test.mjs` checks this.
+- No em dash or middle dot in Arabic text: both are bidi-neutral and break the
+  direction. `tests/arabic-punctuation.test.mjs` checks this.
 
-Read both before adding or changing an Arabic string. This file keeps only the
-mechanics: keys, message files, plurals and typesetting.
+This file otherwise keeps to the mechanics: keys, message files, plurals and
+typesetting.
 
 ### Typesetting
 

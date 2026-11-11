@@ -29,8 +29,8 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 /**
- * Sample copy, per script: the same store as the docs page. The Arabic follows
- * design/content/. Buttons are the library's own, never hand-styled controls.
+ * Sample copy, per script: the same store as the docs page. The Arabic is
+ * Modern Standard Arabic. Buttons are the library's own, never hand-styled controls.
  */
 const COPY = {
   ltr: {

@@ -108,7 +108,7 @@ const leadingFor = (index: 0 | 1) =>
  * Figma sets `letterSpacing` to 0% on all 148 text styles, both scripts, every
  * weight — so the ramp declares no tracking and components should set none.
  * Tailwind's stock `tracking-*` scale is left in place for the one sanctioned
- * exception, the letter-spaced eyebrow that design/DESIGN.md documents as
+ * exception, the letter-spaced eyebrow, which is
  * deliberately detached. Reach for it only for that.
  */
 

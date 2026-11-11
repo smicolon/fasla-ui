@@ -44,7 +44,7 @@ const withDirection: Decorator = (Story, context) => {
 
 /**
  * `className` is always the last row of the controls table, for every
- * component (the agent instructions file, "Storybook controls table"). Storybook lists the
+ * component. Storybook lists the
  * props it reads from the component first and a story's own args after them,
  * so without this `className` lands mid-table whenever a story adds args of
  * its own, or whenever it comes early in the component's props. It is a
@@ -77,7 +77,7 @@ const preview: Preview = {
     // Button and Icon Button lead the UI section; everything else keeps the
     // order of its files, which is alphabetical.
     options: {
-      storySort: { order: ["Blocks", "Effects", "UI", ["Button", "Icon Button"]] },
+      storySort: { order: ["Effects", "UI", ["Button", "Icon Button"]] },
     },
   },
   globalTypes: {

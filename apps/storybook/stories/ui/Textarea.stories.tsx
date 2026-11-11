@@ -34,7 +34,7 @@ type Story = StoryObj<TextareaProps>
 /**
  * Sample copy, per script: delivery notes at checkout, and a support request.
  * Only the rendered text changes; prop names stay English everywhere. The
- * Arabic is written in Modern Standard Arabic from design/content/, not
+ * Arabic is written in Modern Standard Arabic in Modern Standard Arabic, not
  * translated.
  */
 const COPY = {
