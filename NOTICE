@@ -2,22 +2,46 @@ Fasla UI
 Copyright (c) 2025-2026 Smicolon GmbH
 
 The source code in this repository is licensed under the MIT License (see
-LICENSE). This file lists the fonts, brand marks and images the repository
-uses or contains, and where each comes from. Third-party npm packages are
-listed with their own licences in each package.json and in bun.lock.
+LICENSE). This file lists the fonts, icons, brand marks and images the
+repository uses or contains, and where each comes from. Third-party npm
+packages are listed with their own licences in each package.json and in
+bun.lock.
 
 FONTS
 
+The repository uses three typefaces and no others. None of the font files
+is stored in this repository.
+
   Geist and Geist Mono
-    By Vercel. SIL Open Font License 1.1.
-    The docs site and Storybook load them from the `geist` npm package; the
-    files are not stored in this repository.
+    Copyright (c) 2023 Vercel, in collaboration with basement.studio.
+    SIL Open Font License 1.1.
+    The docs site and Storybook load them from the `geist` npm package.
 
   Cairo
-    By Mohamed Gaber. SIL Open Font License 1.1.
-    The docs site loads it through next/font/google; Storybook loads it from
-    the @fontsource-variable/cairo npm package. The files are not stored in
-    this repository.
+    Copyright 2009 The Cairo Project Authors
+    (https://github.com/Gue3bara/Cairo). SIL Open Font License 1.1.
+    The docs site loads it through next/font/google; Storybook and the
+    `font-cairo` registry item load it from @fontsource-variable/cairo.
+
+ICONS
+
+  Lucide
+    Copyright (c) 2026 Lucide Icons and Contributors. ISC License.
+    Icons derived from the Feather project: Copyright (c) 2013-present Cole
+    Bemis, MIT License. Used through the `lucide-react` npm package; the
+    icon files are not stored in this repository.
+
+  Fasla's own icons
+    Every other icon in the repository is drawn for Fasla by Smicolon GmbH
+    and is licensed with the code: the glyphs of the landing page's
+    components table, the docs site's own icons, and the artwork of the
+    Social Icons component.
+
+  Platform marks in Social Icons
+    packages/fasla-ui/registry/ui/social-icons/ draws the marks of 32
+    platforms (Apple, Google, GitHub, Slack, Zoom and others). The drawings
+    are Fasla's own; each mark is a trademark of its owner and is shown only
+    to refer to that platform.
 
 BRAND MARKS
 
@@ -26,16 +50,24 @@ BRAND MARKS
     favicon.ico, smicolon-icon.png, Logo-dark.svg, Logo-light.svg.
     Owned by Smicolon GmbH.
 
-  Platform marks in Social Icons
-    packages/fasla-ui/registry/ui/social-icons/ draws the marks of 32
-    platforms (Apple, Google, GitHub, Slack, Zoom and others). Each mark is a
-    trademark of its owner and is shown only to link to that platform.
+PHOTOS
 
-IMAGES
+  Unsplash
+    The stock photos in this repository are from Unsplash, under the
+    Unsplash License (https://unsplash.com/license):
+      - apps/docs/public/landing/img/p-faisal.webp, p-khalid.webp and
+        p-noura.webp: the portraits on the landing page.
+      - apps/docs/public/landing/img/f-dunes.webp: the AlUla dunes behind
+        the Arabic word on the landing page.
+      - apps/docs/public/samples/avatar-portrait.png: the sample portrait in
+        the Avatar docs and the Storybook stories.
+    The repository does not record the photographer of any of these five
+    photos; see TO CONFIRM.
 
   Wall of Love testimonials
     apps/docs/public/landing/img/wall/*: one photo and 13 company logos,
-    copied from the testimonials smicolon.com publishes.
+    copied from the testimonials smicolon.com publishes. These are the
+    customers' own pictures, not stock photos.
 
   Landing film
     apps/docs/public/landing/media/*: the Fasla product film and its posters,
@@ -43,20 +75,15 @@ IMAGES
 
 TO CONFIRM
 
-  The sources below are not recorded in the repository. Confirm each one, or
+  The facts below are not recorded in the repository. Confirm each one, or
   replace the file, before relying on this notice.
 
-  - apps/docs/public/landing/img/p-faisal.webp, p-khalid.webp, p-noura.webp:
-    portraits on the landing page. Photographer and licence unknown.
-  - apps/docs/public/landing/img/f-dunes.webp: the AlUla dunes photo behind
-    the Arabic word on the landing page. Photographer and licence unknown.
-  - apps/docs/public/samples/avatar-portrait.png: the sample portrait in the
-    Avatar docs. Photographer and licence unknown.
+  - The Unsplash photographer and photo link of p-faisal.webp, p-khalid.webp,
+    p-noura.webp, f-dunes.webp and avatar-portrait.png. Unsplash does not
+    require credit, but it is the only proof of the source.
   - apps/docs/public/landing/img/wall/*: permission from each customer to show
     their photo or logo in an open-source repository.
   - apps/docs/public/landing/media/*: who made the film, and whether it may be
     redistributed under the MIT License with the code.
-  - packages/fasla-ui/registry/ui/social-icons/: the original source of the
-    platform artwork (the paths were exported from the Fasla Figma file).
   - Whether the Fasla and Smicolon marks are licensed with the code under the
     MIT License or reserved by Smicolon GmbH.
