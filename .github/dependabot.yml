@@ -1,0 +1,30 @@
+# Dependabot version updates, kept deliberately small.
+#
+# Enabled: GitHub Actions only. The workflows pin every action to a full commit
+# SHA, and a pinned SHA never moves on its own, so this is what keeps those pins
+# current. Monthly, and grouped into one pull request so it is one review a
+# month rather than one per action.
+#
+# Not enabled here, on purpose:
+# - Dependabot security updates. They are switched on in the repository
+#   settings (Security > Advanced Security), not in this file.
+# - The `bun` ecosystem (a valid value, see
+#   https://docs.github.com/en/code-security/dependabot/ecosystems-supported-by-dependabot/supported-ecosystems-and-repositories).
+#   This is a Bun workspace with a committed bun.lock. Bumping dependencies
+#   across the monorepo would open a steady stream of pull requests that each
+#   need a human to check them against the components. We can add it later,
+#   grouped and limited, once there is capacity to review it.
+# - `npm`. The repository installs with Bun, not npm, so it has no
+#   package-lock.json for Dependabot to update.
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: "ci"
