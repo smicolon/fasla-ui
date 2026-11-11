@@ -1,0 +1,62 @@
+Fasla UI
+Copyright (c) 2025-2026 Smicolon GmbH
+
+The source code in this repository is licensed under the MIT License (see
+LICENSE). This file lists the fonts, brand marks and images the repository
+uses or contains, and where each comes from. Third-party npm packages are
+listed with their own licences in each package.json and in bun.lock.
+
+FONTS
+
+  Geist and Geist Mono
+    By Vercel. SIL Open Font License 1.1.
+    The docs site and Storybook load them from the `geist` npm package; the
+    files are not stored in this repository.
+
+  Cairo
+    By Mohamed Gaber. SIL Open Font License 1.1.
+    The docs site loads it through next/font/google; Storybook loads it from
+    the @fontsource-variable/cairo npm package. The files are not stored in
+    this repository.
+
+BRAND MARKS
+
+  Fasla and Smicolon names and logos
+    apps/docs/public/brand/*, packages/fasla-ui/registry/ui/fasla-logo/,
+    favicon.ico, smicolon-icon.png, Logo-dark.svg, Logo-light.svg.
+    Owned by Smicolon GmbH.
+
+  Platform marks in Social Icons
+    packages/fasla-ui/registry/ui/social-icons/ draws the marks of 32
+    platforms (Apple, Google, GitHub, Slack, Zoom and others). Each mark is a
+    trademark of its owner and is shown only to link to that platform.
+
+IMAGES
+
+  Wall of Love testimonials
+    apps/docs/public/landing/img/wall/*: one photo and 13 company logos,
+    copied from the testimonials smicolon.com publishes.
+
+  Landing film
+    apps/docs/public/landing/media/*: the Fasla product film and its posters,
+    in English and Arabic.
+
+TO CONFIRM
+
+  The sources below are not recorded in the repository. Confirm each one, or
+  replace the file, before relying on this notice.
+
+  - apps/docs/public/landing/img/p-faisal.webp, p-khalid.webp, p-noura.webp:
+    portraits on the landing page. Photographer and licence unknown.
+  - apps/docs/public/landing/img/f-dunes.webp: the AlUla dunes photo behind
+    the Arabic word on the landing page. Photographer and licence unknown.
+  - apps/docs/public/samples/avatar-portrait.png: the sample portrait in the
+    Avatar docs. Photographer and licence unknown.
+  - apps/docs/public/landing/img/wall/*: permission from each customer to show
+    their photo or logo in an open-source repository.
+  - apps/docs/public/landing/media/*: who made the film, and whether it may be
+    redistributed under the MIT License with the code.
+  - packages/fasla-ui/registry/ui/social-icons/: the original source of the
+    platform artwork (the paths were exported from the Fasla Figma file).
+  - Whether the Fasla and Smicolon marks are licensed with the code under the
+    MIT License or reserved by Smicolon GmbH.
