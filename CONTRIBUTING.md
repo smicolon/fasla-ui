@@ -11,14 +11,18 @@ opening an issue.
 
 This repository holds the free, open-source part of FASLA UI:
 
-- **UI primitives, blocks and effects** in `packages/fasla-ui/registry/`
+- **UI primitives and effects** in `packages/fasla-ui/registry/`
 - **The `fasla-ui` command-line tool** (`init`, `add`, `list`) in
   `packages/fasla-ui/src/cli/`
 - **The documentation site** in `apps/docs` (English and Arabic)
 - **The Storybook** in `apps/storybook`
 
-Bug fixes, accessibility and RTL fixes, new components and documentation
-improvements are all welcome. For a large change, such as a new component
+Premium blocks and templates are not part of this repository. Fasla Pro, with
+premium blocks and templates, is coming soon; see
+[fasla.smicolon.com](https://fasla.smicolon.com).
+
+Bug fixes, accessibility and RTL fixes, new primitives and effects, and
+documentation improvements are all welcome. For a large change, such as a new component
 family or a change to the CLI, open an issue first so we can agree on the shape
 before you spend time on it.
 
@@ -73,9 +77,8 @@ commands.
 
 ### Adding or changing a component
 
-Components live in `packages/fasla-ui/registry/`: `ui/` for primitives,
-`blocks/` for larger compositions, and `effects/` for animated components. A
-component usually has its own folder:
+Components live in `packages/fasla-ui/registry/`: `ui/` for primitives and
+`effects/` for animated components. A component usually has its own folder:
 
 ```
 packages/fasla-ui/registry/ui/component-name/

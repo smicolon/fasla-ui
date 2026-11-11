@@ -1,6 +1,6 @@
 ---
 name: Component request
-about: Request a new component for the library
+about: Request a new UI primitive or effect
 title: '[Component] '
 labels: enhancement
 assignees: ''
@@ -32,7 +32,6 @@ If possible, include a link to a similar component in another library, a design 
 
 ## Component category
 - [ ] UI Primitive (basic building block like Button, Input)
-- [ ] App Block (composite component like PageHeader, DataTable)
 - [ ] Effect (animated/visual component like ShimmerButton)
 
 ## Accessibility considerations
