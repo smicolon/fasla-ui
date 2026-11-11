@@ -71,6 +71,39 @@ describe("workflow skip chains", () => {
   })
 })
 
+// `cmd | head` under pipefail fails the step when cmd writes more than head
+// reads: head exits, cmd is killed by SIGPIPE. It passes on small output and
+// breaks on a big one, so it is banned in scripts that set pipefail.
+export function findPipefailHeadProblems(workflow) {
+  const problems = []
+  for (const [name, job] of Object.entries(workflow.jobs ?? {})) {
+    for (const step of job.steps ?? []) {
+      const script = String(step.run ?? "")
+        .split("\n")
+        .filter((line) => !line.trim().startsWith("#"))
+        .join("\n")
+      if (/set -[a-z]*o?[a-z]* ?pipefail|set -o pipefail/.test(script) && /\|\s*head\b/.test(script)) {
+        problems.push(`job "${name}": a step pipes into head under pipefail`)
+      }
+    }
+  }
+  return problems
+}
+
+describe("workflow scripts", () => {
+  const files = readdirSync(workflowsDir).filter((f) => f.endsWith(".yml") || f.endsWith(".yaml"))
+  for (const file of files) {
+    test(`${file}: no pipe into head under pipefail`, () => {
+      expect(findPipefailHeadProblems(load(file))).toEqual([])
+    })
+  }
+
+  test("the check catches the pipe into head", () => {
+    const broken = { jobs: { j: { steps: [{ run: "set -euo pipefail\ntar -tzf x.tgz | head -50" }] } } }
+    expect(findPipefailHeadProblems(broken)).toHaveLength(1)
+  })
+})
+
 describe("release.yml privileges", () => {
   const release = load("release.yml")
   const jobs = release.jobs
