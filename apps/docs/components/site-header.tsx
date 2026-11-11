@@ -74,12 +74,6 @@ export function SiteHeader() {
             {t("components")}
           </Link>
           <Link
-            href={p("/docs/blocks/")}
-            className="px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground rounded-full hover:bg-accent"
-          >
-            {t("blocks")}
-          </Link>
-          <Link
             href="https://github.com/smicolon/fasla-ui"
             target="_blank"
             rel="noreferrer"
@@ -140,13 +134,6 @@ export function SiteHeader() {
               className="px-4 py-3 text-sm font-medium rounded-xl hover:bg-accent transition-colors"
             >
               {t("components")}
-            </Link>
-            <Link
-              href={p("/docs/blocks/")}
-              onClick={() => setMobileMenuOpen(false)}
-              className="px-4 py-3 text-sm font-medium rounded-xl hover:bg-accent transition-colors"
-            >
-              {t("blocks")}
             </Link>
             <Link
               href="https://github.com/smicolon/fasla-ui"

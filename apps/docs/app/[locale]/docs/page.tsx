@@ -7,7 +7,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 /** Category keys as they appear in seo-routes, mapped to message keys. */
 const categoryKeys: Record<string, string> = {
   "UI Primitives": "primitives",
-  Blocks: "blocks",
   Effects: "effects",
 }
 
@@ -84,8 +83,8 @@ export default async function DocsPage({
                   href={p(route.path)}
                   className="group rounded-lg border border-border/50 p-4 transition-colors hover:border-fasla-red/50 hover:bg-accent/50"
                 >
-                  {/* Component names follow design/content/arabic-glossary.md:
-                      Arabic with the English in parentheses on /ar/. */}
+                  {/* Component names on /ar/ are Arabic with the English in
+                      parentheses. */}
                   <span className="font-semibold group-hover:text-fasla-red">
                     {routeText(route, locale as Locale).h1}
                   </span>

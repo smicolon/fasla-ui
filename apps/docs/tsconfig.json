@@ -25,7 +25,6 @@
       "@/content/*": ["./content/*"],
       "@fasla-ui/*": ["../../packages/fasla-ui/*"],
       "@fasla-ui/ui/*": ["../../packages/fasla-ui/registry/ui/*"],
-      "@fasla-ui/blocks/*": ["../../packages/fasla-ui/registry/blocks/*"],
       "@fasla-ui/effects/*": ["../../packages/fasla-ui/registry/effects/*"]
     }
   },

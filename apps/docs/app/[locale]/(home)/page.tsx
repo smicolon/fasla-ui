@@ -7,7 +7,6 @@ import { registryCounts } from "@/lib/registry"
 import { AnnotatedCard } from "./_components/annotated-card"
 import { ArabicWord } from "./_components/arabic-word"
 import { AtomsTable } from "./_components/atoms-table"
-import { BlocksGrid } from "./_components/blocks-grid"
 import { AgentPromptCompact } from "./_components/agent-prompt"
 import { CommandBand } from "./_components/command-band"
 import { FaqSection } from "./_components/faq-section"
@@ -25,7 +24,6 @@ import { ReviewWall } from "./_components/review-wall"
 import { installCommand, landingLinks } from "./_components/links"
 import { FlipSettled } from "./_components/locale-flip"
 import { SanadWindow } from "./_components/sanad-window"
-import { TemplatesSection } from "./_components/templates-section"
 import { TypeSpecimen } from "./_components/type-specimen"
 import { XrayStage } from "./_components/xray-stage"
 
@@ -131,8 +129,6 @@ export default async function HomePage({
         <TypeSpecimen />
         <MirrorCompare />
         <AtomsTable />
-        <BlocksGrid />
-        <TemplatesSection />
         <ArabicWord />
         <ParityPlayground pageDir={localeDirection[locale as Locale]} />
         <AnnotatedCard components={registryCounts.total} />

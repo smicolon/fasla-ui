@@ -11,12 +11,11 @@ describe("Registry-derived component counts", () => {
     const registry = JSON.parse(readFileSync(registryPath, "utf8"))
 
     expect(registryCounts.total).toBe(registry.items.length)
-    expect(registryCounts.primitives + registryCounts.blocks + registryCounts.effects).toBe(
-      registryCounts.total
-    )
-    expect(registryCounts.blocks).toBe(
-      registry.items.filter((item) => item.type === "registry:block").length
-    )
+    expect(registryCounts.primitives + registryCounts.effects).toBe(registryCounts.total)
+    // The free product: the 35 UI items and the 7 effects. Everything else is premium.
+    expect(registryCounts.total).toBe(42)
+    expect(registryCounts.effects).toBe(7)
+    expect(registry.items.some((item) => item.type === "registry:block")).toBe(false)
   })
 
   test("are never hard-coded on the pages that state them", () => {

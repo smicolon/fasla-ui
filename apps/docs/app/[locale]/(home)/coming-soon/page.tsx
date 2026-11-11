@@ -36,7 +36,7 @@ export async function generateMetadata(
 }
 
 /**
- * Coming soon: where the Blocks, Templates, Pro and Team links go until each
+ * Coming soon: where the Pro and Team links go until each
  * exists. The landing page's nav, hinge comma and footer, so the language
  * switch flips it in place like the home page.
  */

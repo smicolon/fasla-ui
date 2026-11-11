@@ -1,7 +1,7 @@
 /**
- * Lucide-style glyphs for the atoms table (24 grid, 1.75 stroke), one per
- * atom, drawn for the reference. An atom Figma adds later gets the generic
- * square until it has its own. Inner markup only; AtomIcon draws the frame.
+ * Lucide-style glyphs for the components table (24 grid, 1.75 stroke), one per
+ * component, drawn for the reference. A component added later gets the
+ * generic square until it has its own. Inner markup only; AtomIcon draws the frame.
  */
 const GLYPHS: Record<string, React.ReactNode> = {
   "Button": (
@@ -214,11 +214,76 @@ const GLYPHS: Record<string, React.ReactNode> = {
       <rect x="2.5" y="7" width="19" height="10" rx="2" /><circle cx="8" cy="12" r="2.2" /><path d="m9.7 13.7 1.3 1.3M14.5 11l2 2 2-2" />
     </>
   ),
+  "Card": (
+    <>
+      <rect x="3" y="5" width="18" height="14" rx="3" /><path d="M7 10h6M7 14h10" />
+    </>
+  ),
+  "Tabs": (
+    <>
+      <rect x="3" y="8" width="18" height="12" rx="2" /><path d="M3 8V5.5A1.5 1.5 0 0 1 4.5 4H10v4" />
+    </>
+  ),
+  "Steps": (
+    <>
+      <circle cx="5" cy="12" r="2" /><circle cx="12" cy="12" r="2" /><circle cx="19" cy="12" r="2" /><path d="M7 12h3M14 12h3" />
+    </>
+  ),
+  "Sidebar": (
+    <>
+      <rect x="3" y="4" width="18" height="16" rx="2" /><path d="M9 4v16" />
+    </>
+  ),
+  "Fasla Logo": (
+    <>
+      <circle cx="11.5" cy="9.5" r="3.5" fill="currentColor" stroke="none" /><path d="M14.8 10.5c-.4 3.6-2.4 6.2-5.6 7.5" />
+    </>
+  ),
+  "Social Icons": (
+    <>
+      <circle cx="6" cy="12" r="2.5" /><circle cx="18" cy="6" r="2.5" /><circle cx="18" cy="18" r="2.5" /><path d="m8.2 10.8 7.6-3.6M8.2 13.2l7.6 3.6" />
+    </>
+  ),
+  "Animated Gradient": (
+    <>
+      <rect x="3" y="3" width="18" height="18" rx="3" /><path d="M3 15c4-1 6-6 10-6s5 2 8 1" />
+    </>
+  ),
+  "Border Beam": (
+    <>
+      <rect x="3" y="5" width="18" height="14" rx="3" /><path d="M14 2.5h4.5A3.5 3.5 0 0 1 22 6v4" />
+    </>
+  ),
+  "Glow Card": (
+    <>
+      <rect x="6" y="6" width="12" height="12" rx="2" /><path d="M12 2v1.5M12 20.5V22M2 12h1.5M20.5 12H22" />
+    </>
+  ),
+  "Shimmer Button": (
+    <>
+      <rect x="3" y="7" width="18" height="10" rx="5" /><path d="m10 17 4-10" />
+    </>
+  ),
+  "Spotlight": (
+    <>
+      <path d="M9 3h6l-1 5h-4z" /><path d="m10 8-4 13h12L14 8" />
+    </>
+  ),
+  "Text Reveal": (
+    <>
+      <path d="M4 7h16M4 12h10M4 17h5" />
+    </>
+  ),
+  "Typewriter Text": (
+    <>
+      <path d="M4 8h10M4 13h7" /><path d="M17 6v12" />
+    </>
+  ),
 }
 
 const FALLBACK = <rect x="4" y="4" width="16" height="16" rx="3" />
 
-/** The glyph for one Figma atom, by its display name; unknown names get a plain square. */
+/** The glyph for one component, by its English name; unknown names get a plain square. */
 export function AtomIcon({ name, className }: { name: string; className?: string }) {
   return (
     <svg

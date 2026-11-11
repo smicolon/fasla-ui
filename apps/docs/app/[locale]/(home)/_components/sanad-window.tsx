@@ -1,11 +1,9 @@
-import type { CSSProperties, ReactNode } from "react"
+import type { ReactNode } from "react"
 import { getTranslations } from "next-intl/server"
 import { Button } from "@fasla-ui/ui/button/button"
 import { Card } from "@fasla-ui/ui/card/card"
 import { Select } from "@fasla-ui/ui/select/select"
-import { PageHeader } from "@fasla-ui/blocks/page-header/PageHeader"
 import { Sidebar, SidebarFooter, SidebarGroup, SidebarItem } from "@fasla-ui/ui/sidebar/sidebar"
-import { StatsCard, StatsGrid } from "@fasla-ui/blocks/stats-card/StatsCard"
 import { cn } from "@/lib/utils"
 import {
   ArrowEndIcon,
@@ -40,7 +38,7 @@ const navItem =
   "min-h-0 h-9 rounded-md border-0 px-2.5 py-0 font-normal text-foreground/70 hover:bg-muted hover:text-foreground [&>span]:gap-2.5"
 const navActive = "border border-border bg-card font-medium text-foreground shadow-sm hover:bg-card"
 
-/** A Card laid out as StatsCard lays itself out, for the stats it cannot show. */
+/** A stat in a Card: a title and value, an icon at the end, and a line under them. */
 function ComposedStat({
   tagProps,
   title,
@@ -79,7 +77,6 @@ function ComposedStat({
  */
 export async function SanadWindow() {
   const t = await getTranslations("landing.sanad")
-  const currency = { "--l-cur": `"${t("cur")}"` } as CSSProperties
 
   return (
     <div className="relative overflow-hidden rounded-2xl border border-foreground/15 bg-card text-start shadow-2xl [view-transition-name:product] [.is-xray_&]:overflow-visible">
@@ -131,49 +128,45 @@ export async function SanadWindow() {
         </Sidebar>
 
         <div className="flex min-w-0 flex-col gap-5 px-[clamp(16px,2.4vw,32px)] pb-8 pt-7 max-[560px]:gap-3.5 max-[560px]:px-3.5 max-[560px]:pb-5 max-[560px]:pt-[18px]">
-          <PageHeader
-            {...tag("PageHeader", 1, { space: "roomy" })}
-            title={t("title")}
-            description={t("greet")}
-            headingLevel={3}
-            bordered={false}
-            className="bg-transparent p-0 md:p-0 [view-transition-name:p-head] [&>div]:items-center"
-            actions={
-              <>
-                <span {...tag("Select", 2, { space: "tight" })} className="inline-flex max-[560px]:hidden">
-                  <Select
-                    size="sm"
-                    aria-label={t("rangeLabel")}
-                    items={[{ value: "2025", label: t("range") }]}
-                    defaultValue="2025"
-                    className="w-auto tabular-nums"
-                  />
-                </span>
-                <Button {...tag("Button", 3, { space: "tight" })} variant="outline" size="sm">
-                  <DownloadIcon />
-                  {t("export")}
-                </Button>
-              </>
-            }
-          />
+          {/* The page's heading row, drawn for the landing only. */}
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3 [view-transition-name:p-head]">
+            <div className="min-w-0 space-y-1">
+              <h3 className="text-2xl font-semibold tracking-tight">{t("title")}</h3>
+              <p className="text-sm text-muted-foreground">{t("greet")}</p>
+            </div>
+            <div className="flex items-center gap-2">
+              <span {...tag("Select", 2, { space: "tight" })} className="inline-flex max-[560px]:hidden">
+                <Select
+                  size="sm"
+                  aria-label={t("rangeLabel")}
+                  items={[{ value: "2025", label: t("range") }]}
+                  defaultValue="2025"
+                  className="w-auto tabular-nums"
+                />
+              </span>
+              <Button {...tag("Button", 3, { space: "tight" })} variant="outline" size="sm">
+                <DownloadIcon />
+                {t("export")}
+              </Button>
+            </div>
+          </div>
 
-          <StatsGrid columns={3} className="[view-transition-name:p-stats]">
-            {/* StatsCard's value is text only, so landing.css draws the small
-                currency before it from --l-cur (.l-cur), and hides the chevron
-                StatsCard draws beside every trend (.l-no-chevron). */}
-            <StatsCard
-              {...tag("StatsCard", 4, { style: currency })}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 [view-transition-name:p-stats]">
+            <ComposedStat
+              tagProps={tag("Card", 4)}
               title={t("s1")}
+              currency={t("cur")}
               value="184,320.50"
               icon={<WalletIcon />}
-              trend={{ value: 4.2, direction: "up" }}
-              description={t("vsNov")}
-              className="l-cur l-no-chevron p-5"
-            />
-            {/* StatsCard prints a negative change with a hyphen and colours a
-                fall red, so this card is composed from Card in StatsCard's
-                layout: a true minus, and neutral, because spending less is
-                good news. */}
+            >
+              <div className="mt-4 flex items-center gap-2 text-sm">
+                <bdi dir="ltr" className="font-medium tabular-nums text-success">
+                  +4.2%
+                </bdi>
+                <span className="text-muted-foreground">{t("vsNov")}</span>
+              </div>
+            </ComposedStat>
+            {/* A true minus, and neutral, because spending less is good news. */}
             <ComposedStat tagProps={tag("Card", 5)} title={t("s2")} currency={t("cur")} value="12,940" icon={<BagIcon />}>
               <div className="mt-4 flex items-center gap-2 text-sm">
                 <bdi dir="ltr" className="font-medium tabular-nums">
@@ -182,15 +175,14 @@ export async function SanadWindow() {
                 <span className="text-muted-foreground">{t("vsNov")}</span>
               </div>
             </ComposedStat>
-            {/* StatsCard has no place for a bar either. Fasla has no Progress
-                component yet, so the bar is landing-only. */}
+            {/* The bar is landing-only. */}
             <ComposedStat tagProps={tag("Card", 6)} title={t("s3")} value="68%" icon={<TargetIcon />}>
               <div className="mb-2 mt-3 h-1.5 overflow-hidden rounded-full bg-muted">
                 <div className="h-full w-[68%] rounded-full bg-foreground" />
               </div>
               <p className="text-sm text-muted-foreground">{t("goal")}</p>
             </ComposedStat>
-          </StatsGrid>
+          </div>
 
           <Card {...tag("Card", 7)} className="px-5 pb-3 pt-[18px] [view-transition-name:p-chart]">
             <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-2">

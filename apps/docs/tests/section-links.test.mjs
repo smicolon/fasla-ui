@@ -4,39 +4,36 @@ import path from "node:path"
 
 const docsRoot = path.resolve(import.meta.dir, "..")
 const read = (file) => readFileSync(path.join(docsRoot, file), "utf8")
-const count = (source, pattern) => (source.match(pattern) ?? []).length
 
-// The site's top-level sections: wherever a header, menu or footer links
-// Components, it links Blocks too, as many times and right after it.
+// The free site's top-level sections: Docs, Components and GitHub. The Blocks
+// section is premium, so nothing here links to it.
 describe("Top-level section links", () => {
-  test("the docs header and its mobile menu list Blocks after Components", () => {
+  test("the docs header and its mobile menu list Components, and no Blocks", () => {
     const source = read("components/site-header.tsx")
-    expect(count(source, /p\("\/docs\/blocks\/"\)/g)).toBe(count(source, /p\("\/docs\/components\/button"\)/g))
-    expect(source.indexOf('{t("blocks")}')).toBeGreaterThan(source.indexOf('{t("components")}'))
+    expect(source).toContain('p("/docs/components/button")')
+    expect(source).not.toContain("/docs/blocks")
+    expect(source).not.toContain('t("blocks")')
   })
 
-  test("the landing header and footer list Blocks after Components", () => {
+  test("the landing header and footer list Components, and no Blocks", () => {
     for (const file of ["app/[locale]/(home)/_components/landing-nav.tsx", "app/[locale]/(home)/_components/landing-footer.tsx"]) {
       const source = read(file)
-      expect(count(source, /landingLinks\.blocks\(locale\)/g), file).toBe(count(source, /landingLinks\.components\(locale\)/g))
-      expect(source.indexOf("landingLinks.blocks("), file).toBeGreaterThan(source.indexOf("landingLinks.components"))
+      expect(source, file).toContain("landingLinks.components(locale)")
+      expect(source, file).not.toContain("landingLinks.blocks")
     }
   })
 
-  test("the block catalogue's cards and its button lead to the Blocks introduction, not Coming soon", () => {
-    const source = read("app/[locale]/(home)/_components/blocks-grid.tsx")
-    expect(count(source, /href=\{landingLinks\.blocks\(locale\)\}/g)).toBe(2)
-    expect(source).not.toContain("comingSoon")
+  test("the landing links have no Blocks or templates destination", async () => {
+    const { landingLinks } = await import("../app/[locale]/(home)/_components/links")
+    expect("blocks" in landingLinks).toBe(false)
+    expect("templates" in landingLinks).toBe(false)
   })
 
-  test("Blocks leads to the Blocks introduction, in both languages", async () => {
-    const { landingLinks } = await import("../app/[locale]/(home)/_components/links")
-    expect(landingLinks.blocks("en")).toBe("/en/docs/blocks/")
-    expect(landingLinks.blocks("ar")).toBe("/ar/docs/blocks/")
-    for (const [file, label] of [["messages/en.json", "Blocks"], ["messages/ar.json", "الكتل"]]) {
+  test("the nav messages carry no Blocks label", () => {
+    for (const file of ["messages/en.json", "messages/ar.json"]) {
       const messages = JSON.parse(read(file))
-      expect(messages.nav.blocks).toBe(label)
-      expect(messages.landing.nav.blocks).toBe(label)
+      expect(messages.nav.blocks).toBeUndefined()
+      expect(messages.landing.nav.blocks).toBeUndefined()
     }
   })
 })

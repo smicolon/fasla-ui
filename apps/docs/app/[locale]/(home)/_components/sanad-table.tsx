@@ -1,10 +1,9 @@
 "use client"
 
-import type { ComponentProps } from "react"
+import type { ComponentProps, ReactNode } from "react"
 import { useTranslations } from "next-intl"
 import { Avatar } from "@fasla-ui/ui/avatar/avatar"
 import { Badge } from "@fasla-ui/ui/badge/badge"
-import { DataTable, type Column } from "@fasla-ui/blocks/data-table/DataTable"
 import { DotIcon } from "./icons"
 import { Initials } from "./initials"
 import { xrayTag } from "./xray-tag"
@@ -24,6 +23,14 @@ const ROWS: Row[] = [
   { id: 4, key: "r4", amount: "−3,200.00", status: "sched" },
 ]
 
+type Column<T> = {
+  id: string
+  header: ReactNode
+  cell: (row: T) => ReactNode
+  width?: string
+  align?: "start" | "end"
+}
+
 const tone = { done: "success", pend: "warning", sched: "info" } as const
 
 /** A transaction's status as a soft Badge in its tone. */
@@ -40,8 +47,7 @@ function StatusBadge({
 }
 
 /**
- * Sanad's recent transactions. A client component because DataTable wires a
- * click handler on every row, which a server component cannot pass down.
+ * Sanad's recent transactions: a plain table, drawn for the landing only.
  */
 export function SanadTable() {
   const t = useTranslations("landing.sanad")
@@ -109,14 +115,36 @@ export function SanadTable() {
   ]
 
   return (
-    <DataTable
-      {...xrayTag("DataTable", 8)}
-      data={ROWS}
-      columns={columns}
-      getRowKey={(row) => row.id}
-      // The reference's denser table: a 12px header and 12px row padding,
-      // 14px at the sides on phones.
-      className="l-tag-in-end rounded-none border-0 [&_td]:px-5 [&_td]:py-3 [&_th]:h-auto [&_th]:px-5 [&_th]:py-2.5 [&_th]:text-xs [&_thead]:bg-muted/50 [&_tr:last-child]:border-b-0 max-[560px]:[&_td]:px-3.5 max-[560px]:[&_th]:px-3.5"
-    />
+    <div {...xrayTag("Card", 8)} className="l-tag-in-end overflow-x-auto">
+      <table className="w-full caption-bottom text-sm">
+        <thead className="bg-muted/50">
+          <tr className="border-b">
+            {columns.map((column) => (
+              <th
+                key={column.id}
+                scope="col"
+                className={`px-5 py-2.5 text-xs font-medium text-muted-foreground max-[560px]:px-3.5 ${column.align === "end" ? "text-end" : "text-start"} ${column.width ?? ""}`}
+              >
+                {column.header}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody>
+          {ROWS.map((row) => (
+            <tr key={row.id} className="border-b last:border-b-0">
+              {columns.map((column) => (
+                <td
+                  key={column.id}
+                  className={`px-5 py-3 max-[560px]:px-3.5 ${column.align === "end" ? "text-end" : "text-start"} ${column.width ?? ""}`}
+                >
+                  {column.cell(row)}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }

@@ -1,7 +1,5 @@
 import { describe, it, expect } from "vitest"
 import { render, screen } from "@testing-library/react"
-import { EmptySearchResults, EmptyData } from "./blocks/empty-state"
-import { PageHeader } from "./blocks/page-header/PageHeader"
 import { Breadcrumb } from "./ui/breadcrumb"
 import { Button } from "./ui/button"
 import { Combobox } from "./ui/combobox"
@@ -12,20 +10,8 @@ import { Combobox } from "./ui/combobox"
  * lookup that misses a key does.
  */
 describe("text props passed as undefined keep their English default", () => {
-  it("EmptySearchResults", () => {
-    render(<EmptySearchResults query="linen" title={undefined} description={undefined} />)
-    expect(screen.getByText("No results found")).toBeTruthy()
-    expect(screen.getByText('No results for "linen". Try a different search term.')).toBeTruthy()
-  })
-
-  it("EmptyData", () => {
-    render(<EmptyData resourceName="orders" title={undefined} description={undefined} />)
-    expect(screen.getByText("No orders yet")).toBeTruthy()
-    expect(screen.getByText("Get started by creating your first order.")).toBeTruthy()
-  })
-
-  it("Breadcrumb, also inside PageHeader", () => {
-    render(<PageHeader title="Orders" breadcrumb={<Breadcrumb aria-label={undefined} />} />)
+  it("Breadcrumb", () => {
+    render(<Breadcrumb aria-label={undefined} />)
     expect(screen.getByRole("navigation", { name: "Breadcrumb" })).toBeTruthy()
   })
 

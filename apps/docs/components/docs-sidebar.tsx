@@ -11,7 +11,6 @@ import type { Locale } from "@/i18n/routing"
 /** Category keys as they appear in seo-routes, mapped to message keys. */
 const categoryKeys: Record<string, string> = {
   "UI Primitives": "primitives",
-  Blocks: "blocks",
   Effects: "effects",
 }
 
@@ -37,24 +36,12 @@ function DocsNav() {
         : "text-muted-foreground hover:bg-accent hover:text-foreground",
     )
 
-  // Blocks have their own section, opened from the header: its sidebar starts
-  // at the blocks introduction and lists only blocks. Everything else is the
-  // Components section, which no longer lists them.
-  const blocksGroup = componentRouteGroups.find((group) => group.category === "Blocks")
-  const inBlocks =
-    pathname.includes("/docs/blocks/") || pathname.endsWith("/docs/blocks") ||
-    (blocksGroup?.routes.some((route) => isActive(route.path)) ?? false)
-  const groups = componentRouteGroups.filter((group) => (group.category === "Blocks") === inBlocks)
+  const groups = componentRouteGroups
 
-  const gettingStarted = inBlocks
-    ? [
-        { title: t("introduction"), path: "/docs/blocks/" },
-        { title: t("installation"), path: "/docs/blocks/installation/" },
-      ]
-    : [
-        { title: t("introduction"), path: "/docs/" },
-        { title: t("installation"), path: "/docs/installation/" },
-      ]
+  const gettingStarted = [
+    { title: t("introduction"), path: "/docs/" },
+    { title: t("installation"), path: "/docs/installation/" },
+  ]
 
   return (
     <>
@@ -84,8 +71,8 @@ function DocsNav() {
             <ul className="space-y-1">
               {group.routes.map((route) => (
                 <li key={route.path}>
-                  {/* Component names follow design/content/arabic-glossary.md:
-                      Arabic with the English in parentheses on /ar/. */}
+                  {/* Component names on /ar/ are Arabic with the English in
+                      parentheses. */}
                   <Link
                     href={p(route.path)}
                     aria-current={isActive(route.path) ? "page" : undefined}

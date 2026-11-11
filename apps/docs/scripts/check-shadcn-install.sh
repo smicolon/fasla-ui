@@ -111,38 +111,6 @@ check_classes() {
   echo "ok    every Fasla class has a rule after $1"
 }
 
-# A block on an inverted surface, in a project whose theme is shadcn's and has
-# none of Fasla's inverse tokens: adding it must bring their mapping, with the
-# fallbacks to the page colours swapped, so the panel's classes compile and
-# resolve to the project's own colours.
-echo "::group::Inverse tokens: a block brings their mapping into a theme without them"
-if grep -q -- "--background-inverse:" "$CSS"; then
-  echo "::error::The fresh project already defines --background-inverse; the check proves nothing"
-  exit 1
-fi
-shadcn add @fasla/faq-dark-panel --yes
-for line in \
-  "--color-background-inverse: var(--background-inverse, var(--foreground));" \
-  "--color-foreground-inverse: var(--foreground-inverse, var(--background));" \
-  "--color-muted-foreground-inverse: var(--muted-foreground-inverse, color-mix(in oklab, var(--background) 75%, var(--foreground)));"; do
-  grep -qF -- "$line" "$CSS" || { echo "::error::@fasla/faq-dark-panel did not add: $line"; exit 1; }
-done
-for target in components/blocks/faq-dark-panel.tsx components/ui/accordion.tsx; do
-  [ -f "$APP/$target" ] || { echo "::error::@fasla/faq-dark-panel did not write $target"; exit 1; }
-done
-mkdir -p "$APP/app/inverse-check"
-cat > "$APP/app/inverse-check/page.tsx" <<'PAGE'
-export default function InverseCheck() {
-  return <main className="bg-background-inverse text-foreground-inverse"><p className="text-muted-foreground-inverse">.</p></main>
-}
-PAGE
-(cd "$APP" && npx -y @tailwindcss/cli@4 -i app/globals.css -o "$WORK_DIR/inverse.css" >/dev/null 2>&1)
-grep -qE '\.bg-background-inverse[,{ ]' "$WORK_DIR/inverse.css" || { echo "::error::bg-background-inverse produces no CSS"; exit 1; }
-grep -qF "var(--background-inverse, var(--foreground))" "$WORK_DIR/inverse.css" ||
-  { echo "::error::bg-background-inverse has no fallback to the project's --foreground"; exit 1; }
-echo "ok    faq-dark-panel brought the inverse mapping; its classes fall back to the page colours"
-echo "::endgroup::"
-
 echo "::group::Theme: the base layer keeps the project's own colours"
 # Give the app its own primary, the first --primary in the file (:root's).
 node -e '
@@ -161,7 +129,7 @@ check_classes theme-base
 echo "::endgroup::"
 
 echo "::group::Theme: the colours layer"
-FASLA_PRIMARY=$(node -e 'console.log(require(process.argv[1]).tokens.primary.light)' "$ROOT/design/tokens/mode.json")
+FASLA_PRIMARY=$(node -e 'console.log(require(process.argv[1]).tokens.primary.light)' "$ROOT/packages/fasla-ui/theme/tokens/mode.json")
 shadcn add @fasla/theme @fasla/font-geist --yes
 if ! grep -q -- "--primary: $FASLA_PRIMARY;" "$CSS"; then
   echo "::error::@fasla/theme did not set --primary to Fasla's $FASLA_PRIMARY"

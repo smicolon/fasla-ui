@@ -4,11 +4,11 @@ import { registryCounts } from "@/lib/registry"
 
 export const SITE_URL = "https://fasla.smicolon.com"
 
-export type ComponentCategory = "UI Primitives" | "Blocks" | "Effects"
+export type ComponentCategory = "UI Primitives" | "Effects"
 
 type CoreRoute = {
   kind: "core"
-  path: "/" | "/docs/" | "/docs/installation/" | "/docs/blocks/" | "/docs/blocks/installation/"
+  path: "/" | "/docs/" | "/docs/installation/"
   title: string
   description: string
   h1: string
@@ -38,50 +38,36 @@ type ComponentRoute = {
   category: ComponentCategory
   /**
    * Arabic name, title and description, for component pages whose body is
-   * Arabic on /ar. The name follows design/content/arabic-glossary.md.
+   * Arabic on /ar: the Arabic name with the English in parentheses.
    */
   ar?: { title: string; description: string; h1: string }
 }
 
-/**
- * A block family's page in the Blocks section: every Type of the family on one
- * page, each previewed in a frame so its breakpoints change.
- */
-type BlockRoute = {
-  kind: "block"
-  path: `/docs/blocks/${string}/`
-  title: string
-  description: string
-  h1: string
-  category: "Blocks"
-  ar?: { title: string; description: string; h1: string }
-}
-
-export type SeoRoute = CoreRoute | ComponentRoute | BlockRoute
+export type SeoRoute = CoreRoute | ComponentRoute
 
 export const routes = [
   {
     kind: "core",
     path: "/",
     title: "Fasla — Arabic‑first blocks, components & templates",
-    description: `${registryCounts.total} accessible React components — primitives, application blocks and motion effects for Tailwind CSS. The CLI copies the source into your project. MIT-licensed core.`,
+    description: `${registryCounts.total} accessible React components — primitives and motion effects for Tailwind CSS. The CLI copies the source into your project. MIT-licensed core.`,
     h1: "Arabic‑first blocks, components & templates",
     ar: {
       title: "كتل ومكوّنات وقوالب، بالعربية أولًا | فاصلة",
-      description: `مكتبة تضمّ ${arabicComponentCount(registryCounts.total)} تراعي الوصولية: مكوّنات أساسية وكتل تطبيقات وتأثيرات حركية مبنيّة على Tailwind CSS. تنسخ أداة الأوامر الشيفرة المصدرية إلى مشروعك. النواة برخصة MIT.`,
+      description: `مكتبة تضمّ ${arabicComponentCount(registryCounts.total)} تراعي الوصولية: مكوّنات أساسية وتأثيرات حركية مبنيّة على Tailwind CSS. تنسخ أداة الأوامر الشيفرة المصدرية إلى مشروعك. النواة برخصة MIT.`,
     },
   },
   {
     kind: "core",
     path: "/docs/",
-    title: "Fasla Documentation: React Components and Blocks",
+    title: "Fasla Documentation: React Components and Effects",
     description:
-      "Explore Fasla documentation for reusable React primitives, application blocks, animated effects, and copy-paste implementation guidance.",
+      "Explore Fasla documentation for reusable React primitives, animated effects, and copy-paste implementation guidance.",
     h1: "Introduction",
     ar: {
-      title: "توثيق فاصلة: مكوّنات React والكتل",
+      title: "توثيق فاصلة: مكوّنات React والتأثيرات",
       description:
-        "استكشف توثيق فاصلة: مكوّنات أساسية قابلة لإعادة الاستخدام، وكتل تطبيقات، وتأثيرات حركية، وإرشادات تطبيق جاهزة للنسخ واللصق.",
+        "استكشف توثيق فاصلة: مكوّنات أساسية قابلة لإعادة الاستخدام، وتأثيرات حركية، وإرشادات تطبيق جاهزة للنسخ واللصق.",
     },
   },
   {
@@ -95,302 +81,6 @@ export const routes = [
       title: "ثبّت فاصلة في مشروع React مع Tailwind CSS",
       description:
         "ثبّت فاصلة بأداة الأوامر (CLI) أو يدويًا، ثم اضبط إعدادات Tailwind CSS والدالة المساعدة cn في مشروعك.",
-    },
-  },
-  {
-    kind: "core",
-    path: "/docs/blocks/",
-    title: "Fasla Blocks: Ready-Made React Page Sections",
-    description:
-      "What a Fasla block is: a whole page section built from Fasla components, responsive, mirrored for Arabic and filled from props.",
-    h1: "Introduction",
-    ar: {
-      title: "كتل فاصلة: أقسام صفحات جاهزة",
-      description:
-        "تعرّف على كتل فاصلة: أقسام صفحات كاملة مبنية من مكوّنات فاصلة، متجاوبة ومعكوسة للعربية، ويأتي محتواها من خصائصها.",
-    },
-  },
-  {
-    kind: "core",
-    path: "/docs/blocks/installation/",
-    title: "Install Fasla Blocks in a React Project",
-    description:
-      "Set the project up once with init, then add a block with one command that brings the components it uses, and the CSS for inverted blocks.",
-    h1: "Installation",
-    ar: {
-      title: "ثبّت كتل فاصلة في مشروع React",
-      description:
-        "اضبط مشروعك مرة واحدة بالأمر init، ثم أضف الكتلة بأمر واحد يثبّت معها المكوّنات التي تستخدمها، مع ما تحتاجه الكتل المعكوسة من CSS.",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/faq/",
-    title: "FAQ Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Twenty-six FAQ sections, from a centred accordion to search, topic tabs and a support chat, responsive and mirrored for Arabic.",
-    h1: "FAQ",
-    ar: {
-      title: "كتل الأسئلة الشائعة لمشاريع React | فاصلة",
-      description:
-        "ستة وعشرون قسمًا للأسئلة الشائعة، من قائمة أسئلة في الوسط إلى البحث والتبويبات ومحادثة الدعم، متجاوبة ومعكوسة للعربية.",
-      h1: "الأسئلة الشائعة (FAQ)",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/error-state/",
-    title: "Error State Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Twenty-eight error pages, from a centred 404 to a server error, no access, offline and maintenance, responsive and mirrored for Arabic.",
-    h1: "Error State",
-    ar: {
-      title: "كتل حالة الخطأ لمشاريع React | فاصلة",
-      description:
-        "ثمانٍ وعشرون صفحة خطأ، من صفحة غير موجودة في الوسط إلى خطأ الخادم ورفض الوصول وانقطاع الاتصال والصيانة، متجاوبة ومعكوسة للعربية.",
-      h1: "حالة الخطأ (Error State)",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/logo-cloud/",
-    title: "Logo Cloud Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Twenty-two logo sections, from a single row of customer marks to a full wall, quotes, figures and a sector filter, responsive and mirrored for Arabic.",
-    h1: "Logo Cloud",
-    ar: {
-      title: "كتل سحابة الشعارات لمشاريع React | فاصلة",
-      description:
-        "اثنان وعشرون قسمًا لشعارات العملاء، من صف واحد إلى جدار كامل، مع اقتباسات وأرقام وتصفية حسب القطاع، متجاوبة ومعكوسة للعربية.",
-      h1: "سحابة الشعارات (Logo Cloud)",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/authentications/",
-    title: "Authentication Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Twenty-six sign-in and account screens, from a centred sign-in card to codes, two-factor, password recovery and onboarding, responsive and mirrored for Arabic.",
-    h1: "Authentications",
-    ar: {
-      title: "كتل تسجيل الدخول لمشاريع React | فاصلة",
-      description:
-        "ست وعشرون شاشة لتسجيل الدخول والحساب، من بطاقة دخول في الوسط إلى رموز التحقق والتحقق بخطوتين واستعادة كلمة المرور والإعداد الأول، متجاوبة ومعكوسة للعربية.",
-      h1: "تسجيل الدخول (Authentications)",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/gallery/",
-    title: "Gallery Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Twenty-two photo galleries, from a captioned grid and a masonry wall to carousels, a lightbox and a before-and-after slider, responsive and mirrored for Arabic.",
-    h1: "Gallery",
-    ar: {
-      title: "كتل معرض الصور لمشاريع React | فاصلة",
-      description:
-        "اثنان وعشرون معرضًا للصور، من شبكة بتسميات وجدار متدرّج إلى العروض المتحركة وعارض الصور ومنزلق المقارنة قبل وبعد، متجاوبة ومعكوسة للعربية.",
-      h1: "معرض الصور (Gallery)",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/navbar/",
-    title: "Navbar Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Seventeen navigation bars, from a logo and links to floating pills, search, an account menu and a shop header, responsive and mirrored for Arabic.",
-    h1: "Navbar",
-    ar: {
-      title: "كتل شريط التنقّل لمشاريع React | فاصلة",
-      description:
-        "سبعة عشر شريط تنقّل، من شعار وروابط إلى أشرطة عائمة وبحث وقائمة للحساب وترويسة متجر، متجاوبة ومعكوسة للعربية.",
-      h1: "شريط التنقّل (Navbar)",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/pricing/",
-    title: "Pricing Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Five pricing sections, from tier cards with a billing toggle and two plans side by side to a full feature matrix and a checkout step, responsive and mirrored for Arabic.",
-    h1: "Pricing",
-    ar: {
-      title: "كتل الأسعار لمشاريع React | فاصلة",
-      description:
-        "خمسة أقسام للأسعار، من بطاقات الخطط مع مبدّل للفوترة وخطتين متجاورتين إلى جدول كامل للميزات وخطوة للدفع، متجاوبة ومعكوسة للعربية.",
-      h1: "الأسعار (Pricing)",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/hero/",
-    title: "Hero Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Twenty-nine landing-page heroes, from split layouts and photo-led openers to card grids and moving type, video and counters, responsive and mirrored for Arabic.",
-    h1: "Hero",
-    ar: {
-      title: "كتل الأقسام الافتتاحية لمشاريع React | فاصلة",
-      description:
-        "تسعة وعشرون قسمًا افتتاحيًا لصفحات الهبوط، من التخطيطات المقسّمة والافتتاحيات المصوّرة إلى شبكات البطاقات والكتابة المتحركة والفيديو والعدّادات، متجاوبة ومعكوسة للعربية.",
-      h1: "القسم الافتتاحي (Hero)",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/about/",
-    title: "About Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Sections that introduce a company: statements and photo heroes, stories and values, letters, culture walls and figures, responsive and mirrored for Arabic.",
-    h1: "About",
-    ar: {
-      title: "كتل من نحن لمشاريع React | فاصلة",
-      description:
-        "أقسام تعرّف بالشركة: بيانات وواجهات بالصور، وقصص وقيم، ورسائل، وجدران للثقافة وأرقام، متجاوبة ومعكوسة للعربية.",
-      h1: "من نحن (About)",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/careers/",
-    title: "Careers Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Sections for a careers page: open roles as lists, cards, teams, tables and accordions, with filtering and paging, responsive and mirrored for Arabic.",
-    h1: "Careers",
-    ar: {
-      title: "كتل الوظائف لمشاريع React | فاصلة",
-      description:
-        "أقسام لصفحة الوظائف: الوظائف المتاحة في قوائم وبطاقات وفرق وجداول ومطويات، مع التصفية والتنقل بين الصفحات، متجاوبة ومعكوسة للعربية.",
-      h1: "كتلة الوظائف (Careers)",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/how-it-works/",
-    title: "How it Works Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Sections that explain a process: steps told with photos, cards and collages, and grids and panels with a drawn picture of each step, responsive and mirrored for Arabic.",
-    h1: "How it Works",
-    ar: {
-      title: "كتل كيف يعمل لمشاريع React | فاصلة",
-      description:
-        "أقسام تشرح خطوات العمل: خطوات مروية بالصور والبطاقات والكولاج، وشبكات وألواح برسم لكل خطوة، متجاوبة ومعكوسة للعربية.",
-      h1: "كيف يعمل (How it Works)",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/team/",
-    title: "Team Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Fourteen team sections, from leadership grids, portrait walls and cut-out lineups to directories, tables, a carousel and a hiring call to action, responsive and mirrored for Arabic.",
-    h1: "Team",
-    ar: {
-      title: "كتل الفريق لمشاريع React | فاصلة",
-      description:
-        "أربعة عشر قسمًا للفريق، من شبكات القيادة وجدران الصور وصفوف الصور المقصوصة إلى الأدلة والجداول وعارض الأعضاء ودعوة إلى التوظيف، متجاوبة ومعكوسة للعربية.",
-      h1: "الفريق (Team)",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/social-proof/",
-    title: "Social Proof Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Testimonial sections, from quote grids and walls to spotlights, carousels and stories backed by a figure, responsive and mirrored for Arabic.",
-    h1: "Social Proof",
-    ar: {
-      title: "كتل آراء العملاء لمشاريع React | فاصلة",
-      description:
-        "أقسام لآراء العملاء، من شبكات الاقتباسات وجدرانها إلى الاقتباسات البارزة وعارضات الشرائح والقصص التي يدعمها رقم، متجاوبة ومعكوسة للعربية.",
-      h1: "آراء العملاء (Social Proof)",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/blog-cards/",
-    title: "Blog Cards Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Sections that show articles to readers: card grids, lead features, lists, panels beside a post and browsing controls, responsive and mirrored for Arabic.",
-    h1: "Blog Cards",
-    ar: {
-      title: "كتل بطاقات المدونة لمشاريع React | فاصلة",
-      description:
-        "أقسام تعرض المقالات للقرّاء: شبكات بطاقات ومقالات مميزة وقوائم ولوحات بجانب المقال وأدوات للتصفح، متجاوبة ومعكوسة للعربية.",
-      h1: "بطاقات المدونة (Blog Cards)",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/features/",
-    title: "Features Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Twenty-seven features sections, from icon cards, numbered rows and checklists to photo-led layouts, carousels, tabs, accordions and product-in-use mock-ups, responsive and mirrored for Arabic.",
-    h1: "Features",
-    ar: {
-      title: "كتل المزايا لمشاريع React | فاصلة",
-      description:
-        "سبعة وعشرون قسمًا للمزايا: بطاقات الأيقونات والصفوف المرقّمة وقوائم التحقق، وتخطيطات تقودها الصور، وعارض وتبويبات وأكورديون، ونماذج المنتج أثناء الاستخدام، متجاوبة ومعكوسة للعربية.",
-      h1: "كتلة المزايا (Features)",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/contact-us/",
-    title: "Contact Us Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Contact sections: forms set in type, forms beside a photo, places and hours, and other ways to reach the team, with client-side checks, responsive and mirrored for Arabic.",
-    h1: "Contact Us",
-    ar: {
-      title: "كتل التواصل لمشاريع React | فاصلة",
-      description:
-        "أقسام للتواصل: نماذج تقوم على الكتابة وحدها، ونماذج بجانب صورة، ومواقع وأوقات، وطرق أخرى للوصول إلى الفريق، مع تحقق من الحقول، متجاوبة ومعكوسة للعربية.",
-      h1: "كتلة التواصل (Contact Us)",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/footer/",
-    title: "Footer Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Sections that close a page: sitemaps, brand-led footers, call-to-action bands, minimal bars, contact layouts and app footers, responsive and mirrored for Arabic.",
-    h1: "Footer",
-    ar: {
-      title: "كتل التذييل لمشاريع React | فاصلة",
-      description:
-        "أقسام تُغلق الصفحة: خرائط الموقع، وتذييلات العلامة، وأشرطة الدعوة، وتخطيطات التواصل، وتذييلات التطبيقات، متجاوبة ومعكوسة للعربية.",
-      h1: "التذييل (Footer)",
-    },
-  },
-  {
-    kind: "block",
-    category: "Blocks",
-    path: "/docs/blocks/video-call/",
-    title: "Video Call Blocks for React and Tailwind CSS | Fasla",
-    description:
-      "Sections for a video-call product: the lobby, waiting room, incoming call and join link, call stages with a grid, a speaker, a shared screen or a side panel, the controls dock, live captions and reactions, the call summary, upcoming meetings and the AI recap, built from the same parts and responsive, mirrored for Arabic.",
-    h1: "Video Call",
-    ar: {
-      title: "كتل المكالمات المرئية لمشاريع React | فاصلة",
-      description:
-        "أقسام لمنتج المكالمات المرئية: ردهة الانضمام وغرفة الانتظار والمكالمة الواردة ورابط الانضمام، ومراحل المكالمة بالشبكة أو المتحدث أو الشاشة المشتركة أو اللوحة الجانبية، وشريط عناصر التحكم والتسميات المباشرة والتفاعلات وملخّص المكالمة والاجتماعات القادمة وملخّص الذكاء الاصطناعي، مبنية من أجزاء مشتركة ومتجاوبة ومعكوسة للعربية.",
-      h1: "المكالمات المرئية (Video Call)",
     },
   },
   {
@@ -905,96 +595,6 @@ export const routes = [
   },
   {
     kind: "component",
-    category: "Blocks",
-    path: "/docs/components/app-shell/",
-    title: "App Shell React Layout | Fasla",
-    description:
-      "Structure React applications with a responsive app shell that composes navigation, sidebars, headers, and main content.",
-    h1: "AppShell",
-    ar: {
-      title: "إطار التطبيق (AppShell) لتطبيقات React | فاصلة",
-      description:
-        "نظّم تطبيقك بكتلة إطار التطبيق (AppShell)، وهي تخطيط متجاوب يجمع التنقّل والشريط الجانبي والرأس والمحتوى الرئيسي.",
-      h1: "إطار التطبيق (AppShell)",
-    },
-  },
-  {
-    kind: "component",
-    category: "Blocks",
-    path: "/docs/components/page-header/",
-    title: "Page Header React Block | Fasla",
-    description:
-      "Build consistent React page headers with titles, descriptions, breadcrumbs, and responsive action areas.",
-    h1: "PageHeader",
-    ar: {
-      title: "رأس الصفحة (PageHeader) لتطبيقات React | فاصلة",
-      description:
-        "ابنِ رؤوس صفحات متّسقة بكتلة رأس الصفحة (PageHeader)، مع العنوان والوصف ومسار التنقّل (breadcrumb) ومنطقة للإجراءات.",
-      h1: "رأس الصفحة (PageHeader)",
-    },
-  },
-  {
-    kind: "component",
-    category: "Blocks",
-    path: "/docs/components/empty-state/",
-    title: "Empty State React Block | Fasla",
-    description:
-      "Explain empty React views with contextual icons, helpful descriptions, search variants, and clear next actions.",
-    h1: "EmptyState",
-    ar: {
-      title: "حالة فارغة (EmptyState) لتطبيقات React | فاصلة",
-      description:
-        "اشرح الشاشات الفارغة بكتلة حالة فارغة (EmptyState)، مع أيقونة ووصف مفيد وخطوة تالية واضحة.",
-      h1: "حالة فارغة (EmptyState)",
-    },
-  },
-  {
-    kind: "component",
-    category: "Blocks",
-    path: "/docs/components/form-section/",
-    title: "Form Section React Block | Fasla",
-    description:
-      "Group related React form fields with headings, descriptions, validation-ready layout, and aligned action controls.",
-    h1: "FormSection",
-    ar: {
-      title: "قسم النموذج (FormSection) لتطبيقات React | فاصلة",
-      description:
-        "اجمع حقول النموذج المترابطة بكتلة قسم النموذج (FormSection)، مع عنوان ووصف وتخطيط جاهز للتحقق وأزرار إجراءات مصطفّة.",
-      h1: "قسم النموذج (FormSection)",
-    },
-  },
-  {
-    kind: "component",
-    category: "Blocks",
-    path: "/docs/components/data-table/",
-    title: "Data Table React Block | Fasla",
-    description:
-      "Present structured React data with typed columns, pagination, responsive controls, and reusable table states.",
-    h1: "DataTable",
-    ar: {
-      title: "جدول البيانات (DataTable) لتطبيقات React | فاصلة",
-      description:
-        "اعرض بيانات منظّمة بكتلة جدول البيانات (DataTable)، مع أعمدة محددة الأنواع وترقيم للصفحات وحالات جاهزة للجدول.",
-      h1: "جدول البيانات (DataTable)",
-    },
-  },
-  {
-    kind: "component",
-    category: "Blocks",
-    path: "/docs/components/stats-card/",
-    title: "Stats Card React Block | Fasla",
-    description:
-      "Display key React dashboard metrics with trend indicators, supporting context, icons, and consistent card layout.",
-    h1: "Stats Card",
-    ar: {
-      title: "بطاقة الإحصاءات (Stats Card) لتطبيقات React | فاصلة",
-      description:
-        "اعرض المقاييس الأساسية للوحة التحكم بكتلة بطاقة الإحصاءات (Stats Card)، مع مؤشرات الاتجاه والسياق والأيقونات.",
-      h1: "بطاقة الإحصاءات (Stats Card)",
-    },
-  },
-  {
-    kind: "component",
     category: "Effects",
     path: "/docs/components/shimmer-button/",
     title: "Shimmer Button React Effect | Fasla",
@@ -1107,25 +707,10 @@ export const componentRoutes = routes.filter(
     route.kind === "component"
 )
 
-/** The block family pages, under /docs/blocks/. */
-export const blockRoutes = routes.filter(
-  (route): route is Extract<(typeof routes)[number], { kind: "block" }> => route.kind === "block"
-)
-
-/**
- * The catalogue by category, for the docs landing and sidebar. Blocks lists
- * the block family pages first, then the application blocks that still live
- * under /docs/components/: they moved to the Blocks section with their URLs
- * unchanged.
- */
-export const componentRouteGroups = (
-  ["UI Primitives", "Blocks", "Effects"] as const
-).map((category) => ({
+/** The catalogue by category, for the docs landing and sidebar. */
+export const componentRouteGroups = (["UI Primitives", "Effects"] as const).map((category) => ({
   category,
-  routes: [
-    ...(category === "Blocks" ? blockRoutes : []),
-    ...componentRoutes.filter((route) => route.category === category),
-  ],
+  routes: componentRoutes.filter((route) => route.category === category),
 }))
 
 /**
