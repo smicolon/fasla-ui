@@ -6,7 +6,11 @@
   "author": "Smicolon",
   "repository": {
     "type": "git",
-    "url": "https://github.com/smicolon/fasla-ui"
+    "url": "git+https://github.com/smicolon/fasla-ui.git",
+    "directory": "packages/fasla-ui"
+  },
+  "bugs": {
+    "url": "https://github.com/smicolon/fasla-ui/issues"
   },
   "homepage": "https://fasla.smicolon.com",
   "keywords": [
@@ -21,7 +25,9 @@
     "shadcn",
     "shadcn-ui",
     "design-system",
-    "animations"
+    "animations",
+    "base-ui",
+    "cli"
   ],
   "type": "module",
   "sideEffects": false,

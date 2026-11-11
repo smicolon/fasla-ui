@@ -1,194 +1,201 @@
 # Contributing to FASLA UI
 
-Thank you for your interest in contributing to FASLA UI! This document provides guidelines and instructions for contributing.
+Thanks for your interest in FASLA UI. This guide covers how to set the project
+up, how to propose a change, and what we look for in a pull request.
 
-## Getting Started
+By taking part you agree to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
+To report a security problem, follow [SECURITY.md](SECURITY.md) instead of
+opening an issue.
+
+## Scope of this repository
+
+This repository holds the free, open-source part of FASLA UI:
+
+- **UI primitives and effects** in `packages/fasla-ui/registry/`
+- **The `fasla-ui` command-line tool** (`init`, `add`, `list`) in
+  `packages/fasla-ui/src/cli/`
+- **The documentation site** in `apps/docs` (English and Arabic)
+- **The Storybook** in `apps/storybook`
+
+Premium blocks and templates are not part of this repository. Fasla Pro, with
+premium blocks and templates, is coming soon; see
+[fasla.smicolon.com](https://fasla.smicolon.com).
+
+Bug fixes, accessibility and RTL fixes, new primitives and effects, and
+documentation improvements are all welcome. For a large change, such as a new component
+family or a change to the CLI, open an issue first so we can agree on the shape
+before you spend time on it.
+
+## Getting started
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) 18+
-- [Bun](https://bun.sh/) 1.0+
+- [Node.js](https://nodejs.org/) 22 or newer (the root `package.json` sets
+  `engines.node` to `>=22`; `.node-version` pins 22)
+- [Bun](https://bun.sh/) 1.2 or newer (the workspace is installed and run with
+  Bun; CI uses 1.4.2)
 - Git
 
-### Setup
+### Set up
 
-1. Fork the repository
-2. Clone your fork:
+1. Fork the repository and clone your fork:
+
    ```bash
    git clone https://github.com/YOUR_USERNAME/fasla-ui.git
    cd fasla-ui
    ```
-3. Install dependencies:
+
+2. Install dependencies:
+
    ```bash
    bun install
    ```
-4. Start development:
-   ```bash
-   bun run storybook
-   ```
 
-## Development Workflow
+3. Create a branch from `main`, for example `feat/button-loading` or
+   `fix/input-error-border`.
 
-### Branch Naming
+### Commands
 
-- `feat/component-name` - New components
-- `fix/issue-description` - Bug fixes
-- `docs/description` - Documentation changes
-- `refactor/description` - Code refactoring
+Run these from the repository root.
 
-### Commit Messages
-
-Follow [Conventional Commits](https://www.conventionalcommits.org/):
-
-```
-feat(button): add loading state
-fix(input): correct border color on error
-docs(readme): update installation instructions
-```
-
-### Creating Components
-
-1. Create a new directory in `packages/fasla-ui/registry/ui/`:
-   ```
-   packages/fasla-ui/registry/ui/component-name/
-   ├── component-name.tsx
-   ├── component-name.test.tsx
-   ├── component-name.stories.tsx
-   └── index.ts
-   ```
-
-2. Use the CVA pattern for variants:
-   ```tsx
-   import { cva, type VariantProps } from "class-variance-authority"
-   import { cn } from "@/lib/utils"
-
-   const componentVariants = cva("base-classes", {
-     variants: {
-       variant: {
-         default: "...",
-       },
-       size: {
-         default: "...",
-       },
-     },
-     defaultVariants: {
-       variant: "default",
-       size: "default",
-     },
-   })
-   ```
-
-3. Add to `registry.json`:
-   ```json
-   {
-     "name": "component-name",
-     "type": "registry:ui",
-     "files": [
-       {
-         "path": "registry/ui/component-name/component-name.tsx",
-         "target": "components/ui/component-name.tsx"
-       }
-     ]
-   }
-   ```
-
-4. Write tests (aim for 90%+ coverage)
-
-5. Create Storybook stories
-
-### Testing
-
-```bash
-# Run all tests
-bun run test
-
-# Watch mode
-bun run test:watch
-
-# With coverage
-bun run test --coverage
-```
-
-### Code Style
-
-- Use TypeScript
-- Follow existing patterns in the codebase
-- Use Tailwind CSS for styling
-- Export all types
-- Include JSDoc comments for public APIs
-
-### Pull Request Process
-
-1. Create a branch from `main`
-2. Make your changes
-3. Add/update tests
-4. Add/update documentation
-5. Run `bun run lint` and `bun run typecheck`
-6. Push and create a PR
-
-### Versioning — nothing to do by hand
-
-Versions and changelogs come from your commit messages. There is no changeset
-file to write and no version to bump yourself.
-
-[release-please](https://github.com/googleapis/release-please) reads the
-conventional commits that land on `main` and keeps a `chore: release packages`
-pull request open with the next versions and CHANGELOG entries already written.
-Merging that PR tags the release and publishes to npm.
-
-What your commit type does:
-
-| Commit | Bump |
+| Task | Command |
 | --- | --- |
-| `fix:` | patch — `0.2.2` → `0.2.3` |
-| `feat:` | minor — `0.2.2` → `0.3.0` |
-| `feat!:` or a `BREAKING CHANGE:` footer | major — `0.2.2` → `1.0.0` |
-| `chore:`, `ci:`, `test:`, `style:` | none |
+| Lint | `bun run lint` |
+| Type check | `bun run typecheck` |
+| Unit tests | `bun run test` |
+| Build everything | `bun run build` |
+| Storybook (dev server) | `bun run storybook` |
+| Docs site (dev server) | `bun run --cwd apps/docs dev` |
+| Library tests in watch mode | `bun run --cwd packages/fasla-ui test:watch` |
 
-Scope a commit to the package it touches when it matters — `fix(cli): …` — and
-keep the first line under 72 characters. A commit that does not parse as a
-conventional commit is simply ignored for versioning, so it will not appear in
-the changelog.
+`bun run lint`, `typecheck`, `test` and `build` run through
+[Turborepo](https://turbo.build) across every workspace that defines the
+script. Run lint, type check, tests and build before you push; CI runs the same
+commands.
 
-## Localisation
+## Making a change
+
+### Adding or changing a component
+
+Components live in `packages/fasla-ui/registry/`: `ui/` for primitives and
+`effects/` for animated components. A component usually has its own folder:
+
+```
+packages/fasla-ui/registry/ui/component-name/
+├── component-name.tsx
+├── component-name.test.tsx
+└── index.ts
+```
+
+- Build variants with [class-variance-authority](https://cva.style) and merge
+  classes with `cn()` from `@/lib/utils`.
+- Style with Tailwind CSS and the theme tokens (CSS variables), not raw colour
+  values, so dark mode and theming keep working.
+- Accept a `className` prop and export your prop types.
+- Register the component in `packages/fasla-ui/registry.json` so the CLI can
+  install it.
+- Add a Storybook story under `apps/storybook/stories/`.
+- Add or update the docs page in `apps/docs`.
+- Write tests for the behaviour, not only the rendering.
+
+### Quality bar
+
+- **Right-to-left.** FASLA UI is Arabic-first. Check every change in both LTR
+  and RTL. Use logical properties (`ms-*`, `ps-*`, `start-*`, `text-start`)
+  instead of left and right, and mirror directional icons.
+- **Accessibility.** Everything interactive works from the keyboard, has a
+  visible focus style and the right ARIA attributes. Icon-only buttons need an
+  `aria-label`.
+- **Motion.** Animation respects `prefers-reduced-motion`.
+- **States.** Cover loading, empty, error and disabled states where they apply.
+- **Light and dark.** Check both themes.
+
+### Localisation
 
 The docs site ships in English and Arabic, and every page exists in both. A
-string added to one locale and not the other fails the build.
+string added to one locale and not the other fails the tests. Read
+[docs/LOCALISATION.md](docs/LOCALISATION.md) before you add a page, a string or
+a locale.
 
-Read **[docs/LOCALISATION.md](docs/LOCALISATION.md)** before adding a page, a
-string or a locale. It covers the message-file structure, `setRequestLocale`
-(which the static export requires), the Arabic writing rules from Brand
-Identity V2.5, ICU plurals, and what does and does not mirror in RTL.
+## Commits and pull request titles
 
-## Component Guidelines
+This repository uses [Conventional Commits](https://www.conventionalcommits.org/)
+and **squash-merges** every pull request. That means the **pull request title
+becomes the commit message on `main`**, so the title is what matters. The
+individual commits on your branch are not kept, but clear ones help reviewers.
 
-### Accessibility
+The format is:
 
-- All interactive components must be keyboard accessible
-- Use proper ARIA attributes
-- Test with screen readers
-- Support `prefers-reduced-motion`
+```
+<type>(<optional scope>): <description>
+```
 
-### Performance
+- **Types:** `build`, `chore`, `ci`, `docs`, `feat`, `fix`, `perf`,
+  `refactor`, `revert`, `style`, `test`
+- **Scope** is optional: lowercase letters, digits, `.`, `_`, `/` and `-`, in
+  parentheses, for example `fix(cli): ...` or `feat(button): ...`
+- A `!` before the colon marks a breaking change: `feat!: drop React 17`
+- Keep the title to **72 characters or fewer**
 
-- Avoid unnecessary re-renders
-- Use `React.memo` where appropriate
-- Keep bundle size minimal
-- Tree-shake friendly exports
+Examples:
 
-### Styling
+```
+feat(button): add a loading state
+fix(input): correct the border colour on error
+docs: explain how to add a locale
+```
 
-- Use Tailwind CSS utility classes
-- Support dark mode via CSS variables
-- Allow className overrides
-- Use `cn()` for class merging
+The `PR title` workflow (`.github/workflows/pr-title.yml`) checks this on every
+pull request and fails if the title does not match.
 
-## Getting Help
+## How releases work
 
-- Open an issue for bugs or feature requests
-- Join discussions in existing issues
-- Check the documentation at [fasla.smicolon.com](https://fasla.smicolon.com)
+You never bump a version or edit a changelog by hand.
 
-## Code of Conduct
+A bot ([release-please](https://github.com/googleapis/release-please)) reads the
+squash-merged commit messages on `main` and keeps one open pull request titled
+`chore: release packages`. That pull request contains the next version number
+and the changelog entries it worked out from the commits. When a maintainer
+merges it, the release is tagged and the package is published to npm by the
+release workflow.
 
-Be respectful and constructive. We're all here to build something great together.
+What your title type does to the version:
+
+| Title | Effect |
+| --- | --- |
+| `fix:` | patch release (`0.8.0` to `0.8.1`) |
+| `feat:` | minor release (`0.8.0` to `0.9.0`) |
+| `feat!:` or a `BREAKING CHANGE:` footer | major release (while the version is below 1.0, a minor bump) |
+| `docs:`, `refactor:`, `perf:`, `revert:` | listed in the changelog, but no version bump on their own |
+| `chore:`, `ci:`, `build:`, `style:`, `test:` | no version bump and not in the changelog |
+
+A title that does not parse as a conventional commit produces no release entry,
+which is why the title check exists.
+
+## Pull requests
+
+A good pull request:
+
+- does one thing and is small enough to review in one sitting
+- has a conventional title as described above
+- explains **what** changed and **why**, and links the issue it closes
+- includes tests for new behaviour and bug fixes
+- updates the docs, Storybook stories and, where it applies, both locales
+- includes before and after screenshots for visual changes, in LTR and RTL
+- passes lint, type check, tests and build
+
+Open the pull request against `main` and fill in the template. A maintainer will
+review it; expect some back-and-forth, and please keep discussion on the pull
+request so others can follow it.
+
+## Getting help
+
+- Read the documentation at [fasla.smicolon.com](https://fasla.smicolon.com)
+- Search the [existing issues](https://github.com/smicolon/fasla-ui/issues)
+  before opening a new one
+- Use the issue templates for bugs, component requests and questions
+
+## License
+
+By contributing you agree that your contributions are licensed under the
+[MIT License](LICENSE) that covers the project.
