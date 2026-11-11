@@ -2,22 +2,22 @@
 name: Component request
 about: Request a new component for the library
 title: '[Component] '
-labels: component-request
+labels: enhancement
 assignees: ''
 ---
 
-## Component Name
+## Component name
 What should the component be called?
 
 ## Description
 A clear and concise description of what the component should do.
 
-## Use Cases
+## Use cases
 - [ ] Use case 1
 - [ ] Use case 2
 - [ ] Use case 3
 
-## Proposed Props
+## Proposed props
 ```tsx
 interface ComponentProps {
   // Describe the expected props
@@ -27,16 +27,19 @@ interface ComponentProps {
 }
 ```
 
-## Visual Reference
+## Visual reference
 If possible, include a link to a similar component in another library, a design mockup, or a screenshot.
 
-## Component Category
+## Component category
 - [ ] UI Primitive (basic building block like Button, Input)
 - [ ] App Block (composite component like PageHeader, DataTable)
 - [ ] Effect (animated/visual component like ShimmerButton)
 
-## Accessibility Considerations
-Any specific a11y requirements for this component?
+## Accessibility considerations
+Any specific accessibility requirements for this component?
+
+## Right-to-left
+Anything that should behave differently in RTL, such as directional icons or layout?
 
 ## Additional context
 Add any other context about the component request here.
