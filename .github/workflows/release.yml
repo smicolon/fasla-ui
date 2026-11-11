@@ -195,7 +195,11 @@ jobs:
           [ "${#files[@]}" -gt 0 ] || { echo "::error::no tarballs to publish"; exit 1; }
           for f in "${files[@]}"; do
             echo "::group::dry run $f"
-            tar -tzf "$f" | head -50
+            # Not `tar | head`: head closes the pipe early, tar then dies on
+            # SIGPIPE, and pipefail turns that into a failed step.
+            tar -tzf "$f" > "$RUNNER_TEMP/listing.txt"
+            echo "$(wc -l < "$RUNNER_TEMP/listing.txt") files in $f; first 50:"
+            head -n 50 "$RUNNER_TEMP/listing.txt"
             # A dry run on a version npm already has fails with "You cannot
             # publish over the previously published versions". That is the
             # normal case on a manual run between releases, so it is reported
