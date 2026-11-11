@@ -14,6 +14,7 @@ import { applyThemeItems, detectProjectStyle, themeItemsCommand } from "../theme
 import { installComponentPackages, writeCnHelper } from "./init.js"
 import { aliasRootOrExit, repairIfNeededOrExit, safeOrExit } from "./shared.js"
 import { isFaslaFile } from "../marker.js"
+import { isProName, proNotice } from "../pro.js"
 
 /**
  * `add`: copies registry components, and what they import, into the project,
@@ -93,9 +94,16 @@ export function addCommand() {
         registry.items.some((item) => item.name === c)
       )
 
-      const invalidComponents = components.filter(
+      const notInRegistry = components.filter(
         (c) => !registry.items.some((item) => item.name === c)
       )
+      // Names the registry does not have but Fasla Pro does get a notice, not an error.
+      const proComponents = notInRegistry.filter(isProName)
+      const invalidComponents = notInRegistry.filter((c) => !isProName(c))
+
+      if (proComponents.length > 0) {
+        console.log(chalk.cyan(proNotice(proComponents)))
+      }
 
       if (invalidComponents.length > 0) {
         console.log(
@@ -104,6 +112,8 @@ export function addCommand() {
       }
 
       if (validComponents.length === 0) {
+        // Only Pro names were asked for: nothing went wrong, there is just nothing to add yet.
+        if (invalidComponents.length === 0 && proComponents.length > 0) process.exit(0)
         console.log(chalk.red("No valid components to add."))
         process.exit(1)
       }

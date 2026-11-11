@@ -609,6 +609,31 @@ describe("add", () => {
     expect(await tree(dir)).toEqual(before)
   })
 
+  it("answers a Fasla Pro name with a coming-soon notice and the pricing link, and exits normally", async () => {
+    const dir = await nextApp({ "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" } }) })
+    const before = await tree(dir)
+    await expect(run("add", "hero-split-image", "--yes", "--cwd", dir)).rejects.toThrow("process.exit(0)")
+    expect(output()).toContain("hero-split-image is part of Fasla Pro, coming soon.")
+    expect(output()).toContain("Pricing: https://fasla.smicolon.com/en/#pricing")
+    expect(output()).not.toContain("Unknown components")
+    expect(output()).not.toContain("No valid components")
+    expect(await tree(dir)).toEqual(before)
+  })
+
+  it("adds the free names and gives the notice for the Pro ones in the same run", async () => {
+    const dir = await nextApp({ "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" } }) })
+    await run("add", "badge", "data-table", "--yes", "--no-install", "--cwd", dir)
+    expect(output()).toContain("data-table is part of Fasla Pro, coming soon.")
+    expect(await fs.pathExists(path.join(dir, "components/ui/badge.tsx"))).toBe(true)
+  })
+
+  it("still calls a name that is neither free nor Pro unknown, and fails", async () => {
+    const dir = await nextApp({ "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" } }) })
+    await expect(run("add", "buton", "faq-dark-panel", "--yes", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(output()).toContain("faq-dark-panel is part of Fasla Pro, coming soon.")
+    expect(output()).toContain("Unknown components: buton")
+  })
+
   it("leaves a 0.3 project untouched when the registry can't be fetched", async () => {
     registryDown = true
     const dir = await legacyProject()

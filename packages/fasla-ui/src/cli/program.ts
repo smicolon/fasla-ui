@@ -11,7 +11,7 @@ import { cliVersion } from "./version.js"
 export function createProgram() {
   return new Command()
     .name("fasla-ui")
-    .description("CLI for installing fasla-ui components")
+    .description("CLI for installing the 42 Fasla UI components: 35 UI primitives and 7 effects")
     .version(cliVersion())
     .addCommand(initCommand())
     .addCommand(addCommand())
