@@ -1,6 +1,6 @@
 /**
  * The Fasla theme as shadcn registry items, generated from the Figma
- * snapshots in design/tokens — the same files the docs and Storybook
+ * snapshots in packages/fasla-ui/theme/tokens — the same files the docs and Storybook
  * globals.css, tokens/tailwind.ts and tailwind-preset.ts are tested against,
  * so the items can't drift from them.
  *
@@ -104,7 +104,7 @@ const v3Color = (name) => (name in INVERSE_FALLBACKS ? inverseColor(name) : sema
 
 /** The Figma snapshots. `root` is the repository, for tests that use a copy. */
 export function loadSources(root = REPO) {
-  const read = (file) => JSON.parse(readFileSync(path.join(root, "design/tokens", file), "utf8"))
+  const read = (file) => JSON.parse(readFileSync(path.join(root, "packages/fasla-ui/theme/tokens", file), "utf8"))
   return { mode: read("mode.json"), typography: read("typography.json") }
 }
 

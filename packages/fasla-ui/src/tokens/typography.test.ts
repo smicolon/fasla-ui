@@ -6,7 +6,7 @@ import { LEADING, SIZE_PX } from "../../tailwind-preset"
 
 /**
  * Guards the type contract: Figma's `Tailwind En/*` and `Tailwind AR/*` styles
- * → design/tokens/typography.json → tailwind-preset.ts, which both apps load.
+ * → packages/fasla-ui/theme/tokens/typography.json → tailwind-preset.ts, which both apps load.
  * Figma is the source of truth; the snapshot is the committed record of it.
  */
 const REPO = resolve(dirname(fileURLToPath(import.meta.url)), "../../../..")
@@ -14,7 +14,7 @@ type Script = { lineHeight: number; rung: string }
 const snap: {
   lineHeights: Record<string, number>
   ramp: Record<string, { figma: string; size: number; en: Script; ar: Script }>
-} = JSON.parse(readFileSync(resolve(REPO, "design/tokens/typography.json"), "utf8"))
+} = JSON.parse(readFileSync(resolve(REPO, "packages/fasla-ui/theme/tokens/typography.json"), "utf8"))
 
 const rungs = Object.keys(snap.ramp)
 
