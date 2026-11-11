@@ -1,14 +1,13 @@
 # FASLA UI
 
-Professional UI components with animations and app building blocks for React applications.
+Arabic-first React components: 35 UI primitives and 7 animated effects, 42 in all, copied into your project by a CLI.
 
 Built with [Tailwind CSS](https://tailwindcss.com), [Framer Motion](https://www.framer.com/motion/), and [Radix UI](https://radix-ui.com).
 
 ## Features
 
-- **UI Primitives** - Button, Input, Card, Badge, Skeleton with CVA variants
-- **App Blocks** - AppShell, PageHeader, DataTable, EmptyState, FormSection
-- **Effects** - ShimmerButton, AnimatedGradient, TextReveal, BorderBeam, Spotlight
+- **35 UI Primitives** - Button, Input, Select, Dialog, Tabs, Sidebar and more, with CVA variants
+- **7 Effects** - ShimmerButton, AnimatedGradient, TextReveal, BorderBeam, Spotlight, GlowCard, TypewriterText
 - **Design Tokens** - Consistent spacing, colors, typography
 - **Motion Presets** - Built-in animations that respect `prefers-reduced-motion`
 - **shadcn Compatible** - Works with the shadcn CLI
@@ -72,35 +71,57 @@ Visit [fasla.smicolon.com](https://fasla.smicolon.com) for full documentation.
 
 ## Components
 
-### UI Primitives
+### UI Primitives (35)
 
 | Component | Description |
 |-----------|-------------|
-| Button | All variants (default, destructive, outline, secondary, ghost, link), sizes, loading state |
-| Input | Text input with validation states, icons |
-| Card | Composable card with header, content, footer |
-| Badge | Status indicators with variants |
-| Skeleton | Loading placeholders |
+| Accordion | Stacked headings that each show or hide a section of content |
+| Alert | A message box for information, success, warnings and errors |
+| Alert Dialog | A modal dialog on Base UI that asks the user to confirm or cancel an action |
+| Avatar | A user's photo, initials or icon, in three sizes and two radii, with an optional border and presence dot |
+| Badge | A compact inline label for status, category or metadata |
+| Breadcrumb | A composable trail of links to the current page |
+| Button | A button in five types (solid, soft, outline, ghost, link) and three tones, four sizes and the matching icon-button sizes, two radii, and a loading state |
+| Calendar | A month calendar on react-day-picker |
+| Card | A card component with header, content, and footer sections |
+| Carousel | A scroll-snap carousel with a dot stepper |
+| Checkbox | An accessible checkbox for binary selections with controlled state |
+| Combobox | A searchable combobox with single or multiple selection |
+| Content Carousel | A horizontal card browser with previous and next arrows, showing one, two or three content slots per view |
+| Date Picker | A date field on Base UI's Popover |
+| Dialog | A modal dialog on Base UI for focused tasks and forms |
+| Dropdown Menu | A menu of actions on Base UI, opened from a button |
+| Fasla Logo | The Fasla logo |
+| Input | A text field with a label, helper labels, start and end icons, success and invalid states, four sizes and two radii |
+| Input Number | A number field with step buttons in five layouts, Input's success, invalid and disabled states, min and max limits, and Western digits in every language, mirrored for RTL |
+| OTP Input | A one-time code field on input-otp, with a slot per character in groups, separators or spaced slots |
+| Pagination | A composable row of page links built on Button |
+| Progress | A determinate progress bar in three sizes, with an optional percentage label, that fills from the inline start and mirrors for RTL |
+| Radio | An accessible radio for choosing one option from a set, with a plain and a bordered layout variant |
+| Select | A select field on Base UI |
+| Sheet | A panel on Base UI that slides in from an edge of the screen |
+| Sidebar | App navigation that collapses to icons |
+| Skeleton | Loading placeholders that replace shadcn's Skeleton |
+| Slider | A slider on Base UI for one value or a range, in three track sizes with a 16px thumb |
+| Social Icons | Brand marks for 32 platforms, from Google and Apple to Slack and Zoom, in their own colours, one quiet muted colour, or the text colour around them |
+| Status Indicator | A presence dot — online, away, busy or offline — with an accessible name in the page's language, so colour never carries the status alone |
+| Steps | A display-only stepper for multi-step flows |
+| Switch | An accessible switch for on-off settings |
+| Tabs | Accessible, keyboard-navigable tabs (also called pills) |
+| Textarea | A multi-line text field that grows with its text, with a label, helper text, a character counter, and success and invalid states |
+| Tooltip | A short hint on hover or keyboard focus |
 
-### App Blocks
+### Effects (7)
 
 | Component | Description |
 |-----------|-------------|
-| AppShell | Sidebar and header layout system |
-| PageHeader | Title, breadcrumbs, actions |
-| DataTable | Tables with selection, loading and empty states; pair with Pagination |
-| EmptyState | Contextual empty states with actions |
-| FormSection | Grouped form fields |
-
-### Effects
-
-| Component | Description |
-|-----------|-------------|
-| ShimmerButton | Button with shimmer animation |
-| AnimatedGradient | Animated gradient backgrounds |
-| TextReveal | Character-by-character reveal |
-| BorderBeam | Animated border effect |
-| Spotlight | Cursor-following spotlight |
+| Animated Gradient | Animated gradient background and text effects |
+| Border Beam | Animated border beam and glowing border effects |
+| Glow Card | Card with a cursor-following glow on hover |
+| Shimmer Button | A button with animated shimmer effect |
+| Spotlight | Cursor-following spotlight effect |
+| Text Reveal | Character and word reveal animations |
+| Typewriter Text | Text that types itself out, one character at a time |
 
 ## Peer Dependencies
 
@@ -143,8 +164,7 @@ Arabic setting, and the Cairo font. It never changes a colour you already
 have. Arabic text uses `--font-arabic`; point it at another font to swap Cairo.
 
 Fasla's base components replace shadcn's components of the same name in
-`components/ui`; `add` asks before replacing a file that isn't Fasla's. Blocks
-install to `components/blocks`.
+`components/ui`; `add` asks before replacing a file that isn't Fasla's.
 
 ## Development
 
