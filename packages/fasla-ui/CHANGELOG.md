@@ -1,5 +1,12 @@
 # @smicolon/fasla-ui
 
+## [0.8.1](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.8.0...fasla-ui-v0.8.1) (2026-11-11)
+
+
+### Documentation
+
+* add security policy, contributing guide and issue templates ([e798c0a](https://github.com/smicolon/fasla-ui/commit/e798c0af47711444e932635bdd7466df580fd714))
+
 ## [0.8.0](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.7.0...fasla-ui-v0.8.0) (2026-11-06)
 
 
