@@ -3,6 +3,8 @@
 import { useEffect, useId, useRef, useState } from "react"
 import { useTranslations } from "next-intl"
 import { Button } from "@fasla-ui/ui/button/button"
+import { copyBoxInteraction } from "@/components/copy-command"
+import { cn } from "@/lib/utils"
 import { agentPrompt } from "./agent-prompt-text"
 import { copyWithStatus, type CopyStatus } from "./copy-text"
 
@@ -101,7 +103,13 @@ export function AgentPromptCompact({ className }: { className?: string }) {
         status={status}
         onCopy={copy}
         iconEnd
-        className="h-12 min-h-11 w-full justify-between rounded-[10px] border-foreground/15 bg-background px-[22px] text-[15px]"
+        // The install command's border, hover and focus (copyBoxInteraction), in place
+        // of the outline Button's inset ring, background hover and focus band. The
+        // outline type insets its ring; clearing --tw-ring-inset puts the focus ring outside.
+        className={cn(
+          "h-12 min-h-11 w-full justify-between rounded-[10px] border border-foreground/15 bg-background px-[22px] text-[15px] ring-0 [--tw-ring-inset:_] hover:bg-background focus-visible:after:opacity-0",
+          copyBoxInteraction
+        )}
       />
       <p role="status" className="absolute inset-x-0 top-full mt-2 text-balance text-sm leading-6 text-foreground rtl:leading-[1.7]">
         {status === "failed" && (

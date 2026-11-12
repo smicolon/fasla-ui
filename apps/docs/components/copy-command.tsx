@@ -5,6 +5,14 @@ import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 
 /**
+ * The install command's hover, transition and keyboard focus, shared with the
+ * hero's Copy agent prompt button so the two react the same: the 1px border
+ * darkens on hover, and focus draws the red ring.
+ */
+export const copyBoxInteraction =
+  "transition-colors hover:border-foreground/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fasla-red focus-visible:ring-offset-2"
+
+/**
  * The hero's install command. A command you cannot copy is a picture of a
  * command, so this is a button, not a code block.
  *
@@ -40,7 +48,8 @@ export function CopyCommand({ command, className }: { command: string; className
       onClick={copy}
       aria-label={copied ? t("copied") : t("copy", { command })}
       className={cn(
-        "group inline-flex items-center gap-3 rounded-lg border border-border bg-secondary px-4 py-3 text-start transition-colors hover:border-foreground/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-fasla-red focus-visible:ring-offset-2",
+        "group inline-flex items-center gap-3 rounded-lg border border-border bg-secondary px-4 py-3 text-start",
+        copyBoxInteraction,
         className
       )}
     >
