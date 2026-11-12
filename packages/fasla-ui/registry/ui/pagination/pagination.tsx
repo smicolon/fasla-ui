@@ -15,6 +15,15 @@ import { cn } from "../../../src/lib/utils"
 declare const process: { env: { NODE_ENV?: string } }
 
 /*
+ * Button's asChild, passed by spreading this rather than as an `asChild`
+ * attribute. shadcn's base-* styles (base-nova and others) rewrite each
+ * `asChild` attribute for Base UI's `render` prop when they install a file,
+ * and drop it when the child is an expression, as here: the links then
+ * rendered as a <button> around an <a>. A spread is left as it is.
+ */
+const AS_CHILD = { asChild: true } as const
+
+/*
  * Figma: `Pagination` (400:6808), 48 variants: Direction × size ×
  * Variants × Shape, plus the `Next - Pre button` and `Next - Pre icon button`
  * booleans; and `Pagination Ellipsis` (46207:243282), one per size.
@@ -197,7 +206,7 @@ const PaginationLink = React.forwardRef<HTMLAnchorElement, PaginationLinkProps>(
     useHrefCheck("PaginationLink", { href: props.href, asChild, disabled })
     return (
       <Button
-        asChild
+        {...AS_CHILD}
         variant={look.variant}
         tone={look.tone}
         size={`icon-${size}`}
@@ -273,7 +282,7 @@ function useStep(
   )
   return (
     <Button
-      asChild
+      {...AS_CHILD}
       variant={look.variant}
       tone={look.tone}
       size={iconOnly ? `icon-${size}` : size}
