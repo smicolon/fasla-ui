@@ -257,7 +257,10 @@ Examples (a new project):
       const css = typeof config.tailwind?.css === "string" ? config.tailwind.css : style.css
       const layout = style.rsc ? await findLayout(cwd) : undefined
       const utilsFile = `${aliasToPath(utilsAlias, aliasRoot.root)}.ts`
-      const tracked = ["components.json", utilsFile, css, "package.json", ...(layout ? [layout] : [])]
+      // Tailwind 3's config too: the theme items merge their colours, type sizes
+      // and fonts into it.
+      const tailwindConfig = style.tailwindMajor === 3 && style.config ? style.config : undefined
+      const tracked = ["components.json", utilsFile, css, "package.json", ...(layout ? [layout] : []), ...(tailwindConfig ? [tailwindConfig] : [])]
       const before = await snapshotFiles(cwd, tracked)
 
       // Refuse before writing anything if a path would land outside the
@@ -309,6 +312,7 @@ Examples (a new project):
         utils: utilsFile,
         css,
         layout,
+        tailwindConfig,
         fontFixes,
         themeCommand: options.install === false ? "pending" : undefined,
       })
