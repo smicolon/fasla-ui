@@ -18,7 +18,9 @@ export const landingLinks = {
   templates: comingSoon,
   pro: comingSoon,
   team: comingSoon,
-  storybook: "https://fasla.smicolon.com/components/",
+  // Relative, so it opens the Storybook built and deployed with this site
+  // (build:pages serves it at /components/), on whichever host serves the page.
+  storybook: "/components/?path=/docs/ui-button--docs",
   github: "https://github.com/smicolon/fasla-ui",
   discussions: "https://github.com/smicolon/fasla-ui/discussions",
 } as const

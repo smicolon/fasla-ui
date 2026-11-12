@@ -57,4 +57,12 @@ describe("Top-level section links", () => {
     expect(existsSync(path.join(docsRoot, "app/[locale]/docs/blocks"))).toBe(false)
     expect(existsSync(path.join(docsRoot, "app/[locale]/docs/templates"))).toBe(false)
   })
+
+  test("the Storybook link is relative and opens the Button docs in this site's Storybook", async () => {
+    const { landingLinks } = await import("../app/[locale]/(home)/_components/links")
+    expect(landingLinks.storybook).toBe("/components/?path=/docs/ui-button--docs")
+    expect(landingLinks.storybook).not.toMatch(/^[a-z]+:\/\//)
+    const stories = read("../storybook/stories/ui/Button.stories.tsx")
+    expect(stories).toMatch(/title: "UI\/Button"/)
+  })
 })
