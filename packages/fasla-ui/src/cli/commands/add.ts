@@ -8,7 +8,7 @@ import { DEFAULT_REGISTRY_URL, LEGACY_REGISTRY_URL, REGISTRY_URL, THEME_ITEMS, f
 import { andList, describeAdded, ownItemName, registryItemName, resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
 import { aliasToPath, checkDestination, effectiveComponentsAlias, installFile, resolveInsideProject } from "../paths.js"
 import { isInteractive } from "../tty.js"
-import { nonInteractiveAddMessage } from "../init-options.js"
+import { nonInteractiveAddMessage, nonInteractiveAddNamesMessage } from "../init-options.js"
 import { detectPackageManager } from "../pm.js"
 import { applyThemeItems, detectProjectStyle, themeItemsCommand } from "../theme.js"
 import { installComponentPackages, writeCnHelper } from "./init.js"
@@ -69,12 +69,18 @@ export function addCommand() {
 
       // If no components specified, prompt for selection
       if (components.length === 0) {
+        // No terminal: the list would be drawn to a pipe and nothing chosen.
+        if (!isInteractive()) {
+          console.log(chalk.red(nonInteractiveAddNamesMessage()))
+          process.exit(1)
+        }
         const { selected } = await prompts({
           type: "multiselect",
           name: "selected",
           message: "Which components would you like to add?",
           choices: registry.items.map((item) => ({
-            title: `${item.name} ${chalk.gray(`(${item.type.replace("registry:", "")})`)}`,
+            // The effects are registry:ui items; their category says what they are.
+            title: `${item.name} ${chalk.gray(`(${item.categories?.includes("effects") ? "effect" : item.type.replace("registry:", "")})`)}`,
             value: item.name,
             description: item.description,
           })),

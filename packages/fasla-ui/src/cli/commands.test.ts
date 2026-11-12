@@ -47,6 +47,8 @@ vi.mock("./registry", async (importOriginal) => {
     // Depends on a URL under our registry that names no component and no
     // theme item: a dependency removed or misspelt, not a theme item.
     { name: "ghost-block", type: "registry:block", registryDependencies: ["https://ui.smicolon.com/r/badge.json", "https://ui.smicolon.com/r/ghost.json"], files: [{ path: "registry/blocks/ghost-block/GhostBlock.tsx", type: "registry:block", target: "components/blocks/ghost-block.tsx", content: `// From Fasla UI (@fasla/ghost-block): https://fasla.smicolon.com\nexport const GhostBlock = () => null\n` }] },
+    // An effect: a registry:ui item whose category says what it is.
+    { name: "shine", type: "registry:ui", categories: ["effects", "text"], files: [{ path: "registry/effects/shine/shine.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/shine): https://fasla.smicolon.com\nexport const Shine = () => null\n` }] },
     // Broken registry entries, for what add says when a component writes nothing.
     { name: "hollow", type: "registry:ui", files: [] },
     { name: "blank", type: "registry:ui", files: [{ path: "registry/ui/blank/blank.tsx", type: "registry:ui", target: "", content: "" }] },
@@ -1081,6 +1083,29 @@ describe("add: files of the same name from another library", () => {
     expect(output()).toContain("Added nothing.\nNot added:\n  button: button.tsx is already there")
     expect(output()).not.toContain("Components added successfully!")
     expect(output()).not.toContain("Import them in your code:")
+  })
+
+  it("without a terminal and without names, stops and says how to name them, instead of drawing the picker to a pipe", async () => {
+    interactive = false
+    const dir = await nextApp({
+      "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }),
+    })
+    const before = await tree(dir)
+    await expect(run("add", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(output()).toContain("Error: add asks which components to add, and stdin is not a terminal")
+    expect(output()).toContain("npx @smicolon/fasla-ui@latest add button card --yes")
+    expect(prompted.map((q) => q.name)).not.toContain("selected")
+    expect(await tree(dir)).toEqual(before)
+  })
+
+  it("labels an effect as an effect in the picker, not by its registry type", async () => {
+    const dir = await nextApp({
+      "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }),
+    })
+    await expect(run("add", "--cwd", dir)).rejects.toThrow("process.exit(0)")
+    const titles = prompted.find((q) => q.name === "selected")!.choices!.map((c) => (c as { title: string }).title.replace(/\x1b\[[0-9;]*m/g, ""))
+    expect(titles).toContain("shine (effect)")
+    expect(titles).toContain("button (ui)")
   })
 
   it("asks to add the components by name, and says the ones they use come too, rather than a count too low", async () => {
