@@ -265,7 +265,7 @@ describe("init", () => {
     const out = output()
     expect(out).toContain(`Warning: "@/" is not set up in this Vite app`)
     expect(out).toContain('"paths": { "@/*": ["./src/*"] }')
-    expect(out).toContain('resolve: { alias: { "@": path.resolve(__dirname, "./src") } },')
+    expect(out).toContain('resolve: { alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) } },')
     expect(out).toContain("bun add -d @types/node")
     expect(out).toContain("bun add clsx tailwind-merge")
     // It sets up src/, which is where those changes point "@/".

@@ -62,8 +62,11 @@ describe("aliasAdvice", () => {
     expect(advice).toContain('"paths": { "@/*": ["./src/*"] }')
     // TypeScript 6 rejects baseUrl, so the advice never adds it.
     expect(advice).not.toContain("baseUrl")
-    expect(advice).toContain("In vite.config.ts, import path and add resolve.alias")
-    expect(advice).toContain('resolve: { alias: { "@": path.resolve(__dirname, "./src") } },')
+    expect(advice).toContain("In vite.config.ts, import fileURLToPath and add resolve.alias")
+    expect(advice).toContain('import { fileURLToPath } from "node:url"')
+    // Not __dirname, which Vite 8 warns won't work under its native config loader.
+    expect(advice).toContain('resolve: { alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) } },')
+    expect(advice).not.toContain("__dirname")
     expect(advice).toContain("bun add -d @types/node")
   })
 
@@ -126,7 +129,7 @@ describe("aliasAdvice", () => {
     const dir = await project({ "vite.config.js": "export default {}", "tsconfig.json": "{}" })
     const advice = (await aliasAdvice(dir, { root: "", mapped: false, pm: "npm" }))!.join("\n")
     expect(advice).toContain('"paths": { "@/*": ["./*"] }')
-    expect(advice).toContain('path.resolve(__dirname, ".")')
+    expect(advice).toContain('fileURLToPath(new URL(".", import.meta.url))')
     expect(advice).toContain("In tsconfig.json, inside")
   })
 })
