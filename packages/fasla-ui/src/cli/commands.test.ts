@@ -1083,6 +1083,19 @@ describe("add: files of the same name from another library", () => {
     expect(output()).not.toContain("Import them in your code:")
   })
 
+  it("asks to add the components by name, and says the ones they use come too, rather than a count too low", async () => {
+    const dir = await nextApp({
+      "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }),
+    })
+    await run("add", "chip", "--cwd", dir)
+    expect(prompted.find((q) => q.name === "confirm")!.message).toBe("Add chip, and the components it uses?")
+    // chip brought badge with it.
+    expect(await fs.pathExists(path.join(dir, "components/ui/badge.tsx"))).toBe(true)
+    prompted.length = 0
+    await run("add", "button", "tabs", "--cwd", dir)
+    expect(prompted.find((q) => q.name === "confirm")!.message).toBe("Add button and tabs, and the components they use?")
+  })
+
   it("says a component another one uses is already there, without a warning or a Not added list", async () => {
     const dir = await nextApp({
       "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }),

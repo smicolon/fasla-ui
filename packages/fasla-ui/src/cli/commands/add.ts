@@ -5,7 +5,7 @@ import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
 import { DEFAULT_REGISTRY_URL, LEGACY_REGISTRY_URL, REGISTRY_URL, THEME_ITEMS, fetchRegistry, fetchComponent, getTargetDirectory, type RegistryFile, type RegistryItem } from "../registry.js"
-import { describeAdded, ownItemName, registryItemName, resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
+import { andList, describeAdded, ownItemName, registryItemName, resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
 import { aliasToPath, checkDestination, effectiveComponentsAlias, installFile, resolveInsideProject } from "../paths.js"
 import { isInteractive } from "../tty.js"
 import { nonInteractiveAddMessage } from "../init-options.js"
@@ -128,7 +128,9 @@ export function addCommand() {
         const { confirm } = await prompts({
           type: "confirm",
           name: "confirm",
-          message: `Add ${validComponents.length} component(s)?`,
+          // Asked before the components they use are looked up, so it names
+          // them as such rather than giving a count that would be too low.
+          message: `Add ${andList(validComponents)}, and the components ${validComponents.length === 1 ? "it uses" : "they use"}?`,
           initial: true,
         })
 
