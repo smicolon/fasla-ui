@@ -6,6 +6,15 @@ import { Button, type ButtonProps } from "../button/button"
 import { cn } from "../../../src/lib/utils"
 
 /*
+ * Next.js and Vite replace `process.env.NODE_ENV` with "production" or
+ * "development" when they build, so the dev-only check below is removed from
+ * production code. Declared here for the type checker only (it emits
+ * nothing): a Vite project's tsconfig has no Node types, and without this its
+ * `tsc -b` build fails on the name `process`.
+ */
+declare const process: { env: { NODE_ENV?: string } }
+
+/*
  * Figma: `Pagination` (400:6808), 48 variants: Direction × size ×
  * Variants × Shape, plus the `Next - Pre button` and `Next - Pre icon button`
  * booleans; and `Pagination Ellipsis` (46207:243282), one per size.
