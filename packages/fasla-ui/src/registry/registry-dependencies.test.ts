@@ -33,7 +33,7 @@ describe("registry dependencies", () => {
   )
 
   it("points every registry dependency at a component or theme item that exists", () => {
-    // theme-inverse: blocks on an inverted surface bring its mapping with them.
+    // theme-inverse: items on an inverted surface bring its mapping with them.
     const themeNames = new Set(buildThemeItems({ registryUrl: "https://registry.example/r" }).map((i) => i.name))
     for (const item of registry.items) {
       for (const dep of item.registryDependencies ?? []) {

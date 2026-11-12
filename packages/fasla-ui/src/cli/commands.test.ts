@@ -41,7 +41,7 @@ vi.mock("./registry", async (importOriginal) => {
     { name: "badge", type: "registry:ui", files: [{ path: "registry/ui/badge/badge.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/badge): https://fasla.smicolon.com\nimport { cn } from "@/lib/utils"\nexport const Badge = () => cn("x")\n` }] },
     // Its dependency on badge points at ui.smicolon.com, as the published registry's do.
     { name: "chip", type: "registry:ui", registryDependencies: ["https://ui.smicolon.com/r/badge.json"], files: [{ path: "registry/ui/chip/chip.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/chip): https://fasla.smicolon.com\nexport const Chip = () => null\n` }] },
-    // A block on an inverted surface: it needs theme-inverse, a theme item
+    // An item on an inverted surface: it needs theme-inverse, a theme item
     // published beside the components but not in the index.
     { name: "dark-block", type: "registry:block", registryDependencies: ["https://ui.smicolon.com/r/theme-inverse.json"], files: [{ path: "registry/blocks/dark-block/DarkBlock.tsx", type: "registry:block", target: "components/blocks/dark-block.tsx", content: `// From Fasla UI (@fasla/dark-block): https://fasla.smicolon.com\nexport const DarkBlock = () => null\n` }] },
     // Depends on a URL under our registry that names no component and no

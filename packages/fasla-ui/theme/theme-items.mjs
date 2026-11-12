@@ -75,7 +75,7 @@ export const semanticColor = (name) => `color-mix(in oklab, var(--${name}) calc(
 
 /**
  * What each inverse token falls back to in a theme that doesn't define it: the
- * page's own colours, swapped. A block on an inverted surface then still reads
+ * page's own colours, swapped. Content on an inverted surface then still reads
  * in a project with another library's theme, or none of Fasla's. Figma's names;
  * a new inverse token gets its fallback here, from the tokens every shadcn
  * theme has.
@@ -243,8 +243,8 @@ function pageColourRules(all, value) {
 /**
  * `.light`: every token at its Light value, for one element. It pins a picture
  * to Light inside a Dark page, as Figma pins a frame to its Light mode: the
- * glows, windows and cards drawn in a How it Works picture read their colours
- * from these variables, so under `.light` they are Light whatever the page is.
+ * glows, windows and cards drawn in an illustration read their colours from
+ * these variables, so under `.light` they are Light whatever the page is.
  * Unlayered like `.dark`, and on the element itself, so it wins over a `.dark`
  * further up. Only the elements that carry the class are affected.
  */
@@ -405,8 +405,8 @@ export function buildThemeItems({ registryUrl, sources = loadSources() }) {
     font: { family, provider: "google", import: importName, variable, ...extra },
   })
 
-  // The inverse tokens' mapping alone, for a block on an inverted surface.
-  // Blocks that use the inverse tokens depend on it, so `add` brings the
+  // The inverse tokens' mapping alone, for content on an inverted surface.
+  // Items that use the inverse tokens depend on it, so `add` brings the
   // mapping into any project. It sets no values: a Fasla theme has them, and
   // in any other theme the fallbacks apply.
   const inverse = {
@@ -415,7 +415,7 @@ export function buildThemeItems({ registryUrl, sources = loadSources() }) {
     type: "registry:theme",
     title: "Fasla theme: inverse tokens",
     description:
-      "Maps the inverse tokens (background-inverse, foreground-inverse, muted-foreground-inverse) for blocks on an inverted surface. Each falls back to your page colours, swapped, when your theme doesn't define it.",
+      "Maps the inverse tokens (background-inverse, foreground-inverse, muted-foreground-inverse) for content on an inverted surface. Each falls back to your page colours, swapped, when your theme doesn't define it.",
     cssVars: { theme: inverseThemeVars() },
     tailwind: {
       config: { theme: { extend: { colors: Object.fromEntries(Object.keys(INVERSE_FALLBACKS).map((name) => [name, inverseColor(name)])) } } },

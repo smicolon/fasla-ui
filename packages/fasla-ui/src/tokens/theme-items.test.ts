@@ -105,6 +105,15 @@ describe("theme (Fasla's colours)", () => {
   })
 })
 
+describe("theme item text", () => {
+  it("describes every item without naming blocks or a block family: the open source package has none", () => {
+    for (const i of items) {
+      expect(`${i.title ?? ""} ${(i as { description?: string }).description ?? ""}`, i.name).not.toMatch(/\bblocks?\b|how it works/i)
+    }
+    expect(item("theme-inverse").description).toContain("for content on an inverted surface")
+  })
+})
+
 describe("theme-base", () => {
   it("adds exactly the Figma tokens shadcn doesn't have", () => {
     expect(extras).toEqual(tokenNames(mode).filter((name) => !SHADCN_TOKENS.includes(name)))

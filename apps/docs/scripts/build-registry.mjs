@@ -96,7 +96,7 @@ async function main() {
   // Where each component's main file lands in a consumer's project.
   const targets = new Map(registry.items.map((item) => [item.name, item.files[0]?.target]))
   const targetOf = (name) => targets.get(name)
-  // The theme items too: a block on an inverted surface depends on
+  // The theme items too: content on an inverted surface depends on
   // theme-inverse, which is published beside the components.
   const themeItems = buildThemeItems({ registryUrl: REGISTRY_URL })
   const ownNames = new Set([...registry.items.map((item) => item.name), ...themeItems.map((item) => item.name)])

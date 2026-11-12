@@ -183,7 +183,7 @@ export function addCommand() {
         addSpinner.info(describeAdded(resolved.added, resolved.neededBy))
       }
       // Theme items are published outside the index and carry CSS, no files:
-      // theme-inverse, for a block on an inverted surface. The shadcn CLI
+      // theme-inverse, for content on an inverted surface. The shadcn CLI
       // installs those, below, as `init` installs the theme. Only our own
       // theme items: any other URL the index doesn't list is a dependency this
       // registry can't resolve, and is reported as one.

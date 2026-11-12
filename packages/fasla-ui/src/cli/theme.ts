@@ -160,7 +160,7 @@ export function applyTheme(cwd: string, choice: ThemeChoice, project: { nextMajo
 
 /**
  * The command that installs theme items a component depends on — theme-inverse
- * for a block on an inverted surface — as `add` runs it. By URL, so it works
+ * for content on an inverted surface — as `add` runs it. By URL, so it works
  * whether or not components.json names the @fasla registry.
  */
 export function themeItemsCommand(urls: string[]): string {
