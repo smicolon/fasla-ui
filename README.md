@@ -56,7 +56,7 @@ export function App() {
         <CardTitle>Welcome</CardTitle>
       </CardHeader>
       <CardContent>
-        <Button variant="default" size="default">
+        <Button variant="default" size="md">
           Get Started
         </Button>
       </CardContent>

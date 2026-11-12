@@ -13,7 +13,7 @@ import { visibleOffSwitch } from "./switch-style"
 type Props = {
   dir: "ltr" | "rtl"
   variant: "default" | "outline" | "ghost"
-  size: "sm" | "default" | "lg"
+  size: "sm" | "md" | "lg"
   icon: boolean
   loading: boolean
   disabled: boolean
@@ -24,7 +24,7 @@ type Props = {
  * and size apply, written out. Read from button.tsx; keep in step with it.
  */
 const BACKGROUND = { default: "--primary", outline: "--background", ghost: "transparent" }
-const SIZE = { sm: { height: 32, padding: 12 }, default: { height: 36, padding: 16 }, lg: { height: 40, padding: 32 } }
+const SIZE = { sm: { height: 32, padding: 12 }, md: { height: 36, padding: 16 }, lg: { height: 40, padding: 32 } }
 
 /**
  * A segmented control: one of a few values. Fasla has no Toggle Group in code
@@ -60,7 +60,7 @@ function Segmented<V extends string>({ label, value, options, onChange }: { labe
  */
 export function ParityPlayground({ pageDir }: { pageDir: "ltr" | "rtl" }) {
   const t = useTranslations("landing.parity")
-  const [p, setP] = useState<Props>({ dir: pageDir, variant: "default", size: "default", icon: true, loading: false, disabled: false })
+  const [p, setP] = useState<Props>({ dir: pageDir, variant: "default", size: "md", icon: true, loading: false, disabled: false })
   const [changed, setChanged] = useState<keyof Props | null>(null)
 
   useEffect(() => {
@@ -86,7 +86,7 @@ export function ParityPlayground({ pageDir }: { pageDir: "ltr" | "rtl" }) {
     [
       ["dir", t("dir"), <Segmented key="d" label={t("dir")} value={p.dir} options={["ltr", "rtl"]} onChange={(v) => set("dir", v)} />],
       ["variant", t("variant"), <Segmented key="v" label={t("variant")} value={p.variant} options={["default", "outline", "ghost"]} onChange={(v) => set("variant", v)} />],
-      ["size", t("size"), <Segmented key="s" label={t("size")} value={p.size} options={["sm", "default", "lg"]} onChange={(v) => set("size", v)} />],
+      ["size", t("size"), <Segmented key="s" label={t("size")} value={p.size} options={["sm", "md", "lg"]} onChange={(v) => set("size", v)} />],
       ["icon", t("icon"), null],
       ["loading", t("loading"), null],
       ["disabled", t("disabled"), null],
