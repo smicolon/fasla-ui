@@ -283,6 +283,15 @@ describe("init", () => {
     expect(await tree(dir)).toEqual(before)
   })
 
+  it("without a terminal and without --yes, says so: the message doesn't claim --yes was passed", async () => {
+    interactive = false
+    const dir = await viteApp()
+    await expect(run("init", "--path", "src/components", "--style", "default", "--theme", "fasla", "--no-install", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    const out = output()
+    expect(out).toContain("Without questions (--yes, or no terminal) the CLI won't write files under a guessed folder.")
+    expect(out).not.toContain("With --yes the CLI")
+  })
+
   it("stops a --yes run in any project whose tsconfig doesn't map @/", async () => {
     const dir = await project({ "package.json": "{}", "tsconfig.json": JSON.stringify({ compilerOptions: {} }), "src/index.ts": "" })
     const before = await tree(dir)
@@ -307,7 +316,7 @@ describe("init", () => {
     // --yes never resumes a plan it hasn't shown: it says how, and changes nothing.
     const halfway = await tree(dir)
     await expect(run("init", "--yes", "--no-install", "--cwd", dir)).rejects.toThrow("process.exit(1)")
-    expect(output()).toContain("Run the command without --yes to review and resume it")
+    expect(output()).toContain("Run the command in a terminal without --yes to review and resume it")
     expect(output()).toContain(`or delete ${REPAIR_FILE} to abandon it`)
     expect(await tree(dir)).toEqual(halfway)
 

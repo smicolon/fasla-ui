@@ -43,7 +43,10 @@ export async function aliasRootOrExit(cwd: string, yes: boolean, pm: PackageMana
   if (yes && !found.mapped) {
     console.log(chalk.red(`Error: ${advice[0]}`))
     for (const line of advice.slice(1)) console.log(line)
-    console.log(`\nWith --yes the CLI won't write files under a guessed folder. Make these changes and run it again, or run it without --yes.`)
+    // `yes` is also true with no terminal, where --yes may not have been passed.
+    console.log(
+      `\nWithout questions (--yes, or no terminal) the CLI won't write files under a guessed folder. Make these changes and run it again, or run it in a terminal without --yes.`
+    )
     console.log("Nothing was written.")
     process.exit(1)
   }
@@ -133,7 +136,7 @@ async function resumeOrExit(cwd: string, journal: RepairJournal, aliasRoot: stri
   for (const line of describeSteps(journal)) console.log(`  - ${line}`)
   console.log()
   if (yes) {
-    console.log(`With --yes the CLI won't resume a repair it hasn't shown you. Run the command without --yes to review and resume it,`)
+    console.log(`Without questions (--yes, or no terminal) the CLI won't resume a repair it hasn't shown you. Run the command in a terminal without --yes to review and resume it,`)
     console.log(`or delete ${REPAIR_FILE} to abandon it. Nothing was changed.`)
     process.exit(1)
   }
