@@ -16,8 +16,8 @@ import { cn } from "../../../src/lib/utils"
 declare const process: { env: { NODE_ENV?: string } }
 
 /**
- * Built against the Figma `Button` set (307:333, 1,200 variants) and `Icon
- * Button` set (3615:13506, 480 variants): Type × Style × Size × State × Radius,
+ * Built against the Figma `Button` set (1,200 variants) and `Icon
+ * Button` set (480 variants): Type × Style × Size × State × Radius,
  * plus Direction on Button. Every colour below is the token the sets bind.
  *
  * `variant` keeps shadcn's names, each pinned to one Figma Type and Style, and

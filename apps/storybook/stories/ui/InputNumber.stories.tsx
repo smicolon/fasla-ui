@@ -7,8 +7,8 @@ import {
 } from "../../../../packages/fasla-ui/registry/ui/input-number"
 
 /**
- * Figma: "Input Number" (39043:1432) and its internal "Input Number Button"
- * (46381:5702). Variant and State are props here; Filled is the difference
+ * Figma: "Input Number" and its internal "Input Number Button".
+ * Variant and State are props here; Filled is the difference
  * between a placeholder and a value; Direction is the toolbar. Every story
  * follows the Direction and Theme toolbars, except Directions and Light and
  * Dark, which show both at once.

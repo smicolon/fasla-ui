@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "../../../src/lib/utils"
 
 /**
- * Built from the Figma `Fasla Logo` set (41668:149234): the lockup in each
+ * Built from the Figma `Fasla Logo` set: the lockup in each
  * direction and the icon on its own, with the paths exported from Figma.
  *
  * - `lockup`, English: the red mark, then "fasla" (273×88).

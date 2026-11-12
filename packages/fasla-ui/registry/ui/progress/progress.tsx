@@ -6,7 +6,7 @@ import { cva } from "class-variance-authority"
 import { cn } from "../../../src/lib/utils"
 
 /*
- * Figma: Progress (3831:2727), 126 variants plus a `Show Percentage` toggle.
+ * Figma: Progress, 126 variants plus a `Show Percentage` toggle.
  *
  * Built on Base UI's Progress, which owns the semantics: the `progressbar`
  * role, `aria-valuenow` / `aria-valuemin` / `aria-valuemax`, an

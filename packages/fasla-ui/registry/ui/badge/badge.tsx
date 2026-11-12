@@ -6,7 +6,7 @@ import { cva } from "class-variance-authority"
 import { cn } from "../../../src/lib/utils"
 
 /**
- * Built against the Figma `Badge` set (326:2134): Type × Tone × Size × Radius ×
+ * Built against the Figma `Badge` set: Type × Tone × Size × Radius ×
  * Direction × Stats, 432 variants. Every colour below is the token the set binds.
  *
  * Direction is not a prop. The row is a plain flex row in DOM order — icon,

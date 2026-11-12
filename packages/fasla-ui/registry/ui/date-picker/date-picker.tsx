@@ -11,8 +11,8 @@ import { Calendar, type CalendarRadius } from "../calendar/calendar"
 import { selectFieldClasses, selectTriggerVariants } from "../select/select"
 
 /*
- * Figma: "Date Picker" (15113:5466, 48 variants), opening Figma's Standard
- * Calendar (15117:6294).
+ * Figma: "Date Picker" (48 variants), opening Figma's Standard
+ * Calendar.
  *
  * The trigger is Select's: the same box, padding, gaps, border, shadow, text
  * and focus ring, read from `selectTriggerVariants`, so a Date Picker and a

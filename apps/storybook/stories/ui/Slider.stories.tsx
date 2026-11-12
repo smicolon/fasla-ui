@@ -3,7 +3,7 @@ import type { Decorator, Meta, StoryObj } from "@storybook/react"
 import { Slider, type SliderProps, type SliderSize } from "../../../../packages/fasla-ui/registry/ui/slider"
 
 /**
- * Figma: Slider (40500:60632). Size is a prop; Empty, Half-Full and Full are
+ * Figma: Slider. Size is a prop; Empty, Half-Full and Full are
  * values (the minimum, a value between, the maximum); Double slider is a
  * range, an array value with a thumb per entry; Focus is keyboard focus;
  * Direction is the toolbar. Every story follows the Direction and Theme

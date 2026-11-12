@@ -5,8 +5,8 @@ import { OTPInput, OTPInputContext } from "input-otp"
 import { cn } from "../../../src/lib/utils"
 
 /*
- * Figma: OTP Input (40465:54984), 8 variants, and its slot, Otp Input Item
- * (15097:22526), 5 states.
+ * Figma: OTP Input, 8 variants, and its slot, Otp Input Item,
+ * 5 states.
  *
  * Built on input-otp, as shadcn's Input OTP is. One real `<input>` lies over
  * the slots and owns the behaviour: typing, pasting, deleting, the one-time

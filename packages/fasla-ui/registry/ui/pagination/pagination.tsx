@@ -24,9 +24,9 @@ declare const process: { env: { NODE_ENV?: string } }
 const AS_CHILD = { asChild: true } as const
 
 /*
- * Figma: `Pagination` (400:6808), 48 variants: Direction × size ×
+ * Figma: `Pagination`, 48 variants: Direction × size ×
  * Variants × Shape, plus the `Next - Pre button` and `Next - Pre icon button`
- * booleans; and `Pagination Ellipsis` (46207:243282), one per size.
+ * booleans; and `Pagination Ellipsis`, one per size.
  *
  * Composable, with shadcn's part names. Figma axis → code:
  *  - `Variants` Default / Solid / Outlined → `variant` on `Pagination`.

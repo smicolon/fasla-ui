@@ -6,7 +6,7 @@ import { Input, type InputProps } from "../../../../packages/fasla-ui/registry/u
 import { Button } from "../../../../packages/fasla-ui/registry/ui/button"
 
 /**
- * Figma: "Default Input" (414:12784). Its Size, Radius and State axes are
+ * Figma: "Default Input". Its Size, Radius and State axes are
  * props here; Filled is the difference between a placeholder and a value;
  * Direction is the toolbar. Every story follows the Direction and Theme
  * toolbars, except Light and Dark, which shows both themes at once.

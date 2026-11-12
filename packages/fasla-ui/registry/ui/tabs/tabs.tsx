@@ -7,8 +7,8 @@ import { cva } from "class-variance-authority"
 import { cn } from "../../../src/lib/utils"
 
 /*
- * Figma: "Tabs & Pills" — `Tabs / Tab item` (408:8904) and `Tabs Component`
- * (39913:32645). "Pills" is another name for the same component.
+ * Figma: "Tabs & Pills" — `Tabs / Tab item` and `Tabs Component`.
+ * "Pills" is another name for the same component.
  *
  * Built on Base UI's Tabs, which owns the behaviour: the tablist, tab and
  * tabpanel roles and the ids that link them, the roving tab stop, the arrow,

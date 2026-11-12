@@ -9,9 +9,9 @@ import { menuItemClasses, menuPopupClasses } from "../select/select"
 import { Switch } from "../switch/switch"
 
 /*
- * Figma: "Dropdown" (3969:51446, 20 variants), with its parts on the same
- * page: "Dropdown Item" (46229:3337, 24 variants), "Dropdown Label"
- * (46229:243341) and "Dropdown Separator" (46229:243342).
+ * Figma: "Dropdown" (20 variants), with its parts on the same
+ * page: "Dropdown Item" (24 variants), "Dropdown Label"
+ * and "Dropdown Separator".
  *
  * Built on Base UI's Menu, which owns the behaviour: the menu, menuitem,
  * menuitemcheckbox and menuitemradio roles, opening on press and on the

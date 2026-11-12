@@ -10,9 +10,8 @@ import { cn } from "../../../src/lib/utils"
 import { badgeVariants } from "../badge/badge"
 
 /*
- * Figma: "Select Input" (3884:6936, 192 variants), "Select Item"
- * (46162:1970), "Select Menu" (46162:242459) and the open preview
- * (46162:242460).
+ * Figma: "Select Input" (192 variants), "Select Item",
+ * "Select Menu" and the open preview.
  *
  * Built on Base UI's Select and Field. Base UI owns the behaviour: the
  * combobox and listbox roles, opening on click and on the arrow keys,

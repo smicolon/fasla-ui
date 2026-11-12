@@ -6,7 +6,7 @@ import { Button, type ButtonProps } from "../button/button"
 import { cn } from "../../../src/lib/utils"
 
 /*
- * Figma: `Alert` (15226:58727), 30 variants: Variants × Type × Direction, plus
+ * Figma: `Alert`, 30 variants: Variants × Type × Direction, plus
  * the `Left Icon`, `Avatar`, `Title`, `Subtitle`, `Show Actions` and `Close
  * Icon` booleans.
  *

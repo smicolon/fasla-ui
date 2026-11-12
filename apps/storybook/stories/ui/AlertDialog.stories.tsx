@@ -18,7 +18,7 @@ import { Button } from "../../../../packages/fasla-ui/registry/ui/button"
 import { Input } from "../../../../packages/fasla-ui/registry/ui/input"
 
 /**
- * Figma: "Alert Dialog" (15455:53947). Align, Destructive and Icon are props
+ * Figma: "Alert Dialog". Align, Destructive and Icon are props
  * of `AlertDialogContent`; Additional Content is whatever sits between the
  * header and the footer (`additionalContent` here); Direction is the toolbar.
  * Every story follows the Direction and Theme toolbars, except Light and Dark

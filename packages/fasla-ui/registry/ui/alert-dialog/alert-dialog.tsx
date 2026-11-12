@@ -7,7 +7,7 @@ import { cn } from "../../../src/lib/utils"
 import { Button } from "../button/button"
 
 /*
- * Figma: "Alert Dialog" (15455:53947), 8 variants.
+ * Figma: "Alert Dialog", 8 variants.
  *
  * Built on Base UI's Alert Dialog. Base UI owns the behaviour: the
  * `alertdialog` role, naming it by its title and describing it by its

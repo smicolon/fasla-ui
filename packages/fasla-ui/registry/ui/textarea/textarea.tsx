@@ -5,7 +5,7 @@ import { Field as FieldPrimitive } from "@base-ui/react/field"
 import { cn } from "../../../src/lib/utils"
 
 /*
- * Figma: "Textarea" (3928:2374), beside Default Input.
+ * Figma: "Textarea", beside Default Input.
  *
  * Built like Input, on Base UI's Field, which owns the wiring: the label's
  * `for`, the description and error ids in `aria-describedby`, `aria-invalid`,

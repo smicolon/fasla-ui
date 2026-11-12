@@ -9,7 +9,7 @@ import {
 } from "../../../../packages/fasla-ui/registry/ui/carousel"
 
 /**
- * Figma: Carousel (40600:96155), the dot stepper. `No. of items` is how many
+ * Figma: Carousel, the dot stepper. `No. of items` is how many
  * slides you render, `Active Item` is the active slide, and Direction is the
  * toolbar. Every story follows the Direction and Theme toolbars, except Light
  * and Dark and Directions, which show both at once.

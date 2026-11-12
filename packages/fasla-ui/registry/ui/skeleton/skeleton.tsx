@@ -4,7 +4,7 @@ import { cn } from "../../../src/lib/utils"
 /**
  * Skeleton — a loading placeholder that stands in for content until it arrives.
  *
- * Matches the Figma set (Skeleton, `15120:8056`):
+ * Matches the Figma set (Skeleton):
  * - every block is `secondary`, the token Figma binds (`theme/secondary`),
  *   solid rather than a tint, so it reads the same on any surface;
  * - bars are 16px tall with a 4px radius, stacked 8px apart;

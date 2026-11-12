@@ -6,8 +6,8 @@ import { cva } from "class-variance-authority"
 import { cn } from "../../../src/lib/utils"
 
 /*
- * Figma: `Steps / Step item` (405:7832), 48 variants, assembled into
- * `Steps Horizontal` (3793:70328) and `Steps Vertical` (3793:70403).
+ * Figma: `Steps / Step item`, 48 variants, assembled into
+ * `Steps Horizontal` and `Steps Vertical`.
  *
  * Display only: the steps show where the reader is in a flow, and none of
  * them is a link or a button, so there is no hover or focus state (Figma has

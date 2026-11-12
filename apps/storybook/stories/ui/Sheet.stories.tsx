@@ -17,7 +17,7 @@ import { Button } from "../../../../packages/fasla-ui/registry/ui/button"
 import { Input } from "../../../../packages/fasla-ui/registry/ui/input"
 
 /**
- * Figma: "Sheet" (15043:262710). Side is a prop of `SheetContent`; Direction
+ * Figma: "Sheet". Side is a prop of `SheetContent`; Direction
  * is the toolbar. Every story follows the Direction and Theme toolbars,
  * except Light and Dark and LTR and RTL, which show both at once.
  *

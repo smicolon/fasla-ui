@@ -16,8 +16,8 @@ import { Button } from "../button/button"
 import { Select } from "../select/select"
 
 /*
- * Figma: "Standard Calendar" (15117:6294), 8 types × LTR/RTL, and its "Time
- * and Days" part (42278:36791).
+ * Figma: "Standard Calendar", 8 types × LTR/RTL, and its "Time
+ * and Days" part.
  *
  * Built on react-day-picker, which owns the behaviour: the month grid, the
  * keyboard (arrows, Page Up/Down, Home/End), single, multiple and range

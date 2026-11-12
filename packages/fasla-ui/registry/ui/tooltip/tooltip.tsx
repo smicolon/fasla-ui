@@ -8,7 +8,7 @@ import { cn } from "../../../src/lib/utils"
 import { Avatar, type AvatarProps } from "../avatar/avatar"
 
 /*
- * Figma: "Tooltip" (15139:15897), 120 variants.
+ * Figma: "Tooltip", 120 variants.
  *
  * Built on Base UI's Tooltip, which owns the behaviour: opening on hover and
  * on keyboard focus, closing on Escape, blur and pointer leave, placement
