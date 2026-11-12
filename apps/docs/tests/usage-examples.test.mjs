@@ -54,3 +54,38 @@ describe("Usage examples on component pages", () => {
     expect(offenders).toEqual([])
   })
 })
+
+// What a reader copies first works in a new project, which has no images of
+// its own: no file it would have to supply, unless the example says so.
+describe("Usage examples in a new project", () => {
+  const page = (name) => pages.find((p) => p.name === name).source
+  const messages = (lang) => JSON.parse(readFileSync(path.join(docsRoot, `messages/${lang}.json`), "utf8")).docs
+
+  test("Sidebar draws its logo with the free Fasla Logo, installed with it, and asks for no image file", () => {
+    const source = page("sidebar")
+    for (const code of examplesOf(source)) {
+      expect(code).not.toMatch(/src=["{]["']?\//)
+      if (code.includes("<FaslaLogo")) expect(code).toContain('import { FaslaLogo } from "@/components/ui/fasla-logo"')
+    }
+    expect(examplesOf(source)[0]).toContain("<FaslaLogo")
+    expect(source).toContain('<InstallCommand name="sidebar fasla-logo" />')
+    expect(messages("en").sidebar.installNote).toContain("<code>fasla-logo</code>")
+    expect(messages("ar").sidebar.installNote).toContain("<code>fasla-logo</code>")
+  })
+
+  test("Avatar's first example needs no image; the photo examples say the path is the reader's own", () => {
+    const examples = examplesOf(page("avatar"))
+    expect(examples[0]).not.toMatch(/src=|photo:/)
+    const withPhoto = examples.filter((code) => code.includes("/avatars/"))
+    expect(withPhoto.length).toBeGreaterThan(0)
+    for (const code of withPhoto) expect(code).toContain('// ${a("usage.photoPath")}')
+    expect(messages("en").avatar.usage.photoPath).toBeTruthy()
+    expect(messages("ar").avatar.usage.photoPath).toBeTruthy()
+  })
+
+  test("Progress's example renders as copied, without a value passed in", () => {
+    const [code] = examplesOf(page("progress"))
+    expect(code).toMatch(/\{ value = \d+ \}: \{ value\?: number \}/)
+  })
+})
+

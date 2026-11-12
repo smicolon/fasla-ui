@@ -39,6 +39,7 @@
         "lazy": "Long lists: defer photos below the fold, and give dense screens a sharper source",
         "circle": "Circle with a border and a presence dot",
         "inline": "Inline, beside a name that already says who it is",
+        "photoPath": "Your own image: a file in your public folder, or a URL.",
         "sampleName": "Layla Hassan"
       },
       "props": {
@@ -98,7 +99,7 @@
       "playground": "Component Playground",
       "menu": "Docs menu",
       "lead": "App navigation that folds to icons: titled groups of links, sub-items under a parent, and the signed-in person at the foot. Expanded and collapsed, as in the Figma set, with an optional plan card.",
-      "installNote": "Sidebar is built on Base UI, so it needs the <code>@base-ui/react</code> package, and it uses <code>avatar</code> and <code>tooltip</code>. <code>add</code> installs them with the component, and so does the shadcn CLI.",
+      "installNote": "Sidebar is built on Base UI, so it needs the <code>@base-ui/react</code> package, and it uses <code>avatar</code> and <code>tooltip</code>. <code>add</code> installs them with the component, and so does the shadcn CLI. The examples below draw the logo with <code>fasla-logo</code>, which the command adds too; pass your own logo instead if you have one.",
       "previewHint": "Collapse the sidebar from the button in its header, then point at an icon to see its label.",
       "logo": "Fasla",
       "nav": "Main",

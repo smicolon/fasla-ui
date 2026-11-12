@@ -258,7 +258,7 @@ export default function SidebarPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
-        <InstallCommand name="sidebar" />
+        <InstallCommand name="sidebar fasla-logo" />
         <p className="text-muted-foreground">{s.rich("installNote", rich)}</p>
       </section>
 
@@ -399,6 +399,7 @@ export default function SidebarPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
         <UsageExample title={s("usage.basic")}>{`import { LayoutDashboardIcon, SettingsIcon, ShoppingCartIcon } from "lucide-react"
+import { FaslaLogo } from "@/components/ui/fasla-logo"
 import {
   Sidebar,
   SidebarContent,
@@ -414,8 +415,8 @@ export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarHeader
-        logo={<img src="/logo.svg" alt="${s("logo")}" className="h-7" />}
-        logoIcon={<img src="/logo-icon.svg" alt="${s("logo")}" className="size-7" />}
+        logo={<FaslaLogo title="${s("logo")}" className="h-7" />}
+        logoIcon={<FaslaLogo variant="icon" title="${s("logo")}" className="size-7" />}
       />
       <SidebarContent aria-label="${s("nav")}">
         <SidebarGroup label="${s("groups.store")}">
@@ -430,7 +431,7 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <SidebarProfile name="${s("profile.name")}" description="${s("profile.description")}" avatar={{ src: "/avatar.png" }} />
+        <SidebarProfile name="${s("profile.name")}" description="${s("profile.description")}" />
       </SidebarFooter>
     </Sidebar>
   )
@@ -439,6 +440,7 @@ export function AppSidebar() {
 
 import { useState } from "react"
 import { LayoutDashboardIcon } from "lucide-react"
+import { FaslaLogo } from "@/components/ui/fasla-logo"
 import {
   Sidebar,
   SidebarContent,
@@ -453,7 +455,7 @@ export function CollapsibleSidebar() {
 
   return (
     <Sidebar collapsed={collapsed} onCollapsedChange={setCollapsed}>
-      <SidebarHeader logo={<img src="/logo.svg" alt="${s("logo")}" className="h-7" />} />
+      <SidebarHeader logo={<FaslaLogo title="${s("logo")}" className="h-7" />} />
       <SidebarContent>
         <SidebarGroup label="${s("groups.store")}">
           <SidebarItem icon={<LayoutDashboardIcon strokeWidth={1.5} />} label="${s("items.dashboard")}" href="/dashboard" />

@@ -140,13 +140,6 @@ npx @smicolon/fasla-ui@latest add avatar status-indicator`}</CodeBlock>
       {/* Usage */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
-        <UsageExample title={a("usage.photo")}>{`import { Avatar } from "@/components/ui/avatar"
-
-const user = { name: "${a("usage.sampleName")}", photo: "/avatars/layla.jpg" }
-
-export function UserAvatar() {
-  return <Avatar src={user.photo} name={user.name} />
-}`}</UsageExample>
         <UsageExample title={a("usage.initials")}>{`import { Avatar } from "@/components/ui/avatar"
 
 const user = { name: "${a("usage.sampleName")}" }
@@ -159,10 +152,22 @@ export function UserAvatarWithoutPhoto() {
     </div>
   )
 }`}</UsageExample>
+        <UsageExample title={a("usage.photo")}>{`import { Avatar } from "@/components/ui/avatar"
+
+const user = {
+  name: "${a("usage.sampleName")}",
+  // ${a("usage.photoPath")}
+  photo: "/avatars/layla.jpg",
+}
+
+export function UserAvatar() {
+  return <Avatar src={user.photo} name={user.name} />
+}`}</UsageExample>
         <UsageExample title={a("usage.lazy")}>{`import { Avatar } from "@/components/ui/avatar"
 
 const user = {
   name: "${a("usage.sampleName")}",
+  // ${a("usage.photoPath")}
   photo: "/avatars/layla.jpg",
   photo2x: "/avatars/layla@2x.jpg",
 }
@@ -179,14 +184,22 @@ export function LazyUserAvatar() {
 }`}</UsageExample>
         <UsageExample title={a("usage.circle")}>{`import { Avatar } from "@/components/ui/avatar"
 
-const user = { name: "${a("usage.sampleName")}", photo: "/avatars/layla.jpg" }
+const user = {
+  name: "${a("usage.sampleName")}",
+  // ${a("usage.photoPath")}
+  photo: "/avatars/layla.jpg",
+}
 
 export function OnlineUserAvatar() {
   return <Avatar src={user.photo} name={user.name} radius="rounded" border status="online" />
 }`}</UsageExample>
         <UsageExample title={a("usage.inline")}>{`import { Avatar } from "@/components/ui/avatar"
 
-const user = { name: "${a("usage.sampleName")}", photo: "/avatars/layla.jpg" }
+const user = {
+  name: "${a("usage.sampleName")}",
+  // ${a("usage.photoPath")}
+  photo: "/avatars/layla.jpg",
+}
 
 export function UserByline() {
   return (
