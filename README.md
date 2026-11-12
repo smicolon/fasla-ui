@@ -1,11 +1,27 @@
-# FASLA UI
+# Fasla UI
+
+<p dir="rtl">مكتبة مكوّنات React بالعربية أولًا: 42 مكوّنًا تدعم الكتابة من اليمين إلى اليسار تلقائيًا.</p>
 
 Arabic-first React components: 35 UI primitives and 7 animated effects, 42 in all, copied into your project by a CLI.
 
-Built with [Tailwind CSS](https://tailwindcss.com), [Framer Motion](https://www.framer.com/motion/), and [Radix UI](https://radix-ui.com).
+**Documentation:** [fasla.smicolon.com](https://fasla.smicolon.com)
+
+Fasla (فاصلة) is a design system for React. Layouts use logical properties, so
+a component mirrors under `dir="rtl"` with no extra classes, and the theme
+brings a type scale with Arabic line heights and the Cairo font. Components are
+distributed through a shadcn-compatible registry and copied into your project,
+so the code is yours to change.
+
+Built with [Tailwind CSS](https://tailwindcss.com), [Base UI](https://base-ui.com)
+and [Motion](https://motion.dev) (the `framer-motion` package, for the effects),
+with [Lucide](https://lucide.dev) icons. Button and Breadcrumb use Radix UI's
+[Slot](https://www.radix-ui.com/primitives/docs/utilities/slot), Calendar and
+Date Picker use [React DayPicker](https://daypicker.dev), and OTP Input uses
+[input-otp](https://github.com/guilhermerodz/input-otp).
 
 ## Features
 
+- **Arabic-first, RTL by default** - Logical properties throughout, so layouts mirror under `dir="rtl"`
 - **35 UI Primitives** - Button, Input, Select, Dialog, Tabs, Sidebar and more, with CVA variants
 - **7 Effects** - ShimmerButton, AnimatedGradient, TextReveal, BorderBeam, Spotlight, GlowCard, TypewriterText
 - **Design Tokens** - Consistent spacing, colors, typography
@@ -65,9 +81,8 @@ export function App() {
 }
 ```
 
-## Documentation
-
-Visit [fasla.smicolon.com](https://fasla.smicolon.com) for full documentation.
+`variant="default"` is the type Figma calls Solid, and `md` is the default size,
+so both props can be left out.
 
 ## Components
 
@@ -130,9 +145,12 @@ Visit [fasla.smicolon.com](https://fasla.smicolon.com) for full documentation.
   "react": "^18.0.0 || ^19.0.0",
   "react-dom": "^18.0.0 || ^19.0.0",
   "tailwindcss": "^3.4.0 || ^4.1.4",
-  "framer-motion": "^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0" // optional, for animations
+  "framer-motion": "^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0"
 }
 ```
+
+`framer-motion` is optional (`peerDependenciesMeta`): only the motion presets
+and five of the seven effects use it.
 
 ## Theme
 

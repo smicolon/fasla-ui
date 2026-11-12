@@ -19,7 +19,7 @@ so the code is yours to change.
 - **Themes** - Fasla's palette, or keep your brand's colours and add only the base layer
 - **shadcn Compatible** - Works seamlessly with existing shadcn/ui projects
 - **Tailwind CSS** - Utility-first styling with full customization
-- **Framer Motion** - Animated effects that respect `prefers-reduced-motion`
+- **Motion** - Animated effects, on the `framer-motion` package, that respect `prefers-reduced-motion`
 - **TypeScript** - Full type safety and IntelliSense
 - **Design Tokens** - Consistent spacing, colors, and density profiles
 - **Accessible** - Keyboard navigation and visible focus styles on form controls
@@ -104,7 +104,7 @@ Core building blocks with CVA variants for consistent styling:
 | **Tooltip** | A short hint on hover or keyboard focus |
 
 ### Effects (7)
-Animated components for visual flair (powered by Framer Motion):
+Animated components for visual flair; five of them use Motion (the `framer-motion` package):
 
 | Component | Description |
 |-----------|-------------|
@@ -129,7 +129,7 @@ export function MyComponent() {
       <CardHeader>
         <CardTitle>Welcome</CardTitle>
       </CardHeader>
-      <CardContent className="space-x-4">
+      <CardContent className="flex items-center gap-4">
         <Button variant="default">Get Started</Button>
         <ShimmerButton>Learn More</ShimmerButton>
       </CardContent>
@@ -138,6 +138,9 @@ export function MyComponent() {
 }
 ```
 
+`variant="default"` is the type Figma calls Solid, and `md` is the default size,
+so both props can be left out.
+
 ## Peer Dependencies
 
 ```json
@@ -145,9 +148,12 @@ export function MyComponent() {
   "react": "^18.0.0 || ^19.0.0",
   "react-dom": "^18.0.0 || ^19.0.0",
   "tailwindcss": "^3.4.0 || ^4.1.4",
-  "framer-motion": "^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0"  // optional, required for effects
+  "framer-motion": "^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0"
 }
 ```
+
+`framer-motion` is optional (`peerDependenciesMeta`): only the motion presets
+and five of the seven effects use it.
 
 ## Theme
 
@@ -189,7 +195,7 @@ Visit [fasla.smicolon.com](https://fasla.smicolon.com) for full documentation, e
 
 - [shadcn/ui](https://ui.shadcn.com) - The foundation this library builds on
 - [Tailwind CSS](https://tailwindcss.com) - Utility-first CSS framework
-- [Framer Motion](https://www.framer.com/motion/) - Animation library for React
+- [Motion](https://motion.dev) - Animation library for React, formerly Framer Motion (the `framer-motion` package)
 
 ## License
 
