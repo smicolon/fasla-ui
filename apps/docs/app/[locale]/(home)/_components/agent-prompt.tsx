@@ -40,8 +40,22 @@ function useCopyPrompt() {
  * The button, with its status region. Every label sits in one grid cell, so
  * the widest sets the width and a change never moves anything; only the
  * current label is seen or read. The polite region stays mounted.
+ *
+ * `iconEnd` puts the label at the inline start and the icon at the inline
+ * end, for a button wider than its content: flex follows the writing
+ * direction, so in Arabic the label is on the right and the icon on the left.
  */
-function CopyPromptButton({ status, onCopy, className }: { status: CopyStatus; onCopy: () => void; className?: string }) {
+function CopyPromptButton({
+  status,
+  onCopy,
+  className,
+  iconEnd = false,
+}: {
+  status: CopyStatus
+  onCopy: () => void
+  className?: string
+  iconEnd?: boolean
+}) {
   const t = useTranslations("landing.final.agent")
   const copied = status === "copied"
   const shown = copied ? "copied" : "idle"
@@ -52,14 +66,15 @@ function CopyPromptButton({ status, onCopy, className }: { status: CopyStatus; o
   return (
     <>
       <Button type="button" variant="outline" size="lg" onClick={onCopy} className={className}>
-        {copied ? checkIcon : copyIcon}
-        <span className="grid">
+        {!iconEnd && (copied ? checkIcon : copyIcon)}
+        <span className={`grid ${iconEnd ? "text-start" : ""}`}>
           {labels.map(({ key, text }) => (
             <span key={key} aria-hidden={key === shown ? undefined : true} className={`col-start-1 row-start-1 ${key === shown ? "" : "invisible"}`}>
               {text}
             </span>
           ))}
         </span>
+        {iconEnd && (copied ? checkIcon : copyIcon)}
       </Button>
       <span role="status" aria-live="polite" className="sr-only">
         {copied ? t("copied") : ""}
@@ -69,7 +84,9 @@ function CopyPromptButton({ status, onCopy, className }: { status: CopyStatus; o
 }
 
 /**
- * The hero's version: the button alone, after a small "or". A refused copy shows one line under
+ * The hero's version: the button alone, after a small "or", as wide as the
+ * install row above it (the page wraps both in one shrink-to-fit box), with
+ * the label at the inline start and the icon at the inline end. A refused copy shows one line under
  * it, out of flow so the hero does not move, pointing to the full prompt
  * under the CLI band, where the text can be selected.
  */
@@ -83,7 +100,8 @@ export function AgentPromptCompact({ className }: { className?: string }) {
       <CopyPromptButton
         status={status}
         onCopy={copy}
-        className="h-12 min-h-11 rounded-[10px] border-foreground/15 bg-background px-[22px] text-[15px] max-[560px]:w-full"
+        iconEnd
+        className="h-12 min-h-11 w-full justify-between rounded-[10px] border-foreground/15 bg-background px-[22px] text-[15px]"
       />
       <p role="status" className="absolute inset-x-0 top-full mt-2 text-balance text-sm leading-6 text-foreground rtl:leading-[1.7]">
         {status === "failed" && (

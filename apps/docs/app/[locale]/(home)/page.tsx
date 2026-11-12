@@ -100,19 +100,23 @@ export default async function HomePage({
 
             <DirectionSwitch label={t("hero.swLabel")} />
 
-            <div className="mt-7 flex flex-wrap justify-center gap-3 [view-transition-name:hero-cta]">
-              <CopyCommand
-                command={installCommand}
-                className="h-12 rounded-[10px] border-foreground/15 bg-background py-0 max-[560px]:w-full max-[560px]:justify-between"
-              />
-              <Button asChild size="lg" className="h-12 rounded-[10px] px-[22px] text-[15px] max-[560px]:w-full">
-                <Link href={landingLinks.docs(locale)}>
-                  {t("cta.start")}
-                  <ArrowEndIcon />
-                </Link>
-              </Button>
+            {/* One shrink-to-fit box for the install row and the agent prompt, so the
+                prompt button is exactly as wide as the row, and still is when the row stacks. */}
+            <div className="mx-auto w-fit max-w-full">
+              <div className="mt-7 flex flex-wrap justify-center gap-3 [view-transition-name:hero-cta]">
+                <CopyCommand
+                  command={installCommand}
+                  className="h-12 rounded-[10px] border-foreground/15 bg-background py-0 max-[560px]:w-full max-[560px]:justify-between"
+                />
+                <Button asChild size="lg" className="h-12 rounded-[10px] px-[22px] text-[15px] max-[560px]:w-full">
+                  <Link href={landingLinks.docs(locale)}>
+                    {t("cta.start")}
+                    <ArrowEndIcon />
+                  </Link>
+                </Button>
+              </div>
+              <AgentPromptCompact className="mt-3" />
             </div>
-            <AgentPromptCompact className="mt-3" />
           </div>
 
           <XrayStage label={t("hero.xray")} windowLabel={t("sanad.label")}>
