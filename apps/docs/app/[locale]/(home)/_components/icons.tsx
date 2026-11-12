@@ -56,6 +56,14 @@ export const ChevronEndIcon = ({ className, ...props }: IconProps) => (
   <ChevronRightIcon className={cn("rtl:-scale-x-100", className)} {...props} />
 )
 
+/** An envelope (Lucide `mail`): a link that opens an email. Never mirrors. */
+export const MailIcon = (props: IconProps) => (
+  <Icon {...props}>
+    <path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7" />
+    <rect x="2" y="4" width="20" height="16" rx="2" />
+  </Icon>
+)
+
 /** Two opposing arrows: the "mirrors" tag. */
 export const MirrorIcon = (props: IconProps) => (
   <Icon strokeWidth={2} {...props}>

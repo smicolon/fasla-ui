@@ -3384,7 +3384,9 @@
       "title": "Coming soon",
       "lede": "The templates and the Pro and Team plans are on their way. The open-source components and the docs are ready to use today.",
       "docs": "Read the docs",
-      "home": "Back to home"
+      "home": "Back to home",
+      "notify": "Notify me about Pro",
+      "notifySubject": "Fasla Pro: notify me"
     }
   }
 }

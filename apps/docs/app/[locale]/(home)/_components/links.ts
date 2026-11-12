@@ -26,3 +26,14 @@ export const landingLinks = {
 } as const
 
 export const installCommand = "npx @smicolon/fasla-ui@latest init"
+
+/** Smicolon's support address, written here and nowhere else in the site. */
+export const supportEmail = "support@smicolon.com"
+
+/**
+ * A new email to support asking to hear when Fasla Pro opens, with the subject
+ * in the page's language. The subject is percent-encoded (spaces as %20, Arabic
+ * as UTF-8), as mailto URLs require. No form and no tracking: the reader's own
+ * email program sends it.
+ */
+export const notifyProMailto = (subject: string) => `mailto:${supportEmail}?subject=${encodeURIComponent(subject)}`

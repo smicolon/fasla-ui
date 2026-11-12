@@ -6,10 +6,10 @@ import { Button } from "@fasla-ui/ui/button/button"
 import { locales, type Locale } from "@/i18n/routing"
 import { SITE_URL } from "@/lib/seo-routes"
 import { FaslaComma } from "../_components/fasla-mark"
-import { ArrowEndIcon, DotIcon } from "../_components/icons"
+import { ArrowEndIcon, DotIcon, MailIcon } from "../_components/icons"
 import { LandingFooter } from "../_components/landing-footer"
 import { LandingNav } from "../_components/landing-nav"
-import { landingLinks } from "../_components/links"
+import { landingLinks, notifyProMailto } from "../_components/links"
 import { FlipSettled } from "../_components/locale-flip"
 
 /**
@@ -78,6 +78,16 @@ export default async function ComingSoonPage({ params }: { params: Promise<{ loc
               <Link href={`/${locale}/`}>{t("home")}</Link>
             </Button>
           </div>
+          {/* Quiet, under the two buttons: a plain mailto link, no form and no tracking. */}
+          <p className="mt-6">
+            <a
+              href={notifyProMailto(t("notifySubject"))}
+              className="inline-flex min-h-11 items-center gap-2 rounded-[10px] px-2 text-[15px] font-medium text-muted-foreground underline decoration-foreground/30 underline-offset-4 outline-none transition-colors hover:text-foreground hover:decoration-current focus-visible:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            >
+              <MailIcon />
+              {t("notify")}
+            </a>
+          </p>
         </section>
       </main>
 
