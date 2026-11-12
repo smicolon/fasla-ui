@@ -41,6 +41,17 @@ npx @smicolon/fasla-ui@latest add button card   # per component
 Keep `@latest`: without it, npx runs the copy of `@smicolon/fasla-ui` a project
 already has installed, and 0.4 or older has no CLI.
 
+Without a terminal (an agent or a CI job), `init` asks nothing: pass `--yes`
+and the theme. In a new project:
+
+```bash
+npx @smicolon/fasla-ui@latest init --yes --theme fasla
+```
+
+Under `--yes`, the theme default is decided by `--primary`: a stylesheet that
+sets it keeps its colours (`brand`), and one that doesn't gets Fasla's
+(`fasla`).
+
 `add` ends by installing the packages the components import, with your
 project's package manager, and skips any the project already has at a
 compatible version. If the install fails, it keeps the files it wrote and

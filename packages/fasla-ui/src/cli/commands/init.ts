@@ -16,7 +16,7 @@ import { aliasRootOrExit, installOrPrint, repairIfNeededOrExit, safeOrExit } fro
 import {
   applyTheme,
   detectProjectStyle,
-  hasColourTokens,
+  hasPalette,
   THEME_CHOICES,
   themeCommand,
   themeWithoutAsking,
@@ -173,20 +173,25 @@ export function initCommand() {
   return new Command()
     .name("init")
     .description("Initialize fasla-ui in your project")
-    .option("-y, --yes", "Accept every default and ask nothing")
+    .option("-y, --yes", "Accept every default and ask nothing; the theme default is then decided by --primary")
     .option("--path <dir>", "Where components go, e.g. src/components; the ui folder is added for you (src/components/ui works too)")
     .option("--style <default|new-york>", "The shadcn style")
     .option("--no-install", "Don't install clsx, tailwind-merge or the theme; print the commands instead")
-    .option("--theme <fasla|brand>", 'The theme: "fasla" for Fasla\'s colours, "brand" to keep yours')
+    .option(
+      "--theme <fasla|brand>",
+      'The theme: "fasla" for Fasla\'s colours, "brand" to keep yours. Under --yes without it, a stylesheet that sets --primary keeps its colours, and one that doesn\'t gets Fasla\'s'
+    )
     .option("-c, --cwd <path>", "Working directory", process.cwd())
     .addHelpText(
       "after",
       `
 Without a terminal (an agent, a CI job) init asks nothing: pass --yes, or all
 of --path, --style and --theme. Missing ones are listed and nothing is written.
+Under --yes, the theme default is decided by --primary: a stylesheet that sets
+it keeps its colours ("brand"), one that doesn't gets Fasla's ("fasla").
 
-Examples:
-  npx @smicolon/fasla-ui@latest init --yes
+Examples (a new project):
+  npx @smicolon/fasla-ui@latest init --yes --theme fasla
   npx @smicolon/fasla-ui@latest init --path src/components --style default --theme fasla`
     )
     .action(async (options) => {
@@ -283,7 +288,13 @@ Examples:
 
       if (!(await installCnPackages(cwd, pm, { enabled: options.install !== false, tailwindMajor: style.tailwindMajor }))) process.exit(1)
 
-      const theme = { flag: options.theme, yes, install: options.install !== false, nextMajor: style.nextMajor }
+      const theme = {
+        flag: options.theme,
+        yes,
+        install: options.install !== false,
+        nextMajor: style.nextMajor,
+        rerun: { path: options.path, style: options.style },
+      }
       const themeOk = await installTheme(cwd, css, theme)
       // The theme item can leave a font variable pointing at itself.
       const fontFixes: FontFix[] = options.install !== false && themeOk ? await repairFontVariables(cwd, css) : []
@@ -310,19 +321,44 @@ Examples:
     })
 }
 
+/** The flags of this run that a printed `init` command repeats, so it writes the same files. */
+export interface RerunFlags {
+  path?: string
+  style?: string
+}
+
+/**
+ * The `init` that switches the theme layer, as printed after a `--yes` run.
+ * `--yes` so it runs without a terminal too (an agent, a CI job), and asks no
+ * overwrite question in one; `--path` and `--style` as this run had them.
+ */
+export function rerunCommand(theme: ThemeChoice, { path: dir, style }: RerunFlags = {}): string {
+  const flags = [`--yes`, `--theme ${theme}`]
+  if (dir !== undefined) flags.push(`--path ${/\s/.test(dir) ? JSON.stringify(dir) : dir}`)
+  if (style !== undefined) flags.push(`--style ${style}`)
+  return `npx @smicolon/fasla-ui@latest init ${flags.join(" ")}`
+}
+
 /**
  * Asks which theme layer the project gets — or, with `--theme` or `--yes`,
- * decides without asking, never replacing colours the project has unless
- * `--theme fasla` says to — and installs it with the shadcn CLI. Returns false
- * only when the install was tried and failed.
+ * decides without asking: under `--yes` alone, a stylesheet that sets
+ * `--primary` keeps its colours and one that doesn't gets Fasla's — and
+ * installs it with the shadcn CLI. Returns false only when the install was
+ * tried and failed.
  */
 export async function installTheme(
   cwd: string,
   css: string,
-  { flag, yes, install, nextMajor }: { flag?: string; yes: boolean; install: boolean; nextMajor?: number }
+  {
+    flag,
+    yes,
+    install,
+    nextMajor,
+    rerun = {},
+  }: { flag?: string; yes: boolean; install: boolean; nextMajor?: number; rerun?: RerunFlags }
 ): Promise<boolean> {
-  const hasColours = hasColourTokens(await fs.readFile(path.join(cwd, css), "utf8").catch(() => ""))
-  let choice = themeWithoutAsking({ flag, yes, hasColours })
+  const palette = hasPalette(await fs.readFile(path.join(cwd, css), "utf8").catch(() => ""))
+  let choice = themeWithoutAsking({ flag, yes, hasPalette: palette })
 
   if (!choice) {
     const { theme } = await prompts({
@@ -332,7 +368,7 @@ export async function installTheme(
       choices: THEME_CHOICES.map(({ value, title }) => ({
         value,
         // Nothing to keep yet: say so, rather than leave the components colourless.
-        title: value === "brand" && !hasColours ? `${title} (${css} has no colours yet, so the components would have none)` : title,
+        title: value === "brand" && !palette ? `${title} (${css} sets no --primary, so the components would have no colours)` : title,
       })),
       initial: 0,
     })
@@ -344,9 +380,10 @@ export async function installTheme(
   } else if (yes && !flag) {
     console.log(
       choice === "brand"
-        ? `\n${css} has its own colours, so they are kept: installing the base theme only.\n` +
-            `To use Fasla's colours instead: ${chalk.cyan("npx @smicolon/fasla-ui@latest init --theme fasla")}`
-        : `\n${css} has no colours yet, so it gets Fasla's.`
+        ? `\n${css} sets its own --primary, so its colours are kept: installing the base theme only.\n` +
+            `To use Fasla's colours instead: ${chalk.cyan(rerunCommand("fasla", rerun))}`
+        : `\n${css} sets no --primary, so it gets Fasla's colours.\n` +
+            `To keep its colours instead: ${chalk.cyan(rerunCommand("brand", rerun))}`
     )
   }
 

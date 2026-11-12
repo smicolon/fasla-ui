@@ -121,7 +121,7 @@ export default async function InstallationPage({
               tabIndex={0}
               className="overflow-x-auto whitespace-pre rounded-lg bg-terminal p-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-fasla-red"
             >
-              <code className="font-mono text-sm text-green-400">{"npx @smicolon/fasla-ui@latest init --yes\nnpx @smicolon/fasla-ui@latest init --path src/components --style default --theme fasla\nnpx @smicolon/fasla-ui@latest add button --yes"}</code>
+              <code className="font-mono text-sm text-green-400">{"npx @smicolon/fasla-ui@latest init --yes --theme fasla\nnpx @smicolon/fasla-ui@latest init --path src/components --style default --theme fasla\nnpx @smicolon/fasla-ui@latest add button --yes"}</code>
             </pre>
             <p className="text-muted-foreground mt-2">{i.rich("cliFlagsEnd", flagCode)}</p>
           </div>

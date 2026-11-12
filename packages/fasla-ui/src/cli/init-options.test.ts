@@ -31,6 +31,11 @@ describe("messages", () => {
     expect(text).toContain("--yes")
     expect(text).toContain("Nothing was written.")
   })
+  it("shows a --yes example that works in a new project: with --theme fasla", () => {
+    const text = nonInteractiveInitMessage(["--path <dir>"])
+    expect(text).toContain("Example: npx @smicolon/fasla-ui@latest init --yes --theme fasla\n")
+    expect(text).not.toMatch(/init --yes\n/)
+  })
   it("add names --yes", () => {
     expect(nonInteractiveAddMessage()).toContain("--yes")
   })

@@ -1,28 +1,74 @@
 import { describe, expect, it, vi } from "vitest"
-import { applyTheme, childEnv, hasColourTokens, themeCommand, themeItems, themeWithoutAsking } from "./theme"
+import { applyTheme, childEnv, hasPalette, themeCommand, themeItems, themeWithoutAsking } from "./theme"
 
 describe("themeWithoutAsking", () => {
   it("follows --theme whatever the project has", () => {
-    expect(themeWithoutAsking({ flag: "fasla", yes: true, hasColours: true })).toBe("fasla")
-    expect(themeWithoutAsking({ flag: "brand", yes: false, hasColours: false })).toBe("brand")
+    expect(themeWithoutAsking({ flag: "fasla", yes: true, hasPalette: true })).toBe("fasla")
+    expect(themeWithoutAsking({ flag: "brand", yes: false, hasPalette: false })).toBe("brand")
   })
 
-  it("with --yes, keeps colours a project has and gives Fasla's only to one with none", () => {
-    expect(themeWithoutAsking({ yes: true, hasColours: true })).toBe("brand")
-    expect(themeWithoutAsking({ yes: true, hasColours: false })).toBe("fasla")
+  it("with --yes, keeps a palette the project has and gives Fasla's to one without", () => {
+    expect(themeWithoutAsking({ yes: true, hasPalette: true })).toBe("brand")
+    expect(themeWithoutAsking({ yes: true, hasPalette: false })).toBe("fasla")
   })
 
   it("asks otherwise", () => {
-    expect(themeWithoutAsking({ yes: false, hasColours: true })).toBeUndefined()
+    expect(themeWithoutAsking({ yes: false, hasPalette: true })).toBeUndefined()
   })
 })
 
-describe("hasColourTokens", () => {
-  it("sees shadcn's colour tokens, not other variables", () => {
-    expect(hasColourTokens(":root {\n  --primary: oklch(0.2 0 0);\n}")).toBe(true)
-    expect(hasColourTokens("@layer base { :root { --background: 0 0% 100%; } }")).toBe(true)
-    expect(hasColourTokens(':root { --font-sans: "Geist"; --success: #0a0; }')).toBe(false)
-    expect(hasColourTokens('@import "tailwindcss";')).toBe(false)
+// The stylesheets init meets, as the templates write them.
+const CREATE_NEXT_APP = `@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+`
+const CREATE_NEXT_APP_14 = `@tailwind base;\n@tailwind components;\n@tailwind utilities;\n\n:root {\n  --background: #ffffff;\n  --foreground: #171717;\n}\n`
+const VITE_TEMPLATE = `@import "tailwindcss";\n:root {\n  --text: #6b6375;\n  --border: #e5e4e7;\n  --accent: #aa3bff;\n}\n`
+const SHADCN_V4 = `:root {\n  --background: oklch(1 0 0);\n  --primary: oklch(0.205 0 0);\n  --primary-foreground: oklch(0.985 0 0);\n}\n`
+const SHADCN_V3 = `@layer base {\n  :root {\n    --background: 0 0% 100%;\n    --primary: 222.2 47.4% 11.2%;\n  }\n}\n`
+
+describe("hasPalette", () => {
+  it("is false for the stylesheets fresh projects start with", () => {
+    expect(hasPalette(CREATE_NEXT_APP)).toBe(false)
+    expect(hasPalette(CREATE_NEXT_APP_14)).toBe(false)
+    expect(hasPalette(VITE_TEMPLATE)).toBe(false)
+    expect(hasPalette('@import "tailwindcss";')).toBe(false)
+  })
+
+  it("is true for a shadcn theme or a brand palette, on either Tailwind", () => {
+    expect(hasPalette(SHADCN_V4)).toBe(true)
+    expect(hasPalette(SHADCN_V3)).toBe(true)
+    expect(hasPalette(":root{--primary:#ff0066}")).toBe(true)
+  })
+
+  it("ignores other names that end in primary, and comments", () => {
+    expect(hasPalette("@theme inline {\n  --color-primary: var(--primary);\n}")).toBe(false)
+    expect(hasPalette(":root { --primary-foreground: #fff; }")).toBe(false)
+    expect(hasPalette("/* :root { --primary: red; } */\n:root { --background: #fff; }")).toBe(false)
+  })
+})
+
+describe("themeWithoutAsking on real stylesheets", () => {
+  it("gives a fresh create-next-app or Vite project Fasla's colours under --yes", () => {
+    for (const css of [CREATE_NEXT_APP, CREATE_NEXT_APP_14, VITE_TEMPLATE]) {
+      expect(themeWithoutAsking({ yes: true, hasPalette: hasPalette(css) })).toBe("fasla")
+    }
+  })
+
+  it("keeps a shadcn project's colours under --yes", () => {
+    for (const css of [SHADCN_V4, SHADCN_V3]) {
+      expect(themeWithoutAsking({ yes: true, hasPalette: hasPalette(css) })).toBe("brand")
+    }
   })
 })
 

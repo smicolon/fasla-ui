@@ -24,7 +24,8 @@ describe("Installation: Without questions block", () => {
     expect(pre).not.toMatch(/whitespace-pre-wrap|break-words|break-all/)
     expect(pre).toContain("focus-visible:ring-2")
     for (const line of [
-      "npx @smicolon/fasla-ui@latest init --yes",
+      // --theme with --yes: a new project gets Fasla's colours whatever its stylesheet has.
+      "npx @smicolon/fasla-ui@latest init --yes --theme fasla\\n",
       "npx @smicolon/fasla-ui@latest init --path src/components --style default --theme fasla",
       "npx @smicolon/fasla-ui@latest add button --yes",
     ]) {
@@ -47,7 +48,18 @@ describe("Installation: Without questions block", () => {
     const t = messages("en")
     expect(t.cliFlagsBody).toContain("or pass all three of <code>--path</code>, <code>--style</code> and <code>--theme</code>")
     expect(t.cliFlagsBody).not.toContain("give each choice")
-    expect(t.cliFlagYes).toBe("<code>--yes</code> (<code>-y</code>) accepts every default and asks nothing.")
+    expect(t.cliFlagYes).toContain("<code>--yes</code> (<code>-y</code>) accepts every default and asks nothing.")
+  })
+
+  test("says that under --yes the theme default is decided by --primary, in both languages", () => {
+    const en = messages("en")
+    expect(en.cliFlagYes).toContain("Under <code>--yes</code>, the theme default is decided by <code>--primary</code>")
+    expect(en.cliFlagTheme).toContain("<code>--theme fasla</code>")
+    const ar = messages("ar")
+    expect(ar.cliFlagYes).toContain("ومع <code>--yes</code> يعتمد المظهر الافتراضي على المتغير <code>--primary</code>")
+    expect(ar.cliFlagTheme).toContain("<code>--theme fasla</code>")
+    // No bare `init --yes` example: a new project needs --theme with it.
+    expect(page).not.toMatch(/init --yes\\n/)
   })
 
   test("Arabic: the agreed wording, code spans untouched", () => {
@@ -59,7 +71,7 @@ describe("Installation: Without questions block", () => {
     expect(t.cliFlagsBody).toContain("كما يفعل وكيل ذكاء اصطناعي أو مهمة تكامل مستمر")
     expect(t.cliFlagsBody).not.toContain("وكيل برمجي")
     expect(t.cliFlagTheme).toContain("<code>--theme</code> هو طبقة المظهر")
-    expect(t.cliFlagYes).toBe("<code>--yes</code> (<code>-y</code>) يقبل كل القيم الافتراضية ولا يطرح أي سؤال.")
+    expect(t.cliFlagYes).toContain("<code>--yes</code> (<code>-y</code>) يقبل كل القيم الافتراضية ولا يطرح أي سؤال.")
     expect(t.cliFlagNoInstall).toBe("<code>--no-install</code> يطبع أوامر التثبيت بدلًا من تنفيذها.")
     expect(t.cliFlagsExample).toBe("أمثلة:")
   })

@@ -104,7 +104,7 @@ let interactive = true
 vi.mock("./tty", () => ({ isInteractive: () => interactive }))
 
 const { createProgram } = await import("./program")
-const { installCnPackages, rangeStaysBelow3 } = await import("./commands/init")
+const { initCommand, installCnPackages, rangeStaysBelow3 } = await import("./commands/init")
 const { beginLegacyRepair, executeJournal, LOCK_FILE, planLegacyRepair, REPAIR_FILE } = await import("./legacy")
 const { addExample } = await import("./commands/list")
 
@@ -836,6 +836,17 @@ describe("list", () => {
   })
 })
 
+describe("init --help", () => {
+  it("shows a --yes example for a new project, and says --primary decides the theme under --yes", () => {
+    let text = ""
+    const command = initCommand().configureOutput({ writeOut: (s) => void (text += s) })
+    command.outputHelp()
+    expect(text).toContain("npx @smicolon/fasla-ui@latest init --yes --theme fasla\n")
+    expect(text).not.toMatch(/init --yes\n/)
+    expect(text).toContain("the theme default is decided by --primary")
+  })
+})
+
 describe("init: the theme", () => {
   const withColours = (extra: Record<string, string> = {}) =>
     nextApp({ "app/globals.css": `@import "tailwindcss";\n:root {\n  --primary: #ff0066;\n}\n`, ...extra })
@@ -857,14 +868,15 @@ describe("init: the theme", () => {
     const dir = await nextApp({ "app/globals.css": `@import "tailwindcss";\n` })
     await run("init", "--no-install", "--cwd", dir)
     const brand = prompted.find((q) => q.name === "theme")!.choices!.find((c) => c.value === "brand")!
-    expect(brand.title).toBe("I have a brand: keep my colours (app/globals.css has no colours yet, so the components would have none)")
+    expect(brand.title).toBe("I have a brand: keep my colours (app/globals.css sets no --primary, so the components would have no colours)")
   })
 
   it("keeps the project's colours under --yes: base theme only, and says how to switch", async () => {
     const dir = await withColours()
     await run("init", "--yes", "--cwd", dir, "--no-install")
-    expect(output()).toContain("app/globals.css has its own colours, so they are kept: installing the base theme only.")
-    expect(output()).toContain("npx @smicolon/fasla-ui@latest init --theme fasla")
+    expect(output()).toContain("app/globals.css sets its own --primary, so its colours are kept: installing the base theme only.")
+    // A command that works without a terminal, as the run it follows did.
+    expect(output()).toContain("To use Fasla's colours instead: npx @smicolon/fasla-ui@latest init --yes --theme fasla\n")
     expect(output()).toContain("npx shadcn@latest add @fasla/theme-base")
     expect(asked.map((q) => q.name)).not.toContain("theme")
   })
@@ -872,8 +884,22 @@ describe("init: the theme", () => {
   it("installs Fasla's colours under --yes only when the project has none", async () => {
     const dir = await nextApp({ "app/globals.css": `@import "tailwindcss";\n`, "package.json": JSON.stringify({ dependencies: { next: "16", clsx: "^2", "tailwind-merge": "^3" } }) })
     await run("init", "--yes", "--cwd", dir)
-    expect(output()).toContain("app/globals.css has no colours yet, so it gets Fasla's.")
+    expect(output()).toContain("app/globals.css sets no --primary, so it gets Fasla's colours.")
     expect(themesApplied).toEqual([{ cwd: dir, choice: "fasla" }])
+  })
+
+  it("gives a fresh create-next-app stylesheet Fasla's colours under --yes: --background and --foreground are no palette", async () => {
+    const css = `@import "tailwindcss";\n\n:root {\n  --background: #ffffff;\n  --foreground: #171717;\n}\n`
+    const dir = await nextApp({ "app/globals.css": css, "package.json": JSON.stringify({ dependencies: { next: "16", clsx: "^2", "tailwind-merge": "^3" } }) })
+    await run("init", "--yes", "--cwd", dir)
+    expect(themesApplied).toEqual([{ cwd: dir, choice: "fasla" }])
+    expect(output()).toContain("To keep its colours instead: npx @smicolon/fasla-ui@latest init --yes --theme brand")
+  })
+
+  it("repeats --path and --style in the command it prints, so the rerun writes the same components.json", async () => {
+    const dir = await withColours()
+    await run("init", "--yes", "--path", "src/ui kit", "--style", "new-york", "--cwd", dir, "--no-install")
+    expect(output()).toContain('npx @smicolon/fasla-ui@latest init --yes --theme fasla --path "src/ui kit" --style new-york')
   })
 
   it("replaces the project's colours only when --theme fasla says so", async () => {

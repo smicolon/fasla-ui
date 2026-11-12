@@ -43,7 +43,7 @@ export function nonInteractiveInitMessage(missing: string[]): string {
   return [
     "Error: init asks questions, and stdin is not a terminal, so there is nobody to answer.",
     `Pass ${flags.length === 1 ? "this flag" : "these flags"}: ${flags.join(", ")}.`,
-    "Example: npx @smicolon/fasla-ui@latest init --yes",
+    "Example: npx @smicolon/fasla-ui@latest init --yes --theme fasla",
     "Example: npx @smicolon/fasla-ui@latest init --path src/components --style default --theme fasla",
     "Nothing was written.",
   ].join("\n")
