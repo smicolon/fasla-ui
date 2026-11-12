@@ -183,7 +183,9 @@ loads Geist from `next/font`, which Next.js 14 has neither of.
 # Starting from scratch: use Fasla's colours (palette, radius, Geist).
 npx shadcn@latest add https://fasla.smicolon.com/r/theme.json https://fasla.smicolon.com/r/font-geist.json
 
-# The same on Next.js 14, without Geist: its template already loads it.
+# The same on Next.js 14, without Geist: next/font/google has no Geist there, so
+# shadcn would leave app/layout.tsx unchanged and ask you to add the fonts by
+# hand. The Next.js 14 template already loads Geist from its own files.
 npx shadcn@latest add https://fasla.smicolon.com/r/theme.json
 
 # I have a brand: keep my colours (base layer only)

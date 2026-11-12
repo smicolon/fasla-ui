@@ -136,6 +136,15 @@ describe("Theme section of the Installation page", () => {
     expect(page.indexOf('<PackageManagerTabs run={shadcnAdd("theme")} />')).toBeGreaterThan(note)
   })
 
+  test("says why Geist is left out on Next.js 14 as shadcn 4.23 behaves: it leaves the layout unchanged, the build does not fail", () => {
+    const en = JSON.parse(read("messages/en.json")).docs.installation.themeNext14
+    const ar = JSON.parse(read("messages/ar.json")).docs.installation.themeNext14
+    const reason = (text) => text.slice(text.indexOf("font-geist.json"))
+    expect(reason(en)).toContain("leaves <code>app/layout.tsx</code> unchanged and asks you to add the fonts by hand")
+    expect(reason(en)).not.toMatch(/fail/)
+    expect(reason(ar)).toContain("فيترك shadcn الملف <code>app/layout.tsx</code> دون تغيير")
+  })
+
   test("shows the cn helper with Fasla's type sizes, as init writes it", () => {
     // Without them tailwind-merge reads `text-xxs` as a colour and drops the
     // `text-foreground` beside it: Avatar's initials at size 12 lose colour.
