@@ -24,7 +24,7 @@ type Props = {
  * and size apply, written out. Read from button.tsx; keep in step with it.
  */
 const BACKGROUND = { default: "--primary", outline: "--background", ghost: "transparent" }
-const SIZE = { sm: { height: 32, padding: 12 }, md: { height: 36, padding: 16 }, lg: { height: 40, padding: 32 } }
+const SIZE = { sm: { height: 32, padding: 12 }, md: { height: 36, padding: 16 }, lg: { height: 40, padding: 24 } }
 
 /**
  * A segmented control: one of a few values. Fasla has no Toggle Group in code
