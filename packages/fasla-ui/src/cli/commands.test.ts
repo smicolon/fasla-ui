@@ -1083,6 +1083,37 @@ describe("add: files of the same name from another library", () => {
     expect(output()).not.toContain("Import them in your code:")
   })
 
+  it("says a component another one uses is already there, without a warning or a Not added list", async () => {
+    const dir = await nextApp({
+      "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }),
+    })
+    await run("add", "badge", "--yes", "--cwd", dir)
+    logs = []
+    // The spinner writes to stderr.
+    let spinner = ""
+    vi.spyOn(process.stderr, "write").mockImplementation(((chunk: string | Uint8Array) => {
+      spinner += String(chunk)
+      return true
+    }) as typeof process.stderr.write)
+    await run("add", "chip", "--yes", "--cwd", dir)
+    const text = output() + spinner.replace(/\x1b\[[0-9;]*[A-Za-z]/g, "")
+    expect(text).toContain("badge: badge.tsx is already there")
+    expect(text).toContain("Added 1 component(s) (badge already there)")
+    expect(text).not.toContain("already exists, skipping")
+    expect(text).not.toContain("Not added:")
+    expect(text).toContain("Components added successfully!")
+  })
+
+  it("still warns about a component that was asked for and is already there", async () => {
+    const dir = await nextApp({
+      "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }),
+    })
+    await run("add", "badge", "--yes", "--cwd", dir)
+    logs = []
+    await run("add", "badge", "--yes", "--cwd", dir)
+    expect(output()).toContain("Added nothing.\nNot added:\n  badge: badge.tsx is already there")
+  })
+
   it("names the real reason a component wrote nothing: no files, or no content", async () => {
     const dir = await withShadcnButton()
     await run("add", "hollow", "blank", "badge", "--yes", "--cwd", dir)

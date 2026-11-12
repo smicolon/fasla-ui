@@ -261,6 +261,11 @@ export function addCommand() {
       // was skipped — kept under --yes, or already there — wasn't added, and
       // the summary mustn't say it was.
       const added = new Set<string>()
+      // Components this run brings in only because another one uses them, and
+      // whose Fasla file is already in the project: installed, not skipped.
+      // `add dialog` after `add button` finds button.tsx there, as it should.
+      const present = new Set<string>()
+      const keptTargets = new Set(kept.map((k) => path.join(cwd, k.file)))
       // Why each component wrote nothing, as it happened, so the summary names
       // the real cause: a file already there, a registry entry with no files
       // or no content, or an error.
@@ -320,8 +325,13 @@ export function addCommand() {
             })
             if (outcome.result === "written") added.add(componentName)
             else if (outcome.result === "exists") {
-              addSpinner.warn(`${componentName}: ${filename} already exists, skipping (use -o to overwrite)`)
-              because(componentName, `${filename} is already there`)
+              if (!validComponents.includes(componentName) && !keptTargets.has(targetPath)) {
+                present.add(componentName)
+                addSpinner.info(`${componentName}: ${filename} is already there`)
+              } else {
+                addSpinner.warn(`${componentName}: ${filename} already exists, skipping (use -o to overwrite)`)
+                because(componentName, `${filename} is already there`)
+              }
             } else if (outcome.result === "duplicate") {
               addSpinner.warn(`${componentName}: ${filename} was already written by ${outcome.by} in this run, skipping`)
               because(componentName, `${filename} was already written by ${outcome.by}`)
@@ -333,9 +343,11 @@ export function addCommand() {
         }
       }
 
-      const total = resolved.items.length
-      const notAdded = resolved.items.map((item) => item.name).filter((name) => !added.has(name))
-      if (notAdded.length === 0) addSpinner.succeed(`Added ${total} component(s)`)
+      // A component already there counts neither as added nor as not added.
+      const total = resolved.items.length - present.size
+      const notAdded = resolved.items.map((item) => item.name).filter((name) => !added.has(name) && !present.has(name))
+      const alreadyThere = present.size > 0 ? ` (${[...present].join(", ")} already there)` : ""
+      if (notAdded.length === 0) addSpinner.succeed(`Added ${total} component(s)${alreadyThere}`)
       else {
         addSpinner.stop()
         console.log(chalk.yellow(added.size === 0 ? "Added nothing." : `Added ${added.size} of ${total} component(s).`))
