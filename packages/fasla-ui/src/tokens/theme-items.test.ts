@@ -72,10 +72,18 @@ describe("theme (Fasla's colours)", () => {
     // Unlayered, so they outweigh the template's unlayered :root on Tailwind 3,
     // where the CLI writes the palette into @layer base.
     expect(theme.css![":root"]).toEqual(light)
-    expect(theme.css![".dark"]).toEqual(dark)
+    expect(theme.css![".dark"]).toMatchObject(dark)
     // The same values the palette has: these only restate it outside a layer.
     expect(light["--background"]).toBe(theme.cssVars!.light!.background)
     expect(dark["--foreground"]).toBe(theme.cssVars!.dark!.foreground)
+  })
+
+  it("restates the whole Dark palette in an unlayered .dark, which Tailwind 3 keeps when no file names \"dark\"", () => {
+    // On Tailwind 3 the CLI writes cssVars.dark into @layer base, and Tailwind 3
+    // drops a layered rule whose class no content file names.
+    const rule = theme.css![".dark"] as Record<string, string>
+    expect(Object.keys(rule)).toEqual(tokenNames(mode).map((name) => `--${name}`))
+    for (const name of tokenNames(mode)) expect(rule[`--${name}`], name).toBe(theme.cssVars!.dark![name])
   })
 
   it("has a .light scope: every token at its Light value, for one element on a Dark page", () => {
@@ -113,7 +121,7 @@ describe("theme-base", () => {
   it("declares the values under :where(), which a project's own value always outweighs", () => {
     const layer = base.css!["@layer base"] as Record<string, Record<string, string>>
     const light = layer[":where(:root)"]!
-    const dark = layer[":where(.dark)"]!
+    const dark = layer[':where([class~="dark"])']!
     for (const name of extras) {
       expect(light[`--${name}`], name).toBe(mode.tokens[name]!.light)
       expect(dark[`--${name}`], name).toBe(mode.tokens[name]!.dark)
@@ -122,10 +130,16 @@ describe("theme-base", () => {
     expect(declared).toEqual(extras.map((name) => `--${name}`))
   })
 
-  it("re-declares its tokens at Light under :where(.light), after :where(.dark), so a .light element on a Dark page gets them", () => {
+  it("writes .dark as an attribute selector, so Tailwind 3 keeps it whether or not a file names \"dark\"", () => {
+    const layer = base.css!["@layer base"] as Record<string, Record<string, string>>
+    expect(Object.keys(layer).filter((selector) => /\.dark\b/.test(selector))).toEqual([])
+    expect(layer).toHaveProperty(':where([class~="dark"])')
+  })
+
+  it("re-declares its tokens at Light under :where(.light), after the dark rule, so a .light element on a Dark page gets them", () => {
     const layer = base.css!["@layer base"] as Record<string, Record<string, string>>
     const keys = Object.keys(layer)
-    expect(keys.indexOf(":where(.light)")).toBeGreaterThan(keys.indexOf(":where(.dark)"))
+    expect(keys.indexOf(":where(.light)")).toBeGreaterThan(keys.indexOf(':where([class~="dark"])'))
     for (const name of extras) expect(layer[":where(.light)"]![`--${name}`], name).toBe(mode.tokens[name]!.light)
     expect(Object.keys(layer[":where(.light)"]!)).toEqual(extras.map((name) => `--${name}`))
   })

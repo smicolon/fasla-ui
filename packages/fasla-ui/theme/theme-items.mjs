@@ -212,15 +212,24 @@ export const LATIN_FONT = 'var(--font-sans, var(--font-geist-sans, "Geist Variab
  *   loses to the template's unlayered `:root`: `.dark` turned the components
  *   dark on a white page. The same two tokens, unlayered here, win again.
  *
- * Only these two tokens: they are all the templates set. The rules go in the
- * stylesheet rather than `init` deleting the template's, so the shadcn-only
- * route gets them too, and a stylesheet the developer wrote is never edited.
+ * Only these two tokens in Light: they are all the templates set. The rules go
+ * in the stylesheet rather than `init` deleting the template's, so the
+ * shadcn-only route gets them too, and a stylesheet the developer wrote is
+ * never edited.
+ *
+ * `.dark` restates the whole Dark palette, not only those two. On Tailwind 3
+ * the CLI writes the palette's `.dark` into `@layer base`, and Tailwind 3 keeps
+ * a rule in a layer only when its class appears in a content file: with no
+ * file naming "dark" (a toggle from a library, or none yet), every Dark colour
+ * was dropped from the build and only these two switched. A rule outside a
+ * layer is always kept. On Tailwind 4 it restates what the palette's own
+ * `.dark` sets, at the same values.
  */
-function pageColourRules(value) {
+function pageColourRules(all, value) {
   const page = (scheme) => ({ "--background": value("background", scheme), "--foreground": value("foreground", scheme) })
   return {
     ":root": page("light"),
-    ".dark": page("dark"),
+    ".dark": Object.fromEntries(all.map((name) => [`--${name}`, value(name, "dark")])),
     "@media (prefers-color-scheme: dark)": { ":root:not(.dark)": page("light") },
   }
 }
@@ -322,9 +331,13 @@ export function buildThemeItems({ registryUrl, sources = loadSources() }) {
           ...Object.fromEntries(extras.map((name) => [`--${name}`, value(name, "light")])),
           ...leadingVars(typography, "en"),
         },
-        ":where(.dark)": Object.fromEntries(extras.map((name) => [`--${name}`, value(name, "dark")])),
-        // After .dark, so a .light element inside a .dark page gets the light
-        // values of these tokens too; the theme item brings the rest.
+        // `[class~="dark"]` is `.dark`, written so Tailwind 3 keeps it: it
+        // drops a rule in a layer whose class no content file names, and an
+        // app's toggle may never write the word "dark" (next-themes doesn't).
+        // An attribute selector names no class, so it is always kept.
+        ':where([class~="dark"])': Object.fromEntries(extras.map((name) => [`--${name}`, value(name, "dark")])),
+        // After the dark rule, so a .light element inside a .dark page gets the
+        // light values of these tokens too; the theme item brings the rest.
         ":where(.light)": Object.fromEntries(extras.map((name) => [`--${name}`, value(name, "light")])),
         '[dir="rtl"]': leadingVars(typography, "ar"),
         // The page in the theme's colours. The Next.js templates do this
@@ -353,7 +366,7 @@ export function buildThemeItems({ registryUrl, sources = loadSources() }) {
     title: "Fasla theme: colours",
     description: "Fasla's full light and dark palette and radius, on top of the base theme. Replaces your project's colours.",
     registryDependencies: [itemUrl(registryUrl, "theme-base")],
-    css: { body: { "font-family": LATIN_FONT, ...SMOOTHING }, ...pageColourRules(value), ".light": lightScopeRule(all, value) },
+    css: { body: { "font-family": LATIN_FONT, ...SMOOTHING }, ...pageColourRules(all, value), ".light": lightScopeRule(all, value) },
     cssVars: {
       theme: radius,
       light: Object.fromEntries(all.map((name) => [name, value(name, "light")])),
