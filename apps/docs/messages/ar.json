@@ -6,6 +6,8 @@
   "nav": {
     "docs": "التوثيق",
     "components": "المكوّنات",
+    "blocks": "الكتل",
+    "templates": "القوالب",
     "aguiEvents": "أحداث AG-UI",
     "changelog": "سجل التغييرات",
     "github": "GitHub",
@@ -2845,6 +2847,8 @@
       "label": "القائمة الرئيسية",
       "docs": "التوثيق",
       "components": "المكوّنات",
+      "blocks": "الكتل",
+      "templates": "القوالب",
       "github": "GitHub",
       "lang": "English",
       "langLabel": "التبديل إلى الإنجليزية",

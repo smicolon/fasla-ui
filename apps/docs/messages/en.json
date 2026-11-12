@@ -6,6 +6,8 @@
   "nav": {
     "docs": "Docs",
     "components": "Components",
+    "blocks": "Blocks",
+    "templates": "Templates",
     "aguiEvents": "AG-UI events",
     "changelog": "Changelog",
     "github": "GitHub",
@@ -2845,6 +2847,8 @@
       "label": "Main",
       "docs": "Docs",
       "components": "Components",
+      "blocks": "Blocks",
+      "templates": "Templates",
       "github": "GitHub",
       "lang": "العربية",
       "langLabel": "Switch to Arabic",
