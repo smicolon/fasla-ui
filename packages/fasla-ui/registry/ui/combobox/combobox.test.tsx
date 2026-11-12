@@ -70,3 +70,27 @@ describe("Combobox highlight", () => {
     expect(screen.getByRole("option").textContent).toBe('Create "Mecca"')
   })
 })
+
+describe("Combobox ARIA", () => {
+  const cities = [
+    { value: "riyadh", label: "Riyadh" },
+    { value: "jeddah", label: "Jeddah" },
+  ]
+
+  it("points the open input at its listbox with aria-controls, and drops it when closed", () => {
+    render(<Combobox options={cities} />)
+    const input = screen.getByRole("combobox")
+    expect(input).not.toHaveAttribute("aria-controls")
+    fireEvent.focus(input)
+    const id = input.getAttribute("aria-controls")
+    expect(id).toBeTruthy()
+    expect(document.getElementById(id!)).toHaveAttribute("role", "listbox")
+  })
+
+  it("marks every option's selection, the create option included", () => {
+    render(<Combobox options={cities} creatable onCreate={() => {}} />)
+    fireEvent.change(screen.getByRole("combobox"), { target: { value: "Mecca" } })
+    for (const option of screen.getAllByRole("option")) expect(option).toHaveAttribute("aria-selected")
+    expect(screen.getByRole("option", { name: 'Create "Mecca"' })).toHaveAttribute("aria-selected", "false")
+  })
+})
