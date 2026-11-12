@@ -158,8 +158,8 @@ export default async function InstallationPage({
         {/* Said plainly, before anyone adds a component to a shadcn project. */}
         <p className="rounded-lg border border-border p-4 text-sm">{i.rich("themeReplaces", rich)}</p>
 
-        {/* The one way Fasla inverts a surface. Linked from the Blocks
-            introduction and from each inverse block's manual steps. */}
+        {/* The inverse tokens: what they paint, where the mapping comes from,
+            and how to add it by hand. */}
         <div className="space-y-4">
           <h3 id="inverse-tokens" className="scroll-mt-24 text-xl font-semibold">
             {i("inverseTitle")}
