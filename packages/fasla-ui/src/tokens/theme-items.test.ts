@@ -207,6 +207,16 @@ describe("theme-base", () => {
     expect(ltr[1]).toEqual({ direction: "ltr", "unicode-bidi": "isolate", "text-align": "start" })
   })
 
+  it("gives body the Arabic font when dir=\"rtl\" is on <html>, outweighing a body font the page sets", () => {
+    const css = base.css!
+    // Not in a layer, and one attribute more than `body`: it wins over the
+    // colours layer's body font and the Next.js templates' body { Arial }.
+    expect(css['[dir="rtl"] body']).toEqual({ "font-family": 'var(--font-arabic, "Cairo Variable", "Cairo"), system-ui, sans-serif' })
+    expect(css["@layer base"]).not.toHaveProperty('[dir="rtl"] body')
+    // Fasla's colours set the Latin font on body, which this must outweigh.
+    expect(theme.css!.body!["font-family"]).toBe(LATIN_FONT)
+  })
+
   it("defines font-arabic on Tailwind 3, which the Cairo item's selector applies", () => {
     expect(base.tailwind!.config.theme.extend.fontFamily).toEqual({ arabic: ['var(--font-arabic, "Cairo Variable", "Cairo")', "system-ui", "sans-serif"] })
   })

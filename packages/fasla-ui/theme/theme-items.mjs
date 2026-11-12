@@ -172,6 +172,12 @@ const ARABIC_RULES = {
     // keeps whatever smoothing it has.
     ...SMOOTHING,
   },
+  // With dir="rtl" on <html>, the rule above sets <html> only, and a body
+  // font outweighs what <html> passes down: Fasla's colours layer sets the
+  // page in Geist on body, and the Next.js templates set Arial there. So body
+  // takes the Arabic font itself. With dir on an element inside body, the rule
+  // above sets that element, and this one matches nothing.
+  '[dir="rtl"] body': { "font-family": ARABIC_FONT.join(", ") },
   // Arabic is never letter-spaced, set in capitals or in italic.
   '[dir="rtl"], [dir="rtl"] *': { "letter-spacing": "0" },
   '[dir="rtl"] .uppercase': { "text-transform": "none" },
