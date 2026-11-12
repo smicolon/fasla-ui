@@ -3083,6 +3083,64 @@
         "typewriter-text": "Typewriter Text"
       }
     },
+    "blocks": {
+      "title": "Blocks for every page, in both directions.",
+      "lede": "Copy a full-width section into your app. Every block ships in English and Arabic and mirrors to right-to-left on its own.",
+      "all": "Browse all blocks",
+      "count": "{count, plural, one {{num} block} other {{num} blocks}}",
+      "new": "+{num} New",
+      "families": {
+        "hero": "Hero",
+        "feat": "Features",
+        "gallery": "Gallery",
+        "ban": "Banners",
+        "auth": "Authentication",
+        "price": "Billing & payments",
+        "checkout": "Checkout",
+        "order": "Order summary",
+        "dash": "Dashboard",
+        "prod": "Product lists",
+        "chat": "Messages",
+        "ai": "AI assistant",
+        "faq": "FAQ",
+        "err": "Error states",
+        "cal": "Date pickers",
+        "toast": "Notifications"
+      }
+    },
+    "templates": {
+      "title": "Templates, ready for launch day.",
+      "lede": "Complete bilingual sites built from Fasla blocks. Pick one, swap the content, and ship English and Arabic together.",
+      "all": "See all templates",
+      "prev": "Previous templates",
+      "next": "Next templates",
+      "items": {
+        "rihla": {
+          "name": "Rihla",
+          "kind": "Travel & stays"
+        },
+        "qahwahouse": {
+          "name": "Qahwa House",
+          "kind": "Café & shop"
+        },
+        "sanad": {
+          "name": "Sanad",
+          "kind": "Finance dashboard"
+        },
+        "dar": {
+          "name": "Dar",
+          "kind": "Real estate"
+        },
+        "mahaam": {
+          "name": "Mahaam",
+          "kind": "AI workspace"
+        },
+        "majalla": {
+          "name": "Majalla",
+          "kind": "Magazine"
+        }
+      }
+    },
     "launch": {
       "caption": "Arabic, from the first commit.",
       "title": "Arabic is a launch language.",

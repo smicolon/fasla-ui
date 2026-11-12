@@ -3,7 +3,8 @@ Copyright (c) 2025-2026 Smicolon GmbH
 
 The source code in this repository is licensed under the MIT License (see
 LICENSE). The Fasla and Smicolon names, logos and brand marks, the landing
-film, and the Wall of Love customer marks are not; see below. This file
+film, the Fasla Pro preview pictures, and the Wall of Love customer marks
+are not; see below. This file
 lists the fonts, icons, brand marks and images the repository uses or
 contains, and where each comes from. Third-party npm packages are listed
 with their own licences in each package.json and in bun.lock.
@@ -72,6 +73,15 @@ PHOTOS
     smicolon.com. They are third-party customer marks and pictures, shown
     with Smicolon's permission. They are NOT licensed under the MIT License;
     each remains the property of its owner.
+
+  Fasla Pro previews
+    apps/docs/public/landing/pro/*: the pictures of the Fasla Pro blocks and
+    templates on the home page, in English and Arabic, light and dark.
+    All rights reserved by Smicolon GmbH. They are NOT licensed under the MIT
+    License: the MIT License covers the code, not these pictures or the blocks
+    and templates they show. The pictures include photographs from Unsplash,
+    used under the Unsplash License; the Smicolon GmbH reservation applies to
+    the compositions, not to those photographs.
 
   Landing film
     apps/docs/public/landing/media/*: the Fasla product film and its posters,
