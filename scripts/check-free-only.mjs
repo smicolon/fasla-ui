@@ -7,7 +7,8 @@
  *
  *   1. registry.json lists exactly the free items, each with files that exist
  *      under registry/ui or registry/effects;
- *   2. no tracked path is one of the folders the blocks and templates used;
+ *   2. no tracked path is one of the folders the blocks and templates used,
+ *      and no script or stylesheet comes from their paths or imports their code;
  *   3. no tracked text file carries the premium marker or a Figma link;
  *   4. with --built, the built registry in apps/docs/public/r and the npm
  *      tarball hold only free items (run it after `bun run build`).
@@ -53,6 +54,25 @@ const PRO_PATHS =
 const proPaths = tracked.filter((file) => PRO_PATHS.test(file))
 if (proPaths.length) fail(`${proPaths.length} tracked paths belong to Fasla Pro, first: ${proPaths.slice(0, 5).join(", ")}`)
 else ok(`${tracked.length} tracked paths, none in a Pro folder`)
+
+// ── 2b. Code files from a premium path ──────────────────────────────────────
+// The home page shows Fasla Pro as pictures (public/landing/pro/), drawn by
+// its own section files. No script or stylesheet may come back from where the
+// blocks and templates lived: not by path, and not by importing their code.
+const CODE = /\.(c?[jt]sx?|mjs|mts|css)$/
+const PRO_CODE_PATHS = [
+  /^premium\//,
+  /(^|\/)landing-premium\.css$/,
+  /^apps\/docs\/lib\/(blocks|templates)\.ts$/,
+  /^apps\/docs\/app\/\[locale\]\/\(home\)\/_components\/(block-library|blocks-grid|blocks-data|templates-section|templates-carousel)\.tsx?$/,
+]
+const PRO_IMPORT = /from\s+["'][^"']*(@fasla-ui\/blocks\/|registry\/(blocks|templates)\/|\/block-library|\/blocks-data|\/templates-carousel|\/templates-section|\/blocks-grid|@free\/)[^"']*["']/
+const codeFiles = tracked.filter((file) => CODE.test(file) && existsSync(path.join(ROOT, file)))
+const proCode = codeFiles.filter((file) => PRO_PATHS.test(file) || PRO_CODE_PATHS.some((rx) => rx.test(file)))
+const proImports = codeFiles.filter((file) => PRO_IMPORT.test(readFileSync(path.join(ROOT, file), "utf8")))
+if (proCode.length) fail(`${proCode.length} script or style files come from a Pro path: ${proCode.slice(0, 5).join(", ")}`)
+if (proImports.length) fail(`${proImports.length} files import block or template code: ${proImports.slice(0, 5).join(", ")}`)
+if (!proCode.length && !proImports.length) ok(`${codeFiles.length} script and style files, none from a Pro path or importing Pro code`)
 
 // ── 3. Tracked text ─────────────────────────────────────────────────────────
 // Spelled in parts, so this file does not carry what it looks for.
