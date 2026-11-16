@@ -1098,8 +1098,25 @@ describe("add: files of the same name from another library", () => {
     await expect(run("add", "--cwd", dir)).rejects.toThrow("process.exit(1)")
     expect(output()).toContain("Error: add asks which components to add, and stdin is not a terminal")
     expect(output()).toContain("npx @smicolon/fasla-ui@latest add button card --yes")
+    expect(output()).toContain("Or add every component: npx @smicolon/fasla-ui@latest add --all --yes")
     expect(prompted.map((q) => q.name)).not.toContain("selected")
     expect(await tree(dir)).toEqual(before)
+  })
+
+  it("without a terminal, every add command the no-name error suggests runs as printed", async () => {
+    interactive = false
+    const config = { aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }
+    const dir = await nextApp({ "components.json": JSON.stringify(config) })
+    await expect(run("add", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    const suggested = [...output().matchAll(/npx @smicolon\/fasla-ui@latest (add[^\n,]*)/g)].map((m) => m[1]!.trim())
+    expect(suggested).toEqual(["add button card --yes", "add --all --yes"])
+    // --all alone still stops for confirmation: the reason the suggestion carries --yes.
+    await expect(run("add", "--all", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    for (const command of suggested) {
+      const fresh = await nextApp({ "components.json": JSON.stringify(config) })
+      await run(...command.split(" "), "--cwd", fresh)
+      expect(await fs.pathExists(path.join(fresh, "components/ui/button.tsx")), command).toBe(true)
+    }
   })
 
   it("labels an effect as an effect in the picker, not by its registry type", async () => {

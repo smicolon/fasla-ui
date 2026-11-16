@@ -53,7 +53,9 @@ export function nonInteractiveInitMessage(missing: string[]): string {
 export function nonInteractiveAddNamesMessage(): string {
   return [
     "Error: add asks which components to add, and stdin is not a terminal, so there is nobody to answer.",
-    "Name them: npx @smicolon/fasla-ui@latest add button card --yes, or pass --all for every component.",
+    "Name them: npx @smicolon/fasla-ui@latest add button card --yes",
+    // --all still asks to confirm, so it needs --yes as well.
+    "Or add every component: npx @smicolon/fasla-ui@latest add --all --yes",
     "Nothing was written.",
   ].join("\n")
 }
