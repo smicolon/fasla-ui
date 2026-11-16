@@ -96,6 +96,7 @@ const STATES = ["default", "hover", "selected", "focus"] as const
 export default function SidebarPage() {
   const t = useTranslations("docs.sections")
   const s = useTranslations("docs.sidebar")
+  const e = useTranslations("docs.examples")
   const rtl = useLocale() === "ar"
 
   // Prop and value names are code identifiers, so they stay Latin in both
@@ -466,7 +467,7 @@ export function CollapsibleSidebar() {
 }`}</UsageExample>
         <UsageExample title={s("usage.router")}>{`"use client"
 
-import Link from "next/link"
+import Link from "next/link" // ${e("nextOnly")}
 import { usePathname } from "next/navigation"
 import { LayoutDashboardIcon, ShoppingCartIcon } from "lucide-react"
 import { Sidebar, SidebarContent, SidebarGroup, SidebarItem } from "@/components/ui/sidebar"

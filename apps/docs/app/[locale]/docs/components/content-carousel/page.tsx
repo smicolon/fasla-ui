@@ -16,6 +16,7 @@ const ITEMS_PER_VIEW = [1, 2, 3] as const
 export default function ContentCarouselPage() {
   const t = useTranslations("docs.sections")
   const s = useTranslations("docs.contentCarousel")
+  const e = useTranslations("docs.examples")
 
   // Prop and value names are code identifiers, so they stay Latin in both
   // locales; the sentence around them is the locale's.
@@ -232,6 +233,7 @@ export function CustomerStories() {
 } from "@/components/ui/content-carousel"
 
 const PHOTOS = [
+  // ${e("photosPath")}
   { src: "/photos/old-town.jpg", alt: "${s("examples.photo1")}" },
   { src: "/photos/harbour.jpg", alt: "${s("examples.photo2")}" },
   { src: "/photos/corniche.jpg", alt: "${s("examples.photo3")}" },

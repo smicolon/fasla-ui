@@ -274,7 +274,7 @@ export default function DropdownMenuPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
-        <InstallCommand name="dropdown-menu" />
+        <InstallCommand name="dropdown-menu button" />
         <p className="text-muted-foreground">{d.rich("installNote", rich)}</p>
       </section>
 

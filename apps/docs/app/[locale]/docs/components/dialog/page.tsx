@@ -258,7 +258,7 @@ export default function DialogPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
-        <InstallCommand name="dialog" />
+        <InstallCommand name="dialog input" />
         <p className="text-muted-foreground">{d.rich("installNote", rich)}</p>
       </section>
 

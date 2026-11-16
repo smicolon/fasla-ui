@@ -223,7 +223,7 @@ export default function AlertDialogPage() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
-        <InstallCommand name="alert-dialog" />
+        <InstallCommand name="alert-dialog input" />
         <p className="text-muted-foreground">{a.rich("installNote", rich)}</p>
       </section>
 

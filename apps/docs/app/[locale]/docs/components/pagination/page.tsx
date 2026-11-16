@@ -104,6 +104,7 @@ const Rows = ({ children }: { children: React.ReactNode }) => (
 export default function PaginationPageDocs() {
   const t = useTranslations("docs.sections")
   const p = useTranslations("docs.pagination")
+  const e = useTranslations("docs.examples")
 
   const label = p("sample.label")
 
@@ -419,7 +420,7 @@ export function TablePagination() {
     </Pagination>
   )
 }`}</UsageExample>
-        <UsageExample title={p("usage.router")}>{`import Link from "next/link"
+        <UsageExample title={p("usage.router")}>{`import Link from "next/link" // ${e("nextOnly")}
 import {
   Pagination,
   PaginationContent,

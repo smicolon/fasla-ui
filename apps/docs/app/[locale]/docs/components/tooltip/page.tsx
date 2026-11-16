@@ -224,6 +224,7 @@ function Held({
 export default function TooltipPage() {
   const t = useTranslations("docs.sections")
   const a = useTranslations("docs.tooltip")
+  const e = useTranslations("docs.examples")
 
   // Prop and value names are code identifiers, so they stay Latin in both
   // locales; the sentence around them is the locale's.
@@ -482,7 +483,11 @@ export function LastEditedTooltip() {
       <TooltipTrigger>${trigger}</TooltipTrigger>
       <TooltipContent
         variant="secondary"
-        avatar={{ src: "/avatars/layla.png", name: "" }}
+        avatar={{
+          // ${e("photoPath")}
+          src: "/avatars/layla.png",
+          name: "",
+        }}
         description="${a("sample.edited")}"
       >
         ${a("sample.name")}

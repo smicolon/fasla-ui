@@ -90,6 +90,11 @@
       "components": "Components",
       "accessibility": "Accessibility"
     },
+    "examples": {
+      "photoPath": "Your own image: a file in your public folder, or a URL.",
+      "photosPath": "Your own images: files in your public folder, or URLs.",
+      "nextOnly": "Next.js only"
+    },
     "sidebar": {
       "gettingStarted": "Getting started",
       "primitives": "UI primitives",
@@ -783,7 +788,7 @@
     },
     "dropdownMenu": {
       "lead": "A menu of actions and settings that opens from a button. Use it for a short list of things the reader can do with the page, or with one item on it, such as editing, sharing or signing out.",
-      "installNote": "Dropdown Menu is built on Base UI, so it needs the <code>@base-ui/react</code> package. It shares its menu styles with <code>select</code>, and its switch rows use <code>switch</code>. <code>add</code> installs both with the component, and so does the shadcn CLI.",
+      "installNote": "Dropdown Menu is built on Base UI, so it needs the <code>@base-ui/react</code> package. It shares its menu styles with <code>select</code>, and its switch rows use <code>switch</code>. <code>add</code> installs both with the component, and so does the shadcn CLI. The examples below open the menu from a <code>button</code>, which the command adds too.",
       "previewHint": "Press the button, or move to it with Tab and press Enter or the down arrow.",
       "variantsBody": "Rows come in two variants, set with <code>variant</code>. <code>default</code> is for everyday actions. <code>destructive</code> marks an action that deletes something or cannot be undone: put it last, after a separator, and say exactly what it does in its label. <code>icon</code> puts a 16px icon before the text.",
       "statesBody": "A row is highlighted while the pointer rests on it or the arrow keys reach it; point at the rows above to see it. A row with <code>disabled</code> is dimmed and cannot be pressed. It stays reachable with the arrow keys, so screen readers can announce that it is unavailable.",
@@ -986,6 +991,7 @@
     },
     "input": {
       "lead": "A one-line text field, with an optional label, helper text and icons. It shows when a value passes or fails validation, in four sizes and two corner shapes.",
+      "installNote": "The examples below use icons from the <code>lucide-react</code> package; install it too if your project doesn't have it.",
       "preview": {
         "label": "Full name",
         "placeholder": "Layla Haddad",
@@ -1569,7 +1575,7 @@
     },
     "tabs": {
       "lead": "Tabs switch between related views in the same place and show one panel at a time. The same component is sometimes called Pills.",
-      "installNote": "Tabs is built on Base UI, so it needs the <code>@base-ui/react</code> package. <code>add</code> installs it with the component, and so does the shadcn CLI.",
+      "installNote": "Tabs is built on Base UI, so it needs the <code>@base-ui/react</code> package. <code>add</code> installs it with the component, and so does the shadcn CLI. The examples below use icons from the <code>lucide-react</code> package; install it too if your project doesn't have it.",
       "variantsBody": "Three styles, set on <code>TabsList</code> so a group never mixes them. <code>boxed</code>, the default, sets the tabs in a muted track and raises the active tab into a pill on it; it suits toolbars and inline view switches. <code>bordered</code> underlines the active tab, for content navigation and dense layouts. <code>lifted</code> raises the active tab out of a baseline like a file folder, for page-level sections.",
       "sizesBody": "Three sizes, also set on <code>TabsList</code> so every tab in a group matches. <code>md</code> is the default. Tabs are 28, 30 or 32px tall, and <code>lg</code> uses 16px text with 20px icons. The <code>boxed</code> track adds 4px around them.",
       "statesBody": "The active tab follows <code>value</code>. Hover and focus are real CSS states rather than props, so tab into a group to see the focus ring. A disabled tab is greyed out, and you cannot select it.",
@@ -1835,7 +1841,7 @@
     },
     "alert": {
       "lead": "A message box that tells people about news, guidance, a finished task, something that needs attention, or an error. It comes in five variants and three types, the same as the Figma set, with an optional action and close button.",
-      "installNote": "Alert is built on Button, so adding it adds <code>button</code> too.",
+      "installNote": "Alert is built on Button, so adding it adds <code>button</code> too. The example of a message from a person shows an <code>avatar</code>, which the command adds too.",
       "sample": {
         "default": {
           "title": "New message",
@@ -2132,7 +2138,7 @@
       }
     },
     "alertDialog": {
-      "installNote": "Alert Dialog is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its actions use <code>button</code>. <code>add</code> installs both with the component, and so does the shadcn CLI.",
+      "installNote": "Alert Dialog is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its actions use <code>button</code>. <code>add</code> installs both with the component, and so does the shadcn CLI. The example that asks for the project name uses <code>input</code>, which the command adds too.",
       "previewHint": "Press the button to open the dialog. Tab moves between its buttons, and Escape closes it.",
       "trigger": "Delete project",
       "cancel": "Cancel",
@@ -2251,7 +2257,7 @@
     },
     "dialog": {
       "whenToUse": "Use Dialog for a focused task that needs the user's input, such as editing a profile or choosing a plan, without leaving the page. To ask the user to confirm or cancel one action, such as deleting a project, use <link>Alert Dialog</link> instead.",
-      "installNote": "Dialog is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its close and back buttons use <code>button</code>. <code>add</code> installs both with the component, and so does the shadcn CLI.",
+      "installNote": "Dialog is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its close and back buttons use <code>button</code>. <code>add</code> installs both with the component, and so does the shadcn CLI. The examples below use <code>input</code> for their fields, which the command adds too.",
       "previewHint": "Press the button to open the dialog. Focus moves to the first field and Tab stays inside. Escape, the close button, Cancel or a press on the overlay closes it.",
       "trigger": "Edit profile",
       "cancel": "Cancel",
@@ -2390,7 +2396,7 @@
       }
     },
     "sheet": {
-      "installNote": "Sheet is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its close button uses <code>button</code>. <code>add</code> installs both with the component, and so does the shadcn CLI.",
+      "installNote": "Sheet is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its close button uses <code>button</code>. <code>add</code> installs both with the component, and so does the shadcn CLI. Two examples below use <code>input</code> for their fields, which the command adds too.",
       "previewHint": "Press a button to open the sheet from that side. Tab stays inside it, and Escape, the close button or a press on the overlay closes it.",
       "trigger": "Edit profile",
       "title": "Edit profile",
@@ -2496,6 +2502,7 @@
     },
     "badge": {
       "lead": "A compact inline label for status, category or metadata, with an optional icon, avatar and close button.",
+      "installNote": "One example below puts an <code>avatar</code> in a badge, and the command adds it too.",
       "preview": {
         "new": "New",
         "paid": "Paid",
@@ -2560,6 +2567,7 @@
     },
     "breadcrumb": {
       "lead": "A trail of links that shows where the current page sits in your site and takes the reader back up a level in one click. You compose it from parts, so it holds as many steps as the page needs, and it follows the page's reading direction.",
+      "installNote": "Two examples below use <code>dropdown-menu</code> and <code>badge</code>, and the command adds both too.",
       "sample": {
         "label": "Breadcrumb",
         "crumbs": [
