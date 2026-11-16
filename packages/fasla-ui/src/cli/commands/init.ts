@@ -382,12 +382,14 @@ export async function installTheme(
     }
     choice = theme as ThemeChoice
   } else if (yes && !flag) {
+    // No way back is offered from Fasla's colours: --yes only picks them when
+    // the stylesheet has no palette, so there are no colours to keep, and
+    // they would already be written by the time a second run could keep them.
     console.log(
       choice === "brand"
         ? `\n${css} sets its own --primary, so its colours are kept: installing the base theme only.\n` +
             `To use Fasla's colours instead: ${chalk.cyan(rerunCommand("fasla", rerun))}`
-        : `\n${css} sets no --primary, so it gets Fasla's colours.\n` +
-            `To keep its colours instead: ${chalk.cyan(rerunCommand("brand", rerun))}`
+        : `\n${css} sets no --primary, so it gets Fasla's colours.`
     )
   }
 

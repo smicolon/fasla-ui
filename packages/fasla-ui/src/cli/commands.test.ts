@@ -904,7 +904,11 @@ describe("init: the theme", () => {
     const dir = await nextApp({ "app/globals.css": css, "package.json": JSON.stringify({ dependencies: { next: "16", clsx: "^2", "tailwind-merge": "^3" } }) })
     await run("init", "--yes", "--cwd", dir)
     expect(themesApplied).toEqual([{ cwd: dir, choice: "fasla" }])
-    expect(output()).toContain("To keep its colours instead: npx @smicolon/fasla-ui@latest init --yes --theme brand")
+    expect(output()).toContain("app/globals.css sets no --primary, so it gets Fasla's colours.\n")
+    // No rerun with --theme brand: there are no colours to keep, and after this
+    // run that command would change nothing.
+    expect(output()).not.toContain("--theme brand")
+    expect(output()).not.toContain("To keep its colours")
   })
 
   it("repeats --path and --style in the command it prints, so the rerun writes the same components.json", async () => {
