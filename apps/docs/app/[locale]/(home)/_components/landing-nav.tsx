@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useLocale, useTranslations } from "next-intl"
 import { useTheme } from "next-themes"
 import { Button } from "@fasla-ui/ui/button/button"
+import { MobileMenuButton, MobileMenuPanel, useMobileMenu } from "@/components/mobile-menu"
 import { cn } from "@/lib/utils"
 import { MoonIcon, SunIcon } from "./icons"
 import { Lockup } from "./lockup"
@@ -17,11 +18,14 @@ const navLink =
  * The home page's own header: a full-width sticky bar, where the docs keep the
  * floating SiteHeader. Its three groups carry view-transition names so they
  * cross-fade in place, rather than slide, when the page flips direction.
+ * Below 760px the links fold into the same phone menu the docs header uses.
  */
 export function LandingNav() {
   const locale = useLocale()
   const t = useTranslations("landing.nav")
   const tc = useTranslations("landing.cta")
+  const tn = useTranslations("nav")
+  const menu = useMobileMenu("landing-menu")
   const { flip } = useLocaleFlip()
   const { resolvedTheme, setTheme } = useTheme()
 
@@ -82,8 +86,26 @@ export function LandingNav() {
           <Button asChild size="sm" className="max-[760px]:hidden">
             <Link href={landingLinks.docs(locale)}>{tc("start")}</Link>
           </Button>
+          <MobileMenuButton
+            menu={menu}
+            label={tn("toggleMenu")}
+            className="inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring min-[761px]:hidden"
+          />
         </div>
       </div>
+
+      <MobileMenuPanel
+        menu={menu}
+        links={[
+          { href: landingLinks.docs(locale), label: t("docs") },
+          { href: landingLinks.components(locale), label: t("components") },
+          { href: landingLinks.blocks(locale), label: t("blocks") },
+          { href: landingLinks.templates(locale), label: t("templates") },
+          { href: landingLinks.github, label: t("github") },
+        ]}
+        cta={{ href: landingLinks.docs(locale), label: tc("start") }}
+        className="absolute inset-x-0 top-full border-b bg-background px-4 pb-4 pt-2 shadow-lg min-[761px]:hidden"
+      />
     </header>
   )
 }
