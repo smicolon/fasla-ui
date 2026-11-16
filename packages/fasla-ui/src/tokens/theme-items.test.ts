@@ -46,6 +46,19 @@ describe("theme (Fasla's colours)", () => {
     expect(theme.tailwind!.config.theme.extend.borderRadius).toEqual({ xs: "2px", sm: "6px", md: "8px" })
   })
 
+  it("restates the radius in @layer theme, as :where(:root), so Tailwind 3 keeps it and a project's own radius wins", () => {
+    // On Tailwind 3 the CLI writes cssVars.theme into a `.theme` rule, which
+    // Tailwind 3 drops: without this, rounded-[var(--radius-md)] had no value.
+    expect(theme.css!["@layer theme"]).toEqual({
+      ":where(:root)": { "--radius-xs": "2px", "--radius-sm": "6px", "--radius-md": "8px" },
+    })
+    // The same values as the Tailwind 4 theme variables, so nothing changes there.
+    const restated = (theme.css!["@layer theme"] as Record<string, Record<string, string>>)[":where(:root)"]!
+    for (const [name, v] of Object.entries(theme.cssVars!.theme!)) expect(restated[`--${name}`], name).toBe(v)
+    // theme-base sets no radius: a project that keeps its colours keeps its radius.
+    expect(base.css).not.toHaveProperty("@layer theme")
+  })
+
   it("maps every colour on Tailwind 3 exactly as tokens/tailwind.ts does", () => {
     expect(theme.tailwind!.config.theme.extend.colors).toEqual(tailwindSemanticColors)
     expect(semanticColor("primary")).toBe(tsSemanticColor("primary"))

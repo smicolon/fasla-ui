@@ -372,7 +372,19 @@ export function buildThemeItems({ registryUrl, sources = loadSources() }) {
     title: "Fasla theme: colours",
     description: "Fasla's full light and dark palette and radius, on top of the base theme. Replaces your project's colours.",
     registryDependencies: [itemUrl(registryUrl, "theme-base")],
-    css: { body: { "font-family": LATIN_FONT, ...SMOOTHING }, ...pageColourRules(all, value), ".light": lightScopeRule(all, value) },
+    css: {
+      body: { "font-family": LATIN_FONT, ...SMOOTHING },
+      ...pageColourRules(all, value),
+      ".light": lightScopeRule(all, value),
+      // The radius again, for Tailwind 3: the CLI writes cssVars.theme there
+      // into a `.theme` rule in @layer base, which Tailwind 3 drops, and the
+      // components' rounded-[var(--radius-md)] had no value. Tailwind 3 passes
+      // any other @layer through as a CSS cascade layer, which every unlayered
+      // rule outweighs, so a radius the project sets itself still wins. On
+      // Tailwind 4 this is the layer its theme variables are emitted in, as
+      // `:root, :host`, which outweighs :where(): the values above apply there.
+      "@layer theme": { ":where(:root)": Object.fromEntries(Object.entries(radius).map(([name, v]) => [`--${name}`, v])) },
+    },
     cssVars: {
       theme: radius,
       light: Object.fromEntries(all.map((name) => [name, value(name, "light")])),
