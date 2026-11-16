@@ -4,10 +4,20 @@ on:
   push:
     branches:
       - main
-  # Manual DRY RUN: builds and packs, then runs `npm publish --dry-run` on the
-  # tarball. It never publishes and never touches release-please. Run it from
-  # the Actions tab (Release > Run workflow) or:  gh workflow run release.yml --ref <branch>
+  # Manual runs. Without a tag, a DRY RUN: builds and packs, then runs
+  # `npm publish --dry-run` on the tarball, from any branch:
+  #   gh workflow run release.yml --ref <branch>
+  # With a tag, publishes that existing release tag, when a push could not
+  # (the release was cut but the publish failed). Only from main:
+  #   gh workflow run release.yml --ref main -f tag=fasla-ui-v0.9.0
+  # Neither touches release-please.
   workflow_dispatch:
+    inputs:
+      tag:
+        description: "An existing release tag to publish, such as fasla-ui-v0.9.0. Empty: dry run only."
+        required: false
+        default: ""
+        type: string
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -59,6 +69,24 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           persist-credentials: false
+          # A manual publish builds the tag it was given; everything else, this run's commit.
+          ref: ${{ inputs.tag || github.sha }}
+
+      # A manual publish only builds a release tag whose package version is
+      # the tag's own, so it can never publish anything but that release.
+      - name: Check the release tag
+        if: inputs.tag != ''
+        run: |
+          set -euo pipefail
+          [[ "$TAG" =~ ^fasla-ui-v([0-9]+\.[0-9]+\.[0-9]+)$ ]] || { echo "::error::$TAG is not a fasla-ui release tag"; exit 1; }
+          want="${BASH_REMATCH[1]}"
+          have="$(jq -r .version packages/fasla-ui/package.json)"
+          [ "$have" = "$want" ] || { echo "::error::$TAG holds version $have, not $want"; exit 1; }
+          [ "$(git rev-parse HEAD)" = "$(git rev-parse "refs/tags/$TAG^{commit}")" ] || { echo "::error::checked out commit is not $TAG"; exit 1; }
+          echo "Publishing $TAG: @smicolon/fasla-ui $have"
+        env:
+          # Never inline ${{ }} into the script body — keep it a quoted env var.
+          TAG: ${{ inputs.tag }}
 
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
         with:
@@ -122,13 +150,17 @@ jobs:
     name: Publish to npm
     runs-on: ubuntu-latest
     needs: [release-please, build]
-    # success() is what GitHub applies to an `if` without a status function; it
-    # is written out so the intent is explicit. It is false when release-please
-    # was skipped, which keeps this job off manual runs.
+    # On a push, when release-please cut a release. On a manual run, only with
+    # a tag and only from main, so a branch's copy of this file cannot publish.
+    # `!cancelled()` because release-please is skipped on a manual run, and an
+    # `if` without a status function would then be false.
     if: >-
-      ${{ success() && github.event_name == 'push' &&
-        needs.release-please.outputs.releases_created == 'true' &&
-        needs.build.result == 'success' }}
+      ${{ !cancelled() && needs.build.result == 'success' && (
+        (github.event_name == 'push' &&
+          needs.release-please.outputs.releases_created == 'true') ||
+        (github.event_name == 'workflow_dispatch' && inputs.tag != '' &&
+          github.ref == 'refs/heads/main')
+      ) }}
     permissions:
       contents: read
       id-token: write
@@ -145,7 +177,9 @@ jobs:
           set -euo pipefail
           v="$(npm --version)"
           echo "npm $v"
-          printf '%s\n11.5.1\n' "$v" | sort -V -C || { echo "::error::npm $v is older than 11.5.1"; exit 1; }
+          # sort -C succeeds when its input is already in order: 11.5.1, then
+          # this npm. The other order passed only npm 11.5.1 and older.
+          printf '11.5.1\n%s\n' "$v" | sort -V -C || { echo "::error::npm $v is older than 11.5.1"; exit 1; }
 
       - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0
         with:
@@ -173,7 +207,7 @@ jobs:
     # `!cancelled()` is needed: on a manual run release-please is skipped, and
     # the implicit success() of an `if` without a status function is false when
     # any job earlier in the chain was skipped.
-    if: ${{ !cancelled() && github.event_name == 'workflow_dispatch' && needs.build.result == 'success' }}
+    if: ${{ !cancelled() && github.event_name == 'workflow_dispatch' && inputs.tag == '' && needs.build.result == 'success' }}
     permissions:
       contents: read
     steps:

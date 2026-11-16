@@ -117,12 +117,30 @@ describe("release.yml privileges", () => {
     expect(jobs["publish-dry-run"].permissions).toEqual({ contents: "read" })
   })
 
-  test("the publish job runs only on a push, never on a manual run", () => {
+  test("the publish job runs on a push release, or on a manual run with a tag, from main only", () => {
     const condition = String(jobs.publish.if)
     expect(condition).toContain("github.event_name == 'push'")
     expect(condition).toContain("releases_created == 'true'")
     expect(condition).toContain("needs.build.result == 'success'")
-    expect(condition).not.toContain("workflow_dispatch")
+    expect(condition).toMatch(/github\.event_name == 'workflow_dispatch' && inputs\.tag != '' &&\s+github\.ref == 'refs\/heads\/main'/)
+  })
+
+  test("a manual publish builds only the tag it names, at that tag's own version", () => {
+    const [checkout, check] = jobs.build.steps
+    expect(checkout.with.ref).toBe("${{ inputs.tag || github.sha }}")
+    expect(check.if).toBe("inputs.tag != ''")
+    expect(check.env.TAG).toBe("${{ inputs.tag }}")
+    expect(check.run).toContain("^fasla-ui-v([0-9]+\\.[0-9]+\\.[0-9]+)$")
+    expect(check.run).toContain("packages/fasla-ui/package.json")
+    expect(check.run).not.toContain("${{")
+  })
+
+  test("the npm version check passes npm 11.5.1 and newer, and fails older", () => {
+    const step = jobs.publish.steps.find((s) => s.name === "Check npm supports trusted publishing")
+    const line = String(step.run).split("\n").find((l) => l.includes("sort -V -C"))
+    const passes = (v) => Bun.spawnSync(["bash", "-c", `set -euo pipefail; v=${v}; ${line}`]).exitCode === 0
+    for (const v of ["11.5.1", "11.9.0", "11.10.0", "12.0.0"]) expect(passes(v), v).toBe(true)
+    for (const v of ["11.5.0", "11.4.2", "10.9.3"]) expect(passes(v), v).toBe(false)
   })
 
   test("the publish job installs and builds nothing", () => {
@@ -132,7 +150,8 @@ describe("release.yml privileges", () => {
     }
   })
 
-  test("the dry-run job runs only on a manual run", () => {
+  test("the dry-run job runs only on a manual run without a tag", () => {
     expect(String(jobs["publish-dry-run"].if)).toContain("workflow_dispatch")
+    expect(String(jobs["publish-dry-run"].if)).toContain("inputs.tag == ''")
   })
 })
