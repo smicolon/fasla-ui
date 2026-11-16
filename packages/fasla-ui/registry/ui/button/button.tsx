@@ -6,9 +6,18 @@ import { Slot } from "@radix-ui/react-slot"
 import { cva } from "class-variance-authority"
 import { cn } from "../../../src/lib/utils"
 
+/*
+ * Next.js and Vite replace `process.env.NODE_ENV` with "production" or
+ * "development" when they build, so the dev-only check below is removed from
+ * production code. Declared here for the type checker only (it emits
+ * nothing): a Vite project's tsconfig has no Node types, and without this its
+ * `tsc -b` build fails on the name `process`.
+ */
+declare const process: { env: { NODE_ENV?: string } }
+
 /**
- * Built against the Figma `Button` set (307:333, 1,200 variants) and `Icon
- * Button` set (3615:13506, 480 variants): Type × Style × Size × State × Radius,
+ * Built against the Figma `Button` set (1,200 variants) and `Icon
+ * Button` set (480 variants): Type × Style × Size × State × Radius,
  * plus Direction on Button. Every colour below is the token the sets bind.
  *
  * `variant` keeps shadcn's names, each pinned to one Figma Type and Style, and

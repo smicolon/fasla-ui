@@ -79,7 +79,8 @@ export default function BadgePage() {
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
         {/* `init` writes components.json, which `add` needs. */}
         <CodeBlock language="bash">{`npx @smicolon/fasla-ui@latest init
-npx @smicolon/fasla-ui@latest add badge`}</CodeBlock>
+npx @smicolon/fasla-ui@latest add badge avatar`}</CodeBlock>
+        <p className="text-muted-foreground">{b.rich("installNote", richCode)}</p>
       </section>
 
       {/* Preview */}

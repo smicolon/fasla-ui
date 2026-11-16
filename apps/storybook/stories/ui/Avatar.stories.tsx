@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react"
 import { Avatar, type AvatarProps } from "../../../../packages/fasla-ui/registry/ui/avatar"
 
-/** The Avatar set's own illustration, exported from Figma (5593:1593). */
+/** The Avatar set's own illustration, exported from Figma. */
 const PHOTO = "/samples/avatar-portrait.png"
 
 const COPY = {

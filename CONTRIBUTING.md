@@ -1,6 +1,6 @@
-# Contributing to FASLA UI
+# Contributing to Fasla UI
 
-Thanks for your interest in FASLA UI. This guide covers how to set the project
+Thanks for your interest in Fasla UI. This guide covers how to set the project
 up, how to propose a change, and what we look for in a pull request.
 
 By taking part you agree to follow the [Code of Conduct](CODE_OF_CONDUCT.md).
@@ -9,7 +9,7 @@ opening an issue.
 
 ## Scope of this repository
 
-This repository holds the free, open-source part of FASLA UI:
+This repository holds the free, open-source part of Fasla UI:
 
 - **UI primitives and effects** in `packages/fasla-ui/registry/`
 - **The `fasla-ui` command-line tool** (`init`, `add`, `list`) in
@@ -100,7 +100,7 @@ packages/fasla-ui/registry/ui/component-name/
 
 ### Quality bar
 
-- **Right-to-left.** FASLA UI is Arabic-first. Check every change in both LTR
+- **Right-to-left.** Fasla UI is Arabic-first. Check every change in both LTR
   and RTL. Use logical properties (`ms-*`, `ps-*`, `start-*`, `text-start`)
   instead of left and right, and mirror directional icons.
 - **Accessibility.** Everything interactive works from the keyboard, has a

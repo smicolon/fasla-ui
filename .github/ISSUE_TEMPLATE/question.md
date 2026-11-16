@@ -1,6 +1,6 @@
 ---
 name: Question
-about: Ask how to use FASLA UI
+about: Ask how to use Fasla UI
 title: '[Question] '
 labels: question
 assignees: ''

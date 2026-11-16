@@ -91,6 +91,10 @@ jobs:
       - name: Run tests
         run: bun run test
 
+      # This repository is the free product: the 42 items, the CLI, docs and tokens.
+      - name: Free-only check
+        run: bun run check:free-only
+
   # The registry must always install with the official shadcn CLI, not only
   # with ours. This builds it from the PR, serves it locally, and installs every
   # item into a fresh Next.js app through the @fasla namespace, then runs tsc.

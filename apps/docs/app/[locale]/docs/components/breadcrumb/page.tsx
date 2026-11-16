@@ -139,6 +139,7 @@ const RowHead = ({ children }: { children: React.ReactNode }) => (
 export default function BreadcrumbPageDocs() {
   const t = useTranslations("docs.sections")
   const b = useTranslations("docs.breadcrumb")
+  const e = useTranslations("docs.examples")
   /** The list comma of the page's script, for the landmark names below. */
   const comma = useLocale() === "ar" ? "، " : ", "
 
@@ -264,7 +265,8 @@ ${indent}${separator}`
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
-        <InstallCommand name="breadcrumb" />
+        <InstallCommand name="breadcrumb dropdown-menu badge" />
+        <p className="text-muted-foreground">{b.rich("installNote", richCode)}</p>
       </section>
 
       {/* Preview */}
@@ -462,7 +464,7 @@ ${items([crumbs[0]!, crumbs[3]!], "        ", `<BreadcrumbSeparator>
     </Breadcrumb>
   )
 }`}</UsageExample>
-        <UsageExample title={b("usage.router")}>{`import Link from "next/link"
+        <UsageExample title={b("usage.router")}>{`import Link from "next/link" // ${e("nextOnly")}
 import {
   Breadcrumb,
   BreadcrumbItem,

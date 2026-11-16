@@ -84,48 +84,6 @@ export const registry: RegistryItem[] = [
     dependencies: ["class-variance-authority"],
     categories: ["primitives", "forms"],
   },
-  // Blocks
-  {
-    name: "app-shell",
-    type: "block",
-    title: "App Shell",
-    description: "Application shell with sidebar, header, and content area.",
-    sourcePath: "registry/blocks/app-shell",
-    categories: ["layout", "application"],
-  },
-  {
-    name: "page-header",
-    type: "block",
-    title: "Page Header",
-    description: "Page header with title, breadcrumb, description, and actions.",
-    sourcePath: "registry/blocks/page-header",
-    categories: ["layout", "navigation"],
-  },
-  {
-    name: "empty-state",
-    type: "block",
-    title: "Empty State",
-    description: "Empty state component with icon, title, description, and actions.",
-    sourcePath: "registry/blocks/empty-state",
-    dependencies: ["lucide-react"],
-    categories: ["feedback", "data-display"],
-  },
-  {
-    name: "form-section",
-    type: "block",
-    title: "Form Section",
-    description: "Form section with title, description, fields, and actions.",
-    sourcePath: "registry/blocks/form-section",
-    categories: ["forms", "layout"],
-  },
-  {
-    name: "data-table",
-    type: "block",
-    title: "Data Table",
-    description: "Data table with row selection, a sticky header, loading and empty states, and custom cell rendering. Pair it with Pagination to page through rows.",
-    sourcePath: "registry/blocks/data-table",
-    categories: ["data-display", "tables"],
-  },
   // Effects
   {
     name: "shimmer-button",

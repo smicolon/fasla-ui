@@ -36,8 +36,6 @@ stories/
 │   ├── Card.stories.tsx
 │   ├── Badge.stories.tsx
 │   └── Skeleton.stories.tsx
-├── blocks/             # App Blocks
-│   └── EmptyState.stories.tsx
 └── effects/            # Animated Effects
     ├── ShimmerButton.stories.tsx
     ├── AnimatedGradient.stories.tsx
@@ -82,8 +80,7 @@ export const Default: Story = {
 
 ## Story layout rule
 
-The same rule as the agent instructions file ("Stories and docs examples: layout rule"), with
-how to meet it:
+The layout rule for every story and docs example, and how to meet it:
 
 - **Centre the content in its box.** The story's outermost element is
   `mx-auto` (with `w-max` on a grid), so the whole block sits in the middle

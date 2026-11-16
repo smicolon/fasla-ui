@@ -46,6 +46,19 @@ describe("theme (Fasla's colours)", () => {
     expect(theme.tailwind!.config.theme.extend.borderRadius).toEqual({ xs: "2px", sm: "6px", md: "8px" })
   })
 
+  it("restates the radius in @layer theme, as :where(:root), so Tailwind 3 keeps it and a project's own radius wins", () => {
+    // On Tailwind 3 the CLI writes cssVars.theme into a `.theme` rule, which
+    // Tailwind 3 drops: without this, rounded-[var(--radius-md)] had no value.
+    expect(theme.css!["@layer theme"]).toEqual({
+      ":where(:root)": { "--radius-xs": "2px", "--radius-sm": "6px", "--radius-md": "8px" },
+    })
+    // The same values as the Tailwind 4 theme variables, so nothing changes there.
+    const restated = (theme.css!["@layer theme"] as Record<string, Record<string, string>>)[":where(:root)"]!
+    for (const [name, v] of Object.entries(theme.cssVars!.theme!)) expect(restated[`--${name}`], name).toBe(v)
+    // theme-base sets no radius: a project that keeps its colours keeps its radius.
+    expect(base.css).not.toHaveProperty("@layer theme")
+  })
+
   it("maps every colour on Tailwind 3 exactly as tokens/tailwind.ts does", () => {
     expect(theme.tailwind!.config.theme.extend.colors).toEqual(tailwindSemanticColors)
     expect(semanticColor("primary")).toBe(tsSemanticColor("primary"))
@@ -72,10 +85,18 @@ describe("theme (Fasla's colours)", () => {
     // Unlayered, so they outweigh the template's unlayered :root on Tailwind 3,
     // where the CLI writes the palette into @layer base.
     expect(theme.css![":root"]).toEqual(light)
-    expect(theme.css![".dark"]).toEqual(dark)
+    expect(theme.css![".dark"]).toMatchObject(dark)
     // The same values the palette has: these only restate it outside a layer.
     expect(light["--background"]).toBe(theme.cssVars!.light!.background)
     expect(dark["--foreground"]).toBe(theme.cssVars!.dark!.foreground)
+  })
+
+  it("restates the whole Dark palette in an unlayered .dark, which Tailwind 3 keeps when no file names \"dark\"", () => {
+    // On Tailwind 3 the CLI writes cssVars.dark into @layer base, and Tailwind 3
+    // drops a layered rule whose class no content file names.
+    const rule = theme.css![".dark"] as Record<string, string>
+    expect(Object.keys(rule)).toEqual(tokenNames(mode).map((name) => `--${name}`))
+    for (const name of tokenNames(mode)) expect(rule[`--${name}`], name).toBe(theme.cssVars!.dark![name])
   })
 
   it("has a .light scope: every token at its Light value, for one element on a Dark page", () => {
@@ -97,6 +118,15 @@ describe("theme (Fasla's colours)", () => {
   })
 })
 
+describe("theme item text", () => {
+  it("describes every item without naming blocks or a block family: the open source package has none", () => {
+    for (const i of items) {
+      expect(`${i.title ?? ""} ${(i as { description?: string }).description ?? ""}`, i.name).not.toMatch(/\bblocks?\b|how it works/i)
+    }
+    expect(item("theme-inverse").description).toContain("for content on an inverted surface")
+  })
+})
+
 describe("theme-base", () => {
   it("adds exactly the Figma tokens shadcn doesn't have", () => {
     expect(extras).toEqual(tokenNames(mode).filter((name) => !SHADCN_TOKENS.includes(name)))
@@ -113,7 +143,7 @@ describe("theme-base", () => {
   it("declares the values under :where(), which a project's own value always outweighs", () => {
     const layer = base.css!["@layer base"] as Record<string, Record<string, string>>
     const light = layer[":where(:root)"]!
-    const dark = layer[":where(.dark)"]!
+    const dark = layer[':where([class~="dark"])']!
     for (const name of extras) {
       expect(light[`--${name}`], name).toBe(mode.tokens[name]!.light)
       expect(dark[`--${name}`], name).toBe(mode.tokens[name]!.dark)
@@ -122,10 +152,16 @@ describe("theme-base", () => {
     expect(declared).toEqual(extras.map((name) => `--${name}`))
   })
 
-  it("re-declares its tokens at Light under :where(.light), after :where(.dark), so a .light element on a Dark page gets them", () => {
+  it("writes .dark as an attribute selector, so Tailwind 3 keeps it whether or not a file names \"dark\"", () => {
+    const layer = base.css!["@layer base"] as Record<string, Record<string, string>>
+    expect(Object.keys(layer).filter((selector) => /\.dark\b/.test(selector))).toEqual([])
+    expect(layer).toHaveProperty(':where([class~="dark"])')
+  })
+
+  it("re-declares its tokens at Light under :where(.light), after the dark rule, so a .light element on a Dark page gets them", () => {
     const layer = base.css!["@layer base"] as Record<string, Record<string, string>>
     const keys = Object.keys(layer)
-    expect(keys.indexOf(":where(.light)")).toBeGreaterThan(keys.indexOf(":where(.dark)"))
+    expect(keys.indexOf(":where(.light)")).toBeGreaterThan(keys.indexOf(':where([class~="dark"])'))
     for (const name of extras) expect(layer[":where(.light)"]![`--${name}`], name).toBe(mode.tokens[name]!.light)
     expect(Object.keys(layer[":where(.light)"]!)).toEqual(extras.map((name) => `--${name}`))
   })
@@ -191,6 +227,16 @@ describe("theme-base", () => {
     expect(ltr[0]).toContain(".font-mono")
     expect(ltr[0]).toContain(".tabular-nums")
     expect(ltr[1]).toEqual({ direction: "ltr", "unicode-bidi": "isolate", "text-align": "start" })
+  })
+
+  it("gives body the Arabic font when dir=\"rtl\" is on <html>, outweighing a body font the page sets", () => {
+    const css = base.css!
+    // Not in a layer, and one attribute more than `body`: it wins over the
+    // colours layer's body font and the Next.js templates' body { Arial }.
+    expect(css['[dir="rtl"] body']).toEqual({ "font-family": 'var(--font-arabic, "Cairo Variable", "Cairo"), system-ui, sans-serif' })
+    expect(css["@layer base"]).not.toHaveProperty('[dir="rtl"] body')
+    // Fasla's colours set the Latin font on body, which this must outweigh.
+    expect(theme.css!.body!["font-family"]).toBe(LATIN_FONT)
   })
 
   it("defines font-arabic on Tailwind 3, which the Cairo item's selector applies", () => {

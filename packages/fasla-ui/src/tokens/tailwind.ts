@@ -3,7 +3,7 @@
  *
  * These are the 41 `theme/*` variables of the Figma "☾ Mode" collection, plus
  * the twelve `opacity/*` Soft tints and `custom/backdrop-overlay`. Figma
- * is the source of truth; `design/tokens/mode.json` holds the committed
+ * is the source of truth; `packages/fasla-ui/theme/tokens/mode.json` holds the committed
  * snapshot, and both apps declare the same values in their own `globals.css`.
  *
  * Spread this into `theme.extend.colors` and define the matching CSS variables

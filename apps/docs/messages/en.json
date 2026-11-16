@@ -6,6 +6,8 @@
   "nav": {
     "docs": "Docs",
     "components": "Components",
+    "blocks": "Blocks",
+    "templates": "Templates",
     "aguiEvents": "AG-UI events",
     "changelog": "Changelog",
     "github": "GitHub",
@@ -13,8 +15,7 @@
     "home": "Fasla — home",
     "toggleMenu": "Toggle menu",
     "toggleTheme": "Toggle theme",
-    "switchLanguage": "Switch language",
-    "blocks": "Blocks"
+    "switchLanguage": "Switch language"
   },
   "docs": {
     "avatar": {
@@ -38,6 +39,7 @@
         "lazy": "Long lists: defer photos below the fold, and give dense screens a sharper source",
         "circle": "Circle with a border and a presence dot",
         "inline": "Inline, beside a name that already says who it is",
+        "photoPath": "Your own image: a file in your public folder, or a URL.",
         "sampleName": "Layla Hassan"
       },
       "props": {
@@ -88,17 +90,21 @@
       "components": "Components",
       "accessibility": "Accessibility"
     },
+    "examples": {
+      "photoPath": "Your own image: a file in your public folder, or a URL.",
+      "photosPath": "Your own images: files in your public folder, or URLs.",
+      "nextOnly": "Next.js only"
+    },
     "sidebar": {
       "gettingStarted": "Getting started",
       "primitives": "UI primitives",
-      "blocks": "Blocks",
       "effects": "Effects",
       "introduction": "Introduction",
       "installation": "Installation",
       "playground": "Component Playground",
       "menu": "Docs menu",
       "lead": "App navigation that folds to icons: titled groups of links, sub-items under a parent, and the signed-in person at the foot. Expanded and collapsed, as in the Figma set, with an optional plan card.",
-      "installNote": "Sidebar is built on Base UI, so it needs the <code>@base-ui/react</code> package, and it uses <code>avatar</code> and <code>tooltip</code>. <code>add</code> installs them with the component, and so does the shadcn CLI.",
+      "installNote": "Sidebar is built on Base UI, so it needs the <code>@base-ui/react</code> package, and it uses <code>avatar</code> and <code>tooltip</code>. <code>add</code> installs them with the component, and so does the shadcn CLI. The examples below draw the logo with <code>fasla-logo</code>, which the command adds too; pass your own logo instead if you have one.",
       "previewHint": "Collapse the sidebar from the button in its header, then point at an icon to see its label.",
       "logo": "Fasla",
       "nav": "Main",
@@ -345,10 +351,10 @@
       "cliList": "List everything the registry offers:",
       "cliFlagsTitle": "Without questions: for agents and CI",
       "cliFlagsBody": "<code>init</code> asks questions only when a terminal is there to answer them. Run without one, as an agent or a CI job does, it never waits: pass <code>--yes</code> to accept every default, or pass all three of <code>--path</code>, <code>--style</code> and <code>--theme</code>. When a choice is missing, <code>init</code> lists the flags to pass, writes nothing and exits with an error.",
-      "cliFlagYes": "<code>--yes</code> (<code>-y</code>) accepts every default and asks nothing.",
+      "cliFlagYes": "<code>--yes</code> (<code>-y</code>) accepts every default and asks nothing. Under <code>--yes</code>, the theme default is decided by <code>--primary</code>: a stylesheet that sets it keeps its colours (<code>brand</code>), and one that doesn’t, as in a new project, gets Fasla’s (<code>fasla</code>).",
       "cliFlagPath": "<code>--path</code> is the folder components go in, such as <code>src/components</code>. The CLI puts them in a <code>ui</code> folder under it, so <code>src/components/ui</code> gives the same result.",
       "cliFlagStyle": "<code>--style</code> is the shadcn style written to <code>components.json</code>: <code>default</code> or <code>new-york</code>.",
-      "cliFlagTheme": "<code>--theme</code> is the theme layer: <code>fasla</code> for Fasla’s colours, or <code>brand</code> to keep yours.",
+      "cliFlagTheme": "<code>--theme</code> is the theme layer: <code>fasla</code> for Fasla’s colours, or <code>brand</code> to keep yours. Pass it with <code>--yes</code> to choose for yourself: in a new project, <code>--theme fasla</code>.",
       "cliFlagNoInstall": "<code>--no-install</code> prints the install commands instead of running them.",
       "cliFlagsExample": "For example:",
       "cliFlagsEnd": "When it finishes, <code>init</code> lists each file it created or changed and the command to run next. <code>add</code> also needs <code>--yes</code> when there is no terminal.",
@@ -356,11 +362,11 @@
       "themeBody": "Components take every colour from your theme. <code>init</code> asks which of two layers you want and installs it. The shadcn CLI commands below install a layer too, or switch a project to the other one later. Both give you the base layer.",
       "themeSetupFirst": "The shadcn commands need a project that is already set up, with a <code>components.json</code>. In a new project, run <code>npx @smicolon/fasla-ui@latest init</code> first, or <code>npx shadcn@latest init</code>. Run in a project without one, the shadcn CLI sets the project up itself, and the colours of the preset it picks replace Fasla’s.",
       "themeFasla": "Starting from scratch: use Fasla’s colours. Fasla’s light and dark palette, its radius and the Geist font, on top of the base layer:",
-      "themeNext14": "On Next.js 14, set the project up with <code>npx @smicolon/fasla-ui@latest init</code>, not <code>shadcn init</code>: shadcn’s setup writes Tailwind 4 styles and loads Geist from <code>next/font</code>, and Next.js 14 has neither, so the build fails. Then leave out <code>font-geist.json</code>, as the Next.js 14 template already loads Geist:",
+      "themeNext14": "On Next.js 14, set the project up with <code>npx @smicolon/fasla-ui@latest init</code>, not <code>shadcn init</code>: shadcn’s setup writes Tailwind 4 styles and loads Geist from <code>next/font</code>, and Next.js 14 has neither, so the build fails. Then leave out <code>font-geist.json</code>: Next.js 14’s <code>next/font/google</code> has no Geist, so the shadcn CLI leaves <code>app/layout.tsx</code> unchanged and asks you to add the fonts by hand, and the template already loads Geist from its own files:",
       "themeBrand": "I have a brand: keep my colours. The base layer only: the tokens shadcn doesn’t have (success, warning, info and the soft tints), the type scale with Arabic line heights, the Arabic setting and the Cairo font. It changes no colour you already have:",
       "themeConfirm": "The shadcn CLI asks <code>Existing CSS variables and components will be overwritten. Continue?</code> with No as the default, so type <code>y</code>. The base layer, <code>theme-base</code>, doesn’t change any colour your project already has.",
       "themeArabicFont": "Arabic text is set in Cairo through the <code>--font-arabic</code> variable. To use another Arabic font, point <code>--font-arabic</code> at it.",
-      "themeReplaces": "Fasla’s base components replace shadcn’s components of the same name, such as <code>button</code> and <code>badge</code>, in <code>components/ui</code>. <code>add</code> asks before it replaces a file that isn’t Fasla’s. Blocks install to their own folder, <code>components/blocks</code>.",
+      "themeReplaces": "Fasla’s base components replace shadcn’s components of the same name, such as <code>button</code> and <code>badge</code>, in <code>components/ui</code>. <code>add</code> asks before it replaces a file that isn’t Fasla’s.",
       "manualTitle": "Manual Installation",
       "manualBody": "You can also copy components directly from the source code.",
       "manualDeps": "1. Install dependencies:",
@@ -369,8 +375,8 @@
       "manualCopy": "3. Copy each component from its file in the registry, such as <code>https://fasla.smicolon.com/r/button.json</code> for Button. <code>https://fasla.smicolon.com/r/registry.json</code> lists them all.",
       "manualCopyDetail": "In each file, <code>files</code> holds the source in <code>content</code> and the path to save it at in <code>target</code>. <code>dependencies</code> lists the packages to install, and <code>registryDependencies</code> the other Fasla components it needs, which you copy the same way.",
       "inverseTitle": "Inverse tokens",
-      "inverseBody": "A block on an inverted surface, such as the FAQ Dark Panel, paints it with three tokens: <code>background-inverse</code>, <code>foreground-inverse</code> and <code>muted-foreground-inverse</code>. Fasla’s theme sets them: the surface is dark in light mode and light in dark mode. They are the only way Fasla inverts a surface, so a block never forces a dark class on a section or borrows <code>bg-foreground</code>.",
-      "inverseFallback": "Adding such a block with either CLI also adds the tokens’ mapping. When your theme doesn’t set the tokens, each falls back to your page colours, swapped: <code>foreground</code> for the surface, <code>background</code> for its text. To set your own, define <code>--background-inverse</code>, <code>--foreground-inverse</code> and <code>--muted-foreground-inverse</code> for light and dark.",
+      "inverseBody": "To invert a surface, so it is dark in light mode and light in dark mode, paint it with three tokens: <code>background-inverse</code>, <code>foreground-inverse</code> and <code>muted-foreground-inverse</code>. Fasla’s theme sets them. For example, put the Fasla Logo on a <code>bg-background-inverse</code> band and give it <code>text-foreground-inverse</code>.",
+      "inverseFallback": "Both of Fasla’s theme layers add the tokens’ mapping, so a project set up with <code>init</code> already has it. When your theme doesn’t set the tokens, each falls back to your page colours, swapped: <code>foreground</code> for the surface, <code>background</code> for its text. To set your own, define <code>--background-inverse</code>, <code>--foreground-inverse</code> and <code>--muted-foreground-inverse</code> for light and dark.",
       "inverseTailwind4": "Adding the mapping by hand on Tailwind 4: these three lines go in your stylesheet’s <code>@theme inline</code> block.",
       "inverseTailwind3": "On Tailwind 3, these go under <code>theme.extend.colors</code> in <code>tailwind.config</code>:"
     },
@@ -605,7 +611,7 @@
         "form": "The id of the form the value is submitted with, when the field sits outside it.",
         "id": "The trigger's id, for a <code>label</code> element of your own.",
         "defaultOpen": "Opens the menu on first render.",
-        "collisionAvoidance": "How the menu avoids the window edge. By default it flips above the trigger when there is no room below; <code>{ side: \"none\" }</code> keeps it below."
+        "collisionAvoidance": "How the menu avoids the window edge. By default it flips above the trigger when there is no room below; <code>'{ side: \"none\" }'</code> keeps it below."
       },
       "itemProps": {
         "value": "The value this option submits.",
@@ -782,7 +788,7 @@
     },
     "dropdownMenu": {
       "lead": "A menu of actions and settings that opens from a button. Use it for a short list of things the reader can do with the page, or with one item on it, such as editing, sharing or signing out.",
-      "installNote": "Dropdown Menu is built on Base UI, so it needs the <code>@base-ui/react</code> package. It shares its menu styles with <code>select</code>, and its switch rows use <code>switch</code>. <code>add</code> installs both with the component, and so does the shadcn CLI.",
+      "installNote": "Dropdown Menu is built on Base UI, so it needs the <code>@base-ui/react</code> package. It shares its menu styles with <code>select</code>, and its switch rows use <code>switch</code>. <code>add</code> installs both with the component, and so does the shadcn CLI. The examples below open the menu from a <code>button</code>, which the command adds too.",
       "previewHint": "Press the button, or move to it with Tab and press Enter or the down arrow.",
       "variantsBody": "Rows come in two variants, set with <code>variant</code>. <code>default</code> is for everyday actions. <code>destructive</code> marks an action that deletes something or cannot be undone: put it last, after a separator, and say exactly what it does in its label. <code>icon</code> puts a 16px icon before the text.",
       "statesBody": "A row is highlighted while the pointer rests on it or the arrow keys reach it; point at the rows above to see it. A row with <code>disabled</code> is dimmed and cannot be pressed. It stays reachable with the arrow keys, so screen readers can announce that it is unavailable.",
@@ -985,6 +991,7 @@
     },
     "input": {
       "lead": "A one-line text field, with an optional label, helper text and icons. It shows when a value passes or fails validation, in four sizes and two corner shapes.",
+      "installNote": "The examples below use icons from the <code>lucide-react</code> package; install it too if your project doesn't have it.",
       "preview": {
         "label": "Full name",
         "placeholder": "Layla Haddad",
@@ -1568,7 +1575,7 @@
     },
     "tabs": {
       "lead": "Tabs switch between related views in the same place and show one panel at a time. The same component is sometimes called Pills.",
-      "installNote": "Tabs is built on Base UI, so it needs the <code>@base-ui/react</code> package. <code>add</code> installs it with the component, and so does the shadcn CLI.",
+      "installNote": "Tabs is built on Base UI, so it needs the <code>@base-ui/react</code> package. <code>add</code> installs it with the component, and so does the shadcn CLI. The examples below use icons from the <code>lucide-react</code> package; install it too if your project doesn't have it.",
       "variantsBody": "Three styles, set on <code>TabsList</code> so a group never mixes them. <code>boxed</code>, the default, sets the tabs in a muted track and raises the active tab into a pill on it; it suits toolbars and inline view switches. <code>bordered</code> underlines the active tab, for content navigation and dense layouts. <code>lifted</code> raises the active tab out of a baseline like a file folder, for page-level sections.",
       "sizesBody": "Three sizes, also set on <code>TabsList</code> so every tab in a group matches. <code>md</code> is the default. Tabs are 28, 30 or 32px tall, and <code>lg</code> uses 16px text with 20px icons. The <code>boxed</code> track adds 4px around them.",
       "statesBody": "The active tab follows <code>value</code>. Hover and focus are real CSS states rather than props, so tab into a group to see the focus ring. A disabled tab is greyed out, and you cannot select it.",
@@ -1690,7 +1697,7 @@
         "triggerHandle": "The handle of a tooltip rendered elsewhere that this trigger opens.",
         "payload": "Data passed to the tooltip when this trigger opens it.",
         "alignOffset": "Moves the tooltip along its side, in px.",
-        "collisionAvoidance": "How the tooltip avoids the window edge. <code>{ side: \"none\", align: \"none\" }</code> keeps it in place."
+        "collisionAvoidance": "How the tooltip avoids the window edge. <code>'{ side: \"none\", align: \"none\" }'</code> keeps it in place."
       }
     },
     "progress": {
@@ -1834,7 +1841,7 @@
     },
     "alert": {
       "lead": "A message box that tells people about news, guidance, a finished task, something that needs attention, or an error. It comes in five variants and three types, the same as the Figma set, with an optional action and close button.",
-      "installNote": "Alert is built on Button, so adding it adds <code>button</code> too.",
+      "installNote": "Alert is built on Button, so adding it adds <code>button</code> too. The example of a message from a person shows an <code>avatar</code>, which the command adds too.",
       "sample": {
         "default": {
           "title": "New message",
@@ -2131,7 +2138,7 @@
       }
     },
     "alertDialog": {
-      "installNote": "Alert Dialog is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its actions use <code>button</code>. <code>add</code> installs both with the component, and so does the shadcn CLI.",
+      "installNote": "Alert Dialog is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its actions use <code>button</code>. <code>add</code> installs both with the component, and so does the shadcn CLI. The example that asks for the project name uses <code>input</code>, which the command adds too.",
       "previewHint": "Press the button to open the dialog. Tab moves between its buttons, and Escape closes it.",
       "trigger": "Delete project",
       "cancel": "Cancel",
@@ -2250,7 +2257,7 @@
     },
     "dialog": {
       "whenToUse": "Use Dialog for a focused task that needs the user's input, such as editing a profile or choosing a plan, without leaving the page. To ask the user to confirm or cancel one action, such as deleting a project, use <link>Alert Dialog</link> instead.",
-      "installNote": "Dialog is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its close and back buttons use <code>button</code>. <code>add</code> installs both with the component, and so does the shadcn CLI.",
+      "installNote": "Dialog is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its close and back buttons use <code>button</code>. <code>add</code> installs both with the component, and so does the shadcn CLI. The examples below use <code>input</code> for their fields, which the command adds too.",
       "previewHint": "Press the button to open the dialog. Focus moves to the first field and Tab stays inside. Escape, the close button, Cancel or a press on the overlay closes it.",
       "trigger": "Edit profile",
       "cancel": "Cancel",
@@ -2389,7 +2396,7 @@
       }
     },
     "sheet": {
-      "installNote": "Sheet is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its close button uses <code>button</code>. <code>add</code> installs both with the component, and so does the shadcn CLI.",
+      "installNote": "Sheet is built on Base UI, so it needs the <code>@base-ui/react</code> package, and its close button uses <code>button</code>. <code>add</code> installs both with the component, and so does the shadcn CLI. Two examples below use <code>input</code> for their fields, which the command adds too.",
       "previewHint": "Press a button to open the sheet from that side. Tab stays inside it, and Escape, the close button or a press on the overlay closes it.",
       "trigger": "Edit profile",
       "title": "Edit profile",
@@ -2495,6 +2502,7 @@
     },
     "badge": {
       "lead": "A compact inline label for status, category or metadata, with an optional icon, avatar and close button.",
+      "installNote": "One example below puts an <code>avatar</code> in a badge, and the command adds it too.",
       "preview": {
         "new": "New",
         "paid": "Paid",
@@ -2559,6 +2567,7 @@
     },
     "breadcrumb": {
       "lead": "A trail of links that shows where the current page sits in your site and takes the reader back up a level in one click. You compose it from parts, so it holds as many steps as the page needs, and it follows the page's reading direction.",
+      "installNote": "Two examples below use <code>dropdown-menu</code> and <code>badge</code>, and the command adds both too.",
       "sample": {
         "label": "Breadcrumb",
         "crumbs": [
@@ -2646,190 +2655,6 @@
         "separator": "Custom separator",
         "router": "With a Next.js link",
         "badge": "With badges"
-      }
-    },
-    "appShell": {
-      "lead": "Application layout with sidebar, header, and content areas.",
-      "brand": "My store",
-      "nav": {
-        "dashboard": "Dashboard",
-        "orders": "Orders",
-        "settings": "Settings"
-      },
-      "welcome": "Welcome back, Layla",
-      "content": {
-        "title": "Dashboard",
-        "body": "You have 12 new orders today."
-      },
-      "props": {
-        "sidebar": "Sidebar content, hidden on mobile.",
-        "header": "Header content.",
-        "children": "Main content.",
-        "sidebarWidth": "Width of the sidebar.",
-        "sidebarMobile": "Shows the sidebar on mobile.",
-        "className": "Extra classes for the component."
-      }
-    },
-    "pageHeader": {
-      "lead": "Page header with title, description, breadcrumbs, and actions.",
-      "preview": {
-        "title": "Orders",
-        "description": "Track and manage your store’s orders"
-      },
-      "actionsTitle": "With Actions",
-      "actions": {
-        "title": "Products",
-        "description": "Add, edit and price your products",
-        "action": "Add product"
-      },
-      "breadcrumbTitle": "With Breadcrumb",
-      "breadcrumb": {
-        "home": "Home",
-        "current": "Settings",
-        "label": "Breadcrumb"
-      },
-      "props": {
-        "title": "Page title.",
-        "description": "Text below the title.",
-        "actions": "Controls at the end of the header.",
-        "breadcrumb": "A <code>Breadcrumb</code> above the title, named with its own <code>aria-label</code>.",
-        "bordered": "Shows the bottom border.",
-        "headingLevel": "Heading level of the title.",
-        "className": "Extra classes for the component."
-      }
-    },
-    "emptyState": {
-      "lead": "Display contextual empty states with icons, titles, descriptions, and actions.",
-      "preview": {
-        "title": "No products yet",
-        "description": "Get started by adding your first product.",
-        "action": "Add product"
-      },
-      "searchTitle": "Search Results",
-      "search": {
-        "query": "linen shirt",
-        "title": "No results found",
-        "description": "No results for \"{query}\". Try a different search term."
-      },
-      "dataTitle": "Empty Data",
-      "data": {
-        "title": "No orders yet",
-        "description": "Get started by creating your first order."
-      },
-      "sizes": "No products yet",
-      "props": {
-        "icon": "Icon above the title.",
-        "title": "Main title.",
-        "description": "Text below the title.",
-        "action": "Primary action.",
-        "secondaryAction": "Secondary action.",
-        "size": "Size of the empty state.",
-        "className": "Extra classes for the component."
-      }
-    },
-    "formSection": {
-      "lead": "Form sections for grouping related fields with labels and descriptions.",
-      "preview": {
-        "title": "Personal Information",
-        "description": "Update your personal details.",
-        "first": "First Name",
-        "firstPlaceholder": "Layla",
-        "last": "Last Name",
-        "lastPlaceholder": "Haddad"
-      },
-      "errorTitle": "With Error",
-      "error": {
-        "label": "Email",
-        "message": "This email is already taken"
-      },
-      "actionsTitle": "Form Actions",
-      "actions": {
-        "cancel": "Cancel",
-        "save": "Save"
-      },
-      "usage": {
-        "title": "Account",
-        "description": "Update your account settings.",
-        "email": "Email"
-      },
-      "partsNote": "The table covers the props of <code>FormSection</code>, <code>FormField</code> and <code>FormActions</code>.",
-      "props": {
-        "title": "Section title.",
-        "description": "Text below the title or label.",
-        "divider": "Shows a divider at the bottom.",
-        "label": "Field label.",
-        "error": "Error message below the field.",
-        "required": "Marks the field as required.",
-        "htmlFor": "Connects the label to its input.",
-        "align": "Alignment of the actions.",
-        "sticky": "Sticks the actions to the bottom.",
-        "className": "Extra classes for the part."
-      }
-    },
-    "dataTable": {
-      "lead": "A data table component with sorting, selection, and pagination.",
-      "columns": {
-        "name": "Name",
-        "email": "Email",
-        "role": "Role"
-      },
-      "people": {
-        "a": "Layla Haddad",
-        "b": "Omar Khalil",
-        "c": "Sara Nasser"
-      },
-      "roles": {
-        "admin": "Admin",
-        "editor": "Editor",
-        "viewer": "Viewer"
-      },
-      "loadingTitle": "Loading State",
-      "emptyTitle": "Empty State",
-      "empty": "No users found",
-      "paginationTitle": "Pagination",
-      "paginationBody": "Page through rows with <code>Pagination</code>, placed under the table. Here its links are buttons, because paging changes the rows shown rather than the URL.",
-      "pagination": {
-        "label": "Pagination",
-        "status": "Page {page} of {total}"
-      },
-      "props": {
-        "data": "Rows to display.",
-        "columns": "Column definitions; each <code>align</code> is <code>start</code>, <code>center</code> or <code>end</code> of the reading direction.",
-        "getRowKey": "Unique key for each row.",
-        "loading": "Shows the loading state.",
-        "emptyState": "Shown when there are no rows.",
-        "onRowClick": "Called when a row is clicked.",
-        "selectedKey": "Key of the selected row.",
-        "stickyHeader": "Keeps the header visible on scroll.",
-        "className": "Extra classes for the component."
-      }
-    },
-    "statsCard": {
-      "lead": "Display key metrics with trends and icons.",
-      "cards": {
-        "revenue": "Revenue",
-        "revenueValue": "SAR 48,200",
-        "orders": "Orders",
-        "returns": "Returns",
-        "vsLastMonth": "vs last month"
-      },
-      "features": {
-        "value": "Title and value display",
-        "trend": "Trend indicator (up/down with percentage)",
-        "icon": "Optional icon",
-        "description": "Description text",
-        "loading": "Loading state",
-        "grid": "StatsGrid for layout"
-      },
-      "props": {
-        "title": "Label above the value.",
-        "value": "The main value.",
-        "description": "Text below the value.",
-        "icon": "Icon in the corner.",
-        "trend": "Change, with an up or down arrow.",
-        "loading": "Shows a skeleton while loading.",
-        "grid": "Lays the cards out in 2, 3 or 4 columns.",
-        "className": "Extra classes for the component."
       }
     },
     "shimmerButton": {
@@ -3012,704 +2837,6 @@
         "glowContainer": "A container with a glow that slides round its border.",
         "className": "Extra classes for the component."
       }
-    },
-    "blocksIntro": {
-      "title": "Introduction",
-      "lead": "Blocks are whole page sections, built from Fasla’s components and ready to drop into a page.",
-      "whatTitle": "What a block is",
-      "whatBody": "A block is one file that composes Fasla components, such as Accordion, Tabs and Button, into a section of a page. It takes every colour from your theme tokens. Once it is in your project, the code is yours to change.",
-      "whatResponsive": "It is responsive: each block is designed at desktop, tablet and mobile widths, and changes layout at the <code>md</code> and <code>lg</code> breakpoints.",
-      "whatDirection": "It follows the page’s direction. Every side is a logical one, so the same code lays out left to right in English and right to left in Arabic.",
-      "whatContent": "Its content comes from props. Each block ships with English and Arabic copy; <code>locale</code> picks which, and any prop you pass replaces it.",
-      "imagesTitle": "Images",
-      "imagesBody": "Blocks don’t include images. A block with a photo shows a placeholder, and one with people shows their initials, until you pass your own: <code>image</code> takes a <code>src</code> and an <code>alt</code>, and each person takes a <code>src</code>.",
-      "inverseTitle": "Blocks on an inverted surface",
-      "inverseBody": "A few blocks sit on an inverted surface: dark in light mode, light in dark mode. They are painted with the inverse tokens, so they never force a dark class on a section. Installing one with <code>npx @smicolon/fasla-ui@latest add</code> or <code>npx shadcn@latest add</code> also adds the tokens’ mapping to your stylesheet.",
-      "inverseMore": "Installing one by hand takes three lines of CSS: see <link>Installation</link>.",
-      "familiesTitle": "Block families"
-    },
-    "faqBlocks": {
-      "lead": "{count, plural, one {One FAQ section} other {{n} FAQ sections}}: question lists, layouts, search and topic navigation, and ways to reach support.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "lists": "Lists",
-        "layouts": "Layouts",
-        "navigation": "Navigation and search",
-        "support": "Support and contact"
-      },
-      "types": {
-        "faq-classic-centered": "Classic Centered",
-        "faq-split-sticky": "Split Sticky",
-        "faq-accent-active-card": "Accent Active Card",
-        "faq-soft-filled-rows": "Soft Filled Rows",
-        "faq-numbered-editorial": "Numbered Editorial",
-        "faq-dark-panel": "Dark Panel",
-        "faq-mono-index": "Mono Index",
-        "faq-uppercase-dense": "Uppercase Dense",
-        "faq-featured-question": "Featured Question",
-        "faq-two-column-grid": "Two-Column Grid",
-        "faq-masonry-cards": "Masonry Cards",
-        "faq-category-columns": "Category Columns",
-        "faq-grouped-sections": "Grouped Sections",
-        "faq-table-compact": "Table Compact",
-        "faq-search-categories": "Search + Categories",
-        "faq-tabs-by-topic": "Tabs by Topic",
-        "faq-sidebar-nav": "Sidebar Nav",
-        "faq-category-chip-grid": "Category Chip Grid",
-        "faq-topic-tiles": "Topic Tiles",
-        "faq-help-hero-popular": "Help Hero + Popular",
-        "faq-contact-cta-card": "Contact CTA Card",
-        "faq-support-channels": "Support Channels",
-        "faq-newsletter-close": "Newsletter Close",
-        "faq-support-stats": "Support Stats",
-        "faq-media-split": "Media Split",
-        "faq-chat-thread": "Chat Thread"
-      }
-    },
-    "errorStateBlocks": {
-      "lead": "{count, plural, one {One error page} other {{n} error pages}}: 404 pages, and the states next to them, from a server error to a timed redirect.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "not-found": "404 pages",
-        "other-states": "Other states"
-      },
-      "types": {
-        "error-state-centered-minimal": "Centered Minimal",
-        "error-state-search-recovery": "Search Recovery",
-        "error-state-display-numeral-split": "Display Numeral Split",
-        "error-state-editorial-photo-split": "Editorial Photo Split",
-        "error-state-full-bleed-photo": "Full-Bleed Photo",
-        "error-state-colour-field-scatter": "Colour Field Scatter",
-        "error-state-dark-spotlight": "Dark Spotlight",
-        "error-state-ghost-watermark": "Ghost Watermark",
-        "error-state-helpful-links-list": "Helpful Links List",
-        "error-state-popular-pages-grid": "Popular Pages Grid",
-        "error-state-error-card-panel": "Error Card Panel",
-        "error-state-illustrated-empty-state": "Illustrated Empty State",
-        "error-state-light-editorial": "Light Editorial",
-        "error-state-layered-badge-centered": "Layered Badge Centered",
-        "error-state-server-error-500": "Server Error 500",
-        "error-state-access-denied-403": "Access Denied 403",
-        "error-state-offline-state": "Offline State",
-        "error-state-maintenance-mode": "Maintenance Mode",
-        "error-state-empty-search-results": "Empty Search Results",
-        "error-state-recovery-bento": "Recovery Bento",
-        "error-state-sitemap-columns": "Sitemap Columns",
-        "error-state-terminal-console": "Terminal Console",
-        "error-state-photo-collage-scatter": "Photo Collage Scatter",
-        "error-state-support-escalation-band": "Support Escalation Band",
-        "error-state-split-colour-panel": "Split Colour Panel",
-        "error-state-marquee-404-band": "Marquee 404 Band",
-        "error-state-broken-trail-breadcrumb": "Broken Trail Breadcrumb",
-        "error-state-countdown-redirect": "Countdown Redirect"
-      }
-    },
-    "authenticationsBlocks": {
-      "lead": "{count, plural, one {One screen} other {{n} screens}} between a visitor and their account: the ways in, and the steps that follow, from a code to a locked session.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "ways-in": "Ways in",
-        "next-steps": "Next steps"
-      },
-      "types": {
-        "auth-centered-card-sign-in": "Centered Card Sign In",
-        "auth-social-first-sign-in": "Social-First Sign In",
-        "auth-split-photo-sign-in": "Split Photo Sign In",
-        "auth-split-testimonial-sign-up": "Split Testimonial Sign Up",
-        "auth-minimal-centered-sign-in": "Minimal Centered Sign In",
-        "auth-sign-up-password-strength": "Sign Up + Password Strength",
-        "auth-sign-up-benefits-column": "Sign Up + Benefits Column",
-        "auth-tabbed-sign-in-sign-up": "Tabbed Sign In / Sign Up",
-        "auth-magic-link-request": "Magic Link Request",
-        "auth-check-your-email": "Check Your Email",
-        "auth-otp-verification": "OTP Verification",
-        "auth-two-factor-authenticator": "Two-Factor Authenticator",
-        "auth-two-factor-method-chooser": "Two-Factor Method Chooser",
-        "auth-forgot-password": "Forgot Password",
-        "auth-reset-password": "Reset Password",
-        "auth-password-changed": "Password Changed",
-        "auth-team-invite-accept": "Team Invite Accept",
-        "auth-profile-setup-onboarding": "Profile Setup Onboarding",
-        "auth-photo-background-sign-in": "Photo Background Sign In",
-        "auth-phone-number-sign-in": "Phone Number Sign In",
-        "auth-qr-device-login": "QR Device Login",
-        "auth-passkey-sign-in": "Passkey Sign In",
-        "auth-locked-session-re-authenticate": "Locked Session Re-authenticate",
-        "auth-multi-step-sign-up-wizard": "Multi-Step Sign Up Wizard",
-        "auth-sign-in-error-state": "Sign In Error State",
-        "auth-waitlist-early-access": "Waitlist Early Access"
-      }
-    },
-    "navbarBlocks": {
-      "lead": "{count, plural, one {One navigation bar} other {{n} navigation bars}} for the top of a page: a site's links, a floating pill, or an app's search, notifications and account.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "site": "Site bars",
-        "floating": "Floating",
-        "app": "Apps and shops"
-      },
-      "types": {
-        "navbar-default": "Default",
-        "navbar-with-dropdown": "With Dropdown",
-        "navbar-with-icon-indicator-avatar": "With Icon Indicator & Avatar",
-        "navbar-with-centered-logo": "With Centered Logo",
-        "navbar-with-cta-button": "With CTA Button",
-        "navbar-with-submenu": "With Submenu",
-        "navbar-rounded": "Rounded",
-        "navbar-with-search-input": "With Search Input",
-        "navbar-multiple-icon": "Multiple Icon",
-        "navbar-multiple-action": "Multiple Action",
-        "navbar-extended-at-top": "Extended at Top",
-        "navbar-small": "Small",
-        "navbar-rounded-small": "Rounded Small",
-        "navbar-centered-floating": "Centered Floating",
-        "navbar-active-action-with-border": "Active Action with Border",
-        "navbar-active-action-with-round": "Active Action with Round",
-        "navbar-e-commerce": "E-commerce"
-      }
-    },
-    "logoCloudBlocks": {
-      "lead": "{count, plural, one {One logo section} other {{n} logo sections}}, from a single row of marks to a full wall.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "walls": "Logo walls",
-        "proof": "With quotes, figures or a filter"
-      },
-      "types": {
-        "logo-cloud-centered-caption-row": "Centered Caption Row",
-        "logo-cloud-heading-grid": "Heading Grid",
-        "logo-cloud-bordered-cell-grid": "Bordered Cell Grid",
-        "logo-cloud-enterprise-wall": "Enterprise Wall",
-        "logo-cloud-contained-card": "Contained Card",
-        "logo-cloud-dark-logo-wall": "Dark Logo Wall",
-        "logo-cloud-side-label-rail": "Side Label Rail",
-        "logo-cloud-heading-left-grid-right": "Heading Left Grid Right",
-        "logo-cloud-editorial-eyebrow-split": "Editorial Eyebrow Split",
-        "logo-cloud-flanked-heading": "Flanked Heading",
-        "logo-cloud-quote-panel-grid": "Quote Panel Grid",
-        "logo-cloud-stat-rail-above-grid": "Stat Rail Above Grid",
-        "logo-cloud-logo-metric-tiles": "Logo Metric Tiles",
-        "logo-cloud-logo-quote-cards": "Logo Quote Cards",
-        "logo-cloud-named-integration-cards": "Named Integration Cards",
-        "logo-cloud-logo-testimonial-strip": "Logo Testimonial Strip",
-        "logo-cloud-scatter-field": "Scatter Field",
-        "logo-cloud-bento-logo-wall": "Bento Logo Wall",
-        "logo-cloud-divider-rule-row": "Divider Rule Row",
-        "logo-cloud-pyramid-row-stack": "Pyramid Row Stack",
-        "logo-cloud-tabbed-industry-filter": "Tabbed Industry Filter",
-        "logo-cloud-grid-closing-cta": "Grid Closing CTA"
-      }
-    },
-    "galleryBlocks": {
-      "lead": "{count, plural, one {One photo gallery} other {{n} photo galleries}}: captioned grids and walls, carousels, and viewers with controls of their own.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "grids": "Grids and walls",
-        "carousels": "Carousels",
-        "viewers": "Viewers"
-      },
-      "types": {
-        "gallery-culture-photo-grid": "Culture Photo Grid",
-        "gallery-masonry-gallery": "Masonry Gallery",
-        "gallery-photo-bento": "Photo Bento",
-        "gallery-filmstrip-carousel": "Filmstrip Carousel",
-        "gallery-full-bleed-slider": "Full-Bleed Slider",
-        "gallery-filter-tabs-grid": "Filter Tabs + Grid",
-        "gallery-hover-caption-cards": "Hover Caption Cards",
-        "gallery-lightbox-viewer": "Lightbox Viewer",
-        "gallery-horizontal-scroll-rail": "Horizontal Scroll Rail",
-        "gallery-editorial-split": "Editorial Split",
-        "gallery-scattered-collage": "Scattered Collage",
-        "gallery-social-feed-strip": "Social Feed Strip",
-        "gallery-video-gallery": "Video Gallery",
-        "gallery-before-after-compare": "Before / After Compare",
-        "gallery-dark-cinema-wall": "Dark Cinema Wall",
-        "gallery-hover-index-list": "Hover Index List",
-        "gallery-mosaic-statement-tile": "Mosaic + Statement Tile",
-        "gallery-contact-sheet-wall": "Contact Sheet Wall",
-        "gallery-featured-thumb-rail": "Featured + Thumb Rail",
-        "gallery-album-cards": "Album Cards",
-        "gallery-timeline-gallery": "Timeline Gallery",
-        "gallery-photo-spotlight": "Photo Spotlight"
-      }
-    },
-    "pricingBlocks": {
-      "lead": "{count, plural, one {One pricing section} other {{n} pricing sections}}: plans to compare side by side, and a choice of plan or billing that leads to checkout.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "compare": "Compare plans",
-        "choose": "Choose and pay"
-      },
-      "types": {
-        "pricing-tiers": "Pricing Tiers",
-        "pricing-two-plan-compare": "Two-Plan Compare",
-        "pricing-plan-spotlight": "Plan Spotlight",
-        "pricing-comparison-matrix": "Comparison Matrix",
-        "pricing-plan-picker-summary": "Plan Picker + Summary"
-      }
-    },
-    "heroBlocks": {
-      "lead": "{count, plural, one {One hero} other {{n} heroes}} for the top of a landing page: split layouts, photo-led openers, cards and patterns, and type-led heroes, some of them moving.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "split": "Split layouts",
-        "photo-led": "Photo-led",
-        "cards": "Cards and patterns",
-        "type-led": "Type-led"
-      },
-      "types": {
-        "hero-editorial-arch": "Editorial Arch",
-        "hero-photo-constellation": "Photo Constellation",
-        "hero-arc-gallery": "Arc Gallery",
-        "hero-inline-image-headline": "Inline Image Headline",
-        "hero-bento-split": "Bento Split",
-        "hero-framed-full-bleed": "Framed Full-Bleed",
-        "hero-annotated-object": "Annotated Object",
-        "hero-editorial-triptych": "Editorial Triptych",
-        "hero-colour-stage": "Colour Stage",
-        "hero-twin-panels": "Twin Panels",
-        "hero-split-band-headline": "Split Band Headline",
-        "hero-textured-dark": "Textured Dark",
-        "hero-component-pattern": "Component Pattern",
-        "hero-curved-media-rail": "Curved Media Rail",
-        "hero-framed-studio-card": "Framed Studio Card",
-        "hero-orbit-track": "Orbit Track",
-        "hero-floating-integrations": "Floating Integrations",
-        "hero-shape-grid": "Shape Grid",
-        "hero-wave-band": "Wave Band",
-        "hero-studio-mosaic": "Studio Mosaic",
-        "hero-illustration-split": "Illustration Split",
-        "hero-masked-type-reveal": "Masked Type Reveal",
-        "hero-velocity-marquee": "Velocity Marquee",
-        "hero-duo-card": "Duo Card",
-        "hero-video-spotlight": "Video Spotlight",
-        "hero-brand-color-block": "Brand Color-Block",
-        "hero-scramble-decode": "Scramble Decode",
-        "hero-split-flap-counters": "Split-Flap Counters",
-        "hero-video-in-type": "Video-in-Type"
-      }
-    },
-    "aboutBlocks": {
-      "lead": "Sections that introduce a company: statements and photo heroes, its story and values, and its culture and figures.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "statements": "Statements and heroes",
-        "story": "Story and values",
-        "culture": "Culture and numbers"
-      },
-      "types": {
-        "about-mission-statement-hero": "Mission Statement Hero",
-        "about-collage-hero": "Collage Hero",
-        "about-statement-band": "Statement Band",
-        "about-values-spotlight": "Values Spotlight",
-        "about-values-connector-list": "Values Connector List",
-        "about-approach-stack-cards": "Approach Stack Cards",
-        "about-story-snapshots": "Story & Snapshots",
-        "about-bento": "Bento",
-        "about-culture-masonry": "Culture Masonry",
-        "about-impact-stats-band": "Impact Stats Band",
-        "about-story-photos": "Story Photos",
-        "about-split-panel": "Split Panel",
-        "about-letter-card": "Letter Card",
-        "about-values-focus": "Values Focus",
-        "about-spotlight": "Spotlight",
-        "about-headline-photos": "Headline Photos",
-        "about-type-stack": "Type Stack",
-        "about-color-bento": "Color Bento",
-        "about-numbered-rows": "Numbered Rows"
-      }
-    },
-    "careersBlocks": {
-      "lead": "Sections for a careers page: the open roles in lists, cards, teams, tables and accordions, with filtering and paging.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "lists": "Browse roles",
-        "highlights": "Highlights and states",
-        "details": "Role details"
-      },
-      "types": {
-        "careers-open-roles-hairline-list": "Open Roles — Hairline List",
-        "careers-role-cards-grid": "Role Cards Grid",
-        "careers-roles-by-department": "Roles by Department",
-        "careers-open-vacancies-table": "Open Vacancies Table",
-        "careers-roles-list-accordion-expanded": "Roles List — Accordion Expanded",
-        "careers-about-card-role-list": "About Card + Role List",
-        "careers-featured-role-spotlight": "Featured Role Spotlight",
-        "careers-perks-benefits": "Perks & Benefits",
-        "careers-no-open-roles-empty-state": "No Open Roles — Empty State",
-        "careers-role-detail-panel": "Role Detail Panel",
-        "careers-role-detail-page": "Role Detail Page"
-      }
-    },
-    "howItWorksBlocks": {
-      "lead": "Sections that explain a process: timelines and phases, steps told with photos and cards, rails, tabs and accordions you move through, and grids and panels with a drawn picture of each step.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "timelines": "Timelines and phases",
-        "visual-steps": "Visual steps",
-        "interactive": "Sliding and interactive",
-        "grids": "Grids and panels"
-      },
-      "types": {
-        "how-it-works-center-spine-timeline": "Center Spine Timeline",
-        "how-it-works-vertical-timeline-card": "Vertical Timeline Card",
-        "how-it-works-contained-timeline": "Contained Timeline",
-        "how-it-works-phase-line": "Phase Line",
-        "how-it-works-pill-timeline": "Pill Timeline",
-        "how-it-works-numbered-photo-steps": "Numbered Photo Steps",
-        "how-it-works-split-photo-step-list": "Split Photo + Step List",
-        "how-it-works-full-bleed-step-panel": "Full-Bleed Step Panel",
-        "how-it-works-overlay-numeral-cards": "Overlay Numeral Cards",
-        "how-it-works-diagonal-photo-collage": "Diagonal Photo Collage",
-        "how-it-works-photo-bento-steps": "Photo Bento Steps",
-        "how-it-works-fanned-dissolve-cards": "Fanned Dissolve Cards",
-        "how-it-works-stacked-media-text": "Stacked Media + Text",
-        "how-it-works-photo-rail-progress": "Photo Rail + Progress",
-        "how-it-works-tall-visual-rail": "Tall Visual Rail",
-        "how-it-works-step-tabs-photo-panel": "Step Tabs + Photo Panel",
-        "how-it-works-accordion-steps": "Accordion Steps",
-        "how-it-works-orbital-process": "Orbital Process",
-        "how-it-works-six-card-grid": "Six-Card Grid",
-        "how-it-works-column-panels": "Column Panels",
-        "how-it-works-numbered-instruction-panels": "Numbered Instruction Panels",
-        "how-it-works-numbered-editorial-rows": "Numbered Editorial Rows",
-        "how-it-works-split-feature-band": "Split Feature Band",
-        "how-it-works-rounded-cards-device-crop": "Rounded Cards + Device Crop"
-      }
-    },
-    "blockCard": {
-      "fullScreen": "Open full screen",
-      "newTab": "(opens in a new tab)",
-      "view": "View",
-      "preview": "Preview",
-      "code": "Code",
-      "manual": "Manual",
-      "breakpoint": "Width",
-      "desktop": "Desktop",
-      "tablet": "Tablet",
-      "mobile": "Mobile",
-      "direction": "Direction",
-      "frameTitle": "{name} at {width} pixels wide",
-      "loading": "Loading the source…",
-      "loadFailed": "The source couldn’t be loaded. Install the block with the command below instead.",
-      "manualDependencies": "Add the components it uses:",
-      "manualPackages": "Install the packages it imports:",
-      "manualSource": "Copy the source into <code>{file}</code>:",
-      "manualInverse": "Add the inverse tokens’ mapping to your stylesheet’s <code>@theme inline</code> block. On Tailwind 3, see <link>Inverse tokens</link>.",
-      "install": "Install"
-    },
-    "blocksInstall": {
-      "title": "Installation",
-      "lead": "Set your project up once, then add a block with one command.",
-      "initTitle": "Run <code>init</code> first",
-      "initBody": "Run <code>init</code> once per project, before the first block. It writes <code>components.json</code>, which every <code>add</code> reads, adds the <code>cn</code> helper the blocks import, and installs the theme.",
-      "initMore": "The theme layers and setting up a project by hand: see <link>Installation</link> in the Components section.",
-      "addTitle": "Install a block",
-      "addBody": "<code>add</code> writes the block to <code>components/blocks/</code>. It also installs the components the block uses, such as <code>accordion</code> or <code>tabs</code>, and the packages they import. You don’t add them one by one.",
-      "addShadcn": "The shadcn CLI installs a block the same way, from its registry URL, with <code>npx shadcn@latest add</code>:",
-      "inverseTitle": "CSS for blocks on an inverted surface",
-      "inverseBody": "Both <code>add</code> commands also add the inverse tokens’ mapping that a block on an inverted surface needs. Installing one by hand on Tailwind 4, add these three lines to your stylesheet’s <code>@theme inline</code> block:",
-      "inverseMore": "On Tailwind 3, the fallbacks, and setting your own colours: see <link>Inverse tokens</link>."
-    },
-    "socialProofBlocks": {
-      "lead": "Sections where customers speak for the product: quote grids and walls, spotlights, carousels and selectors, and stories backed by a figure.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "grids": "Grids & walls",
-        "spotlights": "Spotlights",
-        "carousels": "Carousels & selectors",
-        "stories": "Stories & numbers"
-      },
-      "types": {
-        "social-proof-classic-trio-grid": "Classic Trio Grid",
-        "social-proof-staggered-columns": "Staggered Columns",
-        "social-proof-benefit-title-cards": "Benefit-Title Cards",
-        "social-proof-giant-quote-duo": "Giant Quote Duo",
-        "social-proof-vertical-column-wall": "Vertical Column Wall",
-        "social-proof-tweet-wall": "Tweet Wall",
-        "social-proof-app-review-row": "App Review Row",
-        "social-proof-centered-logo-spotlight": "Centered Logo Spotlight",
-        "social-proof-dark-editorial-split": "Dark Editorial Split",
-        "social-proof-bracket-framed-quote": "Bracket-Framed Quote",
-        "social-proof-highlighted-phrase-spotlight": "Highlighted-Phrase Spotlight",
-        "social-proof-tinted-panel-portrait": "Tinted-Panel Portrait",
-        "social-proof-overlay-photo-quote": "Overlay Photo Quote",
-        "social-proof-arch-portrait-quote": "Arch Portrait Quote",
-        "social-proof-spotlight-carousel": "Spotlight Carousel",
-        "social-proof-avatar-selector-row": "Avatar-Selector Row",
-        "social-proof-progress-carousel": "Progress Carousel",
-        "social-proof-persona-pillars": "Persona Pillars",
-        "social-proof-workplace-portrait-stories": "Workplace Portrait Stories",
-        "social-proof-stat-story-cards": "Stat-Story Cards",
-        "social-proof-video-story-cards": "Video Story Cards",
-        "social-proof-case-study-row": "Case-Study Row",
-        "social-proof-proof-bento": "Proof Bento"
-      }
-    },
-    "teamBlocks": {
-      "lead": "{count, plural, one {One team section} other {{n} team sections}}: grids and walls of portraits, directories and tables, and spotlights that put a founder, a rail of members or an open role up front.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "grids-and-walls": "Grids and walls",
-        "directories": "Directories",
-        "spotlights": "Spotlights"
-      },
-      "types": {
-        "team-leadership-grid": "Leadership Grid",
-        "team-portrait-wall": "Portrait Wall",
-        "team-compact-directory-rows": "Compact Directory Rows",
-        "team-split-intro-member-rail": "Split Intro + Member Rail",
-        "team-founder-spotlight": "Founder Spotlight",
-        "team-member-carousel": "Member Carousel",
-        "team-department-tabs-directory": "Department Tabs Directory",
-        "team-member-table": "Member Table",
-        "team-meta-profile-cards": "Meta Profile Cards",
-        "team-we-re-hiring-cta": "We're Hiring CTA",
-        "team-hairline-grid": "Hairline Grid",
-        "team-overlay-portrait-cards": "Overlay Portrait Cards",
-        "team-annotated-portrait-lineup": "Annotated Portrait Lineup",
-        "team-grid-backdrop-roster": "Grid Backdrop Roster"
-      }
-    },
-    "blogCardsBlocks": {
-      "lead": "Sections that show articles to readers: card grids and features, lists and indexes, the panels that sit beside a post, and the controls for browsing.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "railNote": "In Filter Sidebar + Results the filter rail does not stick to the top of the screen at 1024px and wider: no variant draws a sticky rail, so it scrolls with the page.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "grids": "Card grids",
-        "features": "Features",
-        "lists": "Lists and indexes",
-        "alongside": "Alongside a post",
-        "browse": "Browse and filter"
-      },
-      "types": {
-        "blog-cards-classic-3-up-grid": "Classic 3-Up Grid",
-        "blog-cards-featured-two-up": "Featured + Two-Up",
-        "blog-cards-compact-4-up-thumb-grid": "Compact 4-Up Thumb Grid",
-        "blog-cards-bento-editorial-grid": "Bento Editorial Grid",
-        "blog-cards-overlay-photo-trio": "Overlay Photo Trio",
-        "blog-cards-journal-bento": "Journal Bento",
-        "blog-cards-left-thumb-row-cards": "Left-Thumb Row Cards",
-        "blog-cards-hairline-text-index": "Hairline Text Index",
-        "blog-cards-numbered-reading-list": "Numbered Reading List",
-        "blog-cards-latest-popular-split": "Latest / Popular Split",
-        "blog-cards-split-feature": "Split Feature",
-        "blog-cards-lead-ranked-picks": "Lead + Ranked Picks",
-        "blog-cards-dark-editorial-feature": "Dark Editorial Feature",
-        "blog-cards-magazine-cover-story": "Magazine Cover Story",
-        "blog-cards-pull-quote-feature": "Pull-Quote Feature",
-        "blog-cards-newsletter-latest": "Newsletter + Latest",
-        "blog-cards-author-spotlight": "Author Spotlight",
-        "blog-cards-related-posts-strip": "Related Posts Strip",
-        "blog-cards-filter-sidebar-results": "Filter Sidebar + Results",
-        "blog-cards-search-chips-results": "Search + Chips + Results",
-        "blog-cards-post-carousel-with-controls": "Post Carousel with Controls"
-      }
-    },
-    "contactUsBlocks": {
-      "lead": "Sections that let a visitor reach your team: forms set in type, forms beside a photo, places and hours, and other ways in.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "forms": "Contact forms",
-        "photo-forms": "Forms with photos",
-        "places": "Places and hours",
-        "channels": "Ways to reach us"
-      },
-      "types": {
-        "contact-us-classic-centered": "Classic Centered",
-        "contact-us-dark-statement": "Dark Statement",
-        "contact-us-oversized-wordmark": "Oversized Wordmark",
-        "contact-us-editorial-statement": "Editorial Statement",
-        "contact-us-ruled-split-form": "Ruled Split Form",
-        "contact-us-grand-headline-form": "Grand Headline Form",
-        "contact-us-pitch-and-inquiry": "Pitch & Inquiry",
-        "contact-us-form-contact-methods": "Form + Contact Methods",
-        "contact-us-split-photo-dark": "Split Photo Dark",
-        "contact-us-photo-and-dark-panel": "Photo & Dark Panel",
-        "contact-us-editorial-and-address-card": "Editorial & Address Card",
-        "contact-us-map-split": "Map Split",
-        "contact-us-office-cards": "Office Cards",
-        "contact-us-hq-feature": "HQ Feature",
-        "contact-us-global-offices-table": "Global Offices Table",
-        "contact-us-hours-and-availability": "Hours and Availability",
-        "contact-us-named-owners": "Named Owners",
-        "contact-us-book-a-call": "Book a Call",
-        "contact-us-form-with-faq": "Form with FAQ",
-        "contact-us-bento-grid": "Bento Grid",
-        "contact-us-social-rail": "Social Rail",
-        "contact-us-newsletter-combo": "Newsletter Combo",
-        "contact-us-support-channels": "Support Channels"
-      }
-    },
-    "featuresBlocks": {
-      "lead": "Twenty-seven sections that set out what a product does: icon cards, numbered rows and checklists, layouts led by photos, panels the visitor operates, and the product in use.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "icons-numbers": "Icons, numbers and checklists",
-        "photo-led": "Photo-led layouts",
-        "interactive": "Layouts the visitor operates",
-        "product-in-use": "Product in use"
-      },
-      "types": {
-        "features-icon-card-grid": "Icon Card Grid",
-        "features-compact-icon-index": "Compact Icon Index",
-        "features-numbered-feature-rows": "Numbered Feature Rows",
-        "features-feature-checklist-columns": "Feature Checklist Columns",
-        "features-colour-block-cards": "Colour Block Cards",
-        "features-stat-feature-band": "Stat Feature Band",
-        "features-split-photo-icon-list": "Split Photo + Icon List",
-        "features-photo-bento": "Photo Bento",
-        "features-feature-list-thumbnails": "Feature List + Thumbnails",
-        "features-photo-feature-chips": "Photo + Feature Chips",
-        "features-media-rail": "Media Rail",
-        "features-full-bleed-photo-banner": "Full-Bleed Photo Banner",
-        "features-editorial-photo-split": "Editorial Photo Split",
-        "features-photo-collage": "Photo Collage",
-        "features-notched-photo-columns": "Notched Photo Columns",
-        "features-perforated-photo-strip": "Perforated Photo Strip",
-        "features-portrait-photo-cards-link-row": "Portrait Photo Cards + Link Row",
-        "features-photo-carousel": "Photo Carousel",
-        "features-photo-tabs-panel": "Photo Tabs Panel",
-        "features-accordion-photo": "Accordion + Photo",
-        "features-expanding-step-cards": "Expanding Step Cards",
-        "features-compare-panels-chat-answer": "Compare Panels + Chat Answer",
-        "features-numbered-steps-floating-cards": "Numbered Steps + Floating Cards",
-        "features-solid-colour-cards": "Solid Colour Cards",
-        "features-icon-titled-preview-rail": "Icon-Titled Preview Rail",
-        "features-tinted-product-bento": "Tinted Product Bento",
-        "features-showcase-card-pair": "Showcase Card Pair"
-        }
-      },
-    "videoCallBlocks": {
-      "lead": "Sections for a video-call product: the screens before a call (the lobby, the waiting room, an incoming call, the join link), the call stages with a grid, a speaker, a shared screen or a side panel, the controls on a call, the live captions and reactions that sit on its stage, and what surrounds it afterwards: the summary, the meetings coming up and the AI recap, and a marketing hero that shows the product.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "before": "Before the call",
-        "stages": "Call stages",
-        "layers": "Call layers",
-        "around": "Around the call",
-        "marketing": "Marketing"
-      },
-      "types": {
-        "video-call-pre-join-lobby": "Pre-Join Lobby",
-        "video-call-grid-gallery-call": "Grid Gallery Call",
-        "video-call-speaker-filmstrip": "Speaker & Filmstrip",
-        "video-call-screen-share-stage": "Screen Share Stage",
-        "video-call-call-with-side-panel": "Call With Side Panel",
-        "video-call-call-controls-dock": "Call Controls Dock",
-        "video-call-waiting-room-knock": "Waiting Room & Knock",
-        "video-call-incoming-call": "Incoming Call",
-        "video-call-call-ended-summary": "Call Ended Summary",
-        "video-call-captions-reactions": "Captions & Reactions",
-        "video-call-join-link-dial-in": "Join Link & Dial-in",
-        "video-call-upcoming-meetings": "Upcoming Meetings",
-        "video-call-ai-meeting-recap": "AI Meeting Recap",
-        "video-call-hero-call-mockup": "Hero — Call Mockup"
-      }
-    },
-    "footerBlocks": {
-      "lead": "Sections that close a page: sitemaps, brand-led footers, call-to-action bands, minimal bars, contact and support layouts, legal and trust, commerce, community and careers, and app footers.",
-      "intro": "Each one installs on its own. Preview it at desktop, tablet or mobile width, in either direction. New to blocks? Start with the <link>introduction</link>.",
-      "filterLabel": "Filter by family",
-      "showing": "{count, plural, one {Showing one type} other {Showing {n} types}}",
-      "families": {
-        "all": "All",
-        "sitemap": "Sitemap & directory",
-        "brand": "Brand-led",
-        "cta": "Call to action & sign-up",
-        "bars": "Minimal bars",
-        "contact": "Contact & support",
-        "legal": "Legal & trust",
-        "commerce": "Commerce",
-        "community": "Community & careers",
-        "utility": "Utility & product"
-      },
-      "types": {
-        "footer-four-column-directory": "Four-Column Directory",
-        "footer-wide-sitemap-mega": "Wide Sitemap Mega",
-        "footer-accordion-sitemap": "Accordion Sitemap",
-        "footer-two-tier-doormat": "Two-Tier Doormat",
-        "footer-index-numbered-columns": "Index-Numbered Columns",
-        "footer-brand-panel-split": "Brand Panel Split",
-        "footer-giant-wordmark": "Giant Wordmark",
-        "footer-image-backed-brand": "Image-Backed Brand",
-        "footer-centered-brand-minimal": "Centered Brand Minimal",
-        "footer-marquee-strip": "Marquee Strip",
-        "footer-big-type-link-stack": "Big-Type Link Stack",
-        "footer-bento-tile": "Bento Tile",
-        "footer-cta-band-columns": "CTA Band + Columns",
-        "footer-newsletter-split": "Newsletter Split",
-        "footer-floating-demo-card": "Floating Demo Card",
-        "footer-big-question-cta": "Big-Question CTA",
-        "footer-single-line-bar": "Single-Line Bar",
-        "footer-split-hairline-micro": "Split Hairline Micro",
-        "footer-two-row-compact": "Two-Row Compact",
-        "footer-inline-preferences": "Inline + Preferences",
-        "footer-contact-first": "Contact-First",
-        "footer-support-contact": "Support & Contact",
-        "footer-local-business": "Local Business",
-        "footer-legal-first-slim": "Legal-First Slim",
-        "footer-trust-compliance": "Trust & Compliance",
-        "footer-ecommerce-mega": "Ecommerce Mega",
-        "footer-service-promise-band": "Service Promise Band",
-        "footer-careers-culture": "Careers & Culture",
-        "footer-community-events": "Community & Events",
-        "footer-dashboard-slim-bar": "Dashboard Slim Bar",
-        "footer-docs-page": "Docs Page",
-        "footer-multi-region": "Multi-Region",
-        "footer-product-family-switcher": "Product Family Switcher"
-      }
     }
   },
   "copyCommand": {
@@ -3730,6 +2857,7 @@
       "docs": "Docs",
       "components": "Components",
       "blocks": "Blocks",
+      "templates": "Templates",
       "github": "GitHub",
       "lang": "العربية",
       "langLabel": "Switch to Arabic",
@@ -3915,55 +3043,53 @@
       }
     },
     "atoms": {
-      "title": "{variants} atom variants, ready in Figma.",
-      "lede": "{n} atoms, each a Figma component set with its sizes, states, light and dark themes, and both directions.",
-      "count": "{n} variants, LTR and RTL",
-      "countLtr": "{n} variants, LTR only",
+      "title": "{n} components, free and open source.",
+      "lede": "The UI primitives and motion effects in the open-source package, each in English and Arabic, in both directions, light and dark.",
+      "effect": "Effect",
       "foot": "TypeScript. MIT core. Built on shadcn/ui primitives.",
       "names": {
-        "Button": "Button",
-        "Icon Button": "Icon Button",
-        "Radio": "Radio",
-        "Tooltip": "Tooltip",
-        "Alert": "Alert",
-        "Breadcrumb": "Breadcrumb",
-        "Pagination": "Pagination",
-        "Badge": "Badge",
-        "Avatar": "Avatar",
-        "Status Indicator": "Status Indicator",
-        "Rating": "Rating",
-        "Skeleton": "Skeleton",
-        "Separator": "Separator",
-        "Checkbox": "Checkbox",
-        "Switch": "Switch",
-        "Carousel": "Carousel",
-        "Content Carousel": "Content Carousel",
-        "Dialog": "Dialog",
-        "Input": "Input",
-        "Alert Dialog": "Alert Dialog",
-        "Command Menu": "Command Menu",
-        "Table": "Table",
-        "Sheet": "Sheet",
-        "Textarea": "Textarea",
-        "Progress": "Progress",
-        "Sidebar Item": "Sidebar Item",
-        "Slider": "Slider",
-        "OTP Input": "OTP Input",
-        "Calendar": "Calendar",
-        "Calendar View": "Calendar View",
-        "Date Picker": "Date Picker",
-        "Select": "Select",
-        "Input Number": "Input Number",
-        "Sonner": "Sonner",
-        "Accordion": "Accordion",
-        "Popover": "Popover",
-        "Timeline": "Timeline",
-        "Dropdown Menu": "Dropdown Menu",
-        "Context Menu": "Context Menu",
-        "Toggle": "Toggle",
-        "Toggle Group": "Toggle Group",
-        "Menubar": "Menubar",
-        "Combobox": "Combobox"
+        "accordion": "Accordion",
+        "alert": "Alert",
+        "alert-dialog": "Alert Dialog",
+        "animated-gradient": "Animated Gradient",
+        "avatar": "Avatar",
+        "badge": "Badge",
+        "border-beam": "Border Beam",
+        "breadcrumb": "Breadcrumb",
+        "button": "Button",
+        "calendar": "Calendar",
+        "card": "Card",
+        "carousel": "Carousel",
+        "checkbox": "Checkbox",
+        "combobox": "Combobox",
+        "content-carousel": "Content Carousel",
+        "date-picker": "Date Picker",
+        "dialog": "Dialog",
+        "dropdown-menu": "Dropdown Menu",
+        "fasla-logo": "Fasla Logo",
+        "glow-card": "Glow Card",
+        "input": "Input",
+        "input-number": "Input Number",
+        "input-otp": "OTP Input",
+        "pagination": "Pagination",
+        "progress": "Progress",
+        "radio": "Radio",
+        "select": "Select",
+        "sheet": "Sheet",
+        "shimmer-button": "Shimmer Button",
+        "sidebar": "Sidebar",
+        "skeleton": "Skeleton",
+        "slider": "Slider",
+        "social-icons": "Social Icons",
+        "spotlight": "Spotlight",
+        "status-indicator": "Status Indicator",
+        "steps": "Steps",
+        "switch": "Switch",
+        "tabs": "Tabs",
+        "text-reveal": "Text Reveal",
+        "textarea": "Textarea",
+        "tooltip": "Tooltip",
+        "typewriter-text": "Typewriter Text"
       }
     },
     "blocks": {
@@ -4022,532 +3148,6 @@
           "name": "Majalla",
           "kind": "Magazine"
         }
-      }
-    },
-    "blk": {
-      "hero": {
-        "lg": "Rihla",
-        "ln": [
-          "Stays",
-          "Experiences",
-          "Journal"
-        ],
-        "sg": "Sign in",
-        "k": "Winter season · AlUla",
-        "h": "Wake up\nin the desert.",
-        "f": [
-          [
-            "Where",
-            "AlUla, Saudi Arabia"
-          ],
-          [
-            "When",
-            "12 – 16 Oct"
-          ],
-          [
-            "Guests",
-            "2 adults"
-          ]
-        ],
-        "go": "Search"
-      },
-      "price": {
-        "h": "Plans that grow with you",
-        "seg": [
-          "Monthly",
-          "Yearly"
-        ],
-        "save": "−20%",
-        "cur": "SAR",
-        "per": "/ mo",
-        "pop": "Popular",
-        "t": [
-          [
-            "Starter",
-            "0",
-            [
-              "1 storefront",
-              "Basic analytics",
-              "Email support"
-            ],
-            "Start free"
-          ],
-          [
-            "Pro",
-            "49",
-            [
-              "5 storefronts",
-              "Live inventory",
-              "Arabic and English"
-            ],
-            "Upgrade"
-          ],
-          [
-            "Team",
-            "129",
-            [
-              "Unlimited stores",
-              "Roles and SSO",
-              "Priority support"
-            ],
-            "Talk to sales"
-          ]
-        ]
-      },
-      "stats": {
-        "t": "Revenue",
-        "r": "Last 30 days",
-        "v": "SAR 184,320",
-        "up": "+12.4%",
-        "k": [
-          [
-            "1,284",
-            "Orders"
-          ],
-          [
-            "3.8%",
-            "Conversion"
-          ]
-        ]
-      },
-      "prod": {
-        "h": "New in the studio",
-        "ch": [
-          "All",
-          "Cups",
-          "Pitchers",
-          "Sets"
-        ],
-        "p": [
-          [
-            "q-main",
-            "Chalk cup set",
-            "SAR 460",
-            "New"
-          ],
-          [
-            "q-pour",
-            "Milk pitcher",
-            "SAR 120",
-            ""
-          ],
-          [
-            "q-sugar2",
-            "Sugar pot",
-            "SAR 85",
-            "Bestseller"
-          ]
-        ]
-      },
-      "cal": {
-        "m": "October 2026",
-        "wd": [
-          "Su",
-          "Mo",
-          "Tu",
-          "We",
-          "Th",
-          "Fr",
-          "Sa"
-        ],
-        "n": "4 nights",
-        "p": "SAR 5,000 total",
-        "b": "Reserve"
-      },
-      "chat": {
-        "who": "Noura · Host",
-        "st": "Online",
-        "m": [
-          "Hi Khalid, your villa is ready for Thursday.",
-          "Perfect. Can we check in early?",
-          "Yes, from 1 pm. Here is your stay:"
-        ],
-        "card": [
-          "Oasis House",
-          "12 – 16 Oct · 2 guests"
-        ],
-        "ph": "Write a message…"
-      },
-      "auth": {
-        "loc": "Canyon Lodge, AlUla",
-        "h": "Welcome back",
-        "p": "Sign in to manage your trips.",
-        "l1": "Email",
-        "v1": "khalid@rihla.travel",
-        "l2": "Password",
-        "rm": "Remember me",
-        "fg": "Forgot?",
-        "b": "Sign in",
-        "or": "or",
-        "b2": "Email me a sign-in link"
-      },
-      "ban": {
-        "k": "Riyadh Season",
-        "h": "The city lights up in",
-        "cd": [
-          [
-            "03",
-            "days"
-          ],
-          [
-            "14",
-            "hrs"
-          ],
-          [
-            "22",
-            "min"
-          ],
-          [
-            "09",
-            "sec"
-          ]
-        ],
-        "b": "Get tickets"
-      },
-      "faq": {
-        "h": "Questions, answered",
-        "q": [
-          [
-            "Can I change my dates?",
-            "Yes. Free changes up to 48 hours before check-in."
-          ],
-          [
-            "Is breakfast included?",
-            ""
-          ],
-          [
-            "Do you offer airport pickup?",
-            ""
-          ],
-          [
-            "How do I pay?",
-            ""
-          ]
-        ]
-      },
-      "err": {
-        "h": "Lost in the dunes.",
-        "p": "The page you are looking for moved or never existed.",
-        "b": "Back home",
-        "b2": "Contact us"
-      },
-      "feat": {
-        "h": "Built for real stays",
-        "p": "Every component works in Arabic and English.",
-        "t": [
-          [
-            "Instant booking",
-            "Confirm in one tap"
-          ],
-          [
-            "85 verified hosts",
-            "Checked in person"
-          ],
-          [
-            "92% occupancy",
-            "This winter season"
-          ]
-        ]
-      },
-      "toast": {
-        "t": [
-          [
-            "Payment received",
-            "SAR 3,750 from Khalid",
-            "now"
-          ],
-          [
-            "Booking confirmed",
-            "Oasis House · 12 Oct",
-            "2m"
-          ],
-          [
-            "Check-in tomorrow",
-            "Door code sent by SMS",
-            "1h"
-          ]
-        ]
-      },
-      "gallery": {
-        "h": "Moments from AlUla",
-        "ch": [
-          "All",
-          "Stays",
-          "Dining",
-          "Desert"
-        ],
-        "more": "View all",
-        "cap": [
-          [
-            "Dunes at dawn",
-            "Desert"
-          ],
-          [
-            "Oasis House",
-            "Stays"
-          ],
-          [
-            "Old town",
-            "Explore"
-          ],
-          [
-            "Morning coffee",
-            "Dining"
-          ]
-        ]
-      },
-      "checkout": {
-        "lg": "Qahwa House",
-        "h": "Checkout",
-        "st": [
-          "Bag",
-          "Delivery",
-          "Payment"
-        ],
-        "c": "Contact",
-        "em": "sara@qahwa.house",
-        "d": "Delivery",
-        "ad": "Al Olaya, Riyadh 12211",
-        "p": "Payment",
-        "cn": "•••• •••• •••• 4821",
-        "ex": "08 / 28",
-        "cv": "•••",
-        "b": "Pay SAR 805",
-        "it": [
-          [
-            "q-main",
-            "Chalk cup set",
-            "SAR 460"
-          ],
-          [
-            "q-pour",
-            "Milk pitcher × 2",
-            "SAR 240"
-          ]
-        ],
-        "tot": [
-          [
-            "Subtotal",
-            "SAR 700"
-          ],
-          [
-            "VAT 15%",
-            "SAR 105"
-          ],
-          [
-            "Total",
-            "SAR 805"
-          ]
-        ]
-      },
-      "dhero": {
-        "lg": "Dar",
-        "ln": [
-          "Buy",
-          "Rent",
-          "Off-plan"
-        ],
-        "sg": "List a home",
-        "k": "New this week · Dubai Marina",
-        "h": "Homes with\na view.",
-        "f": [
-          [
-            "Location",
-            "Dubai Marina"
-          ],
-          [
-            "Type",
-            "Apartment"
-          ],
-          [
-            "Budget",
-            "AED 2–3M"
-          ]
-        ],
-        "go": "Search"
-      },
-      "ai": {
-        "lg": "Mahaam",
-        "tag": "Assistant",
-        "h": "What should we plan today?",
-        "ph": "Ask Mahaam to plan, write or summarise…",
-        "ch": [
-          "Plan my week",
-          "Summarise the meeting",
-          "Draft a reply"
-        ],
-        "m": "Fast mode"
-      },
-      "dash": {
-        "lg": "Sanad",
-        "nav": [
-          "Overview",
-          "Payments",
-          "Cards",
-          "Savings"
-        ],
-        "t": "Overview",
-        "s": "Good morning, Khalid",
-        "range": "Jan – Dec 2025",
-        "k": [
-          [
-            "Balance",
-            "SAR 184,320",
-            "+4.2%"
-          ],
-          [
-            "Monthly spend",
-            "SAR 12,940",
-            "−3.1%"
-          ],
-          [
-            "Savings goal",
-            "68%",
-            ""
-          ]
-        ],
-        "ch": "Balance by month",
-        "mo": "J,F,M,A,M,J,J,A,S,O,N,D",
-        "tx": [
-          [
-            "p-noura",
-            "Noura Al-Saud",
-            "+4,500"
-          ],
-          [
-            "p-khalid",
-            "Khalid Al-Harbi",
-            "−1,250"
-          ],
-          [
-            "p-faisal",
-            "Faisal Al-Qahtani",
-            "+186"
-          ]
-        ]
-      },
-      "order": {
-        "h": "Your order",
-        "n": "3 items",
-        "it": [
-          [
-            "q-main",
-            "Chalk cup set",
-            "Sand · 4 cups",
-            "460"
-          ],
-          [
-            "q-pour",
-            "Milk pitcher",
-            "Qty 2",
-            "240"
-          ]
-        ],
-        "promo": "Promo code",
-        "ap": "Apply",
-        "r": [
-          [
-            "Subtotal",
-            "SAR 700"
-          ],
-          [
-            "Delivery",
-            "Free"
-          ],
-          [
-            "VAT 15%",
-            "SAR 105"
-          ]
-        ],
-        "tot": "Total",
-        "tv": "SAR 805",
-        "b": "Checkout",
-        "sec": "Secure payment"
-      },
-      "app": {
-        "lg": "Qahwa House",
-        "k": "Now on mobile",
-        "h": "Your morning cup,\none tap away.",
-        "p": "Order ahead, skip the queue and collect in two minutes.",
-        "b1": [
-          "Download for",
-          "iOS"
-        ],
-        "b2": [
-          "Get it on",
-          "Android"
-        ],
-        "card": [
-          "Spanish latte",
-          "Ready in 2 min"
-        ],
-        "pr": "SAR 18"
-      },
-      "mag": {
-        "lg": "Majalla",
-        "ln": [
-          "Culture",
-          "Travel",
-          "Food",
-          "Design"
-        ],
-        "sb": "Subscribe",
-        "k": "Cover story",
-        "h": "The old town\nwakes up again.",
-        "p": "Inside AlUla’s mud-brick lanes, a new generation of makers is moving back in.",
-        "by": "Words by Noura Al-Saud · 8 min read",
-        "a": [
-          [
-            "f-coffee",
-            "Food",
-            "A cup of gahwa, done right"
-          ],
-          [
-            "f-riyadh",
-            "City",
-            "Riyadh after dark"
-          ],
-          [
-            "f-oasis",
-            "Design",
-            "Courtyards that keep cool"
-          ]
-        ]
-      },
-      "read": {
-        "h": "Most read this week",
-        "it": [
-          [
-            "f-hero",
-            "Travel",
-            "Sunrise over Hegra, minute by minute",
-            "6 min"
-          ],
-          [
-            "f-lodge",
-            "Stay",
-            "A night in a canyon lodge",
-            "5 min"
-          ],
-          [
-            "f-dunes",
-            "Desert",
-            "How the dunes move",
-            "4 min"
-          ],
-          [
-            "f-cupset",
-            "Design",
-            "The potters of the new Riyadh",
-            "7 min"
-          ]
-        ]
-      },
-      "news": {
-        "h": "The Sunday letter",
-        "p": "One email a week. Places, food and design from the region, in Arabic and English.",
-        "ph": "Your email",
-        "b": "Subscribe"
       }
     },
     "launch": {
@@ -4701,7 +3301,7 @@
         },
         {
           "q": "Is it free?",
-          "a": "Yes. The core is MIT licensed and free forever, for personal and commercial work. Pro is $149 and Team is $399, both one-time payments with lifetime access to the premium blocks, templates and the Figma file. <link>See the plans</link>."
+          "a": "Yes. The core is MIT licensed and free forever, for personal and commercial work. Pro is €149 and Team is €349, both one-time payments with lifetime access to the premium blocks, templates and the Figma file. <link>See the plans</link>."
         },
         {
           "q": "How do I add it to my project?",
@@ -4741,7 +3341,7 @@
           "CLI that copies the source into your project",
           "Community support on GitHub",
           "Premium blocks and templates",
-          "The Fasla Figma file"
+          "Fasla's Figma file"
         ]
       },
       "pro": {
@@ -4752,7 +3352,7 @@
           "Unlimited commercial projects",
           "Everything in Open source",
           "All premium blocks and templates",
-          "The Fasla Figma file, {variants} variants",
+          "Fasla's Figma file",
           "Lifetime access and free updates",
           "Support within 48 business hours"
         ]
@@ -4764,7 +3364,7 @@
           "Up to 10 seats",
           "Unlimited commercial projects",
           "Everything in Pro",
-          "The Figma file for every seat",
+          "One shared Figma file for all seats",
           "Lifetime access and free updates",
           "Priority support within 24 business hours"
         ]
@@ -4791,9 +3391,11 @@
       "meta": "Coming soon | Fasla",
       "badge": "On the way",
       "title": "Coming soon",
-      "lede": "The templates and the Pro and Team plans are on their way. The open-source components, the first blocks and the docs are ready to use today.",
+      "lede": "The templates and the Pro and Team plans are on their way. The open-source components and the docs are ready to use today.",
       "docs": "Read the docs",
-      "home": "Back to home"
+      "home": "Back to home",
+      "notify": "Notify me about Pro",
+      "notifySubject": "Fasla Pro: notify me"
     }
   }
 }

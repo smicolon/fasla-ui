@@ -7,8 +7,8 @@ import { cn } from "../../../src/lib/utils"
 import { Button } from "../button/button"
 
 /*
- * Figma: "Dialog" (38975:3887), 6 variants: Size × Direction, built from
- * "Dialog Header" (38975:3913) and "Footer Actions" (38975:3834).
+ * Figma: "Dialog", 6 variants: Size × Direction, built from
+ * "Dialog Header" and "Footer Actions".
  *
  * Built on Base UI's Dialog. Base UI owns the behaviour: the `dialog` role,
  * naming it by its title and describing it by its description, trapping focus

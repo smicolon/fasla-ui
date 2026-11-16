@@ -28,8 +28,8 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 /**
- * Sample copy, per script: the same store as the docs page. The Arabic follows
- * design/content/. TextReveal reveals Arabic a word at a time, so its letters
+ * Sample copy, per script: the same store as the docs page. The Arabic is
+ * Modern Standard Arabic. TextReveal reveals Arabic a word at a time, so its letters
  * stay joined; switch the toolbar to RTL to see it.
  */
 const COPY = {
@@ -69,7 +69,7 @@ const copy = (ctx: StoryCtx) => (ctx.globals.direction === "rtl" ? COPY.rtl : CO
 /**
  * Storybook lists a story's own args first in the controls table, so the
  * other rows are named here, unset, ahead of `className`: that keeps
- * `className` the last row (the agent instructions file, "Storybook controls table"). Unset is
+ * `className` the last row. Unset is
  * what they are anyway, so nothing in the preview or the table changes.
  */
 export const Default: Story = {

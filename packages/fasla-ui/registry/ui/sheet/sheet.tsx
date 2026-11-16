@@ -7,7 +7,7 @@ import { cn } from "../../../src/lib/utils"
 import { Button } from "../button/button"
 
 /*
- * Figma: "Sheet" (15043:262710), 8 variants: Side × Direction.
+ * Figma: "Sheet", 8 variants: Side × Direction.
  *
  * Built on Base UI's Dialog. Base UI owns the behaviour: the `dialog` role,
  * naming it by its title and describing it by its description, trapping focus

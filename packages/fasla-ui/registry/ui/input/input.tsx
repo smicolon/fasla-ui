@@ -7,7 +7,7 @@ import { cva } from "class-variance-authority"
 import { cn } from "../../../src/lib/utils"
 
 /*
- * Figma: "Default Input" (414:12784), on the Text Input page.
+ * Figma: "Default Input", on the Text Input page.
  *
  * Built on Base UI's Field and Input, which own the wiring: the label's `for`,
  * the description and error ids in `aria-describedby`, `aria-invalid`, and

@@ -1,6 +1,6 @@
 /**
  * The Fasla theme as shadcn registry items, generated from the Figma
- * snapshots in design/tokens — the same files the docs and Storybook
+ * snapshots in packages/fasla-ui/theme/tokens — the same files the docs and Storybook
  * globals.css, tokens/tailwind.ts and tailwind-preset.ts are tested against,
  * so the items can't drift from them.
  *
@@ -75,7 +75,7 @@ export const semanticColor = (name) => `color-mix(in oklab, var(--${name}) calc(
 
 /**
  * What each inverse token falls back to in a theme that doesn't define it: the
- * page's own colours, swapped. A block on an inverted surface then still reads
+ * page's own colours, swapped. Content on an inverted surface then still reads
  * in a project with another library's theme, or none of Fasla's. Figma's names;
  * a new inverse token gets its fallback here, from the tokens every shadcn
  * theme has.
@@ -104,7 +104,7 @@ const v3Color = (name) => (name in INVERSE_FALLBACKS ? inverseColor(name) : sema
 
 /** The Figma snapshots. `root` is the repository, for tests that use a copy. */
 export function loadSources(root = REPO) {
-  const read = (file) => JSON.parse(readFileSync(path.join(root, "design/tokens", file), "utf8"))
+  const read = (file) => JSON.parse(readFileSync(path.join(root, "packages/fasla-ui/theme/tokens", file), "utf8"))
   return { mode: read("mode.json"), typography: read("typography.json") }
 }
 
@@ -172,6 +172,12 @@ const ARABIC_RULES = {
     // keeps whatever smoothing it has.
     ...SMOOTHING,
   },
+  // With dir="rtl" on <html>, the rule above sets <html> only, and a body
+  // font outweighs what <html> passes down: Fasla's colours layer sets the
+  // page in Geist on body, and the Next.js templates set Arial there. So body
+  // takes the Arabic font itself. With dir on an element inside body, the rule
+  // above sets that element, and this one matches nothing.
+  '[dir="rtl"] body': { "font-family": ARABIC_FONT.join(", ") },
   // Arabic is never letter-spaced, set in capitals or in italic.
   '[dir="rtl"], [dir="rtl"] *': { "letter-spacing": "0" },
   '[dir="rtl"] .uppercase': { "text-transform": "none" },
@@ -212,15 +218,24 @@ export const LATIN_FONT = 'var(--font-sans, var(--font-geist-sans, "Geist Variab
  *   loses to the template's unlayered `:root`: `.dark` turned the components
  *   dark on a white page. The same two tokens, unlayered here, win again.
  *
- * Only these two tokens: they are all the templates set. The rules go in the
- * stylesheet rather than `init` deleting the template's, so the shadcn-only
- * route gets them too, and a stylesheet the developer wrote is never edited.
+ * Only these two tokens in Light: they are all the templates set. The rules go
+ * in the stylesheet rather than `init` deleting the template's, so the
+ * shadcn-only route gets them too, and a stylesheet the developer wrote is
+ * never edited.
+ *
+ * `.dark` restates the whole Dark palette, not only those two. On Tailwind 3
+ * the CLI writes the palette's `.dark` into `@layer base`, and Tailwind 3 keeps
+ * a rule in a layer only when its class appears in a content file: with no
+ * file naming "dark" (a toggle from a library, or none yet), every Dark colour
+ * was dropped from the build and only these two switched. A rule outside a
+ * layer is always kept. On Tailwind 4 it restates what the palette's own
+ * `.dark` sets, at the same values.
  */
-function pageColourRules(value) {
+function pageColourRules(all, value) {
   const page = (scheme) => ({ "--background": value("background", scheme), "--foreground": value("foreground", scheme) })
   return {
     ":root": page("light"),
-    ".dark": page("dark"),
+    ".dark": Object.fromEntries(all.map((name) => [`--${name}`, value(name, "dark")])),
     "@media (prefers-color-scheme: dark)": { ":root:not(.dark)": page("light") },
   }
 }
@@ -228,8 +243,8 @@ function pageColourRules(value) {
 /**
  * `.light`: every token at its Light value, for one element. It pins a picture
  * to Light inside a Dark page, as Figma pins a frame to its Light mode: the
- * glows, windows and cards drawn in a How it Works picture read their colours
- * from these variables, so under `.light` they are Light whatever the page is.
+ * glows, windows and cards drawn in an illustration read their colours from
+ * these variables, so under `.light` they are Light whatever the page is.
  * Unlayered like `.dark`, and on the element itself, so it wins over a `.dark`
  * further up. Only the elements that carry the class are affected.
  */
@@ -322,9 +337,13 @@ export function buildThemeItems({ registryUrl, sources = loadSources() }) {
           ...Object.fromEntries(extras.map((name) => [`--${name}`, value(name, "light")])),
           ...leadingVars(typography, "en"),
         },
-        ":where(.dark)": Object.fromEntries(extras.map((name) => [`--${name}`, value(name, "dark")])),
-        // After .dark, so a .light element inside a .dark page gets the light
-        // values of these tokens too; the theme item brings the rest.
+        // `[class~="dark"]` is `.dark`, written so Tailwind 3 keeps it: it
+        // drops a rule in a layer whose class no content file names, and an
+        // app's toggle may never write the word "dark" (next-themes doesn't).
+        // An attribute selector names no class, so it is always kept.
+        ':where([class~="dark"])': Object.fromEntries(extras.map((name) => [`--${name}`, value(name, "dark")])),
+        // After the dark rule, so a .light element inside a .dark page gets the
+        // light values of these tokens too; the theme item brings the rest.
         ":where(.light)": Object.fromEntries(extras.map((name) => [`--${name}`, value(name, "light")])),
         '[dir="rtl"]': leadingVars(typography, "ar"),
         // The page in the theme's colours. The Next.js templates do this
@@ -353,7 +372,19 @@ export function buildThemeItems({ registryUrl, sources = loadSources() }) {
     title: "Fasla theme: colours",
     description: "Fasla's full light and dark palette and radius, on top of the base theme. Replaces your project's colours.",
     registryDependencies: [itemUrl(registryUrl, "theme-base")],
-    css: { body: { "font-family": LATIN_FONT, ...SMOOTHING }, ...pageColourRules(value), ".light": lightScopeRule(all, value) },
+    css: {
+      body: { "font-family": LATIN_FONT, ...SMOOTHING },
+      ...pageColourRules(all, value),
+      ".light": lightScopeRule(all, value),
+      // The radius again, for Tailwind 3: the CLI writes cssVars.theme there
+      // into a `.theme` rule in @layer base, which Tailwind 3 drops, and the
+      // components' rounded-[var(--radius-md)] had no value. Tailwind 3 passes
+      // any other @layer through as a CSS cascade layer, which every unlayered
+      // rule outweighs, so a radius the project sets itself still wins. On
+      // Tailwind 4 this is the layer its theme variables are emitted in, as
+      // `:root, :host`, which outweighs :where(): the values above apply there.
+      "@layer theme": { ":where(:root)": Object.fromEntries(Object.entries(radius).map(([name, v]) => [`--${name}`, v])) },
+    },
     cssVars: {
       theme: radius,
       light: Object.fromEntries(all.map((name) => [name, value(name, "light")])),
@@ -386,8 +417,8 @@ export function buildThemeItems({ registryUrl, sources = loadSources() }) {
     font: { family, provider: "google", import: importName, variable, ...extra },
   })
 
-  // The inverse tokens' mapping alone, for a block on an inverted surface.
-  // Blocks that use the inverse tokens depend on it, so `add` brings the
+  // The inverse tokens' mapping alone, for content on an inverted surface.
+  // Items that use the inverse tokens depend on it, so `add` brings the
   // mapping into any project. It sets no values: a Fasla theme has them, and
   // in any other theme the fallbacks apply.
   const inverse = {
@@ -396,7 +427,7 @@ export function buildThemeItems({ registryUrl, sources = loadSources() }) {
     type: "registry:theme",
     title: "Fasla theme: inverse tokens",
     description:
-      "Maps the inverse tokens (background-inverse, foreground-inverse, muted-foreground-inverse) for blocks on an inverted surface. Each falls back to your page colours, swapped, when your theme doesn't define it.",
+      "Maps the inverse tokens (background-inverse, foreground-inverse, muted-foreground-inverse) for content on an inverted surface. Each falls back to your page colours, swapped, when your theme doesn't define it.",
     cssVars: { theme: inverseThemeVars() },
     tailwind: {
       config: { theme: { extend: { colors: Object.fromEntries(Object.keys(INVERSE_FALLBACKS).map((name) => [name, inverseColor(name)])) } } },

@@ -14,7 +14,7 @@ type Story = StoryObj<typeof TypewriterText>
 /**
  * Storybook lists a story's own args first in the controls table, so the
  * other rows are named here, unset, ahead of `className`: that keeps
- * `className` the last row (the agent instructions file, "Storybook controls table"). Unset is
+ * `className` the last row. Unset is
  * what they are anyway, so nothing in the preview or the table changes.
  */
 const ROWS_BEFORE_CLASSNAME = {
@@ -35,8 +35,8 @@ const rowsAfter = (own: NonNullable<Story["args"]>) => ({
 })
 
 /**
- * Sample copy, per script: the same store as the docs page. The Arabic follows
- * design/content/. The cursor sits at the end of the line, so on the left in RTL.
+ * Sample copy, per script: the same store as the docs page. The Arabic is
+ * Modern Standard Arabic. The cursor sits at the end of the line, so on the left in RTL.
  */
 const COPY = {
   ltr: {

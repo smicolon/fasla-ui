@@ -88,17 +88,19 @@ export async function aliasAdvice(
   if (!aliased) {
     lines.push(
       "",
-      `${step++}. In ${viteConfig}, import path and add resolve.alias:`,
+      `${step++}. In ${viteConfig}, import fileURLToPath and add resolve.alias:`,
       "",
-      `     import path from "path"`,
+      `     import { fileURLToPath } from "node:url"`,
       "",
       `     export default defineConfig({`,
       `       // ...what is already there`,
-      `       resolve: { alias: { "@": path.resolve(__dirname, "${target}") } },`,
+      `       resolve: { alias: { "@": fileURLToPath(new URL("${target}", import.meta.url)) } },`,
       `     })`
     )
+    // import.meta.url, not __dirname: Vite 8 warns that __dirname won't work
+    // once its native config loader is the default.
     if ((await missingPackages(cwd, ["@types/node"])).length > 0) {
-      lines.push("", `${step++}. Install Node's types, which "path" needs:`, "", `     ${installCommand(pm, ["@types/node"], { dev: true })}`)
+      lines.push("", `${step++}. Install Node's types, which "node:url" needs:`, "", `     ${installCommand(pm, ["@types/node"], { dev: true })}`)
     }
   }
   return lines

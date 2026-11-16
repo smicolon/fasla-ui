@@ -30,7 +30,7 @@ const LATIN_PARENTHETICAL = /\s*\([^()؀-ۿ]*[A-Za-z][^()؀-ۿ]*\)/g
 
 /**
  * The menu label for a heading. An Arabic heading carries its term's English
- * in parentheses, "الأنماط (variant)", per design/content/; the page keeps it,
+ * in parentheses, "الأنماط (variant)"; the page keeps it,
  * but the menu is a list of short Arabic labels, so it drops the Latin-only
  * parenthetical. English headings are left as they are.
  */

@@ -7,7 +7,7 @@ import { ChevronDownIcon, MinusIcon, PlusIcon } from "lucide-react"
 import { cn } from "../../../src/lib/utils"
 
 /*
- * Figma: `Accordion` (15217:41213) and its row, `Accordion Item` (324:856).
+ * Figma: `Accordion` and its row, `Accordion Item`.
  *
  * Built on Base UI's Accordion, which owns the behaviour: the button and
  * region roles and the ids that link them, `aria-expanded`, single or

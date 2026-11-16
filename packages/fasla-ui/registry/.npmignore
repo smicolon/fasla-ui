@@ -1,0 +1,5 @@
+# The tests stay in this repository: the npm package has no use for them.
+# package.json "files" brings in all of registry/, and only an .npmignore in
+# a folder under it can leave files out (one at the package root cannot).
+*.test.ts
+*.test.tsx

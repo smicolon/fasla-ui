@@ -9,8 +9,8 @@ import { Avatar, type AvatarProps } from "../avatar/avatar"
 import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip/tooltip"
 
 /*
- * Figma: "Side Bar" (40503:333), Direction × State × Plan card, and its item,
- * "Side Bar Inside Item" (40492:58601), State × Sub-item × Direction with the
+ * Figma: "Side Bar", Direction × State × Plan card, and its item,
+ * "Side Bar Inside Item", State × Sub-item × Direction with the
  * Icon, Badge and Have sub-items booleans.
  *
  * Figma property → code:

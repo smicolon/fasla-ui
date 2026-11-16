@@ -18,6 +18,7 @@ const SIZES = ["xs", "sm", "md", "lg"] as const
 export default function ButtonPage() {
   const t = useTranslations("docs.sections")
   const b = useTranslations("docs.button")
+  const e = useTranslations("docs.examples")
 
   // Prop and value names are code identifiers, so they stay Latin in both
   // locales; `nowrap` keeps each one a single unit.
@@ -263,7 +264,7 @@ export function DeleteAccountButton() {
     </Button>
   )
 }`}</UsageExample>
-        <UsageExample title={b("usage.link")}>{`import Link from "next/link"
+        <UsageExample title={b("usage.link")}>{`import Link from "next/link" // ${e("nextOnly")}
 import { Button } from "@/components/ui/button"
 
 export function ForgotPasswordLink() {

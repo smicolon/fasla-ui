@@ -118,7 +118,7 @@ export default function ProgressPage() {
         <h2 className="text-2xl font-semibold">{t("usage")}</h2>
         <UsageExample>{`import { Progress } from "@/components/ui/progress"
 
-export function UploadProgress({ value }: { value: number }) {
+export function UploadProgress({ value = 60 }: { value?: number }) {
   return (
     <Progress
       value={value}

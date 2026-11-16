@@ -69,6 +69,7 @@ const Caption = ({ children }: { children: React.ReactNode }) => (
 export default function AlertPageDocs() {
   const t = useTranslations("docs.sections")
   const a = useTranslations("docs.alert")
+  const e = useTranslations("docs.examples")
 
   const sample = (variant: Variant): Sample => ({
     title: a(`sample.${variant}.title`),
@@ -158,7 +159,7 @@ export default function AlertPageDocs() {
       {/* Installation */}
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
-        <InstallCommand name="alert" />
+        <InstallCommand name="alert avatar" />
         <p className="text-sm text-muted-foreground">{a.rich("installNote", richCode)}</p>
       </section>
 
@@ -366,9 +367,14 @@ export function InboxNotice() {
         <UsageExample title={a("usage.avatar")}>{`import { Alert, AlertAction, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Avatar } from "@/components/ui/avatar"
 
+const sender = {
+  // ${e("photoPath")}
+  photo: "/avatars/layla.png",
+}
+
 export function ReplyNotice() {
   return (
-    <Alert icon={<Avatar src="/avatars/layla.png" name="" radius="rounded" />}>
+    <Alert icon={<Avatar src={sender.photo} name="" radius="rounded" />}>
       <AlertTitle>${avatar.title}</AlertTitle>
       <AlertDescription>${avatar.description}</AlertDescription>
       <AlertAction asChild>

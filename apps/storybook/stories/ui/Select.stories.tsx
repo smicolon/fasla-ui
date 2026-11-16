@@ -10,8 +10,8 @@ import {
 import { Input } from "../../../../packages/fasla-ui/registry/ui/input"
 
 /**
- * Figma: "Select Input" (3884:6936), "Select Item" (46162:1970) and "Select
- * Menu" (46162:242459). Size, Radius, State and Multi Select are props here;
+ * Figma: "Select Input", "Select Item" and "Select
+ * Menu". Size, Radius, State and Multi Select are props here;
  * Filled is the difference between the placeholder and a value; Direction is
  * the toolbar. Every story follows the Direction and Theme toolbars, except
  * Light and Dark and LTR and RTL, which show both at once.
@@ -84,7 +84,7 @@ type Story = StoryObj<StoryArgs>
 /**
  * Sample copy, per script: choosing where an order is delivered. Only the
  * rendered text changes — prop names stay English everywhere. The Arabic is
- * written from design/content/, not translated.
+ * written in Modern Standard Arabic, not translated.
  */
 const COPY = {
   ltr: {

@@ -6,8 +6,8 @@ import { Select } from "../../../../packages/fasla-ui/registry/ui/select"
 import { cn } from "../../../../packages/fasla-ui/src/lib/utils"
 
 /**
- * Figma: "Date Picker" (15113:5466), opening the Standard Calendar
- * (15117:6294). Size and State are props; Figma's Inactive and Active are
+ * Figma: "Date Picker", opening the Standard Calendar.
+ * Size and State are props; Figma's Inactive and Active are
  * the placeholder and a value; Direction is the toolbar. Every story follows
  * the Direction and Theme toolbars, except Light and Dark and Directions,
  * which show both at once.

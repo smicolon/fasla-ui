@@ -6,6 +6,8 @@
   "nav": {
     "docs": "التوثيق",
     "components": "المكوّنات",
+    "blocks": "الكتل",
+    "templates": "القوالب",
     "aguiEvents": "أحداث AG-UI",
     "changelog": "سجل التغييرات",
     "github": "GitHub",
@@ -13,8 +15,7 @@
     "home": "الصفحة الرئيسية لفاصلة",
     "toggleMenu": "فتح القائمة",
     "toggleTheme": "تبديل المظهر",
-    "switchLanguage": "تغيير اللغة",
-    "blocks": "الكتل"
+    "switchLanguage": "تغيير اللغة"
   },
   "docs": {
     "avatar": {
@@ -38,6 +39,7 @@
         "lazy": "في القوائم الطويلة: أجّل تحميل الصور خارج الشاشة، وقدّم مصدرًا أوضح للشاشات الكثيفة",
         "circle": "دائرة بإطار ونقطة حالة",
         "inline": "داخل السطر، بجانب اسم يعرّف صاحبه",
+        "photoPath": "صورتك أنت: ملف في المجلد public، أو رابط.",
         "sampleName": "ليلى حسن"
       },
       "props": {
@@ -88,17 +90,21 @@
       "components": "المكوّنات",
       "accessibility": "إتاحة الوصول (accessibility)"
     },
+    "examples": {
+      "photoPath": "صورتك أنت: ملف في المجلد public، أو رابط.",
+      "photosPath": "صورك أنت: ملفات في المجلد public، أو روابط.",
+      "nextOnly": "لمشاريع Next.js فقط"
+    },
     "sidebar": {
       "gettingStarted": "البداية",
       "primitives": "المكوّنات الأساسية",
-      "blocks": "الكتل",
       "effects": "التأثيرات",
       "introduction": "مقدّمة",
       "installation": "التثبيت",
       "playground": "مختبر المكوّنات (بالإنجليزية)",
       "menu": "قائمة التوثيق",
       "lead": "يعرض مكوّن شريط جانبي تنقّل التطبيق، وينطوي إلى أيقونات: مجموعات من الروابط لكلٍّ منها عنوان، وعناصر فرعية تحت عنصر رئيسي، والمستخدم الذي سجّل دخوله في أسفله. يأتي بحالتَي التوسيع والطيّ كما في Figma، مع بطاقة خطة اختيارية.",
-      "installNote": "مكوّن الشريط الجانبي مبني على مكتبة Base UI، لذلك يحتاج إلى الحزمة <code>@base-ui/react</code>، ويستخدم المكوّن <code>avatar</code> والمكوّن <code>tooltip</code>. يثبّت الأمر <code>add</code> كليهما مع المكوّن، وكذلك أداة shadcn.",
+      "installNote": "مكوّن الشريط الجانبي مبني على مكتبة Base UI، لذلك يحتاج إلى الحزمة <code>@base-ui/react</code>، ويستخدم المكوّن <code>avatar</code> والمكوّن <code>tooltip</code>. يثبّت الأمر <code>add</code> كليهما مع المكوّن، وكذلك أداة shadcn. وتعرض الأمثلة أدناه الشعار بالمكوّن <code>fasla-logo</code>، الذي يضيفه الأمر أيضًا؛ ويمكنك تمرير شعارك بدلًا منه.",
       "previewHint": "اطوِ الشريط الجانبي من الزر في رأسه، ثم ضع المؤشر على أيقونة لترى تسميتها.",
       "logo": "فاصلة",
       "nav": "الرئيسية",
@@ -345,10 +351,10 @@
       "cliList": "اعرض كل ما يقدّمه السجل (registry):",
       "cliFlagsTitle": "بلا أسئلة: لوكلاء الذكاء الاصطناعي وأنظمة التكامل المستمر (CI)",
       "cliFlagsBody": "لا يطرح الأمر <code>init</code> أسئلة إلا إذا كان يعمل في طرفية (terminal) يتفاعل معها مستخدم. وإذا شُغّل دونها، كما يفعل وكيل ذكاء اصطناعي أو مهمة تكامل مستمر، فلن ينتظر: مرّر <code>--yes</code> لقبول كل القيم الافتراضية، أو مرّر الخيارات الثلاثة كلها: <code>--path</code>، <code>--style</code>، <code>--theme</code>. وإذا غاب أيٌّ منها، يعرض الأمر <code>init</code> الخيارات الناقصة، ولا يكتب شيئًا، وينتهي بخطأ.",
-      "cliFlagYes": "<code>--yes</code> (<code>-y</code>) يقبل كل القيم الافتراضية ولا يطرح أي سؤال.",
+      "cliFlagYes": "<code>--yes</code> (<code>-y</code>) يقبل كل القيم الافتراضية ولا يطرح أي سؤال. ومع <code>--yes</code> يعتمد المظهر الافتراضي على المتغير <code>--primary</code>: إن كان معرَّفًا في ملف الأنماط تُحفَظ ألوان المشروع (<code>brand</code>)، وإلا، كما في المشاريع الجديدة، تُثبَّت ألوان فاصلة (<code>fasla</code>).",
       "cliFlagPath": "<code>--path</code> هو المجلد الذي توضع فيه المكوّنات، مثل <code>src/components</code>. تضعها الأداة في مجلد <code>ui</code> تحته، فيعطي <code>src/components/ui</code> النتيجة نفسها.",
       "cliFlagStyle": "<code>--style</code> هو نمط shadcn الذي يُكتب في <code>components.json</code>: <code>default</code> أو <code>new-york</code>.",
-      "cliFlagTheme": "<code>--theme</code> هو طبقة المظهر: <code>fasla</code> لألوان فاصلة، أو <code>brand</code> للإبقاء على ألوانك.",
+      "cliFlagTheme": "<code>--theme</code> هو طبقة المظهر: <code>fasla</code> لألوان فاصلة، أو <code>brand</code> للإبقاء على ألوانك. مرّره مع <code>--yes</code> لتختار المظهر بنفسك؛ وفي المشاريع الجديدة استخدم <code>--theme fasla</code>.",
       "cliFlagNoInstall": "<code>--no-install</code> يطبع أوامر التثبيت بدلًا من تنفيذها.",
       "cliFlagsExample": "أمثلة:",
       "cliFlagsEnd": "وعند الانتهاء يعرض الأمر <code>init</code> كل ملف أنشأه أو غيّره، والأمر الذي تشغّله بعده. ويحتاج الأمر <code>add</code> أيضًا إلى <code>--yes</code> حين لا توجد طرفية.",
@@ -356,11 +362,11 @@
       "themeBody": "تأخذ المكوّنات كل ألوانها من المظهر (theme) في مشروعك. يسألك الأمر <code>init</code> أي الطبقتين تريد ويثبّتها. تثبّت أوامر shadcn/ui أدناه طبقةً أيضًا، أو تنقل المشروع إلى الطبقة الأخرى لاحقًا. تحصل في الحالتين على الطبقة الأساسية.",
       "themeSetupFirst": "تحتاج أوامر shadcn/ui إلى مشروع مُعَدّ مسبقًا فيه الملف <code>components.json</code>. في مشروع جديد، شغّل <code>npx @smicolon/fasla-ui@latest init</code> أولًا، أو <code>npx shadcn@latest init</code>. إذا شغّلتها في مشروع ليس فيه هذا الملف، تُعِدّ أداة shadcn/ui المشروع بنفسها، وتحل ألوان القالب الجاهز (preset) الذي تختاره محل ألوان فاصلة.",
       "themeFasla": "تبدأ من الصفر: استخدم ألوان فاصلة. تحصل على ألوان فاصلة للوضعين الفاتح والداكن، مع نصف قطر الزوايا (radius) والخط Geist، فوق الطبقة الأساسية:",
-      "themeNext14": "في Next.js 14، أعِدّ المشروع بالأمر <code>npx @smicolon/fasla-ui@latest init</code>، لا بالأمر <code>shadcn init</code>: يكتب إعداد shadcn/ui أنماط Tailwind 4 ويحمّل الخط Geist من <code>next/font</code>، ولا يتوفر أيٌّ منهما في Next.js 14، فيفشل البناء. ثم احذف الرابط <code>font-geist.json</code> من الأمر، لأن قالب Next.js 14 يحمّل الخط Geist أصلًا:",
+      "themeNext14": "في Next.js 14، أعِدّ المشروع بالأمر <code>npx @smicolon/fasla-ui@latest init</code>، لا بالأمر <code>shadcn init</code>: يكتب إعداد shadcn/ui أنماط Tailwind 4 ويحمّل الخط Geist من <code>next/font</code>، ولا يتوفر أيٌّ منهما في Next.js 14، فيفشل البناء. ثم احذف الرابط <code>font-geist.json</code> من الأمر: لا يتضمن <code>next/font/google</code> في Next.js 14 الخط Geist، فيترك shadcn الملف <code>app/layout.tsx</code> دون تغيير ويطلب منك إضافة الخطوط يدويًا، والقالب يحمّل الخط Geist من ملفاته أصلًا.",
       "themeBrand": "لديك هوية بصرية: احتفظ بألوانك. تحصل على الطبقة الأساسية وحدها: الـ tokens غير الموجودة في shadcn/ui، مثل النجاح، التحذير، المعلومات، ألوان Soft الخفيفة، مع سلّم أحجام النص بارتفاعات أسطر عربية، وقواعد الكتابة العربية، والخط Cairo. لا تغيّر أي لون موجود في مشروعك:",
       "themeConfirm": "تسألك أداة الأوامر في shadcn/ui: <code>Existing CSS variables and components will be overwritten. Continue?</code>، والجواب الافتراضي هو لا، لذلك اكتب <code>y</code>. لا تغيّر الطبقة الأساسية <code>theme-base</code> أي لون موجود في مشروعك.",
       "themeArabicFont": "يظهر النص العربي بالخط Cairo عبر المتغير <code>--font-arabic</code>. لاستخدام خط عربي آخر، اجعل <code>--font-arabic</code> يشير إليه.",
-      "themeReplaces": "تحل المكوّنات الأساسية في فاصلة محل مكوّنات shadcn/ui التي تحمل الاسم نفسه في <code>components/ui</code>، مثل <code>button</code>، <code>badge</code>. يسألك الأمر <code>add</code> قبل أن يستبدل ملفًا ليس من فاصلة، ويثبّت الكتل في مجلدها الخاص، <code>components/blocks</code>.",
+      "themeReplaces": "تحل المكوّنات الأساسية في فاصلة محل مكوّنات shadcn/ui التي تحمل الاسم نفسه في <code>components/ui</code>، مثل <code>button</code>، <code>badge</code>. يسألك الأمر <code>add</code> قبل أن يستبدل ملفًا ليس من فاصلة.",
       "manualTitle": "ثبّت يدويًا",
       "manualBody": "يمكنك أيضًا نسخ المكوّنات مباشرة من الشيفرة المصدرية.",
       "manualDeps": "1. ثبّت الاعتماديات (dependency):",
@@ -369,8 +375,8 @@
       "manualCopy": "3. انسخ كل مكوّن من ملفه في السجل (registry)، مثل <code>https://fasla.smicolon.com/r/button.json</code> للمكوّن Button. يسرد الملف <code>https://fasla.smicolon.com/r/registry.json</code> المكوّنات كلها.",
       "manualCopyDetail": "في كل ملف، يحمل <code>files</code> الشيفرة المصدرية في <code>content</code>، والمسار الذي تحفظها فيه في <code>target</code>. يسرد <code>dependencies</code> الحزم التي تثبّتها، ويسرد <code>registryDependencies</code> مكوّنات فاصلة الأخرى التي يحتاجها المكوّن، فتنسخها بالطريقة نفسها.",
       "inverseTitle": "الرموز المعكوسة",
-      "inverseBody": "تلوّن الكتلة ذات السطح المعكوس، مثل اللوحة الداكنة في الأسئلة الشائعة، سطحها بثلاثة رموز: <code>background-inverse</code>، <code>foreground-inverse</code>، <code>muted-foreground-inverse</code>. يضبطها مظهر فاصلة فيكون السطح داكنًا في الوضع الفاتح وفاتحًا في الوضع الداكن. وهي الطريقة الوحيدة التي تعكس بها فاصلة سطحًا، فلا تفرض الكتلة صنف الوضع الداكن على قسم، ولا تستعير <code>bg-foreground</code>.",
-      "inverseFallback": "إذا أضفت كتلة كهذه بأيّ من أداتي الأوامر، فإنها تضيف معها ربط هذه الرموز. وإذا لم يضبطها مظهرك، فإن كل رمز يرجع إلى ألوان صفحتك معكوسةً: <code>foreground</code> للسطح، و <code>background</code> لنصه. ولتضبط ألوانك أنت، عرّف <code>--background-inverse</code>، <code>--foreground-inverse</code>، <code>--muted-foreground-inverse</code> للوضعين الفاتح والداكن.",
+      "inverseBody": "لعكس ألوان سطح، فيكون داكنًا في الوضع الفاتح وفاتحًا في الوضع الداكن، لوّنه بثلاثة رموز: <code>background-inverse</code>، <code>foreground-inverse</code>، <code>muted-foreground-inverse</code>. ويضبطها مظهر فاصلة. مثلًا، ضع المكوّن <code>FaslaLogo</code> على شريط بالصنف <code>bg-background-inverse</code>، وأعطه الصنف <code>text-foreground-inverse</code>.",
+      "inverseFallback": "تضيف طبقتا مظهر فاصلة كلتاهما ربط هذه الرموز، فيكون موجودًا في أي مشروع أُعدّ بالأمر <code>init</code>. وإذا لم يضبطها مظهرك، فإن كل رمز يرجع إلى ألوان صفحتك معكوسةً: <code>foreground</code> للسطح، و <code>background</code> لنصه. ولتضبط ألوانك أنت، عرّف <code>--background-inverse</code>، <code>--foreground-inverse</code>، <code>--muted-foreground-inverse</code> للوضعين الفاتح والداكن.",
       "inverseTailwind4": "لإضافة الربط يدويًا في Tailwind 4، ضع هذه الأسطر الثلاثة في كتلة <code>@theme inline</code> في ملف الأنماط:",
       "inverseTailwind3": "في Tailwind 3، ضعها تحت <code>theme.extend.colors</code> في <code>tailwind.config</code>:"
     },
@@ -605,7 +611,7 @@
         "form": "معرّف النموذج الذي تُرسل معه القيمة، حين يكون الحقل خارجه.",
         "id": "معرّف العنصر المُشغِّل، لتربطه بعنصر <code>label</code> من عندك.",
         "defaultOpen": "يفتح القائمة عند العرض الأول.",
-        "collisionAvoidance": "كيف تتجنب القائمة حافة النافذة. تنتقل تلقائيًا فوق العنصر المُشغِّل حين لا يتسع لها المكان تحته، وتبقيها القيمة <code>{ side: \"none\" }</code> تحته."
+        "collisionAvoidance": "كيف تتجنب القائمة حافة النافذة. تنتقل تلقائيًا فوق العنصر المُشغِّل حين لا يتسع لها المكان تحته، وتبقيها القيمة <code>'{ side: \"none\" }'</code> تحته."
       },
       "itemProps": {
         "value": "القيمة التي يرسلها هذا الخيار.",
@@ -782,7 +788,7 @@
     },
     "dropdownMenu": {
       "lead": "قائمة بالإجراءات والإعدادات تُفتح من زر. استخدمها لعرض قائمة قصيرة بما يستطيع القارئ فعله في الصفحة، أو بعنصر واحد فيها، مثل التعديل أو المشاركة أو تسجيل الخروج.",
-      "installNote": "مكوّن القائمة المنسدلة مبني على مكتبة Base UI، لذلك يحتاج إلى الحزمة <code>@base-ui/react</code>. ويتشارك أنماط القائمة مع المكوّن <code>select</code>، وتستخدم صفوف مفتاح التبديل المكوّن <code>switch</code>. يثبّت الأمر <code>add</code> كليهما مع المكوّن، وكذلك أداة shadcn.",
+      "installNote": "مكوّن القائمة المنسدلة مبني على مكتبة Base UI، لذلك يحتاج إلى الحزمة <code>@base-ui/react</code>. ويتشارك أنماط القائمة مع المكوّن <code>select</code>، وتستخدم صفوف مفتاح التبديل المكوّن <code>switch</code>. يثبّت الأمر <code>add</code> كليهما مع المكوّن، وكذلك أداة shadcn. وتفتح الأمثلة أدناه القائمة من المكوّن <code>button</code>، الذي يضيفه الأمر أيضًا.",
       "previewHint": "اضغط الزر، أو انتقل إليه بمفتاح Tab ثم اضغط مفتاح Enter أو السهم السفلي.",
       "variantsBody": "للصفوف نمطان (variant) تحددهما الخاصية <code>variant</code>. النمط <code>default</code> للإجراءات المعتادة، والنمط <code>destructive</code> لإجراء يحذف شيئًا أو لا يمكن التراجع عنه: ضعه في آخر القائمة بعد فاصل، واكتب في عنوانه ما يفعله بالضبط. وتضع الخاصية <code>icon</code> أيقونة بحجم 16px قبل النص.",
       "statesBody": "يُبرز الصف حين يستقر عليه مؤشر الفأرة أو تصل إليه مفاتيح الأسهم، فمرّر المؤشر فوق الصفوف أعلاه لترى ذلك. والصف الذي يحمل الخاصية <code>disabled</code> يظهر باهتًا ولا يمكن الضغط عليه، لكنه يبقى في متناول مفاتيح الأسهم، ليعلن قارئ الشاشة أنه غير متاح.",
@@ -985,6 +991,7 @@
     },
     "input": {
       "lead": "يتيح لك مكوّن حقل الإدخال كتابة إجابة قصيرة في سطر واحد، مع تسمية ونص مساعد وأيقونات عند الحاجة. ويُظهر الحقل نتيجة التحقق من القيمة، بأربعة أحجام وشكلين للزوايا.",
+      "installNote": "تستخدم الأمثلة أدناه أيقونات من الحزمة <code>lucide-react</code>؛ ثبّتها أيضًا إن لم تكن في مشروعك.",
       "preview": {
         "label": "الاسم الكامل",
         "placeholder": "ليلى حداد",
@@ -1568,7 +1575,7 @@
     },
     "tabs": {
       "lead": "يتيح لك مكوّن علامات التبويب (Tabs) التنقل بين عروض مترابطة في المكان نفسه، ويُظهر لوحة واحدة في كل مرة. ويُسمّى المكوّن نفسه أحيانًا Pills.",
-      "installNote": "مكوّن علامات التبويب (Tabs) مبني على مكتبة Base UI، لذلك يحتاج إلى الحزمة <code>@base-ui/react</code>. يثبّتها الأمر <code>add</code> مع المكوّن، وكذلك أداة shadcn.",
+      "installNote": "مكوّن علامات التبويب (Tabs) مبني على مكتبة Base UI، لذلك يحتاج إلى الحزمة <code>@base-ui/react</code>. يثبّتها الأمر <code>add</code> مع المكوّن، وكذلك أداة shadcn. تستخدم الأمثلة أدناه أيقونات من الحزمة <code>lucide-react</code>؛ ثبّتها أيضًا إن لم تكن في مشروعك.",
       "variantsBody": "تأتي علامات التبويب بثلاثة أنماط (variant)، وتحدد النمط على <code>TabsList</code> حتى لا تختلط الأنماط في مجموعة واحدة. النمط (variant) <code>boxed</code> هو الافتراضي، ويجمع علامات التبويب على خلفية رمادية فاتحة، ويُبرز علامة التبويب النشطة فوقها في إطار مرتفع. وهو مناسب لأشرطة الأدوات والتبديل بين طرق العرض. النمط (variant) <code>bordered</code> يضع خطًا تحت علامة التبويب النشطة، وهو مناسب للتنقل في المحتوى والواجهات المزدحمة. أما النمط (variant) <code>lifted</code> فيرفع علامة التبويب النشطة فوق خط أساسي مثل الملف الورقي، وهو مناسب لأقسام الصفحة الرئيسية.",
       "sizesBody": "تتوفر علامات التبويب بثلاثة أحجام، وتحدد الحجم أيضًا على <code>TabsList</code> لتتطابق كل علامات التبويب في المجموعة. الحجم الافتراضي هو <code>md</code>. يبلغ ارتفاع علامة التبويب 28 أو 30 أو 32px، ويستخدم الحجم <code>lg</code> نصًا بحجم 16px مع أيقونات بحجم 20px. وفي النمط (variant) <code>boxed</code> تضيف الخلفية 4px حول علامات التبويب.",
       "statesBody": "تتبع علامة التبويب النشطة قيمة <code>value</code>. أما حالة التمرير (hover) وحالة التركيز (focus) فتأتيان من CSS مباشرة، لا من خاصية. انتقل إلى المجموعة بمفتاح Tab لترى حلقة التركيز. وتظهر علامة التبويب المعطّلة باهتة، ولا يمكنك اختيارها.",
@@ -1690,7 +1697,7 @@
         "triggerHandle": "مقبض تلميح موجود في مكان آخر يُظهره هذا العنصر المُشغِّل.",
         "payload": "بيانات تُمرَّر إلى التلميح حين يُظهره هذا العنصر المُشغِّل.",
         "alignOffset": "يحرّك التلميح على طول جهته، بالبكسل.",
-        "collisionAvoidance": "كيف يتجنب التلميح حافة النافذة. تبقيه القيمة <code>{ side: \"none\", align: \"none\" }</code> في مكانه."
+        "collisionAvoidance": "كيف يتجنب التلميح حافة النافذة. تبقيه القيمة <code>'{ side: \"none\", align: \"none\" }'</code> في مكانه."
       }
     },
     "progress": {
@@ -1834,7 +1841,7 @@
     },
     "alert": {
       "lead": "صندوق رسالة يُعلم المستخدم بخبر جديد، أو يرشده، أو يؤكد له اكتمال مهمة، أو ينبّهه إلى أمر يحتاج إلى انتباهه، أو يبلغه بخطأ. يأتي بخمسة أنماط وثلاثة أنواع كما في ملف التصميم، ومعه زر إجراء وزر إغلاق عند الحاجة.",
-      "installNote": "التنبيه مبني على مكوّن زر، فإضافته تضيف معه العنصر <code>button</code> من السجل.",
+      "installNote": "التنبيه مبني على مكوّن زر، فإضافته تضيف معه العنصر <code>button</code> من السجل. ويعرض مثال الرسالة من شخص المكوّن <code>avatar</code>، الذي يضيفه الأمر أيضًا.",
       "sample": {
         "default": {
           "title": "رسالة جديدة",
@@ -2131,7 +2138,7 @@
       }
     },
     "alertDialog": {
-      "installNote": "مكوّن حوار التنبيه مبني على مكتبة Base UI، لذلك يحتاج إلى الحزمة <code>@base-ui/react</code>، ويستخدم مكوّن زر للإجراءات. يثبّت الأمر <code>add</code> كليهما مع المكوّن، وكذلك أداة shadcn.",
+      "installNote": "مكوّن حوار التنبيه مبني على مكتبة Base UI، لذلك يحتاج إلى الحزمة <code>@base-ui/react</code>، ويستخدم مكوّن زر للإجراءات. يثبّت الأمر <code>add</code> كليهما مع المكوّن، وكذلك أداة shadcn. ويستخدم المثال الذي يطلب اسم المشروع المكوّن <code>input</code>، الذي يضيفه الأمر أيضًا.",
       "previewHint": "اضغط الزر لفتح الحوار. ينقلك مفتاح Tab بين أزراره، ويغلقه مفتاح Escape.",
       "trigger": "حذف المشروع",
       "cancel": "إلغاء",
@@ -2250,7 +2257,7 @@
     },
     "dialog": {
       "whenToUse": "استخدم النافذة المنبثقة لمهمة مركّزة تحتاج إلى مدخلات من المستخدم، مثل تعديل الملف الشخصي أو اختيار خطة، دون مغادرة الصفحة. أما لطلب تأكيد إجراء واحد أو إلغائه، مثل حذف مشروع، فاستخدم <link>حوار التنبيه</link>.",
-      "installNote": "مكوّن نافذة منبثقة مبني على مكتبة Base UI، لذلك يحتاج إلى الحزمة <code>@base-ui/react</code>، ويستخدم مكوّن زر لزرّي الإغلاق والرجوع. يثبّت الأمر <code>add</code> كليهما مع المكوّن، وكذلك أداة shadcn.",
+      "installNote": "مكوّن نافذة منبثقة مبني على مكتبة Base UI، لذلك يحتاج إلى الحزمة <code>@base-ui/react</code>، ويستخدم مكوّن زر لزرّي الإغلاق والرجوع. يثبّت الأمر <code>add</code> كليهما مع المكوّن، وكذلك أداة shadcn. وتستخدم الأمثلة أدناه المكوّن <code>input</code> لحقولها، الذي يضيفه الأمر أيضًا.",
       "previewHint": "اضغط الزر لفتح النافذة. ينتقل التركيز إلى أول حقل، ويبقى التنقل بمفتاح Tab داخلها. ويغلقها مفتاح Escape أو زر الإغلاق أو زر الإلغاء أو الضغط على الطبقة الخلفية.",
       "trigger": "تعديل الملف الشخصي",
       "cancel": "إلغاء",
@@ -2389,7 +2396,7 @@
       }
     },
     "sheet": {
-      "installNote": "مكوّن اللوحة المنزلقة مبني على مكتبة Base UI، لذلك يحتاج إلى الحزمة <code>@base-ui/react</code>، ويستخدم مكوّن زر لزر الإغلاق. يثبّت الأمر <code>add</code> كليهما مع المكوّن، وكذلك أداة shadcn.",
+      "installNote": "مكوّن اللوحة المنزلقة مبني على مكتبة Base UI، لذلك يحتاج إلى الحزمة <code>@base-ui/react</code>، ويستخدم مكوّن زر لزر الإغلاق. يثبّت الأمر <code>add</code> كليهما مع المكوّن، وكذلك أداة shadcn. ويستخدم مثالان أدناه المكوّن <code>input</code> لحقولهما، الذي يضيفه الأمر أيضًا.",
       "previewHint": "اضغط أحد الأزرار لفتح اللوحة من تلك الجهة. يبقى التنقل بمفتاح Tab داخلها، ويغلقها مفتاح Escape أو زر الإغلاق أو الضغط على الطبقة الخلفية.",
       "trigger": "تعديل الملف الشخصي",
       "title": "تعديل الملف الشخصي",
@@ -2495,6 +2502,7 @@
     },
     "badge": {
       "lead": "يعرض مكوّن شارة (Badge) تسمية قصيرة داخل السطر لحالة أو فئة أو معلومة، مع أيقونة أو صورة رمزية أو زر إغلاق عند الحاجة.",
+      "installNote": "يضع أحد الأمثلة أدناه المكوّن <code>avatar</code> داخل شارة، ويضيفه الأمر أيضًا.",
       "preview": {
         "new": "جديد",
         "paid": "مدفوع",
@@ -2559,6 +2567,7 @@
     },
     "breadcrumb": {
       "lead": "يعرض مكوّن مسار التنقّل مكان الصفحة الحالية في موقعك على شكل سلسلة من الروابط، ويعيد القارئ إلى أي مستوى أعلى بنقرة واحدة. تركّبه من أجزاء، فيضم عدد الخطوات الذي تحتاجه الصفحة، ويتبع اتجاه القراءة فيها.",
+      "installNote": "يستخدم مثالان أدناه المكوّن <code>dropdown-menu</code> والمكوّن <code>badge</code>، ويضيفهما الأمر أيضًا.",
       "sample": {
         "label": "مسار التنقّل",
         "crumbs": [
@@ -2646,190 +2655,6 @@
         "separator": "فاصل مخصص",
         "router": "مع رابط Next.js",
         "badge": "مع الشارات"
-      }
-    },
-    "appShell": {
-      "lead": "تنظّم كتلة إطار التطبيق (AppShell) تخطيط التطبيق: شريط جانبي ورأس ومنطقة للمحتوى.",
-      "brand": "متجري",
-      "nav": {
-        "dashboard": "لوحة التحكم",
-        "orders": "الطلبات",
-        "settings": "الإعدادات"
-      },
-      "welcome": "مرحبًا بعودتك يا ليلى",
-      "content": {
-        "title": "لوحة التحكم",
-        "body": "لديك 12 طلبًا جديدًا اليوم."
-      },
-      "props": {
-        "sidebar": "محتوى الشريط الجانبي، ويُخفى على الجوّال.",
-        "header": "محتوى الرأس.",
-        "children": "المحتوى الرئيسي.",
-        "sidebarWidth": "عرض الشريط الجانبي.",
-        "sidebarMobile": "يُظهر الشريط الجانبي على الجوّال.",
-        "className": "أصناف (class) إضافية للمكوّن."
-      }
-    },
-    "pageHeader": {
-      "lead": "تعرض كتلة رأس الصفحة (PageHeader) عنوان الصفحة ووصفها ومسار التنقّل (breadcrumb) وأزرار الإجراءات.",
-      "preview": {
-        "title": "الطلبات",
-        "description": "تابع طلبات متجرك وأدِرها"
-      },
-      "actionsTitle": "مع أزرار الإجراءات",
-      "actions": {
-        "title": "المنتجات",
-        "description": "أضف منتجاتك وعدّلها وسعّرها",
-        "action": "إضافة منتج"
-      },
-      "breadcrumbTitle": "مع مسار التنقّل (breadcrumb)",
-      "breadcrumb": {
-        "home": "الرئيسية",
-        "current": "الإعدادات",
-        "label": "مسار التنقّل"
-      },
-      "props": {
-        "title": "عنوان الصفحة.",
-        "description": "نص تحت العنوان.",
-        "actions": "عناصر تحكم في نهاية الرأس.",
-        "breadcrumb": "مكوّن مسار التنقّل فوق العنوان، واسمه في الخاصية <code>aria-label</code> الخاصة به.",
-        "bordered": "يُظهر الحد السفلي.",
-        "headingLevel": "مستوى عنوان الصفحة.",
-        "className": "أصناف (class) إضافية للمكوّن."
-      }
-    },
-    "emptyState": {
-      "lead": "تعرض كتلة حالة فارغة (EmptyState) رسالة تناسب السياق حين لا يوجد محتوى، مع أيقونة وعنوان ووصف وإجراء.",
-      "preview": {
-        "title": "لا توجد منتجات بعد",
-        "description": "ابدأ بإضافة منتجك الأول.",
-        "action": "إضافة منتج"
-      },
-      "searchTitle": "نتائج البحث",
-      "search": {
-        "query": "قميص كتان",
-        "title": "لا توجد نتائج",
-        "description": "لم نعثر على نتائج لـ «{query}». جرّب كلمة بحث أخرى."
-      },
-      "dataTitle": "بيانات فارغة",
-      "data": {
-        "title": "لا توجد طلبات بعد",
-        "description": "ابدأ بإنشاء طلبك الأول."
-      },
-      "sizes": "لا توجد منتجات بعد",
-      "props": {
-        "icon": "أيقونة فوق العنوان.",
-        "title": "العنوان الرئيسي.",
-        "description": "نص تحت العنوان.",
-        "action": "الإجراء الأساسي.",
-        "secondaryAction": "إجراء ثانوي.",
-        "size": "حجم الحالة الفارغة.",
-        "className": "أصناف (class) إضافية للمكوّن."
-      }
-    },
-    "formSection": {
-      "lead": "تجمع كتلة قسم النموذج (FormSection) الحقول المترابطة، مع تسمياتها وأوصافها.",
-      "preview": {
-        "title": "المعلومات الشخصية",
-        "description": "حدّث بياناتك الشخصية.",
-        "first": "الاسم الأول",
-        "firstPlaceholder": "ليلى",
-        "last": "اسم العائلة",
-        "lastPlaceholder": "حداد"
-      },
-      "errorTitle": "مع رسالة خطأ",
-      "error": {
-        "label": "البريد الإلكتروني",
-        "message": "هذا البريد الإلكتروني مستخدم من قبل"
-      },
-      "actionsTitle": "أزرار النموذج",
-      "actions": {
-        "cancel": "إلغاء",
-        "save": "حفظ"
-      },
-      "usage": {
-        "title": "الحساب",
-        "description": "حدّث إعدادات حسابك.",
-        "email": "البريد الإلكتروني"
-      },
-      "partsNote": "يضم الجدول خصائص (props) الأجزاء <code>FormSection</code>، <code>FormField</code>، <code>FormActions</code>.",
-      "props": {
-        "title": "عنوان القسم.",
-        "description": "نص تحت العنوان أو التسمية.",
-        "divider": "يُظهر فاصلًا في الأسفل.",
-        "label": "تسمية الحقل.",
-        "error": "رسالة خطأ تحت الحقل.",
-        "required": "يعلّم الحقل بأنه مطلوب.",
-        "htmlFor": "يربط التسمية بحقلها.",
-        "align": "محاذاة أزرار الإجراءات.",
-        "sticky": "يثبّت الأزرار في أسفل الصفحة.",
-        "className": "أصناف (class) إضافية للجزء."
-      }
-    },
-    "dataTable": {
-      "lead": "يعرض مكوّن جدول البيانات (DataTable) البيانات في جدول، مع الترتيب والتحديد والتنقّل بين الصفحات (pagination).",
-      "columns": {
-        "name": "الاسم",
-        "email": "البريد الإلكتروني",
-        "role": "الدور"
-      },
-      "people": {
-        "a": "ليلى حداد",
-        "b": "عمر خليل",
-        "c": "سارة ناصر"
-      },
-      "roles": {
-        "admin": "مدير",
-        "editor": "محرر",
-        "viewer": "مشاهد"
-      },
-      "loadingTitle": "حالة التحميل",
-      "emptyTitle": "حالة فارغة",
-      "empty": "لا يوجد مستخدمون",
-      "paginationTitle": "التنقّل بين الصفحات (pagination)",
-      "paginationBody": "تنقّل بين صفوف الجدول بالمكوّن <code>Pagination</code> تحته. وروابطه هنا أزرار، لأن التنقّل يغيّر الصفوف المعروضة لا عنوان الصفحة.",
-      "pagination": {
-        "label": "التنقّل بين الصفحات",
-        "status": "الصفحة {page} من {total}"
-      },
-      "props": {
-        "data": "الصفوف المعروضة.",
-        "columns": "تعريفات الأعمدة، وتأخذ <code>align</code> في كل عمود إحدى القيم <code>start</code>، <code>center</code>، <code>end</code> بحسب اتجاه القراءة.",
-        "getRowKey": "مفتاح فريد لكل صف.",
-        "loading": "يعرض حالة التحميل.",
-        "emptyState": "يظهر حين لا توجد صفوف.",
-        "onRowClick": "تُستدعى عند النقر على صف.",
-        "selectedKey": "مفتاح الصف المحدد.",
-        "stickyHeader": "يُبقي رأس الجدول ظاهرًا عند التمرير.",
-        "className": "أصناف (class) إضافية للمكوّن."
-      }
-    },
-    "statsCard": {
-      "lead": "تعرض كتلة بطاقة الإحصاءات (Stats Card) المقاييس الأساسية مع الاتجاه والأيقونات.",
-      "cards": {
-        "revenue": "الإيرادات",
-        "revenueValue": "48,200 ر.س",
-        "orders": "الطلبات",
-        "returns": "المرتجعات",
-        "vsLastMonth": "مقارنة بالشهر الماضي"
-      },
-      "features": {
-        "value": "عرض العنوان والقيمة",
-        "trend": "مؤشر الاتجاه، صعودًا أو هبوطًا مع النسبة",
-        "icon": "أيقونة اختيارية",
-        "description": "نص وصفي",
-        "loading": "حالة التحميل",
-        "grid": "الجزء <code>StatsGrid</code> لتخطيط البطاقات"
-      },
-      "props": {
-        "title": "التسمية فوق القيمة.",
-        "value": "القيمة الرئيسية.",
-        "description": "نص تحت القيمة.",
-        "icon": "أيقونة في الزاوية.",
-        "trend": "التغيّر، مع سهم للصعود أو الهبوط.",
-        "loading": "يعرض هيكل التحميل أثناء التحميل.",
-        "grid": "يرتّب البطاقات في عمودين أو ثلاثة أو أربعة.",
-        "className": "أصناف (class) إضافية للمكوّن."
       }
     },
     "shimmerButton": {
@@ -3012,704 +2837,6 @@
         "glowContainer": "حاوية ينزلق حول إطارها توهّج.",
         "className": "أصناف (class) إضافية للمكوّن."
       }
-    },
-    "blocksIntro": {
-      "title": "مقدّمة",
-      "lead": "الكتل أقسام صفحات كاملة، مبنية من مكوّنات فاصلة وجاهزة لتضعها في صفحتك.",
-      "whatTitle": "ما الكتلة",
-      "whatBody": "الكتلة ملف واحد يجمع مكوّنات فاصلة، مثل الأكورديون والتبويبات والزر، في قسم من الصفحة. تأخذ كل ألوانها من رموز مظهرك. وبعد أن تضيفها إلى مشروعك تصبح شيفرتها ملكك تعدّلها كما تشاء.",
-      "whatResponsive": "الكتلة متجاوبة: صُممت كل كتلة بعرض سطح المكتب والجهاز اللوحي والهاتف، ويتغيّر تخطيطها عند نقطتي التوقف <code>md</code>، <code>lg</code>.",
-      "whatDirection": "تتبع الكتلة اتجاه الصفحة. كل الجهات فيها منطقية، فتعرض الشيفرة نفسها المحتوى من اليسار إلى اليمين بالإنجليزية ومن اليمين إلى اليسار بالعربية.",
-      "whatContent": "يأتي محتوى الكتلة من خصائصها. لكل كتلة نصوص بالعربية والإنجليزية تختار بينها <code>locale</code>، وأي خاصية تمرّرها تحلّ محلّ النص الافتراضي.",
-      "imagesTitle": "الصور",
-      "imagesBody": "لا تتضمن الكتل صورًا. تعرض الكتلة التي فيها صورة مساحة بديلة، وتعرض الكتلة التي فيها أشخاص الأحرف الأولى من أسمائهم، حتى تمرّر صورك أنت: تأخذ <code>image</code> قيمتي <code>src</code>، <code>alt</code>، ويأخذ كل شخص <code>src</code>.",
-      "inverseTitle": "الكتل ذات السطح المعكوس",
-      "inverseBody": "بعض الكتل على سطح معكوس: داكن في الوضع الفاتح، وفاتح في الوضع الداكن. تُلوَّن هذه الكتل بالرموز المعكوسة، فلا تفرض صنف الوضع الداكن على أي قسم. وإذا ثبّتّ إحداها بالأمر <code>npx @smicolon/fasla-ui@latest add</code> أو بالأمر <code>npx shadcn@latest add</code>، فإن الأمر يضيف ربط هذه الرموز إلى ملف الأنماط.",
-      "inverseMore": "تحتاج الكتلة المعكوسة إذا ثبّتّها يدويًا إلى ثلاثة أسطر من CSS: راجع <link>التثبيت</link>.",
-      "familiesTitle": "عائلات الكتل"
-    },
-    "faqBlocks": {
-      "lead": "{count, plural, one {قسم واحد للأسئلة الشائعة} two {قسمان للأسئلة الشائعة} few {{n} أقسام للأسئلة الشائعة} many {{n} قسمًا للأسئلة الشائعة} other {{n} قسم للأسئلة الشائعة}}: قوائم أسئلة، وتخطيطات، وبحث وتنقّل بين المواضيع، وطرق للوصول إلى الدعم.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "lists": "القوائم",
-        "layouts": "التخطيطات",
-        "navigation": "التنقّل والبحث",
-        "support": "الدعم والتواصل"
-      },
-      "types": {
-        "faq-classic-centered": "كلاسيكي في الوسط",
-        "faq-split-sticky": "مقسوم بعنوان ثابت",
-        "faq-accent-active-card": "بطاقة نشطة بارزة",
-        "faq-soft-filled-rows": "صفوف بتعبئة هادئة",
-        "faq-numbered-editorial": "تحريري مرقّم",
-        "faq-dark-panel": "لوحة داكنة",
-        "faq-mono-index": "فهرس أحادي",
-        "faq-uppercase-dense": "كثيف بعناوين بارزة",
-        "faq-featured-question": "سؤال مميّز",
-        "faq-two-column-grid": "شبكة بعمودين",
-        "faq-masonry-cards": "بطاقات متراصّة",
-        "faq-category-columns": "أعمدة حسب الفئة",
-        "faq-grouped-sections": "أقسام مجمّعة",
-        "faq-table-compact": "جدول مضغوط",
-        "faq-search-categories": "بحث وفئات",
-        "faq-tabs-by-topic": "تبويبات حسب الموضوع",
-        "faq-sidebar-nav": "تنقّل جانبي",
-        "faq-category-chip-grid": "شبكة أزرار الفئات",
-        "faq-topic-tiles": "مربعات المواضيع",
-        "faq-help-hero-popular": "واجهة المساعدة والأكثر قراءة",
-        "faq-contact-cta-card": "بطاقة دعوة للتواصل",
-        "faq-support-channels": "قنوات الدعم",
-        "faq-newsletter-close": "خاتمة بالنشرة البريدية",
-        "faq-support-stats": "إحصاءات الدعم",
-        "faq-media-split": "مقسوم مع صورة",
-        "faq-chat-thread": "سلسلة محادثة"
-      }
-    },
-    "errorStateBlocks": {
-      "lead": "{count, plural, one {صفحة خطأ واحدة} two {صفحتا خطأ} few {{n} صفحات خطأ} many {{n} صفحة خطأ} other {{n} صفحة خطأ}}: صفحات لم يُعثر عليها، والحالات المجاورة لها، من خطأ الخادم إلى إعادة التوجيه المؤقتة.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "not-found": "صفحات غير موجودة",
-        "other-states": "حالات أخرى"
-      },
-      "types": {
-        "error-state-centered-minimal": "بسيط في الوسط",
-        "error-state-search-recovery": "العودة بالبحث",
-        "error-state-display-numeral-split": "رقم عرضي مقسوم",
-        "error-state-editorial-photo-split": "صورة تحريرية مقسومة",
-        "error-state-full-bleed-photo": "صورة بعرض كامل",
-        "error-state-colour-field-scatter": "أرقام مبعثرة على لون",
-        "error-state-dark-spotlight": "بقعة ضوء داكنة",
-        "error-state-ghost-watermark": "علامة مائية باهتة",
-        "error-state-helpful-links-list": "قائمة روابط مفيدة",
-        "error-state-popular-pages-grid": "شبكة الصفحات الشائعة",
-        "error-state-error-card-panel": "بطاقة الخطأ",
-        "error-state-illustrated-empty-state": "حالة فارغة مرسومة",
-        "error-state-light-editorial": "تحريري خفيف",
-        "error-state-layered-badge-centered": "شارة بطبقات في الوسط",
-        "error-state-server-error-500": "خطأ الخادم 500",
-        "error-state-access-denied-403": "رفض الوصول 403",
-        "error-state-offline-state": "انقطاع الاتصال",
-        "error-state-maintenance-mode": "وضع الصيانة",
-        "error-state-empty-search-results": "نتائج بحث فارغة",
-        "error-state-recovery-bento": "شبكة بينتو للعودة",
-        "error-state-sitemap-columns": "أعمدة خريطة الموقع",
-        "error-state-terminal-console": "نافذة الطرفية",
-        "error-state-photo-collage-scatter": "صور مبعثرة",
-        "error-state-support-escalation-band": "شريط التصعيد إلى الدعم",
-        "error-state-split-colour-panel": "لوحة لونية مقسومة",
-        "error-state-marquee-404-band": "شريط 404 متحرك",
-        "error-state-broken-trail-breadcrumb": "مسار تنقّل منقطع",
-        "error-state-countdown-redirect": "إعادة توجيه بعدّ تنازلي"
-      }
-    },
-    "authenticationsBlocks": {
-      "lead": "{count, plural, one {شاشة واحدة} two {شاشتان} few {{n} شاشات} many {{n} شاشة} other {{n} شاشة}} بين الزائر وحسابه: طرق الدخول، والخطوات التي تليها، من رمز التحقق إلى الجلسة المقفلة.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "ways-in": "طرق الدخول",
-        "next-steps": "الخطوات التالية"
-      },
-      "types": {
-        "auth-centered-card-sign-in": "بطاقة دخول في الوسط",
-        "auth-social-first-sign-in": "الدخول بالحسابات أولًا",
-        "auth-split-photo-sign-in": "دخول بجانب صورة",
-        "auth-split-testimonial-sign-up": "تسجيل بجانب رأي عميل",
-        "auth-minimal-centered-sign-in": "دخول بسيط في الوسط",
-        "auth-sign-up-password-strength": "تسجيل مع قوة كلمة المرور",
-        "auth-sign-up-benefits-column": "تسجيل مع عمود المزايا",
-        "auth-tabbed-sign-in-sign-up": "دخول وتسجيل بتبويبين",
-        "auth-magic-link-request": "طلب رابط الدخول",
-        "auth-check-your-email": "تحقّق من بريدك",
-        "auth-otp-verification": "التحقق برمز لمرة واحدة",
-        "auth-two-factor-authenticator": "التحقق بخطوتين عبر التطبيق",
-        "auth-two-factor-method-chooser": "اختيار طريقة التحقق بخطوتين",
-        "auth-forgot-password": "نسيت كلمة المرور",
-        "auth-reset-password": "إعادة تعيين كلمة المرور",
-        "auth-password-changed": "تم تغيير كلمة المرور",
-        "auth-team-invite-accept": "قبول دعوة الفريق",
-        "auth-profile-setup-onboarding": "إعداد الملف الشخصي",
-        "auth-photo-background-sign-in": "دخول على خلفية صورة",
-        "auth-phone-number-sign-in": "الدخول برقم الهاتف",
-        "auth-qr-device-login": "الدخول برمز QR",
-        "auth-passkey-sign-in": "الدخول بمفتاح المرور",
-        "auth-locked-session-re-authenticate": "فتح جلسة مقفلة",
-        "auth-multi-step-sign-up-wizard": "تسجيل على خطوات",
-        "auth-sign-in-error-state": "خطأ في تسجيل الدخول",
-        "auth-waitlist-early-access": "قائمة انتظار الوصول المبكر"
-      }
-    },
-    "navbarBlocks": {
-      "lead": "{count, plural, one {شريط تنقّل واحد} two {شريطا تنقّل} few {{n} أشرطة تنقّل} many {{n} شريط تنقّل} other {{n} شريط تنقّل}} لأعلى الصفحة: روابط موقع، أو شريط عائم، أو بحث تطبيق وإشعاراته وحسابه.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "site": "أشرطة المواقع",
-        "floating": "عائمة",
-        "app": "التطبيقات والمتاجر"
-      },
-      "types": {
-        "navbar-default": "الافتراضي",
-        "navbar-with-dropdown": "مع قائمة منسدلة",
-        "navbar-with-icon-indicator-avatar": "مع مؤشر الإشعارات والصورة الرمزية",
-        "navbar-with-centered-logo": "مع شعار في الوسط",
-        "navbar-with-cta-button": "مع زر إجراء",
-        "navbar-with-submenu": "مع قائمة فرعية",
-        "navbar-rounded": "مستدير",
-        "navbar-with-search-input": "مع حقل بحث",
-        "navbar-multiple-icon": "أيقونات متعددة",
-        "navbar-multiple-action": "إجراءات متعددة",
-        "navbar-extended-at-top": "مع شريط علوي",
-        "navbar-small": "صغير",
-        "navbar-rounded-small": "صغير مستدير",
-        "navbar-centered-floating": "عائم في الوسط",
-        "navbar-active-action-with-border": "رابط نشط بخط",
-        "navbar-active-action-with-round": "رابط نشط بنقطة",
-        "navbar-e-commerce": "متجر إلكتروني"
-      }
-    },
-    "logoCloudBlocks": {
-      "lead": "{count, plural, one {قسم شعارات واحد} two {قسما شعارات} few {{n} أقسام شعارات} many {{n} قسمًا للشعارات} other {{n} قسم شعارات}}، من صف واحد إلى جدار كامل.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "walls": "جدران الشعارات",
-        "proof": "مع اقتباس أو أرقام أو تصفية"
-      },
-      "types": {
-        "logo-cloud-centered-caption-row": "صف بتعليق في الوسط",
-        "logo-cloud-heading-grid": "شبكة بعنوان",
-        "logo-cloud-bordered-cell-grid": "شبكة خلايا بإطار",
-        "logo-cloud-enterprise-wall": "جدار المؤسسات",
-        "logo-cloud-contained-card": "داخل بطاقة",
-        "logo-cloud-dark-logo-wall": "جدار شعارات داكن",
-        "logo-cloud-side-label-rail": "شريط بتسمية جانبية",
-        "logo-cloud-heading-left-grid-right": "عنوان بجانب الشبكة",
-        "logo-cloud-editorial-eyebrow-split": "تحريري مقسوم بعنوان تمهيدي",
-        "logo-cloud-flanked-heading": "عنوان بين الشعارات",
-        "logo-cloud-quote-panel-grid": "شبكة مع لوحة اقتباس",
-        "logo-cloud-stat-rail-above-grid": "أرقام فوق الشبكة",
-        "logo-cloud-logo-metric-tiles": "مربعات الشعارات والأرقام",
-        "logo-cloud-logo-quote-cards": "بطاقات الشعارات والاقتباسات",
-        "logo-cloud-named-integration-cards": "بطاقات التكاملات بأسمائها",
-        "logo-cloud-logo-testimonial-strip": "شريط الشعارات مع شهادة",
-        "logo-cloud-scatter-field": "شعارات متناثرة",
-        "logo-cloud-bento-logo-wall": "جدار شعارات بينتو",
-        "logo-cloud-divider-rule-row": "صف بخطوط فاصلة",
-        "logo-cloud-pyramid-row-stack": "صفوف هرمية",
-        "logo-cloud-tabbed-industry-filter": "تصفية حسب القطاع",
-        "logo-cloud-grid-closing-cta": "شبكة بدعوة ختامية"
-      }
-    },
-    "galleryBlocks": {
-      "lead": "{count, plural, one {معرض صور واحد} two {معرضا صور} few {{n} معارض صور} many {{n} معرضًا للصور} other {{n} معرض صور}}: شبكات وجدران بتسميات، وعارضات شرائح، وعارضات بأدوات تحكّم خاصة بها.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "grids": "الشبكات والجدران",
-        "carousels": "عارضات الشرائح",
-        "viewers": "العارضات التفاعلية"
-      },
-      "types": {
-        "gallery-culture-photo-grid": "شبكة صور الفريق",
-        "gallery-masonry-gallery": "معرض متراصّ",
-        "gallery-photo-bento": "شبكة بينتو للصور",
-        "gallery-filmstrip-carousel": "عارض بشريط مصغّرات",
-        "gallery-full-bleed-slider": "عارض بعرض كامل",
-        "gallery-filter-tabs-grid": "شبكة بتبويبات للتصفية",
-        "gallery-hover-caption-cards": "بطاقات بتسمية عند التمرير",
-        "gallery-lightbox-viewer": "عارض الصور المكبّرة",
-        "gallery-horizontal-scroll-rail": "شريط تمرير أفقي",
-        "gallery-editorial-split": "تحريري مقسوم",
-        "gallery-scattered-collage": "صور مبعثرة",
-        "gallery-social-feed-strip": "شريط منشورات التواصل",
-        "gallery-video-gallery": "معرض الفيديو",
-        "gallery-before-after-compare": "مقارنة قبل وبعد",
-        "gallery-dark-cinema-wall": "جدار سينمائي داكن",
-        "gallery-hover-index-list": "فهرس بمعاينة عند التمرير",
-        "gallery-mosaic-statement-tile": "فسيفساء مع بطاقة نصية",
-        "gallery-contact-sheet-wall": "جدار الصور المصغّرة",
-        "gallery-featured-thumb-rail": "صورة مميّزة وشريط مصغّرات",
-        "gallery-album-cards": "بطاقات الألبومات",
-        "gallery-timeline-gallery": "معرض على خط زمني",
-        "gallery-photo-spotlight": "صورة في الواجهة"
-      }
-    },
-    "pricingBlocks": {
-      "lead": "{count, plural, one {قسم أسعار واحد} two {قسما أسعار} few {{n} أقسام للأسعار} many {{n} قسمًا للأسعار} other {{n} قسم للأسعار}}: خطط تقارن بينها جنبًا إلى جنب، واختيار للخطة أو لدورة الفوترة يقود إلى الدفع.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "compare": "مقارنة الخطط",
-        "choose": "الاختيار والدفع"
-      },
-      "types": {
-        "pricing-tiers": "فئات الأسعار",
-        "pricing-two-plan-compare": "مقارنة بين خطتين",
-        "pricing-plan-spotlight": "خطة واحدة بارزة",
-        "pricing-comparison-matrix": "جدول المقارنة",
-        "pricing-plan-picker-summary": "اختيار الخطة مع ملخص الطلب"
-      }
-    },
-    "heroBlocks": {
-      "lead": "{count, plural, one {قسم افتتاحي واحد} two {قسمان افتتاحيان} few {{n} أقسام افتتاحية} many {{n} قسمًا افتتاحيًا} other {{n} قسم افتتاحي}} لأعلى صفحة الهبوط: تخطيطات مقسّمة، وافتتاحيات تتصدّرها الصور، وبطاقات وأنماط، وأقسام تتصدّرها الكتابة، وبعضها متحرك.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "split": "تخطيطات مقسّمة",
-        "photo-led": "تتصدّرها الصور",
-        "cards": "بطاقات وأنماط",
-        "type-led": "تتصدّرها الكتابة"
-      },
-      "types": {
-        "hero-editorial-arch": "قوس تحريري",
-        "hero-photo-constellation": "كوكبة الصور",
-        "hero-arc-gallery": "معرض على قوس",
-        "hero-inline-image-headline": "عنوان بصورة مدمجة",
-        "hero-bento-split": "بينتو مقسوم",
-        "hero-framed-full-bleed": "صورة كاملة في إطار",
-        "hero-annotated-object": "عنصر مشروح",
-        "hero-editorial-triptych": "ثلاثية تحريرية",
-        "hero-colour-stage": "منصة لونية",
-        "hero-twin-panels": "لوحتان متجاورتان",
-        "hero-split-band-headline": "شريط منقسم",
-        "hero-textured-dark": "داكن بنقشة",
-        "hero-component-pattern": "نمط المكوّنات",
-        "hero-curved-media-rail": "شريط وسائط منحني",
-        "hero-framed-studio-card": "بطاقة استوديو مؤطرة",
-        "hero-orbit-track": "مسار مداري",
-        "hero-floating-integrations": "تكاملات عائمة",
-        "hero-shape-grid": "شبكة الأشكال",
-        "hero-wave-band": "شريط موجي",
-        "hero-studio-mosaic": "فسيفساء الاستوديو",
-        "hero-illustration-split": "تقسيم برسم توضيحي",
-        "hero-masked-type-reveal": "كشف عبر الحروف",
-        "hero-velocity-marquee": "شريط السرعة",
-        "hero-duo-card": "بطاقتان متجاورتان",
-        "hero-video-spotlight": "فيلم في الواجهة",
-        "hero-brand-color-block": "كتل ألوان العلامة",
-        "hero-scramble-decode": "فك التشفير",
-        "hero-split-flap-counters": "عدادات الألواح القلّابة",
-        "hero-video-in-type": "فيديو داخل النص"
-      }
-    },
-    "aboutBlocks": {
-      "lead": "أقسام تعرّف بالشركة: بيانات وواجهات بالصور، وقصتها وقيمها، وثقافتها وأرقامها.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "statements": "البيانات والواجهات",
-        "story": "القصة والقيم",
-        "culture": "الثقافة والأرقام"
-      },
-      "types": {
-        "about-mission-statement-hero": "واجهة بيان المهمة",
-        "about-collage-hero": "واجهة كولاج الصور",
-        "about-statement-band": "شريط البيان",
-        "about-values-spotlight": "القيم تحت الضوء",
-        "about-values-connector-list": "قائمة القيم الموصولة",
-        "about-approach-stack-cards": "بطاقات المنهج المكدّسة",
-        "about-story-snapshots": "القصة واللقطات",
-        "about-bento": "بنتو",
-        "about-culture-masonry": "جدار الثقافة",
-        "about-impact-stats-band": "شريط أرقام الأثر",
-        "about-story-photos": "القصة بالصور",
-        "about-split-panel": "اللوحة المقسومة",
-        "about-letter-card": "بطاقة الرسالة",
-        "about-values-focus": "القيم في التركيز",
-        "about-spotlight": "بقعة الضوء",
-        "about-headline-photos": "العنوان والصور",
-        "about-type-stack": "الحروف المكدّسة",
-        "about-color-bento": "بنتو الألوان",
-        "about-numbered-rows": "الصفوف المرقّمة"
-      }
-    },
-    "careersBlocks": {
-      "lead": "أقسام لصفحة الوظائف: الوظائف المتاحة في قوائم وبطاقات وفرق وجداول ومطويات، مع التصفية والتنقل بين الصفحات.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "lists": "تصفّح الوظائف",
-        "highlights": "إبراز وحالات",
-        "details": "تفاصيل الوظيفة"
-      },
-      "types": {
-        "careers-open-roles-hairline-list": "قائمة وظائف بخط رفيع",
-        "careers-role-cards-grid": "شبكة بطاقات الوظائف",
-        "careers-roles-by-department": "الوظائف حسب الفريق",
-        "careers-open-vacancies-table": "جدول الوظائف الشاغرة",
-        "careers-roles-list-accordion-expanded": "قائمة الوظائف المتوسّعة",
-        "careers-about-card-role-list": "بطاقة التعريف وقائمة الوظائف",
-        "careers-featured-role-spotlight": "الوظيفة المميزة",
-        "careers-perks-benefits": "المزايا",
-        "careers-no-open-roles-empty-state": "لا توجد وظائف مفتوحة",
-        "careers-role-detail-panel": "لوحة تفاصيل الوظيفة",
-        "careers-role-detail-page": "صفحة تفاصيل الوظيفة"
-      }
-    },
-    "howItWorksBlocks": {
-      "lead": "أقسام تشرح خطوات العمل: خطوط زمنية ومراحل، وخطوات مروية بالصور والبطاقات، وشرائح وألسنة وقوائم قابلة للطي تتنقل بينها، وشبكات وألواح برسم لكل خطوة.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "timelines": "الخطوط الزمنية والمراحل",
-        "visual-steps": "خطوات مرئية",
-        "interactive": "شرائح وتفاعل",
-        "grids": "شبكات وألواح"
-      },
-      "types": {
-        "how-it-works-center-spine-timeline": "Center Spine Timeline",
-        "how-it-works-vertical-timeline-card": "Vertical Timeline Card",
-        "how-it-works-contained-timeline": "Contained Timeline",
-        "how-it-works-phase-line": "Phase Line",
-        "how-it-works-pill-timeline": "Pill Timeline",
-        "how-it-works-numbered-photo-steps": "Numbered Photo Steps",
-        "how-it-works-split-photo-step-list": "Split Photo + Step List",
-        "how-it-works-full-bleed-step-panel": "Full-Bleed Step Panel",
-        "how-it-works-overlay-numeral-cards": "Overlay Numeral Cards",
-        "how-it-works-diagonal-photo-collage": "Diagonal Photo Collage",
-        "how-it-works-photo-bento-steps": "Photo Bento Steps",
-        "how-it-works-fanned-dissolve-cards": "Fanned Dissolve Cards",
-        "how-it-works-stacked-media-text": "Stacked Media + Text",
-        "how-it-works-photo-rail-progress": "Photo Rail + Progress",
-        "how-it-works-tall-visual-rail": "Tall Visual Rail",
-        "how-it-works-step-tabs-photo-panel": "Step Tabs + Photo Panel",
-        "how-it-works-accordion-steps": "Accordion Steps",
-        "how-it-works-orbital-process": "Orbital Process",
-        "how-it-works-six-card-grid": "Six-Card Grid",
-        "how-it-works-column-panels": "Column Panels",
-        "how-it-works-numbered-instruction-panels": "Numbered Instruction Panels",
-        "how-it-works-numbered-editorial-rows": "Numbered Editorial Rows",
-        "how-it-works-split-feature-band": "Split Feature Band",
-        "how-it-works-rounded-cards-device-crop": "Rounded Cards + Device Crop"
-      }
-    },
-    "blockCard": {
-      "fullScreen": "فتح بملء الشاشة",
-      "newTab": "(يُفتح في علامة تبويب جديدة)",
-      "view": "طريقة العرض",
-      "preview": "معاينة",
-      "code": "الشيفرة",
-      "manual": "يدويًا",
-      "breakpoint": "العرض",
-      "desktop": "سطح المكتب",
-      "tablet": "جهاز لوحي",
-      "mobile": "هاتف",
-      "direction": "الاتجاه",
-      "frameTitle": "{name} بعرض {width} بكسل",
-      "loading": "جارٍ تحميل الشيفرة…",
-      "loadFailed": "تعذّر تحميل الشيفرة. ثبّت الكتلة بالأمر أدناه بدلًا من ذلك.",
-      "manualDependencies": "أضف المكوّنات التي تستخدمها:",
-      "manualPackages": "ثبّت الحزم التي تستوردها:",
-      "manualSource": "انسخ الشيفرة إلى <code>{file}</code>:",
-      "manualInverse": "أضف ربط الرموز المعكوسة إلى كتلة <code>@theme inline</code> في ملف الأنماط. ولإضافته في Tailwind 3، راجع <link>الرموز المعكوسة</link>.",
-      "install": "التثبيت"
-    },
-    "blocksInstall": {
-      "title": "التثبيت",
-      "lead": "اضبط مشروعك مرة واحدة، ثم أضف الكتلة بأمر واحد.",
-      "initTitle": "شغّل الأمر <code>init</code> أولًا",
-      "initBody": "شغّل الأمر <code>init</code> مرة واحدة في كل مشروع، قبل إضافة أول كتلة. يكتب الأمر الملف <code>components.json</code> الذي يقرؤه كل أمر <code>add</code>، ويضيف الدالة المساعدة <code>cn</code> التي تستوردها الكتل، ويثبّت المظهر.",
-      "initMore": "لطبقات المظهر وضبط المشروع يدويًا، راجع صفحة <link>التثبيت</link> في قسم المكوّنات.",
-      "addTitle": "ثبّت كتلة",
-      "addBody": "يكتب الأمر <code>add</code> الكتلة في <code>components/blocks/</code>، ويثبّت معها المكوّنات التي تستخدمها، مثل <code>accordion</code>، <code>tabs</code>، والحزم التي تستوردها، فلا تحتاج إلى إضافتها واحدًا واحدًا.",
-      "addShadcn": "ويثبّت الأمر <code>npx shadcn@latest add</code> الكتلة بالطريقة نفسها، من رابطها في السجل:",
-      "inverseTitle": "CSS للكتل ذات السطح المعكوس",
-      "inverseBody": "يضيف كلا الأمرين <code>add</code> ربط الرموز المعكوسة الذي تحتاجه الكتلة ذات السطح المعكوس. وإذا ثبّتّ إحداها يدويًا في Tailwind 4، فأضف هذه الأسطر الثلاثة إلى كتلة <code>@theme inline</code> في ملف الأنماط:",
-      "inverseMore": "راجع <link>الرموز المعكوسة</link> لطريقة الإضافة في Tailwind 3، ولشرح القيم البديلة وضبط ألوانك أنت."
-    },
-    "socialProofBlocks": {
-      "lead": "أقسام يتحدث فيها العملاء عن المنتج: شبكات الاقتباسات وجدرانها، والاقتباسات البارزة، والشرائح التي يتنقل بينها القارئ أو يختار منها، والقصص التي يدعمها رقم.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "grids": "الشبكات والجدران",
-        "spotlights": "الاقتباسات البارزة",
-        "carousels": "الشرائح والاختيار",
-        "stories": "القصص والأرقام"
-      },
-      "types": {
-        "social-proof-classic-trio-grid": "شبكة ثلاثية كلاسيكية",
-        "social-proof-staggered-columns": "أعمدة متدرّجة",
-        "social-proof-benefit-title-cards": "بطاقات بعناوين الفوائد",
-        "social-proof-giant-quote-duo": "اقتباسان كبيران",
-        "social-proof-vertical-column-wall": "جدار من الأعمدة",
-        "social-proof-tweet-wall": "جدار التغريدات",
-        "social-proof-app-review-row": "صف تقييمات التطبيقات",
-        "social-proof-centered-logo-spotlight": "اقتباس بارز بشعار في الوسط",
-        "social-proof-dark-editorial-split": "تقسيم تحريري داكن",
-        "social-proof-bracket-framed-quote": "اقتباس بين أقواس الزوايا",
-        "social-proof-highlighted-phrase-spotlight": "اقتباس بارز بعبارات مميّزة",
-        "social-proof-tinted-panel-portrait": "صورة شخصية على لوحة ملوّنة",
-        "social-proof-overlay-photo-quote": "اقتباس فوق صورة",
-        "social-proof-arch-portrait-quote": "اقتباس بصورة مقوّسة",
-        "social-proof-spotlight-carousel": "عارض الاقتباسات البارزة",
-        "social-proof-avatar-selector-row": "صف اختيار الصور الشخصية",
-        "social-proof-progress-carousel": "عارض بشريط تقدّم",
-        "social-proof-persona-pillars": "أعمدة الأدوار",
-        "social-proof-workplace-portrait-stories": "قصص بصور فرق العمل",
-        "social-proof-stat-story-cards": "بطاقات قصص بالأرقام",
-        "social-proof-video-story-cards": "بطاقات قصص بالفيديو",
-        "social-proof-case-study-row": "صف دراسات الحالة",
-        "social-proof-proof-bento": "بنتو الإثبات"
-      }
-    },
-    "teamBlocks": {
-      "lead": "{count, plural, one {قسم فريق واحد} two {قسما فريق} few {{n} أقسام للفريق} many {{n} قسمًا للفريق} other {{n} قسم للفريق}}: شبكات وجدران للصور، وأدلة وجداول، وإبرازات تضع مؤسسًا أو شريطًا من الأعضاء أو وظيفة مفتوحة في الواجهة.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "grids-and-walls": "شبكات وجدران",
-        "directories": "أدلة",
-        "spotlights": "إبرازات"
-      },
-      "types": {
-        "team-leadership-grid": "شبكة القيادة",
-        "team-portrait-wall": "جدار الصور",
-        "team-compact-directory-rows": "صفوف الدليل المدمجة",
-        "team-split-intro-member-rail": "مقدمة مع شريط الأعضاء",
-        "team-founder-spotlight": "إبراز المؤسسين",
-        "team-member-carousel": "عارض الأعضاء",
-        "team-department-tabs-directory": "دليل الأقسام بعلامات التبويب",
-        "team-member-table": "جدول الأعضاء",
-        "team-meta-profile-cards": "بطاقات الملفات التفصيلية",
-        "team-we-re-hiring-cta": "دعوة إلى التوظيف",
-        "team-hairline-grid": "شبكة بخطوط رفيعة",
-        "team-overlay-portrait-cards": "بطاقات صور بتسمية فوقها",
-        "team-annotated-portrait-lineup": "صف صور بأسهم توضيحية",
-        "team-grid-backdrop-roster": "شبكة على خلفية مربعات"
-      }
-    },
-    "blogCardsBlocks": {
-      "lead": "أقسام تعرض المقالات للقرّاء: شبكات البطاقات والمقالات المميزة، والقوائم والفهارس، واللوحات التي ترافق المقال، وأدوات التصفح.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "railNote": "في «أرشيف بمرشّحات جانبية» لا يلتصق شريط المرشّحات بأعلى الشاشة عند عرض 1024px فأكثر، فلا نسخة ترسم شريطًا لاصقًا، ويتمرر الشريط مع الصفحة.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "grids": "شبكات البطاقات",
-        "features": "المقالات المميزة",
-        "lists": "القوائم والفهارس",
-        "alongside": "إلى جانب المقال",
-        "browse": "التصفح والتصفية"
-      },
-      "types": {
-        "blog-cards-classic-3-up-grid": "شبكة كلاسيكية بثلاث بطاقات",
-        "blog-cards-featured-two-up": "شبكة مقال مميز ومقالين",
-        "blog-cards-compact-4-up-thumb-grid": "شبكة مدمجة بأربع صور مصغّرة",
-        "blog-cards-bento-editorial-grid": "شبكة تحريرية بنمط بينتو",
-        "blog-cards-overlay-photo-trio": "شبكة ثلاث صور بنص فوقها",
-        "blog-cards-journal-bento": "شبكة بينتو اليوميات",
-        "blog-cards-left-thumb-row-cards": "قائمة بطاقات بصورة جانبية",
-        "blog-cards-hairline-text-index": "فهرس نصي بخطوط رفيعة",
-        "blog-cards-numbered-reading-list": "قائمة قراءة مرقّمة",
-        "blog-cards-latest-popular-split": "قائمة الأحدث والأكثر قراءة",
-        "blog-cards-split-feature": "مقال مميز بتخطيط منقسم",
-        "blog-cards-lead-ranked-picks": "مقال رئيسي واختيارات مرتبة",
-        "blog-cards-dark-editorial-feature": "مقال تحريري داكن",
-        "blog-cards-magazine-cover-story": "مقال غلاف المجلة",
-        "blog-cards-pull-quote-feature": "مقال باقتباس بارز",
-        "blog-cards-newsletter-latest": "نشرة بريدية مع الأحدث",
-        "blog-cards-author-spotlight": "بطاقة الكاتب ومقالاته",
-        "blog-cards-related-posts-strip": "شريط مقالات ذات صلة",
-        "blog-cards-filter-sidebar-results": "أرشيف بمرشّحات جانبية",
-        "blog-cards-search-chips-results": "بحث بوسوم المواضيع",
-        "blog-cards-post-carousel-with-controls": "عارض مقالات بأزرار تحكم"
-      }
-    },
-    "contactUsBlocks": {
-      "lead": "أقسام تتيح للزائر أن يصل إلى فريقك: نماذج تقوم على الكتابة، ونماذج بجانب صورة، ومواقع وأوقات، وقنوات أخرى للتواصل.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "forms": "نماذج التواصل",
-        "photo-forms": "نماذج مع صور",
-        "places": "المواقع والأوقات",
-        "channels": "قنوات التواصل"
-      },
-      "types": {
-        "contact-us-classic-centered": "Classic Centered",
-        "contact-us-dark-statement": "Dark Statement",
-        "contact-us-oversized-wordmark": "Oversized Wordmark",
-        "contact-us-editorial-statement": "Editorial Statement",
-        "contact-us-ruled-split-form": "Ruled Split Form",
-        "contact-us-grand-headline-form": "Grand Headline Form",
-        "contact-us-pitch-and-inquiry": "Pitch & Inquiry",
-        "contact-us-form-contact-methods": "Form + Contact Methods",
-        "contact-us-split-photo-dark": "Split Photo Dark",
-        "contact-us-photo-and-dark-panel": "Photo & Dark Panel",
-        "contact-us-editorial-and-address-card": "Editorial & Address Card",
-        "contact-us-map-split": "Map Split",
-        "contact-us-office-cards": "Office Cards",
-        "contact-us-hq-feature": "HQ Feature",
-        "contact-us-global-offices-table": "Global Offices Table",
-        "contact-us-hours-and-availability": "Hours and Availability",
-        "contact-us-named-owners": "Named Owners",
-        "contact-us-book-a-call": "Book a Call",
-        "contact-us-form-with-faq": "Form with FAQ",
-        "contact-us-bento-grid": "Bento Grid",
-        "contact-us-social-rail": "Social Rail",
-        "contact-us-newsletter-combo": "Newsletter Combo",
-        "contact-us-support-channels": "Support Channels"
-      }
-    },
-    "featuresBlocks": {
-      "lead": "سبعة وعشرون قسمًا تعرض ما يفعله المنتج: بطاقات الأيقونات والصفوف المرقّمة وقوائم التحقق، وتخطيطات تقودها الصور، ولوحات يتفاعل معها الزائر، والمنتج أثناء الاستخدام.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "icons-numbers": "تخطيطات الأيقونات والأرقام وقوائم التحقق",
-        "photo-led": "تخطيطات تقودها الصورة",
-        "interactive": "تخطيطات يتفاعل معها الزائر",
-        "product-in-use": "تخطيطات تعرض المنتج أثناء الاستخدام"
-      },
-      "types": {
-        "features-icon-card-grid": "شبكة بطاقات الأيقونات",
-        "features-compact-icon-index": "فهرس أيقونات مدمج",
-        "features-numbered-feature-rows": "صفوف مزايا مرقّمة",
-        "features-feature-checklist-columns": "أعمدة قوائم التحقق",
-        "features-colour-block-cards": "بطاقات بكتل لونية",
-        "features-stat-feature-band": "شريط مزايا بالأرقام",
-        "features-split-photo-icon-list": "صورة وقائمة أيقونات",
-        "features-photo-bento": "بينتو الصور",
-        "features-feature-list-thumbnails": "قائمة مزايا بصور مصغّرة",
-        "features-photo-feature-chips": "صورة ووسوم المزايا",
-        "features-media-rail": "شريط صور أفقي",
-        "features-full-bleed-photo-banner": "لافتة صورة بعرض الصفحة",
-        "features-editorial-photo-split": "تقسيم تحريري بالصورة",
-        "features-photo-collage": "كولاج صور",
-        "features-notched-photo-columns": "أعمدة صور بحافة مشطوفة",
-        "features-perforated-photo-strip": "شريط صور بحواف مثقّبة",
-        "features-portrait-photo-cards-link-row": "بطاقات صور طولية ورابط",
-        "features-photo-carousel": "عارض صور",
-        "features-photo-tabs-panel": "لوحة صور بعلامات تبويب",
-        "features-accordion-photo": "أكورديون وصورة",
-        "features-expanding-step-cards": "بطاقات خطوات تتوسّع",
-        "features-compare-panels-chat-answer": "لوحتا مقارنة وإجابة محادثة",
-        "features-numbered-steps-floating-cards": "خطوات مرقّمة وبطاقات عائمة",
-        "features-solid-colour-cards": "بطاقات بلون واحد",
-        "features-icon-titled-preview-rail": "شريط معاينات بعناوين أيقونية",
-        "features-tinted-product-bento": "بينتو منتجات بألوان خفيفة",
-        "features-showcase-card-pair": "بطاقتا عرض"
-        }
-      },
-    "videoCallBlocks": {
-      "lead": "أقسام لمنتج المكالمات المرئية: الشاشات قبل المكالمة (الردهة وغرفة الانتظار والمكالمة الواردة ورابط الانضمام)، ومراحل المكالمة بالشبكة أو المتحدث أو الشاشة المشتركة أو اللوحة الجانبية، وعناصر التحكم أثناء المكالمة، والتسميات المباشرة والتفاعلات على منصتها، وما يحيط بالمكالمة بعد انتهائها: الملخّص والاجتماعات القادمة وملخّص الذكاء الاصطناعي، وواجهة رئيسية تسويقية تعرض المنتج.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "before": "قبل المكالمة",
-        "stages": "مراحل المكالمة",
-        "layers": "طبقات المكالمة",
-        "around": "حول المكالمة",
-        "marketing": "التسويق"
-      },
-      "types": {
-        "video-call-pre-join-lobby": "ردهة ما قبل الانضمام",
-        "video-call-grid-gallery-call": "معرض الشبكة",
-        "video-call-speaker-filmstrip": "المتحدث وشريط المشاركين",
-        "video-call-screen-share-stage": "مرحلة مشاركة الشاشة",
-        "video-call-call-with-side-panel": "المكالمة مع لوحة جانبية",
-        "video-call-call-controls-dock": "شريط عناصر التحكم في المكالمة",
-        "video-call-waiting-room-knock": "غرفة الانتظار والطرق على الباب",
-        "video-call-incoming-call": "المكالمة الواردة",
-        "video-call-call-ended-summary": "ملخّص انتهاء المكالمة",
-        "video-call-captions-reactions": "التسميات والتفاعلات",
-        "video-call-join-link-dial-in": "رابط الانضمام والاتصال الهاتفي",
-        "video-call-upcoming-meetings": "الاجتماعات القادمة",
-        "video-call-ai-meeting-recap": "ملخّص الاجتماع بالذكاء الاصطناعي",
-        "video-call-hero-call-mockup": "واجهة رئيسية بمحاكاة مكالمة"
-      }
-    },
-    "footerBlocks": {
-      "lead": "أقسام تُغلق الصفحة: خرائط الموقع، وتذييلات العلامة، وأشرطة الدعوة، والأشرطة المصغّرة، وتخطيطات التواصل والدعم، والقانون والثقة، والتجارة، والمجتمع والوظائف، وتذييلات التطبيقات.",
-      "intro": "يُثبَّت كل قسم وحده. اعرضه بعرض سطح المكتب أو الجهاز اللوحي أو الهاتف، وبالاتجاهين. جديد على الكتل؟ ابدأ من <link>المقدّمة</link>.",
-      "filterLabel": "التصفية حسب العائلة",
-      "showing": "{count, plural, one {يُعرض نوع واحد} two {يُعرض نوعان} few {تُعرض {n} أنواع} many {يُعرض {n} نوعًا} other {يُعرض {n} نوع}}",
-      "families": {
-        "all": "الكل",
-        "sitemap": "خريطة الموقع والأدلة",
-        "brand": "قائمة على العلامة",
-        "cta": "الدعوة إلى الإجراء والاشتراك",
-        "bars": "أشرطة مصغّرة",
-        "contact": "التواصل والدعم",
-        "legal": "القانون والثقة",
-        "commerce": "التجارة",
-        "community": "المجتمع والوظائف",
-        "utility": "الأدوات والمنتج"
-      },
-      "types": {
-        "footer-four-column-directory": "دليل بأربعة أعمدة",
-        "footer-wide-sitemap-mega": "خريطة موقع واسعة",
-        "footer-accordion-sitemap": "خريطة موقع قابلة للطي",
-        "footer-two-tier-doormat": "خريطة موقع بطبقتين",
-        "footer-index-numbered-columns": "أعمدة مرقّمة",
-        "footer-brand-panel-split": "لوحة العلامة المقسومة",
-        "footer-giant-wordmark": "شعار عملاق",
-        "footer-image-backed-brand": "علامة بخلفية صورة",
-        "footer-centered-brand-minimal": "علامة مركزية مبسّطة",
-        "footer-marquee-strip": "شريط عبارات متحرك",
-        "footer-big-type-link-stack": "روابط بخط كبير",
-        "footer-bento-tile": "بلاطات بنتو",
-        "footer-cta-band-columns": "شريط دعوة مع أعمدة",
-        "footer-newsletter-split": "نشرة بريدية مع روابط",
-        "footer-floating-demo-card": "بطاقة عرض عائمة",
-        "footer-big-question-cta": "دعوة بسؤال كبير",
-        "footer-single-line-bar": "شريط بسطر واحد",
-        "footer-split-hairline-micro": "شريط مصغّر بخط رفيع",
-        "footer-two-row-compact": "شريط مدمج بصفين",
-        "footer-inline-preferences": "شريط مع التفضيلات",
-        "footer-contact-first": "التواصل أولًا",
-        "footer-support-contact": "الدعم والتواصل",
-        "footer-local-business": "نشاط تجاري محلي",
-        "footer-legal-first-slim": "شريط قانوني أولًا",
-        "footer-trust-compliance": "الثقة والامتثال",
-        "footer-ecommerce-mega": "تذييل المتجر الواسع",
-        "footer-service-promise-band": "شريط وعود الخدمة",
-        "footer-careers-culture": "الوظائف والثقافة",
-        "footer-community-events": "المجتمع والفعاليات",
-        "footer-dashboard-slim-bar": "شريط لوحة التحكم المصغّر",
-        "footer-docs-page": "تذييل صفحة توثيق",
-        "footer-multi-region": "مناطق متعددة",
-        "footer-product-family-switcher": "مبدّل عائلة المنتجات"
-      }
     }
   },
   "copyCommand": {
@@ -3730,6 +2857,7 @@
       "docs": "التوثيق",
       "components": "المكوّنات",
       "blocks": "الكتل",
+      "templates": "القوالب",
       "github": "GitHub",
       "lang": "English",
       "langLabel": "التبديل إلى الإنجليزية",
@@ -3915,55 +3043,53 @@
       }
     },
     "atoms": {
-      "title": "{variants} صيغة من المكوّنات الأساسية، جاهزة في Figma.",
-      "lede": "{atoms, plural, one {مكوّن أساسي واحد} two {مكوّنان أساسيان} few {{n} مكوّنات أساسية} many {{n} مكوّنًا أساسيًا} other {{n} مكوّن أساسي}}، لكل منها مجموعة مكوّنات في Figma بمقاساتها وحالاتها ومظهريها الفاتح والداكن، وباتجاهي الكتابة.",
-      "count": "{count, plural, few {{n} صيغ} other {{n} صيغة}}، بالاتجاهين",
-      "countLtr": "{count, plural, few {{n} صيغ} other {{n} صيغة}}، LTR فقط",
+      "title": "{count, plural, one {مكوّن واحد} two {مكوّنان} few {{n} مكوّنات} many {{n} مكوّنًا} other {{n} مكوّن}}، مجانية ومفتوحة المصدر.",
+      "lede": "المكوّنات الأساسية والتأثيرات الحركية في الحزمة مفتوحة المصدر، كلٌّ منها بالعربية والإنجليزية، وباتجاهي الكتابة، وبالمظهرين الفاتح والداكن.",
+      "effect": "تأثير",
       "foot": "TypeScript. نواة بترخيص MIT. مبنية على مكوّنات shadcn/ui الأساسية.",
       "names": {
-        "Button": "زر",
-        "Icon Button": "زر أيقونة",
-        "Radio": "زر الاختيار",
-        "Tooltip": "تلميح",
-        "Alert": "تنبيه",
-        "Breadcrumb": "مسار التنقل",
-        "Pagination": "ترقيم الصفحات",
-        "Badge": "شارة",
-        "Avatar": "صورة رمزية",
-        "Status Indicator": "مؤشر الحالة",
-        "Rating": "التقييم",
-        "Skeleton": "هيكل التحميل",
-        "Separator": "خط فاصل",
-        "Checkbox": "مربع اختيار",
-        "Switch": "مفتاح تبديل",
-        "Carousel": "عارض الشرائح",
-        "Content Carousel": "عارض المحتوى",
-        "Dialog": "نافذة منبثقة",
-        "Input": "حقل إدخال",
-        "Alert Dialog": "حوار التنبيه",
-        "Command Menu": "قائمة الأوامر",
-        "Table": "جدول",
-        "Sheet": "لوحة منزلقة",
-        "Textarea": "حقل نص طويل",
-        "Progress": "شريط التقدّم",
-        "Sidebar Item": "عنصر الشريط الجانبي",
-        "Slider": "شريط تحديد القيمة",
-        "OTP Input": "حقل الرمز",
-        "Calendar": "تقويم",
-        "Calendar View": "عرض التقويم",
-        "Date Picker": "منتقي التاريخ",
-        "Select": "حقل الاختيار",
-        "Input Number": "حقل رقمي",
-        "Sonner": "إشعار عابر",
-        "Accordion": "أكورديون",
-        "Popover": "نافذة منبثقة",
-        "Timeline": "خط زمني",
-        "Dropdown Menu": "قائمة منسدلة",
-        "Context Menu": "قائمة السياق",
-        "Toggle": "زر تبديل",
-        "Toggle Group": "مجموعة أزرار تبديل",
-        "Menubar": "شريط القوائم",
-        "Combobox": "حقل الاختيار بالبحث"
+        "accordion": "الأكورديون",
+        "alert": "تنبيه",
+        "alert-dialog": "حوار التنبيه",
+        "animated-gradient": "تدرّج متحرك",
+        "avatar": "صورة رمزية",
+        "badge": "شارة",
+        "border-beam": "شعاع الإطار",
+        "breadcrumb": "مسار التنقّل",
+        "button": "زر",
+        "calendar": "تقويم",
+        "card": "بطاقة",
+        "carousel": "عارض الشرائح",
+        "checkbox": "خانة الاختيار",
+        "combobox": "حقل الاختيار بالبحث",
+        "content-carousel": "عارض المحتوى",
+        "date-picker": "منتقي التاريخ",
+        "dialog": "نافذة منبثقة",
+        "dropdown-menu": "قائمة منسدلة",
+        "fasla-logo": "شعار فاصلة",
+        "glow-card": "بطاقة متوهجة",
+        "input": "حقل الإدخال",
+        "input-number": "حقل الإدخال الرقمي",
+        "input-otp": "حقل الرمز",
+        "pagination": "التنقّل بين الصفحات",
+        "progress": "شريط التقدم",
+        "radio": "زر الاختيار",
+        "select": "حقل الاختيار",
+        "sheet": "لوحة منزلقة",
+        "shimmer-button": "زر اللمعان",
+        "sidebar": "شريط جانبي",
+        "skeleton": "هيكل التحميل",
+        "slider": "شريط تحديد القيمة",
+        "social-icons": "أيقونات التواصل الاجتماعي",
+        "spotlight": "بقعة الضوء",
+        "status-indicator": "مؤشر الحالة",
+        "steps": "مؤشر الخطوات",
+        "switch": "مفتاح التبديل",
+        "tabs": "علامات التبويب",
+        "text-reveal": "ظهور النص",
+        "textarea": "منطقة النص",
+        "tooltip": "تلميح",
+        "typewriter-text": "نص الآلة الكاتبة"
       }
     },
     "blocks": {
@@ -4022,532 +3148,6 @@
           "name": "مجلة",
           "kind": "مجلة رقمية"
         }
-      }
-    },
-    "blk": {
-      "hero": {
-        "lg": "رحلة",
-        "ln": [
-          "الإقامة",
-          "التجارب",
-          "المجلة"
-        ],
-        "sg": "تسجيل الدخول",
-        "k": "موسم الشتاء، العُلا",
-        "h": "استيقظ\nفي الصحراء.",
-        "f": [
-          [
-            "الوجهة",
-            "العُلا، السعودية"
-          ],
-          [
-            "التاريخ",
-            "12 – 16 أكتوبر"
-          ],
-          [
-            "الضيوف",
-            "شخصان بالغان"
-          ]
-        ],
-        "go": "ابحث"
-      },
-      "price": {
-        "h": "خطط تكبر معك",
-        "seg": [
-          "شهري",
-          "سنوي"
-        ],
-        "save": "−20%",
-        "cur": "ر.س",
-        "per": "/ شهريًا",
-        "pop": "الأكثر طلبًا",
-        "t": [
-          [
-            "المبتدئة",
-            "0",
-            [
-              "متجر واحد",
-              "تحليلات أساسية",
-              "دعم عبر البريد"
-            ],
-            "ابدأ مجانًا"
-          ],
-          [
-            "الاحترافية",
-            "49",
-            [
-              "5 متاجر",
-              "مخزون مباشر",
-              "بالعربية والإنجليزية"
-            ],
-            "رقِّ خطتك"
-          ],
-          [
-            "الفرق",
-            "129",
-            [
-              "متاجر بلا حدود",
-              "أدوار ودخول موحّد",
-              "دعم مُقدَّم"
-            ],
-            "تواصل معنا"
-          ]
-        ]
-      },
-      "stats": {
-        "t": "الإيرادات",
-        "r": "آخر 30 يومًا",
-        "v": "184,320 ر.س",
-        "up": "+12.4%",
-        "k": [
-          [
-            "1,284",
-            "طلبًا"
-          ],
-          [
-            "3.8%",
-            "نسبة التحويل"
-          ]
-        ]
-      },
-      "prod": {
-        "h": "جديد المرسم",
-        "ch": [
-          "الكل",
-          "الأكواب",
-          "الأباريق",
-          "الأطقم"
-        ],
-        "p": [
-          [
-            "q-main",
-            "طقم أكواب طباشيري",
-            "460 ر.س",
-            "جديد"
-          ],
-          [
-            "q-pour",
-            "إبريق حليب",
-            "120 ر.س",
-            ""
-          ],
-          [
-            "q-sugar2",
-            "وعاء سكر",
-            "85 ر.س",
-            "الأكثر مبيعًا"
-          ]
-        ]
-      },
-      "cal": {
-        "m": "أكتوبر 2026",
-        "wd": [
-          "أحد",
-          "إثنين",
-          "ثلاثاء",
-          "أربعاء",
-          "خميس",
-          "جمعة",
-          "سبت"
-        ],
-        "n": "4 ليالٍ",
-        "p": "الإجمالي 5,000 ر.س",
-        "b": "احجز"
-      },
-      "chat": {
-        "who": "نورة، المضيفة",
-        "st": "متصلة الآن",
-        "m": [
-          "أهلًا خالد، الفيلا جاهزة ليوم الخميس.",
-          "ممتاز. هل يمكننا الوصول مبكرًا؟",
-          "نعم، من الساعة 1 ظهرًا. هذه تفاصيل إقامتك:"
-        ],
-        "card": [
-          "بيت الواحة",
-          "12 – 16 أكتوبر، ضيفان"
-        ],
-        "ph": "اكتب رسالة…"
-      },
-      "auth": {
-        "loc": "نُزل الوادي، العُلا",
-        "h": "مرحبًا بعودتك",
-        "p": "سجّل الدخول لإدارة رحلاتك.",
-        "l1": "البريد الإلكتروني",
-        "v1": "khalid@rihla.travel",
-        "l2": "كلمة المرور",
-        "rm": "تذكّرني",
-        "fg": "نسيتها؟",
-        "b": "تسجيل الدخول",
-        "or": "أو",
-        "b2": "أرسل لي رابط الدخول"
-      },
-      "ban": {
-        "k": "موسم الرياض",
-        "h": "تضيء المدينة بعد",
-        "cd": [
-          [
-            "03",
-            "أيام"
-          ],
-          [
-            "14",
-            "ساعة"
-          ],
-          [
-            "22",
-            "دقيقة"
-          ],
-          [
-            "09",
-            "ثانية"
-          ]
-        ],
-        "b": "احصل على التذاكر"
-      },
-      "faq": {
-        "h": "أسئلة وأجوبة",
-        "q": [
-          [
-            "هل يمكنني تغيير التاريخ؟",
-            "نعم، التغيير مجاني حتى 48 ساعة قبل الوصول."
-          ],
-          [
-            "هل الإفطار مشمول؟",
-            ""
-          ],
-          [
-            "هل توفّرون الاستقبال من المطار؟",
-            ""
-          ],
-          [
-            "كيف أدفع؟",
-            ""
-          ]
-        ]
-      },
-      "err": {
-        "h": "تهنا بين الكثبان.",
-        "p": "الصفحة التي تبحث عنها نُقلت أو لم تكن موجودة.",
-        "b": "العودة للرئيسية",
-        "b2": "تواصل معنا"
-      },
-      "feat": {
-        "h": "مصمّمة لإقامات حقيقية",
-        "p": "كل مكوّن يعمل بالعربية والإنجليزية.",
-        "t": [
-          [
-            "حجز فوري",
-            "تأكيد بلمسة واحدة"
-          ],
-          [
-            "85 مضيفًا موثّقًا",
-            "تحقّقنا منهم شخصيًا"
-          ],
-          [
-            "إشغال 92%",
-            "في موسم الشتاء هذا"
-          ]
-        ]
-      },
-      "toast": {
-        "t": [
-          [
-            "تم استلام الدفعة",
-            "3,750 ر.س من خالد",
-            "الآن"
-          ],
-          [
-            "تم تأكيد الحجز",
-            "بيت الواحة، 12 أكتوبر",
-            "دقيقتان"
-          ],
-          [
-            "الوصول غدًا",
-            "أُرسل رمز الباب برسالة",
-            "ساعة"
-          ]
-        ]
-      },
-      "gallery": {
-        "h": "لحظات من العُلا",
-        "ch": [
-          "الكل",
-          "الإقامة",
-          "المطاعم",
-          "الصحراء"
-        ],
-        "more": "عرض الكل",
-        "cap": [
-          [
-            "الكثبان عند الفجر",
-            "الصحراء"
-          ],
-          [
-            "بيت الواحة",
-            "الإقامة"
-          ],
-          [
-            "البلدة القديمة",
-            "استكشف"
-          ],
-          [
-            "قهوة الصباح",
-            "المطاعم"
-          ]
-        ]
-      },
-      "checkout": {
-        "lg": "بيت القهوة",
-        "h": "إتمام الشراء",
-        "st": [
-          "السلة",
-          "التوصيل",
-          "الدفع"
-        ],
-        "c": "التواصل",
-        "em": "sara@qahwa.house",
-        "d": "التوصيل",
-        "ad": "العليا، الرياض 12211",
-        "p": "الدفع",
-        "cn": "•••• •••• •••• 4821",
-        "ex": "08 / 28",
-        "cv": "•••",
-        "b": "ادفع 805 ر.س",
-        "it": [
-          [
-            "q-main",
-            "طقم أكواب طباشيري",
-            "460 ر.س"
-          ],
-          [
-            "q-pour",
-            "إبريق حليب × 2",
-            "240 ر.س"
-          ]
-        ],
-        "tot": [
-          [
-            "المجموع الفرعي",
-            "700 ر.س"
-          ],
-          [
-            "ضريبة القيمة المضافة 15%",
-            "105 ر.س"
-          ],
-          [
-            "الإجمالي",
-            "805 ر.س"
-          ]
-        ]
-      },
-      "dhero": {
-        "lg": "دار",
-        "ln": [
-          "شراء",
-          "إيجار",
-          "على الخريطة"
-        ],
-        "sg": "اعرض عقارك",
-        "k": "جديد هذا الأسبوع، مرسى دبي",
-        "h": "بيوت\nبإطلالة.",
-        "f": [
-          [
-            "الموقع",
-            "مرسى دبي"
-          ],
-          [
-            "النوع",
-            "شقة"
-          ],
-          [
-            "الميزانية",
-            "2–3 مليون درهم"
-          ]
-        ],
-        "go": "ابحث"
-      },
-      "ai": {
-        "lg": "مهام",
-        "tag": "المساعد",
-        "h": "ماذا نخطط اليوم؟",
-        "ph": "اطلب من مهام أن يخطط أو يكتب أو يلخّص…",
-        "ch": [
-          "خطّط أسبوعي",
-          "لخّص الاجتماع",
-          "اكتب ردًّا"
-        ],
-        "m": "الوضع السريع"
-      },
-      "dash": {
-        "lg": "سند",
-        "nav": [
-          "نظرة عامة",
-          "المدفوعات",
-          "البطاقات",
-          "الادخار"
-        ],
-        "t": "نظرة عامة",
-        "s": "صباح الخير يا خالد",
-        "range": "يناير – ديسمبر 2025",
-        "k": [
-          [
-            "الرصيد",
-            "184,320 ر.س",
-            "+4.2%"
-          ],
-          [
-            "الإنفاق الشهري",
-            "12,940 ر.س",
-            "−3.1%"
-          ],
-          [
-            "هدف الادخار",
-            "68%",
-            ""
-          ]
-        ],
-        "ch": "الرصيد حسب الشهر",
-        "mo": "ي,ف,م,أ,م,ي,ي,أ,س,أ,ن,د",
-        "tx": [
-          [
-            "p-noura",
-            "نورة آل سعود",
-            "+4,500"
-          ],
-          [
-            "p-khalid",
-            "خالد الحربي",
-            "−1,250"
-          ],
-          [
-            "p-faisal",
-            "فيصل القحطاني",
-            "+186"
-          ]
-        ]
-      },
-      "order": {
-        "h": "طلبك",
-        "n": "3 منتجات",
-        "it": [
-          [
-            "q-main",
-            "طقم أكواب طباشيري",
-            "رملي، 4 أكواب",
-            "460"
-          ],
-          [
-            "q-pour",
-            "إبريق حليب",
-            "الكمية 2",
-            "240"
-          ]
-        ],
-        "promo": "رمز الخصم",
-        "ap": "تطبيق",
-        "r": [
-          [
-            "المجموع الفرعي",
-            "700 ر.س"
-          ],
-          [
-            "التوصيل",
-            "مجاني"
-          ],
-          [
-            "ضريبة القيمة المضافة 15%",
-            "105 ر.س"
-          ]
-        ],
-        "tot": "الإجمالي",
-        "tv": "805 ر.س",
-        "b": "إتمام الشراء",
-        "sec": "دفع آمن"
-      },
-      "app": {
-        "lg": "بيت القهوة",
-        "k": "متوفر الآن على الجوال",
-        "h": "قهوتك الصباحية\nبلمسة واحدة.",
-        "p": "اطلب مسبقًا، وتجاوز الطابور، واستلم خلال دقيقتين.",
-        "b1": [
-          "حمّله على",
-          "iOS"
-        ],
-        "b2": [
-          "حمّله على",
-          "Android"
-        ],
-        "card": [
-          "لاتيه إسباني",
-          "جاهز خلال دقيقتين"
-        ],
-        "pr": "18 ر.س"
-      },
-      "mag": {
-        "lg": "مجلة",
-        "ln": [
-          "ثقافة",
-          "سفر",
-          "طعام",
-          "تصميم"
-        ],
-        "sb": "اشترك",
-        "k": "قصة الغلاف",
-        "h": "البلدة القديمة\nتستيقظ من جديد.",
-        "p": "في أزقّة العُلا الطينية، جيل جديد من الحرفيين يعود إليها.",
-        "by": "بقلم نورة آل سعود، قراءة في 8 دقائق",
-        "a": [
-          [
-            "f-coffee",
-            "طعام",
-            "فنجان قهوة كما يجب"
-          ],
-          [
-            "f-riyadh",
-            "مدينة",
-            "الرياض بعد الغروب"
-          ],
-          [
-            "f-oasis",
-            "تصميم",
-            "أفنية تحفظ البرودة"
-          ]
-        ]
-      },
-      "read": {
-        "h": "الأكثر قراءة هذا الأسبوع",
-        "it": [
-          [
-            "f-hero",
-            "سفر",
-            "الشروق فوق الحِجر دقيقةً بدقيقة",
-            "6 دقائق"
-          ],
-          [
-            "f-lodge",
-            "إقامة",
-            "ليلة في نُزل الوادي",
-            "5 دقائق"
-          ],
-          [
-            "f-dunes",
-            "صحراء",
-            "كيف تتحرك الكثبان",
-            "4 دقائق"
-          ],
-          [
-            "f-cupset",
-            "تصميم",
-            "خزّافو الرياض الجديدة",
-            "7 دقائق"
-          ]
-        ]
-      },
-      "news": {
-        "h": "رسالة الأحد",
-        "p": "رسالة واحدة كل أسبوع: أماكن وطعام وتصميم من المنطقة، بالعربية والإنجليزية.",
-        "ph": "بريدك الإلكتروني",
-        "b": "اشترك"
       }
     },
     "launch": {
@@ -4701,7 +3301,7 @@
         },
         {
           "q": "هل فاصلة مجانية؟",
-          "a": "نعم. النواة مرخّصة بـ MIT ومجانية دائمًا للمشاريع الشخصية والتجارية. أما Pro فبـ 149 دولارًا و Team بـ 399 دولارًا، بدفعة واحدة ووصول دائم إلى الكتل والقوالب المميزة وملف Figma. <link>اطّلع على الخطط</link>."
+          "a": "نعم. النواة مرخّصة بـ MIT ومجانية دائمًا للمشاريع الشخصية والتجارية. أما Pro فبـ 149 يورو و Team بـ 349 يورو، بدفعة واحدة ووصول دائم إلى الكتل والقوالب المميزة وملف Figma. <link>اطّلع على الخطط</link>."
         },
         {
           "q": "كيف أضيفها إلى مشروعي؟",
@@ -4752,7 +3352,7 @@
           "مشاريع تجارية بلا حدود",
           "كل ما في الخطة المفتوحة",
           "جميع الكتل والقوالب المميزة",
-          "ملف Figma الخاص بفاصلة بـ{variants} صيغة",
+          "ملف Figma الخاص بفاصلة",
           "وصول دائم وتحديثات مجانية",
           "دعم خلال 48 ساعة عمل"
         ]
@@ -4764,7 +3364,7 @@
           "حتى 10 مقاعد",
           "مشاريع تجارية بلا حدود",
           "كل ما في Pro",
-          "ملف Figma لكل مقعد",
+          "ملف Figma مشترك لجميع المقاعد",
           "وصول دائم وتحديثات مجانية",
           "دعم ذو أولوية خلال 24 ساعة عمل"
         ]
@@ -4791,9 +3391,11 @@
       "meta": "قريبًا | فاصلة",
       "badge": "قيد التطوير",
       "title": "قريبًا",
-      "lede": "القوالب وخطة Pro وخطة Team في الطريق. المكوّنات مفتوحة المصدر وأولى الكتل والتوثيق جاهزة للاستخدام اليوم.",
+      "lede": "القوالب وخطة Pro وخطة Team في الطريق. المكوّنات مفتوحة المصدر والتوثيق جاهزة للاستخدام اليوم.",
       "docs": "اقرأ التوثيق",
-      "home": "العودة إلى الرئيسية"
+      "home": "العودة إلى الرئيسية",
+      "notify": "أبلغني عند إطلاق Pro",
+      "notifySubject": "أبلغني عند إطلاق فاصلة Pro"
     }
   }
 }

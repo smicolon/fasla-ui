@@ -18,7 +18,7 @@ export function listCommand() {
   return new Command()
     .name("list")
     .description("List available components")
-    .option("-t, --type <type>", "Filter by type (ui, block, effect)")
+    .option("-t, --type <type>", "Filter by type (ui, effect)")
     .action(async (options) => {
       const spinner = ora("Fetching components...").start()
 
@@ -36,18 +36,18 @@ export function listCommand() {
 
       let items = registry.items
 
+      // The registry types effects as registry:ui too; their category tells them apart.
+      const kindOf = (item: (typeof items)[number]) =>
+        item.categories?.includes("effects") ? "effect" : item.type.replace("registry:", "")
+
       if (options.type) {
-        const typeFilter = `registry:${options.type}`
-        items = items.filter((item) =>
-          item.type === options.type || item.type === typeFilter
-        )
+        items = items.filter((item) => kindOf(item) === options.type.replace("registry:", ""))
       }
 
-      // Group by type
+      // Group by kind
       const grouped = items.reduce(
         (acc, item) => {
-          // Normalize type (remove registry: prefix if present)
-          const type = item.type.replace("registry:", "")
+          const type = kindOf(item)
           if (!acc[type]) {
             acc[type] = []
           }
@@ -59,12 +59,11 @@ export function listCommand() {
 
       const typeLabels: Record<string, string> = {
         ui: "UI Primitives",
-        block: "App Blocks",
         effect: "Effects & Animations",
       }
 
       for (const [type, typeItems] of Object.entries(grouped)) {
-        console.log(chalk.cyan.bold(`${typeLabels[type] || type}`))
+        console.log(chalk.cyan.bold(`${typeLabels[type] || type} (${typeItems.length})`))
         for (const item of typeItems) {
           const name = item.name.padEnd(20)
           const desc = item.description || ""

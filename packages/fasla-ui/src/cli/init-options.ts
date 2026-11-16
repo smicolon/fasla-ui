@@ -43,8 +43,19 @@ export function nonInteractiveInitMessage(missing: string[]): string {
   return [
     "Error: init asks questions, and stdin is not a terminal, so there is nobody to answer.",
     `Pass ${flags.length === 1 ? "this flag" : "these flags"}: ${flags.join(", ")}.`,
-    "Example: npx @smicolon/fasla-ui@latest init --yes",
+    "Example: npx @smicolon/fasla-ui@latest init --yes --theme fasla",
     "Example: npx @smicolon/fasla-ui@latest init --path src/components --style default --theme fasla",
+    "Nothing was written.",
+  ].join("\n")
+}
+
+/** What to print, then exit 1, when `add` has no terminal and no component names. */
+export function nonInteractiveAddNamesMessage(): string {
+  return [
+    "Error: add asks which components to add, and stdin is not a terminal, so there is nobody to answer.",
+    "Name them: npx @smicolon/fasla-ui@latest add button card --yes",
+    // --all still asks to confirm, so it needs --yes as well.
+    "Or add every component: npx @smicolon/fasla-ui@latest add --all --yes",
     "Nothing was written.",
   ].join("\n")
 }

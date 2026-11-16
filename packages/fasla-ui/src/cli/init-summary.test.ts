@@ -49,4 +49,13 @@ describe("describeChanges", () => {
     const lines = describeChanges({ ...input, layout: undefined, before: same, after: same, themeCommand: "npx shadcn …" }).join("\n")
     expect(lines).toMatch(/unchanged\s+src\/app\/globals\.css — the theme is not installed yet/)
   })
+
+  it("lists tailwind.config on Tailwind 3, which the theme items change", () => {
+    const before = { "components.json": undefined, "src/lib/utils.ts": undefined, "app/globals.css": "a", "package.json": "{}", "tailwind.config.ts": "export default { content: [] }" }
+    const after = { ...before, "tailwind.config.ts": "export default { content: [], darkMode: [\"class\"], theme: { extend: { colors: {} } } }" }
+    const lines = describeChanges({ ...input, css: "app/globals.css", layout: undefined, tailwindConfig: "tailwind.config.ts", before, after }).join("\n")
+    expect(lines).toMatch(/changed\s+tailwind\.config\.ts — adds Fasla's theme for Tailwind 3/)
+    // Unchanged, it isn't listed.
+    expect(describeChanges({ ...input, layout: undefined, tailwindConfig: "tailwind.config.ts", before, after: before }).join("\n")).not.toContain("tailwind.config")
+  })
 })

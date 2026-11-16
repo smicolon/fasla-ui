@@ -78,6 +78,7 @@ export default function InputPage() {
       <section className="space-y-4">
         <h2 className="text-2xl font-semibold">{t("installation")}</h2>
         <InstallCommand name="input" />
+        <p className="text-muted-foreground">{i.rich("installNote", richCode)}</p>
       </section>
 
       {/* Preview */}

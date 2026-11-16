@@ -67,6 +67,8 @@ export function Combobox({
   removeLabel = (label) => `Remove ${label}`,
 }: ComboboxProps) {
   const [open, setOpen] = React.useState(false)
+  // The input names the list it controls, as the combobox role requires.
+  const listboxId = React.useId()
   const [search, setSearch] = React.useState("")
   const [highlightedIndex, setHighlightedIndex] = React.useState(0)
   const inputRef = React.useRef<HTMLInputElement>(null)
@@ -234,6 +236,7 @@ export function Combobox({
           className="flex-1 bg-transparent outline-none placeholder:text-muted-foreground"
           aria-expanded={open}
           aria-haspopup="listbox"
+          aria-controls={open ? listboxId : undefined}
           role="combobox"
         />
         <button
@@ -271,6 +274,7 @@ export function Combobox({
           {/* Options list */}
           <ul
             ref={listRef}
+            id={listboxId}
             role="listbox"
             className="max-h-60 overflow-auto p-1"
           >
@@ -328,6 +332,8 @@ export function Combobox({
                 {showCreate && (
                   <li
                     role="option"
+                    // An action, never a selected value.
+                    aria-selected={false}
                     data-highlighted={highlightedIndex === filteredOptions.length}
                     onClick={handleCreate}
                     className={cn(

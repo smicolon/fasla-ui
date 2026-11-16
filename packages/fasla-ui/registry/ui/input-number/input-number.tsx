@@ -10,8 +10,8 @@ import { Button } from "../button/button"
 import { inputBoxVariants, inputLabelClassName, inputLabelRowClassName, type InputStatus } from "../input/input"
 
 /*
- * Figma: "Input Number" (39043:1432, 100 variants) and its internal "Input
- * Number Button" (46381:5702).
+ * Figma: "Input Number" (100 variants) and its internal "Input
+ * Number Button".
  *
  * Built on Base UI's Field and NumberField, which own the behaviour: parsing
  * and formatting, `min` / `max` / `step`, ArrowUp / ArrowDown (Shift and Alt

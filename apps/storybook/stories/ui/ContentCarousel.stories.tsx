@@ -7,7 +7,7 @@ import {
 } from "../../../../packages/fasla-ui/registry/ui/content-carousel"
 
 /**
- * Figma: Content Carousel (15769:74332). `Type` (Single box, Two boxes,
+ * Figma: Content Carousel. `Type` (Single box, Two boxes,
  * Three boxes) is `itemsPerView`; the arrows are Icon Buttons; Direction is
  * the toolbar. Every story follows the Direction and Theme toolbars, except
  * Light and Dark and Directions, which show both at once.
@@ -68,7 +68,7 @@ type Story = StoryObj<StoryArgs>
  * Sample copy, per script.
  *
  * Only the *rendered values* change — prop names stay English everywhere.
- * The Arabic follows design/content/: real situations (customer words, a
+ * The Arabic shows real situations (customer words, a
  * photo tour), never placeholders, and the arrows take the locale's names.
  */
 const COPY = {

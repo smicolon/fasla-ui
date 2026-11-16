@@ -13,7 +13,7 @@ function strings(value, key = "") {
 const ar = strings(JSON.parse(readFileSync(path.join(docsRoot, "messages/ar.json"), "utf8")))
 const seoRoutes = readFileSync(path.join(docsRoot, "lib/seo-routes.ts"), "utf8")
 
-// Rules from design/content/arabic-writing-guide.md.
+// The Arabic writing rules for punctuation and spelling.
 describe("Arabic punctuation and spelling", () => {
   // Both are bidi-neutral and break direction inside Arabic text.
   test("uses no em dash or middle dot in any Arabic string", () => {

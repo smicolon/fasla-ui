@@ -94,7 +94,7 @@ type Story = StoryObj<StoryArgs>
 
 /**
  * Sample copy, per script: the same account actions as the docs page. Only the
- * labels change; the Arabic follows design/content/.
+ * labels change; the Arabic is Modern Standard Arabic.
  */
 const COPY = {
   ltr: {

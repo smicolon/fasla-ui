@@ -8,8 +8,8 @@ import { Button } from "../../../../packages/fasla-ui/registry/ui/button"
 import { cn } from "../../../../packages/fasla-ui/src/lib/utils"
 
 /**
- * Figma: "Standard Calendar" (15117:6294), 8 types × LTR/RTL, and its "Time
- * and Days" part (42278:36791). Four types are props — `mode`,
+ * Figma: "Standard Calendar", 8 types × LTR/RTL, and its "Time
+ * and Days" part. Four types are props — `mode`,
  * `numberOfMonths`, `captionLayout` and `radius` — and three are compositions:
  * time slots, presets and a form. Direction is the toolbar. Every story
  * follows the Direction and Theme toolbars, except Light and Dark and

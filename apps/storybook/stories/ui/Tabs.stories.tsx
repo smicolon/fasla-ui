@@ -30,7 +30,7 @@ type Story = StoryObj<typeof TabsList>
 /**
  * Sample copy, per script: account settings and orders, as on the docs page.
  * Only the rendered text changes — prop names stay English everywhere. The
- * Arabic follows design/content/ and matches the docs site.
+ * Arabic is Modern Standard Arabic and matches the docs site.
  */
 const COPY = {
   ltr: {

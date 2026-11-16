@@ -20,8 +20,8 @@ import { Input } from "../../../../packages/fasla-ui/registry/ui/input"
 import { Radio } from "../../../../packages/fasla-ui/registry/ui/radio"
 
 /**
- * Figma: "Dialog" (38975:3887), with "Dialog Header" (38975:3913) and
- * "Footer Actions" (38975:3834). Size and the close button are props of
+ * Figma: "Dialog", with "Dialog Header" and
+ * "Footer Actions". Size and the close button are props of
  * `DialogContent`; the Back header type is `onBack` on `DialogHeader`; the
  * footer's layout is `layout` on `DialogFooter`, and its actions are Buttons.
  * Direction is the toolbar. Every story follows the Direction and Theme
@@ -139,8 +139,8 @@ type Story = StoryObj<StoryArgs>
 
 /**
  * Sample copy, per script. Only the rendered text changes — prop names stay
- * English everywhere. The Arabic is written in Modern Standard Arabic from
- * design/content/, not translated.
+ * English everywhere. The Arabic is written in Modern Standard Arabic,
+ * not translated.
  */
 const COPY = {
   ltr: {

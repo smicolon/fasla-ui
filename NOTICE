@@ -1,0 +1,90 @@
+Fasla UI
+Copyright (c) 2025-2026 Smicolon GmbH
+
+The source code in this repository is licensed under the MIT License (see
+LICENSE). The Fasla and Smicolon names, logos and brand marks, the landing
+film, the Fasla Pro preview pictures, and the Wall of Love customer marks
+are not; see below. This file
+lists the fonts, icons, brand marks and images the repository uses or
+contains, and where each comes from. Third-party npm packages are listed
+with their own licences in each package.json and in bun.lock.
+
+FONTS
+
+The repository uses three typefaces and no others. None of the font files
+is stored in this repository.
+
+  Geist and Geist Mono
+    Copyright (c) 2023 Vercel, in collaboration with basement.studio.
+    SIL Open Font License 1.1.
+    The docs site and Storybook load them from the `geist` npm package.
+
+  Cairo
+    Copyright 2009 The Cairo Project Authors
+    (https://github.com/Gue3bara/Cairo). SIL Open Font License 1.1.
+    The docs site loads it through next/font/google; Storybook and the
+    `font-cairo` registry item load it from @fontsource-variable/cairo.
+
+ICONS
+
+  Lucide
+    Copyright (c) 2026 Lucide Icons and Contributors. ISC License.
+    Icons derived from the Feather project: Copyright (c) 2013-present Cole
+    Bemis, MIT License. Used through the `lucide-react` npm package; the
+    icon files are not stored in this repository.
+
+  Fasla's own icons
+    Every other icon in the repository is drawn for Fasla by Smicolon GmbH
+    and is licensed with the code: the glyphs of the landing page's
+    components table, the docs site's own icons, and the artwork of the
+    Social Icons component.
+
+  Platform marks in Social Icons
+    packages/fasla-ui/registry/ui/social-icons/ draws the marks of 32
+    platforms (Apple, Google, GitHub, Slack, Zoom and others). The drawings
+    are Fasla's own; each mark is a trademark of its owner and is shown only
+    to refer to that platform.
+
+BRAND MARKS
+
+  Fasla and Smicolon names, logos and brand marks
+    apps/docs/public/brand/*, packages/fasla-ui/registry/ui/fasla-logo/,
+    favicon.ico, smicolon-icon.png, Logo-dark.svg, Logo-light.svg, and the
+    Fasla and Smicolon names wherever they appear.
+    All rights reserved by Smicolon GmbH. They are NOT licensed under the MIT
+    License: the MIT License covers the code, not the names, logos or brand
+    marks, and does not permit using them to identify another product.
+
+PHOTOS
+
+  Unsplash
+    The five photographs are from Unsplash and are used under the Unsplash
+    License (https://unsplash.com/license):
+      - apps/docs/public/landing/img/p-faisal.webp, p-khalid.webp and
+        p-noura.webp: the portraits on the landing page.
+      - apps/docs/public/landing/img/f-dunes.webp: the AlUla dunes behind
+        the Arabic word on the landing page.
+      - apps/docs/public/samples/avatar-portrait.png: the sample portrait in
+        the Avatar docs and the Storybook stories.
+
+  Wall of Love testimonials
+    apps/docs/public/landing/img/wall/*: one photo and 13 company logos of
+    Smicolon's own customers, as published with their testimonials on
+    smicolon.com. They are third-party customer marks and pictures, shown
+    with Smicolon's permission. They are NOT licensed under the MIT License;
+    each remains the property of its owner.
+
+  Fasla Pro previews
+    apps/docs/public/landing/pro/*: the pictures of the Fasla Pro blocks and
+    templates on the home page, in English and Arabic, light and dark.
+    All rights reserved by Smicolon GmbH. They are NOT licensed under the MIT
+    License: the MIT License covers the code, not these pictures or the blocks
+    and templates they show. The pictures include photographs from Unsplash,
+    used under the Unsplash License; the Smicolon GmbH reservation applies to
+    the compositions, not to those photographs.
+
+  Landing film
+    apps/docs/public/landing/media/*: the Fasla product film and its posters,
+    in English and Arabic, produced by Smicolon GmbH.
+    All rights reserved by Smicolon GmbH. They are NOT licensed under the MIT
+    License: the MIT License covers the code, not the film or its posters.

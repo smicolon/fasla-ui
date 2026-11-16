@@ -7,7 +7,7 @@ import { cva } from "class-variance-authority"
 import { cn } from "../../../src/lib/utils"
 
 /*
- * Figma: Slider (40500:60632), 42 variants.
+ * Figma: Slider, 42 variants.
  *
  * Built on Base UI's Slider, which owns the behaviour: a `slider` role on a
  * real range input in each thumb, `aria-valuenow` / `aria-valuemin` /

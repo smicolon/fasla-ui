@@ -10,7 +10,7 @@ import {
 } from "../../../../packages/fasla-ui/registry/ui/input-otp"
 
 /**
- * Figma: OTP Input (40465:54984) and its slot, Otp Input Item (15097:22526).
+ * Figma: OTP Input and its slot, Otp Input Item.
  * Figma's `Type` axis is a way of composing the parts, not a prop, mirrored
  * here so the set can be walked through: Simple, Digits only, With
  * Separator and With Spacing, with Figma's own names. The slot's states are

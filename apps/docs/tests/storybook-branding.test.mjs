@@ -29,7 +29,7 @@ describe("Storybook product identity", () => {
     expect(managerHtml).toContain('property="og:title"')
     expect(managerHtml).toContain('name="twitter:card"')
     expect(managerSource).toContain('brandTitle: "Fasla Component Explorer"')
-    expect(managerSource).toContain(`brandUrl: "${canonical}"`)
+    expect(managerSource).toContain('brandUrl: "/"')
   })
 
   test("keeps previews public without a competing canonical", async () => {

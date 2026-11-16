@@ -121,7 +121,7 @@ export default async function InstallationPage({
               tabIndex={0}
               className="overflow-x-auto whitespace-pre rounded-lg bg-terminal p-4 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-fasla-red"
             >
-              <code className="font-mono text-sm text-green-400">{"npx @smicolon/fasla-ui@latest init --yes\nnpx @smicolon/fasla-ui@latest init --path src/components --style default --theme fasla\nnpx @smicolon/fasla-ui@latest add button --yes"}</code>
+              <code className="font-mono text-sm text-green-400">{"npx @smicolon/fasla-ui@latest init --yes --theme fasla\nnpx @smicolon/fasla-ui@latest init --path src/components --style default --theme fasla\nnpx @smicolon/fasla-ui@latest add button --yes"}</code>
             </pre>
             <p className="text-muted-foreground mt-2">{i.rich("cliFlagsEnd", flagCode)}</p>
           </div>
@@ -158,8 +158,8 @@ export default async function InstallationPage({
         {/* Said plainly, before anyone adds a component to a shadcn project. */}
         <p className="rounded-lg border border-border p-4 text-sm">{i.rich("themeReplaces", rich)}</p>
 
-        {/* The one way Fasla inverts a surface. Linked from the Blocks
-            introduction and from each inverse block's manual steps. */}
+        {/* The inverse tokens: what they paint, where the mapping comes from,
+            and how to add it by hand. */}
         <div className="space-y-4">
           <h3 id="inverse-tokens" className="scroll-mt-24 text-xl font-semibold">
             {i("inverseTitle")}

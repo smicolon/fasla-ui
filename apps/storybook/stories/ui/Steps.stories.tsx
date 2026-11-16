@@ -9,8 +9,8 @@ import {
 } from "../../../../packages/fasla-ui/registry/ui/steps"
 
 /**
- * Figma: Steps / Step item (405:7832), assembled into Steps Horizontal
- * (3793:70328) and Steps Vertical (3793:70403). Orientation and Radius are
+ * Figma: Steps / Step item, assembled into Steps Horizontal
+ * and Steps Vertical. Orientation and Radius are
  * props on `Steps`; Status is a prop on each `StepsItem`; Has tail is never a
  * prop, since every step but the last draws one; Step Icon is `icon`; Sub
  * Text is `description`; Direction is the toolbar. Every story follows the
@@ -85,7 +85,7 @@ export default meta
 type Story = StoryObj<StoryArgs>
 
 /**
- * Sample copy, per script: a checkout, written from design/content/, not
+ * Sample copy, per script: a checkout, written in Modern Standard Arabic, not
  * translated. Digits stay Western in Arabic.
  */
 const COPY = {

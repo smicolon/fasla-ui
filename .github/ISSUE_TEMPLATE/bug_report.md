@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Something in FASLA UI is not working as documented
+about: Something in Fasla UI is not working as documented
 title: '[Bug] '
 labels: bug
 assignees: ''

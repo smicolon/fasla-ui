@@ -41,12 +41,14 @@ vi.mock("./registry", async (importOriginal) => {
     { name: "badge", type: "registry:ui", files: [{ path: "registry/ui/badge/badge.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/badge): https://fasla.smicolon.com\nimport { cn } from "@/lib/utils"\nexport const Badge = () => cn("x")\n` }] },
     // Its dependency on badge points at ui.smicolon.com, as the published registry's do.
     { name: "chip", type: "registry:ui", registryDependencies: ["https://ui.smicolon.com/r/badge.json"], files: [{ path: "registry/ui/chip/chip.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/chip): https://fasla.smicolon.com\nexport const Chip = () => null\n` }] },
-    // A block on an inverted surface: it needs theme-inverse, a theme item
+    // An item on an inverted surface: it needs theme-inverse, a theme item
     // published beside the components but not in the index.
     { name: "dark-block", type: "registry:block", registryDependencies: ["https://ui.smicolon.com/r/theme-inverse.json"], files: [{ path: "registry/blocks/dark-block/DarkBlock.tsx", type: "registry:block", target: "components/blocks/dark-block.tsx", content: `// From Fasla UI (@fasla/dark-block): https://fasla.smicolon.com\nexport const DarkBlock = () => null\n` }] },
     // Depends on a URL under our registry that names no component and no
     // theme item: a dependency removed or misspelt, not a theme item.
     { name: "ghost-block", type: "registry:block", registryDependencies: ["https://ui.smicolon.com/r/badge.json", "https://ui.smicolon.com/r/ghost.json"], files: [{ path: "registry/blocks/ghost-block/GhostBlock.tsx", type: "registry:block", target: "components/blocks/ghost-block.tsx", content: `// From Fasla UI (@fasla/ghost-block): https://fasla.smicolon.com\nexport const GhostBlock = () => null\n` }] },
+    // An effect: a registry:ui item whose category says what it is.
+    { name: "shine", type: "registry:ui", categories: ["effects", "text"], files: [{ path: "registry/effects/shine/shine.tsx", type: "registry:ui", target: "", content: `// From Fasla UI (@fasla/shine): https://fasla.smicolon.com\nexport const Shine = () => null\n` }] },
     // Broken registry entries, for what add says when a component writes nothing.
     { name: "hollow", type: "registry:ui", files: [] },
     { name: "blank", type: "registry:ui", files: [{ path: "registry/ui/blank/blank.tsx", type: "registry:ui", target: "", content: "" }] },
@@ -104,7 +106,7 @@ let interactive = true
 vi.mock("./tty", () => ({ isInteractive: () => interactive }))
 
 const { createProgram } = await import("./program")
-const { installCnPackages, rangeStaysBelow3 } = await import("./commands/init")
+const { initCommand, installCnPackages, rangeStaysBelow3 } = await import("./commands/init")
 const { beginLegacyRepair, executeJournal, LOCK_FILE, planLegacyRepair, REPAIR_FILE } = await import("./legacy")
 const { addExample } = await import("./commands/list")
 
@@ -265,7 +267,7 @@ describe("init", () => {
     const out = output()
     expect(out).toContain(`Warning: "@/" is not set up in this Vite app`)
     expect(out).toContain('"paths": { "@/*": ["./src/*"] }')
-    expect(out).toContain('resolve: { alias: { "@": path.resolve(__dirname, "./src") } },')
+    expect(out).toContain('resolve: { alias: { "@": fileURLToPath(new URL("./src", import.meta.url)) } },')
     expect(out).toContain("bun add -d @types/node")
     expect(out).toContain("bun add clsx tailwind-merge")
     // It sets up src/, which is where those changes point "@/".
@@ -281,6 +283,15 @@ describe("init", () => {
     expect(out).toContain('"paths": { "@/*": ["./src/*"] }')
     expect(out).toContain("Nothing was written.")
     expect(await tree(dir)).toEqual(before)
+  })
+
+  it("without a terminal and without --yes, says so: the message doesn't claim --yes was passed", async () => {
+    interactive = false
+    const dir = await viteApp()
+    await expect(run("init", "--path", "src/components", "--style", "default", "--theme", "fasla", "--no-install", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    const out = output()
+    expect(out).toContain("Without questions (--yes, or no terminal) the CLI won't write files under a guessed folder.")
+    expect(out).not.toContain("With --yes the CLI")
   })
 
   it("stops a --yes run in any project whose tsconfig doesn't map @/", async () => {
@@ -307,7 +318,7 @@ describe("init", () => {
     // --yes never resumes a plan it hasn't shown: it says how, and changes nothing.
     const halfway = await tree(dir)
     await expect(run("init", "--yes", "--no-install", "--cwd", dir)).rejects.toThrow("process.exit(1)")
-    expect(output()).toContain("Run the command without --yes to review and resume it")
+    expect(output()).toContain("Run the command in a terminal without --yes to review and resume it")
     expect(output()).toContain(`or delete ${REPAIR_FILE} to abandon it`)
     expect(await tree(dir)).toEqual(halfway)
 
@@ -609,6 +620,31 @@ describe("add", () => {
     expect(await tree(dir)).toEqual(before)
   })
 
+  it("answers a Fasla Pro name with a coming-soon notice and the pricing link, and exits normally", async () => {
+    const dir = await nextApp({ "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" } }) })
+    const before = await tree(dir)
+    await expect(run("add", "hero-split-image", "--yes", "--cwd", dir)).rejects.toThrow("process.exit(0)")
+    expect(output()).toContain("hero-split-image is part of Fasla Pro, coming soon.")
+    expect(output()).toContain("Pricing: https://fasla.smicolon.com/en/#pricing")
+    expect(output()).not.toContain("Unknown components")
+    expect(output()).not.toContain("No valid components")
+    expect(await tree(dir)).toEqual(before)
+  })
+
+  it("adds the free names and gives the notice for the Pro ones in the same run", async () => {
+    const dir = await nextApp({ "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" } }) })
+    await run("add", "badge", "data-table", "--yes", "--no-install", "--cwd", dir)
+    expect(output()).toContain("data-table is part of Fasla Pro, coming soon.")
+    expect(await fs.pathExists(path.join(dir, "components/ui/badge.tsx"))).toBe(true)
+  })
+
+  it("still calls a name that is neither free nor Pro unknown, and fails", async () => {
+    const dir = await nextApp({ "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" } }) })
+    await expect(run("add", "buton", "faq-dark-panel", "--yes", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(output()).toContain("faq-dark-panel is part of Fasla Pro, coming soon.")
+    expect(output()).toContain("Unknown components: buton")
+  })
+
   it("leaves a 0.3 project untouched when the registry can't be fetched", async () => {
     registryDown = true
     const dir = await legacyProject()
@@ -811,6 +847,17 @@ describe("list", () => {
   })
 })
 
+describe("init --help", () => {
+  it("shows a --yes example for a new project, and says --primary decides the theme under --yes", () => {
+    let text = ""
+    const command = initCommand().configureOutput({ writeOut: (s) => void (text += s) })
+    command.outputHelp()
+    expect(text).toContain("npx @smicolon/fasla-ui@latest init --yes --theme fasla\n")
+    expect(text).not.toMatch(/init --yes\n/)
+    expect(text).toContain("the theme default is decided by --primary")
+  })
+})
+
 describe("init: the theme", () => {
   const withColours = (extra: Record<string, string> = {}) =>
     nextApp({ "app/globals.css": `@import "tailwindcss";\n:root {\n  --primary: #ff0066;\n}\n`, ...extra })
@@ -832,14 +879,15 @@ describe("init: the theme", () => {
     const dir = await nextApp({ "app/globals.css": `@import "tailwindcss";\n` })
     await run("init", "--no-install", "--cwd", dir)
     const brand = prompted.find((q) => q.name === "theme")!.choices!.find((c) => c.value === "brand")!
-    expect(brand.title).toBe("I have a brand: keep my colours (app/globals.css has no colours yet, so the components would have none)")
+    expect(brand.title).toBe("I have a brand: keep my colours (app/globals.css sets no --primary, so the components would have no colours)")
   })
 
   it("keeps the project's colours under --yes: base theme only, and says how to switch", async () => {
     const dir = await withColours()
     await run("init", "--yes", "--cwd", dir, "--no-install")
-    expect(output()).toContain("app/globals.css has its own colours, so they are kept: installing the base theme only.")
-    expect(output()).toContain("npx @smicolon/fasla-ui@latest init --theme fasla")
+    expect(output()).toContain("app/globals.css sets its own --primary, so its colours are kept: installing the base theme only.")
+    // A command that works without a terminal, as the run it follows did.
+    expect(output()).toContain("To use Fasla's colours instead: npx @smicolon/fasla-ui@latest init --yes --theme fasla\n")
     expect(output()).toContain("npx shadcn@latest add @fasla/theme-base")
     expect(asked.map((q) => q.name)).not.toContain("theme")
   })
@@ -847,8 +895,26 @@ describe("init: the theme", () => {
   it("installs Fasla's colours under --yes only when the project has none", async () => {
     const dir = await nextApp({ "app/globals.css": `@import "tailwindcss";\n`, "package.json": JSON.stringify({ dependencies: { next: "16", clsx: "^2", "tailwind-merge": "^3" } }) })
     await run("init", "--yes", "--cwd", dir)
-    expect(output()).toContain("app/globals.css has no colours yet, so it gets Fasla's.")
+    expect(output()).toContain("app/globals.css sets no --primary, so it gets Fasla's colours.")
     expect(themesApplied).toEqual([{ cwd: dir, choice: "fasla" }])
+  })
+
+  it("gives a fresh create-next-app stylesheet Fasla's colours under --yes: --background and --foreground are no palette", async () => {
+    const css = `@import "tailwindcss";\n\n:root {\n  --background: #ffffff;\n  --foreground: #171717;\n}\n`
+    const dir = await nextApp({ "app/globals.css": css, "package.json": JSON.stringify({ dependencies: { next: "16", clsx: "^2", "tailwind-merge": "^3" } }) })
+    await run("init", "--yes", "--cwd", dir)
+    expect(themesApplied).toEqual([{ cwd: dir, choice: "fasla" }])
+    expect(output()).toContain("app/globals.css sets no --primary, so it gets Fasla's colours.\n")
+    // No rerun with --theme brand: there are no colours to keep, and after this
+    // run that command would change nothing.
+    expect(output()).not.toContain("--theme brand")
+    expect(output()).not.toContain("To keep its colours")
+  })
+
+  it("repeats --path and --style in the command it prints, so the rerun writes the same components.json", async () => {
+    const dir = await withColours()
+    await run("init", "--yes", "--path", "src/ui kit", "--style", "new-york", "--cwd", dir, "--no-install")
+    expect(output()).toContain('npx @smicolon/fasla-ui@latest init --yes --theme fasla --path "src/ui kit" --style new-york')
   })
 
   it("replaces the project's colours only when --theme fasla says so", async () => {
@@ -1021,6 +1087,90 @@ describe("add: files of the same name from another library", () => {
     expect(output()).toContain("Added nothing.\nNot added:\n  button: button.tsx is already there")
     expect(output()).not.toContain("Components added successfully!")
     expect(output()).not.toContain("Import them in your code:")
+  })
+
+  it("without a terminal and without names, stops and says how to name them, instead of drawing the picker to a pipe", async () => {
+    interactive = false
+    const dir = await nextApp({
+      "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }),
+    })
+    const before = await tree(dir)
+    await expect(run("add", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    expect(output()).toContain("Error: add asks which components to add, and stdin is not a terminal")
+    expect(output()).toContain("npx @smicolon/fasla-ui@latest add button card --yes")
+    expect(output()).toContain("Or add every component: npx @smicolon/fasla-ui@latest add --all --yes")
+    expect(prompted.map((q) => q.name)).not.toContain("selected")
+    expect(await tree(dir)).toEqual(before)
+  })
+
+  it("without a terminal, every add command the no-name error suggests runs as printed", async () => {
+    interactive = false
+    const config = { aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }
+    const dir = await nextApp({ "components.json": JSON.stringify(config) })
+    await expect(run("add", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    const suggested = [...output().matchAll(/npx @smicolon\/fasla-ui@latest (add[^\n,]*)/g)].map((m) => m[1]!.trim())
+    expect(suggested).toEqual(["add button card --yes", "add --all --yes"])
+    // --all alone still stops for confirmation: the reason the suggestion carries --yes.
+    await expect(run("add", "--all", "--cwd", dir)).rejects.toThrow("process.exit(1)")
+    for (const command of suggested) {
+      const fresh = await nextApp({ "components.json": JSON.stringify(config) })
+      await run(...command.split(" "), "--cwd", fresh)
+      expect(await fs.pathExists(path.join(fresh, "components/ui/button.tsx")), command).toBe(true)
+    }
+  })
+
+  it("labels an effect as an effect in the picker, not by its registry type", async () => {
+    const dir = await nextApp({
+      "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }),
+    })
+    await expect(run("add", "--cwd", dir)).rejects.toThrow("process.exit(0)")
+    const titles = prompted.find((q) => q.name === "selected")!.choices!.map((c) => (c as { title: string }).title.replace(/\x1b\[[0-9;]*m/g, ""))
+    expect(titles).toContain("shine (effect)")
+    expect(titles).toContain("button (ui)")
+  })
+
+  it("asks to add the components by name, and says the ones they use come too, rather than a count too low", async () => {
+    const dir = await nextApp({
+      "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }),
+    })
+    await run("add", "chip", "--cwd", dir)
+    expect(prompted.find((q) => q.name === "confirm")!.message).toBe("Add chip, and the components it uses?")
+    // chip brought badge with it.
+    expect(await fs.pathExists(path.join(dir, "components/ui/badge.tsx"))).toBe(true)
+    prompted.length = 0
+    await run("add", "button", "tabs", "--cwd", dir)
+    expect(prompted.find((q) => q.name === "confirm")!.message).toBe("Add button and tabs, and the components they use?")
+  })
+
+  it("says a component another one uses is already there, without a warning or a Not added list", async () => {
+    const dir = await nextApp({
+      "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }),
+    })
+    await run("add", "badge", "--yes", "--cwd", dir)
+    logs = []
+    // The spinner writes to stderr.
+    let spinner = ""
+    vi.spyOn(process.stderr, "write").mockImplementation(((chunk: string | Uint8Array) => {
+      spinner += String(chunk)
+      return true
+    }) as typeof process.stderr.write)
+    await run("add", "chip", "--yes", "--cwd", dir)
+    const text = output() + spinner.replace(/\x1b\[[0-9;]*[A-Za-z]/g, "")
+    expect(text).toContain("badge: badge.tsx is already there")
+    expect(text).toContain("Added 1 component(s) (badge already there)")
+    expect(text).not.toContain("already exists, skipping")
+    expect(text).not.toContain("Not added:")
+    expect(text).toContain("Components added successfully!")
+  })
+
+  it("still warns about a component that was asked for and is already there", async () => {
+    const dir = await nextApp({
+      "components.json": JSON.stringify({ aliases: { components: "@/components", utils: "@/lib/utils" }, registries: { "@fasla": "x/{name}" } }),
+    })
+    await run("add", "badge", "--yes", "--cwd", dir)
+    logs = []
+    await run("add", "badge", "--yes", "--cwd", dir)
+    expect(output()).toContain("Added nothing.\nNot added:\n  badge: badge.tsx is already there")
   })
 
   it("names the real reason a component wrote nothing: no files, or no content", async () => {

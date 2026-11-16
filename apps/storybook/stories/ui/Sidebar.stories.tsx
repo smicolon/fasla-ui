@@ -26,8 +26,8 @@ import {
 } from "../../../../packages/fasla-ui/registry/ui/sidebar"
 
 /**
- * Figma: "Side Bar" (40503:333), Direction × State × Plan card, and "Side Bar
- * Inside Item" (40492:58601), State × Sub-item × Direction with the Icon,
+ * Figma: "Side Bar", Direction × State × Plan card, and "Side Bar
+ * Inside Item", State × Sub-item × Direction with the Icon,
  * Badge and Have sub-items booleans. Direction is the toolbar. Every story
  * follows the Direction and Theme toolbars, except Light And Dark and LTR And
  * RTL, which show both at once.

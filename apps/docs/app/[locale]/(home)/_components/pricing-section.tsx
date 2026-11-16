@@ -3,12 +3,9 @@ import { getLocale, getTranslations } from "next-intl/server"
 import { Badge } from "@fasla-ui/ui/badge/badge"
 import { Button } from "@fasla-ui/ui/button/button"
 import { Card } from "@fasla-ui/ui/card/card"
-import { atomCounts } from "@/lib/atoms"
 import { cn } from "@/lib/utils"
 import { landingLinks } from "./links"
 import { SectionHead, Stroked } from "./section-head"
-
-const fmt = new Intl.NumberFormat("en-US")
 
 /** Features a plan does not include, by plan: struck through and dimmed. */
 const MISSING: Record<string, number[]> = { os: [5, 6], pro: [], team: [] }
@@ -17,18 +14,18 @@ const MISSING: Record<string, number[]> = { os: [5, 6], pro: [], team: [] }
  * "Free to start. Pay once for more." Three plans on the Fasla Card: the MIT
  * core, Pro and Team, one-time payments. Pro is raised and marked best value.
  *
- * Prices are final for the landing page (5 Oct). The Pro and Team buttons go
- * where links.ts sends them, pending Mohamed's decision; the component and
- * variant counts in the lists are read from the registry and the Figma index.
+ * Prices are in euro only, the sign before the number in both languages. The
+ * Pro and Team buttons go where links.ts sends them, the Coming soon page until
+ * there is a checkout. The component count is read from the registry.
  */
 export async function PricingSection({ components }: { components: number }) {
   const locale = await getLocale()
   const t = await getTranslations("landing.pricing")
 
   const plans = [
-    { id: "os", price: "$0", per: t("free"), cta: t("start"), href: landingLinks.docs(locale), best: false },
-    { id: "pro", price: "$149", per: t("once"), cta: t("choosePro"), href: landingLinks.pro(locale), best: true },
-    { id: "team", price: "$399", per: t("once"), cta: t("chooseTeam"), href: landingLinks.team(locale), best: false },
+    { id: "os", price: "€0", per: t("free"), cta: t("start"), href: landingLinks.docs(locale), best: false },
+    { id: "pro", price: "€149", per: t("once"), cta: t("choosePro"), href: landingLinks.pro(locale), best: true },
+    { id: "team", price: "€349", per: t("once"), cta: t("chooseTeam"), href: landingLinks.team(locale), best: false },
   ]
 
   return (
@@ -72,7 +69,7 @@ export async function PricingSection({ components }: { components: number }) {
                         </svg>
                         <span className={cn(missing && "line-through decoration-current decoration-1")}>
                           {missing && <span className="sr-only">{t("notIncluded")}: </span>}
-                          {t(`${plan.id}.features.${i}`, { count: String(components), variants: fmt.format(atomCounts.variants) })}
+                          {t(`${plan.id}.features.${i}`, { count: String(components) })}
                         </span>
                       </li>
                     )

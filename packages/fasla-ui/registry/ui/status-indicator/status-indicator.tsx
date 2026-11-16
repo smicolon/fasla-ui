@@ -3,7 +3,7 @@ import { cva } from "class-variance-authority"
 import { cn } from "../../../src/lib/utils"
 
 /**
- * Built against the Figma `Status Indicator` set (323:390): Type × Size, 8
+ * Built against the Figma `Status Indicator` set: Type × Size, 8
  * variants. Every colour below is the token the set binds.
  *
  * The dot has no Direction axis: it is a circle, so there is nothing to mirror.

@@ -2,7 +2,7 @@ import * as React from "react"
 import { cn } from "../../../src/lib/utils"
 
 /**
- * Built from the Figma `Social Icons` set (40334:57763): 32 platforms ×
+ * Built from the Figma `Social Icons` set: 32 platforms ×
  * `Color` Original / Negative, 24×24, with the paths exported from Figma
  * unchanged.
  *

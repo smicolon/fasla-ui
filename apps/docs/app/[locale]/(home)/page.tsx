@@ -7,7 +7,6 @@ import { registryCounts } from "@/lib/registry"
 import { AnnotatedCard } from "./_components/annotated-card"
 import { ArabicWord } from "./_components/arabic-word"
 import { AtomsTable } from "./_components/atoms-table"
-import { BlocksGrid } from "./_components/blocks-grid"
 import { AgentPromptCompact } from "./_components/agent-prompt"
 import { CommandBand } from "./_components/command-band"
 import { FaqSection } from "./_components/faq-section"
@@ -21,11 +20,11 @@ import { LandingNav } from "./_components/landing-nav"
 import { MirrorCompare } from "./_components/mirror-compare"
 import { ParityPlayground } from "./_components/parity-playground"
 import { PricingSection } from "./_components/pricing-section"
+import { ProBlocksShowcase, ProTemplatesShowcase } from "./_components/pro-showcase"
 import { ReviewWall } from "./_components/review-wall"
 import { installCommand, landingLinks } from "./_components/links"
 import { FlipSettled } from "./_components/locale-flip"
 import { SanadWindow } from "./_components/sanad-window"
-import { TemplatesSection } from "./_components/templates-section"
 import { TypeSpecimen } from "./_components/type-specimen"
 import { XrayStage } from "./_components/xray-stage"
 
@@ -101,19 +100,23 @@ export default async function HomePage({
 
             <DirectionSwitch label={t("hero.swLabel")} />
 
-            <div className="mt-7 flex flex-wrap justify-center gap-3 [view-transition-name:hero-cta]">
-              <CopyCommand
-                command={installCommand}
-                className="h-12 rounded-[10px] border-foreground/15 bg-background py-0 max-[560px]:w-full max-[560px]:justify-between"
-              />
-              <Button asChild size="lg" className="h-12 rounded-[10px] px-[22px] text-[15px] max-[560px]:w-full">
-                <Link href={landingLinks.docs(locale)}>
-                  {t("cta.start")}
-                  <ArrowEndIcon />
-                </Link>
-              </Button>
+            {/* One shrink-to-fit box for the install row and the agent prompt, so the
+                prompt button is exactly as wide as the row, and still is when the row stacks. */}
+            <div className="mx-auto w-fit max-w-full">
+              <div className="mt-7 flex flex-wrap justify-center gap-3 [view-transition-name:hero-cta]">
+                <CopyCommand
+                  command={installCommand}
+                  className="h-12 rounded-[10px] border-foreground/15 bg-background py-0 max-[560px]:w-full max-[560px]:justify-between"
+                />
+                <Button asChild size="lg" className="h-12 rounded-[10px] px-[22px] text-[15px] max-[560px]:w-full">
+                  <Link href={landingLinks.docs(locale)}>
+                    {t("cta.start")}
+                    <ArrowEndIcon />
+                  </Link>
+                </Button>
+              </div>
+              <AgentPromptCompact className="mt-3" />
             </div>
-            <AgentPromptCompact className="mt-3" />
           </div>
 
           <XrayStage label={t("hero.xray")} windowLabel={t("sanad.label")}>
@@ -131,8 +134,8 @@ export default async function HomePage({
         <TypeSpecimen />
         <MirrorCompare />
         <AtomsTable />
-        <BlocksGrid />
-        <TemplatesSection />
+        <ProBlocksShowcase />
+        <ProTemplatesShowcase />
         <ArabicWord />
         <ParityPlayground pageDir={localeDirection[locale as Locale]} />
         <AnnotatedCard components={registryCounts.total} />

@@ -54,3 +54,130 @@ describe("Usage examples on component pages", () => {
     expect(offenders).toEqual([])
   })
 })
+
+// What a reader copies first works in a new project, which has no images of
+// its own: no file it would have to supply, unless the example says so.
+describe("Usage examples in a new project", () => {
+  const page = (name) => pages.find((p) => p.name === name).source
+  const messages = (lang) => JSON.parse(readFileSync(path.join(docsRoot, `messages/${lang}.json`), "utf8")).docs
+
+  test("Sidebar draws its logo with the free Fasla Logo, installed with it, and asks for no image file", () => {
+    const source = page("sidebar")
+    for (const code of examplesOf(source)) {
+      expect(code).not.toMatch(/src=["{]["']?\//)
+      if (code.includes("<FaslaLogo")) expect(code).toContain('import { FaslaLogo } from "@/components/ui/fasla-logo"')
+    }
+    expect(examplesOf(source)[0]).toContain("<FaslaLogo")
+    expect(source).toContain('<InstallCommand name="sidebar fasla-logo" />')
+    expect(messages("en").sidebar.installNote).toContain("<code>fasla-logo</code>")
+    expect(messages("ar").sidebar.installNote).toContain("<code>fasla-logo</code>")
+  })
+
+  test("Avatar's first example needs no image; the photo examples say the path is the reader's own", () => {
+    const examples = examplesOf(page("avatar"))
+    expect(examples[0]).not.toMatch(/src=|photo:/)
+    const withPhoto = examples.filter((code) => code.includes("/avatars/"))
+    expect(withPhoto.length).toBeGreaterThan(0)
+    for (const code of withPhoto) expect(code).toContain('// ${a("usage.photoPath")}')
+    expect(messages("en").avatar.usage.photoPath).toBeTruthy()
+    expect(messages("ar").avatar.usage.photoPath).toBeTruthy()
+  })
+
+  test("Progress's example renders as copied, without a value passed in", () => {
+    const [code] = examplesOf(page("progress"))
+    expect(code).toMatch(/\{ value = \d+ \}: \{ value\?: number \}/)
+  })
+})
+
+
+// Every component an example imports comes with the page's own add command,
+// and an example that leans on something else says so in its first lines.
+describe("Usage examples and the page's add command", () => {
+  const messages = (lang) => JSON.parse(readFileSync(path.join(docsRoot, `messages/${lang}.json`), "utf8")).docs
+  const registry = JSON.parse(readFileSync(path.join(docsRoot, "../../packages/fasla-ui/registry.json"), "utf8"))
+  const deps = new Map(registry.items.map((item) => [item.name, (item.registryDependencies ?? []).map((d) => d.replace(/^.*\/|\.json$/g, ""))]))
+  /** The components `add` writes for these names: them, and what they use. */
+  const closure = (names) => {
+    const seen = new Set()
+    const walk = (name) => {
+      if (seen.has(name)) return
+      seen.add(name)
+      for (const dep of deps.get(name) ?? []) walk(dep)
+    }
+    names.forEach(walk)
+    return seen
+  }
+  /** The names in the page's install step: <InstallCommand name="…"> or a written `add …`. */
+  const addNames = (source) => {
+    const m = source.match(/<InstallCommand name="([^"]+)"/) ?? source.match(/fasla-ui@latest add ([a-z0-9 -]+)`/)
+    return m ? m[1].trim().split(/\s+/) : []
+  }
+
+  test("every page has an add command naming only registry items", () => {
+    for (const { name, source } of pages) {
+      const names = addNames(source)
+      expect(names.length, name).toBeGreaterThan(0)
+      for (const item of names) expect(deps.has(item), `${name}: ${item}`).toBe(true)
+    }
+  })
+
+  test("every component an example imports is installed by the page's add command", () => {
+    const missing = pages.flatMap(({ name, source }) => {
+      const have = closure(addNames(source))
+      return examplesOf(source).flatMap((code) =>
+        [...code.matchAll(/from "@\/components\/ui\/([\w-]+)"/g)].map((m) => m[1]).filter((ui) => !have.has(ui)).map((ui) => `${name}: ${ui}`)
+      )
+    })
+    expect([...new Set(missing)]).toEqual([])
+  })
+
+  test("a page whose examples need more than its component names the extras in its install note, English and Arabic", () => {
+    const docs = { en: messages("en"), ar: messages("ar") }
+    const key = (name) => name.replace(/-(\w)/g, (_, c) => c.toUpperCase())
+    for (const { name, source } of pages) {
+      const [own, ...extras] = addNames(source)
+      if (own !== name) continue
+      for (const extra of extras) {
+        for (const lang of ["en", "ar"]) expect(docs[lang][key(name)].installNote, `${lang} ${name}: ${extra}`).toContain(`<code>${extra}</code>`)
+      }
+    }
+  })
+
+  test("a package an example imports comes with the page's add command, or its install note names it", () => {
+    const docs = { en: messages("en"), ar: messages("ar") }
+    const key = (name) => name.replace(/-(\w)/g, (_, c) => c.toUpperCase())
+    const brought = (names) => new Set([...closure(names)].flatMap((item) => registry.items.find((i) => i.name === item)?.dependencies ?? []).map((d) => d.replace(/(.)@.*$/, "$1")))
+    for (const { name, source } of pages) {
+      const have = brought(addNames(source))
+      for (const code of examplesOf(source)) {
+        for (const [, spec] of code.matchAll(/from "([^"./@][^"]*|@[^"/]+\/[^"/]+)[^"]*"/g)) {
+          // react comes with every project; next is the Next.js-only case above.
+          if (spec === "react" || spec.startsWith("next")) continue
+          if (have.has(spec)) continue
+          for (const lang of ["en", "ar"]) expect(docs[lang][key(name)]?.installNote ?? "", `${lang} ${name}: ${spec}`).toContain(`<code>${spec}</code>`)
+        }
+      }
+    }
+  })
+
+  test("an example that imports from Next.js says it is for Next.js only", () => {
+    for (const { name, source } of pages) {
+      for (const code of examplesOf(source)) {
+        const first = code.split("\n").find((line) => /from "next\//.test(line))
+        if (first) expect(first, name).toMatch(/ \/\/ \$\{e\("nextOnly"\)\}$/)
+      }
+    }
+    // Short enough to stay on the import line, inside the code block.
+    expect(messages("en").examples.nextOnly).toBe("Next.js only")
+    expect(messages("ar").examples.nextOnly).toBe("لمشاريع Next.js فقط")
+  })
+
+  test("an example that names an image file says the image is the reader's own", () => {
+    for (const { name, source } of pages) {
+      for (const code of examplesOf(source)) {
+        if (!/["'`]\/[\w\-./]+\.(?:png|jpe?g|svg|webp|gif|avif)["'`]/.test(code)) continue
+        expect(code, name).toMatch(/\/\/ \$\{(e\("photos?Path"\)|a\("usage\.photoPath"\))\}/)
+      }
+    }
+  })
+})

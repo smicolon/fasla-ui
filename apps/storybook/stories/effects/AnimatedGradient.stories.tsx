@@ -26,8 +26,8 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 /**
- * Sample copy, per script: the same store as the docs page. The Arabic follows
- * design/content/. Colours are theme variables, so every story follows light
+ * Sample copy, per script: the same store as the docs page. The Arabic is
+ * Modern Standard Arabic. Colours are theme variables, so every story follows light
  * and dark mode.
  */
 const COPY = {
@@ -62,7 +62,7 @@ const COOL = ["var(--chart-2)", "var(--chart-3)", "var(--chart-2)", "var(--chart
 /**
  * Storybook lists a story's own args first in the controls table, so the
  * other rows are named here, unset, ahead of `className`: that keeps
- * `className` the last row (the agent instructions file, "Storybook controls table"). Unset is
+ * `className` the last row. Unset is
  * what they are anyway, so nothing in the preview or the table changes.
  */
 export const Default: Story = {

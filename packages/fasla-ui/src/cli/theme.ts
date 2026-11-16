@@ -100,30 +100,33 @@ export async function detectProjectStyle(cwd: string, aliasRoot: string): Promis
 }
 
 /**
- * Whether a stylesheet already sets any of shadcn's colour tokens — the
- * project's own colours, or the stock ones `shadcn init` wrote. Either way
- * they are the project's, and only an explicit choice replaces them.
+ * Whether a stylesheet sets a colour palette of its own: a `--primary`
+ * token, as every shadcn theme and brand palette does. A fresh project's
+ * stylesheet doesn't: create-next-app sets only `--background` and
+ * `--foreground`, and Vite's template only demo variables, none of which
+ * colour a component. Comments are ignored.
  */
-export function hasColourTokens(css: string): boolean {
-  return /--(background|foreground|primary|secondary|muted|accent|destructive|border|input|ring)\s*:/.test(css)
+export function hasPalette(css: string): boolean {
+  return /--primary\s*:/.test(css.replace(/\/\*[\s\S]*?\*\//g, ""))
 }
 
 /**
  * The layer to install without asking: what `--theme` says, or with `--yes`
- * the one that changes no colours the project has — Fasla's only when there
- * are none to replace. Undefined means ask.
+ * the one `--primary` decides. A stylesheet that sets it keeps its colours;
+ * one that doesn't gets Fasla's, since its components would have no colours
+ * otherwise. Undefined means ask.
  */
 export function themeWithoutAsking({
   flag,
   yes,
-  hasColours,
+  hasPalette,
 }: {
   flag?: string
   yes: boolean
-  hasColours: boolean
+  hasPalette: boolean
 }): ThemeChoice | undefined {
   if (flag === "fasla" || flag === "brand") return flag
-  if (yes) return hasColours ? "brand" : "fasla"
+  if (yes) return hasPalette ? "brand" : "fasla"
   return undefined
 }
 
@@ -157,7 +160,7 @@ export function applyTheme(cwd: string, choice: ThemeChoice, project: { nextMajo
 
 /**
  * The command that installs theme items a component depends on — theme-inverse
- * for a block on an inverted surface — as `add` runs it. By URL, so it works
+ * for content on an inverted surface — as `add` runs it. By URL, so it works
  * whether or not components.json names the @fasla registry.
  */
 export function themeItemsCommand(urls: string[]): string {

@@ -7,10 +7,10 @@ import { describe, expect, it } from "vitest"
 import { semanticColor, tailwindSemanticColors } from "./tailwind"
 
 /**
- * Guards the token contract: Figma "☾ Mode" → design/tokens/mode.json → both
+ * Guards the token contract: Figma "☾ Mode" → packages/fasla-ui/theme/tokens/mode.json → both
  * apps' `globals.css` → the shared Tailwind mapping.
  *
- * Figma is the source of truth. `design/tokens/mode.json` is the committed
+ * Figma is the source of truth. `packages/fasla-ui/theme/tokens/mode.json` is the committed
  * record of what it said at the last sync, and these tests fail if either app
  * stops agreeing with it. When Figma genuinely moves, re-read the collection,
  * update the snapshot, and regenerate the two sentinel blocks — do not "fix"
@@ -31,7 +31,7 @@ type Snapshot = {
 }
 
 const snap: Snapshot = JSON.parse(
-  readFileSync(resolve(REPO, "design/tokens/mode.json"), "utf8")
+  readFileSync(resolve(REPO, "packages/fasla-ui/theme/tokens/mode.json"), "utf8")
 )
 const NAMES = Object.keys(snap.tokens)
 const RADII = Object.keys(snap.radius)

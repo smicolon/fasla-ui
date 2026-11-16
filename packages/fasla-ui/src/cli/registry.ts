@@ -30,7 +30,7 @@ export const NAMESPACE = "@fasla"
 /**
  * The theme items the registry publishes beside the components but keeps out
  * of the index: CSS and fonts, installed with the shadcn CLI. A component may
- * depend on one (a block on an inverted surface needs theme-inverse), and
+ * depend on one (content on an inverted surface needs theme-inverse), and
  * `add` installs those. Fixed here because the CLI ships without the token
  * files theme/theme-items.mjs builds them from; a test holds the two equal.
  */

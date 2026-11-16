@@ -33,7 +33,7 @@ import { Avatar } from "../../../../packages/fasla-ui/registry/ui/avatar"
 import { cn } from "../../../../packages/fasla-ui/src/lib/utils"
 
 /**
- * Figma: "Dropdown" (3969:51446), with "Dropdown Item" (46229:3337),
+ * Figma: "Dropdown", with "Dropdown Item",
  * "Dropdown Label" and "Dropdown Separator" on the same page. The set's
  * Variants are compositions of the parts, so each core one is a story here,
  * under a short name: Basic Dropdown is Basic, Avatar Heading is With Avatar,

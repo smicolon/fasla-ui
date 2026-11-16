@@ -28,7 +28,7 @@ type Story = StoryObj<typeof Switch>
  *
  * Only the *rendered values* change — prop names stay English everywhere,
  * because they are code identifiers and the argTypes table documents the API,
- * not the sample. The Arabic follows design/content/: a real situation (a
+ * not the sample. The Arabic shows a real situation (a
  * settings screen), never a placeholder, and it matches the docs site.
  *
  * The long strings deliberately avoid digits, colons and dashes: those are

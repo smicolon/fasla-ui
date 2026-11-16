@@ -4,7 +4,7 @@
 [![npm downloads](https://img.shields.io/npm/dm/@smicolon/fasla-ui.svg)](https://www.npmjs.com/package/@smicolon/fasla-ui)
 [![license](https://img.shields.io/npm/l/@smicolon/fasla-ui.svg)](https://github.com/smicolon/fasla-ui/blob/main/LICENSE)
 
-Arabic-first React components and blocks, built on shadcn/ui. RTL by default, bilingual by design.
+Arabic-first React components, built on shadcn/ui. RTL by default, bilingual by design.
 
 Fasla (فاصلة) is a design system for React. Layouts use logical properties, so
 a component mirrors under `dir="rtl"` with no extra classes, and the theme
@@ -15,11 +15,11 @@ so the code is yours to change.
 ## Features
 
 - **Arabic-first, RTL by default** - Logical properties throughout, so layouts mirror under `dir="rtl"`
-- **29 Components** - 14 UI primitives, 8 app blocks and 7 animated effects
+- **42 Components** - 35 UI primitives and 7 animated effects
 - **Themes** - Fasla's palette, or keep your brand's colours and add only the base layer
 - **shadcn Compatible** - Works seamlessly with existing shadcn/ui projects
 - **Tailwind CSS** - Utility-first styling with full customization
-- **Framer Motion** - Animated effects that respect `prefers-reduced-motion`
+- **Motion** - Animated effects, on the `framer-motion` package, that respect `prefers-reduced-motion`
 - **TypeScript** - Full type safety and IntelliSense
 - **Design Tokens** - Consistent spacing, colors, and density profiles
 - **Accessible** - Keyboard navigation and visible focus styles on form controls
@@ -37,6 +37,17 @@ npx @smicolon/fasla-ui@latest add button card shimmer-button
 
 Keep `@latest`: without it, npx runs the copy of this package a project already
 has installed, and 0.4 or older has no CLI.
+
+Without a terminal (an agent or a CI job), `init` asks nothing: pass `--yes`
+and the theme. In a new project:
+
+```bash
+npx @smicolon/fasla-ui@latest init --yes --theme fasla
+```
+
+Under `--yes`, the theme default is decided by `--primary`: a stylesheet that
+sets it keeps its colours (`brand`), and one that doesn't gets Fasla's
+(`fasla`).
 
 `add` ends by installing the packages the components import, with your
 project's package manager, and skips any the project already has at a
@@ -62,68 +73,59 @@ pnpm add @smicolon/fasla-ui
 
 ## Components
 
-### UI Primitives
+### UI Primitives (35)
 Core building blocks with CVA variants for consistent styling:
 
 | Component | Description |
 |-----------|-------------|
-| **Button** | Multiple variants (default, destructive, outline, secondary, ghost, link) with loading state |
-| **Input** | Text input with validation states and icon support |
-| **Input Number** | A number field with step buttons in five layouts, min and max limits, and Western digits in every language |
-| **OTP Input** | A one-time code field with a slot per character, in four layouts, with SMS autofill and paste |
-| **Textarea** | Multi-line text field that grows with its text, with a label, helper text and a counter |
-| **Select** | Dropdown selection with search |
-| **Calendar** | A month calendar for one day or a range, across up to three months, mirrored for RTL |
-| **Date Picker** | A date field on Select's trigger that opens a Calendar, for one day or a range |
-| **Dropdown Menu** | A menu of actions, checkboxes, radio choices and submenus, opened from a button |
-| **Checkbox** | Checkbox with label and description |
-| **Radio** | Single choice from a set, as a plain control or a bordered card |
-| **Switch** | Toggle switch with multiple sizes |
-| **Slider** | Choose a value or a range by dragging a thumb along a track, in three sizes |
-| **Steps** | A display-only stepper for multi-step flows, horizontal or vertical, with done, current and upcoming steps |
-| **Tabs** | Tabbed navigation with animations |
-| **Accordion** | Headings that show or hide their content, in four styles |
-| **Alert Dialog** | A modal that asks the user to confirm or cancel an action |
-| **Sheet** | A panel that slides in from an edge of the screen, with a pinned footer and a scrolling body |
-| **Dialog** | A modal for a focused task or form, in three widths, with a back button, pinned header and footer, and scrolling content |
-| **Badge** | Status indicators and labels |
-| **Breadcrumb** | A trail of links to the current page, with chevron or custom separators and a collapsed form |
-| **Alert** | Messages for information, success, warnings and errors, with an action and a close button |
-| **Pagination** | Page links built on Button, with Previous, Next and an ellipsis, in three variants |
-| **Avatar** | User avatars with fallback initials |
-| **Status Indicator** | Presence dot with a language-aware accessible name |
-| **Card** | Flexible content containers |
-| **Skeleton** | Loading placeholders |
-| **Combobox** | Searchable select with autocomplete |
-| **Carousel** | Scroll-snap slides with a dot stepper |
-| **Content Carousel** | Card browser with previous/next arrows and 1-3 slots per view |
+| **Accordion** | Stacked headings that each show or hide a section of content |
+| **Alert** | A message box for information, success, warnings and errors |
+| **Alert Dialog** | A modal dialog on Base UI that asks the user to confirm or cancel an action |
+| **Avatar** | A user's photo, initials or icon, in three sizes and two radii, with an optional border and presence dot |
+| **Badge** | A compact inline label for status, category or metadata |
+| **Breadcrumb** | A composable trail of links to the current page |
+| **Button** | A button in five types (solid, soft, outline, ghost, link) and three tones, four sizes and the matching icon-button sizes, two radii, and a loading state |
+| **Calendar** | A month calendar on react-day-picker |
+| **Card** | A card component with header, content, and footer sections |
+| **Carousel** | A scroll-snap carousel with a dot stepper |
+| **Checkbox** | An accessible checkbox for binary selections with controlled state |
+| **Combobox** | A searchable combobox with single or multiple selection |
+| **Content Carousel** | A horizontal card browser with previous and next arrows, showing one, two or three content slots per view |
+| **Date Picker** | A date field on Base UI's Popover |
+| **Dialog** | A modal dialog on Base UI for focused tasks and forms |
+| **Dropdown Menu** | A menu of actions on Base UI, opened from a button |
+| **Fasla Logo** | The Fasla logo |
+| **Input** | A text field with a label, helper labels, start and end icons, success and invalid states, four sizes and two radii |
+| **Input Number** | A number field with step buttons in five layouts, Input's success, invalid and disabled states, min and max limits, and Western digits in every language, mirrored for RTL |
+| **OTP Input** | A one-time code field on input-otp, with a slot per character in groups, separators or spaced slots |
+| **Pagination** | A composable row of page links built on Button |
+| **Progress** | A determinate progress bar in three sizes, with an optional percentage label, that fills from the inline start and mirrors for RTL |
+| **Radio** | An accessible radio for choosing one option from a set, with a plain and a bordered layout variant |
+| **Select** | A select field on Base UI |
+| **Sheet** | A panel on Base UI that slides in from an edge of the screen |
+| **Sidebar** | App navigation that collapses to icons |
+| **Skeleton** | Loading placeholders that replace shadcn's Skeleton |
+| **Slider** | A slider on Base UI for one value or a range, in three track sizes with a 16px thumb |
+| **Social Icons** | Brand marks for 32 platforms, from Google and Apple to Slack and Zoom, in their own colours, one quiet muted colour, or the text colour around them |
+| **Status Indicator** | A presence dot — online, away, busy or offline — with an accessible name in the page's language, so colour never carries the status alone |
+| **Steps** | A display-only stepper for multi-step flows |
+| **Switch** | An accessible switch for on-off settings |
+| **Tabs** | Accessible, keyboard-navigable tabs (also called pills) |
+| **Textarea** | A multi-line text field that grows with its text, with a label, helper text, a character counter, and success and invalid states |
+| **Tooltip** | A short hint on hover or keyboard focus |
 
-### App Blocks
-Pre-built page compositions for rapid development:
-
-| Component | Description |
-|-----------|-------------|
-| **AppShell** | Application layout with sidebar and header |
-| **PageHeader** | Title, breadcrumbs, and action buttons |
-| **DataTable** | Tables with selection, loading and empty states; pair with Pagination |
-| **FormSection** | Grouped form fields with validation |
-| **EmptyState** | Empty content placeholders with CTAs |
-| **Sidebar** | Collapsible navigation sidebar |
-| **Navbar** | 17 navigation bars (`navbar-*`), from a logo and links to floating pills and a shop header |
-| **StatsCard** | Metric display cards |
-
-### Effects
-Animated components for visual flair (powered by Framer Motion):
+### Effects (7)
+Animated components for visual flair; five of them use Motion (the `framer-motion` package):
 
 | Component | Description |
 |-----------|-------------|
-| **ShimmerButton** | Button with animated shimmer effect |
-| **AnimatedGradient** | Smooth gradient background animations |
-| **BorderBeam** | Animated border glow effect |
-| **Spotlight** | Cursor-following spotlight |
-| **TextReveal** | Text reveal on scroll |
-| **GlowCard** | Card with hover glow effect |
-| **TypewriterText** | Typewriter text animation |
+| **Animated Gradient** | Animated gradient background and text effects |
+| **Border Beam** | Animated border beam and glowing border effects |
+| **Glow Card** | Card with a cursor-following glow on hover |
+| **Shimmer Button** | A button with animated shimmer effect |
+| **Spotlight** | Cursor-following spotlight effect |
+| **Text Reveal** | Character and word reveal animations |
+| **Typewriter Text** | Text that types itself out, one character at a time |
 
 ## Quick Start
 
@@ -138,7 +140,7 @@ export function MyComponent() {
       <CardHeader>
         <CardTitle>Welcome</CardTitle>
       </CardHeader>
-      <CardContent className="space-x-4">
+      <CardContent className="flex items-center gap-4">
         <Button variant="default">Get Started</Button>
         <ShimmerButton>Learn More</ShimmerButton>
       </CardContent>
@@ -147,6 +149,9 @@ export function MyComponent() {
 }
 ```
 
+`variant="default"` is the type Figma calls Solid, and `md` is the default size,
+so both props can be left out.
+
 ## Peer Dependencies
 
 ```json
@@ -154,9 +159,12 @@ export function MyComponent() {
   "react": "^18.0.0 || ^19.0.0",
   "react-dom": "^18.0.0 || ^19.0.0",
   "tailwindcss": "^3.4.0 || ^4.1.4",
-  "framer-motion": "^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0"  // optional, required for effects
+  "framer-motion": "^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0"
 }
 ```
+
+`framer-motion` is optional (`peerDependenciesMeta`): only the motion presets
+and five of the seven effects use it.
 
 ## Theme
 
@@ -175,7 +183,9 @@ loads Geist from `next/font`, which Next.js 14 has neither of.
 # Starting from scratch: use Fasla's colours (palette, radius, Geist).
 npx shadcn@latest add https://fasla.smicolon.com/r/theme.json https://fasla.smicolon.com/r/font-geist.json
 
-# The same on Next.js 14, without Geist: its template already loads it.
+# The same on Next.js 14, without Geist: next/font/google has no Geist there, so
+# shadcn would leave app/layout.tsx unchanged and ask you to add the fonts by
+# hand. The Next.js 14 template already loads Geist from its own files.
 npx shadcn@latest add https://fasla.smicolon.com/r/theme.json
 
 # I have a brand: keep my colours (base layer only)
@@ -188,8 +198,7 @@ Arabic setting, and the Cairo font. It never changes a colour you already
 have. Arabic text uses `--font-arabic`; point it at another font to swap Cairo.
 
 Fasla's base components replace shadcn's components of the same name in
-`components/ui`; `add` asks before replacing a file that isn't Fasla's. Blocks
-install to `components/blocks`.
+`components/ui`; `add` asks before replacing a file that isn't Fasla's.
 
 ## Documentation
 
@@ -199,8 +208,8 @@ Visit [fasla.smicolon.com](https://fasla.smicolon.com) for full documentation, e
 
 - [shadcn/ui](https://ui.shadcn.com) - The foundation this library builds on
 - [Tailwind CSS](https://tailwindcss.com) - Utility-first CSS framework
-- [Framer Motion](https://www.framer.com/motion/) - Animation library for React
+- [Motion](https://motion.dev) - Animation library for React, formerly Framer Motion (the `framer-motion` package)
 
 ## License
 
-MIT - See [LICENSE](https://github.com/smicolon/fasla-ui/blob/main/LICENSE) for details.
+The code is MIT licensed: see [LICENSE](https://github.com/smicolon/fasla-ui/blob/main/LICENSE). The Fasla and Smicolon names, logos and brand marks are reserved by Smicolon GmbH and are not licensed under MIT; see [NOTICE](https://github.com/smicolon/fasla-ui/blob/main/NOTICE) for them and for the fonts, icons and photos.

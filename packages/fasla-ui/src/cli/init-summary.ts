@@ -44,13 +44,15 @@ export interface SummaryInput {
   utils: string
   css: string
   layout?: string
+  /** tailwind.config.*, on Tailwind 3. */
+  tailwindConfig?: string
   fontFixes: FontFix[]
   /** The theme was not installed (--no-install) and this is the command to run. */
   themeCommand?: string
 }
 
 /** One line per file created or changed: `created  components.json — …`. */
-export function describeChanges({ before, after, components, utilsAlias, utils, css, layout, fontFixes, themeCommand }: SummaryInput): string[] {
+export function describeChanges({ before, after, components, utilsAlias, utils, css, layout, tailwindConfig, fontFixes, themeCommand }: SummaryInput): string[] {
   const lines: string[] = []
   const status = (file: string) => (before[file] === undefined ? "created" : before[file] !== after[file] ? "changed" : "unchanged")
   const row = (kind: string, file: string, note: string) => lines.push(`${kind.padEnd(9)} ${file}${note ? ` — ${note}` : ""}`)
@@ -79,6 +81,10 @@ export function describeChanges({ before, after, components, utilsAlias, utils, 
     if (/\bCairo\b/.test(text) && !/\bCairo\b/.test(before[layout] ?? "")) notes.push("adds the Cairo font")
     if (/className=\{cn\(/.test(text) && !/className=\{cn\(/.test(before[layout] ?? "")) notes.push("the html className now goes through cn()")
     row("changed", layout, notes.join("; ") || "font setup")
+  }
+
+  if (tailwindConfig && (before[tailwindConfig] ?? "") !== (after[tailwindConfig] ?? "")) {
+    row(before[tailwindConfig] === undefined ? "created" : "changed", tailwindConfig, "adds Fasla's theme for Tailwind 3: colours, type sizes, fonts and the dark class")
   }
 
   const added = packageDelta(before["package.json"], after["package.json"])

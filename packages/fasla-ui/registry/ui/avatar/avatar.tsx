@@ -7,7 +7,7 @@ import { cn } from "../../../src/lib/utils"
 import { StatusIndicator, type StatusIndicatorProps } from "../status-indicator/status-indicator"
 
 /**
- * Built against the Figma `Avatar` set (323:321): Direction × Radius × Style ×
+ * Built against the Figma `Avatar` set: Direction × Radius × Style ×
  * Border × Size, 72 variants, plus the `Status Indicator` boolean. Every colour
  * and radius below is the token the set binds.
  *

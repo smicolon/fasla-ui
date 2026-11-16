@@ -94,7 +94,7 @@ type Story = StoryObj<BadgeStoryArgs>
  * Sample copy, per script. Prop and axis names stay English — they are code and
  * Figma identifiers — and only the rendered label switches with the Direction
  * toolbar. The labels are real situations, never the tone or size name, and
- * match the docs page (design/content/).
+ * match the docs page.
  */
 const COPY = {
   ltr: {

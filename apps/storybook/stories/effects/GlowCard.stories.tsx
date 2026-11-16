@@ -12,8 +12,8 @@ export default meta
 type Story = StoryObj<typeof GlowCard>
 
 /**
- * Sample copy, per script: the same store as the docs page. The Arabic follows
- * design/content/. Colours are theme variables; GlowContainer's glow slides in
+ * Sample copy, per script: the same store as the docs page. The Arabic is
+ * Modern Standard Arabic. Colours are theme variables; GlowContainer's glow slides in
  * the reading direction.
  */
 const COPY = {

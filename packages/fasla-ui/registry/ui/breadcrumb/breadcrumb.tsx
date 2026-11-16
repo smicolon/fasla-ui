@@ -4,7 +4,7 @@ import { ChevronRightIcon, EllipsisIcon } from "lucide-react"
 import { cn } from "../../../src/lib/utils"
 
 /*
- * Figma: `Breadcrumbs` (3771:68266), 32 variants: Direction × Style × Count,
+ * Figma: `Breadcrumbs`, 32 variants: Direction × Style × Count,
  * plus a `Has-Icon` boolean.
  *
  * Composable, as shadcn's Breadcrumb is: the developer writes the trail, so

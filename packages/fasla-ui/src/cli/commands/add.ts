@@ -5,15 +5,16 @@ import prompts from "prompts"
 import fs from "fs-extra"
 import path from "path"
 import { DEFAULT_REGISTRY_URL, LEGACY_REGISTRY_URL, REGISTRY_URL, THEME_ITEMS, fetchRegistry, fetchComponent, getTargetDirectory, type RegistryFile, type RegistryItem } from "../registry.js"
-import { describeAdded, ownItemName, registryItemName, resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
+import { andList, describeAdded, ownItemName, registryItemName, resolveWithDependencies, rewriteComponentImports } from "../resolve.js"
 import { aliasToPath, checkDestination, effectiveComponentsAlias, installFile, resolveInsideProject } from "../paths.js"
 import { isInteractive } from "../tty.js"
-import { nonInteractiveAddMessage } from "../init-options.js"
+import { nonInteractiveAddMessage, nonInteractiveAddNamesMessage } from "../init-options.js"
 import { detectPackageManager } from "../pm.js"
 import { applyThemeItems, detectProjectStyle, themeItemsCommand } from "../theme.js"
 import { installComponentPackages, writeCnHelper } from "./init.js"
 import { aliasRootOrExit, repairIfNeededOrExit, safeOrExit } from "./shared.js"
 import { isFaslaFile } from "../marker.js"
+import { isProName, proNotice } from "../pro.js"
 
 /**
  * `add`: copies registry components, and what they import, into the project,
@@ -68,12 +69,18 @@ export function addCommand() {
 
       // If no components specified, prompt for selection
       if (components.length === 0) {
+        // No terminal: the list would be drawn to a pipe and nothing chosen.
+        if (!isInteractive()) {
+          console.log(chalk.red(nonInteractiveAddNamesMessage()))
+          process.exit(1)
+        }
         const { selected } = await prompts({
           type: "multiselect",
           name: "selected",
           message: "Which components would you like to add?",
           choices: registry.items.map((item) => ({
-            title: `${item.name} ${chalk.gray(`(${item.type.replace("registry:", "")})`)}`,
+            // The effects are registry:ui items; their category says what they are.
+            title: `${item.name} ${chalk.gray(`(${item.categories?.includes("effects") ? "effect" : item.type.replace("registry:", "")})`)}`,
             value: item.name,
             description: item.description,
           })),
@@ -93,9 +100,16 @@ export function addCommand() {
         registry.items.some((item) => item.name === c)
       )
 
-      const invalidComponents = components.filter(
+      const notInRegistry = components.filter(
         (c) => !registry.items.some((item) => item.name === c)
       )
+      // Names the registry does not have but Fasla Pro does get a notice, not an error.
+      const proComponents = notInRegistry.filter(isProName)
+      const invalidComponents = notInRegistry.filter((c) => !isProName(c))
+
+      if (proComponents.length > 0) {
+        console.log(chalk.cyan(proNotice(proComponents)))
+      }
 
       if (invalidComponents.length > 0) {
         console.log(
@@ -104,6 +118,8 @@ export function addCommand() {
       }
 
       if (validComponents.length === 0) {
+        // Only Pro names were asked for: nothing went wrong, there is just nothing to add yet.
+        if (invalidComponents.length === 0 && proComponents.length > 0) process.exit(0)
         console.log(chalk.red("No valid components to add."))
         process.exit(1)
       }
@@ -118,7 +134,9 @@ export function addCommand() {
         const { confirm } = await prompts({
           type: "confirm",
           name: "confirm",
-          message: `Add ${validComponents.length} component(s)?`,
+          // Asked before the components they use are looked up, so it names
+          // them as such rather than giving a count that would be too low.
+          message: `Add ${andList(validComponents)}, and the components ${validComponents.length === 1 ? "it uses" : "they use"}?`,
           initial: true,
         })
 
@@ -173,7 +191,7 @@ export function addCommand() {
         addSpinner.info(describeAdded(resolved.added, resolved.neededBy))
       }
       // Theme items are published outside the index and carry CSS, no files:
-      // theme-inverse, for a block on an inverted surface. The shadcn CLI
+      // theme-inverse, for content on an inverted surface. The shadcn CLI
       // installs those, below, as `init` installs the theme. Only our own
       // theme items: any other URL the index doesn't list is a dependency this
       // registry can't resolve, and is reported as one.
@@ -251,6 +269,11 @@ export function addCommand() {
       // was skipped — kept under --yes, or already there — wasn't added, and
       // the summary mustn't say it was.
       const added = new Set<string>()
+      // Components this run brings in only because another one uses them, and
+      // whose Fasla file is already in the project: installed, not skipped.
+      // `add dialog` after `add button` finds button.tsx there, as it should.
+      const present = new Set<string>()
+      const keptTargets = new Set(kept.map((k) => path.join(cwd, k.file)))
       // Why each component wrote nothing, as it happened, so the summary names
       // the real cause: a file already there, a registry entry with no files
       // or no content, or an error.
@@ -310,8 +333,13 @@ export function addCommand() {
             })
             if (outcome.result === "written") added.add(componentName)
             else if (outcome.result === "exists") {
-              addSpinner.warn(`${componentName}: ${filename} already exists, skipping (use -o to overwrite)`)
-              because(componentName, `${filename} is already there`)
+              if (!validComponents.includes(componentName) && !keptTargets.has(targetPath)) {
+                present.add(componentName)
+                addSpinner.info(`${componentName}: ${filename} is already there`)
+              } else {
+                addSpinner.warn(`${componentName}: ${filename} already exists, skipping (use -o to overwrite)`)
+                because(componentName, `${filename} is already there`)
+              }
             } else if (outcome.result === "duplicate") {
               addSpinner.warn(`${componentName}: ${filename} was already written by ${outcome.by} in this run, skipping`)
               because(componentName, `${filename} was already written by ${outcome.by}`)
@@ -323,9 +351,11 @@ export function addCommand() {
         }
       }
 
-      const total = resolved.items.length
-      const notAdded = resolved.items.map((item) => item.name).filter((name) => !added.has(name))
-      if (notAdded.length === 0) addSpinner.succeed(`Added ${total} component(s)`)
+      // A component already there counts neither as added nor as not added.
+      const total = resolved.items.length - present.size
+      const notAdded = resolved.items.map((item) => item.name).filter((name) => !added.has(name) && !present.has(name))
+      const alreadyThere = present.size > 0 ? ` (${[...present].join(", ")} already there)` : ""
+      if (notAdded.length === 0) addSpinner.succeed(`Added ${total} component(s)${alreadyThere}`)
       else {
         addSpinner.stop()
         console.log(chalk.yellow(added.size === 0 ? "Added nothing." : `Added ${added.size} of ${total} component(s).`))
