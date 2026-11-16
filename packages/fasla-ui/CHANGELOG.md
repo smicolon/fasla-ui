@@ -1,5 +1,22 @@
 # @smicolon/fasla-ui
 
+## [0.9.0](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.8.0...fasla-ui-v0.9.0) (2026-11-16)
+
+
+### ⚠ BREAKING CHANGES
+
+* **registry:** keep only the free items in the open source package ([#111](https://github.com/smicolon/fasla-ui/issues/111))
+
+### Features
+
+* **registry:** keep only the free items in the open source package ([#111](https://github.com/smicolon/fasla-ui/issues/111)) ([32ab450](https://github.com/smicolon/fasla-ui/commit/32ab450a5cdca2b1d59e1527666a903d07bb94ec))
+
+
+### Documentation
+
+* add security policy, contributing guide and issue templates ([#107](https://github.com/smicolon/fasla-ui/issues/107)) ([f9d93cf](https://github.com/smicolon/fasla-ui/commit/f9d93cf9a4ecc9d74119413cf6da581565bea98e))
+* **changelog:** point commit links at the rewritten history ([689a772](https://github.com/smicolon/fasla-ui/commit/689a772426517cadf14778b2f1a7b56222660dd0))
+
 ## [0.8.0](https://github.com/smicolon/fasla-ui/compare/fasla-ui-v0.7.0...fasla-ui-v0.8.0) (2026-11-06)
 
 
