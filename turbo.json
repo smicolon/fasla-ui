@@ -18,6 +18,9 @@
     "test": {
       "dependsOn": ["^build"]
     },
+    "@smicolon/fasla-ui#test": {
+      "dependsOn": ["^build", "build"]
+    },
     "clean": {
       "cache": false
     }
