@@ -76,3 +76,23 @@ describe("Arabic sidebar labels", () => {
     expect("حقل الإدخال الرقمي (Input Number)".match(pattern).slice(1)).toEqual(["حقل الإدخال الرقمي", "(Input Number)"])
   })
 })
+
+describe("Effect names", () => {
+  const effects = { "animated-gradient": "Animated Gradient", "border-beam": "Border Beam", "text-reveal": "Text Reveal", "shimmer-button": "Shimmer Button", "glow-card": "Glow Card" }
+
+  test("are written with spaces in every heading, title and description, English and Arabic", async () => {
+    const { routes, routeText } = await import("../lib/seo-routes")
+    for (const [slug, name] of Object.entries(effects)) {
+      const route = routes.find((r) => r.path === `/docs/components/${slug}/`)
+      expect(routeText(route, "en").h1, slug).toBe(name)
+      expect(routeText(route, "ar").h1, slug).toContain(`(${name})`)
+    }
+    const display = [read("lib/seo-routes.ts"), JSON.stringify(JSON.parse(read("messages/ar.json")).docs), JSON.stringify(JSON.parse(read("messages/en.json")).landing)]
+    for (const text of display) expect(text).not.toMatch(/\((AnimatedGradient|BorderBeam|TextReveal)\)|h1: "(AnimatedGradient|BorderBeam|TextReveal)"/)
+  })
+
+  test("keep the code names in code: imports, JSX and <code> are unchanged", () => {
+    const page = read("app/[locale]/docs/components/animated-gradient/page.tsx")
+    expect(page).toMatch(/AnimatedGradient/)
+  })
+})
