@@ -75,7 +75,7 @@ export function SiteHeader() {
           <Link
             href="https://github.com/smicolon/fasla-ui"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-foreground rounded-full hover:bg-accent"
           >
             {t("github")}

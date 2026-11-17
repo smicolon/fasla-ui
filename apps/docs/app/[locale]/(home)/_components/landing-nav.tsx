@@ -53,7 +53,7 @@ export function LandingNav() {
           <Link href={landingLinks.templates(locale)} className={navLink}>
             {t("templates")}
           </Link>
-          <a href={landingLinks.github} className={navLink}>
+          <a href={landingLinks.github} target="_blank" rel="noopener noreferrer" className={navLink}>
             {t("github")}
           </a>
         </nav>
@@ -105,7 +105,7 @@ export function LandingNav() {
           { href: landingLinks.components(locale), label: t("components") },
           { href: landingLinks.blocks(locale), label: t("blocks") },
           { href: landingLinks.templates(locale), label: t("templates") },
-          { href: landingLinks.github, label: t("github") },
+          { href: landingLinks.github, label: t("github"), newTab: true },
         ]}
         cta={{ href: landingLinks.docs(locale), label: tc("start") }}
         className="absolute inset-x-0 top-full border-b bg-background px-4 pb-4 pt-2 shadow-lg min-[761px]:hidden"

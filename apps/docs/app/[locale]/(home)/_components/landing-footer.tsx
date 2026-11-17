@@ -42,7 +42,7 @@ export async function LandingFooter() {
             <Link href={landingLinks.templates(locale)} className={footLink}>
               {tn("templates")}
             </Link>
-            <a href={landingLinks.github} className={footLink}>
+            <a href={landingLinks.github} target="_blank" rel="noopener noreferrer" className={footLink}>
               {tn("github")}
             </a>
           </nav>

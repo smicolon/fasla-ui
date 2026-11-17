@@ -96,3 +96,20 @@ describe("Effect names", () => {
     expect(page).toMatch(/AnimatedGradient/)
   })
 })
+
+describe("The GitHub link", () => {
+  test("opens in a new tab everywhere, with rel=\"noopener noreferrer\"", () => {
+    const landing = read("app/[locale]/(home)/_components/landing-nav.tsx")
+    const footer = read("app/[locale]/(home)/_components/landing-footer.tsx")
+    const header = read("components/site-header.tsx")
+    const menu = read("components/mobile-menu.tsx")
+    for (const source of [landing, footer]) {
+      expect(source).toContain('<a href={landingLinks.github} target="_blank" rel="noopener noreferrer"')
+      expect(source).not.toMatch(/<a href=\{landingLinks\.github\} className/)
+    }
+    expect(landing).toContain('{ href: landingLinks.github, label: t("github"), newTab: true }')
+    expect(header).toContain('label: t("github"), newTab: true }')
+    expect(header).not.toMatch(/rel="noreferrer"/)
+    expect(menu).toContain('{ target: "_blank", rel: "noopener noreferrer" }')
+  })
+})
