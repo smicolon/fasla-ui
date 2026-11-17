@@ -22,7 +22,6 @@ export const landingLinks = {
   // (build:pages serves it at /components/), on whichever host serves the page.
   storybook: "/components/?path=/docs/ui-button--docs",
   github: "https://github.com/smicolon/fasla-ui",
-  discussions: "https://github.com/smicolon/fasla-ui/discussions",
 } as const
 
 export const installCommand = "npx @smicolon/fasla-ui@latest init"

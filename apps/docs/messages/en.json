@@ -3284,8 +3284,6 @@
     "faq": {
       "kicker": "Questions",
       "title": "Honest<br></br>questions.",
-      "ask": "Still have a question?",
-      "askLink": "Ask on GitHub",
       "items": [
         {
           "q": "What is Fasla?",

@@ -3,7 +3,6 @@
 import { useState } from "react"
 import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
-import { landingLinks } from "./links"
 import { Stroked } from "./section-head"
 
 type Item = { q: string; a: string }
@@ -62,12 +61,6 @@ export function FaqSection() {
               </h2>
             </div>
             <QuestionArt />
-            <p className="text-sm text-[color:var(--l-fg-2)]">
-              {t("ask")}{" "}
-              <a href={landingLinks.discussions} target="_blank" rel="noopener noreferrer" className="text-foreground underline underline-offset-[3px]">
-                {t("askLink")}
-              </a>
-            </p>
           </div>
 
           <div className="border-t border-foreground/15">
