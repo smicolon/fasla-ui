@@ -14,7 +14,8 @@
     "getStarted": "Get started",
     "home": "Fasla — home",
     "toggleMenu": "Toggle menu",
-    "toggleTheme": "Toggle theme",
+    "themeToDark": "Switch to dark theme",
+    "themeToLight": "Switch to light theme",
     "switchLanguage": "Switch language"
   },
   "docs": {
@@ -2860,8 +2861,7 @@
       "templates": "Templates",
       "github": "GitHub",
       "lang": "العربية",
-      "langLabel": "Switch to Arabic",
-      "theme": "Toggle dark theme"
+      "langLabel": "Switch to Arabic"
     },
     "cta": {
       "start": "Get started"

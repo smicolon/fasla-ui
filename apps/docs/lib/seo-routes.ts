@@ -615,12 +615,12 @@ export const routes = [
     title: "Animated Gradient React Effect | Fasla",
     description:
       "Add a configurable animated gradient background to React hero sections and cards with smooth motion behavior.",
-    h1: "AnimatedGradient",
+    h1: "Animated Gradient",
     ar: {
-      title: "تدرّج متحرك (AnimatedGradient) لتطبيقات React | فاصلة",
+      title: "تدرّج متحرك (Animated Gradient) لتطبيقات React | فاصلة",
       description:
-        "أضف خلفية بتأثير تدرّج متحرك (AnimatedGradient) إلى الأقسام الرئيسية والبطاقات، بحركة سلسة قابلة للضبط.",
-      h1: "تدرّج متحرك (AnimatedGradient)",
+        "أضف خلفية بتأثير تدرّج متحرك (Animated Gradient) إلى الأقسام الرئيسية والبطاقات، بحركة سلسة قابلة للضبط.",
+      h1: "تدرّج متحرك (Animated Gradient)",
     },
   },
   {
@@ -630,12 +630,12 @@ export const routes = [
     title: "Text Reveal React Effect | Fasla",
     description:
       "Reveal React text character by character with reusable animation controls and reduced-motion support.",
-    h1: "TextReveal",
+    h1: "Text Reveal",
     ar: {
-      title: "ظهور النص (TextReveal) لتطبيقات React | فاصلة",
+      title: "ظهور النص (Text Reveal) لتطبيقات React | فاصلة",
       description:
-        "أظهر النص حرفًا حرفًا بتأثير ظهور النص (TextReveal)، مع عناصر تحكم بالحركة ودعم تقليل الحركة.",
-      h1: "ظهور النص (TextReveal)",
+        "أظهر النص حرفًا حرفًا بتأثير ظهور النص (Text Reveal)، مع عناصر تحكم بالحركة ودعم تقليل الحركة.",
+      h1: "ظهور النص (Text Reveal)",
     },
   },
   {
@@ -645,12 +645,12 @@ export const routes = [
     title: "Border Beam React Effect | Fasla",
     description:
       "Highlight React cards and containers with a configurable animated beam that travels around the border.",
-    h1: "BorderBeam",
+    h1: "Border Beam",
     ar: {
-      title: "شعاع الإطار (BorderBeam) لتطبيقات React | فاصلة",
+      title: "شعاع الإطار (Border Beam) لتطبيقات React | فاصلة",
       description:
-        "أبرز البطاقات والحاويات بتأثير شعاع الإطار (BorderBeam)، وهو شعاع متحرك قابل للضبط يدور حول الإطار.",
-      h1: "شعاع الإطار (BorderBeam)",
+        "أبرز البطاقات والحاويات بتأثير شعاع الإطار (Border Beam)، وهو شعاع متحرك قابل للضبط يدور حول الإطار.",
+      h1: "شعاع الإطار (Border Beam)",
     },
   },
   {

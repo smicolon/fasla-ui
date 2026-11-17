@@ -104,7 +104,7 @@ export function MobileMenuPanel({
           <Link
             key={link.label}
             href={link.href}
-            {...(link.newTab ? { target: "_blank", rel: "noreferrer" } : {})}
+            {...(link.newTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             onClick={close}
             className="px-4 py-3 text-sm font-medium rounded-xl hover:bg-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >

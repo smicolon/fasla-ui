@@ -53,7 +53,7 @@ export function LandingNav() {
           <Link href={landingLinks.templates(locale)} className={navLink}>
             {t("templates")}
           </Link>
-          <a href={landingLinks.github} className={navLink}>
+          <a href={landingLinks.github} target="_blank" rel="noopener noreferrer" className={navLink}>
             {t("github")}
           </a>
         </nav>
@@ -76,12 +76,16 @@ export function LandingNav() {
             variant="ghost"
             size="icon"
             onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-            aria-label={t("theme")}
             className="text-muted-foreground [&_svg]:size-[18px]"
           >
-            {/* Both drawn, CSS picks one, so the server render never guesses the theme. */}
-            <MoonIcon className="dark:hidden" />
-            <SunIcon className="hidden dark:block" />
+            {/* The theme in effect, as the docs header shows it: the sun while the
+                page is light, the moon while it is dark. Both drawn, and both
+                names, CSS picks one, so the server render never guesses the
+                theme. The name says what a press does. */}
+            <SunIcon className="dark:hidden" />
+            <MoonIcon className="hidden dark:block" />
+            <span className="sr-only dark:hidden">{tn("themeToDark")}</span>
+            <span className="sr-only hidden dark:inline">{tn("themeToLight")}</span>
           </Button>
           <Button asChild size="sm" className="max-[760px]:hidden">
             <Link href={landingLinks.docs(locale)}>{tc("start")}</Link>
@@ -101,7 +105,7 @@ export function LandingNav() {
           { href: landingLinks.components(locale), label: t("components") },
           { href: landingLinks.blocks(locale), label: t("blocks") },
           { href: landingLinks.templates(locale), label: t("templates") },
-          { href: landingLinks.github, label: t("github") },
+          { href: landingLinks.github, label: t("github"), newTab: true },
         ]}
         cta={{ href: landingLinks.docs(locale), label: tc("start") }}
         className="absolute inset-x-0 top-full border-b bg-background px-4 pb-4 pt-2 shadow-lg min-[761px]:hidden"
