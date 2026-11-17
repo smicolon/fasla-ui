@@ -106,7 +106,7 @@ export default async function HomePage({
               <div className="mt-7 flex flex-wrap justify-center gap-3 [view-transition-name:hero-cta]">
                 <CopyCommand
                   command={installCommand}
-                  className="h-12 rounded-[10px] border-foreground/15 bg-background py-0 max-[560px]:w-full max-[560px]:justify-between"
+                  className="h-12 rounded-[10px] border-foreground/15 bg-background py-0 max-[560px]:w-full max-[560px]:justify-between max-[560px]:gap-2 max-[560px]:px-3"
                 />
                 <Button asChild size="lg" className="h-12 rounded-[10px] px-[22px] text-[15px] max-[560px]:w-full">
                   <Link href={landingLinks.docs(locale)}>

@@ -43,3 +43,13 @@ describe("The theme icon and its name", () => {
     expect(messages("ar").nav.themeToLight).toBe("التبديل إلى المظهر الفاتح")
   })
 })
+
+describe("The install command on the home page", () => {
+  test("stays on one line: it never wraps, and its type shrinks on narrow screens instead", () => {
+    const copy = read("components/copy-command.tsx")
+    expect(copy).toContain('className="whitespace-nowrap font-mono text-[length:clamp(11px,3.4vw,15px)] text-foreground">{command}')
+    expect(copy).not.toContain("text-[15px]")
+    // On phones the box spends less on padding and gaps.
+    expect(read("app/[locale]/(home)/page.tsx")).toContain("max-[560px]:gap-2 max-[560px]:px-3")
+  })
+})

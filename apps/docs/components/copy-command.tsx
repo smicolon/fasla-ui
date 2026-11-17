@@ -53,10 +53,12 @@ export function CopyCommand({ command, className }: { command: string; className
         className
       )}
     >
-      <span aria-hidden="true" className="select-none font-mono text-[15px] text-muted-foreground">
+      {/* One line at every width: below 441px the type shrinks with the screen
+          (down to 11px) instead of breaking the command. */}
+      <span aria-hidden="true" className="select-none font-mono text-[length:clamp(11px,3.4vw,15px)] text-muted-foreground">
         $
       </span>
-      <span className="font-mono text-[15px] text-foreground">{command}</span>
+      <span className="whitespace-nowrap font-mono text-[length:clamp(11px,3.4vw,15px)] text-foreground">{command}</span>
       <span aria-hidden="true" className="ms-1 text-muted-foreground transition-colors group-hover:text-foreground">
         {copied ? (
           <svg className="h-4 w-4 text-fasla-red" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2}>
