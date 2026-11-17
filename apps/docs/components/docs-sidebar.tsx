@@ -14,6 +14,21 @@ const categoryKeys: Record<string, string> = {
   Effects: "effects",
 }
 
+/**
+ * An Arabic name with the English in parentheses, "حقل الإدخال الرقمي (Input
+ * Number)", with the English kept whole: a wrapped line never splits it, and
+ * <bdi> keeps its brackets the right way round. Any other name as it is.
+ */
+export function SidebarLabel({ text }: { text: string }) {
+  const match = text.match(/^(.*\S)\s*(\([^()]*[A-Za-z][^()]*\))$/)
+  if (!match) return text
+  return (
+    <>
+      {match[1]} <bdi className="whitespace-nowrap">{match[2]}</bdi>
+    </>
+  )
+}
+
 function DocsNav() {
   const pathname = usePathname()
   const locale = useLocale() as Locale
@@ -78,7 +93,7 @@ function DocsNav() {
                     aria-current={isActive(route.path) ? "page" : undefined}
                     className={linkClass(isActive(route.path))}
                   >
-                    {routeText(route, locale).h1}
+                    <SidebarLabel text={routeText(route, locale).h1} />
                   </Link>
                 </li>
               ))}

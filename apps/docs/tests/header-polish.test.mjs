@@ -53,3 +53,26 @@ describe("The install command on the home page", () => {
     expect(read("app/[locale]/(home)/page.tsx")).toContain("max-[560px]:gap-2 max-[560px]:px-3")
   })
 })
+
+describe("Arabic sidebar labels", () => {
+  test("keep the English name in parentheses whole and isolated", () => {
+    const sidebar = read("components/docs-sidebar.tsx")
+    expect(sidebar).toContain('<bdi className="whitespace-nowrap">{match[2]}</bdi>')
+    expect(sidebar).toContain("<SidebarLabel text={routeText(route, locale).h1} />")
+  })
+
+  test("the pattern splits every Arabic component name, and only those", async () => {
+    const source = read("components/docs-sidebar.tsx")
+    const pattern = new RegExp(source.match(/text\.match\(\/(.+)\/\)/)[1])
+    const { componentRouteGroups, routeText } = await import("../lib/seo-routes")
+    const routes = componentRouteGroups.flatMap((group) => group.routes)
+    expect(routes.length).toBeGreaterThan(0)
+    for (const route of routes) {
+      const ar = routeText(route, "ar").h1
+      const en = routeText(route, "en").h1
+      if (/\(/.test(ar)) expect(ar.match(pattern)?.[2], ar).toMatch(/^\([^()]+\)$/)
+      expect(en.match(pattern), en).toBeNull()
+    }
+    expect("حقل الإدخال الرقمي (Input Number)".match(pattern).slice(1)).toEqual(["حقل الإدخال الرقمي", "(Input Number)"])
+  })
+})
