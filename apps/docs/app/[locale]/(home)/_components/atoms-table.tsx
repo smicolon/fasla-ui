@@ -11,6 +11,13 @@ const cell =
   "group flex min-h-[76px] flex-1 items-center gap-2.5 py-4 pe-4 ps-5 transition-colors max-[760px]:min-h-16 max-[760px]:pe-3 max-[760px]:ps-3.5"
 
 /**
+ * Registry items the table does not show: they have no docs page yet, so they
+ * would be names that lead nowhere. Display only: they stay in the registry,
+ * the package and the count in the title.
+ */
+export const hiddenAtoms = new Set(["fasla-logo", "social-icons"])
+
+/**
  * Every component in the open-source package, as one contained table: each
  * component's name in the page language, effects marked as such, and a link to
  * its docs page where it has one. Five columns, then four, three, two and one
@@ -35,7 +42,7 @@ export async function AtomsTable() {
         />
 
         <ul className="relative grid grid-cols-5 overflow-hidden rounded-[14px] bg-background after:pointer-events-none after:absolute after:inset-0 after:z-[2] after:rounded-[inherit] after:border after:border-border after:content-[''] max-[1100px]:grid-cols-4 max-[900px]:grid-cols-3 max-[760px]:grid-cols-2 max-[380px]:grid-cols-1">
-          {atoms.map((atom) => {
+          {atoms.filter((atom) => !hiddenAtoms.has(atom.slug)).map((atom) => {
             const name = t.has(`names.${atom.slug}`) ? t(`names.${atom.slug}`) : atom.name
             const body = (
               <>
