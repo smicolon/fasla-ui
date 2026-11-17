@@ -68,3 +68,22 @@ describe("Top-level section links", () => {
     expect(stories).toMatch(/title: "UI\/Button"/)
   })
 })
+
+// GitHub Discussions are off on the repository, so a link to them is a 404.
+describe("No link to GitHub Discussions", () => {
+  test("the site links nowhere to /discussions, and the FAQ has no ask line left", () => {
+    for (const file of [
+      "app/[locale]/(home)/_components/links.ts",
+      "app/[locale]/(home)/_components/faq-section.tsx",
+      "messages/en.json",
+      "messages/ar.json",
+    ]) {
+      expect(read(file), file).not.toContain("/discussions")
+    }
+    for (const file of ["messages/en.json", "messages/ar.json"]) {
+      const faq = JSON.parse(read(file)).landing.faq
+      expect(faq.ask, file).toBeUndefined()
+      expect(faq.askLink, file).toBeUndefined()
+    }
+  })
+})

@@ -59,7 +59,12 @@ export default async function DocsPage({
               </span>
               <span>
                 {key === "components"
-                  ? t.rich(`features.${key}`, { ...rich, count: registryCounts.total })
+                  ? t.rich(`features.${key}`, {
+                      ...rich,
+                      count: registryCounts.total,
+                      primitives: registryCounts.primitives,
+                      effects: registryCounts.effects,
+                    })
                   : t.rich(`features.${key}`, rich)}
               </span>
             </li>

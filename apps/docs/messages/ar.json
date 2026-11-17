@@ -258,7 +258,7 @@
       "getStartedTitle": "ابدأ",
       "getStartedBody": "ثبّت أداة الأوامر (CLI) وأضف أول مكوّن.",
       "features": {
-        "components": "<strong>{count}+ مكوّنًا</strong> بين مكوّنات أساسية وكتل تطبيقات وتأثيرات",
+        "components": "<strong>{count} مكوّنًا</strong> بين {primitives} مكوّنًا أساسيًا و{effects} تأثيرات",
         "accessible": "<strong>إتاحة الوصول (accessibility)</strong> مدروسة من البداية، ومنها التنقّل بلوحة المفاتيح",
         "animated": "<strong>حركة</strong> سلسة بمكتبة Framer Motion، تحترم إعداد تقليل الحركة",
         "typescript": "<strong>TypeScript</strong> في الشيفرة كلها، مع أنواع كاملة",
@@ -3284,8 +3284,6 @@
     "faq": {
       "kicker": "أسئلة",
       "title": "أسئلة<br></br>في محلّها.",
-      "ask": "لديك سؤال آخر؟",
-      "askLink": "اسألنا على GitHub",
       "items": [
         {
           "q": "ما فاصلة؟",
