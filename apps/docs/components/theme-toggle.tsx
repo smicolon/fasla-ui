@@ -5,12 +5,14 @@ import { useTheme } from "next-themes"
 import { useTranslations } from "next-intl"
 
 export function ThemeToggle() {
-  const { setTheme, theme } = useTheme()
+  const { setTheme, resolvedTheme } = useTheme()
   const t = useTranslations("nav")
 
   return (
     <button
-      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+      // The theme in effect, not the setting: under "system" on a light OS the
+      // setting is "system", and the first click has to go to dark.
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground h-9 w-9"
     >
       <svg
