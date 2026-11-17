@@ -14,3 +14,32 @@ describe("The theme toggle", () => {
     expect(toggle).not.toMatch(/\btheme === "(light|dark)"/)
   })
 })
+
+describe("The theme icon and its name", () => {
+  const landing = read("app/[locale]/(home)/_components/landing-nav.tsx")
+  const messages = (lang) => JSON.parse(read(`messages/${lang}.json`))
+
+  test("both headers show the sun while the page is light and the moon while it is dark", () => {
+    expect(landing).toContain('<SunIcon className="dark:hidden" />')
+    expect(landing).toContain('<MoonIcon className="hidden dark:block" />')
+    // The docs toggle draws the sun first (gone in dark) and the moon second (shown in dark).
+    const sun = toggle.indexOf('<circle cx="12" cy="12" r="4" />')
+    const moon = toggle.indexOf('d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"')
+    expect(sun).toBeGreaterThan(-1)
+    expect(moon).toBeGreaterThan(sun)
+    expect(toggle.slice(0, sun)).toContain("dark:scale-0")
+    expect(toggle.slice(sun, moon)).toContain("dark:scale-100")
+  })
+
+  test("both name the action, in English and Arabic, picked by the theme without JavaScript", () => {
+    for (const source of [landing, toggle]) {
+      expect(source).toMatch(/<span className="sr-only dark:hidden">\{\w+\("themeToDark"\)\}<\/span>/)
+      expect(source).toMatch(/<span className="sr-only hidden dark:inline">\{\w+\("themeToLight"\)\}<\/span>/)
+    }
+    expect(landing).not.toMatch(/aria-label=\{t\("theme"\)\}/)
+    expect(messages("en").nav.themeToDark).toBe("Switch to dark theme")
+    expect(messages("en").nav.themeToLight).toBe("Switch to light theme")
+    expect(messages("ar").nav.themeToDark).toBe("التبديل إلى المظهر الداكن")
+    expect(messages("ar").nav.themeToLight).toBe("التبديل إلى المظهر الفاتح")
+  })
+})

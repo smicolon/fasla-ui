@@ -47,7 +47,9 @@ export function ThemeToggle() {
       >
         <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" />
       </svg>
-      <span className="sr-only">{t("toggleTheme")}</span>
+      {/* What a press does, picked by CSS like the icons: no theme guess on the server. */}
+      <span className="sr-only dark:hidden">{t("themeToDark")}</span>
+      <span className="sr-only hidden dark:inline">{t("themeToLight")}</span>
     </button>
   )
 }
