@@ -258,7 +258,7 @@
       "getStartedTitle": "Get started",
       "getStartedBody": "Install the CLI and add your first component.",
       "features": {
-        "components": "<strong>{count}+ components</strong> — UI primitives, app blocks, and effects",
+        "components": "<strong>{count} components</strong> — {primitives} UI primitives and {effects} effects",
         "accessible": "<strong>Accessible</strong> — built with accessibility in mind, keyboard navigation included",
         "animated": "<strong>Animated</strong> — smooth animations with Framer Motion, respects reduced motion",
         "typescript": "<strong>TypeScript</strong> — 100% TypeScript with full type safety",

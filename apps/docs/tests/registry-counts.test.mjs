@@ -25,4 +25,18 @@ describe("Registry-derived component counts", () => {
       expect(source).not.toMatch(/count(?:=\{|: )\d+/)
     }
   })
+
+  test("the docs introduction states the exact count and the free categories, with no blocks", () => {
+    const page = readFileSync(path.join(docsRoot, "app/[locale]/docs/page.tsx"), "utf8")
+    expect(page).toContain("primitives: registryCounts.primitives")
+    expect(page).toContain("effects: registryCounts.effects")
+    for (const lang of ["en", "ar"]) {
+      const line = JSON.parse(readFileSync(path.join(docsRoot, `messages/${lang}.json`), "utf8")).docs.landing.features.components
+      expect(line, lang).toContain("{count}")
+      expect(line, lang).not.toContain("{count}+")
+      expect(line, lang).toContain("{primitives}")
+      expect(line, lang).toContain("{effects}")
+      expect(line, lang).not.toMatch(/blocks|كتل/)
+    }
+  })
 })
