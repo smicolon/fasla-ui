@@ -1,12 +1,10 @@
-import Link from "next/link"
 import type { Metadata, ResolvingMetadata } from "next"
 import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Badge } from "@fasla-ui/ui/badge/badge"
-import { Button } from "@fasla-ui/ui/button/button"
 import { locales, type Locale } from "@/i18n/routing"
 import { SITE_URL } from "@/lib/seo-routes"
 import { FaslaComma } from "../_components/fasla-mark"
-import { ArrowEndIcon, DotIcon } from "../_components/icons"
+import { DotIcon } from "../_components/icons"
 import { LandingFooter } from "../_components/landing-footer"
 import { LandingNav } from "../_components/landing-nav"
 import { landingLinks } from "../_components/links"
@@ -68,19 +66,8 @@ export default async function ComingSoonPage({ params }: { params: Promise<{ loc
             {t("title")}
           </h1>
           <p className="l-lede mx-auto max-w-[56ch]">{t("lede")}</p>
-          <div className="mt-9 flex flex-wrap justify-center gap-3">
-            <Button asChild size="lg" className="h-12 rounded-[10px] px-[22px] text-[15px] max-[560px]:w-full">
-              <Link href={landingLinks.docs(locale)}>
-                {t("docs")}
-                <ArrowEndIcon />
-              </Link>
-            </Button>
-            <Button asChild size="lg" variant="outline" className="h-12 rounded-[10px] px-[22px] text-[15px] max-[560px]:w-full">
-              <Link href={`/${locale}/`}>{t("home")}</Link>
-            </Button>
-          </div>
           {/* Where the plain mailto link was: the waitlist form, which falls back to that link if it cannot save. */}
-          <WaitlistForm source="coming-soon" className="mt-8" />
+          <WaitlistForm source="coming-soon" className="mt-9" />
         </section>
       </main>
 

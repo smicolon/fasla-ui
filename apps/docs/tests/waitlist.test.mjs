@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test"
 import { readFileSync } from "node:fs"
 import path from "node:path"
-import { CONSENT_TEXT_VERSION, MIN_FILL_MS, cleanEmail, handleWaitlist } from "../lib/waitlist"
+import { MIN_FILL_MS, cleanEmail, handleWaitlist } from "../lib/waitlist"
 
 // The handler logs one code per call; keep the test output quiet.
 console.log = () => {}
@@ -73,20 +73,25 @@ describe("the handler", () => {
     expect(calls).toHaveLength(1)
     expect(calls[0].url).toBe("https://lists.example.test/api/subscribers")
     expect(calls[0].init.headers.authorization).toBe(`token api-user:${TOKEN}`)
-    expect(JSON.parse(calls[0].init.body)).toEqual({
+    const sent = JSON.parse(calls[0].init.body)
+    // Confirmed at once: no opt-in e-mail. The record is the source, the language and the time.
+    expect(sent).toMatchObject({
       email: "Noura@sanad.example",
       name: "Noura",
       status: "enabled",
       lists: [7],
-      preconfirm_subscriptions: false,
-      attribs: { source: "coming-soon", lang: "ar", consent_text: CONSENT_TEXT_VERSION },
+      preconfirm_subscriptions: true,
+      attribs: { source: "waitlist-form", page: "coming-soon", lang: "ar" },
     })
+    expect(Object.keys(sent.attribs).sort()).toEqual(["lang", "page", "signed_up_at", "source"])
+    expect(new Date(sent.attribs.signed_up_at).toISOString()).toBe(sent.attribs.signed_up_at)
+    expect(Math.abs(Date.now() - Date.parse(sent.attribs.signed_up_at))).toBeLessThan(5000)
   })
 
   test("an unknown language or source is replaced by the default", async () => {
     const { calls, fetchImpl } = fake()
     await run({ email: "a@b.co", lang: "fr", source: "elsewhere" }, live, fetchImpl)
-    expect(JSON.parse(calls[0].init.body).attribs).toMatchObject({ lang: "en", source: "coming-soon" })
+    expect(JSON.parse(calls[0].init.body).attribs).toMatchObject({ lang: "en", page: "coming-soon" })
   })
 
   test("a duplicate answers like a new address", async () => {
@@ -248,18 +253,28 @@ describe("the files", () => {
     expect(src).toContain('type="email"')
   })
 
-  test("the notice names the contact once, from links.ts, and keeps the provider placeholders", () => {
-    for (const file of ["messages/en.json", "messages/ar.json"]) {
-      const { waitlist } = JSON.parse(read(file)).landing.soon
-      const all = JSON.stringify(waitlist)
-      expect(all, file).not.toContain("@smicolon.com")
-      expect(all, file).not.toContain("datenschutz")
-      expect(waitlist.unsub.v, file).toContain("{email}")
-      expect(waitlist.rights.v, file).toContain("{email}")
-      expect(waitlist.where.v, file).toMatch(/\[[^\]]+\].*\[[^\]]+\]/)
-      for (const key of ["label", "submit", "sending", "ok", "invalid", "rate", "fallback", "notice", "details"]) {
-        expect(waitlist[key].length, `${file} ${key}`).toBeGreaterThan(0)
-      }
+  test("the page has the form and nothing else to click, and no text under the form", () => {
+    const page = read("app/[locale]/(home)/coming-soon/page.tsx")
+    expect(page).not.toMatch(/<Button|<Link|ArrowEndIcon/)
+    const src = read("app/[locale]/(home)/_components/waitlist-form.tsx")
+    // Same size token for the field and the button, the Input's own error, a hidden label.
+    expect(src.match(/size="lg"/g)).toHaveLength(2)
+    expect(src).toContain("error={error}")
+    expect(src).toContain('className="sr-only"')
+    expect(src).not.toMatch(/<details|<summary|<dl|notice/)
+    expect(src).not.toMatch(/role="alert"|text-destructive/)
+  })
+
+  test("the messages: the one-sentence success, the error and fallback texts, nothing else", () => {
+    const expected = {
+      en: "You're on the list. We'll email you when Fasla Pro opens.",
+      ar: "تم تسجيلك. سنراسلك عند إطلاق فاصلة Pro.",
+    }
+    for (const [lang, ok] of Object.entries(expected)) {
+      const { waitlist } = JSON.parse(read(`messages/${lang}.json`)).landing.soon
+      expect(waitlist.ok, lang).toBe(ok)
+      expect(Object.keys(waitlist).sort(), lang).toEqual(["fallback", "invalid", "label", "ok", "placeholder", "rate", "sending", "submit"])
+      expect(JSON.stringify(waitlist), lang).not.toMatch(/@smicolon\.com|datenschutz/)
     }
   })
 })

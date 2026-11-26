@@ -2,9 +2,11 @@
  * The Fasla Pro waitlist, server side: one pure handler that the Cloudflare
  * Pages Function (functions/api/waitlist.ts) wires to its environment.
  *
- * It takes an e-mail address and adds it to one Listmonk list as an
- * unconfirmed subscriber, so Listmonk sends its double opt-in e-mail. The API
- * token lives only in the Function's environment; it is never in a response, a
+ * It takes an e-mail address and adds it to one Listmonk list as an already
+ * confirmed subscriber (a decision of the product owner: no confirmation
+ * e-mail is sent). The record of the sign-up is its source, the page language
+ * and the date and time, in the subscriber's attributes: no IP, no tracking.
+ * The API token lives only in the Function's environment; it is never in a response, a
  * log line or the page.
  *
  * No imports from the site (no "@/" paths): Cloudflare bundles this file on
@@ -27,9 +29,6 @@ export type WaitlistEnv = {
 }
 
 export type WaitlistFetch = (url: string, init: RequestInit) => Promise<Response>
-
-/** The version of the notice text the person saw, stored with the subscriber as proof of what they agreed to. */
-export const CONSENT_TEXT_VERSION = "waitlist-2026-11-v1"
 
 /** A submit sooner than this after the page was ready is a script, not a person. */
 export const MIN_FILL_MS = 3000
@@ -174,12 +173,13 @@ export async function handleWaitlist(
         name: email.slice(0, email.lastIndexOf("@")).slice(0, 60),
         status: "enabled",
         lists: [listId],
-        // false: the subscription stays unconfirmed and Listmonk sends the double opt-in e-mail.
-        preconfirm_subscriptions: false,
+        // true: the subscription is confirmed at once and Listmonk sends no opt-in e-mail.
+        preconfirm_subscriptions: true,
         attribs: {
-          source: env.WAITLIST_MODE === "test" ? "preview-test" : source,
+          source: env.WAITLIST_MODE === "test" ? "preview-test" : "waitlist-form",
+          page: source,
           lang,
-          consent_text: CONSENT_TEXT_VERSION,
+          signed_up_at: new Date().toISOString(),
         },
       }),
       signal: controller.signal,
