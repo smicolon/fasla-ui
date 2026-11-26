@@ -28,6 +28,6 @@
       "@fasla-ui/effects/*": ["../../packages/fasla-ui/registry/effects/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "**/*.mdx"],
+  "include": ["next-env.d.ts", "**/*.ts", "../../functions/**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "**/*.mdx"],
   "exclude": ["node_modules"]
 }
