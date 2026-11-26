@@ -18,6 +18,8 @@ apps/docs/public/r/
 
 # Environment
 .env
+.dev.vars
+.wrangler/
 .env.local
 .env.*.local
 

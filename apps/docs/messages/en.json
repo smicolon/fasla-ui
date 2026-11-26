@@ -3390,10 +3390,18 @@
       "badge": "On the way",
       "title": "Coming soon",
       "lede": "The templates and the Pro and Team plans are on their way. The open-source components and the docs are ready to use today.",
-      "docs": "Read the docs",
-      "home": "Back to home",
       "notify": "Notify me about Pro",
-      "notifySubject": "Fasla Pro: notify me"
+      "notifySubject": "Fasla Pro: notify me",
+      "waitlist": {
+        "label": "Your email",
+        "placeholder": "you@example.com",
+        "submit": "Notify me",
+        "sending": "Sending…",
+        "ok": "You're on the list. We'll email you when Fasla Pro opens.",
+        "invalid": "This email address doesn't look right. Check it and try again.",
+        "rate": "Too many tries. Please wait a few minutes and try again.",
+        "fallback": "We couldn't save your address here. Write to us instead and we'll add you:"
+      }
     }
   }
 }

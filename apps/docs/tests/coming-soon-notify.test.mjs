@@ -15,7 +15,8 @@ const sources = (dir) =>
   })
 
 // The Coming soon page's "Notify me about Pro" link: a plain mailto to
-// support, its subject in the page's language. No form and no tracking.
+// support, its subject in the page's language. It is now the fallback of the
+// waitlist form (tests/waitlist.test.mjs).
 describe("Coming soon: Notify me about Pro", () => {
   test("the address lives in one constant", async () => {
     const { supportEmail, notifyProMailto } = await import("../app/[locale]/(home)/_components/links")
@@ -38,11 +39,14 @@ describe("Coming soon: Notify me about Pro", () => {
     }
   })
 
-  test("the page links with notifyProMailto, and adds no form or tracking", () => {
+  test("the page shows the waitlist form in that place, and the mailto lives only in the fallback", () => {
     const page = read("app/[locale]/(home)/coming-soon/page.tsx")
-    expect(page).toContain('href={notifyProMailto(t("notifySubject"))}')
-    expect(page).toContain('{t("notify")}')
+    expect(page).toContain('<WaitlistForm source="coming-soon"')
     expect(page).not.toContain("mailto:")
-    expect(page).not.toMatch(/<form|onSubmit|fetch\(|sendBeacon|gtag|analytics/i)
+    expect(page).not.toContain("notifyProMailto")
+    const form = read("app/[locale]/(home)/_components/waitlist-form.tsx")
+    expect(form).toContain('href={notifyProMailto(t("notifySubject"))}')
+    expect(form).toContain('{t("notify")}')
+    expect(form).not.toContain("mailto:")
   })
 })
