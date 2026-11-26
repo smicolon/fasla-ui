@@ -3393,7 +3393,26 @@
       "docs": "Read the docs",
       "home": "Back to home",
       "notify": "Notify me about Pro",
-      "notifySubject": "Fasla Pro: notify me"
+      "notifySubject": "Fasla Pro: notify me",
+      "waitlist": {
+        "label": "Your email",
+        "placeholder": "you@example.com",
+        "submit": "Notify me",
+        "sending": "Sending…",
+        "ok": "Almost done. We sent you an email: open it and confirm to join the list. If you don't see it, check your spam folder.",
+        "invalid": "This email address doesn't look right. Check it and try again.",
+        "rate": "Too many tries. Please wait a few minutes and try again.",
+        "fallback": "We couldn't save your address here. Write to us instead and we'll add you:",
+        "notice": "We use your address only to tell you when Fasla Pro opens. We'll email you once to confirm; you're on the list only after you click. You can unsubscribe at any time.",
+        "details": "Details",
+        "who": { "k": "Who", "v": "Smicolon GmbH, Karl-Kessler-Str 1, 85551 Kirchheim b. München, Germany, is responsible for this list." },
+        "what": { "k": "What and why", "v": "Your email address and the language of this page, so we can tell you when Fasla Pro is available. We send no other marketing without asking you again. Legal basis: your consent (Art. 6(1)(a) GDPR)." },
+        "double": { "k": "Double opt-in", "v": "We send one confirmation email. If you don't confirm, we delete the address after 30 days. We keep a record of your confirmation as proof of consent." },
+        "unsub": { "k": "Unsubscribe", "v": "Every email has an unsubscribe link, or write to <m>{email}</m>. You can withdraw your consent at any time; this does not affect what we did before." },
+        "where": { "k": "Where it is kept", "v": "On a mailing system that Smicolon runs itself (Listmonk, at <m>lists.smicolon.com</m>), on a server of [HOSTING PROVIDER, to be confirmed]; emails are sent through [EMAIL PROVIDER, to be confirmed]. We don't sell your data and use no tracking or analytics for this form." },
+        "how": { "k": "How long", "v": "Until you unsubscribe, or until 12 months after we have told you about the launch, whichever comes first." },
+        "rights": { "k": "Your rights", "v": "Access, correction, erasure, objection, and a complaint to a data protection authority (for Smicolon, BayLDA). Contact: <m>{email}</m>." }
+      }
     }
   }
 }
